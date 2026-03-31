@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Endocrine Pharmacology — HY Reference Chart</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f5f3ef; --surface:#fff; --border:#d9d3c7; --text:#1a1612; --muted:#7a7268;
+    --accent:#1d4e89; --accent-light:#eef3fb; --accent-mid:#7fa8d4;
+    --gold:#9b7e3a; --gold-light:#fdf8ee;
+    --teal:#2d6e65; --teal-light:#e8f4f2;
+    --green:#1a5c2a; --green-light:#eaf4ec;
+    --red:#8b1a1a; --red-light:#fdf0ee;
+    --purple:#4a1d8c; --purple-light:#f2eefb;
+    --orange:#b85c1a;
+    --hy-bg:#fff8e1; --hy-border:#f0c040; --hy-text:#7a5c00;
+    --shadow:0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04);
+    --radius:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.55;padding:24px 20px 100px;}
+
+  .page-header{max-width:1400px;margin:0 auto 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--accent);padding-bottom:14px;}
+  .page-header h1{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;letter-spacing:-.3px;}
+  .page-header .subtitle{font-size:12px;color:var(--muted);margin-top:3px;}
+  .legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;align-items:center;}
+  .legend-item{display:flex;align-items:center;gap:5px;}
+  .legend-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+
+  .section-label{max-width:1400px;margin:28px auto 8px;display:flex;align-items:center;gap:10px;}
+  .section-label::before{content:'';flex:none;width:4px;height:18px;border-radius:2px;background:var(--accent);}
+  .section-label h2{font-family:'DM Serif Display',serif;font-size:16px;font-weight:400;color:var(--muted);letter-spacing:.02em;}
+
+  .card-wrapper{max-width:1400px;margin:0 auto 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+  .card-wrapper:hover{border-color:var(--accent-mid);box-shadow:0 2px 8px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.06);}
+
+  .drug-header{display:flex;align-items:center;gap:10px;padding:10px 16px;color:white;flex-wrap:wrap;}
+  .drug-header.pituitary    {background:#1d3461;}
+  .drug-header.pituitary-ss {background:#0d3320;}
+  .drug-header.pituitary-gh {background:#1a2d4a;}
+  .drug-header.posterior    {background:#2d1b4e;}
+  .drug-header.thyroid-hypo {background:#1a3a2d;}
+  .drug-header.thyroid-hyper{background:#3a1a10;}
+  .drug-header.thyroid-radio{background:#2d2010;}
+  .drug-header.adrenal-test {background:#1a1a3a;}
+  .drug-header.adrenal-block{background:#3a0d1a;}
+  .drug-header.adrenal-rep  {background:#0d3320;}
+  .drug-header.dm-insulin   {background:#1a2d4a;}
+  .drug-header.dm-inject    {background:#1a3a2d;}
+  .drug-header.dm-oral1     {background:#2d1b4e;}
+  .drug-header.dm-oral2     {background:#1a1a3a;}
+  .drug-header.dm-oral3     {background:#0d3320;}
+
+  .drug-name{font-family:'DM Serif Display',serif;font-size:17px;font-weight:400;letter-spacing:-.2px;}
+  .drug-class-pill{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.08em;padding:2px 9px;border-radius:20px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);text-transform:uppercase;}
+  .drug-header .route{margin-left:auto;font-size:11px;color:rgba(255,255,255,.6);font-family:'JetBrains Mono',monospace;}
+
+  .card-body{display:grid;grid-template-columns:1fr 1fr 1fr 1.2fr;gap:0;}
+  @media(max-width:900px){.card-body{grid-template-columns:1fr 1fr;}}
+  @media(max-width:600px){.card-body{grid-template-columns:1fr;}}
+
+  .cell{padding:12px 14px;border-right:1px solid var(--border);border-top:1px solid var(--border);}
+  .cell:last-child{border-right:none;}
+  .cell-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+  .cell-label .icon{font-size:12px;}
+  .cell-content{font-size:12.5px;color:var(--text);line-height:1.55;}
+  .cell-content strong{color:var(--accent);font-weight:600;}
+  .cell-content em{font-style:normal;color:var(--muted);}
+
+  .cell.moa{background:var(--accent-light);}
+  .cell.moa .cell-label{color:var(--accent);}
+  .cell.se .warn{display:inline-block;color:var(--orange);font-weight:600;}
+  .cell.se .ci{display:inline-block;color:var(--red);font-weight:600;}
+  .cell.use{background:var(--teal-light);}
+  .cell.use .cell-label{color:var(--teal);}
+  .cell.use .use-tag{display:inline-block;background:var(--teal-light);border:1px solid var(--teal);color:var(--teal);border-radius:4px;padding:1px 7px;font-size:11px;font-weight:500;margin:1px 2px 2px 0;}
+
+  .cell.hy{background:var(--hy-bg);border-left:3px solid var(--hy-border);border-right:none;}
+  .cell.hy .cell-label{color:var(--hy-text);font-size:10.5px;}
+  .cell.hy .hy-fact{display:flex;align-items:flex-start;gap:6px;margin-bottom:6px;font-size:12.5px;color:var(--hy-text);}
+  .cell.hy .hy-fact::before{content:'⭐';font-size:11px;flex-shrink:0;margin-top:1px;}
+  .cell.hy .trap{margin-top:8px;padding:6px 8px;background:rgba(139,26,26,.07);border-left:2px solid var(--red);border-radius:4px;font-size:11.5px;color:var(--red);}
+  .cell.hy .trap::before{content:'⚠ TRAP: ';font-weight:700;}
+
+  .indication-section{max-width:1400px;margin:32px auto 8px;}
+  .indication-section h3{font-family:'DM Serif Display',serif;font-size:15px;font-weight:400;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .indication-section h3::before{content:'';width:4px;height:18px;border-radius:2px;background:var(--gold);flex-shrink:0;}
+  .ind-table{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .ind-table th{background:#1d3461;color:white;padding:8px 12px;text-align:left;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
+  .ind-table td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .ind-table tr:last-child td{border-bottom:none;}
+  .ind-table tr:nth-child(even) td{background:#faf9f7;}
+  .ind-table .iname{font-weight:600;color:var(--text);}
+  .ind-table .choice{color:var(--teal);font-weight:500;}
+  .ind-table .warn-cell{color:var(--red);font-weight:600;}
+  .ind-table .muted{color:var(--muted);}
+
+  .ins-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0;}
+  @media(max-width:700px){.ins-grid{grid-template-columns:1fr 1fr;}}
+  .ins-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+  .ins-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px;font-family:'JetBrains Mono',monospace;}
+  .ins-name{font-size:12.5px;font-weight:600;color:var(--accent);margin-bottom:4px;}
+  .ins-stat{font-size:11.5px;color:var(--text);line-height:1.6;}
+  .ins-stat span{color:var(--teal);font-weight:600;}
+
+  .comp-panel{max-width:1400px;margin:20px auto 8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+  .comp-head{padding:10px 16px;background:#2d2010;color:white;font-family:'DM Serif Display',serif;font-size:14px;}
+  .comp-body{padding:14px 16px;overflow-x:auto;}
+  .comp-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .comp-table th{background:var(--bg);padding:7px 10px;text-align:left;font-size:10px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);border-bottom:1px solid var(--border);font-weight:600;}
+  .comp-table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--muted);line-height:1.5;}
+  .comp-table tr:last-child td{border-bottom:none;}
+  .comp-table td:first-child{font-weight:600;color:var(--text);font-size:12px;white-space:nowrap;}
+  .comp-table .ok{color:var(--teal);font-weight:600;}
+  .comp-table .warn{color:var(--orange);font-weight:600;}
+  .comp-table .danger{color:var(--red);font-weight:600;}
+  .comp-table tr:hover td{background:#faf9f7;}
+
+  .action-btns{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:100;}
+  .action-btn{display:flex;align-items:center;gap:8px;border:none;border-radius:24px;padding:10px 18px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .15s,box-shadow .15s;white-space:nowrap;}
+  .action-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.28);}
+  .btn-print{background:#1d4e89;color:white;}
+  .btn-excel{background:#1d6f42;color:white;}
+
+  @media print{
+    body{background:white;padding:10px;font-size:10px;}
+    .action-btns{display:none;}
+    .card-wrapper{break-inside:avoid;box-shadow:none;border:1px solid #ccc;margin-bottom:10px;}
+    .page-header,.section-label{break-after:avoid;}
+    .drug-header{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .cell.moa,.cell.use,.cell.hy{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .card-body{grid-template-columns:1fr 1fr!important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div>
+    <h1>Endocrine Pharmacology</h1>
+    <div class="subtitle">Georgetown SOM · Block 4 Endocrine Module · HY Reference Chart — Janicic · Sharma · Watson · Sherman</div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#eef3fb;border:1px solid #7fa8d4"></div> MOA</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#e8f4f2;border:1px solid #2d6e65"></div> Uses</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#fff8e1;border:1px solid #f0c040"></div> ⭐ High-Yield</div>
+    <div class="legend-item"><div class="legend-dot" style="background:rgba(139,26,26,.08);border:1px solid #8b1a1a"></div> ⚠ Trap</div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 1 — PITUITARY
+═══════════════════════════════════════════════════ -->
+<div class="section-label"><h2>Pituitary — Dopamine Agonists & Somatostatin Analogs</h2></div>
+
+<div class="card-wrapper">
+  <div class="drug-header pituitary">
+    <span class="drug-name">Cabergoline · Bromocriptine</span>
+    <span class="drug-class-pill">Dopamine Agonists — D2 Receptor</span>
+    <span class="route">PO · Cabergoline: 2×/week · Bromocriptine: daily</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content">Activate D2 receptors on lactotrophs → ↓ prolactin synthesis and secretion. Dopamine normally <strong>tonically inhibits</strong> prolactin release from the anterior pituitary.<br><br>Cabergoline: D2-selective, longer t½, better tolerated.<br>Bromocriptine: non-selective D2/D1, shorter t½, requires daily dosing.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><span class="warn">Nausea/vomiting</span> (take with food)<br><span class="warn">Orthostatic hypotension</span> (1st dose — start low)<br><span class="warn">Headache, dizziness</span><br><span class="warn">Impulse control disorders</span> (cabergoline — esp. at high doses)<br><span class="warn">Cardiac valvulopathy</span> (cabergoline at very high doses — monitor echo)<br><br><ci>Monitor prolactin + MRI</ci> to assess tumor response.</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">Prolactinoma — 1st line</span><span class="use-tag">Hyperprolactinemia</span><span class="use-tag">Acromegaly (adjunct)</span><br><br>Cabergoline <strong>shrinks tumor AND normalizes prolactin</strong>. Even macroadenomas respond. Surgery reserved for drug failure/intolerance or rapid visual loss.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact"><strong>Cabergoline = 1st line for prolactinoma</strong> (preferred over bromocriptine — twice weekly, better tolerated, higher efficacy).</div>
+      <div class="hy-fact">Shrinks tumor — even macroadenomas. Surgery rarely needed for prolactinoma.</div>
+      <div class="hy-fact">Bromocriptine: also used for <strong>type 2 DM</strong> (Cycloset) — improves insulin sensitivity via CNS dopamine mechanism.</div>
+      <div class="trap">Mild prolactin elevation (&lt;150 ng/mL) + large sellar mass = stalk compression, NOT prolactinoma. A true macro-prolactinoma causing 2+ cm mass → prolactin usually &gt;500 ng/mL. Don't start cabergoline on a craniopharyngioma.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrapper">
+  <div class="drug-header pituitary-ss">
+    <span class="drug-name">Octreotide · Lanreotide · Pasireotide</span>
+    <span class="drug-class-pill">Somatostatin Analogs — SSTR Agonists</span>
+    <span class="route">SC or IM depot (monthly) · Monitor glucose, gallbladder US</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content">Bind somatostatin receptors (SSTR1–5) → inhibit GH secretion (somatotrophs), ACTH (corticotrophs — pasireotide), TSH, glucagon, insulin, gut hormones (gastrin, secretin, VIP).<br><br><strong>Octreotide/Lanreotide:</strong> SSTR2 > 5 (primarily GH/IGF-1 suppression).<br><strong>Pasireotide:</strong> pan-SSTR (1,2,3,5) → also suppresses ACTH → used in Cushing's disease.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><span class="warn">GI: N/V, diarrhea, cramping</span> (inject at mealtime to reduce)<br><span class="warn">Cholelithiasis</span> (impairs gallbladder contraction — US every 6 mo)<br><span class="warn">Hyperglycemia</span> (blocks insulin secretion; <strong>severe with pasireotide</strong>)<br><span class="warn">Bradycardia</span> (mild)<br><span class="warn">Injection site reactions</span> (depot formulations)</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">Acromegaly (post-op residual)</span><span class="use-tag">Cushing's disease (pasireotide)</span><span class="use-tag">Carcinoid syndrome</span><span class="use-tag">VIPoma/glucagonoma</span><span class="use-tag">Esophageal variceal bleeding</span><br><br>Octreotide/lanreotide: suppress GH 50–70% in acromegaly. Monthly LAR depot injections for compliance.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact"><strong>Pasireotide → significant hyperglycemia</strong> — blocks insulin secretion (SSTR2 on beta cells). Monitor glucose closely in all patients.</div>
+      <div class="hy-fact">Cholelithiasis: gallstones form because gallbladder emptying is impaired → monitor with US.</div>
+      <div class="hy-fact">Octreotide for <strong>esophageal variceal bleeding</strong> — reduces portal pressure (↓ splanchnic vasodilation).</div>
+      <div class="trap">Pasireotide hyperglycemia is more severe than octreotide/lanreotide — nearly all patients require glucose-lowering agents. This is due to SSTR2 blockade on pancreatic beta cells (insulin suppression) + SSTR5 effects.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrapper">
+  <div class="drug-header pituitary-gh">
+    <span class="drug-name">Pegvisomant · Somatropin (rGH)</span>
+    <span class="drug-class-pill">GH Receptor Antagonist · Recombinant GH</span>
+    <span class="route">SC daily · Monitor IGF-1 (not GH) for pegvisomant</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>Pegvisomant:</strong> competitive GH receptor antagonist → blocks GH signaling → ↓ IGF-1. GH levels actually <strong>RISE</strong> (receptor blocked, no feedback removal at pituitary).<br><br><strong>Somatropin:</strong> recombinant human GH → replaces deficient GH → stimulates IGF-1 production → linear growth, body composition, bone density.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><strong>Pegvisomant:</strong><br><span class="warn">Liver transaminase elevation</span> (monitor LFTs)<br><span class="warn">Tumor enlargement</span> risk (no direct pituitary effect — no SS analog co-suppression)<br><br><strong>Somatropin:</strong><br><span class="warn">Glucose intolerance</span> (GH is diabetogenic)<br><span class="warn">Edema, arthralgias</span><br><ci>Contraindicated in active malignancy</ci></div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">Pegvisomant: acromegaly resistant to SS analogs</span><br><span class="use-tag">Somatropin: GH deficiency (children + adults)</span><span class="use-tag">Turner syndrome</span><span class="use-tag">Prader-Willi</span><br><br>Somatropin in adults: improves body composition, ↓ LDL, ↑ bone density. Given SC daily; monitor IGF-1.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact">Monitor <strong>IGF-1 (not GH)</strong> for pegvisomant treatment success — GH rises (blocked at receptor, no feedback).</div>
+      <div class="hy-fact">Acromegaly treatment hierarchy: Surgery → SS analogs (octreotide/lanreotide) → dopamine agonists (cabergoline) → pegvisomant.</div>
+      <div class="hy-fact">Somatropin is <strong>diabetogenic</strong> — GH causes insulin resistance. Monitor glucose.</div>
+      <div class="trap">Pegvisomant raises GH levels — do NOT use GH as treatment monitoring. Use IGF-1 only. Also: pegvisomant has no direct effect on the pituitary tumor — combine with SS analog to prevent tumor growth.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 2 — POSTERIOR PITUITARY
+═══════════════════════════════════════════════════ -->
+<div class="section-label"><h2>Posterior Pituitary — DDAVP & Diabetes Insipidus</h2></div>
+
+<div class="card-wrapper">
+  <div class="drug-header posterior">
+    <span class="drug-name">DDAVP (Desmopressin) · Oxytocin</span>
+    <span class="drug-class-pill">Synthetic AVP Analog · V2-Selective</span>
+    <span class="route">Intranasal / PO / IV · Sherman lecture</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>DDAVP:</strong> V2-selective synthetic AVP analog → binds V2R on collecting duct → ↑ AQP2 insertion → ↑ water reabsorption → concentrated urine.<br><br>Why V2-selective? D-arginine substitution eliminates V1a vasoconstriction. Deaminated N-terminus → resistant to vasopressinase (works in gestational DI).<br><br><strong>Oxytocin:</strong> binds oxytocin receptor on uterus + breast → uterine contraction + milk letdown.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><strong>DDAVP:</strong><br><span class="warn">Hyponatremia / water intoxication</span> (excess water retention — dilutional)<br><span class="warn">Headache, nausea</span><br><br><strong>Oxytocin (Pitocin):</strong><br><span class="warn">Water intoxication</span> (cross-reacts with V2R at high doses → hyponatremia)<br><span class="warn">Hypotension</span> (at high IV doses)<br><span class="warn">Uterine hyperstimulation</span> (fetal distress)</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">Central DI — 1st line</span><span class="use-tag">Gestational DI</span><span class="use-tag">Hemophilia A &amp; vWD (DDAVP)</span><br><span class="use-tag">Nocturnal enuresis</span><br><span class="use-tag">Oxytocin: labor induction / postpartum hemorrhage</span><br><br>DDAVP in hemophilia: V2R on endothelium → releases stored vWF + Factor VIII.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact">DDAVP <strong>works in central DI, fails in nephrogenic DI</strong> (V2R or AQP2 defect). Key diagnostic test.</div>
+      <div class="hy-fact"><strong>Nephrogenic DI treatment:</strong> thiazide diuretics (paradoxical ↓ urine output — volume depletion → ↑ proximal reabsorption). NSAIDs (indomethacin) for lithium-induced nephrogenic DI.</div>
+      <div class="hy-fact">DDAVP for <strong>hemophilia A / vWD</strong> — releases endothelial stores of vWF and Factor VIII (V2R on endothelial cells).</div>
+      <div class="trap">Thiazide in nephrogenic DI is paradoxical — a diuretic that reduces urine output. Mechanism: volume depletion → ↑ proximal tubule reabsorption → less fluid reaches AVP-sensitive collecting duct → ↓ polyuria. Classic Step 1 paradox.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 3 — THYROID
+═══════════════════════════════════════════════════ -->
+<div class="section-label"><h2>Thyroid — Hypothyroidism & Hyperthyroidism Drugs</h2></div>
+
+<div class="card-wrapper">
+  <div class="drug-header thyroid-hypo">
+    <span class="drug-name">Levothyroxine (T4) · Liothyronine (T3)</span>
+    <span class="drug-class-pill">Thyroid Hormone Replacement</span>
+    <span class="route">PO · Take fasting AM · Monitor TSH 6–8 weeks after dose change</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>Levothyroxine (T4):</strong> synthetic T4 prohormone → converted to active T3 by peripheral 5'-deiodinase. T3 binds thyroid receptor (TR) → nuclear gene activation → metabolic effects.<br><br><strong>Liothyronine (T3):</strong> active form, short t½ (1.5 days vs. T4's 6.5 days) → rarely used clinically due to rapid fluctuations and cardiac risk.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><span class="warn">Iatrogenic hyperthyroidism</span> if dose too high: palpitations, weight loss, heat intolerance, atrial fibrillation<br><span class="warn">Osteoporosis</span> (chronic over-replacement)<br><span class="warn">Drug interactions:</span> calcium, iron, PPIs, cholestyramine → ↓ absorption (take 4h apart)<br><span class="warn">Enzyme inducers</span> (rifampin, phenytoin) → ↑ T4 metabolism → need higher dose</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">Hypothyroidism — 1st line</span><span class="use-tag">Post-thyroidectomy replacement</span><span class="use-tag">TSH suppression in thyroid cancer</span><br><br>Post-thyroidectomy for cancer: use <strong>TSH-suppressive doses</strong> (keep TSH &lt;0.1) to remove trophic stimulus from residual cancer cells.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact">T4 is a <strong>prohormone</strong>; T3 is 10× more potent at thyroid receptor. Peripheral conversion by 5'-deiodinase.</div>
+      <div class="hy-fact">Monitor TSH (not T4 level) to assess adequacy of replacement — goal TSH 0.5–2.5 mIU/L.</div>
+      <div class="hy-fact">Take on empty stomach AM — calcium, iron, and PPIs dramatically ↓ absorption.</div>
+      <div class="trap">Do NOT confuse TSH-suppressive doses (cancer surveillance) with replacement doses. Exogenous T4 → feedback suppresses endogenous TSH — a deliberately suppressed TSH in thyroid cancer post-thyroidectomy is therapeutic, not iatrogenic.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrapper">
+  <div class="drug-header thyroid-hyper">
+    <span class="drug-name">PTU · Methimazole</span>
+    <span class="drug-class-pill">Thionamides — Antithyroid Agents (TPO Inhibitors)</span>
+    <span class="route">PO · PTU: TID (short t½) · Methimazole: once daily</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>Both:</strong> block <strong>thyroperoxidase (TPO)</strong> → inhibit iodide oxidation, organification, and coupling of MIT/DIT → ↓ thyroid hormone synthesis. <em>NOT immediate — existing TH stores must deplete (weeks).</em><br><br><strong>PTU unique:</strong> also blocks <strong>peripheral 5'-deiodinase</strong> → ↓ T4→T3 conversion → faster reduction of active T3 → preferred in thyroid storm.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><span class="warn">Agranulocytosis</span> (~0.3–0.5%) — most dangerous; any fever/sore throat → STOP, check CBC immediately<br><span class="warn">Rash, pruritus, arthralgias</span> (dose-related, both)<br><span class="warn">PTU: hepatotoxicity</span> — <strong>black box warning</strong> (severe liver necrosis, rare)<br><span class="warn">Methimazole: embryopathy</span> (aplasia cutis, choanal atresia, VACTERL) in 1st trimester</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">Hyperthyroidism (Graves', toxic nodule)</span><span class="use-tag">Thyroid storm (PTU preferred)</span><span class="use-tag">Pre-op preparation</span><br><br><strong>Pregnancy rule:</strong><br>1st trimester → <strong>PTU</strong> (methimazole teratogenic)<br>2nd/3rd trimester → <strong>methimazole</strong> (PTU hepatotoxicity risk)<br>Breastfeeding → PTU preferred</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact"><strong>PTU for thyroid storm</strong> — also blocks T4→T3 conversion (fastest clinical effect on active hormone).</div>
+      <div class="hy-fact"><strong>Pregnancy: PTU 1st trimester, methimazole 2nd/3rd trimester</strong>. Switch at ~12–14 weeks to ↓ hepatotoxicity risk.</div>
+      <div class="hy-fact">Agranulocytosis: fever + sore throat on thionamide → STOP drug + CBC → medical emergency.</div>
+      <div class="hy-fact">Both take <strong>weeks</strong> to work — existing TH stores must be depleted. Add beta-blocker for immediate symptom control.</div>
+      <div class="trap">Methimazole in 1st trimester → aplasia cutis (scalp defect), choanal atresia, VACTERL — absolute contraindication. PTU: black box hepatotoxicity — switch to methimazole in 2nd trimester. I-131 is absolutely contraindicated in pregnancy (ablates fetal thyroid).</div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrapper">
+  <div class="drug-header thyroid-radio">
+    <span class="drug-name">Radioiodine I-131 · Lugol's Iodine · Beta-Blockers</span>
+    <span class="drug-class-pill">Ablative Therapy · Iodine Loading · Symptom Control</span>
+    <span class="route">I-131: PO single dose · Lugol's: pre-op · BB: PO or IV</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>I-131:</strong> concentrated by thyroid via NIS → β-radiation → destroys follicular cells. Definitive.<br><br><strong>Lugol's (high-dose iodine):</strong> Wolff-Chaikoff effect → transiently blocks organification + ↓ thyroid vascularity. Used pre-thyroidectomy (7–10 days) to ↓ intraoperative bleeding.<br><br><strong>Beta-blockers (propranolol preferred):</strong> block adrenergic symptoms (palpitations, tremor, sweating) + propranolol also blocks T4→T3 conversion.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><strong>I-131:</strong><br><span class="warn">Hypothyroidism</span> (expected outcome — most patients require lifelong LT4)<br><span class="warn">Worsening Graves' ophthalmopathy</span> (give steroids)<br><ci>CONTRAINDICATED in pregnancy and breastfeeding</ci><br><br><strong>Beta-blockers:</strong><br><span class="warn">Bronchoconstriction</span> (non-selective — AVOID in asthma)<br><span class="warn">Bradycardia, hypotension</span></div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">I-131: Graves' disease (definitive)</span><span class="use-tag">Toxic nodular goiter</span><span class="use-tag">Lugol's: pre-thyroidectomy</span><span class="use-tag">BB: immediate symptom control in hyperthyroidism</span><br><br>Beta-blockers: bridge therapy while waiting for thionamides or I-131 to work. Propranolol 40 mg TID is standard.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact">I-131 → most patients become <strong>hypothyroid</strong> and need lifelong levothyroxine. This is the expected outcome, not a complication.</div>
+      <div class="hy-fact"><strong>Propranolol blocks T4→T3 conversion</strong> (unique among beta-blockers) — fastest way to ↓ active T3 alongside PTU.</div>
+      <div class="hy-fact">Lugol's iodine: paradoxically blocks organification at high doses (Wolff-Chaikoff) — temporary effect, breaks through in 2–3 weeks.</div>
+      <div class="trap">I-131 ABSOLUTELY CONTRAINDICATED in pregnancy — crosses placenta and ablates fetal thyroid → permanent neonatal hypothyroidism. Delay conception 6 months after I-131. Graves' ophthalmopathy may worsen with I-131 — pre-treat with steroids.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 4 — ADRENAL
+═══════════════════════════════════════════════════ -->
+<div class="section-label"><h2>Adrenal — Testing Agents, Blocking Agents & Replacement (Sharma)</h2></div>
+
+<div class="card-wrapper">
+  <div class="drug-header adrenal-test">
+    <span class="drug-name">ACTH (Cosyntropin) · CRH · Dexamethasone</span>
+    <span class="drug-class-pill">Adrenal Axis Testing Agents</span>
+    <span class="route">IV/IM (stimulation tests) · PO (dex suppression) · Diagnostic use only</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA (Test Logic)</div>
+      <div class="cell-content"><strong>ACTH stimulation (Cosyntropin):</strong> give synthetic ACTH → measure cortisol at 30/60 min. Normal: cortisol rises &gt;18–20 µg/dL. Failure → primary adrenal insufficiency (adrenal glands cannot respond).<br><br><strong>CRH stimulation:</strong> give CRH → measure ACTH + cortisol. Cushing's Disease: ACTH ↑↑ (pituitary responds). Ectopic: ACTH blunted (already maximally secreting, suppressed by negative feedback disrupted).<br><br><strong>Dexamethasone suppression:</strong> exogenous glucocorticoid → suppresses pituitary ACTH in normal subjects. In Cushing's: insufficient suppression.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Interpretation Pearls</div>
+      <div class="cell-content"><strong>Low-dose dex (1mg overnight or 2mg/day × 2d):</strong><br>Normal → cortisol suppresses (&lt;1.8 µg/dL). Abnormal in ANY Cushing's.<br><br><strong>High-dose dex (8mg/day × 2d):</strong><br>Cushing's Disease (pituitary) → cortisol suppresses ≥50% (pituitary still somewhat responsive to feedback).<br>Ectopic ACTH / adrenal tumor → NO suppression (autonomous).<br><br><strong>ACTH level:</strong> Primary adrenal insufficiency → ACTH ↑↑ (no cortisol feedback). Secondary → ACTH ↓.</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">ACTH stim: Addison's diagnosis</span><span class="use-tag">CRH stim: Cushing's source localization</span><span class="use-tag">Dex: Cushing's screening + source</span><br><br>Dexamethasone: also used for <strong>adrenal crisis prevention</strong> (stress dosing), fetal lung maturity (betamethasone/dexamethasone), inflammation.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact">Low-dose dex: <strong>screening test</strong> for Cushing's. High-dose dex: <strong>localizes source</strong> (pituitary vs ectopic vs adrenal).</div>
+      <div class="hy-fact">ACTH level distinguishes primary (↑ ACTH) vs secondary/tertiary (↓ ACTH) adrenal insufficiency.</div>
+      <div class="hy-fact">Cushing's Disease (pituitary): ACTH suppresses &gt;50% on high-dose dex. Ectopic: no suppression at any dose.</div>
+      <div class="trap">Dexamethasone does NOT cross-react with cortisol assays — use dex for suppression tests (not hydrocortisone or prednisone). Pseudo-Cushing's (depression, alcoholism) can show abnormal low-dose dex — use CRH stimulation test to differentiate.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrapper">
+  <div class="drug-header adrenal-block">
+    <span class="drug-name">Ketoconazole · Metyrapone · Mitotane · Osilodrostat · Mifepristone · Spironolactone · Eplerenone</span>
+    <span class="drug-class-pill">Adrenal Blocking Agents — Steroid Synthesis Inhibitors / Receptor Blockers</span>
+    <span class="route">PO · Varying monitoring requirements</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>Ketoconazole:</strong> inhibits CYP11A1, CYP11B1, 17α-hydroxylase → ↓ cortisol + androgen synthesis (broad steroidogenesis block).<br><br><strong>Metyrapone:</strong> inhibits CYP11B1 (11β-hydroxylase) → blocks last step in cortisol synthesis (↑ 11-deoxycortisol → ↑ ACTH by feedback → useful diagnostic tool).<br><br><strong>Mitotane:</strong> adrenolytic — destroys adrenal cortex (used in adrenocortical carcinoma).<br><br><strong>Osilodrostat:</strong> inhibits CYP11B1 (11β-hydroxylase) → ↓ cortisol (newer, Cushing's).<br><br><strong>Mifepristone:</strong> glucocorticoid receptor blocker (RU-486) → blocks cortisol effects at receptor level.<br><br><strong>Spironolactone/Eplerenone:</strong> MRA → blocks mineralocorticoid receptor → ↓ aldosterone effects.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects</div>
+      <div class="cell-content"><strong>Ketoconazole:</strong><br><span class="warn">Hepatotoxicity</span> (monitor LFTs), decreased libido, gynecomastia (↓ androgens)<br><br><strong>Metyrapone:</strong><br><span class="warn">Hypertension, hypokalemia, edema</span> (↑ 11-deoxycortisol and other mineralocorticoid precursors)<br><br><strong>Mitotane:</strong><br><span class="warn">GI: N/V/D</span> (severe), neurologic toxicity, adrenal insufficiency<br><br><strong>Mifepristone:</strong><br><span class="warn">Hypokalemia, hypertension</span> (mineralocorticoid activity unblocked)<br><span class="warn">Endometrial thickening</span> (anti-progesterone effects)<br><br><strong>Spironolactone:</strong><br><span class="warn">Hyperkalemia</span>, <span class="warn">gynecomastia</span>, impotence (non-selective)</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">Cushing's syndrome (all except spiro)</span><span class="use-tag">Adrenal carcinoma (mitotane)</span><span class="use-tag">Primary hyperaldosteronism (spiro/eplerenone)</span><span class="use-tag">HFrEF (spiro/eplerenone)</span><br><br>Cushing's surgery is first-line — drugs are adjuncts when surgery fails/contraindicated or for pre-op cortisol control.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact"><strong>Ketoconazole:</strong> most commonly used for medical management of Cushing's. Also: anti-fungal, ↓ testosterone (prostate cancer).</div>
+      <div class="hy-fact"><strong>Metyrapone test:</strong> blocks CYP11B1 → ↑ 11-deoxycortisol → ↑ ACTH (normal pituitary responds to low cortisol). Used to assess pituitary reserve.</div>
+      <div class="hy-fact"><strong>Mifepristone:</strong> blocks GR at receptor level → cortisol levels RISE (no feedback blockade) — don't use cortisol to monitor. Use glucose/symptoms.</div>
+      <div class="hy-fact"><strong>Mitotane</strong> → adrenocortical carcinoma only (destroys adrenal cortex irreversibly). All patients need glucocorticoid replacement.</div>
+      <div class="trap">Mifepristone (GR blocker) → cortisol levels actually INCREASE (no negative feedback via GR at pituitary) — monitor clinical response + glucose, NOT serum cortisol. Spironolactone → gynecomastia/impotence → switch to eplerenone (selective MRA, no androgen/progesterone effects).</div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrapper">
+  <div class="drug-header adrenal-rep">
+    <span class="drug-name">Hydrocortisone · Fludrocortisone</span>
+    <span class="drug-class-pill">Adrenal Replacement Hormones — Glucocorticoid + Mineralocorticoid</span>
+    <span class="route">PO daily (physiologic) · IV (adrenal crisis) · Fludrocortisone: PO</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>Hydrocortisone:</strong> synthetic cortisol → binds glucocorticoid receptor (GR) → gene activation → anti-inflammatory, glucose regulation, maintain BP, suppress immune response.<br><br>Physiologic dose: 15–20 mg/day (divided). Stress dose (illness/surgery): 2–3× physiologic dose.<br><br><strong>Fludrocortisone:</strong> potent synthetic mineralocorticoid → binds MR → ↑ Na⁺ reabsorption + ↓ K⁺ excretion in collecting duct → maintains BP and electrolytes.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><strong>Glucocorticoid excess (supraphysiologic):</strong><br><span class="warn">Cushing's syndrome features</span>: buffalo hump, moon face, striae, HTN, DM<br><span class="warn">Adrenal suppression</span> (if chronic → HPA axis suppression → NEVER stop abruptly)<br><span class="warn">Osteoporosis, peptic ulcer, immunosuppression</span><br><br><strong>Fludrocortisone excess:</strong><br><span class="warn">Hypertension, hypokalemia, edema</span></div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">Primary adrenal insufficiency (Addison's) — both drugs</span><span class="use-tag">Secondary/tertiary AI — hydrocortisone only</span><span class="use-tag">Adrenal crisis — IV hydrocortisone 100mg q8h</span><span class="use-tag">CAH — chronic replacement</span><br><br>Secondary AI: no mineralocorticoid needed (aldosterone regulated by RAAS, not ACTH).</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact"><strong>Adrenal crisis:</strong> IV hydrocortisone 100 mg q8h + IV fluids + glucose + treat precipitating cause (infection most common).</div>
+      <div class="hy-fact">Primary AI (Addison's) → needs BOTH hydrocortisone (GC) + fludrocortisone (MC). Secondary AI → hydrocortisone only (RAAS intact → aldosterone preserved).</div>
+      <div class="hy-fact"><strong>Sick-day rule:</strong> double/triple hydrocortisone dose during illness, vomiting, or surgery to prevent adrenal crisis.</div>
+      <div class="hy-fact">Never stop chronic steroids abruptly → HPA axis suppression → adrenal crisis. Must taper.</div>
+      <div class="trap">Secondary AI does NOT need fludrocortisone — aldosterone is regulated by angiotensin II (RAAS), not ACTH. Only primary AI requires mineralocorticoid replacement. Classic vignette trap.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION 5 — DIABETES MELLITUS
+═══════════════════════════════════════════════════ -->
+<div class="section-label"><h2>Diabetes — Insulin (Janicic)</h2></div>
+
+<div class="card-wrapper">
+  <div class="drug-header dm-insulin">
+    <span class="drug-name">Insulin — Rapid, Short, Intermediate, Long-Acting</span>
+    <span class="drug-class-pill">Pancreatic Hormone Replacement / Supplement</span>
+    <span class="route">SC (most) · IV (regular only for DKA) · Monitor glucose + K⁺</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> Insulin Types</div>
+      <div class="cell-content">
+        <div class="ins-grid">
+          <div class="ins-card">
+            <div class="ins-type">Rapid-Acting</div>
+            <div class="ins-name">Lispro · Aspart · Glulisine</div>
+            <div class="ins-stat">Onset: <span>5–15 min</span><br>Peak: <span>1–2 hr</span><br>Duration: <span>3–5 hr</span><br>Give: just before meal</div>
+          </div>
+          <div class="ins-card">
+            <div class="ins-type">Short-Acting</div>
+            <div class="ins-name">Regular (Humulin R)</div>
+            <div class="ins-stat">Onset: <span>30–60 min</span><br>Peak: <span>2–4 hr</span><br>Duration: <span>6–10 hr</span><br>IV: DKA only</div>
+          </div>
+          <div class="ins-card">
+            <div class="ins-type">Intermediate</div>
+            <div class="ins-name">NPH (Humulin N)</div>
+            <div class="ins-stat">Onset: <span>2–4 hr</span><br>Peak: <span>4–10 hr</span><br>Duration: <span>10–18 hr</span><br>Cloudy — mix last</div>
+          </div>
+          <div class="ins-card">
+            <div class="ins-type">Long-Acting (Basal)</div>
+            <div class="ins-name">Glargine (Lantus) · Detemir · Degludec</div>
+            <div class="ins-stat">Onset: <span>1–2 hr</span><br>Peak: <span>None (flat)</span><br>Duration: <span>20–24 hr</span><br>Do NOT mix</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects</div>
+      <div class="cell-content"><span class="warn">Hypoglycemia</span> (most common — rapid-acting if meal delayed)<br><span class="warn">Weight gain</span> (anabolic effect)<br><span class="warn">Hypokalemia</span> (insulin drives K⁺ into cells — critical in DKA management)<br><span class="warn">Lipodystrophy</span> (injection site rotation required)<br><span class="warn">Insulin antibodies</span> (rare with modern insulins)<br><br><strong>DKA pearls:</strong> K⁺ appears HIGH initially (acidosis + insulin deficiency), but total body K⁺ is DEPLETED. Replace K⁺ before starting insulin if K⁺ &lt;3.5.</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">T1DM — required (absolute insulin deficiency)</span><span class="use-tag">T2DM — add-on or monotherapy</span><span class="use-tag">DKA — IV regular insulin</span><span class="use-tag">Gestational DM</span><br><br>Basal-bolus regimen: long-acting basal + rapid-acting with each meal = most physiologic regimen.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact"><strong>Only regular insulin can be given IV</strong> (used in DKA and hyperkalemia treatment).</div>
+      <div class="hy-fact">DKA K⁺ paradox: serum K⁺ HIGH despite total body depletion → replete K⁺ BEFORE starting insulin if &lt;3.5 (insulin drives K⁺ into cells → fatal arrhythmia).</div>
+      <div class="hy-fact">Glargine/detemir/degludec: <strong>DO NOT MIX</strong> with other insulins (altered pH/kinetics). Cannot be given IV.</div>
+      <div class="hy-fact">NPH: cloudy suspension (zinc crystal) — mix last if combining with clear insulin. Peak at 4–10h → overnight hypoglycemia risk.</div>
+      <div class="trap">DKA management: Never start insulin if K⁺ &lt;3.5 — will cause fatal hypokalemia. Give KCl IV first, then start insulin drip. Also: HHS vs DKA — HHS has no acidosis, no ketones, but extreme hyperglycemia (>600) and hyperosmolarity. Higher mortality. Treat with aggressive fluids FIRST.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-label"><h2>Diabetes — Injectable Non-Insulin Agents (Janicic)</h2></div>
+
+<div class="card-wrapper">
+  <div class="drug-header dm-inject">
+    <span class="drug-name">GLP-1 Agonists · Amylin Analogs (Pramlintide)</span>
+    <span class="drug-class-pill">Incretin Mimetics — GLP-1R Agonists · Amylin Analog</span>
+    <span class="route">SC injection · GLP-1: weekly (semaglutide) or daily (liraglutide) · Pramlintide: with each meal</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>GLP-1 agonists</strong> (exenatide, liraglutide, semaglutide):<br>Bind GLP-1R → glucose-<strong>dependent</strong> insulin secretion (only when glucose elevated) → ↓ glucagon → ↓ gastric emptying → central satiety (hypothalamus) → weight loss.<br><br><strong>Pramlintide</strong> (amylin analog): synthetic amylin → ↓ glucagon, ↓ gastric emptying, ↑ satiety. Given WITH insulin at meals. Amylin is normally co-secreted with insulin from beta cells.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><strong>GLP-1 agonists:</strong><br><span class="warn">N/V/D</span> (most common, worst at initiation — improves over weeks)<br><span class="warn">Pancreatitis</span> (rare, controversial — discontinue if occurs)<br><span class="warn">Thyroid C-cell tumors</span> (rodent models — black box for liraglutide/semaglutide)<br><ci>Contraindicated: personal/family Hx MTC, MEN2</ci><br><br><strong>Pramlintide:</strong><br><span class="warn">Hypoglycemia when given with insulin</span> (severe — reduce insulin dose)<br><span class="warn">N/V</span></div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">T2DM + ASCVD → GLP-1 agonist</span><span class="use-tag">T2DM + obesity → semaglutide</span><span class="use-tag">T1DM adjunct (pramlintide)</span><br><br><strong>CV outcomes:</strong> liraglutide (LEADER), semaglutide (SUSTAIN-6) → ↓ MACE in T2DM + established ASCVD. Semaglutide (Wegovy) FDA-approved for obesity.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact"><strong>Glucose-DEPENDENT insulin secretion</strong> → NO hypoglycemia when used alone (only hypoglycemic when combined with insulin/sulfonylurea).</div>
+      <div class="hy-fact">GLP-1 agonists: weight loss 3–15 kg via gastric emptying + hypothalamic satiety. First-line add-on in T2DM + ASCVD.</div>
+      <div class="hy-fact">Semaglutide oral (Rybelsus) = first oral GLP-1 agonist. Semaglutide SC (Ozempic) weekly. Wegovy = high-dose semaglutide for obesity.</div>
+      <div class="trap">GLP-1 agonists ≠ DPP-4 inhibitors: GLP-1 agonists are injectable (mostly), 10× more potent, cause significant weight loss. DPP-4 inhibitors: oral, weight neutral, modest glucose lowering. Thyroid C-cell tumor risk: human relevance unclear but black box warning — screen history before prescribing.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-label"><h2>Diabetes — Oral Agents (Janicic)</h2></div>
+
+<div class="card-wrapper">
+  <div class="drug-header dm-oral1">
+    <span class="drug-name">Metformin · Sulfonylureas (Glipizide, Glyburide)</span>
+    <span class="drug-class-pill">Biguanide — AMPK Activator · Sulfonylurea — K-ATP Channel Blocker</span>
+    <span class="route">PO · Metformin: with food (GI SE) · SU: before meals</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>Metformin:</strong> activates <strong>AMPK</strong> → ↓ hepatic gluconeogenesis (primary) + ↓ intestinal glucose absorption + ↑ peripheral insulin sensitivity. Does NOT stimulate insulin secretion → no hypoglycemia solo.<br><br><strong>Sulfonylureas:</strong> bind SUR1 on pancreatic beta cells → close K-ATP channels → membrane depolarization → Ca²⁺ influx → insulin granule exocytosis. <strong>Glucose-independent</strong> → insulin secreted even in fasting → hypoglycemia risk.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects &amp; Contraindications</div>
+      <div class="cell-content"><strong>Metformin:</strong><br><span class="warn">GI: N/V/D, metallic taste</span> (take with food)<br><span class="warn">Lactic acidosis</span> (rare — hold with iodinated contrast, surgery; avoid if eGFR &lt;30)<br>Vitamin B12 deficiency (chronic use)<br><ci>Contraindicated: eGFR &lt;30, severe hepatic disease, acute illness</ci><br><br><strong>Sulfonylureas:</strong><br><span class="warn">HYPOGLYCEMIA</span> (most important — glucose-independent insulin release)<br><span class="warn">Weight gain</span><br><span class="warn">Glyburide</span>: active metabolites accumulate in renal failure → avoid in CKD/elderly</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">Metformin: T2DM — 1st line (UKPDS)</span><span class="use-tag">Pre-diabetes + high-risk (lifestyle failure)</span><br><span class="use-tag">SU: T2DM add-on (cheap, effective)</span><br><br>Metformin: UKPDS trial → ↓ CV events in T2DM. No hypoglycemia, weight neutral/modest loss, cheap, proven.</div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact"><strong>Metformin = first-line T2DM</strong>. No hypoglycemia, mild weight loss, CV benefit, cheap.</div>
+      <div class="hy-fact">Hold metformin 48h before iodinated contrast (↑ lactic acidosis risk) and resume after confirming normal creatinine.</div>
+      <div class="hy-fact">Sulfonylureas: close K-ATP channels <strong>regardless of glucose level</strong> → hypoglycemia in fasting. Glyburide worst in CKD (active metabolites).</div>
+      <div class="hy-fact">Lactic acidosis from metformin: rare but serious — eGFR &lt;30, liver failure, alcohol use, contrast agents → risk.</div>
+      <div class="trap">Sulfonylurea mechanism: K-ATP channel closure on beta cells → insulin release even without glucose → hypoglycemia. GLP-1 agonists: same incretin pathway but GLUCOSE-DEPENDENT → no solo hypoglycemia. Key distinction for boards.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrapper">
+  <div class="drug-header dm-oral2">
+    <span class="drug-name">SGLT2 Inhibitors · DPP-4 Inhibitors · TZDs · Alpha-Glucosidase Inhibitors</span>
+    <span class="drug-class-pill">Newer Oral Antidiabetics — Multiple Classes</span>
+    <span class="route">PO · SGLT2i: once daily · DPP-4i: once daily · TZD: once daily · AGI: with each meal</span>
+  </div>
+  <div class="card-body">
+    <div class="cell moa">
+      <div class="cell-label"><span class="icon">⚙</span> MOA</div>
+      <div class="cell-content"><strong>SGLT2i</strong> (canagliflozin, dapagliflozin, empagliflozin): block SGLT2 in PCT → glucosuria → osmotic diuresis → ↓ glucose + ↓ preload (HF benefit). Also anti-fibrotic cardiac/renal effects independent of glucose.<br><br><strong>DPP-4i</strong> (sitagliptin): inhibit DPP-4 enzyme → ↓ GLP-1 breakdown → ↑ endogenous GLP-1 → glucose-dependent insulin ↑. Less potent than GLP-1 agonists.<br><br><strong>TZD</strong> (pioglitazone): activate <strong>PPARγ</strong> → ↑ adipogenesis + ↑ peripheral insulin sensitivity (fat and muscle). Slow onset (6–12 wks).<br><br><strong>Acarbose</strong> (α-glucosidase inhibitor): blocks intestinal α-glucosidase → delays CHO absorption → ↓ postprandial glucose spike.</div>
+    </div>
+    <div class="cell se">
+      <div class="cell-label"><span class="icon">⚡</span> Side Effects</div>
+      <div class="cell-content"><strong>SGLT2i:</strong> genital mycotic infections, UTI, euglycemic DKA, hypotension<br><ci>Avoid if eGFR &lt;20; Type 1 DM (↑ DKA)</ci><br><br><strong>DPP-4i:</strong> generally well tolerated; pancreatitis (rare); saxagliptin → ↑ HF hospitalizations (avoid in HF)<br><br><strong>TZD (pioglitazone):</strong><br><span class="warn">Weight gain + fluid retention → edema → can worsen HF</span><br><span class="warn">Bladder cancer risk</span> (pioglitazone — avoid if Hx bladder cancer)<br><span class="warn">Fractures</span> (↓ bone density in women)<br><ci>AVOID in HFrEF</ci><br><br><strong>Acarbose:</strong> GI bloating, diarrhea, flatulence (CHO fermentation)</div>
+    </div>
+    <div class="cell use">
+      <div class="cell-label"><span class="icon">🎯</span> Clinical Uses</div>
+      <div class="cell-content"><span class="use-tag">SGLT2i: T2DM + HFrEF or HFpEF</span><span class="use-tag">T2DM + CKD (canagliflozin/dapagliflozin)</span><br><span class="use-tag">DPP-4i: T2DM (weight-neutral option)</span><br><span class="use-tag">TZD: T2DM + insulin resistance (no HF)</span><br><span class="use-tag">Acarbose: postprandial hyperglycemia, dumping syndrome</span></div>
+    </div>
+    <div class="cell hy">
+      <div class="cell-label"><span class="icon">⭐</span> High-Yield Facts</div>
+      <div class="hy-fact"><strong>SGLT2i: ONLY class with benefit in BOTH HFrEF AND HFpEF</strong> (EMPEROR-Reduced, EMPEROR-Preserved, DAPA-HF). Works regardless of DM.</div>
+      <div class="hy-fact"><strong>Euglycemic DKA</strong>: SGLT2i → DKA with near-normal glucose. Always check ketones, not just glucose.</div>
+      <div class="hy-fact">TZDs: <strong>AVOID in HFrEF</strong> (fluid retention worsens HF). Pioglitazone: check for bladder cancer history.</div>
+      <div class="hy-fact">DPP-4i: weight-neutral, no hypoglycemia, oral. Saxagliptin: ↑ HF hospitalizations → avoid in HF.</div>
+      <div class="trap">SGLT2i in a non-diabetic with HFrEF → still indicated (mechanism beyond glucose). Euglycemic DKA — glucose 180 mg/dL doesn't rule out DKA when on SGLT2i. TZD + HFrEF = dangerous fluid retention → absolutely contraindicated.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     COMPARISONS TABLE
+═══════════════════════════════════════════════════ -->
+<div class="comp-panel">
+  <div class="comp-head">🔬 Key Drug Comparisons — High-Yield Step 1 Discriminators</div>
+  <div class="comp-body">
+    <table class="comp-table">
+      <tr><th>Comparison</th><th>Drug A</th><th>Drug B</th><th>Key Distinguishing Feature</th></tr>
+      <tr><td>Prolactinoma 1st line</td><td class="ok">Cabergoline ✓</td><td class="warn">Bromocriptine</td><td>Cabergoline: twice-weekly dosing, D2-selective, better shrinkage, fewer SE.</td></tr>
+      <tr><td>Thyroid storm</td><td class="ok">PTU ✓</td><td class="warn">Methimazole</td><td>PTU blocks TPO + T4→T3 peripheral conversion. Methimazole: TPO only.</td></tr>
+      <tr><td>Hyperthyroidism 1st trimester</td><td class="ok">PTU ✓</td><td class="danger">Methimazole ✗</td><td>Methimazole teratogenic (aplasia cutis, VACTERL). Switch to MMZ in 2nd/3rd trimester.</td></tr>
+      <tr><td>Central DI vs Nephrogenic DI</td><td class="ok">DDAVP: works in central</td><td class="danger">DDAVP: fails in nephrogenic</td><td>Central DI: posterior pituitary problem (↓ AVP). Nephrogenic: V2R/AQP2 defect.</td></tr>
+      <tr><td>Nephrogenic DI treatment</td><td class="ok">Thiazides (paradoxical ↓ urine)</td><td class="warn">NSAIDs (Li-induced)</td><td>Thiazides: volume depletion → ↑ proximal reabsorption → less fluid to distal tubule.</td></tr>
+      <tr><td>T2DM 1st line</td><td class="ok">Metformin ✓ (UKPDS)</td><td class="warn">Sulfonylurea</td><td>Metformin: no hypoglycemia, CV benefit, cheap. SU: hypoglycemia risk, weight gain.</td></tr>
+      <tr><td>T2DM + ASCVD</td><td class="ok">GLP-1 agonist ✓ (LEADER, SUSTAIN-6)</td><td class="ok">SGLT2i ✓ (EMPA-REG)</td><td>Both have CV benefit. GLP-1: more weight loss. SGLT2i: better HF/CKD benefit.</td></tr>
+      <tr><td>T2DM + HFrEF/HFpEF</td><td class="ok">SGLT2i ✓ (only class for both)</td><td class="danger">TZD ✗ (avoid — worsens HF)</td><td>SGLT2i: proven in both HFrEF and HFpEF. TZD absolutely contraindicated in HF.</td></tr>
+      <tr><td>Glucose-dependent insulin secretion</td><td class="ok">GLP-1 agonists — YES (no solo hypoglycemia)</td><td class="danger">Sulfonylureas — NO (glucose-independent)</td><td>SU closes K-ATP channels regardless of glucose → hypoglycemia even when fasting.</td></tr>
+      <tr><td>Cushing's source — high-dose dex</td><td class="ok">Pituitary (Cushing's Dz) → suppresses &gt;50%</td><td class="danger">Ectopic ACTH / adrenal → NO suppression</td><td>Pituitary is partly responsive to negative feedback. Ectopic and adrenal are autonomous.</td></tr>
+      <tr><td>Primary vs Secondary AI — treatment</td><td class="ok">Primary AI: HC + fludrocortisone</td><td class="ok">Secondary AI: HC only (no fludrocortisone)</td><td>Secondary AI: RAAS intact → aldosterone preserved. No mineralocorticoid needed.</td></tr>
+      <tr><td>Mifepristone monitoring</td><td class="ok">Monitor clinical response + glucose</td><td class="danger">NOT serum cortisol (rises on mifepristone)</td><td>GR blockade → no feedback → ACTH ↑ → cortisol ↑. Use symptoms and glucose, not cortisol level.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DRUG SELECTION BY INDICATION
+═══════════════════════════════════════════════════ -->
+<div class="indication-section">
+  <h3>Drug Selection by Clinical Indication</h3>
+  <table class="ind-table">
+    <thead><tr><th>Scenario</th><th>First-Line / Preferred</th><th>Alternative / Add-on</th><th>Key Pearl</th></tr></thead>
+    <tbody>
+      <tr><td class="iname">Prolactinoma (any size)</td><td class="choice">★ Cabergoline (dopamine agonist)</td><td>Bromocriptine</td><td>Surgery only if drug failure or vision loss. Shrinks tumor AND normalizes prolactin.</td></tr>
+      <tr><td class="iname">Acromegaly (post-op)</td><td class="choice">★ Somatostatin analogs (octreotide/lanreotide)</td><td>Cabergoline; pegvisomant (if SS-resistant)</td><td>Monitor IGF-1. Pegvisomant: GH rises but IGF-1 falls — monitor IGF-1 only.</td></tr>
+      <tr><td class="iname">Central DI</td><td class="choice">★ DDAVP (intranasal or PO)</td><td>Low-sodium diet</td><td>Fails in nephrogenic DI. Diagnose with water deprivation test + DDAVP response.</td></tr>
+      <tr><td class="iname">Nephrogenic DI</td><td class="choice">★ Thiazide diuretic (paradoxical) + low-Na diet</td><td>NSAIDs (indomethacin) for Li-induced</td><td>Paradox: diuretic reduces polyuria via volume depletion → ↑ proximal reabsorption.</td></tr>
+      <tr><td class="iname">Hypothyroidism</td><td class="choice">★ Levothyroxine (T4) once daily</td><td>Liothyronine (T3) — rarely used</td><td>Monitor TSH 6–8 wks after dose change. Take fasting. Avoid Ca²⁺/Fe²⁺/PPIs within 4h.</td></tr>
+      <tr><td class="iname">Hyperthyroidism (Graves')</td><td class="choice">★ Methimazole (long-term) or I-131 (definitive)</td><td>PTU (thyroid storm, 1st tri); beta-blocker (bridge)</td><td>Propranolol for immediate symptom control. MMZ: once daily. PTU: TID.</td></tr>
+      <tr><td class="iname">Hyperthyroidism in Pregnancy</td><td class="choice">★ PTU (1st trimester) → MMZ (2nd/3rd trimester)</td><td>Beta-blocker for symptoms</td><td>I-131 absolutely contraindicated. Never switch back to MMZ in 1st trimester.</td></tr>
+      <tr><td class="iname">Thyroid Storm</td><td class="choice">★ PTU (blocks T4→T3) + propranolol + steroids</td><td>Lugol's iodine (after thionamide); cooling</td><td>Give PTU BEFORE Lugol's (Wolff-Chaikoff needs organification blocked first).</td></tr>
+      <tr><td class="iname">Primary Adrenal Insufficiency (Addison's)</td><td class="choice">★ Hydrocortisone + fludrocortisone</td><td>IV hydrocortisone 100mg q8h (crisis)</td><td>Sick-day rules: double/triple dose with illness. Never stop abruptly.</td></tr>
+      <tr><td class="iname">Cushing's Disease (medical)</td><td class="choice">★ Ketoconazole (CYP inhibitor)</td><td>Metyrapone; pasireotide; osilodrostat</td><td>Surgery is gold standard. Drugs: bridge/adjunct. Mifepristone: monitor glucose (not cortisol).</td></tr>
+      <tr><td class="iname">Primary Hyperaldosteronism (Conn's)</td><td class="choice">★ Spironolactone (medical mgmt)</td><td>Eplerenone (if gynecomastia); surgery if adenoma</td><td>Gynecomastia on spiro → switch to eplerenone (selective MRA, same efficacy).</td></tr>
+      <tr><td class="iname">T2DM — First-line</td><td class="choice">★ Metformin (UKPDS)</td><td>Add GLP-1 if ASCVD; SGLT2i if HF/CKD</td><td>No hypoglycemia, CV benefit, cheap. Stop if eGFR &lt;30.</td></tr>
+      <tr><td class="iname">T2DM + HFrEF or HFpEF</td><td class="choice">★ SGLT2 inhibitor (empagliflozin/dapagliflozin)</td><td>Loop diuretic for volume</td><td>ONLY class with mortality benefit in both HFrEF AND HFpEF. Works regardless of DM.</td></tr>
+      <tr><td class="iname">T2DM + ASCVD</td><td class="choice">★ GLP-1 agonist (liraglutide/semaglutide) ± SGLT2i</td><td>Add metformin if not already on</td><td>LEADER (liraglutide), SUSTAIN-6 (semaglutide) → ↓ MACE in established ASCVD.</td></tr>
+      <tr><td class="iname">DKA Management</td><td class="choice">★ IV fluids → K⁺ replacement → IV regular insulin</td><td>Treat precipitant; monitor electrolytes</td><td>NEVER start insulin if K⁺ &lt;3.5. Regular insulin only (IV). Monitor K⁺ hourly.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ACTION BUTTONS -->
+<div class="action-btns">
+  <button class="action-btn btn-print" onclick="window.print()">
+    🖨 Print / Save PDF
+  </button>
+  <button class="action-btn btn-excel" onclick="exportToExcel()">
+    📊 Export to Excel
+  </button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+function exportToExcel() {
+  const wb = XLSX.utils.book_new();
+
+  const drugs = [
+    ["Drug / Class","Mechanism","Side Effects & Contraindications","Clinical Uses","High-Yield Facts & Traps"],
+    ["Cabergoline / Bromocriptine — Dopamine Agonists","D2 receptor activation on lactotrophs → ↓ prolactin. Cabergoline: D2-selective. Bromocriptine: non-selective.","N/V, orthostatic hypotension, impulse control disorders, cardiac valvulopathy (high-dose cabergoline)","Prolactinoma (1st line — shrinks tumor AND normalizes prolactin). Hyperprolactinemia. Acromegaly adjunct.","★ Cabergoline preferred over bromocriptine (twice weekly, better tolerated, higher efficacy). Surgery only if drug failure. ⚠ TRAP: Mild prolactin + large mass = stalk compression NOT prolactinoma."],
+    ["Octreotide / Lanreotide / Pasireotide — Somatostatin Analogs","Bind SSTR1-5 → ↓ GH (somatotrophs), ACTH (pasireotide/corticotrophs), TSH, gut hormones.","GI: N/V/D, cholelithiasis (impaired GB emptying). Hyperglycemia (especially pasireotide — blocks insulin). Bradycardia.","Acromegaly (post-op), Cushing's disease (pasireotide), carcinoid syndrome, VIPoma, esophageal variceal bleeding.","★ Pasireotide → severe hyperglycemia (SSTR2 on beta cells — blocks insulin). Monitor gallbladder US every 6 mo. ⚠ Octreotide also blocks insulin but less than pasireotide."],
+    ["Pegvisomant — GH Receptor Antagonist","Competitive GH receptor antagonist → blocks GH signaling → ↓ IGF-1. GH levels RISE (receptor blocked, no feedback removal).","Liver transaminase elevation, tumor enlargement risk (no direct pituitary suppression).","Acromegaly resistant to somatostatin analogs.","★ Monitor IGF-1 (NOT GH) for treatment success. GH rises on pegvisomant. ⚠ TRAP: Combine with SS analog to prevent tumor enlargement."],
+    ["Somatropin (rGH) — Recombinant Human GH","Recombinant GH → stimulates IGF-1 production → linear growth, body composition, bone density.","Glucose intolerance (GH is diabetogenic), edema, arthralgias. Contraindicated in active malignancy.","GH deficiency (children: stunted growth; adults: body composition/lipids/bone). Turner syndrome, Prader-Willi.","★ GH is diabetogenic — monitor glucose. Monitor IGF-1 for adequacy of replacement."],
+    ["DDAVP (Desmopressin) — Synthetic AVP Analog","V2-selective AVP analog → V2R → AQP2 insertion → water reabsorption. Resistant to vasopressinase.","Hyponatremia/water intoxication (over-administration). Headache, nausea.","Central DI (1st line), gestational DI, hemophilia A/vWD (releases vWF from endothelium), nocturnal enuresis.","★ Works in central DI; FAILS in nephrogenic DI. ★ Hemophilia A/vWD: V2R on endothelium → releases stored vWF/FVIII. ⚠ TRAP: Thiazides for nephrogenic DI (paradoxical)."],
+    ["Levothyroxine (T4) — Thyroid Replacement","Synthetic T4 prohormone → peripheral 5'-deiodinase converts to T3 → nuclear receptor (TR) activation.","Iatrogenic hyperthyroidism (excess dose), osteoporosis. Drug interactions: Ca²⁺, Fe²⁺, PPIs, cholestyramine (↓ absorption).","Hypothyroidism (1st line), post-thyroidectomy, TSH suppression in thyroid cancer.","★ T4 is prohormone; T3 is active (10× receptor affinity). Monitor TSH. Take fasting. ⚠ Hold Ca²⁺/Fe²⁺/PPIs ≥4h from levothyroxine."],
+    ["PTU vs Methimazole — Thionamides (Antithyroid)","Both: block TPO → ↓ TH synthesis. PTU also blocks peripheral 5'-deiodinase (↓ T4→T3 conversion).","Agranulocytosis (both — any fever/sore throat → stop + CBC). PTU: hepatotoxicity (black box). MMZ: embryopathy (1st trimester).","Hyperthyroidism, thyroid storm (PTU preferred), pre-op. Pregnancy: PTU 1st tri → MMZ 2nd/3rd tri.","★ PTU for thyroid storm (also blocks T4→T3). ★ Pregnancy rule: PTU 1st tri, switch to MMZ 2nd/3rd. ⚠ TRAP: MMZ in 1st trimester → aplasia cutis, VACTERL. I-131 absolutely contraindicated in pregnancy."],
+    ["Radioiodine I-131 — Ablative Therapy","Concentrated by NIS → β-radiation → destroys follicular cells. Definitive hyperthyroidism treatment.","Hypothyroidism (expected — most need lifelong LT4). Worsening Graves' ophthalmopathy. CONTRAINDICATED in pregnancy/breastfeeding.","Graves' disease (definitive), toxic nodular goiter.","★ Most patients become hypothyroid and need levothyroxine. ⚠ Absolutely contraindicated in pregnancy (ablates fetal thyroid). Delay conception 6 months post-I-131."],
+    ["ACTH / CRH / Dexamethasone — Adrenal Axis Testing","ACTH stim: test adrenal response. CRH stim: test pituitary response. Dex suppression: test HPA feedback.","Dexamethasone: not used for suppression testing in patients with adrenal insufficiency. Testing only.","Adrenal insufficiency diagnosis (ACTH stim). Cushing's screening (low-dose dex). Source localization (high-dose dex + CRH).","★ Low-dose dex: screening. High-dose dex: pituitary suppresses >50%; ectopic does NOT. ★ ACTH level: ↑ in primary AI, ↓ in secondary. ⚠ TRAP: Pseudo-Cushing's (depression, alcoholism) can fail low-dose dex — use CRH stim to differentiate."],
+    ["Ketoconazole / Metyrapone / Mitotane / Mifepristone — Adrenal Blocking Agents","Ketoconazole: CYP enzyme inhibitor → ↓ cortisol + androgens. Metyrapone: CYP11B1 inhibitor (↑ 11-deoxycortisol). Mitotane: adrenolytic. Mifepristone: GR blocker.","Ketoconazole: hepatotoxicity, ↓ libido. Metyrapone: HTN, hypokalemia, edema. Mitotane: severe GI + neurologic toxicity. Mifepristone: hypokalemia, HTN.","Cushing's syndrome (ketoconazole most common). Adrenocortical carcinoma (mitotane). Metyrapone: diagnostic test + treatment.","★ Mifepristone: monitor glucose + symptoms, NOT cortisol (GR block → cortisol rises from ↑ ACTH). ★ Mitotane for adrenocortical carcinoma only. ⚠ All patients on mitotane need glucocorticoid replacement."],
+    ["Hydrocortisone + Fludrocortisone — Adrenal Replacement","Hydrocortisone: synthetic cortisol → GR activation. Fludrocortisone: potent mineralocorticoid → MR activation → ↑ Na⁺ reabsorption.","Supraphysiologic doses: Cushing's features, adrenal suppression, osteoporosis. Fludrocortisone excess: HTN, hypokalemia, edema.","Primary AI: both HC + fludrocortisone. Secondary AI: HC only (RAAS intact). Adrenal crisis: IV HC 100mg q8h.","★ Primary AI needs BOTH drugs; secondary AI needs HC only (aldosterone preserved via RAAS). ★ Sick-day rule: double/triple dose during illness. ⚠ NEVER stop chronic steroids abruptly → adrenal crisis."],
+    ["Insulin (Rapid/Short/Intermediate/Long-Acting)","Binds insulin receptor (RTK) → glucose uptake (GLUT4), glycogen synthesis, protein synthesis, ↓ lipolysis. Also drives K⁺ into cells.","Hypoglycemia (most common), weight gain, hypokalemia (DKA: replete K⁺ before insulin if <3.5), lipodystrophy.","T1DM (required), T2DM (add-on/monotherapy), DKA (IV regular), gestational DM.","★ Only regular insulin can be given IV (DKA). ★ DKA K⁺ paradox: serum K⁺ high (acidosis), but total body K⁺ depleted — replete FIRST. Glargine: DO NOT MIX, cannot be given IV."],
+    ["GLP-1 Agonists (Liraglutide, Semaglutide, Exenatide)","Bind GLP-1R → glucose-DEPENDENT insulin secretion + ↓ glucagon + ↓ gastric emptying + hypothalamic satiety → weight loss.","N/V/D (worst at initiation), pancreatitis (rare), thyroid C-cell tumors (black box — rodent). CI: MTC/MEN2 history.","T2DM + ASCVD (LEADER, SUSTAIN-6 → ↓ MACE), T2DM + obesity (semaglutide). Adjunct to insulin.","★ Glucose-DEPENDENT → NO solo hypoglycemia. ★ CV benefit in ASCVD. ★ Semaglutide oral (Rybelsus) = first oral GLP-1. ⚠ TRAP: GLP-1 agonists ≠ DPP-4 inhibitors (much more potent, weight loss, injectable mostly)."],
+    ["Metformin — Biguanide (1st Line T2DM)","Activates AMPK → ↓ hepatic gluconeogenesis (primary) + ↓ gut glucose absorption + ↑ peripheral insulin sensitivity.","GI: N/V/D (take with food). Lactic acidosis (rare — hold with contrast/surgery; avoid eGFR <30). B12 deficiency (chronic).","T2DM 1st line (UKPDS — ↓ CV events). Pre-diabetes (high-risk patients).","★ No hypoglycemia, CV benefit, weight neutral/modest loss, cheap. Hold if eGFR <30 or iodinated contrast. ⚠ TRAP: Lactic acidosis with alcohol, liver disease, renal failure, contrast."],
+    ["Sulfonylureas (Glipizide, Glyburide)","Bind SUR1 → close K-ATP channels → membrane depolarization → Ca²⁺ influx → insulin exocytosis. GLUCOSE-INDEPENDENT.","Hypoglycemia (most important — fasting and exercise), weight gain. Glyburide: avoid in CKD (active metabolites accumulate).","T2DM (effective, cheap) add-on to metformin.","★ K-ATP channel closure = glucose-INDEPENDENT insulin release → hypoglycemia even fasting. ★ Glyburide worst in CKD/elderly. ⚠ TRAP: SU vs GLP-1 agonist — SU is glucose-independent (hypoglycemia risk); GLP-1 is glucose-dependent (no solo hypoglycemia)."],
+    ["SGLT2 Inhibitors (Canagliflozin, Dapagliflozin, Empagliflozin)","Block SGLT2 in PCT → glucosuria → osmotic diuresis + natriuresis + direct cardiac/renal anti-fibrotic effects.","Genital mycotic infections, UTI, euglycemic DKA, hypotension. Avoid eGFR <20, T1DM.","T2DM + HFrEF or HFpEF (ONLY class with benefit in both). T2DM + CKD. Works regardless of DM.","★ ONLY class with benefit in BOTH HFrEF AND HFpEF (EMPEROR-Reduced, EMPEROR-Preserved, DAPA-HF). ★ Euglycemic DKA: check ketones even if glucose is near-normal. ⚠ TZD absolutely contraindicated in HFrEF."],
+    ["DPP-4 Inhibitors (Sitagliptin) / TZDs (Pioglitazone) / Acarbose","DPP-4i: inhibit GLP-1 breakdown → ↑ endogenous GLP-1 → glucose-dependent insulin. TZD: PPARγ agonist → ↑ insulin sensitivity. Acarbose: α-glucosidase inhibitor → ↓ CHO absorption.","DPP-4i: pancreatitis; saxagliptin → ↑ HF hospitalizations. TZD: edema, weight gain, bladder cancer (pioglitazone), fractures; AVOID in HF. Acarbose: GI bloating/gas.","DPP-4i: weight-neutral T2DM add-on. TZD: T2DM + insulin resistance (no HF). Acarbose: postprandial hyperglycemia, dumping syndrome.","★ DPP-4i: glucose-dependent (no solo hypoglycemia), oral, weight neutral. ★ TZD: ABSOLUTELY AVOID IN HFrEF (fluid retention). Pioglitazone: screen for bladder cancer history. ⚠ Saxagliptin → ↑ HF hospitalizations — avoid in HF patients."],
+  ];
+
+  const ws1 = XLSX.utils.aoa_to_sheet(drugs);
+  ws1['!cols'] = [{wch:36},{wch:44},{wch:48},{wch:44},{wch:60}];
+  XLSX.utils.book_append_sheet(wb, ws1, "Endo Drug Reference");
+
+  const indications = [
+    ["Scenario","First-Line","Alternative / Add-on","Key Pearl"],
+    ["Prolactinoma","Cabergoline","Bromocriptine; surgery if drug failure","Shrinks tumor AND normalizes prolactin. Surgery rarely needed."],
+    ["Acromegaly (post-op)","SS analogs (octreotide/lanreotide)","Cabergoline; pegvisomant (SS-resistant)","Monitor IGF-1. Pegvisomant: GH rises — monitor IGF-1 only."],
+    ["Central DI","DDAVP","Low-Na diet","Fails in nephrogenic DI. Diagnose with water deprivation test."],
+    ["Nephrogenic DI","Thiazide diuretic + low-Na diet","Indomethacin (Li-induced)","Paradoxical: volume depletion → ↑ proximal reabsorption → ↓ polyuria."],
+    ["Hypothyroidism","Levothyroxine (T4) once daily","Liothyronine (T3) rarely","Monitor TSH. Take fasting. Hold Ca²⁺/Fe²⁺/PPIs ≥4h."],
+    ["Hyperthyroidism (Graves')","Methimazole (long-term) or I-131 (definitive)","PTU (thyroid storm, 1st tri); beta-blocker (bridge)","Propranolol for immediate symptom control."],
+    ["Hyperthyroidism in Pregnancy","PTU (1st trimester) → MMZ (2nd/3rd trimester)","Beta-blocker for symptoms","I-131 absolutely contraindicated. Switch at ~12 weeks."],
+    ["Thyroid Storm","PTU + propranolol + steroids + Lugol's","Cooling; supportive care","Give PTU before Lugol's iodine. Propranolol also blocks T4→T3."],
+    ["Primary Adrenal Insufficiency","Hydrocortisone + fludrocortisone","IV HC 100mg q8h (adrenal crisis)","Sick-day rules. Never stop abruptly."],
+    ["Cushing's Disease (medical)","Ketoconazole (CYP inhibitor)","Metyrapone; pasireotide; osilodrostat","Surgery is gold standard. Mifepristone: monitor glucose not cortisol."],
+    ["Primary Hyperaldosteronism","Spironolactone","Eplerenone (if gynecomastia); surgery if adenoma","Gynecomastia → switch to eplerenone (selective MRA)."],
+    ["T2DM — First-line","Metformin (UKPDS)","Add GLP-1 if ASCVD; SGLT2i if HF/CKD","No hypoglycemia, CV benefit. Stop if eGFR <30."],
+    ["T2DM + HFrEF or HFpEF","SGLT2 inhibitor (empagliflozin/dapagliflozin)","Loop diuretic for volume","Only class proven in BOTH HFrEF AND HFpEF. Works regardless of DM."],
+    ["T2DM + ASCVD","GLP-1 agonist (liraglutide/semaglutide)","Add SGLT2i for HF/CKD co-morbidity","LEADER (liraglutide), SUSTAIN-6 (semaglutide) → ↓ MACE."],
+    ["DKA Management","IV fluids → K⁺ → IV regular insulin","Treat precipitant; monitor electrolytes hourly","NEVER start insulin if K⁺ <3.5. Regular insulin only (IV)."],
+  ];
+
+  const ws2 = XLSX.utils.aoa_to_sheet(indications);
+  ws2['!cols'] = [{wch:36},{wch:44},{wch:40},{wch:56}];
+  XLSX.utils.book_append_sheet(wb, ws2, "Drug Selection by Indication");
+
+  const traps = [
+    ["Topic","Common Wrong Answer","Correct Answer / Explanation"],
+    ["Prolactinoma + large sellar mass","Give cabergoline for prolactinoma","If prolactin <150 ng/mL + large mass → stalk compression (NOT prolactinoma). A macro-prolactinoma → prolactin >500 ng/mL."],
+    ["Acromegaly monitoring on pegvisomant","Check GH level to monitor treatment","GH RISES on pegvisomant (receptor blocked, no feedback). Use IGF-1 to monitor treatment success."],
+    ["Nephrogenic DI","Give DDAVP (same as central DI)","DDAVP fails in nephrogenic DI (V2R or AQP2 defect). Use thiazide diuretics paradoxically."],
+    ["Thiazide in nephrogenic DI","Thiazides worsen DI (diuretic = more urine)","Paradox: thiazide → volume depletion → ↑ proximal reabsorption → less fluid to collecting duct → ↓ urine output."],
+    ["Hyperthyroidism in 1st trimester","Methimazole (once daily, preferred in most)","PTU preferred in 1st trimester — methimazole causes aplasia cutis, choanal atresia, VACTERL. Switch to MMZ at 12 weeks."],
+    ["Thyroid storm — which drug","Methimazole (preferred for hyperthyroidism)","PTU for thyroid storm — blocks TPO AND blocks T4→T3 peripheral conversion (fastest ↓ of active T3)."],
+    ["I-131 in pregnancy","I-131 is safe if thyroid surgery is high-risk","I-131 is ABSOLUTELY CONTRAINDICATED in pregnancy — crosses placenta and ablates fetal thyroid → permanent hypothyroidism."],
+    ["Mifepristone monitoring","Monitor serum cortisol to assess response","Mifepristone blocks GR → ACTH rises (no feedback) → cortisol levels RISE. Use clinical response + glucose, NOT cortisol."],
+    ["Secondary AI — mineralocorticoid","Give both hydrocortisone + fludrocortisone","Secondary AI does NOT need fludrocortisone — aldosterone is regulated by RAAS (angiotensin II), not ACTH. Only primary AI needs both."],
+    ["High-dose dex — Cushing's source","Ectopic ACTH suppresses on high-dose dex","Cushing's Disease (pituitary): suppresses >50% on high-dose dex. Ectopic ACTH: autonomous, NO suppression at any dose."],
+    ["DKA initial K⁺","Start insulin immediately (K⁺ is high)","Serum K⁺ is spuriously HIGH (acidosis pushes K⁺ out of cells), but total body K⁺ is DEPLETED. Give K⁺ first if <3.5, then insulin."],
+    ["Sulfonylurea vs GLP-1 — hypoglycemia","Both stimulate insulin — same hypoglycemia risk","SU: glucose-INDEPENDENT insulin release → hypoglycemia in fasting. GLP-1: glucose-DEPENDENT → no solo hypoglycemia."],
+    ["SGLT2i in non-diabetic HF","SGLT2i only for diabetic patients","SGLT2i proven in HF regardless of diabetes — mechanism is beyond glucose (osmotic diuresis, anti-remodeling, anti-inflammatory)."],
+    ["Euglycemic DKA","Glucose is 185 mg/dL — not DKA","SGLT2i → DKA with near-normal glucose. Always check ketones in an SGLT2i patient with illness, even if glucose is not dramatically elevated."],
+    ["TZD in HFrEF","Pioglitazone improves insulin resistance in HF patients","TZD causes fluid retention → absolutely contraindicated in HFrEF. Can precipitate acute decompensation."],
+    ["Pasireotide hyperglycemia","Same glucose risk as octreotide/lanreotide","Pasireotide causes SIGNIFICANTLY more hyperglycemia — SSTR2 blockade on beta cells suppresses insulin secretion. Nearly all patients need glucose-lowering agents."],
+  ];
+
+  const ws3 = XLSX.utils.aoa_to_sheet(traps);
+  ws3['!cols'] = [{wch:36},{wch:50},{wch:70}];
+  XLSX.utils.book_append_sheet(wb, ws3, "Traps & Pearls");
+
+  XLSX.writeFile(wb, "Endo_Pharm_HY_Reference_Chart.xlsx");
+}
+</script>
+</body>
+</html>
