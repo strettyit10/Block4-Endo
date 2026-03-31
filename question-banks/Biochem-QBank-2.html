@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<!-- saved from url=(0115)file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-QuestionBank-Traps.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUSOM Endocrine — Biochemistry Trap &amp; Step 1 Question Bank</title>
+<link href="./Biochem-QBank-2_files/css2" rel="stylesheet">
+<style>
+:root {
+  --bg:#0F1117;--card:#1A1D26;--card2:#21253A;--border:#2A2E42;
+  --text:#E8EAF0;--muted:#8A8FAA;--radius:12px;
+  --l1:#1E88E5;--l2:#FB8C00;--l3:#E91E63;--l4:#8E24AA;--l5:#00897B;
+  --trap:#EF4444;--alt:#A78BFA;--step1:#22C55E;
+  --green:#22C55E;--red:#EF4444;--gold:#F9A825;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.screen{display:none;}.screen.active{display:block;}
+
+/* TOP BAR */
+.top-bar{background:#0D1321;border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
+.top-bar .title{font-weight:800;font-size:0.95rem;color:#fff;flex:1;}
+.stat{font-size:0.78rem;color:var(--muted);background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:20px;padding:4px 12px;}
+.timer-display{font-size:0.82rem;font-weight:700;color:var(--gold);background:rgba(249,168,37,0.1);border:1px solid rgba(249,168,37,0.25);border-radius:20px;padding:4px 12px;}
+.back-link{font-size:0.78rem;color:var(--muted);text-decoration:none;padding:4px 10px;border:1px solid var(--border);border-radius:8px;}
+.back-link:hover{color:#fff;}
+
+/* START SCREEN */
+.start-screen{max-width:680px;margin:0 auto;padding:48px 20px;}
+.start-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--trap);margin-bottom:12px;}
+.start-title{font-size:2rem;font-weight:800;color:#fff;margin-bottom:6px;}
+.start-sub{font-size:1rem;font-weight:600;color:var(--muted);margin-bottom:12px;}
+.start-desc{color:var(--muted);font-size:0.88rem;line-height:1.65;margin-bottom:28px;}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--muted);}
+.legend-dot{width:10px;height:10px;border-radius:50%;}
+.config-section{margin-bottom:24px;}
+.config-label{font-size:0.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.btn-group{display:flex;flex-wrap:wrap;gap:8px;}
+.tog-btn{padding:8px 14px;border:1px solid var(--border);background:var(--card);color:var(--muted);border-radius:8px;cursor:pointer;font-size:0.8rem;font-weight:600;transition:all 0.15s;}
+.tog-btn.active,.tog-btn:hover{border-color:var(--trap);color:var(--trap);background:rgba(239,68,68,0.08);}
+.tog-btn.l1.active{border-color:var(--l1);color:var(--l1);background:rgba(30,136,229,0.08);}
+.tog-btn.l2.active{border-color:var(--l2);color:var(--l2);background:rgba(251,140,0,0.08);}
+.tog-btn.l3.active{border-color:var(--l3);color:var(--l3);background:rgba(233,30,99,0.08);}
+.tog-btn.l4.active{border-color:var(--l4);color:var(--l4);background:rgba(142,36,170,0.08);}
+.tog-btn.l5.active{border-color:var(--l5);color:var(--l5);background:rgba(0,137,123,0.08);}
+.q-count-preview{font-size:0.85rem;color:var(--muted);margin-bottom:14px;}
+.q-count-preview span{color:#fff;font-weight:700;}
+.begin-btn{display:block;width:100%;padding:15px;background:linear-gradient(135deg,#B91C1C,#EF4444);color:#fff;border:none;border-radius:10px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:opacity 0.15s;}
+.begin-btn:hover{opacity:0.9;}
+
+/* QUESTION SCREEN */
+.q-screen{max-width:800px;margin:0 auto;padding:24px 20px 80px;}
+.progress-bar-wrap{height:3px;background:var(--border);border-radius:2px;margin-bottom:22px;}
+.progress-bar-fill{height:100%;background:var(--trap);border-radius:2px;transition:width 0.3s;}
+.review-banner{background:rgba(249,168,37,0.08);border:1px solid rgba(249,168,37,0.25);border-radius:8px;padding:10px 14px;font-size:0.82rem;color:var(--gold);margin-bottom:14px;}
+.q-meta{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.q-badge{font-size:0.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:10px;}
+.q-badge.l1{background:rgba(30,136,229,0.15);color:var(--l1);}
+.q-badge.l2{background:rgba(251,140,0,0.15);color:var(--l2);}
+.q-badge.l3{background:rgba(233,30,99,0.15);color:var(--l3);}
+.q-badge.l4{background:rgba(142,36,170,0.15);color:var(--l4);}
+.q-badge.l5{background:rgba(0,137,123,0.15);color:var(--l5);}
+.type-badge{font-size:0.68rem;font-weight:700;padding:3px 9px;border-radius:8px;}
+.type-badge.trap{background:rgba(239,68,68,0.15);color:var(--trap);}
+.type-badge.alt{background:rgba(167,139,250,0.15);color:var(--alt);}
+.type-badge.step1{background:rgba(34,197,94,0.15);color:var(--step1);}
+.q-topic{font-size:0.76rem;color:var(--muted);margin-left:auto;}
+.q-stem{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--trap);border-radius:var(--radius);padding:20px 22px;font-size:0.92rem;line-height:1.75;color:var(--text);margin-bottom:16px;}
+.options{display:flex;flex-direction:column;gap:9px;margin-bottom:18px;}
+.option-btn{display:flex;align-items:flex-start;gap:12px;background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:13px 15px;cursor:pointer;text-align:left;transition:border-color 0.15s,background 0.15s;width:100%;}
+.option-btn:hover:not(:disabled){border-color:var(--trap);background:rgba(239,68,68,0.05);}
+.option-btn.selected{border-color:var(--trap);background:rgba(239,68,68,0.08);}
+.option-btn.correct{border-color:var(--green);background:rgba(34,197,94,0.08);}
+.option-btn.wrong{border-color:var(--red);background:rgba(239,68,68,0.06);}
+.option-btn:disabled{cursor:default;}
+.opt-letter{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:0.76rem;font-weight:700;flex-shrink:0;margin-top:1px;}
+.option-btn.correct .opt-letter{background:var(--green);color:#000;}
+.option-btn.wrong .opt-letter{background:var(--red);color:#fff;}
+.opt-text{font-size:0.87rem;line-height:1.5;color:var(--text);}
+.explanation-box{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;display:none;}
+.explanation-box.visible{display:block;}
+.exp-row{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start;}
+.exp-row:last-child{margin-bottom:0;}
+.exp-letter{font-size:0.7rem;font-weight:700;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.exp-letter.right{background:var(--green);color:#000;}
+.exp-letter.wrong{background:rgba(239,68,68,0.15);color:var(--red);border:1px solid rgba(239,68,68,0.3);}
+.exp-text{font-size:0.81rem;color:var(--muted);line-height:1.55;}
+.teaching-box{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px;padding:13px 15px;margin-bottom:14px;display:none;}
+.teaching-box.visible{display:block;}
+.teach-label{font-size:0.66rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--trap);margin-bottom:5px;}
+.teach-text{font-size:0.84rem;color:#F9A8A8;line-height:1.55;}
+.trap-warning{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:0.8rem;color:var(--trap);display:none;}
+.trap-warning.visible{display:flex;align-items:center;gap:8px;}
+.q-actions{display:flex;gap:9px;margin-bottom:18px;}
+.submit-btn{flex:1;padding:11px;background:var(--trap);color:#fff;border:none;border-radius:8px;font-size:0.87rem;font-weight:700;cursor:pointer;transition:opacity 0.15s;}
+.submit-btn:hover{opacity:0.9;}
+.submit-btn:disabled{background:var(--card);color:var(--muted);cursor:not-allowed;}
+.nav-btn{padding:11px 18px;background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:8px;font-size:0.87rem;font-weight:600;cursor:pointer;}
+.nav-btn:hover{border-color:var(--muted);}
+.flag-btn{padding:11px;background:var(--card);border:1px solid var(--border);color:var(--muted);border-radius:8px;cursor:pointer;}
+.flag-btn.flagged{border-color:var(--gold);color:var(--gold);}
+
+/* RESULTS */
+.results-screen{max-width:680px;margin:0 auto;padding:40px 20px 80px;}
+.result-hero{text-align:center;margin-bottom:32px;}
+.result-score{font-size:3rem;font-weight:800;color:#fff;}
+.result-denom{font-size:1.1rem;color:var(--muted);margin-bottom:6px;}
+.result-pct{font-size:1rem;font-weight:700;}
+.result-time{font-size:0.82rem;color:var(--muted);margin-top:5px;}
+.by-lecture{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:22px;}
+.by-lec-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+.by-lec-row:last-child{margin-bottom:0;}
+.lec-label{font-size:0.76rem;font-weight:700;width:90px;flex-shrink:0;}
+.lec-bar-wrap{flex:1;height:7px;background:var(--border);border-radius:4px;}
+.lec-bar-fill{height:100%;border-radius:4px;}
+.lec-score{font-size:0.76rem;color:var(--muted);width:46px;text-align:right;}
+.missed-title{font-size:0.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.missed-item{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:11px 13px;margin-bottom:7px;cursor:pointer;transition:border-color 0.15s;}
+.missed-item:hover{border-color:var(--muted);}
+.missed-num{font-size:0.73rem;color:var(--muted);width:18px;}
+.missed-topic{font-size:0.8rem;color:var(--text);}
+.missed-type{font-size:0.68rem;padding:2px 7px;border-radius:6px;margin-left:auto;flex-shrink:0;}
+.missed-type.trap{background:rgba(239,68,68,0.15);color:var(--trap);}
+.missed-type.alt{background:rgba(167,139,250,0.15);color:var(--alt);}
+.missed-type.step1{background:rgba(34,197,94,0.15);color:var(--step1);}
+.results-actions{display:flex;gap:10px;margin-top:20px;}
+.restart-btn{flex:1;padding:12px;background:var(--trap);color:#fff;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:0.88rem;}
+.review-btn{flex:1;padding:12px;background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:8px;font-weight:700;cursor:pointer;font-size:0.88rem;}
+</style>
+</head>
+<body>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="screen active">
+<div class="start-screen">
+  <div class="start-eyebrow">⚠️ GUSOM Endocrine · Biochemistry</div>
+  <h1 class="start-title">Trap &amp; Step 1</h1>
+  <p class="start-sub">Question Bank</p>
+  <p class="start-desc">40 questions designed around high-yield Step 1 distractor patterns, reverse-reasoning vignettes, "which is INCORRECT/FALSE" traps, and alternative-format questions. Every question tests a common misconception or an alternate angle on core LOs.</p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--trap)"></div>Test Trap</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--alt)"></div>Alt Format (INCORRECT/FALSE/NOT)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--step1)"></div>Step 1 Clinical Reasoning</div>
+  </div>
+  <div class="config-section">
+    <div class="config-label">Filter by Lecture</div>
+    <div class="btn-group" id="filterBtns">
+      <button class="tog-btn active" data-filter="all">All 40 Questions</button>
+      <button class="tog-btn l1" data-filter="1">L1 — Intro Hormones</button>
+      <button class="tog-btn l2" data-filter="2">L2 — Adrenal</button>
+      <button class="tog-btn l3" data-filter="3">L3 — Sex Steroids</button>
+      <button class="tog-btn l4" data-filter="4">L4 — Post. Pituitary</button>
+      <button class="tog-btn l5" data-filter="5">L5 — Thyroid</button>
+    </div>
+  </div>
+  <div class="config-section">
+    <div class="config-label">Mode</div>
+    <div class="btn-group" id="modeBtns">
+      <button class="tog-btn active" data-mode="tutor">Tutor Mode</button>
+      <button class="tog-btn" data-mode="exam">Exam Mode</button>
+    </div>
+  </div>
+  <div class="config-section">
+    <div class="config-label">Timer</div>
+    <div class="btn-group" id="timerBtns">
+      <button class="tog-btn active" data-timer="0">No Timer</button>
+      <button class="tog-btn" data-timer="20">20 min</button>
+      <button class="tog-btn" data-timer="30">30 min</button>
+      <button class="tog-btn" data-timer="45">45 min</button>
+    </div>
+  </div>
+  <p class="q-count-preview">Session: <span id="qCountPreview">40</span> questions</p>
+  <button class="begin-btn" id="beginBtn">⚠️ Enter the Trap Zone →</button>
+  <div style="margin-top:14px;text-align:center;">
+    <a href="file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-ActiveDrills.html" style="color:var(--muted);font-size:0.78rem;text-decoration:none;">← Back to Drill Hub</a>
+    &nbsp;·&nbsp;
+    <a href="file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-QuestionBank.html" style="color:var(--muted);font-size:0.78rem;text-decoration:none;">Standard Question Bank</a>
+  </div>
+</div>
+</div>
+
+<!-- QUESTION SCREEN -->
+<div id="qScreen" class="screen">
+<div class="top-bar">
+  <a href="file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-ActiveDrills.html" class="back-link">← Hub</a>
+  <div class="title" id="qTitle">Question 1 of 40</div>
+  <div class="stat" id="scoreStat">0/0</div>
+  <div class="timer-display" id="timerDisplay" style="display:none;">00:00</div>
+</div>
+<div class="q-screen">
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+  <div id="reviewBanner" class="review-banner" style="display:none;">⭐ Review Mode — Correct answer highlighted</div>
+  <div class="q-meta">
+    <span class="q-badge" id="qLecBadge"></span>
+    <span class="type-badge" id="qTypeBadge"></span>
+    <span class="q-topic" id="qTopicLabel"></span>
+  </div>
+  <div id="trapWarning" class="trap-warning">⚠️ Watch out — this question has a deliberate distractor!</div>
+  <div class="q-stem" id="qStem"></div>
+  <div class="options" id="optionsContainer"></div>
+  <div class="explanation-box" id="explanationBox"></div>
+  <div class="teaching-box" id="teachingBox">
+    <div class="teach-label">🎯 Trap Defused — Teaching Point</div>
+    <div class="teach-text" id="teachText"></div>
+  </div>
+  <div class="q-actions">
+    <button class="nav-btn" id="prevBtn" onclick="goToPrev()">← Prev</button>
+    <button class="submit-btn" id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
+    <button class="nav-btn" id="nextBtn" onclick="goToNext()">Next →</button>
+    <button class="flag-btn" id="flagBtn" onclick="toggleFlag()">⚑</button>
+  </div>
+</div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div id="resultsScreen" class="screen">
+<div class="results-screen">
+  <div class="result-hero">
+    <div class="result-score" id="finalScore">0</div>
+    <div class="result-denom" id="finalDenom">/ 40 correct</div>
+    <div class="result-pct" id="finalPct"></div>
+    <div class="result-time" id="finalTime"></div>
+  </div>
+  <div class="by-lecture" id="byLecture"></div>
+  <div id="missedSection">
+    <div class="missed-title">Missed Questions</div>
+    <div id="missedList"></div>
+  </div>
+  <div class="results-actions">
+    <button class="restart-btn" onclick="restartSession()">↺ New Session</button>
+    <button class="review-btn" onclick="reviewMissed()">Review Missed</button>
+  </div>
+</div>
+</div>
+
+<script>
+const questions = [
+// Q1-Q8: L1 — Intro to Hormones — INSERTED BELOW
+{id:1,lecture:1,type:'alt',topic:'Which hormone does NOT use an intracellular receptor',
+stem:'Which of the following hormones does <strong>NOT</strong> act through an intracellular (nuclear) receptor?',
+options:[{letter:'A',text:'T3 (triiodothyronine)'},{letter:'B',text:'Cortisol'},{letter:'C',text:'Insulin'},{letter:'D',text:'Aldosterone'},{letter:'E',text:'Calcitriol (1,25-dihydroxyvitamin D₃)'}],
+correct:'C',
+explanations:{A:'T3 acts on nuclear thyroid hormone receptor (TR, Class II) — intracellular.',B:'Cortisol acts on the cytoplasmic glucocorticoid receptor (GR, Class I) which translocates to the nucleus — intracellular.',C:'CORRECT — Insulin is a peptide hormone; it cannot cross the plasma membrane and acts on the membrane-bound insulin receptor tyrosine kinase (IR).',D:'Aldosterone acts on the mineralocorticoid receptor (MR, Class I) in the cytoplasm/nucleus — intracellular.',E:'Calcitriol acts on the nuclear vitamin D receptor (VDR, Class II partnered with RXR) — intracellular.'},
+teaching:'Trap: students often assume "steroids" = intracellular. Correct rule: lipid-soluble hormones (steroids, thyroid hormones, vitamin D, retinoids) → intracellular receptors. Hydrophilic hormones (peptides, catecholamines) → membrane receptors. Insulin is a peptide — membrane receptor.'},
+
+{id:2,lecture:1,type:'trap',topic:'HSP90 inhibition — which hormone signaling is most impaired',
+stem:'A novel cancer drug inhibits HSP90 function. Which hormone\'s receptor signaling would be <strong>most directly impaired</strong> by this drug?',
+options:[{letter:'A',text:'T3'},{letter:'B',text:'Aldosterone'},{letter:'C',text:'Cortisol'},{letter:'D',text:'Insulin'},{letter:'E',text:'Prolactin'}],
+correct:'C',
+explanations:{A:'TR (Class II) is constitutively nuclear and does NOT require HSP90 for its signaling.',B:'MR (Class I) does associate with HSP90, but the question asks which is MOST directly impaired — cortisol/GR is the classic taught example.',C:'CORRECT — GR (glucocorticoid receptor, Class I) is held in the cytoplasm in an inactive complex with HSP90; HSP90 is required for proper GR folding and ligand-binding capacity. HSP90 inhibition → misfolded GR → impaired cortisol signaling.',D:'Insulin uses a membrane receptor tyrosine kinase — no HSP90 involvement in its primary signaling.',E:'Prolactin uses a JAK2-STAT5 pathway (membrane receptor) — no HSP90 in primary signaling.'},
+teaching:'Class I steroid receptors (GR, MR, ER, PR, AR) all associate with HSP90 in the cytoplasm until ligand binding. HSP90 inhibitors (e.g., geldanamycin) are being explored in cancer precisely because they degrade oncoproteins AND impair steroid receptor signaling.'},
+
+{id:3,lecture:1,type:'alt',topic:'Scatchard plot — decreased x-intercept meaning',
+stem:'A researcher compares receptor-binding Scatchard plots from normal cells vs. cells treated with a receptor-downregulating drug. The treated cells show a <strong>decreased x-intercept</strong> with the same slope. What has changed?',
+options:[{letter:'A',text:'Receptor affinity increased (↓Kd)'},{letter:'B',text:'Receptor number decreased (↓Bmax)'},{letter:'C',text:'Receptor affinity decreased (↑Kd)'},{letter:'D',text:'Receptor number increased (↑Bmax)'},{letter:'E',text:'Hormone degradation rate increased, not receptor number'}],
+correct:'B',
+explanations:{A:'Increased affinity (↓Kd) would change the SLOPE (slope = –1/Kd), not just the x-intercept.',B:'CORRECT — x-intercept = Bmax (total receptor number). A decreased x-intercept with unchanged slope = same affinity (same Kd), fewer receptors (lower Bmax). This is receptor downregulation.',C:'Decreased affinity (↑Kd) would make the slope less steep (–1/Kd closer to zero).',D:'Increased Bmax would shift the x-intercept to the RIGHT, not decrease it.',E:'Hormone degradation would not change the shape of the binding curve at equilibrium.'},
+teaching:'Scatchard plot rules: slope = –1/Kd (affinity); x-intercept = Bmax (receptor number). If only x-intercept changes = receptor number changed. If only slope changes = affinity changed. If both change = cooperativity (curved Scatchard = Hill coefficient ≠ 1).'},
+
+{id:4,lecture:1,type:'trap',topic:'Permissive vs synergistic hormone action — distinguish',
+stem:'Which of the following scenarios BEST demonstrates a <strong>permissive</strong> hormone effect (not synergism, additive, or antagonism)?',
+options:[{letter:'A',text:'Glucagon and epinephrine together causing more glycogenolysis than either alone'},{letter:'B',text:'Cortisol upregulating α1-adrenergic receptors so epinephrine achieves its full vasopressor effect'},{letter:'C',text:'Estrogen and progesterone together preparing the endometrium for implantation'},{letter:'D',text:'TSH directly stimulating thyroid hormone synthesis'},{letter:'E',text:'T3 and cortisol independently both increasing metabolic rate'}],
+correct:'B',
+explanations:{A:'Glucagon + epinephrine producing MORE than additive glycogenolysis = SYNERGISM (both activate the same pathway with combined potentiation).',B:'CORRECT — PERMISSIVENESS: cortisol alone has minimal vasopressor effect, but it enables epinephrine to achieve FULL vasopressor response by upregulating α1-adrenergic receptors. Cortisol is required for the second hormone to work optimally.',C:'Estrogen + progesterone together on endometrium = SYNERGISM (sequential and cooperative, both needed to produce a combined effect).',D:'TSH directly stimulating thyroid hormone synthesis = DIRECT HORMONE ACTION (not permissive).',E:'T3 and cortisol independently raising metabolic rate = ADDITIVE (each contributes independently, no prerequisite dependency).'},
+teaching:'Permissive = hormone A enables hormone B to work at full capacity, even though A has minimal direct effect alone. Classic: cortisol + catecholamines (upregulates receptors). Do not confuse with synergism (A+B > sum of parts) or additive (A+B = sum of parts).'},
+
+{id:5,lecture:1,type:'alt',topic:'Gq signaling — which statement is INCORRECT',
+stem:'Which statement about G-protein coupled receptor (GPCR) signaling is <strong>INCORRECT</strong>?',
+options:[{letter:'A',text:'Gs activates adenylyl cyclase → ↑cAMP → PKA activation'},{letter:'B',text:'Gq activates phospholipase C → generates IP3 and DAG'},{letter:'C',text:'Gi inhibits adenylyl cyclase → ↓cAMP'},{letter:'D',text:'Gs activates phospholipase C → generates IP3 → ↑intracellular Ca²⁺'},{letter:'E',text:'β-arrestin mediates receptor internalization after prolonged GPCR activation'}],
+correct:'D',
+explanations:{A:'Correct — Gs→adenylyl cyclase→↑cAMP→PKA is the canonical Gs pathway.',B:'Correct — Gq→PLC→IP3+DAG is the correct Gq signaling cascade.',C:'Correct — Gi inhibits adenylyl cyclase (used by α2-adrenergic, M2 muscarinic, somatostatin, dopamine D2 receptors).',D:'INCORRECT (this is the answer) — Gs does NOT activate phospholipase C. PLC activation is the function of Gq. Gs exclusively activates adenylyl cyclase to generate cAMP.',E:'Correct — β-arrestin binds phosphorylated GPCRs → receptor internalization (desensitization) and MAPK signaling.'},
+teaching:'Gs → adenylyl cyclase → cAMP. Gq → PLC → IP3 + DAG. Gi → ↓adenylyl cyclase → ↓cAMP. Never confuse Gs with PLC activation — that is always Gq.'},
+
+{id:6,lecture:1,type:'step1',topic:'TR — active repression without ligand — clinical implication',
+stem:'A researcher identifies a receptor that, <strong>without its ligand</strong>, actively silences target genes via histone deacetylation (HDAC), and <strong>with its ligand</strong>, activates the same genes via histone acetyltransferases (HAT). This mechanism is MOST consistent with which receptor?',
+options:[{letter:'A',text:'Glucocorticoid receptor (GR)'},{letter:'B',text:'Mineralocorticoid receptor (MR)'},{letter:'C',text:'Estrogen receptor (ER)'},{letter:'D',text:'Thyroid hormone receptor (TR)'},{letter:'E',text:'Androgen receptor (AR)'}],
+correct:'D',
+explanations:{A:'GR (Class I): cytoplasmic, HSP90-bound without ligand — INACTIVE (not actively repressing). No constitutive HDAC-mediated gene silencing.',B:'MR (Class I): same as GR — cytoplasmic without ligand, not actively repressing via HDAC.',C:'ER (Class I): cytoplasmic/nuclear without ligand, not constitutively repressing via HDAC-NCoR complex.',D:'CORRECT — TR (Class II) is unique: constitutively nuclear without T3 + recruits NCoR/SMRT corepressor (contains HDAC) → active gene REPRESSION. T3 binding → NCoR/SMRT release → HAT recruitment → gene ACTIVATION. No other receptor does this constitutive nuclear repression.',E:'AR (Class I): cytoplasmic without DHT — inactive but not constitutively repressing via HDAC.'},
+teaching:'TR is the ONLY major nuclear receptor that actively represses in the ABSENCE of ligand. This is why hypothyroidism causes not just "loss of activation" but also "gain of repression." Treating hypothyroidism removes both the activation deficit AND the active repression.'},
+
+{id:7,lecture:1,type:'alt',topic:'TR-RXR DNA response element — correctly identify DR-4',
+stem:'The TR-RXR heterodimer binds which type of thyroid hormone response element (TRE) on DNA?',
+options:[{letter:'A',text:'Inverted repeat with 3-nucleotide spacer (IR-3), same as classic GRE'},{letter:'B',text:'Direct repeat with 4-nucleotide spacer (DR-4)'},{letter:'C',text:'Direct repeat with 3-nucleotide spacer (DR-3), same as VDR-RXR'},{letter:'D',text:'Direct repeat with 5-nucleotide spacer (DR-5), same as RAR-RXR'},{letter:'E',text:'Palindromic repeat with no spacer'}],
+correct:'B',
+explanations:{A:'IR-3 is the classic HRE for Class I steroid receptors (GR, MR, ER, PR, AR) that homodimerize.',B:'CORRECT — TR-RXR binds DR-4 (direct repeat with 4-nucleotide spacer). The spacer length determines receptor specificity.',C:'DR-3 is recognized by VDR-RXR.',D:'DR-5 is recognized by RAR-RXR.',E:'Palindromic HREs are for homodimerizing Class I receptors, not TR-RXR heterodimers.'},
+teaching:'RXR heterodimer response elements: DR-3 = VDR; DR-4 = TR; DR-5 = RAR. Mnemonic: "345" → VDR, TR, RAR (alphabetical with increasing spacer). Class I homodimers bind palindromic IR-3 HREs.'},
+
+{id:8,lecture:1,type:'step1',topic:'Estrogen → ↑TBG → effect on thyroid function tests',
+stem:'A 35-year-old woman starts oral contraceptives (estrogen-containing). Her physician checks thyroid function 6 months later. Which change would you expect in a <strong>euthyroid</strong> woman?',
+options:[{letter:'A',text:'↑Free T4, ↑TSH'},{letter:'B',text:'↑Total T4, normal free T4, normal TSH'},{letter:'C',text:'↓TBG, ↓total T4'},{letter:'D',text:'↑T3, ↓T4 ratio'},{letter:'E',text:'No change in TBG or total T4'}],
+correct:'B',
+explanations:{A:'Free T4 should normalize via feedback even if TBG rises; TSH does not chronically rise in a euthyroid patient on OCPs.',B:'CORRECT — Estrogen → ↑hepatic TBG synthesis → ↑TBG → more T4 bound → transient ↓free T4 → ↑TSH transiently → thyroid makes more T4 → new equilibrium with ↑total T4 + normal free T4 + normal TSH. Clinically euthyroid.',C:'Estrogen INCREASES TBG — the opposite of this answer.',D:'T3/T4 ratio does not specifically shift this way with estrogen/TBG changes.',E:'Estrogen clearly increases TBG (and total T4) — this is clinically important.'},
+teaching:'Estrogen → ↑TBG → ↑total T4/T3 (normal free T4/T3). Identical mechanism in pregnancy. Clinical pearl: never diagnose hyperthyroidism in a pregnant or OCP-using patient based on total T4 alone — always check FREE T4.'},
+
+// Q9-Q16: L2 — Adrenal
+{id:9,lecture:2,type:'alt',topic:'Which finding is expected in ALL three classic CAH types',
+stem:'Which of the following findings would be expected in <strong>ALL THREE</strong> classic forms of CAH (21-hydroxylase, 11β-hydroxylase, AND 17α-hydroxylase deficiencies)?',
+options:[{letter:'A',text:'Elevated 17-hydroxyprogesterone'},{letter:'B',text:'Salt-wasting with hyponatremia and hyperkalemia'},{letter:'C',text:'Virilization of female external genitalia at birth'},{letter:'D',text:'Elevated ACTH'},{letter:'E',text:'Hypertension'}],
+correct:'D',
+explanations:{A:'Elevated 17-OHP is specific to 21-OHase deficiency; 17α-OHase deficiency causes ELEVATED progesterone but LOW 17-OHP (17α-OHase is needed to make 17-OHP).',B:'Salt-wasting occurs only in 21-OHase deficiency (↓aldosterone); 11β-OHase and 17α-OHase cause HYPERTENSION (DOC accumulation).',C:'Virilization (female genital ambiguity) occurs in 21-OHase and 11β-OHase (androgen excess); 17α-OHase deficiency causes the OPPOSITE (no sex steroids → no virilization, even in 46,XY).',D:'CORRECT — All CAH forms share cortisol deficiency → loss of negative feedback → ↑CRH → ↑ACTH. Elevated ACTH is the universal finding across all CAH types.',E:'Hypertension occurs in 11β-OHase and 17α-OHase (DOC accumulation); 21-OHase causes HYPOtension (aldosterone deficiency).'},
+teaching:'The only universal feature of ALL CAH types is ↑ACTH (due to cortisol deficiency in all). Everything else (salt-wasting, hypertension, virilization, specific steroid accumulation) varies by which enzyme is deficient.'},
+
+{id:10,lecture:2,type:'alt',topic:'Dexamethasone suppression test — which statement is INCORRECT',
+stem:'Which statement about the dexamethasone suppression test is <strong>INCORRECT</strong>?',
+options:[{letter:'A',text:'Low-dose dex (1 mg overnight) is a screening test for Cushing\'s syndrome'},{letter:'B',text:'High-dose dex suppression distinguishes pituitary from ectopic/adrenal Cushing\'s'},{letter:'C',text:'Cortisol suppression with high-dose dex indicates an adrenal adenoma as the source'},{letter:'D',text:'In Cushing\'s disease, cortisol suppresses >50% with high-dose dex'},{letter:'E',text:'ACTH-secreting ectopic tumors generally do not suppress with any dex dose'}],
+correct:'C',
+explanations:{A:'Correct — Low-dose dex (1 mg at 11 PM, cortisol checked at 8 AM) is the outpatient screening test; failure to suppress to <1.8 µg/dL = abnormal.',B:'Correct — High-dose dex distinguishes pituitary (Cushing\'s disease) from non-pituitary causes.',C:'INCORRECT (this is the answer) — Cortisol SUPPRESSION with high-dose dex indicates a PITUITARY source (Cushing\'s disease), NOT adrenal. Adrenal adenomas are ACTH-independent (low ACTH) and do NOT suppress with ANY dex dose.',D:'Correct — Pituitary adenomas retain partial glucocorticoid sensitivity; high-dose dex → >50% cortisol suppression = Cushing\'s disease.',E:'Correct — Ectopic ACTH tumors (small cell lung cancer, carcinoids) generally lack glucocorticoid receptors and do not suppress.'},
+teaching:'High-dose dex suppresses cortisol → pituitary source (Cushing\'s disease). No suppression with high-dose dex → adrenal adenoma or ectopic ACTH. Key distinction: adrenal = ACTH-independent (low ACTH); pituitary = ACTH-dependent (high ACTH, suppressible).'},
+
+{id:11,lecture:2,type:'step1',topic:'Addison\'s — acute illness management (stress dosing)',
+stem:'A patient with known Addison\'s disease (on daily oral hydrocortisone 20 mg/10 mg split) develops a fever of 39°C and vomiting. She cannot keep oral medications down. What is the <strong>most important immediate</strong> management step?',
+options:[{letter:'A',text:'Continue oral hydrocortisone at the usual dose and monitor'},{letter:'B',text:'Fluid restriction to prevent hyponatremia'},{letter:'C',text:'Intramuscular or intravenous hydrocortisone 100 mg immediately'},{letter:'D',text:'Increase fludrocortisone dose only (mineralocorticoid coverage)'},{letter:'E',text:'Start vasopressin for hemodynamic support'}],
+correct:'C',
+explanations:{A:'Oral medications cannot be absorbed if she is vomiting — continuing oral dosing would result in no cortisol coverage.',B:'Fluid restriction is dangerous in adrenal crisis — hypovolemia is the immediate threat; she needs IV fluids AND cortisol.',C:'CORRECT — Adrenal crisis management: IM or IV hydrocortisone 100 mg STAT, then 50–100 mg Q6–8h + IV isotonic fluid resuscitation. Hydrocortisone at stress doses provides both glucocorticoid AND mineralocorticoid coverage (at high doses).',D:'Fludrocortisone alone provides mineralocorticoid replacement but NO glucocorticoid coverage — insufficient for adrenal crisis.',E:'Vasopressin may be used in refractory shock but is not the first step; cortisol replacement is primary.'},
+teaching:'"Sick day rules" for adrenal insufficiency: mild illness → double oral dose; cannot take orally → IM/IV hydrocortisone immediately (carry emergency kit). Adrenal crisis is life-threatening: give cortisol, give fluids, find the trigger.'},
+
+{id:12,lecture:2,type:'step1',topic:'CAH — which type has BOTH hypertension AND virilization',
+stem:'In which form of CAH would you expect <strong>BOTH</strong> hypertension AND virilization of female external genitalia at birth?',
+options:[{letter:'A',text:'21-hydroxylase deficiency (classic salt-wasting form)'},{letter:'B',text:'21-hydroxylase deficiency (simple virilizing form, no salt-wasting)'},{letter:'C',text:'11β-hydroxylase deficiency'},{letter:'D',text:'17α-hydroxylase deficiency'},{letter:'E',text:'3β-hydroxysteroid dehydrogenase deficiency'}],
+correct:'C',
+explanations:{A:'21-OHase salt-wasting: virilization (YES) + hypertension (NO → hypotension from aldosterone deficiency).',B:'21-OHase simple virilizing: virilization (YES) + hypertension (NO → aldosterone deficiency; not as severe as salt-wasting form but still not hypertensive).',C:'CORRECT — 11β-OHase deficiency: ↓cortisol + ↓corticosterone → ↑ACTH → androgens accumulate (→ virilization) AND 11-deoxycorticosterone (DOC) accumulates (potent mineralocorticoid → hypertension + hypokalemia).',D:'17α-OHase: hypertension (YES, DOC accumulates) + virilization (NO → no sex steroids of any kind; 46,XY → female phenotype).',E:'3β-HSD: mild androgen excess from DHEA accumulation (mild virilization in females) + salt-wasting (hypertension is not a feature).'},
+teaching:'Only 11β-OHase gives you BOTH hypertension AND virilization. 21-OHase = virilization + hypotension. 17α-OHase = hypertension + feminization (no sex steroids). High-yield CAH comparison question on Step 1.'},
+
+{id:13,lecture:2,type:'trap',topic:'Primary hyperaldosteronism — which finding is NOT consistent',
+stem:'Which of the following findings is <strong>NOT</strong> consistent with primary hyperaldosteronism (Conn\'s syndrome)?',
+options:[{letter:'A',text:'Elevated plasma aldosterone'},{letter:'B',text:'Suppressed plasma renin activity (low PRA)'},{letter:'C',text:'Hypokalemia and metabolic alkalosis'},{letter:'D',text:'Hypertension resistant to multiple medications'},{letter:'E',text:'Elevated plasma renin with secondary aldosterone elevation'}],
+correct:'E',
+explanations:{A:'Consistent — autonomous aldosterone production is elevated.',B:'Consistent — excess aldosterone → Na/water retention → volume expansion → SUPPRESSES renin (negative feedback). Elevated aldosterone-to-renin ratio (ARR) is the diagnostic hallmark.',C:'Consistent — aldosterone → ENaC (Na⁺ in, K⁺ out + H⁺ out) → hypokalemia + metabolic alkalosis.',D:'Consistent — primary hyperaldosteronism is an important cause of treatment-resistant hypertension (screen all patients with resistant HTN).',E:'NOT CONSISTENT (this is the answer) — Elevated renin WITH elevated aldosterone = SECONDARY hyperaldosteronism (e.g., renal artery stenosis, CHF, cirrhosis). In PRIMARY hyperaldosteronism, aldosterone is autonomous; renin is SUPPRESSED, not elevated.'},
+teaching:'Primary vs. secondary hyperaldosteronism: PRIMARY = ↑aldosterone + ↓renin (ARR ↑). SECONDARY = ↑aldosterone + ↑renin (normal ARR). Causes of secondary: renal artery stenosis, CHF, cirrhosis, diuretics.'},
+
+{id:14,lecture:2,type:'step1',topic:'Non-classic 21-OHase deficiency — ACTH stimulation test',
+stem:'An 8-year-old boy has premature pubic hair, acne, and bone age 2 years advanced. Basal 17-hydroxyprogesterone is mildly elevated. After ACTH (cosyntropin) stimulation, 17-OHP rises to >1500 ng/dL. What is the most likely diagnosis?',
+options:[{letter:'A',text:'Central precocious puberty (GnRH-dependent)'},{letter:'B',text:'Non-classic (late-onset) 21-hydroxylase deficiency'},{letter:'C',text:'Classic 21-hydroxylase deficiency (salt-wasting form)'},{letter:'D',text:'Adrenal carcinoma'},{letter:'E',text:'Physiologic premature adrenarche'}],
+correct:'B',
+explanations:{A:'Central precocious puberty: GnRH-dependent; LH/FSH elevated; testicular enlargement in boys. 17-OHP would NOT be specifically elevated.',B:'CORRECT — Non-classic 21-OHase deficiency: partial enzyme deficiency → mildly elevated basal 17-OHP + exaggerated ACTH-stimulated 17-OHP response (>1500 ng/dL is diagnostic). Presents as premature adrenarche, acne, advanced bone age.',C:'Classic 21-OHase (salt-wasting) presents in neonates with ambiguous genitalia and adrenal crisis — not a school-age boy.',D:'Adrenal carcinoma: would show markedly elevated multiple steroids + possible mass; would not show specifically exaggerated 17-OHP response to ACTH.',E:'Physiologic premature adrenarche: 17-OHP response to ACTH would be NORMAL (<1000 ng/dL). The exaggerated 17-OHP response distinguishes non-classic CAH from physiologic adrenarche.'},
+teaching:'Non-classic 21-OHase deficiency diagnosis: ACTH stimulation test → 17-OHP >1500 ng/dL (some sources say >1000 ng/dL). Do NOT miss this in premature adrenarche workup. Treatment: low-dose glucocorticoid if symptomatic.'},
+
+{id:15,lecture:2,type:'step1',topic:'Perioperative steroid coverage — mechanism of concern',
+stem:'A patient on long-term prednisone for rheumatoid arthritis requires emergency surgery. The anesthesiologist is concerned about perioperative hemodynamic instability. What is the PRIMARY pathophysiologic mechanism of concern?',
+options:[{letter:'A',text:'Adrenal medullary insufficiency → ↓catecholamines → vasodilation'},{letter:'B',text:'HPA axis suppression → ↓endogenous cortisol → loss of vasopressor permissiveness → hypotension under stress'},{letter:'C',text:'Direct myocardial suppression by glucocorticoid withdrawal'},{letter:'D',text:'Renal tubular dysfunction causing sodium wasting intraoperatively'},{letter:'E',text:'Immune activation causing cytokine storm without glucocorticoid coverage'}],
+correct:'B',
+explanations:{A:'The adrenal medulla is NOT suppressed by exogenous glucocorticoids (it responds to neural input); catecholamine secretion is preserved.',B:'CORRECT — Long-term exogenous glucocorticoids → ↓CRH/ACTH (HPA suppression) → adrenal cortical atrophy → during surgical stress, endogenous cortisol cannot rise → impaired permissive effect on vasopressors → refractory hypotension (adrenal crisis).',C:'Glucocorticoid withdrawal does not cause direct myocardial suppression.',D:'Acute renal tubular sodium wasting is not the primary mechanism of perioperative instability.',E:'Cytokine storm from immune activation is a concern theoretically but the primary hemodynamic risk is adrenal crisis from HPA suppression.'},
+teaching:'Perioperative steroid coverage: any patient on >5 mg prednisone/day for >3 weeks should receive stress-dose steroids (hydrocortisone 50–100 mg IV) for major surgery. Mechanism: exogenous steroids suppress HPA axis → adrenal atrophy → cannot mount cortisol stress response.'},
+
+{id:16,lecture:2,type:'trap',topic:'MR and 11β-HSD2 — what maintains MR specificity for aldosterone',
+stem:'The mineralocorticoid receptor (MR) has equal affinity for both aldosterone and cortisol. Yet in the kidney, MR primarily responds to aldosterone. What is the PRIMARY mechanism maintaining this specificity?',
+options:[{letter:'A',text:'Cortisol is too large to enter kidney tubular cells'},{letter:'B',text:'11β-HSD2 converts cortisol → inactive cortisone in renal tubular cells, preventing MR activation by cortisol'},{letter:'C',text:'The kidney MR has a unique amino acid sequence that selectively binds aldosterone'},{letter:'D',text:'Aldosterone concentrations are always 1000× higher than cortisol in the kidney'},{letter:'E',text:'Cortisol is rapidly metabolized by CYP3A4 before reaching the kidney'}],
+correct:'B',
+explanations:{A:'Cortisol is a small lipid-soluble molecule that freely enters all cells.',B:'CORRECT — 11β-HSD2 (kidney, colon, placenta) converts active cortisol → inactive cortisone; since cortisol normally circulates at ~1000× the concentration of aldosterone, 11β-HSD2 is essential to prevent cortisol from activating renal MR. Without it, cortisol would constantly occupy and activate MR.',C:'The renal MR is identical in structure to MR elsewhere; there is no kidney-specific isoform with altered binding.',D:'Cortisol circulates at MUCH HIGHER concentrations than aldosterone (~1000× more), which is precisely why 11β-HSD2 is needed to protect MR.',E:'CYP3A4 is a hepatic drug-metabolizing enzyme; it does not specifically degrade cortisol in the kidney.'},
+teaching:'11β-HSD2 is the kidney\'s cortisol shield for MR. It converts cortisol (active) → cortisone (inactive) in aldosterone-target tissues. Inhibited by glycyrrhizic acid (licorice) or absent in AME syndrome → cortisol activates MR → hypertension, hypokalemia, suppressed aldosterone.'},
+
+// Q17-Q24: L3 — Sex Steroids
+{id:17,lecture:3,type:'alt',topic:'PCOS — which finding would NOT be expected',
+stem:'Which of the following would <strong>NOT</strong> be expected in a patient with polycystic ovary syndrome (PCOS)?',
+options:[{letter:'A',text:'Elevated LH/FSH ratio (>2–3)'},{letter:'B',text:'Low SHBG'},{letter:'C',text:'Elevated free testosterone'},{letter:'D',text:'Elevated FSH leading to regular ovulation'},{letter:'E',text:'Insulin resistance and compensatory hyperinsulinemia'}],
+correct:'D',
+explanations:{A:'Expected — In PCOS: ↑LH pulse frequency (from abnormal GnRH pulsatility) → elevated LH/FSH ratio.',B:'Expected — Hyperinsulinemia suppresses hepatic SHBG → ↓SHBG → ↑free T.',C:'Expected — Elevated androgen (free testosterone) is a hallmark of PCOS (from thecal overproduction driven by LH + insulin).',D:'NOT EXPECTED (this is the answer) — PCOS is characterized by ANOVULATION (oligo/anovulation); FSH is relatively low (not elevated), preventing dominant follicle selection. Elevated FSH driving regular ovulation would EXCLUDE PCOS.',E:'Expected — Insulin resistance is central to PCOS pathophysiology; hyperinsulinemia drives androgen production.'},
+teaching:'PCOS = anovulation (not ovulation). FSH is relatively low or normal; LH is elevated. Low FSH → no dominant follicle → polycystic appearance. High LH → ↑thecal androgen. This is why FSH:LH ratio is reversed.'},
+
+{id:18,lecture:3,type:'step1',topic:'CAIS — why female phenotype despite testosterone',
+stem:'A 46,XY individual with complete androgen insensitivity syndrome (CAIS) asks why they developed female external genitalia despite having normal male-range testosterone. What is the BEST explanation?',
+options:[{letter:'A',text:'The testes failed to produce testosterone (testosterone is paradoxically low)'},{letter:'B',text:'The androgen receptor is nonfunctional, so testosterone cannot signal virilization of external genitalia'},{letter:'C',text:'The testes produced estrogen instead of testosterone, driving female development'},{letter:'D',text:'AMH was absent, allowing the Müllerian (female) default to develop'},{letter:'E',text:'5α-reductase was absent, preventing DHT-mediated male genital development'}],
+correct:'B',
+explanations:{A:'Testosterone is in the NORMAL MALE RANGE or elevated (lack of negative androgen feedback on LH → LH excess → Leydig cell overstimulation).',B:'CORRECT — AR loss-of-function mutation → testosterone/DHT cannot signal despite being present → external genitalia default to female (no androgen effect needed for female external genitalia). Internal female structures absent because AMH is still produced by Sertoli cells.',C:'Testes produce testosterone normally; estrogen is also made (by aromatization of testicular testosterone) but the key issue is AR dysfunction, not excess estrogen.',D:'AMH IS present and functional → Müllerian structures (uterus, fallopian tubes) are ABSENT in CAIS. Absence of uterus is a distinguishing feature.',E:'5α-RD deficiency: DHT absent but AR is functional; external genitalia appear ambiguous at birth but virilize at puberty when high T partially compensates. This is the key distinction from CAIS.'},
+teaching:'CAIS: AR broken → no androgen effect → female external genitalia (default). AMH present → no uterus. Testes present (intra-abdominal). T in male range. MRKH (for comparison): 46,XX, AR intact, normal pubic hair, no uterus but ovaries present.'},
+
+{id:19,lecture:3,type:'alt',topic:'Sex hormone binding proteins — which is INCORRECTLY matched',
+stem:'Which of the following pairs is <strong>INCORRECTLY</strong> matched?',
+options:[{letter:'A',text:'SHBG — produced by liver; binds testosterone and estradiol with high affinity'},{letter:'B',text:'Albumin — low-affinity, high-capacity binding of sex steroids in blood'},{letter:'C',text:'ABP (androgen-binding protein) — produced by Sertoli cells; concentrates T/DHT in seminiferous tubules'},{letter:'D',text:'TBG (thyroxine-binding globulin) — binds testosterone and cortisol with highest affinity in circulation'},{letter:'E',text:'CBG (corticosteroid-binding globulin) — binds cortisol and progesterone'}],
+correct:'D',
+explanations:{A:'Correct match — SHBG is liver-derived; it binds T and E2 with high affinity (higher for T than E2).',B:'Correct match — Albumin: low-affinity, high-capacity, nonspecific binding for sex steroids.',C:'Correct match — ABP is Sertoli cell-derived (FSH-stimulated); same gene as SHBG but produced locally to concentrate androgens in the tubular lumen.',D:'INCORRECTLY MATCHED (this is the answer) — TBG binds THYROID hormones (T4 and T3), NOT testosterone or cortisol. TBG stands for thyroxine-binding globulin; it has no significant affinity for sex steroids or glucocorticoids.',E:'Correct match — CBG (transcortin) binds cortisol and progesterone; also binds aldosterone with lower affinity.'},
+teaching:'TBG = Thyroid Binding Globulin → binds T4/T3, NOT testosterone. CBG = Corticosteroid Binding Globulin → binds cortisol and progesterone. SHBG = Sex Hormone Binding Globulin → binds androgens and estrogens. Don\'t mix up abbreviations.'},
+
+{id:20,lecture:3,type:'step1',topic:'Placental aromatase deficiency — maternal virilization in pregnancy',
+stem:'A 24-year-old 46,XX woman develops progressive virilization (clitoromegaly, acne) during her second pregnancy. Her serum testosterone is elevated, estradiol is very low, and her fetus is 46,XY. What is the MOST LIKELY cause?',
+options:[{letter:'A',text:'Ovarian luteoma of pregnancy (testosterone-secreting)'},{letter:'B',text:'Placental aromatase deficiency — fetal androgens cannot be converted to estrogens and enter maternal circulation'},{letter:'C',text:'21-hydroxylase deficiency in the fetus causing maternal androgen exposure'},{letter:'D',text:'Gestational diabetes causing adrenal androgen overproduction in the mother'},{letter:'E',text:'Maternal PCOS exacerbated by hCG stimulation'}],
+correct:'B',
+explanations:{A:'Luteoma of pregnancy can cause maternal virilization, but it would not explain the very low estradiol; luteoma would still allow placental estrogen production.',B:'CORRECT — Aromatase (CYP19A1) deficiency in the placenta → cannot convert fetal androgens (androstenedione, DHEAS) to estrogens → androgens escape into maternal circulation → maternal virilization; simultaneously, loss of placental estrogen production → very low maternal estradiol.',C:'Fetal 21-OHase deficiency would cause fetal androgen excess, but the placenta would normally aromatize this to estrogens before it reaches the mother.',D:'Gestational diabetes does not cause this hormonal pattern.',E:'PCOS exacerbation would not cause such low estradiol and would not cause this degree of virilization.'},
+teaching:'Placental aromatase deficiency = maternal virilization during pregnancy (androgens not converted to estrogens) + very low maternal estriol/estradiol + female fetus (46,XX) would also be virilized. Diagnosis confirmed by low maternal estriol + elevated androgens. Resolves after delivery.'},
+
+{id:21,lecture:3,type:'trap',topic:'Inhibin vs activin — correctly distinguish actions',
+stem:'Which statement correctly distinguishes inhibin from activin?',
+options:[{letter:'A',text:'Inhibin stimulates FSH release; activin inhibits FSH release'},{letter:'B',text:'Inhibin selectively inhibits FSH; activin selectively stimulates FSH'},{letter:'C',text:'Both inhibin and activin inhibit FSH, differing only in potency'},{letter:'D',text:'Inhibin inhibits both FSH and LH equally; activin stimulates both'},{letter:'E',text:'Activin is produced by Leydig cells; inhibin is produced by Sertoli cells only in females'}],
+correct:'B',
+explanations:{A:'Reversed — inhibin INHIBITS FSH; activin STIMULATES FSH.',B:'CORRECT — Inhibin (from granulosa cells in females, Sertoli cells in males): selectively inhibits pituitary FSH secretion, not LH. Activin (same cell sources): selectively stimulates pituitary FSH secretion. They are structurally related; inhibin = α + β subunit; activin = two β subunits.',C:'They have OPPOSITE effects — inhibin suppresses FSH, activin stimulates FSH.',D:'Inhibin is SELECTIVE for FSH; it does not equally inhibit LH.',E:'In males, BOTH inhibin AND activin are produced primarily by SERTOLI cells, not Leydig cells.'},
+teaching:'Inhibin B (granulosa/Sertoli) → ↓FSH. Activin (same sources) → ↑FSH. These are paracrine and endocrine regulators of FSH specifically. Elevated FSH + low inhibin B = diminished ovarian reserve or impaired spermatogenesis.'},
+
+{id:22,lecture:3,type:'step1',topic:'Aromatase inhibitor — expected hormonal changes in postmenopausal woman',
+stem:'A 60-year-old postmenopausal woman with ER+ breast cancer starts anastrozole (aromatase inhibitor). Which hormone profile would you expect?',
+options:[{letter:'A',text:'↓Estrone, ↑LH, ↑FSH, ↑adrenal androstenedione'},{letter:'B',text:'↑Estrone, ↓LH, ↓FSH'},{letter:'C',text:'↓Estrone, ↓LH, ↓FSH, ↓adrenal androstenedione'},{letter:'D',text:'↑Testosterone, ↓LH, ↓FSH'},{letter:'E',text:'No change in LH/FSH (postmenopause, already maximally elevated)'}],
+correct:'A',
+explanations:{A:'CORRECT — Aromatase inhibitor blocks peripheral conversion of androstenedione → estrone: ↓estrone → loss of estrogen negative feedback on pituitary → ↑LH + ↑FSH; adrenal androstenedione (substrate) accumulates because it cannot be converted → ↑androstenedione.',B:'Estrone would decrease, not increase; LH/FSH would increase, not decrease.',C:'Adrenal androstenedione would INCREASE (substrate accumulation); LH/FSH would INCREASE (less estrogen feedback).',D:'Testosterone would not specifically increase; LH would increase, not decrease.',E:'Postmenopausal LH/FSH are already elevated from lack of ovarian estrogen, but blocking residual peripheral estrogen (aromatase inhibition) → further removal of feedback → further ↑LH/FSH.'},
+teaching:'Aromatase inhibitor: ↓estrogen → ↑LH/FSH (reduced negative feedback) + ↑androstenedione (substrate accumulation). This is why aromatase inhibitors cause bone loss (↓estrogen → ↓OPG → ↑osteoclast activity) — bisphosphonate co-administration is often needed.'},
+
+{id:23,lecture:3,type:'step1',topic:'Fetoplacental estriol — which organ is required for 16-OH step',
+stem:'In the fetoplacental unit, low maternal urine estriol is used as a marker of fetal wellbeing. Which fetal organ is specifically required for the <strong>16-hydroxylation step</strong> that produces 16-OH-DHEAS (the placental substrate for estriol)?',
+options:[{letter:'A',text:'Placenta'},{letter:'B',text:'Fetal liver'},{letter:'C',text:'Fetal adrenal gland'},{letter:'D',text:'Fetal kidney'},{letter:'E',text:'Maternal liver'}],
+correct:'B',
+explanations:{A:'Placenta provides aromatase (final step: 16-OH-DHEAS → estriol) but CANNOT perform 16-hydroxylation.',B:'CORRECT — Fetal liver contains 16α-hydroxylase, which converts DHEAS → 16-OH-DHEAS. This step MUST occur in the fetal liver before the placenta can complete estriol synthesis. Liver disease or anencephaly (no fetal pituitary → no ACTH → adrenal atrophy) both lower estriol.',C:'Fetal adrenal produces DHEAS (the starting substrate) but lacks 16-hydroxylase; this step occurs in the liver.',D:'Fetal kidney does not perform this step.',E:'Maternal liver does NOT 16-hydroxylate; the fetus must do this step before the substrate reaches the placenta.'},
+teaching:'Estriol synthesis pathway: Fetal adrenal → DHEAS; Fetal liver → 16-OH-DHEAS (16α-hydroxylation); Placental aromatase → estriol. Low maternal estriol: anencephaly (no adrenal), fetal liver failure, placental sulfatase deficiency, or placental dysfunction.'},
+
+{id:24,lecture:3,type:'step1',topic:'FSH on Sertoli cells — which consequence of FSH receptor blockade',
+stem:'A research drug selectively blocks FSH receptors on Sertoli cells. Which consequence would MOST directly impair spermatogenesis?',
+options:[{letter:'A',text:'↓Testosterone from Leydig cells → impaired spermatogenesis'},{letter:'B',text:'↓Inhibin B → ↑FSH from pituitary (compensatory)'},{letter:'C',text:'↓Androgen-binding protein (ABP) → ↓intratubular testosterone → impaired spermatogenesis'},{letter:'D',text:'↑LH from pituitary → excess testosterone → feedback inhibition'},{letter:'E',text:'↓GnRH from hypothalamus → secondary hypogonadism'}],
+correct:'C',
+explanations:{A:'Leydig cells respond to LH, not FSH. FSH receptor blockade on Sertoli cells does not directly impair Leydig testosterone production.',B:'↓Inhibin B → ↑FSH is true (disinhibition of FSH) but this is a compensatory response, not the mechanism directly impairing spermatogenesis.',C:'CORRECT — FSH → Sertoli cells → produce ABP (androgen-binding protein); ABP concentrates testosterone in the seminiferous tubule lumen (50–100× serum levels). Without FSH → ↓ABP → ↓intratubular T → impaired spermatogenesis (testosterone concentration in tubule falls below the threshold needed for sperm development).',D:'FSH blockade does not increase LH.',E:'FSH blockade is downstream of GnRH; GnRH itself is not affected.'},
+teaching:'FSH→Sertoli→ABP is the KEY pathway for maintaining intratubular testosterone. Sertoli cells also produce: inhibin B (↓FSH), androgen-binding protein (concentrates T), and Sertoli-derived factors essential for spermatocyte support. FSH is required for normal spermatogenesis.'},
+
+// Q25-Q32: L4 — Posterior Pituitary
+{id:25,lecture:4,type:'alt',topic:'Which condition causes HYPERNATREMIA — not hyponatremia',
+stem:'Which of the following conditions is associated with <strong>HYPERNATREMIA</strong> (not hyponatremia)?',
+options:[{letter:'A',text:'SIADH'},{letter:'B',text:'Primary polydipsia (psychogenic water drinking)'},{letter:'C',text:'Central diabetes insipidus'},{letter:'D',text:'Beer potomania'},{letter:'E',text:'Hypothyroidism (SIADH-like hyponatremia)'}],
+correct:'C',
+explanations:{A:'SIADH → water retention → dilutional HYPOnatremia.',B:'Primary polydipsia → excess water intake → dilutional HYPOnatremia.',C:'CORRECT — Central DI: ↓AVP → loss of free water → HYPERnatremia + dilute urine (low urine Osm). This is the classic electrolyte abnormality in DI.',D:'Beer potomania → dilutional HYPOnatremia (excess free water from beer + low solute intake impairs free water excretion).',E:'Hypothyroidism → SIADH-like syndrome → HYPOnatremia.'},
+teaching:'DI = hypernatremia (free water loss). SIADH = hyponatremia (free water retention). Students commonly confuse these. DI: dilute urine + high serum Na. SIADH: concentrated urine + low serum Na.'},
+
+{id:26,lecture:4,type:'alt',topic:'What DECREASES ADH secretion',
+stem:'Which of the following would <strong>DECREASE</strong> ADH (vasopressin) secretion from the posterior pituitary?',
+options:[{letter:'A',text:'Increased plasma osmolality (hypernatremia)'},{letter:'B',text:'Decreased blood volume (hemorrhage)'},{letter:'C',text:'Ethanol ingestion'},{letter:'D',text:'Nausea and vomiting'},{letter:'E',text:'Elevated angiotensin II (from renal hypoperfusion)'}],
+correct:'C',
+explanations:{A:'Increased osmolality detected by OVLT osmosensors → INCREASES AVP secretion.',B:'Decreased blood volume detected by baroreceptors (carotid sinus, aortic arch, atria) → INCREASES AVP secretion (non-osmotic stimulus).',C:'CORRECT — Ethanol (alcohol) inhibits AVP secretion from the posterior pituitary → explains alcohol-induced polyuria and the dehydration headache of a hangover.',D:'Nausea is a POWERFUL non-osmotic stimulus for AVP release (explains why vomiting patients become water-retaining).',E:'Angiotensin II acts on the subfornical organ (SFO) → INCREASES AVP secretion + thirst (part of the RAAS response to low volume/pressure).'},
+teaching:'AVP is DECREASED by: ethanol, atrial natriuretic peptide (ANP, from atrial stretch in hypervolemia), and hypo-osmolality. Everything else studied (hypovolemia, ↑Osm, nausea, angiotensin II, pain) increases AVP. Alcohol → no AVP → polyuria → dehydration.'},
+
+{id:27,lecture:4,type:'step1',topic:'Tolvaptan (vaptan) — mechanism in SIADH',
+stem:'A patient with SIADH from small cell lung cancer has persistent hyponatremia despite fluid restriction. Tolvaptan is added. What is its mechanism?',
+options:[{letter:'A',text:'Blocks V2 receptor → prevents AQP-2 insertion → free water excretion (aquaresis) without natriuresis'},{letter:'B',text:'Blocks V1a receptor → prevents vasoconstriction → ↑renal blood flow → natriuresis'},{letter:'C',text:'Activates V2 → mimics AVP → concentrates urine to raise serum Na'},{letter:'D',text:'Blocks V1b → ↓ACTH → ↓cortisol → improves sodium handling'},{letter:'E',text:'Inhibits NIS in the kidney → prevents iodide reabsorption → osmotic diuresis'}],
+correct:'A',
+explanations:{A:'CORRECT — Vaptans (tolvaptan = V2-selective; conivaptan = V1a+V2) block collecting duct V2 receptors → AQP-2 not inserted → free water (NOT sodium) excreted (aquaresis) → serum Na rises. Used in SIADH, CHF, and cirrhosis-related hyponatremia.',B:'V1a is in vascular smooth muscle (vasoconstriction); tolvaptan is V2-selective and does not block V1a.',C:'Tolvaptan BLOCKS (antagonizes) V2 — it does not activate it.',D:'V1b is in the anterior pituitary (ACTH release); blocking it would be a different drug (V1b antagonist) with different effects.',E:'NIS is a thyroid transporter; unrelated to kidney water handling.'},
+teaching:'Vaptans = vasopressin receptor antagonists → "aquaresis" (electrolyte-free water excretion). Tolvaptan = V2-selective; conivaptan = V1a+V2. Used when fluid restriction alone fails for SIADH. Risk: overly rapid Na correction → osmotic demyelination syndrome.'},
+
+{id:28,lecture:4,type:'step1',topic:'Ectopic AVP from small cell lung cancer — SIADH pattern',
+stem:'A 60-year-old smoker with small cell lung cancer has Na⁺ 112 mEq/L, urine Osm 680 mOsm/kg, urine Na⁺ 60 mEq/L, and is clinically euvolemic. What is the PRIMARY pathophysiologic mechanism of his hyponatremia?',
+options:[{letter:'A',text:'Renal sodium wasting from adrenal metastases'},{letter:'B',text:'Ectopic AVP production by the tumor → SIADH → water retention → dilutional hyponatremia'},{letter:'C',text:'Central DI from brain metastases causing a reset osmostat'},{letter:'D',text:'Cisplatin nephrotoxicity → proximal tubular dysfunction → salt-wasting'},{letter:'E',text:'Pseudohyponatremia from elevated proteins in plasma'}],
+correct:'B',
+explanations:{A:'Adrenal metastases could cause adrenal insufficiency and HYPOnatremia, but via a different mechanism (mineralocorticoid deficiency → salt wasting); urine would be concentrated only as a secondary response.',B:'CORRECT — Small cell lung cancer is the classic cause of ectopic AVP secretion → SIADH. Pattern: euvolemic hyponatremia + concentrated urine (Osm >> serum) + ↑urine Na + NO edema.',C:'Central DI from brain mets would cause HYPERnatremia + dilute urine — opposite of this presentation.',D:'Cisplatin can cause SIADH-like effects, but more commonly proximal tubular injury; the classic tumor-associated SIADH is from ectopic AVP.',E:'Pseudohyponatremia (from lipids/proteins): measured Na is low but osmolality is NORMAL; urine Na would also be abnormal.'},
+teaching:'Small cell lung cancer = ectopic AVP (SIADH) — the prototypical paraneoplastic endocrine syndrome. Key pattern: euvolemic + urine Osm > serum Osm + UNa > 20 mEq/L + hyponatremia. Treatment: fluid restriction ± vaptans ± demeclocycline.'},
+
+{id:29,lecture:4,type:'trap',topic:'Oxytocin/ADH cross-reactivity — which is TRUE',
+stem:'Oxytocin and ADH (vasopressin) differ by only 2 amino acids and share structural similarity. Which statement about their cross-reactivity is <strong>TRUE</strong>?',
+options:[{letter:'A',text:'Oxytocin cannot bind to any vasopressin receptor at any concentration'},{letter:'B',text:'At high pharmacologic concentrations, oxytocin can weakly activate V2 receptors → mild antidiuretic effect'},{letter:'C',text:'ADH strongly activates oxytocin receptors at physiologic concentrations, causing uterine contractions'},{letter:'D',text:'Oxytocin and ADH are structurally identical; only their carrier binding proteins differ'},{letter:'E',text:'Cross-reactivity at V1a explains why oxytocin always causes significant vasoconstriction during labor induction'}],
+correct:'B',
+explanations:{A:'Some cross-reactivity does exist at high concentrations — this statement is too absolute.',B:'CORRECT — At high pharmacologic doses of oxytocin (used for labor induction), weak V2 receptor activation can cause mild antidiuresis; this rarely causes hyponatremia during prolonged high-dose oxytocin infusions.',C:'Physiologic ADH concentrations do NOT significantly cross-react with oxytocin receptors; cross-reactivity only occurs at supraphysiologic concentrations.',D:'Oxytocin and ADH differ by 2 amino acids (position 3: Ile→Phe; position 8: Leu→Arg), which accounts for their different receptor specificities.',E:'V1a cross-reactivity by oxytocin at pharmacologic doses is minimal; significant vasoconstriction does not occur with clinical oxytocin doses.'},
+teaching:'Structural similarity of OT and ADH: differ by 2 amino acids. High-dose oxytocin → weak V2 cross-activation → mild SIADH-like hyponatremia (rare but reported with prolonged labor induction infusions). Not clinically significant at usual doses.'},
+
+{id:30,lecture:4,type:'step1',topic:'Beer potomania — mechanism of hyponatremia',
+stem:'A 45-year-old man who drinks 12 beers/day with minimal food intake presents with Na⁺ 122 mEq/L. Urine osmolality is 50 mOsm/kg (very dilute). Serum osmolality is 256 mOsm/kg. He is euvolemic. What is the PRIMARY mechanism of his hyponatremia?',
+options:[{letter:'A',text:'Inappropriate AVP secretion from alcohol stimulating the posterior pituitary'},{letter:'B',text:'Very low dietary solute intake → insufficient urinary solute → cannot excrete free water fast enough even with maximally dilute urine → water accumulates'},{letter:'C',text:'Alcohol directly inhibits the kidney\'s ability to dilute urine'},{letter:'D',text:'Alcohol directly stimulates aldosterone release → sodium retention → osmotic water draw'},{letter:'E',text:'Alcoholic hepatitis → low albumin → pseudohyponatremia'}],
+correct:'B',
+explanations:{A:'Alcohol INHIBITS AVP secretion (not stimulates); urine is maximally DILUTE (50 mOsm/kg), confirming AVP is appropriately suppressed.',B:'CORRECT — Beer potomania: beer provides abundant free water but almost no solute (protein, Na, K). The kidney can maximally dilute urine to ~50 mOsm/kg, but free water excretion is limited by the amount of solute available to carry it out. Low solute intake → can only excrete a small volume of dilute urine/day → rest is retained → hyponatremia.',C:'Alcohol does not directly impair renal urine dilution; in fact, the urine IS maximally dilute (50 mOsm/kg).',D:'Alcohol does not stimulate aldosterone; if anything, chronic alcohol causes hypoaldosteronism.',E:'Pseudohyponatremia: normal osmolality, normal anion gap; this patient has low osmolality.'},
+teaching:'Beer potomania: low solute intake limits the kidney\'s ability to excrete free water (free water clearance = volume × [1 - Uosm/Posm]; Uosm already at minimum). Treatment: dietary solute supplementation (oral NaCl/protein) + fluid restriction. Sodium correction must be very slow (risk of ODS).'},
+
+{id:31,lecture:4,type:'alt',topic:'SIADH — which lab finding is NOT expected',
+stem:'In the syndrome of inappropriate antidiuresis (SIADH), which of the following laboratory findings would <strong>NOT</strong> be expected?',
+options:[{letter:'A',text:'Serum osmolality <280 mOsm/kg'},{letter:'B',text:'Urine osmolality >100 mOsm/kg'},{letter:'C',text:'Urine sodium >20 mEq/L'},{letter:'D',text:'Serum sodium >145 mEq/L (hypernatremia)'},{letter:'E',text:'Normal BUN and creatinine (euvolemia)'}],
+correct:'D',
+explanations:{A:'Expected — SIADH causes water retention → dilutional hyponatremia → LOW serum osmolality.',B:'Expected — Inappropriate AVP → concentrated urine (urine Osm typically >300, always >100 mOsm/kg in SIADH).',C:'Expected — Volume expansion from water retention → ↑ANP → ↑renal sodium excretion → urine Na >20 mEq/L despite hyponatremia.',D:'NOT EXPECTED (this is the answer) — SIADH causes HYPOnatremia (serum Na <135), NOT hypernatremia. Hypernatremia is the hallmark of DI (opposite condition).',E:'Expected — SIADH is euvolemic hyponatremia; no edema, no dehydration, normal renal function.'},
+teaching:'SIADH mnemonic: Concentrated urine (Osm >100) + Dilute serum (Na <135) + Euvolemic. The "inappropriate" part: AVP acts even when serum osmolality is LOW (inappropriately). Treat: fluid restriction; if severe: hypertonic saline ± vaptans.'},
+
+{id:32,lecture:4,type:'step1',topic:'AQP-2 pharmacologic block — consequence',
+stem:'A research drug selectively blocks aquaporin-2 (AQP-2) channels in the collecting duct apical membrane. Which is the PRIMARY expected physiologic consequence?',
+options:[{letter:'A',text:'Decreased urine output (water trapped in cells, not tubule)'},{letter:'B',text:'Increased urine output with dilute urine (nephrogenic DI-like state)'},{letter:'C',text:'Increased aldosterone secretion as compensation'},{letter:'D',text:'Decreased plasma osmolality from water retention'},{letter:'E',text:'Decreased AVP release from posterior pituitary'}],
+correct:'B',
+explanations:{A:'AQP-2 blockade would prevent water from moving FROM the tubular lumen INTO cells; water stays in the tubule → exits in urine → increased (not decreased) urine output.',B:'CORRECT — Without AQP-2 at the apical membrane, water cannot enter collecting duct cells even when AVP is present → water stays in tubular lumen → exits as dilute, high-volume urine → functionally identical to nephrogenic DI.',C:'Aldosterone regulates sodium reabsorption via ENaC; it does not directly compensate for AQP-2 loss.',D:'AQP-2 blockade → MORE water in urine → water loss → plasma osmolality INCREASES (not decreases).',E:'AVP release would INCREASE secondarily (as hypernatremia develops → OVLT osmosensors → more AVP released) — but this is a secondary response, not the primary consequence.'},
+teaching:'AQP-2 is the rate-limiting water channel for reabsorption. Without it → dilute urine regardless of AVP levels. This is the exact mechanism of nephrogenic DI from lithium: Li⁺ accumulates in principal cells → blocks Gs-cAMP signaling → AQP-2 not phosphorylated → not inserted → dilute polyuria.'},
+
+// Q33-Q40: L5 — Thyroid
+{id:33,lecture:5,type:'alt',topic:'rT3 — which statement is CORRECT',
+stem:'Which statement about reverse T3 (rT3) is <strong>CORRECT</strong>?',
+options:[{letter:'A',text:'rT3 is produced by outer-ring (5\') deiodination of T4, the same enzyme that makes T3'},{letter:'B',text:'rT3 is produced by inner-ring (5) deiodination of T4 and is metabolically inactive'},{letter:'C',text:'rT3 is the primary active form of thyroid hormone in critically ill patients'},{letter:'D',text:'rT3 levels decrease in sick euthyroid syndrome, reflecting impaired T4 production'},{letter:'E',text:'rT3 activates thyroid hormone receptors with equal potency to T3'}],
+correct:'B',
+explanations:{A:'Outer-ring (5\') deiodination removes iodine from the outer ring → produces ACTIVE T3. Inner-ring (5) deiodination removes iodine from the inner ring → produces INACTIVE rT3. These are different reactions.',B:'CORRECT — rT3 is produced by 5-deiodinase (inner-ring deiodination); it is structurally similar to T3 but CANNOT activate thyroid hormone receptors. In sick euthyroid: ↓5\'-deiodinase (outer-ring, makes T3) + ↑5-deiodinase (inner-ring, makes rT3) → ↑rT3 is a hallmark.',C:'rT3 is metabolically INACTIVE; it is NOT the active form in any condition.',D:'rT3 levels INCREASE in sick euthyroid syndrome (↑inner-ring deiodination activity diverts T4 → rT3 instead of T3).',E:'rT3 cannot activate thyroid hormone receptors at physiologic concentrations; it is inert.'},
+teaching:'5\'-deiodinase (outer ring) → T3 (ACTIVE). 5-deiodinase (inner ring) → rT3 (INACTIVE). In sick euthyroid: the balance shifts toward inner-ring → ↑rT3 + ↓T3. This may conserve energy during illness (metabolic "hibernation" hypothesis).'},
+
+{id:34,lecture:5,type:'alt',topic:'PTU vs MMI — which drug has the MOST mechanisms',
+stem:'Which antithyroid drug has the MOST mechanisms of action affecting thyroid hormone levels, and what are they?',
+options:[{letter:'A',text:'Methimazole — blocks TPO (organification) only'},{letter:'B',text:'Propylthiouracil (PTU) — blocks TPO AND inhibits peripheral 5\'-deiodinase (↓T4→T3 conversion)'},{letter:'C',text:'Propranolol — blocks β-adrenergic symptoms AND is more potent than PTU at blocking TPO'},{letter:'D',text:'Lithium — blocks thyroid hormone release AND inhibits 5\'-deiodinase'},{letter:'E',text:'Perchlorate — blocks NIS AND inhibits TPO, making it the most potent antithyroid agent'}],
+correct:'B',
+explanations:{A:'MMI has ONE primary mechanism: TPO inhibition (organification and coupling). It does NOT inhibit peripheral conversion.',B:'CORRECT — PTU has TWO mechanisms: (1) Inhibits TPO (organification + coupling) AND (2) Inhibits 5\'-deiodinase (peripheral T4→T3 conversion). This makes PTU the preferred agent in thyroid storm (need rapid lowering of T3 levels). Note: propranolol also inhibits 5\'-deiodinase.',C:'Propranolol inhibits 5\'-deiodinase and blocks adrenergic symptoms, but does NOT block TPO; it cannot reduce thyroid hormone synthesis.',D:'Lithium inhibits thyroid hormone RELEASE (blocks colloid resorption) but does not inhibit 5\'-deiodinase.',E:'Perchlorate ONLY blocks NIS (iodide uptake); it has no effect on TPO or 5\'-deiodinase.'},
+teaching:'PTU dual mechanism = preferred in thyroid storm (need fast ↓T3 from both synthesis AND conversion) and first trimester of pregnancy. MMI preferred otherwise (less hepatotoxic for prolonged use; once-daily dosing). Propranolol also blocks 5\'-deiodinase → often added to either drug in thyroid storm.'},
+
+{id:35,lecture:5,type:'trap',topic:'Radioiodine uptake scan — which cause of hyperthyroid has LOW uptake',
+stem:'Which of the following causes of hyperthyroidism would show a <strong>LOW radioactive iodine uptake (RAIU)</strong> on thyroid scan?',
+options:[{letter:'A',text:'Graves\' disease'},{letter:'B',text:'Toxic multinodular goiter (Plummer\'s disease equivalent)'},{letter:'C',text:'Subacute (de Quervain\'s) thyroiditis'},{letter:'D',text:'Toxic adenoma'},{letter:'E',text:'TSH-secreting pituitary adenoma'}],
+correct:'C',
+explanations:{A:'Graves\': DIFFUSELY HIGH uptake (TSI constitutively activates TSH receptors → ↑iodide uptake everywhere).',B:'Toxic MNG: HIGH uptake in the "hot" (autonomous) nodules with low uptake elsewhere.',C:'CORRECT — Subacute thyroiditis: viral-mediated follicular destruction releases preformed T4/T3 → hyperthyroidism → TSH suppressed → gland not actively trapping iodine → LOW uptake. Same mechanism for: factitious thyrotoxicosis (exogenous T4/T3), postpartum thyroiditis, hashitoxicosis.',D:'Toxic adenoma: HOT nodule on scan (focally high uptake) with suppressed surrounding tissue.',E:'TSH-secreting pituitary adenoma: excess TSH drives thyroid → HIGH uptake (diffuse).'},
+teaching:'High RAIU hyperthyroidism: Graves\', toxic MNG, toxic adenoma, TSH adenoma. Low RAIU hyperthyroidism: all destructive thyroiditides (subacute, postpartum, hashitoxicosis), exogenous thyroid hormone ingestion. Treatment differs: destructive thyroiditis → NSAIDs/steroids (self-limited), NOT antithyroid drugs or RAI.'},
+
+{id:36,lecture:5,type:'step1',topic:'Graves\' exophthalmos — mechanism and persistence after treatment',
+stem:'A patient with Graves\' disease is successfully rendered euthyroid with methimazole. Her exophthalmos WORSENS over the next 6 months. What is the mechanism of exophthalmos in Graves\' disease?',
+options:[{letter:'A',text:'Enlarged thyroid gland physically pushing against the optic nerve and orbit'},{letter:'B',text:'TSI cross-react with TSH receptors on orbital fibroblasts → ↑glycosaminoglycan (GAG) production → orbital expansion'},{letter:'C',text:'Excess TSH (before treatment) directly stimulates orbital adipogenesis'},{letter:'D',text:'Anti-TPO antibodies deposit in orbital tissues causing inflammation'},{letter:'E',text:'Cortisol deficiency from HPA suppression allows unchecked orbital inflammation'}],
+correct:'B',
+explanations:{A:'The thyroid gland is not anatomically positioned to push against the orbit; exophthalmos is from retro-orbital tissue expansion.',B:'CORRECT — TSI (thyroid-stimulating immunoglobulins) also bind TSH receptors on orbital fibroblasts and preadipocytes → ↑glycosaminoglycan/hyaluronic acid production → osmotically draws water → retro-orbital swelling → proptosis. This process is INDEPENDENT of thyroid hormone levels, explaining why exophthalmos can persist or worsen after euthyroidism is achieved.',C:'TSH is suppressed in Graves\' (because TSI drives thyroid hormone production); TSH itself is not the driver of orbitopathy.',D:'Anti-TPO antibodies are markers of Hashimoto\'s; TSI (not anti-TPO) is the antibody driving Graves\' orbitopathy.',E:'No evidence for this mechanism.'},
+teaching:'Graves\' orbitopathy = TSI binding to orbital fibroblast TSH receptors → GAG accumulation → orbital expansion. INDEPENDENT of thyroid hormone levels. Treatment: selenium supplementation, IV glucocorticoids, orbital decompression. Radioiodine can WORSEN orbitopathy (use glucocorticoid cover with RAI in patients with active orbitopathy).'},
+
+{id:37,lecture:5,type:'step1',topic:'Distinguishing Hashimoto\'s from other causes of hypothyroidism',
+stem:'A patient has elevated TSH and low free T4. Which additional finding most specifically points to Hashimoto\'s thyroiditis (vs. iodine deficiency, Riedel\'s thyroiditis, or post-RAI hypothyroidism)?',
+options:[{letter:'A',text:'Elevated serum thyroglobulin'},{letter:'B',text:'Positive anti-TPO and anti-thyroglobulin antibodies'},{letter:'C',text:'Low radioactive iodine uptake'},{letter:'D',text:'Low urinary iodine excretion'},{letter:'E',text:'Diffusely enlarged tender thyroid gland'}],
+correct:'B',
+explanations:{A:'Elevated thyroglobulin is nonspecific — seen in any thyroid gland damage, RAI treatment, or thyroid cancer.',B:'CORRECT — Anti-TPO antibodies are present in >95% of Hashimoto\'s patients and are the most sensitive/specific marker. Anti-TG antibodies are also elevated but less specific. These autoantibodies are the defining feature of Hashimoto\'s thyroiditis.',C:'Low RAIU is seen in iodine deficiency AND post-RAI AND subacute thyroiditis — nonspecific.',D:'Low urine iodine = iodine deficiency hypothyroidism, not Hashimoto\'s.',E:'Tender gland = subacute (de Quervain\'s) thyroiditis; Hashimoto\'s gland is usually firm/rubbery and NON-tender.'},
+teaching:'Hashimoto\'s = autoimmune: anti-TPO (most sensitive, >95%) + anti-TG antibodies. Lymphocytic infiltration with germinal centers + Hürthle cell metaplasia on histology. Can present with hashitoxicosis (early transient hyperthyroidism from follicular destruction) before permanent hypothyroidism.'},
+
+{id:38,lecture:5,type:'alt',topic:'Thyroid binding proteins — TBG regulation, which is INCORRECT',
+stem:'Which statement about thyroid-binding globulin (TBG) regulation is <strong>INCORRECT</strong>?',
+options:[{letter:'A',text:'Estrogen increases TBG synthesis by the liver'},{letter:'B',text:'Androgens decrease TBG synthesis'},{letter:'C',text:'TBG levels increase in pregnancy'},{letter:'D',text:'Androgens increase TBG synthesis'},{letter:'E',text:'TBG levels decrease in nephrotic syndrome (urinary TBG loss)'}],
+correct:'D',
+explanations:{A:'Correct — Estrogen ↑TBG (explains ↑total T4 in pregnancy and with OCPs).',B:'Correct — Androgens ↓TBG (explains why male total T4 is slightly lower than female).',C:'Correct — Pregnancy: rising estrogen → ↑TBG → ↑total T4/T3.',D:'INCORRECT (this is the answer) — Androgens DECREASE TBG synthesis, not increase it. Testosterone and anabolic steroids → ↓TBG → ↓total T4 (free T4 normal).',E:'Correct — Nephrotic syndrome → urinary protein loss → ↓TBG → ↓total T4 (free T4 normal; euthyroid).'},
+teaching:'TBG regulation: ↑ by estrogen, hypothyroidism, hepatitis. ↓ by androgens, glucocorticoids, GH excess, nephrotic syndrome, liver failure. Clinical impact: always check FREE T4, not just total T4, in any condition that might alter TBG.'},
+
+{id:39,lecture:5,type:'step1',topic:'Amiodarone — mechanisms of thyroid effects',
+stem:'A patient on amiodarone for ventricular arrhythmia develops hypothyroidism. Which mechanisms are MOST responsible for amiodarone-induced hypothyroidism? (Choose the BEST answer)',
+options:[{letter:'A',text:'Amiodarone stimulates TSH receptor → negative feedback suppression of pituitary TSH'},{letter:'B',text:'Wolff-Chaikoff effect (excess iodine) + amiodarone inhibits 5\'-deiodinase + inhibits thyroid hormone release'},{letter:'C',text:'Amiodarone directly destroys follicular cells, causing thyroiditis-mediated hypothyroidism only'},{letter:'D',text:'Amiodarone increases TBG, reducing free T4 and causing functional hypothyroidism'},{letter:'E',text:'Amiodarone stimulates pituitary TSH release independent of thyroid hormone levels'}],
+correct:'B',
+explanations:{A:'Amiodarone does not stimulate TSH receptors; it causes hypothyroidism through iodine-mediated and direct mechanisms.',B:'CORRECT — Amiodarone hypothyroidism mechanisms: (1) Wolff-Chaikoff: amiodarone contains ~37% iodine by weight → excess iodine → blocks organification; normal glands escape, but susceptible patients (Hashimoto\'s) fail to escape → hypothyroidism. (2) Amiodarone itself inhibits 5\'-deiodinase → ↓T4→T3 + ↑rT3. (3) Blocks thyroid hormone release. Note: can also cause hyperthyroidism (Jod-Basedow in autonomous nodules, or type 2 destructive thyroiditis).',C:'Amiodarone can cause type 2 thyroiditis (destructive), but this causes HYPERTHYROIDISM (preformed T4 release), not hypothyroidism directly.',D:'Amiodarone does not specifically increase TBG.',E:'TSH may be elevated as a RESULT of hypothyroidism (pituitary response), but amiodarone does not directly stimulate TSH.'},
+teaching:'Amiodarone effects on thyroid: expect elevated rT3 and slightly elevated TSH in ALL patients (from 5\'-deiodinase inhibition). Hypothyroidism: Wolff-Chaikoff in susceptible patients. Hyperthyroidism Type 1: Jod-Basedow (autonomous nodules). Hyperthyroidism Type 2: destructive thyroiditis. Monitor TFTs every 3–6 months in all patients on amiodarone.'},
+
+{id:40,lecture:5,type:'alt',topic:'Perchlorate discharge test — which result indicates an organification defect',
+stem:'A positive perchlorate discharge test (>10% discharge of previously accumulated radioiodine after perchlorate administration) indicates which defect?',
+options:[{letter:'A',text:'A NIS (sodium-iodide symporter) defect — failure to transport iodide into the cell'},{letter:'B',text:'An organification defect — iodide enters via NIS but cannot be incorporated into thyroglobulin (TPO or pendrin defect), so it is displaced by perchlorate'},{letter:'C',text:'A thyroglobulin synthesis defect — no protein scaffold for iodide incorporation'},{letter:'D',text:'A deiodinase defect — iodide is recycled too quickly'},{letter:'E',text:'A TSH receptor defect — TSH cannot stimulate iodide uptake'}],
+correct:'B',
+explanations:{A:'NIS defect would mean iodide CANNOT enter the gland at all — the test would show no initial radioiodide accumulation; there would be nothing to discharge.',B:'CORRECT — In the perchlorate discharge test: radioiodide enters via NIS → if it is organified (bound to Tg), it stays; if NOT organified (free iodide still in the cell, due to TPO defect or pendrin defect), perchlorate competes with NIS to displace the free iodide → iodide washes out → POSITIVE test (>10% discharge). Positive in: pendrin defects (Pendred syndrome), TPO mutations, Wolff-Chaikoff.',C:'TG synthesis defect: iodide enters and is organified but cannot be stored → some discharge but different mechanism.',D:'Deiodinase defects occur in peripheral tissues, not in the thyroid follicle; not detected by perchlorate test.',E:'TSH receptor defect → no TSH signaling → gland atrophy, low uptake at baseline; perchlorate test is not the relevant test.'},
+teaching:'Perchlorate discharge test: Step 1: radioiodide given → concentrates in thyroid via NIS. Step 2: perchlorate (NIS blocker) given. If iodide has been organified → it stays in thyroglobulin → no discharge. If NOT organified (free intracellular iodide) → perchlorate competes for NIS → iodide washes out → POSITIVE. Causes: pendrin mutation (Pendred syndrome) or TPO deficiency.'}
+];
+
+// ═══════════════════ APP STATE ═══════════════════
+let session={filtered:[],current:0,answers:{},flagged:new Set(),mode:'tutor',timerMin:0,timerInterval:null,startTime:null,filter:'all',reviewMode:false};
+
+function init(){
+  updatePreview();
+  document.getElementById('filterBtns').addEventListener('click',e=>{
+    const b=e.target.closest('[data-filter]');if(!b)return;
+    document.querySelectorAll('[data-filter]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');session.filter=b.dataset.filter;updatePreview();
+  });
+  document.getElementById('modeBtns').addEventListener('click',e=>{
+    const b=e.target.closest('[data-mode]');if(!b)return;
+    document.querySelectorAll('[data-mode]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');session.mode=b.dataset.mode;
+  });
+  document.getElementById('timerBtns').addEventListener('click',e=>{
+    const b=e.target.closest('[data-timer]');if(!b)return;
+    document.querySelectorAll('[data-timer]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');session.timerMin=parseInt(b.dataset.timer);
+  });
+  document.getElementById('beginBtn').addEventListener('click',beginSession);
+}
+
+function getFiltered(f){
+  if(f==='all')return questions;
+  return questions.filter(q=>q.lecture===parseInt(f));
+}
+
+function updatePreview(){
+  document.getElementById('qCountPreview').textContent=getFiltered(session.filter).length;
+}
+
+function beginSession(){
+  session.filtered=[...getFiltered(session.filter)];
+  if(!session.filtered.length)return;
+  session.current=0;session.answers={};session.flagged=new Set();
+  session.startTime=Date.now();session.reviewMode=false;
+  showScreen('qScreen');startTimer();renderQuestion();
+}
+
+function startTimer(){
+  clearInterval(session.timerInterval);
+  const td=document.getElementById('timerDisplay');
+  if(!session.timerMin){td.style.display='none';return;}
+  td.style.display='';
+  const end=Date.now()+session.timerMin*60000;
+  session.timerInterval=setInterval(()=>{
+    const rem=Math.max(0,end-Date.now());
+    const m=Math.floor(rem/60000),s=Math.floor((rem%60000)/1000);
+    td.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if(!rem){clearInterval(session.timerInterval);finishSession();}
+  },1000);
+}
+
+function getElapsed(){
+  const ms=Date.now()-(session.startTime||Date.now());
+  return `${Math.floor(ms/60000)}m ${Math.floor((ms%60000)/1000)}s`;
+}
+
+function renderQuestion(){
+  const q=session.filtered[session.current];
+  const total=session.filtered.length;
+  const answered=Object.keys(session.answers).length;
+  const correct=Object.values(session.answers).filter(a=>a.correct).length;
+  document.getElementById('qTitle').textContent=`Question ${session.current+1} of ${total}`;
+  document.getElementById('scoreStat').textContent=`${correct}/${answered}`;
+  document.getElementById('progressFill').style.width=`${(session.current/total)*100}%`;
+  document.getElementById('reviewBanner').style.display=session.reviewMode?'':'none';
+
+  const lb=document.getElementById('qLecBadge');
+  lb.textContent=`Lecture ${q.lecture}`;lb.className=`q-badge l${q.lecture}`;
+  const typeLabels={trap:'⚠️ Test Trap',alt:'🔄 Alt Format (NOT/INCORRECT)',step1:'🩺 Step 1 Reasoning'};
+  const tb=document.getElementById('qTypeBadge');
+  tb.textContent=typeLabels[q.type]||q.type;tb.className=`type-badge ${q.type}`;
+  document.getElementById('qTopicLabel').textContent=q.topic;
+
+  const tw=document.getElementById('trapWarning');
+  tw.className=`trap-warning${q.type==='trap'?' visible':''}`;
+
+  document.getElementById('qStem').innerHTML=q.stem;
+
+  const oc=document.getElementById('optionsContainer');
+  oc.innerHTML='';
+  const prev=session.answers[q.id];
+  q.options.forEach(opt=>{
+    const btn=document.createElement('button');
+    btn.className='option-btn';
+    btn.disabled=!!prev||session.reviewMode;
+    if(prev){
+      if(opt.letter===q.correct)btn.classList.add('correct');
+      else if(opt.letter===prev.selected)btn.classList.add('wrong');
+    }
+    if(session.reviewMode&&opt.letter===q.correct)btn.classList.add('correct');
+    btn.innerHTML=`<span class="opt-letter">${opt.letter}</span><span class="opt-text">${opt.text}</span>`;
+    btn.onclick=()=>selectOption(opt.letter);
+    btn.dataset.letter=opt.letter;
+    oc.appendChild(btn);
+  });
+
+  const sb=document.getElementById('submitBtn');
+  sb.disabled=!prev&&!session.reviewMode;
+  sb.textContent=session.reviewMode?'Reviewing':prev?'Answered':'Submit Answer';
+  document.getElementById('flagBtn').className=`flag-btn${session.flagged.has(q.id)?' flagged':''}`;
+  document.getElementById('prevBtn').disabled=session.current===0;
+  document.getElementById('nextBtn').textContent=session.current===total-1?'Finish':'Next →';
+
+  const eb=document.getElementById('explanationBox');
+  const teachBox=document.getElementById('teachingBox');
+  if((prev&&session.mode==='tutor')||session.reviewMode){
+    eb.innerHTML='';
+    q.options.forEach(opt=>{
+      const row=document.createElement('div');row.className='exp-row';
+      const isRight=opt.letter===q.correct;
+      row.innerHTML=`<span class="exp-letter ${isRight?'right':'wrong'}">${opt.letter}</span>
+        <span class="exp-text">${isRight?'✓ ':''}${q.explanations[opt.letter]||''}</span>`;
+      eb.appendChild(row);
+    });
+    eb.classList.add('visible');
+    teachBox.classList.add('visible');
+    document.getElementById('teachText').textContent=q.teaching;
+  }else{
+    eb.classList.remove('visible');
+    teachBox.classList.remove('visible');
+  }
+}
+
+function selectOption(letter){
+  const q=session.filtered[session.current];
+  if(session.answers[q.id])return;
+  document.querySelectorAll('.option-btn').forEach(b=>{
+    b.classList.remove('selected');
+    if(b.dataset.letter===letter)b.classList.add('selected');
+  });
+  const sb=document.getElementById('submitBtn');
+  sb.disabled=false;sb.dataset.selected=letter;
+}
+
+function submitAnswer(){
+  const q=session.filtered[session.current];
+  if(session.answers[q.id])return;
+  const selected=document.getElementById('submitBtn').dataset.selected;
+  if(!selected)return;
+  session.answers[q.id]={selected,correct:selected===q.correct};
+  renderQuestion();
+}
+
+function toggleFlag(){
+  const q=session.filtered[session.current];
+  if(session.flagged.has(q.id))session.flagged.delete(q.id);
+  else session.flagged.add(q.id);
+  document.getElementById('flagBtn').className=`flag-btn${session.flagged.has(q.id)?' flagged':''}`;
+}
+
+function goToPrev(){if(session.current>0){session.current--;renderQuestion();}}
+function goToNext(){
+  if(session.current<session.filtered.length-1){session.current++;renderQuestion();}
+  else finishSession();
+}
+
+function finishSession(){
+  clearInterval(session.timerInterval);
+  const total=session.filtered.length;
+  const correct=Object.values(session.answers).filter(a=>a.correct).length;
+  const pct=total?Math.round((correct/total)*100):0;
+  document.getElementById('finalScore').textContent=correct;
+  document.getElementById('finalDenom').textContent=`/ ${total} correct`;
+  const pctEl=document.getElementById('finalPct');
+  pctEl.textContent=`${pct}%`;
+  pctEl.style.color=pct>=80?'#22C55E':pct>=60?'#F9A825':'#EF4444';
+  document.getElementById('finalTime').textContent=`Time: ${getElapsed()}`;
+
+  const lecColors={1:'#1E88E5',2:'#FB8C00',3:'#E91E63',4:'#8E24AA',5:'#00897B'};
+  const lecNames={1:'L1 · Intro',2:'L2 · Adrenal',3:'L3 · Sex Steroids',4:'L4 · Post. Pit.',5:'L5 · Thyroid'};
+  const byLec={};
+  session.filtered.forEach(q=>{
+    if(!byLec[q.lecture])byLec[q.lecture]={total:0,correct:0};
+    byLec[q.lecture].total++;
+    if(session.answers[q.id]?.correct)byLec[q.lecture].correct++;
+  });
+  const bl=document.getElementById('byLecture');
+  bl.innerHTML='<div style="font-size:0.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Performance by Lecture</div>';
+  Object.entries(byLec).forEach(([key,data])=>{
+    const p=data.total?Math.round((data.correct/data.total)*100):0;
+    bl.innerHTML+=`<div class="by-lec-row">
+      <span class="lec-label" style="color:${lecColors[key]}">${lecNames[key]}</span>
+      <div class="lec-bar-wrap"><div class="lec-bar-fill" style="width:${p}%;background:${lecColors[key]}"></div></div>
+      <span class="lec-score">${data.correct}/${data.total}</span></div>`;
+  });
+
+  const missed=session.filtered.filter(q=>session.answers[q.id]&&!session.answers[q.id].correct);
+  const ml=document.getElementById('missedList');
+  ml.innerHTML='';
+  if(!missed.length){ml.innerHTML='<p style="color:var(--green);font-size:0.88rem;">🎉 Perfect score — all traps defused!</p>';}
+  else{missed.forEach((q,i)=>{
+    const el=document.createElement('div');el.className='missed-item';
+    el.innerHTML=`<span class="missed-num">${i+1}</span>
+      <span class="missed-topic">${q.topic}</span>
+      <span class="missed-type ${q.type}">${q.type==='trap'?'⚠️ Trap':q.type==='alt'?'🔄 Alt':'🩺 Step 1'}</span>`;
+    el.onclick=()=>jumpTo(q.id);ml.appendChild(el);
+  });}
+  showScreen('resultsScreen');
+}
+
+function jumpTo(id){
+  const idx=session.filtered.findIndex(q=>q.id===id);
+  if(idx<0)return;
+  session.current=idx;showScreen('qScreen');renderQuestion();
+}
+
+function reviewMissed(){
+  const missed=session.filtered.filter(q=>session.answers[q.id]&&!session.answers[q.id].correct);
+  if(!missed.length)return;
+  session.filtered=missed;session.current=0;session.reviewMode=true;
+  showScreen('qScreen');renderQuestion();
+}
+
+function restartSession(){session.reviewMode=false;showScreen('startScreen');updatePreview();}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+init();
+</script>
+
+
+</body></html>
