@@ -299,20 +299,36 @@ h1 {
 
 .card-topline {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 14px;
   margin-bottom: 16px;
 }
 
+.card-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.card-heading-text {
+  min-width: 0;
+}
+
+.card-heading-text h3 {
+  margin: 0;
+}
+
 .card-icon {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 14px;
-  font-size: 1.35rem;
+  border-radius: 16px;
+  font-size: 1.9rem;
   background: color-mix(in srgb, var(--card-accent, var(--teal-500)) 18%, transparent);
   border: 1px solid color-mix(in srgb, var(--card-accent, var(--teal-500)) 32%, rgba(255, 255, 255, 0.08));
 }
@@ -457,14 +473,14 @@ h1 {
 }
 
 .section-icon-large {
-  width: 68px;
-  height: 68px;
-  flex: 0 0 68px;
+  width: 74px;
+  height: 74px;
+  flex: 0 0 74px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 18px;
-  font-size: 1.9rem;
+  border-radius: 20px;
+  font-size: 2.15rem;
   background: color-mix(in srgb, var(--section-accent, var(--teal-500)) 18%, rgba(248, 251, 255, 0.04));
   border: 1px solid color-mix(in srgb, var(--section-accent, var(--teal-500)) 32%, rgba(198, 208, 219, 0.12));
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
@@ -572,6 +588,21 @@ h1 {
 
   .section-header {
     margin-top: 34px;
+  }
+
+  .card-topline {
+    align-items: flex-start;
+  }
+
+  .card-heading {
+    align-items: flex-start;
+  }
+
+  .card-icon {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+    font-size: 1.65rem;
   }
 }
 
