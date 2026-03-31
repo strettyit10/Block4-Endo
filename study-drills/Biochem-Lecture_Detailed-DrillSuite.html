@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<!-- saved from url=(0109)file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-ActiveDrills.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUSOM Endocrine — Biochemistry Active Learning Drills</title>
+<link href="./Biochem-Lecture_Detailed-DrillSuite_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --blue:   #1E88E5; --blue-mid: #90CAF9;  --blue-light: #E3F2FD;
+    --orange: #FB8C00; --orange-mid: #FFCC80; --orange-light: #FFF3E0;
+    --rose:   #E91E63; --rose-mid: #F48FB1;   --rose-light: #FCE4EC;
+    --purple: #8E24AA; --purple-mid: #CE93D8; --purple-light: #F3E5F5;
+    --teal:   #00897B; --teal-mid: #80CBC4;   --teal-light: #E0F2F1;
+    --gold:   #F9A825; --gold-mid: #FFE082;   --gold-light: #FFFDE7;
+    --bg: #0F1117;
+    --card: #1A1D26;
+    --card2: #21253A;
+    --border: #2A2E42;
+    --text: #E8EAF0;
+    --muted: #8A8FAA;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, #0D1321 0%, #1A1D2E 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 24px 28px;
+    text-align: center;
+  }
+  .site-header .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    margin-bottom: 10px;
+  }
+  .site-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .site-header p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .header-badges {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+  }
+  .header-badge {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  /* ── MAIN ── */
+  .main { max-width: 1020px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    padding-left: 2px;
+  }
+
+  /* ── LECTURE GRID ── */
+  .lecture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 18px;
+    margin-bottom: 48px;
+  }
+
+  .lecture-card {
+    display: block;
+    text-decoration: none;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 22px 20px;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    position: relative;
+    overflow: hidden;
+  }
+  .lecture-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .lecture-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    border-color: var(--accent);
+  }
+
+  .card-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .card-subtitle {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .card-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .pill {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3px 10px;
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+  .card-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    margin-top: 4px;
+  }
+  .cta-text {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .cta-arrow {
+    font-size: 1rem;
+    color: var(--accent);
+    transition: transform 0.2s;
+  }
+  .lecture-card:hover .cta-arrow { transform: translateX(4px); }
+
+  /* ── BLOCK CHALLENGE CARD ── */
+  .challenge-card {
+    display: block;
+    text-decoration: none;
+    background: linear-gradient(135deg, #1A1230 0%, #200D30 100%);
+    border: 1px solid #4A2070;
+    border-radius: var(--radius);
+    padding: 28px 28px 24px;
+    transition: transform 0.18s, box-shadow 0.18s;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .challenge-card::after {
+    content: '🏆';
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    opacity: 0.15;
+  }
+  .challenge-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 40px rgba(138,43,226,0.3);
+  }
+  .challenge-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #C084FC;
+    margin-bottom: 8px;
+  }
+  .challenge-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .challenge-desc {
+    font-size: 0.88rem;
+    color: #A78BCA;
+    margin-bottom: 18px;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+  .challenge-modes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .mode-chip {
+    background: rgba(192,132,252,0.12);
+    border: 1px solid rgba(192,132,252,0.25);
+    border-radius: 12px;
+    padding: 4px 12px;
+    font-size: 0.75rem;
+    color: #C084FC;
+    font-weight: 600;
+  }
+  .challenge-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    background: #7C3AED;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+  .challenge-card:hover .challenge-cta { background: #6D28D9; }
+
+  /* ── MODES GUIDE ── */
+  .modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+  .mode-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .mode-icon { font-size: 1.4rem; margin-bottom: 8px; }
+  .mode-name { font-size: 0.85rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .mode-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.78rem;
+    padding: 32px 20px;
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <div class="eyebrow">GUSOM Endocrine Block · 2026</div>
+  <h1>Biochemistry Active Learning Drills</h1>
+  <p>Per-lecture interactive drill sets — flashcards, MCQs, vignettes, test traps, fill-in-blank, and reference tables. Select a lecture to begin.</p>
+  <div class="header-badges">
+    <span class="header-badge">5 Lectures</span>
+    <span class="header-badge">100+ Flashcards</span>
+    <span class="header-badge">60+ MCQs with Explanations</span>
+    <span class="header-badge">30+ Clinical Vignettes</span>
+    <span class="header-badge">25+ Test Traps</span>
+    <span class="header-badge">Fill-in-Blank Tables</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- LECTURE CARDS -->
+  <div class="section-title">Lectures</div>
+  <div class="lecture-grid">
+
+    <!-- L1 -->
+    <a class="lecture-card" href="file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-L1-IntroHormones.html" style="--accent: #1E88E5;">
+      <div class="card-number">Lecture 1</div>
+      <div class="card-title">Introduction to Hormones</div>
+      <div class="card-subtitle">Hormone classes, receptors, signal transduction, nuclear receptor mechanisms</div>
+      <div class="card-pills">
+        <span class="pill">🃏 20 Flashcards</span>
+        <span class="pill">📝 12 MCQs</span>
+        <span class="pill">🩺 6 Vignettes</span>
+        <span class="pill">⚠️ 5 Test Traps</span>
+        <span class="pill">📋 Fill-in-Blank</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 1</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- L2 -->
+    <a class="lecture-card" href="file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-L2-AdrenalSynthesis.html" style="--accent: #FB8C00;">
+      <div class="card-number">Lecture 2</div>
+      <div class="card-title">Adrenal Hormone Synthesis</div>
+      <div class="card-subtitle">Steroidogenesis, adrenal zones, CAH variants, HPA axis, Cushing's/Addison's/Conn's</div>
+      <div class="card-pills">
+        <span class="pill">🃏 20 Flashcards</span>
+        <span class="pill">📝 12 MCQs</span>
+        <span class="pill">🩺 6 Vignettes</span>
+        <span class="pill">⚠️ 5 Test Traps</span>
+        <span class="pill">📋 Fill-in-Blank</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 2</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- L3 -->
+    <a class="lecture-card" href="file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-L3-SexSteroids.html" style="--accent: #E91E63;">
+      <div class="card-number">Lecture 3</div>
+      <div class="card-title">Sex Steroid Synthesis</div>
+      <div class="card-subtitle">Two-cell model, SHBG, AIS vs 5α-RD, PCOS, fetoplacental unit, pharmacology</div>
+      <div class="card-pills">
+        <span class="pill">🃏 20 Flashcards</span>
+        <span class="pill">📝 12 MCQs</span>
+        <span class="pill">🩺 6 Vignettes</span>
+        <span class="pill">⚠️ 5 Test Traps</span>
+        <span class="pill">📋 Fill-in-Blank</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 3</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- L4 -->
+    <a class="lecture-card" href="file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-L4-PosteriorPituitary.html" style="--accent: #8E24AA;">
+      <div class="card-number">Lecture 4</div>
+      <div class="card-title">Posterior Pituitary Hormones</div>
+      <div class="card-subtitle">AVP/ADH, oxytocin, V1/V2 receptors, DI types, osmosensors, circumventricular organs</div>
+      <div class="card-pills">
+        <span class="pill">🃏 20 Flashcards</span>
+        <span class="pill">📝 12 MCQs</span>
+        <span class="pill">🩺 6 Vignettes</span>
+        <span class="pill">⚠️ 5 Test Traps</span>
+        <span class="pill">📋 Fill-in-Blank</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 4</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- L5 -->
+    <a class="lecture-card" href="file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-L5-ThyroidSynthesis.html" style="--accent: #00897B;">
+      <div class="card-number">Lecture 5</div>
+      <div class="card-title">Thyroid Hormone Synthesis</div>
+      <div class="card-subtitle">NIS, TPO, thyroglobulin, Wolff-Chaikoff, binding proteins, TR mechanism, Graves/Hashimoto</div>
+      <div class="card-pills">
+        <span class="pill">🃏 20 Flashcards</span>
+        <span class="pill">📝 12 MCQs</span>
+        <span class="pill">🩺 6 Vignettes</span>
+        <span class="pill">⚠️ 5 Test Traps</span>
+        <span class="pill">📋 Fill-in-Blank</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 5</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- BLOCK CHALLENGE -->
+  <div class="section-title">Cumulative Assessment</div>
+  <a class="challenge-card" href="file:///Users/ashleyjohnston/Documents/Claude/Projects/Cowork%20-%20Endocrine/GUSOM-Biochem-BlockChallenge.html">
+    <div class="challenge-eyebrow">🏆 All 5 Lectures · Integration Mode</div>
+    <div class="challenge-title">Block Challenge</div>
+    <div class="challenge-desc">
+      High-stakes cumulative assessment integrating all biochemistry lectures. Designed to simulate in-house exam and Step 1 pressure with 6 distinct challenge modes.
+    </div>
+    <div class="challenge-modes">
+      <span class="mode-chip">📖 Integration Vignettes (10)</span>
+      <span class="mode-chip">⚡ MCQ Gauntlet (15)</span>
+      <span class="mode-chip">🪜 Diagnosis Ladder (20)</span>
+      <span class="mode-chip">💀 Elimination Round</span>
+      <span class="mode-chip">🔥 Streak Challenge</span>
+      <span class="mode-chip">📊 Live Dashboard</span>
+    </div>
+    <div class="challenge-cta">
+      Enter Block Challenge →
+    </div>
+  </a>
+
+  <!-- HOW TO USE -->
+  <div class="section-title">What's in Each Lecture</div>
+  <div class="modes-grid">
+    <div class="mode-card">
+      <div class="mode-icon">🃏</div>
+      <div class="mode-name">Flashcards</div>
+      <div class="mode-desc">20 per lecture. Click to flip. Cover high-yield facts, enzymatic steps, and receptor details.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-icon">📝</div>
+      <div class="mode-name">MCQ Quiz</div>
+      <div class="mode-desc">12 Step 1-style questions per lecture with per-option explanations for every choice.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-icon">🩺</div>
+      <div class="mode-name">Clinical Vignettes</div>
+      <div class="mode-desc">6 vignettes per lecture. Reveal the answer and a "why it matters" teaching point.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-icon">⚠️</div>
+      <div class="mode-name">Test Traps</div>
+      <div class="mode-desc">5 high-distractor MCQs per lecture targeting the most commonly missed concepts.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-icon">📋</div>
+      <div class="mode-name">Fill-in-Blank</div>
+      <div class="mode-desc">Structured tables per lecture. Type answers, check individually, or reveal all at once.</div>
+    </div>
+    <div class="mode-card">
+      <div class="mode-icon">📊</div>
+      <div class="mode-name">Reference Table</div>
+      <div class="mode-desc">Quick-reference summary of all key facts, enzymes, and clinical correlates per lecture.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  GUSOM Endocrine Block · Biochemistry Active Learning Drills · 2026
+</div>
+
+
+
+</body></html>
