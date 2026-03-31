@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Endo·Drill — New Formats | Block 4</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f4f0;--surface:#fff;--surface2:#f0efe9;
+  --border:rgba(0,0,0,.09);--bh:rgba(0,0,0,.2);
+  --text:#1a1a1a;--muted:#6b6b6b;--dim:#c0bfba;
+  --acc:#2563eb;--ag:rgba(37,99,235,.08);
+  --green:#16a34a;--gbg:rgba(22,163,74,.08);
+  --red:#dc2626;--rbg:rgba(220,38,38,.08);
+  --amb:#d97706;--abg:rgba(217,119,6,.08);
+  --pur:#7c3aed;--pbg:rgba(124,58,237,.08);
+  --teal:#0891b2;--tbg:rgba(8,145,178,.08);
+  --coral:#e11d48;--cobg:rgba(225,29,72,.08);
+  --sh:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);
+  --r:10px;--rl:14px;
+}
+[data-theme="dark"]{
+  --bg:#0f1117;--surface:#181c27;--surface2:#1f2435;
+  --border:rgba(255,255,255,.08);--bh:rgba(255,255,255,.18);
+  --text:#e8eaf0;--muted:#7a8099;--dim:#444d66;
+  --acc:#5c8aff;--ag:rgba(92,138,255,.12);
+  --green:#3ecf8e;--gbg:rgba(62,207,142,.1);
+  --red:#ff6b6b;--rbg:rgba(255,107,107,.1);
+  --amb:#f5a623;--abg:rgba(245,166,35,.1);
+  --pur:#a78bfa;--pbg:rgba(167,139,250,.1);
+  --teal:#38bdf8;--tbg:rgba(56,189,248,.1);
+  --coral:#fb7185;--cobg:rgba(251,113,133,.1);
+  --sh:0 1px 4px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;min-height:100vh;line-height:1.6;transition:background .25s,color .25s}
+
+/* ── HEADER ── */
+.hdr{border-bottom:1px solid var(--border);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;background:var(--surface);box-shadow:var(--sh);position:sticky;top:0;z-index:100;gap:12px;flex-wrap:wrap}
+.hdr-l{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',serif;font-size:20px;letter-spacing:-.02em}
+.logo span{color:var(--acc)}
+.bdg-row{display:flex;gap:6px;flex-wrap:wrap}
+.bdg{font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:20px;border:1px solid var(--border);color:var(--muted);background:var(--surface2);font-weight:500}
+.bdg.p{border-color:rgba(37,99,235,.25);color:var(--acc);background:var(--ag)}
+.bdg.r{border-color:rgba(225,29,72,.2);color:var(--coral);background:var(--cobg)}
+.bdg.g{border-color:rgba(22,163,74,.2);color:var(--green);background:var(--gbg)}
+.t-btn{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:12px;color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.t-btn:hover{border-color:var(--bh);color:var(--text)}
+.t-track{width:34px;height:19px;background:var(--bh);border-radius:10px;position:relative;transition:background .2s;flex-shrink:0}
+[data-theme="dark"] .t-track{background:var(--acc)}
+.t-thumb{width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2.5px;left:2.5px;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+[data-theme="dark"] .t-thumb{transform:translateX(15px)}
+
+/* ── MAIN ── */
+.main{max-width:1080px;margin:0 auto;padding:26px 22px 80px}
+
+/* ── SCOREBAR ── */
+.scorebar{display:flex;align-items:center;gap:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:13px 20px;margin-bottom:24px;box-shadow:var(--sh);flex-wrap:wrap}
+.sc-item{display:flex;flex-direction:column;align-items:center;min-width:54px}
+.sc-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;line-height:1}
+.sc-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-top:2px}
+.sc-div{width:1px;height:28px;background:var(--border)}
+.streak-pill{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:12px;padding:4px 10px;border-radius:8px;background:var(--abg);color:var(--amb);border:1px solid rgba(217,119,6,.2)}
+.mode-tabs{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap}
+.mode-tab{padding:7px 13px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.mode-tab:hover{border-color:var(--bh);color:var(--text)}
+.mode-tab.active{background:var(--ag);border-color:var(--acc);color:var(--acc)}
+
+/* ── SECTION HEAD ── */
+.sh{margin-bottom:18px}
+.sh h2{font-family:'Instrument Serif',serif;font-size:26px;font-weight:400;letter-spacing:-.02em;color:var(--text);margin-bottom:4px}
+.sh p{color:var(--muted);font-size:14px}
+
+/* ── PANEL VISIBILITY ── */
+.panel{display:none}
+.panel.active{display:block}
+
+/* ═══════════════════════════════════════
+   DRILL 1: ↑/↓ PREDICT-THE-LAB
+═══════════════════════════════════════ */
+.ptl-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:24px;box-shadow:var(--sh);margin-bottom:16px}
+.ptl-scenario{font-size:15px;line-height:1.75;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.ptl-scenario .hl{background:rgba(37,99,235,.08);border-radius:3px;padding:0 3px;color:var(--acc)}
+.ptl-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.ptl-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.ptl-diff{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600}
+.ptl-diff.d1{background:var(--gbg);color:var(--green)}
+.ptl-diff.d2{background:var(--abg);color:var(--amb)}
+.ptl-diff.d3{background:var(--rbg);color:var(--red)}
+.ptl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px}
+.ptl-row{background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:8px;transition:border-color .15s}
+.ptl-row.correct{border-color:var(--green);background:var(--gbg)}
+.ptl-row.wrong{border-color:var(--red);background:var(--rbg)}
+.ptl-lab{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--text)}
+.ptl-btns{display:flex;gap:5px}
+.ptl-btn{flex:1;padding:7px 4px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface);cursor:pointer;font-size:16px;transition:all .15s;font-weight:700;text-align:center;color:var(--muted)}
+.ptl-btn:hover{border-color:var(--acc);color:var(--acc);background:var(--ag)}
+.ptl-btn.sel-up{border-color:var(--red);background:var(--rbg);color:var(--red)}
+.ptl-btn.sel-down{border-color:var(--acc);background:var(--ag);color:var(--acc)}
+.ptl-btn.sel-norm{border-color:var(--green);background:var(--gbg);color:var(--green)}
+.ptl-btn:disabled{pointer-events:none}
+.ptl-correct-lbl{font-size:11px;font-weight:600;color:var(--green);display:none}
+.ptl-wrong-lbl{font-size:11px;font-weight:600;color:var(--red);display:none}
+.ptl-row.correct .ptl-correct-lbl{display:block}
+.ptl-row.wrong .ptl-wrong-lbl{display:block}
+.ptl-check{padding:10px 22px;background:var(--acc);border:none;border-radius:var(--r);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;box-shadow:0 2px 8px rgba(37,99,235,.2)}
+.ptl-check:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.ptl-check:disabled{opacity:.5;pointer-events:none}
+.ptl-explanation{margin-top:14px;padding:14px 16px;background:var(--surface2);border-radius:var(--r);border-left:3px solid var(--acc);font-size:13px;line-height:1.7;color:var(--muted);display:none}
+.ptl-explanation.show{display:block;animation:pop .2s}
+.ptl-explanation strong{color:var(--text)}
+.ptl-nav{display:flex;gap:10px;margin-top:8px;align-items:center}
+.btn-next{padding:10px 22px;border-radius:var(--r);background:var(--acc);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-next:hover{filter:brightness(1.07)}
+.btn-prev{padding:10px 18px;border-radius:var(--r);background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;transition:all .15s}
+.btn-prev:hover{border-color:var(--bh);color:var(--text)}
+.ptl-progress{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.ptl-bar{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.ptl-fill{height:100%;background:var(--acc);border-radius:3px;transition:width .4s}
+.ptl-num{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)}
+.ptl-topic-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.ptl-filter-btn{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'DM Mono',monospace}
+.ptl-filter-btn:hover{border-color:var(--bh);color:var(--text)}
+.ptl-filter-btn.active{background:var(--ag);border-color:var(--acc);color:var(--acc)}
+.buzz{font-family:'DM Mono',monospace;font-size:10px;background:var(--abg);color:var(--amb);border:1px solid rgba(217,119,6,.2);padding:2px 8px;border-radius:5px;display:inline-block;margin:2px}
+
+/* ═══════════════════════════════════════
+   DRILL 2: CASCADE SIMULATOR
+═══════════════════════════════════════ */
+.casc-wrap{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
+@media(max-width:700px){.casc-wrap{grid-template-columns:1fr}}
+.casc-diagram{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:24px;box-shadow:var(--sh)}
+.casc-title{font-family:'Instrument Serif',serif;font-size:18px;color:var(--text);margin-bottom:4px}
+.casc-subtitle{font-size:13px;color:var(--muted);margin-bottom:20px}
+.axis-col{display:flex;flex-direction:column;align-items:center}
+.casc-node{width:100%;max-width:320px;background:var(--surface2);border:2px solid var(--border);border-radius:var(--r);padding:14px 16px;text-align:center;transition:all .3s;position:relative}
+.casc-node.affected-up{border-color:var(--red);background:var(--rbg)}
+.casc-node.affected-down{border-color:var(--acc);background:var(--ag)}
+.casc-node.affected-norm{border-color:var(--green);background:var(--gbg)}
+.casc-node.ablated{border-color:var(--muted);background:var(--surface2);opacity:.45}
+.cn-label{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.cn-name{font-size:14px;font-weight:600;color:var(--text)}
+.cn-hormone{font-family:'DM Mono',monospace;font-size:13px;margin-top:4px}
+.cn-arrow-val{font-family:'DM Mono',monospace;font-size:20px;font-weight:700;margin-top:4px;transition:all .3s}
+.arrow-up{color:var(--red)}
+.arrow-down{color:var(--acc)}
+.arrow-norm{color:var(--green)}
+.casc-conn{display:flex;flex-direction:column;align-items:center;margin:6px 0;position:relative}
+.casc-line{width:2px;height:20px;background:var(--border);transition:background .3s}
+.casc-lbl{font-family:'DM Mono',monospace;font-size:10px;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:2px 9px;color:var(--muted);margin:2px 0}
+.casc-arr{font-size:18px;color:var(--dim);line-height:1}
+.neg-fb{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;flex-wrap:wrap}
+.neg-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--red);border:1px solid rgba(220,38,38,.22);background:var(--rbg);border-radius:5px;padding:3px 9px;font-weight:500}
+.pos-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--acc);border:1px solid rgba(37,99,235,.22);background:var(--ag);border-radius:5px;padding:3px 9px;font-weight:500}
+.casc-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:18px;box-shadow:var(--sh)}
+.cp-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:12px}
+.scenario-list{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.scen-btn{padding:10px 14px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;cursor:pointer;transition:all .15s;text-align:left;color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.4}
+.scen-btn:hover{border-color:var(--acc);color:var(--acc);background:var(--ag)}
+.scen-btn.active{border-color:var(--acc);background:var(--ag);color:var(--acc);font-weight:500}
+.casc-explanation{background:var(--surface2);border-radius:var(--r);border-left:3px solid var(--acc);padding:13px 15px;font-size:13px;line-height:1.7;color:var(--muted);margin-top:2px;display:none}
+.casc-explanation.show{display:block;animation:pop .2s}
+.casc-explanation strong{color:var(--text)}
+.casc-q{margin-top:14px}
+.casc-q-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px}
+.casc-q-opts{display:flex;flex-direction:column;gap:6px}
+.casc-opt{padding:9px 13px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;cursor:pointer;transition:all .15s;color:var(--text);font-family:'DM Sans',sans-serif}
+.casc-opt:hover{border-color:var(--acc);color:var(--acc);background:var(--ag)}
+.casc-opt.ok{background:var(--gbg);border-color:var(--green);color:var(--green);pointer-events:none}
+.casc-opt.ng{background:var(--rbg);border-color:var(--red);color:var(--red);pointer-events:none}
+.casc-fb{margin-top:10px;padding:11px 13px;background:var(--surface2);border-left:3px solid var(--acc);border-radius:var(--r);font-size:12px;line-height:1.65;color:var(--muted);display:none}
+.casc-fb.show{display:block;animation:pop .2s}
+.casc-fb strong{color:var(--text)}
+.axis-selector{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.ax-btn{padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.ax-btn:hover{border-color:var(--bh);color:var(--text)}
+.ax-btn.active{background:var(--ag);border-color:var(--acc);color:var(--acc)}
+
+/* ═══════════════════════════════════════
+   DRILL 3: SPEED ROUND
+═══════════════════════════════════════ */
+.speed-setup{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:28px;box-shadow:var(--sh);text-align:center;max-width:520px;margin:0 auto}
+.speed-setup h3{font-family:'Instrument Serif',serif;font-size:22px;margin-bottom:8px}
+.speed-setup p{color:var(--muted);font-size:14px;margin-bottom:20px}
+.speed-opts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.speed-opt-btn{padding:10px 20px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--surface2);color:var(--text);cursor:pointer;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;transition:all .15s}
+.speed-opt-btn:hover,.speed-opt-btn.sel{border-color:var(--acc);background:var(--ag);color:var(--acc)}
+.speed-start{padding:12px 32px;background:var(--acc);border:none;border-radius:var(--r);color:#fff;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all .15s;box-shadow:0 2px 10px rgba(37,99,235,.25)}
+.speed-start:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.speed-arena{display:none}
+.speed-hud{display:flex;align-items:center;gap:16px;margin-bottom:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 18px;box-shadow:var(--sh);flex-wrap:wrap}
+.speed-timer{font-family:'DM Mono',monospace;font-size:28px;font-weight:500;min-width:52px;text-align:center;transition:color .2s}
+.speed-timer.warn{color:var(--amb)}
+.speed-timer.danger{color:var(--red);animation:pulse .5s infinite alternate}
+.speed-score{font-family:'DM Mono',monospace;font-size:18px;color:var(--green)}
+.speed-total{font-family:'DM Mono',monospace;font-size:14px;color:var(--muted)}
+.speed-streak-disp{font-family:'DM Mono',monospace;font-size:14px;color:var(--amb)}
+.speed-bar-wrap{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden;min-width:80px}
+.speed-bar-fill{height:100%;background:var(--acc);border-radius:3px;transition:width .1s linear}
+.speed-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:28px 24px;box-shadow:var(--sh);margin-bottom:16px;min-height:160px;display:flex;flex-direction:column;justify-content:center}
+.speed-q-tag{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:10px}
+.speed-q-text{font-size:17px;font-weight:500;color:var(--text);line-height:1.5}
+.speed-choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:480px){.speed-choices{grid-template-columns:1fr}}
+.speed-choice{padding:12px 16px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r);font-size:14px;cursor:pointer;transition:all .12s;display:flex;align-items:center;gap:10px;color:var(--text);font-family:'DM Sans',sans-serif;text-align:left}
+.speed-choice:hover{border-color:var(--acc);background:var(--ag)}
+.speed-choice.correct{border-color:var(--green);background:var(--gbg);animation:pop .15s}
+.speed-choice.wrong{border-color:var(--red);background:var(--rbg)}
+.speed-choice.reveal{border-color:var(--green);background:var(--gbg);opacity:.75}
+.sc-ltr{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;color:var(--muted);flex-shrink:0}
+.speed-choice.correct .sc-ltr{background:var(--green);color:#fff}
+.speed-choice.wrong .sc-ltr{background:var(--red);color:#fff}
+.speed-fb{font-size:13px;color:var(--muted);padding:10px 14px;background:var(--surface2);border-left:3px solid var(--acc);border-radius:var(--r);line-height:1.6;display:none;margin-bottom:8px}
+.speed-fb.show{display:block}
+.speed-fb strong{color:var(--text)}
+.speed-results{display:none;text-align:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:36px 24px;box-shadow:var(--sh)}
+.results-grade{font-family:'Instrument Serif',serif;font-size:52px;line-height:1;margin-bottom:8px}
+.results-sub{font-size:16px;color:var(--muted);margin-bottom:24px}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.results-stat{background:var(--surface2);border-radius:var(--r);padding:14px;text-align:center}
+.rs-num{font-family:'DM Mono',monospace;font-size:24px;font-weight:500}
+.rs-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.results-retry{padding:11px 26px;background:var(--acc);border:none;border-radius:var(--r);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;box-shadow:0 2px 8px rgba(37,99,235,.2)}
+.results-retry:hover{filter:brightness(1.07)}
+
+/* ── ANIMATIONS ── */
+@keyframes pop{from{transform:scale(.96);opacity:.7}to{transform:scale(1);opacity:1}}
+@keyframes pulse{from{opacity:1}to{opacity:.5}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.shake{animation:shake .3s}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-l">
+    <div class="logo">Endo<span>·</span>Drill <span style="font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);font-style:normal"> New Formats</span></div>
+    <div class="bdg-row">
+      <span class="bdg p">↑↓ Predict-the-Lab</span>
+      <span class="bdg r">Cascade Simulator</span>
+      <span class="bdg g">Speed Round</span>
+    </div>
+  </div>
+  <button class="t-btn" onclick="toggleTheme()">
+    <div class="t-track"><div class="t-thumb"></div></div>
+    Dark mode
+  </button>
+</header>
+
+<div class="main">
+
+<!-- SCOREBAR -->
+<div class="scorebar">
+  <div class="sc-item">
+    <div class="sc-num" id="sc-cor" style="color:var(--green)">0</div>
+    <div class="sc-lbl">Correct</div>
+  </div>
+  <div class="sc-div"></div>
+  <div class="sc-item">
+    <div class="sc-num" id="sc-tot">0</div>
+    <div class="sc-lbl">Answered</div>
+  </div>
+  <div class="sc-div"></div>
+  <div class="sc-item">
+    <div class="sc-num" id="sc-pct">—</div>
+    <div class="sc-lbl">Accuracy</div>
+  </div>
+  <div class="sc-div"></div>
+  <div class="sc-item">
+    <div class="streak-pill" id="sc-streak">🔥 0</div>
+    <div class="sc-lbl">Streak</div>
+  </div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showPanel('ptl',this)">↑↓ Predict Lab</button>
+    <button class="mode-tab" onclick="showPanel('casc',this)">Cascade Sim</button>
+    <button class="mode-tab" onclick="showPanel('speed',this)">⚡ Speed Round</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PANEL 1: PREDICT-THE-LAB
+═══════════════════════════════════════════════ -->
+<div class="panel active" id="panel-ptl">
+  <div class="sh">
+    <h2>↑ / ↓ / → Predict the Lab</h2>
+    <p>Given the clinical scenario, predict whether each lab value will be HIGH ↑, LOW ↓, or NORMAL → then check your answers.</p>
+  </div>
+
+  <div class="ptl-topic-filter" id="ptl-filters"></div>
+  <div class="ptl-progress">
+    <div class="ptl-bar"><div class="ptl-fill" id="ptl-fill" style="width:0%"></div></div>
+    <div class="ptl-num" id="ptl-num">1 / 1</div>
+  </div>
+  <div id="ptl-container"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PANEL 2: CASCADE SIMULATOR
+═══════════════════════════════════════════════ -->
+<div class="panel" id="panel-casc">
+  <div class="sh">
+    <h2>Cascade Simulator</h2>
+    <p>Select a scenario to see how pathology ripples through the axis. Then answer the comprehension question.</p>
+  </div>
+  <div class="axis-selector" id="ax-selector"></div>
+  <div class="casc-wrap">
+    <div class="casc-diagram" id="casc-diagram"></div>
+    <div class="casc-panel">
+      <div class="cp-title">Scenarios</div>
+      <div class="scenario-list" id="casc-scen-list"></div>
+      <div class="casc-explanation" id="casc-expl"></div>
+      <div class="casc-q" id="casc-q-area" style="display:none">
+        <div class="casc-q-title">Comprehension check</div>
+        <div id="casc-q-text" style="font-size:14px;color:var(--muted);margin-bottom:10px;line-height:1.55"></div>
+        <div class="casc-q-opts" id="casc-q-opts"></div>
+        <div class="casc-fb" id="casc-q-fb"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     PANEL 3: SPEED ROUND
+═══════════════════════════════════════════════ -->
+<div class="panel" id="panel-speed">
+  <div class="sh">
+    <h2>⚡ Speed Round</h2>
+    <p>Race the clock. One question at a time. Tap an answer before time runs out.</p>
+  </div>
+
+  <div class="speed-setup" id="speed-setup">
+    <h3>Choose your challenge</h3>
+    <p>Select time per question and topic, then go.</p>
+    <div style="margin-bottom:12px">
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px">Time per question</div>
+      <div class="speed-opts" id="speed-time-opts">
+        <button class="speed-opt-btn" onclick="selTime(8,this)">8s  🔥 Hard</button>
+        <button class="speed-opt-btn sel" onclick="selTime(15,this)">15s  Medium</button>
+        <button class="speed-opt-btn" onclick="selTime(25,this)">25s  Easy</button>
+      </div>
+    </div>
+    <div style="margin-bottom:20px">
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px">Topic</div>
+      <div class="speed-opts" id="speed-topic-opts">
+        <button class="speed-opt-btn sel" onclick="selTopic('all',this)">All topics</button>
+        <button class="speed-opt-btn" onclick="selTopic('hpa',this)">HPA / Adrenal</button>
+        <button class="speed-opt-btn" onclick="selTopic('thyroid',this)">Thyroid</button>
+        <button class="speed-opt-btn" onclick="selTopic('dm',this)">Diabetes</button>
+        <button class="speed-opt-btn" onclick="selTopic('pit',this)">Pituitary</button>
+      </div>
+    </div>
+    <button class="speed-start" onclick="startSpeed()">Start →</button>
+  </div>
+
+  <div class="speed-arena" id="speed-arena">
+    <div class="speed-hud">
+      <div class="speed-timer" id="sp-timer">15</div>
+      <div class="speed-bar-wrap"><div class="speed-bar-fill" id="sp-bar" style="width:100%"></div></div>
+      <div class="speed-score" id="sp-score">0</div>
+      <div class="speed-total" id="sp-total">/ 0</div>
+      <div class="sc-div"></div>
+      <div class="speed-streak-disp" id="sp-streak">🔥 0</div>
+      <button style="padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;margin-left:auto" onclick="endSpeed()">End</button>
+    </div>
+    <div class="speed-card" id="sp-card">
+      <div class="speed-q-tag" id="sp-tag"></div>
+      <div class="speed-q-text" id="sp-q"></div>
+    </div>
+    <div class="speed-fb" id="sp-fb"></div>
+    <div class="speed-choices" id="sp-choices"></div>
+  </div>
+
+  <div class="speed-results" id="speed-results">
+    <div class="results-grade" id="res-grade"></div>
+    <div class="results-sub" id="res-sub"></div>
+    <div class="results-grid">
+      <div class="results-stat"><div class="rs-num" id="res-correct" style="color:var(--green)"></div><div class="rs-lbl">Correct</div></div>
+      <div class="results-stat"><div class="rs-num" id="res-total"></div><div class="rs-lbl">Answered</div></div>
+      <div class="results-stat"><div class="rs-num" id="res-best" style="color:var(--amb)"></div><div class="rs-lbl">Best streak</div></div>
+    </div>
+    <button class="results-retry" onclick="resetSpeed()">Try again ↺</button>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ═══════════ GLOBAL SCORE ═══════════
+let gCor=0,gTot=0,gStreak=0;
+function addSc(ok){
+  gTot++;if(ok){gCor++;gStreak++;}else{gStreak=0;}
+  document.getElementById('sc-cor').textContent=gCor;
+  document.getElementById('sc-tot').textContent=gTot;
+  document.getElementById('sc-pct').textContent=gTot?Math.round(gCor/gTot*100)+'%':'—';
+  document.getElementById('sc-streak').textContent='🔥 '+gStreak;
+}
+function toggleTheme(){
+  const h=document.documentElement;
+  h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');
+}
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.mode-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ═══════════════════════════════════════
+// PREDICT-THE-LAB DATA
+// ═══════════════════════════════════════
+const PTL_DATA = [
+  // ── HPA / ADRENAL ──
+  {
+    topic:'hpa', diff:'d1',
+    scenario:"A <span class='hl'>45-year-old woman</span> has progressive fatigue, weight loss, hyperpigmentation of gum margins and palmar creases, salt craving, and orthostatic hypotension. She was diagnosed with an autoimmune condition 2 years ago.",
+    labs:[
+      {name:'ACTH',correct:'up',explanation:'Primary AI → no cortisol negative feedback → ACTH ↑↑'},
+      {name:'Cortisol (AM)',correct:'down',explanation:'Adrenal cortex destroyed → cannot produce cortisol'},
+      {name:'Aldosterone',correct:'down',explanation:'Adrenal cortex also makes aldosterone → deficient'},
+      {name:'Na⁺',correct:'down',explanation:'No aldosterone → cannot retain sodium → hyponatremia'},
+      {name:'K⁺',correct:'up',explanation:'No aldosterone → cannot excrete potassium → hyperkalemia'},
+      {name:'Blood glucose',correct:'down',explanation:'No cortisol → impaired gluconeogenesis → hypoglycemia'},
+    ],
+    explanation:"<strong>Primary adrenal insufficiency (Addison's disease).</strong> The adrenal cortex is destroyed → ↓cortisol + ↓aldosterone. No cortisol → no negative feedback → ACTH ↑↑ → drives POMC → MSH → hyperpigmentation. Hyponatremia + hyperkalemia + hypoglycemia = lack of both glucocorticoid and mineralocorticoid. KEY: ACTH is HIGH (primary). In secondary AI (pituitary failure), ACTH is LOW and there is NO hyperpigmentation.",
+    bz:['primary AI = ACTH ↑↑','no hyperpigmentation in secondary AI','hypoNa + hyperK = aldosterone loss','POMC → MSH → pigmentation']
+  },
+  {
+    topic:'hpa', diff:'d1',
+    scenario:"A <span class='hl'>38-year-old woman</span> on <span class='hl'>prednisone 40mg/day</span> for lupus (2-year course) develops central obesity, moon face, purple striae, and easy bruising. She is referred for Cushing's workup.",
+    labs:[
+      {name:'ACTH',correct:'down',explanation:'Exogenous steroids → suppress HPA axis → ACTH ↓'},
+      {name:'Cortisol (AM)',correct:'up',explanation:'Prednisone acts like cortisol → total glucocorticoid activity ↑'},
+      {name:'Glucose',correct:'up',explanation:'Glucocorticoids → insulin resistance → hyperglycemia'},
+      {name:'Na⁺',correct:'norm',explanation:'Prednisone has minimal mineralocorticoid activity'},
+      {name:'K⁺',correct:'norm',explanation:'Prednisone has minimal mineralocorticoid activity — K+ usually normal'},
+      {name:'WBC',correct:'up',explanation:'Glucocorticoids → demargination of neutrophils → leukocytosis'},
+    ],
+    explanation:"<strong>Exogenous glucocorticoid (iatrogenic Cushing's).</strong> Prednisone provides exogenous glucocorticoid → negative feedback suppresses CRH/ACTH → ACTH ↓↓. The ACTH suppression distinguishes exogenous from ALL endogenous causes. No mineralocorticoid effect = normal Na/K. Leukocytosis from demargination. TRAP: Total cortisol measured by immunoassay may not cross-react with prednisone — 24h UFC and late-night salivary cortisol are more reliable screening tests.",
+    bz:['exogenous = ACTH ↓↓','no mineralocorticoid effect','neutrophil demargination','distinguish by ACTH']
+  },
+  {
+    topic:'hpa', diff:'d2',
+    scenario:"A <span class='hl'>52-year-old male smoker</span> presents with profound weakness, weight loss, and marked hypertension. Workup reveals ACTH 680 pg/mL. High-dose dexamethasone: no suppression. Pituitary MRI: normal. Chest CT: 2.5 cm central mass.",
+    labs:[
+      {name:'ACTH',correct:'up',explanation:'Ectopic tumor autonomously secreting ACTH → very high levels (often >200 pg/mL)'},
+      {name:'Cortisol',correct:'up',explanation:'Very high ACTH drives bilateral adrenal hyperplasia → excess cortisol'},
+      {name:'K⁺',correct:'down',explanation:'Cortisol at very high levels overwhelms 11β-HSD2 → activates MR → K+ wasting'},
+      {name:'Renin',correct:'down',explanation:'Volume expansion from cortisol mineralocorticoid effect → suppresses renin'},
+      {name:'Glucose',correct:'up',explanation:'Massive cortisol excess → severe insulin resistance → hyperglycemia'},
+      {name:'High-dose dex response',correct:'down',explanation:'Ectopic ACTH source is autonomous — no glucocorticoid receptors → cannot be suppressed'},
+    ],
+    explanation:"<strong>Ectopic ACTH syndrome</strong> (small cell lung carcinoma most likely). Very high ACTH (often >200 pg/mL) drives bilateral adrenal hyperplasia → extreme cortisol. At high concentrations, cortisol overwhelms 11β-HSD2 (the enzyme that protects the mineralocorticoid receptor from cortisol) → cortisol activates MR → profound hypokalemia. HIGH-DOSE DEX DOES NOT SUPPRESS (no feedback sensitivity in tumor). TRAP: Contrast this with Cushing's Disease (moderate ACTH, SUPPRESSES with high-dose dex).",
+    bz:['ACTH >200','no dex suppression','hypoK from cortisol/MR effect','11β-HSD2 overwhelmed']
+  },
+  {
+    topic:'hpa', diff:'d2',
+    scenario:"A <span class='hl'>25-year-old woman (46,XX)</span> presents with primary amenorrhea, clitoral enlargement, and a salt-wasting crisis in infancy (now managed). Labs show markedly elevated 17-hydroxyprogesterone.",
+    labs:[
+      {name:'17-OHP',correct:'up',explanation:'CYP21A2 is blocked → 17-OHP cannot proceed to 11-deoxycortisol → accumulates'},
+      {name:'Cortisol',correct:'down',explanation:'Cannot complete cortisol synthesis → low cortisol'},
+      {name:'Aldosterone',correct:'down',explanation:'CYP21A2 also required for aldosterone → deficient → salt-wasting'},
+      {name:'ACTH',correct:'up',explanation:'Low cortisol → no negative feedback → ACTH ↑↑'},
+      {name:'Androgens (DHEA/androstenedione)',correct:'up',explanation:'17-OHP shunted to androgen pathway (CYP17 lyase not blocked) → virilization'},
+      {name:'Na⁺',correct:'down',explanation:'No aldosterone → sodium wasting → hyponatremia'},
+    ],
+    explanation:"<strong>21-hydroxylase (CYP21A2) deficiency CAH</strong> — most common (90-95%). Blocks BOTH cortisol AND aldosterone pathways. 17-OHP accumulates and is shunted to the androgen pathway → virilization of XX fetus. Low cortisol → ACTH ↑↑ → drives the blocked pathway harder. Salt-wasting (no aldosterone): hypoNa, hyperK. TRAP: 11β-OHD shows HYPERTENSION (DOC accumulates as mineralocorticoid) — NOT salt-wasting.",
+    bz:['17-OHP = diagnostic marker','salt-wasting + virilization','ACTH ↑↑ drives shunt to androgens','NOT 11β-OHD (that is HTN)']
+  },
+  {
+    topic:'hpa', diff:'d3',
+    scenario:"A <span class='hl'>16-year-old girl</span> has primary amenorrhea, no pubic/axillary hair, and hypertension (BP 155/98). 46,XY karyotype. Labs show very HIGH progesterone, HIGH DOC, LOW cortisol, LOW androgens.",
+    labs:[
+      {name:'17-OHP',correct:'down',explanation:'CYP17A1 blocked → 17-OHP cannot be formed from progesterone → low'},
+      {name:'Cortisol',correct:'down',explanation:'No 17-hydroxylation → cannot complete cortisol synthesis → low'},
+      {name:'DOC (11-deoxycorticosterone)',correct:'up',explanation:'No CYP17 → progesterone forced down aldosterone/mineralocorticoid pathway → DOC accumulates'},
+      {name:'Androgens',correct:'down',explanation:'CYP17 also required for sex steroid synthesis → no androgens'},
+      {name:'LH / FSH',correct:'up',explanation:'No sex steroids → no negative feedback on gonadotropins → LH/FSH ↑↑'},
+      {name:'BP',correct:'up',explanation:'DOC accumulation → mineralocorticoid effect → HTN + hypokalemia'},
+    ],
+    explanation:"<strong>17α-hydroxylase (CYP17A1) deficiency</strong> — the HYPERTENSION CAH. CYP17 is required for BOTH cortisol AND sex steroid synthesis. Without it: progesterone is forced through the mineralocorticoid pathway → DOC accumulates (potent mineralocorticoid) → HTN + hypokalemia. 46,XY individuals have female external genitalia (no testosterone during development). 17-OHP is LOW (blocked before it forms — unlike 21-OHD where 17-OHP accumulates).",
+    bz:['17-OHP LOW (not elevated)','DOC ↑ → HTN + hypoK','no sex steroids → XY female phenotype','distinguish from 21-OHD by BP not salt-wasting']
+  },
+  // ── THYROID ──
+  {
+    topic:'thyroid', diff:'d1',
+    scenario:"A <span class='hl'>28-year-old woman</span> presents with palpitations, heat intolerance, 12 lb weight loss over 3 months, and bilateral proptosis. Exam: diffuse smooth goiter, fine tremor, lid lag.",
+    labs:[
+      {name:'TSH',correct:'down',explanation:'Autonomous TH production → negative feedback suppresses pituitary TSH to near-zero'},
+      {name:'Free T4',correct:'up',explanation:'TSI activates TSH receptor → unregulated TH synthesis → T4 ↑↑'},
+      {name:'Free T3',correct:'up',explanation:'Thyroid secretes excess T3; also peripheral T4→T3 conversion increases'},
+      {name:'TSI antibodies',correct:'up',explanation:'Graves\' is autoimmune — TSI (IgG) are the pathological antibodies activating TSH-R'},
+      {name:'RAIU (radioiodine uptake)',correct:'up',explanation:'Active thyroid tissue trapping more iodine — diffusely elevated uptake'},
+      {name:'Heart rate',correct:'up',explanation:'TH increases sympathetic tone → tachycardia'},
+    ],
+    explanation:"<strong>Graves' disease.</strong> TSI (thyroid-stimulating immunoglobulins) activate TSH receptors → unregulated TH production → negative feedback suppresses TSH to undetectable. TSH is the MOST sensitive test — falls before T4 becomes overtly elevated. Exophthalmos from TSH-R activation on orbital fibroblasts → GAG deposition. TRAP: Treating hyperthyroidism does NOT reliably reverse exophthalmos (it's an independent autoimmune process).",
+    bz:['TSH → near zero','TSI = pathological antibody','exophthalmos = orbital fibroblast TSH-R','RAIU diffusely elevated']
+  },
+  {
+    topic:'thyroid', diff:'d1',
+    scenario:"A <span class='hl'>50-year-old woman</span> has fatigue, cold intolerance, constipation, dry skin, and 15 lb weight gain over 1 year. She has a family history of autoimmune disease. Thyroid is mildly enlarged and firm.",
+    labs:[
+      {name:'TSH',correct:'up',explanation:'Thyroid fails → T4↓ → no negative feedback → pituitary compensates → TSH ↑↑'},
+      {name:'Free T4',correct:'down',explanation:'Thyroid destruction → cannot produce adequate TH'},
+      {name:'Anti-TPO antibodies',correct:'up',explanation:'Hashimoto\'s is autoimmune — anti-TPO is the most sensitive marker'},
+      {name:'Anti-Tg antibodies',correct:'up',explanation:'Also present in most Hashimoto\'s patients'},
+      {name:'LDL cholesterol',correct:'up',explanation:'Hypothyroidism → ↓LDL receptor expression → ↑LDL (secondary dyslipidemia)'},
+      {name:'RAIU',correct:'down',explanation:'Destroyed follicular cells cannot trap iodide — low/variable uptake'},
+    ],
+    explanation:"<strong>Hashimoto's thyroiditis</strong> (chronic lymphocytic thyroiditis). Most common cause of hypothyroidism in iodine-sufficient regions. Anti-TPO is most sensitive (present in ~95%); anti-Tg also present. High TSH + low T4 = primary hypothyroidism. LDL rises because TH normally upregulates hepatic LDL receptors — without TH, LDL clearance falls. TRAP: In early Hashimoto's, follicular destruction can cause TRANSIENT thyrotoxicosis (hashitoxicosis) — TSH may be low initially.",
+    bz:['anti-TPO most sensitive','TSH ↑↑ = primary','LDL ↑ = secondary dyslipidemia','hashitoxicosis early (trap)']
+  },
+  {
+    topic:'thyroid', diff:'d2',
+    scenario:"A <span class='hl'>patient with CKD stage 5</span> on dialysis for 8 years has been chronically hypocalcemic. Recent labs now show Ca²⁺ <span class='hl'>11.2 mg/dL</span> (elevated) despite being on dialysis and calcium supplements.",
+    labs:[
+      {name:'PTH',correct:'up',explanation:'Glands underwent nodular hyperplasia from years of secondary HPT → now autonomous → still secreting PTH even with Ca elevated'},
+      {name:'Ca²⁺',correct:'up',explanation:'Autonomous PTH secretion → bone resorption → Ca²⁺ rises despite dialysis'},
+      {name:'Phosphate',correct:'up',explanation:'CKD → impaired renal excretion of phosphate persists'},
+      {name:'Renin',correct:'up',explanation:'CKD → reduced GFR → activation of RAAS → elevated renin'},
+      {name:'1,25-OH Vitamin D',correct:'down',explanation:'CKD → impaired renal 1α-hydroxylase → less active vitamin D (was low throughout secondary HPT)'},
+      {name:'Alkaline phosphatase',correct:'up',explanation:'Increased bone turnover from chronic PTH excess → ALP elevated'},
+    ],
+    explanation:"<strong>Tertiary hyperparathyroidism.</strong> Years of secondary HPT (CKD → low Ca → high PTH) → parathyroid glands undergo nodular hyperplasia → become AUTONOMOUS → secrete PTH independent of calcium levels → Ca now elevated. KEY: Secondary HPT = HIGH PTH + LOW Ca. Tertiary HPT = HIGH PTH + HIGH Ca (glands escaped feedback). Treatment: parathyroidectomy (cinacalcet can bridge). TRAP: Do NOT confuse tertiary with primary HPT — the history of CKD is the clue.",
+    bz:['secondary → tertiary HPT','Ca now elevated = autonomous','parathyroidectomy needed','distinguish from primary by CKD history']
+  },
+  {
+    topic:'thyroid', diff:'d3',
+    scenario:"A <span class='hl'>35-year-old woman on oral contraceptives</span> has routine TFTs showing total T4 = 18 µg/dL (elevated). Free T4 is <span class='hl'>normal</span>. TSH is <span class='hl'>normal</span>. She is completely asymptomatic.",
+    labs:[
+      {name:'TSH',correct:'norm',explanation:'No actual hyperthyroidism — free T4 is normal, so TSH is appropriately normal'},
+      {name:'Free T4',correct:'norm',explanation:'Only the bound fraction is elevated — free (active) fraction is normal'},
+      {name:'Total T4',correct:'up',explanation:'Estrogen → ↑TBG synthesis → more T4 bound → total T4 appears elevated'},
+      {name:'TBG (thyroxine-binding globulin)',correct:'up',explanation:'Estrogen in OCPs upregulates hepatic TBG synthesis → more binding protein'},
+      {name:'TSI antibodies',correct:'norm',explanation:'This is NOT Graves\' disease — no autoantibodies, no autonomous TH production'},
+      {name:'RAIU',correct:'norm',explanation:'Thyroid is functionally normal — no change in iodide uptake'},
+    ],
+    explanation:"<strong>OCP-induced TBG elevation — spurious total T4 elevation.</strong> Estrogen (OCPs, pregnancy, estrogen therapy) → ↑hepatic TBG synthesis → more T4 bound → total T4 rises. BUT free T4 (the biologically active fraction) is UNCHANGED → TSH is normal → NO treatment needed. This is the classic exam trap. Similarly, pregnancy causes markedly elevated total T4 — do NOT diagnose hyperthyroidism based on total T4 alone. Always interpret in context with free T4 and TSH.",
+    bz:['OCP → ↑TBG → ↑total T4','free T4 = normal','TSH = normal','no treatment needed — not hyperthyroid']
+  },
+  // ── PITUITARY ──
+  {
+    topic:'pit', diff:'d1',
+    scenario:"A <span class='hl'>32-year-old woman</span> has amenorrhea for 6 months, galactorrhea, and infertility. She is not pregnant. MRI shows a 1.5 cm pituitary lesion.",
+    labs:[
+      {name:'Prolactin',correct:'up',explanation:'Prolactinoma → autonomous prolactin secretion → markedly elevated (>200 ng/mL for macroadenoma)'},
+      {name:'LH',correct:'down',explanation:'High prolactin → inhibits GnRH pulsatility → suppressed LH'},
+      {name:'FSH',correct:'down',explanation:'High prolactin → inhibits GnRH → suppressed FSH'},
+      {name:'Estradiol',correct:'down',explanation:'No LH/FSH → no ovarian stimulation → low estrogen → amenorrhea'},
+      {name:'TSH',correct:'norm',explanation:'TRH also stimulates prolactin — but normal TSH indicates no primary hypothyroidism driving the prolactin elevation'},
+      {name:'IGF-1',correct:'norm',explanation:'No GH-secreting component — prolactinoma is isolated lactotroph adenoma'},
+    ],
+    explanation:"<strong>Prolactinoma (macroprolactinoma).</strong> Prolactin markedly elevated (>200 ng/mL for 1.5cm lesion — distinguishes from stalk compression which causes modest elevations <150). Hyperprolactinemia → inhibits GnRH pulsatility → low LH/FSH → hypogonadism → amenorrhea + infertility. Galactorrhea from direct prolactin effect on breast. Treatment: dopamine agonist (cabergoline) — first-line, shrinks tumor. TRAP: Check TSH to rule out primary hypothyroidism (TRH stimulates prolactin — hypothyroidism can cause mild hyperprolactinemia).",
+    bz:['prolactin >200 = true prolactinoma','inhibits GnRH → hypogonadism','cabergoline first-line','check TSH to rule out hypothyroid cause']
+  },
+  {
+    topic:'pit', diff:'d2',
+    scenario:"A <span class='hl'>47-year-old man</span> notes his wedding ring no longer fits (increased ring size over 5 years), jaw protrusion, deepened voice, new sleep apnea, carpal tunnel syndrome. Fasting glucose: 148 mg/dL.",
+    labs:[
+      {name:'IGF-1',correct:'up',explanation:'GH excess → liver → IGF-1 markedly elevated. IGF-1 is the best screening test (stable, no pulsatility)'},
+      {name:'GH (random)',correct:'up',explanation:'GH excess from somatotroph adenoma — random GH elevated (though pulsatile)'},
+      {name:'GH after 75g glucose',correct:'up',explanation:'Normal: GH suppresses to <1 ng/mL. In acromegaly: FAILS to suppress (gold standard diagnostic test)'},
+      {name:'Fasting glucose',correct:'up',explanation:'GH → insulin resistance → hyperglycemia. DM in 25-30% of acromegaly'},
+      {name:'Phosphate',correct:'up',explanation:'GH/IGF-1 → increased renal tubular phosphate reabsorption → hyperphosphatemia'},
+      {name:'TSH',correct:'norm',explanation:'Isolated GH excess — other axes initially intact (mass effect may impair others later)'},
+    ],
+    explanation:"<strong>Acromegaly</strong> (GH-secreting somatotroph macroadenoma). After growth plate closure → GH excess causes acral enlargement, not increased height. IGF-1 is the best screening marker (stable levels, unlike pulsatile GH). Gold standard: GH fails to suppress to <1 ng/mL after 75g oral glucose. GH is diabetogenic (insulin resistance). Treatment: transsphenoidal surgery first-line. TRAP: Random GH is unreliable for diagnosis (pulsatile). Hyperphosphatemia is a frequently missed finding.",
+    bz:['IGF-1 = best screening test','oral glucose test = gold standard','GH diabetogenic → DM in 25-30%','hyperphosphatemia (often missed)']
+  },
+  // ── DIABETES ──
+  {
+    topic:'dm', diff:'d1',
+    scenario:"A <span class='hl'>19-year-old T1DM</span> patient missed 2 days of insulin while traveling. He presents with nausea, abdominal pain, rapid breathing (Kussmaul), and fruity breath. Glucose 510 mg/dL.",
+    labs:[
+      {name:'pH',correct:'down',explanation:'Ketone bodies are acids → anion gap metabolic acidosis → pH ↓'},
+      {name:'HCO₃⁻',correct:'down',explanation:'Bicarbonate consumed buffering the ketoacid excess → ↓HCO3'},
+      {name:'Anion gap',correct:'up',explanation:'Unmeasured ketoanions (β-OHB, acetoacetate) → high anion gap'},
+      {name:'Serum K⁺',correct:'up',explanation:'Insulin deficiency → K+ can\'t enter cells. Acidosis → H+/K+ exchange → K+ out. SERUM K+ high despite total body depletion'},
+      {name:'Serum Na⁺',correct:'down',explanation:'Hyperglycemia → osmotic shift of water out of cells → dilutional hyponatremia (pseudohyponatremia)'},
+      {name:'β-hydroxybutyrate',correct:'up',explanation:'Lipolysis without insulin → FFA → ketogenesis in liver → β-OHB and acetoacetate ↑↑'},
+    ],
+    explanation:"<strong>Diabetic ketoacidosis (DKA).</strong> Absolute insulin deficiency → unrestrained lipolysis → FFA → hepatic ketogenesis → anion gap metabolic acidosis. Kussmaul breathing compensates for acidosis. CRITICAL K+ TRAP: Serum K+ is HIGH despite total body K+ DEPLETION (insulin deficiency + acidosis shifts K+ out of cells). When insulin is given → K+ re-enters cells → serum K+ FALLS rapidly. Must check K+ before insulin — replace if K+ <3.5 or arrhythmia risk.",
+    bz:['serum K+ HIGH but total body DEPLETED','replace K+ before insulin if <3.5','anion gap metabolic acidosis','Kussmaul = respiratory compensation']
+  },
+  {
+    topic:'dm', diff:'d2',
+    scenario:"A <span class='hl'>72-year-old T2DM patient</span> is found unresponsive at home. EMS: glucose >600 mg/dL. In ER: glucose 1,100 mg/dL, serum osmolarity 422 mOsm/kg, altered mental status. Urine: <span class='hl'>no ketones</span>.",
+    labs:[
+      {name:'Glucose',correct:'up',explanation:'Extreme hyperglycemia from insulin deficiency + dehydration concentration → >600 mg/dL'},
+      {name:'Serum osmolarity',correct:'up',explanation:'Hyperglycemia + dehydration → hyperosmolarity → >320 mOsm/kg defines HHS'},
+      {name:'pH',correct:'norm',explanation:'HHS: NO significant ketoacidosis — residual insulin prevents ketogenesis → normal pH'},
+      {name:'Ketones',correct:'norm',explanation:'Residual insulin in T2DM (even small amounts) inhibits lipolysis → no ketone formation'},
+      {name:'BUN / Creatinine',correct:'up',explanation:'Profound dehydration from osmotic diuresis → pre-renal azotemia'},
+      {name:'Na⁺',correct:'norm',explanation:'True Na can be normal or low — corrected Na often elevated (add 1.6 mEq/L per 100 mg/dL glucose >100)'},
+    ],
+    explanation:"<strong>Hyperosmolar hyperglycemic state (HHS).</strong> T2DM's residual insulin is sufficient to prevent ketogenesis but insufficient to control glucose. Extreme hyperglycemia + dehydration + hyperosmolarity. pH and ketones are NORMAL (distinguish from DKA). Higher mortality than DKA (older patients, delayed presentation, coexisting illness). Treatment: aggressive IV fluids (1-2L NS) → slow glucose lowering. TRAP: Rapid correction → cerebral edema risk. DKA: absolute insulin deficiency → ketones. HHS: relative deficiency → no ketones.",
+    bz:['no ketones = HHS','residual insulin blocks ketogenesis','osmolarity >320','higher mortality than DKA']
+  },
+  {
+    topic:'dm', diff:'d2',
+    scenario:"A <span class='hl'>45-year-old woman</span> with T2DM, BMI 38, HFrEF (EF 28%), and CKD stage 3 (eGFR 38). She is started on <span class='hl'>empagliflozin (SGLT2 inhibitor)</span>. Labs 4 weeks later.",
+    labs:[
+      {name:'Fasting glucose',correct:'down',explanation:'SGLT2 blocked → glucose excreted in urine → lower circulating glucose'},
+      {name:'HbA1c',correct:'down',explanation:'Chronic glycosuria → improved average glucose → HbA1c falls'},
+      {name:'Body weight',correct:'down',explanation:'Caloric loss via glucosuria + osmotic diuresis → weight loss'},
+      {name:'Systolic BP',correct:'down',explanation:'Natriuresis + volume reduction → BP falls (mechanism of HF benefit)'},
+      {name:'eGFR (acute)',correct:'down',explanation:'SGLT2i reduces glomerular hyperfiltration → acute small eGFR dip (expected, not harmful — protective long-term)'},
+      {name:'Hematocrit',correct:'up',explanation:'Volume contraction from natriuresis/diuresis → relative hemoconcentration → Hct rises'},
+    ],
+    explanation:"<strong>SGLT2 inhibitor effects.</strong> Block renal SGLT2 → glucose excreted → lower BG. Natriuresis → volume reduction → ↓preload → HF benefit. Glomerular hyperfiltration reduction → long-term renal protection despite acute eGFR dip (expected and not an indication to stop). Hematocrit rise from erythropoietin-like effect + hemoconcentration. TRAP: An acute small eGFR dip after starting SGLT2i is EXPECTED and PROTECTIVE — do NOT stop the drug for this. Stop if eGFR <20 or severe volume depletion.",
+    bz:['acute eGFR dip = expected (do not stop)','Hct rises = hemoconcentration','volume reduction = HF benefit','natriuresis → BP falls']
+  },
+  // ── POSTERIOR PITUITARY ──
+  {
+    topic:'post', diff:'d1',
+    scenario:"A <span class='hl'>patient post-head trauma</span> develops polyuria (8L/day) and polydipsia. Urine osmolality: 60 mOsm/kg. Plasma osmolality: 305 mOsm/kg. After DDAVP injection: urine osmolality rises to 700 mOsm/kg.",
+    labs:[
+      {name:'Urine osmolality',correct:'down',explanation:'Inability to concentrate urine → inappropriately dilute despite hyperosmolarity'},
+      {name:'Plasma osmolality',correct:'up',explanation:'Cannot retain water → free water loss → plasma concentrates → hyperosmolarity'},
+      {name:'AVP (serum)',correct:'down',explanation:'Central DI: cannot produce biologically active AVP after trauma (stalk injury)'},
+      {name:'Serum Na⁺',correct:'up',explanation:'Free water loss without replacement → hypernatremia'},
+      {name:'Urine Na⁺',correct:'norm',explanation:'Sodium regulation is separate from water concentration — relatively normal urine Na'},
+      {name:'Response to DDAVP',correct:'up',explanation:'V2 receptors intact → responds to exogenous AVP → central DI confirmed'},
+    ],
+    explanation:"<strong>Central (neurogenic) DI</strong> post-head trauma (infundibular stalk injury). Cannot produce AVP → kidney V2R are intact → responds to exogenous DDAVP (urine concentrates). Plasma is hyperosmolar (high Na), urine is dilute. DDAVP response is the key discriminator: Central DI → responds. Nephrogenic DI → does NOT respond. Primary polydipsia → urine would concentrate with water deprivation alone (AVP axis intact). Treatment: intranasal DDAVP.",
+    bz:['DDAVP works = central DI','DDAVP fails = nephrogenic DI','plasma osm UP + urine osm DOWN','head trauma → stalk injury']
+  },
+];
+
+// ─── PTL STATE ───
+let ptlFiltered = [...PTL_DATA];
+let ptlIdx = 0;
+let ptlChecked = false;
+let ptlTopicFilter = 'all';
+
+function buildPTLFilters(){
+  const topics = [{id:'all',label:'All topics'},{id:'hpa',label:'HPA / Adrenal'},{id:'thyroid',label:'Thyroid & PTH'},{id:'pit',label:'Pituitary'},{id:'dm',label:'Diabetes'},{id:'post',label:'Post. Pituitary'}];
+  const c = document.getElementById('ptl-filters');
+  c.innerHTML = topics.map(t=>`<button class="ptl-filter-btn${t.id==='all'?' active':''}" onclick="setPTLFilter('${t.id}',this)">${t.label}</button>`).join('');
+}
+function setPTLFilter(id,btn){
+  ptlTopicFilter=id;
+  ptlFiltered = id==='all'?[...PTL_DATA]:PTL_DATA.filter(d=>d.topic===id);
+  ptlIdx=0; ptlChecked=false;
+  document.querySelectorAll('.ptl-filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPTL();
+}
+function renderPTL(){
+  if(!ptlFiltered.length){document.getElementById('ptl-container').innerHTML='<p style="color:var(--muted);text-align:center;padding:2rem">No cards for this filter.</p>';return;}
+  const d = ptlFiltered[ptlIdx];
+  ptlChecked = false;
+  const pct = ptlIdx/ptlFiltered.length*100;
+  document.getElementById('ptl-fill').style.width=pct+'%';
+  document.getElementById('ptl-num').textContent=(ptlIdx+1)+' / '+ptlFiltered.length;
+  const diffLbl=['','Easy','Medium','Hard'][d.diff==='d1'?1:d.diff==='d2'?2:3];
+  const rows = d.labs.map((lab,i)=>`
+    <div class="ptl-row" id="ptl-row-${i}">
+      <div class="ptl-lab">${lab.name}</div>
+      <div class="ptl-btns">
+        <button class="ptl-btn" id="ptl-btn-${i}-up" onclick="selectPTL(${i},'up')" title="High ↑">↑</button>
+        <button class="ptl-btn" id="ptl-btn-${i}-norm" onclick="selectPTL(${i},'norm')" title="Normal →">→</button>
+        <button class="ptl-btn" id="ptl-btn-${i}-down" onclick="selectPTL(${i},'down')" title="Low ↓">↓</button>
+      </div>
+      <div class="ptl-correct-lbl">✓ Correct</div>
+      <div class="ptl-wrong-lbl" id="ptl-wrong-${i}"></div>
+    </div>`).join('');
+  document.getElementById('ptl-container').innerHTML=`
+    <div class="ptl-card">
+      <div class="ptl-hdr">
+        <div class="ptl-title">Scenario ${ptlIdx+1}</div>
+        <div class="ptl-diff ${d.diff}">${diffLbl}</div>
+      </div>
+      <div class="ptl-scenario">${d.scenario}</div>
+      <div style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:10px">Predict each lab: ↑ High / → Normal / ↓ Low</div>
+      <div class="ptl-grid">${rows}</div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <button class="ptl-check" id="ptl-check-btn" onclick="checkPTL()">Check answers</button>
+        <span style="font-size:12px;color:var(--muted)">Select all labs first</span>
+      </div>
+      <div class="ptl-explanation" id="ptl-expl">${d.explanation}
+        <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:5px;align-items:center">
+          <span style="font-size:12px;color:var(--muted)">Buzzwords:</span>
+          ${d.bz.map(b=>`<span class="buzz">${b}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+    <div class="ptl-nav">
+      <button class="btn-prev" onclick="navPTL(-1)">← Prev</button>
+      <button class="btn-next" onclick="navPTL(1)">Next →</button>
+    </div>`;
+  window._ptlSelections = {};
+}
+function selectPTL(i,dir){
+  if(ptlChecked) return;
+  window._ptlSelections[i]=dir;
+  ['up','norm','down'].forEach(d=>{
+    const b=document.getElementById(`ptl-btn-${i}-${d}`);
+    b.classList.remove('sel-up','sel-norm','sel-down');
+  });
+  document.getElementById(`ptl-btn-${i}-${dir}`).classList.add(`sel-${dir}`);
+}
+function checkPTL(){
+  const d=ptlFiltered[ptlIdx];
+  const sel=window._ptlSelections||{};
+  if(Object.keys(sel).length < d.labs.length){
+    document.getElementById('ptl-check-btn').classList.add('shake');
+    setTimeout(()=>document.getElementById('ptl-check-btn').classList.remove('shake'),350);
+    return;
+  }
+  ptlChecked=true;
+  let correct=0;
+  d.labs.forEach((lab,i)=>{
+    const row=document.getElementById(`ptl-row-${i}`);
+    const chosen=sel[i];
+    if(chosen===lab.correct){
+      row.classList.add('correct'); correct++;
+    } else {
+      row.classList.remove('correct'); row.classList.add('wrong');
+      const wl=document.getElementById(`ptl-wrong-${i}`);
+      const symb={'up':'↑','down':'↓','norm':'→'};
+      wl.textContent=`Correct: ${symb[lab.correct]} — ${lab.explanation}`;
+      wl.style.display='block';
+    }
+    ['up','norm','down'].forEach(dir=>{
+      document.getElementById(`ptl-btn-${i}-${dir}`).disabled=true;
+    });
+  });
+  addSc(correct===d.labs.length);
+  document.getElementById('ptl-expl').classList.add('show');
+  document.getElementById('ptl-check-btn').disabled=true;
+}
+function navPTL(dir){
+  ptlIdx=Math.max(0,Math.min(ptlFiltered.length-1,ptlIdx+dir));
+  renderPTL();
+}
+
+// ═══════════════════════════════════════
+// CASCADE SIMULATOR DATA
+// ═══════════════════════════════════════
+const AXES = {
+  hpa: {
+    title:'HPA Axis',
+    nodes:[
+      {id:'hypo',label:'Hypothalamus',hormone:'CRH',color:'pur'},
+      {id:'pit',label:'Anterior Pituitary',hormone:'ACTH',color:'acc'},
+      {id:'adr',label:'Adrenal Cortex',hormone:'Cortisol / Aldosterone',color:'amb'},
+    ],
+    connectors:['Portal blood','Systemic blood'],
+    feedbacks:['long-loop: cortisol → Hyp + Pit','short-loop: ACTH → Hyp'],
+    scenarios:[
+      {
+        label:"Primary adrenal insufficiency (Addison's)",
+        changes:{hypo:'up',pit:'up',adr:'down'},
+        expl:"<strong>Adrenal cortex fails</strong> (autoimmune, TB, etc.). No cortisol/aldosterone → no negative feedback → <strong>CRH ↑↑ + ACTH ↑↑</strong>. ACTH drives POMC → MSH → hyperpigmentation. Aldosterone deficiency → Na⁺ loss, K⁺ retention, hypotension. >90% of cortex must be destroyed before symptoms appear.",
+        q:{text:"Why does Addison's cause hyperpigmentation but secondary AI does not?",opts:["The adrenal cortex releases MSH directly","In primary AI, elevated ACTH (sharing POMC precursor with MSH) stimulates skin melanocortin receptors. In secondary AI, ACTH is LOW — no POMC-derived MSH elevation.","Secondary AI doesn't affect the pituitary","Aldosterone drives pigmentation"],ok:1,fb:"POMC (proopiomelanocortin) is the precursor to BOTH ACTH and α-MSH. In primary AI: ACTH ↑↑ means the entire POMC precursor pool is being processed → MSH is also elevated → MC1R stimulation → melanin production. In secondary AI: pituitary fails → ACTH is LOW → no MSH → no pigmentation."}
+      },
+      {
+        label:"Cushing's Disease (pituitary ACTH adenoma)",
+        changes:{hypo:'down',pit:'up',adr:'up'},
+        expl:"<strong>Pituitary corticotroph adenoma</strong> autonomously secretes excess ACTH → bilateral adrenal hyperplasia → cortisol ↑↑. High cortisol provides some negative feedback → hypothalamic CRH is suppressed (long-loop). The pituitary tumor retains PARTIAL feedback sensitivity — it WILL suppress with high-dose dexamethasone.",
+        q:{text:"A patient with Cushing's Disease has high-dose dexamethasone administered. What happens to cortisol?",opts:["No change — the adenoma is completely autonomous","Cortisol suppresses by >50% — pituitary adenoma retains partial feedback sensitivity","Cortisol rises further — dexamethasone stimulates ACTH","Cortisol drops to zero — complete suppression"],ok:1,fb:"The pituitary ACTH adenoma in Cushing's Disease retains PARTIAL glucocorticoid receptor sensitivity. High-dose dex (8mg) can 'override' the set point → >50% cortisol reduction. This distinguishes Cushing's Disease from ectopic ACTH (which has NO feedback sensitivity → no suppression) and from adrenal adenoma (ACTH-independent)."}
+      },
+      {
+        label:"Exogenous glucocorticoids (prednisone)",
+        changes:{hypo:'down',pit:'down',adr:'down'},
+        expl:"<strong>Chronic exogenous steroids</strong> provide long-loop negative feedback → CRH ↓ → ACTH ↓ → adrenal cortex atrophies (no ACTH stimulation). If steroids are suddenly stopped → adrenal crisis (cannot respond to stress). RULE: Taper steroids slowly. Give stress-dose steroids perioperatively. NEVER abruptly stop after prolonged course.",
+        q:{text:"Why must chronic steroid users receive 'stress-dose' hydrocortisone before major surgery?",opts:["Prednisone increases surgical bleeding risk","Exogenous steroids suppress ACTH → adrenal atrophies → cannot mount cortisol stress response → adrenal crisis under surgical stress","Prednisone reduces anesthetic effectiveness","Surgery increases cortisol clearance"],ok:1,fb:"The adrenal cortex requires ACTH stimulation for maintenance. Chronic exogenous steroids suppress ACTH → adrenal cortex atrophies over weeks-months. Under surgical stress, a normal HPA axis would produce 10-20× baseline cortisol. The atrophied adrenal cannot → hypotension, hypoglycemia, cardiovascular collapse. Give hydrocortisone 50-100mg IV q8h perioperatively for major surgery."}
+      },
+      {
+        label:"Ectopic ACTH (small cell lung cancer)",
+        changes:{hypo:'down',pit:'down',adr:'up'},
+        expl:"<strong>Ectopic tumor autonomously secretes ACTH</strong> → bilateral adrenal hyperplasia → cortisol ↑↑↑ (often more extreme than Cushing's Disease). Very high cortisol → suppresses CRH (long-loop) and pituitary ACTH. Tumor ACTH is NOT suppressible by dexamethasone (no glucocorticoid receptors in the tumor). Extreme hypercortisolism → overwhelms 11β-HSD2 → profound hypokalemia.",
+        q:{text:"Ectopic ACTH produces ACTH autonomously. Why is pituitary ACTH also LOW in this condition?",opts:["The tumor destroys pituitary corticotrophs","The extreme cortisol from bilateral adrenal hyperplasia provides massive negative feedback to the pituitary → suppresses pituitary ACTH production","Ectopic ACTH directly inhibits the pituitary","ACTH is actually elevated from the pituitary in ectopic syndrome"],ok:1,fb:"Negative feedback still works at the pituitary level! Very high cortisol (from ectopic ACTH → adrenal hyperplasia) → long-loop negative feedback → suppresses CRH and pituitary ACTH production. The tumor ACTH is measured in total ACTH — it is very high (>200 pg/mL). The 'pituitary' ACTH component is suppressed. The total ACTH is elevated from the tumor source."}
+      },
+    ]
+  },
+  hpt: {
+    title:'HPT Axis',
+    nodes:[
+      {id:'hypo',label:'Hypothalamus',hormone:'TRH',color:'pur'},
+      {id:'pit',label:'Anterior Pituitary',hormone:'TSH',color:'acc'},
+      {id:'thy',label:'Thyroid Gland',hormone:'T3 / T4',color:'teal'},
+    ],
+    connectors:['Portal blood','Systemic blood'],
+    feedbacks:['long-loop: T3 → Hyp + Pit (inhibits TRH gene via nTRE)'],
+    scenarios:[
+      {
+        label:"Primary hypothyroidism (Hashimoto's)",
+        changes:{hypo:'up',pit:'up',thy:'down'},
+        expl:"<strong>Thyroid fails</strong> → T3/T4 ↓ → no negative feedback → TRH ↑ + TSH ↑↑. TSH is the most sensitive indicator (rises before T4 falls below normal range). TSH also drives thyroid growth → goiter. T3/T4 deficiency → ↓BMR, ↓cardiac output, ↓reflexes, cold intolerance, weight gain.",
+        q:{text:"A patient has TSH 0.4 mIU/L (low-normal) and total T4 18 µg/dL (elevated). She is on OCPs. What is the correct interpretation?",opts:["Hyperthyroidism — T4 is elevated","Elevated TBG from estrogen → total T4 rises, but free T4 is normal; TSH is normal — NOT hyperthyroid","Primary hypothyroidism — TSH would be high","Subclinical hyperthyroidism — treat with antithyroid drugs"],ok:1,fb:"Estrogen (OCPs, pregnancy) → ↑TBG synthesis → more T4 is bound → total T4 rises. But free T4 (the biologically active fraction) is UNCHANGED. TSH is normal because there is no actual excess TH action. This is NOT hyperthyroidism — no treatment needed. Always interpret total T4 in context of TBG. Free T4 and TSH are the clinically meaningful tests."}
+      },
+      {
+        label:"Graves' disease (hyperthyroidism)",
+        changes:{hypo:'down',pit:'down',thy:'up'},
+        expl:"<strong>TSI (IgG autoantibodies)</strong> bind and activate TSH receptors → autonomous unregulated TH production → T3/T4 ↑↑ → long-loop negative feedback suppresses TRH and TSH to near-zero. TSH is often undetectable (<0.01). Exophthalmos from TSI activating orbital fibroblast TSH receptors → GAG deposition.",
+        q:{text:"After successful radioiodine treatment for Graves' disease, what happens to TSH over the next few months?",opts:["TSH remains suppressed permanently","TSH rises — T3/T4 fall as thyroid is ablated → removes negative feedback → TSH compensates upward","TSH falls further — radioiodine stimulates the pituitary","TSH stays the same — the pituitary is unaffected"],ok:1,fb:"After ablation: thyroid tissue is destroyed → T3/T4 fall → long-loop negative feedback removed → TSH rises (pituitary is intact and responds normally). Most patients eventually become hypothyroid after radioiodine and require levothyroxine replacement. The rising TSH is the signal to start replacement. This is the SAME principle as why post-thyroidectomy TSH rises — it's used intentionally to drive up TSH for whole-body I-131 scanning for metastatic thyroid cancer."}
+      },
+    ]
+  }
+};
+
+let currentAxis = 'hpa';
+let currentScenario = null;
+let cascQAnswered = false;
+
+function buildAxisSelector(){
+  const c=document.getElementById('ax-selector');
+  c.innerHTML=Object.entries(AXES).map(([k,v])=>`<button class="ax-btn${k==='hpa'?' active':''}" onclick="selectAxis('${k}',this)">${v.title}</button>`).join('');
+}
+function selectAxis(key,btn){
+  currentAxis=key; currentScenario=null; cascQAnswered=false;
+  document.querySelectorAll('.ax-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCascDiagram(); renderCascScenarios();
+  document.getElementById('casc-expl').classList.remove('show');
+  document.getElementById('casc-expl').innerHTML='';
+  document.getElementById('casc-q-area').style.display='none';
+}
+function renderCascDiagram(changes){
+  const ax=AXES[currentAxis];
+  const stateMap=changes||{};
+  const symb={up:'↑',down:'↓',norm:'→',undefined:''};
+  const colorClass={up:'affected-up',down:'affected-down',norm:'affected-norm'};
+  const arrowColor={up:'arrow-up',down:'arrow-down',norm:'arrow-norm'};
+  let html=`<div class="casc-title">${ax.title}</div><div class="casc-subtitle">${changes?'Click a scenario to see how pathology cascades through the axis':'Baseline state — select a scenario'}</div><div class="axis-col">`;
+  ax.nodes.forEach((node,i)=>{
+    const state=stateMap[node.id];
+    const cls=state?colorClass[state]:'';
+    const arrow=state?`<div class="cn-arrow-val ${arrowColor[state]}">${symb[state]}</div>`:'';
+    html+=`<div class="casc-node ${cls}"><div class="cn-label">${node.label}</div><div class="cn-name cn-hormone">${node.hormone}</div>${arrow}</div>`;
+    if(i<ax.nodes.length-1){
+      html+=`<div class="casc-conn"><div class="casc-line"></div><div class="casc-lbl">${ax.connectors[i]||'↓'}</div><div class="casc-arr">↓</div></div>`;
+    }
+  });
+  html+=`</div><div class="neg-fb" style="margin-top:16px">`;
+  ax.feedbacks.forEach(f=>html+=`<div class="neg-tag">↩ ${f}</div>`);
+  html+=`</div>`;
+  document.getElementById('casc-diagram').innerHTML=html;
+}
+function renderCascScenarios(){
+  const ax=AXES[currentAxis];
+  const c=document.getElementById('casc-scen-list');
+  c.innerHTML=ax.scenarios.map((s,i)=>`<button class="scen-btn" onclick="loadScenario(${i},this)">${s.label}</button>`).join('');
+}
+function loadScenario(i,btn){
+  currentScenario=i; cascQAnswered=false;
+  const ax=AXES[currentAxis];
+  const s=ax.scenarios[i];
+  document.querySelectorAll('.scen-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCascDiagram(s.changes);
+  const expl=document.getElementById('casc-expl');
+  expl.innerHTML=s.expl; expl.classList.add('show');
+  // render question
+  const qa=document.getElementById('casc-q-area');
+  qa.style.display='block';
+  document.getElementById('casc-q-text').textContent=s.q.text;
+  const opts=document.getElementById('casc-q-opts');
+  opts.innerHTML=s.q.opts.map((o,oi)=>`<div class="casc-opt" onclick="answerCascQ(${oi},${s.q.ok},'${s.q.fb.replace(/'/g,"&#39;")}')">${o}</div>`).join('');
+  document.getElementById('casc-q-fb').classList.remove('show');
+  document.getElementById('casc-q-fb').innerHTML='';
+}
+function answerCascQ(chosen,ok,fb){
+  if(cascQAnswered)return;
+  cascQAnswered=true;
+  document.querySelectorAll('.casc-opt').forEach((o,i)=>{
+    if(i===ok)o.classList.add('ok');
+    else if(i===chosen)o.classList.add('ng');
+  });
+  const fbEl=document.getElementById('casc-q-fb');
+  fbEl.innerHTML=`<strong>${chosen===ok?'✓ Correct':'✗ Not quite'}</strong> — ${fb}`;
+  fbEl.classList.add('show');
+  addSc(chosen===ok);
+}
+
+// ═══════════════════════════════════════
+// SPEED ROUND DATA
+// ═══════════════════════════════════════
+const SPEED_QS = [
+  // HPA
+  {tag:'HPA Axis',topic:'hpa',q:'Cushing\'s Disease vs adrenal adenoma: ACTH is HIGH in which one?',opts:['Adrenal adenoma','Cushing\'s Disease (pituitary)','Both have high ACTH','Neither'],ok:1,fb:'Cushing\'s Disease = pituitary ACTH adenoma → ACTH HIGH. Adrenal adenoma = autonomous cortisol → ACTH suppressed (low/undetectable).'},
+  {tag:'HPA Axis',topic:'hpa',q:'What lab distinguishes primary from secondary adrenal insufficiency?',opts:['Cortisol level','Aldosterone level','ACTH — HIGH in primary, LOW in secondary','Na+ level'],ok:2,fb:'Primary AI (Addison\'s): adrenal fails → no cortisol → no feedback → ACTH ↑↑. Secondary AI (pituitary): low ACTH → low cortisol. Na/K and cortisol levels overlap — ACTH is the key.'},
+  {tag:'HPA Axis',topic:'hpa',q:'Which CAH enzyme deficiency causes HYPERTENSION (not salt-wasting)?',opts:['21-hydroxylase (CYP21A2)','11β-hydroxylase (CYP11B1)','3β-HSD','Aldosterone synthase (CYP11B2)'],ok:1,fb:'11β-OHD: DOC (11-deoxycorticosterone) accumulates → potent mineralocorticoid → HTN + hypoK. 21-OHD = salt-wasting (no cortisol AND no aldosterone). Both cause virilization.'},
+  {tag:'HPA Axis',topic:'hpa',q:'In primary hyperaldosteronism (Conn\'s), renin is ___',opts:['High (RAAS activated)','Low (autonomous aldosterone suppresses RAAS)','Normal','Variable'],ok:1,fb:'Primary hyperaldosteronism: autonomous aldosterone → volume expansion → baroreceptors inhibit renin release → LOW renin. Secondary hyperaldosteronism (RAS, HF): RAAS activated → HIGH renin AND high aldosterone.'},
+  {tag:'HPA Axis',topic:'hpa',q:'TRAP: A patient with Cushing\'s has ACTH 650 pg/mL. High-dose dex does NOT suppress. Most likely source?',opts:['Pituitary adenoma (Cushing\'s Disease)','Ectopic ACTH (small cell lung)','Adrenal adenoma','Exogenous steroids'],ok:1,fb:'Ectopic ACTH: very high ACTH (>200 pg/mL) + NO high-dose dex suppression. Pituitary: moderate ACTH + DOES suppress. Adrenal: ACTH low/suppressed. Key: ectopic = autonomous, no feedback sensitivity.'},
+  {tag:'HPA Axis',topic:'hpa',q:'The alpha-blocker MUST be given before the beta-blocker in pheochromocytoma prep because:',opts:['Beta-blockers cause tachycardia','Beta-blockers first → remove β2 vasodilation → unopposed α1 → HTN crisis','Alpha-blockers lower BP more effectively','Beta-blockers are not effective in pheo'],ok:1,fb:'Beta-block first → removes β2-mediated vasodilation → unopposed α1 vasoconstriction → hypertensive crisis. ALWAYS alpha-block 10-14 days first (phenoxybenzamine), THEN add beta-blocker.'},
+  {tag:'HPA Axis',topic:'hpa',q:'Waterhouse-Friderichsen syndrome: which organism classically causes bilateral adrenal hemorrhage?',opts:['Streptococcus pneumoniae','Neisseria meningitidis','E. coli','Staphylococcus aureus'],ok:1,fb:'N. meningitidis → fulminant septicemia + DIC → bilateral adrenal hemorrhagic infarction → acute adrenal cortical insufficiency. Also: anticoagulation, trauma. Treatment: IV hydrocortisone + antibiotics emergently.'},
+  {tag:'HPA Axis',topic:'hpa',q:'21-hydroxylase deficiency: what is the diagnostic marker?',opts:['11-deoxycortisol','17-hydroxyprogesterone (17-OHP)','DHEA-S','Aldosterone'],ok:1,fb:'CYP21A2 deficiency → 17-OHP cannot be converted → 17-OHP accumulates markedly. It is the newborn screening test and diagnostic confirmatory test for classic 21-OHD CAH.'},
+  // THYROID
+  {tag:'Thyroid',topic:'thyroid',q:'In Graves\' disease, the autoantibody is ___',opts:['Anti-TPO','Anti-thyroglobulin','TSI (thyroid-stimulating immunoglobulins)','Anti-TSH receptor blocking antibody'],ok:2,fb:'TSI = IgG antibodies that ACTIVATE TSH receptor → constitutive TH production. Anti-TPO and anti-Tg are in Hashimoto\'s (destructive). Anti-TSH blocking antibodies would cause hypothyroidism.'},
+  {tag:'Thyroid',topic:'thyroid',q:'Most common cause of hypothyroidism in iodine-sufficient regions?',opts:['Iodine deficiency','Hashimoto\'s thyroiditis','Subacute thyroiditis','Radioiodine treatment'],ok:1,fb:'Hashimoto\'s (chronic lymphocytic thyroiditis): anti-TPO + anti-Tg → T-cell mediated destruction → hypothyroidism. F:M 10:1. Most common overall in iodine-sufficient countries. Iodine deficiency = most common worldwide.'},
+  {tag:'Thyroid',topic:'thyroid',q:'TRAP: A patient with "elevated total T4" is on OCPs. Free T4 and TSH are normal. This represents:',opts:['Hyperthyroidism requiring treatment','Subclinical Graves\' disease','Elevated TBG — total T4 up, free T4 normal, NO hyperthyroidism','Exogenous T4 intake'],ok:2,fb:'Estrogen → ↑TBG → more T4 bound → total T4 ↑. But FREE T4 unchanged. TSH normal (no actual hormone excess). No treatment needed. Classic exam trap — always check free T4 and TSH, not total T4 alone.'},
+  {tag:'Thyroid',topic:'thyroid',q:'Papillary thyroid carcinoma is diagnosed on histology by:',opts:['Capsular and vascular invasion','Orphan Annie nuclei + nuclear grooves + psammoma bodies','Calcitonin expression + amyloid','High mitotic rate + necrosis'],ok:1,fb:'Papillary carcinoma = nuclear features: ground-glass/Orphan Annie nuclei, nuclear grooves, intranuclear pseudoinclusions + psammoma bodies. Follicular carcinoma = capsular/vascular invasion. Medullary = calcitonin + amyloid. Anaplastic = undifferentiated + necrosis + high mitoses.'},
+  {tag:'Thyroid',topic:'thyroid',q:'PTU (propylthiouracil) has an advantage over methimazole in thyroid storm because it:',opts:['Has no hepatotoxicity risk','Also blocks peripheral T4→T3 conversion by deiodinase','Is safer in late pregnancy','Has faster onset of action'],ok:1,fb:'PTU dual mechanism: (1) blocks TPO (organification/coupling) — same as methimazole. (2) ALSO blocks 5\'-deiodinase → blocks peripheral T4→T3 conversion. In thyroid storm, reducing active T3 quickly is critical. PTU also preferred 1st trimester (methimazole teratogenic).'},
+  {tag:'Thyroid',topic:'thyroid',q:'Subacute (de Quervain\'s) thyroiditis: the thyroid is ___',opts:['Painless and rubbery','Exquisitely tender (painful)','Nodular and hard','Soft and diffuse'],ok:1,fb:'Subacute thyroiditis = post-viral granulomatous inflammation → exquisitely tender/painful thyroid (can refer to jaw/ear). ESR markedly elevated. No autoantibodies. Low RAIU (damaged follicles can\'t trap iodide). Transient thyrotoxicosis → hypothyroid → recovery. Distinguish from Hashimoto\'s (painless).'},
+  {tag:'Thyroid',topic:'thyroid',q:'Secondary hyperparathyroidism (from CKD): PTH is ↑, calcium is ___',opts:['High — PTH drives Ca up','Low or low-normal — CKD impairs Ca absorption and vitamin D activation','Normal — PTH maintains Ca','Extremely high'],ok:1,fb:'Secondary HPT: CKD → impaired 1α-hydroxylase → less 1,25-OH D3 → less intestinal Ca absorption + ↓renal Ca retention → hypocalcemia → PTH ↑↑ (compensatory). Contrast tertiary HPT (autonomous glands → Ca now elevated despite treatment).'},
+  // DIABETES
+  {tag:'Diabetes',topic:'dm',q:'Type 1 vs Type 2 DM: C-peptide is undetectable in ___',opts:['Type 2 DM','Type 1 DM','Both','Neither'],ok:1,fb:'C-peptide is co-secreted with insulin from beta cells. T1DM = autoimmune beta-cell destruction → no insulin → no C-peptide. T2DM = beta cells still functioning (at least partially) → C-peptide detectable. TRAP: Obese teenager ≠ T2DM — always check C-peptide and GAD antibodies.'},
+  {tag:'Diabetes',topic:'dm',q:'DKA: serum potassium is HIGH, but total body potassium is ___',opts:['Also high','LOW — despite high serum K+, K+ has been lost via osmotic diuresis','Normal','Variable'],ok:1,fb:'DKA K+ paradox: serum K+ HIGH (insulin deficiency → K+ can\'t enter cells; acidosis → H+/K+ exchange). BUT total body K+ DEPLETED by osmotic diuresis (urine K+ losses). When insulin given → K+ re-enters cells rapidly → serum K+ CRASHES. Must replete K+ aggressively before/during insulin therapy.'},
+  {tag:'Diabetes',topic:'dm',q:'HHS vs DKA: which has NO significant ketoacidosis?',opts:['DKA','HHS (Hyperosmolar Hyperglycemic State)','Both have ketoacidosis','Neither has ketoacidosis'],ok:1,fb:'HHS: T2DM patient has enough residual insulin to prevent ketogenesis but not enough to control glucose → extreme hyperglycemia, hyperosmolarity, NO significant ketones, normal pH. DKA: absolute insulin deficiency → unrestrained lipolysis → ketones → anion gap acidosis.'},
+  {tag:'Diabetes',topic:'dm',q:'Metformin\'s primary mechanism is:',opts:['Stimulates pancreatic insulin secretion','Blocks SGLT2 in kidney','Activates AMPK → ↓hepatic gluconeogenesis','Blocks alpha-glucosidase in gut'],ok:2,fb:'Metformin: AMPK activation → primarily inhibits hepatic gluconeogenesis. Also improves peripheral insulin sensitivity and reduces intestinal glucose absorption. Does NOT stimulate insulin → no hypoglycemia. Weight neutral to modest weight loss. Contraindicated if eGFR <30 (lactic acidosis).'},
+  {tag:'Diabetes',topic:'dm',q:'GLP-1 agonists (e.g., semaglutide) do NOT cause hypoglycemia because:',opts:['They don\'t affect insulin secretion','They stimulate insulin ONLY when glucose is elevated (glucose-dependent)','They block glucagon only, not insulin','They only work on the GI tract'],ok:1,fb:'GLP-1 agonists: glucose-DEPENDENT insulinotropic effect — only activate insulin secretion when glucose is elevated. At normoglycemia, minimal insulin effect → no hypoglycemia. Compare: sulfonylureas close K-ATP channels regardless of glucose → hypoglycemia risk even in fasting.'},
+  {tag:'Diabetes',topic:'dm',q:'SGLT2 inhibitors: an acute SMALL drop in eGFR after starting should:',opts:['Prompt immediate discontinuation','Be expected and is likely protective long-term — do NOT stop','Trigger switch to metformin','Indicate drug allergy'],ok:1,fb:'SGLT2i reduce glomerular hyperfiltration (a feature of early diabetic nephropathy) → acute small eGFR dip of 2-5 mL/min is EXPECTED and actually reflects the renoprotective mechanism. Do not stop. Discontinue if eGFR <20 or severe volume depletion.'},
+  {tag:'Diabetes',topic:'dm',q:'Which insulin has a FLAT, PEAKLESS profile lasting ~24 hours?',opts:['NPH insulin','Regular insulin','Insulin glargine (Lantus)','Insulin lispro (Humalog)'],ok:2,fb:'Glargine (Lantus) and detemir: peakless, ~24hr duration → ideal basal coverage. NPH: has a peak at 4-8h → hypoglycemia risk. Regular: onset 30-60min, peak 2-4h, duration 5-8h. Lispro/Aspart: onset 15min, peak 1-2h, duration 3-4h (mealtime bolus).'},
+  // PITUITARY
+  {tag:'Pituitary',topic:'pit',q:'Most common functioning pituitary adenoma:',opts:['Somatotroph (GH)','Corticotroph (ACTH)','Lactotroph (Prolactin) — prolactinoma','Thyrotroph (TSH)'],ok:2,fb:'Prolactinoma is the most common functioning pituitary adenoma. Causes hyperprolactinemia → amenorrhea/galactorrhea/infertility in women; impotence in men. Men often present with mass effects (macroadenoma) because symptoms are subtler. Treatment: cabergoline (dopamine agonist) — first-line, shrinks tumor.'},
+  {tag:'Pituitary',topic:'pit',q:'TRAP: A large 3cm sellar mass with prolactin 95 ng/mL. Cabergoline is started. This is:',opts:['Correct — all sellar masses with elevated prolactin are prolactinomas','Dangerous — mild prolactin elevation (<150) + large mass = stalk compression. True prolactinoma of this size → prolactin >500. Wrong diagnosis → cabergoline won\'t shrink it.','Correct — prolactinoma treatment regardless of level','Correct — size correlates with prolactin level'],ok:1,fb:'Stalk compression (from ANY large sellar mass) blocks dopamine delivery → mild prolactin rise (<150 ng/mL). True prolactinoma causing 3cm mass → prolactin usually >500-1000 ng/mL. Giving cabergoline to a craniopharyngioma → tumor won\'t shrink → visual loss progresses → delayed surgery.'},
+  {tag:'Pituitary',topic:'pit',q:'Acromegaly: gold standard diagnostic test is:',opts:['Random serum GH','IGF-1 level','GH level after 75g oral glucose — fails to suppress to <1 ng/mL','MRI pituitary'],ok:2,fb:'GH oral glucose suppression test: normal → GH suppresses to <1 ng/mL. In acromegaly: GH does NOT suppress (often >2-10 ng/mL). Random GH is unreliable (pulsatile). IGF-1 is the best SCREENING test (stable, no pulsatility). MRI confirms location after biochemical diagnosis.'},
+  {tag:'Pituitary',topic:'pit',q:'Sheehan syndrome: the FIRST sign of pituitary failure is:',opts:['Amenorrhea','Cold intolerance','Failure of lactation (prolactin loss)','Hypotension'],ok:2,fb:'Sheehan syndrome (postpartum pituitary ischemia): failure of lactation is the FIRST sign (prolactin lost first due to ischemic necrosis of enlarged lactotrophs). Then: gonadotropins → amenorrhea; TSH → hypothyroidism; ACTH → adrenal insufficiency. GH often lost first on formal testing but clinically silent in adults.'},
+  {tag:'Pituitary',topic:'pit',q:'Bitemporal hemianopsia from a pituitary macroadenoma: which fibers are damaged?',opts:['Temporal retinal fibers (peripheral vision)','Nasal retinal fibers (crossing at optic chiasm — process temporal fields)','Optic radiations in parietal lobe','Macula fibers'],ok:1,fb:'Nasal retinal fibers cross at the optic chiasm (they process the temporal visual fields). A suprasellar mass compresses the chiasm → damages the crossing nasal fibers → BOTH temporal visual fields lost (bitemporal hemianopsia). Peripheral temporal fibers don\'t cross and are preserved.'},
+];
+
+// ─── SPEED ROUND STATE ───
+let spTime=15, spTopic='all', spPool=[], spIdx=0, spCor=0, spTot=0, spStreak=0, spBestStreak=0, spTimer=null, spTimeLeft=0, spAnswered=false;
+
+function selTime(t,btn){
+  spTime=t;
+  document.querySelectorAll('#speed-time-opts .speed-opt-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+function selTopic(t,btn){
+  spTopic=t;
+  document.querySelectorAll('#speed-topic-opts .speed-opt-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+function startSpeed(){
+  document.getElementById('speed-setup').style.display='none';
+  document.getElementById('speed-results').style.display='none';
+  document.getElementById('speed-arena').style.display='block';
+  spPool = (spTopic==='all'?[...SPEED_QS]:SPEED_QS.filter(q=>q.topic===spTopic)).sort(()=>Math.random()-.5);
+  spIdx=0; spCor=0; spTot=0; spStreak=0; spBestStreak=0; spAnswered=false;
+  document.getElementById('sp-score').textContent='0';
+  document.getElementById('sp-total').textContent='/ 0';
+  document.getElementById('sp-streak').textContent='🔥 0';
+  loadSpeedQ();
+}
+function loadSpeedQ(){
+  if(spIdx>=spPool.length){endSpeed();return;}
+  clearInterval(spTimer);
+  spAnswered=false;
+  spTimeLeft=spTime;
+  const q=spPool[spIdx];
+  document.getElementById('sp-tag').textContent=q.tag;
+  document.getElementById('sp-q').textContent=q.q;
+  document.getElementById('sp-fb').classList.remove('show');
+  document.getElementById('sp-fb').textContent='';
+  const cc=document.getElementById('sp-choices');
+  cc.innerHTML=q.opts.map((o,i)=>`<button class="speed-choice" onclick="answerSpeed(${i},${q.ok},'${q.fb.replace(/'/g,"&#39;")}')"><div class="sc-ltr">${String.fromCharCode(65+i)}</div>${o}</button>`).join('');
+  updateTimerDisplay();
+  spTimer=setInterval(()=>{
+    spTimeLeft--;
+    updateTimerDisplay();
+    if(spTimeLeft<=0){
+      clearInterval(spTimer);
+      if(!spAnswered) timeUp(q.ok,q.fb);
+    }
+  },1000);
+}
+function updateTimerDisplay(){
+  const el=document.getElementById('sp-timer');
+  el.textContent=spTimeLeft;
+  el.className='speed-timer';
+  if(spTimeLeft<=5) el.classList.add('danger');
+  else if(spTimeLeft<=Math.floor(spTime*0.4)) el.classList.add('warn');
+  const pct=spTimeLeft/spTime*100;
+  document.getElementById('sp-bar').style.width=pct+'%';
+}
+function answerSpeed(chosen,ok,fb){
+  if(spAnswered)return;
+  spAnswered=true;
+  clearInterval(spTimer);
+  spTot++;
+  const correct=chosen===ok;
+  if(correct){spCor++;spStreak++;if(spStreak>spBestStreak)spBestStreak=spStreak;}
+  else{spStreak=0;}
+  addSc(correct);
+  document.getElementById('sp-score').textContent=spCor;
+  document.getElementById('sp-total').textContent='/ '+spTot;
+  document.getElementById('sp-streak').textContent='🔥 '+spStreak;
+  const choices=document.querySelectorAll('.speed-choice');
+  choices.forEach((c,i)=>{
+    c.onclick=null;
+    if(i===ok) c.classList.add('correct');
+    else if(i===chosen) c.classList.add('wrong');
+  });
+  const fbEl=document.getElementById('sp-fb');
+  fbEl.innerHTML=`<strong>${correct?'✓ Correct':'✗ Incorrect'}</strong> — ${fb}`;
+  fbEl.classList.add('show');
+  spIdx++;
+  setTimeout(loadSpeedQ, correct?1200:2200);
+}
+function timeUp(ok,fb){
+  spAnswered=true; spTot++;
+  spStreak=0;
+  addSc(false);
+  document.getElementById('sp-score').textContent=spCor;
+  document.getElementById('sp-total').textContent='/ '+spTot;
+  document.getElementById('sp-streak').textContent='🔥 0';
+  const choices=document.querySelectorAll('.speed-choice');
+  choices.forEach((c,i)=>{c.onclick=null;if(i===ok)c.classList.add('correct');});
+  const fbEl=document.getElementById('sp-fb');
+  fbEl.innerHTML=`<strong>⏱ Time's up!</strong> Correct answer was ${String.fromCharCode(65+ok)}. ${fb}`;
+  fbEl.classList.add('show');
+  spIdx++;
+  setTimeout(loadSpeedQ,2500);
+}
+function endSpeed(){
+  clearInterval(spTimer);
+  document.getElementById('speed-arena').style.display='none';
+  const r=document.getElementById('speed-results');
+  r.style.display='block';
+  const pct=spTot>0?Math.round(spCor/spTot*100):0;
+  const grade=pct>=90?'🏆':pct>=75?'⭐':pct>=60?'👍':'📚';
+  document.getElementById('res-grade').textContent=grade;
+  document.getElementById('res-sub').textContent=`${pct}% accuracy — ${pct>=90?'Outstanding!':pct>=75?'Well done!':pct>=60?'Good effort — keep drilling!':'Review your notes and try again!'}`;
+  document.getElementById('res-correct').textContent=spCor;
+  document.getElementById('res-total').textContent=spTot;
+  document.getElementById('res-best').textContent=spBestStreak;
+}
+function resetSpeed(){
+  clearInterval(spTimer);
+  document.getElementById('speed-results').style.display='none';
+  document.getElementById('speed-arena').style.display='none';
+  document.getElementById('speed-setup').style.display='block';
+}
+
+// ═══════ INIT ═══════
+buildPTLFilters();
+renderPTL();
+buildAxisSelector();
+renderCascDiagram();
+renderCascScenarios();
+</script>
+</body>
+</html>

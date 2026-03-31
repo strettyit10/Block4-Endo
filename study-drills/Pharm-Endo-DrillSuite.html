@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Endo Pharm Active Learning Suite — Georgetown SOM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1b2a; --surface:#111f30; --surface2:#162840; --surface3:#1c3050;
+  --border:rgba(255,255,255,0.08); --border2:rgba(255,255,255,0.15);
+  --text:#e8f0f8; --muted:#7a99b8; --dim:#3d5a78;
+  --amber:#e8a020; --amber-light:#f5c55a; --amber-bg:rgba(232,160,32,0.12);
+  --teal:#2ab5a0; --teal-bg:rgba(42,181,160,0.1);
+  --green:#3ecf8e; --green-bg:rgba(62,207,142,0.1); --green-border:rgba(62,207,142,0.3);
+  --red:#ff6b6b; --red-bg:rgba(255,107,107,0.1); --red-border:rgba(255,107,107,0.3);
+  --blue:#5c8aff; --blue-bg:rgba(92,138,255,0.1);
+  --purple:#a78bfa; --purple-bg:rgba(167,139,250,0.1);
+  --r:10px; --rl:14px;
+}
+[data-theme="light"]{
+  --bg:#f5f3ef; --surface:#fff; --surface2:#f0ede8; --surface3:#e8e4de;
+  --border:rgba(0,0,0,0.08); --border2:rgba(0,0,0,0.15);
+  --text:#1a1612; --muted:#6b6560; --dim:#c0bab2;
+  --amber:#b8780a; --amber-light:#9a6200; --amber-bg:rgba(184,120,10,0.08);
+  --teal:#1a8a78; --teal-bg:rgba(26,138,120,0.08);
+  --green:#1a7a4a; --green-bg:rgba(26,122,74,0.08); --green-border:rgba(26,122,74,0.3);
+  --red:#c0392b; --red-bg:rgba(192,57,43,0.08); --red-border:rgba(192,57,43,0.3);
+  --blue:#1a4e89; --blue-bg:rgba(26,78,137,0.08);
+  --purple:#5b21b6; --purple-bg:rgba(91,33,182,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .2s,color .2s;}
+
+/* ── HEADER ── */
+.hdr{border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;background:var(--surface);position:sticky;top:0;z-index:100;gap:12px;flex-wrap:wrap;}
+.hdr-l{display:flex;align-items:center;gap:14px;}
+.logo{font-family:'DM Serif Display',serif;font-size:19px;line-height:1;}
+.logo em{font-style:italic;color:var(--amber);}
+.score-row{display:flex;gap:8px;align-items:center;}
+.score-pill{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--border2);background:var(--surface2);}
+.score-pill.ok{border-color:var(--green-border);background:var(--green-bg);color:var(--green);}
+.score-pill.streak{border-color:rgba(232,160,32,0.4);background:var(--amber-bg);color:var(--amber);}
+.theme-btn{padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:12px;color:var(--muted);font-family:'Outfit',sans-serif;transition:all .15s;}
+.theme-btn:hover{border-color:var(--border2);color:var(--text);}
+
+/* ── MODE TABS ── */
+.mode-bar{display:flex;gap:0;border-bottom:1px solid var(--border);background:var(--surface);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.mode-tab{padding:12px 20px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:7px;}
+.mode-tab:hover{color:var(--text);}
+.mode-tab.active{color:var(--amber);border-bottom-color:var(--amber);}
+.mode-icon{font-size:15px;}
+
+/* ── MAIN ── */
+.main{max-width:860px;margin:0 auto;padding:28px 20px 80px;}
+
+/* Section headers */
+.sec-head{margin-bottom:20px;}
+.sec-eyebrow{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:6px;}
+.sec-title{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;color:var(--text);margin-bottom:6px;}
+.sec-sub{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── MODE PANELS ── */
+.mode-panel{display:none;}
+.mode-panel.active{display:block;}
+
+/* ── VIGNETTE (Mode 1) ── */
+.vignette-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-bottom:16px;}
+.vc-meta{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--surface2);border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.vc-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.vc-topic{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(232,160,32,0.3);}
+.vc-diff{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;}
+.diff-1{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border);}
+.diff-2{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(232,160,32,0.3);}
+.diff-3{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);}
+.trap-badge{font-size:10px;padding:2px 7px;border-radius:20px;background:var(--red-bg);color:var(--red);border:1px solid var(--red-border);font-family:'DM Mono',monospace;}
+.vc-body{padding:18px 20px;}
+.vignette-text{font-size:14px;line-height:1.75;color:var(--text);margin-bottom:18px;}
+.vignette-text .hl{background:var(--amber-bg);color:var(--amber);padding:1px 4px;border-radius:3px;font-weight:500;}
+.vignette-text .trap-flag{background:var(--red-bg);color:var(--red);padding:1px 5px;border-radius:3px;font-size:12px;font-weight:500;}
+.options{display:flex;flex-direction:column;gap:8px;}
+.option{padding:11px 14px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;cursor:pointer;transition:all .12s;color:var(--text);text-align:left;display:flex;gap:10px;align-items:flex-start;}
+.option-letter{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;margin-top:1px;min-width:16px;}
+.option:hover{border-color:var(--border2);background:var(--surface3);}
+.option.correct{border-color:var(--green);background:var(--green-bg);pointer-events:none;}
+.option.correct .option-letter{color:var(--green);}
+.option.wrong{border-color:var(--red);background:var(--red-bg);pointer-events:none;}
+.option.wrong .option-letter{color:var(--red);}
+.option.reveal{border-color:var(--green);opacity:.6;pointer-events:none;}
+.explanation{margin-top:14px;padding:14px;background:var(--surface2);border-left:3px solid var(--blue);border-radius:var(--r);font-size:13px;color:var(--muted);line-height:1.7;display:none;}
+.explanation.show{display:block;}
+.explanation strong{color:var(--text);}
+.explanation .trap-exp{margin-top:8px;padding:8px 10px;background:var(--red-bg);border-left:2px solid var(--red);border-radius:6px;font-size:12px;color:var(--red);}
+.explanation .trap-exp::before{content:'⚠ Trap: ';font-weight:700;}
+.buzzwords{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px;}
+.bw{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--teal-bg);color:var(--teal);border:1px solid rgba(42,181,160,0.25);font-family:'DM Mono',monospace;}
+
+/* NAV BTNS */
+.nav-row{display:flex;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap;gap:8px;}
+.nav-btn{padding:8px 18px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);font-size:13px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;}
+.nav-btn:hover{color:var(--text);border-color:var(--amber);background:var(--amber-bg);}
+.nav-btn.primary{background:var(--amber);border-color:var(--amber);color:#0d1b2a;font-weight:600;}
+.nav-btn.primary:hover{background:var(--amber-light);}
+.prog-bar-wrap{flex:1;max-width:200px;}
+.prog-bar{height:4px;background:var(--surface3);border-radius:100px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--amber);border-radius:100px;transition:width .3s;}
+.prog-txt{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:3px;text-align:center;}
+
+/* ── TRAP SPOTTER (Mode 2) ── */
+.trap-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:18px 20px;margin-bottom:12px;}
+.trap-statement{font-size:14px;line-height:1.7;color:var(--text);margin-bottom:14px;}
+.trap-statement .drug{color:var(--blue);font-weight:600;}
+.trap-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.trap-btn{padding:9px 20px;border-radius:8px;border:1.5px solid var(--border2);background:var(--surface2);font-size:13px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .12s;}
+.trap-btn.true-btn{color:var(--green);}
+.trap-btn.false-btn{color:var(--red);}
+.trap-btn:hover{background:var(--surface3);}
+.trap-btn.selected-correct{background:var(--green-bg);border-color:var(--green);pointer-events:none;}
+.trap-btn.selected-wrong{background:var(--red-bg);border-color:var(--red);pointer-events:none;}
+.trap-reveal{display:none;margin-top:12px;padding:12px 14px;border-radius:var(--r);font-size:13px;line-height:1.7;}
+.trap-reveal.show{display:block;}
+.trap-reveal.is-trap{background:var(--red-bg);border-left:3px solid var(--red);color:var(--muted);}
+.trap-reveal.is-true{background:var(--green-bg);border-left:3px solid var(--green);color:var(--muted);}
+.trap-reveal strong{color:var(--text);}
+
+/* ── MECHANISM MATCHER (Mode 3) ── */
+.matcher-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+@media(max-width:600px){.matcher-grid{grid-template-columns:1fr;}}
+.match-col-head{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;}
+.match-item{padding:10px 14px;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;cursor:pointer;transition:all .15s;line-height:1.5;user-select:none;}
+.match-item:hover{border-color:var(--border2);background:var(--surface2);}
+.match-item.selected{border-color:var(--amber);background:var(--amber-bg);color:var(--amber);}
+.match-item.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);pointer-events:none;}
+.match-item.wrong{border-color:var(--red);background:var(--red-bg);animation:shake .3s;pointer-events:none;}
+.match-item.used{opacity:.4;pointer-events:none;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.match-score{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);text-align:center;margin-bottom:16px;}
+
+/* ── CLINICAL DECISION TREE (Mode 4) ── */
+.tree-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-bottom:16px;}
+.tree-scenario{padding:16px 20px;background:var(--surface2);border-bottom:1px solid var(--border);}
+.tree-scenario-tag{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:6px;}
+.tree-scenario-text{font-size:14px;line-height:1.7;color:var(--text);}
+.tree-scenario-text .hl{background:var(--amber-bg);color:var(--amber);padding:1px 4px;border-radius:3px;font-weight:500;}
+.tree-body{padding:16px 20px;}
+.tree-question{font-size:14px;font-weight:500;color:var(--text);margin-bottom:12px;line-height:1.5;}
+.tree-opts{display:flex;flex-direction:column;gap:7px;}
+.tree-opt{padding:10px 14px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;cursor:pointer;transition:all .12s;color:var(--text);text-align:left;}
+.tree-opt:hover{border-color:var(--border2);background:var(--surface3);}
+.tree-opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green);pointer-events:none;}
+.tree-opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red);pointer-events:none;}
+.tree-result{display:none;margin-top:12px;padding:12px 14px;border-radius:var(--r);font-size:13px;line-height:1.7;background:var(--blue-bg);border-left:3px solid var(--blue);color:var(--muted);}
+.tree-result.show{display:block;}
+.tree-result strong{color:var(--text);}
+.tree-next{margin-top:10px;padding:8px 16px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;display:none;}
+.tree-next:hover{color:var(--text);border-color:var(--amber);}
+
+/* ── AI MODE (Mode 5) ── */
+.ai-controls{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center;}
+.ai-select{padding:8px 12px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--text);font-size:13px;font-family:'Outfit',sans-serif;cursor:pointer;}
+.ai-btn{padding:9px 20px;border-radius:8px;border:none;background:var(--amber);color:#0d1b2a;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;display:flex;align-items:center;gap:7px;}
+.ai-btn:hover{background:var(--amber-light);}
+.ai-btn:disabled{opacity:.5;cursor:not-allowed;}
+.ai-output{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:20px;min-height:200px;}
+.ai-loading{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;}
+.spinner{width:18px;height:18px;border:2px solid var(--border2);border-top-color:var(--amber);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ai-question{font-size:14px;line-height:1.75;color:var(--text);margin-bottom:16px;}
+.ai-answer{display:none;margin-top:12px;padding:14px;background:var(--surface2);border-left:3px solid var(--amber);border-radius:var(--r);font-size:13px;color:var(--muted);line-height:1.7;}
+.ai-answer.show{display:block;}
+.ai-answer strong{color:var(--text);}
+.reveal-btn{margin-top:12px;padding:8px 16px;border-radius:8px;border:1px solid var(--amber);background:transparent;color:var(--amber);font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;}
+.reveal-btn:hover{background:var(--amber-bg);}
+
+/* ── FLASHCARD MODE ── */
+.flashcard-wrap{perspective:1000px;margin-bottom:20px;}
+.flashcard{width:100%;min-height:220px;position:relative;transform-style:preserve-3d;transition:transform .45s;cursor:pointer;}
+.flashcard.flipped{transform:rotateY(180deg);}
+.fc-face{position:absolute;width:100%;min-height:220px;backface-visibility:hidden;border-radius:var(--rl);border:1px solid var(--border);padding:28px 24px;display:flex;flex-direction:column;justify-content:center;}
+.fc-front{background:var(--surface);}
+.fc-back{background:var(--surface2);transform:rotateY(180deg);}
+.fc-tag{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--amber);margin-bottom:10px;}
+.fc-q{font-size:16px;line-height:1.65;color:var(--text);font-weight:500;}
+.fc-a{font-size:13px;line-height:1.7;color:var(--muted);}
+.fc-a strong{color:var(--text);}
+.fc-trap{margin-top:10px;padding:8px 10px;background:var(--red-bg);border-left:2px solid var(--red);border-radius:6px;font-size:12px;color:var(--red);}
+.fc-tap-hint{font-size:11px;color:var(--dim);text-align:center;margin-top:-8px;margin-bottom:16px;}
+.fc-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.fc-counter{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+
+/* ── FILTER BAR ── */
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.filter-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .12s;}
+.filter-btn:hover{border-color:var(--border2);color:var(--text);}
+.filter-btn.active{border-color:var(--amber);background:var(--amber-bg);color:var(--amber);}
+
+/* empty state */
+.empty{text-align:center;padding:40px 20px;color:var(--muted);}
+.empty-icon{font-size:36px;margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-l">
+    <div class="logo">Endo Pharm <em>Drill Suite</em></div>
+    <div class="score-row">
+      <span class="score-pill ok" id="sc-ok">0 ✓</span>
+      <span class="score-pill" id="sc-att">0 attempts</span>
+      <span class="score-pill streak" id="sc-streak" style="display:none">🔥 0</span>
+    </div>
+  </div>
+  <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">☀️ Light</button>
+</header>
+
+<nav class="mode-bar">
+  <div class="mode-tab active" onclick="switchMode('vignettes',this)"><span class="mode-icon">🩺</span>NBME Vignettes</div>
+  <div class="mode-tab" onclick="switchMode('traps',this)"><span class="mode-icon">⚠️</span>Trap Spotter</div>
+  <div class="mode-tab" onclick="switchMode('matcher',this)"><span class="mode-icon">🔗</span>Mechanism Match</div>
+  <div class="mode-tab" onclick="switchMode('decisions',this)"><span class="mode-icon">🌿</span>Clinical Decisions</div>
+  <div class="mode-tab" onclick="switchMode('flashcards',this)"><span class="mode-icon">🃏</span>Flashcards</div>
+  <div class="mode-tab" onclick="switchMode('ai',this)"><span class="mode-icon">✨</span>AI Tutor</div>
+</nav>
+
+<main class="main">
+
+<!-- ══════════════════════════════════
+     MODE 1: NBME VIGNETTES
+══════════════════════════════════ -->
+<div id="mode-vignettes" class="mode-panel active">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Active Recall · NBME Format</div>
+    <div class="sec-title">Clinical Vignettes</div>
+    <div class="sec-sub">Full NBME-style stems. Each question mirrors how Step 1 tests mechanism, side effects, contraindications, and drug selection. Traps are flagged in the explanation.</div>
+  </div>
+  <div class="filter-bar" id="vig-filters">
+    <button class="filter-btn active" onclick="filterVigs('all',this)">All</button>
+    <button class="filter-btn" onclick="filterVigs('Pituitary',this)">Pituitary</button>
+    <button class="filter-btn" onclick="filterVigs('Thyroid',this)">Thyroid</button>
+    <button class="filter-btn" onclick="filterVigs('Adrenal',this)">Adrenal</button>
+    <button class="filter-btn" onclick="filterVigs('Diabetes',this)">Diabetes</button>
+    <button class="filter-btn" onclick="filterVigs('Posterior Pituitary',this)">Posterior Pit.</button>
+  </div>
+  <div id="vig-container"></div>
+  <div class="nav-row">
+    <button class="nav-btn" onclick="vigNav(-1)">← Previous</button>
+    <div class="prog-bar-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="vig-prog"></div></div>
+      <div class="prog-txt" id="vig-prog-txt">1 / 30</div>
+    </div>
+    <button class="nav-btn" onclick="vigNav(1)">Next →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODE 2: TRAP SPOTTER
+══════════════════════════════════ -->
+<div id="mode-traps" class="mode-panel">
+  <div class="sec-head">
+    <div class="sec-eyebrow">True / False · High-Speed Drill</div>
+    <div class="sec-title">Trap Spotter</div>
+    <div class="sec-sub">Each statement is either correct or contains a classic board trap. Mark True or False. Immediate feedback with the correct explanation. Master the most tested traps in endocrine pharm.</div>
+  </div>
+  <div id="trap-container"></div>
+  <div class="nav-row">
+    <button class="nav-btn" onclick="trapNav(-1)">← Previous</button>
+    <div class="prog-bar-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="trap-prog"></div></div>
+      <div class="prog-txt" id="trap-prog-txt">1 / 20</div>
+    </div>
+    <button class="nav-btn" onclick="trapNav(1)">Next →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODE 3: MECHANISM MATCHER
+══════════════════════════════════ -->
+<div id="mode-matcher" class="mode-panel">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Matching Drill · MOA Focus</div>
+    <div class="sec-title">Mechanism Match</div>
+    <div class="sec-sub">Click a drug on the left, then click its mechanism on the right. Tests MOA, receptor targets, and enzyme pathways — exactly how Step 1 asks mechanism questions.</div>
+  </div>
+  <div class="match-score" id="match-score">Select a round:</div>
+  <div class="filter-bar" id="match-filters">
+    <button class="filter-btn active" onclick="loadMatchRound(0,this)">Round 1 — Pituitary</button>
+    <button class="filter-btn" onclick="loadMatchRound(1,this)">Round 2 — Thyroid</button>
+    <button class="filter-btn" onclick="loadMatchRound(2,this)">Round 3 — Adrenal</button>
+    <button class="filter-btn" onclick="loadMatchRound(3,this)">Round 4 — Diabetes</button>
+    <button class="filter-btn" onclick="loadMatchRound(4,this)">Round 5 — Mixed HY</button>
+  </div>
+  <div class="matcher-grid">
+    <div><div class="match-col-head">Drug / Agent</div><div id="match-drugs"></div></div>
+    <div><div class="match-col-head">Mechanism / Target</div><div id="match-mechs"></div></div>
+  </div>
+  <button class="nav-btn" onclick="resetMatch()">↺ Reset Round</button>
+</div>
+
+<!-- ══════════════════════════════════
+     MODE 4: CLINICAL DECISIONS
+══════════════════════════════════ -->
+<div id="mode-decisions" class="mode-panel">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Decision Trees · "Next best step"</div>
+    <div class="sec-title">Clinical Decision Drill</div>
+    <div class="sec-sub">Multi-step clinical scenarios that build on each answer. Tests drug selection, monitoring, contraindications, and "next best step" — the most common question format on both in-house and Step 1.</div>
+  </div>
+  <div id="decision-container"></div>
+  <div class="nav-row" style="margin-top:4px;">
+    <button class="nav-btn" onclick="decisionNav(-1)">← Previous</button>
+    <div class="prog-bar-wrap">
+      <div class="prog-bar"><div class="prog-fill" id="dec-prog"></div></div>
+      <div class="prog-txt" id="dec-prog-txt">1 / 12</div>
+    </div>
+    <button class="nav-btn" onclick="decisionNav(1)">Next →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODE 5: FLASHCARDS
+══════════════════════════════════ -->
+<div id="mode-flashcards" class="mode-panel">
+  <div class="sec-head">
+    <div class="sec-eyebrow">Active Recall · Spaced Repetition</div>
+    <div class="sec-title">Flashcards</div>
+    <div class="sec-sub">Click each card to flip it. Focus on mechanism, key distinguishing features, and the one fact that most often appears on exams.</div>
+  </div>
+  <div class="filter-bar" id="fc-filters">
+    <button class="filter-btn active" onclick="filterFC('all',this)">All</button>
+    <button class="filter-btn" onclick="filterFC('Pituitary',this)">Pituitary</button>
+    <button class="filter-btn" onclick="filterFC('Thyroid',this)">Thyroid</button>
+    <button class="filter-btn" onclick="filterFC('Adrenal',this)">Adrenal</button>
+    <button class="filter-btn" onclick="filterFC('Diabetes',this)">Diabetes</button>
+    <button class="filter-btn" onclick="filterFC('Posterior',this)">Posterior Pit.</button>
+  </div>
+  <div class="fc-tap-hint">Click card to reveal answer</div>
+  <div class="flashcard-wrap">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-face fc-front" id="fc-front"></div>
+      <div class="fc-face fc-back" id="fc-back"></div>
+    </div>
+  </div>
+  <div class="fc-nav">
+    <button class="nav-btn" onclick="fcNav(-1)">← Previous</button>
+    <span class="fc-counter" id="fc-counter">1 / 40</span>
+    <button class="nav-btn" onclick="fcNav(1)">Next →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MODE 6: AI TUTOR
+══════════════════════════════════ -->
+<div id="mode-ai" class="mode-panel">
+  <div class="sec-head">
+    <div class="sec-eyebrow">AI-Powered · Infinite Questions</div>
+    <div class="sec-title">AI Tutor</div>
+    <div class="sec-sub">Generate unlimited custom questions. Choose your topic, difficulty, and question type — the AI writes a fresh NBME-style question every time, with a full teaching explanation.</div>
+  </div>
+  <div class="ai-controls">
+    <select class="ai-select" id="ai-topic">
+      <option value="pituitary pharmacology (dopamine agonists, somatostatin analogs, pegvisomant)">Pituitary</option>
+      <option value="posterior pituitary drugs (DDAVP, diabetes insipidus treatment, oxytocin)">Posterior Pituitary</option>
+      <option value="thyroid pharmacology (levothyroxine, PTU, methimazole, I-131, beta-blockers for hyperthyroidism)">Thyroid</option>
+      <option value="adrenal pharmacology (ketoconazole, metyrapone, mitotane, mifepristone, hydrocortisone, fludrocortisone, dexamethasone suppression testing)">Adrenal</option>
+      <option value="diabetes pharmacology (insulin types, metformin, sulfonylureas, GLP-1 agonists, SGLT2 inhibitors, DPP-4 inhibitors, TZDs)">Diabetes</option>
+      <option value="endocrine pharmacology traps and contraindications">Traps & Contraindications</option>
+      <option value="mixed endocrine pharmacology covering all topics">Mixed — All Topics</option>
+    </select>
+    <select class="ai-select" id="ai-type">
+      <option value="clinical vignette in NBME format with 4 answer choices (A-D), clear stem, single best answer, and a full teaching explanation identifying any traps">NBME Vignette</option>
+      <option value="mechanism of action question asking why a drug works the way it does, with 4 choices and explanation">Mechanism Focus</option>
+      <option value="side effect and contraindication question based on a clinical scenario with 4 choices">Side Effects / CI</option>
+      <option value="drug comparison question (e.g., PTU vs methimazole, or which drug to use in pregnancy) with 4 choices">Drug Comparison</option>
+      <option value="'next best step' clinical management question with 4 choices">Next Best Step</option>
+    </select>
+    <select class="ai-select" id="ai-diff">
+      <option value="easy (straightforward mechanism or first-line drug selection)">Easy</option>
+      <option value="medium (requires integrating mechanism with clinical scenario)">Medium</option>
+      <option value="hard (requires identifying a trap, rare contraindication, or complex clinical integration)">Hard — Traps</option>
+    </select>
+    <button class="ai-btn" onclick="generateQuestion()" id="ai-gen-btn">
+      <span>✨</span> Generate Question
+    </button>
+  </div>
+  <div class="ai-output" id="ai-output">
+    <div class="empty">
+      <div class="empty-icon">✨</div>
+      <div style="font-size:14px;color:var(--muted);">Click "Generate Question" to get a fresh NBME-style question on any endocrine pharmacology topic.</div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════════════════
+// THEME
+// ═══════════════════════════════════════════════════
+function toggleTheme(){
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  document.documentElement.setAttribute('data-theme',dark?'light':'dark');
+  document.getElementById('theme-btn').textContent=dark?'🌙 Dark':'☀️ Light';
+}
+
+// ═══════════════════════════════════════════════════
+// SCORE
+// ═══════════════════════════════════════════════════
+let score={ok:0,att:0,streak:0};
+function addScore(correct){
+  score.att++;
+  if(correct){score.ok++;score.streak++;}else{score.streak=0;}
+  document.getElementById('sc-ok').textContent=score.ok+' ✓';
+  document.getElementById('sc-att').textContent=score.att+' attempts';
+  const sw=document.getElementById('sc-streak');
+  if(score.streak>=2){sw.style.display='';sw.textContent='🔥 '+score.streak;}
+  else sw.style.display='none';
+}
+
+// ═══════════════════════════════════════════════════
+// MODE SWITCHING
+// ═══════════════════════════════════════════════════
+function switchMode(id,el){
+  document.querySelectorAll('.mode-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('mode-'+id).classList.add('active');
+  el.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════
+// DATA — VIGNETTES
+// ═══════════════════════════════════════════════════
+const VIGNETTES=[
+  {topic:'Pituitary',diff:1,trap:false,
+   stem:`A <span class="hl">28-year-old woman</span> presents with a 6-month history of amenorrhea, bilateral milky nipple discharge, and inability to conceive. Serum prolactin is <span class="hl">3,400 ng/mL</span>. MRI reveals a 1.8 cm pituitary mass. Visual fields are normal.`,
+   q:'What is the most appropriate initial treatment?',
+   opts:['Trans-sphenoidal surgery — definitive for macroadenomas','Cabergoline — dopamine agonist, first-line for prolactinoma','Bromocriptine — superior efficacy to cabergoline','Radiation therapy — safest for large tumors'],
+   ans:1,
+   exp:`<strong>Cabergoline</strong> is first-line for prolactinoma of any size. It shrinks the tumor AND normalizes prolactin. A prolactin of 3,400 ng/mL with a 1.8 cm mass confirms true prolactinoma (stalk compression rarely elevates prolactin >150 ng/mL). Surgery is reserved for drug failure, intolerance, or acute vision loss.<br><br>Bromocriptine is less preferred — shorter half-life (daily dosing), more side effects, lower tumor shrinkage rate.`,
+   trap:'Bromocriptine is NOT superior to cabergoline. Cabergoline has higher efficacy, twice-weekly dosing, and better tolerability.',
+   bz:['Prolactin >200 ng/mL → true prolactinoma','Cabergoline = 1st line','Surgery = drug failure only']},
+
+  {topic:'Pituitary',diff:2,trap:true,
+   stem:`A <span class="hl">45-year-old man</span> presents with headache and gradual vision loss. MRI shows a <span class="hl">3.2 cm sellar mass</span>. His prolactin level is <span class="hl">94 ng/mL</span>. Bitemporal hemianopsia is present on visual field testing. <span class="trap-flag">⚠ TRAP</span>`,
+   q:'What is the most likely diagnosis and next best step?',
+   opts:['Macroprolactinoma — start cabergoline immediately','Non-functioning adenoma or stalk compression — urgent neurosurgical referral','Craniopharyngioma — start bromocriptine to shrink','Cushing\'s disease — measure 24-hour urine cortisol'],
+   ans:1,
+   exp:`<strong>Stalk compression, NOT prolactinoma.</strong> A 3.2 cm mass would elevate prolactin to >500–1000 ng/mL if it were a true macroprolactinoma. A prolactin of 94 ng/mL with a large sellar mass = stalk compression (dopamine delivery to lactotrophs is physically blocked). Starting cabergoline on a non-functioning adenoma or craniopharyngioma will not shrink the tumor and delays definitive surgical therapy, risking permanent vision loss.`,
+   trap:'Prolactin mildly elevated (<150 ng/mL) + large mass = stalk compression, NOT macroprolactinoma. A true macroprolactinoma causing a 3+ cm mass would have prolactin >500 ng/mL.',
+   bz:['Mild prolactin + big mass = stalk compression','True macroprolactinoma → prolactin >500','Urgent surgical referral for visual field defect']},
+
+  {topic:'Pituitary',diff:2,trap:false,
+   stem:`A <span class="hl">38-year-old man</span> is being treated for acromegaly with <span class="hl">pegvisomant</span> after failing somatostatin analog therapy. His surgeon reports that his IGF-1 level has normalized on pegvisomant. However, repeat GH levels are noted to be markedly elevated compared to pre-treatment.`,
+   q:'Which statement best explains the elevated GH levels?',
+   opts:['Treatment failure — pegvisomant is not working; switch back to octreotide','Expected finding — pegvisomant blocks the GH receptor, eliminating IGF-1-mediated negative feedback on GH secretion','The pituitary tumor has grown larger, causing more GH secretion','Pegvisomant has cross-reactivity with somatostatin receptors, causing paradoxical GH release'],
+   ans:1,
+   exp:`<strong>Expected finding.</strong> Pegvisomant is a GH receptor antagonist — it blocks GH signaling at the receptor level, preventing IGF-1 production. Because IGF-1 is the primary feedback signal that suppresses pituitary GH secretion, normalizing IGF-1 via receptor blockade removes feedback → GH levels rise. <strong>Always monitor IGF-1 (not GH)</strong> when following acromegaly patients on pegvisomant.`,
+   trap:'Do NOT use GH level to monitor pegvisomant efficacy — it rises as a direct consequence of the mechanism. Use IGF-1 exclusively.',
+   bz:['Pegvisomant = GH receptor antagonist','IGF-1 falls → GH rises (no feedback)','Monitor IGF-1, not GH']},
+
+  {topic:'Posterior Pituitary',diff:2,trap:true,
+   stem:`A <span class="hl">55-year-old man</span> with a known history of <span class="hl">lithium therapy</span> for bipolar disorder presents with polyuria (8L/day) and polydipsia. Serum osmolality is 308 mOsm/kg. Urine osmolality is 95 mOsm/kg (concentrated urine expected >800). After a water deprivation test, urine osmolality fails to rise. Administration of <span class="hl">DDAVP</span> also fails to concentrate the urine. <span class="trap-flag">⚠ TRAP</span>`,
+   q:'What is the most appropriate treatment?',
+   opts:['Intranasal DDAVP — synthetic AVP analog treats DI','High-dose IV vasopressin — overcomes the receptor defect','Hydrochlorothiazide + low-sodium diet','Switch lithium to valproate; no other treatment needed'],
+   ans:2,
+   exp:`<strong>Nephrogenic DI.</strong> Lithium blocks V2 receptor (and AQP2 insertion) — the kidney cannot respond to AVP or DDAVP. DDAVP fails by definition in nephrogenic DI. Treatment: <strong>thiazide diuretics (paradoxical)</strong> — mild volume depletion → increased proximal tubule reabsorption → less fluid delivered to the AVP-sensitive collecting duct → reduced polyuria. Also: NSAIDs (indomethacin) for lithium-induced nephrogenic DI via prostaglandin inhibition.`,
+   trap:'DDAVP works only in central DI (posterior pituitary cannot make AVP). In nephrogenic DI (receptor/AQP2 defect), DDAVP fails completely. Classic trap: giving DDAVP when the urine fails to concentrate after DDAVP = nephrogenic DI, treat with thiazides.',
+   bz:['DDAVP fails → nephrogenic DI','Lithium → V2R blockade','Thiazides = treatment (paradoxical diuretic)','Indomethacin for Li-induced']},
+
+  {topic:'Posterior Pituitary',diff:1,trap:false,
+   stem:`A <span class="hl">32-year-old woman with known von Willebrand disease type 1</span> (mild, quantitative deficiency) is scheduled for a dental extraction. Her hematologist recommends prophylactic treatment to minimize bleeding risk. She has no other medical problems and is not on any medications.`,
+   q:'Which agent is most appropriate for pre-procedural hemostasis?',
+   opts:['Cryoprecipitate — contains vWF and Factor VIII','DDAVP (desmopressin) — releases stored vWF from endothelial cells','Recombinant Factor VIII — replaces deficient clotting factor','Fresh frozen plasma — contains all clotting factors'],
+   ans:1,
+   exp:`<strong>DDAVP for mild vWD type 1.</strong> DDAVP binds V2 receptors on vascular endothelial cells → cAMP → exocytosis of Weibel-Palade bodies → release of stored vWF and Factor VIII. In mild vWD type 1, endothelial stores are intact and releasable. DDAVP is non-blood-product, fast-acting, and preferred for minor procedures. Cryoprecipitate/VWF concentrates are reserved for severe disease or DDAVP failure (types 2B, 3).`,
+   trap:'DDAVP does NOT work in vWD type 2B (risk of thrombocytopenia from abnormal vWF-platelet binding) or type 3 (no stores to release). Only effective in type 1 (mild quantitative).',
+   bz:['DDAVP = V2R on endothelium → vWF release','Works in vWD type 1 (mild)','Fails in type 3 (no stores)']},
+
+  {topic:'Thyroid',diff:1,trap:false,
+   stem:`A <span class="hl">35-year-old woman with Graves' disease</span> is 8 weeks pregnant. She has palpitations, heat intolerance, and weight loss. TSH is undetectable; free T4 is 4× upper limit of normal. She asks about treatment options.`,
+   q:'Which antithyroid agent is most appropriate at this gestational age?',
+   opts:['Methimazole — once-daily dosing, preferred in most hyperthyroid patients','PTU (propylthiouracil) — preferred in the first trimester of pregnancy','I-131 radioiodine — definitive treatment for Graves\' disease','Beta-blocker monotherapy — adequate for first trimester'],
+   ans:1,
+   exp:`<strong>PTU in the first trimester.</strong> Methimazole is teratogenic in the first trimester — causes aplasia cutis (scalp defect), choanal atresia, tracheoesophageal fistula, and the VACTERL association. PTU is preferred from conception to ~12–14 weeks, then switched to methimazole for the 2nd and 3rd trimesters (PTU hepatotoxicity risk outweighs benefit beyond 1st trimester).<br><br>I-131 is absolutely contraindicated — crosses the placenta and ablates the fetal thyroid.`,
+   trap:'Do not give methimazole in 1st trimester (teratogenic). Do not give I-131 in any trimester. Switch to methimazole at 12–14 weeks to reduce PTU hepatotoxicity risk.',
+   bz:['PTU → 1st trimester','MMZ → 2nd/3rd trimester','I-131 absolutely contraindicated in pregnancy','Switch at ~12 weeks']},
+
+  {topic:'Thyroid',diff:2,trap:true,
+   stem:`A <span class="hl">52-year-old man</span> has an acute onset of fever, confusion, tachycardia (HR 148), hypertension, and diaphoresis. His wife reports he stopped his methimazole two weeks ago. TSH is undetectable. He is admitted to the ICU. <span class="trap-flag">⚠ TRAP</span>`,
+   q:'In addition to supportive care and beta-blockade, which antithyroid agent and supplemental drug should be given first?',
+   opts:['Methimazole + Lugol\'s iodine simultaneously','PTU — then wait 1 hour — then Lugol\'s iodine + dexamethasone','Methimazole alone — then add I-131 after stabilization','Propranolol alone is sufficient to manage thyroid storm'],
+   ans:1,
+   exp:`<strong>PTU + propranolol + dexamethasone + Lugol's iodine (in that order).</strong><br><br>1. <strong>PTU first</strong> — blocks TPO synthesis AND blocks peripheral T4→T3 conversion (unique to PTU among antithyroid drugs). This is why PTU is preferred in thyroid storm.<br>2. <strong>Wait 1 hour</strong> — then give Lugol's iodine (high-dose iodine triggers Wolff-Chaikoff effect, blocking organification). Must give PTU FIRST to prevent the iodine load from being used to synthesize more TH.<br>3. <strong>Dexamethasone</strong> — also blocks T4→T3 conversion and has anti-inflammatory effects.<br>4. <strong>Propranolol</strong> — controls adrenergic symptoms AND blocks peripheral T4→T3 conversion.`,
+   trap:'NEVER give Lugol\'s iodine before PTU in thyroid storm — the iodine load will be incorporated into new thyroid hormone synthesis if organification is not blocked first. Sequence matters: PTU → wait 1 hour → Lugol\'s.',
+   bz:['PTU before Lugol\'s (sequence critical)','PTU blocks T4→T3 conversion','Propranolol also blocks T4→T3','Dexamethasone blocks T4→T3']},
+
+  {topic:'Thyroid',diff:2,trap:true,
+   stem:`A <span class="hl">46-year-old woman</span> is started on levothyroxine for newly diagnosed hypothyroidism. She takes calcium carbonate 500 mg daily for osteoporosis, a daily PPI (omeprazole), and ferrous sulfate for iron deficiency anemia. All medications are taken in the morning. <span class="trap-flag">⚠ TRAP</span>`,
+   q:'What is the most important counseling point to prevent inadequate thyroid hormone replacement?',
+   opts:['Take levothyroxine with a full glass of water and food to maximize absorption','Take levothyroxine on an empty stomach, 30–60 min before other medications; separate Ca²⁺, Fe²⁺, and PPIs by ≥4 hours','Levothyroxine dose does not need adjustment with calcium — only interactions with statins matter','Increase levothyroxine dose by 25 mcg to compensate for reduced absorption'],
+   ans:1,
+   exp:`<strong>Absorption interactions are critical.</strong> Levothyroxine requires an acidic environment and an empty stomach for maximal absorption. The following dramatically reduce absorption:<br>• Calcium carbonate (chelates T4)<br>• Ferrous sulfate (chelates T4)<br>• PPIs (↓ gastric acid → ↓ absorption)<br>• Cholestyramine, aluminum antacids, sucralfate<br><br>Counsel: take levothyroxine on an empty stomach in the morning; take other medications ≥4 hours later. Failure to counsel causes persistently elevated TSH despite adequate doses.`,
+   trap:'Do NOT increase dose without first correcting the absorption interaction. Concurrent medications are the most common cause of persistent hypothyroidism on levothyroxine. Monitor TSH 6–8 weeks after fixing timing.',
+   bz:['Empty stomach AM','Ca²⁺, Fe²⁺, PPIs → ↓ LT4 absorption','Separate by ≥4 hours','Monitor TSH 6–8 weeks later']},
+
+  {topic:'Adrenal',diff:1,trap:false,
+   stem:`A <span class="hl">38-year-old woman</span> presents with weight gain (mostly central), easy bruising, hypertension, and new-onset diabetes. She has no history of exogenous steroid use. A 24-hour urine free cortisol is elevated. Low-dose (1 mg overnight) dexamethasone suppression test shows a cortisol of 22 µg/dL (normal <1.8). ACTH level is elevated at 120 pg/mL. High-dose (8 mg) dexamethasone suppression test shows cortisol suppression of 55%.`,
+   q:'What is the most likely diagnosis and appropriate pharmacological management?',
+   opts:['Adrenal adenoma — ketoconazole to block cortisol synthesis pre-operatively','Cushing\'s disease (pituitary adenoma) — transsphenoidal surgery is first-line; ketoconazole or pasireotide for medical management if needed','Ectopic ACTH syndrome — metyrapone test to confirm; bilateral adrenalectomy','Primary hyperaldosteronism — spironolactone to block aldosterone receptor'],
+   ans:1,
+   exp:`<strong>Cushing's disease (pituitary ACTH-secreting adenoma).</strong><br><br>Key diagnostic reasoning:<br>• Elevated ACTH → ACTH-dependent Cushing's (not adrenal adenoma which suppresses ACTH)<br>• High-dose dex: suppresses >50% → pituitary source (retains some feedback responsiveness)<br>• High-dose dex: does NOT suppress in ectopic ACTH (fully autonomous)<br><br>Management: transsphenoidal surgery (gold standard). Medical management for surgical failures/preoperative control: <strong>ketoconazole</strong> (most used — CYP enzyme inhibitor), <strong>metyrapone</strong>, <strong>pasireotide</strong>, <strong>osilodrostat</strong>, or <strong>mifepristone</strong> (GR blocker — monitor glucose, not cortisol).`,
+   trap:'Ectopic ACTH: VERY high ACTH (>200 pg/mL), does NOT suppress on high-dose dex. Cushing\'s disease: ACTH elevated but moderate, suppresses >50% on high-dose dex. These two look similar clinically but differ in dexamethasone response.',
+   bz:['High-dose dex suppresses >50% = pituitary','High ACTH = ACTH-dependent','No suppression on high-dose dex = ectopic','Ketoconazole = most used medical agent']},
+
+  {topic:'Adrenal',diff:2,trap:true,
+   stem:`A <span class="hl">60-year-old man</span> with Cushing's syndrome is started on <span class="hl">mifepristone</span> after failing multiple surgical attempts. Two months later, labs show: cortisol <span class="hl">980 nmol/L (markedly elevated)</span>, ACTH <span class="hl">↑↑</span>, fasting glucose 165 mg/dL (improved from 240 mg/dL). His weight and blood pressure have also improved. <span class="trap-flag">⚠ TRAP</span>`,
+   q:'How do you interpret the elevated cortisol level on mifepristone?',
+   opts:['Treatment failure — mifepristone is not working; the elevated cortisol indicates disease progression','Expected finding — mifepristone blocks the glucocorticoid receptor, removing negative feedback; cortisol rises but cannot act at tissue level; monitor glucose and clinical response, not cortisol','The patient is developing adrenal insufficiency — reduce mifepristone dose','Switch to ketoconazole which directly measures cortisol blockade'],
+   ans:1,
+   exp:`<strong>Expected finding — this is how mifepristone works.</strong> Mifepristone blocks the glucocorticoid receptor (GR). When GR is blocked at the pituitary/hypothalamus, cortisol cannot exert negative feedback → ACTH rises → adrenal cortex is driven to produce more cortisol → serum cortisol RISES dramatically. This is NOT treatment failure — it is the mechanism. Clinical response (improved glucose, blood pressure, weight, skin changes) confirms efficacy. <strong>Never use serum cortisol to monitor mifepristone</strong> — it will always be elevated.`,
+   trap:'Mifepristone monitoring: use clinical response + glucose, NOT serum cortisol. Cortisol will be elevated as a direct consequence of GR blockade (removed feedback). This is the same reason why ACTH rises.',
+   bz:['Mifepristone = GR blocker','Cortisol rises (expected — no feedback)','Monitor glucose + clinical response','Never use cortisol to monitor mifepristone']},
+
+  {topic:'Adrenal',diff:2,trap:true,
+   stem:`A <span class="hl">28-year-old woman</span> is diagnosed with <span class="hl">primary adrenal insufficiency</span> (Addison's disease) after presenting in adrenal crisis. She is stabilized on IV hydrocortisone and IV fluids. The team plans to transition her to oral maintenance therapy. <span class="trap-flag">⚠ TRAP</span>`,
+   q:'What medications should she be discharged on?',
+   opts:['Hydrocortisone alone — adequate glucocorticoid replacement for primary AI','Hydrocortisone + fludrocortisone — both glucocorticoid and mineralocorticoid replacement are required in primary AI','Prednisone alone — easier dosing schedule','Dexamethasone — longer-acting, once daily, sufficient for both glucocorticoid and mineralocorticoid replacement'],
+   ans:1,
+   exp:`<strong>Both hydrocortisone (GC) + fludrocortisone (MC) are required in primary adrenal insufficiency.</strong> In primary AI (Addison's), both cortex zones are destroyed: zona fasciculata (cortisol) AND zona glomerulosa (aldosterone). Aldosterone regulates salt retention — without it, patients develop hyponatremia, hyperkalemia, and hypotension. Fludrocortisone replaces aldosterone.<br><br>In <strong>secondary AI</strong> (pituitary/hypothalamic problem), only cortisol is deficient — aldosterone is preserved because it is regulated by the RAAS (angiotensin II), not ACTH. Secondary AI requires hydrocortisone ONLY.`,
+   trap:'Primary AI = needs BOTH hydrocortisone + fludrocortisone. Secondary AI = needs hydrocortisone ONLY (RAAS intact → aldosterone preserved). This is the #1 drug selection trap in adrenal pharmacology.',
+   bz:['Primary AI: both GC + MC','Secondary AI: GC only','Aldosterone regulated by RAAS (not ACTH)','Fludrocortisone = mineralocorticoid replacement']},
+
+  {topic:'Diabetes',diff:1,trap:false,
+   stem:`A <span class="hl">58-year-old man with T2DM, HFrEF (EF 30%), and CKD stage 3 (eGFR 42 mL/min)</span> has an HbA1c of 8.2% on metformin 1000 mg BID. His cardiologist asks you to optimize his diabetes management for cardiovascular and renal benefit.`,
+   q:'Which class of antidiabetic agent should be added for its proven mortality benefit in this patient\'s specific comorbidities?',
+   opts:['Sulfonylurea (glipizide) — effective, inexpensive, and no contraindication with HF','SGLT2 inhibitor (empagliflozin or dapagliflozin) — proven benefit in HFrEF, HFpEF, and CKD, regardless of diabetes status','GLP-1 agonist (semaglutide) — superior weight loss benefit in this scenario','TZD (pioglitazone) — improves insulin resistance and CKD progression'],
+   ans:1,
+   exp:`<strong>SGLT2 inhibitor is the answer.</strong> Landmark trials: EMPEROR-Reduced (empagliflozin in HFrEF), EMPEROR-Preserved (empagliflozin in HFpEF), DAPA-HF (dapagliflozin in HFrEF), CREDENCE/DAPA-CKD (CKD benefit). SGLT2i is the ONLY antidiabetic class with proven benefit in BOTH HFrEF and HFpEF. Also benefits CKD via renoprotection independent of glucose. Works regardless of diabetes status.<br><br>TZD (pioglitazone) is absolutely contraindicated in HFrEF — causes fluid retention and can precipitate acute decompensation.`,
+   trap:'TZD contraindicated in HFrEF — causes fluid retention and worsens HF. GLP-1 agonists have ASCVD benefit but not the same HF/CKD benefit as SGLT2i. SGLT2i is the drug of choice for T2DM + HF (any EF) + CKD.',
+   bz:['SGLT2i = only class for HFrEF AND HFpEF','EMPEROR-Reduced, DAPA-HF trials','TZD absolutely contraindicated in HFrEF','Works regardless of diabetes status']},
+
+  {topic:'Diabetes',diff:2,trap:true,
+   stem:`A <span class="hl">22-year-old man with type 1 diabetes</span> is brought to the ER with vomiting, abdominal pain, and confusion. Vital signs: HR 118, BP 98/60. Labs: glucose 185 mg/dL, pH 7.14, HCO₃⁻ 8 mEq/L, anion gap 24, serum ketones large. His potassium is <span class="hl">6.1 mEq/L</span>. The intern immediately orders an insulin drip. <span class="trap-flag">⚠ TRAP</span>`,
+   q:'What critical step must be completed BEFORE starting the insulin drip?',
+   opts:['Check blood cultures — sepsis must be excluded before starting insulin','Replace potassium to K⁺ >3.5 mEq/L before starting insulin; if already >3.5, add K⁺ to IV fluids with insulin','Give sodium bicarbonate to correct the acidosis first','Start the insulin drip immediately — K⁺ of 6.1 is not a concern in DKA'],
+   ans:1,
+   exp:`<strong>Potassium replacement BEFORE insulin.</strong> In DKA, serum K⁺ is spuriously elevated — the acidosis drives K⁺ out of cells (H⁺/K⁺ exchange), making serum K⁺ look normal or high. However, total body K⁺ is severely depleted (vomiting, osmotic diuresis). When insulin is started, it rapidly drives K⁺ back into cells → serum K⁺ drops precipitously → fatal hypokalemia and cardiac arrhythmia.<br><br>Rule: If K⁺ <3.5 → replace K⁺ first, THEN start insulin. If K⁺ 3.5–5.0 → start insulin AND add K⁺ to IV fluids. If K⁺ >5.0 → start insulin but hold K⁺ supplementation.`,
+   trap:'Serum K⁺ of 6.1 in DKA is SPURIOUSLY HIGH — total body K⁺ is depleted. Insulin will drive K⁺ into cells rapidly. If you start insulin without K⁺ replacement in a patient with already-low or borderline K⁺, you can cause fatal hypokalemia.',
+   bz:['DKA K⁺ paradox: serum high, total body depleted','Replace K⁺ before insulin if <3.5','Acidosis → K⁺/H⁺ exchange → high serum K⁺','Insulin drives K⁺ into cells']},
+
+  {topic:'Diabetes',diff:2,trap:true,
+   stem:`A <span class="hl">68-year-old man with T2DM</span> managed on metformin + canagliflozin (SGLT2 inhibitor) develops an acute illness with fever and nausea. He is not eating. He presents to the ER with confusion. Glucose is <span class="hl">182 mg/dL</span>. ABG: pH 7.22, HCO₃ 10 mEq/L, anion gap 21. Serum and urine ketones are strongly positive. <span class="trap-flag">⚠ TRAP</span>`,
+   q:'What is the diagnosis?',
+   opts:['HHS — glucose is only mildly elevated, confirming hyperosmolar non-ketotic state','Euglycemic DKA from SGLT2 inhibitor — glucose may be near-normal, but ketoacidosis is present','Type 2 DM with simple lactic acidosis from metformin','Metabolic alkalosis from vomiting'],
+   ans:1,
+   exp:`<strong>Euglycemic DKA from SGLT2 inhibitor.</strong> SGLT2 inhibitors cause glucosuria → lower plasma glucose → lower insulin levels → increased glucagon → ketogenesis. During illness (fasting state), this ketogenic state is amplified. The patient has a high anion gap metabolic acidosis with ketones despite a glucose of only 182 mg/dL — this is <strong>euglycemic DKA</strong>. Classic Step 1 trap: glucose is NOT dramatically elevated, so DKA is often missed.`,
+   trap:'SGLT2i DKA trap: DKA with near-normal glucose. The absence of glucose >250 does NOT rule out DKA when a patient is on an SGLT2 inhibitor. Always check ketones directly. Precipitants: illness, surgery, fasting, insulin omission.',
+   bz:['Euglycemic DKA = SGLT2i on board','Normal glucose does NOT rule out DKA','Always check ketones in SGLT2i patients with illness','High anion gap + ketones = DKA regardless of glucose']},
+
+  {topic:'Diabetes',diff:1,trap:false,
+   stem:`A <span class="hl">62-year-old woman with T2DM</span> is on metformin + sitagliptin (DPP-4 inhibitor). She is brought to the ER after being found unresponsive at home. Blood glucose is <span class="hl">38 mg/dL</span>. Her family says she started a new medication two weeks ago for "blood sugar control."`,
+   q:'Which newly started medication most likely caused her hypoglycemia?',
+   opts:['Her sitagliptin — DPP-4 inhibitors cause hypoglycemia by enhancing GLP-1','Her metformin was recently increased — biguanides cause hypoglycemia via gluconeogenesis inhibition','A sulfonylurea (glipizide or glyburide) was likely added — these cause glucose-independent insulin release','An SGLT2 inhibitor was added — glucosuria causes hypoglycemia'],
+   ans:2,
+   exp:`<strong>Sulfonylurea.</strong> Metformin and DPP-4 inhibitors do NOT cause hypoglycemia when used alone. Sulfonylureas (glipizide, glyburide) close K-ATP channels on pancreatic beta cells → insulin released REGARDLESS of glucose level. This glucose-independent mechanism is uniquely dangerous in elderly patients, those who skip meals, or with renal impairment (glyburide accumulates in CKD).<br><br>SGLT2 inhibitors cause glucosuria but do NOT directly cause hypoglycemia — glucose must reach extremely low levels (rarely, in combination with other agents).`,
+   trap:'Only sulfonylureas and insulin cause significant solo hypoglycemia among antidiabetic agents. Metformin, GLP-1 agonists, DPP-4 inhibitors, SGLT2i, and TZDs do not cause meaningful solo hypoglycemia.',
+   bz:['Sulfonylurea = glucose-independent insulin release','Only SU + insulin cause solo hypoglycemia','Glyburide: avoid in CKD (active metabolites)','K-ATP channel closure → insulin exocytosis']},
+
+  {topic:'Pituitary',diff:3,trap:true,
+   stem:`A <span class="hl">42-year-old woman</span> with known <span class="hl">acromegaly</span> was treated with transsphenoidal surgery, achieving remission. She is now enrolled in a clinical trial testing <span class="hl">pegvisomant</span> for recurrent disease. Baseline IGF-1 is elevated. After 3 months of pegvisomant, her MRI shows the pituitary tumor has <span class="hl">increased 15% in size</span>. <span class="trap-flag">⚠ TRAP</span>`,
+   q:'What is the mechanism of the tumor enlargement and how should it be managed?',
+   opts:['Pegvisomant is ineffective for acromegaly — switch immediately to octreotide monotherapy','Tumor enlargement occurs because pegvisomant has no direct pituitary suppression (unlike SS analogs); add a somatostatin analog (octreotide/lanreotide) to pegvisomant','The tumor has transformed to a higher grade — urgent surgery needed','This is expected pseudoprogression; continue pegvisomant alone and repeat MRI in 12 months'],
+   ans:1,
+   exp:`<strong>Add a somatostatin analog.</strong> Pegvisomant blocks GH receptors peripherally but has no direct effect on the pituitary tumor itself. Somatostatin analogs (octreotide, lanreotide) both lower GH AND directly suppress tumor growth via SSTR2 receptors on somatotrophs. When pegvisomant is used without an SS analog, the tumor loses its direct suppressive signal → can grow. Adding octreotide or lanreotide to pegvisomant provides tumor control while pegvisomant handles peripheral IGF-1 normalization.`,
+   trap:'Pegvisomant has no direct effect on pituitary tumor tissue. SS analogs do (SSTR2-mediated growth inhibition). Always combine pegvisomant with an SS analog to prevent tumor escape.',
+   bz:['Pegvisomant = peripheral GH block only','No direct pituitary tumor suppression','SS analogs = SSTR2 → tumor control','Combination therapy recommended']},
+
+  {topic:'Thyroid',diff:3,trap:false,
+   stem:`A <span class="hl">39-year-old man with Graves' disease</span> is being treated with methimazole. He presents with a sudden onset fever (38.8°C) and a severe sore throat for 2 days. He is otherwise hemodynamically stable.`,
+   q:'What is the most critical next step in management?',
+   opts:['Throat swab for strep culture; continue methimazole if strep negative','Stop methimazole immediately and obtain a CBC — agranulocytosis must be ruled out','Reduce methimazole dose and add antibiotics','Switch to PTU — PTU does not cause agranulocytosis'],
+   ans:1,
+   exp:`<strong>STOP methimazole + emergent CBC.</strong> Agranulocytosis occurs in ~0.3–0.5% of patients on thionamides. It is idiosyncratic, dose-related for methimazole, and can be life-threatening. The classic presentation is fever + sore throat + rapid onset. Any patient on a thionamide who develops fever and sore throat must have the drug stopped and a CBC obtained STAT. If ANC <500/µL → confirmed agranulocytosis → hospitalization + G-CSF + broad-spectrum antibiotics.<br><br>PTU also causes agranulocytosis (same mechanism), so switching drugs is NOT the solution.`,
+   trap:'PTU also causes agranulocytosis — it is NOT safe to switch drugs. If agranulocytosis occurs on one thionamide, the patient cannot be switched to the other. Both must be avoided.',
+   bz:['Stop thionamide immediately','Fever + sore throat = agranulocytosis until proven otherwise','ANC <500 = confirmed, hospitalize','PTU also causes agranulocytosis']},
+
+  {topic:'Adrenal',diff:2,trap:false,
+   stem:`A <span class="hl">55-year-old man with primary hyperaldosteronism</span> (Conn's syndrome) is started on spironolactone for blood pressure control. After 3 months, blood pressure is well controlled, but he returns complaining of painful breast tissue enlargement and sexual dysfunction (impotence).`,
+   q:'What is the best management for these side effects?',
+   opts:['Reduce spironolactone dose — symptoms are dose-dependent and will resolve','Switch to eplerenone — a selective MRA with the same aldosterone-blocking efficacy but no anti-androgenic/anti-progestogenic effects','Add tamoxifen to counteract gynecomastia while continuing spironolactone','Switch to furosemide — equivalent blood pressure control without hormonal side effects'],
+   ans:1,
+   exp:`<strong>Switch to eplerenone.</strong> Spironolactone is a non-selective mineralocorticoid receptor antagonist — it also blocks androgen receptors and progesterone receptors → gynecomastia, breast tenderness, impotence, and menstrual irregularities in women. Eplerenone is a selective MRA with no significant androgen or progesterone receptor binding → same aldosterone-blocking efficacy, no sexual side effects. Both have evidence for primary hyperaldosteronism and HFrEF.`,
+   trap:'Reducing spironolactone dose will decrease blood pressure control. Furosemide does not block aldosterone. Eplerenone is the correct switch — same indication, same efficacy, no gynecomastia.',
+   bz:['Spironolactone = non-selective MRA → gynecomastia','Eplerenone = selective MRA → no gynecomastia','Same aldosterone-blocking efficacy','Switch when SE intolerable']},
+];
+
+// ═══════════════════════════════════════════════════
+// DATA — TRAPS
+// ═══════════════════════════════════════════════════
+const TRAPS=[
+  {s:'Cabergoline is the preferred treatment for prolactinoma because it is more effective, better tolerated, and requires less frequent dosing than bromocriptine.',correct:true,exp:'<strong>True.</strong> Cabergoline: D2-selective, twice-weekly dosing, higher tumor shrinkage rate, fewer GI side effects. Bromocriptine: non-selective, daily dosing, more N/V. Cabergoline is definitively preferred.'},
+  {s:'A patient with a 3 cm sellar mass and serum prolactin of 85 ng/mL most likely has a macroprolactinoma and should be started on cabergoline.',correct:false,exp:'<strong>Trap.</strong> Prolactin of 85 ng/mL with a 3 cm mass = stalk compression, NOT macroprolactinoma. True macroprolactinoma causing a 3 cm mass would have prolactin >500–1000 ng/mL. Starting cabergoline on a non-functioning adenoma or craniopharyngioma delays surgical treatment and risks vision loss.'},
+  {s:'Monitoring GH levels is the most reliable way to assess treatment response in acromegaly patients on pegvisomant.',correct:false,exp:'<strong>Trap.</strong> GH RISES on pegvisomant — the drug blocks the GH receptor, removing IGF-1-mediated negative feedback on GH secretion. Monitor IGF-1 exclusively for treatment success. GH level is unreliable and misleadingly elevated.'},
+  {s:'DDAVP (desmopressin) is effective for treating nephrogenic diabetes insipidus.',correct:false,exp:'<strong>Trap.</strong> DDAVP fails completely in nephrogenic DI because the V2 receptor or AQP2 is defective. Giving DDAVP to a patient with nephrogenic DI (e.g., lithium-induced) has no effect. Treat nephrogenic DI with thiazide diuretics (paradoxically reduce urine output via volume depletion).'},
+  {s:'Thiazide diuretics reduce urine output in nephrogenic diabetes insipidus through a paradoxical mechanism involving volume depletion.',correct:true,exp:'<strong>True.</strong> Thiazides cause mild volume depletion → activates proximal tubule Na/water reabsorption → less fluid delivered to the collecting duct (AVP-sensitive segment) → net reduction in urine output despite being a diuretic. Classic paradox.'},
+  {s:'Methimazole is the preferred antithyroid drug in the first trimester of pregnancy.',correct:false,exp:'<strong>Trap.</strong> Methimazole is teratogenic in the 1st trimester: aplasia cutis (scalp defect), choanal atresia, tracheoesophageal fistula, VACTERL association. PTU is preferred in the 1st trimester, then switched to methimazole at 12–14 weeks (PTU hepatotoxicity outweighs benefit in 2nd/3rd tri).'},
+  {s:'PTU is preferred over methimazole in thyroid storm because PTU also blocks peripheral conversion of T4 to T3.',correct:true,exp:'<strong>True.</strong> PTU uniquely inhibits peripheral 5\'-deiodinase in addition to TPO, rapidly reducing active T3 levels. This dual mechanism makes PTU the preferred agent in thyroid storm. Methimazole only blocks TPO.'},
+  {s:'Lugol\'s iodine should be given before PTU in thyroid storm to rapidly reduce thyroid hormone synthesis.',correct:false,exp:'<strong>Trap — SEQUENCE MATTERS.</strong> Lugol\'s iodine must be given AFTER PTU (wait ≥1 hour). If iodine is given first, the iodine load is incorporated into new thyroid hormone synthesis (Jod-Basedow effect). PTU must first block organification (TPO blockade), then iodine can safely be added for its Wolff-Chaikoff inhibitory effect.'},
+  {s:'Mifepristone\'s efficacy in Cushing\'s syndrome can be monitored by measuring serum cortisol levels.',correct:false,exp:'<strong>Trap.</strong> Mifepristone blocks the glucocorticoid receptor → removes negative feedback → ACTH rises → cortisol rises. Serum cortisol will ALWAYS be elevated on mifepristone — it is NOT a measure of treatment failure. Monitor clinical response (weight, BP, glucose, skin changes) and glucose tolerance, NOT cortisol.'},
+  {s:'Patients with secondary adrenal insufficiency require both hydrocortisone and fludrocortisone for complete replacement therapy.',correct:false,exp:'<strong>Trap.</strong> Secondary AI (pituitary or hypothalamic problem) → ACTH deficiency → cortisol deficiency only. Aldosterone is regulated by the RAAS (angiotensin II), NOT ACTH. Therefore, aldosterone is PRESERVED in secondary AI. Only hydrocortisone (GC) is needed. Primary AI (adrenal glands destroyed) → BOTH cortisol AND aldosterone deficient → need BOTH hydrocortisone + fludrocortisone.'},
+  {s:'SGLT2 inhibitors are only indicated for heart failure patients who also have type 2 diabetes.',correct:false,exp:'<strong>Trap.</strong> SGLT2 inhibitors have proven mortality benefit in HFrEF and HFpEF regardless of diabetes status. EMPEROR-Reduced, EMPEROR-Preserved, and DAPA-HF trials included non-diabetic patients. The cardiac benefit occurs via osmotic diuresis, natriuresis, and direct anti-remodeling effects — mechanisms independent of glucose lowering.'},
+  {s:'Euglycemic DKA from SGLT2 inhibitors presents with near-normal blood glucose, making it easy to recognize.',correct:false,exp:'<strong>Trap.</strong> Euglycemic DKA is EASY TO MISS precisely because glucose is 150–200 mg/dL (near normal). Clinicians expect glucose >250 mg/dL for DKA — the near-normal glucose creates a false sense of security. Always check ketones in patients on SGLT2 inhibitors who present with illness, even with near-normal glucose.'},
+  {s:'Sulfonylureas and GLP-1 agonists both stimulate pancreatic insulin secretion, so they carry the same risk of hypoglycemia.',correct:false,exp:'<strong>Trap.</strong> Key distinction: Sulfonylureas close K-ATP channels REGARDLESS of glucose level → insulin released even in fasting → hypoglycemia. GLP-1 agonists stimulate insulin secretion ONLY when glucose is elevated (glucose-DEPENDENT) → no solo hypoglycemia. This is one of the most commonly tested comparisons on Step 1.'},
+  {s:'Pioglitazone (TZD) is a safe add-on for a patient with T2DM and HFrEF who needs better glycemic control.',correct:false,exp:'<strong>Trap.</strong> TZDs cause fluid retention and are ABSOLUTELY CONTRAINDICATED in HFrEF. They worsen HF by promoting Na/water retention via PPARγ activation in collecting ducts. Can precipitate acute decompensated HF. Use SGLT2i instead — proven benefit in HFrEF.'},
+  {s:'In DKA management, the initial serum potassium of 6.1 mEq/L means potassium replacement is not needed before starting insulin.',correct:false,exp:'<strong>Trap.</strong> Serum K⁺ is SPURIOUSLY ELEVATED in DKA — acidosis drives K⁺ out of cells (H⁺/K⁺ exchange). Total body K⁺ is severely depleted from vomiting and osmotic diuresis. Starting insulin will rapidly drive K⁺ back into cells → serum K⁺ drops → fatal arrhythmia. Protocol: if K⁺ <3.5, give K⁺ first; if 3.5–5.0, give insulin + K⁺ together; if >5.0, hold K⁺.'},
+  {s:'High-dose dexamethasone suppression test is used to differentiate Cushing\'s disease (pituitary) from ectopic ACTH production.',correct:true,exp:'<strong>True.</strong> Cushing\'s disease: pituitary corticotrophs retain some feedback responsiveness → cortisol suppresses ≥50% on high-dose dex. Ectopic ACTH: autonomous and completely feedback-resistant → cortisol does NOT suppress. Low-dose dex is used for SCREENING (all forms of Cushing\'s fail to suppress). High-dose dex LOCALIZES source.'},
+  {s:'Pasireotide and octreotide carry identical risks of hyperglycemia when used for acromegaly.',correct:false,exp:'<strong>Trap.</strong> Pasireotide causes significantly MORE hyperglycemia than octreotide or lanreotide. Pasireotide binds SSTR2 on pancreatic beta cells → inhibits insulin secretion → worsening diabetes or new-onset hyperglycemia. Nearly all patients on pasireotide require glucose-lowering agents. Octreotide/lanreotide have milder effects on glucose.'},
+  {s:'Radioiodine (I-131) is the preferred treatment for Graves\' disease in a 25-year-old woman who is considering pregnancy.',correct:false,exp:'<strong>Trap.</strong> I-131 is NOT preferred for women planning near-term pregnancy. I-131 requires a delay in conception of at least 6 months. Additionally, post-I-131 hypothyroidism must be well-controlled before pregnancy. For women desiring pregnancy soon, antithyroid drugs (PTU/MMZ) or surgery are preferred.'},
+  {s:'Agranulocytosis from methimazole can be avoided by switching to PTU if early signs develop.',correct:false,exp:'<strong>Trap.</strong> PTU ALSO causes agranulocytosis via the same mechanism. If agranulocytosis occurs on one thionamide, NEITHER drug can be used. Stop the thionamide completely and consider I-131 or thyroidectomy for definitive management after recovery.'},
+  {s:'Regular insulin (not rapid-acting analogs) is the appropriate choice for intravenous administration in DKA.',correct:true,exp:'<strong>True.</strong> Only regular insulin has established pharmacokinetics for IV use — short IV half-life (~5 minutes), titratable, predictable. Rapid-acting analogs (lispro, aspart, glulisine) are formulated for subcutaneous use only. In DKA, start regular insulin at 0.1 units/kg/hr IV after K⁺ is ≥3.5.'},
+];
+
+// ═══════════════════════════════════════════════════
+// DATA — MECHANISM MATCHER ROUNDS
+// ═══════════════════════════════════════════════════
+const MATCH_ROUNDS=[
+  {// Round 1 — Pituitary
+   pairs:[
+    ['Cabergoline','D2 receptor agonist on lactotrophs → ↓ prolactin secretion'],
+    ['Pasireotide','Multi-receptor SS analog (SSTR1,2,3,5) → ↓ ACTH from corticotrophs'],
+    ['Pegvisomant','Competitive GH receptor antagonist → ↓ IGF-1 (GH levels rise)'],
+    ['Octreotide','SSTR2/5 agonist → ↓ GH/IGF-1 from somatotrophs'],
+    ['Bromocriptine','Non-selective D2/D1 agonist → ↓ prolactin (also T2DM via CNS dopamine)'],
+    ['Somatropin','Recombinant human GH → ↑ IGF-1 → linear growth + body composition'],
+  ]},
+  {// Round 2 — Thyroid
+   pairs:[
+    ['PTU','Blocks TPO + peripheral 5\'-deiodinase (T4→T3 conversion)'],
+    ['Methimazole','Blocks TPO only — does NOT block T4→T3 conversion'],
+    ['Levothyroxine','Synthetic T4 prohormone → converted to T3 by 5\'-deiodinase'],
+    ['I-131','β-radiation via NIS uptake → destroys follicular cells'],
+    ['Lugol\'s iodine','High-dose iodide → Wolff-Chaikoff effect → blocks organification (temporary)'],
+    ['Propranolol','β-blocker + blocks peripheral 5\'-deiodinase (T4→T3 conversion)'],
+  ]},
+  {// Round 3 — Adrenal
+   pairs:[
+    ['Ketoconazole','CYP11A1/CYP11B1/17α-hydroxylase inhibitor → ↓ cortisol + androgens'],
+    ['Metyrapone','CYP11B1 (11β-hydroxylase) inhibitor → ↑ 11-deoxycortisol → useful diagnostically'],
+    ['Mitotane','Adrenolytic — destroys adrenal cortex cells (adrenocortical carcinoma)'],
+    ['Mifepristone','Glucocorticoid receptor (GR) blocker → cortisol cannot signal at tissue'],
+    ['Fludrocortisone','Potent mineralocorticoid → MR activation → ↑ Na⁺ reabsorption in collecting duct'],
+    ['Dexamethasone','Potent GC → suppresses ACTH (pituitary) via negative feedback (testing agent)'],
+  ]},
+  {// Round 4 — Diabetes
+   pairs:[
+    ['Metformin','AMPK activation → ↓ hepatic gluconeogenesis (primary) + ↑ peripheral insulin sensitivity'],
+    ['Glipizide','Closes K-ATP channels on beta cells → glucose-independent insulin release'],
+    ['GLP-1 agonist (semaglutide)','Binds GLP-1R → glucose-DEPENDENT insulin + ↓ glucagon + ↓ gastric emptying'],
+    ['SGLT2 inhibitor (empagliflozin)','Blocks SGLT2 in PCT → glucosuria + osmotic diuresis + natriuresis + anti-fibrotic'],
+    ['Pioglitazone','PPARγ agonist → ↑ adipogenesis + ↑ peripheral insulin sensitivity (slow onset)'],
+    ['Sitagliptin','DPP-4 inhibitor → ↑ endogenous GLP-1 → glucose-dependent insulin (modest effect)'],
+  ]},
+  {// Round 5 — Mixed HY
+   pairs:[
+    ['DDAVP','V2-selective AVP analog → AQP2 insertion → ↑ water reabsorption (central DI, vWD)'],
+    ['Spironolactone','Non-selective MRA → ↓ aldosterone effect → gynecomastia (androgen block)'],
+    ['Eplerenone','Selective MRA → ↓ aldosterone effect → NO gynecomastia (no androgen block)'],
+    ['Pramlintide','Amylin analog → ↓ glucagon + ↓ gastric emptying + ↑ satiety (given with insulin)'],
+    ['Acarbose','α-glucosidase inhibitor → delays CHO absorption → ↓ postprandial glucose'],
+    ['Osilodrostat','Selective CYP11B1 inhibitor → ↓ cortisol (newer agent for Cushing\'s)'],
+  ]},
+];
+
+// ═══════════════════════════════════════════════════
+// DATA — CLINICAL DECISIONS
+// ═══════════════════════════════════════════════════
+const DECISIONS=[
+  {scenario:'A 32-year-old woman has T2DM (HbA1c 7.8%) that is not controlled on metformin alone. She has established atherosclerotic cardiovascular disease (prior MI 6 months ago) and BMI 34.',
+   tag:'T2DM Drug Selection',
+   steps:[
+    {q:'What is the most appropriate add-on agent for her T2DM given her ASCVD history?',opts:['Add a sulfonylurea (glipizide) — inexpensive and effective','Add a GLP-1 agonist (liraglutide or semaglutide) — proven ↓ MACE in ASCVD','Add a DPP-4 inhibitor (sitagliptin) — weight neutral, no hypoglycemia','Add pioglitazone — improves insulin resistance'],ans:1,
+     exp:'<strong>GLP-1 agonist.</strong> LEADER (liraglutide) and SUSTAIN-6 (semaglutide) trials demonstrated significant reduction in MACE (CV death, non-fatal MI, non-fatal stroke) in T2DM patients with established ASCVD. GLP-1 agonists also cause 3–15 kg weight loss — beneficial given her BMI of 34. Sulfonylureas have no CV benefit. DPP-4 inhibitors are CV-neutral. TZDs worsen fluid retention (avoid with recent MI).'},
+    {q:'She is also found to have proteinuria and CKD stage 2 (eGFR 68). Should an SGLT2 inhibitor be added to her regimen?',opts:['No — SGLT2i are only indicated for HF, not ASCVD + CKD in this range','Yes — SGLT2i (canagliflozin/dapagliflozin) have proven renoprotection in DM + CKD, and are complementary to GLP-1 agonists','No — GLP-1 and SGLT2i cannot be used together','Yes, but only if she fails GLP-1 agonist first'],ans:1,
+     exp:'<strong>Yes — add SGLT2i.</strong> CREDENCE (canagliflozin) and DAPA-CKD (dapagliflozin) trials showed significant reduction in CKD progression and CV events in T2DM + CKD. GLP-1 agonists and SGLT2i have complementary mechanisms and can safely be used together. This combination with metformin is now guideline-supported in T2DM + ASCVD + CKD.'},
+    {q:'Three months later, she develops painful gynecomastia after spironolactone was added for resistant hypertension. What is the best management?',opts:['Reduce spironolactone dose — gynecomastia will resolve at lower doses','Switch to eplerenone — selective MRA with no anti-androgenic effects','Add tamoxifen to block estrogen effects from spironolactone','Stop the MRA completely and use a thiazide instead'],ans:1,
+     exp:'<strong>Switch to eplerenone.</strong> Spironolactone is non-selective — blocks mineralocorticoid, androgen, and progesterone receptors → gynecomastia and sexual dysfunction. Eplerenone is selective for MR only → same BP benefit, same aldosterone blockade, no hormonal side effects.'},
+   ]},
+  {scenario:'A 28-year-old woman presents with 3 months of weight loss, heat intolerance, tremor, and tachycardia. TSH is undetectable. Free T4 is 6× upper limit of normal. She is 10 weeks pregnant.',
+   tag:'Hyperthyroidism in Pregnancy',
+   steps:[
+    {q:'What antithyroid agent is most appropriate at this gestational age?',opts:['Methimazole — once daily dosing preferred','PTU — preferred in 1st trimester to avoid methimazole teratogenicity','I-131 — definitive treatment','Beta-blockers alone — avoid antithyroid drugs in pregnancy'],ans:1,
+     exp:'<strong>PTU in 1st trimester.</strong> Methimazole causes aplasia cutis, choanal atresia, and VACTERL defects in the 1st trimester. PTU preferred until ~12–14 weeks, then switch to methimazole (PTU hepatotoxicity risk outweighs methimazole embryopathy risk in 2nd/3rd trimester). I-131 is absolutely contraindicated (ablates fetal thyroid).'},
+    {q:'She is now 16 weeks pregnant and her hyperthyroidism is well-controlled. The obstetrician recommends switching antithyroid drugs. Which drug should she be switched to?',opts:['Continue PTU — it\'s working well','Switch to methimazole — PTU hepatotoxicity risk outweighs methimazole embryopathy risk after 1st trimester','Switch to I-131 — safe in 2nd trimester','No drug needed — hyperthyroidism improves naturally in 2nd trimester'],ans:1,
+     exp:'<strong>Switch to methimazole at 2nd trimester.</strong> PTU carries a black box warning for hepatotoxicity (rare but severe liver necrosis). This risk outweighs the embryopathy risk of methimazole after the critical organogenesis period (1st trimester). Methimazole is preferred for the 2nd and 3rd trimesters.'},
+    {q:'At 28 weeks, she develops severe tachycardia (HR 152), hyperthermia, confusion, and marked agitation. She is diagnosed with thyroid storm. In what order should the following be administered?',opts:['Lugol\'s iodine → PTU → propranolol → dexamethasone','PTU → wait 1 hour → Lugol\'s iodine + propranolol + dexamethasone','Methimazole → Lugol\'s iodine immediately → beta-blocker','I-131 → methimazole → supportive care'],ans:1,
+     exp:'<strong>PTU first, then Lugol\'s after 1 hour.</strong> Lugol\'s iodine MUST come after PTU — if given first, the iodine load fuels more TH synthesis (Jod-Basedow). PTU blocks organification first. PTU also blocks peripheral T4→T3 (unlike methimazole). Propranolol: controls adrenergic symptoms AND blocks T4→T3. Dexamethasone: blocks T4→T3, anti-inflammatory.'},
+   ]},
+  {scenario:'A 65-year-old man with T2DM and Stage 3 CKD (eGFR 38) presents with polyuria, polydipsia, and a random glucose of 622 mg/dL. Serum osmolality is 398 mOsm/kg. pH is 7.36, HCO₃ 22 mEq/L, serum ketones are negative.',
+   tag:'DKA vs HHS',
+   steps:[
+    {q:'What is the diagnosis?',opts:['DKA — glucose is very high, consistent with DKA','Hyperosmolar hyperglycemic state (HHS) — extreme hyperglycemia with no acidosis and no ketones','SIADH — high osmolality suggests this','Lactic acidosis from metformin at low eGFR'],ans:1,
+     exp:'<strong>HHS (Hyperosmolar Hyperglycemic State).</strong> Key features: glucose >600, serum osmolality >320 mOsm/kg, NO significant acidosis (pH normal, HCO₃ normal), NO ketones. Residual insulin in T2DM prevents lipolysis/ketogenesis but is insufficient to control glucose. HHS has higher mortality than DKA (older patients, prolonged dehydration). Metformin should be held with eGFR <30, but this patient has eGFR 38 — still borderline.'},
+    {q:'What is the initial management priority?',opts:['Start IV regular insulin drip immediately — hyperglycemia is the primary problem','Aggressive IV fluid resuscitation first (1–2L isotonic saline bolus) — dehydration is the primary pathology in HHS','Start bicarbonate to normalize pH','Give subcutaneous long-acting insulin first, then reassess'],ans:1,
+     exp:'<strong>IV fluids first.</strong> In HHS, the primary problem is extreme dehydration from osmotic diuresis. Insulin should NOT be started until fluid resuscitation has begun — premature insulin causes rapid intracellular shifts, further volume depletion, and can cause cerebral edema from too-rapid osmolality reduction. Reduce glucose gradually (target 50 mg/dL/hour). Insulin is added after initial fluids when glucose stops falling with fluids alone.'},
+    {q:'How does management of HHS differ from DKA regarding potassium and acidosis correction?',opts:['Identical to DKA — treat both the same way','HHS: potassium less urgently depleted; no acidosis requiring bicarbonate. DKA: carefully monitor K⁺ before insulin; acidosis resolves with insulin (bicarbonate rarely needed in DKA)','HHS: always give bicarbonate. DKA: never give bicarbonate','In HHS, insulin should be given before fluids; opposite of DKA'],ans:1,
+     exp:'<strong>Key differences:</strong> HHS patients are older, often more dehydrated, and do not have the K⁺ paradox as dramatically as DKA. In DKA, K⁺ must be checked and repleted before insulin. In DKA, acidosis corrects with insulin (not bicarbonate — bicarbonate is only for pH <7.0 or severe hyperkalemia). In HHS, monitor K⁺ but the acidosis concern is absent. Both require careful glucose reduction rate to avoid cerebral edema.'},
+   ]},
+  {scenario:'A 48-year-old man develops new-onset Cushing\'s syndrome features. Labs: 24-hour urine free cortisol elevated 3×. Low-dose dexamethasone (1 mg overnight): cortisol 28 µg/dL (not suppressed). ACTH level: 340 pg/mL (markedly elevated). High-dose dexamethasone (8 mg): cortisol not suppressed.',
+   tag:'Cushing\'s Workup',
+   steps:[
+    {q:'What is the most likely source of ACTH excess?',opts:['Pituitary adenoma (Cushing\'s disease) — ACTH is elevated and suppresses on high-dose dex','Ectopic ACTH — markedly elevated ACTH that fails to suppress on high-dose dex','Primary adrenal adenoma — autonomous cortisol production','Exogenous steroid use — suppressed ACTH'],ans:1,
+     exp:'<strong>Ectopic ACTH.</strong> Key: ACTH is 340 pg/mL (markedly elevated) + DOES NOT suppress on high-dose dex. Cushing\'s Disease (pituitary) has moderately elevated ACTH and typically suppresses ≥50% on high-dose dex (retains some feedback responsiveness). Ectopic ACTH (lung carcinoid, small cell lung cancer, etc.) is fully autonomous — no suppression at any dose. Primary adrenal tumor → ACTH would be suppressed (cortisol excess suppresses pituitary ACTH). Exogenous steroids → ACTH suppressed.'},
+    {q:'What is the medical treatment to control cortisol while the ectopic source is investigated?',opts:['Start pasireotide — somatostatin analog for ACTH suppression','Start ketoconazole (or metyrapone) — steroid synthesis inhibitors to lower cortisol levels rapidly','Start mifepristone — blocks cortisol at the receptor level','Start cabergoline — dopamine agonist reduces ACTH'],ans:1,
+     exp:'<strong>Ketoconazole or metyrapone.</strong> For ectopic ACTH, the goal is to reduce cortisol levels while the primary tumor is identified and treated. Steroid synthesis inhibitors (ketoconazole, metyrapone, osilodrostat) are most effective. Mifepristone blocks the receptor but won\'t lower cortisol levels (they rise). Pasireotide works for pituitary ACTH but is less effective for ectopic. Surgery on the primary tumor (lung carcinoid, etc.) is definitive.'},
+   ]},
+];
+
+// ═══════════════════════════════════════════════════
+// DATA — FLASHCARDS
+// ═══════════════════════════════════════════════════
+const FLASHCARDS=[
+  {tag:'Pituitary',q:'What is the first-line treatment for prolactinoma and why is it preferred over surgery?',a:'<strong>Dopamine agonist (cabergoline)</strong> — shrinks tumor AND normalizes prolactin. Even macroadenomas with visual field defects usually respond to cabergoline alone. Surgery reserved for drug failure, intolerance, or acute rapid vision loss.',trap:'Bromocriptine = non-selective D2/D1, daily dosing, more SE. Cabergoline = D2-selective, twice-weekly, preferred in virtually all cases.'},
+  {tag:'Pituitary',q:'A patient on pegvisomant for acromegaly has rising GH levels but normalized IGF-1. Is this treatment failure?',a:'<strong>No — expected finding.</strong> Pegvisomant blocks the GH receptor → IGF-1 falls (therapeutic goal) → IGF-1-mediated negative feedback on GH is removed → GH rises. Monitor <strong>IGF-1 only</strong> for treatment success.',trap:'Never use GH to monitor pegvisomant. Also: no direct pituitary suppression — combine with SS analog to prevent tumor growth.'},
+  {tag:'Pituitary',q:'What is the stalk compression trap in prolactin interpretation?',a:'<strong>Mild prolactin elevation (<150 ng/mL) + large sellar mass = stalk compression</strong>, NOT prolactinoma. Physical compression of portal vessels blocks dopamine delivery to lactotrophs → mild prolactin rise. True macroprolactinoma causing 2+ cm mass → prolactin >500 ng/mL.',trap:'Do not start cabergoline on a craniopharyngioma or non-functioning adenoma — surgical referral needed.'},
+  {tag:'Posterior Pituitary',q:'How does DDAVP differ from natural AVP, and what makes it useful in gestational DI?',a:'Two structural modifications: (1) <strong>D-arginine</strong> at position 8 → V2-selective (no V1a vasoconstriction); (2) <strong>deaminated N-terminus</strong> → resistant to placental vasopressinase. Natural AVP is degraded by vasopressinase in gestational DI; DDAVP survives.',trap:'DDAVP works in gestational DI but fails in nephrogenic DI (V2R/AQP2 defect).'},
+  {tag:'Posterior Pituitary',q:'Why do thiazide diuretics reduce polyuria in nephrogenic DI? (paradox explanation)',a:'<strong>Volume depletion mechanism:</strong> Thiazides block DCT NaCl reabsorption → mild volume depletion → ↑ angiotensin II → ↑ proximal tubule Na/water reabsorption → less fluid delivered to the collecting duct (AVP-dependent segment) → net ↓ urine output despite being a diuretic.',trap:'This is one of the most classically tested paradoxes on USMLE. Thiazide = diuretic that reduces urine output in nephrogenic DI.'},
+  {tag:'Posterior Pituitary',q:'How does DDAVP treat hemophilia A and von Willebrand disease type 1?',a:'V2 receptors on <strong>vascular endothelial cells</strong> (not just kidney) → cAMP → exocytosis of Weibel-Palade bodies → release of stored <strong>vWF and Factor VIII</strong>. Useful for mild disease or pre-procedure prophylaxis. Does NOT work in vWD type 3 (no stores) or type 2B (risk of thrombocytopenia).',trap:'Not useful in type 3 vWD (no endothelial stores). Type 2B: contraindicated (abnormal vWF causes platelet aggregation).'},
+  {tag:'Thyroid',q:'PTU vs methimazole: which is preferred in pregnancy and why? When do you switch?',a:'<strong>1st trimester → PTU</strong> (methimazole teratogenic: aplasia cutis, choanal atresia, VACTERL). <strong>2nd/3rd trimester → switch to methimazole</strong> (PTU has black box hepatotoxicity that outweighs MMZ embryopathy risk after organogenesis). Breastfeeding: PTU preferred.',trap:'Never give I-131 in pregnancy (absolute CI). Switch from PTU to MMZ at ~12–14 weeks. Agranulocytosis: both PTU and MMZ cause it — cannot switch between them if agranulocytosis occurs.'},
+  {tag:'Thyroid',q:'Why is PTU preferred over methimazole in thyroid storm?',a:'PTU has two mechanisms: (1) blocks TPO (like MMZ), AND (2) blocks <strong>peripheral 5\'-deiodinase → ↓ T4→T3 conversion</strong>. This provides faster reduction of active T3 in the periphery. Thyroid storm requires the fastest possible normalization of active hormone. Add propranolol (also blocks T4→T3) and dexamethasone (also blocks T4→T3).',trap:'Sequence in thyroid storm: PTU → wait 1 hour → Lugol\'s iodine. Never give Lugol\'s before PTU (iodine load fuels more TH synthesis).'},
+  {tag:'Thyroid',q:'What is the Wolff-Chaikoff effect and when is it clinically used?',a:'High-dose iodide transiently inhibits <strong>organification of iodine into thyroid hormone</strong> (↓ TPO activity). Used clinically: <strong>pre-thyroidectomy</strong> (Lugol\'s iodine × 7–10 days → ↓ thyroid vascularity → less intraoperative bleeding). Also used in thyroid storm (after PTU is given first).',trap:'Effect is TEMPORARY — thyroid "escapes" Wolff-Chaikoff after 2–3 weeks (upregulates NIS and TPO). Must always give PTU before Lugol\'s in thyroid storm.'},
+  {tag:'Thyroid',q:'Why does levothyroxine have so many absorption drug interactions?',a:'Levothyroxine requires an <strong>acidic gastric environment</strong> and an empty stomach for maximal absorption. Calcium, iron, and sucralfate chelate T4 in the gut. PPIs/antacids raise gastric pH → ↓ dissolution. Take LT4 fasting AM; separate from Ca²⁺/Fe²⁺/PPIs by ≥4 hours. Enzyme inducers (rifampin, phenytoin) ↑ hepatic T4 metabolism.',trap:'Common vignette: persistent elevated TSH despite "adequate" levothyroxine dose — ask about concurrent calcium, iron, PPI use.'},
+  {tag:'Adrenal',q:'Low-dose vs high-dose dexamethasone suppression test: what does each diagnose?',a:'<strong>Low-dose (1 mg overnight):</strong> SCREENING test. Normal → cortisol <1.8 µg/dL. Abnormal (not suppressed) = ANY Cushing\'s syndrome. <strong>High-dose (8 mg):</strong> SOURCE localization. Pituitary adenoma: suppresses ≥50% (retains some feedback). Ectopic ACTH / adrenal tumor: NO suppression at any dose.',trap:'Pseudo-Cushing\'s (depression, alcoholism) may fail low-dose dex — use CRH stimulation test to differentiate from true Cushing\'s.'},
+  {tag:'Adrenal',q:'Primary vs secondary adrenal insufficiency: which needs fludrocortisone?',a:'<strong>Primary AI</strong> (Addison\'s): adrenal cortex destroyed → BOTH cortisol AND aldosterone deficient → needs <strong>hydrocortisone + fludrocortisone</strong>. <strong>Secondary AI</strong> (ACTH deficiency from pituitary/hypothalamus): only cortisol deficient → aldosterone regulated by RAAS (not ACTH) → preserved → needs <strong>hydrocortisone only</strong>.',trap:'Most commonly tested AI trap on USMLE. Secondary AI does NOT need fludrocortisone. ACTH does not regulate aldosterone.'},
+  {tag:'Adrenal',q:'How does mifepristone work in Cushing\'s, and why should you NOT monitor serum cortisol?',a:'Mifepristone blocks the <strong>glucocorticoid receptor (GR)</strong> → blocks cortisol\'s negative feedback at pituitary → ACTH rises → adrenal gland produces MORE cortisol. Serum cortisol RISES as a direct consequence of the mechanism — it is NOT a sign of treatment failure. Monitor: <strong>clinical response + glucose tolerance</strong>.',trap:'Classic exam trap: cortisol elevated on mifepristone = expected, not treatment failure. Monitor glucose (GR block → insulin resistance manifestations may persist) and clinical features.'},
+  {tag:'Adrenal',q:'What is the sick-day rule for adrenal insufficiency patients, and why?',a:'During illness, surgery, or physiologic stress, cortisol requirements increase 2–3×. AI patients cannot mount this response → adrenal crisis risk. Rule: <strong>double or triple hydrocortisone dose during febrile illness, vomiting, or surgery</strong>. If unable to take oral meds (vomiting) → go to ER for IV hydrocortisone.',trap:'Never stop corticosteroids abruptly in AI patients — risk of acute adrenal crisis. Always taper if stopping long-term steroid therapy in other conditions (HPA axis suppression).'},
+  {tag:'Diabetes',q:'Which antidiabetic drugs cause hypoglycemia and why? Which do not?',a:'<strong>CAUSE hypoglycemia:</strong> Insulin (direct), Sulfonylureas (glucose-independent K-ATP closure → insulin regardless of glucose). <strong>Do NOT cause solo hypoglycemia:</strong> Metformin (↓ gluconeogenesis — no insulin secretion), GLP-1 agonists (glucose-DEPENDENT), DPP-4i (glucose-dependent), SGLT2i (renal glucosuria), TZDs (insulin sensitizer), Acarbose (delays absorption).',trap:'Adding ANY drug to insulin or a sulfonylurea increases hypoglycemia risk of that combination.'},
+  {tag:'Diabetes',q:'What is the SGLT2 inhibitor mechanism in heart failure, and why does it work in non-diabetic patients?',a:'SGLT2i block glucose/Na reabsorption in PCT → <strong>osmotic diuresis + natriuresis</strong> → ↓ preload (immediate) + direct <strong>anti-fibrotic and anti-inflammatory</strong> effects on cardiac/renal tissue. These mechanisms are independent of glucose lowering. EMPEROR-Reduced, EMPEROR-Preserved, DAPA-HF: benefit in HF regardless of DM status.',trap:'SGLT2i is the ONLY antidiabetic class with proven benefit in both HFrEF AND HFpEF. TZD absolutely contraindicated in HFrEF (fluid retention).'},
+  {tag:'Diabetes',q:'DKA K⁺ paradox: explain why serum K⁺ is elevated but you must still give potassium.',a:'<strong>Mechanism:</strong> Insulin deficiency → K⁺ cannot enter cells (Na/K-ATPase requires insulin). Acidosis → H⁺ enters cells, K⁺ exits (H⁺/K⁺ exchange) → serum K⁺ appears high. Total body K⁺ is severely depleted from osmotic diuresis and vomiting. Starting insulin → K⁺ rapidly re-enters cells → serum K⁺ drops → fatal arrhythmia.<br>Rule: K⁺ <3.5 → give K⁺ first, then insulin.',trap:'Serum K⁺ of 6+ in DKA is spuriously elevated. NEVER start insulin before checking and repleting K⁺.'},
+  {tag:'Diabetes',q:'Euglycemic DKA: what is it, who gets it, and why is it easy to miss?',a:'<strong>DKA with near-normal glucose (150–200 mg/dL)</strong> occurring in SGLT2 inhibitor users. Mechanism: SGLT2i cause glucosuria → ↓ plasma glucose → ↓ insulin levels → ↑ glucagon → ketogenesis. During illness/fasting, ketogenesis amplified. pH acidic, anion gap elevated, ketones positive — classic DKA — but glucose deceivingly normal.',trap:'Easy to miss because clinicians expect glucose >250 for DKA. Always check ketones in any SGLT2i patient with illness, vomiting, or metabolic acidosis, regardless of glucose level.'},
+  {tag:'Diabetes',q:'Metformin: mechanism, first-line status, contraindications, and lactic acidosis risk.',a:'Activates <strong>AMPK</strong> → ↓ hepatic gluconeogenesis (primary) + ↓ intestinal glucose absorption + ↑ peripheral insulin sensitivity. First-line T2DM (UKPDS: ↓ CV events). No hypoglycemia, mild weight reduction, cheap. Lactic acidosis (rare): avoid if eGFR <30, hepatic failure, alcohol use. Hold 48h before iodinated contrast.',trap:'Lactic acidosis is rare but serious. Common vignette trigger: metformin + iodinated contrast in a patient with CKD → hold metformin. Vitamin B12 deficiency with chronic use (less tested).'},
+  {tag:'Diabetes',q:'Compare GLP-1 agonists vs DPP-4 inhibitors: same or different?',a:'<strong>GLP-1 agonists</strong> (injectable mostly): pharmacological supraphysiologic GLP-1 receptor activation → large ↑ insulin + ↓ glucagon + ↓ gastric emptying + hypothalamic satiety → <strong>3–15 kg weight loss</strong> + CV benefit in ASCVD. <strong>DPP-4 inhibitors</strong> (oral): block GLP-1 degradation → modest ↑ in endogenous GLP-1 → <strong>weight neutral</strong>, modest glucose lowering, no meaningful CV benefit (except saxagliptin worsens HF).',trap:'GLP-1 agonists ≠ DPP-4 inhibitors. GLP-1 agonists: more potent, weight loss, CV benefit, mostly injectable. DPP-4i: oral, weight neutral, CV neutral. Both: glucose-dependent (no solo hypoglycemia).'},
+];
+
+// ═══════════════════════════════════════════════════
+// VIGNETTE ENGINE
+// ═══════════════════════════════════════════════════
+let vigIdx=0, filteredVigs=[...VIGNETTES];
+function filterVigs(topic,btn){
+  document.querySelectorAll('#vig-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  filteredVigs=topic==='all'?[...VIGNETTES]:VIGNETTES.filter(v=>v.topic===topic);
+  vigIdx=0;renderVig();
+}
+function renderVig(){
+  const v=filteredVigs[vigIdx];if(!v)return;
+  const letters=['A','B','C','D','E'];
+  const diffLabel=['','Easy','Medium','Hard'];
+  document.getElementById('vig-container').innerHTML=`
+    <div class="vignette-card">
+      <div class="vc-meta">
+        <span class="vc-num">Q${vigIdx+1}/${filteredVigs.length}</span>
+        <span class="vc-topic">${v.topic}</span>
+        <span class="vc-diff diff-${v.diff}">${diffLabel[v.diff]}</span>
+        ${v.trap?'<span class="trap-badge">⚠ Contains Trap</span>':''}
+      </div>
+      <div class="vc-body">
+        <div class="vignette-text">${v.stem}</div>
+        <div style="font-weight:600;font-size:13px;margin-bottom:10px;color:var(--text);">${v.q}</div>
+        <div class="options">${v.opts.map((o,i)=>`
+          <button class="option" onclick="checkVig(${i},this)">
+            <span class="option-letter">${letters[i]}.</span>
+            <span>${o}</span>
+          </button>`).join('')}
+        </div>
+        <div class="explanation" id="vig-exp">
+          ${v.exp}
+          ${v.trap?`<div class="trap-exp">${v.trap}</div>`:''}
+          <div class="buzzwords">${(v.bz||[]).map(b=>`<span class="bw">${b}</span>`).join('')}</div>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('vig-prog').style.width=((vigIdx+1)/filteredVigs.length*100)+'%';
+  document.getElementById('vig-prog-txt').textContent=`${vigIdx+1} / ${filteredVigs.length}`;
+}
+function checkVig(i,btn){
+  const v=filteredVigs[vigIdx];
+  document.querySelectorAll('.option').forEach((o,j)=>{
+    if(j===v.ans)o.classList.add('correct');
+    else if(j===i)o.classList.add('wrong');
+    o.onclick=null;
+  });
+  document.getElementById('vig-exp').classList.add('show');
+  addScore(i===v.ans);
+}
+function vigNav(dir){vigIdx=Math.max(0,Math.min(filteredVigs.length-1,vigIdx+dir));renderVig();}
+
+// ═══════════════════════════════════════════════════
+// TRAP ENGINE
+// ═══════════════════════════════════════════════════
+let trapIdx=0;
+function renderTrap(){
+  const t=TRAPS[trapIdx];
+  document.getElementById('trap-container').innerHTML=`
+    <div class="trap-card">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:10px;">Statement ${trapIdx+1} of ${TRAPS.length}</div>
+      <div class="trap-statement">${t.s}</div>
+      <div class="trap-btns">
+        <button class="trap-btn true-btn" onclick="checkTrap(true,this)">✓ True — This is correct</button>
+        <button class="trap-btn false-btn" onclick="checkTrap(false,this)">✗ False — This is a trap</button>
+      </div>
+      <div class="trap-reveal ${t.correct?'is-true':'is-trap'}" id="trap-reveal">${t.exp}</div>
+    </div>`;
+  document.getElementById('trap-prog').style.width=((trapIdx+1)/TRAPS.length*100)+'%';
+  document.getElementById('trap-prog-txt').textContent=`${trapIdx+1} / ${TRAPS.length}`;
+}
+function checkTrap(answer,btn){
+  const t=TRAPS[trapIdx];const correct=answer===t.correct;
+  document.querySelectorAll('.trap-btn').forEach(b=>b.onclick=null);
+  btn.classList.add(correct?'selected-correct':'selected-wrong');
+  document.getElementById('trap-reveal').classList.add('show');
+  addScore(correct);
+}
+function trapNav(dir){trapIdx=Math.max(0,Math.min(TRAPS.length-1,trapIdx+dir));renderTrap();}
+
+// ═══════════════════════════════════════════════════
+// MATCHER ENGINE
+// ═══════════════════════════════════════════════════
+let selectedDrug=null,matchCorrect=0,matchTotal=0;
+function shuffle(arr){return [...arr].sort(()=>Math.random()-.5);}
+function loadMatchRound(ri,btn){
+  document.querySelectorAll('#match-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedDrug=null;matchCorrect=0;matchTotal=0;
+  const round=MATCH_ROUNDS[ri];
+  const drugs=shuffle(round.pairs.map(p=>p[0]));
+  const mechs=shuffle(round.pairs.map(p=>p[1]));
+  document.getElementById('match-score').textContent=`0 / ${round.pairs.length} matched`;
+  document.getElementById('match-drugs').innerHTML=drugs.map(d=>`<div class="match-item" data-drug="${d}" onclick="selectDrug('${d.replace(/'/g,"\\'")}',this)">${d}</div>`).join('');
+  document.getElementById('match-mechs').innerHTML=mechs.map(m=>`<div class="match-item" data-mech="${m}" onclick="selectMech('${m.replace(/'/g,"\\'")}',this)">${m}</div>`).join('');
+  matchTotal=round.pairs.length;
+}
+function selectDrug(d,el){
+  document.querySelectorAll('#match-drugs .match-item:not(.correct)').forEach(i=>i.classList.remove('selected'));
+  el.classList.add('selected');selectedDrug=d;
+}
+function selectMech(m,el){
+  if(!selectedDrug)return;
+  const allRounds=MATCH_ROUNDS;
+  let correct=false;
+  for(const r of allRounds){const p=r.pairs.find(p=>p[0]===selectedDrug);if(p&&p[1]===m){correct=true;break;}}
+  const drugEl=document.querySelector(`[data-drug="${selectedDrug.replace(/"/g,'\\"')}"]`);
+  if(correct){
+    drugEl.classList.remove('selected');drugEl.classList.add('correct','used');
+    el.classList.add('correct');
+    matchCorrect++;addScore(true);
+    document.getElementById('match-score').textContent=`${matchCorrect} / ${matchTotal} matched`;
+    if(matchCorrect===matchTotal)document.getElementById('match-score').textContent='🎉 Round complete! All matched correctly.';
+  }else{
+    el.classList.add('wrong');setTimeout(()=>el.classList.remove('wrong'),500);addScore(false);
+  }
+  selectedDrug=null;drugEl&&drugEl.classList.remove('selected');
+}
+function resetMatch(){
+  document.querySelectorAll('#match-filters .filter-btn.active')[0]?.click()||loadMatchRound(0,document.querySelectorAll('#match-filters .filter-btn')[0]);
+}
+
+// ═══════════════════════════════════════════════════
+// DECISION ENGINE
+// ═══════════════════════════════════════════════════
+let decIdx=0,stepIdx=0;
+function renderDecision(){
+  const d=DECISIONS[decIdx];
+  document.getElementById('decision-container').innerHTML=`
+    <div class="tree-card">
+      <div class="tree-scenario">
+        <div class="tree-scenario-tag">${d.tag}</div>
+        <div class="tree-scenario-text">${d.scenario.replace(/([A-Z][^.]+\.)/g,'$1')}</div>
+      </div>
+      <div class="tree-body" id="tree-steps"></div>
+    </div>`;
+  stepIdx=0;renderStep();
+  document.getElementById('dec-prog').style.width=((decIdx+1)/DECISIONS.length*100)+'%';
+  document.getElementById('dec-prog-txt').textContent=`${decIdx+1} / ${DECISIONS.length}`;
+}
+function renderStep(){
+  const d=DECISIONS[decIdx];if(stepIdx>=d.steps.length)return;
+  const s=d.steps[stepIdx];
+  const container=document.getElementById('tree-steps');
+  const stepDiv=document.createElement('div');
+  const letters=['A','B','C','D'];
+  stepDiv.innerHTML=`
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--amber);margin-bottom:8px;${stepIdx>0?'margin-top:20px;padding-top:16px;border-top:1px solid var(--border);':''}">Step ${stepIdx+1} of ${d.steps.length}</div>
+    <div class="tree-question">${s.q}</div>
+    <div class="tree-opts">${s.opts.map((o,i)=>`<button class="tree-opt" onclick="checkStep(${i},this,${stepIdx})">${letters[i]}. ${o}</button>`).join('')}</div>
+    <div class="tree-result" id="step-result-${stepIdx}">${s.exp}</div>
+    <button class="tree-next" id="step-next-${stepIdx}" onclick="nextStep()">Continue to next step →</button>`;
+  container.appendChild(stepDiv);
+}
+function checkStep(i,btn,si){
+  const s=DECISIONS[decIdx].steps[si];
+  btn.parentElement.querySelectorAll('.tree-opt').forEach((o,j)=>{
+    if(j===s.ans)o.classList.add('correct');
+    else if(j===i)o.classList.add('wrong');
+    o.onclick=null;
+  });
+  document.getElementById('step-result-'+si).classList.add('show');
+  const nextBtn=document.getElementById('step-next-'+si);
+  if(stepIdx<DECISIONS[decIdx].steps.length-1)nextBtn.style.display='inline-block';
+  addScore(i===s.ans);
+}
+function nextStep(){stepIdx++;renderStep();}
+function decisionNav(dir){decIdx=Math.max(0,Math.min(DECISIONS.length-1,decIdx+dir));renderDecision();}
+
+// ═══════════════════════════════════════════════════
+// FLASHCARD ENGINE
+// ═══════════════════════════════════════════════════
+let fcIdx=0,filteredFC=[...FLASHCARDS];
+function filterFC(tag,btn){
+  document.querySelectorAll('#fc-filters .filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  filteredFC=tag==='all'?[...FLASHCARDS]:FLASHCARDS.filter(f=>f.tag===tag);
+  fcIdx=0;renderFC();
+}
+function renderFC(){
+  const f=filteredFC[fcIdx];if(!f)return;
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('fc-front').innerHTML=`<div class="fc-tag">${f.tag}</div><div class="fc-q">${f.q}</div>`;
+  document.getElementById('fc-back').innerHTML=`<div class="fc-tag">${f.tag} — Answer</div><div class="fc-a">${f.a}</div>${f.trap?`<div class="fc-trap">⚠ ${f.trap}</div>`:''}`;
+  document.getElementById('fc-counter').textContent=`${fcIdx+1} / ${filteredFC.length}`;
+}
+function flipCard(){document.getElementById('flashcard').classList.toggle('flipped');}
+function fcNav(dir){fcIdx=Math.max(0,Math.min(filteredFC.length-1,fcIdx+dir));renderFC();}
+
+// ═══════════════════════════════════════════════════
+// AI TUTOR ENGINE
+// ═══════════════════════════════════════════════════
+async function generateQuestion(){
+  const topic=document.getElementById('ai-topic').value;
+  const type=document.getElementById('ai-type').value;
+  const diff=document.getElementById('ai-diff').value;
+  const btn=document.getElementById('ai-gen-btn');
+  const out=document.getElementById('ai-output');
+
+  btn.disabled=true;
+  out.innerHTML=`<div class="ai-loading"><div class="spinner"></div><span>Generating your question...</span></div>`;
+
+  const prompt=`You are a USMLE Step 1 question writer specializing in endocrine pharmacology. Generate a single high-quality ${type} about ${topic} at ${diff} difficulty level.
+
+Format your response EXACTLY like this:
+QUESTION:
+[Write the full clinical vignette or question stem here. If it's a clinical vignette, include patient age, sex, presenting symptoms, relevant history, and key lab values. Highlight the most important clinical details.]
+
+OPTIONS:
+A) [Option A]
+B) [Option B]
+C) [Option C]
+D) [Option D]
+
+CORRECT ANSWER: [A/B/C/D]
+
+EXPLANATION:
+[Write a thorough teaching explanation (4-6 sentences) that: (1) states the correct answer and why it's correct, (2) explains the mechanism, (3) explains why the wrong answers are wrong, (4) explicitly identifies any traps in the question, and (5) lists 3-4 buzzwords or key facts a student should remember.]
+
+BUZZWORDS:
+[List 3-4 high-yield phrases separated by | characters]
+
+Make the question genuinely challenging and representative of how Step 1 actually tests this material. Include at least one plausible distractor that tests a common misconception.`;
+
+  try{
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data=await resp.json();
+    const text=data.content?.[0]?.text||'';
+
+    // Parse response
+    const qMatch=text.match(/QUESTION:\n([\s\S]+?)(?=\nOPTIONS:)/);
+    const optsMatch=text.match(/OPTIONS:\n([\s\S]+?)(?=\nCORRECT ANSWER:)/);
+    const ansMatch=text.match(/CORRECT ANSWER:\s*([A-D])/);
+    const expMatch=text.match(/EXPLANATION:\n([\s\S]+?)(?=\nBUZZWORDS:|$)/);
+    const bzMatch=text.match(/BUZZWORDS:\n([\s\S]+?)$/);
+
+    if(!qMatch||!optsMatch||!ansMatch){
+      out.innerHTML=`<div class="ai-output"><div class="ai-question">${text}</div></div>`;
+      btn.disabled=false;return;
+    }
+
+    const question=qMatch[1].trim();
+    const optsRaw=optsMatch[1].trim().split('\n').filter(l=>l.trim());
+    const ansLetter=ansMatch[1];
+    const ansIdx=['A','B','C','D'].indexOf(ansLetter);
+    const explanation=(expMatch?.[1]||'').trim();
+    const buzzwords=(bzMatch?.[1]||'').trim().split('|').map(b=>b.trim()).filter(Boolean);
+
+    const letters=['A','B','C','D'];
+    let answered=false;
+
+    out.innerHTML=`
+      <div class="ai-question">${question}</div>
+      <div class="options" id="ai-opts">
+        ${optsRaw.map((o,i)=>`
+          <button class="option" onclick="checkAI(${i},${ansIdx},this)">
+            <span class="option-letter">${letters[i]}.</span>
+            <span>${o.replace(/^[A-D]\)\s*/,'')}</span>
+          </button>`).join('')}
+      </div>
+      <div class="ai-answer" id="ai-ans">
+        ${explanation}
+        ${buzzwords.length?`<div class="buzzwords" style="margin-top:10px;">${buzzwords.map(b=>`<span class="bw">${b}</span>`).join('')}</div>`:''}
+      </div>`;
+
+  }catch(e){
+    out.innerHTML=`<div style="color:var(--red);font-size:13px;">Error generating question. Please check your connection and try again.<br><small>${e.message}</small></div>`;
+  }
+  btn.disabled=false;
+}
+function checkAI(i,ans,btn){
+  document.querySelectorAll('#ai-opts .option').forEach((o,j)=>{
+    if(j===ans)o.classList.add('correct');
+    else if(j===i)o.classList.add('wrong');
+    o.onclick=null;
+  });
+  document.getElementById('ai-ans').classList.add('show');
+  addScore(i===ans);
+}
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+renderVig();
+renderTrap();
+loadMatchRound(0,document.querySelector('#match-filters .filter-btn'));
+renderDecision();
+renderFC();
+</script>
+</body>
+</html>

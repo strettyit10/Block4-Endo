@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Endocrine Full Drill Suite — Block 4</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f4f0;--surface:#ffffff;--surface2:#f0efe9;
+  --border:rgba(0,0,0,0.09);--bh:rgba(0,0,0,0.2);
+  --text:#1a1a1a;--muted:#6b6b6b;--dim:#c0bfba;
+  --acc:#2563eb;--ag:rgba(37,99,235,0.08);
+  --green:#16a34a;--gbg:rgba(22,163,74,0.08);
+  --red:#dc2626;--rbg:rgba(220,38,38,0.08);
+  --amb:#d97706;--abg:rgba(217,119,6,0.08);
+  --pur:#7c3aed;--pbg:rgba(124,58,237,0.08);
+  --teal:#0891b2;--tbg:rgba(8,145,178,0.08);
+  --coral:#e11d48;--cobg:rgba(225,29,72,0.08);
+  --sh:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+  --r:10px;--rl:14px;
+}
+[data-theme="dark"]{
+  --bg:#0f1117;--surface:#181c27;--surface2:#1f2435;
+  --border:rgba(255,255,255,0.08);--bh:rgba(255,255,255,0.18);
+  --text:#e8eaf0;--muted:#7a8099;--dim:#444d66;
+  --acc:#5c8aff;--ag:rgba(92,138,255,0.12);
+  --green:#3ecf8e;--gbg:rgba(62,207,142,0.1);
+  --red:#ff6b6b;--rbg:rgba(255,107,107,0.1);
+  --amb:#f5a623;--abg:rgba(245,166,35,0.1);
+  --pur:#a78bfa;--pbg:rgba(167,139,250,0.1);
+  --teal:#38bdf8;--tbg:rgba(56,189,248,0.1);
+  --coral:#fb7185;--cobg:rgba(251,113,133,0.1);
+  --sh:0 1px 4px rgba(0,0,0,0.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;min-height:100vh;line-height:1.6;transition:background .25s,color .25s}
+
+/* HEADER */
+.site-header{border-bottom:1px solid var(--border);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;background:var(--surface);box-shadow:var(--sh);position:sticky;top:0;z-index:100;gap:12px;flex-wrap:wrap}
+.hdr-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-family:'Instrument Serif',serif;font-size:20px;color:var(--text);letter-spacing:-.02em}
+.logo span{color:var(--acc)}
+.badge-row{display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:20px;border:1px solid var(--border);color:var(--muted);background:var(--surface2);font-weight:500}
+.badge.phys{border-color:rgba(37,99,235,.25);color:var(--acc);background:var(--ag)}
+.badge.path{border-color:rgba(225,29,72,.2);color:var(--coral);background:var(--cobg)}
+.badge.pharm{border-color:rgba(22,163,74,.2);color:var(--green);background:var(--gbg)}
+.badge.bio{border-color:rgba(217,119,6,.25);color:var(--amb);background:var(--abg)}
+
+/* THEME TOGGLE */
+.theme-btn{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:12px;color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.theme-btn:hover{border-color:var(--bh);color:var(--text)}
+.t-track{width:34px;height:19px;background:var(--bh);border-radius:10px;position:relative;transition:background .2s;flex-shrink:0}
+[data-theme="dark"] .t-track{background:var(--acc)}
+.t-thumb{width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2.5px;left:2.5px;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+[data-theme="dark"] .t-thumb{transform:translateX(15px)}
+
+/* MAIN */
+.main{max-width:1080px;margin:0 auto;padding:26px 22px 80px}
+
+/* SCOREBAR */
+.scorebar{display:flex;align-items:center;gap:18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:13px 20px;margin-bottom:24px;box-shadow:var(--sh);flex-wrap:wrap}
+.sc-item{display:flex;flex-direction:column;align-items:center;min-width:54px}
+.sc-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;line-height:1}
+.sc-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-top:2px}
+.sc-div{width:1px;height:28px;background:var(--border)}
+.streak-pill{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:12px;padding:4px 10px;border-radius:8px;background:var(--abg);color:var(--amb);border:1px solid rgba(217,119,6,.2)}
+.topic-tabs{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap}
+.topic-tab{padding:7px 13px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.topic-tab:hover{border-color:var(--bh);color:var(--text)}
+.topic-tab.active{background:var(--ag);border-color:var(--acc);color:var(--acc)}
+
+/* SECTION */
+.sh{margin-bottom:18px}
+.sh h2{font-family:'Instrument Serif',serif;font-size:26px;font-weight:400;letter-spacing:-.02em;color:var(--text);margin-bottom:4px}
+.sh p{color:var(--muted);font-size:14px}
+
+/* MODE TABS */
+.mode-tabs{display:flex;gap:5px;margin-bottom:20px;flex-wrap:wrap}
+.mode-tab{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.mode-tab:hover{border-color:var(--bh);color:var(--text)}
+.mode-tab.active{background:var(--ag);border-color:var(--acc);color:var(--acc)}
+
+/* TOPIC SECTIONS */
+.topic-section{display:none}
+.topic-section.active{display:block}
+.mode-panel{display:none}
+.mode-panel.active{display:block}
+
+/* LAB GRID */
+.lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+@media(max-width:620px){.lab-grid{grid-template-columns:1fr}}
+.lab-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:19px;box-shadow:var(--sh)}
+.lab-card h3{font-size:14px;font-weight:700;margin-bottom:11px}
+.lab-values{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+.lab-row{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--surface2);border-radius:6px;font-size:13px}
+.lab-name{color:var(--muted);font-family:'DM Mono',monospace;font-size:11px}
+.lab-val{font-weight:700;font-family:'DM Mono',monospace;font-size:12px}
+.hi{color:var(--red)}.lo{color:var(--acc)}.norm{color:var(--green)}
+.dx-opts{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.dx-opt{padding:8px 10px;background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;text-align:center;color:var(--text)}
+.dx-opt:hover{border-color:var(--acc);color:var(--acc);background:var(--ag)}
+.dx-opt.correct{background:var(--gbg);border-color:var(--green);color:var(--green)}
+.dx-opt.wrong{background:var(--rbg);border-color:var(--red);color:var(--red)}
+.explanation{margin-top:11px;padding:12px 14px;background:var(--surface2);border-radius:8px;border-left:3px solid var(--acc);font-size:12px;line-height:1.7;color:var(--muted);display:none}
+.explanation.show{display:block;animation:pop .2s}
+.explanation strong{color:var(--text)}
+
+/* VIGNETTES */
+.prog-row{display:flex;align-items:center;gap:12px;margin-bottom:17px}
+.prog-bar{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--acc);border-radius:3px;transition:width .4s}
+.prog-txt{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)}
+.vig-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:26px;box-shadow:var(--sh);margin-bottom:15px}
+.vig-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;flex-wrap:wrap;gap:8px}
+.vig-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
+.lo-cite{font-size:10px;color:var(--muted);font-style:italic}
+.diff{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600}
+.d1{background:var(--gbg);color:var(--green)}
+.d2{background:var(--abg);color:var(--amb)}
+.d3{background:var(--rbg);color:var(--red)}
+.vig-text{font-size:15px;line-height:1.75;margin-bottom:20px;padding-bottom:17px;border-bottom:1px solid var(--border)}
+.hl{background:rgba(37,99,235,.08);border-radius:3px;padding:0 3px;color:var(--acc)}
+.trap-flag{font-family:'DM Mono',monospace;font-size:10px;background:var(--abg);color:var(--amb);border:1px solid rgba(217,119,6,.3);border-radius:5px;padding:2px 9px;margin-bottom:8px;display:inline-block}
+.ans-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:580px){.ans-grid{grid-template-columns:1fr}}
+.ans-opt{padding:12px 14px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;cursor:pointer;transition:all .15s;display:flex;align-items:flex-start;gap:10px;color:var(--text)}
+.ans-opt:hover{border-color:var(--bh)}
+.ans-opt.correct{background:var(--gbg);border-color:var(--green)}
+.ans-opt.wrong{background:var(--rbg);border-color:var(--red)}
+.opt-ltr{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;color:var(--muted)}
+.ans-opt.correct .opt-ltr{background:var(--green);color:#fff}
+.ans-opt.wrong .opt-ltr{background:var(--red);color:#fff}
+.fb-box{margin-top:15px;padding:16px 18px;border-radius:var(--r);background:var(--surface2);border-left:3px solid var(--acc);font-size:13px;line-height:1.65;display:none;color:var(--muted)}
+.fb-box.show{display:block;animation:pop .2s}
+.buzz{font-family:'DM Mono',monospace;font-size:10px;background:var(--abg);color:var(--amb);border:1px solid rgba(217,119,6,.2);padding:2px 8px;border-radius:5px}
+.nav-btns{display:flex;gap:10px;margin-top:4px}
+.nav-btn{padding:10px 22px;border-radius:var(--r);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s}
+.nav-next{background:var(--acc);border:none;color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.2)}
+.nav-next:hover{filter:brightness(1.07)}
+.nav-prev{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.nav-prev:hover{border-color:var(--bh);color:var(--text)}
+
+/* STEP-THROUGH */
+.step-flow{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:26px;box-shadow:var(--sh)}
+.step-item{margin-bottom:26px}
+.step-hdr{display:flex;align-items:center;gap:11px;margin-bottom:9px}
+.step-num{width:27px;height:27px;border-radius:50%;background:var(--acc);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 2px 6px rgba(37,99,235,.22)}
+.step-ttl{font-size:15px;font-weight:700;color:var(--text)}
+.step-q{font-size:14px;color:var(--muted);margin-bottom:11px;line-height:1.6}
+.step-opts{display:flex;gap:8px;flex-wrap:wrap}
+.step-opt{padding:9px 15px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--text)}
+.step-opt:hover{border-color:var(--acc);color:var(--acc);background:var(--ag)}
+.step-opt.ok{background:var(--gbg);border-color:var(--green);color:var(--green)}
+.step-opt.ng{background:var(--rbg);border-color:var(--red);color:var(--red)}
+.step-rev{margin-top:11px;font-size:13px;color:var(--muted);line-height:1.65;display:none;padding:12px 14px;background:var(--surface2);border-radius:8px;border-left:3px solid var(--acc)}
+.step-rev.show{display:block;animation:pop .2s}
+.step-rev strong{color:var(--text)}
+.step-div{height:1px;background:var(--border);margin:0 0 26px}
+
+/* FLASHCARD FLIP */
+.fc-wrap{perspective:1200px;margin-bottom:16px}
+.fc-inner{position:relative;width:100%;min-height:190px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.fc-inner.flipped{transform:rotateY(180deg)}
+.fc-face{position:absolute;width:100%;min-height:190px;backface-visibility:hidden;border-radius:var(--rl);border:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;text-align:center;box-shadow:var(--sh)}
+.fc-back{transform:rotateY(180deg)}
+.fc-tag{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:.4rem}
+.fc-lo{font-size:10px;color:var(--dim);font-style:italic;margin-bottom:.4rem}
+.fc-q{font-size:16px;font-weight:500;color:var(--text);line-height:1.5;max-width:580px}
+.fc-a{font-size:13px;color:var(--muted);line-height:1.65;max-width:580px;text-align:left}
+.fc-trap{font-size:11px;color:var(--amb);background:var(--abg);border:1px solid rgba(217,119,6,.3);border-radius:var(--r);padding:6px 12px;margin-top:.75rem;text-align:left}
+.fc-hint{font-size:11px;color:var(--dim);margin-top:.75rem}
+.fc-nav{display:flex;gap:8px;margin-bottom:.5rem}
+.fc-nav button{flex:1;padding:8px;font-size:13px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);color:var(--text);cursor:pointer;font-family:'DM Sans',sans-serif}
+.fc-nav button:hover{background:var(--surface2)}
+.fc-mark{display:flex;gap:8px}
+.btn-k{flex:1;padding:7px;font-size:12px;border-radius:var(--r);border:1px solid rgba(22,163,74,.4);color:var(--green);background:var(--gbg);cursor:pointer;font-family:'DM Sans',sans-serif}
+.btn-r{flex:1;padding:7px;font-size:12px;border-radius:var(--r);border:1px solid rgba(217,119,6,.4);color:var(--amb);background:var(--abg);cursor:pointer;font-family:'DM Sans',sans-serif}
+.fc-stat{font-size:11px;color:var(--dim);margin-top:.5rem}
+.fc-bar-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+.fc-bar-row select,.fc-bar-row button{font-size:13px;padding:6px 12px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);color:var(--text);cursor:pointer;font-family:'DM Sans',sans-serif}
+.fc-bar-row select:hover,.fc-bar-row button:hover{background:var(--surface2)}
+.fc-prog{font-size:12px;color:var(--muted);margin-left:auto}
+
+/* QUICK REF */
+.qref{margin-top:13px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:13px 15px;box-shadow:var(--sh)}
+.qref-head{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.qref-body{display:none;margin-top:11px}
+.qref-body.open{display:block}
+.qref-row{font-size:12px;color:var(--muted);line-height:1.9}
+.qref-row strong{color:var(--text)}
+
+/* AXIS BUILDER */
+.axis-wrap{display:grid;grid-template-columns:1fr 280px;gap:18px;align-items:start}
+@media(max-width:680px){.axis-wrap{grid-template-columns:1fr}}
+.axis-diagram{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:26px 22px;box-shadow:var(--sh)}
+.axis-lvl{display:flex;justify-content:center;margin-bottom:0}
+.axis-node{width:210px;text-align:center;background:var(--surface2);border:2px solid var(--border);border-radius:var(--r);padding:14px 12px;transition:border-color .2s}
+.axis-node.correct{border-color:var(--green)!important;background:var(--gbg)}
+.axis-node.wrong{border-color:var(--red)!important;background:var(--rbg);animation:shake .35s}
+.axis-node h3{font-size:12px;font-weight:700;color:var(--text);letter-spacing:.04em;margin-bottom:2px}
+.axis-node .sub{font-size:10px;color:var(--muted);margin-bottom:2px}
+.drop-zone{min-height:30px;min-width:150px;margin:8px auto 0;border:1.5px dashed var(--dim);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--dim);transition:all .15s;padding:4px 8px}
+.drop-zone.drag-over{border-color:var(--acc);color:var(--acc);background:var(--ag)}
+.drop-zone.has-chip{border-style:solid;border-color:var(--acc);color:var(--acc);background:var(--ag);font-weight:600;font-size:13px}
+.connector{display:flex;flex-direction:column;align-items:center;margin:4px 0}
+.conn-lbl{font-family:'DM Mono',monospace;font-size:10px;background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:2px 10px;color:var(--muted)}
+.conn-arr{font-size:18px;color:var(--dim);line-height:1.2}
+.neg-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--red);border:1px solid rgba(220,38,38,.22);background:var(--rbg);border-radius:5px;padding:3px 10px;font-weight:500}
+.chip-bank{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:18px;box-shadow:var(--sh)}
+.bank-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{padding:7px 13px;background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-weight:500;cursor:grab;transition:all .15s;user-select:none;color:var(--text)}
+.chip:hover{border-color:var(--acc);color:var(--acc);background:var(--ag);transform:translateY(-1px);box-shadow:var(--sh)}
+.chip.dragging{opacity:.35;transform:scale(.95)}
+.chip.used{opacity:.25;pointer-events:none}
+.check-btn{width:100%;margin-top:14px;padding:11px;background:var(--acc);border:none;border-radius:var(--r);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.check-btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.reset-btn{width:100%;margin-top:7px;padding:9px;background:transparent;border:1px solid var(--border);border-radius:var(--r);color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .15s}
+.reset-btn:hover{border-color:var(--bh);color:var(--text)}
+.result-panel{margin-top:14px;padding:14px;border-radius:var(--r);display:none}
+.result-panel.show{display:block;animation:pop .2s}
+.result-panel.pass{background:var(--gbg);border:1px solid rgba(22,163,74,.25)}
+.result-panel.fail{background:var(--rbg);border:1px solid rgba(220,38,38,.2)}
+.result-panel h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.result-panel.pass h4{color:var(--green)}
+.result-panel.fail h4{color:var(--red)}
+.result-panel p{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* ANIMATIONS */
+@keyframes pop{from{transform:scale(.97);opacity:.7}to{transform:scale(1);opacity:1}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="hdr-left">
+    <div class="logo">Endo<span>·</span>Drill</div>
+    <div class="badge-row">
+      <span class="badge phys">Physiology</span>
+      <span class="badge path">Pathology</span>
+      <span class="badge pharm">Pharmacology</span>
+      <span class="badge bio">Biochemistry</span>
+    </div>
+  </div>
+  <button class="theme-btn" onclick="toggleTheme()">
+    <div class="t-track"><div class="t-thumb"></div></div>
+    Dark mode
+  </button>
+</header>
+
+<div class="main">
+
+<!-- SCOREBAR -->
+<div class="scorebar">
+  <div class="sc-item">
+    <div class="sc-num" id="sc-cor">0</div>
+    <div class="sc-lbl">Correct</div>
+  </div>
+  <div class="sc-div"></div>
+  <div class="sc-item">
+    <div class="sc-num" id="sc-tot">0</div>
+    <div class="sc-lbl">Answered</div>
+  </div>
+  <div class="sc-div"></div>
+  <div class="sc-item">
+    <div class="sc-num" id="sc-pct">—</div>
+    <div class="sc-lbl">Accuracy</div>
+  </div>
+  <div class="sc-div"></div>
+  <div class="sc-item">
+    <div class="streak-pill" id="sc-streak">🔥 0</div>
+    <div class="sc-lbl">Streak</div>
+  </div>
+  <div class="topic-tabs" style="margin-left:auto">
+    <button class="topic-tab active" onclick="showTopic('hpa',this)">HPA Axis</button>
+    <button class="topic-tab" onclick="showTopic('thyroid',this)">Thyroid</button>
+    <button class="topic-tab" onclick="showTopic('adrenal',this)">Adrenal</button>
+    <button class="topic-tab" onclick="showTopic('diabetes',this)">Diabetes</button>
+    <button class="topic-tab" onclick="showTopic('pituitary',this)">Pituitary</button>
+    <button class="topic-tab" onclick="showTopic('posterior',this)">Post. Pituitary</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC: HPA AXIS
+═══════════════════════════════════════════ -->
+<div class="topic-section active" id="topic-hpa">
+  <div class="sh">
+    <h2>HPA Axis & Adrenal Cortex</h2>
+    <p>Watson · Danielsen · Wieneke · Sharma — feedback loops, cortisol physiology, Cushing's, Addison's, CAH</p>
+  </div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showMode('hpa','builder',this)">Axis Builder</button>
+    <button class="mode-tab" onclick="showMode('hpa','labs',this)">Lab Interpreter</button>
+    <button class="mode-tab" onclick="showMode('hpa','clinic',this)">Vignettes</button>
+    <button class="mode-tab" onclick="showMode('hpa','dexa',this)">Dex Protocol</button>
+    <button class="mode-tab" onclick="showMode('hpa','flash',this)">Flashcards</button>
+  </div>
+
+  <!-- AXIS BUILDER -->
+  <div class="mode-panel active" id="hpa-builder">
+    <div class="axis-wrap">
+      <div class="axis-diagram">
+        <div class="axis-lvl">
+          <div class="axis-node" id="hyp-node">
+            <h3>HYPOTHALAMUS</h3>
+            <div class="sub">Parvocellular PVN neurons</div>
+            <div class="drop-zone" id="dz-crh" ondrop="drop(event,'dz-crh')" ondragover="dragOver(event)">drop releasing hormone</div>
+          </div>
+        </div>
+        <div class="connector"><div class="conn-lbl">portal blood ↓</div><div class="conn-arr">↓</div></div>
+        <div class="axis-lvl">
+          <div class="axis-node" id="pit-node">
+            <h3>ANTERIOR PITUITARY</h3>
+            <div class="sub">Corticotrophs</div>
+            <div class="drop-zone" id="dz-acth" ondrop="drop(event,'dz-acth')" ondragover="dragOver(event)">drop tropic hormone</div>
+          </div>
+        </div>
+        <div class="connector"><div class="conn-arr">↓</div></div>
+        <div class="axis-lvl">
+          <div class="axis-node" id="adr-node">
+            <h3>ADRENAL CORTEX</h3>
+            <div class="sub">Zona fasciculata</div>
+            <div class="drop-zone" id="dz-cort" ondrop="drop(event,'dz-cort')" ondragover="dragOver(event)">drop effector hormone</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;gap:10px;margin-top:10px">
+          <div style="text-align:center;background:var(--surface2);border:1.5px solid rgba(217,119,6,.35);border-radius:var(--r);padding:8px 12px;font-size:11px;font-weight:700;color:var(--amb)">Glomerulosa<br><span style="font-weight:400;color:var(--muted)">Aldosterone</span></div>
+          <div style="text-align:center;background:var(--surface2);border:1.5px solid rgba(37,99,235,.25);border-radius:var(--r);padding:8px 12px;font-size:11px;font-weight:700;color:var(--acc)">Fasciculata<br><span style="font-weight:400;color:var(--muted)">Cortisol</span></div>
+          <div style="text-align:center;background:var(--surface2);border:1.5px solid rgba(124,58,237,.25);border-radius:var(--r);padding:8px 12px;font-size:11px;font-weight:700;color:var(--pur)">Reticularis<br><span style="font-weight:400;color:var(--muted)">DHEA</span></div>
+        </div>
+        <div style="display:flex;justify-content:center;margin-top:14px">
+          <div class="neg-tag">← long-loop (cortisol) &amp; short-loop (ACTH) negative feedback →</div>
+        </div>
+        <div class="result-panel" id="builder-result"></div>
+      </div>
+      <div>
+        <div class="chip-bank">
+          <div class="bank-lbl">Drag to correct level</div>
+          <div class="chips" id="hpa-chips">
+            <div class="chip" draggable="true" ondragstart="dragStart(event,'CRH')" id="chip-CRH">CRH</div>
+            <div class="chip" draggable="true" ondragstart="dragStart(event,'ACTH')" id="chip-ACTH">ACTH</div>
+            <div class="chip" draggable="true" ondragstart="dragStart(event,'Cortisol')" id="chip-Cortisol">Cortisol</div>
+            <div class="chip" draggable="true" ondragstart="dragStart(event,'TSH')" id="chip-TSH">TSH</div>
+            <div class="chip" draggable="true" ondragstart="dragStart(event,'GH')" id="chip-GH">GH</div>
+            <div class="chip" draggable="true" ondragstart="dragStart(event,'AVP')" id="chip-AVP">AVP</div>
+            <div class="chip" draggable="true" ondragstart="dragStart(event,'Aldosterone')" id="chip-Aldo">Aldosterone</div>
+          </div>
+          <button class="check-btn" onclick="checkBuilder()">Check axis</button>
+          <button class="reset-btn" onclick="resetBuilder()">Reset</button>
+        </div>
+        <div class="qref" style="margin-top:12px">
+          <div class="qref-head" onclick="toggleQref('hpa-qref')">Quick Reference <span>▾</span></div>
+          <div class="qref-body" id="hpa-qref">
+            <div class="qref-row"><strong>CRH</strong> → parvocellular PVN → portal blood → corticotrophs</div>
+            <div class="qref-row"><strong>ACTH</strong> → from POMC; short-loop feedback to hypothalamus</div>
+            <div class="qref-row"><strong>Cortisol</strong> → long-loop feedback to BOTH hypothalamus &amp; pituitary</div>
+            <div class="qref-row"><strong>Diurnal peak</strong>: 6–8 AM cortisol; nadir at midnight</div>
+            <div class="qref-row"><strong>Stress activators</strong>: pain, hypoglycemia, infection, surgery</div>
+            <div class="qref-row"><strong>AVP</strong>: also stimulates ACTH (via V1b/Gq on corticotrophs)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAB INTERPRETER -->
+  <div class="mode-panel" id="hpa-labs">
+    <div class="lab-grid" id="hpa-lab-grid"></div>
+  </div>
+
+  <!-- VIGNETTES -->
+  <div class="mode-panel" id="hpa-clinic">
+    <div class="prog-row">
+      <div class="prog-bar"><div class="prog-fill" id="hpa-pfill" style="width:0%"></div></div>
+      <div class="prog-txt" id="hpa-ptxt">0 / 8</div>
+    </div>
+    <div id="hpa-vig-container"></div>
+    <div class="nav-btns">
+      <button class="nav-btn nav-prev" onclick="prevV('hpa')">← Previous</button>
+      <button class="nav-btn nav-next" onclick="nextV('hpa')">Next →</button>
+    </div>
+  </div>
+
+  <!-- DEX PROTOCOL -->
+  <div class="mode-panel" id="hpa-dexa">
+    <div class="step-flow" id="hpa-dexa-container"></div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div class="mode-panel" id="hpa-flash">
+    <div class="fc-bar-row">
+      <select id="hpa-fc-fil" onchange="filterFC('hpa')">
+        <option value="all">All HPA cards</option>
+        <option value="trap">⚠ Traps only</option>
+      </select>
+      <button onclick="shuffleFC('hpa')">Shuffle</button>
+      <button onclick="resetFC('hpa')">Reset</button>
+      <span class="fc-prog" id="hpa-fc-prog"></span>
+    </div>
+    <div class="fc-wrap">
+      <div class="fc-inner" id="hpa-fc-inner" onclick="flipFC('hpa')">
+        <div class="fc-face">
+          <div class="fc-tag" id="hpa-fc-tag"></div>
+          <div class="fc-lo" id="hpa-fc-lo"></div>
+          <div class="fc-q" id="hpa-fc-q"></div>
+          <div class="fc-hint">tap to reveal answer</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" id="hpa-fc-tag2"></div>
+          <div class="fc-a" id="hpa-fc-a"></div>
+          <div class="fc-trap" id="hpa-fc-trap" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button onclick="prevFC('hpa')">← Prev</button>
+      <button onclick="nextFC('hpa')">Next →</button>
+    </div>
+    <div class="fc-mark">
+      <button class="btn-k" onclick="markFC('hpa','k')">✓ Got it</button>
+      <button class="btn-r" onclick="markFC('hpa','r')">↺ Review again</button>
+    </div>
+    <div class="fc-stat" id="hpa-fc-stat"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC: THYROID & PARATHYROID
+═══════════════════════════════════════════ -->
+<div class="topic-section" id="topic-thyroid">
+  <div class="sh">
+    <h2>Thyroid & Parathyroid</h2>
+    <p>Danielsen · Watson · Wieneke — TH synthesis, Graves', Hashimoto's, thyroid cancers, parathyroid disorders</p>
+  </div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showMode('thyroid','labs',this)">Lab Interpreter</button>
+    <button class="mode-tab" onclick="showMode('thyroid','clinic',this)">Vignettes</button>
+    <button class="mode-tab" onclick="showMode('thyroid','synth',this)">Synthesis Steps</button>
+    <button class="mode-tab" onclick="showMode('thyroid','flash',this)">Flashcards</button>
+  </div>
+  <div class="mode-panel active" id="thyroid-labs">
+    <div class="lab-grid" id="thyroid-lab-grid"></div>
+  </div>
+  <div class="mode-panel" id="thyroid-clinic">
+    <div class="prog-row">
+      <div class="prog-bar"><div class="prog-fill" id="thyroid-pfill" style="width:0%"></div></div>
+      <div class="prog-txt" id="thyroid-ptxt">0 / 8</div>
+    </div>
+    <div id="thyroid-vig-container"></div>
+    <div class="nav-btns">
+      <button class="nav-btn nav-prev" onclick="prevV('thyroid')">← Previous</button>
+      <button class="nav-btn nav-next" onclick="nextV('thyroid')">Next →</button>
+    </div>
+  </div>
+  <div class="mode-panel" id="thyroid-synth">
+    <div class="step-flow" id="thyroid-synth-container"></div>
+  </div>
+  <div class="mode-panel" id="thyroid-flash">
+    <div class="fc-bar-row">
+      <select id="thyroid-fc-fil" onchange="filterFC('thyroid')">
+        <option value="all">All thyroid cards</option>
+        <option value="trap">⚠ Traps only</option>
+      </select>
+      <button onclick="shuffleFC('thyroid')">Shuffle</button>
+      <button onclick="resetFC('thyroid')">Reset</button>
+      <span class="fc-prog" id="thyroid-fc-prog"></span>
+    </div>
+    <div class="fc-wrap">
+      <div class="fc-inner" id="thyroid-fc-inner" onclick="flipFC('thyroid')">
+        <div class="fc-face">
+          <div class="fc-tag" id="thyroid-fc-tag"></div>
+          <div class="fc-lo" id="thyroid-fc-lo"></div>
+          <div class="fc-q" id="thyroid-fc-q"></div>
+          <div class="fc-hint">tap to reveal answer</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" id="thyroid-fc-tag2"></div>
+          <div class="fc-a" id="thyroid-fc-a"></div>
+          <div class="fc-trap" id="thyroid-fc-trap" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button onclick="prevFC('thyroid')">← Prev</button>
+      <button onclick="nextFC('thyroid')">Next →</button>
+    </div>
+    <div class="fc-mark">
+      <button class="btn-k" onclick="markFC('thyroid','k')">✓ Got it</button>
+      <button class="btn-r" onclick="markFC('thyroid','r')">↺ Review again</button>
+    </div>
+    <div class="fc-stat" id="thyroid-fc-stat"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC: ADRENAL SYNTHESIS
+═══════════════════════════════════════════ -->
+<div class="topic-section" id="topic-adrenal">
+  <div class="sh">
+    <h2>Adrenal Steroid Synthesis & CAH</h2>
+    <p>Danielsen · Wieneke · Sharma — steroidogenesis, enzyme deficiencies, pheo, RAAS</p>
+  </div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showMode('adrenal','labs',this)">Lab Interpreter</button>
+    <button class="mode-tab" onclick="showMode('adrenal','clinic',this)">Vignettes</button>
+    <button class="mode-tab" onclick="showMode('adrenal','pheo',this)">Pheo Protocol</button>
+    <button class="mode-tab" onclick="showMode('adrenal','flash',this)">Flashcards</button>
+  </div>
+  <div class="mode-panel active" id="adrenal-labs">
+    <div class="lab-grid" id="adrenal-lab-grid"></div>
+  </div>
+  <div class="mode-panel" id="adrenal-clinic">
+    <div class="prog-row">
+      <div class="prog-bar"><div class="prog-fill" id="adrenal-pfill" style="width:0%"></div></div>
+      <div class="prog-txt" id="adrenal-ptxt">0 / 8</div>
+    </div>
+    <div id="adrenal-vig-container"></div>
+    <div class="nav-btns">
+      <button class="nav-btn nav-prev" onclick="prevV('adrenal')">← Previous</button>
+      <button class="nav-btn nav-next" onclick="nextV('adrenal')">Next →</button>
+    </div>
+  </div>
+  <div class="mode-panel" id="adrenal-pheo">
+    <div class="step-flow" id="adrenal-pheo-container"></div>
+  </div>
+  <div class="mode-panel" id="adrenal-flash">
+    <div class="fc-bar-row">
+      <select id="adrenal-fc-fil" onchange="filterFC('adrenal')">
+        <option value="all">All adrenal cards</option>
+        <option value="trap">⚠ Traps only</option>
+      </select>
+      <button onclick="shuffleFC('adrenal')">Shuffle</button>
+      <button onclick="resetFC('adrenal')">Reset</button>
+      <span class="fc-prog" id="adrenal-fc-prog"></span>
+    </div>
+    <div class="fc-wrap">
+      <div class="fc-inner" id="adrenal-fc-inner" onclick="flipFC('adrenal')">
+        <div class="fc-face">
+          <div class="fc-tag" id="adrenal-fc-tag"></div>
+          <div class="fc-lo" id="adrenal-fc-lo"></div>
+          <div class="fc-q" id="adrenal-fc-q"></div>
+          <div class="fc-hint">tap to reveal answer</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" id="adrenal-fc-tag2"></div>
+          <div class="fc-a" id="adrenal-fc-a"></div>
+          <div class="fc-trap" id="adrenal-fc-trap" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button onclick="prevFC('adrenal')">← Prev</button>
+      <button onclick="nextFC('adrenal')">Next →</button>
+    </div>
+    <div class="fc-mark">
+      <button class="btn-k" onclick="markFC('adrenal','k')">✓ Got it</button>
+      <button class="btn-r" onclick="markFC('adrenal','r')">↺ Review again</button>
+    </div>
+    <div class="fc-stat" id="adrenal-fc-stat"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC: DIABETES
+═══════════════════════════════════════════ -->
+<div class="topic-section" id="topic-diabetes">
+  <div class="sh">
+    <h2>Diabetes Mellitus</h2>
+    <p>Furlong · Janicic — T1DM, T2DM, DKA, HHS, insulin types, oral agents, complications</p>
+  </div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showMode('diabetes','labs',this)">Lab Interpreter</button>
+    <button class="mode-tab" onclick="showMode('diabetes','clinic',this)">Vignettes</button>
+    <button class="mode-tab" onclick="showMode('diabetes','drugs',this)">Drug Mechanism Drill</button>
+    <button class="mode-tab" onclick="showMode('diabetes','flash',this)">Flashcards</button>
+  </div>
+  <div class="mode-panel active" id="diabetes-labs">
+    <div class="lab-grid" id="diabetes-lab-grid"></div>
+  </div>
+  <div class="mode-panel" id="diabetes-clinic">
+    <div class="prog-row">
+      <div class="prog-bar"><div class="prog-fill" id="diabetes-pfill" style="width:0%"></div></div>
+      <div class="prog-txt" id="diabetes-ptxt">0 / 8</div>
+    </div>
+    <div id="diabetes-vig-container"></div>
+    <div class="nav-btns">
+      <button class="nav-btn nav-prev" onclick="prevV('diabetes')">← Previous</button>
+      <button class="nav-btn nav-next" onclick="nextV('diabetes')">Next →</button>
+    </div>
+  </div>
+  <div class="mode-panel" id="diabetes-drugs">
+    <div class="step-flow" id="diabetes-drugs-container"></div>
+  </div>
+  <div class="mode-panel" id="diabetes-flash">
+    <div class="fc-bar-row">
+      <select id="diabetes-fc-fil" onchange="filterFC('diabetes')">
+        <option value="all">All diabetes cards</option>
+        <option value="trap">⚠ Traps only</option>
+      </select>
+      <button onclick="shuffleFC('diabetes')">Shuffle</button>
+      <button onclick="resetFC('diabetes')">Reset</button>
+      <span class="fc-prog" id="diabetes-fc-prog"></span>
+    </div>
+    <div class="fc-wrap">
+      <div class="fc-inner" id="diabetes-fc-inner" onclick="flipFC('diabetes')">
+        <div class="fc-face">
+          <div class="fc-tag" id="diabetes-fc-tag"></div>
+          <div class="fc-lo" id="diabetes-fc-lo"></div>
+          <div class="fc-q" id="diabetes-fc-q"></div>
+          <div class="fc-hint">tap to reveal answer</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" id="diabetes-fc-tag2"></div>
+          <div class="fc-a" id="diabetes-fc-a"></div>
+          <div class="fc-trap" id="diabetes-fc-trap" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button onclick="prevFC('diabetes')">← Prev</button>
+      <button onclick="nextFC('diabetes')">Next →</button>
+    </div>
+    <div class="fc-mark">
+      <button class="btn-k" onclick="markFC('diabetes','k')">✓ Got it</button>
+      <button class="btn-r" onclick="markFC('diabetes','r')">↺ Review again</button>
+    </div>
+    <div class="fc-stat" id="diabetes-fc-stat"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC: PITUITARY PATHOLOGY
+═══════════════════════════════════════════ -->
+<div class="topic-section" id="topic-pituitary">
+  <div class="sh">
+    <h2>Pituitary Pathology & GH Axis</h2>
+    <p>Santi · Watson — adenomas, hypopituitarism, acromegaly, mass effects</p>
+  </div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showMode('pituitary','labs',this)">Lab Interpreter</button>
+    <button class="mode-tab" onclick="showMode('pituitary','clinic',this)">Vignettes</button>
+    <button class="mode-tab" onclick="showMode('pituitary','flash',this)">Flashcards</button>
+  </div>
+  <div class="mode-panel active" id="pituitary-labs">
+    <div class="lab-grid" id="pituitary-lab-grid"></div>
+  </div>
+  <div class="mode-panel" id="pituitary-clinic">
+    <div class="prog-row">
+      <div class="prog-bar"><div class="prog-fill" id="pituitary-pfill" style="width:0%"></div></div>
+      <div class="prog-txt" id="pituitary-ptxt">0 / 6</div>
+    </div>
+    <div id="pituitary-vig-container"></div>
+    <div class="nav-btns">
+      <button class="nav-btn nav-prev" onclick="prevV('pituitary')">← Previous</button>
+      <button class="nav-btn nav-next" onclick="nextV('pituitary')">Next →</button>
+    </div>
+  </div>
+  <div class="mode-panel" id="pituitary-flash">
+    <div class="fc-bar-row">
+      <span class="fc-prog" id="pituitary-fc-prog"></span>
+      <button onclick="shuffleFC('pituitary')" style="margin-left:auto">Shuffle</button>
+      <button onclick="resetFC('pituitary')">Reset</button>
+    </div>
+    <div class="fc-wrap">
+      <div class="fc-inner" id="pituitary-fc-inner" onclick="flipFC('pituitary')">
+        <div class="fc-face">
+          <div class="fc-tag" id="pituitary-fc-tag"></div>
+          <div class="fc-lo" id="pituitary-fc-lo"></div>
+          <div class="fc-q" id="pituitary-fc-q"></div>
+          <div class="fc-hint">tap to reveal answer</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" id="pituitary-fc-tag2"></div>
+          <div class="fc-a" id="pituitary-fc-a"></div>
+          <div class="fc-trap" id="pituitary-fc-trap" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button onclick="prevFC('pituitary')">← Prev</button>
+      <button onclick="nextFC('pituitary')">Next →</button>
+    </div>
+    <div class="fc-mark">
+      <button class="btn-k" onclick="markFC('pituitary','k')">✓ Got it</button>
+      <button class="btn-r" onclick="markFC('pituitary','r')">↺ Review again</button>
+    </div>
+    <div class="fc-stat" id="pituitary-fc-stat"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TOPIC: POSTERIOR PITUITARY
+═══════════════════════════════════════════ -->
+<div class="topic-section" id="topic-posterior">
+  <div class="sh">
+    <h2>Posterior Pituitary</h2>
+    <p>Sherman — AVP, oxytocin, diabetes insipidus, osmoregulation</p>
+  </div>
+  <div class="mode-tabs">
+    <button class="mode-tab active" onclick="showMode('posterior','clinic',this)">Vignettes</button>
+    <button class="mode-tab" onclick="showMode('posterior','di',this)">DI Diagnosis Drill</button>
+    <button class="mode-tab" onclick="showMode('posterior','flash',this)">Flashcards</button>
+  </div>
+  <div class="mode-panel active" id="posterior-clinic">
+    <div class="prog-row">
+      <div class="prog-bar"><div class="prog-fill" id="posterior-pfill" style="width:0%"></div></div>
+      <div class="prog-txt" id="posterior-ptxt">0 / 6</div>
+    </div>
+    <div id="posterior-vig-container"></div>
+    <div class="nav-btns">
+      <button class="nav-btn nav-prev" onclick="prevV('posterior')">← Previous</button>
+      <button class="nav-btn nav-next" onclick="nextV('posterior')">Next →</button>
+    </div>
+  </div>
+  <div class="mode-panel" id="posterior-di">
+    <div class="step-flow" id="posterior-di-container"></div>
+  </div>
+  <div class="mode-panel" id="posterior-flash">
+    <div class="fc-bar-row">
+      <span class="fc-prog" id="posterior-fc-prog"></span>
+      <button onclick="shuffleFC('posterior')" style="margin-left:auto">Shuffle</button>
+      <button onclick="resetFC('posterior')">Reset</button>
+    </div>
+    <div class="fc-wrap">
+      <div class="fc-inner" id="posterior-fc-inner" onclick="flipFC('posterior')">
+        <div class="fc-face">
+          <div class="fc-tag" id="posterior-fc-tag"></div>
+          <div class="fc-lo" id="posterior-fc-lo"></div>
+          <div class="fc-q" id="posterior-fc-q"></div>
+          <div class="fc-hint">tap to reveal answer</div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag" id="posterior-fc-tag2"></div>
+          <div class="fc-a" id="posterior-fc-a"></div>
+          <div class="fc-trap" id="posterior-fc-trap" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button onclick="prevFC('posterior')">← Prev</button>
+      <button onclick="nextFC('posterior')">Next →</button>
+    </div>
+    <div class="fc-mark">
+      <button class="btn-k" onclick="markFC('posterior','k')">✓ Got it</button>
+      <button class="btn-r" onclick="markFC('posterior','r')">↺ Review again</button>
+    </div>
+    <div class="fc-stat" id="posterior-fc-stat"></div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+// ═══ GLOBAL SCORE ═══
+let cor=0,tot=0,streak=0;
+function addSc(ok){tot++;if(ok){cor++;streak++;}else{streak=0;}
+  document.getElementById('sc-cor').textContent=cor;
+  document.getElementById('sc-tot').textContent=tot;
+  document.getElementById('sc-pct').textContent=tot?Math.round(cor/tot*100)+'%':'—';
+  document.getElementById('sc-streak').textContent='🔥 '+streak;
+}
+
+// ═══ THEME ═══
+function toggleTheme(){const h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark');}
+
+// ═══ TOPIC / MODE NAV ═══
+function showTopic(id,btn){
+  document.querySelectorAll('.topic-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.topic-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('topic-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function showMode(topic,mode,btn){
+  document.querySelectorAll('#topic-'+topic+' .mode-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#topic-'+topic+' .mode-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(topic+'-'+mode).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleQref(id){const b=document.getElementById(id);b.classList.toggle('open');}
+
+// ═══ AXIS BUILDER ═══
+const CORRECT_DZ={'dz-crh':'CRH','dz-acth':'ACTH','dz-cort':'Cortisol'};
+let dragging=null;
+function dragStart(e,label){dragging=label;e.target.classList.add('dragging');}
+function dragOver(e){e.preventDefault();e.currentTarget.classList.add('drag-over');}
+function drop(e,dzId){
+  e.preventDefault();e.currentTarget.classList.remove('drag-over');
+  if(!dragging)return;
+  const dz=document.getElementById(dzId);
+  dz.textContent=dragging;dz.classList.add('has-chip');
+  document.getElementById('chip-'+dragging)&&document.getElementById('chip-'+dragging).classList.add('used');
+  dragging=null;
+}
+document.addEventListener('dragend',()=>{document.querySelectorAll('.chip').forEach(c=>c.classList.remove('dragging'));document.querySelectorAll('.drop-zone').forEach(d=>d.classList.remove('drag-over'));});
+function checkBuilder(){
+  const map={'dz-crh':'CRH','dz-acth':'ACTH','dz-cort':'Cortisol'};
+  const nodes={'dz-crh':'hyp-node','dz-acth':'pit-node','dz-cort':'adr-node'};
+  let ok=0;
+  Object.entries(map).forEach(([dz,expected])=>{
+    const val=document.getElementById(dz).textContent.trim();
+    const node=document.getElementById(nodes[dz]);
+    if(val===expected){node.classList.add('correct');node.classList.remove('wrong');ok++;}
+    else if(document.getElementById(dz).classList.contains('has-chip')){node.classList.add('wrong');node.classList.remove('correct');}
+  });
+  const rp=document.getElementById('builder-result');
+  rp.className='result-panel show '+(ok===3?'pass':'fail');
+  rp.innerHTML=ok===3?'<h4>✓ Axis complete!</h4><p>CRH → ACTH → Cortisol. Remember: cortisol provides long-loop feedback to both hypothalamus and pituitary. ACTH provides short-loop feedback to hypothalamus only.</p>':'<h4>Not quite</h4><p>'+ok+'/3 correct. Check the highlighted nodes. Remember portal blood flows from hypothalamus → pituitary, then systemic blood to the adrenal.</p>';
+  addSc(ok===3);
+}
+function resetBuilder(){
+  ['dz-crh','dz-acth','dz-cort'].forEach(id=>{const dz=document.getElementById(id);dz.textContent='drop here';dz.classList.remove('has-chip');});
+  ['hyp-node','pit-node','adr-node'].forEach(id=>document.getElementById(id).classList.remove('correct','wrong'));
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('used'));
+  document.getElementById('builder-result').className='result-panel';
+}
+
+// ═══════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════
+
+// ── HPA LABS ──
+const HPA_LABS=[
+  {title:'Lab Pattern A',labs:[{n:'ACTH',v:'↑ 210 pg/mL',c:'hi'},{n:'Cortisol (8 AM)',v:'↑ 42 μg/dL',c:'hi'},{n:'Na⁺',v:'↓ 128 mEq/L',c:'lo'},{n:'K⁺',v:'↑ 6.2 mEq/L',c:'hi'},{n:'Glucose',v:'↓ 55 mg/dL',c:'lo'}],opts:["Cushing's Disease","Primary Adrenal Insufficiency (Addison's)","Adrenal adenoma","Secondary AI"],ok:1,exp:"<strong>Primary adrenal insufficiency.</strong> High ACTH (no negative feedback from cortisol) + low cortisol + hyponatremia + hyperkalemia (aldosterone deficiency) + hypoglycemia. The HIGH ACTH with LOW cortisol is the defining pattern of primary AI."},
+  {title:'Lab Pattern B',labs:[{n:'ACTH',v:'↑ 92 pg/mL',c:'hi'},{n:'Cortisol (8 AM)',v:'↑ 38 μg/dL',c:'hi'},{n:'High-dose dexa',v:'Suppresses',c:'norm'},{n:'MRI pituitary',v:'6mm lesion',c:'norm'},{n:'Na⁺/K⁺',v:'Normal',c:'norm'}],opts:["Ectopic ACTH (small cell lung)","Adrenal adenoma","Cushing's Disease (pituitary adenoma)","Pseudo-Cushing's"],ok:2,exp:"<strong>Cushing's Disease.</strong> Moderately elevated ACTH + high cortisol + HIGH-DOSE dexamethasone SUPPRESSES (pituitary retains partial feedback sensitivity) + pituitary microadenoma. This triad is diagnostic."},
+  {title:'Lab Pattern C',labs:[{n:'ACTH',v:'↓ 3 pg/mL',c:'lo'},{n:'Cortisol (8 AM)',v:'↑ 36 μg/dL',c:'hi'},{n:'High-dose dexa',v:'No suppression',c:'hi'},{n:'CT abdomen',v:'3cm R adrenal',c:'norm'},{n:'L adrenal',v:'Atrophied',c:'norm'}],opts:["Cushing's Disease","Ectopic ACTH syndrome","Primary adrenal adenoma (Cushing's Syndrome)","Secondary AI from pituitary failure"],ok:2,exp:"<strong>Adrenal adenoma (Cushing's Syndrome).</strong> Low/suppressed ACTH (tumor produces cortisol autonomously → negative feedback suppresses pituitary). Contralateral adrenal atrophied (no ACTH stimulation). Does NOT suppress with high-dose dex (ACTH-independent)."},
+  {title:'Lab Pattern D',labs:[{n:'ACTH',v:'↑↑ 620 pg/mL',c:'hi'},{n:'Cortisol',v:'↑↑ 68 μg/dL',c:'hi'},{n:'K⁺',v:'↓ 2.4 mEq/L',c:'lo'},{n:'High-dose dexa',v:'No suppression',c:'hi'},{n:'Chest CT',v:'2cm central mass',c:'norm'}],opts:["Cushing's Disease (pituitary)","Ectopic ACTH (small cell lung carcinoma)","Adrenal hyperplasia","Exogenous steroid use"],ok:1,exp:"<strong>Ectopic ACTH syndrome.</strong> Very high ACTH (often >200), does NOT suppress with high-dose dex, profound hypokalemia (cortisol overwhelms 11β-HSD2 → mineralocorticoid effect), rapid onset, lung mass. Key: ectopic ACTH is autonomous — no feedback sensitivity."},
+  {title:'Lab Pattern E',labs:[{n:'Cortisol (8AM)',v:'↑ 44 μg/dL',c:'hi'},{n:'ACTH',v:'30 pg/mL (normal)',c:'norm'},{n:'UFC (24hr)',v:'Normal',c:'norm'},{n:'Late-night salivary',v:'Normal',c:'norm'},{n:'Current meds',v:'OCP started 2mo ago',c:'norm'}],opts:["Cushing's Syndrome — adrenal source","Cushing's Disease — early","Elevated CBG from OCPs — false elevation","Pseudo-Cushing's from depression"],ok:2,exp:"<strong>OCP trap.</strong> Estrogen → ↑CBG (cortisol-binding globulin) → ↑TOTAL cortisol, but FREE cortisol is normal. UFC and late-night salivary cortisol measure FREE cortisol — both are normal. This is NOT Cushing's. Always ask about OCPs before interpreting total cortisol."},
+  {title:'Lab Pattern F',labs:[{n:'Aldosterone',v:'↑ 28 ng/dL',c:'hi'},{n:'Renin activity',v:'↓ 0.2 ng/mL/hr',c:'lo'},{n:'K⁺',v:'↓ 2.9 mEq/L',c:'lo'},{n:'BP',v:'↑ 168/98',c:'hi'},{n:'Na⁺',v:'↑ 146 mEq/L',c:'hi'}],opts:["Secondary hyperaldosteronism (renal artery stenosis)","Primary hyperaldosteronism (Conn's syndrome)","Cushing's syndrome","Liddle syndrome"],ok:1,exp:"<strong>Primary hyperaldosteronism (Conn's).</strong> High aldo + LOW renin (autonomous aldosterone suppresses RAAS) + hypokalemia + HTN. Aldosterone:renin ratio >30 is the screening test. Secondary hyperaldosteronism (RAS, CHF) = HIGH renin + high aldo. The low renin is the key distinguisher."},
+];
+
+// ── HPA VIGNETTES ──
+const HPA_VIG=[
+  {n:'01',d:1,lo:'Watson: Cortisol feedback',t:"A <span class='hl'>38-year-old woman</span> presents with weight gain, easy bruising, purple striae, BP 158/94, and <span class='hl'>buffalo hump</span>. AM cortisol 38 μg/dL. <span class='hl'>ACTH 8 pg/mL (low)</span>. High-dose dexamethasone: no suppression.",opts:["Cushing's Disease (pituitary adenoma)","Cushing's Syndrome (adrenal adenoma)","Ectopic ACTH from lung tumor","Exogenous glucocorticoid use"],ok:1,fb:"<strong>Low ACTH</strong> rules out pituitary adenoma and ectopic ACTH (both give HIGH ACTH). Low ACTH + high cortisol = autonomous adrenal production. Exogenous steroids also suppress ACTH but history doesn't fit. The contralateral adrenal will be atrophied.",bz:["ACTH-independent","low ACTH + high cortisol","adrenal adenoma","contralateral atrophy"]},
+  {n:'02',d:1,lo:'Watson: Addison\'s symptoms',t:"A <span class='hl'>45-year-old man</span> has <span class='hl'>hyperpigmentation of gums and palmar creases</span>, weight loss, salt craving for 4 months. BP 88/60. Na⁺ 127, K⁺ 6.1. ACTH 220 pg/mL.",opts:["Secondary adrenal insufficiency","Primary adrenal insufficiency (Addisonian crisis)","Waterhouse-Friderichsen syndrome","Cushing's syndrome"],ok:1,fb:"<strong>Addisonian crisis.</strong> Hyperpigmentation = ACTH ↑↑ stimulating MC1R (POMC → MSH) — only occurs in primary AI (secondary AI has LOW ACTH → no pigmentation). Hyponatremia + hyperkalemia = aldosterone deficiency. Salt craving = classic buzzword.",bz:["hyperpigmentation","ACTH ↑↑","salt craving","hypoNa + hyperK"]},
+  {n:'03',d:2,lo:'Danielsen/Wieneke: CAH 21-OHD',t:"A <span class='hl'>newborn female (46,XX)</span> has ambiguous genitalia. Day 3 of life: vomiting, poor feeding. Na⁺ 122, K⁺ 7.3. <span class='hl'>17-OHP markedly elevated</span>. ACTH ↑.",opts:["21-hydroxylase deficiency","11β-hydroxylase deficiency","17α-hydroxylase deficiency","Aromatase deficiency"],ok:0,fb:"<strong>21-hydroxylase deficiency</strong> — most common CAH (90–95%). Blocks BOTH cortisol and aldosterone. 17-OHP accumulates and is shunted to androgens → virilization of XX fetus. Salt-wasting crisis (days 3–14): hypoNa, hyperK. 17-OHP is the diagnostic marker. 11β-OHD: hypertensive, not salt-wasting.",bz:["17-OHP ↑↑","virilization","salt-wasting","most common CAH"]},
+  {n:'04',d:2,lo:'Wieneke: Ectopic ACTH',t:"A <span class='hl'>52-year-old smoker</span> develops rapid weight loss, profound <span class='hl'>hypokalemia (K⁺ 2.3)</span>, hyperglycemia, and skin darkening over 3 weeks. ACTH 640 pg/mL. High-dose dex: no suppression. Pituitary MRI normal.",opts:["Cushing's Disease","Ectopic ACTH syndrome","Primary adrenal hyperplasia","Pseudo-Cushing's"],ok:1,fb:"<strong>Ectopic ACTH</strong> (small cell lung carcinoma until proven otherwise). Very high ACTH (>200), rapid onset, no suppression with high-dose dex. Profound hypokalemia: cortisol overwhelms 11β-HSD2 → cortisol activates MR → K⁺ wasting. Normal pituitary MRI + smoking history = ectopic.",bz:["ACTH >200","no dex suppression","rapid onset","hypokalemia from cortisol/MR effect"]},
+  {n:'05',d:2,lo:'Danielsen: CAH 11β-OHD',t:"A <span class='hl'>16-year-old girl</span> has primary amenorrhea, hirsutism, and <span class='hl'>hypertension (BP 152/96)</span>. Labs: ↑ 11-deoxycortisol, ↑ 11-deoxycorticosterone, ↓ cortisol, ↓ aldosterone, elevated ACTH. <span class='trap-flag'>⚠ TRAP</span>",opts:["21-hydroxylase deficiency","11β-hydroxylase deficiency","17α-hydroxylase deficiency","Aldosterone synthase deficiency"],ok:1,fb:"<strong>11β-hydroxylase deficiency</strong> (2nd most common CAH). Key: <em>hypertensive</em> not salt-wasting. 11-DOC is a potent mineralocorticoid → HTN + hypokalemia. Both 21-OHD and 11β-OHD cause virilization, but ONLY 11β-OHD causes hypertension. 17α-OHD: HTN but NO sex steroids (XY = female phenotype).",bz:["HTN + virilization","11-DOC ↑","no salt-wasting","2nd most common CAH"]},
+  {n:'06',d:1,lo:'Watson: Perioperative AI',t:"A <span class='hl'>60-year-old on prednisone 30mg/day (2 years)</span> undergoes elective knee surgery. Postop: BP 72/42, unresponsive to fluids. ACTH 3 pg/mL, cortisol 1.4 μg/dL.",opts:["Septic shock","Adrenal crisis from HPA suppression","Primary Addison's disease","Waterhouse-Friderichsen syndrome"],ok:1,fb:"<strong>HPA suppression → adrenal crisis.</strong> Chronic exogenous steroids suppress CRH/ACTH → adrenal cortex atrophies. Under surgical stress, the axis cannot respond. ACTH is LOW (secondary, not primary AI) → <em>no hyperpigmentation</em>. Treat: stress-dose hydrocortisone 100mg IV q8h.",bz:["low ACTH","no hyperpigmentation","stress-dose steroids","secondary AI"]},
+  {n:'07',d:3,lo:'Sharma: OCP cortisol trap',t:"A <span class='hl'>35-year-old woman on OCPs</span> has cortisol 43 μg/dL, ACTH 28 pg/mL. <span class='hl'>No clinical Cushing's features</span>. 24-hr urine free cortisol: normal. Late-night salivary cortisol: normal. <span class='trap-flag'>⚠ TRAP</span>",opts:["Cushing's Disease — early","Adrenal adenoma","Elevated CBG from OCPs — spurious elevation","Pseudo-Cushing's from depression"],ok:2,fb:"<strong>OCP → ↑CBG → ↑total cortisol, normal FREE cortisol.</strong> Classic USMLE trap. UFC and late-night salivary cortisol measure free hormone — both normal here. Similarly, pregnancy causes elevated total TH. Always check free hormone and ask about OCP use before diagnosing hypercortisolism.",bz:["CBG ↑ with estrogen","total vs free cortisol","normal UFC","OCP trap"]},
+  {n:'08',d:3,lo:'Wieneke: Nelson\'s Syndrome',t:"A patient who had <span class='hl'>bilateral adrenalectomy for Cushing's Disease</span> presents 2 years later with progressive <span class='hl'>hyperpigmentation, headaches, and bitemporal hemianopsia</span>. ACTH 1,800 pg/mL. <span class='trap-flag'>⚠ TRAP</span>",opts:["Recurrent adrenal adenoma","Nelson's Syndrome","Ectopic ACTH secretion","Exogenous steroid withdrawal"],ok:1,fb:"<strong>Nelson's Syndrome.</strong> Bilateral adrenalectomy removes cortisol → removes all negative feedback → the pre-existing pituitary ACTH adenoma grows unchecked → massive ACTH → profound hyperpigmentation + mass effects (bitemporal hemianopsia from chiasm compression). A known complication of bilateral adrenalectomy for Cushing's Disease.",bz:["bilateral adrenalectomy","loss of feedback","pituitary adenoma expands","Nelson's Syndrome"]},
+];
+
+// ── HPA DEX STEPS ──
+const HPA_DEX=[
+  {n:1,t:"Step 1: Screening — Is this Cushing's?",q:"Which test is NOT appropriate as initial Cushing's screening?",opts:["24h urine free cortisol (UFC)","Late-night salivary cortisol","1mg overnight dexamethasone suppression test","Random AM serum cortisol"],ok:3,rev:"<strong>Random AM cortisol is unreliable</strong> — marked diurnal variation and episodic secretion make it nondiagnostic. Need ≥2 of the other 3 tests abnormal. False positives for all tests: obesity, depression, alcoholism, OCPs (CBG elevation for serum cortisol)."},
+  {n:2,t:"Step 2: Low-dose dex — Does cortisol suppress?",q:"Patient takes 1mg dex at 11 PM. Next AM cortisol = 26 μg/dL. Normal suppression is < 1.8 μg/dL. What does this tell you?",opts:["Normal — no Cushing's","Confirms Cushing's — no further workup needed","Abnormal screen — HPA is not suppressing normally, but diagnosis not yet confirmed","Result invalid — test must be repeated"],ok:2,rev:"<strong>Abnormal screening result</strong> but does NOT diagnose Cushing's. False positives: CRH-secreting tumors, obesity, depression (pseudo-Cushing's), high CBG. Next step: measure ACTH to determine if ACTH-dependent or ACTH-independent."},
+  {n:3,t:"Step 3: ACTH level — Dependent or independent?",q:"ACTH is 88 pg/mL (elevated). Cortisol is high. What does elevated ACTH indicate?",opts:["ACTH-independent: adrenal acting autonomously — image the adrenals","ACTH-dependent: something is driving ACTH from above — pituitary or ectopic","Normal — no further workup","Confirms ectopic ACTH immediately"],ok:1,rev:"<strong>ACTH-dependent Cushing's.</strong> Next step: distinguish pituitary (Cushing's Disease) from ectopic ACTH. Sources: pituitary adenoma (60-70%) vs ectopic ACTH (10-20%). <em>Low/undetectable ACTH</em> (< 5 pg/mL) → ACTH-independent → CT adrenals (adenoma, carcinoma, bilateral hyperplasia)."},
+  {n:4,t:"Step 4: High-dose dex — Pituitary vs ectopic?",q:"8mg dexamethasone over 2 days. Cortisol suppresses by >50% from baseline. What does this mean?",opts:["Ectopic ACTH syndrome — no feedback possible","Cushing's Disease — pituitary adenoma retains partial feedback sensitivity","Primary adrenal adenoma — ACTH-independent","Pseudo-Cushing's — normal axis suppressing"],ok:1,rev:"<strong>Cushing's Disease.</strong> Pituitary adenomas retain PARTIAL feedback sensitivity → high-dose dex CAN suppress them (>50% is threshold). Ectopic sources are autonomous — NO suppression at any dose. Sensitivity ~70% so negative result doesn't rule out Cushing's Disease — MRI pituitary is also needed."},
+  {n:5,t:"Step 5: Localisation — Pituitary MRI shows no adenoma. Now what?",q:"ACTH 92, cortisol elevated, high-dose dex suppresses, but MRI shows no lesion. Next best step?",opts:["Assume Cushing's Disease — treat empirically","Bilateral inferior petrosal sinus sampling (IPSS)","CT chest/abdomen to find ectopic source","Plasma cortisol every 2 hours"],ok:1,rev:"<strong>Inferior petrosal sinus sampling (IPSS)</strong> — samples blood draining from pituitary directly. ACTH gradient (petrosal:peripheral >2 at baseline or >3 with CRH stimulation) confirms pituitary source with >95% sensitivity. Negative MRI does NOT rule out Cushing's Disease (microadenomas can be MRI-occult)."},
+  {n:6,t:"Step 6: Treatment of inoperable Cushing's — which drug?",q:"Patient cannot have surgery. Which drug reduces cortisol by blocking adrenal steroidogenesis at 11β-hydroxylase?",opts:["Spironolactone","Ketoconazole","Metyrapone","Mifepristone"],ok:2,rev:"<strong>Metyrapone</strong> blocks CYP11B1 (11β-hydroxylase) → reduces cortisol. Ketoconazole = broad CYP inhibitor (multiple steps). Osilodrostat = more selective CYP11B1 inhibitor. Mitotane = adrenolytic (carcinoma). Mifepristone = glucocorticoid RECEPTOR antagonist (doesn't lower cortisol levels — used for glucose control). Spironolactone = MR antagonist (for Conn's)."},
+];
+
+// ── HPA FLASHCARDS ──
+const HPA_FC=[
+  {lo:'Watson: feedback levels',tag:'HPA Physiology',q:'What are the 3 levels of negative feedback in the HPA axis?',a:'Long loop: cortisol → inhibits BOTH hypothalamus (CRH) and anterior pituitary (ACTH). Short loop: ACTH → inhibits hypothalamus (CRH). Ultrashort loop: CRH → inhibits its own releasing neurons via axon collaterals (sets pulsatile rhythm).',trap:'Trap: ultrashort loop is self-inhibition by the HYPOTHALAMIC hormone. Pulsatile GnRH, GRH, and CRH are all set by ultrashort loops.'},
+  {lo:'Watson: cortisol diurnal rhythm',tag:'HPA Physiology',q:'What is the diurnal pattern of cortisol secretion and how is it used clinically?',a:'Peak at 6–8 AM (driven by SCN → CRH). Nadir at midnight. Clinically: 1mg overnight dex suppression exploits the morning peak (given at 11 PM; suppress the rise). Midnight salivary cortisol detects Cushing\'s (cortisol should be undetectable then — if elevated, pathological).'},
+  {lo:'Watson: cortisol metabolic effects',tag:'HPA Physiology',q:'Contrast cortisol\'s metabolic effects at physiological vs pharmacological levels.',a:'Physiological: maintains overnight blood glucose (gluconeogenesis from AAs, glycogenolysis). Key: liver uses AAs for glucose while muscle/adipose told not to take up glucose. Pharmacological/chronic excess: central fat redistribution, peripheral muscle wasting, insulin resistance, poor wound healing (↓fibroblast activity), immunosuppression (↓arachidonic acid cascade, T-cell cytokines). Liver still does gluconeogenesis (paradoxically more protein synthesis in liver).'},
+  {lo:'Danielsen: CAH enzyme map',tag:'Adrenal Biochem',q:'Zona glomerulosa CANNOT produce cortisol or sex steroids. Why?',a:'Zona glomerulosa lacks CYP17A1 (17α-hydroxylase) — required for both cortisol synthesis (17-OHP step) AND sex steroid synthesis. Without 17α-hydroxylation, steroidogenesis is shunted down the aldosterone pathway. The glomerulosa is the ONLY zone expressing CYP11B2 (aldosterone synthase), regulated by Ang II and K+ (NOT primarily ACTH).',trap:'Trap: ACTH does not primarily regulate aldosterone — Ang II and K+ do. ACTH has a minor permissive role only.'},
+  {lo:'Danielsen: 21-OHD vs 11β-OHD',tag:'Adrenal Biochem',q:'TRAP: What is the single most important clinical feature distinguishing 21-OHD from 11β-OHD CAH?',a:'BLOOD PRESSURE: 21-OHD → salt-wasting (hypoNa, hyperK, low BP) because BOTH cortisol and aldosterone are deficient. 11β-OHD → HYPERTENSION (11-deoxycorticosterone accumulates — a potent mineralocorticoid → Na+ retention, K+ wasting). Both cause virilization from androgen excess.',trap:'Trap: both 21-OHD and 11β-OHD cause virilization. HTN = 11β-OHD. Salt-wasting = 21-OHD. This is a classic exam discriminator.'},
+  {lo:'Danielsen: 17α-OHD',tag:'Adrenal Biochem',q:'A 17-year-old XY individual has primary amenorrhea, no pubic hair, and hypertension. 17-OHP is LOW. What enzyme is deficient?',a:'17α-hydroxylase (CYP17A1). Deficiency blocks BOTH cortisol AND sex steroid synthesis (no 17-OHP for cortisol; no androgens or estrogens). Shunted to DOC (mineralocorticoid) → HTN + hypokalemia. XY: external genitalia female (no testosterone → feminization), intra-abdominal testes, no uterus (AMH still made). TRAP: 17-OHP is LOW (not elevated, unlike 21-OHD).',trap:'Trap: 17α-OHD has LOW 17-OHP (blocked before it forms). 21-OHD has HIGH 17-OHP (blocked after it forms). Different substrate accumulation pattern.'},
+  {lo:'Wieneke: Addison\'s causes',tag:'Adrenal Pathology',q:'Name 4 causes of primary adrenal insufficiency and the most common in the US.',a:'1) Autoimmune (75% in US — most common; anti-adrenal antibodies). 2) Tuberculosis (infiltrative — historically common, still #1 worldwide). 3) HIV/CMV (adrenal infiltration). 4) Bilateral hemorrhage (Waterhouse-Friderichsen, anticoagulation). Also: metastatic cancer, sarcoidosis, amyloidosis. >90% of adrenal cortex must be destroyed before symptoms appear.'},
+  {lo:'Sharma: adrenal pharmacology',tag:'Adrenal Pharmacology',q:'What does the cosyntropin stimulation test diagnose and how?',a:'Cortrosyn (synthetic ACTH 1-24) given IM/IV → cortisol measured at 0, 30, 60 min. Normal response: peak cortisol >18-20 μg/dL. Blunted response = primary adrenal insufficiency (gland cannot respond to exogenous ACTH). Note: does NOT reliably diagnose acute secondary AI (adrenal not yet atrophied — give insulin tolerance test or metyrapone test for pituitary reserve).'},
+  {lo:'Wieneke: pheo rule of 10s',tag:'Adrenal Pathology',q:'State the rule of 10s for pheochromocytoma.',a:'10% bilateral · 10% extra-adrenal · 10% malignant · 10% pediatric · 10% familial. Diagnosis: urine or plasma METANEPHRINES (metabolites of catecholamines — more sensitive than catecholamines themselves). TRAP: 30% of pheos are now known to be familial (old "10%" is an underestimate). Associated with MEN2A, MEN2B, VHL, NF1, SDH mutations.',trap:'Trap: catecholamines are less sensitive than metanephrines for diagnosis. Always measure metanephrines (fractionated) not just catecholamines.'},
+  {lo:'Sharma: alpha before beta',tag:'Adrenal Pharmacology',q:'TRAP: Why must alpha-blockade PRECEDE beta-blockade in pheochromocytoma pre-op prep?',a:'Pheo secretes epi + NE → activates alpha1 (vasoconstriction) and beta2 (vasodilation). If you give beta-blocker FIRST: blocks beta2-mediated vasodilation → UNOPPOSED alpha1-vasoconstriction → severe hypertensive crisis. Sequence: phenoxybenzamine (irreversible non-selective alpha-blocker, 10–14 days pre-op) FIRST. Then add beta-blocker to control reflex tachycardia.',trap:'TRAP: Beta-blockers first in pheo can be rapidly fatal. The reason is unopposed alpha-mediated vasoconstriction.'},
+];
+
+// ── THYROID LABS ──
+const THYROID_LABS=[
+  {title:'Thyroid Pattern A',labs:[{n:'TSH',v:'↓ 0.02 mIU/L',c:'lo'},{n:'Free T4',v:'↑ 3.8 ng/dL',c:'hi'},{n:'T3',v:'↑ 420 ng/dL',c:'hi'},{n:'TSI antibody',v:'Positive',c:'hi'},{n:'Radioiodine uptake',v:'↑ Diffuse',c:'hi'}],opts:["Toxic multinodular goiter","Graves' disease","TSH-secreting pituitary adenoma","Hashimoto's thyroiditis (hashitoxicosis)"],ok:1,exp:"<strong>Graves' disease.</strong> Suppressed TSH + elevated free T4 + elevated T3 + positive TSI (thyroid-stimulating immunoglobulins — the pathological autoantibody) + diffuse increased uptake on radioiodine scan. TSH is suppressed by negative feedback from excess TH."},
+  {title:'Thyroid Pattern B',labs:[{n:'TSH',v:'↑ 14 mIU/L',c:'hi'},{n:'Free T4',v:'↓ 0.6 ng/dL',c:'lo'},{n:'Anti-TPO Ab',v:'↑ Positive',c:'hi'},{n:'Anti-Tg Ab',v:'↑ Positive',c:'hi'},{n:'Ultrasound',v:'Heterogeneous, ↓ volume',c:'norm'}],opts:["Graves' disease","Subacute (de Quervain's) thyroiditis","Hashimoto's thyroiditis","Secondary hypothyroidism (pituitary failure)"],ok:2,exp:"<strong>Hashimoto's thyroiditis.</strong> High TSH (gland failing → pituitary compensates) + low free T4 + anti-TPO and anti-Tg antibodies + heterogeneous thyroid on US (lymphocytic infiltration). Most common cause of hypothyroidism in iodine-sufficient regions. F:M 10:1, 45–65 years."},
+  {title:'Thyroid Pattern C',labs:[{n:'TSH',v:'↓ 0.1 mIU/L',c:'lo'},{n:'Free T4',v:'Normal',c:'norm'},{n:'Free T3',v:'Normal',c:'norm'},{n:'Thyroid US',v:'Nodule right lobe',c:'norm'},{n:'Symptoms',v:'None',c:'norm'}],opts:["Overt hyperthyroidism","Subclinical hyperthyroidism","Secondary hypothyroidism","Normal thyroid function"],ok:1,exp:"<strong>Subclinical hyperthyroidism.</strong> TSH is the most sensitive thyroid function test — it falls BEFORE T4/T3 rise above normal range. Causes: early autonomous nodule, early Graves'. TSH is suppressed but T4/T3 still within normal range → subclinical. This is an important concept: never dismiss a low TSH just because T4 is 'normal'."},
+  {title:'Thyroid Pattern D',labs:[{n:'TSH',v:'Normal 2.1',c:'norm'},{n:'Total T4',v:'↑ 18 μg/dL',c:'hi'},{n:'Free T4',v:'Normal',c:'norm'},{n:'Symptoms',v:'None',c:'norm'},{n:'Medications',v:'OCP started 3mo ago',c:'norm'}],opts:["Graves' disease","Hashimoto's — hashitoxicosis phase","Elevated TBG from OCPs — spurious total T4 rise","TSH-secreting adenoma"],ok:2,exp:"<strong>Elevated TBG from estrogen.</strong> OCPs/pregnancy/estrogen therapy → ↑TBG → more T4 is bound → total T4 rises. But FREE T4 (the active fraction) is normal. TSH is normal. This is NOT hyperthyroidism. Always interpret total T4 with TBG in mind. Free T4 and TSH are the correct markers."},
+  {title:'Thyroid Pattern E',labs:[{n:'TSH',v:'↑ 6 mIU/L',c:'hi'},{n:'Free T4',v:'Normal low',c:'norm'},{n:'Ca²⁺',v:'↑ 11.4 mg/dL',c:'hi'},{n:'PTH',v:'↑ 92 pg/mL',c:'hi'},{n:'PO₄',v:'↓ 1.9 mg/dL',c:'lo'}],opts:["Primary hyperparathyroidism with co-existing subclinical hypothyroidism","Secondary hyperparathyroidism from CKD","Tertiary hyperparathyroidism","Familial hypocalciuric hypercalcemia"],ok:0,exp:"<strong>Primary hyperparathyroidism + subclinical hypothyroidism.</strong> Two separate findings: (1) High PTH + high Ca2+ + low PO4 = primary HPT (adenoma 80%). (2) Elevated TSH with borderline free T4 = subclinical hypothyroidism (possibly early Hashimoto's). MEN1 should be considered. Primary HPT: 'Bones, Stones, Groans, Psychic Moans.'"},
+];
+
+// ── THYROID VIGNETTES ──
+const THYROID_VIG=[
+  {n:'01',d:1,lo:'Danielsen/Wieneke: Graves\' disease',t:"A <span class='hl'>28-year-old woman</span> presents with palpitations, heat intolerance, 10 lb weight loss, and <span class='hl'>proptosis</span>. TSH undetectable. T3 elevated 5x. Diffuse goiter on exam.",opts:["Toxic multinodular goiter","Graves' disease","TSH-secreting pituitary adenoma","Subacute thyroiditis"],ok:1,fb:"<strong>Graves' disease.</strong> TSI (IgG antibodies) activate TSH receptors → unregulated TH production. Exophthalmos occurs because TSH receptors on orbital fibroblasts are also activated → GAG deposition → proptosis. TRAP: Treating hyperthyroidism doesn't reliably reverse exophthalmos (it's autoimmune orbital disease).",bz:["TSI","exophthalmos","TSH-R activation","diffuse goiter"]},
+  {n:'02',d:2,lo:'Danielsen: PTU vs methimazole',t:"A <span class='hl'>pregnant woman (8 weeks)</span> with newly diagnosed Graves' disease needs antithyroid treatment. Which drug is preferred and why? <span class='trap-flag'>⚠ TRAP</span>",opts:["Methimazole — longer duration of action","PTU (propylthiouracil) — safer in 1st trimester, also blocks T4→T3 conversion","Radioiodine I-131 — definitive treatment","Lugol's iodine — most effective acute option"],ok:1,fb:"<strong>PTU in 1st trimester pregnancy.</strong> Methimazole is teratogenic in 1st trimester (aplasia cutis, choanal atresia). PTU is used 1st trimester, then switch to methimazole for 2nd/3rd. PTU also uniquely blocks peripheral deiodinase (T4→T3 conversion). I-131 is absolutely contraindicated in pregnancy (ablates fetal thyroid).",bz:["PTU = 1st trimester","blocks T4→T3 conversion","methimazole teratogenic in 1st trimester","I-131 contraindicated in pregnancy"]},
+  {n:'03',d:2,lo:'Wieneke: thyroid cancer histology',t:"FNA of a thyroid nodule shows <span class='hl'>follicular architecture</span>. No capsular invasion is seen. Final histology after lobectomy: tumor cells clearly breach the capsule and invade vessels. <span class='trap-flag'>⚠ TRAP</span>",opts:["Follicular adenoma — FNA was sufficient","Papillary carcinoma — nuclear features are diagnostic","Follicular carcinoma — diagnosed by capsular/vascular invasion on surgical specimen","Medullary carcinoma — calcitonin would be elevated"],ok:2,fb:"<strong>Follicular carcinoma.</strong> Cannot be diagnosed by FNA alone — both follicular adenoma and carcinoma look identical on cytology. The ONLY distinguishing feature is capsular and/or vascular invasion on the resected specimen. This is why hemithyroidectomy is done for 'indeterminate' FNA results.",bz:["FNA cannot diagnose follicular carcinoma","capsular/vascular invasion = carcinoma","Orphan Annie nuclei = papillary","lobectomy needed for diagnosis"]},
+  {n:'04',d:1,lo:'Wieneke: parathyroid',t:"A <span class='hl'>55-year-old woman</span> is found to have Ca²⁺ 11.6 mg/dL on routine labs. She mentions 'kidney stones' and 'bone pain.' PTH is 110 pg/mL (elevated). PO₄ is low.",opts:["Secondary hyperparathyroidism (CKD)","Primary hyperparathyroidism (parathyroid adenoma)","Tertiary hyperparathyroidism","Malignant hypercalcemia (PTHrP)"],ok:1,fb:"<strong>Primary hyperparathyroidism.</strong> High PTH + high Ca2+ + low PO4. 80% due to single parathyroid adenoma. 'Bones, Stones, Groans, Psychic Moans' = osteitis fibrosa cystica, nephrolithiasis, constipation/nausea, depression. PTHrP from malignancy causes hypercalcemia but SUPPRESSES PTH (not elevated).",bz:["high PTH + high Ca","low PO4","Bones Stones Groans Moans","parathyroid adenoma"]},
+  {n:'05',d:2,lo:'Wieneke: tertiary HPT trap',t:"A <span class='hl'>CKD stage 5 patient on dialysis</span> has PTH 950 pg/mL, Ca²⁺ 10.9 mg/dL (elevated), PO₄ 6.8 mg/dL. History: 8 years of dialysis, previously on calcium supplements. <span class='trap-flag'>⚠ TRAP</span>",opts:["Secondary hyperparathyroidism — high PTH + elevated Ca expected","Tertiary hyperparathyroidism — autonomous glands now produce PTH independently of Ca","Primary hyperparathyroidism — new adenoma","Vitamin D toxicity"],ok:1,fb:"<strong>Tertiary HPT.</strong> Years of secondary HPT (CKD → ↓Ca → ↑PTH) → glands undergo nodular hyperplasia → become AUTONOMOUS → continue secreting PTH even when Ca is normalized or elevated. Key distinction from secondary HPT: Ca is now elevated. Treat with parathyroidectomy (cinacalcet bridges).",bz:["secondary → tertiary","autonomous glands","Ca now elevated","parathyroidectomy"]},
+  {n:'06',d:3,lo:'Danielsen: TH receptor mechanism',t:"A research experiment finds that removing thyroid hormone (T3) causes the TSH gene to be <span class='hl'>transcribed at higher rates</span>. Adding T3 returns TSH to baseline. Explain the molecular mechanism. <span class='trap-flag'>⚠ TRAP</span>",opts:["T3 activates TSH gene transcription; absence = no transcription","T3 binds TR which represses TSH transcription through nTRE (negative TRE); without T3, TR at nTRE actively drives transcription","TSH is not regulated by T3 at the transcriptional level","T3 degrades TSH mRNA post-transcriptionally"],ok:1,fb:"<strong>Negative TRE (nTRE) mechanism.</strong> Most TR-regulated genes: T3 bound TR → activates transcription via TRE. But TSH (and TRH receptor) genes have NEGATIVE TREs: T3-bound TR REPRESSES these promoters. Without T3, TR at nTRE drives transcription of TSH → TSH rises in hypothyroidism. This explains the inverse relationship between T3 and TSH.",bz:["nTRE = negative response element","T3 represses TSH gene","unliganded TR at nTRE activates","molecular basis of feedback"]},
+  {n:'07',d:2,lo:'Danielsen: iodide pump inhibitors',t:"A patient is prescribed lithium for bipolar disorder. After 6 months, TSH is <span class='hl'>elevated at 8 mIU/L</span> with a goiter. Free T4 is low-normal.",opts:["Lithium blocks TSH receptor","Lithium inhibits thyroid hormone release from thyroglobulin → ↓TH → ↑TSH → goiter","Lithium causes Graves' disease","Lithium is thyrotoxic — causes hyperthyroidism"],ok:1,fb:"<strong>Lithium inhibits TH release</strong> (inhibits thyroglobulin proteolysis and iodide pump). 25% of long-term lithium patients develop goiter and/or hypothyroidism. TSH rises in response to low TH → drives goiter. Treat: levothyroxine replacement. Screen thyroid function every 6–12 months in lithium patients.",bz:["lithium = inhibits TH release","↑TSH → goiter","25% develop hypothyroidism","screen regularly"]},
+  {n:'08',d:2,lo:'Wieneke: medullary thyroid cancer',t:"A <span class='hl'>30-year-old man</span> with a family history of MEN2A has a 1.2 cm right thyroid nodule. Serum calcitonin is elevated. FNA shows amyloid deposits and spindle cells.",opts:["Papillary thyroid carcinoma — most common","Follicular carcinoma — vascular invasion on histology","Medullary thyroid carcinoma — from parafollicular C-cells","Anaplastic carcinoma — worst prognosis"],ok:2,fb:"<strong>Medullary thyroid carcinoma (MTC).</strong> Arises from parafollicular C-cells (not follicular cells) → secretes calcitonin (tumor marker). Amyloid deposits on histology (amyloid = calcitonin fragments). Associated with RET mutations and MEN2A/2B. Screen family members with RET testing. Prophylactic thyroidectomy in proven RET mutation carriers.",bz:["C-cells","calcitonin elevated","amyloid deposits","RET mutation / MEN2"]},
+];
+
+// ── THYROID SYNTHESIS STEPS ──
+const THYROID_SYNTH=[
+  {n:1,t:"Step 1: Iodide uptake — what transporter?",q:"Which transporter moves iodide from blood into the follicular cell?",opts:["Pendrin (apical)","NIS — Na⁺/I⁻ symporter (basolateral)","GLUT4","AQP2"],ok:1,rev:"<strong>NIS (Na⁺/I⁻ symporter)</strong> on the basolateral membrane. Uses Na⁺ gradient (maintained by Na⁺/K⁺-ATPase) to drive I⁻ into the cell against its concentration gradient. TSH upregulates NIS expression. Blocked by perchlorate, thiocyanate, pertechnetate (competitive inhibitors transported into cell). NOT blocked by PTU."},
+  {n:2,t:"Step 2: Oxidation — which enzyme, and what does PTU block here?",q:"Which enzyme oxidizes iodide (I⁻) to reactive iodine (I₂) at the apical membrane?",opts:["Deiodinase","Thyroperoxidase (TPO)","Monoamine oxidase","Aromatase"],ok:1,rev:"<strong>Thyroperoxidase (TPO)</strong> at the luminal surface. Also catalyzes organification (iodination of thyroglobulin tyrosines) and coupling. PTU and methimazole both block TPO. PTU also uniquely inhibits peripheral 5'-deiodinase (T4→T3 conversion). Anti-TPO antibodies are present in Hashimoto's."},
+  {n:3,t:"Step 3: Organification — what does Wolff-Chaikoff do?",q:"What happens to organification when iodide intake suddenly becomes very high?",opts:["Organification is upregulated — more TH produced","Organification is transiently BLOCKED (Wolff-Chaikoff effect); escape occurs by NIS downregulation","Organification is permanently blocked","The gland undergoes apoptosis"],ok:1,rev:"<strong>Wolff-Chaikoff effect:</strong> acute iodide excess → transient inhibition of organification → brief drop in TH synthesis. 'Escape' in 1–2 weeks: NIS is downregulated → less iodide enters → organification resumes. TRAP: Hashimoto's patients may NOT escape → prolonged hypothyroidism. Exploited clinically: Lugol's iodine pre-thyroid surgery (reduce vascularity)."},
+  {n:4,t:"Step 4: Coupling and Storage",q:"Which molecules couple to form T3 vs T4?",opts:["2 × MIT → T4; MIT + DIT → T3","MIT + DIT → T3; DIT + DIT → T4","DIT + DIT → T3; MIT + MIT → T4","Any combination → both T3 and T4"],ok:1,rev:"<strong>Coupling by TPO:</strong> MIT (monoiodotyrosine) + DIT (diiodotyrosine) → T3. DIT + DIT → T4. T4 is the major product of the thyroid (20:1 ratio of T4:T3 secreted). T4 is a prohormone — converted to active T3 by 5'-deiodinase in peripheral tissues. Storage: thyroglobulin in colloid (unique: stored OUTSIDE the cell in follicle lumen)."},
+  {n:5,t:"Step 5: Release and Transport",q:"T4 and T3 are released by proteolysis of thyroglobulin. Which form is 'active' and why?",opts:["T4 is more active — longer half-life","T3 is more active — binds TR with 10× higher affinity than T4","Both are equally active","Reverse T3 is the active form"],ok:1,rev:"<strong>T3 is active:</strong> binds thyroid receptor (TR) with 10× higher affinity than T4. T4 is a prohormone — converted to T3 by 5'-deiodinase in liver, kidney, brain. t½: T3 = 1.5 days; T4 = 6.5 days (T4 serves as 'reservoir'). >99% of both are protein-bound (TBG, albumin). PTU (not methimazole) also blocks peripheral T4→T3 conversion."},
+];
+
+// ── THYROID FLASHCARDS ──
+const THYROID_FC=[
+  {lo:'Danielsen: NIS regulation',tag:'Thyroid Biochem',q:'What drugs inhibit the iodide pump (NIS) vs thyroperoxidase (TPO)?',a:'NIS inhibitors (competitive, transported into cell): perchlorate, thiocyanate, pertechnetate, perrhenate. Note: pertechnetate/pertechnetate can be used for thyroid imaging. TPO inhibitors: PTU and methimazole (antithyroid drugs — block organification AND coupling). PTU additionally blocks peripheral 5\'-deiodinase (T4→T3). PTU does NOT inhibit NIS.',trap:'Trap: PTU is not a NIS inhibitor. Perchlorate is a NIS inhibitor (not a TPO inhibitor). Know which drug hits which step.'},
+  {lo:'Danielsen: T3 receptor mechanism',tag:'Thyroid Biochem',q:'The thyroid receptor (TR) binds DNA with and without T3. What happens at a TRE vs an nTRE?',a:'Positive TRE: unliganded TR recruits corepressors → silences gene. T3 binding → corepressors dissociate, coactivators recruited → transcription activated. Negative TRE (nTRE): opposite — unliganded TR activates transcription; T3-bound TR represses. The TSH subunit gene has an nTRE — this is the molecular basis of negative feedback (high T3 → suppresses TSH gene).'},
+  {lo:'Wieneke: thyroid cancer comparison',tag:'Thyroid Pathology',q:'Match: Orphan Annie nuclei + psammoma bodies | capsular/vascular invasion | calcitonin + amyloid | undifferentiated anaplastic',a:'Orphan Annie nuclei + psammoma bodies = Papillary carcinoma (most common, BRAF, excellent prognosis, lymphatic spread). Capsular/vascular invasion = Follicular carcinoma (RAS, hematogenous spread, cannot diagnose on FNA). Calcitonin + amyloid = Medullary carcinoma (C-cells, RET, MEN2). Undifferentiated anaplastic = Anaplastic (worst prognosis, elderly patients, may arise from pre-existing differentiated cancer).'},
+  {lo:'Wieneke: hyperparathyroidism',tag:'Thyroid/Para Pathology',q:'Compare labs in primary, secondary, and tertiary hyperparathyroidism.',a:'Primary HPT: ↑PTH, ↑Ca2+, ↓PO4 (adenoma 80%, hyperplasia 15%, carcinoma 1%). Secondary HPT (CKD): ↑PTH, ↓Ca2+ (or low-normal), ↑PO4 — compensatory response to hypocalcemia from low vit D. Tertiary HPT: ↑PTH, ↑Ca2+ (autonomous glands after chronic secondary HPT — escaped feedback). Treatment: primary = parathyroidectomy; secondary = vit D, phosphate binders; tertiary = parathyroidectomy.',trap:'Trap: secondary HPT has HIGH PTH but LOW calcium. Tertiary HPT has HIGH PTH AND HIGH Ca (the glands are now autonomous).'},
+  {lo:'Wieneke: Hashimoto\'s features',tag:'Thyroid Pathology',q:'What are the autoantibodies, clinical presentation, and histology of Hashimoto\'s thyroiditis?',a:'Autoantibodies: anti-TPO (most sensitive) + anti-thyroglobulin. Clinical: painless goiter, hypothyroidism in a middle-aged woman (F:M 10:1). Can have transient thyrotoxicosis early (hashitoxicosis — follicular destruction dumps preformed TH). Histology: lymphocytic infiltration with germinal center formation + Hürthle cell (oxyphilic) change of follicular cells. HLA-DR5 associated. Increased risk of thyroid lymphoma.'},
+  {lo:'Wieneke: subacute thyroiditis',tag:'Thyroid Pathology',q:'How does subacute (de Quervain\'s) thyroiditis differ from Hashimoto\'s in presentation, labs, and biopsy?',a:'Subacute: post-viral (coxsackievirus, etc.), PAINFUL thyroid (very tender), flu-like prodrome, transient hyperthyroid then euthyroid then hypothyroid then recovery. ESR markedly elevated. RAIU low (damaged follicles can\'t trap iodide). NO autoantibodies (not autoimmune — granulomatous infiltration with giant cells on biopsy). Resolves in weeks-months. Hashimoto\'s: painless, autoimmune, permanent hypothyroidism.',trap:'Trap: painful thyroid = subacute (de Quervain\'s), NOT Hashimoto\'s (painless). Low RAIU in subacute. Hashimoto\'s RAIU is variable.'},
+];
+
+// ── ADRENAL LABS ──
+const ADRENAL_LABS=[
+  {title:'Adrenal Pattern A',labs:[{n:'Cortisol',v:'↓ 2 μg/dL',c:'lo'},{n:'ACTH',v:'↑ 195 pg/mL',c:'hi'},{n:'17-OHP',v:'↑↑ 45 ng/mL',c:'hi'},{n:'Na⁺',v:'↓ 124 mEq/L',c:'lo'},{n:'K⁺',v:'↑ 7.1 mEq/L',c:'hi'}],opts:["21-hydroxylase CAH","11β-hydroxylase CAH","17α-hydroxylase CAH","Addison's disease"],ok:0,exp:"<strong>21-hydroxylase deficiency CAH.</strong> Salt-wasting (hypoNa + hyperK from aldosterone deficiency) + low cortisol + very high ACTH + markedly elevated 17-OHP (the blocked substrate). 17-OHP is the diagnostic marker. Note: 11β-OHD would show HYPERTENSION with 11-deoxycorticosterone ↑, not salt-wasting."},
+  {title:'Adrenal Pattern B',labs:[{n:'Cortisol',v:'↓ 3 μg/dL',c:'lo'},{n:'11-deoxycortisol',v:'↑↑',c:'hi'},{n:'11-DOC',v:'↑↑',c:'hi'},{n:'BP',v:'↑ 158/98',c:'hi'},{n:'K⁺',v:'↓ 2.8 mEq/L',c:'lo'}],opts:["21-hydroxylase CAH","11β-hydroxylase CAH","17α-hydroxylase CAH","Primary hyperaldosteronism"],ok:1,exp:"<strong>11β-hydroxylase deficiency CAH.</strong> Low cortisol + elevated 11-deoxycortisol + elevated DOC (potent mineralocorticoid → HTN + hypokalemia). CRITICALLY: NO salt-wasting because DOC provides mineralocorticoid activity. Both 21-OHD and 11β-OHD cause virilization from androgen excess. HTN = 11β-OHD; salt-wasting = 21-OHD."},
+  {title:'Adrenal Pattern C',labs:[{n:'Aldosterone',v:'↑ 32 ng/dL',c:'hi'},{n:'Plasma renin',v:'↓ 0.1 ng/mL/hr',c:'lo'},{n:'K⁺',v:'↓ 2.7 mEq/L',c:'lo'},{n:'BP',v:'↑ 174/102 (resistant)',c:'hi'},{n:'Aldo:renin ratio',v:'↑↑ >30',c:'hi'}],opts:["Secondary hyperaldosteronism","Primary hyperaldosteronism (Conn's)","Cushing's syndrome","Renovascular hypertension"],ok:1,exp:"<strong>Primary hyperaldosteronism (Conn's).</strong> Autonomous aldosterone → sodium retention → volume expansion → HTN → baroreceptors suppress renin (LOW renin). Screen with aldo:renin ratio >30. 60% bilateral hyperplasia, 35% unilateral adenoma (Conn's adenoma). Key: LOW renin distinguishes primary from secondary HPT."},
+  {title:'Adrenal Pattern D',labs:[{n:'Plasma metanephrines',v:'↑↑ 4.2 nmol/L',c:'hi'},{n:'Urine metanephrines',v:'↑↑ 2,800 μg/24h',c:'hi'},{n:'BP episodes',v:'280/160 paroxysmal',c:'hi'},{n:'CT adrenal',v:'4cm R adrenal mass',c:'norm'},{n:'Glucose',v:'↑ 145 mg/dL (fasting)',c:'hi'}],opts:["Adrenal cortical adenoma","Pheochromocytoma","Primary hyperaldosteronism","Ectopic ACTH tumor"],ok:1,exp:"<strong>Pheochromocytoma.</strong> Paroxysmal HTN + elevated metanephrines (urine and plasma) + adrenal mass. Hyperglycemia: catecholamines → glycogenolysis + gluconeogenesis + inhibit insulin release. Diagnose with metanephrines (not catecholamines — more sensitive). Next: alpha-block FIRST (phenoxybenzamine 10–14 days), then beta-block, then surgery."},
+];
+
+// ── ADRENAL VIGNETTES ──
+const ADRENAL_VIG=[
+  {n:'01',d:1,lo:'Danielsen: StAR protein',t:"A newborn has <span class='hl'>no steroid production from any adrenal zone</span>. The gonads also produce no steroids. Cholesterol accumulates in the adrenal cells.",opts:["21-hydroxylase deficiency","3β-HSD deficiency","StAR protein deficiency (Lipoid CAH)","17α-hydroxylase deficiency"],ok:2,fb:"<strong>Lipoid CAH from StAR deficiency.</strong> StAR (Steroidogenic Acute Regulatory protein) transports cholesterol into the inner mitochondrial membrane — the rate-limiting step for ALL steroid synthesis. Deficiency → no steroids in adrenal OR gonads. Cholesterol accumulates (lipid droplets). 46,XY → female phenotype (no testosterone). Severe salt-wasting crisis at birth.",bz:["StAR = rate-limiting","no steroids anywhere","lipoid CAH","46 XY → female"]},
+  {n:'02',d:2,lo:'Danielsen: 11β-HSD2 mechanism',t:"A patient regularly chews large amounts of licorice. She develops <span class='hl'>hypertension and hypokalemia</span>. Aldosterone is LOW and renin is LOW. <span class='trap-flag'>⚠ TRAP</span>",opts:["Primary hyperaldosteronism — licorice increases aldosterone","Syndrome of apparent mineralocorticoid excess — licorice inhibits 11β-HSD2","Secondary hyperaldosteronism — licorice increases renin","Cushing's syndrome — licorice increases cortisol"],ok:1,fb:"<strong>Glycyrrhizin in licorice inhibits 11β-HSD2</strong> → cortisol is NOT converted to inactive cortisone in the kidney → cortisol accumulates and activates MR (mineralocorticoid receptor) → Na+ retention + K+ wasting → HTN + hypokalemia. Aldosterone is actually LOW (suppressed by BP feedback). LOW renin + LOW aldosterone + HIGH cortisol → apparent mineralocorticoid excess.",bz:["11β-HSD2 inhibited","cortisol activates MR","low aldosterone","apparent mineralocorticoid excess"]},
+  {n:'03',d:2,lo:'Wieneke: Waterhouse-Friderichsen',t:"A <span class='hl'>6-year-old</span> presents with meningococcal septicemia, petechial rash rapidly becoming purpuric, high fever, and shock. Bilateral adrenal hemorrhage is found on imaging.",opts:["Addison's disease","Waterhouse-Friderichsen syndrome","Cushing's syndrome","Primary hyperaldosteronism"],ok:1,fb:"<strong>Waterhouse-Friderichsen syndrome</strong> — bilateral adrenal hemorrhagic infarction in fulminant septicemia (N. meningitidis classically). DIC-mediated hemorrhage destroys adrenal cortex → acute cortisol + aldosterone deficiency → hypotension, hypoglycemia. Treatment: immediate antibiotics + high-dose IV hydrocortisone.",bz:["N. meningitidis","bilateral adrenal hemorrhage","DIC","acute adrenal crisis"]},
+  {n:'04',d:2,lo:'Sharma: pheo pre-op prep',t:"A <span class='hl'>38-year-old</span> with pheo is due for surgery in 10 days. Her cardiologist wants to start <span class='hl'>metoprolol</span> first to control her heart rate. <span class='trap-flag'>⚠ TRAP</span>",opts:["Correct — beta-blocker is appropriate first-line for pheo pre-op","Dangerous — beta-blockade before alpha-blockade → unopposed alpha → hypertensive crisis","Correct — beta-1 selective blockers are safe in pheo","Correct — metoprolol lowers BP by reducing cardiac output"],ok:1,fb:"<strong>Classic exam trap.</strong> Pheo secretes epi + NE. Beta-blocker FIRST blocks beta-2 vasodilation → UNOPPOSED alpha-1 vasoconstriction → hypertensive crisis. ALWAYS alpha first (phenoxybenzamine or doxazosin for 10–14 days), THEN add beta-blocker after alpha-blockade is established.",bz:["ALPHA FIRST","then beta","unopposed alpha = crisis","phenoxybenzamine 10-14 days"]},
+  {n:'05',d:2,lo:'Danielsen: mineralocorticoid selectivity',t:"A patient with <span class='hl'>congenital 11β-HSD2 deficiency</span> (genetic) presents with severe hypertension, hypokalemia, and a very LOW aldosterone level.",opts:["This is impossible — 11β-HSD2 deficiency causes hyperaldosteronism","Cortisol acts as a mineralocorticoid (activates MR) because 11β-HSD2 normally prevents this in kidney","Secondary hyperaldosteronism from renal ischemia","Glucocorticoid excess from another source"],ok:1,fb:"<strong>11β-HSD2</strong> normally converts cortisol → inactive cortisone in renal tubules. Without it, high circulating cortisol activates MR directly → mimics hyperaldosteronism. Aldosterone is actually LOW/normal (suppressed by volume expansion). This is the mechanism of: licorice toxicity, Liddle syndrome (gain-of-function ENaC mutation — different mechanism but similar phenotype).",bz:["11β-HSD2 protects MR from cortisol","cortisol = apparent mineralocorticoid","low aldosterone","HTN + hypoK"]},
+  {n:'06',d:3,lo:'Danielsen: PNMT and adrenal portal system',t:"A researcher finds that adrenalectomy dramatically reduces circulating <span class='hl'>epinephrine</span> but NOT norepinephrine. Explain why. <span class='trap-flag'>⚠ TRAP</span>",opts:["The adrenal medulla produces both Epi and NE — adrenalectomy should eliminate both","PNMT (NE → Epi) requires high glucocorticoid concentration from adrenocortical portal blood. Only adrenal chromaffin cells have this exposure. Sympathetic neurons produce NE but lack PNMT → can't make Epi. Adrenalectomy removes Epi source but NE from sympathetic neurons is preserved.","All chromaffin cells express PNMT equally","NE is made only in the adrenal — this experiment result is impossible"],ok:1,fb:"<strong>PNMT (phenylethanolamine N-methyltransferase)</strong> converts NE → Epi. It requires very high glucocorticoid levels to be expressed — only available in the adrenal medulla via the corticomedullary portal circulation. Sympathetic neurons = NE final product only (no PNMT, no high cortisol). Extra-adrenal pheo (paraganglioma) = produces NE (no PNMT), not Epi.",bz:["PNMT requires glucocorticoids","adrenal portal system","sympathetic neurons = NE only","paraganglioma = NE not Epi"]},
+  {n:'07',d:2,lo:'Wieneke: MEN2 and pheo',t:"A <span class='hl'>25-year-old woman</span> with known <span class='hl'>RET mutation (MEN2A)</span> undergoes biochemical screening. Plasma metanephrines are mildly elevated bilaterally. She is asymptomatic with normal BP at rest.",opts:["No treatment needed — asymptomatic pheo doesn't need surgery","She may have bilateral pheo. Proceed with alpha-blockade then surgical resection once confirmed — pheo in MEN2 is typically benign, often bilateral, and should be resected.","Start antihypertensives and recheck in 1 year","Start beta-blocker immediately to prevent crisis"],ok:1,fb:"<strong>Bilateral pheo in MEN2A.</strong> MEN2A: RET mutation → MTC + pheo + primary HPT. Pheo in MEN2 is usually benign (10% rule applies differently in hereditary), often bilateral. Asymptomatic doesn't mean safe — adrenalectomy recommended before MTC surgery (pheo surgery first!). Alpha-blockade first, then cortical-sparing adrenalectomy when feasible.",bz:["MEN2A = RET mutation","MTC + pheo + HPT","resect pheo before thyroid surgery","cortical-sparing preferred"]},
+  {n:'08',d:1,lo:'Sharma: adrenal replacement drugs',t:"A patient with Addison's disease requires hormone replacement. What two drugs does she need and why can't one replace the other?",opts:["Only hydrocortisone — it has enough mineralocorticoid activity","Hydrocortisone + fludrocortisone — cortisol replaces glucocorticoid function; fludrocortisone replaces aldosterone for Na/K balance","Dexamethasone + fludrocortisone — dexamethasone is the best glucocorticoid replacement","Only prednisone — it covers both glucocorticoid and mineralocorticoid needs"],ok:1,fb:"<strong>Hydrocortisone + fludrocortisone.</strong> Hydrocortisone replaces glucocorticoid function (also used for stress dosing: 100mg IV q8h perioperatively). Fludrocortisone (synthetic mineralocorticoid) replaces aldosterone for Na+ retention and K+ excretion. Dexamethasone has essentially ZERO mineralocorticoid activity — cannot replace aldosterone. Prednisone has minimal mineralocorticoid activity — insufficient alone.",bz:["hydrocortisone + fludrocortisone","dexamethasone = no mineralocorticoid","stress dosing rule","fludrocortisone = synthetic aldosterone"]},
+];
+
+// ── ADRENAL PHEO STEPS ──
+const ADRENAL_PHEO=[
+  {n:1,t:"Step 1: Diagnose — which test first?",q:"A patient has episodic hypertension, headache, and diaphoresis. First test to order?",opts:["CT abdomen (imaging first)","24-hour urine fractionated metanephrines OR plasma free metanephrines","Random catecholamines","Aldosterone:renin ratio"],ok:1,rev:"<strong>Metanephrines first.</strong> Fractionated metanephrines (normetanephrine, metanephrine) are the metabolites of NE and Epi — produced continuously by the tumor regardless of episodic secretion. More sensitive than catecholamines themselves. Plasma free metanephrines: highest sensitivity (96%). Urine 24h fractionated: slightly less sensitive but high specificity. Do NOT image first — imaging can trigger crisis in unblocked patients."},
+  {n:2,t:"Step 2: Imaging — which modality?",q:"Biochemistry confirms pheo. Next step for localization?",opts:["PET scan with FDG","CT abdomen/pelvis OR MRI adrenals","MIBG scan first","Plain X-ray abdomen"],ok:1,rev:"<strong>CT or MRI adrenals</strong> for initial localization. CT: good resolution. MRI: T2 'light-bulb' sign (high T2 signal) is characteristic — preferred if allergic to contrast or if extra-adrenal location suspected. MIBG (metaiodobenzylguanidine) scintigraphy: useful for extra-adrenal tumors (paragangliomas) or metastatic disease. Functional imaging (DOTATATE PET) increasingly used for hereditary/metastatic cases."},
+  {n:3,t:"Step 3: Pre-op medical prep — which drug FIRST?",q:"Pheo confirmed on CT. Which drug must be started first and why?",opts:["Beta-blocker (metoprolol) to control heart rate","Alpha-blocker (phenoxybenzamine) to block vasoconstriction first","ACE inhibitor for blood pressure","Spironolactone for secondary hyperaldosteronism"],ok:1,rev:"<strong>Alpha-blocker FIRST — always.</strong> Phenoxybenzamine (irreversible, non-selective alpha-1+alpha-2) for 10–14 days pre-op. If beta-blocker given first → removes beta-2 vasodilation → UNOPPOSED alpha-1 → HTN crisis. After alpha-blockade established → add beta-blocker (propranolol) to control reflex tachycardia. High-salt diet + liberal fluid intake during prep (expand volume that was contracted from vasoconstriction)."},
+  {n:4,t:"Step 4: Intraoperative — which drug for HTN crisis?",q:"During tumor manipulation, BP spikes to 260/150. Which IV agent?",opts:["IV labetalol (alpha+beta blocker)","IV phentolamine (short-acting alpha-blocker) or nitroprusside","IV esmolol (beta-blocker)","IV magnesium"],ok:1,rev:"<strong>IV phentolamine</strong> (reversible alpha-blocker) is classic for intraoperative pheo crises. Sodium nitroprusside (rapid vasodilator) is also used. Labetalol: has beta-blocking activity but also alpha — theoretically acceptable. Avoid pure beta-blockers intraoperatively. Nicardipine (calcium channel blocker) is increasingly popular intraoperatively for pheo management."},
+  {n:5,t:"Step 5: Post-op — what happens to BP?",q:"Immediately after tumor removal, BP drops to 70/40. Why?",opts:["Anesthesia overdose — reduce agents","Loss of catecholamine drive → vasodilation + hypotension. Pre-operative phenoxybenzamine also contributes. Treatment: IV fluids aggressively; vasopressors if needed.","Adrenal crisis — give hydrocortisone immediately","Cardiac arrhythmia from catecholamine withdrawal"],ok:1,rev:"<strong>Post-resection hypotension</strong> — expected. Sudden catecholamine withdrawal → vasodilation (alpha-1 no longer activated) + residual phenoxybenzamine effect. Treat with aggressive IV fluids. Note: bilateral adrenalectomy → also need cortisol replacement (no adrenal cortex remaining). Unilateral → contralateral adrenal usually sufficient."},
+];
+
+// ── ADRENAL FLASHCARDS ──
+const ADRENAL_FC=[
+  {lo:'Danielsen: zone-enzyme map',tag:'Adrenal Biochem',q:'Why can\'t the zona glomerulosa produce cortisol or sex steroids?',a:'Zona glomerulosa lacks CYP17A1 (17α-hydroxylase). Without 17α-hydroxylation, pregnenolone/progesterone cannot be converted to 17-OH versions needed for cortisol/androgens. All steroidogenesis in the glomerulosa is forced down the aldosterone pathway. CYP11B2 (aldosterone synthase) is expressed ONLY in glomerulosa — regulated by Ang II and K+, not primarily ACTH.',trap:'Trap: ACTH minimally stimulates aldosterone but the primary regulators are Ang II and serum K+. ACTH controls cortisol (fasciculata) and DHEA (reticularis).'},
+  {lo:'Danielsen: CAH comparison table',tag:'Adrenal Biochem',q:'Summarize the three major CAH enzyme deficiencies: what accumulates, what is deficient, and what is the clinical phenotype.',a:'21-OHD (90-95%): ↑17-OHP, ↑androgens; ↓cortisol, ↓aldosterone → salt-wasting + virilization. 11β-OHD (5-8%): ↑11-DOC, ↑11-deoxycortisol, ↑androgens; ↓cortisol → HTN + virilization (no salt-wasting — DOC is mineralocorticoid). 17α-OHD (<1%): ↑DOC, ↑progesterone; ↓cortisol, ↓sex steroids → HTN + XY female phenotype (no virilization).',trap:'Trap: ALL three have ↑ACTH (low cortisol drives this). But only 21-OHD has salt-wasting. Only 17α-OHD has NO sex steroids.'},
+  {lo:'Wieneke: adrenocortical adenoma vs carcinoma',tag:'Adrenal Pathology',q:'Name 4 features that distinguish adrenal cortical carcinoma from adenoma.',a:'Carcinoma: large size (>6cm, often >10cm), weight >100g, necrosis, hemorrhage, atypical mitoses (>5/50 HPF), vascular invasion, infiltration of adjacent structures, Weiss score >3. Adenoma: typically <4-5cm, lipid-rich (bright on CT = low Hounsfield units), well-circumscribed, no necrosis. Mixed hormone production (cortisol + androgens) raises suspicion for carcinoma.'},
+  {lo:'Sharma: Conn\'s diagnosis and treatment',tag:'Adrenal Pharmacology',q:'What is the workup for suspected primary hyperaldosteronism?',a:'Screen: aldo:renin ratio (ARR) >30 (with aldo >15 ng/dL). Confirm: salt loading test (aldo not suppressed) or fludrocortisone suppression test. Localize: CT adrenals. Adrenal vein sampling (AVS) to confirm unilateral vs bilateral (critical before surgery — CT alone misses 25% of unilateral cases). Treat: unilateral adenoma → adrenalectomy; bilateral hyperplasia → spironolactone or eplerenone (MR antagonists).'},
+  {lo:'Danielsen: DHEA-S physiology',tag:'Adrenal Biochem',q:'What is DHEA-S and why is it the major form of adrenal androgen in circulation?',a:'DHEA-S (DHEA sulfate) — made in zona reticularis. DHEA has short t½ (~15-30 min, binds weakly to albumin). Sulfation in the reticularis → DHEA-S: binds albumin tightly → t½ 7-10 hours. Serves as a circulating reservoir. In target tissues, sulfate is removed by steroid sulfatase → DHEA → converted to more potent androgens. Adrenarche (age 6-8): onset of DHEA-S secretion; peaks in mid-20s.'},
+];
+
+// ── DIABETES LABS ──
+const DIABETES_LABS=[
+  {title:'DM Pattern A',labs:[{n:'Fasting glucose',v:'↑ 322 mg/dL',c:'hi'},{n:'HbA1c',v:'↑ 11.2%',c:'hi'},{n:'C-peptide',v:'↓ Undetectable',c:'lo'},{n:'Anti-GAD Ab',v:'Positive',c:'hi'},{n:'Ketones',v:'↑ Large',c:'hi'}],opts:["Type 2 DM","Type 1 DM","MODY","Gestational diabetes"],ok:1,exp:"<strong>Type 1 DM.</strong> Undetectable C-peptide (no beta-cell function — absolute insulin deficiency). Positive anti-GAD antibodies (autoimmune). Ketones present (without insulin, unrestrained lipolysis → ketogenesis). TRAP: C-peptide is the KEY differentiator between T1 and T2. Obese patients can have T1DM — never assume T2 without checking C-peptide."},
+  {title:'DM Pattern B',labs:[{n:'pH',v:'↓ 7.18',c:'lo'},{n:'Glucose',v:'↑ 485 mg/dL',c:'hi'},{n:'HCO₃⁻',v:'↓ 8 mEq/L',c:'lo'},{n:'Anion gap',v:'↑ 28 mEq/L',c:'hi'},{n:'K⁺ (serum)',v:'↑ 5.9 mEq/L',c:'hi'}],opts:["Hyperosmolar hyperglycemic state (HHS)","Diabetic ketoacidosis (DKA)","Type 2 DM — hyperglycemic hyperosmolarity","Lactic acidosis"],ok:1,exp:"<strong>DKA.</strong> Anion gap metabolic acidosis + ketosis + hyperglycemia. K+ is paradoxically HIGH despite total body K+ depletion (insulin deficiency → K+ can't enter cells; acidosis → K+/H+ exchange). CRITICAL: Replace K+ before starting insulin if K+ <3.5 — insulin will drive K+ into cells rapidly → fatal arrhythmia."},
+  {title:'DM Pattern C',labs:[{n:'Glucose',v:'↑ 950 mg/dL',c:'hi'},{n:'Serum osm',v:'↑ 389 mOsm/kg',c:'hi'},{n:'pH',v:'7.38 (normal)',c:'norm'},{n:'Ketones',v:'Negative',c:'norm'},{n:'HCO₃⁻',v:'22 mEq/L (normal)',c:'norm'}],opts:["DKA","Hyperosmolar hyperglycemic state (HHS)","Type 1 DM presentation","Lactic acidosis"],ok:1,exp:"<strong>HHS (hyperosmolar hyperglycemic state).</strong> Extreme hyperglycemia + hyperosmolarity + NO ketoacidosis + NO significant acidosis. Residual insulin in T2DM sufficient to prevent ketogenesis but insufficient to control glucose. Higher mortality than DKA (older patients, delayed presentation). Treat: aggressive IV fluids + slow glucose lowering."},
+  {title:'DM Pattern D',labs:[{n:'HbA1c',v:'↑ 8.4%',c:'hi'},{n:'eGFR',v:'↓ 35 mL/min',c:'lo'},{n:'LVEF (echo)',v:'↓ 30%',c:'lo'},{n:'Urine albumin',v:'↑ 280 mg/g',c:'hi'},{n:'Current meds',v:'Metformin 1g BID',c:'norm'}],opts:["Add pioglitazone — best insulin sensitizer","Add SGLT2 inhibitor — proven HF and CKD benefit","Add sulfonylurea — most cost-effective","Add DPP-4 inhibitor — weight neutral"],ok:1,exp:"<strong>SGLT2 inhibitor</strong> (empagliflozin, dapagliflozin). Landmark trials: EMPA-REG OUTCOME, DAPA-HF, EMPEROR-Reduced, CREDENCE — proven reduction in HF hospitalizations, CKD progression, CV mortality. Mechanism: glucosuria → natriuresis → preload reduction. Avoid pioglitazone in HFrEF (worsens fluid retention). DPP-4i = CV neutral. Sulfonylurea = hypoglycemia risk, no CV benefit."},
+  {title:'DM Pattern E',labs:[{n:'FBG',v:'112 mg/dL',c:'hi'},{n:'OGTT 2h',v:'158 mg/dL',c:'hi'},{n:'HbA1c',v:'5.9%',c:'hi'},{n:'BMI',v:'31 kg/m²',c:'hi'},{n:'Fam Hx',v:'T2DM (mother)',c:'norm'}],opts:["Normal — no intervention","Type 2 DM — start metformin","Pre-diabetes — lifestyle intervention ± metformin","Type 1 DM — start insulin"],ok:2,exp:"<strong>Pre-diabetes.</strong> FBG 100-125 (impaired fasting glucose) + OGTT 140-199 (impaired glucose tolerance) + HbA1c 5.7-6.4%. First-line: intensive lifestyle intervention (7% weight loss, 150 min/week moderate exercise) — reduces T2DM risk by 58% (DPP trial). Metformin: reduces risk by 31%, can be added especially if BMI >35, age <60, or prior GDM."},
+];
+
+// ── DIABETES VIGNETTES ──
+const DIABETES_VIG=[
+  {n:'01',d:1,lo:'Janicic: DKA potassium physiology',t:"A <span class='hl'>22-year-old T1DM</span> presents with DKA. K⁺ 6.2 mEq/L. IV insulin infusion started. 2 hours later K⁺ drops to 2.8 mEq/L. <span class='trap-flag'>⚠ TRAP</span>",opts:["Insulin caused renal K+ excretion via aldosterone stimulation","K+ was spuriously elevated initially due to dehydration only","Insulin deficiency → K+ can't enter cells + acidosis → K+/H+ exchange out of cells = serum K+ HIGH despite total body depletion. Insulin drives K+ back in → serum K+ drops rapidly.","Insulin directly pumps K+ into urine"],ok:2,fb:"<strong>DKA K+ paradox.</strong> Serum K+ high, total body K+ depleted. Mechanism: (1) Insulin deficiency → Na-K-ATPase not activated → K+ stays extracellular. (2) Acidosis → H+/K+ exchange (H+ enters cells, K+ exits). With insulin infusion → K+ re-enters cells rapidly. MUST replete K+ before starting insulin if K+ <3.5 (risk of fatal arrhythmia).",bz:["serum K+ high, total body K+ low","insulin drives K+ into cells","replete K+ before insulin if <3.5","H+/K+ exchange in acidosis"]},
+  {n:'02',d:2,lo:'Janicic: DKA vs HHS',t:"An <span class='hl'>elderly T2DM patient</span> presents with glucose 1,080 mg/dL, serum osmolarity 420 mOsm/kg, altered consciousness. pH 7.37, HCO₃⁻ 21 mEq/L, ketones negative. <span class='trap-flag'>⚠ TRAP</span>",opts:["DKA — treat with insulin bolus and rapid IV fluids","HHS — residual insulin prevents ketogenesis but not extreme hyperglycemia. Aggressive fluids, slow glucose lowering.","SIADH — fluid restriction needed","DKA — the pH rules out HHS"],ok:1,fb:"<strong>HHS (hyperosmolar hyperglycemic state).</strong> No ketones, no acidosis, extreme hyperglycemia, hyperosmolarity. Residual insulin in T2DM blocks ketogenesis. pH normal (rules out DKA). HHS has HIGHER mortality than DKA. Treatment: 1-2L NS bolus, then hypotonic fluids, insulin only after glucose starts falling with fluids. Avoid rapid drops in osmolarity (cerebral edema).",bz:["HHS = no ketones, no acidosis","extreme hyperglycemia","higher mortality than DKA","slow glucose lowering"]},
+  {n:'03',d:1,lo:'Furlong: T1 vs T2 pathogenesis',t:"A <span class='hl'>14-year-old obese teenager</span> (BMI 34) has polyuria and polydipsia. Glucose 380 mg/dL. HbA1c 12%. <span class='hl'>C-peptide is undetectable</span>. Anti-GAD antibodies positive. <span class='trap-flag'>⚠ TRAP</span>",opts:["Type 2 DM — obesity at this age strongly suggests T2","Type 1 DM — undetectable C-peptide and positive autoantibodies confirm autoimmune beta-cell destruction despite obesity","MODY — family history needed","Gestational diabetes"],ok:1,fb:"<strong>Type 1 DM despite obesity.</strong> Classic trap. Obesity does NOT mean T2DM. The definitive tests are C-peptide (absent in T1 = no beta cells) and autoantibodies (anti-GAD, anti-IA2, anti-insulin). Obese T1DM is increasingly recognized. This patient needs insulin — not metformin alone.",bz:["obesity ≠ T2DM","C-peptide absent = T1","anti-GAD antibodies","insulin required"]},
+  {n:'04',d:2,lo:'Janicic: GLP-1 mechanism',t:"A nurse tells a T2DM patient his new <span class='hl'>semaglutide (GLP-1 agonist)</span> will cause hypoglycemia similar to his previous glipizide (sulfonylurea). <span class='trap-flag'>⚠ TRAP</span>",opts:["Correct — all insulin secretagogues cause equal hypoglycemia risk","Incorrect — GLP-1 agonists stimulate insulin in a GLUCOSE-DEPENDENT manner (only when glucose is elevated) → no hypoglycemia in isolation unlike sulfonylureas","Correct — semaglutide lowers glucose via the same K-ATP mechanism as sulfonylureas","Incorrect — semaglutide doesn't affect insulin secretion at all"],ok:1,fb:"<strong>GLP-1 agonists = glucose-dependent.</strong> Only stimulate insulin when glucose is elevated. At normoglycemia, no insulin release → no hypoglycemia. Sulfonylureas close K-ATP channels regardless of glucose level → insulin released in fasting → hypoglycemia risk. SGLT2i: also no hypoglycemia alone. DPP-4i: also glucose-dependent (less potent). When combined with insulin → hypoglycemia risk increases.",bz:["GLP-1 = glucose-dependent","sulfonylurea = glucose-independent","no solo hypoglycemia with GLP-1","semaglutide + insulin = hypoglycemia risk"]},
+  {n:'05',d:2,lo:'Furlong: diabetic nephropathy pathways',t:"A 15-year T1DM patient has proteinuria 350 mg/g creatinine, eGFR 48 mL/min. Biopsy would show <span class='hl'>Kimmelstiel-Wilson nodules</span>.",opts:["Diabetic nephropathy — caused by AGE deposition, polyol pathway, and PKC activation","IgA nephropathy — most common nephropathy in young adults","Membranous nephropathy — T1DM is not a risk factor","Post-streptococcal GN"],ok:0,fb:"<strong>Diabetic nephropathy.</strong> Kimmelstiel-Wilson nodules = pathognomonic nodular glomerulosclerosis. Three pathways: (1) Advanced glycation end-products (AGEs) → basement membrane thickening. (2) Polyol pathway (sorbitol accumulation) → osmotic damage. (3) PKC activation → VEGF ↑ → glomerular permeability. DM = #1 cause of ESRD in US. ACEi/ARBs slow progression.",bz:["Kimmelstiel-Wilson nodules","AGEs + polyol + PKC","#1 cause ESRD","ACEi/ARB to slow progression"]},
+  {n:'06',d:2,lo:'Janicic: insulin types',t:"A patient on <span class='hl'>insulin glargine</span> reports a noticeable 'peak' effect 4-6 hours after injection. He wonders if he took the wrong insulin. You review his vials. <span class='trap-flag'>⚠ TRAP</span>",opts:["Normal — glargine peaks at 4-6 hours","Abnormal — glargine is peakless (flat 24hr profile). The patient likely drew up NPH or regular insulin by mistake, or has lipohypertrophy affecting absorption.","Normal — all long-acting insulins have a peak","Abnormal — glargine should not be absorbed at all until 24 hours"],ok:1,fb:"<strong>Glargine is peakless.</strong> Forms microprecipitates at injection site → slow steady release over ~24 hours. No pronounced peak. If the patient reports a peak: suspect wrong vial drawn (NPH has a peak at 4-8h; regular peaks at 2-4h), lipohypertrophy at injection site altering absorption, or mixing insulin in the same syringe. Detemir also peakless. Degludec: ultra-long, 42hr, completely peakless.",bz:["glargine = peakless = basal","NPH = has a peak","wrong vial most likely","lipohypertrophy affects absorption"]},
+  {n:'07',d:1,lo:'Janicic: metformin contraindications',t:"A T2DM patient on metformin 1g BID is admitted with acute kidney injury (creatinine rises from 1.1 to 3.8 mg/dL). The AKI is from contrast nephropathy after a cardiac CT.",opts:["Continue metformin — contrast only affects kidneys transiently","Hold metformin — risk of lactic acidosis with impaired renal clearance. Restart once renal function returns to baseline and is stable for 48 hours.","Switch to sulfonylurea — equally effective and safe in AKI","Add SGLT2 inhibitor while holding metformin"],ok:1,fb:"<strong>Hold metformin in AKI.</strong> Metformin is renally cleared — accumulates in renal failure → impairs hepatic mitochondrial electron transport → lactic acidosis (rare but high mortality). Restart after creatinine stabilizes (48h post-contrast or after AKI resolution). Hold if eGFR <30. Reduce dose if eGFR 30-45. SGLT2i also contraindicated in AKI (no glucose effect when GFR <45 and increased AKI risk).",bz:["metformin → lactic acidosis in AKI","hold for contrast procedures","restart after 48h once stable","eGFR <30 = stop metformin"]},
+  {n:'08',d:3,lo:'Furlong: DM microvascular complications',t:"A T1DM patient of 20 years has retinopathy treated with laser, ESRD on dialysis, and severe peripheral neuropathy. His HbA1c has been 9-11% throughout. His cardiologist detects a silent MI. <span class='trap-flag'>⚠ TRAP</span>",opts:["Microvascular complications only — the MI is coincidental","Both microvascular (retinopathy, ESRD, neuropathy) AND macrovascular (MI). DM accelerates atherosclerosis via lipid modification, oxidative stress, endothelial dysfunction. Silent MI is common in DM neuropathy (impaired pain perception).","DM doesn't cause MI — only microvascular damage","MI is from dialysis not DM"],ok:1,fb:"<strong>DM causes BOTH micro and macrovascular disease.</strong> Silent MI is common in DM because: (1) autonomic neuropathy impairs pain perception. (2) DM accelerates atherosclerosis. DM is the leading cause of adult blindness, ESRD, and non-traumatic amputations. The macrovascular complications are from accelerated atherosclerosis (endothelial dysfunction, oxidative stress, dyslipidemia, hyperglycemia-driven AGEs).",bz:["silent MI from autonomic neuropathy","micro + macrovascular","leading cause: blindness, ESRD, amputation","atherosclerosis accelerated by DM"]},
+];
+
+// ── DIABETES DRUG STEPS ──
+const DIABETES_DRUGS=[
+  {n:1,t:"Metformin — mechanism and first-line status",q:"How does metformin lower blood glucose?",opts:["Stimulates pancreatic insulin secretion","Activates AMPK → decreases hepatic gluconeogenesis (primary); also increases peripheral insulin sensitivity and glucose uptake","Blocks alpha-glucosidase → reduces carbohydrate absorption","Inhibits SGLT2 in kidney → glucosuria"],ok:1,rev:"<strong>Metformin:</strong> AMPK activation → ↓hepatic gluconeogenesis (primary effect). Also ↓glucose absorption from gut, ↑peripheral uptake. Does NOT cause hypoglycemia (no insulin secretion). Does NOT cause weight gain. GI side effects (take with food). Contraindicated if eGFR <30 (lactic acidosis). CV benefit shown (UKPDS). First-line for T2DM."},
+  {n:2,t:"Sulfonylureas — mechanism and risk",q:"How do sulfonylureas (glipizide, glyburide) lower glucose, and what is their major risk?",opts:["Block glucagon secretion — no hypoglycemia","Close K-ATP channels on beta cells → depolarization → Ca2+ influx → insulin exocytosis regardless of glucose level → HYPOGLYCEMIA risk","Increase insulin sensitivity in peripheral tissues","Stimulate GLP-1 secretion from gut"],ok:1,rev:"<strong>Sulfonylureas close K-ATP channels</strong> on pancreatic beta cells → membrane depolarization → Ca2+ entry → insulin granule exocytosis. Glucose-INDEPENDENT → hypoglycemia even in fasting. Glyburide especially problematic in elderly and CKD (active metabolites accumulate). Weight gain. Secondary failure as beta cells fail in T2DM."},
+  {n:3,t:"GLP-1 agonists — mechanism, benefits, risks",q:"Why do GLP-1 agonists cause weight loss but NOT hypoglycemia in isolation?",opts:["GLP-1 agonists are insulin sensitizers — no insulin secretion involved","Glucose-DEPENDENT insulin secretion (only when glucose elevated) → no fasting hypoglycemia. Weight loss: suppress glucagon, slow gastric emptying, hypothalamic satiety centers. CV benefit: ↓MACE in established atherosclerosis.","GLP-1 agonists work only on glucagon and don't affect insulin","They cause hypoglycemia — similar risk to sulfonylureas"],ok:1,rev:"<strong>GLP-1 agonists:</strong> glucose-DEPENDENT insulin secretion + glucagon suppression + ↓gastric emptying + hypothalamic satiety → weight loss 3-15 kg. No solo hypoglycemia. CV benefit in ASCVD (LEADER, SUSTAIN-6, REWIND). SE: nausea (worst initially), pancreatitis (rare, controversial). Semaglutide can be oral (Rybelsus) or SC. Avoid in personal/family history of MTC."},
+  {n:4,t:"SGLT2 inhibitors — mechanism and organ benefits",q:"What is the mechanism of SGLT2 inhibitors and their major non-glycemic benefits?",opts:["Block SGLT2 in gut → reduce carbohydrate absorption","Block SGLT2 in renal proximal tubule → prevent glucose reabsorption → glucosuria. Benefits: weight loss, ↓BP, ↓HF hospitalizations (EMPA-REG, DAPA-HF, EMPEROR), ↓CKD progression (CREDENCE). SE: UTI, genital mycotic infections, Fournier's, euglycemic DKA (rare).","Stimulate insulin secretion glucose-dependently","Block glucagon receptor"],ok:1,rev:"<strong>SGLT2i:</strong> kidney proximal tubule SGLT2 blocked → glucose excreted in urine → ↓blood glucose + osmotic diuresis. Hemodynamic benefits (natriuresis) reduce preload → HF benefit. Renal afferent arteriole dilation → reduced glomerular hyperfiltration → CKD benefit. Avoid if eGFR <45 for glycemic effect (can still use for HF/CKD benefit down to eGFR 20). Risk: euglycemic DKA (test ketones, not glucose, if ill)."},
+  {n:5,t:"DPP-4 inhibitors — mechanism and CV profile",q:"How do DPP-4 inhibitors work and what is their major CV finding?",opts:["Block DPP-4 → prevent degradation of endogenous GLP-1 → modest insulin stimulation + glucagon suppression. GLUCOSE-DEPENDENT. Weight neutral. CV NEUTRAL (SAVOR-TIMI, EXAMINE, TECOS). CAUTION: saxagliptin increased HF hospitalizations in SAVOR-TIMI — avoid in HF.","Block pancreatic DPP-4 → directly stimulate insulin receptors","Increase insulin sensitivity via PPARγ","Directly block glucagon secretion irreversibly"],ok:0,rev:"<strong>DPP-4 inhibitors</strong> (sitagliptin, saxagliptin, alogliptin): extend GLP-1 half-life by blocking its degradation. Modest A1c lowering (~0.5-0.8%). Weight neutral. Generally well-tolerated. CV NEUTRAL overall, but saxagliptin increased HF hospitalizations → avoid in HF or use sitagliptin/alogliptin instead. No hypoglycemia in isolation."},
+  {n:6,t:"Insulin types — rapid vs basal",q:"Match: Lispro/Aspart | Regular | Glargine/Detemir",opts:["All are long-acting basal insulins","Lispro/Aspart = rapid-acting (onset 15 min, peak 1-2hr, duration 3-4hr) — mealtime. Regular = short-acting (onset 30-60min, peak 2-4hr, duration 5-8hr). Glargine/Detemir = long-acting peakless (~24hr) — basal.","Glargine peaks at 4 hours — not basal","Regular is the fastest — must be used for emergencies"],ok:1,rev:"<strong>Rapid-acting</strong> (Lispro, Aspart, Glulisine): onset 15 min → given WITH meals. <strong>Short-acting</strong> (Regular): onset 30-60 min → given 30 min before meals; also used in DKA infusions. <strong>Intermediate</strong> (NPH): onset 1-2hr, peak 4-8hr, duration 12-16hr. <strong>Long-acting</strong> (Glargine, Detemir): PEAKLESS, 24hr duration → basal coverage. Degludec: ultra-long (42hr). TRAP: Glargine is peakless — any reported 'peak' = wrong vial or lipohypertrophy."},
+];
+
+// ── DIABETES FLASHCARDS ──
+const DIABETES_FC=[
+  {lo:'Furlong: T1 vs T2 pathogenesis',tag:'Diabetes',q:'A 14-year-old obese patient has DM. How do you definitively distinguish T1 from T2?',a:'C-peptide: undetectable = T1 (no beta cells); detectable = T2 (beta cells still functioning). Autoantibodies: anti-GAD, anti-IA2, anti-insulin, anti-ZnT8 — present in T1. HLA-DR3/DR4 association in T1. Onset: usually younger in T1 but NOT reliable. TRAP: obesity is increasingly common in T1DM — do NOT assume T2 based on weight alone.',trap:'Trap: obese teenager ≠ T2DM. Always check C-peptide and autoantibodies. Missing T1DM → failure to start insulin → DKA.'},
+  {lo:'Janicic: DKA diagnostic criteria',tag:'Diabetes',q:'What are the 3 biochemical criteria for DKA?',a:'1) Hyperglycemia (usually >250 mg/dL, but euglycemic DKA possible with SGLT2i use/pregnancy). 2) Anion gap metabolic acidosis (pH <7.3, HCO3 <18 mEq/L). 3) Ketonemia/ketonuria. Severity: mild pH 7.25-7.3; moderate pH 7.0-7.24; severe pH <7.0. TRAP: SGLT2i can cause euglycemic DKA — glucose may be normal but ketones are elevated. Check ketones not just glucose in ill patients on SGLT2i.',trap:'Trap: euglycemic DKA with SGLT2i — glucose may be 150-200, not dramatically elevated. If on SGLT2i and ill, check ketones directly.'},
+  {lo:'Furlong: DM complications mechanism',tag:'Diabetes',q:'Name the 3 main biochemical pathways responsible for microvascular complications in DM.',a:'1) Advanced glycation end-products (AGEs): glucose + protein non-enzymatically → AGE → basement membrane thickening, mesangial expansion, vessel wall damage. 2) Polyol pathway: excess glucose → aldose reductase → sorbitol accumulation → osmotic stress, ↓NADPH → oxidative damage. 3) PKC (protein kinase C) activation: diacylglycerol accumulates → PKC activated → VEGF ↑ → neovascularization (retinopathy), vascular permeability ↑.'},
+  {lo:'Janicic: insulin pharmacology',tag:'Diabetes Pharmacology',q:'Why is regular insulin used in DKA drips but not rapid-acting insulin (lispro/aspart)?',a:'Regular insulin is given IV (has a short, titratable IV half-life of ~5 minutes). Rapid-acting analogs (lispro, aspart) are designed for subcutaneous use — their pharmacokinetics are based on subcutaneous absorption kinetics (onset 15 min subQ). Regular insulin is the standard IV preparation for DKA, insulin infusions, and hyperkalemia treatment. All rapid-acting analogs can cause hypoglycemia if given wrong route.',trap:'Trap: rapid-acting analogs are NOT for IV use in standard practice. Regular is the IV insulin.'},
+  {lo:'Janicic: DM drug comparison',tag:'Diabetes Pharmacology',q:'Which DM drugs cause hypoglycemia and which do not?',a:'Cause hypoglycemia (insulin-secreting or insulin itself): Sulfonylureas (glucose-independent), Meglitinides (glinides), Insulin. Do NOT cause hypoglycemia alone: Metformin (AMPK, no insulin secretion), GLP-1 agonists (glucose-dependent), DPP-4i (glucose-dependent), SGLT2i (renal glucose excretion), TZDs (insulin sensitizers), Acarbose (delayed absorption). Add insulin to any of the "safe" classes → hypoglycemia risk returns.',},
+];
+
+// ── PITUITARY LABS ──
+const PITUITARY_LABS=[
+  {title:'Pituitary Pattern A',labs:[{n:'Prolactin',v:'↑ 4,200 ng/mL',c:'hi'},{n:'LH/FSH',v:'↓ Low',c:'lo'},{n:'Estradiol',v:'↓ Low',c:'lo'},{n:'MRI',v:'2.4cm sellar mass',c:'norm'},{n:'Vision',v:'Bitemporal hemianopsia',c:'norm'}],opts:["Non-functioning adenoma compressing stalk","Prolactinoma (macroprolactinoma)","Craniopharyngioma","Stalk compression from meningioma"],ok:1,exp:"<strong>Prolactinoma (macroprolactinoma).</strong> Very high prolactin (>200 → likely true prolactinoma, not stalk compression). Hyperprolactinemia → inhibits GnRH → low LH/FSH → hypogonadism (amenorrhea, infertility in women; impotence in men). First-line treatment: dopamine agonist (cabergoline) — shrinks tumor AND normalizes prolactin. Surgery rarely needed."},
+  {title:'Pituitary Pattern B',labs:[{n:'Prolactin',v:'↑ 88 ng/mL (mildly ↑)',c:'hi'},{n:'MRI',v:'2.8cm sellar mass',c:'norm'},{n:'LH/FSH',v:'↓ Low',c:'lo'},{n:'TSH',v:'↓ Low',c:'lo'},{n:'GH stimulation',v:'↓ Blunted',c:'lo'}],opts:["Macroprolactinoma — treat with dopamine agonist","Craniopharyngioma or non-functioning adenoma with stalk compression","TSH-secreting adenoma","Cushing's Disease"],ok:1,exp:"<strong>Stalk compression trap.</strong> Mildly elevated prolactin (<150 ng/mL) with a LARGE mass = stalk compression, NOT true prolactinoma. A true prolactinoma causing a 2.8cm mass would have prolactin >500-1000 ng/mL. Multiple anterior pituitary hormone deficiencies (panhypopituitarism). Giving a dopamine agonist won't shrink a craniopharyngioma — surgical referral needed."},
+  {title:'Pituitary Pattern C',labs:[{n:'IGF-1',v:'↑ 3× upper normal',c:'hi'},{n:'GH (post-glucose)',v:'↑ 4.2 ng/mL (should <1)',c:'hi'},{n:'Glucose',v:'↑ 148 mg/dL (fasting)',c:'hi'},{n:'MRI pituitary',v:'1.3cm mass',c:'norm'},{n:'Testosterone',v:'↓ Low (secondary)',c:'lo'}],opts:["Cushing's Disease","Acromegaly from GH-secreting pituitary adenoma","Prolactinoma with secondary GH excess","GH deficiency"],ok:1,exp:"<strong>Acromegaly.</strong> GH-secreting macroadenoma. Gold standard diagnostic test: GH fails to suppress to <1 ng/mL after 75g oral glucose. IGF-1 is elevated (best screening test — stable, no pulsatility). Hyperglycemia (GH is diabetogenic — insulin resistance). Hypogonadism from pituitary mass effect. Treatment: transsphenoidal surgery first-line."},
+];
+
+// ── PITUITARY VIGNETTES ──
+const PITUITARY_VIG=[
+  {n:'01',d:1,lo:'Santi: prolactinoma treatment',t:"A <span class='hl'>32-year-old woman</span> has amenorrhea, galactorrhea, and infertility. Prolactin 680 ng/mL. MRI: 1.8cm pituitary mass. Vision normal.",opts:["Trans-sphenoidal surgery immediately — definitive treatment","Dopamine agonist (cabergoline) — first-line, shrinks tumor AND normalizes prolactin","Radiation — safest for large tumors","Bromocriptine — equivalent to cabergoline but better tolerated"],ok:1,fb:"<strong>Dopamine agonists are first-line for prolactinoma</strong> — even macroadenomas — because they shrink the tumor AND normalize prolactin. Cabergoline is preferred over bromocriptine (twice weekly dosing, better tolerated). Surgery is reserved for drug-resistant/intolerant cases. Radiation: very slow response, reserved for resistant cases.",bz:["dopamine agonist first-line","cabergoline preferred","shrinks tumor","surgery only if resistant"]},
+  {n:'02',d:2,lo:'Santi: stalk compression trap',t:"A <span class='hl'>50-year-old man</span> has bitemporal hemianopsia. MRI shows a 3cm sellar mass. Prolactin is <span class='hl'>95 ng/mL</span> (mildly elevated). His endocrinologist is considering cabergoline. <span class='trap-flag'>⚠ TRAP</span>",opts:["Correct — start cabergoline for prolactinoma","Dangerous — mildly elevated prolactin with a 3cm mass = stalk compression, NOT prolactinoma. A true prolactinoma of this size would have prolactin >500. Cabergoline will not shrink a non-prolactinoma — this patient needs neurosurgical referral.","Correct — all sellar masses with elevated prolactin are prolactinomas","Correct — size does not matter for prolactinoma diagnosis"],ok:1,fb:"<strong>Stalk compression rule.</strong> Prolactin >200-500 ng/mL: likely true prolactinoma. Prolactin <150 ng/mL with large mass: likely stalk compression (any mass blocks dopamine delivery → mild prolactin rise). This mass could be craniopharyngioma, non-functioning adenoma, meningioma. Treating with cabergoline = no improvement + delayed surgery = vision loss.",bz:["stalk compression = mild prolactin rise <150","true prolactinoma = very high prolactin for mass size","large mass + mild prolactin ≠ prolactinoma","neurosurgical referral needed"]},
+  {n:'03',d:1,lo:'Watson: acromegaly diagnosis',t:"A <span class='hl'>45-year-old man</span> notices his ring size has increased and his jaw has 'grown'. He has new sleep apnea, carpal tunnel, and his glucose is 160 mg/dL fasting. IGF-1 is 3× upper normal.",opts:["Gigantism — GH excess before growth plate closure","Acromegaly — GH excess after growth plate closure causes acral enlargement, not increased height","Primary diabetes with secondary GH elevation","Normal aging changes"],ok:1,fb:"<strong>Acromegaly.</strong> GH excess AFTER growth plate closure → periosteal bone apposition → acral enlargement (jaw = prognathism, hands/feet grow), soft tissue overgrowth, organomegaly. Cannot cause increased height (plates closed). Confirm with: gold standard = GH fails to suppress after 75g glucose. IGF-1 is elevated (best screening). Hyperglycemia = GH is diabetogenic (insulin resistance).",bz:["growth plates closed = acral not height","prognathism","GH diabetogenic","oral glucose suppression test gold standard"]},
+  {n:'04',d:2,lo:'Santi: Sheehan syndrome',t:"A <span class='hl'>28-year-old woman</span> had a traumatic delivery with 2L blood loss. She fails to breastfeed postpartum. 6 months later: amenorrhea, fatigue, cold intolerance, orthostasis. TSH 0.4, FSH/LH undetectable, cortisol low.",opts:["Postpartum depression","Sheehan syndrome — pituitary ischemia from postpartum hemorrhage causing panhypopituitarism","Primary Addison's disease","Autoimmune hypophysitis from pregnancy"],ok:1,fb:"<strong>Sheehan syndrome.</strong> Pituitary enlarged during pregnancy (lactotroph hyperplasia) → vulnerable to ischemia during hemorrhagic shock → pituitary necrosis. First sign: failure of lactation (prolactin lost first). Then progressive: LH/FSH → amenorrhea; TSH → hypothyroidism; ACTH → adrenal insufficiency. Requires replacement of ALL deficient hormones.",bz:["failure of lactation = first sign","postpartum hemorrhage","pituitary ischemia","panhypopituitarism"]},
+  {n:'05',d:3,lo:'Watson: GH physiology — diabetogenic',t:"A patient with <span class='hl'>acromegaly</span> has glucose 210 mg/dL. His endocrinologist explains: GH causes insulin resistance. He asks why GH is 'anabolic' (builds muscle) but also causes diabetes. <span class='trap-flag'>⚠ TRAP</span>",opts:["This is a contradiction — anabolic hormones never cause insulin resistance","GH has tissue-specific effects: anabolic for protein synthesis (muscle, bone via IGF-1) but diabetogenic for glucose metabolism (induces insulin resistance in muscle/adipose, promotes gluconeogenesis in liver). These are independent actions on different pathways.","GH's anabolic effects require insulin resistance","The diabetes is from IGF-1 not GH"],ok:1,fb:"<strong>GH is anabolic AND diabetogenic — independent actions.</strong> Protein anabolism: GH → liver → IGF-1 → ↑amino acid uptake, protein synthesis, epiphyseal growth. Glucose: GH directly antagonizes insulin signaling in muscle/adipose → insulin resistance → hyperglycemia. This is why acromegaly → DM in 25-30%. These two actions are mediated by separate receptor pathways.",bz:["GH = anabolic (protein) + diabetogenic (glucose)","IGF-1 = mediates growth effects","GH directly causes insulin resistance","25-30% of acromegaly develop DM"]},
+  {n:'06',d:2,lo:'Santi: empty sella',t:"An <span class='hl'>obese middle-aged woman</span> has headaches. MRI shows 'empty sella.' TSH, cortisol, prolactin, IGF-1 are all normal.",opts:["This is always secondary to previous pituitary infarction — hormone replacement needed","Primary empty sella — herniation of CSF through diaphragma sellae. Pituitary is compressed against the floor but usually functionally normal. Often incidental. No treatment needed.","This represents Sheehan syndrome — start hormone replacement","This indicates a pituitary adenoma — surgery indicated"],ok:1,fb:"<strong>Primary empty sella</strong> — CSF herniation through the diaphragma sellae (incomplete) compresses pituitary against the sella floor. Often found incidentally in obese women with intracranial hypertension (increased CSF pressure). Pituitary function is usually normal (compressed but functional tissue remains). No treatment needed if function normal. Secondary empty sella (post-surgery/radiation/infarction): may have hypopituitarism.",bz:["primary = incidental, often normal function","obese women + raised ICP association","CSF herniation through diaphragma","secondary = post-infarction/surgery = may have hypopituitarism"]},
+];
+
+// ── PITUITARY FLASHCARDS ──
+const PITUITARY_FC=[
+  {lo:'Santi: adenoma classification',tag:'Pituitary Pathology',q:'Name the 5 major functioning pituitary adenomas by cell type, hormone, and syndrome.',a:'Lactotroph → Prolactin → hyperprolactinemia (amenorrhea/galactorrhea/infertility in women; impotence in men). Somatotroph → GH → acromegaly (adults) or gigantism (children). Corticotroph → ACTH → Cushing\'s Disease. Thyrotroph → TSH → hyperthyroidism (rare, <1%). Gonadotroph → LH/FSH → usually non-functioning (subtle hypogonadism). Most common: prolactinoma.',},
+  {lo:'Watson/Santi: GH axis drugs',tag:'Pituitary Pharmacology',q:'How are GH excess (acromegaly) and GH deficiency treated pharmacologically?',a:'GH excess (acromegaly): Surgery first. If persistent: somatostatin analogs (octreotide, lanreotide — mimic SS → inhibit GH). GH receptor antagonist (pegvisomant — blocks GH receptor → ↓IGF-1, doesn\'t lower GH itself). Dopamine agonists (cabergoline — mild GH suppression). GH deficiency: recombinant human GH (somatropin) given SC daily. Adults: improves body composition, lipids, bone density.'},
+  {lo:'Santi: hypopituitarism',tag:'Pituitary Pathology',q:'Which pituitary hormone is typically lost first in compression/ischemia, and in what order do deficiencies progress?',a:'GH is typically lost first (most sensitive to injury) but often clinically silent in adults. Then: Gonadotropins (LH/FSH → hypogonadism). Then: TSH (secondary hypothyroidism). Then: ACTH (secondary adrenal insufficiency — most dangerous, can be life-threatening). Prolactin: usually RISES in compression (removes dopamine inhibition) — failure of lactation in Sheehan\'s is loss of prolactin from ischemic necrosis (exception). Posterior pituitary (AVP) deficient only if stalk or hypothalamus involved.',trap:'Trap: GH lost first functionally BUT the most dangerous deficiency is ACTH (adrenal insufficiency can be fatal). GH deficiency is often asymptomatic in adults.'},
+];
+
+// ── POSTERIOR VIGNETTES ──
+const POSTERIOR_VIG=[
+  {n:'01',d:1,lo:'Sherman: DI diagnosis',t:"A patient has polyuria (5L/day) and dilute urine (osmolality 80 mOsm/kg). After water deprivation, urine remains dilute. After <span class='hl'>DDAVP injection</span>, urine osmolality rises to 680 mOsm/kg.",opts:["Nephrogenic DI","Central (neurogenic) DI","Primary polydipsia (psychogenic)","Gestational DI"],ok:1,fb:"<strong>Central DI.</strong> DDAVP works (kidney V2 receptors intact). Water deprivation shows can't concentrate (no endogenous AVP). DDAVP concentrates (AVP deficiency confirmed). In nephrogenic DI: DDAVP fails (kidney can't respond — V2 receptor or AQP2 defect). In primary polydipsia: urine concentrates with water deprivation alone (axis intact).",bz:["DDAVP works = central DI","DDAVP fails = nephrogenic DI","water deprivation + DDAVP is the key test","primary polydipsia = concentrates with water deprivation"]},
+  {n:'02',d:1,lo:'Sherman: AVP receptor pharmacology',t:"Why is DDAVP preferred over natural AVP for treating central DI?",opts:["DDAVP has a shorter half-life and is more convenient","DDAVP is V2-selective (D-arginine at position 8 → no V1a activation → no vasoconstriction). Longer half-life (deaminated N-terminal → vasopressinase-resistant). Can be given intranasally (avoids first-pass metabolism, rapid absorption via vascular nasal mucosa).","DDAVP crosses the blood-brain barrier better","DDAVP works on both V1a and V2 receptors — broader effect"],ok:1,fb:"<strong>DDAVP advantages:</strong> (1) V2-selective → antidiuretic without vasoconstriction (V1a). (2) Vasopressinase-resistant (deaminated) → useful in gestational DI. (3) Longer t½ (~7.8 and 75.5 min fast/slow phases vs 2.5/14.5 min for AVP). (4) Intranasal: vascular nasal epithelium = rapid absorption, avoids hepatic first-pass, painless. Oral DDAVP also available.",bz:["V2-selective","no V1a vasoconstriction","vasopressinase-resistant","intranasal absorption"]},
+  {n:'03',d:2,lo:'Sherman: gestational DI',t:"A <span class='hl'>28-week pregnant woman</span> develops severe polyuria and polydipsia. AVP levels are very low. DDAVP injection leads to complete urine concentration. <span class='trap-flag'>⚠ TRAP</span>",opts:["Central DI — treat with DDAVP","Gestational DI — placental vasopressinase degrades AVP; DDAVP is vasopressinase-resistant → works. Resolves post-delivery.","Nephrogenic DI — DDAVP should not have worked","Primary polydipsia — restrict water intake"],ok:1,fb:"<strong>Gestational DI.</strong> Placental trophoblasts secrete vasopressinase → degrades endogenous AVP. DDAVP is modified to resist vasopressinase → effective. Key distinguisher from central DI: clinical context (pregnancy) + vasopressinase resistance. Resolves completely after delivery (vasopressinase disappears). Treat with DDAVP throughout pregnancy.",bz:["placental vasopressinase","DDAVP = vasopressinase resistant","resolves post-delivery","treat throughout pregnancy"]},
+  {n:'04',d:2,lo:'Sherman: osmotic threshold and thirst',t:"A patient receives an infusion that raises plasma osmolality from 280 to 295 mOsm/kg. At 282 mOsm/kg, AVP secretion began. At what osmolality did thirst start, and why the delay? <span class='trap-flag'>⚠ TRAP</span>",opts:["Thirst starts at the same threshold as AVP — 282 mOsm/kg","Thirst starts ~5-10 mOsm/kg HIGHER than AVP threshold (~290) — AVP-mediated water retention is tried first; behavioral thirst is a backup if osmolality continues to rise","Thirst always precedes AVP secretion","Thirst threshold is 10 mOsm/kg LOWER than AVP"],ok:1,fb:"<strong>Thirst threshold is 5-10 mOsm/kg HIGHER than AVP threshold.</strong> Adaptive hierarchy: first, increase water retention via kidney (AVP → AQP2 → reabsorb water). Only if osmolality still rising → trigger thirst (behavioral response — seek water). This prevents unnecessary fluid seeking. Cold oropharyngeal receptor activation (drinking) can inhibit AVP BEFORE osmolality changes — anticipatory response.",bz:["AVP ~280 mOsm/kg","thirst ~290 mOsm/kg","renal conservation before behavioral","cold oropharyngeal receptors anticipate"]},
+  {n:'05',d:2,lo:'Sherman: oxytocin in parturition',t:"An obstetrician tries to stop premature labor with atosiban (oxytocin receptor antagonist). It is largely ineffective despite adequate dosing. Explain. <span class='trap-flag'>⚠ TRAP</span>",opts:["Atosiban is a poor drug — it binds the wrong receptor","At term, estrogen dramatically upregulates uterine OTR expression → receptor density so high that even basal oxytocin overwhelms the antagonist's ability to block. This is the molecular basis for why OT antagonists have limited efficacy.","The oxytocin in labor is from the fetus, not the mother","Atosiban is effective — the patient was not in true labor"],ok:1,fb:"<strong>OTR upregulation at term.</strong> Estrogen rising through pregnancy → progressive increase in uterine OTR density → at term, receptor density is very high. Even basal OT levels can drive contractions. Atosiban cannot out-compete the amplified signaling when receptor density is 100-200× baseline. OT receptor antagonists are more effective earlier in pregnancy (less receptor density).",bz:["estrogen drives OTR upregulation","high receptor density overwhelms antagonist","OTR density increases through pregnancy","atosiban more effective earlier"]},
+  {n:'06',d:3,lo:'Sherman: V receptor second messengers',t:"Oxytocin causes milk ejection in breast (via mammary myoepithelial cells) and uterine contractions. Both cells have OTR. Both couple to <span class='hl'>Gq → IP3 → Ca²⁺ → contraction</span>. What determines the different physiological outcomes?",opts:["Different receptor subtypes in each tissue","Different G proteins — breast uses Gs, uterus uses Gq","Same receptor, same pathway, different tissue architecture and effectors. IP3 → Ca²⁺ → myosin light-chain kinase → actin-myosin contraction — but in myoepithelial cells this squeezes alveoli to eject milk; in uterine smooth muscle this contracts the myometrium.","OT cannot cause milk ejection — that is solely from prolactin"],ok:2,fb:"<strong>Same OTR, same Gq/IP3/Ca2+ pathway, different tissues → different outcomes.</strong> Mammary myoepithelial cells: contraction squeezes alveoli → milk forced into ducts → ejection. Uterine myometrium: smooth muscle contraction → labor. The receptor-signal cascade is IDENTICAL — the physiological effect is determined by the target cell's structure and function. This is a general principle of hormone signaling: one hormone, different tissues, different effects.",bz:["same OTR everywhere","Gq → IP3 → Ca2+ → contraction","tissue architecture determines outcome","same signal, different physiological response"]},
+];
+
+// ── DI DIAGNOSIS STEPS ──
+const POSTERIOR_DI=[
+  {n:1,t:"Step 1: What is DI?",q:"Which finding is required for diagnosis of diabetes insipidus?",opts:["Hyperglycemia >200 mg/dL","Excretion of large volumes of inappropriately dilute urine despite normal or elevated plasma osmolality","Glucose in the urine (glucosuria)","Blood glucose >126 on two occasions"],ok:1,rev:"<strong>DI = inability to concentrate urine.</strong> Large volume dilute urine (urine osm <200 mOsm/kg) in the setting of elevated or normal plasma osmolality. The word 'insipidus' = tasteless (no sugar in urine, unlike diabetes mellitus). 4 types: Central, Nephrogenic, Gestational, Primary polydipsia (dipsogenic)."},
+  {n:2,t:"Step 2: Is it DI or primary polydipsia?",q:"Water deprivation test: after 8hr water restriction, plasma osmolality rises to 295 mOsm/kg but urine osmolality remains at 95 mOsm/kg (dilute). What does this confirm?",opts:["Primary polydipsia — axis intact, patient is just drinking too much","True DI — axis fails to concentrate urine despite hyperosmolality","Normal result — urine is always dilute with water restriction","Nephrogenic DI specifically — no other causes possible"],ok:1,rev:"<strong>True DI confirmed.</strong> A normal person: water restriction → ↑plasma osmolality → ↑AVP → kidney concentrates urine (>600-800 mOsm/kg). In primary polydipsia: same response occurs (axis intact — just chronically suppressed from excess drinking). In any type of DI: urine stays dilute despite hyperosmolality. Next: give DDAVP to distinguish central from nephrogenic."},
+  {n:3,t:"Step 3: DDAVP response — central vs nephrogenic?",q:"After DDAVP: central DI patient's urine osmolality rises to 650. Nephrogenic DI patient's urine osmolality stays at 90. Explain the difference.",opts:["Both should respond to DDAVP — nephrogenic DI always responds partially","Central: AVP/DDAVP deficiency → kidney V2R intact → responds to exogenous DDAVP → concentrates. Nephrogenic: V2R or AQP2 defect → kidney cannot respond to DDAVP → stays dilute.","DDAVP works in nephrogenic — must be insufficient dose","Both stay dilute — DDAVP doesn't work in any DI"],ok:1,rev:"<strong>DDAVP distinguishes central from nephrogenic:</strong> Central DI = can't make AVP → kidney is INTACT and responds. Nephrogenic DI = AVP is present (even elevated) but kidney doesn't respond (V2R mutation = X-linked; AQP2 mutation; lithium; hypercalcemia; hypokalemia). DDAVP works in central, fails in nephrogenic."},
+  {n:4,t:"Step 4: How is gestational DI diagnosed?",q:"A pregnant patient responds normally to DDAVP but does NOT respond to natural (non-modified) AVP. Explain.",opts:["She has central DI — same treatment as always","Gestational DI — placental vasopressinase degrades endogenous AVP. DDAVP lacks the amino group that vasopressinase recognizes → resistant. Natural AVP is destroyed before reaching kidney. Treat with DDAVP throughout pregnancy; resolves post-delivery.","Nephrogenic DI — DDAVP should also fail","Primary polydipsia — water restriction test should be done first"],ok:1,rev:"<strong>Vasopressinase specificity:</strong> Placental vasopressinase cleaves the C-terminal of natural AVP at the amino terminus. DDAVP has a deaminated N-terminal cysteine → vasopressinase cannot recognize it. This is both the diagnostic clue and the therapeutic solution. Placental vasopressinase activity peaks around 22-24 weeks and falls rapidly after delivery."},
+  {n:5,t:"Step 5: Treating nephrogenic DI",q:"Why are THIAZIDE diuretics used to treat nephrogenic DI (paradoxical)?",opts:["Thiazides stimulate V2 receptors directly","Thiazides block NaCl reabsorption in DCT → mild volume depletion → ↑proximal tubule reabsorption of water AND solute → less water delivered to collecting duct → ↓urine output. Paradoxical: diuretic that reduces polyuria.","Thiazides increase AQP2 expression","Thiazides enhance residual V2 receptor function"],ok:1,rev:"<strong>Thiazide paradox in nephrogenic DI:</strong> Block NaCl reabsorption in DCT → volume depletion → ↑angiotensin II → ↑proximal tubule Na+/water reabsorption → less fluid delivered to the collecting duct (the AVP-dependent segment) → LESS total urine output despite being a diuretic. Also: low-sodium diet amplifies this effect. NSAIDs (indomethacin) also reduce urine volume in nephrogenic DI (reduce GFR + prostaglandin-mediated tubular effects)."},
+];
+
+// ── POSTERIOR FLASHCARDS ──
+const POSTERIOR_FC=[
+  {lo:'Sherman: AVP receptors',tag:'Posterior Pituitary',q:'Describe the 3 AVP receptor subtypes: location, G protein, and physiological effect.',a:'V1a: vascular smooth muscle, platelets, liver, brain → Gq → IP3/DAG → vasoconstriction, platelet aggregation, glycogenolysis. V1b: anterior pituitary corticotrophs → Gq → potentiates CRH-driven ACTH release (co-stimulator in stress). V2: renal collecting duct principal cells → Gs → cAMP → AQP2 insertion into apical membrane → water reabsorption (antidiuretic effect). DDAVP is V2-selective (D-arginine).',trap:'Trap: V2 is Gs (cAMP pathway = antidiuretic). V1a and V1b are Gq (IP3 pathway = vasoconstriction/ACTH). These are the exact second messenger questions on shelf exams.'},
+  {lo:'Sherman: oxytocin physiology',tag:'Posterior Pituitary',q:'What is a galactogogue and what are the physiological signals that trigger oxytocin release for milk ejection?',a:'Galactogogue: any substance that promotes breast milk production or flow. OT is the milk ejection reflex mediator (not production). Triggers: (1) Suckling → mechanoreceptors in nipple/areola → spinal afferents → magnocellular neurons → OT release. (2) Visual/auditory/olfactory cues (baby crying → anticipatory OT release). (3) Conditioned stimuli. Myoepithelial cell contraction (Gq/IP3/Ca2+) squeezes alveoli → milk ejected into ducts. Prolactin drives milk PRODUCTION; OT drives milk EJECTION.'},
+  {lo:'Sherman: pair bonding',tag:'Posterior Pituitary',q:'What role do AVP and OT play in pair bonding, and what animal model demonstrates this?',a:'Prairie voles (monogamous) vs Montane voles (non-monogamous): Prairie voles have high density of V1a receptors in reward areas (nucleus accumbens, ventral pallidum). Oxytocin receptor distribution also differs. After mating, AVP + OT release → partner recognition and preference (conditioned reward via dopamine circuits). Human V1a gene polymorphisms correlate with partner bonding outcomes. Both OT and AVP are "social neuropeptides" with roles in trust, memory, social recognition.'},
+  {lo:'Sherman: osmotic threshold concept',tag:'Posterior Pituitary',q:'Explain the physiological reason why the osmotic threshold for thirst (290 mOsm/kg) is higher than for AVP secretion (280 mOsm/kg).',a:'Hierarchical water conservation strategy: First line → AVP acts on kidney → AQP2 insertion → water reabsorption (happens within minutes, no behavioral cost). If this is insufficient (osmolality still rising) → second line → thirst → drinking behavior (requires finding/consuming water). Placing thirst threshold higher prevents unnecessary behavioral water seeking when renal conservation can handle the deficit. Cold oropharyngeal receptors also inhibit AVP BEFORE water is absorbed — anticipatory negative feedback.'},
+];
+
+// ═══════════════════════════════════════
+// RENDERING ENGINE
+// ═══════════════════════════════════════
+
+const CONFIG={
+  hpa:{labs:HPA_LABS,vigs:HPA_VIG,steps:{hpa:'hpa-dexa',data:HPA_DEX},fcs:HPA_FC},
+  thyroid:{labs:THYROID_LABS,vigs:THYROID_VIG,steps:{thyroid:'thyroid-synth',data:THYROID_SYNTH},fcs:THYROID_FC},
+  adrenal:{labs:ADRENAL_LABS,vigs:ADRENAL_VIG,steps:{adrenal:'adrenal-pheo',data:ADRENAL_PHEO},fcs:ADRENAL_FC},
+  diabetes:{labs:DIABETES_LABS,vigs:DIABETES_VIG,steps:{diabetes:'diabetes-drugs',data:DIABETES_DRUGS},fcs:DIABETES_FC},
+  pituitary:{labs:PITUITARY_LABS,vigs:PITUITARY_VIG,fcs:PITUITARY_FC},
+  posterior:{vigs:POSTERIOR_VIG,steps:{posterior:'posterior-di',data:POSTERIOR_DI},fcs:POSTERIOR_FC},
+};
+
+// Lab renderer
+function renderLabs(topic,data,containerId){
+  const c=document.getElementById(containerId);if(!c)return;
+  c.innerHTML='';
+  data.forEach((lab,li)=>{
+    const d=document.createElement('div');d.className='lab-card';
+    d.innerHTML=`<h3>${lab.title}</h3><div class="lab-values">${lab.labs.map(l=>`<div class="lab-row"><span class="lab-name">${l.n}</span><span class="lab-val ${l.c}">${l.v}</span></div>`).join('')}</div><div class="dx-opts" id="lo-${topic}-${li}">${lab.opts.map((o,oi)=>`<div class="dx-opt" onclick="chkLab('${topic}',${li},${oi})">${o}</div>`).join('')}</div><div class="explanation" id="le-${topic}-${li}">${lab.exp}</div>`;
+    c.appendChild(d);
+  });
+}
+function chkLab(topic,li,oi){
+  const lab=CONFIG[topic].labs[li];
+  document.querySelectorAll(`#lo-${topic}-${li} .dx-opt`).forEach((o,i)=>{if(i===lab.ok)o.classList.add('correct');else if(i===oi)o.classList.add('wrong');o.onclick=null;});
+  document.getElementById(`le-${topic}-${li}`).classList.add('show');
+  addSc(oi===lab.ok);
+}
+
+// Vignette renderer
+const vigIdx={};
+function renderV(topic){
+  const vigs=CONFIG[topic].vigs;const i=vigIdx[topic]||0;
+  const v=vigs[i];
+  const dc=['','d1','d2','d3'][v.d];const dl=['','Easy','Medium','Hard'][v.d];
+  const trapHtml=v.n&&v.t.includes('trap-flag')?'':'';
+  document.getElementById(topic+'-vig-container').innerHTML=`<div class="vig-card" style="animation:pop .2s"><div class="vig-hdr"><div><div class="vig-num">Vignette ${v.n} / ${vigs.length}</div><div class="lo-cite">${v.lo}</div></div><div class="diff ${dc}">${dl}</div></div><div class="vig-text">${v.t}</div><div class="ans-grid" id="ag-${topic}">${v.opts.map((o,oi)=>`<div class="ans-opt" onclick="chkV('${topic}',${i},${oi})"><div class="opt-ltr">${String.fromCharCode(65+oi)}</div><div>${o}</div></div>`).join('')}</div><div class="fb-box" id="fbb-${topic}"><div style="margin-bottom:8px;font-weight:700;font-size:14px;color:var(--text)">Explanation</div><div style="margin-bottom:10px">${v.fb}</div><div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font-size:12px;color:var(--muted)">Buzzwords:</span>${v.bz.map(b=>`<span class="buzz">${b}</span>`).join('')}</div></div></div>`;
+  const fill=(i/vigs.length*100);
+  document.getElementById(topic+'-pfill').style.width=fill+'%';
+  document.getElementById(topic+'-ptxt').textContent=i+' / '+vigs.length;
+}
+function chkV(topic,i,oi){
+  const v=CONFIG[topic].vigs[i];
+  document.querySelectorAll(`#ag-${topic} .ans-opt`).forEach((o,j)=>{if(j===v.ok)o.classList.add('correct');else if(j===oi)o.classList.add('wrong');o.onclick=null;o.style.cursor='default';});
+  document.getElementById(`fbb-${topic}`).classList.add('show');
+  addSc(oi===v.ok);
+}
+function nextV(topic){const vigs=CONFIG[topic].vigs;vigIdx[topic]=(vigIdx[topic]||0);if(vigIdx[topic]<vigs.length-1){vigIdx[topic]++;renderV(topic);}}
+function prevV(topic){if((vigIdx[topic]||0)>0){vigIdx[topic]--;renderV(topic);}}
+
+// Steps renderer
+function renderSteps(containerId,data){
+  const c=document.getElementById(containerId);if(!c)return;
+  c.innerHTML=data.map((s,si)=>`<div class="step-item"><div class="step-hdr"><div class="step-num">${s.n}</div><div class="step-ttl">${s.t}</div></div><div class="step-q">${s.q}</div><div class="step-opts">${s.opts.map((o,oi)=>`<div class="step-opt" id="so-${si}-${oi}" onclick="chkStep(${si},${oi},'${containerId}')">${o}</div>`).join('')}</div><div class="step-rev" id="sr-${si}">${s.rev}</div></div>${si<data.length-1?'<div class="step-div"></div>':''}`).join('');
+  c._data=data;
+}
+function chkStep(si,oi,cid){
+  const c=document.getElementById(cid);const s=c._data[si];
+  s.opts.forEach((_,i)=>{const e=document.getElementById(`so-${si}-${i}`);e.onclick=null;if(i===s.ok)e.classList.add('ok');else if(i===oi)e.classList.add('ng');});
+  document.getElementById('sr-'+si).classList.add('show');
+  addSc(oi===s.ok);
+}
+
+// Flashcard state
+const fcState={};
+function initFC(topic){
+  if(!fcState[topic]){
+    fcState[topic]={deck:[...CONFIG[topic].fcs],idx:0,flipped:false,known:new Set(),rev:new Set()};
+  }
+}
+function showFC(topic){
+  initFC(topic);const s=fcState[topic];if(!s.deck.length)return;
+  const c=s.deck[s.idx];
+  document.getElementById(topic+'-fc-tag').textContent=c.tag;
+  document.getElementById(topic+'-fc-lo').textContent='Obj: '+c.lo;
+  document.getElementById(topic+'-fc-q').textContent=c.q;
+  document.getElementById(topic+'-fc-tag2').textContent=c.tag;
+  document.getElementById(topic+'-fc-a').textContent=c.a;
+  const tr=document.getElementById(topic+'-fc-trap');
+  if(c.trap){tr.textContent='⚠ Trap: '+c.trap;tr.style.display='block';}else{tr.style.display='none';}
+  document.getElementById(topic+'-fc-prog').textContent=(s.idx+1)+' / '+s.deck.length;
+  const k=s.known.size,r=s.rev.size;
+  document.getElementById(topic+'-fc-stat').textContent=k+r>0?'✓ '+k+' known  ·  ↺ '+r+' to review':'';
+}
+function flipFC(topic){initFC(topic);const s=fcState[topic];s.flipped=!s.flipped;document.getElementById(topic+'-fc-inner').classList.toggle('flipped',s.flipped);}
+function nextFC(topic){initFC(topic);const s=fcState[topic];s.idx=(s.idx+1)%s.deck.length;s.flipped=false;document.getElementById(topic+'-fc-inner').classList.remove('flipped');showFC(topic);}
+function prevFC(topic){initFC(topic);const s=fcState[topic];s.idx=(s.idx-1+s.deck.length)%s.deck.length;s.flipped=false;document.getElementById(topic+'-fc-inner').classList.remove('flipped');showFC(topic);}
+function markFC(topic,type){initFC(topic);const s=fcState[topic];const c=s.deck[s.idx];if(type==='k'){s.known.add(c.q);s.rev.delete(c.q);}else{s.rev.add(c.q);s.known.delete(c.q);}nextFC(topic);}
+function shuffleFC(topic){initFC(topic);const s=fcState[topic];s.deck.sort(()=>Math.random()-.5);s.idx=0;s.flipped=false;document.getElementById(topic+'-fc-inner').classList.remove('flipped');showFC(topic);}
+function resetFC(topic){initFC(topic);const s=fcState[topic];s.deck=[...CONFIG[topic].fcs];s.idx=0;s.flipped=false;s.known.clear();s.rev.clear();document.getElementById(topic+'-fc-inner').classList.remove('flipped');showFC(topic);}
+function filterFC(topic){
+  const fil=document.getElementById(topic+'-fc-fil');if(!fil)return;
+  const v=fil.value;initFC(topic);const s=fcState[topic];
+  s.deck=v==='trap'?CONFIG[topic].fcs.filter(c=>c.trap):[...CONFIG[topic].fcs];
+  s.idx=0;s.flipped=false;document.getElementById(topic+'-fc-inner').classList.remove('flipped');showFC(topic);
+}
+
+// ═══ INIT ═══
+['hpa','thyroid','adrenal','diabetes','pituitary','posterior'].forEach(t=>{
+  if(CONFIG[t].labs) renderLabs(t,CONFIG[t].labs,t+'-lab-grid');
+  if(CONFIG[t].vigs){vigIdx[t]=0;renderV(t);}
+  showFC(t);
+});
+// Steps
+renderSteps('hpa-dexa-container',HPA_DEX);
+renderSteps('thyroid-synth-container',THYROID_SYNTH);
+renderSteps('adrenal-pheo-container',ADRENAL_PHEO);
+renderSteps('diabetes-drugs-container',DIABETES_DRUGS);
+renderSteps('posterior-di-container',POSTERIOR_DI);
+</script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HPT Axis Drill — Block 4 Endocrine</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f4f0;--sf:#fff;--sf2:#f0efe9;--bd:rgba(0,0,0,.09);--bdh:rgba(0,0,0,.2);--tx:#1a1a1a;--txm:#6b6b6b;--txd:#c0bfba;--ac:#0891b2;--acg:rgba(8,145,178,.08);--gn:#16a34a;--gnb:rgba(22,163,74,.08);--rd:#dc2626;--rdb:rgba(220,38,38,.08);--am:#d97706;--amb:rgba(217,119,6,.08);--sh:0 1px 3px rgba(0,0,0,.07);--r:10px;--rl:14px}
+[data-theme=dark]{--bg:#0f1117;--sf:#181c27;--sf2:#1f2435;--bd:rgba(255,255,255,.08);--bdh:rgba(255,255,255,.18);--tx:#e8eaf0;--txm:#7a8099;--txd:#444d66;--ac:#38bdf8;--acg:rgba(56,189,248,.12);--gn:#3ecf8e;--gnb:rgba(62,207,142,.1);--rd:#ff6b6b;--rdb:rgba(255,107,107,.1);--am:#f5a623;--amb:rgba(245,166,35,.1);--sh:0 1px 4px rgba(0,0,0,.35)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;font-size:15px;min-height:100vh;line-height:1.6;transition:background .25s,color .25s}
+.hdr{border-bottom:1px solid var(--bd);padding:12px 28px;display:flex;align-items:center;justify-content:space-between;background:var(--sf);box-shadow:var(--sh);position:sticky;top:0;z-index:100}
+.hl{display:flex;align-items:center;gap:14px}
+.logo{font-family:'Instrument Serif',serif;font-size:20px;color:var(--tx);letter-spacing:-.02em}.logo span{color:var(--ac)}
+.bdg{display:flex;gap:6px}
+.badge{font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:20px;border:1px solid var(--bd);color:var(--txm);background:var(--sf2);font-weight:500}
+.b1{border-color:rgba(8,145,178,.25);color:var(--ac);background:var(--acg)}
+.b2{border-color:rgba(220,38,38,.2);color:var(--rd);background:var(--rdb)}
+.b3{border-color:rgba(22,163,74,.2);color:var(--gn);background:var(--gnb)}
+.tbtn{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;font-size:12px;color:var(--txm);font-family:'DM Sans',sans-serif}
+.tbtn:hover{border-color:var(--bdh);color:var(--tx)}
+.tt{width:34px;height:19px;background:var(--bdh);border-radius:10px;position:relative;transition:background .2s;flex-shrink:0}
+[data-theme=dark] .tt{background:var(--ac)}
+.th{width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2.5px;left:2.5px;transition:transform .2s}
+[data-theme=dark] .th{transform:translateX(15px)}
+.main{max-width:1100px;margin:0 auto;padding:26px 22px 80px}
+.sb{display:flex;align-items:center;gap:16px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:13px 20px;margin-bottom:22px;box-shadow:var(--sh);flex-wrap:wrap}
+.si{display:flex;flex-direction:column;align-items:center;min-width:54px}
+.sn{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;line-height:1}
+.sl{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--txm);margin-top:2px}
+.sd{width:1px;height:28px;background:var(--bd)}
+.sp{display:inline-flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:12px;padding:4px 10px;border-radius:8px;background:var(--amb);color:var(--am);border:1px solid rgba(217,119,6,.2)}
+.tabs{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap}
+.tab{padding:7px 13px;border-radius:8px;font-size:13px;font-weight:500;border:1px solid var(--bd);background:transparent;color:var(--txm);cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.tab:hover{border-color:var(--bdh);color:var(--tx)}
+.tab.on{background:var(--acg);border-color:var(--ac);color:var(--ac)}
+.sh2{margin-bottom:18px}
+.sh2 h2{font-family:'Instrument Serif',serif;font-size:26px;font-weight:400;letter-spacing:-.02em;color:var(--tx);margin-bottom:4px}
+.sh2 p{color:var(--txm);font-size:14px}
+.bb{display:flex;align-items:center;justify-content:space-between;background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:10px 16px;margin-bottom:18px;box-shadow:var(--sh)}
+.bi{display:flex;align-items:center;gap:10px}
+.bl{font-family:'DM Mono',monospace;font-size:11px;font-weight:600;color:var(--txm);text-transform:uppercase;letter-spacing:.06em}
+.bd2{display:flex;gap:5px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--bd);transition:all .2s}
+.dot.dn{background:var(--gn)}.dot.ac{background:var(--ac)}
+.bt{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600;background:var(--acg);color:var(--ac);border:1px solid rgba(8,145,178,.2)}
+.nbb{padding:8px 16px;background:var(--ac);border:none;border-radius:8px;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;display:none}
+.nbb:hover{filter:brightness(1.07)}
+.nbb.show{display:inline-flex;align-items:center;gap:6px;animation:pop .2s}
+#mb{display:block}#ml,#mc,#mth{display:none}
+/* AXIS */
+.aw{display:grid;grid-template-columns:1fr 268px;gap:18px;align-items:start}
+.ad{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:26px 22px;box-shadow:var(--sh)}
+.alv{display:flex;justify-content:center}
+.an{width:210px;text-align:center;background:var(--sf2);border:2px solid var(--bd);border-radius:var(--r);padding:14px 12px;transition:border-color .2s}
+.an.ok{border-color:var(--gn)!important;background:var(--gnb)}
+.an.ng{border-color:var(--rd)!important;background:var(--rdb);animation:shake .35s}
+.an h3{font-size:12px;font-weight:700;color:var(--tx);letter-spacing:.04em;margin-bottom:2px}
+.an .sub{font-size:10px;color:var(--txm)}
+.dz{min-height:30px;min-width:150px;margin:8px auto 0;border:1.5px dashed var(--txd);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--txd);transition:all .15s;padding:4px 8px}
+.dz.ov{border-color:var(--ac);color:var(--ac);background:var(--acg)}
+.dz.hc{border-style:solid;border-color:var(--ac);color:var(--ac);background:var(--acg);font-weight:600}
+.con{display:flex;flex-direction:column;align-items:center;margin:4px 0}
+.cl{font-family:'DM Mono',monospace;font-size:10px;background:var(--sf2);border:1px solid var(--bd);border-radius:5px;padding:2px 10px;color:var(--txm)}
+.ca{font-size:18px;color:var(--txd);line-height:1.2}
+.cln{width:2px;height:14px;background:var(--bd)}
+.nt{font-family:'DM Mono',monospace;font-size:10px;color:var(--rd);border:1px solid rgba(220,38,38,.22);background:var(--rdb);border-radius:5px;padding:3px 10px;font-weight:500}
+.to{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.ton{background:var(--sf2);border:1.5px solid var(--bd);border-radius:var(--r);padding:10px;text-align:center}
+.t4n{border-color:rgba(217,119,6,.3)}.t3n{border-color:rgba(8,145,178,.3)}
+.tonl{font-weight:700;font-size:10px;letter-spacing:.03em}
+.tona{font-size:10px;color:var(--txm);margin-top:3px;line-height:1.4}
+.cb{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:18px;box-shadow:var(--sh)}
+.cbl{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--txm);font-weight:600;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{padding:7px 13px;background:var(--sf2);border:1.5px solid var(--bd);border-radius:8px;font-size:13px;font-weight:500;cursor:grab;transition:all .15s;user-select:none;color:var(--tx)}
+.chip:hover{border-color:var(--ac);color:var(--ac);background:var(--acg);transform:translateY(-1px)}
+.chip.drag{opacity:.35}.chip.used{opacity:.25;pointer-events:none}
+.cbtn{width:100%;margin-top:14px;padding:11px;background:var(--ac);border:none;border-radius:var(--r);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer}
+.cbtn:hover{filter:brightness(1.07)}
+.rbtn{width:100%;margin-top:7px;padding:9px;background:transparent;border:1px solid var(--bd);border-radius:var(--r);color:var(--txm);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer}
+.rbtn:hover{border-color:var(--bdh);color:var(--tx)}
+.rp{margin-top:14px;padding:14px;border-radius:var(--r);display:none}
+.rp.show{display:block;animation:pop .2s}
+.rp.ps{background:var(--gnb);border:1px solid rgba(22,163,74,.25)}
+.rp.fl{background:var(--rdb);border:1px solid rgba(220,38,38,.2)}
+.rp h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.rp.ps h4{color:var(--gn)}.rp.fl h4{color:var(--rd)}
+.rp p{font-size:12px;color:var(--txm);line-height:1.6}
+.qr{margin-top:13px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:13px 15px;box-shadow:var(--sh)}
+.qrh{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:11px;font-weight:600;color:var(--txm);text-transform:uppercase;letter-spacing:.05em}
+.qrb{display:none;margin-top:11px}
+.qrr{font-size:12px;color:var(--txm);line-height:1.9}
+.qrr strong{color:var(--tx)}
+/* SHARED Q */
+.pr{display:flex;align-items:center;gap:12px;margin-bottom:17px}
+.pb{flex:1;height:5px;background:var(--sf2);border-radius:3px;overflow:hidden}
+.pf{height:100%;background:var(--ac);border-radius:3px;transition:width .4s}
+.pt{font-family:'DM Mono',monospace;font-size:12px;color:var(--txm)}
+.vc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:26px;box-shadow:var(--sh);margin-bottom:15px}
+.vh{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.vn{font-family:'DM Mono',monospace;font-size:11px;color:var(--txm)}
+.df{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:600}
+.d1{background:var(--gnb);color:var(--gn)}.d2{background:var(--amb);color:var(--am)}.d3{background:var(--rdb);color:var(--rd)}
+.vt{font-size:15px;line-height:1.75;margin-bottom:20px;padding-bottom:17px;border-bottom:1px solid var(--bd)}
+.hlx{background:rgba(8,145,178,.08);border-radius:3px;padding:0 3px;color:var(--ac)}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.ao{padding:12px 14px;background:var(--sf2);border:1.5px solid var(--bd);border-radius:var(--r);font-size:13px;cursor:pointer;transition:all .15s;display:flex;align-items:flex-start;gap:10px;color:var(--tx)}
+.ao:hover{border-color:var(--bdh)}
+.ao.ok{background:var(--gnb);border-color:var(--gn)}
+.ao.ng{background:var(--rdb);border-color:var(--rd)}
+.ol{width:22px;height:22px;flex-shrink:0;border-radius:50%;background:var(--bd);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;color:var(--txm)}
+.ao.ok .ol{background:var(--gn);color:#fff}
+.ao.ng .ol{background:var(--rd);color:#fff}
+.fb{margin-top:15px;padding:16px 18px;border-radius:var(--r);background:var(--sf2);border-left:3px solid var(--ac);font-size:13px;line-height:1.65;display:none;color:var(--txm)}
+.fb.show{display:block;animation:pop .2s}
+.fb strong{color:var(--tx)}
+.bz{font-family:'DM Mono',monospace;font-size:10px;background:var(--amb);color:var(--am);border:1px solid rgba(217,119,6,.2);padding:2px 8px;border-radius:5px}
+.nb{display:flex;gap:10px}
+.nbtn{padding:10px 22px;border-radius:var(--r);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s}
+.nx{background:var(--ac);border:none;color:#fff}
+.nx:hover{filter:brightness(1.07)}
+.pv{background:transparent;border:1px solid var(--bd);color:var(--txm)}
+.pv:hover{border-color:var(--bdh);color:var(--tx)}
+/* LAB GRID */
+.lgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+/* THYROID CA */
+.cagrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.cacard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:19px;box-shadow:var(--sh)}
+.cacard h3{font-size:14px;font-weight:700;margin-bottom:6px}
+.casc{font-size:13px;color:var(--txm);margin-bottom:12px;line-height:1.6;padding-bottom:10px;border-bottom:1px solid var(--bd)}
+.caop{display:flex;flex-direction:column;gap:7px}
+.caopt{padding:9px 13px;background:var(--sf2);border:1.5px solid var(--bd);border-radius:8px;font-size:13px;cursor:pointer;transition:all .15s;color:var(--tx)}
+.caopt:hover{border-color:var(--ac);color:var(--ac);background:var(--acg)}
+.caopt.ok{background:var(--gnb);border-color:var(--gn);color:var(--gn)}
+.caopt.ng{background:var(--rdb);border-color:var(--rd);color:var(--rd)}
+.carev{margin-top:10px;font-size:12px;color:var(--txm);line-height:1.7;display:none;padding:10px 12px;background:var(--sf2);border-radius:8px;border-left:3px solid var(--ac)}
+.carev.show{display:block;animation:pop .2s}
+.carev strong{color:var(--tx)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes pop{0%{transform:scale(.97);opacity:.6}100%{transform:scale(1);opacity:1}}
+@media(max-width:780px){.aw,.lgrid,.ag,.cagrid{grid-template-columns:1fr}.tabs{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <div class="hl">
+    <div class="logo">Block 4 <span>HPT Axis</span></div>
+    <div class="bdg"><span class="badge b1">Physiology</span><span class="badge b2">Pathology</span><span class="badge b3">Pharmacology</span></div>
+  </div>
+  <button class="tbtn" onclick="tT()"><span id="ti">🌙</span><div class="tt"><div class="th"></div></div><span id="tl">Dark mode</span></button>
+</header>
+<main class="main">
+  <div class="sb">
+    <div class="si"><div class="sn" id="sok" style="color:var(--gn)">0</div><div class="sl">Correct</div></div>
+    <div class="sd"></div>
+    <div class="si"><div class="sn" id="sat" style="color:var(--txm)">0</div><div class="sl">Attempts</div></div>
+    <div class="sd"></div>
+    <div class="si" id="sw" style="visibility:hidden"><div class="sp" id="spl">🔥 0</div><div class="sl">Streak</div></div>
+    <div class="tabs">
+      <button class="tab on" onclick="swM('b')">Axis Builder</button>
+      <button class="tab" onclick="swM('l')">Lab Interpreter</button>
+      <button class="tab" onclick="swM('c')">Clinical ID</button>
+      <button class="tab" onclick="swM('th')">Thyroid Carcinoma</button>
+    </div>
+  </div>
+
+  <!-- AXIS BUILDER -->
+  <div id="mb">
+    <div class="sh2"><h2>HPT Axis Builder</h2><p>Drag each chip to its slot. The HPT axis is the foundation for all thyroid pathology.</p></div>
+    <div class="aw">
+      <div class="ad">
+        <div class="alv"><div class="an" id="nh"><div class="sub">Paraventricular nucleus</div><h3>HYPOTHALAMUS</h3><div class="dz" id="dz-trh" ondrop="drop(event,'trh')" ondragover="ov(event)" ondragleave="ol(event)">drop releasing hormone</div></div></div>
+        <div class="con"><div class="cln"></div><div class="cl">portal blood ↓</div><div class="ca">↓</div></div>
+        <div class="alv"><div class="an" id="np"><div class="sub">Anterior pituitary — thyrotrope cells</div><h3>PITUITARY</h3><div class="dz" id="dz-tsh" ondrop="drop(event,'tsh')" ondragover="ov(event)" ondragleave="ol(event)">drop tropic hormone</div></div></div>
+        <div class="con"><div class="cln"></div><div class="cl">systemic circulation ↓</div><div class="ca">↓</div></div>
+        <div class="alv"><div class="an" id="nth"><div class="sub">Thyroid follicular cells</div><h3>THYROID GLAND</h3><div class="dz" id="dz-t4" ondrop="drop(event,'t4')" ondragover="ov(event)" ondragleave="ol(event)">drop primary secreted hormone</div></div></div>
+        <div style="margin:10px 0 6px;text-align:center"><div class="nt">← long-loop negative feedback: T3 ⊣ TRH &amp; TSH →</div></div>
+        <div class="to">
+          <div class="ton t4n"><div class="tonl" style="color:var(--am)">T4 (thyroxine)</div><div class="dz" id="dz-t4r" style="font-size:11px" ondrop="drop(event,'t4r')" ondragover="ov(event)" ondragleave="ol(event)">active form?</div><div class="tona">99.97% bound to TBG<br>t½ = 6.5 days</div></div>
+          <div class="ton t3n"><div class="tonl" style="color:var(--ac)">T3 (triiodothyronine)</div><div class="dz" id="dz-t3r" style="font-size:11px" ondrop="drop(event,'t3r')" ondragover="ov(event)" ondragleave="ol(event)">potency vs T4?</div><div class="tona">99.7% bound to TBG<br>t½ = 1.5 days</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="cb">
+          <div class="cbl">Hormone Bank</div>
+          <div class="chips">
+            <div class="chip" id="cc-trh" draggable="true" ondragstart="ds(event,'trh','TRH')" style="border-color:rgba(8,145,178,.22)">TRH</div>
+            <div class="chip" id="cc-tsh" draggable="true" ondragstart="ds(event,'tsh','TSH')" style="border-color:rgba(8,145,178,.22)">TSH</div>
+            <div class="chip" id="cc-t4" draggable="true" ondragstart="ds(event,'t4','T4')" style="border-color:rgba(217,119,6,.22)">T4</div>
+            <div class="chip" id="cc-t4r" draggable="true" ondragstart="ds(event,'t4r','Prohormone (T4→T3)')" style="border-color:rgba(217,119,6,.22)">Prohormone (T4→T3)</div>
+            <div class="chip" id="cc-t3r" draggable="true" ondragstart="ds(event,'t3r','10× more potent')" style="border-color:rgba(8,145,178,.22)">10× more potent</div>
+          </div>
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--bd)">
+            <div class="cbl">Regulator Bank (bonus)</div>
+            <div class="chips">
+              <div class="chip" style="border-color:rgba(22,163,74,.2)">Somatostatin ⊣ TSH</div>
+              <div class="chip" style="border-color:rgba(22,163,74,.2)">Estrogen → TBG ↑</div>
+              <div class="chip" style="border-color:rgba(22,163,74,.2)">PTU blocks T4→T3</div>
+              <div class="chip" style="border-color:rgba(22,163,74,.2)">Wolff-Chaikoff: iodide ⊣ synthesis</div>
+            </div>
+          </div>
+          <button class="cbtn" onclick="chkA()">Check Axis ✓</button>
+          <button class="rbtn" onclick="rstA()">↺ Reset</button>
+          <div id="rp" class="rp"><h4 id="rttl"></h4><p id="rbdy"></p></div>
+        </div>
+        <div class="qr">
+          <div class="qrh" onclick="tqr()"><span>Quick Reference</span><span id="qtog">＋</span></div>
+          <div id="qrb" class="qrb">
+            <div class="qrr">📌 <strong>TRH</strong> — tripeptide (pGlu-His-Pro)</div>
+            <div class="qrr">📌 <strong>TSH</strong> — glycoprotein, α+β subunits</div>
+            <div class="qrr">📌 <strong>T4</strong> — prohormone; t½ 6.5 days</div>
+            <div class="qrr">📌 <strong>T3</strong> — active form; 10× potent; t½ 1.5 days</div>
+            <div class="qrr">📌 <strong>TBG ↑</strong> with estrogen/OCPs → total T4↑, free T4 normal</div>
+            <div class="qrr">📌 <strong>PTU</strong> — blocks TPO AND peripheral T4→T3</div>
+            <div class="qrr">📌 <strong>Methimazole</strong> — blocks TPO only; NOT T4→T3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAB INTERPRETER — 3 BATCHES -->
+  <div id="ml">
+    <div class="sh2"><h2>Lab Value Interpreter</h2><p>Three batches: classic thyroid diagnosis → next step management → TBG/special traps.</p></div>
+    <div class="bb"><div class="bi"><span class="bl">Batch</span><div class="bd2" id="ldots"></div><span class="bt" id="ltag">Classic thyroid diagnosis</span></div><button class="nbb" id="lnbb" onclick="nxt('l')">Next Batch →</button></div>
+    <div class="lgrid" id="lgrid"></div>
+  </div>
+
+  <!-- CLINICAL ID — 3 BATCHES -->
+  <div id="mc">
+    <div class="sh2"><h2>Clinical Identifier</h2><p>Three batches: symptoms/buzzwords → pathophysiology → drug traps &amp; complications.</p></div>
+    <div class="bb"><div class="bi"><span class="bl">Batch</span><div class="bd2" id="cdots"></div><span class="bt" id="ctag">Diagnosis from symptoms</span></div><button class="nbb" id="cnbb" onclick="nxt('c')">Next Batch →</button></div>
+    <div class="pr"><div class="pb"><div class="pf" id="cpf" style="width:0%"></div></div><div class="pt" id="cpt">0 / 8</div></div>
+    <div id="ccon"></div>
+    <div class="nb" style="margin-top:4px"><button class="nbtn pv" onclick="pV()">← Prev</button><button class="nbtn nx" onclick="nV()">Next →</button></div>
+  </div>
+
+  <!-- THYROID CARCINOMA — 3 BATCHES -->
+  <div id="mth">
+    <div class="sh2"><h2>Thyroid Carcinoma Identifier</h2><p>Three batches: diagnose carcinoma type → identify pathologic feature → management decision.</p></div>
+    <div class="bb"><div class="bi"><span class="bl">Batch</span><div class="bd2" id="thdots"></div><span class="bt" id="thtag">Diagnose carcinoma type</span></div><button class="nbb" id="thnbb" onclick="nxt('th')">Next Batch →</button></div>
+    <div class="cagrid" id="thgrid"></div>
+  </div>
+</main>
+
+<script>
+function tT(){const h=document.documentElement,d=h.getAttribute('data-theme')==='dark';h.setAttribute('data-theme',d?'light':'dark');document.getElementById('ti').textContent=d?'🌙':'☀️';document.getElementById('tl').textContent=d?'Dark mode':'Light mode';}
+let sc={ok:0,att:0,str:0},cv=0,placed={},did=null,dval=null;
+let bs={l:{cur:0,ans:0},c:{cur:0,ans:0},th:{cur:0,ans:0}};
+const NB=3;
+const TAGS={l:['Classic thyroid diagnosis','Next step / management','TBG traps & special cases'],c:['Diagnosis from symptoms','Drug mechanisms & traps','Complications & pathophysiology'],th:['Diagnose carcinoma type','Pathologic feature identification','Management decision']};
+function addSc(ok){sc.att++;ok?sc.ok++&&sc.str++:sc.str=0;document.getElementById('sok').textContent=sc.ok;document.getElementById('sat').textContent=sc.att;const sw=document.getElementById('sw');if(sc.str>=2){sw.style.visibility='visible';document.getElementById('spl').textContent='🔥 '+sc.str;}else sw.style.visibility='hidden';}
+function swM(m){['b','l','c','th'].forEach((x,i)=>{document.getElementById('m'+x).style.display='none';document.querySelectorAll('.tab')[i].classList.toggle('on',x===m);});document.getElementById('m'+m).style.display='block';}
+function rDots(m,cur){const el=document.getElementById(m+'dots');if(!el)return;el.innerHTML=Array.from({length:NB},(_,i)=>`<div class="dot ${i<cur?'dn':i===cur?'ac':''}"></div>`).join('');}
+function uTag(m,cur){const el=document.getElementById(m+'tag');if(el&&TAGS[m])el.textContent=TAGS[m][cur];}
+function chkDone(m,tot){if(bs[m].ans>=tot){const b=document.getElementById(m+'nbb');if(b)b.classList.add('show');}}
+function nxt(m){const b=bs[m];b.cur=(b.cur+1)%NB;b.ans=0;rDots(m,b.cur);uTag(m,b.cur);const btn=document.getElementById(m+'nbb');if(btn)btn.classList.remove('show');if(m==='l')rLabs();else if(m==='c'){cv=0;rV(0);}else if(m==='th')rTh();}
+// DRAG
+const DZP={trh:'drop releasing hormone',tsh:'drop tropic hormone',t4:'drop primary secreted hormone',t4r:'active form?',t3r:'potency vs T4?'};
+const DZA={trh:'TRH',tsh:'TSH',t4:'T4',t4r:'Prohormone (T4→T3)',t3r:'10× more potent'};
+function ds(e,id,val){did=id;dval=val;e.dataTransfer.setData('text',val);setTimeout(()=>document.getElementById('cc-'+id)?.classList.add('drag'),0)}
+function ov(e){e.preventDefault();e.currentTarget.classList.add('ov')}
+function ol(e){e.currentTarget.classList.remove('ov')}
+function drop(e,slot){e.preventDefault();const z=e.currentTarget;z.classList.remove('ov');const val=e.dataTransfer.getData('text')||dval;if(!val)return;Object.keys(placed).forEach(k=>{if(placed[k]===val&&k!==slot){const old=document.getElementById('dz-'+k);if(old){old.textContent=DZP[k];old.classList.remove('hc');}delete placed[k];}});placed[slot]=val;z.textContent=val;z.classList.add('hc');if(did)document.getElementById('cc-'+did)?.classList.add('used');did=null;dval=null;}
+function chkA(){let ok=0;Object.keys(DZA).forEach(s=>{const z=document.getElementById('dz-'+s);const n=z?.closest('.an')||z?.closest('.ton');if(placed[s]===DZA[s]){ok++;z&&(z.style.borderColor='var(--gn)');n?.classList.add('ok');}else if(placed[s]){z&&(z.style.borderColor='var(--rd)');if(n){n.classList.add('ng');setTimeout(()=>n.classList.remove('ng'),700);}}});addSc(ok===5);const p=document.getElementById('rp');p.classList.add('show');if(ok===5){p.className='rp show ps';document.getElementById('rttl').textContent='✓ Perfect!';document.getElementById('rbdy').textContent='T3 (not T4) is the active feedback signal — 10× higher receptor affinity. PTU uniquely blocks both TPO AND peripheral T4→T3. Methimazole only blocks TPO.';}else{p.className='rp show fl';document.getElementById('rttl').textContent=ok+'/5 — try again';document.getElementById('rbdy').textContent='T4 is the main secreted hormone (prohormone). T3 is active, made in periphery by deiodinase. T3 inhibits BOTH TRH and TSH.';}}
+function rstA(){placed={};Object.keys(DZP).forEach(s=>{const z=document.getElementById('dz-'+s);if(z){z.textContent=DZP[s];z.classList.remove('hc');z.style.borderColor='';}document.getElementById('cc-'+s)?.classList.remove('used','drag');});['nh','np','nth'].forEach(id=>document.getElementById(id)?.classList.remove('ok','ng'));document.getElementById('rp').classList.remove('show');}
+function tqr(){const b=document.getElementById('qrb'),o=b.style.display==='block';b.style.display=o?'none':'block';document.getElementById('qtog').textContent=o?'＋':'－';}
+
+// LAB DATA — 3 BATCHES × 4 CASES
+const LDATA=[
+ [{t:"Classic hypothyroid panel",labs:[{n:"TSH",v:"↑↑ 14 mIU/L",c:"hi"},{n:"Free T4",v:"↓ 0.4 ng/dL",c:"lo"},{n:"TPO antibodies",v:"↑ Positive",c:"hi"},{n:"Total T3",v:"↓ Low",c:"lo"}],opts:["Graves' disease","Primary hypothyroidism (Hashimoto's)","Secondary hypothyroidism","Sick euthyroid"],ok:1,ex:"<strong>Primary hypothyroidism (Hashimoto's).</strong> Thyroid fails → T4↓ → no feedback → TSH↑↑. TPO antibodies = autoimmune destruction. Secondary hypothyroidism: LOW or inappropriately normal TSH. Pattern: TSH↑ + free T4↓ = ALWAYS primary."},
+  {t:"Classic hyperthyroid panel",labs:[{n:"TSH",v:"↓↓ <0.01 mIU/L",c:"lo"},{n:"Free T4",v:"↑↑ 4.2 ng/dL",c:"hi"},{n:"TSI antibodies",v:"↑ Positive",c:"hi"},{n:"RAI uptake",v:"↑↑ Diffuse",c:"hi"}],opts:["Toxic multinodular goiter","Graves' disease","Subacute thyroiditis","TSH-secreting pituitary adenoma"],ok:1,ex:"<strong>Graves' disease.</strong> TSI (thyroid-stimulating immunoglobulins) stimulate TSH receptor → T4↑↑ → TSH suppressed. Diffuse RAI uptake = Graves' (vs focal in toxic MNG; LOW uptake in thyroiditis — hormone leaking, not produced). Exophthalmos is Graves'-specific."},
+  {t:"Sick ICU patient, T3 very low",labs:[{n:"TSH",v:"↓ 0.3 mIU/L",c:"lo"},{n:"Total T4",v:"↓ Low",c:"lo"},{n:"Free T4",v:"Normal",c:"norm"},{n:"Reverse T3",v:"↑↑ Elevated",c:"hi"}],opts:["Central hypothyroidism","Sick euthyroid syndrome","Primary hypothyroidism","Hashimoto's thyroiditis"],ok:1,ex:"<strong>Sick euthyroid syndrome.</strong> Critically ill → ↓ deiodinase activity → T4 shunted to inactive reverse T3 instead of active T3. TSH low-normal (not elevated as in true hypothyroidism). Free T4 usually preserved. KEY: do NOT treat — adaptive response. Resolves with recovery."},
+  {t:"Paradox: TSH elevated BUT T4 also elevated",labs:[{n:"TSH",v:"↑ 8 mIU/L",c:"hi"},{n:"Free T4",v:"↑↑ 3.2 ng/dL",c:"hi"},{n:"Free T3",v:"↑ Elevated",c:"hi"},{n:"Symptoms",v:"Hyperthyroid features",c:"hi"}],opts:["Primary hypothyroidism","Hashimoto's thyroiditis","TSH-secreting pituitary adenoma (thyrotroph)","Sick euthyroid syndrome"],ok:2,ex:"<strong>Thyrotroph adenoma (TSH-secreting PitNET).</strong> Paradox: TSH HIGH + T4 HIGH = pituitary autonomously secreting TSH regardless of high T4 (loss of feedback). In primary hypothyroidism, T4 would be LOW. Symptoms can be hyperthyroid (from high T4). Very rare. Treatment: transsphenoidal surgery + somatostatin analogs."}],
+ [{t:"Next step — TSH 8, free T4 normal, TPO-Ab positive",labs:[{n:"TSH",v:"↑ 8 mIU/L",c:"hi"},{n:"Free T4",v:"Normal",c:"norm"},{n:"Free T3",v:"Normal",c:"norm"},{n:"TPO antibodies",v:"↑ Positive",c:"hi"}],opts:["Start levothyroxine immediately — TSH elevated","Subclinical hypothyroidism — monitor; consider treatment if TSH >10, symptoms present, or pregnancy planned","Radioactive iodine — ablate the thyroid","Order RAI scan to assess uptake"],ok:1,ex:"<strong>Subclinical hypothyroidism</strong> — TSH elevated but free T4/T3 normal. TPO-Ab positive = Hashimoto's likely, risk of progression. Treatment decision: if TSH >10, start levothyroxine; TSH 5–10: treat if symptomatic, pregnant, or trying to conceive; otherwise watch annually. Goal TSH on treatment: 0.5–2.5 mIU/L."},
+  {t:"Next step — TSH 0.01, free T4 elevated, first trimester pregnancy",labs:[{n:"TSH",v:"↓ 0.01 mIU/L",c:"lo"},{n:"Free T4",v:"↑↑ 4.5 ng/dL",c:"hi"},{n:"Gestation",v:"8 weeks",c:"hi"},{n:"TSI antibodies",v:"Positive",c:"hi"}],opts:["Radioactive iodine — fastest treatment","PTU (propylthiouracil) — preferred in 1st trimester; switch to methimazole in 2nd/3rd trimester","Methimazole — preferred throughout pregnancy","Observation only — hyperthyroidism is normal in early pregnancy"],ok:1,ex:"<strong>PTU preferred in 1st trimester.</strong> Methimazole causes VACTERL association defects in 1st trimester. PTU preferred early (but risk of maternal hepatotoxicity). Switch to methimazole in 2nd/3rd trimester. RAI absolutely contraindicated in pregnancy. Gestational hyperthyroidism from hCG cross-reacting with TSH receptor is normal but Graves' disease in pregnancy needs treatment."},
+  {t:"Next step — thyroid storm suspected",labs:[{n:"Temp",v:"↑ 40.2°C",c:"hi"},{n:"HR",v:"↑ 162 bpm",c:"hi"},{n:"TSH",v:"↓↓ <0.01",c:"lo"},{n:"Mental status",v:"Agitated, confused",c:"hi"}],opts:["Give RAI immediately — most effective","Step-wise: PTU first (blocks TPO + T4→T3) → wait 1h → Lugol's iodine (Wolff-Chaikoff) → propranolol → steroids (block T4→T3). ICU admission.","Give methimazole IV — blocks synthesis only","Observation and cooling — thyroid storm is self-limiting"],ok:1,ex:"<strong>Thyroid storm treatment sequence:</strong> (1) PTU (blocks TPO AND peripheral T4→T3 conversion). (2) Lugol's iodine given 1 HOUR AFTER PTU — exploits Wolff-Chaikoff effect; if given before PTU, iodide is used to make MORE hormone. (3) Propranolol (blocks adrenergic symptoms + T4→T3 conversion). (4) Steroids (additional T4→T3 block + may address underlying trigger). High-dose acetaminophen for fever (not aspirin — displaces thyroid hormone from TBG)."},
+  {t:"Next step — low RAI uptake, postpartum, mildly hyperthyroid",labs:[{n:"TSH",v:"↓ 0.1 mIU/L",c:"lo"},{n:"Free T4",v:"↑ 2.8 ng/dL",c:"hi"},{n:"RAI uptake",v:"↓↓ Very low",c:"lo"},{n:"TPO antibodies",v:"↑ Positive",c:"hi"}],opts:["Methimazole — start immediately","Postpartum thyroiditis — observe; beta-blockers for symptoms only; may progress to hypothyroid phase","RAI ablation now","Thyroidectomy"],ok:1,ex:"<strong>Postpartum thyroiditis</strong> — autoimmune destructive thyroiditis. Low RAI uptake (hormone leaking from destroyed follicles, not being actively produced). Anti-thyroid drugs don't help (not overproducing). Triphasic course: hyperthyroid → hypothyroid → recovery. Beta-blockers for symptoms. 20–30% develop permanent hypothyroidism."}],
+ [{t:"OCP patient — total T4 elevated, TSH normal",labs:[{n:"TSH",v:"Normal",c:"norm"},{n:"Total T4",v:"↑↑ 18 μg/dL",c:"hi"},{n:"Free T4",v:"Normal",c:"norm"},{n:"Free T3",v:"Normal",c:"norm"}],opts:["Hyperthyroidism — start methimazole","Graves' disease — check TSI","Elevated TBG from OCPs — no thyroid disease","TSH-secreting adenoma"],ok:2,ex:"<strong>OCP/estrogen → ↑ TBG → total T4↑ but free T4 normal.</strong> Estrogen increases TBG synthesis in liver → more carrier → total T4 appears elevated. Free T4 is unchanged → patient is euthyroid. Pituitary sees only FREE hormone → TSH normal. This trap also applies to pregnancy. Opposite with androgens/glucocorticoids → ↓ TBG."},
+  {t:"T4 normal, T3 low, rT3 high, TSH low — ICU day 3",labs:[{n:"TSH",v:"↓ 0.1 mIU/L",c:"lo"},{n:"Free T4",v:"Normal",c:"norm"},{n:"Total T3",v:"↓↓ Very low",c:"lo"},{n:"Reverse T3",v:"↑↑ Very high",c:"hi"}],opts:["Start levothyroxine immediately — T3 very low","Sick euthyroid syndrome — treat underlying illness, NOT the thyroid labs","Primary hypothyroidism — missed by TSH","Myxedema coma — emergency thyroid hormone treatment"],ok:1,ex:"<strong>Sick euthyroid (low T3 syndrome).</strong> Illness → ↓ type 1 deiodinase → T4 shunted to reverse T3 (inactive) instead of T3. Severity correlates with illness severity. TSH usually low-normal. Free T4 preserved. Critical: treating with levothyroxine does NOT improve outcomes and may worsen them. Treat the underlying illness."},
+  {t:"Elderly patient, AF, TSH 0.02, no symptoms",labs:[{n:"TSH",v:"↓↓ 0.02 mIU/L",c:"lo"},{n:"Free T4",v:"Normal",c:"norm"},{n:"Free T3",v:"Normal",c:"norm"},{n:"Symptoms",v:"None",c:"norm"}],opts:["No treatment — subclinical, observe","Subclinical hyperthyroidism — treat in elderly (>65) due to AF risk, osteoporosis risk, and risk of progression to overt hyperthyroidism","Start methimazole immediately for all subclinical cases","RAI ablation as first step"],ok:1,ex:"<strong>Subclinical hyperthyroidism in elderly = treat.</strong> Low TSH + normal free T4/T3 = subclinical hyperthyroidism. In elderly: increased risk of atrial fibrillation, osteoporosis (especially post-menopausal women), and progression to overt disease. Treat with methimazole or RAI. In younger patients without risk factors, monitoring may be acceptable."},
+  {t:"Infant, TSH 210 mIU/L at 72h newborn screen",labs:[{n:"TSH",v:"↑↑↑ 210 mIU/L",c:"hi"},{n:"Free T4",v:"↓ Low",c:"lo"},{n:"Symptoms",v:"Macroglossia, large fontanelle, umbilical hernia",c:"hi"},{n:"Age",v:"Newborn",c:"norm"}],opts:["Normal newborn variant — observe","Transient neonatal hyperthyroidism","Congenital hypothyroidism — start levothyroxine urgently by 2 weeks","Neonatal Graves' disease"],ok:2,ex:"<strong>Congenital hypothyroidism</strong> — most common preventable cause of intellectual disability. Newborn screening mandatory. Start levothyroxine by 2 weeks of life to prevent neurodevelopmental impairment. Classic features: macroglossia, large anterior fontanelle, umbilical hernia, prolonged jaundice, poor feeding, constipation. Cause: thyroid dysgenesis (most common), dyshormonogenesis, iodine deficiency."}]
+];
+
+function rLabs(){
+  const b=bs.l;rDots('l',b.cur);uTag('l',b.cur);
+  const batch=LDATA[b.cur];
+  document.getElementById('lgrid').innerHTML='';
+  batch.forEach((c,ci)=>{
+    const d=document.createElement('div');
+    d.style.cssText='background:var(--sf);border:1px solid var(--bd);border-radius:var(--rl);padding:19px;box-shadow:var(--sh)';
+    d.innerHTML=`<h3 style="font-size:14px;font-weight:700;margin-bottom:11px">${c.t}</h3><div style="display:flex;flex-direction:column;gap:5px;margin-bottom:13px">${c.labs.map(l=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--sf2);border-radius:6px;font-size:13px"><span style="color:var(--txm);font-family:'DM Mono',monospace;font-size:11px">${l.n}</span><span style="font-weight:700;font-family:'DM Mono',monospace;font-size:12px;color:var(--${l.c==='hi'?'rd':l.c==='lo'?'ac':'gn'})">${l.v}</span></div>`).join('')}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:7px" id="lo-${b.cur}-${ci}">${c.opts.map((o,oi)=>`<div style="padding:8px 10px;background:var(--sf2);border:1.5px solid var(--bd);border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;text-align:center;color:var(--tx)" onclick="chkL(${ci},${oi})">${o}</div>`).join('')}</div><div style="display:none;margin-top:11px;padding:12px 14px;background:var(--sf2);border-radius:8px;border-left:3px solid var(--ac);font-size:12px;line-height:1.7;color:var(--txm)" id="le-${b.cur}-${ci}">${c.ex}</div>`;
+    document.getElementById('lgrid').appendChild(d);
+  });
+}
+function chkL(ci,oi){const b=bs.l;const c=LDATA[b.cur][ci];document.querySelectorAll(`#lo-${b.cur}-${ci} div`).forEach((o,i)=>{if(i===c.ok)o.style.cssText+='background:var(--gnb);border-color:var(--gn);color:var(--gn)';else if(i===oi)o.style.cssText+='background:var(--rdb);border-color:var(--rd);color:var(--rd)';o.onclick=null;});document.getElementById(`le-${b.cur}-${ci}`).style.display='block';addSc(oi===c.ok);b.ans++;chkDone('l',LDATA[b.cur].length);}
+
+// CLINICAL — 3 BATCHES × 8 Q
+const CDATA=[
+ [{n:"01",d:1,t:"A <span class='hlx'>42-year-old woman</span> presents with fatigue, cold intolerance, constipation, <span class='hlx'>periorbital puffiness</span>. TSH 18, free T4 0.3, TPO antibodies positive. Slow DTR relaxation.",opts:["Graves' disease","Hashimoto's thyroiditis (primary hypothyroidism)","Sick euthyroid","De Quervain's thyroiditis"],ok:1,fb:"Hashimoto's: anti-TPO + anti-thyroglobulin → autoimmune thyroid destruction. TSH↑↑ + free T4↓ = primary hypothyroidism. Classic: slow ('hung-up') DTR relaxation, periorbital puffiness, bradycardia, constipation. Most common cause of hypothyroidism in iodine-sufficient areas.",bz:["Anti-TPO positive","hung-up reflexes","cold intolerance","primary hypothyroidism"]},
+  {n:"02",d:1,t:"A <span class='hlx'>28F</span> with anxiety, heat intolerance, weight loss despite increased appetite, and <span class='hlx'>proptosis</span>. Diffuse smooth goiter. TSH <0.01, free T4 5.1, TSI antibodies positive.",opts:["Toxic multinodular goiter","Subacute thyroiditis","Graves' disease","Factitious hyperthyroidism"],ok:2,fb:"Graves' disease: TSI antibodies stimulate TSH receptor → chronic T4 overproduction. Proptosis (exophthalmos) is pathognomonic — TSI cross-reacts with orbital fibroblasts. Diffuse smooth goiter (vs nodular in toxic MNG). Pretibial myxedema also specific to Graves'.",bz:["TSI antibodies","proptosis = pathognomonic","diffuse smooth goiter","pretibial myxedema"]},
+  {n:"03",d:2,t:"A <span class='hlx'>35F</span> 8 weeks pregnant with Graves' disease needs antithyroid drug therapy. Choice between PTU and methimazole.",opts:["Methimazole preferred throughout pregnancy","PTU preferred in 1st trimester; switch to methimazole in 2nd/3rd","Both equally safe throughout","RAI is preferred in pregnancy"],ok:1,fb:"PTU in 1st trimester: methimazole causes VACTERL association defects (vertebral, cardiac, tracheo-esophageal, renal, limb) in 1st trimester. PTU preferred early but maternal hepatotoxicity risk. Switch to methimazole after 1st trimester. RAI absolutely contraindicated in pregnancy.",bz:["PTU = 1st trimester","Methimazole = VACTERL in 1st tri","switch drugs after 1st tri","RAI contraindicated in pregnancy"]},
+  {n:"04",d:2,t:"A <span class='hlx'>58-year-old man</span> with hyperthyroidism on medication misses doses before surgery. Postop: fever 40.2°C, HR 160, <span class='hlx'>delirium</span>.",opts:["Malignant hyperthermia","Thyroid storm (thyrotoxic crisis)","Neuroleptic malignant syndrome","Severe sepsis"],ok:1,fb:"Thyroid storm: life-threatening thyrotoxicosis triggered by physiologic stress (surgery, infection). Triad: fever + tachycardia + CNS dysfunction. Treatment: PTU → wait 1h → Lugol's iodine → propranolol → steroids. High-dose acetaminophen for fever (NOT aspirin — displaces TH from TBG).",bz:["Fever + tachycardia + CNS","thyroid storm trigger = stress","PTU then Lugol's iodine","NOT aspirin for fever"]},
+  {n:"05",d:2,t:"A <span class='hlx'>72F</span> brought in by family with gradually worsening confusion, <span class='hlx'>hypothermia</span> (temp 34°C), bradycardia HR 38, hypoventilation. TSH 85, free T4 <0.1. Non-compliant with levothyroxine.",opts:["Septic shock","Myxedema coma","Addisonian crisis","Hypothermic exposure"],ok:1,fb:"Myxedema coma: decompensated hypothyroidism. Hallmarks: HYPOTHERMIA (not fever), hypoventilation, severe bradycardia, hyponatremia, altered consciousness. TSH markedly elevated. Treatment: IV levothyroxine + IV hydrocortisone (co-existing adrenal insufficiency common — treat empirically).",bz:["Hypothermia NOT fever","hypoventilation","TSH markedly elevated","IV levothyroxine + steroids"]},
+  {n:"06",d:1,t:"A <span class='hlx'>45F</span> with <span class='hlx'>painful anterior neck swelling</span> after URI 3 weeks ago. Transient hyperthyroidism. Tender thyroid. ESR 88 mm/hr. RAI uptake: very low.",opts:["Graves' disease","Hashimoto's thyroiditis","De Quervain's (subacute granulomatous) thyroiditis","Toxic multinodular goiter"],ok:2,fb:"De Quervain's: post-viral inflammatory thyroiditis. KEY: painful, tender thyroid (distinguishes from all others). Low RAI uptake = hormone leaking from inflamed follicles, not being produced. Elevated ESR. Triphasic: hyperthyroid → hypothyroid → recovery. Treatment: NSAIDs, steroids for severe cases.",bz:["Painful thyroid","post-viral","low RAI uptake","elevated ESR"]},
+  {n:"07",d:3,t:"A <span class='hlx'>55-year-old man</span> with lung cancer: TSH 0.02, free T4 elevated, no hyperthyroid symptoms. RAI scan: <span class='hlx'>suppressed normal thyroid but uptake elsewhere</span>.",opts:["Graves' disease","TSH-secreting pituitary adenoma","Exogenous thyroid hormone","Struma ovarii — ectopic thyroid tissue"],ok:3,fb:"Struma ovarii: teratoma of ovary containing functional thyroid tissue. Ectopic tissue produces T4 autonomously → suppresses normal thyroid gland → RAI scan shows no neck uptake but pelvic activity. TSH-secreting adenoma: TSH would be HIGH or inappropriately normal (not low).",bz:["Suppressed normal thyroid","ectopic T4 source","struma ovarii","no neck RAI uptake"]},
+  {n:"08",d:3,t:"A <span class='hlx'>newborn</span> with TSH 210 mIU/L at 72h. On exam: <span class='hlx'>macroglossia</span>, large anterior fontanelle, umbilical hernia, hypothermia. Mother had no thyroid disease during pregnancy.",opts:["Transient neonatal hyperthyroidism","Congenital hypothyroidism — start levothyroxine by 2 weeks","Neonatal Graves' disease","Normal newborn — observe"],ok:1,fb:"Congenital hypothyroidism: most common preventable cause of intellectual disability. Levothyroxine by 2 weeks of life prevents neurodevelopmental damage. Classic features: macroglossia, large anterior fontanelle, umbilical hernia, prolonged jaundice. Causes: thyroid dysgenesis (most common), dyshormonogenesis, iodine deficiency in mother.",bz:["Macroglossia","large anterior fontanelle","levothyroxine by 2 weeks","most common preventable IDD"]}],
+ [{n:"01",d:1,t:"PTU vs methimazole: <span class='hlx'>which drug UNIQUELY blocks peripheral conversion of T4→T3</span>, and when is this particularly valuable?",opts:["Methimazole — it has a longer half-life","PTU — inhibits both TPO and type 1 deiodinase. Valuable in thyroid storm (rapid reduction of active T3) and pregnancy 1st trimester","Both inhibit T4→T3 conversion equally","Carbimazole — it is converted to methimazole plus an active moiety"],ok:1,fb:"PTU uniquely inhibits type 1 deiodinase in addition to TPO. This dual mechanism is why PTU is preferred in thyroid storm — faster reduction of circulating T3. Methimazole only blocks TPO (organification and coupling). High-dose corticosteroids and propranolol also inhibit T4→T3 conversion.",bz:["PTU blocks TPO + deiodinase","thyroid storm = PTU preferred","T4→T3 block valuable in crisis","methimazole = TPO only"]},
+  {n:"02",d:2,t:"A patient takes Lugol's iodine BEFORE being started on an antithyroid drug. Her hyperthyroidism WORSENS. What happened?",opts:["Lugol's solution was contaminated","Jod-Basedow effect: excess iodide provided substrate → autonomous thyroid tissue produces MORE hormone","Lugol's iodine is a stimulant","This is a paradoxical Wolff-Chaikoff escape"],ok:1,fb:"Jod-Basedow effect: excess iodide + autonomous thyroid tissue (Graves', toxic MNG) → ↑ thyroid hormone synthesis. Prevention: ALWAYS give antithyroid drug 1 hour BEFORE iodide. In normal thyroid: Wolff-Chaikoff effect transiently blocks synthesis. In autonomous tissue: escape is rapid, and substrate availability worsens hyperthyroidism.",bz:["Jod-Basedow effect","iodide + autonomous tissue = more TH","always give ATD before iodide","Wolff-Chaikoff = normal thyroid only"]},
+  {n:"03",d:2,t:"A patient on methimazole develops <span class='hlx'>fever, sore throat, and oral ulcers</span>. CBC: WBC 0.8 × 10⁹/L. What is the emergency?",opts:["Viral pharyngitis — no medication change","Agranulocytosis from methimazole — STOP drug immediately, start G-CSF, antibiotics","This is expected — not a concern","The patient should switch to PTU which is safer for WBC"],ok:1,fb:"Agranulocytosis: rare (0.1–0.5%) but life-threatening complication of thionamides (PTU and methimazole). Fever + sore throat + mouth ulcers = agranulocytosis until proven otherwise. STOP medication immediately. G-CSF to stimulate neutrophil recovery. Broad-spectrum antibiotics for infection. Patient should never restart thionamides — switch to RAI or surgery.",bz:["Agranulocytosis = emergency","stop methimazole immediately","G-CSF + antibiotics","never restart thionamides"]},
+  {n:"04",d:2,t:"In hyperthyroid patient, propranolol is given while awaiting definitive treatment. What thyroid-specific benefit does propranolol provide BEYOND heart rate control?",opts:["Propranolol directly inhibits thyroid hormone synthesis","Propranolol inhibits peripheral T4→T3 conversion (type 1 deiodinase inhibition) — reduces active T3 levels","Propranolol blocks TSI antibody effects","Propranolol is only used for heart rate"],ok:1,fb:"Propranolol has a thyroid-specific effect: inhibits peripheral T4→T3 conversion. This is separate from its beta-blocking (HR control) effect. Also: controls tremor, palpitations, heat intolerance, and anxiety (all adrenergic-mediated). Important in thyroid storm combined with PTU and steroids (all three independently block T4→T3).",bz:["Propranolol inhibits T4→T3","beyond beta-blockade","thyroid storm: PTU + propranolol + steroids","all three block T4→T3"]},
+  {n:"05",d:1,t:"Why is <span class='hlx'>aspirin NOT recommended</span> for fever in thyroid storm?",opts:["Aspirin causes Reye syndrome in adults","Aspirin displaces thyroid hormone from TBG → acutely ↑ free T4/T3 → worsens thyrotoxicosis","Aspirin is an antithyroid drug and reduces T4 synthesis","Aspirin causes agranulocytosis in thyroid storm"],ok:1,fb:"Aspirin (and salicylates) compete with thyroid hormone for binding to TBG → displace T4/T3 → acutely ↑ free hormone levels → can worsen thyrotoxicosis. Use acetaminophen instead for fever control in thyroid storm. Also: active cooling measures. This is a classic pharmacology trap on USMLE.",bz:["Aspirin displaces TH from TBG","↑ free T4/T3","use acetaminophen instead","classic USMLE trap"]},
+  {n:"06",d:2,t:"A patient with Graves' disease is treated with <span class='hlx'>radioactive iodine (I-131)</span>. What is the most common long-term complication?",opts:["Thyroid storm from RAI","Hypothyroidism — develops in majority of patients within years of RAI treatment","Thyroid cancer from RAI","RAI causes permanent exophthalmos"],ok:1,fb:"Hypothyroidism is the expected (and often desirable) outcome of RAI treatment for Graves'. >80% develop hypothyroidism within 10 years. Lifelong levothyroxine replacement needed. RAI can also worsen pre-existing ophthalmopathy — use with caution and consider corticosteroids perioperatively. Contraindicated in pregnancy and breastfeeding.",bz:["Hypothyroidism = expected outcome",">80% within 10 years","lifelong levothyroxine","worsens ophthalmopathy"]},
+  {n:"07",d:3,t:"A patient with Graves' disease is in remission after 18 months of methimazole. Drug is stopped. What predicts a high risk of relapse?",opts:["TSI antibodies still elevated at time of drug discontinuation","Low TSH at the time of discontinuation","Small goiter size","Short duration of initial treatment"],ok:0,fb:"Persistent elevated TSI antibodies = active autoimmune disease = high relapse risk. Other relapse predictors: large goiter, male sex, severe initial hyperthyroidism. If TSI negative at cessation: ~50% remission. If TSI positive: ~80% relapse. If relapse occurs or remission not achieved: consider RAI or surgery for definitive treatment.",bz:["TSI still elevated = high relapse","antibody negativity = remission","remission rate ~50% after methimazole","RAI/surgery if relapse"]},
+  {n:"08",d:3,t:"A patient with Graves' ophthalmopathy is treated with RAI. Her eye disease <span class='hlx'>worsens significantly</span> after RAI. How could this have been prevented?",opts:["RAI never worsens ophthalmopathy","RAI can release thyroid antigens → augment autoimmune response → worsen ophthalmopathy. Prevention: perioperative oral corticosteroids in patients with active GO prior to RAI","Methimazole prevents RAI-induced GO worsening","This is always permanent"],ok:1,fb:"RAI and Graves' ophthalmopathy: RAI releases thyroid antigens → stimulates autoimmune response → worsens active Graves' ophthalmopathy in ~15% of patients. Prevention: oral prednisone 0.4–0.5mg/kg/day starting day of RAI, tapering over 3 months. Patients with severe or active GO may prefer thyroidectomy over RAI.",bz:["RAI can worsen Graves' ophthalmopathy","perioperative steroids prevent worsening","thyroidectomy preferred in active GO","antigen release mechanism"]}],
+ [{n:"01",d:1,t:"A <span class='hlx'>45F</span> with Hashimoto's hypothyroidism on levothyroxine develops <span class='hlx'>palpitations and anxiety</span>. TSH: 0.05 mIU/L (suppressed). What happened?",opts:["Hashimoto's resolved — she is now in remission","She is overreplaced with levothyroxine — reduce dose. Target TSH: 0.5–2.5 mIU/L for most patients","Start propranolol and maintain current dose","Graves' disease has developed"],ok:1,fb:"Levothyroxine over-replacement: suppressed TSH + hyperthyroid symptoms = too much T4. Reduce dose. TSH target: 0.5–2.5 mIU/L for most patients; 0.1–1.5 mIU/L for thyroid cancer follow-up; 0.1–0.4 mIU/L in high-risk differentiated thyroid cancer (suppression therapy). Over-replacement risks: AF, osteoporosis.",bz:["Suppressed TSH = over-replacement","reduce levothyroxine","TSH target 0.5–2.5","AF + osteoporosis risk"]},
+  {n:"02",d:2,t:"Graves' disease treated with methimazole for 2 years. Patient achieves biochemical euthyroidism. <span class='hlx'>Anti-TSH receptor antibody (TSI)</span> is now undetectable. What does this mean for management?",opts:["Continue methimazole lifelong","TSI negativity suggests autoimmune remission — trial of drug discontinuation is reasonable. 50% maintain remission","Switch to RAI immediately","Surgery now that antibodies are negative"],ok:1,fb:"TSI negativity = autoimmune remission achieved. This is the goal of 12–18 month methimazole therapy. ~50% of Graves' patients achieve sustained remission. Discontinue methimazole and monitor TSH in 4–6 weeks. If relapse occurs → RAI or surgery. TSI-positive patients at drug discontinuation have ~80% relapse risk.",bz:["TSI negative = remission achieved","50% sustained remission","monitor after stopping","relapse → RAI or surgery"]},
+  {n:"03",d:2,t:"A patient with Hashimoto's on levothyroxine takes <span class='hlx'>calcium supplements with her morning levothyroxine</span>. Despite adequate dosing, TSH remains elevated. What is the issue?",opts:["She needs a higher dose — Hashimoto's is worsening","Calcium impairs levothyroxine absorption — must be taken 4 hours apart","Her Hashimoto's has converted to Graves'","The brand of levothyroxine is ineffective"],ok:1,fb:"Levothyroxine absorption interactions: calcium carbonate, iron supplements, antacids (aluminum/magnesium), cholestyramine, and some PPIs all impair levothyroxine absorption. Take levothyroxine on empty stomach, 30–60 min before food/coffee. Separate from calcium/iron by ≥4 hours. Also: malabsorption states (celiac disease) increase requirements.",bz:["Calcium impairs absorption","separate by 4 hours","empty stomach","other culprits: iron, antacids, PPIs"]},
+  {n:"04",d:2,t:"A patient with prior thyroid cancer (papillary) is on levothyroxine post-thyroidectomy. Her endocrinologist insists TSH should be <span class='hlx'><0.1 mIU/L</span>. Why?",opts:["Lower TSH means she needs less medication","TSH suppression therapy for thyroid cancer: TSH stimulates thyroid tissue growth — suppressing TSH reduces recurrence risk in high-risk differentiated thyroid cancer","Lower TSH prevents Hashimoto's recurrence","TSH suppression is no longer recommended"],ok:1,fb:"TSH suppression in thyroid cancer: TSH is a growth factor for follicular cells and differentiated thyroid cancers. Suppressing TSH with high-dose levothyroxine (TSH <0.1 mIU/L) reduces recurrence in high-risk patients. Risk: AF, osteoporosis. Degree of suppression tailored to risk: high-risk → TSH <0.1; low-risk → TSH 0.5–2.",bz:["TSH = growth factor for thyroid cancer","TSH suppression reduces recurrence","high-risk: TSH <0.1","AF + osteoporosis risk"]},
+  {n:"05",d:3,t:"A pregnant woman's TSH is <span class='hlx'>0.3 mIU/L</span> in the first trimester. She has no hyperthyroid symptoms. No TSI antibodies. What is the most likely explanation?",opts:["Graves' disease developing in pregnancy","Normal variant — hCG cross-reacts with TSH receptor → mild TSH suppression in 1st trimester","Subclinical hyperthyroidism — treat with methimazole","Gestational thyrotoxicosis — treat with propranolol"],ok:1,fb:"Gestational TSH suppression: hCG (has alpha subunit homology with TSH) cross-reacts with TSH receptor → mild TSH suppression + slight T4 elevation in 1st trimester. Normal: TSH 0.1–2.5 mIU/L in 1st trimester. This physiologic gestational hyperthyroxinemia usually resolves by 20 weeks. No treatment needed without TSI antibodies or symptoms.",bz:["hCG cross-reacts with TSH receptor","normal 1st trimester TSH suppression","gestational hyperthyroxinemia","no treatment if no TSI/symptoms"]},
+  {n:"06",d:3,t:"A patient post-RAI for Graves' develops <span class='hlx'>3 months later</span> on exam: thyroid tender, painful, and labs show transient hyperthyroid spike before going hypothyroid. What is this?",opts:["Thyroid storm from RAI","Radiation thyroiditis — expected sequence after RAI: radiated follicles release stored hormone (transient hyper) → destruction → hypothyroidism","Subacute granulomatous thyroiditis from a virus","Jod-Basedow effect"],ok:1,fb:"Radiation thyroiditis: expected consequence of RAI. Sequence: radiated follicles → release of stored thyroid hormone (1–3 weeks post-RAI) → transient hyperthyroid spike → cell death → hypothyroidism. Usually mild and self-limited. Pre-treat thyroid storm-risk patients (elderly, severe disease) with antithyroid drugs before RAI to reduce stored hormone.",bz:["Radiation thyroiditis","stored hormone release","transient hyperthyroidism then hypothyroidism","pre-treat high-risk patients"]},
+  {n:"07",d:3,t:"A patient with total thyroidectomy for papillary thyroid cancer needs <span class='hlx'>thyrogen (recombinant TSH)</span> injection before I-131 follow-up scan. Why is this used instead of just stopping levothyroxine?",opts:["Thyrogen is cheaper than stopping levothyroxine","Thyrogen allows TSH stimulation of residual thyroid tissue without the hypothyroid morbidity of levothyroxine withdrawal (fatigue, cognitive impairment, QOL decline lasting 6–8 weeks)","Thyrogen directly kills thyroid cancer cells","Thyrogen prevents radiation exposure"],ok:1,fb:"Thyrogen (rhTSH) allows exogenous TSH stimulation for RAI scan/ablation without stopping levothyroxine. Alternative method: stop levothyroxine for 4–6 weeks → hypothyroidism → endogenous TSH ↑ → stimulates residual thyroid cells. Thyrogen avoids weeks of hypothyroid morbidity. TSH stimulation necessary because RAI uptake by thyroid tissue requires TSH signaling.",bz:["Thyrogen = rhTSH","avoids hypothyroid morbidity","stimulates RAI uptake","alternative to levothyroxine withdrawal"]},
+  {n:"08",d:2,t:"A breastfeeding woman with Graves' disease needs antithyroid drug therapy. Which is preferred?",opts:["PTU is preferred in breastfeeding — less passes into breast milk","Methimazole is preferred in breastfeeding — lower breast milk transfer, less hepatotoxicity risk for mother","RAI is preferred in breastfeeding","Both are equally unsafe — must stop breastfeeding"],ok:1,fb:"Methimazole preferred in breastfeeding (and in 2nd/3rd trimester pregnancy). PTU has ~4× more protein binding but is ionized/water-soluble at physiologic pH — minimal breast milk transfer for both, but methimazole has more favorable data. PTU: maternal hepatotoxicity risk makes methimazole better for long-term use. Breastfeed AFTER taking the dose (1–2h gap reduces exposure).",bz:["Methimazole preferred in breastfeeding","maternal hepatotoxicity risk with PTU","breastfeed after taking dose","minimal infant exposure with both"]}]
+];
+
+function rV(i){const b=bs.c;const batch=CDATA[b.cur];const v=batch[i];rDots('c',b.cur);uTag('c',b.cur);const dc=['','d1','d2','d3'][v.d],dl=['','Easy','Medium','Hard'][v.d];document.getElementById('ccon').innerHTML=`<div class="vc" style="animation:pop .2s"><div class="vh"><div class="vn">Q${v.n} · Batch ${b.cur+1}/${NB}</div><div class="df ${dc}">${dl}</div></div><div class="vt">${v.t}</div><div class="ag" id="cag">${v.opts.map((o,oi)=>`<div class="ao" onclick="chkV(${i},${oi})"><div class="ol">${String.fromCharCode(65+oi)}</div><div>${o}</div></div>`).join('')}</div><div class="fb" id="cfb"><div style="margin-bottom:8px;font-weight:700;font-size:14px;color:var(--tx)">Explanation</div><div style="margin-bottom:10px">${v.fb}</div><div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span style="font-size:12px;color:var(--txm)">Buzzwords:</span>${v.bz.map(b=>`<span class="bz">${b}</span>`).join('')}</div></div></div>`;document.getElementById('cpf').style.width=(i/batch.length*100)+'%';document.getElementById('cpt').textContent=`${i} / ${batch.length}`;}
+function chkV(i,oi){const b=bs.c;const v=CDATA[b.cur][i];document.querySelectorAll('#cag .ao').forEach((o,j)=>{if(j===v.ok)o.classList.add('ok');else if(j===oi)o.classList.add('ng');o.onclick=null;o.style.cursor='default';});document.getElementById('cfb').classList.add('show');addSc(oi===v.ok);b.ans++;chkDone('c',CDATA[b.cur].length);}
+function nV(){const b=bs.c;if(cv<CDATA[b.cur].length-1){cv++;rV(cv);}}
+function pV(){if(cv>0){cv--;rV(cv);}}
+
+// THYROID CARCINOMA — 3 BATCHES × 4 CARDS
+const THDATA=[
+ [{t:"Most common thyroid cancer",s:"A 38F has a thyroid nodule. FNA shows cells with 'Orphan Annie eye' nuclei, intranuclear grooves, and nuclear pseudoinclusions. What is the diagnosis and prognosis?",opts:["Follicular thyroid carcinoma — poor prognosis","Papillary thyroid carcinoma — excellent prognosis (>95% 10-year survival)","Medullary thyroid carcinoma","Anaplastic carcinoma"],ok:1,rev:"<strong>Papillary thyroid carcinoma (PTC)</strong> — most common (80-85%). Excellent prognosis. Spreads via LYMPHATICS → cervical lymph nodes (but this doesn't worsen prognosis significantly). Orphan Annie eye nuclei + intranuclear grooves + psammoma bodies are pathognomonic. Treatment: thyroidectomy ± RAI ± TSH suppression. BRAF V600E mutation common."},
+  {t:"MEN2 and thyroid cancer",s:"A 35M with a thyroid mass has markedly elevated calcitonin (1200 pg/mL). Family history of thyroid cancer and pheochromocytoma. Genetic testing shows RET mutation.",opts:["Papillary thyroid carcinoma — treat with RAI","Medullary thyroid carcinoma (MTC) — treat with surgery; DOES NOT respond to RAI","Follicular thyroid carcinoma","Anaplastic carcinoma"],ok:1,rev:"<strong>Medullary thyroid carcinoma (MTC)</strong> — derived from parafollicular C-cells (produce calcitonin). KEY: DOES NOT take up RAI (C-cells don't produce thyroid hormone). Treatment: total thyroidectomy. Calcitonin = tumor marker. RET mutation = MEN2A (pheo + parathyroid) or MEN2B (pheo + mucosal neuromas). Screen family members. Vandetanib/cabozantinib for metastatic disease."},
+  {t:"Hematogenous spread to distant sites",s:"A 55F with a thyroid nodule has distant metastases to bone and lung. FNA shows microfollicular pattern without the papillary nuclear features. No uptake on RAI scan. What type?",opts:["Papillary thyroid carcinoma — RAI-avid","Medullary thyroid carcinoma — does not take up RAI","Follicular thyroid carcinoma — spreads via blood (not lymph); variable RAI uptake","Anaplastic carcinoma — rapidly fatal"],ok:2,rev:"<strong>Follicular thyroid carcinoma (FTC)</strong> — spreads via BLOOD (hematogenous → bone, lung). Cannot distinguish adenoma from carcinoma on FNA — requires capsular/vascular invasion on excisional biopsy. Spreads less often to lymph nodes (unlike PTC). May take up RAI (allows I-131 treatment). Prognosis worse than PTC. Hurthle cell carcinoma is a variant."},
+  {t:"Elderly patient, rapidly enlarging neck mass",s:"An 80F presents with a rapidly enlarging, hard neck mass over 3 weeks. Dysphagia and hoarseness. CT shows invasion of trachea and esophagus. FNA: pleomorphic giant cells, no thyroid differentiation.",opts:["Papillary thyroid carcinoma — treat with RAI","Anaplastic (undifferentiated) thyroid carcinoma — rapidly fatal, median survival <6 months","Medullary thyroid carcinoma","Lymphoma of the thyroid"],ok:1,rev:"<strong>Anaplastic thyroid carcinoma</strong> — most deadly cancer in endocrinology. Undifferentiated, derived from prior differentiated thyroid cancer (often papillary). Rapid growth, invasion, distant mets at presentation. Does NOT take up RAI. Median survival 3–6 months from diagnosis. Treatment: surgery (if resectable) + radiation + dabrafenib/trametinib if BRAF V600E positive. TP53 mutation common."}],
+ [{t:"Pathologic feature: psammoma bodies",s:"Pathology shows laminated calcified concentric structures (psammoma bodies) in a thyroid tumor. What diagnosis do these point toward?",opts:["Follicular thyroid carcinoma","Medullary thyroid carcinoma (amyloid stroma)","Papillary thyroid carcinoma","Hurthle cell carcinoma"],ok:2,rev:"<strong>Psammoma bodies</strong> = concentric laminated calcifications from dystrophic calcification of infarcted tumor nests. Classic in papillary thyroid carcinoma. Also seen in: papillary renal cell carcinoma, serous papillary ovarian carcinoma, meningioma. MTC: amyloid stroma (Congo red positive, derived from procalcitonin). FTC: no characteristic calcifications."},
+  {t:"Congo red staining in thyroid biopsy",s:"A thyroid biopsy shows Congo red-positive apple-green birefringence in the stroma. What tumor type is this from?",opts:["Papillary thyroid carcinoma","Follicular thyroid carcinoma","Medullary thyroid carcinoma — amyloid deposits from procalcitonin","Anaplastic carcinoma"],ok:2,rev:"<strong>Medullary thyroid carcinoma</strong> has amyloid stroma derived from procalcitonin deposits. Congo red stain: apple-green birefringence under polarized light = amyloid. This is pathognomonic for MTC. C-cells are neural crest derivatives → immunostain positive for calcitonin, chromogranin, CEA. Negative for thyroglobulin (does not produce thyroid hormone)."},
+  {t:"Venous invasion on capsule",s:"Excisional biopsy of thyroid nodule. FNA was 'indeterminate (follicular neoplasm)'. Path shows capsular invasion and vascular (venous) invasion. What is the diagnosis?",opts:["Follicular adenoma — benign","Follicular thyroid carcinoma — defined by capsular AND/OR vascular invasion (cannot distinguish on FNA alone)","Papillary thyroid carcinoma","Normal thyroid tissue"],ok:1,rev:"<strong>Follicular thyroid carcinoma</strong> can ONLY be diagnosed on excisional biopsy — FNA cannot distinguish adenoma from carcinoma. Malignancy defined by: (1) capsular invasion or (2) vascular invasion. Minimally invasive FTC: excellent prognosis. Widely invasive FTC: hematogenous spread, worse prognosis. RAS mutations common; no BRAF."},
+  {t:"Cold vs hot nodule on RAI scan",s:"A thyroid nodule on RAI scan shows NO uptake ('cold' nodule). What is the clinical significance?",opts:["Cold nodule = definitely benign, no further workup","Cold nodule = lower functional activity; higher risk of malignancy compared to hot nodule (10–15% of cold nodules are malignant — FNA required)","Cold nodule = definitely malignant","Hot nodule is always malignant"],ok:1,rev:"<strong>Cold nodule = functionally inactive.</strong> ~85% of all thyroid nodules are cold; ~10–15% of cold nodules are malignant. Hot nodule (autonomous functioning): rarely malignant (toxic adenoma or MNG — cause hyperthyroidism). FNA is recommended for cold nodules meeting size criteria (usually >1cm or with suspicious features on ultrasound). Ultrasound characteristics more predictive than RAI."}],
+ [{t:"Post-thyroidectomy, hypocalcemia",s:"Two days after total thyroidectomy for PTC, patient has perioral tingling, Trousseau's sign, and Chvostek's sign. Ca2+ = 7.2 mg/dL. What happened?",opts:["Wound infection","Hypoparathyroidism from inadvertent parathyroid gland removal or devascularization","Hypothyroidism from levothyroxine not started yet","Hypocalcemia from RAI treatment"],ok:1,rev:"<strong>Iatrogenic hypoparathyroidism</strong> — most common complication of total thyroidectomy. Parathyroid glands may be accidentally removed or devascularized. Low PTH → low calcium. Treatment: calcium gluconate IV (acute) then oral calcium carbonate + vitamin D. Transient hypoparathyroidism common (resolves in weeks). Permanent hypoparathyroidism in ~1–2% of total thyroidectomies."},
+  {t:"Hoarse voice after thyroid surgery",s:"A patient develops a hoarse voice immediately after thyroid surgery. What nerve was most likely injured?",opts:["Phrenic nerve","Recurrent laryngeal nerve (RLN) — controls all laryngeal muscles except cricothyroid; injury → hoarseness, aspiration","External branch of superior laryngeal nerve — controls cricothyroid; affects vocal pitch","Hypoglossal nerve"],ok:1,rev:"<strong>Recurrent laryngeal nerve (RLN) injury</strong> — most feared complication of thyroid surgery. RLN controls all intrinsic laryngeal muscles except cricothyroid. Unilateral injury: hoarseness, voice fatigue. Bilateral injury: can cause respiratory distress requiring tracheostomy. Surgeon must identify and preserve RLN during thyroidectomy. External branch SLN injury: affects pitch (singer's nerve)."},
+  {t:"When to use RAI ablation after thyroidectomy",s:"A 40-year-old woman undergoes total thyroidectomy for a 3cm papillary thyroid carcinoma with 2 positive cervical lymph nodes. What additional treatment is appropriate?",opts:["No further treatment — PTC has excellent prognosis","RAI (I-131) ablation to destroy residual thyroid tissue and micro-metastases + TSH suppression therapy","Chemotherapy with cisplatin","External beam radiation to neck only"],ok:1,fb:"",bz:[""],rev:"<strong>RAI ablation indicated for high-risk PTC:</strong> tumor >4cm, T3/T4 disease, lymph node metastases, extrathyroidal extension, or distant metastases. Destroys remnant thyroid tissue + any functioning metastases. Requires TSH stimulation (rhTSH or levothyroxine withdrawal) before RAI. TSH suppression therapy (levothyroxine to keep TSH <0.1) reduces recurrence risk in high-risk patients."},
+  {t:"Calcitonin surveillance after MTC surgery",s:"After total thyroidectomy for hereditary MTC (RET mutation), patient has undetectable calcitonin at 6 months. What surveillance is recommended?",opts:["No further monitoring needed — MTC is cured if calcitonin undetectable","Calcitonin and CEA every 6–12 months lifelong — calcitonin is the sensitive tumor marker for MTC recurrence","TSH suppression therapy as for PTC","RAI scan annually"],ok:1,rev:"<strong>Lifelong calcitonin surveillance for MTC.</strong> Calcitonin (and CEA) are sensitive tumor markers — any rise indicates recurrence before imaging detects it. MTC does NOT respond to RAI (no iodine uptake). Recurrence treated with surgery or kinase inhibitors (vandetanib, cabozantinib). All first-degree relatives of hereditary MTC should undergo RET genetic testing and prophylactic thyroidectomy if positive."}]
+];
+
+function rTh(){const b=bs.th;rDots('th',b.cur);uTag('th',b.cur);document.getElementById('thgrid').innerHTML=THDATA[b.cur].map((t,ti)=>`<div class="cacard"><h3>${t.t}</h3><div class="casc">${t.s}</div><div class="caop" id="tho-${b.cur}-${ti}">${t.opts.map((o,oi)=>`<div class="caopt" onclick="chkTh(${ti},${oi})">${o}</div>`).join('')}</div><div class="carev" id="thr-${b.cur}-${ti}">${t.rev}</div></div>`).join('');}
+function chkTh(ti,oi){const b=bs.th;const t=THDATA[b.cur][ti];document.querySelectorAll(`#tho-${b.cur}-${ti} .caopt`).forEach((o,i)=>{if(i===t.ok)o.classList.add('ok');else if(i===oi)o.classList.add('ng');o.onclick=null;});document.getElementById(`thr-${b.cur}-${ti}`).classList.add('show');addSc(oi===t.ok);b.ans++;chkDone('th',THDATA[b.cur].length);}
+
+rLabs();rV(0);rTh();
+['l','c','th'].forEach(m=>{rDots(m,0);uTag(m,0);});
+</script>
+</body>
+</html>
