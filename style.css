@@ -605,4 +605,34 @@ h1 {
     font-size: 1.65rem;
   }
 }
+/* =========================
+   SUBJECT RESOURCE SYSTEM
+   ========================= */
+
+.resource-list {
+  margin-top: 12px;
+}
+
+.resource-list a {
+  display: block;
+  padding: 8px 0;
+  color: var(--teal-400);
+  font-weight: 500;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.resource-list a:hover {
+  transform: translateX(4px);
+  color: var(--white);
+}
+
+/* Slightly tighten subject cards */
+.card-heading {
+  align-items: center;
+}
+
+/* Optional: subject card spacing tweak */
+.card.section-card {
+  padding-bottom: 20px;
+}
 
