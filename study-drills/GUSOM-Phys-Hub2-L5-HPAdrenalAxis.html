@@ -1,499 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HPA Axis — Step 1 Extensions | GUSOM Phys Hub #2</title>
-    <style>
-        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-        html, body {{ height: 100%; background-color: #0D1117; color: #E0E0E0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 15px; line-height: 1.6; }}
-        body {{ padding: 20px; overflow-y: auto; }}
-
-        .hdr {{ max-width: 1200px; margin: 0 auto 30px; }}
-        .hdr-top {{ display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }}
-        .hdr-left h1 {{ font-size: 28px; font-weight: 600; color: #E0E0E0; margin-bottom: 5px; }}
-        .hdr-left p {{ font-size: 13px; color: #8B949E; margin-bottom: 8px; }}
-        .hub-tag {{ display: inline-block; background: #BF360C; color: #FFF; padding: 3px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-top: 5px; }}
-        .bk-link {{ color: #58A6FF; text-decoration: none; font-size: 13px; padding: 8px 12px; border: 1px solid #30363D; border-radius: 6px; transition: all 0.2s; }}
-        .bk-link:hover {{ background: #161B22; border-color: #8B949E; }}
-
-        .bge {{ background: #161B22; border: 1px solid #30363D; border-radius: 8px; padding: 20px; margin-bottom: 20px; }}
-        .src-badges {{ display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }}
-        .bdg {{ background: #0D1117; border: 1px solid #BF360C; color: #BF360C; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 500; }}
-
-        .tabs {{ display: flex; gap: 2px; margin-bottom: 20px; border-bottom: 2px solid #30363D; }}
-        .tb {{ padding: 12px 20px; background: transparent; border: none; color: #8B949E; cursor: pointer; font-size: 14px; font-weight: 500; border-bottom: 2px solid transparent; transition: all 0.2s; }}
-        .tb:hover {{ color: #E0E0E0; }}
-        .tb.act {{ color: #BF360C; border-bottom-color: #BF360C; }}
-
-        .tab-ct {{ display: none; }}
-        .tab-ct.show {{ display: block; animation: fadeIn 0.2s; }}
-        @keyframes fadeIn {{ from {{ opacity: 0; }} to {{ opacity: 1; }} }}
-
-        .fc {{ background: #0D1117; border: 1px solid #30363D; border-radius: 8px; padding: 20px; margin-bottom: 15px; cursor: pointer; transition: all 0.2s; }}
-        .fc:hover {{ border-color: #BF360C; }}
-        .fci {{ font-weight: 600; color: #BF360C; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }}
-        .fcf {{ color: #E0E0E0; font-weight: 500; margin-bottom: 12px; font-size: 16px; }}
-        .fcb {{ color: #8B949E; font-size: 14px; line-height: 1.7; padding-top: 12px; border-top: 1px solid #30363D; max-height: 0; overflow: hidden; transition: all 0.3s; }}
-        .fc.open .fcb {{ max-height: 500px; }}
-
-        .mi {{ background: #0D1117; border: 1px solid #30363D; border-radius: 8px; padding: 18px; margin-bottom: 18px; }}
-        .ms {{ color: #BF360C; font-weight: 600; margin-bottom: 15px; }}
-        .mos {{ display: flex; flex-direction: column; gap: 10px; }}
-        .mo {{ padding: 12px 15px; background: #161B22; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; transition: all 0.2s; color: #E0E0E0; }}
-        .mo:hover {{ border-color: #8B949E; }}
-        .mo.sel-c {{ background: #1B4620; border-color: #2EA043; color: #2EA043; }}
-        .mo.sel-w {{ background: #4A1f1f; border-color: #D1242F; color: #D1242F; }}
-        .mo.dis {{ pointer-events: none; opacity: 0.6; }}
-        .expl {{ margin-top: 15px; padding: 12px 15px; background: #1A2332; border-left: 3px solid #BF360C; border-radius: 4px; font-size: 14px; color: #B0B8C0; display: none; }}
-        .expl.show {{ display: block; }}
-
-        .vi {{ background: #0D1117; border: 1px solid #30363D; border-radius: 8px; padding: 20px; margin-bottom: 20px; }}
-        .vi h4 {{ color: #BF360C; font-size: 16px; margin-bottom: 12px; font-weight: 600; }}
-        .vb {{ color: #8B949E; margin-bottom: 15px; font-size: 14px; line-height: 1.7; }}
-        .vs {{ display: flex; flex-direction: column; gap: 10px; }}
-        .vqa {{ padding: 12px 15px; background: #161B22; border: 1px solid #30363D; border-radius: 6px; margin-top: 8px; cursor: pointer; transition: all 0.2s; }}
-        .vqa:hover {{ border-color: #8B949E; }}
-        .vqa strong {{ color: #BF360C; margin-right: 8px; }}
-        .vqa.reveal {{ background: #1B4620; border-color: #2EA043; color: #2EA043; }}
-
-        .tri {{ background: #0D1117; border: 1px solid #30363D; border-radius: 8px; padding: 18px; margin-bottom: 18px; }}
-        .trs {{ color: #E0E0E0; font-size: 15px; margin-bottom: 12px; }}
-        .trb {{ display: flex; gap: 10px; margin-top: 12px; }}
-        .trr {{ padding: 8px 15px; background: #161B22; border: 1px solid #30363D; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; color: #E0E0E0; }}
-        .trr:hover {{ border-color: #8B949E; }}
-        .trr.corr {{ background: #1B4620; border-color: #2EA043; color: #2EA043; }}
-        .trr.incorr {{ background: #4A1f1f; border-color: #D1242F; color: #D1242F; }}
-        .trev {{ margin-top: 12px; padding: 12px 15px; background: #1A2332; border-left: 3px solid #BF360C; border-radius: 4px; font-size: 13px; color: #B0B8C0; display: none; }}
-        .trev.show {{ display: block; }}
-
-        .fi {{ background: #0D1117; border: 1px solid #30363D; border-radius: 8px; padding: 18px; margin-bottom: 18px; }}
-        .fin {{ display: flex; gap: 10px; align-items: center; margin-top: 12px; }}
-        .fin input {{ flex: 1; padding: 10px 12px; background: #161B22; border: 1px solid #30363D; border-radius: 6px; color: #E0E0E0; font-size: 14px; }}
-        .fin input:focus {{ outline: none; border-color: #BF360C; }}
-        .fin button {{ padding: 10px 20px; background: #BF360C; color: #FFF; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; }}
-        .fin button:hover {{ background: #D84315; }}
-        .fin button:disabled {{ opacity: 0.5; cursor: not-allowed; }}
-        .fir {{ margin-top: 10px; padding: 10px 12px; background: #1B4620; border-left: 3px solid #2EA043; border-radius: 4px; font-size: 13px; color: #2EA043; display: none; }}
-        .fir.show {{ display: block; }}
-
-        .rt {{ width: 100%; border-collapse: collapse; background: #0D1117; border: 1px solid #30363D; border-radius: 8px; overflow: hidden; margin-top: 10px; }}
-        .rt thead {{ background: #161B22; }}
-        .rt th {{ padding: 12px 15px; text-align: left; font-weight: 600; color: #BF360C; border-bottom: 1px solid #30363D; }}
-        .rt td {{ padding: 12px 15px; border-bottom: 1px solid #30363D; color: #E0E0E0; }}
-        .rt tr:last-child td {{ border-bottom: none; }}
-        .rt tr:hover {{ background: #161B22; }}
-
-        .ft {{ max-width: 1200px; margin: 40px auto 0; padding: 20px; border-top: 1px solid #30363D; color: #8B949E; font-size: 12px; text-align: center; }}
-        .ft a {{ color: #58A6FF; text-decoration: none; }}
-        .ft a:hover {{ text-decoration: underline; }}
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUSOM Phys L5: HPA Axis — Step 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#BF360C;--al:rgba(191,54,12,0.15);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter',sans-serif;background:#0D1117;color:#E6EDF3;min-height:100vh;}
+.container{max-width:1100px;margin:0 auto;padding:20px;}
+.header{background:linear-gradient(135deg,#161B22,#1A1F2E);border-bottom:3px solid var(--accent);padding:28px 30px;margin-bottom:28px;border-radius:10px;}
+.back{font-size:.8em;color:#6B7280;text-decoration:none;display:inline-block;margin-bottom:10px;}
+.back:hover{color:var(--accent);}
+h1{color:#E6EDF3;font-size:1.9em;margin-bottom:6px;}
+.atag{color:var(--accent);font-weight:600;}
+.subtitle{color:#9CA3AF;font-size:.9em;line-height:1.5;}
+.tab-nav{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;background:#161B22;padding:12px;border-radius:8px;border:1px solid #21262D;}
+.tab-btn{padding:9px 18px;background:#1C2128;color:#8B949E;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-weight:600;font-size:.88em;transition:all .2s;}
+.tab-btn:hover{background:#30363D;color:var(--accent);}
+.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.tab-content{display:none;animation:fi .25s ease;}
+.tab-content.active{display:block;}
+@keyframes fi{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+.fc{background:#161B22;border:1px solid #30363D;border-radius:10px;cursor:pointer;perspective:800px;min-height:160px;}
+.fc-inner{position:relative;width:100%;height:100%;min-height:160px;transform-style:preserve-3d;transition:transform .5s;}
+.fc.flipped .fc-inner{transform:rotateY(180deg);}
+.fc-front,.fc-back{position:absolute;width:100%;min-height:160px;backface-visibility:hidden;padding:18px;border-radius:10px;display:flex;flex-direction:column;justify-content:center;}
+.fc-front{background:#161B22;border-top:3px solid var(--accent);}
+.fc-back{background:#1A1F2E;transform:rotateY(180deg);border-top:3px solid #4ADE80;}
+.fc-label{font-size:.7em;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.fc-front .fc-label{color:var(--accent);}
+.fc-back .fc-label{color:#4ADE80;}
+.fc-q{font-size:.95em;color:#E6EDF3;line-height:1.5;font-weight:500;}
+.fc-a{font-size:.92em;color:#D1FAE5;line-height:1.5;}
+.fc-hint{margin-top:10px;font-size:.75em;color:#6B7280;text-align:center;}
+.mcq-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:20px;margin-bottom:16px;}
+.mcq-num{font-size:.75em;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;}
+.mcq-stem{font-size:.95em;color:#E6EDF3;margin-bottom:14px;line-height:1.6;}
+.mcq-options{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.mcq-opt{padding:10px 14px;background:#1C2128;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-size:.9em;color:#C9D1D9;transition:all .2s;display:flex;align-items:flex-start;gap:10px;}
+.mcq-opt:hover:not(.revealed){background:#21262D;border-color:var(--accent);}
+.mcq-opt.correct{background:rgba(74,222,128,.15);border-color:#4ADE80;color:#D1FAE5;}
+.mcq-opt.wrong{background:rgba(239,68,68,.1);border-color:#EF4444;color:#FCA5A5;}
+.mcq-opt .letter{font-weight:700;min-width:20px;}
+.mcq-exp{background:#1C2128;border-left:3px solid #4ADE80;padding:12px 14px;border-radius:0 6px 6px 0;font-size:.87em;color:#9CA3AF;display:none;margin-top:4px;}
+.mcq-exp.visible{display:block;}
+.exp-label{color:#4ADE80;font-weight:600;margin-bottom:4px;}
+.teaching{background:var(--al);border:1px solid var(--accent);border-radius:8px;padding:12px 14px;margin-top:10px;font-size:.87em;color:#FECDD3;display:none;}
+.teaching.visible{display:block;}
+.tp-label{font-weight:700;color:var(--accent);margin-bottom:4px;}
+.vig-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:22px;margin-bottom:20px;}
+.vig-banner{background:var(--al);border:1px solid var(--accent);border-radius:6px;padding:8px 14px;font-size:.8em;color:#FCA5A5;font-weight:600;margin-bottom:14px;}
+.vig-stem{font-size:.93em;line-height:1.7;color:#D1D5DB;margin-bottom:14px;}
+.vig-qa{display:none;margin-top:14px;padding-top:14px;border-top:1px solid #30363D;}
+.vig-qa.visible{display:block;}
+.vig-q{font-weight:600;color:var(--accent);margin-bottom:6px;}
+.vig-a{color:#D1FAE5;font-size:.92em;line-height:1.6;margin-bottom:14px;}
+.vig-btn{background:var(--accent);color:#fff;border:none;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:.85em;font-weight:700;}
+.trap-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:18px;margin-bottom:14px;}
+.trap-stmt{color:#E6EDF3;font-size:.95em;margin-bottom:12px;line-height:1.6;font-weight:500;}
+.trap-btns{display:flex;gap:10px;margin-bottom:10px;}
+.tbtn{padding:9px 18px;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-weight:600;font-size:.88em;background:#1C2128;}
+.tbtn-c{color:#4ADE80;border-color:#4ADE80;}
+.tbtn-x{color:#ff6b6b;border-color:#ff6b6b;}
+.tbtn:hover:not(:disabled){opacity:.85;}
+.tbtn:disabled{opacity:.5;cursor:not-allowed;}
+.trap-res{display:none;padding:10px 14px;border-radius:6px;font-size:.88em;line-height:1.5;margin-top:4px;}
+.trap-res.show{display:block;}
+.trap-res.ok{background:rgba(74,222,128,.1);border-left:3px solid #4ADE80;color:#D1FAE5;}
+.trap-res.bad{background:rgba(239,68,68,.1);border-left:3px solid #EF4444;color:#FCA5A5;}
+.trap-verd{font-weight:700;margin-bottom:4px;}
+.fib-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:18px;margin-bottom:14px;}
+.fib-in{width:100%;background:#0D1117;border:1px solid #30363D;border-radius:6px;padding:8px 12px;color:#E6EDF3;font-size:.9em;font-family:'Inter',sans-serif;margin:8px 0;}
+.fib-in:focus{outline:none;border-color:var(--accent);}
+.fib-btn{background:var(--accent);color:#fff;border:none;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:.85em;font-weight:700;}
+.fib-res{margin-top:8px;font-size:.88em;padding:8px 12px;border-radius:6px;display:none;}
+.fib-res.ok{background:rgba(74,222,128,.15);color:#D1FAE5;border:1px solid #4ADE80;display:block;}
+.fib-res.bad{background:rgba(239,68,68,.1);color:#FCA5A5;border:1px solid #EF4444;display:block;}
+.ref-table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:.88em;}
+.ref-table th{background:var(--accent);color:#fff;padding:9px 12px;text-align:left;font-weight:700;}
+.ref-table td{padding:8px 12px;border:1px solid #30363D;color:#C9D1D9;vertical-align:top;}
+.ref-table tr:nth-child(even) td{background:#161B22;}
+.ref-table tr:nth-child(odd) td{background:#1C2128;}
+.ref-table td.hl{color:var(--accent);font-weight:600;}
+.sec{font-size:.8em;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #21262D;}
+</style>
 </head>
 <body>
-    <div class="hdr">
-        <div class="hdr-top">
-            <div class="hdr-left">
-                <h1>Hypothalamic-Pituitary-Adrenal Axis</h1>
-                <p>Dexamethasone suppression tests · Ectopic ACTH · Metyrapone test · Adrenal crisis · Exogenous glucocorticoids</p>
-                <span class="hub-tag">Hub #2 — Step 1 Extensions</span>
-            </div>
-            <a href="GUSOM-Phys-Hub2-ActiveDrills.html" class="bk-link">← Back to Hub</a>
-        </div>
-        <div class="bge">
-            <p><strong>Lecture 5: HPA Axis Deep Dive</strong></p>
-            <p style="margin-top: 8px; font-size: 14px;">Master advanced diagnostic testing, ectopic sources, adrenal crisis management, and steroid pharmacology for USMLE success.</p>
-            <div class="src-badges">
-                <span class="bdg">Primary: GUSOM Anki Flash Decks</span>
-                <span class="bdg">Step 1: First Aid + Sketchy</span>
-                <span class="bdg">Pharm: Steroid Pharmacology</span>
-                <span class="bdg">Review: BRS Physiology</span>
-            </div>
-        </div>
+<div class="container">
+  <div class="header">
+    <a href="GUSOM-Phys-Hub2-ActiveDrills.html" class="back">← Back to Phys Step 1 Hub</a>
+    <h1>Phys L5: <span class="atag">HPA Axis — Step 1</span></h1>
+    <div class="subtitle">Dexamethasone suppression tests · Ectopic ACTH · Metyrapone test · Adrenal crisis · Exogenous glucocorticoids</div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('fc')">🃏 Flashcards</button>
+    <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ</button>
+    <button class="tab-btn" onclick="switchTab('vig')">🏥 Vignettes</button>
+    <button class="tab-btn" onclick="switchTab('trap')">⚠️ Traps</button>
+    <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+    <button class="tab-btn" onclick="switchTab('ref')">📋 USMLE Map</button>
+  </div>
+  <div id="tab-fc" class="tab-content active"><div class="sec">Step 1 Flashcards — Click to Flip</div><div class="fc-grid" id="fcGrid"></div></div>
+  <div id="tab-mcq" class="tab-content"><div class="sec">USMLE-Style MCQ</div><div id="mcqCont"></div></div>
+  <div id="tab-vig" class="tab-content"><div class="sec">Clinical Vignettes</div><div id="vigCont"></div></div>
+  <div id="tab-trap" class="tab-content">
+    <div class="sec">⚠️ Test Traps</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:10px 14px;background:#161B22;border:1px solid #30363D;border-radius:8px;">
+      <span style="font-size:.85em;color:#9CA3AF;">Click <strong style="color:#4ADE80;">CORRECT ✓</strong> or <strong style="color:#ff6b6b;">TRAP ✗</strong></span>
+      <div style="display:flex;gap:14px;"><span id="tscore" style="font-size:.9em;font-weight:700;">Score: 0/0</span><button onclick="resetTraps()" style="background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:5px 12px;color:#9CA3AF;cursor:pointer;font-size:.82em;">Reset</button></div>
     </div>
+    <div id="trapCont"></div>
+  </div>
+  <div id="tab-fib" class="tab-content"><div class="sec">Fill in the Blank</div><div id="fibCont"></div></div>
+  <div id="tab-ref" class="tab-content"><div class="sec">USMLE Map: GUSOM LO → Step 1 Extensions</div><div id="refCont"></div></div>
+</div>
+<script>
+const flashcards = [
+  {q: "Low-dose dexamethasone suppression test (LDDST) — interpretation", a: "Dexamethasone 1 mg at midnight → measure 8 AM cortisol. Normal: cortisol <1.8 mcg/dL (suppressed). Failure to suppress = hypercortisolism. Does NOT distinguish pituitary vs ectopic vs adrenal source — that requires further testing."},
+  {q: "High-dose dexamethasone suppression test (HDDST) — interpretation", a: "Dexamethasone 8 mg over 2 days → measure cortisol. Suppression (>50% decrease): suggests pituitary Cushing's (corticotroph adenoma responds to high-dose feedback). No suppression: suggests ectopic ACTH or primary adrenal."},
+  {q: "Ectopic ACTH syndrome — causes and lab pattern", a: "Causes: SCLC (most common), bronchial carcinoid, pancreatic NET, medullary thyroid cancer, pheochromocytoma. Labs: very HIGH ACTH, very HIGH cortisol, hypokalemic metabolic alkalosis, no suppression on HDDST. Often no classic Cushing features (rapid course)."},
+  {q: "Metyrapone test — mechanism and use", a: "Metyrapone inhibits 11β-hydroxylase → blocks cortisol synthesis → cortisol falls → ACTH rises → 11-deoxycortisol rises. Normal: ACTH and 11-deoxycortisol ↑ (HPA axis intact). Pituitary Cushing: exaggerated response. Adrenal Cushing: blunted (ACTH suppressed). Ectopic: no change/exaggerated."},
+  {q: "Inferior petrosal sinus sampling (IPSS) — purpose and interpretation", a: "Gold standard for distinguishing pituitary vs ectopic ACTH. Simultaneous blood from inferior petrosal sinus + peripheral vein. Central:peripheral ACTH ratio >2 basal (or >3 after CRH) = pituitary source (Cushing's disease). Ratio <2 = ectopic source."},
+  {q: "Adrenal crisis — presentation and emergency management", a: "Precipitant: stress (infection, surgery, trauma) in adrenal insufficient patient. Presentation: hypotension, hyponatremia, hyperkalemia, hypoglycemia, fever, AMS. Treatment: hydrocortisone 100 mg IV STAT, then 50-100 mg q6-8h + NS 1-2L. Never wait for labs — treat empirically."},
+  {q: "Primary vs secondary adrenal insufficiency — distinguishing features", a: "Primary (Addison): ACTH high, aldosterone low → hyperkalemia, salt wasting, hyperpigmentation. Secondary (pituitary): ACTH low, aldosterone preserved (RAAS intact) → no hyperkalemia, no hyperpigmentation, may have other pituitary hormone deficiencies."},
+  {q: "Exogenous glucocorticoids → HPA suppression — mechanism and timeline", a: "Exogenous steroids → suppress CRH and ACTH (long-loop negative feedback) → adrenal cortex atrophies. Risk after: >3 weeks of ≥20 mg/day prednisone (or equivalent). Recovery: weeks to months. Stress dosing required during illness/surgery. Abrupt withdrawal → adrenal crisis."},
+  {q: "Cushing syndrome diagnosis — stepwise approach", a: "Step 1: Confirm hypercortisolism (1mg ONDST, 24h UFC, late-night salivary cortisol — any 2 of 3). Step 2: Check ACTH (suppressed = adrenal source; elevated = ACTH-dependent). Step 3: If ACTH elevated, HDDST or IPSS to distinguish pituitary vs ectopic."},
+  {q: "CAH 21-hydroxylase deficiency — classic vs non-classic", a: "Classic (severe): salt-wasting (↓aldosterone, ↓cortisol, ↑androgens) + virilization. Simple virilizing: ↓cortisol, ↑androgens, normal aldosterone. Non-classic (NCCAH): mild androgen excess (hirsutism, acne, PCOS-like) — adult presentation. All: ↑17-OHP (precursor accumulates)."},
+  {q: "Bilateral adrenal hyperplasia vs adrenal adenoma in Cushing's", a: "Bilateral hyperplasia: ACTH-dependent (pituitary or ectopic) — both glands stimulated. Unilateral adenoma: ACTIN-independent — high cortisol → suppresses ACTH → contralateral adrenal atrophies. Key: suppressed ACTH + unilateral mass = adrenal adenoma."},
+  {q: "Nelson's syndrome — definition and mechanism", a: "Occurs after bilateral adrenalectomy for Cushing's disease. No cortisol feedback → ACTH-secreting adenoma grows aggressively → very high ACTH → severe hyperpigmentation. Prevention: radiation to pituitary after adrenalectomy. Treatment: pituitary surgery + radiation."},
+  {q: "Steroid equivalence and potency", a: "Hydrocortisone (cortisol): 20 mg = 1 unit. Prednisone: 5 mg. Methylprednisolone: 4 mg. Dexamethasone: 0.75 mg. Dexamethasone: highest anti-inflammatory potency, negligible mineralocorticoid effect, long half-life → used for cerebral edema, suppression testing. Fludrocortisone: mineralocorticoid replacement."},
+  {q: "CRH stimulation test — use in Cushing's workup", a: "IV CRH → ACTH and cortisol measured serially. Cushing's disease (pituitary): exaggerated ACTH and cortisol rise. Ectopic ACTH: minimal/no response (tumor cells don't have normal CRH receptors). Normal: moderate rise. Used to improve IPSS sensitivity."}
+];
 
-    <div style="max-width: 1200px; margin: 0 auto;">
-        <div class="tabs">
-            <button class="tb act" onclick="sw('fc', this)">Flashcards</button>
-            <button class="tb" onclick="sw('mcq', this)">MCQ</button>
-            <button class="tb" onclick="sw('vig', this)">Vignettes</button>
-            <button class="tb" onclick="sw('trap', this)">Traps</button>
-            <button class="tb" onclick="sw('fib', this)">Fill-in-Blank</button>
-            <button class="tb" onclick="sw('ref', this)">USMLE Map</button>
-        </div>
+const mcqs = [
+  {stem: "A 45-year-old woman with suspected Cushing syndrome has a 1 mg overnight dexamethasone suppression test showing cortisol of 4.2 mcg/dL. What is the next step?", options: ["Start treatment for Cushing's disease", "Repeat the test in 3 months", "Confirm with 24-hour urinary free cortisol or late-night salivary cortisol", "Perform high-dose dexamethasone suppression test", "Order ACTH level immediately"], correct: 2, explanations: ["Treating without confirming hypercortisolism would be premature", "Repeating the same screening test wastes time", "LDDST is a screening test with high sensitivity but false positives occur (obesity, depression, alcoholism). Positive screening requires confirmation with a second test (24h UFC or late-night salivary cortisol). HDDST is used to localize the source AFTER hypercortisolism is confirmed.", "HDDST is used after confirmation", "ACTH is ordered after confirmation"], teaching: "LDDST is screening only. Confirm hypercortisolism with a second modality before proceeding to localization tests."},
+  {stem: "A 60-year-old smoker with SCLC presents with hypokalemia, alkalosis, and rapidly progressive muscle wasting. ACTH is extremely high and cortisol does not suppress on high-dose dexamethasone. What is the source of ACTH?", options: ["Pituitary corticotroph adenoma", "Adrenal adenoma", "Ectopic ACTH from SCLC", "Iatrogenic Cushing", "McCune-Albright pituitary involvement"], correct: 2, explanations: ["Pituitary adenomas typically suppress on HDDST", "Adrenal adenoma would suppress ACTH, not elevate it", "Ectopic ACTH syndrome: very high ACTH, no suppression on HDDST, hypokalemic alkalosis (excess cortisol activates mineralocorticoid receptors), rapid course. SCLC is the most common cause. Pituitary Cushing's typically shows >50% suppression on HDDST and has a slower course.", "Exogenous steroids wouldn't produce this picture", "McCune-Albright is associated with other features, not this presentation"], teaching: "Ectopic ACTH: markedly elevated ACTH, failure to suppress on HDDST, rapid course with severe hypokalemia."},
+  {stem: "A patient with known Addison disease is admitted for appendectomy. She takes hydrocortisone 20 mg/10 mg daily at home. What perioperative management is required?", options: ["Continue home dose only", "Hold all steroids perioperatively", "Administer stress dose steroids: hydrocortisone 50-100 mg IV before surgery, then q8h for 24h", "Switch to dexamethasone", "Double her home dose for 1 week"], correct: 2, explanations: ["Inadequate without stress dosing", "This would precipitate crisis", "Adrenal insufficient patients require stress-dose steroids for major surgery (hydrocortisone 50-100 mg IV perioperatively). Without stress dosing, surgical stress can precipitate adrenal crisis. The normal adrenal secretes 75-150 mg cortisol equivalent during major stress.", "Dexamethasone is not appropriate here", "Oral dosing insufficient for surgery"], teaching: "Major surgery in adrenal insufficiency requires IV stress dosing. Normal adrenal responds to stress with 75-150 mg cortisol equivalent."},
+  {stem: "A pituitary MRI in a patient with confirmed hypercortisolism shows no adenoma. ACTH is elevated. What is the best next test?", options: ["Repeat MRI in 6 months", "High-dose dexamethasone suppression test", "Inferior petrosal sinus sampling", "CT chest/abdomen for ectopic source", "24-hour urinary free cortisol"], correct: 2, explanations: ["MRI-negative doesn't mean no tumor; microadenomas can be missed", "HDDST is less definitive than IPSS", "When ACTH is elevated but MRI is negative (up to 40% of pituitary microadenomas are MRI-negative), IPSS is the gold standard to distinguish pituitary vs ectopic source. Central:peripheral ACTH ratio >2 basal or >3 post-CRH = pituitary. This guides surgical planning.", "IPSS is superior for distinguishing source", "Already confirmed hypercortisolism"], teaching: "IPSS is the gold standard when MRI is negative in ACTH-dependent Cushing's."},
+  {stem: "A patient on prednisone 40 mg/day for 8 weeks abruptly stops their medication. Three days later they present with hypotension, nausea, severe fatigue, and hyponatremia. What happened?", options: ["Rebound inflammation", "Adrenal crisis from HPA suppression", "Prednisone withdrawal syndrome", "Addison disease unmasked", "Hypothyroidism"], correct: 1, explanations: ["Inflammation may worsen, but this isn't the acute presentation", "Prolonged supraphysiologic glucocorticoids suppress CRH and ACTH → adrenal cortex atrophies. Abrupt discontinuation removes the exogenous steroid before the adrenal can recover → adrenal crisis. Treatment: IV hydrocortisone. Prevention: taper steroids slowly.", "This is acute adrenal crisis, not withdrawal syndrome", "Not unmasking pre-existing disease", "Different etiology"], teaching: "Chronic steroid therapy suppresses HPA axis. Abrupt withdrawal precipitates adrenal crisis. Taper slowly."},
+  {stem: "In 21-hydroxylase deficiency, which precursor accumulates and is used for diagnosis?", options: ["11-deoxycortisol", "17-hydroxyprogesterone", "Androstenedione", "DHEA-S", "Pregnenolone"], correct: 1, explanations: ["11-deoxycortisol is the product, not accumulating precursor", "21-hydroxylase converts 17-OHP → 11-deoxycortisol (cortisol pathway) and progesterone → 11-deoxycorticosterone (aldosterone pathway). Deficiency → 17-OHP accumulates → diverted to androgen synthesis. Elevated 17-OHP (especially after ACTH stimulation) is the diagnostic marker.", "Secondary precursor; 17-OHP is primary", "DHEA-S is downstream", "Too early in pathway"], teaching: "17-OHP accumulates in 21-hydroxylase deficiency. It's the key diagnostic marker."},
+  {stem: "After bilateral adrenalectomy for refractory Cushing's disease, a patient develops worsening hyperpigmentation and visual field defects. What is the diagnosis?", options: ["Primary adrenal insufficiency", "Nelson's syndrome", "Sheehan syndrome", "Empty sella syndrome", "Adrenal crisis"], correct: 1, explanations: ["No adrenal glands; different condition", "Nelson's syndrome: removal of adrenal glands eliminates cortisol feedback → ACTH adenoma grows aggressively → very high ACTH → hyperpigmentation → mass effect on optic chiasm. Prevention with pituitary radiation before adrenalectomy. Treatment: pituitary surgery.", "Sheehan presents differently", "Different pathophysiology", "Not acute"], teaching: "Nelson's syndrome: post-adrenalectomy growth of ACTH adenoma from loss of cortisol feedback. Prevent with pituitary radiation."},
+  {stem: "Which test best distinguishes pituitary Cushing's disease from ectopic ACTH syndrome when MRI is negative?", options: ["24-hour urinary free cortisol", "CRH stimulation test alone", "High-dose dexamethasone suppression test", "Inferior petrosal sinus sampling with CRH stimulation", "Metyrapone test"], correct: 3, explanations: ["UFC confirms hypercortisolism, doesn't localize", "Alone, it has poor discriminatory power", "HDDST has ~80% sensitivity/specificity", "IPSS with CRH stimulation is the gold standard when MRI is negative. Central:peripheral ACTH >3 after CRH = pituitary source. Sensitivity improves significantly with CRH co-administration. HDDST is inferior.", "Less reliable for localization"], teaching: "IPSS with CRH is the gold standard for source localization when MRI is negative."},
+  {stem: "A patient on chronic prednisone for rheumatoid arthritis develops a fracture from minimal trauma. Which mechanism best explains the bone loss?", options: ["Direct osteoclast activation", "Reduced calcium absorption + decreased osteoblast activity + increased RANK-L", "Increased PTH secretion", "Vitamin D deficiency from steroid metabolism", "Reduced IGF-1"], correct: 1, explanations: ["Multiple mechanisms involved, not just direct activation", "Glucocorticoid-induced osteoporosis: multiple mechanisms — inhibit osteoblast differentiation/function, increase osteoclast activity (via RANK-L), decrease intestinal calcium absorption (anti-vitamin D effect), increase renal calcium excretion, suppress GnRH/sex hormones. Most rapid bone loss in first 3-6 months.", "PTH would be suppressed", "Part of mechanism but not primary", "Contributes but not primary"], teaching: "Glucocorticoid-induced osteoporosis involves osteoblast inhibition, osteoclast activation, and calcium malabsorption."}
+];
 
-        <div id="fc" class="tab-ct show"></div>
-        <div id="mcq" class="tab-ct"></div>
-        <div id="vig" class="tab-ct"></div>
-        <div id="trap" class="tab-ct"></div>
-        <div id="fib" class="tab-ct"></div>
-        <div id="ref" class="tab-ct"></div>
-    </div>
+const vignettes = [
+  {banner: "Cushing's Workup", stem: "A 38-year-old with central obesity, striae, HTN, and glucose intolerance. Late-night salivary cortisol elevated on 2 occasions.", qa: [{q: "What test confirms hypercortisolism?", a: "24-hour urinary free cortisol (UFC) or 1mg ONDST — confirm with 2 abnormal tests from different modalities."}, {q: "ACTH is 85 pg/mL (elevated). What does this tell you?", a: "ACTH-dependent Cushing's — source is pituitary (Cushing's disease) or ectopic. Not adrenal (which would suppress ACTH)."}, {q: "MRI shows 6 mm pituitary adenoma. What is the treatment?", a: "Transsphenoidal surgery — first-line for Cushing's disease."}]},
+  {banner: "Ectopic ACTH", stem: "A 67-year-old smoker with weight loss, profound muscle weakness, hypokalemia (K 2.8), and BP 168/102. Cortisol 78 mcg/dL. ACTH >1000 pg/mL.", qa: [{q: "What is the most likely source of ACTH?", a: "Small cell lung cancer (SCLC) — most common cause of ectopic ACTH syndrome."}, {q: "Why is hypokalemic alkalosis present?", a: "Massive cortisol excess overwhelms 11β-HSD2 in kidney → cortisol acts on mineralocorticoid receptors → sodium retention, potassium wasting, alkalosis."}, {q: "HDDST shows no suppression. What does this confirm?", a: "Ectopic source confirmed — ectopic ACTH-producing tumors lack normal feedback responsiveness to dexamethasone."}]},
+  {banner: "Adrenal Crisis", stem: "A 28-year-old with known Addison disease develops fever, vomiting, and syncope 2 days after starting antibiotics for a URI. BP 80/50.", qa: [{q: "What is the diagnosis?", a: "Adrenal crisis — stress (infection) in a patient without adequate cortisol reserve."}, {q: "What is the immediate treatment?", a: "IV hydrocortisone 100 mg STAT + normal saline 1-2L. Do not wait for cortisol levels."}, {q: "What should this patient have been told to do?", a: "Sick day rules: double or triple oral hydrocortisone dose during illness. If vomiting, use injectable hydrocortisone or go to ER."}]},
+  {banner: "Steroid Taper", stem: "A 52-year-old with lupus nephritis completes 3 months of high-dose prednisone. Physician attempts rapid taper over 1 week.", qa: [{q: "What risk does rapid taper carry?", a: "Adrenal crisis — HPA axis suppressed, adrenal cortex atrophied; sudden withdrawal removes exogenous steroid before recovery."}, {q: "What symptoms indicate HPA insufficiency during taper?", a: "Fatigue, nausea, arthralgias, hypotension, hyponatremia, hypoglycemia — often subtle and mistaken for disease flare."}, {q: "How should steroids be tapered in patients on prolonged therapy?", a: "Slow taper over weeks-months; once at physiologic dose (5-7.5 mg prednisone), check morning cortisol or perform ACTH stimulation test before stopping."}]},
+  {banner: "CAH Presentation", stem: "A newborn female with ambiguous genitalia. Labs: sodium 125 mEq/L, potassium 6.8 mEq/L, hypoglycemia. 17-OHP markedly elevated.", qa: [{q: "What enzyme deficiency is most likely?", a: "21-hydroxylase deficiency (classic salt-wasting form) — most common CAH."}, {q: "Explain the electrolyte abnormalities.", a: "↓21-hydroxylase → ↓aldosterone → salt wasting (hyponatremia) + hyperkalemia. Also ↓cortisol → hypoglycemia + ACTH elevation."}, {q: "What is the long-term treatment?", a: "Hydrocortisone (replaces cortisol + suppresses ACTH to prevent virilization) + fludrocortisone (replaces aldosterone). Salt supplementation in infancy."}]}
+];
 
-    <div class="ft">
-        <p>Built for GUSOM medical students. <a href="#">Report issue</a> · <a href="#">Share feedback</a></p>
-        <p style="margin-top: 8px;">Last updated: 2026-04-01</p>
-    </div>
+const traps = [
+  {myth: "The low-dose dexamethasone suppression test can distinguish pituitary from ectopic Cushing's.", truth: "LDDST only confirms hypercortisolism. Distinguishing pituitary vs ectopic requires HDDST or IPSS.", correct: false},
+  {myth: "A suppressed ACTH in Cushing syndrome points to an adrenal source.", truth: "When ACTH is suppressed, the cortisol excess is coming autonomously from the adrenal gland (adenoma, carcinoma, or bilateral hyperplasia) — ACTH-independent.", correct: true},
+  {myth: "Patients with ectopic ACTH syndrome typically show classical Cushingoid features.", truth: "Ectopic ACTH causes a rapid, severe course — often presents with muscle wasting, hypokalemia, and hypertension without classic moon face/striae (not enough time for fat redistribution).", correct: false},
+  {myth: "Nelson's syndrome develops after bilateral adrenalectomy due to loss of cortisol feedback.", truth: "Without adrenal glands, cortisol feedback is absent → ACTH adenoma grows aggressively → hyperpigmentation, mass effect. Prevention: pituitary radiation prior to adrenalectomy.", correct: true},
+  {myth: "Dexamethasone has significant mineralocorticoid activity.", truth: "Dexamethasone has negligible mineralocorticoid activity — that's why it's used for suppression testing and cerebral edema. Hydrocortisone has both glucocorticoid and mineralocorticoid activity.", correct: false},
+  {myth: "17-hydroxyprogesterone is elevated in 17α-hydroxylase deficiency.", truth: "17α-hydroxylase deficiency blocks the conversion of pregnenolone → 17-OH pregnenolone, so 17-OHP cannot be made. 17-OHP is elevated in 21-hydroxylase deficiency (it accumulates proximal to the block).", correct: false},
+  {myth: "In primary adrenal insufficiency, aldosterone is preserved.", truth: "Primary adrenal insufficiency (Addison) affects the entire adrenal cortex → aldosterone is also deficient → hyperkalemia, salt wasting. Secondary AI (pituitary) preserves RAAS/aldosterone.", correct: false},
+  {myth: "IPSS requires CRH stimulation to improve diagnostic accuracy.", truth: "Basal IPSS has ~95% sensitivity, but adding CRH stimulation improves it further by amplifying the central-to-peripheral ACTH gradient. Ratio >3 post-CRH = pituitary source.", correct: true},
+  {myth: "Metyrapone is used to treat Cushing syndrome long-term.", truth: "Metyrapone is primarily a diagnostic tool (blocks 11β-hydroxylase to test HPA integrity). As a treatment, it can be used short-term preoperatively or when surgery is contraindicated, but it's not a preferred long-term agent.", correct: false},
+  {myth: "A patient on long-term prednisone can safely undergo surgery without extra steroids.", truth: "Patients on supraphysiologic steroids for >3 weeks have HPA suppression. Surgery is a major stressor requiring stress-dose steroids (hydrocortisone 50-100 mg IV) to prevent adrenal crisis.", correct: false}
+];
 
-    <script>
-        const flashcards = [
-            {
-                front: "Low-dose dexamethasone suppression test (LDDST) — interpretation",
-                back: "Dexamethasone 1 mg at midnight → measure 8 AM cortisol. Normal: cortisol <1.8 mcg/dL (suppressed). Failure to suppress = hypercortisolism. Does NOT distinguish pituitary vs ectopic vs adrenal source — that requires further testing."
-            },
-            {
-                front: "High-dose dexamethasone suppression test (HDDST) — interpretation",
-                back: "Dexamethasone 8 mg over 2 days → measure cortisol. Suppression (>50% decrease): suggests pituitary Cushing's (corticotroph adenoma responds to high-dose feedback). No suppression: suggests ectopic ACTH or primary adrenal."
-            },
-            {
-                front: "Ectopic ACTH syndrome — causes and lab pattern",
-                back: "Causes: SCLC (most common), bronchial carcinoid, pancreatic NET, medullary thyroid cancer, pheochromocytoma. Labs: very HIGH ACTH, very HIGH cortisol, hypokalemic metabolic alkalosis, no suppression on HDDST. Often no classic Cushing features (rapid course)."
-            },
-            {
-                front: "Metyrapone test — mechanism and use",
-                back: "Metyrapone inhibits 11β-hydroxylase → blocks cortisol synthesis → cortisol falls → ACTH rises → 11-deoxycortisol rises. Normal: ACTH and 11-deoxycortisol ↑ (HPA axis intact). Pituitary Cushing: exaggerated response. Adrenal Cushing: blunted (ACTH suppressed). Ectopic: no change/exaggerated."
-            },
-            {
-                front: "Inferior petrosal sinus sampling (IPSS) — purpose and interpretation",
-                back: "Gold standard for distinguishing pituitary vs ectopic ACTH. Simultaneous blood from inferior petrosal sinus + peripheral vein. Central:peripheral ACTH ratio >2 basal (or >3 after CRH) = pituitary source (Cushing's disease). Ratio <2 = ectopic source."
-            },
-            {
-                front: "Adrenal crisis — presentation and emergency management",
-                back: "Precipitant: stress (infection, surgery, trauma) in adrenal insufficient patient. Presentation: hypotension, hyponatremia, hyperkalemia, hypoglycemia, fever, AMS. Treatment: hydrocortisone 100 mg IV STAT, then 50-100 mg q6-8h + NS 1-2L. Never wait for labs — treat empirically."
-            },
-            {
-                front: "Primary vs secondary adrenal insufficiency — distinguishing features",
-                back: "Primary (Addison): ACTH high, aldosterone low → hyperkalemia, salt wasting, hyperpigmentation. Secondary (pituitary): ACTH low, aldosterone preserved (RAAS intact) → no hyperkalemia, no hyperpigmentation, may have other pituitary hormone deficiencies."
-            },
-            {
-                front: "Exogenous glucocorticoids → HPA suppression — mechanism and timeline",
-                back: "Exogenous steroids → suppress CRH and ACTH (long-loop negative feedback) → adrenal cortex atrophies. Risk after: >3 weeks of ≥20 mg/day prednisone (or equivalent). Recovery: weeks to months. Stress dosing required during illness/surgery. Abrupt withdrawal → adrenal crisis."
-            },
-            {
-                front: "Cushing syndrome diagnosis — stepwise approach",
-                back: "Step 1: Confirm hypercortisolism (1mg ONDST, 24h UFC, late-night salivary cortisol — any 2 of 3). Step 2: Check ACTH (suppressed = adrenal source; elevated = ACTH-dependent). Step 3: If ACTH elevated, HDDST or IPSS to distinguish pituitary vs ectopic."
-            },
-            {
-                front: "CAH 21-hydroxylase deficiency — classic vs non-classic",
-                back: "Classic (severe): salt-wasting (↓aldosterone, ↓cortisol, ↑androgens) + virilization. Simple virilizing: ↓cortisol, ↑androgens, normal aldosterone. Non-classic (NCCAH): mild androgen excess (hirsutism, acne, PCOS-like) — adult presentation. All: ↑17-OHP (precursor accumulates)."
-            },
-            {
-                front: "Bilateral adrenal hyperplasia vs adrenal adenoma in Cushing's",
-                back: "Bilateral hyperplasia: ACTH-dependent (pituitary or ectopic) — both glands stimulated. Unilateral adenoma: ACTIN-independent — high cortisol → suppresses ACTH → contralateral adrenal atrophies. Key: suppressed ACTH + unilateral mass = adrenal adenoma."
-            },
-            {
-                front: "Nelson's syndrome — definition and mechanism",
-                back: "Occurs after bilateral adrenalectomy for Cushing's disease. No cortisol feedback → ACTH-secreting adenoma grows aggressively → very high ACTH → severe hyperpigmentation. Prevention: radiation to pituitary after adrenalectomy. Treatment: pituitary surgery + radiation."
-            },
-            {
-                front: "Steroid equivalence and potency",
-                back: "Hydrocortisone (cortisol): 20 mg = 1 unit. Prednisone: 5 mg. Methylprednisolone: 4 mg. Dexamethasone: 0.75 mg. Dexamethasone: highest anti-inflammatory potency, negligible mineralocorticoid effect, long half-life → used for cerebral edema, suppression testing. Fludrocortisone: mineralocorticoid replacement."
-            },
-            {
-                front: "CRH stimulation test — use in Cushing's workup",
-                back: "IV CRH → ACTH and cortisol measured serially. Cushing's disease (pituitary): exaggerated ACTH and cortisol rise. Ectopic ACTH: minimal/no response (tumor cells don't have normal CRH receptors). Normal: moderate rise. Used to improve IPSS sensitivity."
-            }
-        ];
+const fillInBlanks = [
+  {prompt: "The low-dose dexamethasone suppression test uses _____ mg of dexamethasone and a positive (abnormal) result is cortisol >_____.", answer: "1;1.8 mcg/dL;1.8"},
+  {prompt: "ACTH-secreting pituitary adenoma typically shows _____ suppression on high-dose DST, while ectopic ACTH shows _____.", answer: "partial;>50%;significant;no suppression;none;absent"},
+  {prompt: "Ectopic ACTH is most commonly caused by _____ and characteristically causes hypokalemic _____.", answer: "SCLC;small cell lung cancer;alkalosis"},
+  {prompt: "Adrenal crisis is treated emergently with _____ mg IV of _____ plus IV fluid resuscitation.", answer: "100;hydrocortisone"},
+  {prompt: "In 21-hydroxylase deficiency, the precursor _____ accumulates and is diverted to _____ synthesis.", answer: "17-OHP;17-hydroxyprogesterone;androgen;androgens"},
+  {prompt: "Nelson's syndrome develops after _____ and is caused by loss of _____ feedback on the ACTH adenoma.", answer: "bilateral adrenalectomy;cortisol"},
+  {prompt: "The gold standard for distinguishing pituitary vs ectopic ACTH is _____ with a central:peripheral ratio >___ after CRH.", answer: "IPSS;inferior petrosal sinus sampling;3"},
+  {prompt: "Exogenous glucocorticoids suppress the HPA axis by inhibiting both _____ and _____ secretion.", answer: "CRH;ACTH"}
+];
 
-        const mcqs = [
-            {
-                q: "A 45-year-old woman with suspected Cushing syndrome has a 1 mg overnight dexamethasone suppression test showing cortisol of 4.2 mcg/dL. What is the next step?",
-                opts: ["Start treatment for Cushing's disease", "Repeat the test in 3 months", "Confirm with 24-hour urinary free cortisol or late-night salivary cortisol", "Perform high-dose dexamethasone suppression test", "Order ACTH level immediately"],
-                correct: 2,
-                explain: "LDDST is a screening test with high sensitivity but false positives occur (obesity, depression, alcoholism). Positive screening requires confirmation with a second test (24h UFC or late-night salivary cortisol). HDDST is used to localize the source AFTER hypercortisolism is confirmed."
-            },
-            {
-                q: "A 60-year-old smoker with SCLC presents with hypokalemia, alkalosis, and rapidly progressive muscle wasting. ACTH is extremely high and cortisol does not suppress on high-dose dexamethasone. What is the source of ACTH?",
-                opts: ["Pituitary corticotroph adenoma", "Adrenal adenoma", "Ectopic ACTH from SCLC", "Iatrogenic Cushing", "McCune-Albright pituitary involvement"],
-                correct: 2,
-                explain: "Ectopic ACTH syndrome: very high ACTH, no suppression on HDDST, hypokalemic alkalosis (excess cortisol activates mineralocorticoid receptors), rapid course. SCLC is the most common cause. Pituitary Cushing's typically shows >50% suppression on HDDST and has a slower course."
-            },
-            {
-                q: "A patient with known Addison disease is admitted for appendectomy. She takes hydrocortisone 20 mg/10 mg daily at home. What perioperative management is required?",
-                opts: ["Continue home dose only", "Hold all steroids perioperatively", "Administer stress dose steroids: hydrocortisone 50-100 mg IV before surgery, then q8h for 24h", "Switch to dexamethasone", "Double her home dose for 1 week"],
-                correct: 2,
-                explain: "Adrenal insufficient patients require stress-dose steroids for major surgery (hydrocortisone 50-100 mg IV perioperatively). Without stress dosing, surgical stress can precipitate adrenal crisis. The normal adrenal secretes 75-150 mg cortisol equivalent during major stress."
-            },
-            {
-                q: "A pituitary MRI in a patient with confirmed hypercortisolism shows no adenoma. ACTH is elevated. What is the best next test?",
-                opts: ["Repeat MRI in 6 months", "High-dose dexamethasone suppression test", "Inferior petrosal sinus sampling", "CT chest/abdomen for ectopic source", "24-hour urinary free cortisol"],
-                correct: 2,
-                explain: "When ACTH is elevated but MRI is negative (up to 40% of pituitary microadenomas are MRI-negative), IPSS is the gold standard to distinguish pituitary vs ectopic source. Central:peripheral ACTH ratio >2 basal or >3 post-CRH = pituitary. This guides surgical planning."
-            },
-            {
-                q: "A patient on prednisone 40 mg/day for 8 weeks abruptly stops their medication. Three days later they present with hypotension, nausea, severe fatigue, and hyponatremia. What happened?",
-                opts: ["Rebound inflammation", "Adrenal crisis from HPA suppression", "Prednisone withdrawal syndrome", "Addison disease unmasked", "Hypothyroidism"],
-                correct: 1,
-                explain: "Prolonged supraphysiologic glucocorticoids suppress CRH and ACTH → adrenal cortex atrophies. Abrupt discontinuation removes the exogenous steroid before the adrenal can recover → adrenal crisis. Treatment: IV hydrocortisone. Prevention: taper steroids slowly."
-            },
-            {
-                q: "In 21-hydroxylase deficiency, which precursor accumulates and is used for diagnosis?",
-                opts: ["11-deoxycortisol", "17-hydroxyprogesterone", "Androstenedione", "DHEA-S", "Pregnenolone"],
-                correct: 1,
-                explain: "21-hydroxylase converts 17-OHP → 11-deoxycortisol (cortisol pathway) and progesterone → 11-deoxycorticosterone (aldosterone pathway). Deficiency → 17-OHP accumulates → diverted to androgen synthesis. Elevated 17-OHP (especially after ACTH stimulation) is the diagnostic marker."
-            },
-            {
-                q: "After bilateral adrenalectomy for refractory Cushing's disease, a patient develops worsening hyperpigmentation and visual field defects. What is the diagnosis?",
-                opts: ["Primary adrenal insufficiency", "Nelson's syndrome", "Sheehan syndrome", "Empty sella syndrome", "Adrenal crisis"],
-                correct: 1,
-                explain: "Nelson's syndrome: removal of adrenal glands eliminates cortisol feedback → ACTH adenoma grows aggressively → very high ACTH → hyperpigmentation → mass effect on optic chiasm. Prevention with pituitary radiation before adrenalectomy. Treatment: pituitary surgery."
-            },
-            {
-                q: "Which test best distinguishes pituitary Cushing's disease from ectopic ACTH syndrome when MRI is negative?",
-                opts: ["24-hour urinary free cortisol", "CRH stimulation test alone", "High-dose dexamethasone suppression test", "Inferior petrosal sinus sampling with CRH stimulation", "Metyrapone test"],
-                correct: 3,
-                explain: "IPSS with CRH stimulation is the gold standard when MRI is negative. Central:peripheral ACTH >3 after CRH = pituitary source. Sensitivity improves significantly with CRH co-administration. HDDST has ~80% sensitivity/specificity — IPSS is superior."
-            },
-            {
-                q: "A patient on chronic prednisone for rheumatoid arthritis develops a fracture from minimal trauma. Which mechanism best explains the bone loss?",
-                opts: ["Direct osteoclast activation", "Reduced calcium absorption + decreased osteoblast activity + increased RANK-L", "Increased PTH secretion", "Vitamin D deficiency from steroid metabolism", "Reduced IGF-1"],
-                correct: 1,
-                explain: "Glucocorticoid-induced osteoporosis: multiple mechanisms — inhibit osteoblast differentiation/function, increase osteoclast activity (via RANK-L), decrease intestinal calcium absorption (anti-vitamin D effect), increase renal calcium excretion, suppress GnRH/sex hormones. Most rapid bone loss in first 3-6 months."
-            }
-        ];
+const refTable = [
+  {lo: "Dexamethasone suppression tests", step1: "LDDST (screening) vs HDDST (localization)", associations: "1mg ONDST: screen; 8mg: pituitary suppresses, ectopic doesn't", keywords: "Failure to suppress, >50% suppression"},
+  {lo: "ACTH-dependent vs independent", step1: "ACTH high = pituitary/ectopic; ACTH low = adrenal", associations: "Unilateral adrenal mass + low ACTH = adenoma", keywords: "Suppressed ACTH, bilateral hyperplasia"},
+  {lo: "Ectopic ACTH", step1: "SCLC most common; no HDDST suppression; rapid course", associations: "Hypokalemic alkalosis, no classic Cushing features", keywords: "SCLC, ACTH >1000, no suppression"},
+  {lo: "Adrenal crisis management", step1: "Hydrocortisone 100 mg IV STAT + saline", associations: "Never delay for labs; sick day rules", keywords: "Hydrocortisone IV, stress dosing"},
+  {lo: "CAH — 21-hydroxylase", step1: "17-OHP accumulates; salt-wasting vs simple virilizing vs NCCAH", associations: "Newborn ambiguous genitalia + hyponatremia + hyperkalemia", keywords: "17-OHP, salt-wasting, virilization"},
+  {lo: "Nelson's syndrome", step1: "Post-adrenalectomy ACTH adenoma growth", associations: "Hyperpigmentation + visual loss after bilateral adrenalectomy", keywords: "Nelson's, hyperpigmentation, cortisol feedback loss"},
+  {lo: "Steroid pharmacology", step1: "Relative potency; mineralocorticoid activity; HPA suppression timeline", associations: "Dex: no mineralocorticoid; fludrocortisone: pure mineralocorticoid", keywords: "Steroid equivalents, stress dosing, taper"}
+];
 
-        const vignettes = [
-            {
-                title: "Cushing's Workup",
-                scenario: "A 38-year-old with central obesity, striae, HTN, and glucose intolerance. Late-night salivary cortisol elevated on 2 occasions.",
-                parts: [
-                    { q: "What test confirms hypercortisolism?", a: "24-hour urinary free cortisol (UFC) or 1mg ONDST — confirm with 2 abnormal tests from different modalities." },
-                    { q: "ACTH is 85 pg/mL (elevated). What does this tell you?", a: "ACTH-dependent Cushing's — source is pituitary (Cushing's disease) or ectopic. Not adrenal (which would suppress ACTH)." },
-                    { q: "MRI shows 6 mm pituitary adenoma. What is the treatment?", a: "Transsphenoidal surgery — first-line for Cushing's disease." }
-                ]
-            },
-            {
-                title: "Ectopic ACTH",
-                scenario: "A 67-year-old smoker with weight loss, profound muscle weakness, hypokalemia (K 2.8), and BP 168/102. Cortisol 78 mcg/dL. ACTH >1000 pg/mL.",
-                parts: [
-                    { q: "What is the most likely source of ACTH?", a: "Small cell lung cancer (SCLC) — most common cause of ectopic ACTH syndrome." },
-                    { q: "Why is hypokalemic alkalosis present?", a: "Massive cortisol excess overwhelms 11β-HSD2 in kidney → cortisol acts on mineralocorticoid receptors → sodium retention, potassium wasting, alkalosis." },
-                    { q: "HDDST shows no suppression. What does this confirm?", a: "Ectopic source confirmed — ectopic ACTH-producing tumors lack normal feedback responsiveness to dexamethasone." }
-                ]
-            },
-            {
-                title: "Adrenal Crisis",
-                scenario: "A 28-year-old with known Addison disease develops fever, vomiting, and syncope 2 days after starting antibiotics for a URI. BP 80/50.",
-                parts: [
-                    { q: "What is the diagnosis?", a: "Adrenal crisis — stress (infection) in a patient without adequate cortisol reserve." },
-                    { q: "What is the immediate treatment?", a: "IV hydrocortisone 100 mg STAT + normal saline 1-2L. Do not wait for cortisol levels." },
-                    { q: "What should this patient have been told to do?", a: "Sick day rules: double or triple oral hydrocortisone dose during illness. If vomiting, use injectable hydrocortisone or go to ER." }
-                ]
-            },
-            {
-                title: "Steroid Taper",
-                scenario: "A 52-year-old with lupus nephritis completes 3 months of high-dose prednisone. Physician attempts rapid taper over 1 week.",
-                parts: [
-                    { q: "What risk does rapid taper carry?", a: "Adrenal crisis — HPA axis suppressed, adrenal cortex atrophied; sudden withdrawal removes exogenous steroid before recovery." },
-                    { q: "What symptoms indicate HPA insufficiency during taper?", a: "Fatigue, nausea, arthralgias, hypotension, hyponatremia, hypoglycemia — often subtle and mistaken for disease flare." },
-                    { q: "How should steroids be tapered in patients on prolonged therapy?", a: "Slow taper over weeks-months; once at physiologic dose (5-7.5 mg prednisone), check morning cortisol or perform ACTH stimulation test before stopping." }
-                ]
-            },
-            {
-                title: "CAH Presentation",
-                scenario: "A newborn female with ambiguous genitalia. Labs: sodium 125 mEq/L, potassium 6.8 mEq/L, hypoglycemia. 17-OHP markedly elevated.",
-                parts: [
-                    { q: "What enzyme deficiency is most likely?", a: "21-hydroxylase deficiency (classic salt-wasting form) — most common CAH." },
-                    { q: "Explain the electrolyte abnormalities.", a: "↓21-hydroxylase → ↓aldosterone → salt wasting (hyponatremia) + hyperkalemia. Also ↓cortisol → hypoglycemia + ACTH elevation." },
-                    { q: "What is the long-term treatment?", a: "Hydrocortisone (replaces cortisol + suppresses ACTH to prevent virilization) + fludrocortisone (replaces aldosterone). Salt supplementation in infancy." }
-                ]
-            }
-        ];
-
-        const traps = [
-            { stmt: "The low-dose dexamethasone suppression test can distinguish pituitary from ectopic Cushing's.", correct: false, reveal: "LDDST only confirms hypercortisolism. Distinguishing pituitary vs ectopic requires HDDST or IPSS." },
-            { stmt: "A suppressed ACTH in Cushing syndrome points to an adrenal source.", correct: true, reveal: "When ACTH is suppressed, the cortisol excess is coming autonomously from the adrenal gland (adenoma, carcinoma, or bilateral hyperplasia) — ACTH-independent." },
-            { stmt: "Patients with ectopic ACTH syndrome typically show classical Cushingoid features.", correct: false, reveal: "Ectopic ACTH causes a rapid, severe course — often presents with muscle wasting, hypokalemia, and hypertension without classic moon face/striae (not enough time for fat redistribution)." },
-            { stmt: "Nelson's syndrome develops after bilateral adrenalectomy due to loss of cortisol feedback.", correct: true, reveal: "Without adrenal glands, cortisol feedback is absent → ACTH adenoma grows aggressively → hyperpigmentation, mass effect. Prevention: pituitary radiation prior to adrenalectomy." },
-            { stmt: "Dexamethasone has significant mineralocorticoid activity.", correct: false, reveal: "Dexamethasone has negligible mineralocorticoid activity — that's why it's used for suppression testing and cerebral edema. Hydrocortisone has both glucocorticoid and mineralocorticoid activity." },
-            { stmt: "17-hydroxyprogesterone is elevated in 17α-hydroxylase deficiency.", correct: false, reveal: "17α-hydroxylase deficiency blocks the conversion of pregnenolone → 17-OH pregnenolone, so 17-OHP cannot be made. 17-OHP is elevated in 21-hydroxylase deficiency (it accumulates proximal to the block)." },
-            { stmt: "In primary adrenal insufficiency, aldosterone is preserved.", correct: false, reveal: "Primary adrenal insufficiency (Addison) affects the entire adrenal cortex → aldosterone is also deficient → hyperkalemia, salt wasting. Secondary AI (pituitary) preserves RAAS/aldosterone." },
-            { stmt: "IPSS requires CRH stimulation to improve diagnostic accuracy.", correct: true, reveal: "Basal IPSS has ~95% sensitivity, but adding CRH stimulation improves it further by amplifying the central-to-peripheral ACTH gradient. Ratio >3 post-CRH = pituitary source." },
-            { stmt: "Metyrapone is used to treat Cushing syndrome long-term.", correct: false, reveal: "Metyrapone is primarily a diagnostic tool (blocks 11β-hydroxylase to test HPA integrity). As a treatment, it can be used short-term preoperatively or when surgery is contraindicated, but it's not a preferred long-term agent." },
-            { stmt: "A patient on long-term prednisone can safely undergo surgery without extra steroids.", correct: false, reveal: "Patients on supraphysiologic steroids for >3 weeks have HPA suppression. Surgery is a major stressor requiring stress-dose steroids (hydrocortisone 50-100 mg IV) to prevent adrenal crisis." }
-        ];
-
-        const fillInBlanks = [
-            { prompt: "The low-dose dexamethasone suppression test uses _____ mg of dexamethasone and a positive (abnormal) result is cortisol >_____.", answers: ["1", "1.8 mcg/dL", "1.8"] },
-            { prompt: "ACTH-secreting pituitary adenoma typically shows _____ suppression on high-dose DST, while ectopic ACTH shows _____.", answers: ["partial", ">50%", "significant", "no suppression", "none", "absent"] },
-            { prompt: "Ectopic ACTH is most commonly caused by _____ and characteristically causes hypokalemic _____.", answers: ["SCLC", "small cell lung cancer", "alkalosis"] },
-            { prompt: "Adrenal crisis is treated emergently with _____ mg IV of _____ plus IV fluid resuscitation.", answers: ["100", "hydrocortisone"] },
-            { prompt: "In 21-hydroxylase deficiency, the precursor _____ accumulates and is diverted to _____ synthesis.", answers: ["17-OHP", "17-hydroxyprogesterone", "androgen", "androgens"] },
-            { prompt: "Nelson's syndrome develops after _____ and is caused by loss of _____ feedback on the ACTH adenoma.", answers: ["bilateral adrenalectomy", "cortisol"] },
-            { prompt: "The gold standard for distinguishing pituitary vs ectopic ACTH is _____ with a central:peripheral ratio >___ after CRH.", answers: ["IPSS", "inferior petrosal sinus sampling", "3"] },
-            { prompt: "Exogenous glucocorticoids suppress the HPA axis by inhibiting both _____ and _____ secretion.", answers: ["CRH", "ACTH"] }
-        ];
-
-        const refTable = [
-            { lo: "Dexamethasone suppression tests", ext: "LDDST (screening) vs HDDST (localization)", hy: "1mg ONDST: screen; 8mg: pituitary suppresses, ectopic doesn't", bw: "Failure to suppress, >50% suppression" },
-            { lo: "ACTH-dependent vs independent", ext: "ACTH high = pituitary/ectopic; ACTH low = adrenal", hy: "Unilateral adrenal mass + low ACTH = adenoma", bw: "Suppressed ACTH, bilateral hyperplasia" },
-            { lo: "Ectopic ACTH", ext: "SCLC most common; no HDDST suppression; rapid course", hy: "Hypokalemic alkalosis, no classic Cushing features", bw: "SCLC, ACTH >1000, no suppression" },
-            { lo: "Adrenal crisis management", ext: "Hydrocortisone 100 mg IV STAT + saline", hy: "Never delay for labs; sick day rules", bw: "Hydrocortisone IV, stress dosing" },
-            { lo: "CAH — 21-hydroxylase", ext: "17-OHP accumulates; salt-wasting vs simple virilizing vs NCCAH", hy: "Newborn ambiguous genitalia + hyponatremia + hyperkalemia", bw: "17-OHP, salt-wasting, virilization" },
-            { lo: "Nelson's syndrome", ext: "Post-adrenalectomy ACTH adenoma growth", hy: "Hyperpigmentation + visual loss after bilateral adrenalectomy", bw: "Nelson's, hyperpigmentation, cortisol feedback loss" },
-            { lo: "Steroid pharmacology", ext: "Relative potency; mineralocorticoid activity; HPA suppression timeline", hy: "Dex: no mineralocorticoid; fludrocortisone: pure mineralocorticoid", bw: "Steroid equivalents, stress dosing, taper" }
-        ];
-
-        function rFC() {
-            let html = '';
-            flashcards.forEach((card, idx) => {
-                html += `<div class="fc" onclick="this.classList.toggle('open')">
-                    <div class="fci">Card ${idx + 1}</div>
-                    <div class="fcf">${card.front}</div>
-                    <div class="fcb">${card.back}</div>
-                </div>`;
-            });
-            document.getElementById('fc').innerHTML = html;
-        }
-
-        function rMCQ() {
-            let html = '';
-            mcqs.forEach((mcq, qidx) => {
-                html += `<div class="mi">
-                    <div class="ms">Q${qidx + 1}. ${mcq.q}</div>
-                    <div class="mos">`;
-                mcq.opts.forEach((opt, oidx) => {
-                    html += `<div class="mo" onclick="sel(this, ${oidx === mcq.correct}, '${mcq.explain.replace(/'/g, "\\'")}')">${String.fromCharCode(65 + oidx)}) ${opt}</div>`;
-                });
-                html += `</div><div class="expl"></div></div>`;
-            });
-            document.getElementById('mcq').innerHTML = html;
-        }
-
-        function rVig() {
-            let html = '';
-            vignettes.forEach((vig, vidx) => {
-                html += `<div class="vi">
-                    <h4>${vidx + 1}. ${vig.title}</h4>
-                    <div class="vb"><strong>Scenario:</strong> ${vig.scenario}</div>`;
-                vig.parts.forEach((part, pidx) => {
-                    html += `<div style="margin-bottom: 12px;">
-                        <div style="color: #BF360C; font-weight: 600; margin-bottom: 6px;">Q${pidx + 1}: ${part.q}</div>
-                        <div class="vqa" onclick="this.classList.toggle('reveal')">
-                            <strong>Reveal</strong>
-                            <div style="display: none;" class="reveal-txt">${part.a}</div>
-                        </div>
-                        <div style="color: #2EA043; margin-top: 8px; font-size: 13px; display: none;" class="reveal-txt">${part.a}</div>
-                    </div>`;
-                });
-                html += `</div>`;
-            });
-            document.getElementById('vig').innerHTML = html;
-            document.querySelectorAll('.vqa').forEach(el => {
-                el.onclick = function() {
-                    this.classList.toggle('reveal');
-                    let txt = this.nextElementSibling;
-                    if (txt) txt.style.display = this.classList.contains('reveal') ? 'block' : 'none';
-                };
-            });
-        }
-
-        function rTrap() {
-            let html = '';
-            traps.forEach((trap, tidx) => {
-                html += `<div class="tri">
-                    <div class="trs">${trap.stmt}</div>
-                    <div class="trb">
-                        <button class="trr" onclick="ans(${tidx}, true)">True</button>
-                        <button class="trr" onclick="ans(${tidx}, false)">False</button>
-                    </div>
-                    <div class="trev"></div>
-                </div>`;
-            });
-            document.getElementById('trap').innerHTML = html;
-        }
-
-        function rFib() {
-            let html = '';
-            fillInBlanks.forEach((fib, fidx) => {
-                html += `<div class="fi">
-                    <div>${fib.prompt}</div>
-                    <div class="fin">
-                        <input type="text" id="fib${fidx}" placeholder="Answer (separate by ;)">
-                        <button onclick="chk(${fidx})">Check</button>
-                    </div>
-                    <div class="fir" id="fir${fidx}"></div>
-                </div>`;
-            });
-            document.getElementById('fib').innerHTML = html;
-        }
-
-        function rRef() {
-            let html = `<table class="rt">
-                <thead>
-                    <tr>
-                        <th style="width: 18%;">GUSOM LO</th>
-                        <th style="width: 22%;">Step 1 Extension</th>
-                        <th style="width: 30%;">HY Associations</th>
-                        <th style="width: 30%;">Buzzwords</th>
-                    </tr>
-                </thead>
-                <tbody>`;
-            refTable.forEach(row => {
-                html += `<tr>
-                    <td>${row.lo}</td>
-                    <td>${row.ext}</td>
-                    <td>${row.hy}</td>
-                    <td>${row.bw}</td>
-                </tr>`;
-            });
-            html += `</tbody></table>`;
-            document.getElementById('ref').innerHTML = html;
-        }
-
-        function sw(name, btn) {
-            document.querySelectorAll('.tab-ct').forEach(t => t.classList.remove('show'));
-            document.querySelectorAll('.tb').forEach(b => b.classList.remove('act'));
-            document.getElementById(name).classList.add('show');
-            btn.classList.add('act');
-        }
-
-        function sel(el, isCorrect, explain) {
-            if (el.classList.contains('dis')) return;
-            el.parentElement.querySelectorAll('.mo').forEach(m => m.classList.add('dis'));
-            el.classList.add(isCorrect ? 'sel-c' : 'sel-w');
-            let expl = el.parentElement.nextElementSibling;
-            expl.textContent = explain;
-            expl.classList.add('show');
-        }
-
-        function ans(idx, userSaysCorrect) {
-            let correct = traps[idx].correct;
-            let isRight = (userSaysCorrect === correct);
-            let parent = document.querySelectorAll('.tri')[idx];
-            parent.querySelectorAll('.trr').forEach(b => {
-                b.disabled = true;
-                if ((b.textContent === 'True' && correct) || (b.textContent === 'False' && !correct)) {
-                    b.classList.add('corr');
-                } else if ((b.textContent === 'True' && !correct) || (b.textContent === 'False' && correct)) {
-                    if ((b.textContent === 'True' && userSaysCorrect) || (b.textContent === 'False' && !userSaysCorrect)) {
-                        b.classList.add('incorr');
-                    }
-                }
-            });
-            let rev = parent.querySelector('.trev');
-            rev.textContent = traps[idx].reveal;
-            rev.classList.add('show');
-        }
-
-        function chk(idx) {
-            let inp = document.getElementById(`fib${idx}`);
-            let userAns = inp.value.trim().toLowerCase();
-            let accepted = fillInBlanks[idx].answers;
-            let isCorrect = accepted.some(a => userAns.includes(a.toLowerCase()) || a.toLowerCase().includes(userAns));
-            let res = document.getElementById(`fir${idx}`);
-            res.textContent = isCorrect ? '✓ Correct!' : `Try again. Accepted: ${accepted.join(', ')}`;
-            res.classList.add('show');
-            inp.disabled = true;
-        }
-
-        window.onload = () => {
-            rFC();
-            rMCQ();
-            rVig();
-            rTrap();
-            rFib();
-            rRef();
-        };
-    </script>
+function switchTab(n){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');event.target.classList.add('active');}
+function renderFC(){const c=document.getElementById('fcGrid');c.innerHTML='';flashcards.forEach((card,i)=>{const el=document.createElement('div');el.className='fc';el.innerHTML=`<div class="fc-inner"><div class="fc-front"><div class="fc-label">Card ${i+1}</div><div class="fc-q">${card.q}</div><div class="fc-hint">Click to reveal</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${card.a}</div></div></div>`;el.onclick=()=>el.classList.toggle('flipped');c.appendChild(el);});}
+function renderMCQ(){const c=document.getElementById('mcqCont');c.innerHTML='';mcqs.forEach((q,i)=>{const el=document.createElement('div');el.className='mcq-item';let opts='';q.options.forEach((o,j)=>{opts+=`<div class="mcq-opt" onclick="selOpt(this,${j===q.correct},\`${q.explanations[j].replace(/`/g,"'")}\`)"><span class="letter">${String.fromCharCode(65+j)}.</span><span>${o}</span></div>`;});el.innerHTML=`<div class="mcq-num">Question ${i+1}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options">${opts}</div><div class="mcq-exp"></div><div class="teaching"><div class="tp-label">Teaching Point</div><div>${q.teaching}</div></div>`;c.appendChild(el);});}
+function selOpt(el,ok,exp){if(el.classList.contains('revealed'))return;const it=el.closest('.mcq-item');it.querySelectorAll('.mcq-opt').forEach(o=>o.classList.add('revealed'));el.classList.add(ok?'correct':'wrong');const e=it.querySelector('.mcq-exp');e.innerHTML=`<div class="exp-label">${ok?'Correct!':'Incorrect'}</div><div>${exp}</div>`;e.classList.add('visible');it.querySelector('.teaching').classList.add('visible');}
+function renderVig(){const c=document.getElementById('vigCont');c.innerHTML='';vignettes.forEach(v=>{const el=document.createElement('div');el.className='vig-item';let qa='';v.qa.forEach(x=>{qa+=`<div><div class="vig-q">${x.q}</div><div class="vig-a">${x.a}</div></div>`;});el.innerHTML=`<div class="vig-banner">${v.banner}</div><div class="vig-stem">${v.stem}</div><button class="vig-btn" onclick="togVig(this)">Reveal Q&A</button><div class="vig-qa">${qa}</div>`;c.appendChild(el);});}
+function togVig(btn){const q=btn.nextElementSibling;q.classList.toggle('visible');btn.textContent=q.classList.contains('visible')?'Hide Q&A':'Reveal Q&A';}
+function renderTraps(){const c=document.getElementById('trapCont');c.innerHTML='';ts={c:0,t:traps.length};updTS();traps.forEach((t,i)=>{const el=document.createElement('div');el.className='trap-item';el.innerHTML=`<div class="trap-stmt">${i+1}. ${t.myth}</div><div class="trap-btns"><button class="tbtn tbtn-c" onclick="ansT(${i},true)">CORRECT ✓</button><button class="tbtn tbtn-x" onclick="ansT(${i},false)">TRAP ✗</button></div><div class="trap-res" id="tr${i}"><div class="trap-verd" id="tv${i}"></div><div id="te${i}"></div></div>`;c.appendChild(el);});}
+function ansT(i,u){const ok=(u===traps[i].correct);document.querySelectorAll(`[onclick*="ansT(${i},"]`).forEach(b=>b.disabled=true);const r=document.getElementById('tr'+i);r.classList.add('show',ok?'ok':'bad');document.getElementById('tv'+i).innerHTML=ok?'✓ Correct!':'✗ Incorrect';document.getElementById('te'+i).innerHTML=traps[i].truth;if(ok)ts.c++;updTS();}
+function updTS(){const e=document.getElementById('tscore');if(e)e.textContent=`Score: ${ts.c}/${ts.t}`;}
+function resetTraps(){ts.c=0;ts.t=traps.length;document.querySelectorAll('.trap-res').forEach(r=>r.classList.remove('show','ok','bad'));document.querySelectorAll('.tbtn').forEach(b=>b.disabled=false);updTS();}
+function renderFIB(){const c=document.getElementById('fibCont');c.innerHTML='';fillInBlanks.forEach((q,i)=>{const el=document.createElement('div');el.className='fib-item';el.innerHTML=`<div><strong>Q${i+1}:</strong> ${q.prompt}</div><input type="text" class="fib-in" placeholder="Type answer..." data-ans="${q.answer}"><button class="fib-btn" onclick="chkFib(this)">Check</button><div class="fib-res"></div>`;c.appendChild(el);});}
+function chkFib(btn){const inp=btn.previousElementSibling;const ans=inp.getAttribute('data-ans').split(';').map(a=>a.toLowerCase().trim());const u=inp.value.toLowerCase().trim();const r=btn.nextElementSibling;const ok=ans.some(a=>u.includes(a)||a.includes(u));r.textContent=ok?`✓ Correct! Answer: ${ans.join(' / ')}`:`✗ Incorrect. Answer: ${ans.join(' / ')}`;r.className='fib-res '+(ok?'ok':'bad');}
+function renderRef(){const c=document.getElementById('refCont');let h='<table class="ref-table"><thead><tr><th>GUSOM LO</th><th>Step 1 Extension</th><th>High-Yield Associations</th><th>Key Buzzwords</th></tr></thead><tbody>';refTable.forEach(r=>{h+=`<tr><td>${r.lo}</td><td>${r.step1}</td><td>${r.associations}</td><td class="hl">${r.keywords}</td></tr>`;});h+='</tbody></table>';c.innerHTML=h;}
+function fixCardHeights(){document.querySelectorAll('.fc').forEach(c=>{const f=c.querySelector('.fc-front'),b=c.querySelector('.fc-back');const h=Math.max(f.scrollHeight,b.scrollHeight)+16;c.style.minHeight=h+'px';c.querySelector('.fc-inner').style.minHeight=h+'px';f.style.minHeight=h+'px';b.style.minHeight=h+'px';});}
+window.onload=()=>{renderFC();renderMCQ();renderVig();renderTraps();renderFIB();renderRef();setTimeout(fixCardHeights,80);};
+</script>
 </body>
 </html>

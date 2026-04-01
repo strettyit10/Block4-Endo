@@ -3,1127 +3,736 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hypothalamic-Pituitary-Thyroid Axis — Step 1 Extensions</title>
+    <title>Phys L7: HPT Axis — Step 1</title>
     <style>
-        * {{
+        :root {
+            --accent: #0D47A1;
+            --al: rgba(13, 71, 161, 0.15);
+        }
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }}
-
-        body {{
-            background-color: #0D1117;
-            color: #E6EDF3;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            font-size: 14px;
-            line-height: 1.5;
-        }}
-
-        .container {{
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-        }}
-
-        header {{
+        }
+        .header {
             margin-bottom: 30px;
-            border-bottom: 2px solid #0D47A1;
-            padding-bottom: 15px;
-        }}
-
-        .hub-tag {{
-            display: inline-block;
-            background-color: #0D47A1;
-            color: #fff;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }}
-
-        h1 {{
+        }
+        h1 {
             font-size: 28px;
-            margin-bottom: 8px;
-            color: #E6EDF3;
-        }}
-
-        .subtitle {{
-            font-size: 16px;
-            color: #79C0FF;
-            margin-bottom: 12px;
-        }}
-
-        .source-badges {{
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 12px;
-        }}
-
-        .badge {{
-            background-color: #161B22;
-            border: 1px solid #30363D;
-            color: #A0AEC0;
-            padding: 6px 12px;
-            border-radius: 3px;
-            font-size: 12px;
-        }}
-
-        .nav-link {{
-            color: #79C0FF;
-            font-size: 12px;
-            margin-top: 12px;
+            margin-bottom: 10px;
+        }
+        .atag {
+            background: var(--al);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .subtitle {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+        .back {
+            display: inline-block;
+            color: var(--accent);
             text-decoration: none;
-        }}
-
-        .nav-link:hover {{
-            text-decoration: underline;
-        }}
-
-        .tabs {{
+            font-size: 13px;
+            padding: 6px 12px;
+            border: 1px solid var(--al);
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        .back:hover {
+            background: var(--al);
+        }
+        .tab-nav {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 20px;
-            border-bottom: 1px solid #30363D;
-            padding-bottom: 15px;
+            border-bottom: 1px solid #1e293b;
             flex-wrap: wrap;
-        }}
-
-        .tab-btn {{
+        }
+        .tab-btn {
+            padding: 10px 16px;
             background: none;
             border: none;
-            color: #79C0FF;
+            color: #64748b;
             cursor: pointer;
-            padding: 8px 16px;
             font-size: 14px;
-            font-weight: 600;
-            border-radius: 4px 4px 0 0;
+            border-bottom: 2px solid transparent;
             transition: all 0.2s;
-        }}
-
-        .tab-btn:hover {{
-            background-color: #161B22;
-        }}
-
-        .tab-btn.active {{
-            background-color: #0D47A1;
-            color: #fff;
-        }}
-
-        .content {{
+        }
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .tab-btn:hover {
+            color: #94a3b8;
+        }
+        .tab-content {
             display: none;
-        }}
-
-        .content.active {{
+        }
+        .tab-content.active {
             display: block;
-        }}
-
-        .card {{
-            background-color: #161B22;
-            border-left: 4px solid #0D47A1;
-            border-radius: 4px;
-            padding: 16px;
-            margin-bottom: 16px;
-            transition: all 0.2s;
-        }}
-
-        .card:hover {{
-            background-color: #1C2128;
-        }}
-
-        .flashcard {{
-            min-height: 120px;
+        }
+        .fc {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            perspective: 1000px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .fc-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .fc.flipped .fc-inner {
+            transform: rotateY(180deg);
+        }
+        .fc-front, .fc-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            cursor: pointer;
-            position: relative;
-        }}
-
-        .flashcard.flipped {{
-            background-color: #1C2128;
-        }}
-
-        .fc-front, .fc-back {{
-            padding: 8px 0;
-        }}
-
-        .fc-front {{
-            display: block;
-            font-weight: 600;
-            color: #79C0FF;
-        }}
-
-        .fc-back {{
-            display: none;
-            color: #C9D1D9;
-            line-height: 1.6;
-            font-size: 13px;
-        }}
-
-        .flashcard.flipped .fc-front {{
-            display: none;
-        }}
-
-        .flashcard.flipped .fc-back {{
-            display: block;
-        }}
-
-        .fc-flip-hint {{
+            padding: 20px;
+        }
+        .fc-back {
+            transform: rotateY(180deg);
+            background: var(--al);
+            border: 1px solid var(--accent);
+        }
+        .fc-label {
             font-size: 11px;
-            color: #6E7681;
-            margin-top: 8px;
-            font-style: italic;
-        }}
-
-        .mcq-question {{
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: #C9D1D9;
-        }}
-
-        .mcq-options {{
+        }
+        .fc-q, .fc-a {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .fc-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            font-size: 11px;
+            color: #64748b;
+        }
+        .fc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .mcq-item {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .mcq-num {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .mcq-stem {
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+        .mcq-opt {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
-            flex-direction: column;
+            gap: 12px;
+        }
+        .mcq-opt:hover {
+            border-color: var(--accent);
+            background: var(--al);
+        }
+        .mcq-opt.revealed {
+            cursor: default;
+            pointer-events: none;
+        }
+        .mcq-opt.correct {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.15);
+        }
+        .mcq-opt.wrong {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+        }
+        .letter {
+            font-weight: 600;
+            color: var(--accent);
+            min-width: 20px;
+        }
+        .mcq-exp {
+            display: none;
+            background: var(--al);
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .mcq-exp.visible {
+            display: block;
+        }
+        .exp-label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--accent);
+        }
+        .teaching {
+            display: none;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .teaching.visible {
+            display: block;
+        }
+        .tp-label {
+            font-weight: 600;
+            color: #3b82f6;
+            margin-bottom: 6px;
+        }
+        .vig-item {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .vig-banner {
+            font-weight: 600;
+            color: var(--accent);
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .vig-stem {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            color: #cbd5e1;
+        }
+        .vig-btn {
+            background: var(--al);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-bottom: 12px;
+        }
+        .vig-btn:hover {
+            background: var(--accent);
+            color: #0f172a;
+        }
+        .vig-qa {
+            display: none;
+        }
+        .vig-qa.visible {
+            display: block;
+        }
+        .vig-q {
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 12px;
+            margin-bottom: 6px;
+            font-size: 13px;
+        }
+        .vig-a {
+            color: #cbd5e1;
+            font-size: 13px;
+            line-height: 1.6;
+            padding-left: 12px;
+            border-left: 2px solid var(--al);
+        }
+        .trap-item {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .trap-stmt {
+            font-size: 14px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        .trap-btns {
+            display: flex;
             gap: 8px;
             margin-bottom: 12px;
-        }}
-
-        .mcq-option {{
-            background-color: #0D1117;
-            border: 1px solid #30363D;
-            border-radius: 3px;
-            padding: 10px 12px;
+        }
+        .tbtn {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.2s;
-            user-select: none;
-        }}
-
-        .mcq-option:hover {{
-            border-color: #79C0FF;
-            background-color: #1C2128;
-        }}
-
-        .mcq-option.correct {{
-            background-color: #238636;
-            border-color: #3fb950;
-            color: #fff;
-        }}
-
-        .mcq-option.incorrect {{
-            background-color: #da3633;
-            border-color: #f85149;
-            color: #fff;
-        }}
-
-        .mcq-explanation {{
-            background-color: #0D1117;
-            border-left: 3px solid #79C0FF;
-            padding: 10px 12px;
-            margin-top: 10px;
-            border-radius: 2px;
-            font-size: 13px;
-            line-height: 1.5;
-            display: none;
-        }}
-
-        .mcq-explanation.show {{
-            display: block;
-        }}
-
-        .vi-question {{
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #30363D;
-        }}
-
-        .vi-question:first-of-type {{
-            margin-top: 0;
-            padding-top: 0;
-            border-top: none;
-        }}
-
-        .vi-q-text {{
+            font-size: 12px;
             font-weight: 600;
-            color: #79C0FF;
-            margin-bottom: 8px;
-        }}
-
-        .vi-a-text {{
-            color: #A0AEC0;
-            font-size: 13px;
-            line-height: 1.5;
-        }}
-
-        .trap-statement {{
-            background-color: #0D1117;
-            border-left: 3px solid #79C0FF;
-            padding: 12px;
-            margin-bottom: 8px;
-            border-radius: 2px;
-            cursor: pointer;
             transition: all 0.2s;
-        }}
-
-        .trap-statement:hover {{
-            border-left-color: #0D47A1;
-        }}
-
-        .trap-buttons {{
-            display: flex;
-            gap: 10px;
+        }
+        .tbtn:hover:not(:disabled) {
+            border-color: var(--accent);
+        }
+        .tbtn:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+        .tbtn-c {
+            color: #10b981;
+            border-color: #10b981;
+        }
+        .tbtn-x {
+            color: #ef4444;
+            border-color: #ef4444;
+        }
+        .trap-res {
+            display: none;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 13px;
+        }
+        .trap-res.show {
+            display: block;
+        }
+        .trap-res.ok {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+        }
+        .trap-res.bad {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+        }
+        .trap-verd {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .trap-res.ok .trap-verd {
+            color: #10b981;
+        }
+        .trap-res.bad .trap-verd {
+            color: #ef4444;
+        }
+        .fib-item {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px;
             margin-bottom: 12px;
-        }}
-
-        .trap-btn {{
-            background-color: #0D47A1;
-            border: 1px solid #0D47A1;
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 3px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .fib-item > div:first-child {
+            flex: 1;
+            min-width: 200px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .fib-in {
+            flex: 0 1 200px;
+            padding: 8px 12px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 4px;
+            color: #e2e8f0;
+            font-size: 13px;
+        }
+        .fib-in:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--al);
+        }
+        .fib-btn {
+            padding: 8px 14px;
+            background: var(--al);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
             font-weight: 600;
             transition: all 0.2s;
-        }}
-
-        .trap-btn:hover {{
-            background-color: #1570C0;
-        }}
-
-        .trap-btn.no {{
-            background-color: #da3633;
-            border-color: #da3633;
-        }}
-
-        .trap-btn.no:hover {{
-            background-color: #f85149;
-        }}
-
-        .trap-reveal {{
-            background-color: #1C2128;
-            border-left: 3px solid #238636;
-            padding: 10px 12px;
-            margin-top: 10px;
-            border-radius: 2px;
+        }
+        .fib-btn:hover {
+            background: var(--accent);
+            color: #0f172a;
+        }
+        .fib-res {
             display: none;
-            font-size: 13px;
-            line-height: 1.5;
-        }}
-
-        .trap-reveal.show {{
-            display: block;
-        }}
-
-        .fib-blank {{
-            background-color: #0D1117;
-            border: 1px solid #30363D;
-            border-radius: 3px;
+            font-size: 12px;
+            width: 100%;
             padding: 8px 12px;
-            margin: 0 4px;
-            font-weight: 600;
-            display: inline-block;
-            min-width: 150px;
-            text-align: center;
-            color: #79C0FF;
-        }}
-
-        .fib-input {{
-            background-color: #0D1117;
-            border: 1px solid #30363D;
-            border-radius: 3px;
-            padding: 8px 12px;
-            color: #C9D1D9;
-            font-size: 13px;
-            width: 250px;
+            border-radius: 4px;
             margin-top: 8px;
-        }}
-
-        .fib-check-btn {{
-            background-color: #238636;
-            border: 1px solid #3fb950;
-            color: #fff;
-            padding: 6px 12px;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 8px;
-            transition: all 0.2s;
-        }}
-
-        .fib-check-btn:hover {{
-            background-color: #2ea043;
-        }}
-
-        .fib-feedback {{
-            margin-top: 10px;
-            font-size: 13px;
+        }
+        .fib-res.ok {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid #10b981;
+            color: #10b981;
+        }
+        .fib-res.bad {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+        }
+        .fib-item input:not(:placeholder-shown) ~ .fib-btn ~ .fib-res:not(.ok):not(.bad) {
             display: none;
-        }}
-
-        .fib-feedback.correct {{
-            color: #3fb950;
-            display: block;
-        }}
-
-        .fib-feedback.incorrect {{
-            color: #f85149;
-            display: block;
-        }}
-
-        .rt-table {{
+        }
+        .ref-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
-        }}
-
-        .rt-table th, .rt-table td {{
-            border: 1px solid #30363D;
+            margin-top: 10px;
+        }
+        .ref-table th, .ref-table td {
             padding: 12px;
             text-align: left;
-        }}
-
-        .rt-table th {{
-            background-color: #0D47A1;
-            color: #fff;
-            font-weight: 600;
-        }}
-
-        .rt-table tr:nth-child(even) {{
-            background-color: #161B22;
-        }}
-
-        .rt-table tr:hover {{
-            background-color: #1C2128;
-        }}
-
-        .rt-emphasis {{
-            color: #79C0FF;
-            font-weight: 600;
-        }}
-
-        .search-box {{
-            background-color: #0D1117;
-            border: 1px solid #30363D;
-            color: #C9D1D9;
-            padding: 10px 12px;
-            border-radius: 4px;
-            width: 100%;
-            margin-bottom: 16px;
-            font-size: 14px;
-        }}
-
-        .progress {{
-            background-color: #0D1117;
-            border-radius: 4px;
-            height: 8px;
-            overflow: hidden;
-            margin-bottom: 16px;
-        }}
-
-        .progress-bar {{
-            background-color: #0D47A1;
-            height: 100%;
-            transition: width 0.3s;
-        }}
-
-        .stats {{
-            display: flex;
-            gap: 20px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }}
-
-        .stat-item {{
+            border: 1px solid #334155;
             font-size: 13px;
-            color: #A0AEC0;
-        }}
-
-        .stat-number {{
+        }
+        .ref-table th {
+            background: var(--al);
+            color: var(--accent);
             font-weight: 600;
-            color: #79C0FF;
-            font-size: 16px;
-        }}
-
-        @media (max-width: 768px) {{
-            .container {{
-                padding: 12px;
-            }}
-
-            h1 {{
-                font-size: 22px;
-            }}
-
-            .tabs {{
-                flex-direction: column;
-            }}
-
-            .tab-btn {{
-                width: 100%;
-                text-align: left;
-            }}
-
-            .rt-table {{
-                font-size: 12px;
-            }}
-
-            .rt-table th, .rt-table td {{
-                padding: 8px;
-            }}
-        }}
+        }
+        .ref-table tr:nth-child(even) {
+            background: #0f172a;
+        }
+        .ref-table tr:nth-child(odd) {
+            background: #1e293b;
+        }
+        .ref-table .hl {
+            color: var(--accent);
+            font-weight: 500;
+        }
+        .tscore {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--al);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="hub-tag">Hub #2 — Step 1 Extensions</div>
-            <h1>Hypothalamic-Pituitary-Thyroid Axis</h1>
+        <div class="header">
+            <h1>Phys L7: <span class="atag">HPT Axis — Step 1</span></h1>
             <div class="subtitle">TSI vs TPO antibodies · Graves ophthalmopathy · Sick euthyroid · Iodine deficiency · Central hypothyroidism · Thyroid cancer</div>
-            <div class="source-badges">
-                <div class="badge">Primary: GUSOM Anki Flash Decks</div>
-                <div class="badge">Step 1: First Aid + Pathoma</div>
-                <div class="badge">Pharm: Amiodarone + Antithyroid Drugs</div>
-                <div class="badge">Review: BRS Physiology</div>
-            </div>
-            <a href="GUSOM-Phys-Hub2-ActiveDrills.html" class="nav-link">← Back to Hub #2</a>
-        </header>
-
-        <div class="tabs">
-            <button class="tab-btn active" onclick="sw('fc', this)">Flashcards</button>
-            <button class="tab-btn" onclick="sw('mi', this)">MCQ</button>
-            <button class="tab-btn" onclick="sw('vi', this)">Vignettes</button>
-            <button class="tab-btn" onclick="sw('tri', this)">Traps</button>
-            <button class="tab-btn" onclick="sw('fi', this)">Fill-in-Blank</button>
-            <button class="tab-btn" onclick="sw('rt', this)">USMLE Map</button>
+            <a href="GUSOM-Phys-Hub2-ActiveDrills.html" class="back">← Back to Phys Step 1 Hub</a>
         </div>
 
-        <!-- Flashcards Tab -->
-        <div id="fc" class="content active">
-            <div class="stats">
-                <div class="stat-item">Total: <span class="stat-number">14</span></div>
-                <div class="stat-item">Viewed: <span class="stat-number" id="fc-viewed">0</span></div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" id="fc-progress" style="width: 0%"></div>
-            </div>
-            <div id="fc-container"></div>
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('fc')">🃏 Flashcards</button>
+            <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ</button>
+            <button class="tab-btn" onclick="switchTab('vig')">🏥 Vignettes</button>
+            <button class="tab-btn" onclick="switchTab('trap')">⚠️ Traps</button>
+            <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+            <button class="tab-btn" onclick="switchTab('ref')">📋 USMLE Map</button>
         </div>
 
-        <!-- MCQ Tab -->
-        <div id="mi" class="content">
-            <div class="stats">
-                <div class="stat-item">Total: <span class="stat-number">9</span></div>
-                <div class="stat-item">Answered: <span class="stat-number" id="mi-answered">0</span></div>
-                <div class="stat-item">Correct: <span class="stat-number" id="mi-correct">0</span></div>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" id="mi-progress" style="width: 0%"></div>
-            </div>
-            <div id="mi-container"></div>
+        <div id="tab-fc" class="tab-content active">
+            <div id="fcGrid" class="fc-grid"></div>
         </div>
 
-        <!-- Vignettes Tab -->
-        <div id="vi" class="content">
-            <div class="stats">
-                <div class="stat-item">Total: <span class="stat-number">5</span></div>
-            </div>
-            <div id="vi-container"></div>
+        <div id="tab-mcq" class="tab-content">
+            <div id="mcqCont"></div>
         </div>
 
-        <!-- Traps Tab -->
-        <div id="tri" class="content">
-            <div class="stats">
-                <div class="stat-item">Total: <span class="stat-number">10</span></div>
-                <div class="stat-item">Revealed: <span class="stat-number" id="tri-revealed">0</span></div>
-            </div>
-            <div id="tri-container"></div>
+        <div id="tab-vig" class="tab-content">
+            <div id="vigCont"></div>
         </div>
 
-        <!-- Fill-in-Blank Tab -->
-        <div id="fi" class="content">
-            <div class="stats">
-                <div class="stat-item">Total: <span class="stat-number">8</span></div>
-                <div class="stat-item">Checked: <span class="stat-number" id="fi-checked">0</span></div>
-            </div>
-            <div id="fi-container"></div>
+        <div id="tab-trap" class="tab-content">
+            <div id="trapCont"></div>
+            <div id="tscore" class="tscore"></div>
         </div>
 
-        <!-- USMLE Map Tab -->
-        <div id="rt" class="content">
-            <table class="rt-table">
-                <thead>
-                    <tr>
-                        <th style="width: 15%">GUSOM LO</th>
-                        <th style="width: 20%">Step 1 Extension</th>
-                        <th style="width: 25%">HY Associations</th>
-                        <th style="width: 40%">Buzzwords</th>
-                    </tr>
-                </thead>
-                <tbody id="rt-body"></tbody>
-            </table>
+        <div id="tab-fib" class="tab-content">
+            <div id="fibCont"></div>
+        </div>
+
+        <div id="tab-ref" class="tab-content">
+            <div id="refCont"></div>
         </div>
     </div>
 
     <script>
-        function js_str(s) {
-            return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
-        }
-
         const flashcards = [
-            {
-                front: "Graves disease — autoantibodies and mechanism",
-                back: "TSI (thyroid-stimulating immunoglobulin) = IgG autoantibody that binds TSH receptor → constitutive Gs activation → cAMP → T3/T4 production without TSH. TSI is pathognomonic for Graves. Also: TPO antibodies (positive but non-specific — also in Hashimoto). TgAb (thyroglobulin antibodies) also present."
-            },
-            {
-                front: "Graves ophthalmopathy — mechanism and features",
-                back: "TSH receptor expressed on orbital fibroblasts → TSI cross-reacts → fibroblast activation → ↑glycosaminoglycan (hyaluronan) production → orbital edema + expansion of extraocular muscles. Features: proptosis (exophthalmos), periorbital edema, diplopia, corneal exposure → keratitis. Can worsen with radioiodine therapy. Treatment: selenium (mild), IV glucocorticoids (moderate), orbital radiation/surgery (severe). Smoking is major risk factor."
-            },
-            {
-                front: "Hashimoto thyroiditis — mechanism and antibodies",
-                back: "Autoimmune hypothyroidism: TH1 CD8+ T cells destroy thyroid follicular cells. Antibodies: TPO Ab (anti-thyroid peroxidase — most sensitive, >95%) and TgAb (anti-thyroglobulin). Lymphocytic infiltration + germinal center formation on biopsy (Hürthle cells). May have transient hyperthyroidism (hashitoxicosis) from follicle destruction → T4/T3 release."
-            },
-            {
-                front: "Sick euthyroid syndrome (non-thyroidal illness syndrome) — lab pattern and mechanism",
-                back: "Seen in critical illness, starvation, surgery. Labs: low T3 (↓5'-deiodinase → less T4→T3 conversion), normal-low T4, low/normal TSH. Mechanism: cytokines (IL-1, IL-6) → ↓TRH/TSH, ↓thyroid binding globulin, ↓5'-deiodinase. Purpose: conserve energy. Treatment: NONE — do NOT treat. TSH normalizes with recovery."
-            },
-            {
-                front: "Iodine deficiency — thyroid adaptations",
-                back: "Low iodine → ↓T4/T3 → ↑TSH → thyroid hyperplasia → goiter (diffuse). Chronic severe deficiency → hypothyroidism. In pregnancy: maternal T4 critical for fetal brain development → iodine deficiency in pregnancy → cretinism (intellectual disability, deafness, spastic diplegia, short stature). Most common preventable cause of intellectual disability worldwide."
-            },
-            {
-                front: "Wolff-Chaikoff effect and escape",
-                back: "Acute iodine load → ↓thyroid hormone synthesis (organification blocked — Wolff-Chaikoff effect). Normal thyroid: escapes within 2 weeks (↓NIS expression → less iodide uptake). Failing to escape → hypothyroidism (e.g., amiodarone, IV contrast in susceptible individuals). Used therapeutically: Lugol's iodine pre-thyroidectomy (reduces vascularity)."
-            },
-            {
-                front: "Amiodarone — thyroid effects",
-                back: "40% iodine by weight. Effects: (1) Hypothyroidism — Wolff-Chaikoff effect + inhibits 5'-deiodinase (↓T4→T3) + direct toxic thyroiditis. (2) Hyperthyroidism Type 1: iodine load → ↑synthesis in autonomous nodule/Graves. Type 2: destructive thyroiditis → T4/T3 release. Distinguish: Type 1 → treated with MMI; Type 2 → treated with glucocorticoids. Both types: avoid RAI (iodine-saturated)."
-            },
-            {
-                front: "Central hypothyroidism — diagnosis and treatment",
-                back: "Pituitary (secondary) or hypothalamic (tertiary) — TSH is LOW or inappropriately normal (not elevated as in primary). Causes: pituitary adenoma, craniopharyngioma, Sheehan, radiation, infiltrative disease. Diagnosis: TRH stimulation test (↑TSH in tertiary/hypothalamic, blunted in pituitary). Treatment: levothyroxine (same as primary) — but monitor free T4, NOT TSH."
-            },
-            {
-                front: "Thyroid cancer — types and key features",
-                back: "Papillary (most common, 80%): RET/PTC rearrangements, BRAF V600E; psammoma bodies, Orphan Annie eye nuclei, ground glass nuclei; excellent prognosis. Follicular: RAS mutation, PAX8-PPARγ; vascular/capsular invasion required for diagnosis. Medullary: RET point mutation (MEN2A/2B), calcitonin marker. Anaplastic: worst prognosis, p53 mutation. All except anaplastic: treated with surgery ± RAI."
-            },
-            {
-                front: "TSH-secreting pituitary adenoma (TSHoma)",
-                back: "Rare cause of hyperthyroidism. Features: elevated T4/T3, elevated (or inappropriately normal) TSH, pituitary adenoma on MRI. Distinguishes from Graves: no TSI, TSH is high (not suppressed). Treatment: transsphenoidal surgery. Somatostatin analogs (octreotide) reduce TSH secretion. Must not be confused with thyroid hormone resistance."
-            },
-            {
-                front: "Thyroid hormone resistance (RTH)",
-                back: "Usually caused by THRB (thyroid hormone receptor beta) mutation → pituitary and peripheral tissues resistant to T4/T3. Labs: high T4/T3, high-normal TSH (pituitary not suppressed). Symptoms: often minimal (peripheral tissues also resistant). Key: distinguish from TSHoma — RTH has no pituitary mass. Family history common (AD)."
-            },
-            {
-                front: "Postpartum thyroiditis",
-                back: "Autoimmune thyroiditis after delivery. Pattern: Phase 1 hyperthyroidism (1-4 months — follicle destruction → T4/T3 release) → Phase 2 hypothyroidism (4-8 months) → usually euthyroid (resolution). Most women recover; 20-30% develop permanent hypothyroidism. Anti-TPO Ab positive. RAI uptake low (destructive, not synthetic). Treatment: symptomatic (beta-blockers for hyper, levothyroxine for hypo)."
-            },
-            {
-                front: "Subacute (de Quervain) thyroiditis",
-                back: "Post-viral (usually URI, Coxsackie/mumps). Presentation: painful tender thyroid + fever + elevated ESR + jaw pain (distinctive). Pattern: same as postpartum (hyper → hypo → recovery). Labs: ↑ESR, ↑CRP, low RAI uptake. Treatment: NSAIDs (aspirin first), glucocorticoids if severe. Usually self-limiting."
-            },
-            {
-                front: "Pendred syndrome",
-                back: "Autosomal recessive SLC26A4 (pendrin) mutation → defective iodide-chloride transporter in thyroid and inner ear. Features: congenital sensorineural hearing loss + goiter ± hypothyroidism. Perchlorate discharge test: positive (defective organification). Most common syndromic form of congenital hearing loss."
-            }
+            {q: "Graves disease — autoantibodies and mechanism", a: "TSI (thyroid-stimulating immunoglobulin) = IgG autoantibody that binds TSH receptor → constitutive Gs activation → cAMP → T3/T4 production without TSH. TSI is pathognomonic for Graves. Also: TPO antibodies (positive but non-specific — also in Hashimoto). TgAb (thyroglobulin antibodies) also present."},
+            {q: "Graves ophthalmopathy — mechanism and features", a: "TSH receptor expressed on orbital fibroblasts → TSI cross-reacts → fibroblast activation → ↑glycosaminoglycan (hyaluronan) production → orbital edema + expansion of extraocular muscles. Features: proptosis (exophthalmos), periorbital edema, diplopia, corneal exposure → keratitis. Can worsen with radioiodine therapy. Treatment: selenium (mild), IV glucocorticoids (moderate), orbital radiation/surgery (severe). Smoking is major risk factor."},
+            {q: "Hashimoto thyroiditis — mechanism and antibodies", a: "Autoimmune hypothyroidism: TH1 CD8+ T cells destroy thyroid follicular cells. Antibodies: TPO Ab (anti-thyroid peroxidase — most sensitive, >95%) and TgAb (anti-thyroglobulin). Lymphocytic infiltration + germinal center formation on biopsy (Hürthle cells). May have transient hyperthyroidism (hashitoxicosis) from follicle destruction → T4/T3 release."},
+            {q: "Sick euthyroid syndrome (non-thyroidal illness syndrome) — lab pattern and mechanism", a: "Seen in critical illness, starvation, surgery. Labs: low T3 (↓5'-deiodinase → less T4→T3 conversion), normal-low T4, low/normal TSH. Mechanism: cytokines (IL-1, IL-6) → ↓TRH/TSH, ↓thyroid binding globulin, ↓5'-deiodinase. Purpose: conserve energy. Treatment: NONE — do NOT treat. TSH normalizes with recovery."},
+            {q: "Iodine deficiency — thyroid adaptations", a: "Low iodine → ↓T4/T3 → ↑TSH → thyroid hyperplasia → goiter (diffuse). Chronic severe deficiency → hypothyroidism. In pregnancy: maternal T4 critical for fetal brain development → iodine deficiency in pregnancy → cretinism (intellectual disability, deafness, spastic diplegia, short stature). Most common preventable cause of intellectual disability worldwide."},
+            {q: "Wolff-Chaikoff effect and escape", a: "Acute iodine load → ↓thyroid hormone synthesis (organification blocked — Wolff-Chaikoff effect). Normal thyroid: escapes within 2 weeks (↓NIS expression → less iodide uptake). Failing to escape → hypothyroidism (e.g., amiodarone, IV contrast in susceptible individuals). Used therapeutically: Lugol\'s iodine pre-thyroidectomy (reduces vascularity)."},
+            {q: "Amiodarone — thyroid effects", a: "40% iodine by weight. Effects: (1) Hypothyroidism — Wolff-Chaikoff effect + inhibits 5\'-deiodinase (↓T4→T3) + direct toxic thyroiditis. (2) Hyperthyroidism Type 1: iodine load → ↑synthesis in autonomous nodule/Graves. Type 2: destructive thyroiditis → T4/T3 release. Distinguish: Type 1 → treated with MMI; Type 2 → treated with glucocorticoids. Both types: avoid RAI (iodine-saturated)."},
+            {q: "Central hypothyroidism — diagnosis and treatment", a: "Pituitary (secondary) or hypothalamic (tertiary) — TSH is LOW or inappropriately normal (not elevated as in primary). Causes: pituitary adenoma, craniopharyngioma, Sheehan, radiation, infiltrative disease. Diagnosis: TRH stimulation test (↑TSH in tertiary/hypothalamic, blunted in pituitary). Treatment: levothyroxine (same as primary) — but monitor free T4, NOT TSH."},
+            {q: "Thyroid cancer — types and key features", a: "Papillary (most common, 80%): RET/PTC rearrangements, BRAF V600E; psammoma bodies, Orphan Annie eye nuclei, ground glass nuclei; excellent prognosis. Follicular: RAS mutation, PAX8-PPARγ; vascular/capsular invasion required for diagnosis. Medullary: RET point mutation (MEN2A/2B), calcitonin marker. Anaplastic: worst prognosis, p53 mutation. All except anaplastic: treated with surgery ± RAI."},
+            {q: "TSH-secreting pituitary adenoma (TSHoma)", a: "Rare cause of hyperthyroidism. Features: elevated T4/T3, elevated (or inappropriately normal) TSH, pituitary adenoma on MRI. Distinguishes from Graves: no TSI, TSH is high (not suppressed). Treatment: transsphenoidal surgery. Somatostatin analogs (octreotide) reduce TSH secretion. Must not be confused with thyroid hormone resistance."},
+            {q: "Thyroid hormone resistance (RTH)", a: "Usually caused by THRB (thyroid hormone receptor beta) mutation → pituitary and peripheral tissues resistant to T4/T3. Labs: high T4/T3, high-normal TSH (pituitary not suppressed). Symptoms: often minimal (peripheral tissues also resistant). Key: distinguish from TSHoma — RTH has no pituitary mass. Family history common (AD)."},
+            {q: "Postpartum thyroiditis", a: "Autoimmune thyroiditis after delivery. Pattern: Phase 1 hyperthyroidism (1-4 months — follicle destruction → T4/T3 release) → Phase 2 hypothyroidism (4-8 months) → usually euthyroid (resolution). Most women recover; 20-30% develop permanent hypothyroidism. Anti-TPO Ab positive. RAI uptake low (destructive, not synthetic). Treatment: symptomatic (beta-blockers for hyper, levothyroxine for hypo)."},
+            {q: "Subacute (de Quervain) thyroiditis", a: "Post-viral (usually URI, Coxsackie/mumps). Presentation: painful tender thyroid + fever + elevated ESR + jaw pain (distinctive). Pattern: same as postpartum (hyper → hypo → recovery). Labs: ↑ESR, ↑CRP, low RAI uptake. Treatment: NSAIDs (aspirin first), glucocorticoids if severe. Usually self-limiting."},
+            {q: "Pendred syndrome", a: "Autosomal recessive SLC26A4 (pendrin) mutation → defective iodide-chloride transporter in thyroid and inner ear. Features: congenital sensorineural hearing loss + goiter ± hypothyroidism. Perchlorate discharge test: positive (defective organification). Most common syndromic form of congenital hearing loss."}
         ];
 
         const mcqs = [
-            {
-                q: "A 35-year-old woman presents with palpitations, heat intolerance, weight loss, and proptosis. TSH is undetectable, T4 is elevated. Which antibody is pathognomonic for her diagnosis?",
-                opts: ["Anti-TPO antibody", "Anti-thyroglobulin antibody", "Thyroid-stimulating immunoglobulin (TSI)", "TSH receptor-blocking antibody", "Anti-microsomal antibody"],
-                correct: 2,
-                expl: "TSI (thyroid-stimulating immunoglobulin) is pathognomonic for Graves disease — it activates the TSH receptor constitutively, driving autonomous T4/T3 production. TPO Ab and TgAb are positive in both Graves and Hashimoto (non-specific). TSI is the distinguishing antibody and also drives ophthalmopathy."
-            },
-            {
-                q: "A critically ill 70-year-old in the ICU has T3 of 40 ng/dL (low), T4 of 5 mcg/dL (low-normal), and TSH of 0.8 μIU/mL (low-normal). He has no prior thyroid disease. What is the most appropriate management?",
-                opts: ["Start levothyroxine immediately", "Start liothyronine (T3)", "Repeat thyroid function tests in 6 weeks after recovery", "Perform TRH stimulation test", "Check anti-TPO antibodies"],
-                correct: 2,
-                expl: "Sick euthyroid syndrome (non-thyroidal illness): T3 falls due to reduced 5'-deiodinase activity. TSH may be low/normal. This is an adaptive response to critical illness. Treatment does NOT improve outcomes and may be harmful. Management: treat the underlying illness and recheck TFTs after recovery."
-            },
-            {
-                q: "A 28-year-old woman on amiodarone develops hyperthyroidism. Ultrasound shows diffuse enlarged thyroid with increased vascularity. RAI uptake is normal. Which type of amiodarone-induced hyperthyroidism is this?",
-                opts: ["Type 2 — destructive thyroiditis", "Type 1 — iodine-excess autonomous synthesis", "Wolff-Chaikoff breakthrough", "Hashitoxicosis", "Postpartum thyroiditis"],
-                correct: 1,
-                expl: "Amiodarone-induced hyperthyroidism Type 1: iodine load → excess synthesis in autonomous tissue (nodule or underlying Graves). Features: goiter with increased vascularity, normal/increased RAI uptake. Treatment: thionamide (MMI/PTU). Type 2 is destructive (low RAI uptake, low vascularity, treated with glucocorticoids)."
-            },
-            {
-                q: "A patient with known pituitary adenoma is found to have low free T4 and TSH of 1.2 mIU/L (inappropriately normal). What is the diagnosis and how should response to levothyroxine treatment be monitored?",
-                opts: ["Primary hypothyroidism — monitor TSH", "Central hypothyroidism — monitor free T4", "Sick euthyroid — no treatment", "Thyroid hormone resistance — monitor T3", "Subclinical hypothyroidism — monitor TSH"],
-                correct: 1,
-                expl: "Central (secondary) hypothyroidism: pituitary cannot secrete normal TSH, so TSH is low or 'inappropriately normal' despite low T4. After starting levothyroxine, TSH cannot be used to monitor (pituitary is broken). Monitor free T4 to target mid-normal range. This is the key monitoring difference from primary hypothyroidism."
-            },
-            {
-                q: "A 55-year-old with a thyroid nodule undergoes FNA showing psammoma bodies and orphan Annie nuclei. What is the likely diagnosis and associated molecular marker?",
-                opts: ["Follicular thyroid cancer — RAS mutation", "Medullary thyroid cancer — calcitonin", "Papillary thyroid cancer — BRAF V600E or RET/PTC", "Anaplastic thyroid cancer — p53", "Hurthle cell carcinoma — mitochondrial DNA mutations"],
-                correct: 2,
-                expl: "Papillary thyroid cancer: psammoma bodies (calcified concentric rings), Orphan Annie eye nuclei (ground glass, empty-appearing nuclei), nuclear grooves. Molecular: BRAF V600E (most common somatic mutation, ~60%) and RET/PTC rearrangements (especially radiation-induced). Best prognosis of all thyroid cancers."
-            },
-            {
-                q: "A patient has elevated T4, elevated T3, and TSH of 4.2 mIU/L. MRI shows no pituitary abnormality. Family history of similar labs. What is the diagnosis?",
-                opts: ["Graves disease", "TSH-secreting pituitary adenoma (TSHoma)", "Thyroid hormone resistance (THRB mutation)", "Factitious hyperthyroidism", "Struma ovarii"],
-                correct: 2,
-                expl: "Thyroid hormone resistance: elevated T4/T3 + inappropriately high TSH + NO pituitary adenoma + family history = THRB mutation. Peripheral tissues are also resistant → minimal symptoms. Distinguished from TSHoma: no pituitary mass, family history, genetic testing (THRB mutation)."
-            },
-            {
-                q: "A pregnant woman in her first trimester is found to have TSH of 0.2 mIU/L (mildly suppressed) and normal free T4. She feels well. What is the most likely explanation?",
-                opts: ["Gestational hyperthyroidism from hCG stimulation", "Early Graves disease", "Subacute thyroiditis", "Postpartum thyroiditis", "TSH-secreting tumor"],
-                correct: 0,
-                expl: "hCG shares structural homology with TSH (both glycoprotein hormones with identical α-subunit). In first trimester, hCG peaks → stimulates TSH receptor → mild TSH suppression + ↑T4/T3. Gestational hyperthyroidism is physiological — usually no treatment needed. If severe (hyperemesis gravidarum, very high T4) → treat with PTU/MMI."
-            },
-            {
-                q: "A patient with painful thyroid, fever, elevated ESR, and hyperthyroidism after a URI. RAI uptake is very low. What is the diagnosis and first-line treatment?",
-                opts: ["Graves disease — PTU", "Hashimoto thyroiditis — levothyroxine", "Subacute (de Quervain) thyroiditis — NSAIDs", "Toxic multinodular goiter — RAI ablation", "Amiodarone type 2 — glucocorticoids"],
-                correct: 2,
-                expl: "Subacute (de Quervain) thyroiditis: post-viral, painful tender thyroid, fever, elevated ESR, low RAI uptake (destructive — no active synthesis). Jaw pain is a distinctive feature. Hyperthyroidism is transient (follicle lysis). Treatment: NSAIDs (aspirin), glucocorticoids if severe. Self-limiting in most cases."
-            },
-            {
-                q: "A neonate is born with sensorineural hearing loss and goiter. Perchlorate discharge test is positive. Thyroid hormone levels are low. What gene is mutated?",
-                opts: ["NIS (SLC5A5)", "Pendrin (SLC26A4)", "THRB", "DUOX2", "TPO"],
-                correct: 1,
-                expl: "Pendred syndrome: SLC26A4 (pendrin) mutation — defective iodide-chloride exchanger in thyroid apical membrane and inner ear. Results in defective organification (iodide cannot enter colloid for incorporation into thyroglobulin) → goiter + hypothyroidism + congenital sensorineural deafness. Perchlorate discharge test positive (iodide not organified, washes out with perchlorate)."
-            }
+            {stem: "A 35-year-old woman presents with palpitations, heat intolerance, weight loss, and proptosis. TSH is undetectable, T4 is elevated. Which antibody is pathognomonic for her diagnosis?", options: ["Anti-TPO antibody", "Anti-thyroglobulin antibody", "Thyroid-stimulating immunoglobulin (TSI)", "TSH receptor-blocking antibody", "Anti-microsomal antibody"], correct: 2, explanations: ["TPO Ab is positive in both Graves and Hashimoto (non-specific).", "TgAb is positive in both Graves and Hashimoto (non-specific).", "TSI (thyroid-stimulating immunoglobulin) is pathognomonic for Graves disease — it activates the TSH receptor constitutively, driving autonomous T4/T3 production. TSI is the distinguishing antibody and also drives ophthalmopathy.", "TSH receptor-blocking antibodies are seen in Graves disease but are not pathognomonic.", "Anti-microsomal antibodies are another name for anti-TPO (non-specific)."], teaching: "TSI (thyroid-stimulating immunoglobulin) is pathognomonic for Graves disease. TPO Ab and TgAb are positive in both Graves and Hashimoto, making them non-specific. TSI activates TSH receptor autonomously."},
+            {stem: "A critically ill 70-year-old in the ICU has T3 of 40 ng/dL (low), T4 of 5 mcg/dL (low-normal), and TSH of 0.8 μIU/mL (low-normal). He has no prior thyroid disease. What is the most appropriate management?", options: ["Start levothyroxine immediately", "Start liothyronine (T3)", "Repeat thyroid function tests in 6 weeks after recovery", "Perform TRH stimulation test", "Check anti-TPO antibodies"], correct: 2, explanations: ["Levothyroxine is not indicated in sick euthyroid syndrome — treatment does not improve outcomes.", "Liothyronine (T3) is not indicated in sick euthyroid syndrome — it may be harmful.", "Sick euthyroid syndrome (non-thyroidal illness): T3 falls due to reduced 5'-deiodinase activity. TSH may be low/normal. This is an adaptive response to critical illness. Treatment does NOT improve outcomes and may be harmful. Management: treat the underlying illness and recheck TFTs after recovery.", "TRH stimulation test is not needed — the diagnosis is sick euthyroid based on clinical context.", "Anti-TPO testing is not relevant to sick euthyroid syndrome."], teaching: "Sick euthyroid syndrome is an adaptive response to critical illness. Do NOT treat with thyroid hormone — randomized trials show no benefit and possible harm. Manage the underlying condition."},
+            {stem: "A 28-year-old woman on amiodarone develops hyperthyroidism. Ultrasound shows diffuse enlarged thyroid with increased vascularity. RAI uptake is normal. Which type of amiodarone-induced hyperthyroidism is this?", options: ["Type 2 — destructive thyroiditis", "Type 1 — iodine-excess autonomous synthesis", "Wolff-Chaikoff breakthrough", "Hashitoxicosis", "Postpartum thyroiditis"], correct: 1, explanations: ["Type 2 is destructive thyroiditis with low vascularity and low RAI uptake.", "Amiodarone-induced hyperthyroidism Type 1: iodine load → excess synthesis in autonomous tissue (nodule or underlying Graves). Features: goiter with increased vascularity, normal/increased RAI uptake. Treatment: thionamide (MMI/PTU). Type 2 is destructive (low RAI uptake, low vascularity, treated with glucocorticoids).", "Wolff-Chaikoff effect leads to hypothyroidism, not hyperthyroidism.", "Hashitoxicosis is seen in Hashimoto thyroiditis, not amiodarone-induced hyperthyroidism.", "Postpartum thyroiditis is a separate entity, not related to amiodarone."], teaching: "Amiodarone Type 1 (synthesis-driven): increased vascularity, normal/high RAI uptake, treat with MMI. Type 2 (destructive): low vascularity, low RAI uptake, treat with glucocorticoids."},
+            {stem: "A patient with known pituitary adenoma is found to have low free T4 and TSH of 1.2 mIU/L (inappropriately normal). What is the diagnosis and how should response to levothyroxine treatment be monitored?", options: ["Primary hypothyroidism — monitor TSH", "Central hypothyroidism — monitor free T4", "Sick euthyroid — no treatment", "Thyroid hormone resistance — monitor T3", "Subclinical hypothyroidism — monitor TSH"], correct: 1, explanations: ["Primary hypothyroidism has elevated TSH, not inappropriately normal TSH.", "Central (secondary) hypothyroidism: pituitary cannot secrete normal TSH, so TSH is low or inappropriately normal despite low T4. After starting levothyroxine, TSH cannot be used to monitor (pituitary is broken). Monitor free T4 to target mid-normal range. This is the key monitoring difference from primary hypothyroidism.", "Sick euthyroid is not associated with pituitary adenoma.", "Thyroid hormone resistance would have high TSH and high T4 (not low T4).", "Subclinical hypothyroidism has elevated TSH with normal T4."], teaching: "Central hypothyroidism: monitor FREE T4 (not TSH) because the pituitary cannot generate appropriate TSH response. Target mid-normal free T4."},
+            {stem: "A 55-year-old with a thyroid nodule undergoes FNA showing psammoma bodies and orphan Annie nuclei. What is the likely diagnosis and associated molecular marker?", options: ["Follicular thyroid cancer — RAS mutation", "Medullary thyroid cancer — calcitonin", "Papillary thyroid cancer — BRAF V600E or RET/PTC", "Anaplastic thyroid cancer — p53", "Hurthle cell carcinoma — mitochondrial DNA mutations"], correct: 2, explanations: ["Follicular cancer has RAS mutations and requires capsular/vascular invasion for diagnosis.", "Medullary cancer secretes calcitonin but does not have psammoma bodies.", "Papillary thyroid cancer: psammoma bodies (calcified concentric rings), Orphan Annie eye nuclei (ground glass, empty-appearing nuclei), nuclear grooves. Molecular: BRAF V600E (most common somatic mutation, ~60%) and RET/PTC rearrangements (especially radiation-induced). Best prognosis of all thyroid cancers.", "Anaplastic cancer has p53 mutations and worst prognosis.", "Hurthle cell carcinoma has mitochondrial mutations but not psammoma bodies."], teaching: "Papillary thyroid cancer has the BEST prognosis (>90% 10-year survival). Key features: psammoma bodies, Orphan Annie nuclei, BRAF V600E or RET/PTC mutations."},
+            {stem: "A patient has elevated T4, elevated T3, and TSH of 4.2 mIU/L. MRI shows no pituitary abnormality. Family history of similar labs. What is the diagnosis?", options: ["Graves disease", "TSH-secreting pituitary adenoma (TSHoma)", "Thyroid hormone resistance (THRB mutation)", "Factitious hyperthyroidism", "Struma ovarii"], correct: 2, explanations: ["Graves disease has suppressed TSH, not elevated TSH.", "TSHoma would show pituitary adenoma on MRI.", "Thyroid hormone resistance: elevated T4/T3 + inappropriately high TSH + NO pituitary adenoma + family history = THRB mutation. Peripheral tissues are also resistant → minimal symptoms. Distinguished from TSHoma: no pituitary mass, family history, genetic testing (THRB mutation).", "Factitious hyperthyroidism would have suppressed TSH.", "Struma ovarii would present with Graves-like features, not thyroid hormone resistance."], teaching: "Thyroid hormone resistance (THRB mutation): high T4/T3 + high-normal TSH + no pituitary mass + family history. Distinguish from TSHoma by imaging and genetics."},
+            {stem: "A pregnant woman in her first trimester is found to have TSH of 0.2 mIU/L (mildly suppressed) and normal free T4. She feels well. What is the most likely explanation?", options: ["Gestational hyperthyroidism from hCG stimulation", "Early Graves disease", "Subacute thyroiditis", "Postpartum thyroiditis", "TSH-secreting tumor"], correct: 0, explanations: ["hCG shares structural homology with TSH (both glycoprotein hormones with identical α-subunit). In first trimester, hCG peaks → stimulates TSH receptor → mild TSH suppression + ↑T4/T3. Gestational hyperthyroidism is physiological — usually no treatment needed. If severe (hyperemesis gravidarum, very high T4) → treat with PTU/MMI.", "Graves disease is possible but less likely given the normal T4 and lack of symptoms.", "Subacute thyroiditis presents with painful thyroid and fever.", "Postpartum thyroiditis occurs after delivery, not during pregnancy.", "TSH-secreting tumors are very rare."], teaching: "Gestational hyperthyroidism (first trimester): hCG structurally similar to TSH → mild TSH suppression is physiological. Usually no treatment needed unless severe."},
+            {stem: "A patient with painful thyroid, fever, elevated ESR, and hyperthyroidism after a URI. RAI uptake is very low. What is the diagnosis and first-line treatment?", options: ["Graves disease — PTU", "Hashimoto thyroiditis — levothyroxine", "Subacute (de Quervain) thyroiditis — NSAIDs", "Toxic multinodular goiter — RAI ablation", "Amiodarone type 2 — glucocorticoids"], correct: 2, explanations: ["Graves disease does not follow a URI and has normal RAI uptake.", "Hashimoto thyroiditis is hypothyroid, not hyperthyroid.", "Subacute (de Quervain) thyroiditis: post-viral, painful tender thyroid, fever, elevated ESR, low RAI uptake (destructive — no active synthesis). Jaw pain is a distinctive feature. Hyperthyroidism is transient (follicle lysis). Treatment: NSAIDs (aspirin), glucocorticoids if severe. Self-limiting in most cases.", "Toxic multinodular goiter does not have low RAI uptake or fever.", "Amiodarone thyrotoxicosis is not preceded by URI."], teaching: "Subacute (de Quervain) thyroiditis: post-viral, painful thyroid, fever, elevated ESR, low RAI uptake (destructive). Treatment: NSAIDs first, glucocorticoids if severe."},
+            {stem: "A neonate is born with sensorineural hearing loss and goiter. Perchlorate discharge test is positive. Thyroid hormone levels are low. What gene is mutated?", options: ["NIS (SLC5A5)", "Pendrin (SLC26A4)", "THRB", "DUOX2", "TPO"], correct: 1, explanations: ["NIS mutations cause iodide uptake defects.", "Pendred syndrome: SLC26A4 (pendrin) mutation — defective iodide-chloride exchanger in thyroid apical membrane and inner ear. Results in defective organification (iodide cannot enter colloid for incorporation into thyroglobulin) → goiter + hypothyroidism + congenital sensorineural deafness. Perchlorate discharge test positive (iodide not organified, washes out with perchlorate).", "THRB mutations cause thyroid hormone resistance.", "DUOX2 mutations affect oxidative stress generation in thyroiditis.", "TPO mutations affect peroxidase enzyme."], teaching: "Pendred syndrome: SLC26A4 (pendrin) mutation causes iodide-chloride transporter defect → defective organification → congenital deafness + goiter. Perchlorate discharge test is positive."}
         ];
 
         const vignettes = [
-            {
-                title: "Graves Disease vs Hashimoto",
-                intro: "A 32-year-old woman presents with 6 months of palpitations, heat intolerance, weight loss, and now bilateral eye protrusion. TSH undetectable, free T4 3× normal.",
-                qs: [
-                    {
-                        q: "What antibody distinguishes Graves from Hashimoto?",
-                        a: "TSI (thyroid-stimulating immunoglobulin) — pathognomonic for Graves. TPO Ab is positive in both."
-                    },
-                    {
-                        q: "What treatment options exist for Graves disease?",
-                        a: "Thionamides (methimazole first-line, PTU in first trimester/thyroid storm), radioiodine ablation (RAI), or surgery (thyroidectomy)."
-                    },
-                    {
-                        q: "Her ophthalmopathy worsens after RAI. Why might this occur?",
-                        a: "RAI causes thyroid cell destruction → release of TSH receptor antigens → increased autoimmune response → worsening ophthalmopathy. Pre-treat with steroids in moderate-severe eye disease before RAI."
-                    }
-                ]
-            },
-            {
-                title: "Sick Euthyroid",
-                intro: "A 65-year-old admitted to the ICU for pneumonia has TSH 0.5 (low-normal), T3 60 ng/dL (low), T4 5 mcg/dL (low-normal). No thyroid history.",
-                qs: [
-                    {
-                        q: "What is the diagnosis?",
-                        a: "Sick euthyroid syndrome (non-thyroidal illness) — adaptive response to severe illness."
-                    },
-                    {
-                        q: "What should NOT be done?",
-                        a: "Do not treat with thyroid hormone replacement — randomized trials show no benefit and possible harm."
-                    },
-                    {
-                        q: "When should thyroid function tests be re-evaluated?",
-                        a: "6-8 weeks after recovery from acute illness — TFTs normalize with resolution of the underlying condition."
-                    }
-                ]
-            },
-            {
-                title: "Amiodarone Thyrotoxicosis",
-                intro: "A 60-year-old on amiodarone for atrial fibrillation develops weight loss, AF worsening, and hyperthyroidism. Thyroid ultrasound: enlarged, hypervascular. RAI uptake: 25% (normal).",
-                qs: [
-                    {
-                        q: "What type of amiodarone thyrotoxicosis is this?",
-                        a: "Type 1 — iodine-excess autonomous synthesis in pre-existing thyroid disease (nodule or Graves substrate). Evidence: increased vascularity, normal RAI uptake."
-                    },
-                    {
-                        q: "How does this differ from Type 2?",
-                        a: "Type 2 is destructive thyroiditis — low vascularity, very low RAI uptake, treated with glucocorticoids not thionamides."
-                    },
-                    {
-                        q: "Can amiodarone be stopped to treat this?",
-                        a: "Amiodarone has a half-life of 40-55 days — stopping has minimal immediate effect. Continue treating with MMI (Type 1) or glucocorticoids (Type 2). Amiodarone discontinuation for long-term management should be discussed with cardiology."
-                    }
-                ]
-            },
-            {
-                title: "Central Hypothyroidism",
-                intro: "A 45-year-old 2 years post-pituitary radiation has low free T4 and TSH of 0.9 mIU/L.",
-                qs: [
-                    {
-                        q: "What is the diagnosis?",
-                        a: "Central (secondary) hypothyroidism — pituitary damage → insufficient TSH secretion → inadequate thyroid stimulation → low T4."
-                    },
-                    {
-                        q: "What is the key monitoring difference from primary hypothyroidism?",
-                        a: "Monitor free T4 (not TSH) — the pituitary cannot generate appropriate TSH response, so TSH is an unreliable guide to therapy."
-                    },
-                    {
-                        q: "What other hormone deficiencies should be screened for?",
-                        a: "Full pituitary panel: GH, ACTH/cortisol, LH/FSH, prolactin — pituitary radiation affects all axes. Screen for central adrenal insufficiency before thyroid hormone (treating hypothyroid in AI patient can precipitate adrenal crisis)."
-                    }
-                ]
-            },
-            {
-                title: "Medullary Thyroid Cancer in MEN2A",
-                intro: "A 28-year-old is referred after her brother was diagnosed with MEN2A. She undergoes genetic testing: RET C634F mutation confirmed.",
-                qs: [
-                    {
-                        q: "What thyroid cancer is she at risk for?",
-                        a: "Medullary thyroid cancer (MTC) — arises from parafollicular C cells, secretes calcitonin. RET proto-oncogene mutation → constitutively active tyrosine kinase."
-                    },
-                    {
-                        q: "What tumor marker is used to screen for and follow MTC?",
-                        a: "Serum calcitonin — secreted by C cells. CEA is also elevated. Calcitonin is the primary tumor marker."
-                    },
-                    {
-                        q: "What is the recommended management given her mutation?",
-                        a: "Prophylactic thyroidectomy — timing depends on RET mutation risk level (ATA risk classification). C634F is high-risk — thyroidectomy recommended by age 5 or when calcitonin becomes detectable."
-                    }
-                ]
-            }
+            {banner: "Graves Disease vs Hashimoto", stem: "A 32-year-old woman presents with 6 months of palpitations, heat intolerance, weight loss, and now bilateral eye protrusion. TSH undetectable, free T4 3x normal.", qa: [{q: "What antibody distinguishes Graves from Hashimoto?", a: "TSI (thyroid-stimulating immunoglobulin) — pathognomonic for Graves. TPO Ab is positive in both."}, {q: "What treatment options exist for Graves disease?", a: "Thionamides (methimazole first-line, PTU in first trimester/thyroid storm), radioiodine ablation (RAI), or surgery (thyroidectomy)."}, {q: "Her ophthalmopathy worsens after RAI. Why might this occur?", a: "RAI causes thyroid cell destruction → release of TSH receptor antigens → increased autoimmune response → worsening ophthalmopathy. Pre-treat with steroids in moderate-severe eye disease before RAI."}]},
+            {banner: "Sick Euthyroid", stem: "A 65-year-old admitted to the ICU for pneumonia has TSH 0.5 (low-normal), T3 60 ng/dL (low), T4 5 mcg/dL (low-normal). No thyroid history.", qa: [{q: "What is the diagnosis?", a: "Sick euthyroid syndrome (non-thyroidal illness) — adaptive response to severe illness."}, {q: "What should NOT be done?", a: "Do not treat with thyroid hormone replacement — randomized trials show no benefit and possible harm."}, {q: "When should thyroid function tests be re-evaluated?", a: "6-8 weeks after recovery from acute illness — TFTs normalize with resolution of the underlying condition."}]},
+            {banner: "Amiodarone Thyrotoxicosis", stem: "A 60-year-old on amiodarone for atrial fibrillation develops weight loss, AF worsening, and hyperthyroidism. Thyroid ultrasound: enlarged, hypervascular. RAI uptake: 25% (normal).", qa: [{q: "What type of amiodarone thyrotoxicosis is this?", a: "Type 1 — iodine-excess autonomous synthesis in pre-existing thyroid disease (nodule or Graves substrate). Evidence: increased vascularity, normal RAI uptake."}, {q: "How does this differ from Type 2?", a: "Type 2 is destructive thyroiditis — low vascularity, very low RAI uptake, treated with glucocorticoids not thionamides."}, {q: "Can amiodarone be stopped to treat this?", a: "Amiodarone has a half-life of 40-55 days — stopping has minimal immediate effect. Continue treating with MMI (Type 1) or glucocorticoids (Type 2). Amiodarone discontinuation for long-term management should be discussed with cardiology."}]},
+            {banner: "Central Hypothyroidism", stem: "A 45-year-old 2 years post-pituitary radiation has low free T4 and TSH of 0.9 mIU/L.", qa: [{q: "What is the diagnosis?", a: "Central (secondary) hypothyroidism — pituitary damage → insufficient TSH secretion → inadequate thyroid stimulation → low T4."}, {q: "What is the key monitoring difference from primary hypothyroidism?", a: "Monitor free T4 (not TSH) — the pituitary cannot generate appropriate TSH response, so TSH is an unreliable guide to therapy."}, {q: "What other hormone deficiencies should be screened for?", a: "Full pituitary panel: GH, ACTH/cortisol, LH/FSH, prolactin — pituitary radiation affects all axes. Screen for central adrenal insufficiency before thyroid hormone (treating hypothyroid in AI patient can precipitate adrenal crisis)."}]},
+            {banner: "Medullary Thyroid Cancer in MEN2A", stem: "A 28-year-old is referred after her brother was diagnosed with MEN2A. She undergoes genetic testing: RET C634F mutation confirmed.", qa: [{q: "What thyroid cancer is she at risk for?", a: "Medullary thyroid cancer (MTC) — arises from parafollicular C cells, secretes calcitonin. RET proto-oncogene mutation → constitutively active tyrosine kinase."}, {q: "What tumor marker is used to screen for and follow MTC?", a: "Serum calcitonin — secreted by C cells. CEA is also elevated. Calcitonin is the primary tumor marker."}, {q: "What is the recommended management given her mutation?", a: "Prophylactic thyroidectomy — timing depends on RET mutation risk level (ATA risk classification). C634F is high-risk — thyroidectomy recommended by age 5 or when calcitonin becomes detectable."}]}
         ];
 
         const traps = [
-            {
-                stmt: "Anti-TPO antibodies are specific for Graves disease.",
-                correct: false,
-                reveal: "TPO Ab are positive in both Graves (~75%) and Hashimoto (>95%). TSI (thyroid-stimulating immunoglobulin) is the pathognomonic antibody for Graves disease."
-            },
-            {
-                stmt: "Sick euthyroid syndrome should be treated with levothyroxine to improve outcomes.",
-                correct: false,
-                reveal: "Clinical trials show no benefit from thyroid hormone treatment in sick euthyroid syndrome. Treatment is to manage the underlying illness. TFTs normalize with recovery."
-            },
-            {
-                stmt: "In central hypothyroidism, TSH monitoring is used to guide levothyroxine dosing.",
-                correct: false,
-                reveal: "The pituitary cannot produce normal TSH response in central hypothyroidism — TSH is unreliable. Monitor free T4, targeting the mid-normal range."
-            },
-            {
-                stmt: "Amiodarone-induced hyperthyroidism Type 2 is treated with thionamides (PTU/MMI).",
-                correct: false,
-                reveal: "Type 2 is destructive thyroiditis (not synthesis-driven) → thionamides are ineffective. Treatment: glucocorticoids (prednisone 40-60 mg). Type 1 (excess synthesis) is treated with thionamides."
-            },
-            {
-                stmt: "Papillary thyroid cancer has the worst prognosis of all thyroid cancers.",
-                correct: false,
-                reveal: "Papillary thyroid cancer has the best prognosis (10-year survival >90%). Anaplastic thyroid cancer has the worst prognosis (median survival <6 months)."
-            },
-            {
-                stmt: "Radioiodine therapy is safe for all patients with Graves disease and worsens ophthalmopathy in all cases.",
-                correct: false,
-                reveal: "RAI is effective for Graves disease but can worsen ophthalmopathy (especially in smokers and those with severe eye disease). Pre-treatment with glucocorticoids reduces this risk. RAI is relatively contraindicated in moderate-severe active ophthalmopathy."
-            },
-            {
-                stmt: "hCG can suppress TSH during pregnancy due to structural homology with TSH.",
-                correct: true,
-                reveal: "hCG and TSH share the same α-subunit. hCG peaks in the first trimester → stimulates TSH receptor → suppresses TSH. This is gestational (physiological) hyperthyroidism — usually benign and self-limiting."
-            },
-            {
-                stmt: "Iodine deficiency is the most common cause of intellectual disability worldwide that is preventable.",
-                correct: true,
-                reveal: "Iodine deficiency during pregnancy → inadequate maternal T4 → impaired fetal brain development → cretinism (intellectual disability, deafness, spastic diplegia). Universal salt iodization has dramatically reduced this."
-            },
-            {
-                stmt: "Medullary thyroid cancer arises from follicular cells and secretes thyroglobulin.",
-                correct: false,
-                reveal: "Medullary thyroid cancer arises from parafollicular C cells (not follicular cells) → secretes calcitonin (not thyroglobulin). Calcitonin is the tumor marker used for screening and surveillance."
-            },
-            {
-                stmt: "Subacute (de Quervain) thyroiditis has high RAI uptake during the hyperthyroid phase.",
-                correct: false,
-                reveal: "RAI uptake is very low in subacute thyroiditis — hyperthyroidism results from follicle destruction and T4/T3 release, NOT increased synthesis. Low RAI uptake distinguishes destructive thyroiditis from Graves disease."
-            }
+            {myth: "Anti-TPO antibodies are specific for Graves disease.", truth: "TPO Ab are positive in both Graves (~75%) and Hashimoto (>95%). TSI (thyroid-stimulating immunoglobulin) is the pathognomonic antibody for Graves disease.", correct: false},
+            {myth: "Sick euthyroid syndrome should be treated with levothyroxine to improve outcomes.", truth: "Clinical trials show no benefit from thyroid hormone treatment in sick euthyroid syndrome. Treatment is to manage the underlying illness. TFTs normalize with recovery.", correct: false},
+            {myth: "In central hypothyroidism, TSH monitoring is used to guide levothyroxine dosing.", truth: "The pituitary cannot produce normal TSH response in central hypothyroidism — TSH is unreliable. Monitor free T4, targeting the mid-normal range.", correct: false},
+            {myth: "Amiodarone-induced hyperthyroidism Type 2 is treated with thionamides (PTU/MMI).", truth: "Type 2 is destructive thyroiditis (not synthesis-driven) → thionamides are ineffective. Treatment: glucocorticoids (prednisone 40-60 mg). Type 1 (excess synthesis) is treated with thionamides.", correct: false},
+            {myth: "Papillary thyroid cancer has the worst prognosis of all thyroid cancers.", truth: "Papillary thyroid cancer has the best prognosis (10-year survival >90%). Anaplastic thyroid cancer has the worst prognosis (median survival <6 months).", correct: false},
+            {myth: "Radioiodine therapy is safe for all patients with Graves disease and worsens ophthalmopathy in all cases.", truth: "RAI is effective for Graves disease but can worsen ophthalmopathy (especially in smokers and those with severe eye disease). Pre-treatment with glucocorticoids reduces this risk. RAI is relatively contraindicated in moderate-severe active ophthalmopathy.", correct: false},
+            {myth: "hCG can suppress TSH during pregnancy due to structural homology with TSH.", truth: "hCG and TSH share the same α-subunit. hCG peaks in the first trimester → stimulates TSH receptor → suppresses TSH. This is gestational (physiological) hyperthyroidism — usually benign and self-limiting.", correct: true},
+            {myth: "Iodine deficiency is the most common cause of intellectual disability worldwide that is preventable.", truth: "Iodine deficiency during pregnancy → inadequate maternal T4 → impaired fetal brain development → cretinism (intellectual disability, deafness, spastic diplegia). Universal salt iodization has dramatically reduced this.", correct: true},
+            {myth: "Medullary thyroid cancer arises from follicular cells and secretes thyroglobulin.", truth: "Medullary thyroid cancer arises from parafollicular C cells (not follicular cells) → secretes calcitonin (not thyroglobulin). Calcitonin is the tumor marker used for screening and surveillance.", correct: false},
+            {myth: "Subacute (de Quervain) thyroiditis has high RAI uptake during the hyperthyroid phase.", truth: "RAI uptake is very low in subacute thyroiditis — hyperthyroidism results from follicle destruction and T4/T3 release, NOT increased synthesis. Low RAI uptake distinguishes destructive thyroiditis from Graves disease.", correct: false}
         ];
 
         const fillInBlanks = [
-            {
-                prompt: "TSI (thyroid-stimulating immunoglobulin) activates the _____ receptor, leading to constitutive _____ production.",
-                answers: [
-                    ["TSH receptor", "TSHR"],
-                    ["T3/T4", "thyroid hormone"]
-                ]
-            },
-            {
-                prompt: "Sick euthyroid syndrome shows low _____ due to reduced _____ activity converting T4 to T3.",
-                answers: [
-                    ["T3"],
-                    ["5'-deiodinase", "deiodinase"]
-                ]
-            },
-            {
-                prompt: "Amiodarone-induced hyperthyroidism Type 1 is treated with _____, while Type 2 is treated with _____.",
-                answers: [
-                    ["MMI", "methimazole", "thionamides"],
-                    ["glucocorticoids", "prednisone", "steroids"]
-                ]
-            },
-            {
-                prompt: "Central hypothyroidism is monitored with _____ (not TSH) because the pituitary is _____.",
-                answers: [
-                    ["free T4"],
-                    ["dysfunctional", "damaged", "impaired"]
-                ]
-            },
-            {
-                prompt: "Papillary thyroid cancer is associated with _____ mutation and shows _____ bodies on histology.",
-                answers: [
-                    ["BRAF V600E", "BRAF", "RET/PTC"],
-                    ["psammoma"]
-                ]
-            },
-            {
-                prompt: "Medullary thyroid cancer is associated with _____ mutation and secretes _____ as its tumor marker.",
-                answers: [
-                    ["RET"],
-                    ["calcitonin"]
-                ]
-            },
-            {
-                prompt: "The Wolff-Chaikoff effect is the transient _____ of thyroid hormone synthesis following acute _____ load.",
-                answers: [
-                    ["inhibition", "suppression"],
-                    ["iodine", "iodide"]
-                ]
-            },
-            {
-                prompt: "Pendred syndrome involves mutation of _____ and presents with congenital _____ deafness and goiter.",
-                answers: [
-                    ["SLC26A4", "pendrin"],
-                    ["sensorineural"]
-                ]
-            }
+            {prompt: "TSI (thyroid-stimulating immunoglobulin) activates the _____ receptor, leading to constitutive _____ production.", answer: "TSH receptor;TSHR;T3/T4;thyroid hormone"},
+            {prompt: "Sick euthyroid syndrome shows low _____ due to reduced _____ activity converting T4 to T3.", answer: "T3;5'-deiodinase;deiodinase"},
+            {prompt: "Amiodarone-induced hyperthyroidism Type 1 is treated with _____, while Type 2 is treated with _____.", answer: "MMI;methimazole;thionamides;glucocorticoids;prednisone;steroids"},
+            {prompt: "Central hypothyroidism is monitored with _____ (not TSH) because the pituitary is _____.", answer: "free T4;dysfunctional;damaged;impaired"},
+            {prompt: "Papillary thyroid cancer is associated with _____ mutation and shows _____ bodies on histology.", answer: "BRAF V600E;BRAF;RET/PTC;psammoma"},
+            {prompt: "Medullary thyroid cancer is associated with _____ mutation and secretes _____ as its tumor marker.", answer: "RET;calcitonin"},
+            {prompt: "The Wolff-Chaikoff effect is the transient _____ of thyroid hormone synthesis following acute _____ load.", answer: "inhibition;suppression;iodine;iodide"},
+            {prompt: "Pendred syndrome involves mutation of _____ and presents with congenital _____ deafness and goiter.", answer: "SLC26A4;pendrin;sensorineural"}
         ];
 
         const refTable = [
-            {
-                lo: "Graves disease",
-                step1: "TSI pathognomonic; Gs → cAMP autonomous production; ophthalmopathy mechanism",
-                hy: "Exophthalmos, pretibial myxedema, thyroid acropachy",
-                bw: "TSI, TSH receptor, proptosis, smoking risk factor"
-            },
-            {
-                lo: "Hashimoto thyroiditis",
-                step1: "TPO Ab most sensitive; TH1 CD8 T cells; Hurthle cells",
-                hy: "Most common hypothyroidism in developed world; associated with lymphoma",
-                bw: "Anti-TPO, hashitoxicosis, lymphocytic infiltration"
-            },
-            {
-                lo: "Sick euthyroid",
-                step1: "↓5'-deiodinase → low T3; adapt response; no treatment",
-                hy: "ICU, critical illness, starvation",
-                bw: "Low T3, low/normal TSH, no treatment"
-            },
-            {
-                lo: "Thyroid cancer types",
-                step1: "Papillary (BRAF/RET) vs Follicular (RAS/PAX8) vs Medullary (RET/calcitonin) vs Anaplastic (p53)",
-                hy: "Psammoma bodies, Orphan Annie nuclei (papillary); calcitonin (medullary)",
-                bw: "BRAF V600E, RET, calcitonin, p53"
-            },
-            {
-                lo: "Central hypothyroidism",
-                step1: "Low TSH + low T4; monitor free T4 not TSH; pituitary causes",
-                hy: "Post-pituitary surgery/radiation, craniopharyngioma, Sheehan",
-                bw: "Free T4 monitoring, central AI first"
-            },
-            {
-                lo: "Amiodarone thyroid effects",
-                step1: "Type 1 (MMI) vs Type 2 (glucocorticoids); Wolff-Chaikoff; long half-life",
-                hy: "40% iodine; inhibits 5'-deiodinase; both hypo and hyperthyroidism",
-                bw: "Amiodarone, Type 1 vs 2, low RAI uptake Type 2"
-            },
-            {
-                lo: "Congenital hypothyroidism",
-                step1: "Iodine deficiency → cretinism; Pendred syndrome (SLC26A4); newborn screening",
-                hy: "Most preventable intellectual disability; Pendred = deafness + goiter",
-                bw: "Cretinism, iodine deficiency, pendrin, perchlorate test"
-            }
+            {lo: "Graves disease", step1: "TSI pathognomonic; Gs → cAMP autonomous production; ophthalmopathy mechanism", associations: "Exophthalmos, pretibial myxedema, thyroid acropachy", keywords: "TSI, TSH receptor, proptosis, smoking risk factor"},
+            {lo: "Hashimoto thyroiditis", step1: "TPO Ab most sensitive; TH1 CD8 T cells; Hurthle cells", associations: "Most common hypothyroidism in developed world; associated with lymphoma", keywords: "Anti-TPO, hashitoxicosis, lymphocytic infiltration"},
+            {lo: "Sick euthyroid", step1: "↓5'-deiodinase → low T3; adapt response; no treatment", associations: "ICU, critical illness, starvation", keywords: "Low T3, low/normal TSH, no treatment"},
+            {lo: "Thyroid cancer types", step1: "Papillary (BRAF/RET) vs Follicular (RAS/PAX8) vs Medullary (RET/calcitonin) vs Anaplastic (p53)", associations: "Psammoma bodies, Orphan Annie nuclei (papillary); calcitonin (medullary)", keywords: "BRAF V600E, RET, calcitonin, p53"},
+            {lo: "Central hypothyroidism", step1: "Low TSH + low T4; monitor free T4 not TSH; pituitary causes", associations: "Post-pituitary surgery/radiation, craniopharyngioma, Sheehan", keywords: "Free T4 monitoring, central AI first"},
+            {lo: "Amiodarone thyroid effects", step1: "Type 1 (MMI) vs Type 2 (glucocorticoids); Wolff-Chaikoff; long half-life", associations: "40% iodine; inhibits 5'-deiodinase; both hypo and hyperthyroidism", keywords: "Amiodarone, Type 1 vs 2, low RAI uptake Type 2"},
+            {lo: "Congenital hypothyroidism", step1: "Iodine deficiency → cretinism; Pendred syndrome (SLC26A4); newborn screening", associations: "Most preventable intellectual disability; Pendred = deafness + goiter", keywords: "Cretinism, iodine deficiency, pendrin, perchlorate test"}
         ];
 
-        function rFC() {
-            const container = document.getElementById('fc-container');
-            container.innerHTML = '';
-            flashcards.forEach((fc, idx) => {
-                const card = document.createElement('div');
-                card.className = 'card flashcard fc';
-                card.onclick = () => card.classList.toggle('flipped');
-                card.innerHTML = `
-                    <div class="fc-front">${fc.front}</div>
-                    <div class="fc-back">${fc.back}</div>
-                    <div class="fc-flip-hint">Click to reveal answer</div>
-                `;
-                container.appendChild(card);
-            });
-        }
+        let ts = {c: 0, t: traps.length};
 
-        function rMCQ() {
-            const container = document.getElementById('mi-container');
-            container.innerHTML = '';
-            mcqs.forEach((m, idx) => {
-                const card = document.createElement('div');
-                card.className = 'card mi';
-                let optHTML = '';
-                m.opts.forEach((opt, oidx) => {
-                    optHTML += `<div class="mcq-option" onclick="sel(this, ${oidx === m.correct}, '${js_str(m.expl)}')">${String.fromCharCode(65 + oidx)}) ${opt}</div>`;
-                });
-                card.innerHTML = `
-                    <div class="mcq-question">Q${idx + 1}: ${m.q}</div>
-                    <div class="mcq-options">${optHTML}</div>
-                    <div class="mcq-explanation"></div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function rVig() {
-            const container = document.getElementById('vi-container');
-            container.innerHTML = '';
-            vignettes.forEach((v, vidx) => {
-                const card = document.createElement('div');
-                card.className = 'card vi';
-                let qsHTML = '';
-                v.qs.forEach((qa, qidx) => {
-                    qsHTML += `
-                        <div class="vi-question">
-                            <div class="vi-q-text">Q${qidx + 1}: ${qa.q}</div>
-                            <div class="vi-a-text">${qa.a}</div>
-                        </div>
-                    `;
-                });
-                card.innerHTML = `
-                    <div style="font-weight: 600; font-size: 15px; margin-bottom: 8px; color: #79C0FF;">${v.title}</div>
-                    <div style="color: #A0AEC0; font-size: 13px; margin-bottom: 12px; line-height: 1.5;">${v.intro}</div>
-                    ${qsHTML}
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function rTrap() {
-            const container = document.getElementById('tri-container');
-            container.innerHTML = '';
-            traps.forEach((t, idx) => {
-                const card = document.createElement('div');
-                card.className = 'card tri';
-                card.innerHTML = `
-                    <div class="trap-statement">${t.stmt}</div>
-                    <div class="trap-buttons">
-                        <button class="trap-btn" onclick="ans(${idx}, true)">True</button>
-                        <button class="trap-btn no" onclick="ans(${idx}, false)">False</button>
-                    </div>
-                    <div class="trap-reveal" id="trap-${idx}"><strong>Explanation:</strong> ${t.reveal}</div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function rFib() {
-            const container = document.getElementById('fi-container');
-            container.innerHTML = '';
-            fillInBlanks.forEach((f, idx) => {
-                const card = document.createElement('div');
-                card.className = 'card fi';
-                const prompt = f.prompt.split('_____');
-                let html = `<div style="margin-bottom: 12px;">`;
-                for (let i = 0; i < prompt.length; i++) {
-                    html += `<span>${prompt[i]}</span>`;
-                    if (i < prompt.length - 1) {
-                        html += `<input type="text" class="fib-input" id="fib-${idx}-${i}" placeholder="answer ${i+1}">`;
-                    }
-                }
-                html += `</div>`;
-                html += `<button class="fib-check-btn" onclick="chk(${idx})">Check Answer</button>`;
-                html += `<div class="fib-feedback" id="fib-fb-${idx}"></div>`;
-                card.innerHTML = html;
-                container.appendChild(card);
-            });
-        }
-
-        function rRef() {
-            const tbody = document.getElementById('rt-body');
-            tbody.innerHTML = '';
-            refTable.forEach(r => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><span class="rt-emphasis">${r.lo}</span></td>
-                    <td>${r.step1}</td>
-                    <td>${r.hy}</td>
-                    <td>${r.bw}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function sel(el, isCorrect, expl) {
-            if (el.classList.contains('correct') || el.classList.contains('incorrect')) return;
-            el.classList.add(isCorrect ? 'correct' : 'incorrect');
-            const explDiv = el.parentElement.nextElementSibling;
-            explDiv.classList.add('show');
-            explDiv.textContent = expl;
-            const answered = document.querySelectorAll('.mcq-option.correct, .mcq-option.incorrect').length;
-            const correct = document.querySelectorAll('.mcq-option.correct').length;
-            document.getElementById('mi-answered').textContent = Math.ceil(answered / mcqs.length);
-            document.getElementById('mi-correct').textContent = Math.ceil(correct / mcqs.length);
-            document.getElementById('mi-progress').style.width = (answered / (mcqs.length * 1)) * 100 + '%';
-        }
-
-        function ans(idx, userSaysCorrect) {
-            const isCorrect = traps[idx].correct === userSaysCorrect;
-            const reveal = document.getElementById('trap-' + idx);
-            reveal.classList.add('show');
-            if (!isCorrect) {
-                reveal.style.borderLeftColor = '#f85149';
-            }
-            const revealed = document.querySelectorAll('.trap-reveal.show').length;
-            document.getElementById('tri-revealed').textContent = revealed;
-        }
-
-        function chk(idx) {
-            const fib = fillInBlanks[idx];
-            let allCorrect = true;
-            let feedback = '';
-            for (let i = 0; i < fib.answers.length; i++) {
-                const input = document.getElementById('fib-' + idx + '-' + i);
-                const userAns = input.value.toLowerCase().trim();
-                const isCorrect = fib.answers[i].some(a => a.toLowerCase() === userAns);
-                if (!isCorrect) {
-                    allCorrect = false;
-                    feedback += `Blank ${i+1}: Expected one of [${fib.answers[i].join(', ')}]\n`;
-                }
-            }
-            const fbDiv = document.getElementById('fib-fb-' + idx);
-            if (allCorrect) {
-                fbDiv.classList.add('correct');
-                fbDiv.classList.remove('incorrect');
-                fbDiv.textContent = '✓ Correct!';
-            } else {
-                fbDiv.classList.add('incorrect');
-                fbDiv.classList.remove('correct');
-                fbDiv.textContent = feedback || '✗ Incorrect. Try again.';
-            }
-            const checked = document.querySelectorAll('.fib-feedback.correct').length;
-            document.getElementById('fi-checked').textContent = checked;
-        }
-
-        function sw(name, btn) {
-            document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-            document.getElementById(name).classList.add('active');
+        function switchTab(n) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            document.getElementById('tab-' + n).classList.add('active');
+            event.target.classList.add('active');
         }
 
-        window.onload = function() {
-            rFC();
-            rMCQ();
-            rVig();
-            rTrap();
-            rFib();
-            rRef();
-
-            document.querySelectorAll('.flashcard').forEach(fc => {
-                fc.addEventListener('click', () => {
-                    const viewed = document.querySelectorAll('.flashcard.flipped').length;
-                    document.getElementById('fc-viewed').textContent = viewed;
-                    document.getElementById('fc-progress').style.width = (viewed / flashcards.length) * 100 + '%';
-                });
+        function renderFC() {
+            const c = document.getElementById('fcGrid');
+            c.innerHTML = '';
+            flashcards.forEach((card, i) => {
+                const el = document.createElement('div');
+                el.className = 'fc';
+                el.innerHTML = `<div class="fc-inner"><div class="fc-front"><div class="fc-label">Card ${i+1}</div><div class="fc-q">${card.q}</div><div class="fc-hint">Click to reveal</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${card.a}</div></div></div>`;
+                el.onclick = () => el.classList.toggle('flipped');
+                c.appendChild(el);
             });
+        }
+
+        function renderMCQ() {
+            const c = document.getElementById('mcqCont');
+            c.innerHTML = '';
+            mcqs.forEach((q, i) => {
+                const el = document.createElement('div');
+                el.className = 'mcq-item';
+                let opts = '';
+                q.options.forEach((o, j) => {
+                    opts += `<div class="mcq-opt" onclick="selOpt(this,${j===q.correct},\`${q.explanations[j].replace(/`/g,"'")}\`)"><span class="letter">${String.fromCharCode(65+j)}.</span><span>${o}</span></div>`;
+                });
+                el.innerHTML = `<div class="mcq-num">Question ${i+1}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options">${opts}</div><div class="mcq-exp"></div><div class="teaching"><div class="tp-label">Teaching Point</div><div>${q.teaching}</div></div>`;
+                c.appendChild(el);
+            });
+        }
+
+        function selOpt(el, ok, exp) {
+            if (el.classList.contains('revealed')) return;
+            const it = el.closest('.mcq-item');
+            it.querySelectorAll('.mcq-opt').forEach(o => o.classList.add('revealed'));
+            el.classList.add(ok ? 'correct' : 'wrong');
+            const e = it.querySelector('.mcq-exp');
+            e.innerHTML = `<div class="exp-label">${ok ? 'Correct!' : 'Incorrect'}</div><div>${exp}</div>`;
+            e.classList.add('visible');
+            it.querySelector('.teaching').classList.add('visible');
+        }
+
+        function renderVig() {
+            const c = document.getElementById('vigCont');
+            c.innerHTML = '';
+            vignettes.forEach(v => {
+                const el = document.createElement('div');
+                el.className = 'vig-item';
+                let qa = '';
+                v.qa.forEach(x => {
+                    qa += `<div><div class="vig-q">${x.q}</div><div class="vig-a">${x.a}</div></div>`;
+                });
+                el.innerHTML = `<div class="vig-banner">${v.banner}</div><div class="vig-stem">${v.stem}</div><button class="vig-btn" onclick="togVig(this)">Reveal Q&A</button><div class="vig-qa">${qa}</div>`;
+                c.appendChild(el);
+            });
+        }
+
+        function togVig(btn) {
+            const q = btn.nextElementSibling;
+            q.classList.toggle('visible');
+            btn.textContent = q.classList.contains('visible') ? 'Hide Q&A' : 'Reveal Q&A';
+        }
+
+        function renderTraps() {
+            const c = document.getElementById('trapCont');
+            c.innerHTML = '';
+            ts = {c: 0, t: traps.length};
+            updTS();
+            traps.forEach((t, i) => {
+                const el = document.createElement('div');
+                el.className = 'trap-item';
+                el.innerHTML = `<div class="trap-stmt">${i+1}. ${t.myth}</div><div class="trap-btns"><button class="tbtn tbtn-c" onclick="ansT(${i},true)">CORRECT ✓</button><button class="tbtn tbtn-x" onclick="ansT(${i},false)">TRAP ✗</button></div><div class="trap-res" id="tr${i}"><div class="trap-verd" id="tv${i}"></div><div id="te${i}"></div></div>`;
+                c.appendChild(el);
+            });
+        }
+
+        function ansT(i, u) {
+            const ok = (u === traps[i].correct);
+            document.querySelectorAll(`[onclick*="ansT(${i},"]`).forEach(b => b.disabled = true);
+            const r = document.getElementById('tr' + i);
+            r.classList.add('show', ok ? 'ok' : 'bad');
+            document.getElementById('tv' + i).innerHTML = ok ? '✓ Correct!' : '✗ Incorrect';
+            document.getElementById('te' + i).innerHTML = traps[i].truth;
+            if (ok) ts.c++;
+            updTS();
+        }
+
+        function updTS() {
+            const e = document.getElementById('tscore');
+            if (e) e.textContent = `Score: ${ts.c}/${ts.t}`;
+        }
+
+        function renderFIB() {
+            const c = document.getElementById('fibCont');
+            c.innerHTML = '';
+            fillInBlanks.forEach((q, i) => {
+                const el = document.createElement('div');
+                el.className = 'fib-item';
+                el.innerHTML = `<div><strong>Q${i+1}:</strong> ${q.prompt}</div><input type="text" class="fib-in" placeholder="Type answer..." data-ans="${q.answer}"><button class="fib-btn" onclick="chkFib(this)">Check</button><div class="fib-res"></div>`;
+                c.appendChild(el);
+            });
+        }
+
+        function chkFib(btn) {
+            const inp = btn.previousElementSibling;
+            const ans = inp.getAttribute('data-ans').split(';').map(a => a.toLowerCase().trim());
+            const u = inp.value.toLowerCase().trim();
+            const r = btn.nextElementSibling;
+            const ok = ans.some(a => u.includes(a) || a.includes(u));
+            r.textContent = ok ? `✓ Correct! Answer: ${ans.join(' / ')}` : `✗ Incorrect. Answer: ${ans.join(' / ')}`;
+            r.className = 'fib-res ' + (ok ? 'ok' : 'bad');
+        }
+
+        function renderRef() {
+            const c = document.getElementById('refCont');
+            let h = '<table class="ref-table"><thead><tr><th>GUSOM LO</th><th>Step 1 Extension</th><th>High-Yield Associations</th><th>Key Buzzwords</th></tr></thead><tbody>';
+            refTable.forEach(r => {
+                h += `<tr><td>${r.lo}</td><td>${r.step1}</td><td>${r.associations}</td><td class="hl">${r.keywords}</td></tr>`;
+            });
+            h += '</tbody></table>';
+            c.innerHTML = h;
+        }
+
+        function fixCardHeights() {
+            document.querySelectorAll('.fc').forEach(c => {
+                const f = c.querySelector('.fc-front'), b = c.querySelector('.fc-back');
+                const h = Math.max(f.scrollHeight, b.scrollHeight) + 16;
+                c.style.minHeight = h + 'px';
+                c.querySelector('.fc-inner').style.minHeight = h + 'px';
+                f.style.minHeight = h + 'px';
+                b.style.minHeight = h + 'px';
+            });
+        }
+
+        window.onload = () => {
+            renderFC();
+            renderMCQ();
+            renderVig();
+            renderTraps();
+            renderFIB();
+            renderRef();
+            setTimeout(fixCardHeights, 80);
         };
     </script>
 </body>

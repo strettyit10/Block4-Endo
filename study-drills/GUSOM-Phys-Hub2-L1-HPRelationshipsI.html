@@ -198,7 +198,8 @@ function resetTraps(){ts.c=0;ts.t=traps.length;document.querySelectorAll('.trap-
 function renderFIB(){const c=document.getElementById('fibCont');c.innerHTML='';fillInBlanks.forEach((q,i)=>{const el=document.createElement('div');el.className='fib-item';el.innerHTML=`<div><strong>Q${i+1}:</strong> ${q.prompt}</div><input type="text" class="fib-in" placeholder="Type answer..." data-ans="${q.answer}"><button class="fib-btn" onclick="chkFib(this)">Check</button><div class="fib-res"></div>`;c.appendChild(el);});}
 function chkFib(btn){const inp=btn.previousElementSibling;const ans=inp.getAttribute('data-ans').split(';').map(a=>a.toLowerCase().trim());const u=inp.value.toLowerCase().trim();const r=btn.nextElementSibling;const ok=ans.some(a=>u.includes(a)||a.includes(u));r.textContent=ok?`✓ Correct! Answer: ${ans.join(' / ')}`:`✗ Incorrect. Answer: ${ans.join(' / ')}`;r.className='fib-res '+(ok?'ok':'bad');}
 function renderRef(){const c=document.getElementById('refCont');let h='<table class="ref-table"><thead><tr><th>GUSOM LO</th><th>Step 1 Extension</th><th>High-Yield Associations</th><th>Key Buzzwords</th></tr></thead><tbody>';refTable.forEach(r=>{h+=`<tr><td>${r.lo}</td><td>${r.step1}</td><td>${r.associations}</td><td class="hl">${r.keywords}</td></tr>`;});h+='</tbody></table>';c.innerHTML=h;}
-window.onload=()=>{renderFC();renderMCQ();renderVig();renderTraps();renderFIB();renderRef();};
+function fixCardHeights(){document.querySelectorAll('.fc').forEach(c=>{const f=c.querySelector('.fc-front'),b=c.querySelector('.fc-back');const h=Math.max(f.scrollHeight,b.scrollHeight)+16;c.style.minHeight=h+'px';c.querySelector('.fc-inner').style.minHeight=h+'px';f.style.minHeight=h+'px';b.style.minHeight=h+'px';});}
+window.onload=()=>{renderFC();renderMCQ();renderVig();renderTraps();renderFIB();renderRef();setTimeout(fixCardHeights,80);};
 </script>
 </body>
 </html>
