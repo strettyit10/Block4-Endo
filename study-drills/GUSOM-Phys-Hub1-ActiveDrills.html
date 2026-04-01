@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Physiology Hub #1 — Core Concepts Active Drills</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+
+        .header { background: linear-gradient(135deg, #0D2E0E 0%, #162716 100%); border: 1px solid #2E7D32; border-left: 5px solid #4CAF50; border-radius: 12px; padding: 32px 36px; margin-bottom: 28px; }
+        .hub-tag { display: inline-block; background: #2E7D32; color: #fff; font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 4px; margin-bottom: 12px; }
+        .header h1 { font-size: 2.1em; color: #E6EDF3; margin-bottom: 8px; line-height: 1.2; }
+        .header h1 span { color: #4CAF50; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.95em; line-height: 1.6; margin-bottom: 16px; }
+        .source-strip { display: flex; gap: 10px; flex-wrap: wrap; }
+        .source-badge { background: #1C2128; border: 1px solid #30363D; border-radius: 6px; padding: 5px 12px; font-size: 0.8em; color: #8B949E; }
+        .source-badge strong { color: #4CAF50; }
+
+        /* Hub Progression */
+        .hub-progression { background: #161B22; border: 1px solid #21262D; border-radius: 10px; padding: 16px 20px; margin-bottom: 28px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .hub-step { padding: 7px 16px; border-radius: 6px; font-size: 0.85em; font-weight: 600; }
+        .hub-step.current { background: #2E7D32; color: #fff; }
+        .hub-step.next { background: #1C2128; border: 1px solid #30363D; color: #6B7280; text-decoration: none; transition: all 0.2s; }
+        .hub-step.next:hover { border-color: #4CAF50; color: #4CAF50; }
+        .hub-arrow { color: #30363D; font-size: 1.1em; }
+        .hub-prog-label { font-size: 0.8em; color: #6B7280; margin-right: 8px; }
+
+        /* Stats bar */
+        .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 28px; }
+        .stat-card { background: #161B22; border: 1px solid #21262D; border-radius: 8px; padding: 14px 16px; text-align: center; }
+        .stat-num { font-size: 1.8em; font-weight: 700; color: #4CAF50; }
+        .stat-label { font-size: 0.75em; color: #6B7280; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.07em; }
+
+        /* Lecture grid */
+        .section-label { font-size: 0.78em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+        .lecture-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .lecture-card { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; text-decoration: none; color: inherit; transition: all 0.2s; position: relative; overflow: hidden; }
+        .lecture-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); }
+        .lecture-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+        .lc-num { font-size: 0.72em; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+        .lc-title { font-size: 1.05em; font-weight: 700; color: #E6EDF3; margin-bottom: 6px; }
+        .lc-topics { font-size: 0.82em; color: #6B7280; line-height: 1.5; margin-bottom: 12px; }
+        .lc-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+        .lc-pill { background: rgba(76,175,80,0.1); border: 1px solid rgba(76,175,80,0.25); border-radius: 4px; padding: 2px 8px; font-size: 0.72em; color: #81C784; font-weight: 600; }
+
+        /* Approach section */
+        .approach { background: #161B22; border: 1px solid #21262D; border-radius: 10px; padding: 22px; margin-bottom: 24px; }
+        .approach h3 { font-size: 0.9em; font-weight: 700; color: #4CAF50; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .step { display: flex; gap: 12px; align-items: flex-start; }
+        .step-num { background: #2E7D32; color: #fff; font-size: 0.8em; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .step-text { font-size: 0.85em; color: #9CA3AF; line-height: 1.5; }
+        .step-text strong { color: #E6EDF3; }
+
+        /* Footer */
+        .footer { text-align: center; font-size: 0.78em; color: #6B7280; border-top: 1px solid #21262D; padding-top: 16px; }
+        .footer a { color: #4CAF50; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- HEADER -->
+    <div class="header">
+        <div class="hub-tag">Hub #1 — Core Concepts</div>
+        <h1>Physiology <span>Active Drills</span></h1>
+        <div class="subtitle">
+            Anki-powered flashcard bank · MCQ · Clinical vignettes · Test traps · Fill-in-blank<br>
+            7 lectures · Endocrinology Physiology Module · Dr. Watson
+        </div>
+        <div class="source-strip">
+            <div class="source-badge"><strong>Primary:</strong> GUSOM Anki Flash Decks</div>
+            <div class="source-badge"><strong>Framework:</strong> Watson Learning Objectives</div>
+            <div class="source-badge"><strong>Clinical:</strong> Vignette Integration</div>
+            <div class="source-badge"><strong>Review:</strong> BRS Physiology</div>
+        </div>
+    </div>
+
+    <!-- HUB PROGRESSION -->
+    <div class="hub-progression">
+        <span class="hub-prog-label">Hub Progression:</span>
+        <span class="hub-step current">🧠 Hub #1 — Core Concepts</span>
+        <span class="hub-arrow">→</span>
+        <a href="GUSOM-Phys-Hub2-ActiveDrills.html" class="hub-step next">🔬 Hub #2 — Step 1 Extensions</a>
+        <span class="hub-arrow">→</span>
+        <a href="GUSOM-Phys-Hub3-ActiveDrills.html" class="hub-step next">📝 Hub #3 — Practice Questions</a>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-bar">
+        <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">Lectures</div></div>
+        <div class="stat-card"><div class="stat-num">579</div><div class="stat-label">Anki Cards</div></div>
+        <div class="stat-card"><div class="stat-num">84+</div><div class="stat-label">MCQ Questions</div></div>
+        <div class="stat-card"><div class="stat-num">21+</div><div class="stat-label">Vignettes</div></div>
+        <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Activity Types</div></div>
+    </div>
+
+    <!-- LECTURE GRID -->
+    <div class="section-label">Lecture Hubs — Click to Open</div>
+    <div class="lecture-grid">
+
+        <a href="GUSOM-Phys-Hub1-L1-HPRelationshipsI.html" class="lecture-card" style="--accent:#0277BD;">
+            <div class="lc-num">Lecture 1</div>
+            <div class="lc-title">Hypothalamic-Pituitary Relationships I</div>
+            <div class="lc-topics">Hypothalamic nuclei · Pituitary anatomy · Portal system · Anterior pituitary cell types · 3 feedback loops</div>
+            <div class="lc-pills"><span class="lc-pill">🃏 12 Anki Cards</span><span class="lc-pill">❓ 8 MCQ</span><span class="lc-pill">🏥 3 Vignettes</span></div>
+        </a>
+
+        <a href="GUSOM-Phys-Hub1-L2-HPRelationshipsII.html" class="lecture-card" style="--accent:#283593;">
+            <div class="lc-num">Lecture 2</div>
+            <div class="lc-title">Hypothalamic-Pituitary Relationships II</div>
+            <div class="lc-topics">Anterior pituitary hormones · GnRH pulsatility · Prolactin regulation · TRH dual action · LH/FSH regulation</div>
+            <div class="lc-pills"><span class="lc-pill">🃏 12 Anki Cards</span><span class="lc-pill">❓ 7 MCQ</span><span class="lc-pill">🏥 3 Vignettes</span></div>
+        </a>
+
+        <a href="GUSOM-Phys-Hub1-L3-PosteriorPituitary.html" class="lecture-card" style="--accent:#00695C;">
+            <div class="lc-num">Lecture 3</div>
+            <div class="lc-title">Posterior Pituitary</div>
+            <div class="lc-topics">Vasopressin (AVP) · Oxytocin · Osmoreceptors · Desmopressin · Gestational DI · Parturition · Lactation</div>
+            <div class="lc-pills"><span class="lc-pill">🃏 14 Anki Cards</span><span class="lc-pill">❓ 8 MCQ</span><span class="lc-pill">🏥 3 Vignettes</span></div>
+        </a>
+
+        <a href="GUSOM-Phys-Hub1-L4-GHAxis.html" class="lecture-card" style="--accent:#6A4C93;">
+            <div class="lc-num">Lecture 4</div>
+            <div class="lc-title">Hypothalamic-Pituitary-GH Axis</div>
+            <div class="lc-topics">GHRH · Somatostatin · IGF-1 feedback · GH metabolic effects · Acromegaly · GH stimulators/inhibitors</div>
+            <div class="lc-pills"><span class="lc-pill">🃏 12 Anki Cards</span><span class="lc-pill">❓ 7 MCQ</span><span class="lc-pill">🏥 3 Vignettes</span></div>
+        </a>
+
+        <a href="GUSOM-Phys-Hub1-L5-HPAdrenalAxis.html" class="lecture-card" style="--accent:#BF360C;">
+            <div class="lc-num">Lecture 5</div>
+            <div class="lc-title">Hypothalamic-Pituitary-Adrenal Axis</div>
+            <div class="lc-topics">CRH · ACTH/POMC · Cortisol feedback · Low vs high cortisol · CAH · Cushing · Addison</div>
+            <div class="lc-pills"><span class="lc-pill">🃏 13 Anki Cards</span><span class="lc-pill">❓ 8 MCQ</span><span class="lc-pill">🏥 3 Vignettes</span></div>
+        </a>
+
+        <a href="GUSOM-Phys-Hub1-L6-StressIntegration.html" class="lecture-card" style="--accent:#8D1F1F;">
+            <div class="lc-num">Lecture 6</div>
+            <div class="lc-title">Stress Integration</div>
+            <div class="lc-topics">CRH as master stress hormone · SAM axis · Acute vs chronic stress · GI/immune/reproductive effects · Cancer metastasis</div>
+            <div class="lc-pills"><span class="lc-pill">🃏 11 Anki Cards</span><span class="lc-pill">❓ 6 MCQ</span><span class="lc-pill">🏥 2 Vignettes</span></div>
+        </a>
+
+        <a href="GUSOM-Phys-Hub1-L7-HPThyroidAxis.html" class="lecture-card" style="--accent:#0D47A1;">
+            <div class="lc-num">Lecture 7</div>
+            <div class="lc-title">Hypothalamic-Pituitary-Thyroid Axis</div>
+            <div class="lc-topics">TRH · TSH · Thyroid hormone feedback · Hypothyroidism vs hyperthyroidism · HPT axis integration</div>
+            <div class="lc-pills"><span class="lc-pill">🃏 10 Anki Cards</span><span class="lc-pill">❓ 6 MCQ</span><span class="lc-pill">🏥 2 Vignettes</span></div>
+        </a>
+
+    </div>
+
+    <!-- STUDY APPROACH -->
+    <div class="approach">
+        <h3>📋 Recommended Study Approach</h3>
+        <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Flashcards first</strong> — flip through the Anki-powered cards to prime the key concepts and mechanisms for that lecture.</div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-text"><strong>MCQ Practice</strong> — test your recall with standard multiple-choice, getting immediate answer + explanation.</div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Clinical Vignettes</strong> — apply concepts to patient scenarios. Think about presentation → mechanism → treatment.</div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Test Traps + FIB</strong> — shore up misconceptions and fill pathway gaps before moving to Hub #2.</div></div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <a href="GUSOM-Phys-ActiveDrills.html">← Classic Physiology Hub</a> &nbsp;|&nbsp;
+        <a href="GUSOM-Phys-Hub2-ActiveDrills.html">Hub #2 — Step 1 Extensions →</a> &nbsp;|&nbsp;
+        <a href="GUSOM-Phys-Hub3-ActiveDrills.html">Hub #3 — Practice Questions →</a>
+    </div>
+</div>
+</body>
+</html>

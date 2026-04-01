@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phys Hub #1 L6: Stress Integration</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+        :root { --accent: #8D1F1F; --accent-light: rgba(141,31,31,0.15); }
+        * { margin:0;padding:0;box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif;background:#0D1117;color:#E6EDF3;min-height:100vh; }
+        .container { max-width:1100px;margin:0 auto;padding:20px; }
+        .header { background:linear-gradient(135deg,#161B22 0%,#1A0505 100%);border-bottom:3px solid var(--accent);padding:28px 30px;margin-bottom:28px;border-radius:10px; }
+        .header .back { font-size:0.8em;color:#6B7280;text-decoration:none;display:inline-block;margin-bottom:10px; }
+        .header .back:hover { color:var(--accent); }
+        .header h1 { color:#E6EDF3;font-size:1.9em;margin-bottom:6px; }
+        .header .subtitle { color:#9CA3AF;font-size:0.9em; }
+        .header .accent-tag { color:var(--accent);font-weight:600; }
+        .lo-box { background:var(--accent-light);border:1px solid var(--accent);border-radius:8px;padding:12px 14px;margin-top:14px;font-size:0.82em;color:#C9D1D9;line-height:1.6; }
+        .lo-box strong { color:var(--accent);display:block;margin-bottom:4px;font-size:0.9em;text-transform:uppercase;letter-spacing:0.06em; }
+        .tab-nav { display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;background:#161B22;padding:12px;border-radius:8px;border:1px solid #21262D; }
+        .tab-btn { padding:9px 18px;background:#1C2128;color:#8B949E;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.88em;transition:all 0.2s; }
+        .tab-btn:hover { background:#30363D;color:var(--accent); }
+        .tab-btn.active { background:var(--accent);color:#fff;border-color:var(--accent); }
+        .tab-content { display:none;animation:fadeIn 0.25s ease; }
+        .tab-content.active { display:block; }
+        @keyframes fadeIn { from { opacity:0;transform:translateY(8px); } to { opacity:1;transform:translateY(0); } }
+        .fc-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px; }
+        .fc { background:#161B22;border:1px solid #30363D;border-radius:10px;cursor:pointer;perspective:800px;min-height:160px; }
+        .fc-inner { position:relative;width:100%;min-height:160px;transform-style:preserve-3d;transition:transform 0.5s; }
+        .fc.flipped .fc-inner { transform:rotateY(180deg); }
+        .fc-front,.fc-back { position:absolute;width:100%;min-height:160px;backface-visibility:hidden;padding:18px;border-radius:10px;display:flex;flex-direction:column;justify-content:center; }
+        .fc-front { background:#161B22;border-top:3px solid var(--accent); }
+        .fc-back { background:#1A1F2E;transform:rotateY(180deg);border-top:3px solid #4ADE80; }
+        .fc-label { font-size:0.7em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px; }
+        .fc-front .fc-label { color:var(--accent); }
+        .fc-back .fc-label { color:#4ADE80; }
+        .fc-q { font-size:0.95em;color:#E6EDF3;line-height:1.5;font-weight:500; }
+        .fc-a { font-size:0.88em;color:#D1FAE5;line-height:1.6; }
+        .mcq-item { background:#161B22;border:1px solid #30363D;border-radius:10px;padding:20px;margin-bottom:16px; }
+        .mcq-num { font-size:0.75em;color:#6B7280;font-weight:700;text-transform:uppercase;margin-bottom:8px; }
+        .mcq-stem { font-size:0.95em;color:#E6EDF3;margin-bottom:14px;line-height:1.6; }
+        .mcq-stem strong { color:#FCD34D; }
+        .mcq-options { display:flex;flex-direction:column;gap:8px;margin-bottom:12px; }
+        .mcq-opt { padding:10px 14px;background:#1C2128;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-size:0.9em;color:#C9D1D9;transition:all 0.2s;display:flex;gap:10px;align-items:flex-start; }
+        .mcq-opt:hover:not([disabled]) { background:#21262D;border-color:var(--accent); }
+        .mcq-opt.correct { background:rgba(74,222,128,0.15);border-color:#4ADE80;color:#D1FAE5; }
+        .mcq-opt.wrong { background:rgba(239,68,68,0.1);border-color:#EF4444;color:#FCA5A5; }
+        .mcq-opt .letter { font-weight:700;min-width:20px; }
+        .mcq-explanation { background:#1C2128;border-left:3px solid #4ADE80;padding:12px 14px;border-radius:0 6px 6px 0;font-size:0.87em;color:#9CA3AF;display:none;margin-top:4px;line-height:1.6; }
+        .mcq-explanation.visible { display:block; }
+        .exp-label { color:#4ADE80;font-weight:600;display:block;margin-bottom:4px; }
+        .teaching-pt { background:var(--accent-light);border:1px solid var(--accent);border-radius:8px;padding:12px 14px;margin-top:10px;font-size:0.87em;color:#C9D1D9;display:none;line-height:1.6; }
+        .teaching-pt.visible { display:block; }
+        .tp-label { font-weight:700;color:var(--accent);display:block;margin-bottom:4px; }
+        .vig-item { background:#161B22;border:1px solid #30363D;border-radius:10px;padding:22px;margin-bottom:20px; }
+        .vig-banner { background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:8px 14px;font-size:0.8em;color:#C9D1D9;font-weight:600;margin-bottom:14px; }
+        .vig-stem { font-size:0.93em;line-height:1.7;color:#D1D5DB;margin-bottom:14px; }
+        .vig-stem strong { color:#FCD34D; }
+        .trap-item { background:#1A1212;border:1px solid #7F1D1D;border-radius:10px;padding:18px;margin-bottom:14px; }
+        .trap-header { color:#FCA5A5;font-size:0.85em;font-weight:700;margin-bottom:8px; }
+        .trap-myth { background:rgba(239,68,68,0.1);border-left:3px solid #EF4444;padding:8px 12px;border-radius:0 6px 6px 0;font-size:0.9em;color:#FCA5A5;margin-bottom:8px; }
+        .trap-truth { background:rgba(74,222,128,0.1);border-left:3px solid #4ADE80;padding:8px 12px;border-radius:0 6px 6px 0;font-size:0.9em;color:#D1FAE5; }
+        .trap-myth-label { font-size:0.75em;color:#EF4444;font-weight:700;margin-bottom:4px; }
+        .trap-truth-label { font-size:0.75em;color:#4ADE80;font-weight:700;margin-bottom:4px; }
+        .fib-item { background:#161B22;border:1px solid #30363D;border-radius:10px;padding:18px;margin-bottom:14px; }
+        .fib-prompt { font-size:0.93em;color:#E6EDF3;margin-bottom:12px;line-height:1.6; }
+        .fib-input { width:100%;background:#0D1117;border:1px solid #30363D;border-radius:6px;padding:8px 12px;color:#E6EDF3;font-size:0.9em;font-family:inherit;margin-bottom:8px; }
+        .fib-input:focus { outline:none;border-color:var(--accent); }
+        .fib-btn { background:var(--accent);color:white;border:none;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:600; }
+        .fib-result { margin-top:8px;font-size:0.88em;padding:8px 12px;border-radius:6px;display:none;line-height:1.5; }
+        .fib-result.correct { background:rgba(74,222,128,0.15);color:#D1FAE5;border:1px solid #4ADE80;display:block; }
+        .fib-result.incorrect { background:rgba(239,68,68,0.1);color:#FCA5A5;border:1px solid #EF4444;display:block; }
+        .ref-table { width:100%;border-collapse:collapse;margin-bottom:20px;font-size:0.87em; }
+        .ref-table th { background:var(--accent);color:white;padding:9px 12px;text-align:left; }
+        .ref-table td { padding:8px 12px;border:1px solid #30363D;color:#C9D1D9;vertical-align:top; }
+        .ref-table tr:nth-child(even) td { background:#161B22; }
+        .ref-table tr:nth-child(odd) td { background:#1C2128; }
+        .ref-table td.hl { color:var(--accent);font-weight:600; }
+        .ref-table td.hl-g { color:#4ADE80;font-weight:600; }
+        .ref-table td.hl-r { color:#F87171;font-weight:600; }
+        .section-title { font-size:0.8em;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <a href="GUSOM-Phys-Hub1-ActiveDrills.html" class="back">← Hub #1 Landing</a>
+    <h1>Lecture 6: <span class="accent-tag">Stress Integration</span></h1>
+    <div class="subtitle">CRH as master stress hormone · SAM axis · Acute vs chronic stress · GI/immune/reproductive effects</div>
+    <div class="lo-box"><strong>Learning Objectives</strong>Explain difference between acute and chronic stress · Explain central role of CRH in mediating stress · Describe effects of pro-inflammatory cytokines on CRH · Explain how stress cascade can cause dysfunction of immune, reproductive, GI, cardiovascular systems · Explain impacts of stress reduction</div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('flashcards',this)">🃏 Flashcards</button>
+    <button class="tab-btn" onclick="switchTab('mcq',this)">❓ MCQ</button>
+    <button class="tab-btn" onclick="switchTab('vignettes',this)">🏥 Vignettes</button>
+    <button class="tab-btn" onclick="switchTab('traps',this)">⚠️ Test Traps</button>
+    <button class="tab-btn" onclick="switchTab('fib',this)">✏️ Fill-in-Blank</button>
+    <button class="tab-btn" onclick="switchTab('ref',this)">📊 Reference</button>
+  </div>
+  <div id="tab-flashcards" class="tab-content active"><div class="section-title">Anki-Powered Flashcards — Click to Flip</div><div class="fc-grid" id="fcGrid"></div></div>
+  <div id="tab-mcq" class="tab-content"><div class="section-title">Multiple Choice Practice</div><div id="mcqContainer"></div></div>
+  <div id="tab-vignettes" class="tab-content"><div class="section-title">Clinical Vignettes</div><div id="vigContainer"></div></div>
+  <div id="tab-traps" class="tab-content"><div class="section-title">⚠️ Test Traps</div><div id="trapsContainer"></div></div>
+  <div id="tab-fib" class="tab-content"><div class="section-title">Fill in the Blank</div><div id="fibContainer"></div></div>
+  <div id="tab-ref" class="tab-content"><div class="section-title">Quick Reference</div><div id="refContainer"></div></div>
+</div>
+<script>
+const flashcards = [
+    { q: "Pathway for gathering and integrating stress information in the brain", a: "Cerebral cortex (perceives stressor) → Cingulate cortex → Hippocampus (contextual memory) → Amygdala (emotional processing/fear) → Hypothalamus (CRH release)\nKey: ALL stress signals converge on the hypothalamus to trigger the CRH-mediated stress response" },
+    { q: "Master Stress Hormone", a: "CRH (Corticotropin-releasing hormone)\nCRH is the MASTER STRESS HORMONE — orchestrates the body's entire stress response by coordinating:\n• HPA axis (CRH → ACTH → cortisol)\n• SAM axis (sympathetic nervous system → epinephrine)\n• Multiple behavioral and physiological responses" },
+    { q: "CRH effect on the autonomic nervous system", a: "CRH STIMULATES the sympathetic nervous system (SNS)\nCRH INHIBITS the parasympathetic nervous system (PNS)\nNet: fight-or-flight response — ↑HR, ↑BP, ↑glucose, bronchodilation, ↓GI motility" },
+    { q: "CRH is anxiogenic — what does this mean?", a: "Anxiogenic = causes anxiety\nCRH released from brain circuits (not just hypothalamus) → activates limbic areas → anxiety, fear, vigilance\nIn chronic stress: persistently elevated CRH → anxiety disorders, depression\nThis is part of the behavioral stress response (not just hormonal)" },
+    { q: "CRH produces a dose-dependent [what] aversion?", a: "CRH produces dose-dependent TASTE aversion AND PLACE aversion\nAnimals avoid environments associated with CRH injection — this is a conditioned aversive response\nHigher CRH doses = stronger aversion responses (dose-dependent)" },
+    { q: "Chronic stress → hippocampal damage → what consequence?", a: "Chronic stress → persistently elevated cortisol → damages hippocampal neurons (CA3 region)\nHippocampus is critical for: memory consolidation, contextual learning, HPA negative feedback\nDamage results in: MEMORY IMPAIRMENT (declarative memory loss) + ↑HPA activity (loss of hippocampal inhibition of HPA axis) → vicious cycle of more stress and more damage" },
+    { q: "Glucocorticoids (cortisol) — effect on immune system", a: "Glucocorticoids (cortisol) have INHIBITORY effects on immune system:\n• ↓ cytokine production (IL-1, IL-6, TNF)\n• ↓ leukocyte migration to sites of inflammation\n• ↓ T-cell proliferation\n• ↓ antibody production\nAcute beneficial: limits excessive inflammation\nChronic: immunosuppression → ↑infection risk, impaired wound healing" },
+    { q: "Stress effect on GASTRIC function", a: "Stress (via CRH neurons) DECREASES gastric contractility and emptying\nMechanism: CRH → activates central CRH2 receptors → ↓vagal tone to stomach → ↓gastric motility\nClinical: stress-induced nausea, bloating, gastroparesis-like symptoms\nNote: GI ulcers from stress = combination of ↑acid (catecholamines) + ↓mucosal defenses (cortisol)" },
+    { q: "Stress effect on INTESTINAL function", a: "Stress (via CRH neurons) INCREASES intestinal motility and defecation\nMechanism: CRH → activates central CRH1 receptors → ↑colonic motility\nClinical: stress-induced diarrhea, urgency, IBS (irritable bowel syndrome) — CRH pathways implicated\nNote: gastric ↓ + intestinal ↑ = classic 'butterflies in stomach' + urgent bowel" },
+    { q: "GnIH and stress — reproductive suppression", a: "During stress: CRH neurons secrete GnIH (gonadotropin-inhibiting hormone) from dorsomedial nucleus\nGnIH → ↓GnRH pulsatility → ↓LH/FSH → ↓sex hormone production\nResult: stress-induced amenorrhea (female athletes, anorexia, chronic illness)\nAlso: glucocorticoids directly inhibit gonadotropes" },
+    { q: "Acute vs chronic stress — key differences", a: "ACUTE stress (adaptive):\n• ↑Epinephrine (SAM axis) — immediate fight-or-flight\n• ↑Cortisol — mobilizes energy\n• ↑Immune surveillance (NK cells acutely activated)\n• Resolves quickly\nCHRONIC stress (pathological):\n• Sustained cortisol → immunosuppression\n• Hippocampal damage → memory impairment\n• Cardiovascular disease risk\n• Reproductive suppression\n• ↑Cancer metastasis (via immunosuppression)" },
+];
+const mcqs = [
+    { stem: "A 28-year-old female marathon runner develops amenorrhea after significantly increasing her training. LH and FSH are very low despite low body fat. Which mediator MOST directly suppresses the HPG axis during exercise stress?", opts: ["High estrogen from adipose tissue","GnIH (gonadotropin-inhibiting hormone) released during stress","Prolactin from lactotropes","TSH from thyroid","Somatostatin from hypothalamus"], correct: 1, exps: ["Her body fat is low; estrogen is not elevated.","CORRECT. Stress → ↑CRH → GnIH from dorsomedial nucleus → ↓GnRH pulsatility → ↓LH/FSH → ↓estrogen → amenorrhea. Also: cortisol directly inhibits gonadotropes. This is functional hypothalamic amenorrhea.","Prolactin is involved in lactation-related amenorrhea; not the primary stress mechanism.","TSH is not involved in suppressing the HPG axis.","Somatostatin inhibits GH/TSH, not GnRH."], teach: "Stress amenorrhea = functional hypothalamic amenorrhea (FHA): GnIH + cortisol suppress HPG axis. Also in anorexia, illness, overtraining. Treatment: reduce stress, normalize body weight. Distinguish from PCOS (high androgens, LH, insulin resistance)." },
+    { stem: "Chronic social stress in a rat model causes measurable structural changes in the hippocampus. What is the mechanism and consequence?", opts: ["Stress → ↑dopamine → hippocampal growth","Chronic cortisol → dendritic retraction and neuronal loss in CA3 → memory impairment","Acute adrenaline → hippocampal hyperexcitability → seizures","Serotonin depletion → hippocampal atrophy → anxiety","CRH directly stimulates hippocampal growth"], correct: 1, exps: ["Stress decreases, not increases, hippocampal integrity.","CORRECT. Chronic cortisol → glucocorticoid receptor-mediated dendritic retraction → CA3 neuronal loss → declarative memory impairment. The hippocampus also normally INHIBITS the HPA axis — damage removes this brake → more cortisol → more damage (vicious cycle).","Adrenaline effects are acute, not structural.","Serotonin is relevant to depression but not the primary mechanism of hippocampal damage from stress.","CRH in high amounts is neurotoxic, not stimulatory for growth."], teach: "Chronic stress → hippocampal damage → memory impairment + ↑HPA activity (loss of hippocampal inhibition). This provides the neurobiological basis for PTSD and stress-related cognitive decline. Interventions that reduce stress (exercise, mindfulness) may prevent hippocampal damage." },
+    { stem: "A patient with IBS (irritable bowel syndrome) notes that stress reliably triggers diarrhea and urgency. What mechanism explains stress-induced diarrhea?", opts: ["Cortisol directly stimulates colonic mucosa","CRH activates central CRH1 receptors → ↑colonic motility and defecation","High epinephrine slows intestinal transit","Cortisol activates mineralocorticoid receptors in colon → Na/water secretion","Stress increases serotonin from enterochromaffin cells → decreased motility"], correct: 1, exps: ["Cortisol doesn't directly stimulate colonic mucosa acutely.","CORRECT. CRH neurons project to gut via central and peripheral pathways. CRH1 receptor activation in brain → ↑colonic motility → stress-induced diarrhea, urgency. CRH2 receptor activation → ↓gastric emptying (nausea). IBS pathophysiology involves dysregulated CRH signaling.","Epinephrine acutely SLOWS gut motility (alpha-1: vasoconstriction reduces mesenteric blood flow).","Not the primary mechanism.","5-HT from EC cells → ↑motility (not decreased). Stress may ↑5-HT contributing to IBS."], teach: "CRH has dual GI effects: CRH2 → ↓gastric emptying (nausea); CRH1 → ↑colonic motility (diarrhea). Both occur in stress. This explains stress-induced GI symptoms in IBS, functional dyspepsia. CRH antagonists are being investigated for IBS treatment." },
+    { stem: "Pro-inflammatory cytokines (IL-1, IL-6, TNF) released during infection have what effect on CRH secretion?", opts: ["Inhibit CRH to prevent over-activation of HPA axis","Stimulate CRH secretion, amplifying cortisol production during infection","Have no effect on CRH","Stimulate dopamine, inhibiting CRH indirectly","Directly stimulate cortisol from adrenal, bypassing CRH"], correct: 1, exps: ["Cytokines STIMULATE, not inhibit, CRH.","CORRECT. Pro-inflammatory cytokines (IL-1β, IL-6, TNF-α) stimulate hypothalamic CRH → ↑ACTH → ↑cortisol. This is the immune-HPA cross-talk: infection → cytokines → CRH → cortisol → anti-inflammatory effect. An elegant negative feedback loop: cortisol limits excessive inflammation.","Cytokines are major regulators of CRH.","Cytokines don't work via dopamine at the hypothalamus.","Cytokines work via CRH, not directly on the adrenal."], teach: "Immune-HPA axis cross-talk: cytokines (IL-1, IL-6, TNF) → ↑CRH → ↑ACTH → ↑cortisol → anti-inflammatory. This is why: (1) sick people have elevated cortisol (sickness response), (2) chronic infection can cause Cushing's-like features, (3) cortisol replacement helps during severe sepsis." },
+    { stem: "Which of the following CORRECTLY describes CRH's effect on the autonomic nervous system?", opts: ["CRH stimulates BOTH sympathetic and parasympathetic nervous systems equally","CRH stimulates sympathetic and INHIBITS parasympathetic nervous system","CRH inhibits sympathetic and stimulates parasympathetic","CRH only affects the enteric nervous system","CRH has no effect on the autonomic nervous system"], correct: 1, exps: ["Not equal — CRH favors sympathetic.","CORRECT. CRH: ↑SNS (via locus coeruleus and sympathetic outflow) + ↓PNS (reduces vagal tone). Net: fight-or-flight state — ↑HR, ↑BP, ↑glucose, bronchodilation, ↑alertness, ↓digestion.","Reversed — CRH promotes fight-or-flight (sympathetic).","CRH has broad ANS effects, not just enteric.","CRH is a major ANS regulator."], teach: "CRH = master stress coordinator: activates HPA axis (cortisol), activates SAM axis (epinephrine via SNS), suppresses PNS (digestion, reproduction, rest). In chronic stress, sustained CRH → sustained sympathetic activation → cardiovascular disease (HTN, atherosclerosis, arrhythmias)." },
+    { stem: "Stress-induced immunosuppression (via cortisol) can promote which pathological process?", opts: ["Autoimmune disease flares","Cancer metastasis","Faster wound healing","Greater antibody production","Better graft acceptance (less rejection)"], correct: 1, exps: ["Chronic stress-induced immunosuppression may reduce autoimmune flares transiently but long-term impairs immune surveillance.","CORRECT. Stress → ↑cortisol → immunosuppression → ↓NK cell surveillance → ↑cancer metastasis risk. Stress-induced cortisol reduces the immune system's ability to detect and destroy metastatic cells. This is a well-studied mechanism of cancer progression.","Cortisol impairs wound healing (↓collagen synthesis, ↓inflammatory response).","Antibody production is reduced by cortisol.","Reduced rejection might occur acutely, but chronic immunosuppression has other risks."], teach: "Stress → cancer metastasis: Cortisol → ↓NK cells → tumor cells evade immune surveillance → metastasize. This is one reason why psychosocial stress is associated with worse cancer outcomes. Stress reduction (yoga, mindfulness, social support) may have real biological impact on immune function." },
+];
+const vigs = [
+    { banner: "Clinical Vignette | Chronic Stress & Memory", stem: `A 45-year-old emergency physician reports difficulty remembering conversations and misplacing items frequently over the past 2 years. She attributes this to high work stress. Salivary cortisol patterns show chronically elevated evening cortisol (when it should be low).`, question: "What is the mechanism linking chronic stress/cortisol to memory impairment?", opts: ["High cortisol directly damages temporal lobe neurons","Chronic cortisol → hippocampal CA3 neuronal atrophy/dendritic retraction → declarative memory impairment","Cortisol reduces dopamine → PFC dysfunction → working memory impairment","Chronic epinephrine → sympathetic storms → sleep disruption → memory impairment","Cortisol damages the amygdala → loss of emotional memory"], correct: 1, exps: ["Cortisol preferentially damages hippocampal neurons, not temporal lobe broadly.","CORRECT. Chronic cortisol → glucocorticoid receptor activation in hippocampus → dendritic atrophy → CA3 neuronal loss → impaired consolidation of new declarative memories. Also: damaged hippocampus loses its inhibitory input to HPA → even more cortisol → vicious cycle.","PFC dopamine and working memory are affected in stress but hippocampal damage is the primary mechanism.","Sleep disruption contributes but is not the primary mechanism.","Amygdala may actually be hyper-reactive in stress, not damaged; emotional memory may be enhanced."], teach: "Chronic stress → hippocampal damage → declarative memory loss. The hippocampus is critical for HPA negative feedback — loss of hippocampal neurons removes the brake on cortisol → more hippocampal damage. MRI studies show smaller hippocampi in PTSD patients. Exercise can reverse this — promotes BDNF (brain-derived neurotrophic factor) → hippocampal neurogenesis." },
+    { banner: "Clinical Vignette | Stress Amenorrhea", stem: `A 22-year-old female competitive rower reports 8 months of absent periods. She trains 4–6 hours/day. Weight is 110 lbs (BMI 18.5). No pregnancy. LH 1.2 mIU/mL (low), FSH 2.1 mIU/mL (low), estradiol very low. Prolactin normal. TSH normal.`, question: "What physiological mechanism explains her amenorrhea?", opts: ["Prolactinoma suppressing GnRH via dopamine","CRH/GnIH-mediated suppression of GnRH pulsatility from intense training stress","Primary ovarian failure from overtraining","TSH suppression reducing estrogen production","Elevated testosterone from training suppressing LH/FSH"], correct: 1, exps: ["Prolactin is normal; no prolactinoma.","CORRECT. Functional hypothalamic amenorrhea (FHA): intense training → stress (metabolic + psychological) → ↑CRH → ↑GnIH from dorsomedial nucleus → ↓GnRH pulsatility → ↓LH/FSH → ↓estradiol → amenorrhea. This is a central (hypothalamic) suppression.","Primary ovarian failure: FSH would be markedly elevated (no negative feedback).","TSH is normal; thyroid not involved.","Testosterone is not elevated in female athletes with FHA."], teach: "FHA triad (female athlete triad): Low energy availability + Menstrual dysfunction + Low bone mineral density. CRH/GnIH is central. Treatment: reduce training intensity, ↑caloric intake, address underlying stress. Long-term: ↑osteoporosis risk from chronic hypoestrogenism." },
+];
+const traps = [
+    { title: "TRAP #1: Stress always suppresses the immune system", myth: "Stress always causes immunosuppression from the start.", truth: "ACUTE stress can actually ENHANCE certain immune responses (↑NK cell activity, ↑leukocyte trafficking to skin and mucosa). CHRONIC stress → sustained cortisol → immunosuppression. The temporal pattern matters: acute = immunostimulatory; chronic = immunosuppressive." },
+    { title: "TRAP #2: CRH only affects the HPA axis", myth: "CRH's only role is to release ACTH from the anterior pituitary.", truth: "CRH is a master integrator: HPA axis (ACTH/cortisol) + SAM axis (SNS activation) + behavioral responses (anxiogenic, aversive) + GI effects (↓gastric, ↑colonic motility) + reproductive suppression (via GnIH). CRH receptors are found throughout the brain and periphery." },
+    { title: "TRAP #3: Cortisol damages the amygdala in chronic stress", myth: "Chronic cortisol damages the amygdala (like it does the hippocampus).", truth: "Chronic cortisol ENLARGES and ENHANCES the amygdala (fear/emotion center) while DAMAGING the hippocampus. PTSD: hyperactive amygdala + shrunken hippocampus. The amygdala-hippocampus imbalance explains hypervigilance and memory problems in PTSD." },
+    { title: "TRAP #4: Stress increases both gastric and intestinal motility", myth: "Stress increases motility throughout the GI tract.", truth: "Stress has OPPOSITE effects on stomach vs intestine: ↓Gastric emptying (nausea, bloating) and ↑Intestinal/colonic motility (diarrhea, urgency). CRH2 receptors mediate gastric slowdown; CRH1 receptors mediate colonic acceleration. Explains 'stress belly' patterns in IBS." },
+    { title: "TRAP #5: Stress-induced amenorrhea means permanent infertility", myth: "Functional hypothalamic amenorrhea (stress-related) is irreversible.", truth: "Functional hypothalamic amenorrhea is REVERSIBLE. Reducing training, increasing caloric intake, reducing psychological stress → GnRH pulsatility restores → menstrual cycle returns. Fertility is preserved if underlying stressors are addressed." },
+];
+const fibs = [
+    { prompt: "Stress signal pathway: ________ cortex → ________ (contextual memory) → ________ (emotional processing) → Hypothalamus → ________ release.", answers: ["cingulate","hippocampus","amygdala","crh"], hint: "Cortex → Cingulate → Hippocampus → Amygdala → Hypothalamus → CRH" },
+    { prompt: "CRH ________ the sympathetic nervous system and ________ the parasympathetic nervous system. Net autonomic effect: ________.", answers: ["stimulates","inhibits","fight-or-flight","sympathetic"], hint: "CRH: stimulates SNS, inhibits PNS → fight-or-flight" },
+    { prompt: "Chronic stress → ↑cortisol → damage to ________ neurons (CA3 region) → ________ impairment. This also removes the HPA ________ → even more cortisol release.", answers: ["hippocampal","memory","negative feedback","inhibition"], hint: "Hippocampal damage → memory impairment + loss of HPA negative feedback" },
+    { prompt: "Stress GI effects: ↓ ________ emptying (nausea) via CRH________ receptors; ↑ ________ motility (diarrhea) via CRH________ receptors.", answers: ["gastric","2","colonic","intestinal","1"], hint: "↓Gastric (CRH2) + ↑Colonic (CRH1)" },
+    { prompt: "Pro-inflammatory cytokines (________, ________, ________) stimulate CRH → ↑ACTH → ↑cortisol → ________ (anti-inflammatory feedback loop).", answers: ["il-1","il-6","tnf","immunosuppression","anti-inflammatory"], hint: "IL-1, IL-6, TNF → ↑CRH → ↑cortisol → anti-inflammatory. Immune-HPA cross-talk." },
+];
+const REF_HTML = `<table class='ref-table'><thead><tr><th>Stress Type</th><th>Key Mediators</th><th>Time Course</th><th>Effects</th><th>Clinical Consequence</th></tr></thead><tbody>
+<tr><td class='hl'>Acute Stress</td><td>Epinephrine (SAM) + Cortisol (HPA)</td><td>Minutes-hours</td><td>↑HR, ↑BP, ↑glucose, ↑alertness, some immune activation</td><td>Adaptive; normally resolves</td></tr>
+<tr><td class='hl'>Chronic Stress</td><td>Sustained cortisol + CRH</td><td>Weeks-years</td><td>Hippocampal damage, immunosuppression, HTN, GI disorders, reproductive failure</td><td>PTSD, depression, CVD, cancer metastasis</td></tr>
+</tbody></table>
+<table class='ref-table' style='margin-top:14px'><thead><tr><th>System</th><th>Acute Stress Effect</th><th>Chronic Stress Effect</th></tr></thead><tbody>
+<tr><td class='hl'>Immune</td><td>↑NK cells, ↑WBC mobilization</td><td>↓NK cells, ↓lymphocytes, ↑infection risk, ↑cancer metastasis</td></tr>
+<tr><td class='hl'>Reproductive</td><td>GnIH/CRH suppresses LH/FSH transiently</td><td>Amenorrhea, hypogonadism, infertility</td></tr>
+<tr><td class='hl'>GI</td><td>↓Gastric motility, ↑colonic motility</td><td>IBS, GERD, peptic ulcers</td></tr>
+<tr><td class='hl'>Cardiovascular</td><td>↑HR, ↑BP (adaptive)</td><td>HTN, atherosclerosis, arrhythmias</td></tr>
+<tr><td class='hl'>CNS/Memory</td><td>↑Alertness, enhanced fear memory</td><td>Hippocampal atrophy, declarative memory loss, PTSD</td></tr>
+</tbody></table>`;
+</script>
+<script>
+function switchTab(n,b){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');if(b)b.classList.add('active');}
+function renderFlashcards(){document.getElementById('fcGrid').innerHTML=flashcards.map((fc,i)=>`<div class="fc" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front"><div class="fc-label">💡 Card ${i+1} of ${flashcards.length}</div><div class="fc-q">${fc.q}</div></div><div class="fc-back"><div class="fc-label">✅ Answer</div><div class="fc-a">${fc.a.replace(/\n/g,'<br>')}</div></div></div></div>`).join('');}
+function renderMCQ(){document.getElementById('mcqContainer').innerHTML=mcqs.map((q,qi)=>`<div class="mcq-item"><div class="mcq-num">Question ${qi+1} of ${mcqs.length}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options" id="opts${qi}">${q.opts.map((o,oi)=>`<div class="mcq-opt" onclick="selQ(this,${qi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span></div>`).join('')}</div><div class="mcq-explanation" id="exp${qi}"></div><div class="teaching-pt" id="teach${qi}"><span class="tp-label">📚 Teaching Point</span>${q.teach}</div></div>`).join('');}
+function selQ(btn,qi,oi){const c=document.getElementById('opts'+qi);if(c.dataset.answered)return;c.dataset.answered='true';const q=mcqs[qi];c.querySelectorAll('.mcq-opt').forEach(b=>b.setAttribute('disabled','true'));c.querySelectorAll('.mcq-opt').forEach((b,i)=>{if(i===q.correct)b.classList.add('correct');else b.classList.add('wrong');});const e=document.getElementById('exp'+qi);e.innerHTML=`<span class="exp-label">${oi===q.correct?'✅ Correct!':'❌ Incorrect'}</span>${q.exps[oi]}<br><br>${q.exps.map((x,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${x}`).join('<br>')}`;e.classList.add('visible');document.getElementById('teach'+qi).classList.add('visible');}
+function renderVigs(){document.getElementById('vigContainer').innerHTML=vigs.map((v,vi)=>`<div class="vig-item"><div class="vig-banner">${v.banner}</div><div class="vig-stem">${v.stem}</div><div class="mcq-stem" style="margin-bottom:10px"><strong style="color:#E6EDF3">${v.question}</strong></div><div class="mcq-options" id="vopts${vi}">${v.opts.map((o,oi)=>`<div class="mcq-opt" onclick="selV(this,${vi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span></div>`).join('')}</div><div class="mcq-explanation" id="vexp${vi}"></div><div class="teaching-pt" id="vteach${vi}"><span class="tp-label">📚 Teaching Point</span>${v.teach}</div></div>`).join('');}
+function selV(btn,vi,oi){const c=btn.closest('.mcq-options');if(c.dataset.answered)return;c.dataset.answered='true';const v=vigs[vi];c.querySelectorAll('.mcq-opt').forEach(b=>b.setAttribute('disabled','true'));c.querySelectorAll('.mcq-opt').forEach((b,i)=>{if(i===v.correct)b.classList.add('correct');else b.classList.add('wrong');});const e=document.getElementById('vexp'+vi);e.innerHTML=`<span class="exp-label">${oi===v.correct?'✅ Correct!':'❌ Incorrect'}</span>${v.exps[oi]}<br><br>${v.exps.map((x,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${x}`).join('<br>')}`;e.classList.add('visible');document.getElementById('vteach'+vi).classList.add('visible');}
+function renderTraps(){document.getElementById('trapsContainer').innerHTML=traps.map(t=>`<div class="trap-item"><div class="trap-header">${t.title}</div><div class="trap-myth"><div class="trap-myth-label">❌ COMMON MYTH</div>${t.myth}</div><div class="trap-truth"><div class="trap-truth-label">✅ TRUTH</div>${t.truth}</div></div>`).join('');}
+function renderFIB(){document.getElementById('fibContainer').innerHTML=fibs.map((f,i)=>`<div class="fib-item"><div class="fib-prompt">${i+1}. ${f.prompt}</div><input class="fib-input" id="fib${i}" placeholder="Type your answer(s)…"/><button class="fib-btn" onclick="chkFIB(${i})">Check</button><div class="fib-result" id="fibres${i}"></div><div style="font-size:0.78em;color:#6B7280;margin-top:6px;">Hint: ${f.hint}</div></div>`).join('');}
+function chkFIB(i){const f=fibs[i];const v=document.getElementById('fib'+i).value.toLowerCase().trim();const ok=f.answers.some(a=>v.includes(a.toLowerCase()));const r=document.getElementById('fibres'+i);r.className=ok?'fib-result correct':'fib-result incorrect';r.textContent=ok?'✅ Correct! '+f.hint:'❌ Review: '+f.hint;}
+renderFlashcards();renderMCQ();renderVigs();renderTraps();renderFIB();
+document.getElementById('refContainer').innerHTML=REF_HTML;
+</script>
+</body>
+</html>

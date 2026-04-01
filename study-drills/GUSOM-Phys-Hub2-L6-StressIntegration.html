@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L6: Stress Integration — Step 1 Extensions</title>
+    <style>
+        * {{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }}
+
+        body {{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0D1117;
+            color: #E6EDF3;
+            line-height: 1.6;
+            padding: 16px;
+        }}
+
+        .header {{
+            max-width: 1200px;
+            margin: 0 auto 24px;
+            padding: 20px;
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+        }}
+
+        .hub-tag {{
+            display: inline-block;
+            background-color: #8D1F1F;
+            color: #E6EDF3;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }}
+
+        h1 {{
+            font-size: 28px;
+            margin-bottom: 4px;
+            color: #C9D1D9;
+        }}
+
+        .subtitle {{
+            font-size: 14px;
+            color: #8B949E;
+            margin-bottom: 16px;
+        }}
+
+        .source-badges {{
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }}
+
+        .badge {{
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #8B949E;
+        }}
+
+        .back-link {{
+            display: inline-block;
+            margin-top: 12px;
+            color: #58A6FF;
+            text-decoration: none;
+            font-size: 13px;
+        }}
+
+        .back-link:hover {{
+            text-decoration: underline;
+        }}
+
+        .container {{
+            max-width: 1200px;
+            margin: 0 auto;
+        }}
+
+        .tabs {{
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #30363D;
+            flex-wrap: wrap;
+        }}
+
+        .tab-btn {{
+            padding: 12px 16px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #8B949E;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s;
+        }}
+
+        .tab-btn:hover {{
+            color: #C9D1D9;
+        }}
+
+        .tab-btn.active {{
+            color: #8D1F1F;
+            border-bottom-color: #8D1F1F;
+        }}
+
+        .tab-content {{
+            display: none;
+        }}
+
+        .tab-content.active {{
+            display: block;
+        }}
+
+        .fc {{
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }}
+
+        .fci {{
+            color: #58A6FF;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }}
+
+        .fcf {{
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #C9D1D9;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }}
+
+        .fcb {{
+            font-size: 14px;
+            color: #8B949E;
+            line-height: 1.8;
+            padding-top: 16px;
+            border-top: 1px solid #30363D;
+        }}
+
+        .mi {{
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }}
+
+        .ms {{
+            font-weight: 600;
+            color: #C9D1D9;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }}
+
+        .mos {{
+            margin-top: 8px;
+            margin-bottom: 4px;
+        }}
+
+        .mo {{
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }}
+
+        .mo:hover {{
+            background-color: #161B22;
+            border-color: #8D1F1F;
+        }}
+
+        .mo.selected {{
+            border-color: #58A6FF;
+            background-color: rgba(88, 166, 255, 0.1);
+        }}
+
+        .mo.correct {{
+            border-color: #3fb950;
+            background-color: rgba(63, 185, 80, 0.1);
+        }}
+
+        .mo.incorrect {{
+            border-color: #f85149;
+            background-color: rgba(248, 81, 73, 0.1);
+        }}
+
+        .explanation {{
+            margin-top: 12px;
+            padding: 12px;
+            background-color: rgba(141, 31, 31, 0.15);
+            border-left: 3px solid #8D1F1F;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #8B949E;
+            display: none;
+        }}
+
+        .explanation.show {{
+            display: block;
+        }}
+
+        .vi {{
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }}
+
+        .vi-title {{
+            font-weight: 600;
+            color: #8D1F1F;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }}
+
+        .vi-case {{
+            color: #8B949E;
+            font-size: 14px;
+            margin-bottom: 16px;
+            font-style: italic;
+        }}
+
+        .vb {{
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+        }}
+
+        .vqa {{
+            font-weight: 600;
+            color: #58A6FF;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }}
+
+        .vq-ans {{
+            color: #8B949E;
+            font-size: 13px;
+            margin-left: 12px;
+            padding-left: 12px;
+            border-left: 2px solid #30363D;
+        }}
+
+        .tri {{
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }}
+
+        .trs {{
+            color: #C9D1D9;
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }}
+
+        .trb {{
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }}
+
+        .trb button {{
+            flex: 1;
+            padding: 10px 16px;
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            color: #C9D1D9;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }}
+
+        .trb button:hover {{
+            background-color: #161B22;
+            border-color: #8D1F1F;
+        }}
+
+        .trb button.correct {{
+            border-color: #3fb950;
+            background-color: rgba(63, 185, 80, 0.1);
+        }}
+
+        .trb button.incorrect {{
+            border-color: #f85149;
+            background-color: rgba(248, 81, 73, 0.1);
+        }}
+
+        .trr {{
+            margin-top: 12px;
+            padding: 12px;
+            background-color: rgba(141, 31, 31, 0.15);
+            border-left: 3px solid #8D1F1F;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #8B949E;
+            display: none;
+        }}
+
+        .trr.show {{
+            display: block;
+        }}
+
+        .fi {{
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }}
+
+        .fin {{
+            color: #C9D1D9;
+            font-size: 15px;
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }}
+
+        .fib-input {{
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            color: #E6EDF3;
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 12px;
+            width: 100%;
+            max-width: 500px;
+        }}
+
+        .fib-check {{
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            color: #58A6FF;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }}
+
+        .fib-check:hover {{
+            background-color: #161B22;
+            border-color: #8D1F1F;
+        }}
+
+        .fib-check.correct {{
+            border-color: #3fb950;
+            background-color: rgba(63, 185, 80, 0.1);
+        }}
+
+        .fib-check.incorrect {{
+            border-color: #f85149;
+            background-color: rgba(248, 81, 73, 0.1);
+        }}
+
+        .fib-feedback {{
+            margin-top: 12px;
+            font-size: 13px;
+            color: #8B949E;
+            display: none;
+        }}
+
+        .fib-feedback.show {{
+            display: block;
+        }}
+
+        .rt {{
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            overflow: hidden;
+        }}
+
+        .rt table {{
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }}
+
+        .rt th {{
+            background-color: #0D1117;
+            border-bottom: 2px solid #30363D;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #58A6FF;
+        }}
+
+        .rt td {{
+            padding: 12px;
+            border-bottom: 1px solid #30363D;
+            color: #8B949E;
+        }}
+
+        .rt tr:last-child td {{
+            border-bottom: none;
+        }}
+
+        .rt-key {{
+            color: #C9D1D9;
+            font-weight: 500;
+        }}
+
+        .grid-2 {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }}
+
+        @media (max-width: 768px) {{
+            .grid-2 {{
+                grid-template-columns: 1fr;
+            }}
+
+            h1 {{
+                font-size: 22px;
+            }}
+
+            .tabs {{
+                flex-direction: column;
+            }}
+
+            .tab-btn {{
+                padding: 10px 12px;
+                font-size: 13px;
+            }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="hub-tag">Hub #2 — Step 1 Extensions</div>
+        <h1>Stress Integration — Step 1 Extensions</h1>
+        <p class="subtitle">GR nuclear mechanism · Cytokine-HPA crosstalk · Chronic steroid suppression · Stress hyperglycemia · Immune modulation</p>
+        <div class="source-badges">
+            <span class="badge">Primary: GUSOM Anki Flash Decks</span>
+            <span class="badge">Step 1: First Aid + Pathoma</span>
+            <span class="badge">Pharm: GR Signaling</span>
+            <span class="badge">Review: BRS Physiology</span>
+        </div>
+        <a href="GUSOM-Phys-Hub2-ActiveDrills.html" class="back-link">← Back to Hub Index</a>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="sw('fc', this)">Flashcards</button>
+            <button class="tab-btn" onclick="sw('mcq', this)">MCQ</button>
+            <button class="tab-btn" onclick="sw('vig', this)">Vignettes</button>
+            <button class="tab-btn" onclick="sw('trap', this)">Traps</button>
+            <button class="tab-btn" onclick="sw('fib', this)">Fill-in-Blank</button>
+            <button class="tab-btn" onclick="sw('ref', this)">USMLE Map</button>
+        </div>
+
+        <!-- FLASHCARDS TAB -->
+        <div id="fc" class="tab-content active">
+            <div id="fc-render"></div>
+        </div>
+
+        <!-- MCQ TAB -->
+        <div id="mcq" class="tab-content">
+            <div id="mcq-render"></div>
+        </div>
+
+        <!-- VIGNETTES TAB -->
+        <div id="vig" class="tab-content">
+            <div id="vig-render"></div>
+        </div>
+
+        <!-- TRAPS TAB -->
+        <div id="trap" class="tab-content">
+            <div id="trap-render"></div>
+        </div>
+
+        <!-- FILL-IN-BLANK TAB -->
+        <div id="fib" class="tab-content">
+            <div id="fib-render"></div>
+        </div>
+
+        <!-- REFERENCE TABLE TAB -->
+        <div id="ref" class="tab-content">
+            <div id="ref-render"></div>
+        </div>
+    </div>
+
+    <script>
+        // ===== HELPER FUNCTION =====
+        function js_str(s) {
+            return s.replace(/\\/g, '\\\\').replace(/\$/g, '\\$').replace(/`/g, '\\`').replace(/"/g, '\\"');
+        }
+
+        // ===== DATA ARRAYS =====
+        const flashcards = [
+            {front: "Glucocorticoid receptor (GR) — nuclear mechanism", back: "Cortisol → diffuses into cell → binds cytoplasmic GR (bound to Hsp90) → Hsp90 dissociates → GR-cortisol complex dimerizes → nuclear translocation → binds GRE (glucocorticoid response elements) → activates transcription of anti-inflammatory genes (lipocortin/annexin A1, IκB) OR transrepresses NF-κB/AP-1 (reduces pro-inflammatory cytokine genes)."},
+            {front: "Transactivation vs transrepression by glucocorticoids", back: "Transactivation: GR binds GRE → upregulates anti-inflammatory mediators (annexin A1, IL-10, IκBα). Transrepression: GR interacts with NF-κB and AP-1 → inhibits pro-inflammatory genes (IL-1, IL-6, TNF-α, COX-2). Most anti-inflammatory effects = transrepression. Most side effects = transactivation."},
+            {front: "IL-1, IL-6, TNF-α → CRH — the immune-neuroendocrine link", back: "During infection/injury: macrophages release IL-1β, IL-6, TNF-α → act on hypothalamus → stimulate CRH release → ACTH → cortisol. This forms a negative feedback loop (cortisol → suppresses cytokines). Cortisol is pro-survival: mobilizes energy, suppresses excessive inflammation."},
+            {front: "Stress hyperglycemia — mechanism", back: "Acute stress → catecholamines (↑glucagon, ↓insulin, ↑glycogenolysis) + cortisol (↑gluconeogenesis, ↑proteolysis for gluconeogenic substrates, ↑lipolysis for FFA). Net: marked hyperglycemia even in non-diabetics. Critical illness hyperglycemia → worse outcomes → target glucose 140-180 mg/dL in ICU."},
+            {front: "Chronic stress → immunosuppression — mechanism", back: "Prolonged cortisol: ↓lymphocyte proliferation (G1 arrest), ↓IL-2, apoptosis of thymocytes, ↓NK cell activity, ↓antibody production, ↓neutrophil migration. Clinical: increased susceptibility to infections, reactivation of latent viruses (HSV, VZV), impaired wound healing."},
+            {front: "Stress → reproductive suppression", back: "CRH and cortisol suppress GnRH → ↓LH/FSH → ↓estrogen/testosterone. CRH also directly inhibits GnRH neurons. Result: functional hypothalamic amenorrhea (athletes, anorexia, stress), ↓libido, ↓fertility. Acute stress → LH surge suppression; chronic stress → hypogonadotropic hypogonadism."},
+            {front: "Stress ulcers — mechanism and prevention", back: "Stress → catecholamines → splanchnic vasoconstriction → ↓mucosal blood flow → mucosal ischemia. Cortisol → ↓prostaglandin synthesis (PGE2) → ↓mucus production → ↓HCO3 secretion. Critical illness → stress ulcers → GI bleeding. Prevention: PPI or H2 blockers in ICU patients."},
+            {front: "SAM axis (sympatho-adrenal medullary) vs HPA axis — timing", back: "SAM: immediate (seconds-minutes) — hypothalamus → sympathetic nervous system → adrenal medulla → epinephrine/norepinephrine. Fight-or-flight: ↑HR, ↑BP, bronchodilation, mydriasis, glycogenolysis. HPA: delayed (minutes-hours) — CRH → ACTH → cortisol. Sustains metabolic response."},
+            {front: "Glucocorticoid effects on bone — osteoporosis mechanism", back: "Multiple mechanisms: ↓osteoblast number/function (apoptosis), ↑RANKL/↓OPG (↑osteoclast activity), ↓intestinal Ca2+ absorption (antagonize vitamin D), ↑renal Ca2+ excretion, suppress GnRH → ↓sex steroids. Most rapid bone loss: first 3-6 months of therapy. Prevention: Ca2+ + Vit D + bisphosphonates."},
+            {front: "Glucocorticoids and the skin/connective tissue", back: "Glucocorticoids → ↓fibroblast proliferation and collagen synthesis → skin thinning, easy bruising, poor wound healing, striae (stretch marks from rapid fat deposition + weak skin). Also: acne (↑androgens from adrenal stimulation), hirsutism."},
+            {front: "Neuropsychiatric effects of glucocorticoids", back: "Acute: euphoria, improved energy (therapeutic doses). Higher doses/chronic: steroid psychosis (paranoia, mania, depression), insomnia, cognitive impairment. Mechanism: GR in hippocampus → hippocampal atrophy with chronic stress/high cortisol → impaired declarative memory. Cushing syndrome: depression most common psychiatric manifestation."},
+            {front: "CRH in extrahypothalamic sites", back: "CRH expressed in: amygdala (fear/anxiety), prefrontal cortex, peripheral immune cells, gut (stress → IBS), placenta (labor initiation), and skin (stress → ↑melanogenesis). Amygdala CRH + LC-NE system mediates anxiety response to stress. CRH antagonists in clinical trials for depression/anxiety/IBS."},
+            {front: "Stress and cancer metastasis", back: "Chronic stress → catecholamines → β2-AR on tumor cells → ↑cAMP → ↑VEGF (angiogenesis), ↑MMP (matrix metalloproteinases → invasion), ↑EMT (epithelial-mesenchymal transition). Also: cortisol → ↓NK cell surveillance → tumor escape. β-blockers (propranolol) being studied as anti-metastatic agents."},
+            {front: "Mineralocorticoid excess vs glucocorticoid excess — distinguishing features", back: "Mineralocorticoid (aldosterone) excess: hypertension, hypokalemia, metabolic alkalosis, NO Cushingoid features, low renin. Glucocorticoid (cortisol) excess (Cushing): central obesity, moon face, buffalo hump, striae, osteoporosis, hyperglycemia, immunosuppression, HTN (cortisol activates MR). Ectopic ACTH: can cause both (high cortisol overwhelms 11β-HSD2)."}
+        ];
+
+        const mcqs = [
+            {q: "A patient with rheumatoid arthritis on prednisone 30 mg/day for 4 months develops a disseminated varicella infection. Which mechanism best explains her increased susceptibility?", opts: ["A) Direct viral activation by cortisol", "B) Reduced NK cell activity, lymphopenia, and impaired T-cell function", "C) Increased cortisol binding to viral proteins", "D) Reduced neutrophil counts below 500/μL", "E) B-cell aplasia"], correct: 1, expl: "Glucocorticoids cause lymphopenia (sequestration in lymph nodes + apoptosis), reduce NK cell activity, inhibit T-cell proliferation (↓IL-2), and impair cellular immunity → reactivation of latent viruses (VZV, HSV, CMV). NK cells are key for viral surveillance. This is why VZV vaccination should occur BEFORE starting immunosuppression."},
+            {q: "During septic shock, a patient's blood glucose rises to 280 mg/dL despite no prior diabetes. Which hormones are primarily responsible?", opts: ["A) Insulin and glucagon", "B) Cortisol and catecholamines", "C) GH and IGF-1", "D) Thyroid hormone and PTH", "E) Aldosterone and cortisol"], correct: 1, expl: "Stress hyperglycemia: cortisol (↑gluconeogenesis, ↑proteolysis) + catecholamines (↑glycogenolysis, ↑glucagon, ↓insulin secretion). These counter-regulatory hormones overwhelm normal glucose homeostasis. GH also contributes but catecholamines + cortisol are primary drivers in acute stress."},
+            {q: "A female marathon runner presents with secondary amenorrhea. FSH and LH are low. Cortisol is chronically elevated. What is the mechanism?", opts: ["A) Cortisol directly damages the ovaries", "B) Elevated cortisol and CRH suppress GnRH neurons", "C) High cortisol increases SHBG, reducing free estrogen", "D) Catecholamines suppress pituitary gonadotrophs directly", "E) Elevated cortisol converts estrogen to androgens"], correct: 1, expl: "Functional hypothalamic amenorrhea: chronic stress/exercise → elevated CRH → directly inhibits GnRH neurons. Cortisol also suppresses the HPG axis at the hypothalamic level. Result: low GnRH → low LH/FSH → low estrogen → amenorrhea. This is distinct from primary ovarian failure (which would show high FSH/LH)."},
+            {q: "Which glucocorticoid mechanism is primarily responsible for anti-inflammatory effects?", opts: ["A) Upregulation of prostaglandin synthase", "B) Transrepression of NF-κB and AP-1", "C) Stimulation of histamine release", "D) Activation of RANKL on osteoblasts", "E) Induction of cortisol-binding globulin"], correct: 1, expl: "Most anti-inflammatory actions of glucocorticoids occur via transrepression: GR physically interacts with NF-κB (inhibits IL-1, IL-6, TNF-α, COX-2) and AP-1 transcription factors. Transactivation (GRE binding) accounts for more of the metabolic side effects. Annexin A1 (transactivated) also contributes to anti-inflammation."},
+            {q: "A patient in the ICU is given high-dose methylprednisolone 125 mg q8h. Blood glucose is persistently 240 mg/dL. What is the mechanism?", opts: ["A) Pancreatic inflammation from ARDS", "B) Glucocorticoid → transactivation of PEPCK and G6Pase → gluconeogenesis + peripheral insulin resistance", "C) Methylprednisolone directly blocks GLUT4", "D) Cortisol-induced pancreatitis", "E) Catecholamine surge from steroid fever"], correct: 1, expl: "Glucocorticoids induce hepatic gluconeogenesis (activate PEPCK, G6Pase via GRE transactivation) and cause peripheral insulin resistance (in muscle: reduces IRS-1 signaling; in adipose: promotes lipolysis → FFA → insulin resistance). Net = steroid-induced hyperglycemia. Target ICU glucose 140-180 mg/dL."},
+            {q: "A patient with chronic stress has reduced T-cell counts. The mechanism involves glucocorticoid-induced expression of which molecule in T cells?", opts: ["A) BCL-2 (anti-apoptotic)", "B) BIM (pro-apoptotic), activated via GRE", "C) Caspase inhibitors", "D) PD-L1", "E) CTLA-4"], correct: 1, expl: "Glucocorticoids induce apoptosis in T cells and thymocytes via transactivation of pro-apoptotic genes including BIM (BCL-2-interacting mediator of cell death). This is therapeutic in lymphomas (prednisone in CHOP) but leads to lymphopenia with chronic stress/steroid use. Thymocytes are particularly sensitive."},
+            {q: "A patient with CRH-secreting hypothalamic tumor is described. In addition to cortisol excess, which reproductive hormone would be most impaired?", opts: ["A) Prolactin", "B) Oxytocin", "C) GnRH and downstream LH/FSH", "D) TSH", "E) Growth hormone"], correct: 2, expl: "Excess CRH (and resultant cortisol) suppresses GnRH neurons → ↓LH/FSH → hypogonadism. CRH directly inhibits GnRH through CRH receptors on GnRH neurons. The HPG axis is among the most stress-sensitive endocrine axes. This is seen in functional hypothalamic amenorrhea."},
+            {q: "β-blockers are being studied as anti-metastatic agents because catecholamines promote cancer spread via which receptor?", opts: ["A) α1-adrenergic receptor", "B) β2-adrenergic receptor → cAMP → VEGF/MMP upregulation", "C) Dopamine D2 receptor", "D) GRK2 (G-protein receptor kinase 2)", "E) α2-adrenergic receptor"], correct: 1, expl: "Catecholamines act on β2-AR on tumor cells → ↑cAMP → ↑PKA → ↑VEGF (angiogenesis), ↑MMPs (invasion), ↑epithelial-mesenchymal transition. β-blockers (especially propranolol) block this pathway. Observational studies suggest β-blocker use is associated with reduced metastasis in some cancers (breast, melanoma)."}
+        ];
+
+        const vignettes = [
+            {title: "Steroid Immunosuppression", case: "A 55-year-old on 6 months of prednisone 20 mg for polymyalgia rheumatica develops shingles (dermatomal vesicular rash).", qs: [{q: "What immune mechanism was impaired?", a: "Glucocorticoids reduce T-cell (especially CD8+) and NK cell function → impaired surveillance of latent VZV in dorsal root ganglia → reactivation."}, {q: "What prophylaxis should be offered before starting chronic steroids?", a: "Recombinant zoster vaccine (Shingrix) — 2 doses, given before immunosuppression when possible. Also consider PCP prophylaxis (TMP-SMX) if on ≥20 mg prednisone for >4 weeks."}, {q: "What other infections are patients on chronic glucocorticoids at risk for?", a: "Pneumocystis jirovecii (PCP), fungal infections (Aspergillus, Candida, Cryptococcus), reactivation TB, CMV, bacterial infections."}]},
+            {title: "Stress Hyperglycemia in ICU", case: "A 70-year-old non-diabetic is admitted for septic shock. Day 2 glucose 310 mg/dL.", qs: [{q: "What is causing the hyperglycemia?", a: "Stress hyperglycemia: catecholamines (↑glycogenolysis, ↑glucagon, ↓insulin) + cortisol (↑gluconeogenesis, insulin resistance). Both counter-regulatory hormones are massively elevated in septic shock."}, {q: "What is the target blood glucose in ICU?", a: "140–180 mg/dL (moderate control). Tight control <110 mg/dL increases hypoglycemia risk and mortality (NICE-SUGAR trial)."}, {q: "After recovery, will this patient likely need diabetes medication?", a: "Usually not — stress hyperglycemia typically resolves with resolution of the acute illness. However, it may unmask underlying pre-diabetes."}]},
+            {title: "Functional Hypothalamic Amenorrhea", case: "A 24-year-old female competitive gymnast with BMI 17, training 6h/day, no menses for 8 months. LH 1.2, FSH 2.1, estradiol low. Cortisol chronically elevated.", qs: [{q: "What is the mechanism of amenorrhea?", a: "Chronic energy deficit + psychological stress → ↑CRH + cortisol → direct inhibition of GnRH neurons → ↓LH/FSH → anovulation and amenorrhea."}, {q: "What is the primary treatment?", a: "Address the underlying cause: increase caloric intake, reduce training intensity. Estrogen-progestin (OCP) can be used for bone protection but does not restore natural fertility."}, {q: "What long-term complication is she at risk for?", a: "Osteoporosis — low estrogen + high cortisol → accelerated bone loss. Part of the female athlete triad: energy deficiency, menstrual dysfunction, low bone density."}]},
+            {title: "Steroid-Induced Hyperglycemia", case: "A 62-year-old with COPD exacerbation is given IV methylprednisolone 125 mg q8h. Blood glucose rises to 320 mg/dL. He has no prior diabetes.", qs: [{q: "What is the mechanism?", a: "Glucocorticoids activate PEPCK and G6Pase (gluconeogenesis) + cause insulin resistance in muscle and adipose → steroid-induced hyperglycemia."}, {q: "How should this be managed?", a: "Insulin therapy — start with sliding scale + basal insulin. Oral agents (metformin) may be insufficient for acute severe hyperglycemia. Target 140-180 mg/dL."}, {q: "Will he need lifelong insulin?", a: "Usually not — if hyperglycemia resolves when steroids are tapered, no ongoing treatment needed. Monitor with HbA1c to assess baseline glucose status."}]},
+            {title: "Cancer and Stress", case: "A research study shows patients with high-stress jobs have faster cancer progression. Mechanism being studied involves catecholamines.", qs: [{q: "What is the molecular mechanism by which catecholamines promote metastasis?", a: "β2-AR on tumor cells → ↑cAMP → ↑PKA → ↑VEGF (angiogenesis) + ↑MMP (matrix invasion) + ↑EMT. Also ↑norepinephrine → promotes tumor cell survival."}, {q: "What drug class is being studied to block this pathway?", a: "Non-selective β-blockers (propranolol) — block β2-AR, reducing VEGF/MMP induction. Associated with improved outcomes in observational studies for breast cancer and melanoma."}, {q: "How does cortisol contribute to impaired cancer surveillance?", a: "Cortisol reduces NK cell number and cytotoxicity → decreased immune surveillance of nascent tumor cells → increased tumor escape from immune system."}]}
+        ];
+
+        const traps = [
+            {stmt: "The primary anti-inflammatory mechanism of glucocorticoids is transactivation (GRE binding).", isCorrect: false, reveal: "Most anti-inflammatory effects are via transrepression of NF-κB and AP-1. Transactivation (GRE binding) contributes to metabolic side effects and some anti-inflammatory effects (annexin A1, IκBα)."},
+            {stmt: "Cortisol binds to a cell surface receptor to exert its effects.", isCorrect: false, reveal: "Glucocorticoids are lipophilic steroids — they diffuse through the cell membrane, bind to cytoplasmic GR (complexed with Hsp90), then translocate to the nucleus to regulate gene transcription."},
+            {stmt: "Chronic stress causes hypogonadism via direct gonadal toxicity.", isCorrect: false, reveal: "Chronic stress-induced hypogonadism is central (hypothalamic) — CRH and cortisol suppress GnRH neurons → ↓LH/FSH → ↓sex steroids. The gonads themselves are intact."},
+            {stmt: "Glucocorticoid-induced lymphopenia primarily results from lymphocyte destruction in the blood.", isCorrect: false, reveal: "Glucocorticoids redistribute lymphocytes from blood to lymphoid tissue (lymph nodes, bone marrow) — this is the main mechanism. Apoptosis of thymocytes and T cells also occurs with higher doses/chronic exposure."},
+            {stmt: "Stress hyperglycemia in non-diabetics is harmless and requires no treatment.", isCorrect: false, reveal: "Stress hyperglycemia in critically ill patients is associated with worse outcomes (infection risk, poor wound healing, mortality). Target 140-180 mg/dL in ICU. Tight control (<110) increases hypoglycemia risk (NICE-SUGAR trial)."},
+            {stmt: "IL-6 stimulates cortisol secretion by acting directly on the adrenal cortex.", isCorrect: false, reveal: "IL-6 (and IL-1β, TNF-α) primarily act at the hypothalamus to stimulate CRH release → ACTH → cortisol. Cytokines can also directly stimulate the pituitary and adrenal to a lesser degree, but the primary feedback is at the hypothalamic level."},
+            {stmt: "The female athlete triad includes amenorrhea, eating disorder, and hypertension.", isCorrect: false, reveal: "Female athlete triad: energy deficiency (with or without eating disorder), menstrual dysfunction (amenorrhea), and low bone density (osteoporosis). Hypertension is not a component."},
+            {stmt: "Glucocorticoids can cause bone loss independent of calcium and vitamin D levels.", isCorrect: true, reveal: "Glucocorticoids directly suppress osteoblast function and increase osteoclast activity via RANKL. This is independent of calcium/vitamin D effects (though steroids also reduce calcium absorption). Bone loss occurs even with normal Ca2+/Vit D."},
+            {stmt: "β-blockers may have anti-tumor metastatic effects through β2-AR blockade.", isCorrect: true, reveal: "Catecholamines via β2-AR on tumor cells promote VEGF, MMP, and EMT. β-blockers (propranolol) are being studied as anti-metastatic adjuncts. Observational data suggest benefit in breast cancer and melanoma patients."},
+            {stmt: "Cortisol freely crosses the blood-brain barrier and directly affects hippocampal neurons.", isCorrect: true, reveal: "Cortisol is lipophilic and crosses the BBB. High GR expression in the hippocampus means chronic stress → hippocampal atrophy, impaired neurogenesis, memory impairment. This underlies stress-related cognitive decline and depression."}
+        ];
+
+        const fillInBlanks = [
+            {prompt: "Glucocorticoids bind to cytoplasmic GR after dissociation of _____, then translocate to the nucleus to bind _____.", answers: [["Hsp90", "heat shock protein 90"], ["GRE", "glucocorticoid response elements"]]},
+            {prompt: "The main anti-inflammatory mechanism of glucocorticoids is _____ of NF-κB and AP-1 transcription factors.", answers: [["transrepression"]]},
+            {prompt: "During acute stress, _____ and _____ are the primary counter-regulatory hormones causing hyperglycemia.", answers: [["cortisol"], ["catecholamines", "epinephrine", "norepinephrine"]]},
+            {prompt: "Chronic stress-induced amenorrhea is mediated by _____ and cortisol suppressing _____.", answers: [["CRH"], ["GnRH"]]},
+            {prompt: "Catecholamines promote cancer metastasis by activating _____ receptors on tumor cells, increasing _____ and MMP expression.", answers: [["β2-adrenergic", "β2-AR"], ["VEGF"]]},
+            {prompt: "The female athlete triad consists of energy deficiency, _____, and _____.", answers: [["menstrual dysfunction", "amenorrhea"], ["low bone density", "osteoporosis"]]},
+            {prompt: "Glucocorticoids cause bone loss by ↓ _____ function and ↑ _____ activity via RANKL/OPG imbalance.", answers: [["osteoblast"], ["osteoclast"]]},
+            {prompt: "In the ICU, the target blood glucose range is _____ mg/dL based on the _____ trial.", answers: [["140-180", "140 to 180"], ["NICE-SUGAR"]]}
+        ];
+
+        const refTable = [
+            {lo: "GR nuclear signaling", ext: "Transactivation (GRE) vs transrepression (NF-κB/AP-1)", hy: "Anti-inflammatory = transrepression; side effects = transactivation", bw: "GRE, NF-κB, Hsp90, nuclear translocation"},
+            {lo: "Cytokine-HPA axis", ext: "IL-1, IL-6, TNF-α → CRH → cortisol negative feedback loop", hy: "Cortisol as immune brake; sickness behavior", bw: "IL-6 → CRH, cortisol immunosuppression"},
+            {lo: "Stress hyperglycemia", ext: "Cortisol + catecholamines → gluconeogenesis + insulin resistance", hy: "ICU target: 140-180 mg/dL; NICE-SUGAR trial", bw: "Stress hyperglycemia, PEPCK, G6Pase, insulin resistance"},
+            {lo: "Stress → reproductive suppression", ext: "CRH suppresses GnRH → functional hypothalamic amenorrhea", hy: "Female athlete triad; anorexia; low LH/FSH", bw: "Functional hypothalamic amenorrhea, CRH → GnRH suppression"},
+            {lo: "Glucocorticoid bone effects", ext: "↓osteoblast + ↑RANKL → rapid early bone loss", hy: "Bisphosphonate prevention; Ca2+/Vit D supplementation", bw: "Steroid osteoporosis, RANKL, osteoblast apoptosis"},
+            {lo: "Stress and cancer", ext: "β2-AR → cAMP → VEGF/MMP; NK cell suppression by cortisol", hy: "Propranolol anti-metastatic trials; NK surveillance", bw: "β2-AR, VEGF, MMP, propranolol"},
+            {lo: "Glucocorticoid immunosuppression", ext: "Lymphopenia (redistribution + apoptosis); NK↓; T-cell↓IL-2", hy: "VZV reactivation; PCP; fungal infections on chronic steroids", bw: "BIM apoptosis, thymocyte, NK suppression, VZV reactivation"}
+        ];
+
+        // ===== RENDER FUNCTIONS =====
+        function rFC() {
+            let html = '';
+            flashcards.forEach((fc, i) => {
+                html += `<div class="fc"><div class="fci">Card ${i+1} / ${flashcards.length}</div><div class="fcf">${js_str(fc.front)}</div><div class="fcb">${js_str(fc.back)}</div></div>`;
+            });
+            document.getElementById('fc-render').innerHTML = html;
+        }
+
+        function rMCQ() {
+            let html = '';
+            mcqs.forEach((mcq, i) => {
+                html += `<div class="mi"><div class="ms">Question ${i+1}</div><div class="mos">${js_str(mcq.q)}</div>`;
+                mcq.opts.forEach((opt, j) => {
+                    html += `<div class="mo" onclick="sel(this, ${j === mcq.correct}, '${js_str(mcq.expl)}')">${js_str(opt)}</div>`;
+                });
+                html += `<div class="explanation"></div></div>`;
+            });
+            document.getElementById('mcq-render').innerHTML = html;
+        }
+
+        function rVig() {
+            let html = '';
+            vignettes.forEach((vig, i) => {
+                html += `<div class="vi"><div class="vi-title">Vignette ${i+1}: ${js_str(vig.title)}</div><div class="vi-case">${js_str(vig.case)}</div>`;
+                vig.qs.forEach((qa, j) => {
+                    html += `<div class="vb"><div class="vqa">Q${j+1}: ${js_str(qa.q)}</div><div class="vq-ans"><strong>A:</strong> ${js_str(qa.a)}</div></div>`;
+                });
+                html += `</div>`;
+            });
+            document.getElementById('vig-render').innerHTML = html;
+        }
+
+        function rTrap() {
+            let html = '';
+            traps.forEach((trap, i) => {
+                html += `<div class="tri"><div class="trs">${js_str(trap.stmt)}</div><div class="trb"><button onclick="ans(${i}, true)">True</button><button onclick="ans(${i}, false)">False</button></div><div class="trr"></div></div>`;
+            });
+            document.getElementById('trap-render').innerHTML = html;
+        }
+
+        function rFib() {
+            let html = '';
+            fillInBlanks.forEach((fib, i) => {
+                html += `<div class="fi"><div class="fin">${i+1}. ${js_str(fib.prompt)}</div>`;
+                fib.answers.forEach((ans_set, j) => {
+                    html += `<input type="text" class="fib-input" id="fib-${i}-${j}" placeholder="Answer ${j+1}"><button class="fib-check" onclick="chk(this, ${i}, ${j}, ['${ans_set.join('\',\'')}'])">Check</button>`;
+                });
+                html += `<div class="fib-feedback"></div></div>`;
+            });
+            document.getElementById('fib-render').innerHTML = html;
+        }
+
+        function rRef() {
+            let html = '<div class="rt"><table><thead><tr><th>GUSOM LO</th><th>Step 1 Extension</th><th>HY Associations</th><th>Buzzwords</th></tr></thead><tbody>';
+            refTable.forEach(row => {
+                html += `<tr><td class="rt-key">${js_str(row.lo)}</td><td>${js_str(row.ext)}</td><td>${js_str(row.hy)}</td><td>${js_str(row.bw)}</td></tr>`;
+            });
+            html += '</tbody></table></div>';
+            document.getElementById('ref-render').innerHTML = html;
+        }
+
+        // ===== INTERACTION FUNCTIONS =====
+        function sw(name, btn) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(name).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function sel(el, isCorrect, expl) {
+            const container = el.parentElement;
+            const existing = container.querySelector('.mo.selected');
+            if (existing && existing !== el) existing.classList.remove('selected', 'correct', 'incorrect');
+            el.classList.add('selected');
+            const feedbackDiv = container.querySelector('.explanation');
+            if (isCorrect) {
+                el.classList.add('correct');
+                el.classList.remove('incorrect');
+                feedbackDiv.innerHTML = `<strong>Correct!</strong> ${expl}`;
+            } else {
+                el.classList.add('incorrect');
+                el.classList.remove('correct');
+                feedbackDiv.innerHTML = `<strong>Not quite.</strong> ${expl}`;
+            }
+            feedbackDiv.classList.add('show');
+        }
+
+        function ans(idx, userSaysCorrect) {
+            const isCorrect = traps[idx].isCorrect;
+            const match = userSaysCorrect === isCorrect;
+            const revealDiv = document.querySelectorAll('.tri')[idx].querySelector('.trr');
+            const buttons = document.querySelectorAll('.tri')[idx].querySelectorAll('button');
+            buttons.forEach((btn, j) => {
+                if ((j === 0 && userSaysCorrect) || (j === 1 && !userSaysCorrect)) {
+                    btn.classList.add(match ? 'correct' : 'incorrect');
+                }
+            });
+            revealDiv.innerHTML = match ? `<strong>Correct!</strong> ${traps[idx].reveal}` : `<strong>Incorrect.</strong> ${traps[idx].reveal}`;
+            revealDiv.classList.add('show');
+        }
+
+        function chk(btn, fib_idx, ans_idx, correctAnswers) {
+            const input = document.getElementById(`fib-${fib_idx}-${ans_idx}`);
+            const userAnswer = input.value.trim().toLowerCase();
+            const isCorrect = correctAnswers.some(ca => ca.toLowerCase() === userAnswer);
+            const feedbackDiv = input.parentElement.querySelector('.fib-feedback');
+            if (isCorrect) {
+                btn.classList.add('correct');
+                input.disabled = true;
+                btn.disabled = true;
+                feedbackDiv.innerHTML = '<strong>Correct!</strong>';
+            } else {
+                btn.classList.add('incorrect');
+                feedbackDiv.innerHTML = `<strong>Not quite.</strong> Acceptable answers: ${correctAnswers.join(', ')}`;
+            }
+            feedbackDiv.classList.add('show');
+        }
+
+        // ===== LOAD ON PAGE INIT =====
+        window.onload = function() {
+            rFC();
+            rMCQ();
+            rVig();
+            rTrap();
+            rFib();
+            rRef();
+        };
+    </script>
+</body>
+</html>

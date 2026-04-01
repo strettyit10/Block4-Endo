@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L4 · GH Axis — Practice Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0D1117;
+            color: #C9D1D9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .back-link {
+            color: #58A6FF;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .back-link:hover {
+            background-color: #30363D;
+        }
+
+        .title-section {
+            flex: 1;
+        }
+
+        .lecture-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #F0F6FC;
+        }
+
+        .lecture-subtitle {
+            font-size: 14px;
+            color: #8B949E;
+        }
+
+        .source-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .pill {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #8B949E;
+        }
+
+        .pill.source {
+            border-color: #6A4C93;
+            color: #C77DFF;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #30363D;
+            margin-bottom: 24px;
+            gap: 2px;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: #8B949E;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+        .tab-button:hover {
+            color: #C9D1D9;
+        }
+
+        .tab-button.active {
+            color: #6A4C93;
+            border-bottom-color: #6A4C93;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .question-card {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .question-card:hover {
+            border-color: #30363D;
+        }
+
+        .question-number {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6A4C93;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .question-text {
+            font-size: 15px;
+            margin-bottom: 16px;
+            color: #F0F6FC;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .option {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            color: #C9D1D9;
+        }
+
+        .option:hover {
+            border-color: #30363D;
+            background-color: #1C2128;
+        }
+
+        .option.selected {
+            border-color: #6A4C93;
+            background-color: #3E2F5C;
+        }
+
+        .option.correct {
+            border-color: #238636;
+            background-color: #0D3B1A;
+            color: #3FB950;
+        }
+
+        .option.incorrect {
+            border-color: #F85149;
+            background-color: #3D1F1A;
+            color: #F85149;
+        }
+
+        .explanation {
+            background-color: #0D1117;
+            border-left: 3px solid #6A4C93;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+            display: none;
+            font-size: 14px;
+            color: #C9D1D9;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        .explanation-label {
+            font-weight: 600;
+            color: #6A4C93;
+            margin-bottom: 6px;
+        }
+
+        .teaching-point {
+            background-color: #3E2F5C;
+            border-left: 3px solid #C77DFF;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #C77DFF;
+            font-style: italic;
+        }
+
+        .score-section {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 12px;
+            color: #8B949E;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .score-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #6A4C93;
+        }
+
+        .reset-button {
+            background-color: #6A4C93;
+            color: #0D1117;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .reset-button:hover {
+            background-color: #C77DFF;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8B949E;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="GUSOM-Phys-Hub3-ActiveDrills.html" class="back-link">← Back to Hub</a>
+        </div>
+
+        <div class="title-section">
+            <h1 class="lecture-title">L4 · GH Axis</h1>
+            <p class="lecture-subtitle">Practice Questions</p>
+            <div class="source-pills">
+                <span class="pill source">GUSOM In-House (Dr. Watson LOs)</span>
+                <span class="pill source">BRS Physiology Ch. 9</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('gusom')">GUSOM Questions</button>
+            <button class="tab-button" onclick="showTab('brs')">BRS Questions</button>
+            <button class="tab-button" onclick="showTab('score')">Score</button>
+        </div>
+
+        <!-- GUSOM QUESTIONS TAB -->
+        <div id="gusom" class="tab-content active">
+            <div id="gusom-questions"></div>
+        </div>
+
+        <!-- BRS QUESTIONS TAB -->
+        <div id="brs" class="tab-content">
+            <div id="brs-questions"></div>
+        </div>
+
+        <!-- SCORE TAB -->
+        <div id="score" class="tab-content">
+            <div class="score-section">
+                <div class="score-grid">
+                    <div class="score-item">
+                        <div class="score-label">GUSOM</div>
+                        <div class="score-value"><span id="gusom-score">0</span>/10</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">BRS</div>
+                        <div class="score-value"><span id="brs-score">0</span>/5</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Overall</div>
+                        <div class="score-value"><span id="overall-score">0</span>/15</div>
+                    </div>
+                </div>
+                <button class="reset-button" onclick="resetScore()">Reset All Scores</button>
+            </div>
+            <div class="empty-state">
+                <p>Answer questions to see your scores here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = {
+            gusom: [
+                {
+                    id: 'g1',
+                    text: 'A 45-year-old presents with progressive coarsening of facial features over 10 years, enlarged hands requiring ring-size increase, jaw prognathism, new-onset carpal tunnel syndrome, and sleep apnea. Serum IGF-1 is 3× the upper limit of normal. What is the confirmatory test?',
+                    options: ['24-hour urinary GH', 'Random serum GH', 'Oral glucose tolerance test (OGTT) with GH measured at 0, 30, 60, 90, 120 min', 'Insulin tolerance test', 'GHRH stimulation test'],
+                    correct: 2,
+                    explanation: 'Acromegaly confirmation: OGTT (75g glucose orally) with serial GH measurements. Normal response: GH suppresses to <1 ng/mL (some guidelines: <0.4 ng/mL with sensitive assays). Acromegaly: GH fails to suppress or paradoxically rises (GH secreting adenomas often respond abnormally to glucose). IGF-1 is used for screening (elevated in acromegaly, stable levels unlike pulsatile GH), but OGTT is the gold standard confirmation test.',
+                    teaching: 'IGF-1 = screening test for acromegaly. OGTT GH suppression test = gold standard confirmation. Random GH is unreliable (pulsatile).'
+                },
+                {
+                    id: 'g2',
+                    text: 'Growth hormone promotes which of the following metabolic effects? (Select the MOST COMPLETE answer)',
+                    options: ['Glucose uptake in muscle, fat deposition, protein catabolism', 'Gluconeogenesis, lipolysis, reduced peripheral glucose uptake, protein anabolism (via IGF-1)', 'Insulin release from pancreas, glycogen synthesis, fat deposition', 'Pure anabolic effects with no catabolic properties', 'Peripheral glucose oxidation and glycogen breakdown'],
+                    correct: 1,
+                    explanation: 'GH has a dual metabolic nature: (1) Direct catabolic effects: promotes lipolysis (↑FFA → fuel), gluconeogenesis (↑blood glucose), ↓glucose uptake in muscle/fat (anti-insulin = "diabetogenic"). (2) Indirect anabolic effects via IGF-1: protein synthesis, muscle growth, bone elongation, glucose uptake (insulin-like). Net: GH excess (acromegaly) → insulin resistance + diabetes. IGF-1 mediates the growth effects; GH mediates the metabolic effects.',
+                    teaching: 'GH: direct effects = diabetogenic (↑glucose, ↑FFA, ↓peripheral glucose uptake). Indirect via IGF-1 = anabolic (growth, protein synthesis). Acromegaly = insulin resistance.'
+                },
+                {
+                    id: 'g3',
+                    text: 'A 7-year-old girl with short stature undergoes GH stimulation testing. Peak GH is 24 ng/mL. IGF-1 is undetectable. IGFBP-3 is markedly reduced. Recombinant GH treatment has no effect. What is the diagnosis?',
+                    options: ['GH deficiency', 'Laron syndrome (GH receptor deficiency)', 'IGF-1 deficiency from liver disease', 'Hypothyroidism', 'Constitutional delay of growth and puberty'],
+                    correct: 1,
+                    explanation: 'Laron syndrome: GHR (GH receptor) loss-of-function mutation → GH cannot signal → no IGF-1 production. Labs: HIGH GH (no IGF-1 feedback to suppress GH), LOW IGF-1, LOW IGFBP-3. GH treatment: no response (receptor is broken). Treatment: mecasermin (recombinant IGF-1). Distinguished from GHD (GH deficiency): GHD has LOW GH on stim test + LOW IGF-1.',
+                    teaching: 'Laron: high GH + low IGF-1 = GHR mutation. GH stim test shows HIGH GH peak. Treat with mecasermin (recombinant IGF-1). GHD: LOW GH on stim test.'
+                },
+                {
+                    id: 'g4',
+                    text: 'A patient with acromegaly is started on octreotide LAR (long-acting somatostatin analog). Which side effect requires routine monitoring with abdominal ultrasound?',
+                    options: ['Kidney stones', 'Gallstones', 'Hepatic fibrosis', 'Pancreatitis', 'Adrenal insufficiency'],
+                    correct: 1,
+                    explanation: 'Somatostatin analogs (octreotide, lanreotide) inhibit CCK-mediated gallbladder contraction → bile stasis → cholesterol gallstone formation (25-60% with long-term use). All patients starting somatostatin analogs should have baseline abdominal ultrasound, and follow-up imaging during treatment. Other side effects: steatorrhea (inhibit pancreatic enzyme secretion), bradycardia, hyperglycemia (inhibit insulin secretion), injection site reactions.',
+                    teaching: 'Somatostatin analogs → gallstones (inhibit CCK → bile stasis). Monitor with US. Also: GI effects, hyperglycemia, bradycardia.'
+                },
+                {
+                    id: 'g5',
+                    text: 'Growth hormone is released in episodic pulses. Which physiological factor is the STRONGEST acute stimulus for GH secretion?',
+                    options: ['Postprandial glucose rise', 'Deep sleep (slow-wave, Stage 3/4)', 'Mild exercise', 'Emotional stress', 'Eating a high-protein meal'],
+                    correct: 1,
+                    explanation: 'The largest physiological GH pulse occurs during slow-wave sleep (Stage 3/4, NREM). This is why sleep deprivation impairs growth in children and why GH secretion is highest during childhood/adolescence. Other stimuli: hypoglycemia (strongest pharmacological stimulus), exercise, amino acids (arginine), fasting. Suppressors: hyperglycemia, somatostatin, cortisol (chronic stress).',
+                    teaching: 'Largest GH pulse: slow-wave sleep. Strongest pharmacological stimulus: insulin-induced hypoglycemia. Suppressors: glucose, somatostatin, cortisol.'
+                },
+                {
+                    id: 'g6',
+                    text: 'IGF-1 mediates its growth effects by binding to which receptor type?',
+                    options: ['Nuclear steroid receptor', 'Tyrosine kinase receptor (similar to insulin receptor)', 'GPCR coupled to Gs', 'JAK2-STAT5 pathway (same as GHR)', 'Serine/threonine kinase receptor'],
+                    correct: 1,
+                    explanation: 'IGF-1 receptor = receptor tyrosine kinase (RTK), homologous to insulin receptor. Binding → autophosphorylation of intracellular tyrosine residues → IRS-1/2 → PI3K/Akt (survival, protein synthesis, glucose uptake) + MAPK/ERK (proliferation). GH receptor, in contrast, is a cytokine receptor that recruits JAK2 (not intrinsically a kinase). The IGF-1R is highly homologous to insulin R — explains insulin-like metabolic effects of IGF-1.',
+                    teaching: 'IGF-1R = tyrosine kinase (like insulin receptor). GHR = cytokine receptor → JAK2-STAT5. Different receptor types for the same axis.'
+                },
+                {
+                    id: 'g7',
+                    text: 'A patient on pegvisomant for acromegaly has GH levels of 30 ng/mL (elevated). Her IGF-1 has normalized. Is the treatment effective?',
+                    options: ['No — GH should be suppressed for treatment to work', 'Yes — pegvisomant blocks GHR; GH rises reflexively but IGF-1 is the correct efficacy marker', 'No — rising GH indicates tumor growth requiring surgery', 'Uncertain — need pituitary biopsy', 'No — she needs addition of octreotide immediately'],
+                    correct: 1,
+                    explanation: 'Pegvisomant blocks GH receptor dimerization → no JAK2-STAT5 activation → no IGF-1 produced. Because IGF-1 cannot feedback on the pituitary, GH rises reflexively. GH levels ARE EXPECTED TO RISE on pegvisomant. IGF-1 is the correct parameter to monitor efficacy. If IGF-1 is normalized, the treatment is working. Additional monitoring: liver enzymes (hepatotoxicity), pituitary MRI (tumor may grow due to loss of IGF-1 feedback on tumor).',
+                    teaching: 'Pegvisomant: monitor IGF-1 (not GH). GH ALWAYS rises on pegvisomant — don\'t misinterpret. Monitor LFTs and MRI annually.'
+                },
+                {
+                    id: 'g8',
+                    text: 'Which of the following patients most requires a GH stimulation test (rather than random GH level)?',
+                    options: ['40-year-old with suspected acromegaly and elevated IGF-1', '8-year-old with short stature, no pubertal development, low IGF-1, and delayed bone age', '30-year-old with OGTT failure to suppress GH', '16-year-old with elevated IGF-1 and rapidly progressive facial changes', '25-year-old with GH > 100 ng/mL'],
+                    correct: 1,
+                    explanation: 'GH stimulation tests are used to diagnose GH DEFICIENCY (not excess). In children with short stature: random GH unreliable (pulsatile) → need provocative test. Stimuli: insulin tolerance test (gold standard), arginine, glucagon, clonidine, GHRH+arginine. A peak GH <10 ng/mL on stimulation = GH deficiency. For acromegaly (excess): use OGTT suppression test (not stimulation). The question describes GH deficiency workup.',
+                    teaching: 'GH stimulation test = diagnose deficiency (peak GH <10 = deficient). GH suppression test (OGTT) = diagnose excess (failure to suppress = acromegaly).'
+                },
+                {
+                    id: 'g9',
+                    text: 'Tesamorelin is approved for which condition, and what is its mechanism?',
+                    options: ['Acromegaly — GHR antagonist', 'HIV-associated lipodystrophy — GHRH receptor agonist', 'GH deficiency in adults — direct GH replacement', 'Laron syndrome — IGF-1 receptor activator', 'Pituitary gigantism — somatostatin receptor agonist'],
+                    correct: 1,
+                    explanation: 'Tesamorelin = GHRH analog (GHRH receptor agonist) → stimulates pituitary GH secretion → ↑GH → lipolysis of visceral fat. FDA-approved for HIV-associated lipodystrophy (visceral fat accumulation from antiretroviral therapy). Not approved for adult GHD (recombinant GH is used). Mechanism: stimulates endogenous GH (unlike pegvisomant which blocks GH action or octreotide which suppresses GH).',
+                    teaching: 'Tesamorelin = GHRH agonist → ↑GH → visceral fat lipolysis. FDA indication: HIV lipodystrophy. Not GHD. Pegvisomant = GHR antagonist.'
+                },
+                {
+                    id: 'g10',
+                    text: 'In acromegaly, which vascular/cardiac complication is most directly caused by GH excess?',
+                    options: ['Pulmonary hypertension', 'Mitral valve prolapse', 'Left ventricular hypertrophy and cardiomegaly', 'Atrial fibrillation from thyroid dysfunction', 'Deep vein thrombosis'],
+                    correct: 2,
+                    explanation: 'Acromegaly → GH and IGF-1 excess → organomegaly including cardiomegaly. Cardiac: LVH (most common, from GH/IGF-1 direct hypertrophic effect), diastolic dysfunction, cardiomyopathy, and increased arrhythmia risk. Hypertension (from GH-induced sodium retention and insulin resistance) further worsens LVH. Cardiac disease is a major source of mortality in acromegaly.',
+                    teaching: 'Acromegaly cardiac: LVH + cardiomegaly (direct GH/IGF-1 effect) + HTN. Cardiac mortality is major cause of death. Reverses partially with treatment.'
+                }
+            ],
+            brs: [
+                {
+                    id: 'b1',
+                    text: 'GHRH is secreted from which hypothalamic nucleus, and what is its receptor mechanism on somatotrophs?',
+                    options: ['PVN → Gi → ↓cAMP', 'Arcuate nucleus → Gs → ↑cAMP → PKA → GH secretion', 'SCN → Gq → IP3 → GH secretion', 'DMN → tyrosine kinase → STAT5', 'VMN → nuclear receptor → GH gene'],
+                    correct: 1,
+                    explanation: 'GHRH from arcuate nucleus → median eminence → portal blood → somatotrophs (Gs-coupled GPCR) → ↑adenylyl cyclase → ↑cAMP → PKA → GH gene expression + exocytosis of GH. Somatostatin from periventricular nucleus → Gi → ↓cAMP → opposes GHRH. The pulsatile nature of GH secretion reflects alternating GHRH bursts and somatostatin inter-pulse intervals.',
+                    teaching: 'GHRH → arcuate → Gs → ↑cAMP. SRIF (somatostatin) → periventricular → Gi → ↓cAMP. Opposites.'
+                },
+                {
+                    id: 'b2',
+                    text: 'After glucose ingestion, GH normally decreases. What is the mechanism?',
+                    options: ['Glucose directly inhibits somatotrophs', 'Glucose stimulates somatostatin release', 'Glucose reduces GHRH secretion', 'Glucose stimulates insulin which inhibits GH directly', 'Glucose activates leptin receptors on somatotrophs'],
+                    correct: 1,
+                    explanation: 'Glucose → stimulates somatostatin (SRIF) release from periventricular nucleus → somatostatin travels via portal system → Gi on somatotrophs → ↓cAMP → ↓GH secretion. Also: glucose → ↑insulin → insulin can modestly suppress GH. Clinically, this is the basis of the OGTT suppression test — normal GH falls to <1 ng/mL; failure to suppress = acromegaly.',
+                    teaching: 'Hyperglycemia → ↑somatostatin → ↓GH. Hypoglycemia → ↓somatostatin + ↑GHRH → ↑GH. This is why hypoglycemia is the gold standard stimulus for GH testing.'
+                },
+                {
+                    id: 'b3',
+                    text: 'What is the role of IGFBP-3 in GH/IGF-1 physiology?',
+                    options: ['IGFBP-3 activates the IGF-1 receptor', 'IGFBP-3 is the major carrier protein for IGF-1 in blood, prolonging its half-life', 'IGFBP-3 is synthesized in the pituitary and stimulates GH release', 'IGFBP-3 inhibits GH receptor signaling', 'IGFBP-3 is used as a marker for kidney function'],
+                    correct: 1,
+                    explanation: 'IGFBP-3 (IGF binding protein 3) carries ~75% of circulating IGF-1. It is GH-dependent (synthesized in the liver under GH stimulation) and forms a ternary complex with IGF-1 and an acid-labile subunit (ALS) → extends IGF-1 half-life from <30 min to ~16 hours. Low IGFBP-3: GHD (low GH → low IGFBP-3 synthesis), Laron syndrome (no GHR signaling → no IGFBP-3). Both IGF-1 and IGFBP-3 are used clinically to assess GH axis status.',
+                    teaching: 'IGFBP-3: GH-dependent carrier protein for IGF-1. Low in GHD and Laron. Both IGF-1 + IGFBP-3 needed for complete GH axis assessment.'
+                },
+                {
+                    id: 'b4',
+                    text: 'Exercise is a strong stimulus for GH secretion. What is the primary mechanism?',
+                    options: ['Exercise increases blood glucose → paradoxical GH release', 'Exercise decreases somatostatin and increases GHRH secretion; also increases ghrelin', 'Exercise directly stimulates anterior pituitary somatotrophs via sympathetic innervation', 'Exercise induces hypoglycemia via increased glucose utilization', 'Exercise-induced cortisol release stimulates GH'],
+                    correct: 1,
+                    explanation: 'Exercise stimulates GH via: (1) ↑GHRH from hypothalamus. (2) ↓somatostatin. (3) ↑ghrelin (from stomach → stimulates somatotrophs via GHS-R). (4) Possible β-adrenergic stimulation. The magnitude of GH response correlates with exercise intensity. This is clinically used as a provocative test (exercise test) for GH deficiency in children.',
+                    teaching: 'Exercise → ↑GHRH + ↑ghrelin + ↓somatostatin → ↑GH. Used as provocative test in GHD workup.'
+                },
+                {
+                    id: 'b5',
+                    text: 'A patient with acromegaly undergoes transsphenoidal surgery. Post-operatively, IGF-1 normalizes. What follow-up is required?',
+                    options: ['No further monitoring — surgical cure is permanent', 'Annual IGF-1 measurement and periodic pituitary MRI for surveillance of recurrence', 'Monthly GH measurements for 1 year', 'Annual 24h urinary GH', 'Repeat surgery after 6 months regardless of IGF-1'],
+                    correct: 1,
+                    explanation: 'Post-surgical acromegaly follow-up: IGF-1 (3-6 months post-op, then annually once stable) and OGTT-GH suppression test to confirm remission. Pituitary MRI: 3-6 months post-op to assess residual tumor, then annually for 5 years. Recurrence can occur even after apparent biochemical cure. Long-term: screen for comorbidities (colonoscopy for colon cancer surveillance, cardiac echo, sleep study for sleep apnea, BMD for osteoporosis).',
+                    teaching: 'Acromegaly remission criteria: IGF-1 normal + GH <1 ng/mL on OGTT. Annual surveillance needed — recurrence can occur years later.'
+                }
+            ]
+        };
+
+        function renderQuestions(tabName, container) {
+            const qs = questions[tabName];
+            const html = qs.map((q, i) => `
+                <div class="question-card">
+                    <div class="question-number">Question ${i + 1}</div>
+                    <div class="question-text">${q.text}</div>
+                    <div class="options">
+                        ${q.options.map((opt, j) => `
+                            <div class="option" onclick="sel(this, ${j === q.correct}, '${q.id}', '${tabName}')" data-q="${q.id}">
+                                <strong>${String.fromCharCode(65 + j)})</strong> ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="explanation" data-q="${q.id}">
+                        <div class="explanation-label">Explanation:</div>
+                        <p>${q.explanation}</p>
+                        <div class="teaching-point">Teaching Point: ${q.teaching}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById(container).innerHTML = html;
+        }
+
+        function sel(el, isCorrect, qId, tabName) {
+            const card = el.closest('.question-card');
+            const exp = card.querySelector(`[data-q="${qId}"]`);
+            const opts = card.querySelectorAll('.option');
+
+            opts.forEach(o => o.classList.remove('selected', 'correct', 'incorrect'));
+
+            if (isCorrect) {
+                el.classList.add('selected', 'correct');
+                localStorage.setItem(`${tabName}-${qId}`, '1');
+            } else {
+                el.classList.add('selected', 'incorrect');
+                localStorage.setItem(`${tabName}-${qId}`, '0');
+            }
+
+            exp.classList.add('show');
+        }
+
+        function showTab(name) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(name).classList.add('active');
+            document.querySelector(`[onclick="showTab('${name}')"]`).classList.add('active');
+
+            if (name === 'gusom' && !document.getElementById('gusom-questions').innerHTML) {
+                renderQuestions('gusom', 'gusom-questions');
+            } else if (name === 'brs' && !document.getElementById('brs-questions').innerHTML) {
+                renderQuestions('brs', 'brs-questions');
+            } else if (name === 'score') {
+                updateScore();
+            }
+        }
+
+        function updateScore() {
+            let gusom = 0, brs = 0;
+            questions.gusom.forEach(q => {
+                if (localStorage.getItem(`gusom-${q.id}`) === '1') gusom++;
+            });
+            questions.brs.forEach(q => {
+                if (localStorage.getItem(`brs-${q.id}`) === '1') brs++;
+            });
+            document.getElementById('gusom-score').textContent = gusom;
+            document.getElementById('brs-score').textContent = brs;
+            document.getElementById('overall-score').textContent = gusom + brs;
+        }
+
+        function resetScore() {
+            if (confirm('Reset all scores and answers?')) {
+                Object.keys(localStorage).forEach(k => {
+                    if (k.startsWith('gusom-') || k.startsWith('brs-')) {
+                        localStorage.removeItem(k);
+                    }
+                });
+                document.querySelectorAll('.option').forEach(o => {
+                    o.classList.remove('selected', 'correct', 'incorrect');
+                });
+                document.querySelectorAll('.explanation').forEach(e => {
+                    e.classList.remove('show');
+                });
+                updateScore();
+            }
+        }
+
+        // Initial render
+        renderQuestions('gusom', 'gusom-questions');
+    </script>
+</body>
+</html>

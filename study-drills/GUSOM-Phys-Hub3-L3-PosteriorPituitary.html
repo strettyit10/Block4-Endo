@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L3 · Posterior Pituitary — Practice Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0D1117;
+            color: #C9D1D9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .back-link {
+            color: #58A6FF;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .back-link:hover {
+            background-color: #30363D;
+        }
+
+        .title-section {
+            flex: 1;
+        }
+
+        .lecture-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #F0F6FC;
+        }
+
+        .lecture-subtitle {
+            font-size: 14px;
+            color: #8B949E;
+        }
+
+        .source-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .pill {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #8B949E;
+        }
+
+        .pill.source {
+            border-color: #00695C;
+            color: #00D9A3;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #30363D;
+            margin-bottom: 24px;
+            gap: 2px;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: #8B949E;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+        .tab-button:hover {
+            color: #C9D1D9;
+        }
+
+        .tab-button.active {
+            color: #00695C;
+            border-bottom-color: #00695C;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .question-card {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+        }
+
+        .question-card:hover {
+            border-color: #30363D;
+        }
+
+        .question-number {
+            font-size: 12px;
+            font-weight: 600;
+            color: #00695C;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .question-text {
+            font-size: 15px;
+            margin-bottom: 16px;
+            color: #F0F6FC;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .option {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            color: #C9D1D9;
+        }
+
+        .option:hover {
+            border-color: #30363D;
+            background-color: #1C2128;
+        }
+
+        .option.selected {
+            border-color: #00695C;
+            background-color: #0D2E2A;
+        }
+
+        .option.correct {
+            border-color: #238636;
+            background-color: #0D3B1A;
+            color: #3FB950;
+        }
+
+        .option.incorrect {
+            border-color: #F85149;
+            background-color: #3D1F1A;
+            color: #F85149;
+        }
+
+        .explanation {
+            background-color: #0D1117;
+            border-left: 3px solid #00695C;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 12px;
+            display: none;
+            font-size: 14px;
+            color: #C9D1D9;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        .explanation-label {
+            font-weight: 600;
+            color: #00695C;
+            margin-bottom: 6px;
+        }
+
+        .teaching-point {
+            background-color: #0D2E2A;
+            border-left: 3px solid #00D9A3;
+            padding: 12px;
+            border-radius: 4px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #00D9A3;
+            font-style: italic;
+        }
+
+        .score-section {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 12px;
+            color: #8B949E;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .score-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #00695C;
+        }
+
+        .reset-button {
+            background-color: #00695C;
+            color: #0D1117;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .reset-button:hover {
+            background-color: #00D9A3;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8B949E;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="GUSOM-Phys-Hub3-ActiveDrills.html" class="back-link">← Back to Hub</a>
+        </div>
+
+        <div class="title-section">
+            <h1 class="lecture-title">L3 · Posterior Pituitary</h1>
+            <p class="lecture-subtitle">Practice Questions</p>
+            <div class="source-pills">
+                <span class="pill source">GUSOM In-House (Dr. Watson LOs)</span>
+                <span class="pill source">BRS Physiology Ch. 7</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('gusom')">GUSOM Questions</button>
+            <button class="tab-button" onclick="showTab('brs')">BRS Questions</button>
+            <button class="tab-button" onclick="showTab('score')">Score</button>
+        </div>
+
+        <!-- GUSOM QUESTIONS TAB -->
+        <div id="gusom" class="tab-content active">
+            <div id="gusom-questions"></div>
+        </div>
+
+        <!-- BRS QUESTIONS TAB -->
+        <div id="brs" class="tab-content">
+            <div id="brs-questions"></div>
+        </div>
+
+        <!-- SCORE TAB -->
+        <div id="score" class="tab-content">
+            <div class="score-section">
+                <div class="score-grid">
+                    <div class="score-item">
+                        <div class="score-label">GUSOM</div>
+                        <div class="score-value"><span id="gusom-score">0</span>/10</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">BRS</div>
+                        <div class="score-value"><span id="brs-score">0</span>/5</div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Overall</div>
+                        <div class="score-value"><span id="overall-score">0</span>/15</div>
+                    </div>
+                </div>
+                <button class="reset-button" onclick="resetScore()">Reset All Scores</button>
+            </div>
+            <div class="empty-state">
+                <p>Answer questions to see your scores here.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = {
+            gusom: [
+                {
+                    id: 'g1',
+                    text: 'A 35-year-old man presents with polyuria (12 L/day) and polydipsia. Urine osmolality is 85 mOsm/kg (very dilute). Serum sodium is 148 mEq/L. After water deprivation for 8 hours, urine osmolality rises to only 110 mOsm/kg. After administration of desmopressin (DDAVP), urine osmolality rises to 580 mOsm/kg. What is the diagnosis?',
+                    options: ['Nephrogenic diabetes insipidus', 'Central diabetes insipidus', 'Primary polydipsia (psychogenic)', 'SIADH', 'Osmotic diuresis from hyperglycemia'],
+                    correct: 1,
+                    explanation: 'Water deprivation test results: Failure to concentrate urine after deprivation (low urine Osm) + RESPONSE to DDAVP = central DI. The kidney is intact but lacks ADH. In nephrogenic DI: no response to DDAVP (kidney doesn\'t respond). In primary polydipsia: urine concentrates after deprivation (ADH is present and kidneys work — just chronically suppressed by fluid intake). Central DI causes: head trauma, neurosurgery, tumors, Langerhans cell histiocytosis, Sheehan.',
+                    teaching: 'DDAVP response = central DI (ADH absent but kidney works). No DDAVP response = nephrogenic DI (kidney is the problem). Normal concentration after deprivation = primary polydipsia.'
+                },
+                {
+                    id: 'g2',
+                    text: 'A patient is started on lithium for bipolar disorder. 3 months later she develops polyuria. Labs show serum sodium 145, urine Osm 180 mOsm/kg (inappropriately dilute), and normal serum ADH. Desmopressin fails to concentrate the urine. What is the mechanism of her polyuria?',
+                    options: ['Lithium suppresses ADH synthesis in the hypothalamus', 'Lithium blocks ENaC in the collecting duct, preventing water reabsorption', 'Lithium blocks V2 receptor signaling in the collecting duct → impaired cAMP → impaired aquaporin-2 insertion', 'Lithium induces central DI via direct hypothalamic toxicity', 'Lithium causes osmotic diuresis via glucose elevation'],
+                    correct: 2,
+                    explanation: 'Lithium enters principal cells via ENaC and accumulates intracellularly → inhibits adenylyl cyclase downstream of V2 receptor → ↓cAMP → PKA not activated → AQP2 channels not inserted into apical membrane → inability to concentrate urine despite normal/high ADH. ADH is present but the kidney can\'t respond = nephrogenic DI. Treatment: amiloride (blocks ENaC → less lithium entry), thiazide diuretics, NSAIDs, low-sodium diet.',
+                    teaching: 'Lithium → nephrogenic DI via inhibiting adenylyl cyclase (↓cAMP) downstream of V2 receptor. Treat with amiloride (blocks ENaC = less lithium entry into cells).'
+                },
+                {
+                    id: 'g3',
+                    text: 'A 55-year-old with small cell lung cancer develops hyponatremia (Na 122 mEq/L), decreased serum osmolality (250 mOsm/kg), and urine osmolality of 680 mOsm/kg (inappropriately concentrated). Urine sodium is 45 mEq/L. The patient is euvolemic. What is the diagnosis and mechanism?',
+                    options: ['Cerebral salt wasting — volume depletion triggers ADH', 'SIADH — ectopic ADH secretion from SCLC', 'Primary polydipsia — excessive water intake', 'Adrenal insufficiency — mineralocorticoid deficiency', 'Central DI — tumor compressing hypothalamus'],
+                    correct: 1,
+                    explanation: 'SIADH diagnosis: hyponatremia + low serum osmolality + inappropriately concentrated urine (Uosm >100 mOsm/kg) + euvolemia + urine Na >20 mEq/L + no other cause (adrenal/thyroid intact). SCLC produces ectopic ADH → collecting duct reabsorbs water → dilutional hyponatremia + concentrated urine. Treatment: fluid restriction (first-line), then salt tablets/hypertonic saline (severe symptoms), then vaptans (V2 antagonists — tolvaptan) or demeclocycline.',
+                    teaching: 'SIADH: euvolemic hyponatremia + inappropriately concentrated urine + urine Na >20. SCLC = most common cause of ectopic ADH. Treatment: fluid restriction → vaptans.'
+                },
+                {
+                    id: 'g4',
+                    text: 'Osmoreceptors in the anterior hypothalamus detect plasma osmolality. At what serum osmolality does ADH secretion begin, and what is the threshold for thirst?',
+                    options: ['ADH: 295 mOsm/kg; Thirst: 280 mOsm/kg', 'ADH: 280 mOsm/kg; Thirst: 295 mOsm/kg', 'Both thresholds: 290 mOsm/kg', 'ADH: 285 mOsm/kg; Thirst: 300 mOsm/kg', 'ADH: 300 mOsm/kg; Thirst: 285 mOsm/kg'],
+                    correct: 1,
+                    explanation: 'ADH secretion begins at plasma Osm ~280 mOsm/kg (osmoreceptors in OVLT and subfornical organ). Thirst threshold is higher at ~295 mOsm/kg. This separation ensures ADH-mediated water retention corrects mild hyperosmolality before thirst drives drinking — a "first line of defense." At extreme hyperosmolality (>295), thirst kicks in as backup. Patients who cannot drink (intubated, unconscious) lose this thirst defense → dangerous hypernatremia.',
+                    teaching: 'ADH threshold: ~280. Thirst threshold: ~295. ADH first, thirst second. Patients who cannot drink are at high risk for hypernatremia even with intact ADH.'
+                },
+                {
+                    id: 'g5',
+                    text: 'A woman at 30 weeks gestation develops severe polyuria and polydipsia. Serum sodium is normal. Serum ADH is undetectable. DDAVP administration normalizes urine concentration. What is causing her DI?',
+                    options: ['Pituitary destruction from preeclampsia', 'Gestational DI from placental vasopressinase', 'Lupus-associated central DI', 'Lithium-induced nephrogenic DI', 'Primary polydipsia from pregnancy-related behavioral changes'],
+                    correct: 1,
+                    explanation: 'Gestational DI: placenta (especially syncytiotrophoblast) produces vasopressinase (cysteine aminopeptidase) → rapidly degrades native ADH → DI. Normal women have 4x rise in vasopressinase during pregnancy and compensate with 4x ↑ADH production. Women with limited ADH reserve (subclinical central DI) can\'t compensate → manifest DI during pregnancy. Responds to DDAVP (desmopressin is resistant to vasopressinase — D-amino acid analog). Resolves after delivery.',
+                    teaching: 'Gestational DI: vasopressinase from placenta degrades ADH. DDAVP works (resistant to vasopressinase). Resolves postpartum.'
+                },
+                {
+                    id: 'g6',
+                    text: 'A patient with SIADH from pulmonary disease has Na 128 mEq/L. She is currently asymptomatic. Which is the most appropriate first-line treatment?',
+                    options: ['Hypertonic (3%) saline infusion', 'Furosemide and salt tablets', 'Fluid restriction to 800-1000 mL/day', 'Tolvaptan (V2 receptor antagonist)', 'Normal saline infusion'],
+                    correct: 2,
+                    explanation: 'Asymptomatic SIADH with Na 128 mEq/L — first-line treatment is fluid restriction (800-1000 mL/day). By restricting water intake below free water clearance, the kidneys gradually eliminate excess water → Na rises. For moderate-severe symptoms (seizures, obtundation): 3% hypertonic saline (target increase 1-2 mEq/L/hour, max 10-12 mEq/L in 24h). Tolvaptan: reserved for persistent/severe cases. Avoid normal saline in SIADH — Na excreted + water retained → can worsen hyponatremia.',
+                    teaching: 'SIADH treatment ladder: (1) Fluid restriction. (2) Salt tablets + furosemide. (3) Vaptans (tolvaptan). (4) 3% saline for severe symptoms. NEVER give normal saline in SIADH.'
+                },
+                {
+                    id: 'g7',
+                    text: 'Oxytocin is released during breastfeeding by which reflex?',
+                    options: ['Negative feedback from prolactin', 'Ferguson reflex from uterine stretch', 'Milk ejection reflex — suckling → neural signal → hypothalamus → PVN → oxytocin release', 'Oxytocin is released continuously during lactation', 'High estrogen levels stimulate oxytocin release'],
+                    correct: 2,
+                    explanation: 'Suckling → afferent nerve signals → spinal cord → hypothalamus → activate PVN/SON magnocellular neurons → oxytocin release from posterior pituitary → milk ejection (myoepithelial cell contraction). This is a neuroendocrine reflex. Oxytocin and prolactin are both required for lactation: prolactin (from anterior pituitary) = milk production; oxytocin (from posterior pituitary) = milk ejection (letdown reflex). Sight/sound of baby → also triggers oxytocin release (conditioned response).',
+                    teaching: 'Prolactin = milk synthesis (anterior pituitary). Oxytocin = milk ejection/letdown (posterior pituitary). Both required for breastfeeding.'
+                },
+                {
+                    id: 'g8',
+                    text: 'A 70-year-old is found to have Na 118 mEq/L. He is confused. Brain MRI shows central pontine demyelination. What happened before admission?',
+                    options: ['Acute hypernatremia from inadequate fluid intake', 'Rapid overcorrection of hyponatremia → osmotic demyelination syndrome', 'SIADH causing rapid sodium fall', 'Hyperglycemic hyperosmolar state', 'Lithium toxicity causing demyelination'],
+                    correct: 1,
+                    explanation: 'Osmotic demyelination syndrome (ODS / central pontine myelinolysis): overcorrection of chronic hyponatremia. Chronic hyponatremia: brain has adapted (expelled organic osmolytes). Rapid correction → brain cannot quickly replace osmolytes → osmotic stress → myelin sheath damage → demyelination. Prevention: correct Na by NO MORE than 10-12 mEq/L in 24 hours (some guidelines: 8 mEq/L/24h). ODS: locked-in syndrome, quadriplegia, pseudobulbar palsy. If overcorrection occurs: DDAVP + D5W to intentionally re-lower Na (re-lowering is beneficial if caught within 24h).',
+                    teaching: 'ODS prevention: correct hyponatremia ≤10-12 mEq/L per 24 hours. Chronic hypo >> acute hypo in ODS risk. "Correct too fast → demyelinate."'
+                },
+                {
+                    id: 'g9',
+                    text: 'Which V2 receptor-mediated pathway leads to aquaporin-2 (AQP2) insertion into the apical membrane of collecting duct principal cells?',
+                    options: ['ADH → V2 → Gq → PLC → IP3 → AQP2 exocytosis', 'ADH → V2 → Gs → ↑cAMP → PKA → phosphorylation of AQP2 → exocytosis to apical membrane', 'ADH → V1a → Gq → PKC → AQP2 insertion', 'ADH → V2 → Gi → ↓cAMP → AQP2 removal from membrane', 'ADH → nuclear receptor → AQP2 gene transcription only'],
+                    correct: 1,
+                    explanation: 'ADH → V2 receptor (collecting duct principal cells) → Gs → ↑adenylyl cyclase → ↑cAMP → PKA activation → PKA phosphorylates AQP2 → AQP2 vesicles fuse with apical membrane (exocytosis) → water channels open → water reabsorption. Long-term ADH also upregulates AQP2 gene expression (but acute effect is vesicle insertion). V1a (vasopressin) → Gq → vasoconstriction (smooth muscle). V1b → Gq → ACTH stimulation.',
+                    teaching: 'ADH → V2 → Gs → cAMP → PKA → AQP2 exocytosis. Nephrogenic DI: V2 receptor or AQP2 mutation. V1a → Gq → vasoconstriction.'
+                },
+                {
+                    id: 'g10',
+                    text: 'Beer potomania presents as hyponatremia in chronic heavy beer drinkers. What is the mechanism?',
+                    options: ['Alcohol directly inhibits ADH secretion → water retention', 'Low solute intake (beer has negligible sodium/protein) → inability to excrete free water → dilutional hyponatremia', 'Beer stimulates SIADH', 'Alcohol-induced hepatic failure → low albumin → osmotic dilution', 'Stress from alcoholism increases ADH continuously'],
+                    correct: 1,
+                    explanation: 'Beer potomania: beer contains very few solutes (low protein, low sodium). Free water excretion requires adequate solute (urea, Na) in urine. When dietary solute is minimal, urine cannot carry sufficient free water even at maximum dilution → any excess water intake leads to hyponatremia. The kidney is maxed out at minimum concentration (~50 mOsm/kg) but can only excrete ~15L/day in a person eating normally — less if solute intake is very low. Treatment: treat the dietary cause. Avoid rapid correction (ODS risk).',
+                    teaching: 'Beer potomania: low dietary solute → can\'t excrete free water → hyponatremia. Not true SIADH. Treatment: improve nutrition/solute intake.'
+                }
+            ],
+            brs: [
+                {
+                    id: 'b1',
+                    text: 'A patient with central diabetes insipidus is treated with desmopressin (DDAVP). What does desmopressin lack compared to native ADH, and why is this clinically useful?',
+                    options: ['Desmopressin lacks V2 receptor affinity, making it safer', 'Desmopressin lacks V1a vasopressor activity, so it concentrates urine without causing hypertension', 'Desmopressin is more rapidly degraded, providing shorter duration', 'Desmopressin acts on V1b receptors, stimulating ACTH', 'Desmopressin lacks antidiuretic activity but prevents thirst'],
+                    correct: 1,
+                    explanation: 'Desmopressin (DDAVP): D-amino acid derivative of AVP. Modifications: (1) D-Arg in position 8 → more resistant to peptidases (longer duration). (2) Deamination at Cys1 → eliminates V1a activity (no vasoconstriction). Clinically: V2-selective → concentrates urine without raising BP. Also used for: von Willebrand disease type 1 (↑vWF/Factor VIII release via V2 on endothelium), nocturnal enuresis, hemophilia A.',
+                    teaching: 'DDAVP: V2-selective (no V1a = no vasoconstriction), long-acting. Uses: central DI, vWD type 1, enuresis, hemophilia A.'
+                },
+                {
+                    id: 'b2',
+                    text: 'What is the primary osmoreceptor location that stimulates ADH release when plasma osmolality rises?',
+                    options: ['Paraventricular nucleus', 'Anterior hypothalamus — organum vasculosum of the lamina terminalis (OVLT) and subfornical organ', 'Posterior hypothalamus and mammillary bodies', 'Pineal gland', 'Area postrema'],
+                    correct: 1,
+                    explanation: 'Circumventricular organs (CVOs) lack the blood-brain barrier and act as osmosensors: OVLT (organum vasculosum of the lamina terminalis) and SFO (subfornical organ) → detect ↑plasma osmolality → project to PVN/SON → ADH release. These regions are outside the BBB, allowing them to directly sample blood osmolality. Volume receptors (atrial/baroreceptors) project via CN IX/X to brainstem to regulate ADH.',
+                    teaching: 'OVLT and SFO = osmoreceptors (no BBB). Low pressure baroreceptors = volume sensors for ADH. Both converge on PVN/SON → ADH release.'
+                },
+                {
+                    id: 'b3',
+                    text: 'In SIADH, why does the serum sodium reach a new steady state rather than continuing to fall?',
+                    options: ['ADH secretion eventually shuts down via negative feedback', 'The kidney\'s pressure natriuresis mechanism increases sodium excretion', 'As plasma volume expands, ANP is released → ↓Na reabsorption → "escape" → new steady state', 'The liver compensates by producing more sodium-binding proteins', 'Aldosterone increases and restores sodium'],
+                    correct: 2,
+                    explanation: 'SIADH escape: water retention → ↑plasma volume → ↑ANP + ↑BNP + suppression of renin-angiotensin-aldosterone → ↑urinary sodium excretion → limits further expansion. This is why SIADH patients are euvolemic (not edematous) and why they continue to excrete sodium in the urine (urine Na >20 mEq/L). The ADH continues to act — escape is at the sodium transport level, not at ADH.',
+                    teaching: 'SIADH escape: volume expansion → ANP → natriuresis → new steady-state euvolemic hyponatremia. That\'s why SIADH patients have urine Na >20 despite hyponatremia.'
+                },
+                {
+                    id: 'b4',
+                    text: 'Vasopressin V1a receptors mediate which physiological effect?',
+                    options: ['Antidiuresis via AQP2 insertion', 'ACTH release from corticotrophs', 'Vasoconstriction via Gq → IP3 → smooth muscle contraction', 'Renal prostaglandin release', 'Cardiac preload reduction'],
+                    correct: 2,
+                    explanation: 'V1a receptors on vascular smooth muscle → Gq → PLC → IP3 → ↑intracellular Ca2+ → smooth muscle contraction → vasoconstriction. This is the vasopressin (pressor) effect. V1b (V3) on pituitary corticotrophs → Gq → ACTH release (synergizes with CRH). V2 on renal collecting duct → Gs → cAMP → AQP2 insertion. DDAVP is V2-selective (no V1a activity).',
+                    teaching: 'V1a → Gq → vasoconstriction. V1b → Gq → ACTH. V2 → Gs → antidiuresis. "V1 = vascular, V2 = water."'
+                },
+                {
+                    id: 'b5',
+                    text: 'Oxytocin and ADH have the same 9-amino-acid ring structure and differ in only 2 amino acids. Which oxytocin receptor subtype mediates uterine contractions during labor?',
+                    options: ['OT1 receptor → Gi', 'OTR (oxytocin receptor) → Gq → IP3/DAG → ↑intracellular Ca2+', 'Beta-2 receptor → Gs', 'Prostaglandin receptor → cAMP', 'OTR → Gs → cAMP'],
+                    correct: 1,
+                    explanation: 'Oxytocin receptor (OTR) → Gq → PLC → IP3/DAG → ↑intracellular Ca2+ → myometrial smooth muscle contraction. Oxytocin also stimulates uterine prostaglandin synthesis (PGE2/PGF2α) which further amplify contractions. Positive feedback in labor: uterine contractions → fetal head compresses cervix → Ferguson reflex → ↑OT release → more contractions. Tocolytics: atosiban (OT receptor antagonist), β2 agonists (ritodrine, terbutaline), nifedipine.',
+                    teaching: 'OT receptor → Gq → Ca2+ → myometrial contraction. Atosiban = OT receptor antagonist (tocolytic). Oxytocin also stimulates PGE2 synthesis for additional contraction.'
+                }
+            ]
+        };
+
+        function renderQuestions(tabName, container) {
+            const qs = questions[tabName];
+            const html = qs.map((q, i) => `
+                <div class="question-card">
+                    <div class="question-number">Question ${i + 1}</div>
+                    <div class="question-text">${q.text}</div>
+                    <div class="options">
+                        ${q.options.map((opt, j) => `
+                            <div class="option" onclick="sel(this, ${j === q.correct}, '${q.id}', '${tabName}')" data-q="${q.id}">
+                                <strong>${String.fromCharCode(65 + j)})</strong> ${opt}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="explanation" data-q="${q.id}">
+                        <div class="explanation-label">Explanation:</div>
+                        <p>${q.explanation}</p>
+                        <div class="teaching-point">Teaching Point: ${q.teaching}</div>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById(container).innerHTML = html;
+        }
+
+        function sel(el, isCorrect, qId, tabName) {
+            const card = el.closest('.question-card');
+            const exp = card.querySelector(`[data-q="${qId}"]`);
+            const opts = card.querySelectorAll('.option');
+
+            opts.forEach(o => o.classList.remove('selected', 'correct', 'incorrect'));
+
+            if (isCorrect) {
+                el.classList.add('selected', 'correct');
+                localStorage.setItem(`${tabName}-${qId}`, '1');
+            } else {
+                el.classList.add('selected', 'incorrect');
+                localStorage.setItem(`${tabName}-${qId}`, '0');
+            }
+
+            exp.classList.add('show');
+        }
+
+        function showTab(name) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(name).classList.add('active');
+            document.querySelector(`[onclick="showTab('${name}')"]`).classList.add('active');
+
+            if (name === 'gusom' && !document.getElementById('gusom-questions').innerHTML) {
+                renderQuestions('gusom', 'gusom-questions');
+            } else if (name === 'brs' && !document.getElementById('brs-questions').innerHTML) {
+                renderQuestions('brs', 'brs-questions');
+            } else if (name === 'score') {
+                updateScore();
+            }
+        }
+
+        function updateScore() {
+            let gusom = 0, brs = 0;
+            questions.gusom.forEach(q => {
+                if (localStorage.getItem(`gusom-${q.id}`) === '1') gusom++;
+            });
+            questions.brs.forEach(q => {
+                if (localStorage.getItem(`brs-${q.id}`) === '1') brs++;
+            });
+            document.getElementById('gusom-score').textContent = gusom;
+            document.getElementById('brs-score').textContent = brs;
+            document.getElementById('overall-score').textContent = gusom + brs;
+        }
+
+        function resetScore() {
+            if (confirm('Reset all scores and answers?')) {
+                Object.keys(localStorage).forEach(k => {
+                    if (k.startsWith('gusom-') || k.startsWith('brs-')) {
+                        localStorage.removeItem(k);
+                    }
+                });
+                document.querySelectorAll('.option').forEach(o => {
+                    o.classList.remove('selected', 'correct', 'incorrect');
+                });
+                document.querySelectorAll('.explanation').forEach(e => {
+                    e.classList.remove('show');
+                });
+                updateScore();
+            }
+        }
+
+        // Initial render
+        renderQuestions('gusom', 'gusom-questions');
+    </script>
+</body>
+</html>

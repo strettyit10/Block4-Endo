@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUSOM Endocrine — Physiology Step 1 Extensions Hub #2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1117;
+    --card: #1A1D26;
+    --card2: #21253A;
+    --border: #2A2E42;
+    --text: #E8EAF0;
+    --muted: #8A8FAA;
+    --radius: 14px;
+    --accent: #F59E0B;
+    --accent-dim: rgba(245,158,11,0.15);
+    --accent-border: rgba(245,158,11,0.3);
+    --accent-text: #FCD34D;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, #0D1117 0%, #13110A 50%, #1A1500 100%);
+    border-bottom: 1px solid #3D3300;
+    padding: 36px 24px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,158,11,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .site-header .eyebrow {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent-text); margin-bottom: 10px;
+  }
+  .site-header h1 { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .site-header .hub-tag {
+    display: inline-block;
+    background: var(--accent-dim); border: 1px solid var(--accent-border);
+    border-radius: 8px; padding: 3px 14px; font-size: 0.75rem; font-weight: 700;
+    color: var(--accent-text); letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .site-header p { font-size: 0.95rem; color: var(--muted); max-width: 640px; margin: 0 auto; line-height: 1.6; }
+  .header-badges { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .header-badge {
+    background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 14px; font-size: 0.78rem; color: var(--muted);
+  }
+  .header-badge.hl { background: var(--accent-dim); color: var(--accent-text); border-color: var(--accent-border); }
+
+  /* ── PROGRESSION BANNER ── */
+  .progression-banner {
+    background: linear-gradient(135deg, #0D1117 0%, #111827 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .prog-step { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; }
+  .prog-step .step-dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 800;
+  }
+  .prog-step.done .step-dot { background: rgba(34,197,94,0.2); border: 2px solid #22C55E; color: #22C55E; }
+  .prog-step.active .step-dot { background: var(--accent-dim); border: 2px solid var(--accent); color: var(--accent); }
+  .prog-step.next-hub .step-dot { background: rgba(139,148,170,0.1); border: 2px solid #4B5563; color: #6B7280; }
+  .prog-step.done .step-label { color: #6EE7B7; }
+  .prog-step.done .step-label a { color: #6EE7B7; text-decoration: none; font-weight: 600; }
+  .prog-step.done .step-label a:hover { text-decoration: underline; }
+  .prog-step.active .step-label { color: var(--accent-text); font-weight: 700; }
+  .prog-step.next-hub .step-label { color: #6B7280; }
+  .prog-step.next-hub .step-label a { color: #6B7280; text-decoration: none; }
+  .prog-step.next-hub .step-label a:hover { color: var(--accent-text); }
+  .prog-arrow { color: var(--muted); font-size: 1rem; }
+
+  /* ── MAIN ── */
+  .main { max-width: 1040px; margin: 0 auto; padding: 44px 20px 80px; }
+  .section-title {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 16px; padding-left: 2px;
+  }
+
+  /* ── STEP 1 FOCUS BANNER ── */
+  .focus-banner {
+    background: linear-gradient(135deg, #1A1200 0%, #1E1508 100%);
+    border: 1px solid var(--accent-border);
+    border-radius: var(--radius);
+    padding: 20px 24px; margin-bottom: 40px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .focus-icon { font-size: 2rem; flex-shrink: 0; margin-top: 2px; }
+  .focus-text h3 { font-size: 1rem; font-weight: 700; color: var(--accent-text); margin-bottom: 6px; }
+  .focus-text p { font-size: 0.85rem; color: #B8A060; line-height: 1.6; }
+  .focus-pillrow { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .focus-pill {
+    background: var(--accent-dim); border: 1px solid var(--accent-border);
+    border-radius: 10px; padding: 2px 10px; font-size: 0.7rem;
+    color: var(--accent-text); font-weight: 600;
+  }
+
+  /* ── LECTURE GRID ── */
+  .lecture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    margin-bottom: 52px;
+  }
+  .lecture-card {
+    display: block; text-decoration: none;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px 22px 20px;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    position: relative; overflow: hidden;
+  }
+  .lecture-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--lc-accent);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .lecture-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    border-color: var(--lc-accent);
+  }
+  .card-number { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--lc-accent); margin-bottom: 8px; }
+  .card-title { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+  .card-subtitle { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
+  .card-step1 {
+    font-size: 0.73rem; color: #B8A060; margin-bottom: 14px;
+    padding: 7px 10px; background: var(--accent-dim);
+    border-radius: 6px; border: 1px solid var(--accent-border);
+    line-height: 1.5;
+  }
+  .card-step1 strong { color: var(--accent-text); font-weight: 700; }
+  .card-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .pill { background: rgba(255,255,255,0.06); border: 1px solid var(--border); border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; color: var(--muted); }
+  .pill.step1 { background: var(--accent-dim); border-color: var(--accent-border); color: var(--accent-text); font-weight: 600; }
+  .card-cta { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px; }
+  .cta-text { font-size: 0.82rem; font-weight: 600; color: var(--lc-accent); }
+  .cta-arrow { font-size: 1rem; color: var(--lc-accent); transition: transform 0.2s; }
+  .lecture-card:hover .cta-arrow { transform: translateX(4px); }
+
+  /* ── FOOTER ── */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 20px 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  .site-footer a { color: var(--accent-text); text-decoration: none; margin: 0 8px; }
+  .site-footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="eyebrow">GUSOM Endocrine · Physiology</div>
+  <div class="hub-tag">Hub #2 — Step 1 Extensions</div>
+  <h1>Physiology <span style="color:var(--accent-text);">Step 1 Extensions</span></h1>
+  <p>High-yield Step 1 extensions of in-house physiology · Signal transduction diseases · Clinical pharmacology · Integrative pathophysiology · 7 lectures</p>
+  <div class="header-badges">
+    <div class="header-badge hl">🎯 Step 1 Focused</div>
+    <div class="header-badge">7 Lectures</div>
+    <div class="header-badge">98+ MCQ</div>
+    <div class="header-badge">35+ Vignettes</div>
+    <div class="header-badge">Challenge Drills</div>
+    <div class="header-badge">USMLE Maps</div>
+  </div>
+</header>
+
+<!-- PROGRESSION BANNER -->
+<div class="progression-banner">
+  <div class="prog-step done">
+    <div class="step-dot">✓</div>
+    <div class="step-label"><a href="GUSOM-Phys-Hub1-ActiveDrills.html">Hub #1 — Core Concepts</a></div>
+  </div>
+  <div class="prog-arrow">→</div>
+  <div class="prog-step active">
+    <div class="step-dot">2</div>
+    <div class="step-label">Hub #2 — Step 1 Extensions</div>
+  </div>
+  <div class="prog-arrow">→</div>
+  <div class="prog-step next-hub">
+    <div class="step-dot">3</div>
+    <div class="step-label"><a href="GUSOM-Phys-Hub3-ActiveDrills.html">Hub #3 — Practice Questions</a></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- FOCUS BANNER -->
+  <div class="focus-banner">
+    <div class="focus-icon">🎯</div>
+    <div class="focus-text">
+      <h3>Step 1 Extension Strategy</h3>
+      <p>Each lecture hub adds signal transduction mechanisms, pharmacology, molecular genetics, and integrative pathophysiology beyond in-house scope. These are the concepts that bridge GUSOM physiology to USMLE Step 1 clinical reasoning.</p>
+      <div class="focus-pillrow">
+        <span class="focus-pill">G-protein diseases</span>
+        <span class="focus-pill">Pharmacology integration</span>
+        <span class="focus-pill">Dexamethasone tests</span>
+        <span class="focus-pill">Receptor mechanisms</span>
+        <span class="focus-pill">Paraneoplastic syndromes</span>
+        <span class="focus-pill">Molecular genetics</span>
+        <span class="focus-pill">Axis integration</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LECTURE GRID -->
+  <div class="section-title">Lecture Step 1 Extensions — Click to Open</div>
+  <div class="lecture-grid">
+
+    <a href="GUSOM-Phys-Hub2-L1-HPRelationshipsI.html" class="lecture-card" style="--lc-accent:#0277BD;">
+      <div class="card-number">Lecture 1</div>
+      <div class="card-title">HP Relationships I — Step 1</div>
+      <div class="card-subtitle">Portal system disruption · Pituitary tumor types · Transcription factor mutations · Sheehan syndrome · Kisspeptin</div>
+      <div class="card-step1"><strong>Step 1 adds:</strong> PROP1/POU1F1 mutations, craniopharyngioma, McCune-Albright Gs, pituitary adenoma mass effects, bitemporal hemianopia mechanism</div>
+      <div class="card-pills">
+        <span class="pill step1">🃏 14 Cards</span>
+        <span class="pill step1">❓ 8 MCQ</span>
+        <span class="pill step1">🏥 5 Vignettes</span>
+        <span class="pill">🎯 Drill</span>
+      </div>
+      <div class="card-cta"><span class="cta-text">Open Step 1 Hub</span><span class="cta-arrow">→</span></div>
+    </a>
+
+    <a href="GUSOM-Phys-Hub2-L2-HPRelationshipsII.html" class="lecture-card" style="--lc-accent:#283593;">
+      <div class="card-number">Lecture 2</div>
+      <div class="card-title">HP Relationships II — Step 1</div>
+      <div class="card-subtitle">Prolactinoma pharmacology · GnRH agonist flare · POMC processing · Glycoprotein cross-reactivity · Empty sella</div>
+      <div class="card-step1"><strong>Step 1 adds:</strong> Cabergoline/bromocriptine mechanism, leuprolide flare phenomenon, hCG/TSH cross-reactivity, pituitary apoplexy, Addison's hyperpigmentation</div>
+      <div class="card-pills">
+        <span class="pill step1">🃏 14 Cards</span>
+        <span class="pill step1">❓ 9 MCQ</span>
+        <span class="pill step1">🏥 5 Vignettes</span>
+        <span class="pill">🎯 Drill</span>
+      </div>
+      <div class="card-cta"><span class="cta-text">Open Step 1 Hub</span><span class="cta-arrow">→</span></div>
+    </a>
+
+    <a href="GUSOM-Phys-Hub2-L3-PosteriorPituitary.html" class="lecture-card" style="--lc-accent:#00695C;">
+      <div class="card-number">Lecture 3</div>
+      <div class="card-title">Posterior Pituitary — Step 1</div>
+      <div class="card-subtitle">SIADH workup · Central vs nephrogenic DI · Desmopressin pharmacology · Beer potomania · Demeclocycline</div>
+      <div class="card-step1"><strong>Step 1 adds:</strong> ADH receptor signaling (V1/V2/V3), DI water deprivation test, SIADH treatment ladder, lithium-induced nephrogenic DI, OT induction pharmacology</div>
+      <div class="card-pills">
+        <span class="pill step1">🃏 14 Cards</span>
+        <span class="pill step1">❓ 9 MCQ</span>
+        <span class="pill step1">🏥 5 Vignettes</span>
+        <span class="pill">🎯 Drill</span>
+      </div>
+      <div class="card-cta"><span class="cta-text">Open Step 1 Hub</span><span class="cta-arrow">→</span></div>
+    </a>
+
+    <a href="GUSOM-Phys-Hub2-L4-GHAxis.html" class="lecture-card" style="--lc-accent:#6A4C93;">
+      <div class="card-number">Lecture 4</div>
+      <div class="card-title">GH Axis — Step 1</div>
+      <div class="card-subtitle">JAK2-STAT5 signaling · Laron syndrome · Octreotide pharmacology · Pegvisomant · Pituitary gigantism vs acromegaly</div>
+      <div class="card-step1"><strong>Step 1 adds:</strong> GH receptor deficiency (Laron), octreotide/lanreotide mechanism, GH resistance in malnutrition/T1DM, IGF-1 generation test, pegvisomant (GH receptor antagonist)</div>
+      <div class="card-pills">
+        <span class="pill step1">🃏 14 Cards</span>
+        <span class="pill step1">❓ 8 MCQ</span>
+        <span class="pill step1">🏥 5 Vignettes</span>
+        <span class="pill">🎯 Drill</span>
+      </div>
+      <div class="card-cta"><span class="cta-text">Open Step 1 Hub</span><span class="cta-arrow">→</span></div>
+    </a>
+
+    <a href="GUSOM-Phys-Hub2-L5-HPAdrenalAxis.html" class="lecture-card" style="--lc-accent:#BF360C;">
+      <div class="card-number">Lecture 5</div>
+      <div class="card-title">HPA Axis — Step 1</div>
+      <div class="card-subtitle">Dexamethasone suppression tests · Ectopic ACTH · Metyrapone · Adrenal crisis workup · ACTH stim test</div>
+      <div class="card-step1"><strong>Step 1 adds:</strong> Low-dose vs high-dose dex test interpretation, ectopic ACTH (SCLC), metyrapone test mechanism, adrenal crisis management, exogenous glucocorticoid HPA suppression</div>
+      <div class="card-pills">
+        <span class="pill step1">🃏 14 Cards</span>
+        <span class="pill step1">❓ 9 MCQ</span>
+        <span class="pill step1">🏥 5 Vignettes</span>
+        <span class="pill">🎯 Drill</span>
+      </div>
+      <div class="card-cta"><span class="cta-text">Open Step 1 Hub</span><span class="cta-arrow">→</span></div>
+    </a>
+
+    <a href="GUSOM-Phys-Hub2-L6-StressIntegration.html" class="lecture-card" style="--lc-accent:#8D1F1F;">
+      <div class="card-number">Lecture 6</div>
+      <div class="card-title">Stress Integration — Step 1</div>
+      <div class="card-subtitle">Glucocorticoid receptor (nuclear) · Cytokine-HPA crosstalk · Chronic steroid pharmacology · Stress hyperglycemia · Psychiatric comorbidities</div>
+      <div class="card-step1"><strong>Step 1 adds:</strong> GR nuclear receptor mechanism, IL-1/IL-6/TNF → CRH, adrenal suppression from chronic steroids, stress-induced hyperglycemia, HPA-immune feedback</div>
+      <div class="card-pills">
+        <span class="pill step1">🃏 12 Cards</span>
+        <span class="pill step1">❓ 7 MCQ</span>
+        <span class="pill step1">🏥 4 Vignettes</span>
+        <span class="pill">🎯 Drill</span>
+      </div>
+      <div class="card-cta"><span class="cta-text">Open Step 1 Hub</span><span class="cta-arrow">→</span></div>
+    </a>
+
+    <a href="GUSOM-Phys-Hub2-L7-HPThyroidAxis.html" class="lecture-card" style="--lc-accent:#0D47A1;">
+      <div class="card-number">Lecture 7</div>
+      <div class="card-title">HPT Axis — Step 1</div>
+      <div class="card-subtitle">TSH-R antibodies · Graves' vs Hashimoto's · Sick euthyroid · Subclinical hypothyroidism · TSH-secreting adenoma</div>
+      <div class="card-step1"><strong>Step 1 adds:</strong> TSI vs TPO antibodies, Graves' ophthalmopathy mechanism, sick euthyroid pathophysiology, iodine deficiency goiter, central hypothyroidism diagnosis</div>
+      <div class="card-pills">
+        <span class="pill step1">🃏 12 Cards</span>
+        <span class="pill step1">❓ 8 MCQ</span>
+        <span class="pill step1">🏥 5 Vignettes</span>
+        <span class="pill">🎯 Drill</span>
+      </div>
+      <div class="card-cta"><span class="cta-text">Open Step 1 Hub</span><span class="cta-arrow">→</span></div>
+    </a>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <a href="GUSOM-Phys-Hub1-ActiveDrills.html">← Hub #1 — Core Concepts</a>
+  <a href="GUSOM-Phys-ActiveDrills.html">Classic Physiology Hub</a>
+  <a href="GUSOM-Phys-Hub3-ActiveDrills.html">Hub #3 — Practice Questions →</a>
+</footer>
+</body>
+</html>

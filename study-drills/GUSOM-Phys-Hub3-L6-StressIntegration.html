@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L6 · Stress Integration — Practice Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0D1117;
+            color: #E6EDF3;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #8D1F1F;
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #8D1F1F;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: #58A6FF;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #30363D;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 12px 20px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #8B949E;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            color: #E6EDF3;
+        }
+
+        .tab-button.active {
+            color: #8D1F1F;
+            border-bottom-color: #8D1F1F;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .question-card {
+            background-color: #161B22;
+            border-left: 4px solid #8D1F1F;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            box-shadow: 0 4px 12px rgba(141, 31, 31, 0.15);
+        }
+
+        .question-number {
+            font-size: 14px;
+            color: #8D1F1F;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 16px;
+            color: #E6EDF3;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            padding: 12px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 15px;
+            color: #E6EDF3;
+        }
+
+        .option:hover {
+            background-color: #1C2128;
+            border-color: #8D1F1F;
+        }
+
+        .option.selected {
+            background-color: #8D1F1F;
+            border-color: #8D1F1F;
+            color: #FFFFFF;
+        }
+
+        .option.correct {
+            background-color: #1F6FEB;
+            border-color: #1F6FEB;
+            color: #FFFFFF;
+        }
+
+        .option.incorrect {
+            background-color: #DA3633;
+            border-color: #DA3633;
+            color: #FFFFFF;
+        }
+
+        .explanation-box {
+            display: none;
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            border-radius: 4px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .explanation-box.visible {
+            display: block;
+        }
+
+        .explanation-label {
+            font-weight: bold;
+            color: #58A6FF;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .explanation-text {
+            color: #C9D1D9;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .teaching-point {
+            background-color: #161B22;
+            border-left: 3px solid #8D1F1F;
+            padding: 12px;
+            border-radius: 3px;
+            font-size: 14px;
+            color: #D4AF37;
+            font-style: italic;
+        }
+
+        .score-section {
+            background-color: #161B22;
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #30363D;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .score-item {
+            background-color: #0D1117;
+            padding: 16px;
+            border-radius: 4px;
+            border-left: 4px solid #8D1F1F;
+        }
+
+        .score-label {
+            font-size: 13px;
+            color: #8B949E;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .score-value {
+            font-size: 32px;
+            color: #8D1F1F;
+            font-weight: bold;
+        }
+
+        .reset-button {
+            background-color: #8D1F1F;
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .reset-button:hover {
+            background-color: #651717;
+        }
+
+        .reset-button:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 22px;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .tab-button {
+                border-bottom: 2px solid #30363D;
+                padding: 10px 16px;
+            }
+
+            .question-card {
+                padding: 18px;
+            }
+
+            .score-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="GUSOM-Phys-Hub3-ActiveDrills.html" class="back-link">← Back to Hub</a>
+            <h1>L6 · Stress Integration</h1>
+            <p style="color: #8B949E; font-size: 14px; margin-top: 8px;">Practice Questions</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('gusom')">GUSOM Questions</button>
+            <button class="tab-button" onclick="showTab('brs')">BRS Questions</button>
+            <button class="tab-button" onclick="showTab('score')">Score</button>
+        </div>
+
+        <!-- GUSOM Questions Tab -->
+        <div id="gusom" class="tab-content active">
+            <div class="question-card">
+                <div class="question-number">Question 1</div>
+                <div class="question-text">A 55-year-old critically ill patient in the ICU has been on methylprednisolone 40 mg IV daily for 10 days for severe ARDS. Cultures come back positive for Pneumocystis jirovecii pneumonia. Which immune mechanism was impaired by steroids to allow this infection?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Steroids do impair neutrophil chemotaxis, but this is not the primary mechanism allowing PCP.', 'gusom')">A) Impaired neutrophil chemotaxis</div>
+                    <div class="option" onclick="sel(this, true, 'Glucocorticoids significantly impair cell-mediated immunity: ↓T-cell proliferation (especially CD4+ helper T cells), ↓IL-2 production, apoptosis of T lymphocytes, and lymphocyte redistribution from blood to lymphoid tissues. PCP (Pneumocystis jirovecii pneumonia) is an opportunistic infection that requires intact CD4+ T-cell mediated immunity for clearance. Any cause of CD4+ depletion or dysfunction (steroids, HIV, other immunosuppression) allows PCP to develop. Prevention: TMP-SMX prophylaxis for patients on ≥20 mg prednisone-equivalent for >4 weeks.', 'gusom')">B) Reduced T-cell (especially CD4+) count and impaired cell-mediated immunity</div>
+                    <div class="option" onclick="sel(this, false, 'Steroids do reduce immunoglobulin synthesis, but PCP is controlled by T-cell immunity, not antibodies.', 'gusom')">C) Decreased immunoglobulin synthesis</div>
+                    <div class="option" onclick="sel(this, false, 'Steroids actually enhance complement cascade as part of anti-inflammatory effect.', 'gusom')">D) Inhibition of complement activation</div>
+                    <div class="option" onclick="sel(this, false, 'Steroids do reduce NK cells, but T-cell immunity is more critical for PCP.', 'gusom')">E) Reduced natural killer cell count only</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-1">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Glucocorticoids are powerful immunosuppressants that impair multiple immune mechanisms, most notably cell-mediated immunity. Effects include: (1) ↓T-cell proliferation and IL-2 production. (2) Increased T-cell apoptosis (especially lymphocytes in thymus and secondary lymphoid organs). (3) Lymphocyte redistribution from blood to lymphoid tissues (causing relative lymphopenia in circulating blood). (4) ↓antigen-presenting cell function. (5) ↓NK cell activity. Pneumocystis jirovecii pneumonia is an opportunistic infection caused by a fungal organism that is normally cleared by CD4+ T-cell mediated immunity. Any significant CD4+ dysfunction (steroid-induced, HIV-related, or from other immunosuppression) increases PCP risk. Prevention: TMP-SMX (Bactrim) prophylaxis is indicated for patients on ≥20 mg/day prednisone-equivalent for >4 weeks, or for any CD4+ count <200 cells/μL.</div>
+                    <div class="teaching-point">Steroids → ↓CD4+ T cells → risk for PCP, VZV, TB reactivation, fungal infections. TMP-SMX prophylaxis indicated if ≥20 mg prednisone for >4 weeks.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 2</div>
+                <div class="question-text">A 45-year-old executive with chronic work stress presents for insomnia and cognitive difficulties. Lab: morning cortisol 28 mcg/dL (mildly elevated), late-night salivary cortisol elevated. Which brain structure is most vulnerable to chronic elevated cortisol?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'The amygdala (fear/anxiety center) is hyper-responsive to stress, not atrophic. Amygdala increases in size with chronic stress.', 'gusom')">A) Amygdala — increases in size</div>
+                    <div class="option" onclick="sel(this, true, 'The hippocampus has the highest density of glucocorticoid receptors (GR) in the brain. Chronic hypercortisolism causes: (1) Hippocampal neuronal damage and loss. (2) Reduced neurogenesis in the dentate gyrus (site of adult neurogenesis). (3) Hippocampal volume reduction on MRI. Clinically: impaired declarative (explicit) memory, depression, and anxiety. Stress-induced hippocampal atrophy correlates with duration and severity of depression. In Cushing syndrome, hippocampal atrophy is common.', 'gusom')">B) Hippocampus — glucocorticoid receptor-rich; chronic exposure → atrophy and reduced neurogenesis</div>
+                    <div class="option" onclick="sel(this, false, 'The prefrontal cortex function is impaired by stress, not enhanced.', 'gusom')">C) Prefrontal cortex — enhances function</div>
+                    <div class="option" onclick="sel(this, false, 'The cerebellum is not particularly vulnerable to glucocorticoid excess.', 'gusom')">D) Cerebellum</div>
+                    <div class="option" onclick="sel(this, false, 'The striatum is not the primary target of chronic glucocorticoid excess.', 'gusom')">E) Striatum</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-2">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The hippocampus is exquisitely sensitive to glucocorticoid excess because it expresses very high levels of glucocorticoid receptors (GR) — the highest density of any brain region. Chronic hypercortisolism causes: (1) Excitotoxic neuronal damage (excessive glutamate signaling). (2) Reduced BDNF (brain-derived neurotrophic factor) → impaired neuronal survival. (3) Suppressed neurogenesis in the dentate gyrus (where new neurons are normally generated). (4) Overall hippocampal volume reduction visible on MRI. Clinical consequences: impaired hippocampal-dependent memory (declarative/explicit memory), depression, anxiety, and cognitive difficulties. In contrast, the amygdala (which expresses lower levels of GR) is relatively spared or even hyper-responsive to stress, contributing to heightened fear and anxiety responses. This dissociation (amygdala hyperactivity + hippocampal hypoactivity) is characteristic of depression and PTSD.</div>
+                    <div class="teaching-point">Cortisol → hippocampal atrophy (high GR density). Memory impairment in Cushing syndrome and chronic stress. Amygdala: activated (anxiety ↑). Hippocampus: damaged (memory ↓).</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 3</div>
+                <div class="question-text">Cytokines released during systemic infection trigger CRH secretion. This represents which physiological principle?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Immune activation actually triggers HPA activation, not suppression.', 'gusom')">A) Immune system activation suppresses HPA axis</div>
+                    <div class="option" onclick="sel(this, true, 'The immune-neuroendocrine axis: During infection, immune cells (macrophages, dendritic cells) release pro-inflammatory cytokines (IL-1β, IL-6, TNF-α) → cross blood-brain barrier or act via circumventricular organs (OVLT) → stimulate hypothalamus → ↑CRH secretion → ↑ACTH → ↑cortisol. Cortisol then acts anti-inflammatory: inhibits cytokine synthesis, stabilizes mast cells, suppresses prostaglandin production → forms NEGATIVE FEEDBACK loop to limit excessive inflammation. This is adaptive: cortisol allows immune response without causing septic shock and multi-organ failure. Adrenal-insufficient patients have exaggerated cytokine responses and worse sepsis outcomes.', 'gusom')">B) Immune-to-neuroendocrine communication: IL-1β, IL-6, TNF-α → hypothalamus → CRH → ACTH → cortisol, which then suppresses excessive inflammation</div>
+                    <div class="option" onclick="sel(this, false, 'CRH promotes cytokine production indirectly, but the primary effect is immune activation leading to HPA response.', 'gusom')">C) CRH activates cytokine production</div>
+                    <div class="option" onclick="sel(this, false, 'Cortisol actually suppresses TNF-α and other pro-inflammatory cytokines.', 'gusom')">D) Cortisol amplifies TNF-α effects</div>
+                    <div class="option" onclick="sel(this, false, 'This forms a negative feedback loop that dampens inflammation, not perpetuates it.', 'gusom')">E) This represents a positive feedback loop that perpetuates infection</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-3">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The integration of immune and neuroendocrine systems during infection is essential for survival. Mechanism: (1) Infection triggers innate immune response → macrophages and dendritic cells produce IL-1β, IL-6, TNF-α. (2) These cytokines reach the brain via: (a) direct circumventricular organ (OVLT, median eminence) stimulation, (b) vagal afferent signaling, (c) crossing the blood-brain barrier during inflammation. (3) Cytokines stimulate hypothalamic neurons → ↑CRH release → pituitary → ↑ACTH → adrenal → ↑cortisol. (4) Cortisol acts as a brake: suppresses further cytokine production (↓IL-1, IL-6, TNF-α), stabilizes mast cells (↓histamine), inhibits phospholipase A2 (↓arachidonic acid → ↓prostaglandins/leukotrienes). This forms a negative feedback loop that prevents cytokine storm and shock. Patients with adrenal insufficiency cannot mount adequate cortisol response → exaggerated cytokine responses → septic shock. This is why stress-dose steroids are given in septic shock.</div>
+                    <div class="teaching-point">Cytokines → CRH → cortisol → anti-inflammatory. Negative feedback brake on inflammation. Adrenal insufficiency = impaired stress response → cytokine storm risk.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 4</div>
+                <div class="question-text">A 24-year-old female elite runner with BMI 17 has not had a menstrual period in 9 months. FSH is 2.4, LH is 1.8, estradiol is low. Which mechanism best explains the amenorrhea?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Primary ovarian failure would show HIGH FSH (loss of ovarian negative feedback). FSH is low here.', 'gusom')">A) Primary ovarian failure</div>
+                    <div class="option" onclick="sel(this, false, 'Prolactinoma would elevate prolactin; no mention of that here.', 'gusom')">B) Prolactinoma</div>
+                    <div class="option" onclick="sel(this, true, 'Functional hypothalamic amenorrhea (FHA) / Female Athlete Triad: Energy deficiency (negative energy balance from intense exercise + inadequate caloric intake) activates CRH neurons → ↑CRH tone → CRH directly inhibits GnRH (gonadotropin-releasing hormone) neurons in the hypothalamus. Additionally, cortisol is elevated → suppresses HPG (hypothalamic-pituitary-gonadal) axis. Result: ↓GnRH pulsatility → ↓LH and ↓FSH (both low, not just one) → ↓estradiol → amenorrhea. Distinguish from primary ovarian failure (FSH would be HIGH). Treatment: increase caloric intake, reduce training intensity. Address energy deficit first.', 'gusom')">C) Elevated CRH from chronic stress/energy deficit → suppresses GnRH pulse generator</div>
+                    <div class="option" onclick="sel(this, false, 'Adipose loss causes estrogen deficiency, but the primary mechanism is CRH/HPA suppression of GnRH.', 'gusom')">D) Direct estrogen deficiency from adipose loss</div>
+                    <div class="option" onclick="sel(this, false, 'Cortisol suppresses both FSH and LH together, not just FSH.', 'gusom')">E) Elevated cortisol suppresses FSH but not LH</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-4">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Functional hypothalamic amenorrhea (FHA), a component of the Female Athlete Triad / Relative Energy Deficiency in Sport (RED-S): The root cause is energy deficiency (inadequate caloric intake relative to energy expenditure). Energy deficit activates CRH neurons in the hypothalamus → ↑CRH tone + ↑cortisol. CRH acts on GnRH neurons → direct inhibition of pulsatile GnRH release. Additionally, cortisol suppresses HPG axis function. Result: Loss of pulsatile LH/FSH secretion → low LH, low FSH, low estradiol → amenorrhea. Key: BOTH LH and FSH are low (distinguishes from primary ovarian failure, where FSH would be high). Treatment: address the root cause (energy deficit) by increasing caloric intake and reducing training intensity. Simply giving OCPs masks the underlying problem but does not restore menstrual function or prevent bone loss progression. RED-S expanded concept includes male athletes with hypogonadism from energy deficiency.</div>
+                    <div class="teaching-point">FHA: CRH + cortisol suppress GnRH → low LH + low FSH + low estrogen. FSH NOT elevated (distinguishes from ovarian failure). Address energy deficit first.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 5</div>
+                <div class="question-text">A 28-year-old woman begins high-dose corticosteroids for an autoimmune condition. After 6 months, she develops vertebral compression fractures. What is the PRIMARY mechanism of glucocorticoid-induced osteoporosis?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'While osteoclasts do increase, the primary problem is impaired bone formation.', 'gusom')">A) Increase in bone resorption via direct osteoclast activation</div>
+                    <div class="option" onclick="sel(this, true, 'Glucocorticoid-induced osteoporosis is multifactorial: (1) Direct effect on osteoblasts: GR → ↓osteoblast differentiation (↓Runx2), ↑apoptosis of mature osteoblasts → reduced bone formation (this is primary). (2) Indirect effect: ↑RANKL expression + ↓OPG → ↑osteoclast activation → bone resorption. (3) ↓intestinal calcium absorption (GC antagonize vitamin D action). (4) ↑renal calcium excretion. (5) ↓GnRH/LH/FSH → ↓estrogen + ↓testosterone → further bone loss. Most rapid bone loss occurs first 3-6 months. Prevention: calcium 1200 mg + Vitamin D 800-1000 IU + bisphosphonate.', 'gusom')">B) Multiple mechanisms: ↓osteoblast differentiation/function (direct GR effect), ↑RANKL/↓OPG (↑osteoclasts), ↓intestinal calcium absorption, ↑renal calcium excretion, ↓sex hormones</div>
+                    <div class="option" onclick="sel(this, false, 'GC do antagonize vitamin D, but this is secondary to osteoblast dysfunction.', 'gusom')">C) Glucocorticoids block vitamin D activation in the liver</div>
+                    <div class="option" onclick="sel(this, false, 'Secondary hyperparathyroidism occurs but is not the primary cause.', 'gusom')">D) ↑PTH from secondary hyperparathyroidism only</div>
+                    <div class="option" onclick="sel(this, false, 'Both cortical and trabecular bone are affected.', 'gusom')">E) Increased cortical bone loss without trabecular involvement</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-5">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Glucocorticoid-induced osteoporosis (GIOP) involves multiple pathogenic mechanisms: (1) PRIMARY: Osteoblast dysfunction. GR in osteoblasts → ↓Runx2 transcription factor → ↓osteoblast differentiation and recruitment. Additionally, GC increase osteoblast apoptosis → loss of mature bone-forming cells. Result: severely impaired bone formation. (2) Osteoclast activation: GC increase RANKL expression + decrease OPG → ↑osteoclast formation and activity → bone resorption. (3) Calcium metabolism: GC antagonize vitamin D action → ↓intestinal calcium absorption, ↑renal calcium wasting → secondary hyperparathyroidism. (4) Sex hormone deficiency: GC suppress GnRH → ↓LH/FSH → ↓estrogen/testosterone → additional bone loss. Most rapid bone loss occurs in first 3-6 months (while on steroids). Prevention and treatment: (1) Minimize steroid dose. (2) Calcium 1200 mg/day + Vitamin D 800-1000 IU/day (standard). (3) Bisphosphonate (e.g., alendronate) — significantly reduces fracture risk. (4) Monitor BMD with DXA scan. (5) Weight-bearing exercise.</div>
+                    <div class="teaching-point">GC osteoporosis: multiple mechanisms. ↓osteoblast + ↑osteoclast + ↓calcium absorption. Fastest bone loss = first 3-6 months. Bisphosphonate + Ca + VitD for prevention.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 6</div>
+                <div class="question-text">Which stress-related mediator directly promotes GI stress ulcer formation in critically ill patients?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Serotonin actually decreases in stress conditions.', 'gusom')">A) Elevated serotonin from intestinal cells</div>
+                    <div class="option" onclick="sel(this, true, 'Stress ulcer pathogenesis (acute mucosal erosion in ICU): (1) Catecholamines (from sympathetic activation) → splanchnic vasoconstriction → ↓mucosal blood flow → ischemia. (2) Cortisol → ↓prostaglandin E2 (PGE2) synthesis (by inhibiting phospholipase A2 and COX) → reduced mucus secretion + ↓gastric HCO3- secretion → loss of mucosal protection. Combined effect: ischemia + loss of mucosal defenses → epithelial erosion → bleeding. Prevention: PPI (proton pump inhibitor) superior to H2 blockers in high-risk ICU patients, especially those with: mechanical ventilation >48h, coagulopathy, burns, head injury, multi-organ failure.', 'gusom')">B) Catecholamines → splanchnic vasoconstriction + cortisol → ↓mucosal prostaglandins → mucosal breakdown</div>
+                    <div class="option" onclick="sel(this, false, 'Aldosterone does not directly damage gastric mucosa.', 'gusom')">C) ACTH-stimulated aldosterone → GI epithelium damage</div>
+                    <div class="option" onclick="sel(this, false, 'CRH has local actions but is not the primary mechanism.', 'gusom')">D) CRH directly damages gastric mucosa via CRH receptors</div>
+                    <div class="option" onclick="sel(this, false, 'Glucagon is not a direct culprit in stress ulcer formation.', 'gusom')">E) Elevated glucagon from counter-regulatory response</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-6">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Stress ulcers (acute erosive gastritis in critically ill patients) develop from combined ischemic and cytoprotective defect mechanisms: (1) Ischemic component: Severe stress activates sympathetic nervous system → catecholamine surge → α1-adrenergic vasoconstriction of splanchnic vessels → ↓mucosal blood flow → mucosal ischemia → epithelial damage. (2) Loss of mucosal defenses: Cortisol (elevated in critical illness) → ↓prostaglandin E2 synthesis (inhibits phospholipase A2 and COX) → reduced protective mucus layer + reduced HCO3- secretion → loss of acid neutralization and physical protection. (3) Result: Ischemic epithelium + loss of defensive barriers → erosion and hemorrhage. Risk factors: mechanical ventilation >48h, severe sepsis, coagulopathy, severe burns, head/spinal injury, acute liver failure. Prevention: (1) PPI (superior to H2 blockers). (2) Early enteral nutrition (maintains mucosal integrity). (3) Correction of coagulopathy. (4) Blood pressure support.</div>
+                    <div class="teaching-point">Stress ulcer: catecholamines (ischemia) + cortisol (↓PGE2 → ↓mucus). Prevention: PPI in high-risk ICU patients (MV >48h, coagulopathy, burns).</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 7</div>
+                <div class="question-text">Chronic psychological stress activates the β2-adrenergic receptor on tumor cells. What downstream effect promotes tumor metastasis?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'β2-AR increases VEGF and MMP, not decreases.', 'gusom')">A) ↓VEGF and ↓MMP</div>
+                    <div class="option" onclick="sel(this, true, 'Catecholamine-mediated tumor progression: Stress → sympathetic activation → norepinephrine/epinephrine → β2-AR on tumor cells → Gs protein → ↑cAMP → PKA activation → (1) ↑VEGF (vascular endothelial growth factor) = angiogenesis = new blood supply. (2) ↑MMP-2 and MMP-9 (matrix metalloproteinases) = degrade basement membrane = cell invasion. (3) ↑EMT (epithelial-mesenchymal transition) = cells acquire mesenchymal invasive phenotype. Additionally: cortisol → ↓NK cell count and cytotoxicity → impaired tumor immune surveillance. This neuro-oncological stress-tumor axis is being exploited therapeutically: β-blockers (especially propranolol) under investigation as adjunct anticancer agents.', 'gusom')">B) β2-AR → Gs → ↑cAMP → PKA → ↑VEGF + ↑MMP (matrix invasion) + ↑EMT (epithelial-mesenchymal transition)</div>
+                    <div class="option" onclick="sel(this, false, 'β2-AR → Gi would decrease cAMP, not promote metastasis through this pathway.', 'gusom')">C) β2-AR → Gi → ↓cAMP → ↓apoptosis</div>
+                    <div class="option" onclick="sel(this, false, 'Catecholamines actually impair NK cell function.', 'gusom')">D) Catecholamines block NK cell activation</div>
+                    <div class="option" onclick="sel(this, false, 'β2-AR → Gs → cAMP is the correct pathway, not Gq.', 'gusom')">E) β2-AR → PLC → IP3 → tumor angiogenesis</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-7">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Chronic psychological stress activates the sympathetic nervous system, increasing circulating and tissue catecholamines (norepinephrine, epinephrine). These bind β2-adrenergic receptors on tumor cells: β2-AR → Gs protein → adenylyl cyclase → ↑cAMP → PKA phosphorylation → transcriptional changes. Downstream effects promoting metastasis: (1) ↑VEGF expression → angiogenesis → new blood vessel formation → increased blood supply to tumor → nutrient delivery and escape route. (2) ↑MMP-2 and MMP-9 expression → matrix metalloproteinases degrade extracellular matrix and basement membrane → facilitates invasion and extravasation. (3) ↑EMT transcription factors (Snail, Slug) → epithelial cells acquire mesenchymal characteristics → migration capacity, invasiveness. Additionally: cortisol from concurrent HPA activation → ↓NK cell count, ↓cytokine production, ↓NK cell-mediated tumor killing → impaired immune surveillance. Clinical relevance: β-blockers (especially non-selective propranolol) being studied as potential adjunct therapy to reduce stress-mediated tumor progression. This has major implications for counseling cancer patients on stress reduction.</div>
+                    <div class="teaching-point">Chronic stress → catecholamines → β2-AR → cAMP → VEGF + MMP + EMT = pro-metastatic. Propranolol under study. Also: cortisol → ↓NK cells → tumor escape.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 8</div>
+                <div class="question-text">Glucocorticoids induce apoptosis in thymocytes and lymphocytes. What is the primary molecular mechanism?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'GC enhance TNF signaling, they do not block it.', 'gusom')">A) Blocking TNF receptor signaling</div>
+                    <div class="option" onclick="sel(this, true, 'Glucocorticoid-induced lymphocyte apoptosis: Cortisol → enters cell → cytoplasmic GR → translocates to nucleus → transactivates BIM (BCL-2 interacting mediator of cell death) gene → BIM protein produced → activates pro-apoptotic BAX/BAK at outer mitochondrial membrane → mitochondrial outer membrane permeabilization (MOMP) → cytochrome c release → apoptosome formation → caspase-9 and caspase-3 activation → apoptosis. This is therapeutically exploited: prednisone/dexamethasone used to induce lymphoma cell death in CHOP (cyclophosphamide, doxorubicin, vincristine, prednisone) regimen for Hodgkin lymphoma, and dexamethasone in multiple myeloma. Clinical consequence: lymphopenia (especially CD4+ and CD8+ T cells) during prolonged steroid therapy.', 'gusom')">B) GR-mediated transcription of BIM (pro-apoptotic BCL-2 family member) → mitochondrial apoptosis pathway</div>
+                    <div class="option" onclick="sel(this, false, 'GR does not primarily block BCL-2 at the membrane.', 'gusom')">C) GR blocks anti-apoptotic BCL-2 at the membrane</div>
+                    <div class="option" onclick="sel(this, false, 'This is death receptor pathway, not the primary GC mechanism.', 'gusom')">D) Direct caspase-8 activation via death receptor</div>
+                    <div class="option" onclick="sel(this, false, 'GC-induced apoptosis is primarily intrinsic/mitochondrial.', 'gusom')">E) ↓FLIP (inhibitor of caspase-8) expression</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-8">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Glucocorticoid-induced apoptosis in lymphocytes and thymocytes is a well-characterized mechanism: Cortisol → glucocorticoid receptor (GR) in cytoplasm → GR-ligand complex → nuclear translocation → GR-GRE interaction → transactivation of pro-apoptotic genes. The primary target is BIM (BCL-2 interacting mediator of cell death), a BH3-only pro-apoptotic member of the BCL-2 family. BIM upregulation → interaction with anti-apoptotic proteins (BCL-2, BCL-xL) → activation of pro-apoptotic BAX and BAK → mitochondrial outer membrane permeabilization (MOMP) → cytochrome c release → cytosolic apoptosome formation → caspase-9 activation → executioner caspase-3 → apoptotic cell death. Thymocytes are exceptionally sensitive to GC-induced apoptosis (single-positive and double-positive cells eliminated). This mechanism is therapeutically exploited: prednisone is a backbone component of CHOP chemotherapy for Hodgkin lymphoma; dexamethasone is used in multiple myeloma and acute lymphoblastic leukemia (ALL). Clinical consequence: pronounced lymphopenia during prolonged corticosteroid therapy (especially CD4+ and CD8+ T-cell counts drop), increasing infection risk.</div>
+                    <div class="teaching-point">GC → BIM (pro-apoptotic) → mitochondrial apoptosis pathway → lymphocyte/thymocyte death. Therapeutic basis for prednisone in lymphoma. Clinically: lymphopenia on steroids.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BRS Questions Tab -->
+        <div id="brs" class="tab-content">
+            <div class="question-card">
+                <div class="question-number">BRS Question 1</div>
+                <div class="question-text">During the acute stress response, the sympatho-adrenal medullary (SAM) axis is activated. What are the immediate cardiovascular effects of catecholamine release?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Heart rate and blood pressure increase, not decrease.', 'brs')">A) ↓Heart rate, ↑peripheral resistance, vasodilation</div>
+                    <div class="option" onclick="sel(this, true, 'SAM axis response: Acute stress → hypothalamus → sympathetic preganglionic fibers → adrenal medulla → epinephrine (80%) + norepinephrine (20%) release. Cardiovascular effects: (1) ↑Heart rate (HR) via β1-AR on SA node. (2) ↑Cardiac contractility via β1-AR on myocardium. (3) ↑Peripheral vascular resistance via α1-AR on arteries (vasoconstriction in skin, viscera). (4) Selective vasodilation in skeletal muscle via β2-AR (metabolic demand). (5) ↑Blood pressure (↑CO + ↑SVR). Metabolic: glycogenolysis (liver, muscle), lipolysis, ↑glucagon, ↓insulin. Purpose: "fight or flight" — divert oxygen and glucose to muscles/brain. This is immediate (seconds), while HPA cortisol response takes minutes-hours.', 'brs')">B) ↑Heart rate (β1), ↑cardiac output, ↑peripheral resistance (α1), splanchnic vasoconstriction, skeletal muscle vasodilation (β2)</div>
+                    <div class="option" onclick="sel(this, false, 'Bradycardia and hypotension are opposite of acute stress response.', 'brs')">C) Bradycardia and hypotension</div>
+                    <div class="option" onclick="sel(this, false, 'Peripheral vasoconstriction occurs (in some beds), not just vasodilation.', 'brs')">D) Peripheral vasodilation only</div>
+                    <div class="option" onclick="sel(this, false, 'Aldosterone is primarily regulated by RAAS, not directly by catecholamines during acute stress.', 'brs')">E) Increased aldosterone directly from catecholamines</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-1">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The sympatho-adrenal medullary (SAM) axis provides immediate (seconds) physiological response to acute stress. Pathway: Stressor → hypothalamus → sympathetic preganglionic neurons (via LC and other centers) → adrenal medulla → catecholamine release (epinephrine 80%, norepinephrine 20%). Adrenergic effects: (1) β1-AR on heart: ↑HR, ↑contractility, ↑AV nodal conduction. (2) α1-AR on blood vessels: vasoconstriction in skin, GI, renal circulation (splanchnic vasoconstriction). (3) β2-AR on blood vessels in skeletal muscle: vasodilation (↑blood flow to muscles). (4) Net effect: ↑cardiac output, ↑blood pressure, perfusion shifted to muscles/brain. Metabolic: β2-AR on liver/muscle → glycogenolysis; β2-AR on adipose → lipolysis. Pancreas: β2 on beta cells → ↓insulin; α1 on alpha cells → ↑glucagon. Result: mobilization of glucose and fatty acids. The SAM response is fast but short-lived. The HPA response (minutes to hours) provides sustained metabolic support.</div>
+                    <div class="teaching-point">SAM: immediate (seconds). Catecholamines → ↑HR + ↑CO + ↑glycogenolysis. HPA: delayed (hours). Cortisol → sustains metabolic response.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Question 2</div>
+                <div class="question-text">Glucocorticoids are used therapeutically for many inflammatory conditions. What is the primary mechanism of their anti-inflammatory effect at the cellular level?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'GC decrease, not increase, prostaglandin synthase expression.', 'brs')">A) Upregulation of prostaglandin synthase</div>
+                    <div class="option" onclick="sel(this, true, 'Primary anti-inflammatory mechanism: GR-mediated TRANSREPRESSION of NF-κB (most important) and AP-1 transcription factors → ↓expression of pro-inflammatory genes: IL-1β, IL-6, TNF-α, COX-2, iNOS, ICAM-1, adhesion molecules. Secondary mechanism via TRANSACTIVATION: ↑annexin A1 (lipocortin-1) expression → inhibits phospholipase A2 → ↓arachidonic acid release → ↓prostaglandin and leukotriene synthesis. Also ↑IκBα expression → sequesters NF-κB. Transrepression (suppression of pro-inflammatory transcription) accounts for the majority of immunosuppressive effects.', 'brs')">B) Transrepression of NF-κB → ↓IL-1, IL-6, TNF-α, COX-2 gene expression</div>
+                    <div class="option" onclick="sel(this, false, 'Direct mast cell stabilization is not the primary anti-inflammatory mechanism.', 'brs')">C) Direct mast cell membrane stabilization via Gs pathway</div>
+                    <div class="option" onclick="sel(this, false, 'GC inhibit complement cascade rather than activate inhibitors.', 'brs')">D) Activation of complement cascade inhibitors</div>
+                    <div class="option" onclick="sel(this, false, 'IL-10 is induced, but it is one of multiple mechanisms.', 'brs')">E) Stimulation of IL-10 only</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-2">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The anti-inflammatory potency of glucocorticoids derives from two main mechanisms: (1) TRANSREPRESSION (accounts for ~70% of effects): GR in cytoplasm → nuclear translocation → physical interaction with NF-κB and AP-1 transcription factors (without binding DNA itself) → blocks their ability to activate target genes → ↓IL-1β, IL-6, TNF-α, COX-2, iNOS, ICAM-1, selectins, chemokines. This is why GC are so effective at suppressing inflammation. (2) TRANSACTIVATION (accounts for ~30% of effects): GR-GRE interaction on DNA → ↑annexin A1 (lipocortin-1) → inhibits phospholipase A2 → ↓arachidonic acid release → ↓prostaglandins/leukotrienes; ↑IκBα → sequesters NF-κB; ↑gluconeogenic and metabolic genes. Both mechanisms contribute, but transrepression is the primary anti-inflammatory mechanism. This also explains why GC have immunosuppressive effects beyond simple anti-inflammatory action.</div>
+                    <div class="teaching-point">Primary anti-inflammatory: GR transrepression of NF-κB → ↓IL-1/6, TNF-α, COX-2. Transactivation: ↑annexin A1 (↓phospholipase A2). Both contribute.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Question 3</div>
+                <div class="question-text">Psychosocial stress activates the HPA axis. What type of stress is MOST effective at activating ACTH/cortisol secretion?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Physical pain alone activates SAM more than HPA; psychological factors magnify HPA response.', 'brs')">A) Acute physical pain alone</div>
+                    <div class="option" onclick="sel(this, true, 'HPA axis is maximally activated by PSYCHOLOGICAL stress with key characteristics: (1) UNCONTROLLABILITY — stress you cannot control activates HPA more than identical physical stress you CAN control. (2) UNPREDICTABILITY — stress that is unpredictable activates HPA more than predictable stress. (3) Threat to ego/social standing (social stress). Mechanism: prefrontal cortex (assessment of control) and amygdala (threat detection) → project to hypothalamus → CRH release. Physical stressors (pain, cold, exercise) preferentially activate the SAM (sympathetic-adrenal) axis. Chronic uncontrollable stress → HPA dysregulation → hippocampal damage (memory impairment), depression.', 'brs')">B) Anticipatory anxiety and uncontrollability — psychological stressors where the outcome is uncertain and uncontrollable</div>
+                    <div class="option" onclick="sel(this, false, 'Brief, controllable acute stress activates HPA minimally.', 'brs')">C) Brief, controllable acute stress</div>
+                    <div class="option" onclick="sel(this, false, 'Post-exercise recovery does not maximally activate HPA.', 'brs')">D) Post-exercise recovery</div>
+                    <div class="option" onclick="sel(this, false, 'Sleep deprivation activates HPA but less than uncontrollable psychological stress.', 'brs')">E) Sleep deprivation alone</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-3">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation_text">HPA axis activation by stress is strongly modulated by cognitive appraisal: The same physical stressor activates the HPA axis more if it is UNCONTROLLABLE or UNPREDICTABLE, and less if it is CONTROLLABLE or PREDICTABLE. Classic animal studies (Weiss rat model): rats exposed to unpredictable, uncontrollable shock developed greater HPA activation and hippocampal damage than rats receiving identical shocks but with control (ability to escape). Psychological stress types that maximally activate HPA: (1) Anticipatory anxiety (uncertainty about outcome). (2) Loss of control (uncontrollability). (3) Social threat (public speaking, social evaluation). (4) Cognitive challenge. Physical stressors (exercise, cold, pain) preferentially activate SAM (immediate, short-lived catecholamine response) over HPA (slower, sustained cortisol response). Chronic uncontrollable/unpredictable stress → sustained HPA elevation → hippocampal neuronal damage → cognitive impairment, depression, anxiety. This has clinical implications: patients with perceived lack of control in medical situations show higher cortisol responses; explaining procedures and giving autonomy reduces stress response.</div>
+                    <div class="teaching-point">Psychological uncontrollability → maximal HPA activation. Physical stress → maximal SAM. Chronic uncontrollable stress → hippocampal damage + PTSD-related HPA dysregulation.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Question 4</div>
+                <div class="question-text">A patient taking prednisone 30 mg/day is found to have blood glucose of 220 mg/dL. He was not diabetic before. What mechanism explains steroid-induced hyperglycemia?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Prednisone does not directly destroy pancreatic beta cells.', 'brs')">A) Prednisone directly destroys beta cells</div>
+                    <div class="option" onclick="sel(this, true, 'Steroid-induced hyperglycemia involves multiple mechanisms: (1) HEPATIC: GR → transactivation of PEPCK (phosphoenolpyruvate carboxykinase) and G6Pase (glucose-6-phosphatase) genes → ↑gluconeogenesis → ↑hepatic glucose output. (2) MUSCLE: ↓GLUT4 expression (reduced glucose transporter), IRS-1 (insulin receptor substrate-1) serine phosphorylation → ↓PI3K/Akt → ↓glucose uptake = insulin resistance. (3) ADIPOSE: ↑lipolysis → ↑free fatty acids (FFA) → further hepatic insulin resistance. (4) PANCREAS: mild ↓insulin secretion from beta cells. Dominant mechanism: increased hepatic glucose production + peripheral insulin resistance. Hyperglycemia is typically worse postprandially (afternoon/evening if prednisone given in morning).', 'brs')">B) Glucocorticoids upregulate PEPCK and G6Pase (gluconeogenesis) + cause peripheral insulin resistance via IRS-1 serine phosphorylation</div>
+                    <div class="option" onclick="sel(this, false, 'Cortisol does not activate glucagon receptors; instead it enhances glucagon sensitivity.', 'brs')">C) Cortisol activates glucagon receptors</div>
+                    <div class="option" onclick="sel(this, false, 'Cortisol is not primarily mediated by V2 receptor (that is vasopressin).', 'brs')">D) Cortisol inhibits insulin secretion via V2 receptor</div>
+                    <div class="option" onclick="sel(this, false, 'GLUT2 is liver glucose transporter; the problem is mainly hepatic gluconeogenesis and muscle resistance.', 'brs')">E) Prednisone inhibits glucose transporter GLUT2 in liver</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-4">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Glucocorticoid-induced hyperglycemia results from two primary mechanisms: (1) HEPATIC (predominant): GR → GRE interaction → ↑PEPCK and G6Pase gene transcription → increased gluconeogenesis from lactate, amino acids, glycerol → increased hepatic glucose output (can increase 2-3 fold). (2) PERIPHERAL INSULIN RESISTANCE: In muscle, GC → ↓GLUT4 translocation + IRS-1 serine phosphorylation (instead of tyrosine) → uncoupling of insulin signaling → ↓PI3K/Akt activation → ↓glucose uptake. In adipose, GC → ↑hormone-sensitive lipase → ↑lipolysis → ↑free fatty acids → compete with glucose for oxidation (Randle cycle) → further hepatic insulin resistance. (3) Mild ↓insulin secretion from pancreatic beta cells. Clinical: Hyperglycemia on steroids is often worst postprandially (glucose rises higher after meals) because the liver produces excess glucose while muscles cannot take it up efficiently. Management: monitor glucose; may require antidiabetic therapy (metformin, GLP-1 agonist, or insulin). Highest risk: pre-existing diabetes, obesity, high-dose steroids.</div>
+                    <div class="teaching-point">Steroid hyperglycemia: ↑hepatic gluconeogenesis (PEPCK/G6Pase) + peripheral insulin resistance. Typically highest postprandially (afternoon/evening with morning prednisone). Treat with insulin if needed.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Question 5</div>
+                <div class="question-text">The female athlete triad has three components. Which is considered the root cause driving the other two?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Bone stress fractures are a consequence, not the root cause.', 'brs')">A) Bone stress fractures</div>
+                    <div class="option" onclick="sel(this, false, 'Low BMD is a consequence of the other two components.', 'brs')">B) Low bone mineral density</div>
+                    <div class="option" onclick="sel(this, false, 'Menstrual dysfunction is a consequence of energy deficit, not the root cause.', 'brs')">C) Menstrual dysfunction</div>
+                    <div class="option" onclick="sel(this, true, 'Female Athlete Triad (now called Relative Energy Deficiency in Sport, RED-S) has LOW ENERGY AVAILABILITY as the ROOT CAUSE. Energy deficit → ↑CRH (energy deficit activates CRH neurons) → ↑cortisol → suppression of GnRH pulsatility → ↓LH/FSH → ↓estrogen → Menstrual dysfunction (amenorrhea). Simultaneously, ↓estrogen + ↓energy availability → ↓bone formation (less substrate for osteoblasts) + ↑bone resorption → Low bone mineral density → stress fractures. Treatment strategy: Address ROOT CAUSE by increasing caloric intake + reducing training intensity → this reverses menstrual dysfunction and reduces fracture risk. Simply treating with OCPs masks symptoms but does NOT fix the underlying problem or protect bone.', 'brs')">D) Low energy availability (energy deficiency)</div>
+                    <div class="option" onclick="sel(this, false, 'Elevated cortisol is a consequence of energy deficit, not the primary cause of the triad.', 'brs')">E) High cortisol</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-5">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The Female Athlete Triad consists of three interrelated but causally linked components, with LOW ENERGY AVAILABILITY as the root cause: (1) Low energy availability (energy deficiency): Inadequate caloric intake relative to energy expenditure from exercise. This triggers a cascade of metabolic and neuroendocrine changes. (2) Menstrual dysfunction: Energy deficit → increased CRH tone (CRH neurons are sensitive to energy status) → CRH inhibits GnRH neurons → suppression of pulsatile GnRH → ↓LH/FSH → ↓estradiol → primary amenorrhea or secondary amenorrhea/oligomenorrhea. (3) Low bone mineral density: ↓estrogen (from suppressed HPG axis) → ↓bone formation, ↑bone resorption. Additionally, poor energy status means insufficient substrate for osteoblast function. Result: progressive bone loss and stress fractures. Clinical management: The KEY is to address the ROOT CAUSE (energy deficit) by: (1) Increasing caloric intake. (2) Reducing exercise intensity/duration. (3) Counseling about RED-S. Simply giving OCPs (oral contraceptive pills) treats the menstrual symptom but does NOT address energy deficit, does NOT reverse HPA dysregulation, does NOT prevent bone loss progression. The updated terminology "Relative Energy Deficiency in Sport" (RED-S) encompasses this concept and includes male athletes with hypogonadism from energy deficiency. Male RED-S: low energy availability → ↑CRH → ↓GnRH → ↓testosterone → hypogonadism.</div>
+                    <div class="teaching-point">Triad root cause: energy deficiency. Fix energy deficiency → reverses menstrual dysfunction → protects bone. OCP treats symptoms but does not fix root cause.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Score Tab -->
+        <div id="score" class="tab-content">
+            <div class="score-section">
+                <h2 style="color: #8D1F1F; margin-bottom: 25px; font-size: 22px;">Performance Summary</h2>
+
+                <div class="score-grid">
+                    <div class="score-item">
+                        <div class="score-label">GUSOM Questions</div>
+                        <div class="score-value"><span id="score-gusom-correct">0</span>/<span id="score-gusom-total">8</span></div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">BRS Questions</div>
+                        <div class="score-value"><span id="score-brs-correct">0</span>/<span id="score-brs-total">5</span></div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Overall Score</div>
+                        <div class="score-value"><span id="score-total-correct">0</span>/<span id="score-total-total">13</span></div>
+                    </div>
+                </div>
+
+                <button class="reset-button" onclick="resetScore()">Reset All Scores</button>
+
+                <div style="margin-top: 25px; padding: 16px; background-color: #0D1117; border-radius: 4px; border-left: 3px solid #8D1F1F;">
+                    <p style="color: #8B949E; font-size: 14px; line-height: 1.8;">
+                        Select answers to questions and reveal explanations. Your score updates automatically as you answer each question. Use this tool to explore the integration of stress response systems (HPA, SAM) with immune, metabolic, reproductive, and musculoskeletal physiology.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let scores = {
+            gusom: {},
+            brs: {}
+        };
+
+        function sel(el, isCorrect, explanation, tabKey) {
+            const parent = el.parentElement;
+            const qNum = parent.parentElement.querySelector('.question-number').textContent;
+
+            parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected', 'correct', 'incorrect'));
+
+            if (isCorrect) {
+                el.classList.add('selected', 'correct');
+                scores[tabKey][qNum] = true;
+            } else {
+                el.classList.add('selected', 'incorrect');
+                scores[tabKey][qNum] = false;
+            }
+
+            const expBox = parent.parentElement.querySelector('.explanation-box');
+            expBox.classList.add('visible');
+
+            updateScore();
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function updateScore() {
+            const gusom_correct = Object.values(scores.gusom).filter(v => v === true).length;
+            const brs_correct = Object.values(scores.brs).filter(v => v === true).length;
+            const total_correct = gusom_correct + brs_correct;
+
+            document.getElementById('score-gusom-correct').textContent = gusom_correct;
+            document.getElementById('score-brs-correct').textContent = brs_correct;
+            document.getElementById('score-total-correct').textContent = total_correct;
+        }
+
+        function resetScore() {
+            scores = { gusom: {}, brs: {} };
+            document.querySelectorAll('.option').forEach(o => o.classList.remove('selected', 'correct', 'incorrect'));
+            document.querySelectorAll('.explanation-box').forEach(e => e.classList.remove('visible'));
+            updateScore();
+        }
+    </script>
+</body>
+</html>

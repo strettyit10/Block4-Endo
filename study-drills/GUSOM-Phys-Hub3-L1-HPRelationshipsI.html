@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L1 · Hypothalamic-Pituitary Relationships I — Practice Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0D1117;
+            color: #E6EDF3;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0277BD;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #0396d6;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #E6EDF3;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #8B949E;
+            margin-bottom: 16px;
+        }
+
+        .source-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .source-pill {
+            display: inline-block;
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
+            color: #8B949E;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #30363D;
+            margin-bottom: 30px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px 16px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #8B949E;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .tab-button.active {
+            color: #E6EDF3;
+            border-bottom-color: #0277BD;
+        }
+
+        .tab-button:hover:not(.active) {
+            color: #C9D1D9;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .mcq-item {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .mcq-number {
+            font-weight: 600;
+            color: #0277BD;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .mcq-question {
+            font-size: 15px;
+            color: #E6EDF3;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .mcq-opt {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            border-radius: 4px;
+            padding: 12px 14px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #C9D1D9;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .mcq-opt:hover {
+            background-color: #1C2128;
+            border-color: #58A6FF;
+        }
+
+        .mcq-opt.correct {
+            background-color: #1B4620;
+            border-color: #3FB950;
+            color: #3FB950;
+            cursor: default;
+        }
+
+        .mcq-opt.incorrect {
+            background-color: #5A1E1E;
+            border-color: #F85149;
+            color: #F85149;
+            cursor: default;
+        }
+
+        .mcq-opt.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .explanation {
+            background-color: #0D1117;
+            border-left: 4px solid #0277BD;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        .explanation-label {
+            font-weight: 600;
+            color: #0277BD;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .explanation-text {
+            font-size: 14px;
+            color: #8B949E;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .teaching-point-label {
+            font-weight: 600;
+            color: #48D597;
+            font-size: 12px;
+            margin-bottom: 4px;
+            margin-top: 8px;
+        }
+
+        .teaching-point-text {
+            font-size: 14px;
+            color: #7EE787;
+            line-height: 1.5;
+        }
+
+        .score-section {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .score-card {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            border-radius: 6px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 13px;
+            color: #8B949E;
+            margin-bottom: 8px;
+        }
+
+        .score-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #0277BD;
+        }
+
+        .score-total {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            border-radius: 6px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .reset-btn {
+            background-color: #1f6feb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 16px;
+            width: 100%;
+        }
+
+        .reset-btn:hover {
+            background-color: #388bfd;
+        }
+
+        @media (max-width: 600px) {
+            .score-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .tab-button {
+                font-size: 12px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="GUSOM-Phys-Hub3-ActiveDrills.html" class="back-link">← Back to Hub</a>
+
+        <div class="header">
+            <h1>L1 · Hypothalamic-Pituitary Relationships I</h1>
+            <p>Practice Questions</p>
+            <div class="source-pills">
+                <div class="source-pill">GUSOM In-House (Dr. Watson LOs)</div>
+                <div class="source-pill">BRS Physiology Ch. 7</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('gusom')">GUSOM Questions</button>
+            <button class="tab-button" onclick="showTab('brs')">BRS Questions</button>
+            <button class="tab-button" onclick="showTab('score')">Score</button>
+        </div>
+
+        <!-- GUSOM Questions Tab -->
+        <div id="gusom" class="tab-content active">
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q1</div>
+                <div class="mcq-question">A 25-year-old woman undergoes MRI for headaches. Imaging shows a craniopharyngioma compressing the pituitary stalk. Which of the following effects on hormone levels would be expected?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'The pituitary stalk carries dopamine and releasing hormones. Stalk compression affects both but not in this pattern.', 'gusom')">A) Increased GH, decreased prolactin</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'The pituitary stalk carries dopamine (prolactin-inhibiting factor) from the hypothalamus to the anterior pituitary. Stalk compression → loss of dopamine → hyperprolactinemia. Simultaneously, all other hypothalamic releasing hormones (GHRH, TRH, CRH, GnRH) are also lost → decreased GH, TSH, LH/FSH, ACTH. The stalk effect classically produces: high prolactin + low everything else.', 'gusom')">B) Increased prolactin, decreased LH/FSH/TSH/GH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'TSH would decrease, not increase, due to loss of TRH.', 'gusom')">C) Decreased prolactin, increased TSH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'ACTH would decrease, not increase, due to loss of CRH.', 'gusom')">D) Increased ACTH, decreased prolactin</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Prolactin would be high, not normal, due to loss of dopamine inhibition.', 'gusom')">E) Normal prolactin, decreased TSH only</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The pituitary stalk carries dopamine (prolactin-inhibiting factor) from the hypothalamus to the anterior pituitary. Stalk compression → loss of dopamine → hyperprolactinemia. Simultaneously, all other hypothalamic releasing hormones (GHRH, TRH, CRH, GnRH) are also lost → decreased GH, TSH, LH/FSH, ACTH. The stalk effect classically produces: high prolactin + low everything else.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Stalk section = high prolactin + low all other anterior pituitary hormones. This is opposite of a prolactinoma (which also has high prolactin but suppresses everything else via a different mechanism).</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q2</div>
+                <div class="mcq-question">Which hypothalamic nucleus contains magnocellular neurons that synthesize vasopressin and oxytocin?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'These nuclei are involved in GnRH and GHRH production, not ADH/oxytocin.', 'gusom')">A) Arcuate nucleus and ventromedial nucleus</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Magnocellular neurons in the paraventricular nucleus (PVN) and supraoptic nucleus (SON) synthesize vasopressin (ADH) and oxytocin as prohormones → transported down axons to posterior pituitary (neurohypophysis) for release. Parvocellular neurons in the PVN produce CRH. The arcuate nucleus produces GHRH, kisspeptin, and dopamine.', 'gusom')">B) Paraventricular nucleus and supraoptic nucleus</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'These nuclei regulate circadian rhythm and temperature, not posterior pituitary hormones.', 'gusom')">C) Suprachiasmatic nucleus and preoptic area</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'These nuclei regulate feeding and temperature, not posterior pituitary hormones.', 'gusom')">D) Dorsomedial nucleus and lateral hypothalamus</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'These are not the primary nuclei for magnocellular neurons.', 'gusom')">E) Periventricular nucleus and zona incerta</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Magnocellular neurons in the paraventricular nucleus (PVN) and supraoptic nucleus (SON) synthesize vasopressin (ADH) and oxytocin as prohormones → transported down axons to posterior pituitary (neurohypophysis) for release. Parvocellular neurons in the PVN produce CRH. The arcuate nucleus produces GHRH, kisspeptin, and dopamine.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">PVN + SON → magnocellular → ADH and OT → posterior pituitary. Arcuate → parvocellular → GHRH and dopamine → anterior pituitary (via portal).</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q3</div>
+                <div class="mcq-question">In the hypothalamic-pituitary portal system, the primary plexus collects releasing hormones and the secondary plexus delivers them to the anterior pituitary. Destruction of portal vessels would have what effect?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Portal destruction removes releasing hormones, so hormone levels would not increase.', 'gusom')">A) Increased secretion of all anterior pituitary hormones</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Multiple hormones are affected, not just TSH.', 'gusom')">B) Selective decrease in TSH only</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'The portal system carries both releasing hormones AND dopamine (the primary prolactin inhibitor). Destruction removes releasing hormones → ↓GH, TSH, ACTH, LH, FSH. But it also removes dopamine → disinhibition of prolactin → ↑prolactin. This pattern (pan-hypopituitarism + hyperprolactinemia) is the hallmark of stalk disruption.', 'gusom')">C) Decreased secretion of GH, TSH, ACTH, LH, FSH with increased prolactin</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Prolactin would increase, not decrease, due to loss of dopamine inhibition.', 'gusom')">D) Decreased prolactin with normal other hormones</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Portal destruction has significant hormonal effects.', 'gusom')">E) No significant hormonal effect</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The portal system carries both releasing hormones AND dopamine (the primary prolactin inhibitor). Destruction removes releasing hormones → ↓GH, TSH, ACTH, LH, FSH. But it also removes dopamine → disinhibition of prolactin → ↑prolactin. This pattern (pan-hypopituitarism + hyperprolactinemia) is the hallmark of stalk disruption.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Portal destruction = lost releasing hormones + lost dopamine. Net: all anterior hormones ↓ EXCEPT prolactin ↑.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q4</div>
+                <div class="mcq-question">A medical student reads that anterior pituitary cells include 'acidophils' and 'basophils.' Which hormone-secreting cells are classified as acidophils?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Corticotrophs and thyrotrophs are basophils, not acidophils.', 'gusom')">A) Corticotrophs and thyrotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Gonadotrophs and corticotrophs are basophils, not acidophils.', 'gusom')">B) Gonadotrophs and corticotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Anterior pituitary staining: Acidophils (stain pink with eosin): Somatotrophs (GH) and Lactotrophs (prolactin) — the \"S.L.\" cells. Basophils (stain blue with hematoxylin): Thyrotrophs (TSH), Gonadotrophs (LH/FSH), Corticotrophs (ACTH/POMC) — the \"T.G.C.\" cells. Chromophobes: agranular, poor staining — often null cells or degranulated cells.', 'gusom')">C) Somatotrophs and lactotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Thyrotrophs and gonadotrophs are basophils, not acidophils.', 'gusom')">D) Thyrotrophs and gonadotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Not all cell types are acidophils.', 'gusom')">E) All five cell types stain as acidophils</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Anterior pituitary staining: Acidophils (stain pink with eosin): Somatotrophs (GH) and Lactotrophs (prolactin) — the "S.L." cells. Basophils (stain blue with hematoxylin): Thyrotrophs (TSH), Gonadotrophs (LH/FSH), Corticotrophs (ACTH/POMC) — the "T.G.C." cells. Chromophobes: agranular, poor staining — often null cells or degranulated cells.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Mnemonic: FLAT PiG → FSH+LH (Gonadotrophs), ACTH (Corticotrophs), TSH (Thyrotrophs) = basophils. GH (Somatotrophs), Prolactin (Lactotrophs) = acidophils.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q5</div>
+                <div class="mcq-question">A 35-year-old woman with Sheehan syndrome (postpartum pituitary necrosis) would most predictably have which hormonal pattern?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Prolactin would be low, not high, in Sheehan syndrome.', 'gusom')">A) Increased prolactin and decreased TSH</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Sheehan syndrome: ischemic necrosis of anterior pituitary from postpartum hemorrhage/shock → pan-hypopituitarism. Loss of lactotrophs → can\'t breastfeed (failure to lactate is often the presenting symptom). Loss of all other anterior pituitary cells → ↓ TSH, ACTH, LH/FSH, GH. Prolactin is LOW (opposite of stalk compression). Posterior pituitary is typically SPARED (separate blood supply from inferior hypophyseal arteries).', 'gusom')">B) Decreased prolactin and decreased TSH/LH/FSH/GH/ACTH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'All anterior pituitary hormones are affected, not just prolactin.', 'gusom')">C) Isolated prolactin deficiency</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'GH and TSH would be decreased, not increased.', 'gusom')">D) Increased GH and TSH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Multiple hormones are affected, not just ACTH and TSH.', 'gusom')">E) Decreased ACTH and TSH with preserved LH/FSH</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Sheehan syndrome: ischemic necrosis of anterior pituitary from postpartum hemorrhage/shock → pan-hypopituitarism. Loss of lactotrophs → can't breastfeed (failure to lactate is often the presenting symptom). Loss of all other anterior pituitary cells → ↓ TSH, ACTH, LH/FSH, GH. Prolactin is LOW (opposite of stalk compression). Posterior pituitary is typically SPARED (separate blood supply from inferior hypophyseal arteries).</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Sheehan = pan-hypopituitarism including LOW prolactin (failure to lactate). Stalk compression = high prolactin. Key distinguishing feature.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q6</div>
+                <div class="mcq-question">Which of the following best describes the feedback control in the hypothalamic-pituitary axis?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'This describes long-loop feedback alone, not the complete picture.', 'gusom')">A) Short-loop: end-organ hormone acts on hypothalamus and pituitary</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'This describes long-loop feedback alone, not the complete picture.', 'gusom')">B) Long-loop: end-organ hormone acts on hypothalamus and pituitary</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'This describes ultrashort-loop feedback alone, not the complete picture.', 'gusom')">C) Ultrashort-loop: pituitary hormone acts back on hypothalamus</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'This describes short-loop feedback alone, not the complete picture.', 'gusom')">D) Short-loop: anterior pituitary hormone acts on hypothalamus</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'The HPx axis has THREE feedback loops: (1) Long-loop: end-organ hormone (e.g., cortisol, T4, estrogen) → acts on hypothalamus AND pituitary. (2) Short-loop: anterior pituitary hormone (e.g., ACTH, TSH) → acts back on hypothalamus. (3) Ultrashort-loop: hypothalamic hormone (e.g., CRH) → acts on hypothalamic neurons itself (autofeedback). All three operate simultaneously.', 'gusom')">E) All loops: end-organ, pituitary, and hypothalamic hormone feedback simultaneously</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The HPx axis has THREE feedback loops: (1) Long-loop: end-organ hormone (e.g., cortisol, T4, estrogen) → acts on hypothalamus AND pituitary. (2) Short-loop: anterior pituitary hormone (e.g., ACTH, TSH) → acts back on hypothalamus. (3) Ultrashort-loop: hypothalamic hormone (e.g., CRH) → acts on hypothalamic neurons itself (autofeedback). All three operate simultaneously.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Long loop = most clinically relevant. Short and ultrashort loops = fine-tuning. All are negative feedback EXCEPT mid-cycle estrogen surge (positive feedback → LH surge).</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q7</div>
+                <div class="mcq-question">Empty sella syndrome occurs when CSF fills the sella turcica, compressing the pituitary. Which finding is most expected?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Primary empty sella usually has normal function.', 'gusom')">A) Panhypopituitarism in all cases</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Prolactin may be mildly elevated but usually normal function overall.', 'gusom')">B) Hyperprolactinemia with pan-hypopituitarism</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'In primary empty sella, the pituitary gland is flattened against the sella wall but retains enough functional tissue that pituitary function is USUALLY NORMAL. Mild hyperprolactinemia may occur if the pituitary stalk is distorted. Secondary empty sella (post-surgery, radiation, apoplexy) is more likely to cause hypopituitarism. The key teaching point: empty sella appearance ≠ hypopituitarism.', 'gusom')">C) Usually normal pituitary function; prolactin may be mildly elevated</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Empty sella does not typically cause isolated ADH deficiency.', 'gusom')">D) Isolated ADH deficiency</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'GH and IGF-1 would be decreased, not elevated.', 'gusom')">E) Elevated GH and IGF-1</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">In primary empty sella, the pituitary gland is flattened against the sella wall but retains enough functional tissue that pituitary function is USUALLY NORMAL. Mild hyperprolactinemia may occur if the pituitary stalk is distorted. Secondary empty sella (post-surgery, radiation, apoplexy) is more likely to cause hypopituitarism. The key teaching point: empty sella appearance ≠ hypopituitarism.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Primary empty sella: normal hormone function typically. Secondary empty sella (post-trauma/surgery): may have hypopituitarism. Do not assume hypopituitarism from imaging alone.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q8</div>
+                <div class="mcq-question">Kisspeptin neurons project to GnRH neurons. What is the primary function of kisspeptin in the HPG axis?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Kisspeptin stimulates GnRH, not inhibits it.', 'gusom')">A) It inhibits GnRH release to prevent premature puberty</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Kisspeptin (KISS1 gene product) from KNDy neurons in the arcuate nucleus is the master stimulator of GnRH release. Kisspeptin → GnRH → LH/FSH. Kisspeptin is essential for puberty onset — kisspeptin or kisspeptin receptor mutations → Kallmann-like hypogonadotropic hypogonadism. Kisspeptin also mediates positive (mid-cycle estrogen → kisspeptin surge) and negative feedback. Kisspeptin receptor antagonists suppress GnRH → used in endometriosis.', 'gusom')">B) It is the primary stimulator of GnRH release, acting as a gate for puberty onset and pulsatile LH secretion</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Kisspeptin acts on GnRH neurons, not directly on gonadotrophs.', 'gusom')">C) It directly stimulates LH secretion from gonadotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Kisspeptin affects GnRH, not dopamine.', 'gusom')">D) It inhibits dopamine release in the tuberoinfundibular pathway</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Kisspeptin affects GnRH and the HPG axis, not GH.', 'gusom')">E) It stimulates somatotroph growth hormone secretion</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Kisspeptin (KISS1 gene product) from KNDy neurons in the arcuate nucleus is the master stimulator of GnRH release. Kisspeptin → GnRH → LH/FSH. Kisspeptin is essential for puberty onset — kisspeptin or kisspeptin receptor mutations → Kallmann-like hypogonadotropic hypogonadism. Kisspeptin also mediates positive (mid-cycle estrogen → kisspeptin surge) and negative feedback. Kisspeptin receptor antagonists suppress GnRH → used in endometriosis.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Kisspeptin = gatekeeper of GnRH. Loss of kisspeptin receptor = pubertal failure. Estrogen positive feedback → kisspeptin surge → GnRH surge → LH surge.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q9</div>
+                <div class="mcq-question">A 22-year-old male presents with anosmia and inability to initiate puberty. GnRH stimulation test shows an appropriate LH and FSH response. What is the diagnosis?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, true, 'Kallmann syndrome: failure of GnRH neuron migration from olfactory placode to hypothalamus (GnRH neurons originate in the nose!) — linked to KAL1 (X-linked), FGFR1, PROK2 mutations. Features: anosmia (olfactory bulb hypoplasia) + hypogonadotropic hypogonadism (low LH/FSH/testosterone). GnRH stimulation test: LH/FSH RISE (pituitary is intact) — this distinguishes Kallmann from pituitary failure. Treatment: pulsatile GnRH (Gonadorelin) or gonadotropins for fertility.', 'gusom')">A) Kallmann syndrome — GnRH neuron migration failure</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Primary hypogonadism would show elevated LH/FSH with low testosterone, not low LH/FSH.', 'gusom')">B) Primary hypogonadism</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'A pituitary adenoma would not produce an appropriate LH/FSH response to GnRH stimulation.', 'gusom')">C) Pituitary adenoma causing hypogonadotropic hypogonadism</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Constitutional delay of puberty does not cause anosmia.', 'gusom')">D) Constitutional delay of puberty</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Klinefelter syndrome does not cause anosmia or affect GnRH neuron migration.', 'gusom')">E) Klinefelter syndrome</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Kallmann syndrome: failure of GnRH neuron migration from olfactory placode to hypothalamus (GnRH neurons originate in the nose!) — linked to KAL1 (X-linked), FGFR1, PROK2 mutations. Features: anosmia (olfactory bulb hypoplasia) + hypogonadotropic hypogonadism (low LH/FSH/testosterone). GnRH stimulation test: LH/FSH RISE (pituitary is intact) — this distinguishes Kallmann from pituitary failure. Treatment: pulsatile GnRH (Gonadorelin) or gonadotropins for fertility.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Kallmann = anosmia + HH + normal pituitary (GnRH stim test normal). GnRH neurons migrate with olfactory neurons — both fail to migrate in Kallmann.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q10</div>
+                <div class="mcq-question">A patient with a pituitary macroadenoma (non-functional) develops bitemporal hemianopia. Which anatomical structure is compressed?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'The optic tract is posterior; the chiasm is superior to the pituitary.', 'gusom')">A) Optic tract</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'The optic chiasm sits directly above the pituitary gland. Upward extension of a pituitary macroadenoma compresses the crossing nasal fibers at the chiasm → loss of temporal visual fields bilaterally = bitemporal hemianopia. This is a classic examination finding that should prompt pituitary imaging. The non-crossing temporal fibers are preserved → nasal visual fields intact.', 'gusom')">B) Optic chiasm</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'The optic nerve would not cause bitemporal hemianopia.', 'gusom')">C) Optic nerve</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Meyer\'s loop is deeper in the brain and would not be compressed by pituitary tumors.', 'gusom')">D) Meyer\'s loop</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'The lateral geniculate nucleus is not directly above the pituitary.', 'gusom')">E) Lateral geniculate nucleus</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The optic chiasm sits directly above the pituitary gland. Upward extension of a pituitary macroadenoma compresses the crossing nasal fibers at the chiasm → loss of temporal visual fields bilaterally = bitemporal hemianopia. This is a classic examination finding that should prompt pituitary imaging. The non-crossing temporal fibers are preserved → nasal visual fields intact.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Pituitary tumor → compresses optic chiasm → nasal fibers cross here → lose temporal fields bilaterally. "Bitemporal hemianopia = think pituitary."</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BRS Questions Tab -->
+        <div id="brs" class="tab-content">
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q1</div>
+                <div class="mcq-question">Growth hormone-releasing hormone (GHRH) exerts its effects on somatotrophs by which mechanism?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'GHRH uses Gs, not Gi coupling.', 'brs')">A) Binding to a receptor coupled to Gi, decreasing cAMP</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'GHRH does not use tyrosine kinase receptors.', 'brs')">B) Binding to a tyrosine kinase receptor, activating STAT5</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'GHRH binds a GPCR on somatotrophs coupled to Gs → adenylyl cyclase ↑ → cAMP ↑ → PKA activation → GH gene transcription + GH secretion. This is the same mechanism used by many pituitary releasing hormones (CRH → corticotrophs via Gs; TRH → thyrotrophs via Gq). Somatostatin binds Gi-coupled GPCR → ↓cAMP → inhibits GH secretion.', 'brs')">C) Binding to a receptor coupled to Gs, increasing cAMP and activating PKA</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'GHRH does not bind nuclear receptors.', 'brs')">D) Binding to a nuclear receptor and directly regulating transcription</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'GHRH uses Gs/cAMP, not Gq/IP3.', 'brs')">E) Binding to a receptor coupled to Gq, increasing IP3 and DAG</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">GHRH binds a GPCR on somatotrophs coupled to Gs → adenylyl cyclase ↑ → cAMP ↑ → PKA activation → GH gene transcription + GH secretion. This is the same mechanism used by many pituitary releasing hormones (CRH → corticotrophs via Gs; TRH → thyrotrophs via Gq). Somatostatin binds Gi-coupled GPCR → ↓cAMP → inhibits GH secretion.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">GHRH → Gs → ↑cAMP → GH release. Somatostatin → Gi → ↓cAMP → GH inhibition. Gi vs Gs = key opposition.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q2</div>
+                <div class="mcq-question">A woman is found to have a prolactinoma. Which of the following is the first-line treatment?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Surgery is not first-line for prolactinomas.', 'brs')">A) Transsphenoidal surgery</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Radiation is not first-line.', 'brs')">B) Radiation therapy</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Prolactinomas are unique among pituitary adenomas — medical therapy with dopamine agonists (cabergoline preferred, bromocriptine alternative) is FIRST-LINE, even for macroadenomas causing visual field defects. Dopamine agonists restore dopamine signaling → reduce prolactin secretion AND shrink the tumor (~80-90% respond). Surgery is reserved for medical failure, intolerance, or preference. This is the key exception to the \"surgery first\" rule for pituitary adenomas.', 'brs')">C) Cabergoline (dopamine agonist)</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Octreotide is used for TSH-secreting adenomas, not prolactinomas.', 'brs')">D) Octreotide</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Bromocriptine is an option but cabergoline is preferred.', 'brs')">E) Bromocriptine only for microadenomas</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Prolactinomas are unique among pituitary adenomas — medical therapy with dopamine agonists (cabergoline preferred, bromocriptine alternative) is FIRST-LINE, even for macroadenomas causing visual field defects. Dopamine agonists restore dopamine signaling → reduce prolactin secretion AND shrink the tumor (~80-90% respond). Surgery is reserved for medical failure, intolerance, or preference. This is the key exception to the "surgery first" rule for pituitary adenomas.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Prolactinoma exception: dopamine agonist FIRST (not surgery). Cabergoline preferred over bromocriptine (longer acting, fewer side effects, better tolerated).</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q3</div>
+                <div class="mcq-question">Somatostatin is produced in the hypothalamic periventricular nucleus and inhibits GH secretion. Which additional anterior pituitary hormone does somatostatin also inhibit?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Somatostatin does not inhibit ACTH.', 'brs')">A) ACTH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Somatostatin does not inhibit LH.', 'brs')">B) LH</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Somatostatin inhibits both GH and TSH secretion from the anterior pituitary. This dual inhibitory action is the basis for octreotide\'s use in TSH-secreting adenomas. Somatostatin does not significantly inhibit ACTH, LH, FSH, or prolactin at physiologic concentrations. TRH, in contrast, stimulates both TSH AND prolactin.', 'brs')">C) TSH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Somatostatin does not inhibit prolactin.', 'brs')">D) Prolactin</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Somatostatin does not inhibit FSH.', 'brs')">E) FSH</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Somatostatin inhibits both GH and TSH secretion from the anterior pituitary. This dual inhibitory action is the basis for octreotide's use in TSH-secreting adenomas. Somatostatin does not significantly inhibit ACTH, LH, FSH, or prolactin at physiologic concentrations. TRH, in contrast, stimulates both TSH AND prolactin.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Somatostatin inhibits GH + TSH. TRH stimulates TSH + prolactin. These dual actions are clinically important.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q4</div>
+                <div class="mcq-question">Corticotropin-releasing hormone (CRH) from the hypothalamus acts on corticotrophs to stimulate ACTH secretion. What is the primary second messenger system involved?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'CRH uses Gs/cAMP, not Gq/IP3.', 'brs')">A) Gq → PLC → IP3/DAG</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'CRH binds CRHR1 on corticotrophs → Gs-coupled → ↑adenylyl cyclase → ↑cAMP → PKA activation → POMC gene transcription → ACTH processing and release. This is the same Gs mechanism as GHRH (for GH). Importantly, CRH also activates PKC, but the primary second messenger is cAMP.', 'brs')">B) Gs → adenylyl cyclase → cAMP → PKA</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'CRH uses Gs, not Gi.', 'brs')">C) Gi → ↓adenylyl cyclase</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'CRH does not use tyrosine kinase receptors.', 'brs')">D) Tyrosine kinase → JAK-STAT</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'CRH uses cAMP, not cGMP.', 'brs')">E) cGMP via guanylyl cyclase</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">CRH binds CRHR1 on corticotrophs → Gs-coupled → ↑adenylyl cyclase → ↑cAMP → PKA activation → POMC gene transcription → ACTH processing and release. This is the same Gs mechanism as GHRH (for GH). Importantly, CRH also activates PKC, but the primary second messenger is cAMP.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">CRH → Gs → cAMP → PKA → POMC → ACTH. Most hypothalamic releasing hormones use either Gs (↑cAMP) or Gq (↑IP3/DAG).</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q5</div>
+                <div class="mcq-question">During surgery, a patient has a pituitary adenoma resected. Post-operatively, she develops polyuria with dilute urine and normal serum sodium (early). What is the most likely explanation?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'SIADH occurs later in the triphasic response, not initially.', 'brs')">A) SIADH from surgical stress</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Central DI after pituitary surgery: disruption of the posterior pituitary or stalk → loss of ADH → inability to concentrate urine → polyuria with dilute urine, rising serum sodium (if patient cannot drink enough). Triphasic response: (1) DI (ADH storage lost) → (2) SIADH (stored ADH released from dying neurons) → (3) Permanent DI. Treatment: desmopressin (DDAVP).', 'brs')">B) Damage to posterior pituitary or stalk causing central DI</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Hypothyroidism would not cause polyuria with dilute urine.', 'brs')">C) Hypothyroidism from anterior pituitary damage</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Adrenal insufficiency would not cause dilute urine.', 'brs')">D) Adrenal insufficiency from ACTH deficiency</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Stress hyperglycemia alone does not cause polyuria with dilute urine of this magnitude.', 'brs')">E) Diabetes mellitus from stress hyperglycemia</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Central DI after pituitary surgery: disruption of the posterior pituitary or stalk → loss of ADH → inability to concentrate urine → polyuria with dilute urine, rising serum sodium (if patient cannot drink enough). Triphasic response: (1) DI (ADH storage lost) → (2) SIADH (stored ADH released from dying neurons) → (3) Permanent DI. Treatment: desmopressin (DDAVP).</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Post-pituitary surgery: watch for DI (polyuria, dilute urine, hypernatremia). May have triphasic response. Treat central DI with desmopressin.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Score Tab -->
+        <div id="score" class="tab-content">
+            <div class="score-section">
+                <div class="score-grid">
+                    <div class="score-card">
+                        <div class="score-label">GUSOM Questions</div>
+                        <div class="score-value"><span id="gusom-correct">0</span>/<span id="gusom-total">10</span></div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-label">BRS Questions</div>
+                        <div class="score-value"><span id="brs-correct">0</span>/<span id="brs-total">5</span></div>
+                    </div>
+                </div>
+                <div class="score-card">
+                    <div class="score-label">OVERALL SCORE</div>
+                    <div class="score-value"><span id="overall-correct">0</span>/<span id="overall-total">15</span></div>
+                </div>
+                <button class="reset-btn" onclick="resetScores()">Reset All Scores</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const score = {
+            gusom: { correct: 0, total: 10 },
+            brs: { correct: 0, total: 5 }
+        };
+
+        function sel(el, isCorrect, explanation, tabKey) {
+            const parent = el.parentElement;
+            const allOpts = parent.querySelectorAll('.mcq-opt');
+            const explanationDiv = el.parentElement.nextElementSibling;
+
+            allOpts.forEach(opt => opt.classList.add('disabled'));
+
+            if (isCorrect) {
+                el.classList.add('correct');
+                score[tabKey].correct++;
+            } else {
+                el.classList.add('incorrect');
+                allOpts.forEach(opt => {
+                    if (!opt.classList.contains('incorrect')) {
+                        opt.classList.add('disabled');
+                    }
+                });
+            }
+
+            if (explanationDiv && explanationDiv.classList.contains('explanation')) {
+                explanationDiv.classList.add('show');
+            }
+
+            updateScores();
+        }
+
+        function updateScores() {
+            const gusom = score.gusom;
+            const brs = score.brs;
+            const total = gusom.correct + brs.correct;
+            const maxTotal = gusom.total + brs.total;
+
+            document.getElementById('gusom-correct').textContent = gusom.correct;
+            document.getElementById('brs-correct').textContent = brs.correct;
+            document.getElementById('overall-correct').textContent = total;
+            document.getElementById('overall-total').textContent = maxTotal;
+        }
+
+        function resetScores() {
+            score.gusom.correct = 0;
+            score.brs.correct = 0;
+
+            document.querySelectorAll('.mcq-opt').forEach(opt => {
+                opt.classList.remove('correct', 'incorrect', 'disabled');
+            });
+
+            document.querySelectorAll('.explanation').forEach(exp => {
+                exp.classList.remove('show');
+            });
+
+            updateScores();
+        }
+
+        function showTab(name) {
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(tb => tb.classList.remove('active'));
+
+            document.getElementById(name).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        updateScores();
+    </script>
+</body>
+</html>

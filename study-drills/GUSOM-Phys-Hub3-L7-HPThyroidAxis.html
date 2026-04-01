@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L7 · Hypothalamic-Pituitary-Thyroid Axis — Practice Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #0D1117;
+            color: #C9D1D9;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #30363D;
+            padding-bottom: 20px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #0D47A1;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #1565C0;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #E6EDF3;
+        }
+
+        .source-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .pill {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            color: #8B949E;
+            padding: 6px 12px;
+            border-radius: 24px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid #30363D;
+            margin-bottom: 30px;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: #8B949E;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            color: #C9D1D9;
+        }
+
+        .tab-button.active {
+            color: #0D47A1;
+            border-bottom-color: #0D47A1;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .question-card {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            color: #0D47A1;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .question-text {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #E6EDF3;
+            line-height: 1.7;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            padding: 12px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 15px;
+            color: #C9D1D9;
+        }
+
+        .option:hover {
+            border-color: #0D47A1;
+            background-color: #1C2128;
+        }
+
+        .option.selected {
+            border-color: #0D47A1;
+            background-color: #0F3460;
+        }
+
+        .option.correct {
+            border-color: #238636;
+            background-color: #164B35;
+            color: #3FB950;
+        }
+
+        .option.incorrect {
+            border-color: #DA3633;
+            background-color: #67060C;
+            color: #F85149;
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #0F3460;
+            border-left: 4px solid #0D47A1;
+            border-radius: 4px;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background-color: #164B35;
+            border-left-color: #238636;
+        }
+
+        .feedback.incorrect {
+            background-color: #67060C;
+            border-left-color: #DA3633;
+        }
+
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .feedback-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #C9D1D9;
+        }
+
+        .teaching-point {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-style: italic;
+            font-size: 13px;
+            color: #8B949E;
+        }
+
+        .score-display {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .score-box {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 13px;
+            color: #8B949E;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .score-value {
+            font-size: 32px;
+            color: #0D47A1;
+            font-weight: 700;
+        }
+
+        .overall-score {
+            background-color: #0D1117;
+            border: 2px solid #0D47A1;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .overall-label {
+            font-size: 14px;
+            color: #8B949E;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .overall-value {
+            font-size: 48px;
+            color: #0D47A1;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .reset-button {
+            background-color: #0D47A1;
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .reset-button:hover {
+            background-color: #1565C0;
+        }
+
+        .reset-button:active {
+            transform: scale(0.98);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8B949E;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="GUSOM-Phys-Hub3-ActiveDrills.html" class="back-link">← Back to Hub</a>
+            <h1>L7 · Hypothalamic-Pituitary-Thyroid Axis</h1>
+            <div style="color: #8B949E; margin-top: 8px;">Practice Questions</div>
+            <div class="source-pills">
+                <span class="pill">GUSOM In-House (Dr. Watson LOs)</span>
+                <span class="pill">BRS Physiology Ch. 9</span>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('gusom')">GUSOM Questions</button>
+            <button class="tab-button" onclick="showTab('brs')">BRS Questions</button>
+            <button class="tab-button" onclick="showTab('score')">Score</button>
+        </div>
+
+        <!-- GUSOM QUESTIONS TAB -->
+        <div id="gusom" class="tab-content active">
+            <div class="question-card">
+                <div class="question-number">Q1</div>
+                <div class="question-text">A 32-year-old woman presents with 3 months of palpitations, heat intolerance, 12-pound weight loss, and insomnia. Exam shows exophthalmos, lid lag, and a diffusely enlarged thyroid. TSH is undetectable, free T4 is 3× normal. Thyroid uptake scan shows diffuse increased uptake. What is the first-line pharmacological treatment in the non-pregnant patient?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Propranolol is used for symptomatic beta-adrenergic effects but is NOT first-line monotherapy.', 'gusom')">A) Propranolol alone</div>
+                    <div class="option" onclick="sel(this, false, 'PTU is reserved for: first trimester pregnancy, thyroid storm, or methimazole allergy in non-pregnant adults.', 'gusom')">B) Propylthiouracil (PTU)</div>
+                    <div class="option" onclick="sel(this, true, 'Methimazole (MMI) is first-line for Graves in non-pregnant adults: once-daily dosing, blocks TPO → ↓T4/T3 synthesis.', 'gusom')">C) Methimazole (MMI)</div>
+                    <div class="option" onclick="sel(this, false, 'RAI is used after achieving euthyroid state with antithyroid drugs (not first-line pharmacological).', 'gusom')">D) Radioiodine (RAI) ablation</div>
+                    <div class="option" onclick="sel(this, false, 'Thyroidectomy is definitive but is NOT first-line pharmacological (reserved for drug failure, pregnancy).', 'gusom')">E) Thyroidectomy</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Graves disease: diffuse toxic goiter, TSI positive, increased RAI uptake. First-line pharmacological: methimazole (MMI) — preferred over PTU in non-pregnant adults (once-daily dosing, better safety profile). PTU is used in: first trimester of pregnancy, thyroid storm (faster T4→T3 conversion blockade), methimazole allergy. MMI mechanism: inhibits thyroid peroxidase (TPO) → blocks iodide organification and coupling → ↓T4/T3 synthesis. Does NOT block release of stored hormone (so symptom control takes weeks — use propranolol for symptomatic relief early).
+                    <div class="teaching-point">MMI = first-line for Graves (non-pregnant). PTU = pregnancy (first trimester), thyroid storm. Both block TPO. Neither blocks stored hormone release — symptoms take weeks to improve.</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Q2</div>
+                <div class="question-text">A 45-year-old man with a 3 cm thyroid nodule undergoes FNA. Pathology shows cells with 'orphan Annie eye' nuclei, nuclear grooves, and psammoma bodies. What is the diagnosis, and what molecular marker is most commonly associated?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Follicular cancer associates with RAS mutation, but lacks the diagnostic nuclear features mentioned.', 'gusom')">A) Follicular thyroid cancer — RAS mutation</div>
+                    <div class="option" onclick="sel(this, false, 'Medullary cancer shows RET point mutations but lacks orphan Annie nuclei (C-cell origin).', 'gusom')">B) Medullary thyroid cancer — RET point mutation</div>
+                    <div class="option" onclick="sel(this, false, 'Anaplastic cancer (p53 mutation) is highly aggressive but lacks psammoma bodies and orphan Annie nuclei.', 'gusom')">C) Anaplastic thyroid cancer — p53 mutation</div>
+                    <div class="option" onclick="sel(this, true, 'Papillary thyroid cancer: orphan Annie nuclei + psammoma bodies + nuclear grooves + BRAF V600E (most common).', 'gusom')">D) Papillary thyroid cancer — BRAF V600E mutation</div>
+                    <div class="option" onclick="sel(this, false, 'Hurthle cell carcinoma has different histology (eosinophilic cells) and mitochondrial mutations, not BRAF.', 'gusom')">E) Hurthle cell carcinoma — mitochondrial mutations</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Papillary thyroid cancer (PTC) — most common thyroid cancer (80%). Histologic hallmarks: (1) Orphan Annie eye nuclei (empty-appearing ground glass nuclei with nuclear clearing), (2) nuclear grooves, (3) intranuclear cytoplasmic inclusions, (4) psammoma bodies (concentric calcifications). Molecular: BRAF V600E most common (~60% of PTC), RET/PTC rearrangements (especially post-radiation). Prognosis: excellent (10-year survival >90%). Treatment: thyroidectomy ± RAI ± TSH suppression.
+                    <div class="teaching-point">PTC: Orphan Annie nuclei + psammoma bodies + nuclear grooves. BRAF V600E (most common). RET/PTC (radiation-associated). Best prognosis. BRAF = also in melanoma and colon cancer.</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Q3</div>
+                <div class="question-text">A 25-year-old woman delivers a healthy baby. 3 months postpartum she develops palpitations and irritability, then at 6 months she develops fatigue and cold intolerance. TSH is now elevated with low T4. Anti-TPO antibodies are positive. RAI uptake was low during the initial hyperthyroid phase. What is the diagnosis?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Graves in postpartum period would show HIGH RAI uptake and TSI positive, not low uptake.', 'gusom')">A) Graves disease developing postpartum</div>
+                    <div class="option" onclick="sel(this, false, 'Subacute thyroiditis presents with PAINFUL thyroid and low uptake; no pain is mentioned here.', 'gusom')">B) Subacute (de Quervain) thyroiditis</div>
+                    <div class="option" onclick="sel(this, true, 'Postpartum thyroiditis: hyper phase (low RAI uptake) → hypo phase (elevated TSH, low T4) → recovery. Anti-TPO positive.', 'gusom')">C) Postpartum thyroiditis</div>
+                    <div class="option" onclick="sel(this, false, 'Toxic multinodular goiter shows HIGH RAI uptake and nodular pattern on imaging, not diffuse.', 'gusom')">D) Toxic multinodular goiter</div>
+                    <div class="option" onclick="sel(this, false, 'TSH-secreting pituitary adenoma is rare and would present differently with very high TSH and high T4.', 'gusom')">E) TSH-secreting pituitary adenoma</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Postpartum thyroiditis: autoimmune destructive thyroiditis occurring within 1 year postpartum. Pattern: hyperthyroid phase (1-4 months, follicle destruction → T4/T3 release, low RAI uptake) → hypothyroid phase (4-8 months, depleted stores) → recovery (most). Anti-TPO positive. Distinguished from Graves: low RAI uptake during hyper phase (Graves has high uptake) + no TSI. 20-30% progress to permanent hypothyroidism. Treatment: β-blocker for hyper phase (symptomatic), levothyroxine for hypo phase if symptomatic.
+                    <div class="teaching-point">Postpartum thyroiditis: hyper → hypo → usually recovery. LOW RAI uptake (destructive, not synthetic). Anti-TPO positive. Distinguish from Graves (high RAI, TSI positive).</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Q4</div>
+                <div class="question-text">A 55-year-old man on amiodarone for 2 years develops hypothyroidism. TSH is 12.4, free T4 is low. What are the THREE mechanisms by which amiodarone causes hypothyroidism?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Direct thyrocyte apoptosis is not the primary mechanism; amiodarone works via iodine overload effects.', 'gusom')">A) Direct thyrocyte apoptosis only</div>
+                    <div class="option" onclick="sel(this, true, 'THREE mechanisms: Wolff-Chaikoff (↓organification) + ↓5\'-deiodinase (↓T4→T3 conversion) + direct thyroiditis.', 'gusom')">B) Wolff-Chaikoff effect (excess iodine inhibits organification) + inhibition of 5'-deiodinase (↓T4→T3) + direct toxic thyroiditis</div>
+                    <div class="option" onclick="sel(this, false, 'TSH receptor inhibition is not a mechanism of amiodarone hypothyroidism.', 'gusom')">C) Inhibition of TSH receptors</div>
+                    <div class="option" onclick="sel(this, false, 'Anti-TPO antibody induction is not the primary mechanism of amiodarone-induced hypo.', 'gusom')">D) Anti-TPO antibody induction</div>
+                    <div class="option" onclick="sel(this, false, 'NIS blockade is not a recognized mechanism; amiodarone does not primarily block NIS.', 'gusom')">E) Block of NIS (sodium-iodide symporter) only</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Amiodarone (40% iodine by weight) causes hypothyroidism via: (1) Wolff-Chaikoff effect: excess iodine → blocks organification → ↓T4/T3 synthesis. Normal thyroids escape; those with underlying autoimmune disease cannot escape → hypothyroidism. (2) Inhibition of 5'-deiodinase: ↓peripheral T4→T3 conversion (this elevates T4 and rT3, lowers T3 — this is expected and not disease). (3) Direct toxic thyroiditis (type 2 amiodarone hyperthyroidism mechanism when it damages cells → releases T4/T3). Treatment: levothyroxine (continue amiodarone if needed for arrhythmia).
+                    <div class="teaching-point">Amiodarone hypo: Wolff-Chaikoff + ↓5'-deiodinase + direct thyroiditis. Expected labs on amiodarone: ↑T4, ↓T3, ↑rT3, ↑TSH slightly initially. Treat hypo with levothyroxine.</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Q5</div>
+                <div class="question-text">A 68-year-old man has a thyroid nodule with FNA showing 'vascular invasion.' Histology also shows follicular architecture without the diagnostic nuclear features of papillary cancer. What is the most likely diagnosis?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Papillary cancer has characteristic nuclear features (orphan Annie nuclei, grooves) not mentioned here.', 'gusom')">A) Papillary thyroid cancer</div>
+                    <div class="option" onclick="sel(this, false, 'Follicular adenoma (benign) lacks vascular invasion; benign has <capsular invasion only.', 'gusom')">B) Follicular thyroid adenoma (benign)</div>
+                    <div class="option" onclick="sel(this, true, 'Follicular carcinoma: distinguished from adenoma ONLY by capsular and/or vascular invasion on histology.', 'gusom')">C) Follicular thyroid carcinoma</div>
+                    <div class="option" onclick="sel(this, false, 'Medullary cancer is C-cell derived (calcitonin), not follicular-derived; different histology.', 'gusom')">D) Medullary thyroid cancer</div>
+                    <div class="option" onclick="sel(this, false, 'Hashimoto thyroiditis shows lymphocytic infiltration, not a malignant nodule.', 'gusom')">E) Hashimoto thyroiditis with reactive nodule</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Follicular thyroid carcinoma: distinguished from follicular adenoma ONLY by capsular and/or vascular invasion on histology (cannot be determined by FNA cytology alone — FNA shows follicular cells but cannot assess invasion). Molecular: RAS mutations, PAX8-PPARγ rearrangement. Prognosis: good if minimally invasive; worse if widely invasive (hematogenous spread — lung, bone). FNA result 'follicular neoplasm/suspicious' → requires surgery for definitive diagnosis.
+                    <div class="teaching-point">Follicular carcinoma vs adenoma: requires CAPSULAR and/or VASCULAR INVASION on histology. FNA cannot distinguish — requires surgical specimen. Spreads hematogenously (unlike papillary, which spreads lymphatically).</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Q6</div>
+                <div class="question-text">A 48-year-old woman is found to have TSH of 8.2 mIU/L on routine screening. Free T4 is normal. She has no symptoms. Anti-TPO antibodies are positive. What is the diagnosis and management?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Overt hypothyroidism requires LOW free T4 with elevated TSH; T4 is normal here.', 'gusom')">A) Overt hypothyroidism — start levothyroxine immediately</div>
+                    <div class="option" onclick="sel(this, true, 'Subclinical hypo: ↑TSH (4.5-10) + normal T4. Treat if TSH >10, symptomatic, pregnant, or infertile.', 'gusom')">B) Subclinical hypothyroidism — consider treatment if TSH >10, symptomatic, or pregnant</div>
+                    <div class="option" onclick="sel(this, false, 'This is not normal thyroid function; elevated TSH alone indicates subclinical hypothyroidism.', 'gusom')">C) Hashimoto thyroiditis with normal function — no treatment, follow-up only</div>
+                    <div class="option" onclick="sel(this, false, 'SIADH from TSH elevation is not a recognized condition; TSH elevation does not cause SIADH.', 'gusom')">D) SIADH from TSH elevation</div>
+                    <div class="option" onclick="sel(this, false, 'TSH is elevated, not suppressed; this is not hyperthyroidism.', 'gusom')">E) Subclinical hyperthyroidism — suppress TSH further</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Subclinical hypothyroidism: elevated TSH (4.5-10 mIU/L) + NORMAL free T4. Treatment is indicated if: TSH >10 mIU/L, symptoms present, pregnancy, infertility, significant lipid abnormalities. With TSH 8.2 and no symptoms: generally observe (recheck in 6 months). Anti-TPO positive = higher risk of progression to overt hypothyroidism (~5%/year). The goal of levothyroxine: normalize TSH to 0.5-2.5 mIU/L.
+                    <div class="teaching-point">Subclinical hypo: ↑TSH + normal T4. Treat if TSH >10, symptomatic, pregnant, or infertile. Anti-TPO positive = higher progression risk. Annual TSH monitoring.</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Q7</div>
+                <div class="question-text">Radioiodine (RAI, I-131) therapy is used to treat Graves disease. Which patients should receive pre-treatment glucocorticoids before RAI?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Not all Graves patients need glucocorticoids; only those with active ophthalmopathy at risk.', 'gusom')">A) All Graves patients before RAI</div>
+                    <div class="option" onclick="sel(this, true, 'RAI can worsen active severe ophthalmopathy → give prophylactic glucocorticoids. Mild/inactive: no steroids needed.', 'gusom')">B) Only patients with active severe Graves ophthalmopathy — RAI can worsen eye disease</div>
+                    <div class="option" onclick="sel(this, false, 'Anti-TPO alone does not predict ophthalmopathy worsening risk; clinical severity matters.', 'gusom')">C) Patients with elevated anti-TPO antibodies</div>
+                    <div class="option" onclick="sel(this, false, 'TSH <0.01 does not predict need for glucocorticoids; ophthalmopathy status does.', 'gusom')">D) Patients with TSH <0.01</div>
+                    <div class="option" onclick="sel(this, false, 'Macroadenoma is unrelated to Graves disease; this is not standard RAI protocol.', 'gusom')">E) All patients with macroadenoma compressing the optic chiasm</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">RAI and ophthalmopathy: RAI treatment can worsen or precipitate Graves ophthalmopathy in susceptible patients, particularly smokers and those with moderate-severe active ophthalmopathy. Mechanism: thyroid cell destruction → release of TSH receptor antigens → increased autoimmune response against orbital tissue. Management: patients with moderate-severe active ophthalmopathy should receive prophylactic oral glucocorticoids concurrent with RAI. Mild/inactive ophthalmopathy: can receive RAI without steroids. Smoking is the major modifiable risk factor for worsening ophthalmopathy.
+                    <div class="teaching-point">RAI + active severe ophthalmopathy = risk of worsening. Give concurrent steroids. Mild/inactive ophthalmopathy: RAI without steroids is acceptable. Smoking = major risk factor.</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Q8</div>
+                <div class="question-text">A 38-year-old woman presents to the ER with fever (40°C), tachycardia (140 bpm), severe agitation, and vomiting. She recently had an upper respiratory infection. TSH is undetectable, T4 is 5× normal. What is the immediate treatment?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Methimazole alone is too slow; thyroid storm requires multi-step immediate intervention.', 'gusom')">A) Methimazole only, then observe</div>
+                    <div class="option" onclick="sel(this, true, 'Thyroid storm: PTU (blocks synthesis AND T4→T3) → iodide (after 1-2h) → propranolol → glucocorticoids.', 'gusom')">B) Propranolol + PTU + glucocorticoids + potassium iodide (Lugol's) in sequence</div>
+                    <div class="option" onclick="sel(this, false, 'Thyroidectomy in thyroid storm is not standard emergency treatment; medical stabilization first.', 'gusom')">C) Emergency thyroidectomy</div>
+                    <div class="option" onclick="sel(this, false, 'RAI acts too slowly (takes weeks) for acute thyroid storm; not emergency treatment.', 'gusom')">D) Radioiodine to quickly reduce thyroid hormone</div>
+                    <div class="option" onclick="sel(this, false, 'Plasmapheresis alone is not standard therapy; medical management is first-line.', 'gusom')">E) Plasmapheresis alone</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Thyroid storm: life-threatening emergency. Treatment targets multiple steps simultaneously: (1) PTU first (blocks synthesis AND T4→T3 conversion — PREFERRED over MMI in storm). (2) 1-2 hours AFTER PTU: Lugol's iodine (Wolff-Chaikoff — blocks release of stored hormone; must give PTU first or iodine provides substrate → more hormone). (3) Propranolol (↓sympathetic symptoms, ↓T4→T3 peripherally). (4) Glucocorticoids (dexamethasone — ↓T4→T3 conversion + possible adrenal insufficiency coverage). (5) Treat precipitating cause.
+                    <div class="teaching-point">Thyroid storm: PTU first → then iodide (1-2h later) → propranolol → glucocorticoids. PTU preferred over MMI (also blocks T4→T3). Never give iodide before PTU (would stimulate more synthesis).</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Q9</div>
+                <div class="question-text">Hashimoto thyroiditis is the most common cause of hypothyroidism in the developed world. What immune cells are primarily responsible for thyroid destruction?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Anti-TPO antibodies contribute but do NOT directly lyse thyrocytes; T cells are primary.', 'gusom')">A) B cells producing anti-TPO antibodies that directly lyse thyrocytes</div>
+                    <div class="option" onclick="sel(this, false, 'CD4+ TH2 cells produce Th2 cytokines (IL-4, IL-5) — not the primary destructive pathway in Hashimoto.', 'gusom')">B) CD4+ TH2 cells stimulating antibody production</div>
+                    <div class="option" onclick="sel(this, true, 'Hashimoto: TH1-predominant. CD8+ cytotoxic T cells directly kill thyrocytes. CD4+ TH1 orchestrate response.', 'gusom')">C) CD8+ cytotoxic T cells directly attacking thyrocytes + CD4+ TH1 cells orchestrating the response</div>
+                    <div class="option" onclick="sel(this, false, 'Natural killer cells play a minor role; CD8+ cytotoxic T cells are primary.', 'gusom')">D) Natural killer cells</div>
+                    <div class="option" onclick="sel(this, false, 'Mast cells and eosinophils contribute but are not primary in Hashimoto thyroiditis.', 'gusom')">E) Mast cells and eosinophils</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Hashimoto thyroiditis: TH1-predominant autoimmune response. CD8+ cytotoxic T cells directly kill thyrocytes (perforin/granzyme + Fas-FasL pathway). CD4+ TH1 helper cells secrete IFN-γ → activate macrophages + cytotoxic T cells. Germinal center formation within thyroid → autoantibody production (anti-TPO most sensitive >95%, anti-TgAb). Hurthle cells (eosinophilic metaplasia of follicular cells) = characteristic histology. End result: thyroid lymphocytic infiltration, fibrosis, hypothyroidism.
+                    <div class="teaching-point">Hashimoto: TH1 + CD8+ T cells → thyrocyte destruction. Anti-TPO >95% sensitive (not specific — also in Graves). Hurthle cells on histology. Lymphocytic infiltration + germinal centers.</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Q10</div>
+                <div class="question-text">A 40-year-old woman presents with a painless anterior neck mass, 3 weeks after a URI. She denies thyroid pain. TSH is normal. Ultrasound shows a 1.5 cm cold nodule. What is the most important next step?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'RAI uptake scan is used for TSH-suppressed patients (hot/toxic nodule); not for cold nodules.', 'gusom')">A) RAI uptake scan</div>
+                    <div class="option" onclick="sel(this, false, 'CT is not first-line for nodule evaluation; FNA is standard.', 'gusom')">B) CT neck with contrast</div>
+                    <div class="option" onclick="sel(this, true, 'Cold nodule ≥1.5 cm with normal TSH → FNA is gold standard to rule out malignancy.', 'gusom')">C) Fine-needle aspiration (FNA) biopsy</div>
+                    <div class="option" onclick="sel(this, false, 'A 1.5 cm nodule requires biopsy evaluation, not observation.', 'gusom')">D) Repeat TSH in 6 months</div>
+                    <div class="option" onclick="sel(this, false, 'Anti-TPO and anti-TgAb are not primary nodule evaluation tests; FNA is needed.', 'gusom')">E) Measure anti-TPO and anti-TgAb</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Thyroid nodule management: FNA biopsy is the most important next step for a cold nodule (low/no RAI uptake) on workup — cold nodules have ~10-15% malignancy rate. Algorithm: TSH normal or high → ultrasound → if nodule ≥1 cm with concerning features OR ≥1.5 cm → FNA. TSH suppressed → RAI scan first (hot nodule = toxic adenoma, less likely malignant). Key: cold nodule = cannot rule out malignancy → FNA is definitive.
+                    <div class="teaching-point">Cold nodule + normal/high TSH → FNA. Hot nodule + low TSH → RAI scan (likely toxic adenoma = benign). FNA is the gold standard for nodule evaluation.</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BRS QUESTIONS TAB -->
+        <div id="brs" class="tab-content">
+            <div class="question-card">
+                <div class="question-number">BRS Q1</div>
+                <div class="question-text">TSH stimulates thyroid follicular cells through which receptor mechanism?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'TSH does not signal through tyrosine kinase receptors; it uses G-protein coupled signaling.', 'brs')">A) Tyrosine kinase receptor → JAK-STAT</div>
+                    <div class="option" onclick="sel(this, false, 'TSH does not bind intracellular nuclear receptors; it is a peptide hormone with surface receptors.', 'brs')">B) Nuclear receptor → direct DNA binding</div>
+                    <div class="option" onclick="sel(this, true, 'TSHR is Gs-coupled GPCR → cAMP → PKA → thyroid synthesis and secretion + cell growth.', 'brs')">C) Gs-coupled GPCR → ↑adenylyl cyclase → ↑cAMP → PKA → thyroid hormone synthesis and secretion</div>
+                    <div class="option" onclick="sel(this, false, 'Gi coupling would decrease cAMP, which is opposite to TSH effect.', 'brs')">D) Gi-coupled → ↓cAMP</div>
+                    <div class="option" onclick="sel(this, false, 'Gq-PLC-IP3 pathway is used by some hormones but not TSH signaling.', 'brs')">E) Gq → PLC → IP3 → Ca2+ → thyroid hormone release</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">TSH receptor (TSHR) → Gs-coupled GPCR → ↑adenylyl cyclase → ↑cAMP → PKA → multiple effects: (1) ↑NIS expression (iodide uptake), (2) ↑thyroglobulin synthesis, (3) ↑TPO activity (organification), (4) ↑iodothyronine deiodinase, (5) thyroid cell growth (goiter). TSI (thyroid-stimulating immunoglobulin in Graves) acts through the same TSHR → Gs → cAMP pathway. GNAS activating mutations can also autonomously activate thyroid cell cAMP → toxic adenoma (Gs pathway is the key).
+                    <div class="teaching-point">TSHR → Gs → cAMP → PKA → all aspects of T4/T3 synthesis. TSI acts at same receptor. Autonomous toxic adenoma = constitutive TSHR activation → low TSH (feedback suppressed).</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Q2</div>
+                <div class="question-text">A patient in the ICU develops the 'sick euthyroid syndrome.' Which laboratory pattern is most characteristic?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'This pattern represents overt hypothyroidism with elevated TSH; sick euthyroid has low-normal TSH.', 'brs')">A) Low T3, low T4, elevated TSH</div>
+                    <div class="option" onclick="sel(this, false, 'High T3 is not seen in sick euthyroid; T3 falls, not rises.', 'brs')">B) High T3, normal T4, low TSH</div>
+                    <div class="option" onclick="sel(this, true, 'Sick euthyroid: ↓T3 (key finding), normal-to-low T4, low-normal TSH. ↑reverse T3.', 'brs')">C) Low T3, normal-low T4, low-normal TSH</div>
+                    <div class="option" onclick="sel(this, false, 'Normal T3 and high TSH do not describe sick euthyroid (T3 is low, TSH is low-normal).', 'brs')">D) Normal T3, high T4, high TSH</div>
+                    <div class="option" onclick="sel(this, false, 'This pattern resembles overt hypothyroidism, not sick euthyroid.', 'brs')">E) Low T3, high T4, high TSH</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Sick euthyroid (non-thyroidal illness): (1) T3 FALLS (↓5'-deiodinase activity → less T4→T3 conversion; also ↑reverse T3). (2) T4 may be normal early, then falls in severe illness (↓thyroid-binding globulin, ↑clearance). (3) TSH is low or low-normal (cytokines suppress hypothalamic TRH → ↓TSH). Pattern: Low T3, normal-to-low T4, low-normal TSH. This is the most common pattern in ICU. Treatment: none. rT3 is elevated (T4 → rT3 instead of T3).
+                    <div class="teaching-point">Sick euthyroid: ↓T3 (key), ↑rT3, ±↓T4, low-normal TSH. Do not treat — adaptive response. Recheck TFTs 6-8 weeks after recovery.</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Q3</div>
+                <div class="question-text">Which of the following is the primary active thyroid hormone at the cellular level, and how does it exert its effects?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'T4 is the storage form and prohormone; T3 is the active form.', 'brs')">A) T4 — binds to cytoplasmic receptor</div>
+                    <div class="option" onclick="sel(this, true, 'T3 is the primary active hormone; binds nuclear TR → regulates gene transcription.', 'brs')">B) T3 — binds to nuclear thyroid hormone receptor (TR), regulates gene transcription</div>
+                    <div class="option" onclick="sel(this, false, 'Reverse T3 is inactive; it inhibits further deiodinase-mediated conversion.', 'brs')">C) Reverse T3 — binds nuclear TR with highest affinity</div>
+                    <div class="option" onclick="sel(this, false, 'MIT (monoiodotyrosine) is an intermediate, not a functional hormone.', 'brs')">D) MIT (monoiodotyrosine) — directly activates thyroid hormone receptor</div>
+                    <div class="option" onclick="sel(this, false, 'T4 acts through nuclear receptors after conversion to T3, not directly via membrane receptors.', 'brs')">E) T4 directly activates membrane receptors</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">T3 is the primary active thyroid hormone (3-4× more potent than T4, higher TR affinity). T4 is a prohormone, converted peripherally by 5'-deiodinase (type 1 in liver/kidney, type 2 in brain/pituitary) to T3. T3 → binds nuclear thyroid hormone receptor (TR-α, TR-β) → TH response element (TRE) on DNA → regulates gene transcription. Effects: ↑basal metabolic rate, ↑O2 consumption, ↑thermogenesis, ↑sympathetic sensitivity (↑β-adrenergic receptors), heart, brain development (critical in fetus).
+                    <div class="teaching-point">T4 = prohormone. T3 = active hormone. T3 → nuclear TR → TRE → gene transcription. 5'-deiodinase converts T4→T3. rT3 is inactive (competitive inhibitor of deiodinase).</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Q4</div>
+                <div class="question-text">The Wolff-Chaikoff effect refers to which phenomenon?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'High TSH stimulates uptake but does not define Wolff-Chaikoff effect.', 'brs')">A) High TSH stimulates iodide uptake</div>
+                    <div class="option" onclick="sel(this, true, 'Wolff-Chaikoff: acute high iodine → ↓organification → transient ↓T4/T3. Normal escape in 1-2 weeks.', 'brs')">B) Acute iodine excess → transient inhibition of thyroid hormone organification</div>
+                    <div class="option" onclick="sel(this, false, 'Chronic iodine deficiency causes endemic goiter; not Wolff-Chaikoff.', 'brs')">C) Chronic iodine deficiency → goiter</div>
+                    <div class="option" onclick="sel(this, false, 'Excess iodine is transient and reversible; it does not permanently block NIS.', 'brs')">D) Excess iodine permanently inhibits the NIS symporter</div>
+                    <div class="option" onclick="sel(this, false, 'Low iodine does not activate TPO; TPO is constitutively active when iodide is available.', 'brs')">E) Low iodine activates thyroid peroxidase</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">Wolff-Chaikoff effect: acute high iodine load (e.g., contrast, Lugol's, amiodarone) → iodide accumulates in thyroid → inhibits thyroglobulin organification (iodide incorporation into tyrosyl residues) → transient ↓T4/T3 synthesis. Normal thyroid escapes within 1-2 weeks (↓NIS expression → less iodide uptake). Clinical uses: Lugol's iodine pre-thyroidectomy (reduces vascularity) and acute thyroid storm (after PTU administration). Patients with autoimmune thyroid disease (Hashimoto) cannot escape → may develop permanent hypothyroidism.
+                    <div class="teaching-point">Wolff-Chaikoff: high iodine → ↓organification → transient ↓T4/T3. Normal escape in 1-2 weeks. Autoimmune thyroid disease = cannot escape → hypothyroidism. Lugol's used in thyroid surgery prep.</div></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Q5</div>
+                <div class="question-text">A patient is found to have an elevated TSH of 18 mIU/L with low free T4. She is started on levothyroxine. TSH normalizes to 1.8 mIU/L after 8 weeks. Why is TSH used to monitor levothyroxine therapy in primary hypothyroidism?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'TSH does not directly regulate synthesis; TSH is the RESPONSE to free T4 levels.', 'brs')">A) TSH directly stimulates T4 synthesis in the thyroid</div>
+                    <div class="option" onclick="sel(this, false, 'TSH does not reflect T4→T3 conversion; it reflects free T4 status to the pituitary.', 'brs')">B) TSH reflects the peripheral conversion of T4 to T3</div>
+                    <div class="option" onclick="sel(this, true, 'Thyrotrophs are exquisitely sensitive to free T4; TSH is the most sensitive indicator of T4 status.', 'brs')">C) The pituitary TSH-secreting cells are exquisitely sensitive to free T4 — TSH is the most sensitive indicator of overall thyroid hormone status</div>
+                    <div class="option" onclick="sel(this, false, 'TSH is more sensitive but does not predict T4 more accurately in terms of precision measurement.', 'brs')">D) TSH levels predict free T4 more accurately than direct T4 measurement</div>
+                    <div class="option" onclick="sel(this, false, 'In central hypo, TSH is inappropriately low/normal; must use free T4. In primary hypo, TSH is gold standard.', 'brs')">E) TSH monitoring is only used in central hypothyroidism</div>
+                </div>
+                <div class="feedback">
+                    <div class="feedback-title">Explanation</div>
+                    <div class="feedback-text">In PRIMARY hypothyroidism (pituitary is intact), TSH is the gold standard monitoring tool because: (1) Thyrotrophs are exquisitely sensitive to free T4 — tiny changes in T4 cause large changes in TSH (log-linear relationship). (2) TSH reflects the INTEGRATED T4/T3 action over days-weeks (more stable than single T4 measurements). (3) TSH normalizes within 6-8 weeks of adequate T4 replacement. Exception: central (secondary) hypothyroidism → TSH is low or inappropriately normal → must monitor free T4 instead.
+                    <div class="teaching-point">Primary hypothyroidism: monitor TSH (intact pituitary, exquisite sensitivity). Central hypothyroidism: monitor free T4 (pituitary cannot generate appropriate TSH). This is a high-yield distinction.</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCORE TAB -->
+        <div id="score" class="tab-content">
+            <div class="overall-score">
+                <div class="overall-label">Overall Score</div>
+                <div class="overall-value" id="overallScore">0/15</div>
+                <button class="reset-button" onclick="resetScore()">Reset All Scores</button>
+            </div>
+
+            <div class="score-grid">
+                <div class="score-box">
+                    <div class="score-label">GUSOM Questions</div>
+                    <div class="score-value"><span id="gusomc">0</span>/<span id="gusomg">10</span></div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">BRS Questions</div>
+                    <div class="score-value"><span id="brsc">0</span>/<span id="brsg">5</span></div>
+                </div>
+            </div>
+
+            <div class="score-display">
+                <div style="text-align: center; color: #8B949E; padding: 40px 20px;">
+                    Answer questions in the tabs above to track your progress.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const score = {
+            gusom: { c: 0, t: 10 },
+            brs: { c: 0, t: 5 }
+        };
+
+        function sel(el, isCorrect, explanation, tabKey) {
+            const card = el.parentElement.parentElement;
+            const options = card.querySelectorAll('.option');
+            const feedback = card.querySelector('.feedback');
+
+            if (card.classList.contains('answered')) {
+                return;
+            }
+
+            options.forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+
+            setTimeout(() => {
+                options.forEach(opt => {
+                    if (opt === el) {
+                        if (isCorrect) {
+                            opt.classList.add('correct');
+                            feedback.classList.add('show', 'correct');
+                            score[tabKey].c++;
+                        } else {
+                            opt.classList.add('incorrect');
+                            feedback.classList.add('show', 'incorrect');
+                            const correctOpt = Array.from(options).find(o => {
+                                const onclick = o.getAttribute('onclick');
+                                return onclick && onclick.includes('sel(this, true');
+                            });
+                            if (correctOpt) {
+                                correctOpt.classList.add('correct');
+                            }
+                        }
+                    } else {
+                        const onclick = opt.getAttribute('onclick');
+                        if (isCorrect === false && onclick && onclick.includes('sel(this, true')) {
+                            opt.classList.add('correct');
+                        }
+                    }
+                });
+                card.classList.add('answered');
+                updateScore();
+            }, 100);
+        }
+
+        function updateScore() {
+            document.getElementById('gusomc').textContent = score.gusom.c;
+            document.getElementById('brsc').textContent = score.brs.c;
+            const total = score.gusom.c + score.brs.c;
+            const max = score.gusom.t + score.brs.t;
+            document.getElementById('overallScore').textContent = `${total}/${max}`;
+        }
+
+        function showTab(name) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(name).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function resetScore() {
+            if (confirm('Reset all scores? This cannot be undone.')) {
+                score.gusom.c = 0;
+                score.brs.c = 0;
+
+                document.querySelectorAll('.question-card').forEach(card => {
+                    card.classList.remove('answered');
+                    card.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected', 'correct', 'incorrect');
+                    });
+                    card.querySelectorAll('.feedback').forEach(fb => {
+                        fb.classList.remove('show', 'correct', 'incorrect');
+                    });
+                });
+
+                updateScore();
+            }
+        }
+    </script>
+</body>
+</html>

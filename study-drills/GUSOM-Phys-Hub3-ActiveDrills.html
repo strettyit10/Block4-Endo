@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GUSOM Physiology Hub #3: Practice Question Bank — In-house exam style questions + BRS Physiology board-style questions per lecture.">
+    <meta name="keywords" content="GUSOM-Style Questions, BRS Physiology, 7 Lecture Hubs, Score Tracking">
+    <title>Physiology Hub #3: Practice Question Bank — GUSOM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0D1117;
+            color: #C9D1D9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
+            border-bottom: 1px solid #30363D;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+            color: #00BCD4;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #8B949E;
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #79C0FF;
+        }
+
+        .meta-tag {
+            background-color: rgba(0, 188, 212, 0.15);
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        /* Hub Progression Banner */
+        .hub-progression {
+            background-color: #161B22;
+            border-bottom: 1px solid #30363D;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .progression-track {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hub-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .hub-step.completed {
+            background-color: rgba(34, 134, 58, 0.2);
+            border: 1px solid rgba(34, 134, 58, 0.4);
+            color: #3FB950;
+        }
+
+        .hub-step.completed .check {
+            font-weight: bold;
+        }
+
+        .hub-step.current {
+            background-color: rgba(0, 188, 212, 0.2);
+            border: 2px solid #00BCD4;
+            color: #00BCD4;
+            font-weight: 600;
+        }
+
+        .progression-arrow {
+            color: #8B949E;
+            font-size: 1.2rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Source Strip */
+        .source-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .source-card {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .source-card:hover {
+            border-color: #00BCD4;
+            box-shadow: 0 4px 12px rgba(0, 188, 212, 0.15);
+        }
+
+        .source-card h3 {
+            font-size: 1.15rem;
+            color: #00BCD4;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .source-card p {
+            color: #8B949E;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Lecture Grid */
+        .lectures-section {
+            margin-bottom: 3rem;
+        }
+
+        .lectures-section h2 {
+            font-size: 1.5rem;
+            color: #C9D1D9;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #30363D;
+        }
+
+        .lecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .lecture-card {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lecture-card:hover {
+            border-color: #00BCD4;
+            box-shadow: 0 8px 16px rgba(0, 188, 212, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .lecture-card-accent {
+            height: 4px;
+            width: 100%;
+        }
+
+        .lecture-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lecture-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #C9D1D9;
+        }
+
+        .lecture-card .lecture-title {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .lecture-card .question-count {
+            font-size: 0.95rem;
+            color: #79C0FF;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
+        .lecture-card p {
+            color: #8B949E;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .lecture-card-cta {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #30363D;
+            color: #00BCD4;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Study Approach */
+        .study-approach {
+            background: linear-gradient(135deg, rgba(0, 188, 212, 0.1) 0%, rgba(0, 188, 212, 0.05) 100%);
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .study-approach h2 {
+            color: #00BCD4;
+            font-size: 1.35rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .approach-step {
+            background-color: rgba(22, 27, 34, 0.6);
+            border: 1px solid #30363D;
+            border-radius: 6px;
+            padding: 1.5rem;
+        }
+
+        .approach-step h3 {
+            color: #79C0FF;
+            font-size: 1.05rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background-color: #00BCD4;
+            color: #0D1117;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .approach-step p {
+            color: #8B949E;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            color: #00BCD4;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-item p {
+            color: #8B949E;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #161B22;
+            border-top: 1px solid #30363D;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-nav a {
+            color: #79C0FF;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: #00BCD4;
+        }
+
+        .footer-nav a.current {
+            color: #00BCD4;
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        .footer-divider {
+            color: #30363D;
+            margin: 0 0.5rem;
+        }
+
+        .footer-meta {
+            color: #6E7681;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .lecture-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .meta-tags {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .progression-track {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .progression-arrow {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Physiology Hub #3: Practice Question Bank</h1>
+    <p class="subtitle">GUSOM in-house exam style questions + BRS Physiology board-style questions — per-lecture, fully interactive</p>
+    <div class="meta-tags">
+        <span class="meta-tag">📝 GUSOM-Style Questions</span>
+        <span class="meta-tag">📚 BRS Physiology</span>
+        <span class="meta-tag">7 Lecture Hubs</span>
+        <span class="meta-tag">Score Tracking</span>
+    </div>
+</header>
+
+<section class="hub-progression">
+    <div class="progression-track">
+        <div class="hub-step completed">
+            <span class="check">✓</span> Hub #1: Learning Objectives
+        </div>
+        <span class="progression-arrow">→</span>
+        <div class="hub-step completed">
+            <span class="check">✓</span> Hub #2: Clinical Cases
+        </div>
+        <span class="progression-arrow">→</span>
+        <div class="hub-step current">
+            Hub #3: Practice Questions
+        </div>
+    </div>
+</section>
+
+<div class="container">
+
+    <!-- Source Strip -->
+    <section class="source-strip">
+        <div class="source-card">
+            <h3>📘 GUSOM In-House</h3>
+            <p>Dr. Watson learning objective–aligned questions per lecture. Tested on your in-house exams.</p>
+        </div>
+        <div class="source-card">
+            <h3>📗 BRS Physiology</h3>
+            <p>Board-style questions from BRS Physiology (Preston), Chapters 7–9. USMLE Step 1 format.</p>
+        </div>
+        <div class="source-card">
+            <h3>🎯 Step 1 Ready</h3>
+            <p>Clinical vignette question format with teaching-point explanations. Board prep integrated.</p>
+        </div>
+    </section>
+
+    <!-- Lecture Grid -->
+    <section class="lectures-section">
+        <h2>Lectures & Question Banks</h2>
+        <div class="lecture-grid">
+            <!-- L1 -->
+            <a href="GUSOM-Phys-Hub3-L1-HPRelationshipsI.html" class="lecture-card">
+                <div class="lecture-card-accent" style="background-color: #0277BD;"></div>
+                <div class="lecture-card-content">
+                    <div class="lecture-title">HP Relationships I</div>
+                    <div class="question-count">10 GUSOM-style + 5 BRS questions</div>
+                    <p>Pituitary anatomy, portal system, feedback loops, cell types</p>
+                    <div class="lecture-card-cta">Open Question Bank →</div>
+                </div>
+            </a>
+
+            <!-- L2 -->
+            <a href="GUSOM-Phys-Hub3-L2-HPRelationshipsII.html" class="lecture-card">
+                <div class="lecture-card-accent" style="background-color: #283593;"></div>
+                <div class="lecture-card-content">
+                    <div class="lecture-title">HP Relationships II</div>
+                    <div class="question-count">10 GUSOM-style + 5 BRS questions</div>
+                    <p>Anterior pituitary hormones, GnRH pulsatility, prolactin regulation</p>
+                    <div class="lecture-card-cta">Open Question Bank →</div>
+                </div>
+            </a>
+
+            <!-- L3 -->
+            <a href="GUSOM-Phys-Hub3-L3-PosteriorPituitary.html" class="lecture-card">
+                <div class="lecture-card-accent" style="background-color: #00695C;"></div>
+                <div class="lecture-card-content">
+                    <div class="lecture-title">Posterior Pituitary</div>
+                    <div class="question-count">10 GUSOM-style + 5 BRS questions</div>
+                    <p>ADH/DI/SIADH, oxytocin, water balance</p>
+                    <div class="lecture-card-cta">Open Question Bank →</div>
+                </div>
+            </a>
+
+            <!-- L4 -->
+            <a href="GUSOM-Phys-Hub3-L4-GHAxis.html" class="lecture-card">
+                <div class="lecture-card-accent" style="background-color: #6A4C93;"></div>
+                <div class="lecture-card-content">
+                    <div class="lecture-title">GH Axis</div>
+                    <div class="question-count">10 GUSOM-style + 5 BRS questions</div>
+                    <p>GH deficiency, acromegaly, IGF-1, Laron syndrome</p>
+                    <div class="lecture-card-cta">Open Question Bank →</div>
+                </div>
+            </a>
+
+            <!-- L5 -->
+            <a href="GUSOM-Phys-Hub3-L5-HPAdrenalAxis.html" class="lecture-card">
+                <div class="lecture-card-accent" style="background-color: #BF360C;"></div>
+                <div class="lecture-card-content">
+                    <div class="lecture-title">HPA Axis</div>
+                    <div class="question-count">10 GUSOM-style + 5 BRS questions</div>
+                    <p>Cushing syndrome, CAH, adrenal insufficiency, stress response</p>
+                    <div class="lecture-card-cta">Open Question Bank →</div>
+                </div>
+            </a>
+
+            <!-- L6 -->
+            <a href="GUSOM-Phys-Hub3-L6-StressIntegration.html" class="lecture-card">
+                <div class="lecture-card-accent" style="background-color: #8D1F1F;"></div>
+                <div class="lecture-card-content">
+                    <div class="lecture-title">Stress Integration</div>
+                    <div class="question-count">8 GUSOM-style + 5 BRS questions</div>
+                    <p>Cortisol mechanisms, immune effects, stress response integration</p>
+                    <div class="lecture-card-cta">Open Question Bank →</div>
+                </div>
+            </a>
+
+            <!-- L7 -->
+            <a href="GUSOM-Phys-Hub3-L7-HPThyroidAxis.html" class="lecture-card">
+                <div class="lecture-card-accent" style="background-color: #0D47A1;"></div>
+                <div class="lecture-card-content">
+                    <div class="lecture-title">HPT Axis</div>
+                    <div class="question-count">10 GUSOM-style + 5 BRS questions</div>
+                    <p>Thyroid disorders, Graves, Hashimoto, thyroid cancer</p>
+                    <div class="lecture-card-cta">Open Question Bank →</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Study Approach -->
+    <section class="study-approach">
+        <h2>Recommended Study Approach</h2>
+        <div class="approach-grid">
+            <div class="approach-step">
+                <h3><span class="step-number">1</span> Timed Blocks</h3>
+                <p>Set a timer and do 5–10 questions as a block. Simulate test conditions.</p>
+            </div>
+            <div class="approach-step">
+                <h3><span class="step-number">2</span> Review Wrong Answers</h3>
+                <p>Click the explanation on every question, even ones you got right.</p>
+            </div>
+            <div class="approach-step">
+                <h3><span class="step-number">3</span> BRS Integration</h3>
+                <p>BRS questions are board-format — note the question style differences from GUSOM-style.</p>
+            </div>
+            <div class="approach-step">
+                <h3><span class="step-number">4</span> Score Track</h3>
+                <p>Use the score tab to see your accuracy per section before moving on.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stat-item">
+            <h3>7</h3>
+            <p>Lectures</p>
+        </div>
+        <div class="stat-item">
+            <h3>100+</h3>
+            <p>Questions</p>
+        </div>
+        <div class="stat-item">
+            <h3>2</h3>
+            <p>Question Sources</p>
+        </div>
+        <div class="stat-item">
+            <h3>∞</h3>
+            <p>Score Tracking</p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-nav">
+            <a href="GUSOM-Phys-Hub1-ActiveDrills.html">← Hub #1: Learning Objectives</a>
+            <span class="footer-divider">|</span>
+            <a href="GUSOM-Phys-Hub2-ActiveDrills.html">Hub #2: Clinical Cases</a>
+            <span class="footer-divider">|</span>
+            <a href="GUSOM-Phys-Hub3-ActiveDrills.html" class="current">Hub #3: Practice Questions</a>
+        </div>
+        <p class="footer-meta">GUSOM Physiology — Endocrine Block Hub #3 · Practice Question Bank</p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 2: HP Relationships II</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --accent: #283593; --accent-light: rgba(40,53,147,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #161B22 0%, #0D0F2A 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+        .lo-box { background: var(--accent-light); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 14px; font-size: 0.82em; color: #C9D1D9; line-height: 1.6; }
+        .lo-box strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.06em; }
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.88em; color: #D1FAE5; line-height: 1.6; }
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; gap: 10px; align-items: flex-start; }
+        .mcq-opt:hover:not([disabled]) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74,222,128,0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239,68,68,0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; line-height: 1.6; }
+        .mcq-explanation.visible { display: block; }
+        .exp-label { color: #4ADE80; font-weight: 600; display: block; margin-bottom: 4px; }
+        .teaching-pt { background: var(--accent-light); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #C9D1D9; display: none; line-height: 1.6; }
+        .teaching-pt.visible { display: block; }
+        .tp-label { font-weight: 700; color: var(--accent); display: block; margin-bottom: 4px; }
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: var(--accent-light); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #C9D1D9; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+        .trap-item { background: #1A1212; border: 1px solid #7F1D1D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-header { color: #FCA5A5; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; }
+        .trap-myth { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #FCA5A5; margin-bottom: 8px; }
+        .trap-truth { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D1FAE5; }
+        .trap-myth-label { font-size: 0.75em; color: #EF4444; font-weight: 700; margin-bottom: 4px; }
+        .trap-truth-label { font-size: 0.75em; color: #4ADE80; font-weight: 700; margin-bottom: 4px; }
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: inherit; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; line-height: 1.5; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.87em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-g { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-r { color: #F87171; font-weight: 600; }
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <a href="GUSOM-Phys-Hub1-ActiveDrills.html" class="back">← Hub #1 Landing</a>
+    <h1>Lecture 2: <span class="accent-tag">HP Relationships II</span></h1>
+    <div class="subtitle">Anterior pituitary hormones · Cell types · GnRH pulsatility · Prolactin · POMC · GH overview</div>
+    <div class="lo-box"><strong>Learning Objectives</strong>Describe and name anterior pituitary hormones and their cell types · Predict effects of blocking portal blood flow or ablating peripheral target glands · Explain all three feedback levels · Identify pituitary cell acidophils vs basophils</div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('flashcards',this)">🃏 Flashcards</button>
+    <button class="tab-btn" onclick="switchTab('mcq',this)">❓ MCQ</button>
+    <button class="tab-btn" onclick="switchTab('vignettes',this)">🏥 Vignettes</button>
+    <button class="tab-btn" onclick="switchTab('traps',this)">⚠️ Test Traps</button>
+    <button class="tab-btn" onclick="switchTab('fib',this)">✏️ Fill-in-Blank</button>
+    <button class="tab-btn" onclick="switchTab('ref',this)">📊 Reference</button>
+  </div>
+  <div id="tab-flashcards" class="tab-content active"><div class="section-title">Anki-Powered Flashcards — Click to Flip</div><div class="fc-grid" id="fcGrid"></div></div>
+  <div id="tab-mcq" class="tab-content"><div class="section-title">Multiple Choice Practice</div><div id="mcqContainer"></div></div>
+  <div id="tab-vignettes" class="tab-content"><div class="section-title">Clinical Vignettes</div><div id="vigContainer"></div></div>
+  <div id="tab-traps" class="tab-content"><div class="section-title">⚠️ Test Traps — Common Misconceptions</div><div id="trapsContainer"></div></div>
+  <div id="tab-fib" class="tab-content"><div class="section-title">Fill in the Blank</div><div id="fibContainer"></div></div>
+  <div id="tab-ref" class="tab-content"><div class="section-title">Quick Reference</div><div id="refContainer"></div></div>
+</div>
+<script>
+const flashcards = [
+    { q: "Which anterior pituitary cells are ACIDOPHILS and what hormones do they make?", a: "Acidophils (eosin-stained, pink):\n• Somatotropes → GH (Growth Hormone)\n• Lactotropes → Prolactin\nMnemo: 'GAP' = GH, Acidophil, Prolactin" },
+    { q: "Which anterior pituitary cells are BASOPHILS and what hormones do they make?", a: "Basophils (hematoxylin-stained, blue/purple):\n• Gonadotropes → LH + FSH (glycoproteins)\n• Corticotropes → ACTH\n• Thyrotropes → TSH\nMnemo: 'FLAT' = FSH/LH, ACTH, Thyrotropes = Basophils" },
+    { q: "Prolactin is under what type of control from the hypothalamus?", a: "Prolactin is under ONLY NEGATIVE control from the hypothalamus (via dopamine/PIH). It has NO releasing hormone — unlike all other anterior pituitary hormones. Stalk section → prolactin rises. This is unique among all anterior pituitary hormones." },
+    { q: "FSH and LH are what type of hormones? What receptor do they use?", a: "FSH and LH are GLYCOPROTEIN hormones (alpha + beta subunits — alpha is shared with TSH and HCG). They bind GPCR on gonadal cells. Both require pulsatile GnRH for sustained secretion." },
+    { q: "ACTH is derived from what precursor? What other hormones come from the same precursor?", a: "ACTH is a 39-amino acid peptide derived from POMC (Pro-opiomelanocortin). Other POMC products:\n• α-MSH (melanocyte-stimulating) — explains bronzing in Addison's/ACTH-secreting tumors\n• β-endorphin (endogenous opioid)\n• β-lipotropin" },
+    { q: "What are the 5 anterior pituitary hormones and their cell types?", a: "GH (somatotropes) | Prolactin (lactotropes) | TSH (thyrotropes) | ACTH (corticotropes) | LH + FSH (gonadotropes)\nMemory: 'FLAT PiG' = FSH/LH, ACTH, TSH + Prolactin, iGF (GH)" },
+    { q: "TRH stimulates which TWO anterior pituitary cell types?", a: "TRH (thyrotropin-releasing hormone) stimulates:\n1. Thyrotropes → TSH release\n2. Lactotropes → Prolactin release\nThis is the classic mechanism of hyperprolactinemia in primary hypothyroidism." },
+    { q: "What are the 3 classes of hormone secreted by the anterior pituitary?", a: "1. Glycoproteins (LH, FSH, TSH) — alpha+beta subunits\n2. Polypeptides/proteins (GH, Prolactin, ACTH)\nAll are peptide-based; none are steroids or lipophilic small molecules." },
+    { q: "What happens to LH and FSH if the peripheral target glands are ablated (e.g., ovaries removed)?", a: "LH and FSH RISE dramatically. Removing the ovaries → loss of estrogen/progesterone/inhibin → no negative feedback → hypothalamus and pituitary are disinhibited → ↑GnRH → ↑LH/FSH. This is the physiology of menopause (gonadal failure)." },
+    { q: "What is the effect of high estrogen (as in mid-cycle) on GnRH/LH secretion?", a: "POSITIVE feedback (unique exception!): rising estradiol at mid-cycle triggers the LH surge → ovulation. Low estrogen = negative feedback (suppresses LH). High sustained estrogen = positive feedback (LH surge). Only time positive feedback occurs in H-P axis for sex steroids." },
+    { q: "What is the pars intermedia and what does it secrete?", a: "The pars intermedia is a vestigial region between anterior and posterior pituitary. It appears as a cleft in adults. It secretes MSH (melanocyte-stimulating hormone) from POMC processing. In adults it largely regresses but its cells persist (basophils)." },
+    { q: "If GH is elevated and you give an oral glucose load (OGTT), what is the expected normal response?", a: "Normal: GH is SUPPRESSED after glucose load (hyperglycemia inhibits GH). Pathological (acromegaly): GH FAILS to suppress after OGTT — this is the diagnostic test for acromegaly. GH is the only axis directly counter-regulated by glucose." },
+];
+const mcqs = [
+    { stem: "A patient with primary adrenal insufficiency (Addison's disease) develops <strong>hyperpigmentation of the skin and buccal mucosa</strong>. Which best explains this?", opts: ["High aldosterone stimulates melanocytes","High ACTH cross-reacts with MC1R on melanocytes via shared POMC precursor","High CRH directly stimulates melanocytes","Low cortisol directly activates melanin synthesis","High TSH stimulates melanocytes"], correct: 1, exps: ["Aldosterone does not stimulate melanocytes.","CORRECT. ACTH and α-MSH share the POMC precursor. In Addison's, cortisol falls → ↑CRH → ↑ACTH (and ↑α-MSH) → MSH binds MC1R on melanocytes → hyperpigmentation. This is why Addison's patients tan without sun exposure.","CRH is not a direct melanocyte stimulant.","Low cortisol doesn't directly activate melanin.","TSH does not stimulate melanocytes."], teach: "Hyperpigmentation in Addison's = ↑ACTH/MSH (shared POMC). Does NOT occur in secondary adrenal insufficiency (pituitary failure) because ACTH is LOW." },
+    { stem: "A 30-year-old woman undergoes bilateral oophorectomy. Which hormone pattern is MOST expected within 2 weeks?", opts: ["↑Estrogen, ↓LH/FSH","↓Estrogen, ↓LH/FSH","↓Estrogen, ↑LH/FSH","No change in LH/FSH because of pituitary reserve","↑Progesterone, ↑LH/FSH"], correct: 2, exps: ["Estrogen would fall, not rise.","LH and FSH would RISE, not fall — loss of negative feedback.","CORRECT. Oophorectomy → ↓estrogen/progesterone → loss of negative feedback on H-P axis → ↑GnRH → ↑LH/FSH. This is the same mechanism as natural menopause.","The pituitary is fully functional; without negative feedback it will increase output.","Progesterone source is also removed."], teach: "Surgical menopause = immediate ↑LH/FSH (menopausal pattern: FSH >40 mIU/mL). Estrogen replacement suppresses LH/FSH back toward normal." },
+    { stem: "Which anterior pituitary hormone is a polypeptide derived from a larger precursor that ALSO generates endogenous opioids?", opts: ["TSH","GH","Prolactin","ACTH","LH"], correct: 3, exps: ["TSH is a glycoprotein (alpha/beta subunits).","GH is a 191-aa polypeptide but NOT from POMC.","Prolactin is a polypeptide but NOT from POMC.","CORRECT. ACTH comes from POMC. POMC is also cleaved to β-endorphin (opioid) and α-MSH. ACTH is 39 aa; the first 13 aa are identical to α-MSH.","LH is a glycoprotein."], teach: "POMC → ACTH + β-endorphin + α-MSH + β-lipotropin. The hypothalamic arcuate nucleus produces β-endorphin. Pituitary corticotropes produce ACTH. Pars intermedia produces α-MSH." },
+    { stem: "Continuous (non-pulsatile) GnRH administration paradoxically DECREASES LH and FSH. What is the primary mechanism?", opts: ["Increased somatostatin from periventricular nucleus","Downregulation/desensitization of pituitary GnRH receptors","Increased progesterone negative feedback","Increased GnIH from dorsomedial nucleus","Increased dopamine suppressing gonadotropes"], correct: 1, exps: ["Somatostatin regulates GH/TSH, not LH/FSH.","CORRECT. Continuous GnRH → sustained receptor activation → downregulation and desensitization of GnRH receptors on gonadotropes → paradoxical ↓LH/FSH. Pulsatile GnRH is required.","No exogenous progesterone is involved.","GnIH is not the primary mechanism.","Dopamine does not directly suppress gonadotropes."], teach: "Clinical use: Leuprolide (GnRH agonist) given continuously → medical castration. Used for prostate cancer, endometriosis, central precocious puberty. Initial 'flare' then sustained suppression." },
+    { stem: "A woman has galactorrhea and amenorrhea. Prolactin is 45 ng/mL. TSH is elevated and free T4 is low. After treating her with levothyroxine, prolactin normalizes. What was the mechanism of hyperprolactinemia?", opts: ["Primary prolactinoma","TRH-driven prolactin release from primary hypothyroidism","Stalk compression","Dopamine receptor blockade","Ectopic prolactin from breast tissue"], correct: 1, exps: ["Prolactinoma would not normalize with levothyroxine treatment.","CORRECT. Primary hypothyroidism → ↓T4 → ↑TRH (compensatory) → TRH stimulates lactotropes → ↑prolactin. Treating hypothyroidism → ↓TRH → prolactin normalizes.","Stalk compression would not resolve with levothyroxine.","No dopamine blockers are mentioned.","Ectopic prolactin would not respond to levothyroxine."], teach: "ALWAYS check TSH when evaluating hyperprolactinemia! TRH stimulates both TSH and prolactin. Hypothyroidism = reversible cause of galactorrhea/amenorrhea — treat the hypothyroid, cure the prolactin issue." },
+    { stem: "Which pituitary cell type makes both LH AND FSH from the same cell?", opts: ["Corticotropes","Thyrotropes","Gonadotropes","Lactotropes","Somatotropes"], correct: 2, exps: ["Corticotropes make ACTH only.","Thyrotropes make TSH only.","CORRECT. Gonadotropes make BOTH LH and FSH from the same cell type, both in response to GnRH. The ratio of LH:FSH released depends on GnRH pulse frequency — high frequency favors LH; low frequency favors FSH.","Lactotropes make prolactin only.","Somatotropes make GH only."], teach: "GnRH pulse frequency determines LH:FSH ratio. Fast pulses → LH dominates (late follicular phase). Slow pulses → FSH dominates (luteal phase). This allows differential regulation of folliculogenesis vs. ovulation from a single cell type." },
+    { stem: "In a research model, all anterior pituitary basophils are ablated. Which hormones are MOST affected?", opts: ["GH and Prolactin","LH, FSH, ACTH, and TSH","GH, Prolactin, and ACTH","Only LH and FSH","Only ACTH and TSH"], correct: 1, exps: ["GH and Prolactin are made by ACIDOPHILS, not basophils — they would be unaffected.","CORRECT. Basophils = gonadotropes (LH/FSH) + corticotropes (ACTH) + thyrotropes (TSH). All would fall. Mnemonic: FLAT basophils (FSH/LH, ACTH, TSH).","ACTH is from basophils, but GH and Prolactin are from acidophils.","FSH/LH are basophil products, but ACTH and TSH also are.","Both ACTH and TSH + LH/FSH would fall."], teach: "Basophil diseases: Cushing's DISEASE (corticotrope adenoma), Nelson's syndrome (post-adrenalectomy corticotrope expansion). All involve basophilic cells. Prolactinomas and somatotropinomas = acidophilic cell tumors." },
+];
+const vigs = [
+    { banner: "Clinical Vignette | ACTH-Secreting Tumor", stem: "A 44-year-old woman develops central obesity, easy bruising, purple striae, hirsutism, and <strong>marked hyperpigmentation of her skin and palms</strong>. Midnight cortisol is elevated and fails to suppress with 8 mg dexamethasone. MRI shows a <strong>2 cm ectopic mass in the chest</strong> (small cell lung carcinoma).", question: "Why does she have hyperpigmentation?", opts: ["High cortisol directly stimulates melanin synthesis","Ectopic ACTH (from tumor) cross-reacts with MSH receptor on melanocytes","The lung tumor secretes MSH directly","Low aldosterone causes hyperpigmentation","TRH from hypothalamus is elevated"], correct: 1, exps: ["High cortisol causes Cushing features but does not cause hyperpigmentation.","CORRECT. Ectopic ACTH secretion → very high ACTH levels → ACTH cross-reacts with MC1R (MSH receptor) on melanocytes → hyperpigmentation. The ectopic ACTH scenario shows more hyperpigmentation than pituitary Cushing's because ACTH is much higher (no feedback suppression).","Small cell carcinoma secretes ACTH (ectopic), not MSH directly.","Aldosterone does not cause hyperpigmentation.","TRH is not elevated in this context."], teach: "Hyperpigmentation in Cushing's = always ectopic ACTH (or Addison's). In pituitary Cushing's (Cushing's DISEASE), hyperpigmentation is minimal because ACTH is modestly elevated. In ectopic ACTH, ACTH is massively elevated → strong MC1R stimulation → marked hyperpigmentation." },
+    { banner: "Clinical Vignette | Mid-Cycle LH Surge", stem: "A 26-year-old woman is undergoing hormonal monitoring during her menstrual cycle. On day 12, her estradiol level <strong>peaks at 400 pg/mL</strong> (high). The following day, she has a marked rise in LH (LH surge) followed by ovulation.", question: "What type of feedback is responsible for the LH surge?", opts: ["Negative feedback: high estradiol suppresses pituitary to allow LH surge","Positive feedback: high estradiol stimulates GnRH release and pituitary sensitivity to GnRH","Ultra-short feedback: LH itself stimulates more LH release","Inhibin B negative feedback removes FSH suppression","Progesterone positive feedback triggers the LH surge"], correct: 1, exps: ["This is the OPPOSITE — negative feedback suppresses LH; positive feedback drives the surge.","CORRECT. At mid-cycle, sustained high estradiol (>200 pg/mL for >36 hours) switches from negative to POSITIVE feedback on the hypothalamus and pituitary → ↑GnRH pulse frequency + ↑pituitary sensitivity → LH surge → ovulation. This is the ONLY context of positive feedback in the HPG axis for estrogen.","Ultra-short feedback is not the mechanism.","Inhibin B suppresses FSH; not the mechanism of LH surge.","Progesterone rises AFTER ovulation (luteal phase); not the trigger."], teach: "Estrogen = NEGATIVE feedback at LOW levels (follicular phase), POSITIVE feedback at HIGH sustained levels (pre-ovulation → LH surge). Combined OCPs maintain synthetic estrogen/progesterone → continuous negative feedback → no LH surge → no ovulation." },
+    { banner: "Clinical Vignette | Pituitary Apoplexy", stem: "A 50-year-old man with known pituitary macroadenoma develops sudden severe headache, diplopia, and visual field defect. He becomes hypotensive and lethargic. Emergent CT shows hemorrhage into the pituitary mass.", question: "Which pituitary hormone deficiency is MOST IMMEDIATELY life-threatening?", opts: ["TSH deficiency → hypothyroidism","LH/FSH deficiency → hypogonadism","ACTH deficiency → secondary adrenal insufficiency → shock","Prolactin deficiency → inability to lactate","GH deficiency → growth failure"], correct: 2, exps: ["Hypothyroidism is dangerous but develops slowly.","Hypogonadism is not acutely life-threatening.","CORRECT. ACTH deficiency → no cortisol → adrenal crisis → hypotension, hyponatremia, shock. Cortisol is needed for vascular tone and stress response. This is the most immediately life-threatening complication. Treat with IV hydrocortisone IMMEDIATELY.","Prolactin deficiency is not life-threatening.","GH deficiency is not acutely life-threatening."], teach: "In pituitary apoplexy (hemorrhage into pituitary mass): immediate priority = cortisol replacement (hydrocortisone). Order of treatment urgency: cortisol first, thyroid hormone second, sex hormones last. ACTH deficiency = secondary adrenal insufficiency (no aldosterone deficiency — RAAS remains intact)." },
+];
+const traps = [
+    { title: "TRAP #1: All anterior pituitary hormones are glycoproteins", myth: "All anterior pituitary hormones (GH, Prolactin, ACTH, LH, FSH, TSH) are glycoproteins.", truth: "Only LH, FSH, and TSH are glycoproteins (alpha-beta subunit dimers with carbohydrate chains). GH, Prolactin, and ACTH are polypeptides/proteins WITHOUT carbohydrate chains. The glycoprotein hormones share an identical alpha subunit — only beta subunits differ." },
+    { title: "TRAP #2: MSH comes from the anterior pituitary in adults", myth: "MSH is secreted by anterior pituitary cells in adult humans.", truth: "MSH is secreted by the pars intermedia (from basophilic cells). In adults the pars intermedia largely regresses. ACTH (from anterior pituitary corticotropes) cross-reacts with MSH receptors because the first 13 AAs of ACTH are identical to α-MSH — this is why ACTH excess (Addison's, ectopic ACTH) causes hyperpigmentation." },
+    { title: "TRAP #3: High estrogen always suppresses LH (negative feedback only)", myth: "Estrogen always suppresses LH through negative feedback.", truth: "Low estrogen = negative feedback (suppresses LH throughout most of the cycle). High sustained estrogen (mid-cycle peak >200 pg/mL for >36h) = POSITIVE feedback → LH surge → ovulation. This is the ONLY example of positive feedback in the H-P axis for sex steroids." },
+    { title: "TRAP #4: Adrenalectomy resolves Cushing's disease permanently", myth: "Bilateral adrenalectomy cures pituitary Cushing's disease by removing cortisol production.", truth: "After bilateral adrenalectomy, removing cortisol feedback → the pituitary corticotrope adenoma grows aggressively (no cortisol suppression) → massive ACTH elevation → Nelson's syndrome = hyperpigmentation + visual field defects from tumor expansion. Patient needs close pituitary monitoring after adrenalectomy for Cushing's." },
+    { title: "TRAP #5: Anterior pituitary hormones work through intracellular receptors", myth: "Anterior pituitary hormones like GH and ACTH act through intracellular steroid receptors.", truth: "All anterior pituitary hormones are peptide/protein hormones — they CANNOT cross the cell membrane. They bind cell-surface GPCR or receptor tyrosine kinases (GH/Prolactin use JAK-STAT via receptor-associated kinase). Only steroid hormones (cortisol, estrogen, T3) use intracellular receptors." },
+];
+const fibs = [
+    { prompt: "POMC is cleaved to produce 3 key hormones: ________ (39-aa, from corticotropes), ________ (stimulates melanocytes, from pars intermedia), and ________ (endogenous opioid, from arcuate nucleus).", answers: ["acth","msh","endorphin"], hint: "ACTH | α-MSH | β-endorphin" },
+    { prompt: "Glycoprotein anterior pituitary hormones that share an alpha subunit: ________, ________, and ________. The beta subunit determines specificity.", answers: ["lh","fsh","tsh"], hint: "LH, FSH, TSH (also HCG from placenta shares this alpha subunit)" },
+    { prompt: "In primary hypothyroidism: ↓T4 → ↑________ → ↑________ (intended) AND ↑________ (unintended side effect → galactorrhea).", answers: ["trh","tsh","prolactin"], hint: "TRH rises → stimulates both TSH and prolactin" },
+    { prompt: "Pituitary cells: Acidophils make ________ and ________. Basophils make ________, ________, and ________.", answers: ["gh","prolactin","acth","tsh","fsh","lh"], hint: "Acidophils: GH + Prolactin. Basophils: ACTH + TSH + LH/FSH" },
+    { prompt: "After bilateral oophorectomy, ________ and ________ are lost → ________ feedback is removed → LH and FSH ________.", answers: ["estrogen","progesterone","negative","rise","increase"], hint: "Estrogen + progesterone removed → negative feedback gone → LH/FSH rise" },
+];
+function renderRef() { document.getElementById('refContainer').innerHTML = `<table class='ref-table'><thead><tr><th>Hormone</th><th>Cell Type</th><th>Class</th><th>Primary Regulation</th><th>Clinical Pearl</th></tr></thead><tbody>
+<tr><td class='hl'>GH</td><td>Somatotropes (Acidophil)</td><td>Polypeptide</td><td>GHRH↑ / Somatostatin↓</td><td>Inhibited by hyperglycemia; OGTT test for acromegaly</td></tr>
+<tr><td class='hl'>Prolactin</td><td>Lactotropes (Acidophil)</td><td>Polypeptide</td><td>Dopamine↓ ONLY; TRH↑</td><td>Only exclusively inhibitory control; rises with stalk section</td></tr>
+<tr><td class='hl'>TSH</td><td>Thyrotropes (Basophil)</td><td>Glycoprotein (αβ)</td><td>TRH↑ / T3↓</td><td>Elevated in primary hypothyroidism</td></tr>
+<tr><td class='hl'>ACTH</td><td>Corticotropes (Basophil)</td><td>39-aa polypeptide from POMC</td><td>CRH↑ / Cortisol↓</td><td>Elevated in Addison's → hyperpigmentation via MSH cross-reactivity</td></tr>
+<tr><td class='hl'>LH + FSH</td><td>Gonadotropes (Basophil)</td><td>Glycoproteins (αβ)</td><td>GnRH↑ (pulsatile); Sex steroids↓</td><td>Surge in LH = positive feedback (mid-cycle estradiol peak)</td></tr>
+</tbody></table>`; }
+</script>
+
+
+function switchTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    if (btn) btn.classList.add('active');
+}
+function renderFlashcards() {
+    const grid = document.getElementById('fcGrid');
+    grid.innerHTML = flashcards.map((fc,i) => `
+        <div class="fc" onclick="this.classList.toggle('flipped')">
+            <div class="fc-inner">
+                <div class="fc-front"><div class="fc-label">💡 Card ${i+1} of ${flashcards.length}</div><div class="fc-q">${fc.q}</div></div>
+                <div class="fc-back"><div class="fc-label">✅ Answer</div><div class="fc-a">${fc.a.replace(/\n/g,'<br>')}</div></div>
+            </div>
+        </div>`).join('');
+}
+function renderMCQ() {
+    const cont = document.getElementById('mcqContainer');
+    cont.innerHTML = mcqs.map((q,qi) => `
+        <div class="mcq-item">
+            <div class="mcq-num">Question ${qi+1} of ${mcqs.length}</div>
+            <div class="mcq-stem">${q.stem}</div>
+            <div class="mcq-options" id="opts${qi}">
+                ${q.opts.map((o,oi) => `<div class="mcq-opt" onclick="selectMCQ(this,${qi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span></div>`).join('')}
+            </div>
+            <div class="mcq-explanation" id="exp${qi}"></div>
+            <div class="teaching-pt" id="teach${qi}"><span class="tp-label">📚 Teaching Point</span>${q.teach}</div>
+        </div>`).join('');
+}
+function selectMCQ(btn, qi, oi) {
+    const container = document.getElementById('opts'+qi);
+    if (container.dataset.answered) return;
+    container.dataset.answered = 'true';
+    const q = mcqs[qi];
+    container.querySelectorAll('.mcq-opt').forEach(b => b.setAttribute('disabled','true'));
+    container.querySelectorAll('.mcq-opt').forEach((b,idx) => { if(idx===q.correct) b.classList.add('correct'); else b.classList.add('wrong'); });
+    const expDiv = document.getElementById('exp'+qi);
+    expDiv.innerHTML = `<span class="exp-label">${oi===q.correct?'✅ Correct!':'❌ Incorrect'}</span>${q.exps[oi]}<br><br>${q.exps.map((e,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${e}`).join('<br>')}`;
+    expDiv.classList.add('visible');
+    document.getElementById('teach'+qi).classList.add('visible');
+}
+function renderVigs() {
+    const cont = document.getElementById('vigContainer');
+    cont.innerHTML = vigs.map((v,vi) => `
+        <div class="vig-item">
+            <div class="vig-banner">${v.banner}</div>
+            <div class="vig-stem">${v.stem}</div>
+            <div class="mcq-stem" style="margin-bottom:10px"><strong style="color:#E6EDF3">${v.question}</strong></div>
+            <div class="mcq-options" id="vopts${vi}">
+                ${v.opts.map((o,oi) => `<div class="mcq-opt" onclick="selectVig(this,${vi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span></div>`).join('')}
+            </div>
+            <div class="mcq-explanation" id="vexp${vi}"></div>
+            <div class="teaching-pt" id="vteach${vi}"><span class="tp-label">📚 Teaching Point</span>${v.teach}</div>
+        </div>`).join('');
+}
+function selectVig(btn, vi, oi) {
+    const container = btn.closest('.mcq-options');
+    if (container.dataset.answered) return;
+    container.dataset.answered = 'true';
+    const v = vigs[vi];
+    container.querySelectorAll('.mcq-opt').forEach(b => b.setAttribute('disabled','true'));
+    container.querySelectorAll('.mcq-opt').forEach((b,idx) => { if(idx===v.correct) b.classList.add('correct'); else b.classList.add('wrong'); });
+    const expDiv = document.getElementById('vexp'+vi);
+    expDiv.innerHTML = `<span class="exp-label">${oi===v.correct?'✅ Correct!':'❌ Incorrect'}</span>${v.exps[oi]}<br><br>${v.exps.map((e,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${e}`).join('<br>')}`;
+    expDiv.classList.add('visible');
+    document.getElementById('vteach'+vi).classList.add('visible');
+}
+function renderTraps() {
+    const cont = document.getElementById('trapsContainer');
+    cont.innerHTML = traps.map(t => `
+        <div class="trap-item">
+            <div class="trap-header">${t.title}</div>
+            <div class="trap-myth"><div class="trap-myth-label">❌ COMMON MYTH</div>${t.myth}</div>
+            <div class="trap-truth"><div class="trap-truth-label">✅ TRUTH</div>${t.truth}</div>
+        </div>`).join('');
+}
+function renderFIB() {
+    const cont = document.getElementById('fibContainer');
+    cont.innerHTML = fibs.map((f,i) => `
+        <div class="fib-item">
+            <div class="fib-prompt">${i+1}. ${f.prompt}</div>
+            <input class="fib-input" id="fib${i}" placeholder="Type your answer(s)…" />
+            <button class="fib-btn" onclick="checkFIB(${i})">Check</button>
+            <div class="fib-result" id="fibres${i}"></div>
+            <div style="font-size:0.78em;color:#6B7280;margin-top:6px;">Hint: ${f.hint}</div>
+        </div>`).join('');
+}
+function checkFIB(i) {
+    const f = fibs[i];
+    const val = document.getElementById('fib'+i).value.toLowerCase().trim();
+    const correct = f.answers.some(a => val.includes(a.toLowerCase()));
+    const res = document.getElementById('fibres'+i);
+    res.className = correct ? 'fib-result correct' : 'fib-result incorrect';
+    res.textContent = correct ? '✅ Correct! ' + f.hint : '❌ Review: ' + f.hint;
+}
+renderFlashcards(); renderMCQ(); renderVigs(); renderTraps(); renderFIB();
+
+renderRef();
+</script>
+</body>
+</html>

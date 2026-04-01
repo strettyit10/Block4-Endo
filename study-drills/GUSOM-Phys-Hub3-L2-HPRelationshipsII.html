@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L2 · Hypothalamic-Pituitary Relationships II — Practice Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0D1117;
+            color: #E6EDF3;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #283593;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: #42466d;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #E6EDF3;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: #8B949E;
+            margin-bottom: 16px;
+        }
+
+        .source-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .source-pill {
+            display: inline-block;
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
+            color: #8B949E;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid #30363D;
+            margin-bottom: 30px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px 16px;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: #8B949E;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .tab-button.active {
+            color: #E6EDF3;
+            border-bottom-color: #283593;
+        }
+
+        .tab-button:hover:not(.active) {
+            color: #C9D1D9;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .mcq-item {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .mcq-number {
+            font-weight: 600;
+            color: #283593;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .mcq-question {
+            font-size: 15px;
+            color: #E6EDF3;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .mcq-opt {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            border-radius: 4px;
+            padding: 12px 14px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #C9D1D9;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .mcq-opt:hover {
+            background-color: #1C2128;
+            border-color: #58A6FF;
+        }
+
+        .mcq-opt.correct {
+            background-color: #1B4620;
+            border-color: #3FB950;
+            color: #3FB950;
+            cursor: default;
+        }
+
+        .mcq-opt.incorrect {
+            background-color: #5A1E1E;
+            border-color: #F85149;
+            color: #F85149;
+            cursor: default;
+        }
+
+        .mcq-opt.disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .explanation {
+            background-color: #0D1117;
+            border-left: 4px solid #283593;
+            border-radius: 4px;
+            padding: 12px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        .explanation-label {
+            font-weight: 600;
+            color: #283593;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .explanation-text {
+            font-size: 14px;
+            color: #8B949E;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .teaching-point-label {
+            font-weight: 600;
+            color: #48D597;
+            font-size: 12px;
+            margin-bottom: 4px;
+            margin-top: 8px;
+        }
+
+        .teaching-point-text {
+            font-size: 14px;
+            color: #7EE787;
+            line-height: 1.5;
+        }
+
+        .score-section {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .score-card {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            border-radius: 6px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 13px;
+            color: #8B949E;
+            margin-bottom: 8px;
+        }
+
+        .score-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: #283593;
+        }
+
+        .score-total {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            border-radius: 6px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .reset-btn {
+            background-color: #1f6feb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 16px;
+            width: 100%;
+        }
+
+        .reset-btn:hover {
+            background-color: #388bfd;
+        }
+
+        @media (max-width: 600px) {
+            .score-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .tab-button {
+                font-size: 12px;
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="GUSOM-Phys-Hub3-ActiveDrills.html" class="back-link">← Back to Hub</a>
+
+        <div class="header">
+            <h1>L2 · Hypothalamic-Pituitary Relationships II</h1>
+            <p>Practice Questions</p>
+            <div class="source-pills">
+                <div class="source-pill">GUSOM In-House (Dr. Watson LOs)</div>
+                <div class="source-pill">BRS Physiology Ch. 7</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('gusom')">GUSOM Questions</button>
+            <button class="tab-button" onclick="showTab('brs')">BRS Questions</button>
+            <button class="tab-button" onclick="showTab('score')">Score</button>
+        </div>
+
+        <!-- GUSOM Questions Tab -->
+        <div id="gusom" class="tab-content active">
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q1</div>
+                <div class="mcq-question">A 28-year-old woman presents with secondary amenorrhea, galactorrhea, and headaches. Serum prolactin is 280 ng/mL (normal <25). MRI shows a 12 mm pituitary adenoma. What is the most appropriate initial treatment?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Surgery is reserved for medical failure or intolerance.', 'gusom')">A) Transsphenoidal surgery</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Radiation is not first-line.', 'gusom')">B) Radiation therapy</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Prolactinoma (macroadenoma) — first-line is dopamine agonist therapy. Cabergoline is preferred over bromocriptine (longer half-life, twice weekly dosing, better tolerated, more effective at tumor shrinkage). Even macroadenomas with mass effect respond well to medical therapy. Surgery is reserved for medical failure, intolerance, or patient preference. Dopamine agonists restore dopamine → ↓prolactin → restore menses and normalize galactorrhea.', 'gusom')">C) Cabergoline (dopamine agonist)</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Bromocriptine is less preferred than cabergoline.', 'gusom')">D) Bromocriptine only</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Octreotide is used for TSH-secreting adenomas, not prolactinomas.', 'gusom')">E) Octreotide</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Prolactinoma (macroadenoma) — first-line is dopamine agonist therapy. Cabergoline is preferred over bromocriptine (longer half-life, twice weekly dosing, better tolerated, more effective at tumor shrinkage). Even macroadenomas with mass effect respond well to medical therapy. Surgery is reserved for medical failure, intolerance, or patient preference. Dopamine agonists restore dopamine → ↓prolactin → restore menses and normalize galactorrhea.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Prolactinoma: dopamine agonist FIRST (not surgery). Cabergoline preferred. Even macroadenomas respond to medical therapy.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q2</div>
+                <div class="mcq-question">Which hypothalamic nucleus is the primary source of dopamine that inhibits prolactin secretion via the tuberoinfundibular dopamine pathway?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'PVN produces CRH and magnocellular hormones, not primary dopamine.', 'gusom')">A) Paraventricular nucleus</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'SON produces magnocellular hormones, not primary dopamine.', 'gusom')">B) Supraoptic nucleus</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'The arcuate nucleus (also called the infundibular nucleus) is the major source of tuberoinfundibular dopamine neurons that project to the median eminence → portal system → anterior pituitary → inhibit lactotrophs. Dopamine = PIF (prolactin-inhibiting factor). Loss of this pathway (stalk compression, antipsychotics) → hyperprolactinemia.', 'gusom')">C) Arcuate nucleus</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Ventromedial nucleus regulates feeding and temperature.', 'gusom')">D) Ventromedial nucleus</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Lateral hypothalamus regulates feeding, not primary dopamine production.', 'gusom')">E) Lateral hypothalamic area</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The arcuate nucleus (also called the infundibular nucleus) is the major source of tuberoinfundibular dopamine neurons that project to the median eminence → portal system → anterior pituitary → inhibit lactotrophs. Dopamine = PIF (prolactin-inhibiting factor). Loss of this pathway (stalk compression, antipsychotics) → hyperprolactinemia.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Arcuate nucleus = source of TIDA (tuberoinfundibular dopamine) → primary prolactin inhibitor. Antipsychotics block D2 → remove inhibition → ↑prolactin.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q3</div>
+                <div class="mcq-question">A patient being treated with risperidone (antipsychotic) develops galactorrhea and menstrual irregularities. What is the mechanism?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Antipsychotics do not stimulate lactotrophs directly.', 'gusom')">A) Direct stimulation of lactotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Antipsychotics (D2 receptor antagonists) block dopamine (PIF) action on lactotrophs → remove tonic inhibition → hyperprolactinemia → galactorrhea, amenorrhea, infertility. This is drug-induced hyperprolactinemia. Treatment: switch to prolactin-sparing antipsychotic (quetiapine, clozapine, aripiprazole) rather than adding cabergoline (which may worsen psychosis).', 'gusom')">B) Blockade of dopamine D2 receptors on lactotrophs → removes tonic inhibition → hyperprolactinemia</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Antipsychotics do not stimulate TRH release.', 'gusom')">C) Stimulation of TRH release</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Antipsychotics do not directly suppress estrogen synthesis.', 'gusom')">D) Direct suppression of estrogen synthesis</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Antipsychotics do not directly stimulate oxytocin.', 'gusom')">E) Stimulation of oxytocin release</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Antipsychotics (D2 receptor antagonists) block dopamine (PIF) action on lactotrophs → remove tonic inhibition → hyperprolactinemia → galactorrhea, amenorrhea, infertility. This is drug-induced hyperprolactinemia. Treatment: switch to prolactin-sparing antipsychotic (quetiapine, clozapine, aripiprazole) rather than adding cabergoline (which may worsen psychosis).</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Drug-induced hyperprolactinemia: D2 antagonists (antipsychotics, metoclopramide, domperidone). Management: switch to prolactin-sparing agent, not cabergoline.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q4</div>
+                <div class="mcq-question">The mid-cycle LH surge is triggered by rising estrogen during the late follicular phase. This is an example of which type of feedback?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'This is positive feedback, not negative.', 'gusom')">A) Negative long-loop feedback</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'This is positive feedback, not negative.', 'gusom')">B) Negative short-loop feedback</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Mid-cycle: estrogen rises from growing follicle → when estrogen reaches threshold (>200 pg/mL for ~48 hours) → switches to POSITIVE feedback → stimulates GnRH and acts directly on gonadotrophs → massive LH surge → ovulation. This positive feedback is unique — most other steroid hormone effects on the HPx axis are negative. After ovulation, progesterone + estrogen restore negative feedback.', 'gusom')">C) Positive long-loop feedback</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'This is not ultrashort feedback.', 'gusom')">D) Ultrashort feedback</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'This is a fundamental HPG axis mechanism driven by feedback.', 'gusom')">E) No feedback — this is an independent neuroendocrine event</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Mid-cycle: estrogen rises from growing follicle → when estrogen reaches threshold (>200 pg/mL for ~48 hours) → switches to POSITIVE feedback → stimulates GnRH and acts directly on gonadotrophs → massive LH surge → ovulation. This positive feedback is unique — most other steroid hormone effects on the HPx axis are negative. After ovulation, progesterone + estrogen restore negative feedback.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Positive feedback exception: sustained high estrogen → LH surge. This only occurs mid-cycle. All other estrogen effects on HPG axis are negative feedback.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q5</div>
+                <div class="mcq-question">TRH (thyrotropin-releasing hormone) stimulates which TWO anterior pituitary hormones?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'TRH does not stimulate GH.', 'gusom')">A) TSH and GH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'TRH does not stimulate ACTH.', 'gusom')">B) TSH and ACTH</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'TRH → thyrotrophs (TSH) AND lactotrophs (prolactin). This dual stimulation explains why primary hypothyroidism can cause hyperprolactinemia and galactorrhea — elevated TRH (from low T4 feedback) → ↑TSH AND ↑prolactin → galactorrhea + amenorrhea. Treatment: levothyroxine (corrects TSH and prolactin) — NOT cabergoline. This is a classic board exam trick.', 'gusom')">C) TSH and prolactin</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'TRH does not stimulate LH.', 'gusom')">D) Prolactin and LH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'TRH does not stimulate FSH.', 'gusom')">E) TSH and FSH</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">TRH → thyrotrophs (TSH) AND lactotrophs (prolactin). This dual stimulation explains why primary hypothyroidism can cause hyperprolactinemia and galactorrhea — elevated TRH (from low T4 feedback) → ↑TSH AND ↑prolactin → galactorrhea + amenorrhea. Treatment: levothyroxine (corrects TSH and prolactin) — NOT cabergoline. This is a classic board exam trick.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">TRH stimulates TSH + prolactin. Hypothyroidism → ↑TRH → ↑prolactin → galactorrhea. Treat with levothyroxine, not cabergoline/dopamine agonist.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q6</div>
+                <div class="mcq-question">GnRH must be secreted in a pulsatile fashion to maintain LH and FSH secretion. What happens when GnRH is administered continuously (non-pulsatile)?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Continuous GnRH suppresses, not increases, LH and FSH.', 'gusom')">A) Increased LH and FSH secretion</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Continuous (non-pulsatile) GnRH → downregulation of GnRH receptors on gonadotrophs → reduced LH and FSH → medical castration. This is the principle behind GnRH agonists (leuprolide, goserelin): initial flare (first 2 weeks) → then receptor downregulation → ↓LH/FSH/sex steroids. Used for: prostate cancer, endometriosis, precocious puberty, uterine fibroids.', 'gusom')">B) Downregulation of GnRH receptors → decreased LH and FSH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Continuous GnRH suppresses both LH and FSH, not just FSH.', 'gusom')">C) Selective increase in FSH only</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Continuous GnRH suppresses sex steroids.', 'gusom')">D) Increased testosterone and estrogen</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Continuous GnRH has a significant effect on LH and FSH.', 'gusom')">E) No change in LH or FSH</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Continuous (non-pulsatile) GnRH → downregulation of GnRH receptors on gonadotrophs → reduced LH and FSH → medical castration. This is the principle behind GnRH agonists (leuprolide, goserelin): initial flare (first 2 weeks) → then receptor downregulation → ↓LH/FSH/sex steroids. Used for: prostate cancer, endometriosis, precocious puberty, uterine fibroids.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Pulsatile GnRH = stimulates gonadotrophs. Continuous GnRH = downregulates receptors = medical castration. GnRH agonist paradox: stimulate first, then suppress.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q7</div>
+                <div class="mcq-question">ACTH is derived from a larger precursor molecule, POMC. Which OTHER peptides are co-secreted from corticotrophs along with ACTH?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'TSH and LH are not derived from POMC.', 'gusom')">A) TSH and LH</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'POMC (pro-opiomelanocortin) is cleaved by prohormone convertases → ACTH, β-LPH (→β-endorphin), and γ-MSH. In Addison\'s disease or Nelson\'s syndrome: excess ACTH and MSH → hyperpigmentation (MSH activates MC1R on melanocytes). β-endorphin = endogenous opioid. This cleavage varies by tissue — pituitary vs intermediate lobe vs hypothalamus.', 'gusom')">B) β-endorphin and MSH (melanocyte-stimulating hormone)</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Prolactin and GH are not derived from POMC.', 'gusom')">C) Prolactin and GH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Oxytocin and vasopressin are not derived from POMC.', 'gusom')">D) Oxytocin and vasopressin</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'These hormones are not co-secreted with ACTH.', 'gusom')">E) Somatostatin and CRH</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">POMC (pro-opiomelanocortin) is cleaved by prohormone convertases → ACTH, β-LPH (→β-endorphin), and γ-MSH. In Addison's disease or Nelson's syndrome: excess ACTH and MSH → hyperpigmentation (MSH activates MC1R on melanocytes). β-endorphin = endogenous opioid. This cleavage varies by tissue — pituitary vs intermediate lobe vs hypothalamus.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">POMC → ACTH + MSH + β-endorphin. High ACTH states (Addison, Nelson) also have high MSH → hyperpigmentation. This explains skin darkening in primary adrenal insufficiency.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q8</div>
+                <div class="mcq-question">A couple presents for infertility evaluation. The female partner has normal FSH and LH but her doctor suspects GnRH pulsatility is disturbed. What condition would explain this?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Hyperthyroidism does not typically disrupt GnRH pulsatility.', 'gusom')">A) Hyperthyroidism</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'FHA: chronic stress, low body weight (BMI <18), excessive exercise → ↑CRH → disrupts GnRH pulse generator → ↓LH pulse frequency and amplitude → anovulation. LH and FSH may be low-normal (not absent — the GnRH generator is partially functional). Treatment: address underlying cause (restore weight, reduce stress). Pulsatile GnRH can restore fertility.', 'gusom')">B) Functional hypothalamic amenorrhea (FHA) from chronic stress/low body weight</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'A pituitary adenoma would suppress, not maintain, normal LH/FSH.', 'gusom')">C) Pituitary adenoma</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'PCOS causes elevated LH, not normal levels.', 'gusom')">D) Polycystic ovary syndrome</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Turner syndrome causes primary ovarian failure, not GnRH disruption.', 'gusom')">E) Turner syndrome</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">FHA: chronic stress, low body weight (BMI <18), excessive exercise → ↑CRH → disrupts GnRH pulse generator → ↓LH pulse frequency and amplitude → anovulation. LH and FSH may be low-normal (not absent — the GnRH generator is partially functional). Treatment: address underlying cause (restore weight, reduce stress). Pulsatile GnRH can restore fertility.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">FHA: stress + energy deficit → ↑CRH → ↓GnRH pulsatility → ↓LH/FSH. Distinguished from pituitary failure by normal GnRH stimulation test response.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q9</div>
+                <div class="mcq-question">Which anterior pituitary cell type is most abundant and produces the largest pituitary tumor type?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Lactotrophs produce prolactinomas, which are the most common functioning adenomas, but somatotrophs are the most abundant cells.', 'gusom')">A) Lactotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Thyrotrophs are not the most abundant.', 'gusom')">B) Thyrotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Somatotrophs are the most abundant anterior pituitary cell type (~50% of cells). They produce GH-secreting adenomas (acromegaly) which are the second most common functioning pituitary adenoma (after prolactinomas). Nonfunctional adenomas (gonadotroph origin) are the most common overall. Lactotrophs (prolactinomas) are the most common functioning adenoma.', 'gusom')">C) Somatotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Corticotrophs are not the most abundant.', 'gusom')">D) Corticotrophs</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Gonadotrophs produce nonfunctional adenomas, not the most common functioning adenoma type.', 'gusom')">E) Gonadotrophs</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Somatotrophs are the most abundant anterior pituitary cell type (~50% of cells). They produce GH-secreting adenomas (acromegaly) which are the second most common functioning pituitary adenoma (after prolactinomas). Nonfunctional adenomas (gonadotroph origin) are the most common overall. Lactotrophs (prolactinomas) are the most common functioning adenoma.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Most abundant anterior pituitary cells: somatotrophs. Most common functioning adenoma: prolactinoma. Most common pituitary adenoma overall: non-functioning (null cell/gonadotroph).</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q10</div>
+                <div class="mcq-question">A female patient undergoes bilateral oophorectomy. What happens to serum LH and FSH levels within weeks?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Stress causes temporary changes, but oophorectomy causes sustained gonadotropin elevation.', 'gusom')">A) Both decrease due to stress</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Both LH and FSH increase.', 'gusom')">B) LH increases, FSH remains normal</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Oophorectomy removes estrogen and progesterone → loss of negative feedback on hypothalamus and pituitary → ↑GnRH → ↑LH and ↑FSH (FSH rises more due to loss of inhibin B from granulosa cells). This is the basis of menopause physiology — as ovarian reserve declines, FSH rises first (inhibin B falls before estrogen), then LH rises as estrogen also falls.', 'gusom')">C) Both increase markedly</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Both LH and FSH increase with oophorectomy.', 'gusom')">D) LH decreases, FSH increases</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Oophorectomy causes marked hormonal changes.', 'gusom')">E) Both remain unchanged</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Oophorectomy removes estrogen and progesterone → loss of negative feedback on hypothalamus and pituitary → ↑GnRH → ↑LH and ↑FSH (FSH rises more due to loss of inhibin B from granulosa cells). This is the basis of menopause physiology — as ovarian reserve declines, FSH rises first (inhibin B falls before estrogen), then LH rises as estrogen also falls.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Remove ovaries → remove negative feedback → LH ↑ + FSH ↑. FSH rises first in menopause (loss of inhibin). Useful mnemonic: castration → freed pituitary → both gonadotropins surge.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BRS Questions Tab -->
+        <div id="brs" class="tab-content">
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q1</div>
+                <div class="mcq-question">A 30-year-old woman has elevated serum prolactin. To determine whether this represents a prolactinoma or stalk compression, which of the following prolactin values most strongly suggests a prolactinoma (rather than stalk compression)?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Mild elevation consistent with stalk effect.', 'brs')">A) Prolactin 35 ng/mL</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Moderate elevation could be either prolactinoma or stalk effect.', 'brs')">B) Prolactin 80 ng/mL</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Elevated but microadenoma association less specific.', 'brs')">C) Prolactin 220 ng/mL (with 15 mm adenoma)</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'The magnitude of prolactin elevation helps distinguish prolactinoma from stalk effect. Stalk compression (any cause — non-functioning adenoma, craniopharyngioma) typically elevates prolactin to 25-150 ng/mL due to loss of dopamine. True prolactinomas typically: microadenoma →100-500 ng/mL; macroadenoma → >500 ng/mL. A prolactin of 400 ng/mL with a large macroadenoma strongly suggests true prolactin secretion. Key: if prolactin is only mildly elevated with a large tumor, consider stalk compression.', 'brs')">D) Prolactin 400 ng/mL (with 25 mm macroadenoma)</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Mild elevation consistent with stalk effect.', 'brs')">E) Prolactin 50 ng/mL</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The magnitude of prolactin elevation helps distinguish prolactinoma from stalk effect. Stalk compression (any cause — non-functioning adenoma, craniopharyngioma) typically elevates prolactin to 25-150 ng/mL due to loss of dopamine. True prolactinomas typically: microadenoma →100-500 ng/mL; macroadenoma → >500 ng/mL. A prolactin of 400 ng/mL with a large macroadenoma strongly suggests true prolactin secretion. Key: if prolactin is only mildly elevated with a large tumor, consider stalk compression.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Prolactin >200-500 ng/mL with macroadenoma = true prolactinoma. Modest elevation (25-150 ng/mL) with any mass = likely stalk effect.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q2</div>
+                <div class="mcq-question">Leuprolide acetate is prescribed for endometriosis. How does its mechanism of action lead to a reduction in estrogen levels?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'Leuprolide acts on the HPG axis, not as a local estrogen blocker.', 'brs')">A) Blocks estrogen receptors in the uterus</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Leuprolide acts on the HPG axis to reduce LH/FSH.', 'brs')">B) Inhibits ovarian steroidogenesis directly</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Leuprolide is a GnRH agonist with prolonged half-life. Given continuously → initially stimulates GnRH receptors (flare) → chronic receptor overstimulation → receptor downregulation/desensitization → ↓LH and FSH → ↓ovarian estrogen and progesterone. Creates a \"medical oophorectomy.\" Side effects: menopausal symptoms (hot flashes, bone loss). Combined with add-back therapy or bisphosphonates for long-term use.', 'brs')">C) Continuous GnRH receptor stimulation → downregulation → ↓LH/FSH → ↓estrogen</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Leuprolide affects the HPG axis, causing suppression via receptor downregulation.', 'brs')">D) Inhibits FSH at the gonadotroph level</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Leuprolide is a GnRH agonist, not a somatostatin analog.', 'brs')">E) Stimulates somatostatin to suppress FSH</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Leuprolide is a GnRH agonist with prolonged half-life. Given continuously → initially stimulates GnRH receptors (flare) → chronic receptor overstimulation → receptor downregulation/desensitization → ↓LH and FSH → ↓ovarian estrogen and progesterone. Creates a "medical oophorectomy." Side effects: menopausal symptoms (hot flashes, bone loss). Combined with add-back therapy or bisphosphonates for long-term use.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Leuprolide paradox: GnRH agonist → suppresses sex steroids after initial flare. Use for: endometriosis, fibroids, precocious puberty, prostate cancer.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q3</div>
+                <div class="mcq-question">Which of the following best describes the regulation of FSH vs LH secretion from gonadotrophs?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'FSH and LH have divergent regulatory mechanisms.', 'brs')">A) Both are regulated identically by GnRH alone</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'FSH and LH diverge in regulation: GnRH regulates both, but FSH is uniquely regulated by: Inhibin B (from granulosa/Sertoli cells) → selectively suppresses FSH without affecting LH. Activin → stimulates FSH. Follistatin → suppresses FSH by binding activin. LH is primarily regulated by GnRH pulse frequency (fast pulses → LH; slow pulses → FSH). This differential regulation allows selective FSH rise in early menopause before LH rises.', 'brs')">B) FSH is primarily regulated by inhibin B (suppresses FSH selectively) and activin (stimulates FSH); LH is primarily regulated by GnRH pulse frequency</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'FSH and LH are regulated differently.', 'brs')">C) LH is regulated by inhibin; FSH by GnRH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Both FSH and LH are regulated by GnRH via the same pulsatile mechanism, with differential modulation.', 'brs')">D) FSH and LH are regulated by separate releasing hormones</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'Follistatin suppresses FSH, but this is not the primary regulator.', 'brs')">E) LH is primarily regulated by follistatin</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">FSH and LH diverge in regulation: GnRH regulates both, but FSH is uniquely regulated by: Inhibin B (from granulosa/Sertoli cells) → selectively suppresses FSH without affecting LH. Activin → stimulates FSH. Follistatin → suppresses FSH by binding activin. LH is primarily regulated by GnRH pulse frequency (fast pulses → LH; slow pulses → FSH). This differential regulation allows selective FSH rise in early menopause before LH rises.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Inhibin B → suppresses FSH ONLY. This explains why FSH rises before LH in menopause (inhibin B falls with declining follicle number).</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q4</div>
+                <div class="mcq-question">A patient with a non-functioning pituitary macroadenoma (no hormone secretion) undergoes surgical resection but has incomplete removal. Post-operatively, which hormonal deficiency is most likely to occur last (i.e., most resistant to damage)?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'ACTH is lost before prolactin.', 'brs')">A) ACTH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'TSH is lost before prolactin.', 'brs')">B) TSH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'GH is the first hormone to be lost with pituitary damage.', 'brs')">C) GH</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'LH/FSH are lost before prolactin.', 'brs')">D) LH/FSH</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'Order of hormone loss with pituitary damage/compression (most sensitive → most resistant): GH (first, most sensitive) → FSH/LH → TSH → ACTH → Prolactin (LAST). Prolactin is LAST because it is tonically inhibited — damage that removes dopamine inhibition actually INCREASES prolactin. GH is first because somatotrophs are most numerous and most sensitive to compression/ischemia.', 'brs')">E) Prolactin</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Order of hormone loss with pituitary damage/compression (most sensitive → most resistant): GH (first, most sensitive) → FSH/LH → TSH → ACTH → Prolactin (LAST). Prolactin is LAST because it is tonically inhibited — damage that removes dopamine inhibition actually INCREASES prolactin. GH is first because somatotrophs are most numerous and most sensitive to compression/ischemia.</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Pituitary hormone loss order (most to least sensitive): GH → FSH/LH → TSH → ACTH → Prolactin last (because losing dopamine inhibition = prolactin rises). Screen GH first in suspected hypopituitarism.</div>
+                </div>
+            </div>
+
+            <div class="mcq-item">
+                <div class="mcq-number">Q5</div>
+                <div class="mcq-question">ACTH has a circadian rhythm with peak levels occurring at which time?</div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="sel(this, false, 'ACTH peaks in the early morning, not at midnight.', 'brs')">A) Midnight</div>
+                    <div class="mcq-opt" onclick="sel(this, true, 'ACTH (and cortisol) follow a circadian rhythm: PEAK in early morning (6-8 AM) → nadir at midnight. This is driven by suprachiasmatic nucleus (SCN) → CRH → ACTH → cortisol. Clinical implications: (1) Morning cortisol is the reference standard. (2) Late-night salivary cortisol should be low — if elevated, suggests Cushing syndrome. (3) Steroid replacement should mimic this rhythm (higher dose in AM).', 'brs')">B) Early morning (6-8 AM)</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'ACTH peaks in the early morning, not at noon.', 'brs')">C) Noon</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'ACTH peaks in the early morning, not late afternoon.', 'brs')">D) Late afternoon</div>
+                    <div class="mcq-opt" onclick="sel(this, false, 'ACTH follows a clear circadian rhythm.', 'brs')">E) ACTH has no circadian rhythm</div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">ACTH (and cortisol) follow a circadian rhythm: PEAK in early morning (6-8 AM) → nadir at midnight. This is driven by suprachiasmatic nucleus (SCN) → CRH → ACTH → cortisol. Clinical implications: (1) Morning cortisol is the reference standard. (2) Late-night salivary cortisol should be low — if elevated, suggests Cushing syndrome. (3) Steroid replacement should mimic this rhythm (higher dose in AM).</div>
+                    <div class="teaching-point-label">TEACHING POINT</div>
+                    <div class="teaching-point-text">Cortisol/ACTH peak: early morning. Nadir: midnight. Late-night salivary cortisol elevation = Cushing screening test. Give steroid replacement in AM to mimic physiology.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Score Tab -->
+        <div id="score" class="tab-content">
+            <div class="score-section">
+                <div class="score-grid">
+                    <div class="score-card">
+                        <div class="score-label">GUSOM Questions</div>
+                        <div class="score-value"><span id="gusom-correct">0</span>/<span id="gusom-total">10</span></div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-label">BRS Questions</div>
+                        <div class="score-value"><span id="brs-correct">0</span>/<span id="brs-total">5</span></div>
+                    </div>
+                </div>
+                <div class="score-card">
+                    <div class="score-label">OVERALL SCORE</div>
+                    <div class="score-value"><span id="overall-correct">0</span>/<span id="overall-total">15</span></div>
+                </div>
+                <button class="reset-btn" onclick="resetScores()">Reset All Scores</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const score = {
+            gusom: { correct: 0, total: 10 },
+            brs: { correct: 0, total: 5 }
+        };
+
+        function sel(el, isCorrect, explanation, tabKey) {
+            const parent = el.parentElement;
+            const allOpts = parent.querySelectorAll('.mcq-opt');
+            const explanationDiv = el.parentElement.nextElementSibling;
+
+            allOpts.forEach(opt => opt.classList.add('disabled'));
+
+            if (isCorrect) {
+                el.classList.add('correct');
+                score[tabKey].correct++;
+            } else {
+                el.classList.add('incorrect');
+                allOpts.forEach(opt => {
+                    if (!opt.classList.contains('incorrect')) {
+                        opt.classList.add('disabled');
+                    }
+                });
+            }
+
+            if (explanationDiv && explanationDiv.classList.contains('explanation')) {
+                explanationDiv.classList.add('show');
+            }
+
+            updateScores();
+        }
+
+        function updateScores() {
+            const gusom = score.gusom;
+            const brs = score.brs;
+            const total = gusom.correct + brs.correct;
+            const maxTotal = gusom.total + brs.total;
+
+            document.getElementById('gusom-correct').textContent = gusom.correct;
+            document.getElementById('brs-correct').textContent = brs.correct;
+            document.getElementById('overall-correct').textContent = total;
+            document.getElementById('overall-total').textContent = maxTotal;
+        }
+
+        function resetScores() {
+            score.gusom.correct = 0;
+            score.brs.correct = 0;
+
+            document.querySelectorAll('.mcq-opt').forEach(opt => {
+                opt.classList.remove('correct', 'incorrect', 'disabled');
+            });
+
+            document.querySelectorAll('.explanation').forEach(exp => {
+                exp.classList.remove('show');
+            });
+
+            updateScores();
+        }
+
+        function showTab(name) {
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(tb => tb.classList.remove('active'));
+
+            document.getElementById(name).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        updateScores();
+    </script>
+</body>
+</html>

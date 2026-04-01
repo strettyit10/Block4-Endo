@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phys Hub #1 L7: HP Thyroid Axis</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+        :root { --accent: #0D47A1; --accent-light: rgba(13,71,161,0.15); }
+        * { margin:0;padding:0;box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif;background:#0D1117;color:#E6EDF3;min-height:100vh; }
+        .container { max-width:1100px;margin:0 auto;padding:20px; }
+        .header { background:linear-gradient(135deg,#161B22 0%,#020D1F 100%);border-bottom:3px solid var(--accent);padding:28px 30px;margin-bottom:28px;border-radius:10px; }
+        .header .back { font-size:0.8em;color:#6B7280;text-decoration:none;display:inline-block;margin-bottom:10px; }
+        .header .back:hover { color:var(--accent); }
+        .header h1 { color:#E6EDF3;font-size:1.9em;margin-bottom:6px; }
+        .header .subtitle { color:#9CA3AF;font-size:0.9em; }
+        .header .accent-tag { color:var(--accent);font-weight:600; }
+        .lo-box { background:var(--accent-light);border:1px solid var(--accent);border-radius:8px;padding:12px 14px;margin-top:14px;font-size:0.82em;color:#C9D1D9;line-height:1.6; }
+        .lo-box strong { color:var(--accent);display:block;margin-bottom:4px;font-size:0.9em;text-transform:uppercase;letter-spacing:0.06em; }
+        .tab-nav { display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;background:#161B22;padding:12px;border-radius:8px;border:1px solid #21262D; }
+        .tab-btn { padding:9px 18px;background:#1C2128;color:#8B949E;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.88em;transition:all 0.2s; }
+        .tab-btn:hover { background:#30363D;color:var(--accent); }
+        .tab-btn.active { background:var(--accent);color:#fff;border-color:var(--accent); }
+        .tab-content { display:none;animation:fadeIn 0.25s ease; }
+        .tab-content.active { display:block; }
+        @keyframes fadeIn { from { opacity:0;transform:translateY(8px); } to { opacity:1;transform:translateY(0); } }
+        .fc-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px; }
+        .fc { background:#161B22;border:1px solid #30363D;border-radius:10px;cursor:pointer;perspective:800px;min-height:160px; }
+        .fc-inner { position:relative;width:100%;min-height:160px;transform-style:preserve-3d;transition:transform 0.5s; }
+        .fc.flipped .fc-inner { transform:rotateY(180deg); }
+        .fc-front,.fc-back { position:absolute;width:100%;min-height:160px;backface-visibility:hidden;padding:18px;border-radius:10px;display:flex;flex-direction:column;justify-content:center; }
+        .fc-front { background:#161B22;border-top:3px solid var(--accent); }
+        .fc-back { background:#1A1F2E;transform:rotateY(180deg);border-top:3px solid #4ADE80; }
+        .fc-label { font-size:0.7em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px; }
+        .fc-front .fc-label { color:var(--accent); }
+        .fc-back .fc-label { color:#4ADE80; }
+        .fc-q { font-size:0.95em;color:#E6EDF3;line-height:1.5;font-weight:500; }
+        .fc-a { font-size:0.88em;color:#D1FAE5;line-height:1.6; }
+        .mcq-item { background:#161B22;border:1px solid #30363D;border-radius:10px;padding:20px;margin-bottom:16px; }
+        .mcq-num { font-size:0.75em;color:#6B7280;font-weight:700;text-transform:uppercase;margin-bottom:8px; }
+        .mcq-stem { font-size:0.95em;color:#E6EDF3;margin-bottom:14px;line-height:1.6; }
+        .mcq-stem strong { color:#FCD34D; }
+        .mcq-options { display:flex;flex-direction:column;gap:8px;margin-bottom:12px; }
+        .mcq-opt { padding:10px 14px;background:#1C2128;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-size:0.9em;color:#C9D1D9;transition:all 0.2s;display:flex;gap:10px;align-items:flex-start; }
+        .mcq-opt:hover:not([disabled]) { background:#21262D;border-color:var(--accent); }
+        .mcq-opt.correct { background:rgba(74,222,128,0.15);border-color:#4ADE80;color:#D1FAE5; }
+        .mcq-opt.wrong { background:rgba(239,68,68,0.1);border-color:#EF4444;color:#FCA5A5; }
+        .mcq-opt .letter { font-weight:700;min-width:20px; }
+        .mcq-explanation { background:#1C2128;border-left:3px solid #4ADE80;padding:12px 14px;border-radius:0 6px 6px 0;font-size:0.87em;color:#9CA3AF;display:none;margin-top:4px;line-height:1.6; }
+        .mcq-explanation.visible { display:block; }
+        .exp-label { color:#4ADE80;font-weight:600;display:block;margin-bottom:4px; }
+        .teaching-pt { background:var(--accent-light);border:1px solid var(--accent);border-radius:8px;padding:12px 14px;margin-top:10px;font-size:0.87em;color:#C9D1D9;display:none;line-height:1.6; }
+        .teaching-pt.visible { display:block; }
+        .tp-label { font-weight:700;color:var(--accent);display:block;margin-bottom:4px; }
+        .vig-item { background:#161B22;border:1px solid #30363D;border-radius:10px;padding:22px;margin-bottom:20px; }
+        .vig-banner { background:var(--accent-light);border:1px solid var(--accent);border-radius:6px;padding:8px 14px;font-size:0.8em;color:#C9D1D9;font-weight:600;margin-bottom:14px; }
+        .vig-stem { font-size:0.93em;line-height:1.7;color:#D1D5DB;margin-bottom:14px; }
+        .vig-stem strong { color:#FCD34D; }
+        .trap-item { background:#1A1212;border:1px solid #7F1D1D;border-radius:10px;padding:18px;margin-bottom:14px; }
+        .trap-header { color:#FCA5A5;font-size:0.85em;font-weight:700;margin-bottom:8px; }
+        .trap-myth { background:rgba(239,68,68,0.1);border-left:3px solid #EF4444;padding:8px 12px;border-radius:0 6px 6px 0;font-size:0.9em;color:#FCA5A5;margin-bottom:8px; }
+        .trap-truth { background:rgba(74,222,128,0.1);border-left:3px solid #4ADE80;padding:8px 12px;border-radius:0 6px 6px 0;font-size:0.9em;color:#D1FAE5; }
+        .trap-myth-label { font-size:0.75em;color:#EF4444;font-weight:700;margin-bottom:4px; }
+        .trap-truth-label { font-size:0.75em;color:#4ADE80;font-weight:700;margin-bottom:4px; }
+        .fib-item { background:#161B22;border:1px solid #30363D;border-radius:10px;padding:18px;margin-bottom:14px; }
+        .fib-prompt { font-size:0.93em;color:#E6EDF3;margin-bottom:12px;line-height:1.6; }
+        .fib-input { width:100%;background:#0D1117;border:1px solid #30363D;border-radius:6px;padding:8px 12px;color:#E6EDF3;font-size:0.9em;font-family:inherit;margin-bottom:8px; }
+        .fib-input:focus { outline:none;border-color:var(--accent); }
+        .fib-btn { background:var(--accent);color:white;border:none;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:600; }
+        .fib-result { margin-top:8px;font-size:0.88em;padding:8px 12px;border-radius:6px;display:none;line-height:1.5; }
+        .fib-result.correct { background:rgba(74,222,128,0.15);color:#D1FAE5;border:1px solid #4ADE80;display:block; }
+        .fib-result.incorrect { background:rgba(239,68,68,0.1);color:#FCA5A5;border:1px solid #EF4444;display:block; }
+        .ref-table { width:100%;border-collapse:collapse;margin-bottom:20px;font-size:0.87em; }
+        .ref-table th { background:var(--accent);color:white;padding:9px 12px;text-align:left; }
+        .ref-table td { padding:8px 12px;border:1px solid #30363D;color:#C9D1D9;vertical-align:top; }
+        .ref-table tr:nth-child(even) td { background:#161B22; }
+        .ref-table tr:nth-child(odd) td { background:#1C2128; }
+        .ref-table td.hl { color:var(--accent);font-weight:600; }
+        .ref-table td.hl-g { color:#4ADE80;font-weight:600; }
+        .ref-table td.hl-r { color:#F87171;font-weight:600; }
+        .section-title { font-size:0.8em;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <a href="GUSOM-Phys-Hub1-ActiveDrills.html" class="back">← Hub #1 Landing</a>
+    <h1>Lecture 7: <span class="accent-tag">HP Thyroid Axis</span></h1>
+    <div class="subtitle">TRH · TSH · Thyroid hormone feedback · Hypothyroidism vs Hyperthyroidism · HPT axis integration</div>
+    <div class="lo-box"><strong>Learning Objectives</strong>Integrate knowledge of thyroid gland and thyroid hormone from prior lectures to evaluate clinical HPT axis scenarios · Evaluate patients' signs and symptoms in context of the HPT axis · Apply feedback concepts to thyroid clinical problems</div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('flashcards',this)">🃏 Flashcards</button>
+    <button class="tab-btn" onclick="switchTab('mcq',this)">❓ MCQ</button>
+    <button class="tab-btn" onclick="switchTab('vignettes',this)">🏥 Vignettes</button>
+    <button class="tab-btn" onclick="switchTab('traps',this)">⚠️ Test Traps</button>
+    <button class="tab-btn" onclick="switchTab('fib',this)">✏️ Fill-in-Blank</button>
+    <button class="tab-btn" onclick="switchTab('ref',this)">📊 Reference</button>
+  </div>
+  <div id="tab-flashcards" class="tab-content active"><div class="section-title">Anki-Powered Flashcards — Click to Flip</div><div class="fc-grid" id="fcGrid"></div></div>
+  <div id="tab-mcq" class="tab-content"><div class="section-title">Multiple Choice Practice</div><div id="mcqContainer"></div></div>
+  <div id="tab-vignettes" class="tab-content"><div class="section-title">Clinical Vignettes</div><div id="vigContainer"></div></div>
+  <div id="tab-traps" class="tab-content"><div class="section-title">⚠️ Test Traps</div><div id="trapsContainer"></div></div>
+  <div id="tab-fib" class="tab-content"><div class="section-title">Fill in the Blank</div><div id="fibContainer"></div></div>
+  <div id="tab-ref" class="tab-content"><div class="section-title">Quick Reference</div><div id="refContainer"></div></div>
+</div>
+<script>
+const flashcards = [
+    { q: "Where is TRH secreted from? Which anterior pituitary cell does it target?", a: "TRH (thyrotropin-releasing hormone) is secreted from the ANTERIOR HYPOTHALAMIC AREA (anterior nucleus)\nTRH is a MODIFIED TRIPEPTIDE (pyroGlu-His-Pro-amide)\nTRH targets: (1) THYROTROPES → TSH release, (2) LACTOTROPES → Prolactin release\nKey: TRH has DUAL TARGETS" },
+    { q: "TSH — which cell produces it? Hormone class? What triggers its release?", a: "Produced by: THYROTROPES (basophilic cells) in anterior pituitary\nHormone class: GLYCOPROTEIN (alpha-beta subunit) — alpha subunit shared with LH, FSH, HCG\nTriggers: TRH from anterior hypothalamus\nInhibition: T3/T4 (long-loop negative feedback) + somatostatin (mild)" },
+    { q: "The HPT axis negative feedback — how does it work?", a: "T3 (active form) and T4 → negative feedback on:\n1. Hypothalamus: ↓TRH production\n2. Anterior pituitary: ↓thyrotrope sensitivity to TRH + ↓TSH production\nNote: T3 (not T4) is the active form at both levels. T4 is peripherally converted to T3 by deiodinase." },
+    { q: "In PRIMARY HYPOTHYROIDISM — what happens to TRH, TSH, and prolactin?", a: "Primary hypothyroid: thyroid gland fails → ↓T3/T4\n→ Loss of negative feedback → ↑TRH (hypothalamus compensates)\n→ ↑TRH → ↑TSH (thyrotropes try harder)\n→ ↑TRH also stimulates LACTOTROPES → ↑PROLACTIN\nClinical triad: fatigue/weight gain + ↑TSH + galactorrhea/amenorrhea (hyperprolactinemia)" },
+    { q: "In SECONDARY HYPOTHYROIDISM (pituitary failure) — lab pattern?", a: "Pituitary fails → ↓TSH (cannot stimulate thyroid)\n→ Thyroid atrophies → ↓T3/T4\nKey: ↓TSH + ↓T4 (both low) = secondary/tertiary hypothyroidism\nContrast with primary: ↑TSH + ↓T4\nNo hyperpigmentation (unlike secondary AI where ACTH is low)\nNo galactorrhea (TRH is not elevated — pituitary failure)" },
+    { q: "In PRIMARY HYPERTHYROIDISM (e.g., Graves' disease) — lab pattern?", a: "Graves': TSH receptor antibodies (TRAb) → mimic TSH → autonomous thyroid stimulation → ↑T3/T4\n→ ↑T3/T4 → negative feedback → SUPPRESSED TRH and TSH\nLabs: ↓TSH (suppressed) + ↑free T4 + ↑T3\nKey: ↓TSH in hyperthyroidism (the pituitary responds normally to excess thyroid hormone)" },
+    { q: "TRH stimulates both TSH AND prolactin — what is the clinical implication?", a: "In PRIMARY HYPOTHYROIDISM: ↑TRH → ↑TSH (expected) AND ↑prolactin (unexpected)\nResult: galactorrhea + amenorrhea in a hypothyroid patient\nDiagnosis: always check TSH when evaluating hyperprolactinemia!\nTreatment: levothyroxine → ↓TRH → prolactin normalizes without needing dopamine agonist" },
+    { q: "TSH effects on the thyroid gland — what does TSH do?", a: "TSH binds TSH receptor (GPCR, Gs-coupled) on thyroid follicular cells:\n1. ↑Iodine uptake (NIS upregulation)\n2. ↑Thyroglobulin synthesis\n3. ↑TPO activity (organification, coupling)\n4. ↑T3/T4 release from colloid\n5. ↑Thyroid gland growth (goiter if TSH chronically elevated)\nGraves' TSI antibodies mimic all these TSH effects" },
+    { q: "TBG (thyroid-binding globulin) — clinical relevance to HPT axis", a: "TBG binds T4 and T3 in circulation (carrier protein)\n↑TBG (estrogen, pregnancy, OCP) → ↑total T4 (bound) but FREE T4 normal → NO thyroid disease\n↓TBG (androgens, nephrotic syndrome, liver disease) → ↓total T4 but FREE T4 normal\nKey: only FREE hormone is biologically active. TSH = best functional test of HPT axis (not total T4)." },
+    { q: "Somatostatin effect on TSH — is it significant?", a: "Somatostatin (from periventricular nucleus) has a MILD inhibitory effect on TSH secretion\nThis is a secondary regulation — TRH/T3 feedback is primary\nClinical significance: somatostatinoma → ↓TSH (along with ↓GH). Octreotide can mildly suppress TSH." },
+];
+const mcqs = [
+    { stem: "A 35-year-old woman has fatigue, weight gain, constipation, and cold intolerance. TSH is 62 mIU/L (markedly elevated), free T4 is very low. Prolactin is 55 ng/mL (elevated). What explains the elevated prolactin?", opts: ["Concurrent prolactinoma","Stalk compression by goiter","Elevated TRH stimulating lactotropes","Decreased dopamine from hypothyroidism","Elevated TSH cross-stimulating prolactin receptors"], correct: 2, exps: ["No MRI data suggests prolactinoma; the setting strongly favors hypothyroid mechanism.","A goiter doesn't compress the stalk.","CORRECT. Primary hypothyroid → ↓T4 → ↑TRH (compensatory) → TRH stimulates BOTH thyrotropes (TSH) AND lactotropes (prolactin). Treatment: levothyroxine → ↓TRH → both TSH and prolactin normalize.","Dopamine is not decreased in hypothyroidism.","TSH does not cross-react with prolactin receptors."], teach: "Always check TSH in hyperprolactinemia — primary hypothyroid causes hyperprolactinemia via TRH. Levothyroxine treatment normalizes both. No dopamine agonist needed." },
+    { stem: "A 28-year-old woman with Graves' disease has TSH <0.01 mIU/L. Why is TSH suppressed?", opts: ["TSH is consumed by the overactive thyroid gland","TSH receptor antibodies suppress TSH at the pituitary","↑T3/T4 from Graves' inhibits TRH and pituitary TSH release via negative feedback","TRAb directly blocks TSH synthesis in the pituitary","Excess T4 is converted to reverse T3, which suppresses TSH"], correct: 2, exps: ["TSH is not 'consumed' by the thyroid.","TRAb acts on the thyroid, not directly on the pituitary.","CORRECT. Graves' → TRAb → autonomous thyroid stimulation → ↑T3/T4 → negative feedback on hypothalamus (↓TRH) and anterior pituitary (↓TSH). TSH is suppressed because the pituitary is responding appropriately to the excess thyroid hormone.","TRAb does not block pituitary TSH synthesis.","Reverse T3 does not suppress TSH through a direct mechanism."], teach: "TSH is the most sensitive test for thyroid function. In hyperthyroidism: TSH suppressed, FT4 elevated. In primary hypothyroidism: TSH elevated, FT4 low. TSH is the best single test because it responds amplified to small changes in free T4 (the pituitary is exquisitely sensitive to T3/T4 levels)." },
+    { stem: "A patient's total T4 is elevated but free T4 is normal. TSH is normal. She is on oral contraceptive pills. What explains the high total T4?", opts: ["Subclinical hyperthyroidism — she needs treatment","OCP-induced ↑TBG → more T4 bound → ↑total T4 but free T4 unchanged","OCP directly stimulates TSH → ↑T4 production","OCP inhibits deiodinase → T4 can't convert to T3 → T4 accumulates","Autoimmune thyroid disease from OCP"], correct: 1, exps: ["Free T4 is normal, TSH is normal — no clinical hyperthyroidism.","CORRECT. Estrogen (from OCP, pregnancy) → ↑TBG synthesis in liver → more bound T4 in circulation → ↑total T4 but free T4 and TSH remain normal. Only free hormone is active. This is NOT thyroid disease.","OCP does not directly stimulate TSH.","Deiodinase inhibition is not the mechanism.","OCP is not associated with autoimmune thyroid disease."], teach: "TBG elevation (estrogen, pregnancy): total T4/T3 ↑, but free T4 normal, TSH normal. TBG reduction (androgens, nephrotic syndrome): total T4/T3 ↓, but free T4 normal, TSH normal. Always check FREE T4 and TSH for thyroid status — not total T4." },
+    { stem: "Secondary hypothyroidism (pituitary failure) differs from primary hypothyroidism in which key lab finding?", opts: ["Free T4 is elevated in secondary","TSH is low/normal in secondary, not elevated","Total T3 is elevated in secondary","Prolactin is elevated in secondary but not primary","TRH is elevated in secondary, distinguishing it from primary"], correct: 1, exps: ["Free T4 is low in both primary and secondary hypothyroidism.","CORRECT. Primary hypothyroid: ↑TSH + ↓free T4 (pituitary tries harder). Secondary hypothyroid: ↓TSH + ↓free T4 (pituitary can't produce TSH). TSH is the key distinguishing test.","T3 is low in both.","Primary hypothyroid → ↑TRH → ↑prolactin. Secondary hypothyroid (pituitary failure) → ↓TRH production is normal but pituitary can't respond → no ↑prolactin.","TRH is elevated in primary (trying to stimulate pituitary). In secondary, TRH may be elevated but the pituitary can't respond."], teach: "Primary vs. Secondary hypothyroid: Primary = ↑TSH + ↓FT4 (thyroid failed). Secondary = ↓TSH + ↓FT4 (pituitary failed). Tertiary = ↓TRH → ↓TSH → ↓FT4 (hypothalamic failure). Key: TSH direction is opposite between primary and secondary." },
+    { stem: "In hyperthyroidism from a TSH-secreting pituitary adenoma (thyrotropinoma), what lab pattern is expected?", opts: ["↑TSH, ↓free T4","↓TSH, ↑free T4","↑TSH, ↑free T4","↓TSH, ↓free T4","Normal TSH, ↑free T4"], correct: 2, exps: ["Primary hypothyroid pattern.","Typical hyperthyroidism pattern — but TSH-secreting adenoma is different.","CORRECT. Thyrotropinoma: pituitary adenoma autonomously secretes TSH → ↑TSH + ↑free T4. This is 'inappropriate TSH' — elevated TSH in the setting of elevated thyroid hormone. Rare cause of hyperthyroidism. Treatment: surgical removal of pituitary adenoma.","Primary hypothyroid would show ↓TSH only with secondary AI.","In thyrotropinoma, TSH is elevated (not normal)."], teach: "TSH-secreting adenoma (thyrotropinoma): ↑TSH + ↑FT4 (inappropriate TSH secretion). Rare! Most common cause of ↑TSH + ↑FT4 in practice: lab error or heterophile antibodies causing falsely elevated TSH. Key: most hyperthyroidism has ↓TSH — if TSH is elevated with hyperthyroidism, suspect thyrotropinoma or lab artifact." },
+    { stem: "A 48-year-old woman with Graves' disease is treated with methimazole. 4 weeks later, her symptoms improve. TSH is still suppressed at 0.02 mIU/L. Free T4 has normalized. What explains the persistently suppressed TSH?", opts: ["Methimazole suppresses TSH production directly","TSH suppression persists for weeks-months after FT4 normalizes because pituitary thyrotropes remain chronically suppressed","TRAb continue to suppress TSH despite normal T4","Methimazole blocks TSH release","TSH is unreliable during treatment"], correct: 1, exps: ["Methimazole blocks thyroid hormone synthesis, not TSH directly.","CORRECT. TSH recovery lags significantly behind free T4 normalization. After months of TSH suppression (from hyperthyroidism), the pituitary thyrotropes are down-regulated and take weeks-months to recover, even after T4 normalizes. Do not escalate treatment just because TSH is still low early in therapy.","TRAb don't suppress TSH directly; high T4 does.","Methimazole doesn't block TSH release.","TSH is reliable but lags — this is a known pharmacokinetic/pharmacodynamic consideration in treatment monitoring."], teach: "Monitoring Graves' treatment: Don't use TSH as primary monitoring during initial treatment (lags 2-3 months). Use FREE T4 to assess treatment response. Once FT4 normalizes, continue treatment — TSH will recover gradually. Avoid over-treatment (making patient hypothyroid) by checking FT4 more frequently early on." },
+];
+const vigs = [
+    { banner: "Clinical Vignette | HPT Axis Integration", stem: `A 55-year-old woman sees her OB-GYN for amenorrhea and galactorrhea x 6 months. She also notes fatigue, cold intolerance, constipation, and 12-lb weight gain. TSH is 95 mIU/L (markedly elevated). Free T4 is very low. Prolactin is 45 ng/mL (mildly elevated). MRI pituitary: normal.`, question: "What is the diagnosis and what single treatment will resolve BOTH the hypothyroid AND hyperprolactinemia?", opts: ["Prolactinoma — treat with cabergoline","Primary hypothyroidism — treat with levothyroxine (resolves both TSH elevation and hyperprolactinemia)","Secondary hypothyroidism — treat with TRH","Stalk compression — remove the mass","Multiple endocrine neoplasia — refer to genetics"], correct: 1, exps: ["Prolactinoma would not explain the markedly elevated TSH, and MRI is normal.","CORRECT. Primary hypothyroidism → ↓T4 → ↑TRH → ↑TSH AND ↑prolactin (TRH stimulates both thyrotropes and lactotropes). Normal MRI rules out mass. Treatment: levothyroxine → T4 normalizes → ↓TRH → TSH normalizes + prolactin normalizes. No dopamine agonist needed.","Secondary hypothyroid: TSH would be low, not high.","No mass on MRI.","No MEN syndrome is described."], teach: "Classic boards integration: hypothyroidism + galactorrhea + amenorrhea = elevated TRH driving both TSH and prolactin. One treatment (levothyroxine) fixes both problems. Always check TSH before attributing hyperprolactinemia to a prolactinoma." },
+    { banner: "Clinical Vignette | Graves' Disease", stem: `A 34-year-old woman presents with palpitations, tremor, 12-lb weight loss, heat intolerance, exophthalmos, and diarrhea x 3 months. TSH is 0.01 mIU/L (suppressed). Free T4 is 3.8 ng/dL (markedly elevated). TSH receptor antibodies (TRAb) are positive.`, question: "Explain the HPT axis abnormality in Graves' disease.", opts: ["Hypothalamus produces excess TRH causing TSH and T4 elevation","TRAb mimic TSH at thyroid follicular cells → autonomous T4 production → negative feedback suppresses TRH and TSH","TRAb block TSH receptor → ↑TSH compensates → ↑T4","Destruction of thyroid → T4 release (like Hashimoto's) → feedback suppression","Pituitary adenoma secretes TSH → ↑T4"], correct: 1, exps: ["TRH is suppressed (not elevated) in Graves'.","CORRECT. TRAb (thyroid-stimulating immunoglobulins) bind and ACTIVATE TSH receptors on thyroid follicular cells (like TSH agonists) → autonomous T4/T3 production → negative feedback on hypothalamus (↓TRH) AND pituitary (↓TSH). Result: suppressed TSH + elevated FT4.","TRAb ACTIVATE, not block, TSH receptors.","Graves' is not primarily destructive thyroiditis (though it can have a thyroid storm phase).","TSH-secreting adenoma would show ↑TSH + ↑FT4; here TSH is suppressed."], teach: "Graves' disease: TSI (TRAb) mimics TSH → autonomous thyroid stimulation → hyperthyroidism → TSH suppressed. Exophthalmos = TRAb activates orbital fibroblasts (not from T4 itself). Treatment: methimazole, radioiodine, or thyroidectomy. Beta-blockers for symptomatic relief (blocks adrenergic effects of thyroid hormone)." },
+];
+const traps = [
+    { title: "TRAP #1: Elevated TSH means the thyroid is hyperactive", myth: "A high TSH level means the thyroid is overproducing hormone (hyperthyroidism).", truth: "Elevated TSH means the PITUITARY is trying harder to stimulate the thyroid — this indicates the thyroid is UNDER-PRODUCING (primary hypothyroidism). High TSH = hypothyroid (primary). Low TSH = hyperthyroid (primary). Remember: TSH and thyroid status move in OPPOSITE directions in primary disease." },
+    { title: "TRAP #2: Total T4 is the best test for thyroid function", myth: "Total T4 is the most reliable marker of thyroid status.", truth: "TOTAL T4 reflects both bound and free T4. TBG changes (estrogen, pregnancy, androgens, liver disease) alter total T4 without affecting free T4 or thyroid function. FREE T4 + TSH are the best tests. TSH is most sensitive — small changes in free T4 cause large TSH changes." },
+    { title: "TRAP #3: High TSH + high FT4 is impossible", myth: "You cannot have elevated TSH and elevated free T4 simultaneously.", truth: "TSH-secreting pituitary adenoma (thyrotropinoma): autonomous TSH secretion → ↑TSH + ↑FT4. This is 'inappropriate TSH' — the pituitary doesn't respond to T4's negative feedback. Rare but important. Also seen in thyroid hormone resistance syndrome." },
+    { title: "TRAP #4: Levothyroxine should be titrated to normalize TSH quickly", myth: "In treating hypothyroidism, TSH should normalize within 2 weeks of starting levothyroxine.", truth: "TSH lags free T4 by 6–8 weeks. After starting levothyroxine, FT4 normalizes first, then TSH normalizes slowly. In hyperthyroidism treatment, TSH remains suppressed for weeks-months after FT4 normalizes. Use FT4 for early monitoring; TSH for long-term optimization." },
+    { title: "TRAP #5: Hypothyroidism and galactorrhea means there's a prolactinoma", myth: "Galactorrhea + amenorrhea always means prolactinoma; check prolactin and start dopamine agonist.", truth: "ALWAYS check TSH when evaluating galactorrhea/amenorrhea. Primary hypothyroidism → ↑TRH → ↑prolactin → galactorrhea. Treatment: levothyroxine (not dopamine agonist). Failure to check TSH = missed diagnosis, unnecessary bromocriptine, untreated hypothyroidism." },
+];
+const fibs = [
+    { prompt: "TRH from the ________ hypothalamic area targets TWO pituitary cell types: ________ cells (→TSH) and ________ cells (→prolactin).", answers: ["anterior","thyrotrope","lactotrope"], hint: "TRH: anterior hypothalamus → thyrotropes (TSH) + lactotropes (prolactin)" },
+    { prompt: "Primary hypothyroid: ↓T4 → ↑________ → ↑________ AND ↑________. These elevated hormones explain both the diagnostic TSH value AND the unexpected galactorrhea.", answers: ["trh","tsh","prolactin"], hint: "↓T4 → ↑TRH → ↑TSH + ↑prolactin (TRH stimulates both)" },
+    { prompt: "Graves' disease: ________ (TRAb) bind and activate TSH receptors → autonomous ↑T4 → negative feedback → ↓________ and ↓________.", answers: ["thyroid stimulating immunoglobulin","trab","tsh","trh"], hint: "TRAb mimic TSH → ↑T4 → negative feedback suppresses TSH and TRH" },
+    { prompt: "OCP elevates ________ in liver → ↑total T4 (more bound) but ________ T4 is unchanged. ________ is also unchanged. This is NOT thyroid disease.", answers: ["tbg","thyroid binding globulin","free","tsh"], hint: "OCP → ↑TBG → ↑total T4 but free T4 + TSH normal. Not thyroid disease." },
+    { prompt: "TSH-secreting adenoma (thyrotropinoma): ↑________ (autonomous) + ↑________ (from thyroid stimulation). This is different from ALL other hyperthyroidism where TSH is ________.", answers: ["tsh","free t4","ft4","suppressed","low"], hint: "Thyrotropinoma: ↑TSH + ↑FT4 (inappropriate TSH). All other hyperthyroidism: ↓TSH." },
+];
+const REF_HTML = `<table class='ref-table'><thead><tr><th>Condition</th><th>TRH</th><th>TSH</th><th>Free T4</th><th>Prolactin</th><th>Key Cause</th></tr></thead><tbody>
+<tr><td class='hl'>Primary Hypothyroid</td><td class='hl-r'>↑↑</td><td class='hl-r'>↑↑</td><td class='hl-r'>↓</td><td class='hl-r'>↑ (TRH-driven)</td><td>Hashimoto's, post-ablation</td></tr>
+<tr><td class='hl'>Secondary Hypothyroid</td><td>↑</td><td class='hl-r'>↓ or N</td><td class='hl-r'>↓</td><td>N (pituitary fails)</td><td>Pituitary failure</td></tr>
+<tr><td class='hl'>Tertiary Hypothyroid</td><td class='hl-r'>↓</td><td class='hl-r'>↓</td><td class='hl-r'>↓</td><td>N</td><td>Hypothalamic failure</td></tr>
+<tr><td class='hl'>Primary Hyperthyroid (Graves')</td><td class='hl-r'>↓</td><td class='hl-r'>↓↓</td><td class='hl-g'>↑↑</td><td>N</td><td>TRAb → autonomous T4</td></tr>
+<tr><td class='hl'>Thyrotropinoma</td><td class='hl-r'>↓</td><td class='hl-g'>↑</td><td class='hl-g'>↑</td><td>May ↑ if co-secreting</td><td>TSH-secreting pituitary adenoma</td></tr>
+<tr><td class='hl'>↑TBG (estrogen, OCP)</td><td>N</td><td>N</td><td>N (total T4 ↑)</td><td>N</td><td>TBG elevation; not disease</td></tr>
+</tbody></table>`;
+</script>
+<script>
+function switchTab(n,b){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');if(b)b.classList.add('active');}
+function renderFlashcards(){document.getElementById('fcGrid').innerHTML=flashcards.map((fc,i)=>`<div class="fc" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front"><div class="fc-label">💡 Card ${i+1} of ${flashcards.length}</div><div class="fc-q">${fc.q}</div></div><div class="fc-back"><div class="fc-label">✅ Answer</div><div class="fc-a">${fc.a.replace(/\n/g,'<br>')}</div></div></div></div>`).join('');}
+function renderMCQ(){document.getElementById('mcqContainer').innerHTML=mcqs.map((q,qi)=>`<div class="mcq-item"><div class="mcq-num">Question ${qi+1} of ${mcqs.length}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options" id="opts${qi}">${q.opts.map((o,oi)=>`<div class="mcq-opt" onclick="selQ(this,${qi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span></div>`).join('')}</div><div class="mcq-explanation" id="exp${qi}"></div><div class="teaching-pt" id="teach${qi}"><span class="tp-label">📚 Teaching Point</span>${q.teach}</div></div>`).join('');}
+function selQ(btn,qi,oi){const c=document.getElementById('opts'+qi);if(c.dataset.answered)return;c.dataset.answered='true';const q=mcqs[qi];c.querySelectorAll('.mcq-opt').forEach(b=>b.setAttribute('disabled','true'));c.querySelectorAll('.mcq-opt').forEach((b,i)=>{if(i===q.correct)b.classList.add('correct');else b.classList.add('wrong');});const e=document.getElementById('exp'+qi);e.innerHTML=`<span class="exp-label">${oi===q.correct?'✅ Correct!':'❌ Incorrect'}</span>${q.exps[oi]}<br><br>${q.exps.map((x,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${x}`).join('<br>')}`;e.classList.add('visible');document.getElementById('teach'+qi).classList.add('visible');}
+function renderVigs(){document.getElementById('vigContainer').innerHTML=vigs.map((v,vi)=>`<div class="vig-item"><div class="vig-banner">${v.banner}</div><div class="vig-stem">${v.stem}</div><div class="mcq-stem" style="margin-bottom:10px"><strong style="color:#E6EDF3">${v.question}</strong></div><div class="mcq-options" id="vopts${vi}">${v.opts.map((o,oi)=>`<div class="mcq-opt" onclick="selV(this,${vi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span></div>`).join('')}</div><div class="mcq-explanation" id="vexp${vi}"></div><div class="teaching-pt" id="vteach${vi}"><span class="tp-label">📚 Teaching Point</span>${v.teach}</div></div>`).join('');}
+function selV(btn,vi,oi){const c=btn.closest('.mcq-options');if(c.dataset.answered)return;c.dataset.answered='true';const v=vigs[vi];c.querySelectorAll('.mcq-opt').forEach(b=>b.setAttribute('disabled','true'));c.querySelectorAll('.mcq-opt').forEach((b,i)=>{if(i===v.correct)b.classList.add('correct');else b.classList.add('wrong');});const e=document.getElementById('vexp'+vi);e.innerHTML=`<span class="exp-label">${oi===v.correct?'✅ Correct!':'❌ Incorrect'}</span>${v.exps[oi]}<br><br>${v.exps.map((x,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${x}`).join('<br>')}`;e.classList.add('visible');document.getElementById('vteach'+vi).classList.add('visible');}
+function renderTraps(){document.getElementById('trapsContainer').innerHTML=traps.map(t=>`<div class="trap-item"><div class="trap-header">${t.title}</div><div class="trap-myth"><div class="trap-myth-label">❌ COMMON MYTH</div>${t.myth}</div><div class="trap-truth"><div class="trap-truth-label">✅ TRUTH</div>${t.truth}</div></div>`).join('');}
+function renderFIB(){document.getElementById('fibContainer').innerHTML=fibs.map((f,i)=>`<div class="fib-item"><div class="fib-prompt">${i+1}. ${f.prompt}</div><input class="fib-input" id="fib${i}" placeholder="Type your answer(s)…"/><button class="fib-btn" onclick="chkFIB(${i})">Check</button><div class="fib-result" id="fibres${i}"></div><div style="font-size:0.78em;color:#6B7280;margin-top:6px;">Hint: ${f.hint}</div></div>`).join('');}
+function chkFIB(i){const f=fibs[i];const v=document.getElementById('fib'+i).value.toLowerCase().trim();const ok=f.answers.some(a=>v.includes(a.toLowerCase()));const r=document.getElementById('fibres'+i);r.className=ok?'fib-result correct':'fib-result incorrect';r.textContent=ok?'✅ Correct! '+f.hint:'❌ Review: '+f.hint;}
+renderFlashcards();renderMCQ();renderVigs();renderTraps();renderFIB();
+document.getElementById('refContainer').innerHTML=REF_HTML;
+</script>
+</body>
+</html>

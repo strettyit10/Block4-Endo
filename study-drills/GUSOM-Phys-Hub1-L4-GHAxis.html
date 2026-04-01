@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phys Hub #1 L4: HP-GH Axis</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+        :root { --accent: #6A4C93; --accent-light: rgba(106,76,147,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A0A30 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+        .lo-box { background: var(--accent-light); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 14px; font-size: 0.82em; color: #C9D1D9; line-height: 1.6; }
+        .lo-box strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.06em; }
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.88em; color: #D1FAE5; line-height: 1.6; }
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; gap: 10px; align-items: flex-start; }
+        .mcq-opt:hover:not([disabled]) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74,222,128,0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239,68,68,0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; line-height: 1.6; }
+        .mcq-explanation.visible { display: block; }
+        .exp-label { color: #4ADE80; font-weight: 600; display: block; margin-bottom: 4px; }
+        .teaching-pt { background: var(--accent-light); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #C9D1D9; display: none; line-height: 1.6; }
+        .teaching-pt.visible { display: block; }
+        .tp-label { font-weight: 700; color: var(--accent); display: block; margin-bottom: 4px; }
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: var(--accent-light); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #C9D1D9; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+        .trap-item { background: #1A1212; border: 1px solid #7F1D1D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-header { color: #FCA5A5; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; }
+        .trap-myth { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #FCA5A5; margin-bottom: 8px; }
+        .trap-truth { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D1FAE5; }
+        .trap-myth-label { font-size: 0.75em; color: #EF4444; font-weight: 700; margin-bottom: 4px; }
+        .trap-truth-label { font-size: 0.75em; color: #4ADE80; font-weight: 700; margin-bottom: 4px; }
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: inherit; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; line-height: 1.5; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.87em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-g { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-r { color: #F87171; font-weight: 600; }
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <a href="GUSOM-Phys-Hub1-ActiveDrills.html" class="back">← Hub #1 Landing</a>
+    <h1>Lecture 4: <span class="accent-tag">HP-GH Axis</span></h1>
+    <div class="subtitle">GHRH · Somatostatin · IGF-1 feedback · GH metabolic effects · Acromegaly · Stimulators/inhibitors</div>
+    <div class="lo-box"><strong>Learning Objectives</strong>Identify hypothalamic hormones controlling GH · Describe feedback regulating GH · Explain GH actions on bone, muscle, fat, glucose · Describe GH adenoma disease · Describe acromegaly features and causes · Explain GH-IGF-1 relationship · List GH stimulators and inhibitors</div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('flashcards',this)">🃏 Flashcards</button>
+    <button class="tab-btn" onclick="switchTab('mcq',this)">❓ MCQ</button>
+    <button class="tab-btn" onclick="switchTab('vignettes',this)">🏥 Vignettes</button>
+    <button class="tab-btn" onclick="switchTab('traps',this)">⚠️ Test Traps</button>
+    <button class="tab-btn" onclick="switchTab('fib',this)">✏️ Fill-in-Blank</button>
+    <button class="tab-btn" onclick="switchTab('ref',this)">📊 Reference</button>
+  </div>
+  <div id="tab-flashcards" class="tab-content active"><div class="section-title">Anki-Powered Flashcards — Click to Flip</div><div class="fc-grid" id="fcGrid"></div></div>
+  <div id="tab-mcq" class="tab-content"><div class="section-title">Multiple Choice Practice</div><div id="mcqContainer"></div></div>
+  <div id="tab-vignettes" class="tab-content"><div class="section-title">Clinical Vignettes</div><div id="vigContainer"></div></div>
+  <div id="tab-traps" class="tab-content"><div class="section-title">⚠️ Test Traps — Common Misconceptions</div><div id="trapsContainer"></div></div>
+  <div id="tab-fib" class="tab-content"><div class="section-title">Fill in the Blank</div><div id="fibContainer"></div></div>
+  <div id="tab-ref" class="tab-content"><div class="section-title">Quick Reference</div><div id="refContainer"></div></div>
+</div>
+<script>
+const flashcards = [
+    { q: "IGF-1 long-loop negative feedback — what are its 3 targets?", a: "IGF-1 feeds back to:\n1. ↓GHRH from ventromedial nucleus (less stimulator)\n2. ↑Somatostatin from periventricular nucleus (more inhibitor)\n3. Directly ↓GH secretion from somatotropes\nResult: self-limiting pulsatile GH/IGF-1 loop" },
+    { q: "GH stimulators vs inhibitors — key pairs to know", a: "STIMULATORS: Hypoglycemia/fasting | Deep slow-wave sleep (stage 3-4) | Exercise | High amino acids | Sex steroids (E₂, testosterone) | Low free fatty acids | Melatonin\nINHIBITORS: Hyperglycemia | Somatostatin | Elevated IGF-1 | Hypercortisolemia | Obesity | High free fatty acids\nDiagnostic: OGTT — normal suppresses GH to <1 ng/mL; acromegaly = fails to suppress" },
+    { q: "GH metabolic effects: FED vs FASTING state", a: "FED state: GH + IGF-1 → protein ANABOLISM in muscle (builds lean mass)\nFASTING state: GH acts as anti-insulin:\n• Lipolysis in adipose → ↑free fatty acids\n• Gluconeogenesis in liver → ↑blood glucose\n• Glucose SPARING in muscle/fat → insulin resistance\nGH = key counter-regulatory hormone to insulin in fasting" },
+    { q: "Pre-natal vs post-natal growth factors", a: "Pre-natal: IGF-2 (regulated by insulin, NOT GH) → babies with congenital GH deficiency born NORMAL SIZE\nPost-natal: IGF-1 (made in liver, stimulated by GH)\nClinical implication: GH deficiency presents after birth as growth failure, not as IUGR" },
+    { q: "Where do GHRH and somatostatin converge in signaling?", a: "Both converge on the cAMP-PKA pathway in somatotropes:\nGHRH → Gs → ↑cAMP → PKA → GH release (stimulatory)\nSomatostatin → Gi → ↓cAMP → PKA inhibited → ↓GH\nOpposite ends of adenylyl cyclase — same final pathway" },
+    { q: "Why does T1DM cause low IGF-1 despite high GH?", a: "Insulin drives GH RECEPTOR expression in hepatocytes\nT1DM: ↓insulin → ↓GH receptors in liver → liver CANNOT respond to GH → ↓IGF-1 despite ↑GH\nCall this 'GH resistance': normal/elevated GH but impaired downstream signaling\nTreat underlying insulin deficiency to restore IGF-1 production" },
+    { q: "Major targets of GH (direct and indirect effects)", a: "Major targets: Liver (IGF-1 production — indirect effects), Skeletal muscle (anabolism via IGF-1), Adipose tissue (lipolysis — direct GH effect)\nGH has NO significant effect on immune system\nBone: GH acts on epiphyseal plate chondrocytes (both direct and via IGF-1)" },
+    { q: "Clinical features of acromegaly", a: "GH excess in ADULTS (epiphyses closed):\n• Coarse facial features, enlarged jaw (prognathism), frontal bossing\n• Enlarged hands/feet (ring and shoe size increasing)\n• Carpal tunnel syndrome (median nerve compression)\n• Insulin resistance → T2DM\n• HTN, sleep apnea, colonic polyps (↑colon cancer risk)\n• Visual field defects if macroadenoma (bitemporal hemianopsia)\nDiagnosis: IGF-1 (screen) + OGTT failure to suppress GH (confirm)" },
+    { q: "IGF-1 binding protein — clinical significance?", a: "Nearly all IGF-1 circulates bound to IGFBP-3 (insulin-like growth factor binding protein 3)\nResult: long half-life (hours-days vs minutes for GH)\nClinical use: IGF-1 levels are STABLE throughout the day → best biochemical marker for acromegaly screening and treatment monitoring (unlike GH which is pulsatile)" },
+    { q: "How does FASTING stimulate GH secretion?", a: "Fasting → ↓serum glucose AND ↓serum fatty acids → both stimulate GH secretion\nHuman placental lactogen (hPL) also inhibits GH secretion (responsible for fetal growth, GH-independent)\nIncreased free fatty acids → INHIBIT GH secretion (negative feedback)" },
+    { q: "GH in healthy adults — what is its role?", a: "GH maintains adult body composition: preserves lean muscle mass, promotes bone density, regulates fat distribution\nGH deficiency in adults: ↑visceral fat, ↓muscle, ↓bone density, fatigue, poor quality of life\nGH replacement in adults (pituitary-deficient): FDA-approved, improves body composition" },
+    { q: "Sex steroids and GH — relationship?", a: "Both estradiol AND testosterone STIMULATE GH secretion\nPuberty: sex steroids ↑ → major GH surge → adolescent growth spurt\nHigh cortisol: INHIBITS GH (opposite of sex steroids)\nClinical: Cushing's disease in children → growth failure (↑cortisol suppresses GH)" },
+];
+const mcqs = [
+    { stem: "A 45-year-old man has enlarged hands, jaw prognathism, and new-onset T2DM over 5 years. IGF-1 is 3x normal. After 75g oral glucose, GH is 8 ng/mL. Diagnosis?", opts: ["Gigantism","Acromegaly — excess GH after epiphyseal fusion","Cushing's syndrome","Ectopic IGF-1","Prolactinoma"], correct: 1, exps: ["Gigantism: before epiphyses close in childhood.","CORRECT. Acromegaly = excess GH in adults. Features: coarse facies, enlarged extremities, insulin resistance. OGTT: normal → GH <1 ng/mL; acromegaly → fails to suppress.","Cushing's: central obesity, moon face, purple striae, not enlarged extremities.","Ectopic IGF-1 would suppress, not stimulate, pituitary GH.","Prolactinoma: galactorrhea, amenorrhea, not acral enlargement."], teach: "Acromegaly confirmation = OGTT. Screening = IGF-1. Treat: transsphenoidal surgery (first-line). Medical: somatostatin analogs (octreotide), pegvisomant (GH receptor antagonist)." },
+    { stem: "A 24-hour fasting GH is measured. Which finding is MOST expected during fasting?", opts: ["↓GH to undetectable (fasting suppresses GH)","↑GH (promotes lipolysis and gluconeogenesis)","No change in GH (regulated only by sleep)","↑GH only if amino acids are high","↓GH because somatostatin is elevated"], correct: 1, exps: ["GH is STIMULATED by fasting, not suppressed.","CORRECT. Fasting → ↓glucose AND ↓free fatty acids → stimulates GH → lipolysis and gluconeogenesis. GH is the fasting counter-regulatory hormone.","GH is also regulated by osmolality, glucose, exercise — not only sleep.","Amino acids are also GH stimulators, but low glucose is the primary fasting stimulus.","Somatostatin is not primarily elevated by fasting."], teach: "GH in fasting: ↑lipolysis (↑FFAs) + ↑gluconeogenesis + ↓glucose uptake in muscle. This provides fuel and maintains blood glucose without insulin." },
+    { stem: "Best SCREENING test for acromegaly in clinic?", opts: ["Random serum GH","Serum IGF-1","OGTT with GH","24-hr urine GH","Somatostatin level"], correct: 1, exps: ["Random GH is unreliable — pulsatile. A high value doesn't confirm; a low value doesn't rule out.","CORRECT. IGF-1 reflects integrated GH secretion over time (stable, long half-life via IGFBP-3). Best screening test.","OGTT is the gold-standard CONFIRMATORY test, not first-line screening.","Urine GH is not a standard clinical test.","Somatostatin levels are not clinically used."], teach: "Acromegaly workup: Suspect → IGF-1 (screen) → OGTT + GH (confirm: GH should suppress to <1; failure = acromegaly) → MRI pituitary (locate tumor)." },
+    { stem: "Laron syndrome (GH receptor loss-of-function) shows which lab pattern?", opts: ["↓GH, ↓IGF-1","↑GH, ↑IGF-1","↑GH, ↓IGF-1","↓GH, ↑IGF-1","Normal GH, normal IGF-1"], correct: 2, exps: ["GH is HIGH in Laron (no negative feedback from IGF-1).","GH is high, IGF-1 is LOW (receptor non-functional → no liver response).","CORRECT. Laron: pituitary makes normal GH → ↑GH (no IGF-1 feedback). But GH receptor is broken → liver makes NO IGF-1 → ↓IGF-1 → growth failure. Treat with recombinant IGF-1.","IGF-1 would not be elevated without GH receptor.","GH is elevated in Laron."], teach: "Laron syndrome: ↑GH + ↓IGF-1 + short stature. Treat with mecasermin (recombinant IGF-1) — NOT GH (receptor broken). Distinct from classical GH deficiency (↓GH, ↓IGF-1)." },
+    { stem: "High cortisol (Cushing's syndrome) causes growth failure in children. What is the mechanism regarding GH?", opts: ["Cortisol stimulates somatostatin → ↓GH","Cortisol directly inhibits epiphyseal chondrocytes and suppresses GH secretion","Cortisol elevates IGF-1 which suppresses GH","Cortisol destroys somatotropes","Cortisol increases GHRH clearance"], correct: 1, exps: ["Cortisol does increase somatostatin (partly true), but the main mechanism is broader.","CORRECT. High cortisol: (1) Directly suppresses GH secretion from somatotropes; (2) Inhibits IGF-1 action at bone/muscle level. Also, glucocorticoids directly impair chondrocyte proliferation. Combined: ↓GH + ↓IGF-1 sensitivity + direct bone effects = growth failure.","Cortisol does not elevate IGF-1 — it reduces IGF-1 signaling.","Cortisol does not destroy somatotropes.","Not the primary mechanism."], teach: "Cushing's in children: growth failure (↓GH + ↓IGF-1 action). Cortisol effect on growth: opposite of sex steroids (which stimulate GH). Treating Cushing's → 'catch-up growth' if epiphyses still open." },
+    { stem: "GHRH and somatostatin both act on somatotropes. Which G protein does each use?", opts: ["Both use Gs","Both use Gi","GHRH = Gq; Somatostatin = Gs","GHRH = Gs; Somatostatin = Gi","GHRH = Gi; Somatostatin = Gs"], correct: 3, exps: ["Only GHRH uses Gs.","Only somatostatin uses Gi.","Gq is the OT/AVP-V1a pathway; not GH regulation.","CORRECT. GHRH → Gs → ↑cAMP → PKA → GH release. Somatostatin → Gi → ↓cAMP → ↓PKA → ↓GH. They oppose each other at the same adenylyl cyclase. This is why octreotide (somatostatin analog) suppresses GH.","Reversed."], teach: "GHRH-Gs and SSTN-Gi converge on adenylyl cyclase: ↑cAMP = GH release; ↓cAMP = GH suppression. Octreotide (SSTN analog) is used for acromegaly because it activates Gi → ↓cAMP → ↓GH. Also used for carcinoid syndrome, VIPoma, glucagonoma." },
+    { stem: "A child with growth hormone deficiency was born at normal birth weight (50th percentile). At age 3, he is at the 5th percentile for height. How does this growth pattern fit with the physiology?", opts: ["Normal birth weight rules out GH deficiency","Pre-natal growth is GH-independent (IGF-2); post-natal growth requires GH (IGF-1)","GH deficiency was corrected in utero by placental GH","Post-natal catch-up growth compensated for the deficiency","This pattern suggests Laron syndrome, not GH deficiency"], correct: 1, exps: ["Normal birth weight is EXPECTED in GH deficiency — fetal growth doesn't need GH.","CORRECT. Pre-natal: IGF-2 (GH-independent) → normal birth weight. Post-natal: GH → liver IGF-1 → bone growth. GH deficiency appears after birth (postnatal growth failure). Treat with recombinant GH.","Placental GH is a different molecule (hPL/hGH-V) and inhibits, not replaces, pituitary GH.","No catch-up growth occurs with untreated GH deficiency.","Laron would show ↑GH + ↓IGF-1; GH deficiency shows ↓GH + ↓IGF-1. Treat GH deficiency with GH; Laron with IGF-1."], teach: "GH deficiency: normal birth size (IGF-2 independent of GH), postnatal growth failure. Diagnosis: ↓IGF-1, ↓GH after provocative test (ITT). Treatment: recombinant GH until epiphyseal closure." },
+];
+const vigs = [
+    { banner: "Clinical Vignette | Acromegaly Workup", stem: `A 48-year-old woman notices her wedding ring no longer fits and her shoe size increased from 8 to 10 over 7 years. Jaw is enlarged. New-onset HTN and prediabetes. <strong>IGF-1: 3.2x upper limit of normal.</strong> MRI shows a 1.4 cm pituitary mass.`, question: "Which test CONFIRMS acromegaly?", opts: ["Single random GH >5 ng/mL","IGF-1 alone (already done — confirms diagnosis)","OGTT: GH fails to suppress to <1 ng/mL after glucose load","24-hour urinary GH","Somatostatin stimulation test"], correct: 2, exps: ["Random GH is unreliable due to pulsatility; not confirmatory.","IGF-1 is a screening test; OGTT is confirmatory.","CORRECT. OGTT confirmation: oral 75g glucose → measure GH at 30, 60, 90 min. Normal: GH <1 ng/mL. Acromegaly: GH fails to suppress (autonomous GH secretion from adenoma). This confirms the diagnosis before surgery.","24-hr urine GH is not standard.","Somatostatin stimulation tests GH excess (somatostatin analogs suppress GH in normal but not acromegaly? Not standard)."], teach: "Acromegaly confirmation = OGTT with GH. IGF-1 is stable and is the screening test. OGTT is confirmatory because it tests suppressibility. Treat: trans-sphenoidal surgery. Medical if surgery fails: octreotide/lanreotide (SSTN analogs), pegvisomant (GH receptor antagonist)." },
+    { banner: "Clinical Vignette | Somatostatinoma", stem: `A 60-year-old man has diabetes mellitus, steatorrhea (fatty stools), and achlorhydria. Endoscopy shows an islet cell tumor. Serum somatostatin is markedly elevated. Both serum GH and TSH are low.`, question: "Why are both GH AND TSH suppressed in this patient?", opts: ["Somatostatin specifically inhibits only GH; TSH is low from ectopic TRH","Somatostatin inhibits both GH (somatotropes) and TSH (thyrotropes) from anterior pituitary","The pancreatic tumor compresses the pituitary stalk","Ectopic cortisol from the tumor suppresses both","Somatostatin inhibits IGF-1 which then suppresses both"], correct: 1, exps: ["Somatostatin inhibits BOTH, not just GH.","CORRECT. Somatostatin = 'the great inhibitor.' Periventricular nucleus normally suppresses GH AND TSH. Ectopic somatostatin from pancreatic tumor replicates this. Triad: diabetes (↓insulin) + steatorrhea (↓exocrine pancreas via ↓CCK) + achlorhydria (↓gastrin).","Pancreatic tumor doesn't compress pituitary.","Cortisol is not from this tumor.","Not the mechanism."], teach: "Somatostatinoma triad: Diabetes + Steatorrhea + Achlorhydria (3 S's: Somatostatinoma + sugar + stool + stomach acid). Somatostatin inhibits GH, TSH, insulin, glucagon, gastrin, CCK, and VIP. Octreotide (SS analog) used therapeutically for acromegaly, carcinoid, VIPoma, Zollinger-Ellison." },
+    { banner: "Clinical Vignette | GH Deficiency Adult", stem: `A 35-year-old woman with prior craniopharyngioma resection reports fatigue, ↑abdominal fat, ↓exercise tolerance, and poor quality of life. IGF-1 is in the low-normal range. Stimulation testing (ITT) shows GH fails to rise adequately.`, question: "What is the appropriate treatment?", opts: ["Exogenous cortisol (she has adrenal insufficiency)","Recombinant GH (somatropin) replacement","IGF-1 (mecasermin) replacement","Testosterone supplementation","Somatostatin analog (octreotide)"], correct: 1, exps: ["Cortisol is for adrenal insufficiency; not described here.","CORRECT. Adult GH deficiency from pituitary tumor/surgery → ↑fat, ↓lean, ↓bone. Recombinant GH (somatropin) replacement is FDA-approved in adults. Improves body composition, bone density, quality of life.","Mecasermin (IGF-1) is for Laron syndrome (GH receptor defect), not standard GH deficiency.","Testosterone may be indicated if gonadotropin deficiency co-exists, but not the primary GH deficiency treatment.","Octreotide SUPPRESSES GH — used for acromegaly, not GH deficiency."], teach: "Adult GH deficiency after pituitary disease: can be subtle. Symptoms: ↑visceral fat, ↓lean mass, ↓bone density, dyslipidemia, poor quality of life. Diagnosis: IGF-1 + GH stimulation test (ITT or glucagon). Treat: recombinant GH subcutaneous injection." },
+];
+const traps = [
+    { title: "TRAP #1: Random GH confirms acromegaly", myth: "An elevated random serum GH level is diagnostic for acromegaly.", truth: "GH is pulsatile — normal peaks during sleep and exercise mimic acromegaly. Use IGF-1 for screening (stable) and OGTT for confirmation (GH should suppress to <1 ng/mL; failure = acromegaly)." },
+    { title: "TRAP #2: GH-deficient babies are small at birth", myth: "Growth hormone deficiency causes intrauterine growth restriction.", truth: "Pre-natal growth depends on IGF-2 and insulin, NOT GH. GH-deficient babies are born NORMAL SIZE. Growth failure appears postnatally when IGF-1/GH becomes critical for bone growth." },
+    { title: "TRAP #3: GH promotes glucose uptake like insulin", myth: "GH and insulin both stimulate glucose uptake in muscle and fat.", truth: "In fasting, GH OPPOSES insulin: ↓glucose uptake (glucose sparing), ↑gluconeogenesis, ↑lipolysis. GH excess (acromegaly) = insulin resistance → diabetes. In the fed state, GH promotes protein anabolism via IGF-1." },
+    { title: "TRAP #4: Laron syndrome responds to GH injections", myth: "Laron syndrome (GH insensitivity) is treated with recombinant GH to normalize height.", truth: "GH receptor is non-functional in Laron — giving more GH cannot signal. Treatment is recombinant IGF-1 (mecasermin) which bypasses the broken GH receptor. Lab: ↑GH + ↓IGF-1 (hallmark of receptor insensitivity)." },
+    { title: "TRAP #5: Somatostatin only inhibits GH", myth: "Somatostatin's primary role is solely to inhibit GH secretion.", truth: "Somatostatin inhibits: GH AND TSH (pituitary) + insulin and glucagon (pancreas) + gastrin, CCK, VIP, secretin (GI). Somatostatin analogs (octreotide) are used for acromegaly, carcinoid, VIPoma, Zollinger-Ellison, and acute variceal bleeding." },
+];
+const fibs = [
+    { prompt: "GH STIMULATORS: ________ (low blood sugar), ________ sleep, ________ (physical activity), high amino acids, sex steroids. GH INHIBITORS: ________ (high blood sugar), somatostatin, high ________.", answers: ["hypoglycemia","slow-wave","deep","exercise","hyperglycemia","igt","igf","cortisol","fatty acids"], hint: "Stimulators: hypoglycemia, deep sleep, exercise, amino acids, sex steroids. Inhibitors: hyperglycemia, somatostatin, IGF-1, cortisol, high FFAs." },
+    { prompt: "Acromegaly diagnostic test: ________ (screening test, stable throughout day) → oral glucose tolerance test (OGTT) to confirm — GH fails to suppress to <________ ng/mL.", answers: ["igf-1","igf1","1"], hint: "IGF-1 screens; OGTT confirms (GH should suppress to <1 ng/mL)." },
+    { prompt: "Pre-natal growth factor: ________ (GH-independent). Post-natal growth factor: ________ (made in liver, GH-dependent). This explains why GH-deficient babies have ________ birth weight.", answers: ["igf-2","igf2","igf-1","igf1","normal"], hint: "Pre-natal: IGF-2 (GH-independent). Post-natal: IGF-1 (GH-dependent). Normal birth weight." },
+    { prompt: "T1DM: ↓insulin → ↓________ receptor expression in liver → liver cannot respond to GH → ↓________ despite ↑GH (this is 'GH resistance').", answers: ["gh receptor","growth hormone receptor","igf-1","igf1"], hint: "Insulin drives GH receptor expression → without insulin, liver can't make IGF-1 despite elevated GH." },
+    { prompt: "Laron syndrome: GH ________ (high/low) because no negative feedback from ________. IGF-1 ________ (high/low) because GH ________ is non-functional. Treatment: ________.", answers: ["high","igf-1","low","receptor","mecasermin","igf-1"], hint: "Laron: ↑GH (no IGF-1 feedback) + ↓IGF-1 (broken receptor). Treat with mecasermin (recombinant IGF-1)." },
+];
+const REF_HTML = `<table class='ref-table'><thead><tr><th>GH Stimulators</th><th>GH Inhibitors</th></tr></thead><tbody>
+<tr><td>Hypoglycemia / Fasting</td><td>Hyperglycemia (OGTT suppresses GH)</td></tr>
+<tr><td>Deep slow-wave sleep</td><td>Somatostatin (periventricular nucleus)</td></tr>
+<tr><td>Exercise</td><td>Elevated IGF-1 (long-loop)</td></tr>
+<tr><td>High amino acids (arginine, leucine)</td><td>Hypercortisolemia</td></tr>
+<tr><td>Sex steroids (E₂, testosterone)</td><td>Obesity / High free fatty acids</td></tr>
+<tr><td>Melatonin</td><td>Human placental lactogen (fetal growth)</td></tr>
+</tbody></table>
+<table class='ref-table' style='margin-top:14px'><thead><tr><th>Condition</th><th>GH</th><th>IGF-1</th><th>Features</th><th>Treatment</th></tr></thead><tbody>
+<tr><td class='hl'>Acromegaly</td><td class='hl-r'>↑↑</td><td class='hl-r'>↑↑</td><td>Coarse features, enlarged hands/feet, DM, HTN (adult onset)</td><td>Surgery, octreotide, pegvisomant</td></tr>
+<tr><td class='hl'>Gigantism</td><td class='hl-r'>↑↑</td><td class='hl-r'>↑↑</td><td>Tall stature, proportional enlargement (childhood)</td><td>Surgery</td></tr>
+<tr><td class='hl'>GH Deficiency (child)</td><td class='hl-r'>↓</td><td class='hl-r'>↓</td><td>Short stature, central fat, normal birth size</td><td>Recombinant GH (somatropin)</td></tr>
+<tr><td class='hl'>Laron Syndrome</td><td class='hl-g'>↑↑</td><td class='hl-r'>↓↓</td><td>Short stature, normal birth size, GH receptor LOF</td><td>Mecasermin (recombinant IGF-1)</td></tr>
+<tr><td class='hl'>GH Deficiency (adult)</td><td class='hl-r'>↓</td><td class='hl-r'>↓</td><td>↑visceral fat, ↓lean mass, ↓bone density</td><td>Recombinant GH (FDA-approved)</td></tr>
+</tbody></table>`;
+</script>
+<script>
+function switchTab(name,btn){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');if(btn)btn.classList.add('active');}
+function renderFlashcards(){const g=document.getElementById('fcGrid');g.innerHTML=flashcards.map((fc,i)=>`<div class="fc" onclick="this.classList.toggle('flipped')"><div class="fc-inner"><div class="fc-front"><div class="fc-label">💡 Card ${i+1} of ${flashcards.length}</div><div class="fc-q">${fc.q}</div></div><div class="fc-back"><div class="fc-label">✅ Answer</div><div class="fc-a">${fc.a.replace(/\n/g,'<br>')}</div></div></div></div>`).join('');}
+function renderMCQ(){const c=document.getElementById('mcqContainer');c.innerHTML=mcqs.map((q,qi)=>`<div class="mcq-item"><div class="mcq-num">Question ${qi+1} of ${mcqs.length}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options" id="opts${qi}">${q.opts.map((o,oi)=>`<div class="mcq-opt" onclick="selQ(this,${qi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span></div>`).join('')}</div><div class="mcq-explanation" id="exp${qi}"></div><div class="teaching-pt" id="teach${qi}"><span class="tp-label">📚 Teaching Point</span>${q.teach}</div></div>`).join('');}
+function selQ(btn,qi,oi){const c=document.getElementById('opts'+qi);if(c.dataset.answered)return;c.dataset.answered='true';const q=mcqs[qi];c.querySelectorAll('.mcq-opt').forEach(b=>b.setAttribute('disabled','true'));c.querySelectorAll('.mcq-opt').forEach((b,i)=>{if(i===q.correct)b.classList.add('correct');else b.classList.add('wrong');});const e=document.getElementById('exp'+qi);e.innerHTML=`<span class="exp-label">${oi===q.correct?'✅ Correct!':'❌ Incorrect'}</span>${q.exps[oi]}<br><br>${q.exps.map((x,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${x}`).join('<br>')}`;e.classList.add('visible');document.getElementById('teach'+qi).classList.add('visible');}
+function renderVigs(){const c=document.getElementById('vigContainer');c.innerHTML=vigs.map((v,vi)=>`<div class="vig-item"><div class="vig-banner">${v.banner}</div><div class="vig-stem">${v.stem}</div><div class="mcq-stem" style="margin-bottom:10px"><strong style="color:#E6EDF3">${v.question}</strong></div><div class="mcq-options" id="vopts${vi}">${v.opts.map((o,oi)=>`<div class="mcq-opt" onclick="selV(this,${vi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span></div>`).join('')}</div><div class="mcq-explanation" id="vexp${vi}"></div><div class="teaching-pt" id="vteach${vi}"><span class="tp-label">📚 Teaching Point</span>${v.teach}</div></div>`).join('');}
+function selV(btn,vi,oi){const c=btn.closest('.mcq-options');if(c.dataset.answered)return;c.dataset.answered='true';const v=vigs[vi];c.querySelectorAll('.mcq-opt').forEach(b=>b.setAttribute('disabled','true'));c.querySelectorAll('.mcq-opt').forEach((b,i)=>{if(i===v.correct)b.classList.add('correct');else b.classList.add('wrong');});const e=document.getElementById('vexp'+vi);e.innerHTML=`<span class="exp-label">${oi===v.correct?'✅ Correct!':'❌ Incorrect'}</span>${v.exps[oi]}<br><br>${v.exps.map((x,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${x}`).join('<br>')}`;e.classList.add('visible');document.getElementById('vteach'+vi).classList.add('visible');}
+function renderTraps(){document.getElementById('trapsContainer').innerHTML=traps.map(t=>`<div class="trap-item"><div class="trap-header">${t.title}</div><div class="trap-myth"><div class="trap-myth-label">❌ COMMON MYTH</div>${t.myth}</div><div class="trap-truth"><div class="trap-truth-label">✅ TRUTH</div>${t.truth}</div></div>`).join('');}
+function renderFIB(){document.getElementById('fibContainer').innerHTML=fibs.map((f,i)=>`<div class="fib-item"><div class="fib-prompt">${i+1}. ${f.prompt}</div><input class="fib-input" id="fib${i}" placeholder="Type your answer(s)…"/><button class="fib-btn" onclick="chkFIB(${i})">Check</button><div class="fib-result" id="fibres${i}"></div><div style="font-size:0.78em;color:#6B7280;margin-top:6px;">Hint: ${f.hint}</div></div>`).join('');}
+function chkFIB(i){const f=fibs[i];const v=document.getElementById('fib'+i).value.toLowerCase().trim();const ok=f.answers.some(a=>v.includes(a.toLowerCase()));const r=document.getElementById('fibres'+i);r.className=ok?'fib-result correct':'fib-result incorrect';r.textContent=ok?'✅ Correct! '+f.hint:'❌ Review: '+f.hint;}
+renderFlashcards();renderMCQ();renderVigs();renderTraps();renderFIB();
+document.getElementById('refContainer').innerHTML=REF_HTML;
+</script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phys Hub #1 L1: H-P Relationships I</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #0277BD; --accent-dark: #01579B; --accent-light: rgba(2,119,189,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #161B22 0%, #0D1B2A 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+        .lo-box { background: rgba(2,119,189,0.08); border: 1px solid rgba(2,119,189,0.3); border-radius: 8px; padding: 12px 14px; margin-top: 14px; font-size: 0.82em; color: #90CAF9; line-height: 1.6; }
+        .lo-box strong { color: var(--accent); display: block; margin-bottom: 4px; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.06em; }
+
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* FLASHCARDS */
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.88em; color: #D1FAE5; line-height: 1.6; }
+        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
+
+        /* MCQ */
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; gap: 10px; align-items: flex-start; }
+        .mcq-opt:hover:not([disabled]) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74,222,128,0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239,68,68,0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; line-height: 1.6; }
+        .mcq-explanation.visible { display: block; }
+        .exp-label { color: #4ADE80; font-weight: 600; display: block; margin-bottom: 4px; }
+        .teaching-pt { background: rgba(2,119,189,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #90CAF9; display: none; line-height: 1.6; }
+        .teaching-pt.visible { display: block; }
+        .tp-label { font-weight: 700; color: var(--accent); display: block; margin-bottom: 4px; }
+
+        /* VIGNETTES */
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: var(--accent-light); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #90CAF9; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+
+        /* TRAPS */
+        .trap-item { background: #1A1212; border: 1px solid #7F1D1D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-header { color: #FCA5A5; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; }
+        .trap-myth { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #FCA5A5; margin-bottom: 8px; }
+        .trap-truth { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D1FAE5; }
+        .trap-myth-label { font-size: 0.75em; color: #EF4444; font-weight: 700; margin-bottom: 4px; }
+        .trap-truth-label { font-size: 0.75em; color: #4ADE80; font-weight: 700; margin-bottom: 4px; }
+
+        /* FIB */
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: inherit; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; line-height: 1.5; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+
+        /* REFERENCE */
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.87em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-g { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-r { color: #F87171; font-weight: 600; }
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="GUSOM-Phys-Hub1-ActiveDrills.html" class="back">← Hub #1 Landing</a>
+        <h1>Lecture 1: <span class="accent-tag">Hypothalamic-Pituitary Relationships I</span></h1>
+        <div class="subtitle">Hypothalamic anatomy · Portal system · Anterior pituitary cell types · Feedback loops</div>
+        <div class="lo-box">
+            <strong>Learning Objectives (Watson)</strong>
+            Describe H-P functional and anatomic relationships · Identify hypothalamic nuclei producing vasopressin and oxytocin · List hypothalamic releasing/inhibiting hormones and their targets · Explain three levels of feedback · Name anterior pituitary hormones and cell types · Predict effects of blocking portal blood flow or ablating peripheral target glands
+        </div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards',this)">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq',this)">❓ MCQ</button>
+        <button class="tab-btn" onclick="switchTab('vignettes',this)">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps',this)">⚠️ Test Traps</button>
+        <button class="tab-btn" onclick="switchTab('fib',this)">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('ref',this)">📊 Reference</button>
+    </div>
+
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Anki-Powered Flashcards — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice</div>
+        <div id="mcqContainer"></div>
+    </div>
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes</div>
+        <div id="vigContainer"></div>
+    </div>
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">⚠️ Test Traps — Common Exam Misconceptions</div>
+        <div id="trapsContainer"></div>
+    </div>
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill in the Blank — Complete the Pathway</div>
+        <div id="fibContainer"></div>
+    </div>
+    <div id="tab-ref" class="tab-content">
+        <div class="section-title">Quick Reference</div>
+        <div id="refContainer"></div>
+    </div>
+</div>
+
+<script>
+// ─── TAB ───────────────────────────────────────────────
+function switchTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    if (btn) btn.classList.add('active');
+}
+
+// ─── FLASHCARD DATA ────────────────────────────────────
+const flashcards = [
+    { q: "Which hypothalamic nucleus secretes GnRH (LHRH)?", a: "Medial preoptic nucleus. Remember: 'preoptic = pro-ovulation.' GnRH must be secreted in PULSES — continuous GnRH → receptor downregulation → paradoxical ↓LH/FSH." },
+    { q: "Which hypothalamic nucleus secretes TRH?", a: "Anterior hypothalamic area (anterior nucleus). TRH is a tripeptide that stimulates BOTH TSH AND prolactin — key dual-action concept." },
+    { q: "Which hypothalamic nucleus secretes CRH?", a: "Paraventricular nucleus (PVN). The PVN is the master stress integration hub — also co-secretes ADH and oxytocin from magnocellular neurons." },
+    { q: "Which hypothalamic nucleus secretes somatostatin (GHIH)?", a: "Periventricular nucleus. Somatostatin = 14-aa or 28-aa peptide. Also called GHIH (growth hormone-inhibiting hormone). Inhibits both GH AND TSH." },
+    { q: "Which hypothalamic nucleus secretes GHRH?", a: "Ventromedial nucleus. GHRH (44-aa peptide) stimulates GH release via Gs-PKA. Somatostatin and GHRH converge on opposite ends of the same PKA pathway." },
+    { q: "Which hypothalamic nucleus secretes GnIH (gonadotropin-INHIBITING hormone)?", a: "Dorsomedial nucleus. GnIH suppresses LH/FSH — mediates stress-induced amenorrhea (stress → ↑GnIH → ↓GnRH pulsatility → ↓LH/FSH → amenorrhea)." },
+    { q: "Which hypothalamic nucleus secretes PIH (dopamine) and what else comes from it?", a: "Arcuate nucleus secretes: (1) PIH/dopamine — only inhibitor of prolactin, (2) β-endorphin, (3) α-MSH. All three are derived from POMC processing in the arcuate." },
+    { q: "Blood supply to the ANTERIOR pituitary — what's the pathway?", a: "Superior hypophyseal artery → first capillary bed in the MEDIAN EMINENCE → portal vessels down infundibular stalk → second capillary bed in pars distalis (adenohypophysis). This portal system delivers hypothalamic RH/IH at high concentrations." },
+    { q: "Blood supply to the POSTERIOR pituitary?", a: "Inferior hypophyseal artery. Posterior pituitary (neurohypophysis) = axon terminals of hypothalamic neurons — needs direct arterial supply, not portal system." },
+    { q: "Which pituitary cell types are basophils vs acidophils?", a: "Basophils (hematoxylin-stained): TSH (thyrotropes), ACTH (corticotropes), LH/FSH (gonadotropes) — 'FLAT' cells.\nAcidophils (eosin-stained): GH (somatotropes), Prolactin (lactotropes) — 'GAP' cells.\nMnemo: B-FLAT (Basophil: FSH/LH/ACTH/TSH), A-GAP (Acidophil: GH/PRL)" },
+    { q: "What are the 3 types of negative feedback in the H-P axis?", a: "Long-loop: peripheral hormone (e.g., cortisol) feeds back to hypothalamus AND anterior pituitary.\nShort-loop: pituitary hormone (e.g., ACTH) feeds back to hypothalamus.\nUltra-short: hypothalamic hormone inhibits its own release → generates PULSATILE secretion patterns." },
+    { q: "What is the median eminence and why is its BBB unique?", a: "Region of hypothalamus where releasing/inhibiting hormones enter the FIRST capillary bed of the portal system. The BBB is WEAKENED here — a circumventricular organ — allowing hypothalamic peptides to enter the portal blood. Also allows feedback signals (cortisol, T3) to reach hypothalamic neurons." },
+    { q: "Prolactin negative feedback — which type?", a: "SHORT-loop negative feedback: prolactin feeds back to hypothalamus to stimulate MORE dopamine (PIH) secretion → more inhibition of prolactin. This is one reason why prolactin is unique — it auto-regulates via its own release of PIH." },
+    { q: "What happens to each pituitary hormone if the infundibular stalk is severed?", a: "⬆ PROLACTIN (loses dopamine/PIH inhibition)\n⬇ TSH, ACTH, GH, LH, FSH, ADH/OT (all lose their releasing hormones or neural connections)\nKey rule: if the portal system is interrupted, only prolactin rises; everything else falls." },
+];
+
+// ─── MCQ DATA ──────────────────────────────────────────
+const mcqs = [
+    {
+        stem: "The infundibular stalk is surgically severed in an experiment. Which hormone level rises?",
+        opts: ["TSH","ACTH","Prolactin","GH","LH"],
+        correct: 2,
+        exps: ["TSH falls — loses TRH stimulation.","ACTH falls — loses CRH stimulation.","CORRECT. Prolactin is under exclusive INHIBITORY control (dopamine/PIH). Severing stalk removes dopamine → prolactin rises. Classic boards question.","GH falls — loses GHRH.","LH falls — loses pulsatile GnRH."],
+        teach: "Only prolactin rises after stalk section. Dopamine (PIH) = the sole inhibitor of prolactin. Everything else has a releasing hormone and thus falls."
+    },
+    {
+        stem: "A patient develops galactorrhea and amenorrhea. TSH is 52 mIU/L and free T4 is very low. What mechanism explains the elevated prolactin?",
+        opts: ["Prolactinoma secreting prolactin directly","Stalk compression by thyroid mass","TRH stimulating prolactin from lactotropes","Decreased dopamine secretion","Elevated estrogen stimulating lactotropes"],
+        correct: 2,
+        exps: ["No mass mentioned; presentation is classic primary hypothyroidism.","No mass is described; thyroid masses rarely compress the pituitary stalk.","CORRECT. Primary hypothyroidism → ↓T4 → ↑TRH (loss of negative feedback) → TRH stimulates BOTH TSH AND prolactin. Classic: hypothyroidism + galactorrhea.","Dopamine is not decreased in hypothyroidism.","Elevated estrogen is not the mechanism here."],
+        teach: "TRH has dual targets: thyrotropes (TSH) AND lactotropes (prolactin). Always check TSH when evaluating hyperprolactinemia — hypothyroidism is a reversible cause."
+    },
+    {
+        stem: "Which of the following correctly pairs hypothalamic nucleus → hormonal output?",
+        opts: ["Supraoptic nucleus → CRH","Paraventricular nucleus → GnRH","Ventromedial nucleus → GHRH","Periventricular nucleus → TRH","Dorsomedial nucleus → somatostatin"],
+        correct: 2,
+        exps: ["Supraoptic nucleus → ADH and oxytocin (magnocellular neurons), not CRH.","PVN → CRH (also ADH, oxytocin) — not GnRH. GnRH comes from medial preoptic nucleus.","CORRECT. Ventromedial nucleus → GHRH. Remember: V = Ventromedial = GHRH.","Periventricular → somatostatin, not TRH. TRH comes from anterior hypothalamic area.","Dorsomedial → GnIH (gonadotropin-INHIBITING hormone), not somatostatin."],
+        teach: "Nucleus mnemonics: Medial Preoptic=GnRH, Anterior=TRH, PVN=CRH, Ventromedial=GHRH, Periventricular=Somatostatin, Dorsomedial=GnIH, Arcuate=PIH(dopamine)."
+    },
+    {
+        stem: "GnRH is infused continuously (not pulsatilely) for 3 weeks. After 3 weeks, LH and FSH are LOWER than baseline. Best explanation?",
+        opts: ["Increased GnRH degradation in portal blood","Downregulation of pituitary GnRH receptors","Negative feedback from elevated sex steroids","Increased GnIH from dorsomedial nucleus","Depletion of LH and FSH granules from gonadotropes"],
+        correct: 1,
+        exps: ["Portal degradation is not the primary issue.","CORRECT. Continuous GnRH → receptor desensitization/downregulation on gonadotropes → ↓LH/FSH. Pulsatile GnRH is required. This is the basis for leuprolide (GnRH agonist) suppression in prostate cancer and endometriosis.","If sex steroids were elevated, that would suppress LH/FSH, but the initial drop occurred before sex steroids could rise significantly.","GnIH is not the primary mechanism here.","Granule depletion is not the primary explanation."],
+        teach: "GnRH must be PULSATILE to stimulate LH/FSH. Continuous GnRH → receptor downregulation → paradoxical hypogonadism. Leuprolide exploits this: initial flare, then sustained suppression."
+    },
+    {
+        stem: "Which of the following is the ONLY catecholamine (not peptide) among hypothalamic regulatory hormones?",
+        opts: ["GnRH","CRH","Dopamine (PIH)","TRH","Somatostatin"],
+        correct: 2,
+        exps: ["GnRH is a 10-aa peptide.","CRH is a 41-aa peptide.","CORRECT. Dopamine (PIH) is a CATECHOLAMINE derived from tyrosine. It is NOT a peptide. All other hypothalamic regulatory hormones are peptides or modified peptides.","TRH is a modified tripeptide (pyro-Glu-His-Pro-amide).","Somatostatin is a 14-aa (or 28-aa) cyclic peptide."],
+        teach: "Dopamine = PIH = CATECHOLAMINE. Its small molecular size and lipophilicity allow dopamine agonists (bromocriptine, cabergoline) to be used orally to treat prolactinomas."
+    },
+    {
+        stem: "The anterior pituitary is at greater risk for ischemia than the posterior pituitary. Why?",
+        opts: ["It has higher metabolic demands due to hormone synthesis","It relies on portal blood rather than direct arterial supply and has higher susceptibility to hypotension","It is directly adjacent to the optic chiasm","Its cells lack protective autocrine mechanisms","It has no venous drainage"],
+        correct: 1,
+        exps: ["While true, this alone does not explain the relative ischemic risk.","CORRECT. The adenohypophysis relies on the portal system (secondary capillary bed from superior hypophyseal artery). In severe hypotension (e.g., obstetric hemorrhage), this portal system collapses → anterior pituitary infarction = Sheehan syndrome.","Proximity to optic chiasm is anatomically true but does not explain ischemic risk.","Autocrine mechanisms are not the key factor.","Both have venous drainage via systemic sinuses."],
+        teach: "Sheehan syndrome = postpartum pituitary infarction due to hypotension during hemorrhage. The adenohypophysis depends on portal blood flow — when BP drops, the portal system fails first. Presents as failure to lactate post-delivery."
+    },
+    {
+        stem: "Which of the following organs is NOT regulated by the hypothalamic-pituitary axis?",
+        opts: ["Adrenal cortex","Thyroid gland","Gonads","Pancreatic islets","Liver (via GH/IGF-1)"],
+        correct: 3,
+        exps: ["Adrenal cortex IS regulated — CRH → ACTH → cortisol (HPA axis).","Thyroid IS regulated — TRH → TSH → T3/T4 (HPT axis).","Gonads ARE regulated — GnRH → LH/FSH → estrogen/testosterone/progesterone.","CORRECT. Pancreatic islets self-regulate: insulin is controlled by blood glucose, incretins, and amino acids — NOT by hypothalamic-pituitary hormones. Same for parathyroid glands (PTH regulated by blood Ca²⁺).","Liver IGF-1 production IS regulated — GH from anterior pituitary stimulates liver IGF-1."],
+        teach: "Organs independent of H-P axis: Pancreas (glucose-sensing) and Parathyroid glands (Ca²⁺-sensing). These are self-contained feedback loops."
+    },
+    {
+        stem: "A research model blocks portal blood flow to the anterior pituitary while leaving posterior pituitary blood supply intact. Which finding is EXPECTED?",
+        opts: ["ADH levels rise","Prolactin falls, all others rise","Prolactin rises, TSH/ACTH/GH/LH/FSH all fall","All pituitary hormones fall equally","Only ACTH and TSH fall; others are unaffected"],
+        correct: 2,
+        exps: ["ADH is from the POSTERIOR pituitary (inferior hypophyseal artery) — unaffected by portal blockade.","Prolactin would RISE (not fall), because dopamine inhibition is removed.","CORRECT. Blocking portal flow removes ALL hypothalamic releasing hormones from the anterior pituitary AND removes dopamine (PIH). Without dopamine, prolactin rises. Without releasing hormones, all others fall.","The posterior pituitary is not affected (separate blood supply).","All anterior pituitary hormones except prolactin would fall."],
+        teach: "Portal flow disruption = stalk effect physiology. Prolactin rises (dopamine removed). TSH, ACTH, GH, LH, FSH all fall (lose releasing hormones). ADH and oxytocin are unaffected (posterior pituitary)."
+    },
+];
+
+// ─── VIGNETTES ─────────────────────────────────────────
+const vigs = [
+    {
+        banner: "Clinical Vignette | Stalk Effect",
+        stem: `A 35-year-old woman presents with 8 months of amenorrhea and bilateral milky nipple discharge. She is not pregnant. MRI shows a <strong>non-secreting 1.8 cm mass at the pituitary stalk</strong>. Labs: prolactin 195 ng/mL (↑), TSH 1.2 mIU/L (normal), LH and FSH low, IGF-1 low.`,
+        question: "What is the BEST mechanism explaining elevated prolactin?",
+        opts: ["The mass is a prolactinoma","Stalk compression blocks dopamine delivery to anterior pituitary","TRH excess from hypothalamus stimulates lactotropes","Decreased estrogen from low LH/FSH causes prolactin to rise","ACTH stimulates prolactin release"],
+        correct: 1,
+        exps: ["The question states the mass does NOT secrete hormones itself.","CORRECT. Stalk effect: any mass at or compressing the stalk → blocks dopamine (PIH) transit from hypothalamus → removes inhibition → prolactin rises. Other hormones fall (lose releasing hormones).","TSH is normal, arguing against a hypothyroid/TRH mechanism.","Low estrogen does not directly cause hyperprolactinemia.","ACTH does not regulate prolactin."],
+        teach: "Stalk effect is the key differential from prolactinoma: both → ↑prolactin, but stalk effect also shows ↓TSH/ACTH/GH/LH/FSH. Treatment targets the underlying mass (not dopamine agonists). Prolactinomas are typically >150 ng/mL only if macro-adenoma OR if treated prolactinoma."
+    },
+    {
+        banner: "Clinical Vignette | GnRH Pulsatility",
+        stem: `A 28-year-old man with hypogonadotropic hypogonadism (Kallmann syndrome variant) is started on continuous GnRH infusion. After 2 months, his LH and FSH are <strong>lower</strong> than before treatment began. His testosterone remains undetectable.`,
+        question: "Why did continuous GnRH DECREASE LH and FSH?",
+        opts: ["Continuous GnRH increases somatostatin, which suppresses LH","Continuous GnRH causes GnRH receptor desensitization on gonadotropes","Testosterone negative feedback caused the LH/FSH drop","Continuous GnRH stimulates GnIH secretion","CRH inhibits GnRH pulsatility"],
+        correct: 1,
+        exps: ["Somatostatin does not regulate LH/FSH.","CORRECT. Continuous (non-pulsatile) GnRH → downregulation of pituitary GnRH receptors → paradoxical ↓LH/FSH. Pulsatile GnRH is required for gonadotrope stimulation. This is why leuprolide (GnRH agonist) achieves medical castration.","Testosterone is undetectable, so negative feedback cannot explain the drop.","GnIH is not the primary mechanism here.","CRH mediates stress-induced GnIH, but this is a separate mechanism."],
+        teach: "Therapeutic implication: use PULSATILE GnRH (Gn pump) to RESTORE fertility in Kallmann syndrome. Use CONTINUOUS GnRH agonist to SUPPRESS LH/FSH (prostate cancer, endometriosis, central precocious puberty). Opposite effects from same molecule based on dosing pattern."
+    },
+    {
+        banner: "Clinical Vignette | Sheehan Syndrome",
+        stem: `A 27-year-old woman delivered her first baby via emergency C-section with 3L blood loss. Post-delivery, she is unable to breastfeed (no milk production). 3 months later she returns with fatigue, cold intolerance, and failure of her menstrual cycle to resume. AM cortisol is undetectable. TSH and free T4 are both low. LH and FSH are low.`,
+        question: "What is the diagnosis and underlying mechanism?",
+        opts: ["Prolactinoma compressing the pituitary","Autoimmune hypophysitis destroying all cell types","Anterior pituitary infarction from postpartum hemorrhage causing pan-hypopituitarism","Central diabetes insipidus from posterior pituitary destruction","Hypothalamic Kallmann syndrome"],
+        correct: 2,
+        exps: ["No mention of elevated prolactin; this presentation is pan-hypopituitarism.","Autoimmune hypophysitis is possible but less likely given the clear precipitating hemorrhage.","CORRECT. Sheehan syndrome = anterior pituitary infarction from hypotension during obstetric hemorrhage. The adenohypophysis depends on portal blood; when BP drops, it infarcts. Result: pan-anterior hypopituitarism — low cortisol, low thyroid, no LH/FSH (amenorrhea), no prolactin (failure to lactate). Posterior pituitary usually spared (separate arterial supply).","Posterior pituitary is typically spared in Sheehan (inferior hypophyseal artery supply is intact).","Kallmann is congenital and would not present post-delivery."],
+        teach: "Sheehan syndrome memory hook: 'Sheehan = Sheeps-kan = can't sheep/produce milk.' Presents as failure to lactate + pan-hypopituitarism after postpartum hemorrhage. The anterior pituitary is ENLARGED during pregnancy (hyperplasia of lactotropes) — this makes it more vulnerable to ischemia."
+    }
+];
+
+// ─── TEST TRAPS ────────────────────────────────────────
+const traps = [
+    { title: "TRAP #1: Posterior pituitary MAKES hormones", myth: "The posterior pituitary produces ADH and oxytocin.", truth: "Posterior pituitary only STORES and RELEASES them. ADH and oxytocin are synthesized in magnocellular neurons of the SON and PVN, packaged in vesicles, and transported by FAST AXONAL TRANSPORT to be stored in Herring bodies in the posterior pituitary." },
+    { title: "TRAP #2: Stalk section kills ALL pituitary hormones equally", myth: "Sectioning the pituitary stalk equally decreases all pituitary hormones.", truth: "PROLACTIN RISES after stalk section (loses dopamine inhibition), while TSH, ACTH, GH, LH, FSH all FALL (lose their releasing hormones). Stalk section → prolactin is the only hormone that goes up." },
+    { title: "TRAP #3: PIH/dopamine is a peptide", myth: "Prolactin-inhibiting hormone (PIH) is a peptide like other hypothalamic hormones.", truth: "PIH is DOPAMINE — a CATECHOLAMINE derived from tyrosine, NOT a peptide. This is why dopamine agonists (bromocriptine, cabergoline) work to suppress prolactin in prolactinomas. All other hypothalamic regulatory hormones are peptides." },
+    { title: "TRAP #4: GnRH agonists always stimulate LH/FSH", myth: "GnRH agonists (leuprolide) continuously increase LH and FSH.", truth: "Initially yes (brief 'flare'), but CONTINUOUS GnRH → GnRH receptor desensitization → paradoxical DECREASE in LH/FSH. Pulsatile = stimulatory; continuous = suppressive. This is the mechanism of medical castration in prostate cancer." },
+    { title: "TRAP #5: Anterior pituitary gets blood from inferior hypophyseal artery", myth: "The inferior hypophyseal artery supplies the anterior pituitary.", truth: "POSTERIOR pituitary = inferior hypophyseal artery. ANTERIOR pituitary = superior hypophyseal artery via portal system. Different arteries! Sheehan syndrome involves failure of the superior hypophyseal artery/portal system in hypotension." },
+    { title: "TRAP #6: Pancreas is regulated by H-P axis", myth: "Insulin secretion is controlled by ACTH or pituitary hormones.", truth: "Pancreatic islets self-regulate based on blood glucose, incretins, and amino acids — completely INDEPENDENT of the H-P axis. Similarly, parathyroid PTH secretion is regulated by blood Ca²⁺, not the pituitary." },
+];
+
+// ─── FIB DATA ──────────────────────────────────────────
+const fibs = [
+    { prompt: "Complete the HPA axis: Hypothalamus (PVN) releases ________ → enters portal system → stimulates anterior pituitary ________ cells → release ________ → stimulates adrenal zona fasciculata → ________.", answers: ["crh","corticotroph","acth","cortisol"], hint: "CRH → corticotrophs → ACTH → cortisol" },
+    { prompt: "The arcuate nucleus of the hypothalamus releases 3 molecules: ________ (which inhibits prolactin), ________ (endogenous opioid), and ________ (melanocyte product).", answers: ["dopamine","beta-endorphin","alpha-msh","alpha msh"], hint: "Arcuate: Dopamine/PIH | β-endorphin | α-MSH (all from POMC processing)" },
+    { prompt: "Blood reaches the anterior pituitary via the ________ hypophyseal artery → first capillary bed in the ________ → portal vessels → second capillary bed in the anterior lobe.", answers: ["superior","median eminence"], hint: "Superior → Median eminence → Portal → Anterior pituitary" },
+    { prompt: "Which pituitary cells are acidophils: ________ cells (make GH) and ________ cells (make prolactin)?", answers: ["somatotrope","lactotrope","somatotroph","lactotroph"], hint: "Acidophils: Somatotropes (GH) and Lactotropes (PRL)" },
+    { prompt: "Ultra-short loop feedback results in ________ release patterns. Short-loop: pituitary hormone feeds back to the ________. Long-loop: peripheral hormone feeds back to the ________ AND ________.", answers: ["pulsatile","hypothalamus","hypothalamus","pituitary"], hint: "Ultra-short=pulsatile; Short=hypothalamus; Long=hypothalamus+pituitary" },
+];
+
+// ─── REFERENCE TABLE ───────────────────────────────────
+function renderRef() {
+    const cont = document.getElementById('refContainer');
+    const headers = ["Hypothalamic Nucleus","Hormone Released","Target Pituitary Cell","Anterior Pituitary Hormone","Notes"];
+    const rows = [
+        ["Medial Preoptic","GnRH","Gonadotropes","LH + FSH","Must be PULSATILE; continuous → ↓LH/FSH"],
+        ["Dorsomedial","GnIH","Gonadotropes","↓LH, ↓FSH","Stress → ↑GnIH → amenorrhea"],
+        ["Anterior Hypothalamic","TRH","Thyrotropes + Lactotropes","TSH AND Prolactin","⭐ TRH stimulates BOTH TSH and prolactin"],
+        ["Paraventricular (PVN)","CRH (+ ADH, OT)","Corticotropes","ACTH","PVN = master stress nucleus"],
+        ["Ventromedial","GHRH","Somatotropes","GH ↑","Gs-cAMP-PKA pathway"],
+        ["Periventricular","Somatostatin (GHIH)","Somatotropes","↓GH (and ↓TSH)","14-aa or 28-aa cyclic peptide"],
+        ["Arcuate","Dopamine (PIH) ⭐","Lactotropes","↓Prolactin ONLY","⭐ Catecholamine, not peptide; only inhibitory control"],
+        ["SON + PVN","ADH, Oxytocin","—","—","Stored in posterior pituitary (Herring bodies)"],
+    ];
+    let html = `<table class="ref-table"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+    rows.forEach((r,i) => {
+        html += `<tr>${r.map((c,j)=>{
+            let cls = '';
+            if (j===2||j===3) cls = 'hl';
+            if (c.includes('⭐')) cls = 'hl-g';
+            return `<td class="${cls}">${c}</td>`;
+        }).join('')}</tr>`;
+    });
+    html += `</tbody></table>`;
+    html += `<div style="background:#161B22;border:1px solid #21262D;border-radius:8px;padding:16px;margin-top:12px;">
+        <div style="font-size:0.78em;color:#6B7280;font-weight:700;text-transform:uppercase;margin-bottom:10px;">Blood Supply Summary</div>
+        <table class="ref-table"><thead><tr><th>Pituitary Region</th><th>Artery</th><th>Mechanism</th><th>Clinical Pearl</th></tr></thead><tbody>
+        <tr><td class="hl">Adenohypophysis (Anterior)</td><td>Superior hypophyseal a.</td><td>Portal system (2 capillary beds)</td><td class="hl-r">Risk: Sheehan syndrome (ischemia in hypotension)</td></tr>
+        <tr><td class="hl">Neurohypophysis (Posterior)</td><td>Inferior hypophyseal a.</td><td>Direct arterial supply</td><td class="hl-g">Spared in Sheehan (separate arterial supply)</td></tr>
+        </tbody></table>
+    </div>`;
+    cont.innerHTML = html;
+}
+
+// ─── RENDER FLASHCARDS ─────────────────────────────────
+function renderFlashcards() {
+    const grid = document.getElementById('fcGrid');
+    grid.innerHTML = flashcards.map((fc,i) => `
+        <div class="fc" onclick="this.classList.toggle('flipped')">
+            <div class="fc-inner">
+                <div class="fc-front">
+                    <div class="fc-label">💡 Card ${i+1} of ${flashcards.length} — Click to Reveal</div>
+                    <div class="fc-q">${fc.q}</div>
+                </div>
+                <div class="fc-back">
+                    <div class="fc-label">✅ Answer</div>
+                    <div class="fc-a">${fc.a.replace(/\n/g,'<br>')}</div>
+                </div>
+            </div>
+        </div>`).join('');
+}
+
+// ─── RENDER MCQ ────────────────────────────────────────
+function renderMCQ() {
+    const cont = document.getElementById('mcqContainer');
+    cont.innerHTML = mcqs.map((q,qi) => `
+        <div class="mcq-item">
+            <div class="mcq-num">Question ${qi+1} of ${mcqs.length}</div>
+            <div class="mcq-stem">${q.stem}</div>
+            <div class="mcq-options" id="opts${qi}">
+                ${q.opts.map((o,oi) => `
+                    <div class="mcq-opt" onclick="selectMCQ(this,${qi},${oi})" id="opt${qi}_${oi}">
+                        <span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span>
+                    </div>`).join('')}
+            </div>
+            <div class="mcq-explanation" id="exp${qi}"></div>
+            <div class="teaching-pt" id="teach${qi}"><span class="tp-label">📚 Teaching Point</span>${q.teach}</div>
+        </div>`).join('');
+}
+
+function selectMCQ(btn, qi, oi) {
+    const container = document.getElementById('opts'+qi);
+    if (container.dataset.answered) return;
+    container.dataset.answered = 'true';
+    const q = mcqs[qi];
+    container.querySelectorAll('.mcq-opt').forEach(b => b.setAttribute('disabled','true'));
+    container.querySelectorAll('.mcq-opt').forEach((b,idx) => {
+        if (idx === q.correct) b.classList.add('correct');
+        else b.classList.add('wrong');
+    });
+    const expDiv = document.getElementById('exp'+qi);
+    expDiv.innerHTML = `<span class="exp-label">${oi===q.correct?'✅ Correct!':'❌ Incorrect'}</span>${q.exps[oi]}<br><br><strong style="color:#C9D1D9">All options:</strong><br>${q.exps.map((e,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${e}`).join('<br>')}`;
+    expDiv.classList.add('visible');
+    document.getElementById('teach'+qi).classList.add('visible');
+}
+
+// ─── RENDER VIGNETTES ──────────────────────────────────
+function renderVigs() {
+    const cont = document.getElementById('vigContainer');
+    cont.innerHTML = vigs.map((v,vi) => `
+        <div class="vig-item">
+            <div class="vig-banner">${v.banner}</div>
+            <div class="vig-stem">${v.stem}</div>
+            <div class="mcq-stem"><strong style="color:#E6EDF3">${v.question}</strong></div>
+            <div class="mcq-options" id="vopts${vi}">
+                ${v.opts.map((o,oi) => `
+                    <div class="mcq-opt" onclick="selectVig(this,${vi},${oi})">
+                        <span class="letter">${String.fromCharCode(65+oi)}.</span><span>${o}</span>
+                    </div>`).join('')}
+            </div>
+            <div class="mcq-explanation" id="vexp${vi}"></div>
+            <div class="teaching-pt" id="vteach${vi}"><span class="tp-label">📚 Teaching Point</span>${v.teach}</div>
+        </div>`).join('');
+}
+
+function selectVig(btn, vi, oi) {
+    const container = btn.closest('.mcq-options');
+    if (container.dataset.answered) return;
+    container.dataset.answered = 'true';
+    const v = vigs[vi];
+    container.querySelectorAll('.mcq-opt').forEach(b => b.setAttribute('disabled','true'));
+    container.querySelectorAll('.mcq-opt').forEach((b,idx) => {
+        if (idx === v.correct) b.classList.add('correct');
+        else b.classList.add('wrong');
+    });
+    const expDiv = document.getElementById('vexp'+vi);
+    expDiv.innerHTML = `<span class="exp-label">${oi===v.correct?'✅ Correct!':'❌ Incorrect'}</span>${v.exps[oi]}<br><br>${v.exps.map((e,i)=>`<b>${String.fromCharCode(65+i)}.</b> ${e}`).join('<br>')}`;
+    expDiv.classList.add('visible');
+    document.getElementById('vteach'+vi).classList.add('visible');
+}
+
+// ─── RENDER TRAPS ──────────────────────────────────────
+function renderTraps() {
+    const cont = document.getElementById('trapsContainer');
+    cont.innerHTML = traps.map(t => `
+        <div class="trap-item">
+            <div class="trap-header">${t.title}</div>
+            <div class="trap-myth"><div class="trap-myth-label">❌ COMMON MYTH</div>${t.myth}</div>
+            <div class="trap-truth"><div class="trap-truth-label">✅ TRUTH</div>${t.truth}</div>
+        </div>`).join('');
+}
+
+// ─── RENDER FIB ────────────────────────────────────────
+function renderFIB() {
+    const cont = document.getElementById('fibContainer');
+    cont.innerHTML = fibs.map((f,i) => `
+        <div class="fib-item">
+            <div class="fib-prompt">${i+1}. ${f.prompt}</div>
+            <input class="fib-input" id="fib${i}" placeholder="Type your answer(s)…" />
+            <button class="fib-btn" onclick="checkFIB(${i})">Check</button>
+            <div class="fib-result" id="fibres${i}"></div>
+            <div style="font-size:0.78em;color:#6B7280;margin-top:6px;">Hint: ${f.hint}</div>
+        </div>`).join('');
+}
+
+function checkFIB(i) {
+    const f = fibs[i];
+    const val = document.getElementById('fib'+i).value.toLowerCase().trim();
+    const correct = f.answers.some(a => val.includes(a.toLowerCase()));
+    const res = document.getElementById('fibres'+i);
+    if (correct) {
+        res.className = 'fib-result correct';
+        res.textContent = '✅ Correct! ' + f.hint;
+    } else {
+        res.className = 'fib-result incorrect';
+        res.textContent = '❌ Review: ' + f.hint;
+    }
+}
+
+// ─── INIT ──────────────────────────────────────────────
+renderFlashcards();
+renderMCQ();
+renderVigs();
+renderTraps();
+renderFIB();
+renderRef();
+</script>
+</body>
+</html>

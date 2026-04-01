@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L5 · Hypothalamic-Pituitary-Adrenal Axis — Practice Questions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0D1117;
+            color: #E6EDF3;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #BF360C;
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #BF360C;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            font-size: 14px;
+            color: #58A6FF;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #30363D;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 12px 20px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #8B949E;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            color: #E6EDF3;
+        }
+
+        .tab-button.active {
+            color: #BF360C;
+            border-bottom-color: #BF360C;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .question-card {
+            background-color: #161B22;
+            border-left: 4px solid #BF360C;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            box-shadow: 0 4px 12px rgba(191, 54, 12, 0.15);
+        }
+
+        .question-number {
+            font-size: 14px;
+            color: #BF360C;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            font-size: 16px;
+            color: #E6EDF3;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            padding: 12px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 15px;
+            color: #E6EDF3;
+        }
+
+        .option:hover {
+            background-color: #1C2128;
+            border-color: #BF360C;
+        }
+
+        .option.selected {
+            background-color: #BF360C;
+            border-color: #BF360C;
+            color: #FFFFFF;
+        }
+
+        .option.correct {
+            background-color: #1F6FEB;
+            border-color: #1F6FEB;
+            color: #FFFFFF;
+        }
+
+        .option.incorrect {
+            background-color: #DA3633;
+            border-color: #DA3633;
+            color: #FFFFFF;
+        }
+
+        .explanation-box {
+            display: none;
+            background-color: #0D1117;
+            border: 1px solid #30363D;
+            border-radius: 4px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .explanation-box.visible {
+            display: block;
+        }
+
+        .explanation-label {
+            font-weight: bold;
+            color: #58A6FF;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .explanation-text {
+            color: #C9D1D9;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .teaching-point {
+            background-color: #161B22;
+            border-left: 3px solid #BF360C;
+            padding: 12px;
+            border-radius: 3px;
+            font-size: 14px;
+            color: #D4AF37;
+            font-style: italic;
+        }
+
+        .score-section {
+            background-color: #161B22;
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #30363D;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .score-item {
+            background-color: #0D1117;
+            padding: 16px;
+            border-radius: 4px;
+            border-left: 4px solid #BF360C;
+        }
+
+        .score-label {
+            font-size: 13px;
+            color: #8B949E;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .score-value {
+            font-size: 32px;
+            color: #BF360C;
+            font-weight: bold;
+        }
+
+        .reset-button {
+            background-color: #BF360C;
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .reset-button:hover {
+            background-color: #8B2A0A;
+        }
+
+        .reset-button:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 22px;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .tab-button {
+                border-bottom: 2px solid #30363D;
+                padding: 10px 16px;
+            }
+
+            .question-card {
+                padding: 18px;
+            }
+
+            .score-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="GUSOM-Phys-Hub3-ActiveDrills.html" class="back-link">← Back to Hub</a>
+            <h1>L5 · Hypothalamic-Pituitary-Adrenal Axis</h1>
+            <p style="color: #8B949E; font-size: 14px; margin-top: 8px;">Practice Questions</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('gusom')">GUSOM Questions</button>
+            <button class="tab-button" onclick="showTab('brs')">BRS Questions</button>
+            <button class="tab-button" onclick="showTab('score')">Score</button>
+        </div>
+
+        <!-- GUSOM Questions Tab -->
+        <div id="gusom" class="tab-content active">
+            <div class="question-card">
+                <div class="question-number">Question 1</div>
+                <div class="question-text">A 38-year-old woman with central obesity, purple striae, and hypertension has 24-hour urinary free cortisol of 4× upper limit of normal. Plasma ACTH is 95 pg/mL (elevated). MRI pituitary shows a 7 mm adenoma. What is the diagnosis?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Adrenal adenoma would suppress ACTH via feedback, not elevate it.', 'gusom')">A) Adrenal adenoma</div>
+                    <div class="option" onclick="sel(this, false, 'Ectopic ACTH typically presents with very high ACTH (>200 pg/mL) and rapid progression without classic features. MRI finding supports pituitary source.', 'gusom')">B) Ectopic ACTH syndrome</div>
+                    <div class="option" onclick="sel(this, true, 'Cushing disease is a pituitary ACTH-secreting (corticotroph) adenoma. Elevated ACTH + pituitary adenoma on MRI + elevated cortisol = Cushing disease (ACTH-dependent Cushing syndrome).', 'gusom')">C) Cushing disease (pituitary ACTH adenoma)</div>
+                    <div class="option" onclick="sel(this, false, 'Primary pigmented nodular adrenocortical disease (PPNAD) would have suppressed ACTH.', 'gusom')">D) Primary pigmented nodular adrenocortical disease</div>
+                    <div class="option" onclick="sel(this, false, 'Exogenous steroids would suppress ACTH, not elevate it.', 'gusom')">E) Exogenous glucocorticoid use</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-1">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Cushing disease is a pituitary ACTH-secreting adenoma causing ACTH-dependent Cushing syndrome. The triad of elevated ACTH, pituitary adenoma on MRI, and high cortisol confirms pituitary source. Classic features include central obesity, purple striae, easy bruising, proximal muscle weakness, hypertension, glucose intolerance, and osteoporosis. Treatment is transsphenoidal surgery. Adrenal sources suppress ACTH via feedback inhibition.</div>
+                    <div class="teaching-point">Cushing disease = pituitary corticotroph adenoma. ACTH elevated + pituitary lesion = Cushing disease. ACTH suppressed = adrenal source.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 2</div>
+                <div class="question-text">A 62-year-old man with SCLC develops muscle weakness, hypokalemia (K 2.6 mEq/L), metabolic alkalosis, and hypertension. Plasma cortisol is 85 mcg/dL. ACTH is 980 pg/mL. High-dose dexamethasone (8 mg) does not suppress cortisol. What is the diagnosis?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Cushing disease would show cortisol suppression on HDDST (>50% suppression indicates pituitary source).', 'gusom')">A) Cushing disease</div>
+                    <div class="option" onclick="sel(this, false, 'Primary adrenal carcinoma would have suppressed ACTH, not markedly elevated.', 'gusom')">B) Primary adrenal carcinoma</div>
+                    <div class="option" onclick="sel(this, true, 'Ectopic ACTH syndrome is characterized by: very high ACTH (often >1000 pg/mL), very high cortisol, NO suppression on HDDST, severe hypokalemic metabolic alkalosis (cortisol overwhelming 11β-HSD2 leading to mineralocorticoid receptor activation), and rapid onset. SCLC is the most common cause.', 'gusom')">C) Ectopic ACTH syndrome</div>
+                    <div class="option" onclick="sel(this, false, 'Iatrogenic Cushing would have suppressed ACTH when exogenous steroids stopped.', 'gusom')">D) Iatrogenic Cushing</div>
+                    <div class="option" onclick="sel(this, false, 'AIMAH would have suppressed ACTH.', 'gusom')">E) Bilateral adrenal hyperplasia independent of ACTH</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-2">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Ectopic ACTH syndrome presents with extremely high ACTH (often >1000 pg/mL), extremely high cortisol, and no suppression on HDDST because ectopic tumor cells lack normal glucocorticoid receptors for feedback. Severe hypokalemic metabolic alkalosis occurs because cortisol at such high levels overwhelms 11β-HSD2 (cortisol inactivation enzyme), allowing cortisol to activate mineralocorticoid receptors, causing potassium wasting and sodium retention. SCLC is the most common source. Rapid onset without classic Cushingoid features (moon facies, striae) due to acute presentation. Treatment: address underlying malignancy + medical adrenal blockade (ketoconazole, metyrapone, etomidate).</div>
+                    <div class="teaching-point">Ectopic ACTH: very HIGH ACTH (often >1000 pg/mL), no HDDST suppression, severe hypokalemic alkalosis. SCLC most common. No classic features = rapid course. Medical blockade required.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 3</div>
+                <div class="question-text">A 42-year-old woman recently treated with prednisone 40 mg/day for 6 weeks for an inflammatory condition develops shock following dental surgery. She had tapered and stopped steroids 5 days prior. What is the most likely diagnosis?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'While possible, the temporal relationship to recent steroid cessation and surgical stress makes adrenal crisis more likely.', 'gusom')">A) Septic shock from dental infection</div>
+                    <div class="option" onclick="sel(this, false, 'Possible, but less likely given the clear temporal relationship to steroids and surgery.', 'gusom')">B) Anaphylaxis to anesthetic</div>
+                    <div class="option" onclick="sel(this, true, 'Adrenal crisis from HPA suppression due to recent high-dose steroids. Even 5 days after stopping, the HPA axis remains suppressed for weeks-months. 6 weeks of 40 mg prednisone → significant HPA suppression → adrenal cortex atrophy → cannot mount adequate cortisol response to surgical stress. Shock develops due to inadequate cortisol and adrenal failure.', 'gusom')">C) Adrenal crisis — HPA suppression from recent steroids</div>
+                    <div class="option" onclick="sel(this, false, 'PE would present with specific pulmonary and hemodynamic findings, less consistent with this presentation.', 'gusom')">D) Pulmonary embolism</div>
+                    <div class="option" onclick="sel(this, false, 'Vagal syncope would resolve quickly and not present as prolonged shock.', 'gusom')">E) Vagal syncope</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-3">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Adrenal crisis in this context results from HPA axis suppression caused by prolonged high-dose glucocorticoid therapy. After stopping steroids, the HPA axis takes weeks to months to recover because the adrenal cortex has atrophied from lack of ACTH stimulation. When surgical stress occurs during this recovery window, the suppressed adrenal gland cannot produce sufficient cortisol to meet the increased demand, leading to shock. Management: IV hydrocortisone 100 mg STAT followed by fluid resuscitation. Prevention: perioperative stress-dose steroids (hydrocortisone 50-100 mg IV) for any major stress within 6-12 months of prolonged steroid use.</div>
+                    <div class="teaching-point">HPA recovery after steroids: weeks-months. Adrenal stress response blunted during recovery. Stress-dose steroids needed for surgery within 6-12 months of prolonged steroid use. Always screen for recent steroid exposure perioperatively.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 4</div>
+                <div class="question-text">Which of the following is the most appropriate initial test to screen for hypercortisolism in a patient suspected of having Cushing syndrome?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Random cortisol is unreliable due to circadian variation and stress response.', 'gusom')">A) Random serum cortisol</div>
+                    <div class="option" onclick="sel(this, true, '24-hour urinary free cortisol (UFC) is one of three first-line screening tests for hypercortisolism. UFC >2× upper limit of normal on at least 2 occasions is diagnostic. Alternatives: late-night salivary cortisol, 1 mg overnight dexamethasone suppression test. Need at least 2 abnormal screening tests for diagnosis.', 'gusom')">B) 24-hour urinary free cortisol (UFC)</div>
+                    <div class="option" onclick="sel(this, false, 'ACTH is measured AFTER confirming hypercortisolism to determine ACTH-dependent vs independent source.', 'gusom')">C) Serum ACTH level</div>
+                    <div class="option" onclick="sel(this, false, 'HDDST is used for localization after hypercortisolism is confirmed.', 'gusom')">D) High-dose dexamethasone test</div>
+                    <div class="option" onclick="sel(this, false, 'Pituitary MRI is performed after biochemical confirmation, not as initial screen.', 'gusom')">E) Pituitary MRI</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-4">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The diagnostic approach to Cushing syndrome follows a stepwise pattern: (1) Screening: confirm hypercortisolism using 24-hour UFC, late-night salivary cortisol, or 1 mg overnight DST. Need ≥2 abnormal tests. (2) Source determination: ACTH level to determine ACTH-dependent vs independent. (3) Localization: HDDST or IPSS for ACTH-dependent; imaging for ACTH-independent. 24-hour UFC is highly sensitive for overt Cushing syndrome.</div>
+                    <div class="teaching-point">Cushing screening: 24h UFC, late-night salivary cortisol, 1mg ONDST (any 2 abnormal = confirmed). THEN ACTH (source), THEN HDDST/IPSS (localization).</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 5</div>
+                <div class="question-text">A newborn is found to have ambiguous genitalia, hyponatremia (Na 128), hyperkalemia (K 6.5), and hypoglycemia. 17-hydroxyprogesterone is markedly elevated. What is the most likely enzyme deficiency?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, '17α-hydroxylase deficiency causes hypertension (↑DOC) and hypokalemia, not hyponatremia or virilization.', 'gusom')">A) 17α-hydroxylase</div>
+                    <div class="option" onclick="sel(this, false, '11β-hydroxylase deficiency causes hypertension and hypokalemia, not the salt-wasting and virilization seen here.', 'gusom')">B) 11β-hydroxylase</div>
+                    <div class="option" onclick="sel(this, true, '21-hydroxylase deficiency (90% of CAH): blocks cortisol synthesis (↓ cortisol → hypoglycemia) and aldosterone synthesis (↓aldosterone → hyponatremia + hyperkalemia = salt-wasting). Substrate shunted to androgen pathway (↑DHEA → virilization with ambiguous genitalia in females). Elevated 17-OHP is pathognomonic. Treatment: hydrocortisone + fludrocortisone.', 'gusom')">C) 21-hydroxylase</div>
+                    <div class="option" onclick="sel(this, false, '3β-hydroxysteroid dehydrogenase deficiency would not produce markedly elevated 17-OHP.', 'gusom')">D) 3β-hydroxysteroid dehydrogenase</div>
+                    <div class="option" onclick="sel(this, false, 'Aldosterone synthase deficiency causes salt-wasting but not virilization.', 'gusom')">E) Aldosterone synthase</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-5">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">21-hydroxylase deficiency is the most common form of congenital adrenal hyperplasia (90%). This enzyme is critical for both cortisol and aldosterone synthesis. Deficiency causes: (1) ↓Cortisol → hypoglycemia + adrenal insufficiency symptoms. (2) ↓Aldosterone → salt-wasting crisis (hyponatremia, hyperkalemia, shock). (3) ↑17-OHP and ↑DHEA (substrate accumulation) → androgen excess → virilization (ambiguous genitalia in females, precocious puberty in males). Diagnosis is confirmed by markedly elevated 17-hydroxyprogesterone (>1000 ng/dL in salt-wasting form). Treatment requires both glucocorticoid (hydrocortisone) and mineralocorticoid (fludrocortisone) replacement.</div>
+                    <div class="teaching-point">21-OH deficiency: salt-wasting (↓aldo) + virilization (↑androgens) + ↓cortisol + ↑17-OHP. Most common CAH. Classic triad: hypoNa + hyperK + ambiguous genitalia in females.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 6</div>
+                <div class="question-text">Inferior petrosal sinus sampling (IPSS) is performed in a patient with ACTH-dependent Cushing syndrome. The result shows a central:peripheral ACTH ratio of 4.2 after CRH stimulation. What does this indicate?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Ectopic ACTH ratio would be <2 (no suppression at pituitary source).', 'gusom')">A) Ectopic ACTH source</div>
+                    <div class="option" onclick="sel(this, false, 'Primary adrenal Cushing would have already suppressed ACTH.', 'gusom')">B) Primary adrenal Cushing</div>
+                    <div class="option" onclick="sel(this, true, 'IPSS interpretation: Central:peripheral ACTH ratio ≥2 (basal) or ≥3 (after CRH stimulation) indicates pituitary source (Cushing disease). A ratio <2 suggests ectopic source. This ratio of 4.2 after CRH (>3) confirms pituitary corticotroph adenoma. IPSS also provides lateralization data to guide transsphenoidal surgical approach.', 'gusom')">C) Pituitary source (Cushing disease)</div>
+                    <div class="option" onclick="sel(this, false, 'A ratio >3 after CRH is diagnostic, not inconclusive.', 'gusom')">D) Normal finding</div>
+                    <div class="option" onclick="sel(this, false, 'A clear elevation of this magnitude is diagnostic.', 'gusom')">E) Inconclusive — bilateral sampling failed</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-6">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Inferior petrosal sinus sampling (IPSS) is the gold standard test for localizing ACTH-dependent Cushing syndrome when MRI is negative or equivocal. Central blood (from pituitary) is compared to peripheral blood ACTH. Interpretation: Central:peripheral ratio ≥2 at baseline or ≥3 after CRH stimulation = pituitary source (Cushing disease). Ratio <2 = ectopic ACTH source. CRH stimulation during IPSS significantly improves sensitivity. This patient's ratio of 4.2 after CRH (>3) definitively confirms pituitary Cushing disease. IPSS also allows lateralization (left vs right inferior petrosal sinus) to guide surgical approach.</div>
+                    <div class="teaching-point">IPSS: ratio ≥2 basal / ≥3 after CRH = pituitary source. Ratio <2 = ectopic. Used when MRI negative or equivocal — gold standard localization.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 7</div>
+                <div class="question-text">A patient with primary adrenal insufficiency (Addison disease) presents to the ER with hypotension, confusion, vomiting, and temperature 39°C precipitated by a GI infection. What is the immediate management?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Oral dosing is inappropriate in acute crisis; IV required.', 'gusom')">A) Oral hydrocortisone dose doubling</div>
+                    <div class="option" onclick="sel(this, false, 'Fludrocortisone is given chronically after stabilization, not acutely in crisis.', 'gusom')">B) Fludrocortisone 0.1 mg PO</div>
+                    <div class="option" onclick="sel(this, true, 'Adrenal crisis emergency management: DO NOT delay for test results. IV hydrocortisone 100 mg bolus STAT + 1-2L normal saline IV for volume resuscitation. High-dose hydrocortisone (100 mg) has both glucocorticoid AND mineralocorticoid activity (acts on MR), so fludrocortisone not needed acutely. Continue hydrocortisone 50-75 mg IV q6-8h.', 'gusom')">C) IV hydrocortisone 100 mg bolus + 0.9% saline 1-2L</div>
+                    <div class="option" onclick="sel(this, false, 'Methylprednisolone is not superior to hydrocortisone and lacks mineralocorticoid activity at standard doses.', 'gusom')">D) Methylprednisolone 500 mg IV for anti-inflammatory effect</div>
+                    <div class="option" onclick="sel(this, false, 'Never delay treatment for confirmatory testing in adrenal crisis.', 'gusom')">E) ACTH stimulation test before starting treatment</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-7">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Adrenal crisis is a medical emergency requiring immediate, empirical treatment without waiting for lab confirmation. Treatment protocol: (1) IV hydrocortisone 100 mg STAT (has both glucocorticoid and mineralocorticoid potency at this dose). (2) IV normal saline 1-2L for volume resuscitation and sodium correction. (3) Continue hydrocortisone 50-75 mg IV q6-8h. The high dose of hydrocortisone provides sufficient mineralocorticoid activity at the mineralocorticoid receptor, so fludrocortisone is not needed acutely (though it is added back at lower maintenance steroid doses). After stabilization, transition to maintenance: hydrocortisone 15-20 mg/day split dosing + fludrocortisone 0.1 mg daily.</div>
+                    <div class="teaching-point">Adrenal crisis: IV hydrocortisone 100 mg STAT + NS. Never delay for labs. High-dose hydrocortisone = acts on mineralocorticoid receptors → no fludrocortisone needed acutely.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 8</div>
+                <div class="question-text">A patient with Cushing disease (pituitary corticotroph adenoma) undergoes bilateral adrenalectomy. 18 months later she develops very dark skin, headaches, and visual field loss. What is the most likely diagnosis?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'While Addison disease does develop post-adrenalectomy, it does not explain the rapidly enlarging pituitary mass.', 'gusom')">A) Addison disease from adrenalectomy</div>
+                    <div class="option" onclick="sel(this, true, 'Nelson syndrome: after bilateral adrenalectomy, cortisol feedback on the pituitary ACTH adenoma is removed → loss of negative feedback → aggressive growth of corticotroph adenoma → very high ACTH → ACTH contains MSH (melanocyte-stimulating hormone) sequence → hyperpigmentation (dark skin). Mass effect from tumor growth causes headache and visual field loss (bitemporal hemianopsia if suprasellar extension). Prevention: prophylactic pituitary radiation before adrenalectomy. Treatment: pituitary surgery ± radiation.', 'gusom')">B) Nelson syndrome</div>
+                    <div class="option" onclick="sel(this, false, 'Pituitary apoplexy would have acute presentation, not gradual 18-month progression.', 'gusom')">C) Pituitary apoplexy</div>
+                    <div class="option" onclick="sel(this, false, 'Adrenal remnants are typically removed during bilateral adrenalectomy.', 'gusom')">D) Secondary Cushing from adrenal remnant</div>
+                    <div class="option" onclick="sel(this, false, 'While possible, the hyperpigmentation from ACTH/MSH excess is the key clinical clue.', 'gusom')">E) Recurrent ACTH adenoma with normal adrenal response</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-8">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Nelson syndrome develops when the negative feedback inhibition of cortisol on a pituitary ACTH adenoma is removed by bilateral adrenalectomy. Without cortisol feedback, the corticotroph adenoma grows aggressively, producing extremely high levels of ACTH (often >1000 pg/mL). The ACTH molecule contains an MSH (melanocyte-stimulating hormone) sequence that activates melanocyte-stimulating hormone receptors, causing hyperpigmentation (dark skin). Mass effect from tumor growth compresses nearby structures (optic chiasm → visual field loss, brainstem → headache). Prevention: prophylactic pituitary radiation before bilateral adrenalectomy reduces Nelson syndrome risk from ~8% to ~2%. Post-adrenalectomy surveillance: serial ACTH levels and pituitary MRI monitoring. Treatment: transsphenoidal pituitary surgery ± external beam radiation.</div>
+                    <div class="teaching-point">Nelson: post-bilateral adrenalectomy → loss of cortisol feedback → ACTH adenoma growth → hyperpigmentation (ACTH/MSH) + mass effect. Prevention = pituitary radiation.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 9</div>
+                <div class="question-text">A patient with suspected Cushing disease undergoes high-dose dexamethasone suppression test (8 mg over 2 days). Cortisol suppresses by 60% from baseline. What does this suggest?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Ectopic ACTH sources lack normal glucocorticoid receptors and show NO suppression on HDDST.', 'gusom')">A) Ectopic ACTH source</div>
+                    <div class="option" onclick="sel(this, false, 'Primary adrenal sources already have suppressed ACTH and would show no further change.', 'gusom')">B) Primary adrenal Cushing</div>
+                    <div class="option" onclick="sel(this, true, 'High-dose dexamethasone suppression test (HDDST): Cortisol suppression >50% from baseline indicates pituitary Cushing disease. Pituitary corticotroph adenomas retain some responsiveness to high-dose glucocorticoid negative feedback because they are relatively \"restrained\" by feedback (unlike ectopic tumors). No suppression or <50% suppression = ectopic or primary adrenal. Sensitivity ~80%, specificity ~80% — IPSS is more definitive for localization.', 'gusom')">C) Pituitary Cushing disease</div>
+                    <div class="option" onclick="sel(this, false, 'Exogenous steroid use would already show suppressed ACTH.', 'gusom')">D) Exogenous steroid use</div>
+                    <div class="option" onclick="sel(this, false, '60% suppression is diagnostic, not normal variation.', 'gusom')">E) Normal variation — cannot distinguish</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-9">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The high-dose dexamethasone suppression test (HDDST) helps distinguish pituitary (Cushing disease) from ectopic or adrenal sources of ACTH-dependent Cushing. Interpretation: >50% suppression of cortisol = pituitary source (Cushing disease). The pituitary corticotroph adenoma retains some negative feedback responsiveness to high-dose glucocorticoids. No suppression (<50%) = ectopic ACTH (ectopic tumor cells often lack glucocorticoid receptors) or primary adrenal adenoma (ACTH already suppressed). The HDDST has limitations (sensitivity and specificity ~80%). IPSS is the more accurate localizing test when MRI is negative or equivocal.</div>
+                    <div class="teaching-point">HDDST: >50% suppression = pituitary. No suppression = ectopic or adrenal. Sensitivity 80% — use IPSS for definitive localization.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">Question 10</div>
+                <div class="question-text">Describe the 3-day metyrapone test and its interpretation in the evaluation of pituitary Cushing disease.</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Metyrapone blocks synthesis, not ACTH secretion itself.', 'gusom')">A) Metyrapone blocks ACTH synthesis; elevated ACTH confirms pituitary adenoma</div>
+                    <div class="option" onclick="sel(this, true, 'Metyrapone blocks the enzyme 11β-hydroxylase (final step in cortisol synthesis) → cortisol levels fall → removes negative feedback inhibition on the HPA axis → ACTH rises + substrate (11-deoxycortisol) accumulates. Normal/pituitary Cushing: exaggerated ACTH and 11-deoxycortisol response (intact HPA axis, just over-active). Adrenal Cushing: blunted/flat response (ACTH already suppressed). Adrenal insufficiency: flat response (confirms HPA axis integrity).', 'gusom')">B) Metyrapone blocks 11β-hydroxylase → ↓cortisol → removes negative feedback → ↑ACTH + ↑11-deoxycortisol. Pituitary Cushing: exaggerated ACTH and 11-deoxycortisol response</div>
+                    <div class="option" onclick="sel(this, false, 'Metyrapone does not directly stimulate CRH.', 'gusom')">C) Metyrapone stimulates CRH directly; excess CRH confirms hypothalamic Cushing</div>
+                    <div class="option" onclick="sel(this, false, 'Metyrapone does not directly suppress aldosterone synthesis in a diagnostic way.', 'gusom')">D) Metyrapone suppresses aldosterone; positive test = CAH</div>
+                    <div class="option" onclick="sel(this, false, 'Metyrapone is used for both diagnostic and therapeutic purposes.', 'gusom')">E) Metyrapone is used only for secondary adrenal insufficiency testing</div>
+                </div>
+                <div class="explanation-box" id="exp-gusom-10">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The metyrapone test is a dynamic challenge test used diagnostically and therapeutically. Metyrapone is an 11β-hydroxylase inhibitor that blocks the final step of cortisol synthesis. When cortisol falls → negative feedback removed → CRH/ACTH rise. Interpretation: (1) Normal/pituitary Cushing: exaggerated rise in ACTH and 11-deoxycortisol (the substrate that accumulates). (2) Adrenal Cushing: blunted or flat response (ACTH already suppressed by autonomous cortisol production). (3) Adrenal insufficiency: flat response (no ACTH response capacity). The 11-deoxycortisol (the product of the blocked step) is measured. A positive metyrapone test shows an exaggerated rise. Therapeutically, metyrapone is used for short-term control of severe hypercortisolism while planning definitive surgery or radiation.</div>
+                    <div class="teaching-point">Metyrapone → ↓cortisol → ↑ACTH + ↑11-deoxycortisol. Exaggerated = pituitary/normal HPA. Flat = adrenal insufficiency. Used diagnostically and for short-term symptom management.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BRS Questions Tab -->
+        <div id="brs" class="tab-content">
+            <div class="question-card">
+                <div class="question-number">BRS Question 1</div>
+                <div class="question-text">CRH stimulates corticotrophs to produce ACTH. What is the primary second messenger used by CRH in corticotrophs?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, true, 'CRH binds CRHR1 (G-protein coupled receptor) → Gs protein → adenylyl cyclase → ↑cAMP → PKA activation → POMC gene transcription → ACTH synthesis and secretion. AVP also stimulates corticotrophs (via V1b receptor → Gq → PKC pathway) and synergizes with CRH for maximal ACTH response during severe stress.', 'brs')">B) cAMP → PKA</div>
+                    <div class="option" onclick="sel(this, false, 'IP3 is utilized by some signaling pathways but cAMP is primary for CRH.', 'brs')">A) IP3 → calcium</div>
+                    <div class="option" onclick="sel(this, false, 'cGMP is not the primary pathway for CRH.', 'brs')">C) cGMP</div>
+                    <div class="option" onclick="sel(this, false, 'DAG → PKC is used by AVP (secondary), not the primary CRH pathway.', 'brs')">D) DAG → PKC</div>
+                    <div class="option" onclick="sel(this, false, 'GR acts as a transcription factor but is not a second messenger for acute CRH signaling.', 'brs')">E) Direct nuclear GR activation</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-1">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">CRH exerts its effects through CRHR1 (corticotropin-releasing hormone receptor 1), a G-protein coupled receptor on corticotroph cells. CRH → CRHR1 → Gs-mediated activation of adenylyl cyclase → ↑cAMP → PKA phosphorylation of transcription factors (CREB) → POMC gene transcription → ACTH synthesis and release. AVP also signals to corticotrophs (via V1b and V3 receptors) → Gq → PKC pathway, and AVP synergizes with CRH for potent stimulation during acute stress. This dual pathway (CRH + AVP) allows for graded ACTH responses.</div>
+                    <div class="teaching-point">CRH → Gs → cAMP (primary). AVP → V1b → Gq → PKC (synergistic). Together → maximum ACTH response during severe stress.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Question 2</div>
+                <div class="question-text">Aldosterone is synthesized primarily in which zone of the adrenal cortex?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'The zona fasciculata (middle zone) synthesizes glucocorticoids (cortisol), not mineralocorticoids.', 'brs')">A) Zona fasciculata</div>
+                    <div class="option" onclick="sel(this, false, 'The zona reticularis (inner zone) synthesizes adrenal androgens (DHEA, DHEA-S).', 'brs')">B) Zona reticularis</div>
+                    <div class="option" onclick="sel(this, true, 'The zona glomerulosa (outermost zone of the adrenal cortex) is the primary site of aldosterone synthesis. Its enzymes include aldosterone synthase (18-hydroxylase and 18-oxidase activities). Aldosterone is a mineralocorticoid that regulates sodium and potassium balance. Primary regulators: angiotensin II, hyperkalemia, ACTH (minor). Control is RAAS-driven, not primarily ACTH-driven.', 'brs')">C) Zona glomerulosa</div>
+                    <div class="option" onclick="sel(this, false, 'The adrenal medulla synthesizes catecholamines (epinephrine, norepinephrine), not steroids.', 'brs')">D) Adrenal medulla</div>
+                    <div class="option" onclick="sel(this, false, 'Zona intermedia is not a standard anatomical zone.', 'brs')">E) Zona intermedia</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-2">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The adrenal cortex has three zones with distinct hormone synthesis: (1) Zona glomerulosa (outermost) = mineralocorticoids (aldosterone). (2) Zona fasciculata (middle, largest) = glucocorticoids (cortisol). (3) Zona reticularis (innermost) = adrenal androgens (DHEA, DHEA-S, androstenedione). Mnemonic: "GFR" from outside-in = "Salt, Sugar, Sex." Aldosterone: regulated primarily by the renin-angiotensin-aldosterone system (RAAS) and hyperkalemia. ACTH has a minor role in aldosterone regulation.</div>
+                    <div class="teaching-point">Zona G = aldosterone. Zona F = cortisol. Zona R = androgens. GFR = Salt, Sugar, Sex. Aldosterone controlled by RAAS, not primarily ACTH.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Question 3</div>
+                <div class="question-text">What is the normal diurnal variation of ACTH and cortisol, and how is this used in the diagnosis of Cushing syndrome?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Peak at midnight is the opposite of normal physiology.', 'brs')">A) Peak at midnight; used to detect low midnight cortisol</div>
+                    <div class="option" onclick="sel(this, true, 'Normal: ACTH and cortisol peak at 6-8 AM (driven by suprachiasmatic nucleus → CRH release). Nadir at midnight. In Cushing syndrome: loss of diurnal variation → cortisol remains elevated at midnight (when it should be at nadir). Late-night salivary cortisol (11 PM–midnight) is a sensitive screening test; normal <7.5 nmol/L. Elevated on 2 occasions = positive for Cushing syndrome.', 'brs')">B) Peak at 6-8 AM; absence of diurnal variation (high midnight cortisol/salivary cortisol) is a marker of Cushing syndrome</div>
+                    <div class="option" onclick="sel(this, false, 'Diurnal variation is a key diagnostic feature of normal physiology vs Cushing.', 'brs')">C) No diurnal variation — random cortisol is reliable</div>
+                    <div class="option" onclick="sel(this, false, 'Cortisol peaks at 6-8 AM, not noon.', 'brs')">D) Peak at noon; late-morning hypocortisolemia suggests Cushing</div>
+                    <div class="option" onclick="sel(this, false, 'Cortisol peaks at 6-8 AM, and 8 AM cortisol (not 6 AM) is used for 1mg ONDST.', 'brs')">E) Peak at 3 AM; 6 AM cortisol is the reference standard</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-3">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">The HPA axis displays circadian rhythm controlled by the suprachiasmatic nucleus. Normal pattern: (1) Peak ACTH and cortisol at 6-8 AM (early morning awakening spike). (2) Gradual decline throughout day. (3) Nadir at midnight (when asleep). This rhythm is driven by clock genes and CRH release. In Cushing syndrome: loss of normal diurnal variation → cortisol elevated at midnight when it should be suppressed. This is exploited diagnostically: late-night salivary cortisol (11 PM–midnight) normally suppressed to <7.5 nmol/L. If elevated on ≥2 occasions, it indicates hypercortisolism (Cushing syndrome). Depressed patients, shift workers, and alcoholics can have "pseudo-Cushing" with loss of diurnal variation without true hypercortisolism.</div>
+                    <div class="teaching-point">Cortisol nadir = midnight. Late-night salivary cortisol elevated = Cushing (loss of diurnal rhythm). Peak = 6-8 AM. 1mg ONDST given at midnight → checks 8 AM cortisol suppression.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Question 4</div>
+                <div class="question-text">Cortisol inhibits ACTH secretion via negative feedback at the pituitary and hypothalamus. What is the cellular mechanism at the pituitary?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Cortisol uses nuclear signaling, not primarily membrane receptors for this effect.', 'brs')">A) Cortisol binds membrane receptor → activates Gi → ↓cAMP</div>
+                    <div class="option" onclick="sel(this, true, 'At the pituitary: Cortisol crosses the cell membrane → binds cytoplasmic glucocorticoid receptor (GR) → GR translocates to nucleus → binds glucocorticoid response elements (GRE) → (1) Transactivation: ↑annexin A1 and other anti-inflammatory genes. (2) Transrepression: ↓POMC gene transcription (↓ACTH synthesis) + ↓CRH receptor expression (↓responsiveness to CRH). At the hypothalamus: cortisol → ↓CRH and AVP gene transcription. Fast feedback: cortisol acutely inhibits ACTH exocytosis. Slow feedback: sustained reduction via transcriptional regulation.', 'brs')">B) Cortisol binds nuclear glucocorticoid receptor → ↓POMC gene transcription + ↓CRH receptor expression</div>
+                    <div class="option" onclick="sel(this, false, 'Somatostatin is secreted by a different cell type (delta cells) and is not the primary feedback mechanism.', 'brs')">C) Cortisol stimulates somatostatin release within the pituitary</div>
+                    <div class="option" onclick="sel(this, false, 'D2 dopamine receptors are not the primary feedback mechanism for ACTH.', 'brs')">D) Cortisol activates dopamine D2 receptors on corticotrophs</div>
+                    <div class="option" onclick="sel(this, false, 'Cortisol does not directly block exocytosis as the primary mechanism.', 'brs')">E) Cortisol directly blocks ACTH secretory vesicle exocytosis</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-4">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Cortisol negative feedback operates through nuclear glucocorticoid receptors (GR) at both the pituitary and hypothalamus. At the pituitary corticotroph: (1) Slow feedback (transcriptional): cortisol-GR complex → ↓POMC gene transcription → ↓ACTH synthesis. Cortisol also ↓CRH receptor expression → corticotrophs less responsive to CRH stimulation. (2) Fast feedback (non-genomic): cortisol acutely inhibits ACTH secretory vesicle exocytosis via membrane mechanisms. At the hypothalamus: cortisol → ↓CRH gene expression + ↓AVP gene expression. This multi-level feedback system maintains HPA axis homeostasis. Dysregulation of this feedback (loss of negative feedback) is key to Cushing syndrome pathogenesis.</div>
+                    <div class="teaching-point">Cortisol feedback: nuclear GR → ↓POMC (↓ACTH) + ↓CRH-R expression. Both fast (exocytosis inhibition) and slow (gene transcription) mechanisms involved.</div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-number">BRS Question 5</div>
+                <div class="question-text">A 65-year-old on prednisone 20 mg/day for 3 months needs to undergo major elective surgery. How should perioperative steroids be managed?</div>
+                <div class="options">
+                    <div class="option" onclick="sel(this, false, 'Abruptly stopping steroids would cause adrenal crisis intraoperatively.', 'brs')">A) Discontinue prednisone 2 weeks before surgery</div>
+                    <div class="option" onclick="sel(this, false, 'Stress-dose steroids are mandatory for any major surgery in this patient.', 'brs')">B) Continue home dose only — no additional steroids needed</div>
+                    <div class="option" onclick="sel(this, true, 'For patients on ≥10 mg prednisone for ≥3 weeks, the HPA axis is suppressed. Major surgery requires stress-dose steroids: hydrocortisone 50-100 mg IV given before induction + 25-50 mg IV q8h for 24-48 hours, then taper back to baseline maintenance dose. The normal adrenal secretes 75-150 mg cortisol daily under major surgical stress; home dose alone is insufficient. Hydrocortisone preferred (has both glucocorticoid and mineralocorticoid activity).', 'brs')">C) Administer stress-dose steroids: hydrocortisone 50-100 mg IV before surgery, then taper over 24-48 hours</div>
+                    <div class="option" onclick="sel(this, false, 'Methylprednisolone is not preferred; hydrocortisone is superior.', 'brs')">D) Give methylprednisolone 1 g IV for 3 days perioperatively</div>
+                    <div class="option" onclick="sel(this, false, 'Dexamethasone has poor mineralocorticoid activity and is not ideal.', 'brs')">E) Switch to dexamethasone the night before surgery</div>
+                </div>
+                <div class="explanation-box" id="exp-brs-5">
+                    <div class="explanation-label">EXPLANATION</div>
+                    <div class="explanation-text">Perioperative steroid management in patients with HPA axis suppression: Any patient on ≥10 mg/day prednisone-equivalent for ≥3 weeks has suppressed HPA axis and adrenal atrophy. Major surgery represents severe stress. Normal adrenal cortex secretes 75-150 mg cortisol-equivalent daily during major surgical stress — vastly more than the patient's home replacement dose. Management: (1) Hydrocortisone 50-100 mg IV before anesthetic induction (peak level achieved within minutes). (2) Continue hydrocortisone 25-50 mg IV q8h for 24-48 hours post-op. (3) Taper back to baseline maintenance dose. Hydrocortisone is preferred because at high doses it has both glucocorticoid and mineralocorticoid potency. Failure to provide stress-dose steroids perioperatively risks intraoperative adrenal crisis and cardiovascular collapse.</div>
+                    <div class="teaching-point">Major surgery + ≥3 weeks steroids = stress dose needed. Hydrocortisone 50-100 mg IV before surgery. Taper over 24-48h. Failure = adrenal crisis risk.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Score Tab -->
+        <div id="score" class="tab-content">
+            <div class="score-section">
+                <h2 style="color: #BF360C; margin-bottom: 25px; font-size: 22px;">Performance Summary</h2>
+
+                <div class="score-grid">
+                    <div class="score-item">
+                        <div class="score-label">GUSOM Questions</div>
+                        <div class="score-value"><span id="score-gusom-correct">0</span>/<span id="score-gusom-total">10</span></div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">BRS Questions</div>
+                        <div class="score-value"><span id="score-brs-correct">0</span>/<span id="score-brs-total">5</span></div>
+                    </div>
+                    <div class="score-item">
+                        <div class="score-label">Overall Score</div>
+                        <div class="score-value"><span id="score-total-correct">0</span>/<span id="score-total-total">15</span></div>
+                    </div>
+                </div>
+
+                <button class="reset-button" onclick="resetScore()">Reset All Scores</button>
+
+                <div style="margin-top: 25px; padding: 16px; background-color: #0D1117; border-radius: 4px; border-left: 3px solid #BF360C;">
+                    <p style="color: #8B949E; font-size: 14px; line-height: 1.8;">
+                        Select answers to questions and reveal explanations. Your score updates automatically as you answer each question. Use this tool to identify knowledge gaps and reinforce understanding of HPA axis physiology and clinical applications.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let scores = {
+            gusom: {},
+            brs: {}
+        };
+
+        function sel(el, isCorrect, explanation, tabKey) {
+            const parent = el.parentElement;
+            const qNum = parent.parentElement.querySelector('.question-number').textContent;
+
+            parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected', 'correct', 'incorrect'));
+
+            if (isCorrect) {
+                el.classList.add('selected', 'correct');
+                scores[tabKey][qNum] = true;
+            } else {
+                el.classList.add('selected', 'incorrect');
+                scores[tabKey][qNum] = false;
+            }
+
+            const expBox = parent.parentElement.querySelector('.explanation-box');
+            expBox.classList.add('visible');
+
+            updateScore();
+        }
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function updateScore() {
+            const gusom_correct = Object.values(scores.gusom).filter(v => v === true).length;
+            const brs_correct = Object.values(scores.brs).filter(v => v === true).length;
+            const total_correct = gusom_correct + brs_correct;
+
+            document.getElementById('score-gusom-correct').textContent = gusom_correct;
+            document.getElementById('score-brs-correct').textContent = brs_correct;
+            document.getElementById('score-total-correct').textContent = total_correct;
+        }
+
+        function resetScore() {
+            scores = { gusom: {}, brs: {} };
+            document.querySelectorAll('.option').forEach(o => o.classList.remove('selected', 'correct', 'incorrect'));
+            document.querySelectorAll('.explanation-box').forEach(e => e.classList.remove('visible'));
+            updateScore();
+        }
+    </script>
+</body>
+</html>
