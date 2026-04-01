@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub #3 · L1: Intro to Hormone Action — Practice Questions</title>
+    <style>
+        :root { --accent: #1565C0; --accent-dark: #0D47A1; --accent-light: rgba(21,101,192,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #00BCD4; text-decoration: none; font-size: 0.85em; margin-bottom: 18px; }
+        .back-link:hover { text-decoration: underline; }
+        .header { background: linear-gradient(135deg, #0A1628 0%, #0D1F40 100%); border-bottom: 3px solid var(--accent); padding: 24px 28px; margin-bottom: 24px; border-radius: 10px; }
+        .header h1 { color: #E6EDF3; font-size: 1.7em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.88em; }
+        .source-pills { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .sp { padding: 3px 10px; border-radius: 12px; font-size: 0.78em; font-weight: 600; }
+        .sp-gusom { background: rgba(0,188,212,0.12); color: #00BCD4; border: 1px solid rgba(0,188,212,0.3); }
+        .sp-brs { background: rgba(255,160,0,0.1); color: #FFA000; border: 1px solid rgba(255,160,0,0.3); }
+        .tab-nav { display: flex; gap: 6px; margin-bottom: 22px; flex-wrap: wrap; background: #161B22; padding: 10px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 8px 14px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .tab-content { display: none; animation: fadeIn 0.2s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .info-box { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 4px; font-size: 0.88em; color: #B0C4E8; margin-bottom: 20px; }
+        .q-source { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .q-source.gusom { color: #00BCD4; }
+        .q-source.brs { color: #FFA000; }
+        /* MCQ Styles */
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .mcq-q { color: #E6EDF3; font-weight: 600; margin-bottom: 14px; font-size: 0.98em; line-height: 1.55; }
+        .mcq-opts { display: flex; flex-direction: column; gap: 8px; }
+        .mcq-opt { background: #1C2128; border: 1px solid #30363D; border-radius: 6px; padding: 11px 15px; cursor: pointer; transition: all 0.2s; color: #8B949E; font-size: 0.93em; }
+        .mcq-opt:hover:not(:disabled) { background: #30363D; color: var(--accent); border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74,222,128,0.12); color: #4ADE80; border-color: #4ADE80; cursor: default; }
+        .mcq-opt.incorrect { background: rgba(239,68,68,0.12); color: #ff6b6b; border-color: #EF4444; cursor: default; }
+        .mcq-opt:disabled { cursor: default; }
+        .mcq-explain { background: #1A1F2E; border-left: 3px solid var(--accent); padding: 14px; margin-top: 14px; border-radius: 4px; font-size: 0.88em; color: #D1D5DB; display: none; line-height: 1.55; }
+        .mcq-explain.show { display: block; }
+        .teach-point { background: rgba(21,101,192,0.15); border-left: 3px solid var(--accent); padding: 10px; margin-top: 10px; border-radius: 4px; font-size: 0.9em; color: #90CAF9; font-weight: 600; }
+        /* Matching Styles */
+        .match-section { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 24px; }
+        .match-title { color: var(--accent); font-weight: 700; font-size: 1em; margin-bottom: 6px; }
+        .match-directions { font-size: 0.85em; color: #9CA3AF; margin-bottom: 16px; line-height: 1.5; }
+        .match-choices { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; padding: 12px; background: #1C2128; border-radius: 8px; border: 1px solid #30363D; }
+        .match-choice-label { font-size: 0.82em; font-weight: 700; color: #FFA000; }
+        .match-choice-items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .match-choice-item { background: rgba(255,160,0,0.08); border: 1px solid rgba(255,160,0,0.25); color: #FFA000; padding: 3px 10px; border-radius: 12px; font-size: 0.82em; font-weight: 600; }
+        .match-q-list { display: flex; flex-direction: column; gap: 10px; }
+        .match-q-item { background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 14px; }
+        .match-q-text { font-size: 0.92em; color: #E6EDF3; margin-bottom: 10px; line-height: 1.5; }
+        .match-opts { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+        .match-opt { padding: 6px 14px; background: #0D1117; border: 1px solid #30363D; border-radius: 20px; cursor: pointer; font-size: 0.85em; font-weight: 600; color: #9CA3AF; transition: all 0.2s; }
+        .match-opt:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+        .match-opt.correct { background: rgba(74,222,128,0.12); border-color: #4ADE80; color: #4ADE80; }
+        .match-opt.incorrect { background: rgba(239,68,68,0.12); border-color: #EF4444; color: #ff6b6b; }
+        .match-opt:disabled { cursor: default; }
+        .match-fb { font-size: 0.83em; padding: 7px 10px; border-radius: 5px; display: none; }
+        .match-fb.show { display: block; }
+        .match-fb.correct { background: rgba(74,222,128,0.08); color: #4ADE80; }
+        .match-fb.incorrect { background: rgba(239,68,68,0.08); color: #ff6b6b; }
+        /* Concept Cards */
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 150px; }
+        .fc-inner { position: relative; width: 100%; min-height: 150px; transform-style: preserve-3d; transition: transform 0.45s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 150px; backface-visibility: hidden; padding: 16px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.68em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.92em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.88em; color: #D1FAE5; line-height: 1.5; }
+        /* Score Tab */
+        .score-dashboard { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 24px; margin-bottom: 20px; }
+        .score-title { font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+        .score-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #21262D; }
+        .score-row:last-child { border-bottom: none; }
+        .score-label { font-size: 0.9em; color: #D1D5DB; }
+        .score-val { font-size: 1em; font-weight: 700; color: #E6EDF3; }
+        .reset-btn { background: #30363D; color: #9CA3AF; border: 1px solid #30363D; border-radius: 6px; padding: 8px 16px; cursor: pointer; font-size: 0.85em; font-weight: 600; margin-top: 14px; }
+        .reset-btn:hover { background: #3a3f45; }
+        .score-bar-wrap { background: #0D1117; border-radius: 4px; height: 8px; flex: 1; margin: 0 14px; }
+        .score-bar-fill { height: 100%; border-radius: 4px; background: var(--accent); transition: width 0.4s; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="GUSOM-Biochem-Hub3-ActiveDrills.html" class="back-link">← Hub #3: Practice Questions</a>
+    <div class="header">
+        <h1>🧬 L1 · Introduction to Hormone Action — Practice Questions</h1>
+        <p class="subtitle">GUSOM Endocrine Block · Hub #3 · Exam-Focused Question Practice</p>
+        <div class="source-pills">
+            <span class="sp sp-gusom">2 GUSOM In-House Qs (Dr. Danielsen, Week 2)</span>
+            <span class="sp sp-brs">BRS Biochem Ch. 9 · Q1–10, Q12, Q17–19, Q22–23, Q31</span>
+        </div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('gusom',this)">📝 GUSOM Questions</button>
+        <button class="tab-btn" onclick="switchTab('brs-vig',this)">🏥 BRS Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('brs-match',this)">📚 BRS Matching</button>
+        <button class="tab-btn" onclick="switchTab('concepts',this)">🧠 Concept Cards</button>
+        <button class="tab-btn" onclick="switchTab('score',this)">📊 My Score</button>
+    </div>
+
+    <!-- TAB 1: GUSOM Questions -->
+    <div id="gusom" class="tab-content active">
+        <div class="info-box">Verbatim GUSOM in-house exam questions. These are the actual questions used on your block exams. Full explanations after answering.</div>
+        <div id="gusom-container"></div>
+    </div>
+
+    <!-- TAB 2: BRS Vignettes -->
+    <div id="brs-vig" class="tab-content">
+        <div class="info-box">BRS Biochemistry Ch. 9 clinical vignette questions (Q11–35 subset) mapped to Lecture 1 topics: receptor types, immunoassays, catecholamine metabolism, testosterone receptor properties.</div>
+        <div id="brsvig-container"></div>
+    </div>
+
+    <!-- TAB 3: BRS Matching -->
+    <div id="brs-match" class="tab-content">
+        <div class="info-box">BRS Ch. 9 matching sets (Q1–10): anterior pituitary hormones and their functions, plus case-to-diagnosis matching. Each choice may be used more than once.</div>
+        <div id="brsmatch-container"></div>
+    </div>
+
+    <!-- TAB 4: Concept Cards -->
+    <div id="concepts" class="tab-content">
+        <div class="info-box">Click to flip. Key concepts tied directly to the practice questions in this hub.</div>
+        <div class="fc-grid" id="concepts-grid"></div>
+    </div>
+
+    <!-- TAB 5: Score -->
+    <div id="score" class="tab-content">
+        <div class="score-dashboard">
+            <div class="score-title">📊 Performance Summary — L1 Practice Questions</div>
+            <div class="score-row">
+                <span class="score-label">GUSOM Questions</span>
+                <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-gusom" style="width:0%"></div></div>
+                <span class="score-val" id="score-gusom">—</span>
+            </div>
+            <div class="score-row">
+                <span class="score-label">BRS Vignettes</span>
+                <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-brsvig" style="width:0%"></div></div>
+                <span class="score-val" id="score-brsvig">—</span>
+            </div>
+            <div class="score-row">
+                <span class="score-label">BRS Matching</span>
+                <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-brsmatch" style="width:0%"></div></div>
+                <span class="score-val" id="score-brsmatch">—</span>
+            </div>
+            <div class="score-row" style="font-weight:700;">
+                <span class="score-label">Overall</span>
+                <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-overall" style="width:0%;background:#4ADE80"></div></div>
+                <span class="score-val" id="score-overall">—</span>
+            </div>
+            <button class="reset-btn" onclick="resetAll()">Reset All Scores</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function switchTab(tabName, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabName).classList.add('active');
+    if(btn) btn.classList.add('active');
+    updateScoreDisplay();
+}
+
+// Score tracking
+const scores = { gusom: {c:0,t:0}, brsvig: {c:0,t:0}, brsmatch: {c:0,t:0} };
+function recordScore(bucket, correct) {
+    scores[bucket].t++;
+    if(correct) scores[bucket].c++;
+    updateScoreDisplay();
+}
+function updateScoreDisplay() {
+    Object.keys(scores).forEach(k => {
+        const el = document.getElementById(`score-${k}`);
+        const bar = document.getElementById(`bar-${k}`);
+        if(el) {
+            if(scores[k].t === 0) { el.textContent = '—'; if(bar) bar.style.width='0%'; }
+            else { el.textContent = `${scores[k].c}/${scores[k].t}`; if(bar) bar.style.width=`${Math.round(scores[k].c/scores[k].t*100)}%`; }
+        }
+    });
+    const total = Object.values(scores).reduce((a,v)=>({c:a.c+v.c,t:a.t+v.t}),{c:0,t:0});
+    const el = document.getElementById('score-overall');
+    const bar = document.getElementById('bar-overall');
+    if(total.t === 0) { el.textContent='—'; bar.style.width='0%'; }
+    else { el.textContent=`${total.c}/${total.t} (${Math.round(total.c/total.t*100)}%)`; bar.style.width=`${Math.round(total.c/total.t*100)}%`; }
+}
+function resetAll() {
+    if(!confirm('Reset all scores for this hub?')) return;
+    Object.keys(scores).forEach(k => { scores[k].c=0; scores[k].t=0; });
+    document.querySelectorAll('.mcq-opt, .match-opt').forEach(b => { b.className = b.className.replace('correct','').replace('incorrect',''); b.disabled=false; });
+    document.querySelectorAll('.mcq-explain, .match-fb').forEach(el => el.classList.remove('show'));
+    updateScoreDisplay();
+}
+
+// --- GUSOM Questions ---
+const gusomQs = [
+    {
+        source: "GUSOM · Week 2 · Dr. Danielsen · Topic: Introduction to Hormone Action",
+        q: "Which one of the following lists contains only hormones that consist of 2 subunits encoded on <em>different</em> genes?",
+        opts: [
+            {text:"A. Cortisol and Progesterone", correct:false, explain:"These are steroid hormones synthesized from cholesterol — they are not encoded by genes as polypeptide subunits."},
+            {text:"B. Glucagon and ACTH", correct:false, explain:"These are single-chain peptide hormones, each encoded by one gene. Not dimers."},
+            {text:"C. Insulin and hCG", correct:false, explain:"Insulin has 2 subunits (A and B chains) but they are cleaved from one preproinsulin transcript — one gene. hCG is a glycoprotein heterodimer encoded by 2 genes, so hCG alone would qualify, but insulin does not."},
+            {text:"D. LH and FSH", correct:true, explain:"All glycoprotein hormones (LH, FSH, TSH, hCG) are heterodimers: they share an identical alpha (α) subunit encoded by one gene, and each has a unique beta (β) subunit encoded by a different gene. Only LH and FSH (both glycoproteins) are listed here."},
+            {text:"E. Somatostatin and TSH", correct:false, explain:"Somatostatin is a single-chain monomer. TSH is indeed a glycoprotein heterodimer, but pairing it with somatostatin makes this list incorrect."}
+        ],
+        teach: "The glycoprotein hormones — FSH, LH, TSH, hCG — share a common α-subunit (same gene) and differ in their unique β-subunits (different gene per hormone). This is classic high-yield: 'same α, different β.'"
+    },
+    {
+        source: "GUSOM · Week 2 · Dr. Danielsen · Topic: Introduction to Hormone Action",
+        q: "A Scatchard plot is BEST described as a graphical way of determining:",
+        opts: [
+            {text:"A. Hormone concentration", correct:false, explain:"Hormone concentration is used as the input variable, not what the Scatchard plot determines. You know the hormone concentration you add; the plot tells you about the receptor."},
+            {text:"B. Amount of receptor in an extract", correct:false, explain:"Technically true — the x-intercept gives Bmax (total receptor number) — but this is not the best/complete answer."},
+            {text:"C. The affinity of hormone binding sites in a sample", correct:false, explain:"Also technically true — the slope gives -1/Kd (affinity) — but not the most complete answer."},
+            {text:"D. Hormone concentration and the affinity of hormone binding sites in a sample", correct:false, explain:"Hormone concentration is the input, not an output of the Scatchard plot."},
+            {text:"E. Amount of receptor in an extract and the affinity of hormone binding sites in a sample", correct:true, explain:"The Scatchard plot linearizes saturation binding data. The SLOPE = −1/Kd (gives affinity), and the X-INTERCEPT = Bmax (gives total receptor number/amount). Both pieces of information can be extracted from a single Scatchard analysis."}
+        ],
+        teach: "Scatchard: y-axis = Bound/Free; x-axis = Bound. Slope = −1/Kd (affinity); x-intercept = Bmax (receptor number). This is why E is correct — it gives BOTH Bmax AND Kd simultaneously."
+    }
+];
+
+const gusomContainer = document.getElementById('gusom-container');
+gusomQs.forEach((mcq, idx) => {
+    const div = document.createElement('div');
+    div.className = 'mcq-item';
+    div.innerHTML = `<div class="q-source gusom">${mcq.source}</div>
+        <div class="mcq-q">${idx+1}. ${mcq.q}</div>
+        <div class="mcq-opts">${mcq.opts.map((o,oi)=>`<button class="mcq-opt" data-bucket="gusom" data-correct="${o.correct}" data-qidx="g${idx}" data-oi="${oi}" onclick="selectMCQ(this)">${o.text}</button>`).join('')}</div>
+        <div class="mcq-explain" id="gexp-${idx}"><strong>Explanation:</strong> ${mcq.opts.find(o=>o.correct).explain}<div class="teach-point">💡 ${mcq.teach}</div></div>`;
+    gusomContainer.appendChild(div);
+});
+
+// --- BRS Vignettes ---
+const brsVigs = [
+    {
+        source: "BRS Biochemistry Ch. 9 · Q12",
+        q: "A 25-year-old woman has both Graves' disease (hyperthyroidism) and Cushing's syndrome (hypercortisolism). What do the causative hormones of these two conditions have in common with respect to their mechanism of action?",
+        opts: [
+            {text:"A. Both bind to G-protein coupled receptors on the cell surface", correct:false, explain:"TSH acts on GPCRs to stimulate the thyroid, but thyroid hormone (T3/T4) itself does not — it acts via intracellular nuclear receptors. Cortisol also acts via intracellular receptors."},
+            {text:"B. Both are synthesized from cholesterol", correct:false, explain:"Cortisol is a steroid made from cholesterol. Thyroid hormones are synthesized from tyrosine, not cholesterol."},
+            {text:"C. Both hormones (T3 and cortisol) act through intracellular receptors", correct:true, explain:"Thyroid hormones (T3/T4) act via nuclear receptors (thyroid hormone receptor, TR — a member of the nuclear receptor superfamily). Cortisol acts via the glucocorticoid receptor (GR), also a nuclear receptor. Both are intracellular/nuclear. This is what they share."},
+            {text:"D. Both require cAMP as a second messenger", correct:false, explain:"Neither T3 nor cortisol uses cAMP as a second messenger — those are water-soluble peptide/catecholamine hormones acting on membrane GPCRs."},
+            {text:"E. Both are transported in blood as free, unbound hormones", correct:false, explain:"Both T3/T4 and cortisol travel primarily bound to carrier proteins (TBG and CBG, respectively). Only a small free fraction is biologically active."}
+        ],
+        teach: "Lipid-soluble hormones (steroids + T3/T4) → intracellular/nuclear receptors → modulate transcription. Water-soluble hormones (peptides, catecholamines) → membrane receptors → second messengers."
+    },
+    {
+        source: "BRS Biochemistry Ch. 9 · Q17–19 (RIA/Immunoassay Case)",
+        q: "A 38-year-old woman with palpitations and heat intolerance is evaluated. Radioimmunoassay reveals her total T4 is 15 μg/dL (reference range: 4.5–12 μg/dL). Based on these findings, how would you classify this patient's thyroid status?",
+        opts: [
+            {text:"A. Euthyroid — T4 is within the normal range", correct:false, explain:"15 μg/dL is above the upper reference limit of 12 μg/dL."},
+            {text:"B. Hypothyroid — T4 is too low", correct:false, explain:"15 μg/dL is elevated, not low. Hypothyroid patients have low T4 and elevated TSH."},
+            {text:"C. Hyperthyroid — T4 is elevated above normal range", correct:true, explain:"T4 = 15 μg/dL exceeds the normal range (4.5–12 μg/dL), consistent with hyperthyroid state. Combined with symptoms (palpitations, heat intolerance), this is a hyperthyroid picture."},
+            {text:"D. Cannot determine without free T4", correct:false, explain:"While free T4 is more reliable, a total T4 of 15 μg/dL with hyperthyroid symptoms is clearly abnormal. Free T4 confirmation is appropriate, but classification is already possible here."},
+            {text:"E. Subclinical hyperthyroid — TSH would be normal", correct:false, explain:"In overt hyperthyroidism (high total and free T4 with symptoms), TSH is suppressed — not normal."}
+        ],
+        teach: "Normal T4 reference: 4.5–12 μg/dL. TSH is suppressed in overt hyperthyroidism (↑T4 → negative feedback). RIA measures total hormone; always consider TBG changes (OCP, pregnancy) before concluding thyroid status."
+    },
+    {
+        source: "BRS Biochemistry Ch. 9 · Q19 (RIA Case continued)",
+        q: "For the hyperthyroid patient in the previous question, what would you expect her serum TSH level to be?",
+        opts: [
+            {text:"A. Markedly elevated — TSH stimulates more T4 production", correct:false, explain:"TSH would be elevated only in primary hypothyroidism, where low T4 removes negative feedback on TSH. In hyperthyroidism, high T4 suppresses TSH."},
+            {text:"B. Normal — TSH is not affected by T4 levels", correct:false, explain:"TSH is tightly regulated by T4/T3 via negative feedback on the anterior pituitary. High T4 strongly suppresses TSH."},
+            {text:"C. Lower than normal — high T4 suppresses TSH via negative feedback", correct:true, explain:"High circulating T4 exerts negative feedback at both the hypothalamus (↓TRH) and anterior pituitary (↓TSH secretion and synthesis). TSH is the most sensitive indicator of thyroid status — even small elevations in T4/T3 can suppress TSH to undetectable levels."},
+            {text:"D. Variable — cannot predict without knowing TRH", correct:false, explain:"While TRH drives TSH, T4/T3 feedback is robust and predictable. High T4 → suppressed TSH is a reliable relationship."},
+            {text:"E. Paradoxically elevated due to receptor resistance", correct:false, explain:"Thyroid hormone resistance is rare. This patient has Graves' disease features (palpitations, heat intolerance), not resistance."}
+        ],
+        teach: "Thyroid axis: TRH → TSH → T4/T3 → (−) feedback on TRH and TSH. TSH is the MOST sensitive test: suppressed in hyperthyroid, elevated in hypothyroid. Free T4 confirms. Total T4 can be misleading if TBG is altered."
+    },
+    {
+        source: "BRS Biochemistry Ch. 9 · Q22",
+        q: "A 32-year-old man with Parkinson's disease is prescribed selegiline (a selective MAO-B inhibitor). Two weeks later, he eats a dinner that includes a large serving of aged cheese and red wine. Within 30 minutes, he develops a severe throbbing headache, flushing, and his blood pressure is 210/120 mmHg. Which compound is directly responsible for this hypertensive crisis?",
+        opts: [
+            {text:"A. Dopamine — released by selegiline-induced neuronal activation", correct:false, explain:"Dopamine is a catecholamine affected by MAO metabolism, but dopamine itself does not cause this food-triggered crisis. The crisis requires a dietary substrate."},
+            {text:"B. Tyramine — a dietary amine that normally undergoes first-pass MAO degradation", correct:true, explain:"Aged cheeses and red wine contain tyramine. Normally, intestinal and hepatic MAO degrades dietary tyramine before it reaches systemic circulation. MAO inhibition blocks this first-pass degradation → tyramine enters blood → displaces NE from presynaptic vesicles → massive NE release → hypertensive crisis."},
+            {text:"C. Serotonin — accumulates with MAO inhibition", correct:false, explain:"MAO inhibition does elevate serotonin, which is a concern with serotonin syndrome (especially with SSRIs), but serotonin excess doesn't cause this specific food-triggered hypertensive crisis pattern."},
+            {text:"D. Phenylalanine — precursor to catecholamines", correct:false, explain:"Phenylalanine is a precursor in catecholamine synthesis, but it is not the direct mediator of tyramine-induced hypertension."},
+            {text:"E. Norepinephrine — directly ingested from dietary sources", correct:false, explain:"NE is not ingested from food. Rather, tyramine triggers NE release from presynaptic terminals by competing for the vesicular monoamine transporter (VMAT)."}
+        ],
+        teach: "MAO normally inactivates catecholamines (NE, epinephrine, dopamine) and dietary amines (tyramine) via oxidative deamination. MAO inhibitors → tyramine accumulates → displaces stored NE → sympathetic surge. High-tyramine foods: aged cheeses, cured meats, fermented products, red wine."
+    },
+    {
+        source: "BRS Biochemistry Ch. 9 · Q23",
+        q: "The same patient on selegiline should be counseled to avoid which of the following foods?",
+        opts: [
+            {text:"A. Fresh salmon and rice", correct:false, explain:"Fresh fish is low in tyramine — safe for patients on MAO inhibitors."},
+            {text:"B. Bananas and apples", correct:false, explain:"Fresh fruits are generally low in tyramine (with exceptions for overripe bananas). Generally considered safe."},
+            {text:"C. White bread and pasta", correct:false, explain:"Carbohydrates like bread and pasta do not contain significant tyramine."},
+            {text:"D. Aged cheeses, cured meats, and fermented foods", correct:true, explain:"Tyramine forms from tyrosine through bacterial decarboxylation during the aging/fermentation process. High-tyramine foods: aged/hard cheeses (cheddar, brie, parmesan), cured/smoked meats, fermented soy products (soy sauce, miso), red wine, tap beer. Fresh foods have minimal tyramine."},
+            {text:"E. Citrus fruits and dairy milk", correct:false, explain:"Citrus fruits and fresh milk are low in tyramine. Fresh (non-aged) dairy products are safe."}
+        ],
+        teach: "Tyramine content increases with bacterial fermentation/aging. Remember: Aged, Cured, Fermented = high tyramine risk with MAOIs. Fresh foods are generally safe. Clinical mnemonic: 'If it's old or fermented, avoid it on MAOIs.'"
+    },
+    {
+        source: "BRS Biochemistry Ch. 9 · Q31",
+        q: "A 69-year-old man has a testosterone level of 168 ng/dL (normal: 300–1000 ng/dL). Regarding testosterone, which of the following best describes its receptor properties and actions?",
+        opts: [
+            {text:"A. Binds membrane receptors and uses cAMP as a second messenger", correct:false, explain:"Testosterone is a steroid hormone. Steroids are lipid-soluble and diffuse into cells to bind intracellular/nuclear receptors — they do NOT use membrane GPCRs or cAMP."},
+            {text:"B. Requires TBG as its primary carrier protein and is stored in secretory granules", correct:false, explain:"Testosterone is carried by SHBG (sex hormone-binding globulin) and albumin, not TBG (which is specific for thyroid hormones). Steroids are synthesized de novo, not stored in granules."},
+            {text:"C. Nuclear receptor location; serves as a precursor to estradiol (via aromatase); stimulates GnRH at low levels", correct:true, explain:"Testosterone: (1) binds the androgen receptor (AR), a nuclear receptor; (2) is converted to estradiol by aromatase (especially in adipose tissue); (3) at physiologic levels, stimulates GnRH pulsatility, but at high levels, feedback suppresses GnRH/LH. This is key for understanding hypogonadism and exogenous testosterone effects."},
+            {text:"D. Acts identically to estradiol — both share the same receptor", correct:false, explain:"Testosterone binds the androgen receptor (AR); estradiol binds the estrogen receptor (ER). Although testosterone can be converted to estradiol by aromatase, they do not share the same receptor."},
+            {text:"E. Is rapidly cleared from the blood and requires continuous de novo synthesis with no circulating half-life", correct:false, explain:"Testosterone has a plasma half-life of approximately 10–100 minutes (bound to SHBG extends it). It does circulate bound to carrier proteins."}
+        ],
+        teach: "Testosterone: steroid → nuclear receptor (AR) → genomic effects. Key conversions: Testosterone → DHT (5α-reductase, in prostate/skin) — more potent androgen; Testosterone → Estradiol (aromatase, in adipose) — becomes estrogen. In males, estradiol from aromatase contributes to bone density and negative feedback."
+    }
+];
+
+const brsVigContainer = document.getElementById('brsvig-container');
+brsVigs.forEach((mcq, idx) => {
+    const div = document.createElement('div');
+    div.className = 'mcq-item';
+    div.innerHTML = `<div class="q-source brs">${mcq.source}</div>
+        <div class="mcq-q">${idx+1}. ${mcq.q}</div>
+        <div class="mcq-opts">${mcq.opts.map((o,oi)=>`<button class="mcq-opt" data-bucket="brsvig" data-correct="${o.correct}" data-qidx="v${idx}" data-oi="${oi}" onclick="selectMCQ(this)">${o.text}</button>`).join('')}</div>
+        <div class="mcq-explain" id="vexp-${idx}"><strong>Explanation:</strong> ${mcq.opts.find(o=>o.correct).explain}<div class="teach-point">💡 ${mcq.teach}</div></div>`;
+    brsVigContainer.appendChild(div);
+});
+
+// --- BRS Matching ---
+const matchSets = [
+    {
+        title: "BRS Ch. 9 · Q1–6 · Anterior Pituitary Hormone Functions",
+        directions: "DIRECTIONS: For each description (Q1–6), select the ONE anterior pituitary hormone that best matches. Each choice may be used more than once.",
+        choices: ["A. LH (Luteinizing Hormone)", "B. Prolactin", "C. TSH (Thyroid-Stimulating Hormone)", "D. GH (Growth Hormone)", "E. FSH (Follicle-Stimulating Hormone)"],
+        items: [
+            {num:"Q1", q:"This hormone triggers ovulation in females and stimulates testosterone production by Leydig cells in males.", answer:"A", answerFull:"A. LH", explain:"LH triggers ovulation (mid-cycle LH surge) and stimulates Leydig cells in the testes to produce testosterone."},
+            {num:"Q2", q:"This hormone stimulates milk production and secretion from mammary gland alveolar epithelium after delivery.", answer:"B", answerFull:"B. Prolactin", explain:"Prolactin (PRL) is the primary hormone for lactation. It rises during pregnancy and is sustained by suckling stimulus postpartum. Dopamine (from hypothalamus) normally inhibits PRL secretion."},
+            {num:"Q3", q:"This hormone stimulates synthesis and secretion of T3 and T4 from thyroid follicular cells.", answer:"C", answerFull:"C. TSH", explain:"TSH (thyrotropin) binds TSH receptors on thyroid follicular cells → activates adenylyl cyclase (cAMP) → stimulates iodide uptake, thyroglobulin synthesis, and T3/T4 secretion."},
+            {num:"Q4", q:"This hormone stimulates hepatic synthesis of IGF-1 (somatomedin C), which mediates most of its growth-promoting effects.", answer:"D", answerFull:"D. GH", explain:"GH (growth hormone) acts directly on the liver to stimulate IGF-1 synthesis. IGF-1 then mediates GH's anabolic and growth-promoting effects in muscle, bone, and other tissues."},
+            {num:"Q5", q:"This hormone stimulates development of ovarian follicles in females and supports Sertoli cell function and spermatogenesis in males.", answer:"E", answerFull:"E. FSH", explain:"FSH stimulates granulosa cells in females (follicle development, estrogen synthesis via aromatase) and Sertoli cells in males (spermatogenesis, inhibin production)."},
+            {num:"Q6", q:"After ovulation, this hormone maintains the corpus luteum and stimulates progesterone and estradiol production during the luteal phase.", answer:"A", answerFull:"A. LH", explain:"LH is required to maintain corpus luteum function in the luteal phase, driving progesterone synthesis. If fertilization occurs, hCG (which has LH-like activity) takes over to sustain the corpus luteum through the first trimester."}
+        ]
+    },
+    {
+        title: "BRS Ch. 9 · Q7–10 · Case-to-Diagnosis Matching",
+        directions: "DIRECTIONS: For each clinical description (Q7–10), select the ONE best diagnosis from choices A–E.",
+        choices: ["A. Addison's disease", "B. Acromegaly", "C. Cushing's disease (pituitary-dependent)", "D. Cushing's syndrome (adrenal)", "E. Prolactinoma"],
+        items: [
+            {num:"Q7", q:"A 38-year-old male presents with progressive enlargement of his jaw, hands, and feet over 5 years. He has frontal bossing, wide-spaced teeth, and new-onset type 2 diabetes mellitus. His IGF-1 is markedly elevated.", answer:"B", answerFull:"B. Acromegaly", explain:"Acromegaly: excess GH after epiphyseal closure → bony overgrowth (jaw, hands, feet, skull), soft tissue swelling, insulin resistance/diabetes. Elevated IGF-1 is the best screening test. MRI typically shows a pituitary GH-secreting adenoma."},
+            {num:"Q8", q:"A 45-year-old woman presents with truncal obesity, moon facies, purple striae on her abdomen, hypertension, and glucose of 240 mg/dL. Her 24-hour urine free cortisol is markedly elevated. Serum ACTH is 85 pg/mL (normal 10–50).", answer:"C", answerFull:"C. Cushing's disease (pituitary)", explain:"Elevated ACTH + elevated cortisol = ACTH-dependent Cushing's. Pituitary-dependent (Cushing's DISEASE) is the most common cause. High-dose DST suppresses in pituitary disease but not in ectopic ACTH or adrenal Cushing's."},
+            {num:"Q9", q:"A 28-year-old woman presents with amenorrhea for 8 months, milky discharge from both breasts, and decreased libido. Serum prolactin is 310 ng/mL (normal <25). MRI shows a 1.2 cm pituitary mass.", answer:"E", answerFull:"E. Prolactinoma", explain:"Prolactinoma (lactotroph adenoma): most common secretory pituitary tumor. Elevated PRL → suppresses GnRH pulsatility → amenorrhea, galactorrhea. Macroadenoma (>1 cm) may cause bitemporal hemianopsia. Treatment: dopamine agonist (cabergoline)."},
+            {num:"Q10", q:"A 52-year-old man has moon facies, buffalo hump, and central obesity. Cortisol is markedly elevated at all times. Serum ACTH is undetectable (<5 pg/mL).", answer:"D", answerFull:"D. Cushing's syndrome (adrenal)", explain:"Undetectable ACTH + high cortisol = ACTH-independent = adrenal source (adrenal adenoma, carcinoma, or bilateral hyperplasia). The adrenal tumor secretes cortisol autonomously, suppressing pituitary ACTH via negative feedback. Low-dose DST does NOT suppress."}
+        ]
+    }
+];
+
+const brsMatchContainer = document.getElementById('brsmatch-container');
+matchSets.forEach((set, sIdx) => {
+    const sec = document.createElement('div');
+    sec.className = 'match-section';
+    sec.innerHTML = `<div class="match-title">${set.title}</div>
+        <div class="match-directions">${set.directions}</div>
+        <div class="match-choices">
+            <div><div class="match-choice-label">Answer Choices:</div>
+            <div class="match-choice-items">${set.choices.map(c=>`<span class="match-choice-item">${c}</span>`).join('')}</div></div>
+        </div>
+        <div class="match-q-list" id="mset-${sIdx}"></div>`;
+    brsMatchContainer.appendChild(sec);
+
+    const qList = sec.querySelector(`#mset-${sIdx}`);
+    set.items.forEach((item, iIdx) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'match-q-item';
+        qDiv.innerHTML = `<div class="match-q-text"><strong>${item.num}.</strong> ${item.q}</div>
+            <div class="match-opts">${set.choices.map((c,ci)=>`<button class="match-opt" data-answer="${item.answer}" data-choice="${String.fromCharCode(65+ci)}" data-sidx="${sIdx}" data-iidx="${iIdx}" onclick="selectMatch(this)">${String.fromCharCode(65+ci)}</button>`).join('')}</div>
+            <div class="match-fb" id="mfb-${sIdx}-${iIdx}"></div>`;
+        qList.appendChild(qDiv);
+    });
+});
+
+function selectMCQ(btn) {
+    const isCorrect = btn.dataset.correct === 'true';
+    const qidx = btn.dataset.qidx;
+    const bucket = btn.dataset.bucket;
+    const container = btn.closest('.mcq-item');
+    container.querySelectorAll('.mcq-opt').forEach(b => b.disabled = true);
+    if(isCorrect) { btn.classList.add('correct'); }
+    else { btn.classList.add('incorrect'); container.querySelectorAll('.mcq-opt').forEach(b => { if(b.dataset.correct==='true') b.classList.add('correct'); }); }
+    const expId = qidx.startsWith('g') ? `gexp-${qidx.slice(1)}` : `vexp-${qidx.slice(1)}`;
+    const expEl = document.getElementById(expId);
+    if(expEl) expEl.classList.add('show');
+    recordScore(bucket, isCorrect);
+}
+
+function selectMatch(btn) {
+    const sIdx = parseInt(btn.dataset.sidx);
+    const iIdx = parseInt(btn.dataset.iidx);
+    const answer = btn.dataset.answer;
+    const chosen = btn.dataset.choice;
+    const isCorrect = chosen === answer;
+    const container = btn.closest('.match-q-item');
+    container.querySelectorAll('.match-opt').forEach(b => {
+        b.disabled = true;
+        if(b.dataset.choice === answer) b.classList.add('correct');
+    });
+    if(!isCorrect) btn.classList.add('incorrect');
+    const fb = document.getElementById(`mfb-${sIdx}-${iIdx}`);
+    fb.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+    fb.innerHTML = isCorrect ? `✓ Correct! ${matchSets[sIdx].items[iIdx].explain}` : `✗ Correct answer: ${matchSets[sIdx].items[iIdx].answerFull}. ${matchSets[sIdx].items[iIdx].explain}`;
+    recordScore('brsmatch', isCorrect);
+}
+
+// --- Concept Cards ---
+const concepts = [
+    {q:"Glycoprotein hormones: what do they share, and what differs?", a:"All share the same α-subunit (one gene for all). Each has a unique β-subunit (separate gene). Members: FSH, LH, TSH, hCG. β-subunit confers specificity."},
+    {q:"Scatchard plot: What does the slope represent? What does the x-intercept represent?", a:"Slope = −1/Kd (affinity; steeper slope = lower Kd = higher affinity). X-intercept = Bmax (total receptor number). y-axis = Bound/Free; x-axis = Bound."},
+    {q:"Why does a MAO inhibitor cause a hypertensive crisis with tyramine-rich foods?", a:"MAO normally degrades tyramine in gut/liver (first-pass). MAO inhibition → tyramine enters systemic blood → displaces NE from vesicles → massive sympathetic activation → hypertensive crisis."},
+    {q:"What do T3/T4 and cortisol have in common mechanistically?", a:"Both act through intracellular/nuclear receptors. T3: thyroid hormone receptor (TR); Cortisol: glucocorticoid receptor (GR). Both are ligand-gated transcription factors."},
+    {q:"In hyperthyroidism (elevated T4), what happens to TSH and why?", a:"TSH is suppressed. High T4/T3 → negative feedback at hypothalamus (↓TRH) and anterior pituitary (↓TSH). TSH is the most sensitive thyroid function test."},
+    {q:"Testosterone: what carrier protein? What enzyme converts it to estradiol? What other active metabolite?", a:"Carrier: SHBG. → Estradiol via aromatase (adipose, liver, gonads). → DHT via 5α-reductase (prostate, skin). DHT is more potent androgen; estradiol from testosterone contributes to negative feedback and bone density."},
+    {q:"RIA vs IRMA: how do they differ?", a:"RIA: competitive assay — radiolabeled hormone competes with patient hormone for limited antibody. More patient hormone → less radiolabel bound. IRMA: two-site sandwich — unlabeled capture Ab + radiolabeled detector Ab. More specific and sensitive."},
+    {q:"LH vs FSH: what cells does each target in the gonads?", a:"LH: Leydig cells (males) → testosterone; theca cells (females) → androgen substrate. FSH: Sertoli cells (males) → spermatogenesis; granulosa cells (females) → aromatase → estrogen. Classic mnemonic: LH = 'Leydig/Luteal/Lust'; FSH = 'Follicle/Sperm formation.'"}
+];
+
+const conceptGrid = document.getElementById('concepts-grid');
+concepts.forEach(c => {
+    const fc = document.createElement('div');
+    fc.className = 'fc';
+    fc.innerHTML = `<div class="fc-inner"><div class="fc-front"><div class="fc-label">Question</div><div class="fc-q">${c.q}</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${c.a}</div></div></div>`;
+    fc.onclick = () => fc.classList.toggle('flipped');
+    conceptGrid.appendChild(fc);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub #3 · L5: Thyroid Synthesis — Practice Questions</title>
+    <style>
+        :root { --accent: #E65100; --accent-dark: #BF360C; --accent-light: rgba(230,81,0,0.12); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #00BCD4; text-decoration: none; font-size: 0.85em; margin-bottom: 18px; }
+        .back-link:hover { text-decoration: underline; }
+        .header { background: linear-gradient(135deg, #180800 0%, #2A1000 100%); border-bottom: 3px solid var(--accent); padding: 24px 28px; margin-bottom: 24px; border-radius: 10px; }
+        .header h1 { color: #E6EDF3; font-size: 1.7em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.88em; }
+        .source-pills { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .sp { padding: 3px 10px; border-radius: 12px; font-size: 0.78em; font-weight: 600; }
+        .sp-gusom { background: rgba(0,188,212,0.12); color: #00BCD4; border: 1px solid rgba(0,188,212,0.3); }
+        .sp-brs { background: rgba(255,160,0,0.1); color: #FFA000; border: 1px solid rgba(255,160,0,0.3); }
+        .tab-nav { display: flex; gap: 6px; margin-bottom: 22px; flex-wrap: wrap; background: #161B22; padding: 10px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 8px 14px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .tab-content { display: none; animation: fadeIn 0.2s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .info-box { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 4px; font-size: 0.88em; color: #FFE0B2; margin-bottom: 20px; }
+        .q-source { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .q-source.gusom { color: #00BCD4; }
+        .q-source.brs { color: #FFA000; }
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .mcq-q { color: #E6EDF3; font-weight: 600; margin-bottom: 14px; font-size: 0.98em; line-height: 1.6; }
+        .mcq-opts { display: flex; flex-direction: column; gap: 8px; }
+        .mcq-opt { background: #1C2128; border: 1px solid #30363D; border-radius: 6px; padding: 11px 15px; cursor: pointer; transition: all 0.2s; color: #8B949E; font-size: 0.93em; line-height: 1.45; }
+        .mcq-opt:hover:not(:disabled) { background: #30363D; color: var(--accent); border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74,222,128,0.12); color: #4ADE80; border-color: #4ADE80; cursor: default; }
+        .mcq-opt.incorrect { background: rgba(239,68,68,0.12); color: #ff6b6b; border-color: #EF4444; cursor: default; }
+        .mcq-opt:disabled { cursor: default; }
+        .mcq-explain { background: #180800; border-left: 3px solid var(--accent); padding: 14px; margin-top: 14px; border-radius: 4px; font-size: 0.88em; color: #D1D5DB; display: none; line-height: 1.55; }
+        .mcq-explain.show { display: block; }
+        .teach-point { background: rgba(230,81,0,0.1); border-left: 3px solid var(--accent); padding: 10px; margin-top: 10px; border-radius: 4px; font-size: 0.9em; color: #FFE0B2; font-weight: 600; }
+        .match-section { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 24px; }
+        .match-title { color: var(--accent); font-weight: 700; font-size: 1em; margin-bottom: 6px; }
+        .match-directions { font-size: 0.85em; color: #9CA3AF; margin-bottom: 16px; line-height: 1.5; }
+        .match-choices { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; padding: 12px; background: #1C2128; border-radius: 8px; border: 1px solid #30363D; }
+        .match-choice-label { font-size: 0.82em; font-weight: 700; color: #FFA000; }
+        .match-choice-items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .match-choice-item { background: rgba(255,160,0,0.08); border: 1px solid rgba(255,160,0,0.25); color: #FFA000; padding: 3px 10px; border-radius: 12px; font-size: 0.82em; font-weight: 600; }
+        .match-q-list { display: flex; flex-direction: column; gap: 10px; }
+        .match-q-item { background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 14px; }
+        .match-q-text { font-size: 0.92em; color: #E6EDF3; margin-bottom: 10px; line-height: 1.5; }
+        .match-opts { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+        .match-opt { padding: 6px 14px; background: #0D1117; border: 1px solid #30363D; border-radius: 20px; cursor: pointer; font-size: 0.85em; font-weight: 600; color: #9CA3AF; transition: all 0.2s; }
+        .match-opt:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+        .match-opt.correct { background: rgba(74,222,128,0.12); border-color: #4ADE80; color: #4ADE80; }
+        .match-opt.incorrect { background: rgba(239,68,68,0.12); border-color: #EF4444; color: #ff6b6b; }
+        .match-opt:disabled { cursor: default; }
+        .match-fb { font-size: 0.83em; padding: 7px 10px; border-radius: 5px; display: none; }
+        .match-fb.show { display: block; }
+        .match-fb.correct { background: rgba(74,222,128,0.08); color: #4ADE80; }
+        .match-fb.incorrect { background: rgba(239,68,68,0.08); color: #ff6b6b; }
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 150px; }
+        .fc-inner { position: relative; width: 100%; min-height: 150px; transform-style: preserve-3d; transition: transform 0.45s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 150px; backface-visibility: hidden; padding: 16px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #180800; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.68em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.92em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.88em; color: #D1FAE5; line-height: 1.5; }
+        .score-dashboard { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 24px; }
+        .score-title { font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+        .score-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #21262D; }
+        .score-row:last-child { border-bottom: none; }
+        .score-label { font-size: 0.9em; color: #D1D5DB; }
+        .score-val { font-size: 1em; font-weight: 700; color: #E6EDF3; }
+        .reset-btn { background: #30363D; color: #9CA3AF; border: 1px solid #30363D; border-radius: 6px; padding: 8px 16px; cursor: pointer; font-size: 0.85em; font-weight: 600; margin-top: 14px; }
+        .score-bar-wrap { background: #0D1117; border-radius: 4px; height: 8px; flex: 1; margin: 0 14px; }
+        .score-bar-fill { height: 100%; border-radius: 4px; background: var(--accent); transition: width 0.4s; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="GUSOM-Biochem-Hub3-ActiveDrills.html" class="back-link">← Hub #3: Practice Questions</a>
+    <div class="header">
+        <h1>🟠 L5 · Thyroid Hormone Synthesis & Action — Practice Questions</h1>
+        <p class="subtitle">GUSOM Endocrine Block · Hub #3 · Exam-Focused Question Practice</p>
+        <div class="source-pills">
+            <span class="sp sp-gusom">2 GUSOM In-House Qs (Dr. Danielsen Week 5, Dr. Jonklaas Week 6)</span>
+            <span class="sp sp-brs">BRS Biochem Ch. 9 · Q14, Q16, Q35 + Matching</span>
+        </div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('gusom',this)">📝 GUSOM Questions</button>
+        <button class="tab-btn" onclick="switchTab('brs-vig',this)">🏥 BRS Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('brs-match',this)">📚 BRS Matching</button>
+        <button class="tab-btn" onclick="switchTab('concepts',this)">🧠 Concept Cards</button>
+        <button class="tab-btn" onclick="switchTab('score',this)">📊 My Score</button>
+    </div>
+
+    <div id="gusom" class="tab-content active">
+        <div class="info-box">Verbatim GUSOM in-house exam questions. Full explanations after answering.</div>
+        <div id="gusom-container"></div>
+    </div>
+    <div id="brs-vig" class="tab-content">
+        <div class="info-box">BRS Biochemistry Ch. 9 questions mapped to L5 topics: thyroid hormone precursor, iodine deficiency, pernicious anemia/autoimmune associations.</div>
+        <div id="brsvig-container"></div>
+    </div>
+    <div id="brs-match" class="tab-content">
+        <div class="info-box">BRS-style matching: thyroid drug mechanisms; hypo vs. hyperthyroid lab patterns.</div>
+        <div id="brsmatch-container"></div>
+    </div>
+    <div id="concepts" class="tab-content">
+        <div class="info-box">Click to flip. Key concepts tied to the practice questions.</div>
+        <div class="fc-grid" id="concepts-grid"></div>
+    </div>
+    <div id="score" class="tab-content">
+        <div class="score-dashboard">
+            <div class="score-title">📊 Performance Summary — L5 Practice Questions</div>
+            <div class="score-row"><span class="score-label">GUSOM Questions</span><div class="score-bar-wrap"><div class="score-bar-fill" id="bar-gusom" style="width:0%"></div></div><span class="score-val" id="score-gusom">—</span></div>
+            <div class="score-row"><span class="score-label">BRS Vignettes</span><div class="score-bar-wrap"><div class="score-bar-fill" id="bar-brsvig" style="width:0%"></div></div><span class="score-val" id="score-brsvig">—</span></div>
+            <div class="score-row"><span class="score-label">BRS Matching</span><div class="score-bar-wrap"><div class="score-bar-fill" id="bar-brsmatch" style="width:0%"></div></div><span class="score-val" id="score-brsmatch">—</span></div>
+            <div class="score-row" style="font-weight:700;"><span class="score-label">Overall</span><div class="score-bar-wrap"><div class="score-bar-fill" id="bar-overall" style="width:0%;background:#4ADE80"></div></div><span class="score-val" id="score-overall">—</span></div>
+            <button class="reset-btn" onclick="resetAll()">Reset All Scores</button>
+        </div>
+    </div>
+</div>
+<script>
+function switchTab(tabName,btn){
+    document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.getElementById(tabName).classList.add('active');
+    if(btn)btn.classList.add('active');
+    updateScoreDisplay();
+}
+const scores={gusom:{c:0,t:0},brsvig:{c:0,t:0},brsmatch:{c:0,t:0}};
+function recordScore(bucket,correct){scores[bucket].t++;if(correct)scores[bucket].c++;updateScoreDisplay();}
+function updateScoreDisplay(){
+    Object.keys(scores).forEach(k=>{
+        const el=document.getElementById(`score-${k}`);const bar=document.getElementById(`bar-${k}`);
+        if(el){if(scores[k].t===0){el.textContent='—';if(bar)bar.style.width='0%';}else{el.textContent=`${scores[k].c}/${scores[k].t}`;if(bar)bar.style.width=`${Math.round(scores[k].c/scores[k].t*100)}%`;}}
+    });
+    const total=Object.values(scores).reduce((a,v)=>({c:a.c+v.c,t:a.t+v.t}),{c:0,t:0});
+    const el=document.getElementById('score-overall');const bar=document.getElementById('bar-overall');
+    if(total.t===0){el.textContent='—';bar.style.width='0%';}else{el.textContent=`${total.c}/${total.t} (${Math.round(total.c/total.t*100)}%)`;bar.style.width=`${Math.round(total.c/total.t*100)}%`;}
+}
+function resetAll(){
+    if(!confirm('Reset all scores?'))return;
+    Object.keys(scores).forEach(k=>{scores[k].c=0;scores[k].t=0;});
+    document.querySelectorAll('.mcq-opt,.match-opt').forEach(b=>{b.classList.remove('correct','incorrect');b.disabled=false;});
+    document.querySelectorAll('.mcq-explain,.match-fb').forEach(el=>el.classList.remove('show'));
+    updateScoreDisplay();
+}
+
+// GUSOM Questions
+const gusomQs = [
+    {
+        source:"GUSOM · Week 5 · Dr. Danielsen · Topic: Thyroid Hormone Synthesis and Action",
+        q:"A 35-year-old female visits her physician for a physical exam because she is planning to come off birth control pills in order to conceive. Most of her lab tests are uninformative. The physician ordered a total thyroid hormone level that came back high. Based on this result, the patient was placed on propylthiouracil (PTU) to decrease thyroid function. The BEST explanation as to why this action was ill-advised is:",
+        opts:[
+            {text:"A. PTU causes liver toxicity.", correct:false, explain:"This is TRUE — PTU does carry a risk of hepatotoxicity (one reason methimazole is generally preferred in non-pregnant adults), but this is not the BEST explanation for why prescribing PTU was ill-advised in this specific case. The clinical decision itself was flawed, not just the drug choice."},
+            {text:"B. Methimazole is usually used to inhibit thyroid hormone production.", correct:false, explain:"Also TRUE — methimazole is the preferred antithyroid agent (better side-effect profile, once-daily dosing). PTU is reserved for first trimester pregnancy (less teratogenic during organogenesis), thyroid storm, and methimazole allergy. But again, this doesn't address the fundamental diagnostic error."},
+            {text:"C. Thyroid hormone tests can never be used on patients taking oral contraceptives.", correct:false, explain:"UNTRUE. Thyroid function tests can be performed on OCP users — they are just interpreted differently. Total T4 will be elevated due to increased TBG, but free T4 and TSH will be normal. Thyroid tests are not contraindicated; they just require appropriate interpretation."},
+            {text:"D. Female sex hormones increase thyroid binding globulin and therefore give rise to hyperthyroidism.", correct:false, explain:"PARTIALLY TRUE but incorrect conclusion. Estrogen does increase hepatic TBG synthesis, which raises total T4. However, this does NOT cause true hyperthyroidism — free T4 and TSH remain normal. The patient does NOT have hyperthyroidism; she has elevated TBG. The phrasing 'give rise to hyperthyroidism' is incorrect."},
+            {text:"E. Total thyroid levels are not a good indicator of thyroid hormone status.", correct:true, explain:"BEST ANSWER. Oral contraceptives (OCPs) contain estrogen → estrogen increases hepatic TBG synthesis → more TBG in circulation → more T4 is bound to TBG → elevated TOTAL T4. However, FREE T4 (the biologically active form) and TSH remain normal. Total T4 elevation in this context reflects elevated carrier protein, NOT thyroid disease. The correct tests are TSH and free T3/T4. Treating an elevated total T4 with PTU in an OCP user is a clinical error — the patient is euthyroid. (Dr. Danielsen answer key)"}
+        ],
+        teach:"Total T4 ≠ free T4. TBG increases with: estrogen (OCP, pregnancy, HRT), acute hepatitis, hereditary TBG excess. TBG decreases with: androgens, glucocorticoids, nephrotic syndrome, cirrhosis. Rule: if you suspect thyroid disease, order TSH + FREE T4 (not total T4). Total T4 without TBG context is easily misinterpreted."
+    },
+    {
+        source:"GUSOM · Week 6 · Dr. Jonklaas · Topic: Diagnosis & Treatment of Pituitary Disorders + Thyroid Disorders",
+        q:"A patient is referred to you for hyperprolactinemia. Her prolactin is 190 ng/mL (normal range: 4–30 ng/mL). On physical exam, she has a goiter, cool dry skin, and expressible galactorrhea. Which is the next best step for the evaluation and/or treatment of this patient?",
+        opts:[
+            {text:"A. Perform a pituitary MRI.", correct:false, explain:"MRI is appropriate if you suspect a prolactinoma. However, this patient has signs of HYPOTHYROIDISM (goiter, cool dry skin — classic hypothyroid features). Hypothyroidism is a well-known reversible cause of hyperprolactinemia. Before imaging for a pituitary tumor, you must rule out treatable secondary causes. Ordering MRI now would be premature."},
+            {text:"B. Start levothyroxine.", correct:false, explain:"Levothyroxine is the correct treatment IF hypothyroidism is confirmed. However, starting levothyroxine without first confirming hypothyroidism (via TSH) is premature. The goiter and dry skin might not be hypothyroid in origin. Biochemical confirmation is required before treatment."},
+            {text:"C. Start a dopamine agonist (cabergoline).", correct:false, explain:"Dopamine agonists treat prolactinoma. However, if this patient's hyperprolactinemia is SECONDARY to hypothyroidism (elevated TRH stimulates both TSH and prolactin), treating with cabergoline would lower prolactin but miss the underlying diagnosis. After levothyroxine treatment for hypothyroidism, prolactin often normalizes without cabergoline."},
+            {text:"D. Measure a serum TSH.", correct:true, explain:"CORRECT. This patient has signs of hypothyroidism (goiter, cool dry skin) AND hyperprolactinemia. Hypothyroidism causes hyperprolactinemia via two mechanisms: (1) Elevated TRH (compensatory) stimulates both TSH AND prolactin secretion directly; (2) Enlarged pituitary (thyrotroph hyperplasia from prolonged elevated TSH) can compress the pituitary stalk → reduced dopamine delivery → stalk effect → increased prolactin. Confirming hypothyroidism with TSH is the next best step. If TSH is elevated, treat with levothyroxine → TSH normalizes → TRH decreases → prolactin often normalizes. Only if prolactin remains elevated after euthyroidism is restored should further workup for prolactinoma proceed. (Dr. Jonklaas answer key)"},
+            {text:"E. Refer her for trans-sphenoidal surgery.", correct:false, explain:"Surgery is reserved for macroprolactinomas resistant to dopamine agonists, or with vision-threatening mass effects. No pituitary adenoma has been confirmed, and a reversible cause (hypothyroidism) has not been ruled out."}
+        ],
+        teach:"Hyperprolactinemia differential: (1) Prolactinoma (most common); (2) Hypothyroidism (↑TRH → stimulates both TSH and PRL; also stalk effect from thyrotroph hyperplasia); (3) Drugs (D2 blockers: antipsychotics, metoclopramide); (4) Stalk compression (any pituitary mass); (5) Pregnancy/suckling; (6) CKD, cirrhosis. Rule: before assuming prolactinoma → rule out TSH (hypothyroidism) and review drug list. Treating hypothyroidism often normalizes prolactin."
+    }
+];
+
+const gusomContainer=document.getElementById('gusom-container');
+gusomQs.forEach((mcq,idx)=>{
+    const div=document.createElement('div');div.className='mcq-item';
+    div.innerHTML=`<div class="q-source gusom">${mcq.source}</div>
+        <div class="mcq-q">${idx+1}. ${mcq.q}</div>
+        <div class="mcq-opts">${mcq.opts.map((o,oi)=>`<button class="mcq-opt" data-bucket="gusom" data-correct="${o.correct}" data-qidx="g${idx}" data-oi="${oi}" onclick="selectMCQ(this)">${o.text}</button>`).join('')}</div>
+        <div class="mcq-explain" id="gexp-${idx}"><strong>Explanation:</strong> ${mcq.opts.find(o=>o.correct).explain}<div class="teach-point">💡 ${mcq.teach}</div></div>`;
+    gusomContainer.appendChild(div);
+});
+
+// BRS Vignettes
+const brsVigs = [
+    {
+        source:"BRS Biochemistry Ch. 9 · Q14",
+        q:"A 20-year-old male presents with a 2-month history of weight loss, exophthalmos, lid lag, and resting heart rate of 118 bpm. TSH is undetectable. What amino acid is the direct structural precursor of the hormones responsible for this patient's symptoms?",
+        opts:[
+            {text:"A. Tryptophan", correct:false, explain:"Tryptophan is the precursor for serotonin and melatonin — not thyroid hormones."},
+            {text:"B. Phenylalanine", correct:false, explain:"Phenylalanine is converted to tyrosine (by phenylalanine hydroxylase). While it is upstream of tyrosine, it is not the DIRECT precursor of thyroid hormones."},
+            {text:"C. Methionine", correct:false, explain:"Methionine is an essential amino acid important for methylation reactions and SAM-e. It is not the precursor of thyroid hormones."},
+            {text:"D. Tyrosine", correct:true, explain:"Thyroid hormones (T3 and T4) are iodinated tyrosine derivatives. The synthesis pathway: (1) Tyrosine residues in thyroglobulin are iodinated by thyroid peroxidase (TPO) using I⁻ → monoiodotyrosine (MIT) and diiodotyrosine (DIT); (2) MIT + DIT → T3 (triiodothyronine); (3) DIT + DIT → T4 (thyroxine/tetraiodothyronine). ALSO: Catecholamines (dopamine, NE, epinephrine) are also synthesized from tyrosine. This patient has Graves' disease (TSI autoantibodies stimulate TSH receptors → hyperthyroidism)."},
+            {text:"E. Glutamate", correct:false, explain:"Glutamate is a major neurotransmitter and metabolic intermediate. Not related to thyroid hormone synthesis."}
+        ],
+        teach:"Tyrosine is the precursor for BOTH thyroid hormones AND catecholamines: Tyrosine → T3/T4 (via thyroglobulin iodination); Tyrosine → L-DOPA → Dopamine → NE → Epinephrine (catecholamine synthesis). Phenylalanine hydroxylase converts Phe → Tyr (rate-limiting in PKU: absent PAH → can't make Tyr from Phe). Step 1 high-yield: name the product and pathway from tyrosine."
+    },
+    {
+        source:"BRS Biochemistry Ch. 9 · Q35",
+        q:"A teenager living in rural Australia presents with a diffuse enlarged neck (goiter). He lives far from the coast and his family does not use iodized salt. Which of the following is CORRECT regarding his thyroid function?",
+        opts:[
+            {text:"A. Serum TSH would be decreased", correct:false, explain:"Iodine deficiency → cannot synthesize adequate T3/T4 → low T4/T3 → removes negative feedback on pituitary → TSH is ELEVATED (↑), not decreased. TSH drives thyroid follicular cell hypertrophy and hyperplasia → goiter."},
+            {text:"B. T3 would be increased", correct:false, explain:"Iodine is required for T3/T4 synthesis (each T3 has 3 iodines; each T4 has 4). Without iodine, neither T3 nor T4 can be adequately produced. T3 would be decreased or low-normal (the gland preferentially synthesizes T3 over T4 when iodine is scarce, but total output is still deficient)."},
+            {text:"C. Serum TRH would be decreased", correct:false, explain:"Low T4/T3 removes negative feedback at the hypothalamus → TRH is ELEVATED. TRH drives TSH, which in turn drives thyroid growth (goiter). The hypothalamic-pituitary axis is appropriately trying to compensate for low thyroid output."},
+            {text:"D. Kidney salt balance would be significantly altered", correct:false, explain:"Thyroid hormone deficiency does not primarily affect renal salt handling (that is the domain of aldosterone and ADH). While severe hypothyroidism can cause hyponatremia (via impaired water excretion), salt balance is not the primary consequence of iodine deficiency."},
+            {text:"E. Heat production would be decreased", correct:true, explain:"T3/T4 are the primary regulators of basal metabolic rate (BMR): they increase the number and activity of Na⁺/K⁺-ATPase pumps → increased O₂ consumption → increased heat production. Iodine deficiency → low T3/T4 → decreased BMR → decreased heat production → cold intolerance. Additionally: ↑TSH (from ↓T4 feedback) + ↑TRH → follicular cell hypertrophy/hyperplasia → goiter."}
+        ],
+        teach:"Iodine deficiency: ↓T3/T4 → ↑TSH (loss of negative feedback) → ↑TRH. Clinical: goiter (TSH-driven hyperplasia), hypothyroid symptoms (cold intolerance, fatigue, ↓BMR, ↓heat production). In pregnancy: fetal hypothyroidism → cretinism (irreversible intellectual disability, deaf-mutism, short stature). Prevention: iodized salt. Note: in iodine deficiency, gland preferentially makes T3 (3 iodines needed vs. 4 for T4)."
+    },
+    {
+        source:"BRS Biochemistry Ch. 9 · Q16",
+        q:"A 68-year-old woman with a history of atrophic gastritis presents with fatigue, pallor, and a CBC showing macrocytic anemia (MCV 112 fL). What is the most likely mechanism of her anemia?",
+        opts:[
+            {text:"A. Vitamin B12 malabsorption due to intrinsic factor deficiency", correct:true, explain:"Atrophic gastritis destroys gastric parietal cells → loss of intrinsic factor (IF) production. IF is required for B12 absorption in the terminal ileum (IF-B12 complex recognized by cubam receptor). Without IF → B12 malabsorption → B12 deficiency → (1) impaired DNA synthesis in rapidly dividing cells (RBCs) → megaloblastic anemia with large, hypersegmented neutrophils; (2) impaired myelin synthesis → subacute combined degeneration of the spinal cord. This is pernicious anemia. Association: autoimmune thyroid disease (Hashimoto's, Graves') is commonly associated with pernicious anemia — both are organ-specific autoimmune conditions that often co-occur."},
+            {text:"B. Folic acid deficiency from malabsorption", correct:false, explain:"Folic acid is absorbed in the jejunum — not affected by gastric atrophy. Folate deficiency also causes macrocytic anemia and elevated homocysteine, but does NOT cause neurological symptoms or elevated methylmalonic acid. Atrophic gastritis specifically impairs B12 absorption."},
+            {text:"C. Iron deficiency from bleeding in atrophic gastritis", correct:false, explain:"Iron deficiency causes MICROCYTIC (small cell) anemia, not macrocytic. Also, atrophic gastritis is not primarily associated with bleeding (vs. active peptic ulcer disease)."},
+            {text:"D. Hemolysis from gastric autoantibodies", correct:false, explain:"While autoimmune hemolytic anemia can occur with various autoimmune conditions, atrophic gastritis does not directly cause hemolysis. The macrocytosis here reflects ineffective erythropoiesis from B12 deficiency, not hemolysis."},
+            {text:"E. Aplastic anemia from T-cell suppression", correct:false, explain:"Aplastic anemia is a pancytopenia from bone marrow failure — not the pattern described here (isolated macrocytic anemia in the context of atrophic gastritis)."}
+        ],
+        teach:"Pernicious anemia triad: (1) Atrophic gastritis/anti-parietal cell antibodies → ↓intrinsic factor; (2) Macrocytic megaloblastic anemia; (3) Neurological: subacute combined degeneration (posterior + lateral columns — proprioception, vibration, upper motor neuron signs). Lab: ↑MMA (methylmalonic acid) + ↑homocysteine (vs. folate: only ↑homocysteine). High-yield: autoimmune thyroid disease (Hashimoto's, Graves') + pernicious anemia often co-occur."
+    }
+];
+
+const brsVigContainer=document.getElementById('brsvig-container');
+brsVigs.forEach((mcq,idx)=>{
+    const div=document.createElement('div');div.className='mcq-item';
+    div.innerHTML=`<div class="q-source brs">${mcq.source}</div>
+        <div class="mcq-q">${idx+1}. ${mcq.q}</div>
+        <div class="mcq-opts">${mcq.opts.map((o,oi)=>`<button class="mcq-opt" data-bucket="brsvig" data-correct="${o.correct}" data-qidx="v${idx}" data-oi="${oi}" onclick="selectMCQ(this)">${o.text}</button>`).join('')}</div>
+        <div class="mcq-explain" id="vexp-${idx}"><strong>Explanation:</strong> ${mcq.opts.find(o=>o.correct).explain}<div class="teach-point">💡 ${mcq.teach}</div></div>`;
+    brsVigContainer.appendChild(div);
+});
+
+// BRS Matching
+const matchSets=[
+    {
+        title:"BRS-Style Matching · Thyroid Drug → Primary Mechanism",
+        directions:"DIRECTIONS: Match each thyroid drug/intervention to its primary mechanism. Each answer used once.",
+        choices:["A. Blocks iodide organification by inhibiting thyroid peroxidase","B. Blocks iodide uptake into thyroid follicular cells via NIS","C. Provides exogenous iodide in excess → Wolff-Chaikoff effect → transient inhibition of T3/T4 synthesis","D. Blocks peripheral T4→T3 conversion (deiodinase) AND inhibits TPO","E. Destroys thyroid tissue via radioactive decay — permanent reduction in thyroid mass"],
+        items:[
+            {num:"Q1",q:"Methimazole — first-line antithyroid drug for Graves' disease (non-pregnant adults).",answer:"A",answerFull:"A",explain:"Methimazole (and PTU) block thyroid peroxidase (TPO) → no organification of iodide → no MIT/DIT formation → no T3/T4 synthesis. Methimazole does NOT block peripheral T4→T3 conversion (PTU does). Methimazole onset: hours to days (works on synthesis); existing stored thyroglobulin must be depleted before effect is seen (weeks)."},
+            {num:"Q2",q:"Saturated solution of potassium iodide (SSKI) / Lugol's solution — used acutely before thyroid surgery or in thyroid storm.",answer:"C",answerFull:"C",explain:"Wolff-Chaikoff effect: acute excess iodide paradoxically INHIBITS T3/T4 synthesis (organification is blocked by excess iodide). Used pre-operatively to reduce thyroid vascularity and firmness, and in thyroid storm. Effect is TRANSIENT — escape occurs within 1–2 weeks as NIS downregulates and iodide transport decreases. Key: give AFTER PTU/methimazole to prevent new hormone synthesis from excess iodide."},
+            {num:"Q3",q:"Propylthiouracil (PTU) — preferred in first trimester of pregnancy and for thyroid storm.",answer:"D",answerFull:"D",explain:"PTU: (1) inhibits TPO → blocks organification (same as methimazole); (2) inhibits type 1 deiodinase → blocks peripheral T4→T3 conversion → reduces the more active T3 form faster. This dual action makes PTU preferred in thyroid storm (rapid reduction of T3 needed) and first trimester (lower teratogenic risk than methimazole). Liver toxicity is a concern."},
+            {num:"Q4",q:"Radioactive iodine (¹³¹I) — used for definitive treatment of Graves' disease or toxic multinodular goiter.",answer:"E",answerFull:"E",explain:"¹³¹I is taken up avidly by thyroid tissue (via NIS). Beta radiation emitted from ¹³¹I destroys follicular cells over weeks to months. Result: hypothyroidism (often permanent) → requires lifelong levothyroxine. Contraindicated in pregnancy (damages fetal thyroid). May transiently worsen Graves' orbitopathy (pretreat with steroids if active eye disease)."}
+        ]
+    },
+    {
+        title:"BRS-Style Matching · Lab Pattern → Thyroid State",
+        directions:"DIRECTIONS: Match each lab pattern to the most likely thyroid state. Each answer used once.",
+        choices:["A. Primary hypothyroidism","B. Secondary hypothyroidism (pituitary failure)","C. Overt hyperthyroidism","D. Subclinical hypothyroidism","E. Elevated TBG without thyroid disease (e.g., OCP use)"],
+        items:[
+            {num:"Q5",q:"TSH: 0.02 mU/L (↓↓) | Free T4: 2.8 ng/dL (↑) | Total T4: 18 μg/dL (↑) | Symptoms: palpitations, heat intolerance, tremor",answer:"C",answerFull:"C. Overt hyperthyroidism",explain:"Suppressed TSH + elevated free T4 + symptoms = overt hyperthyroidism. Free T4 confirms the excess thyroid hormone. Causes: Graves' disease (TSI autoantibodies), toxic multinodular goiter, thyroid adenoma."},
+            {num:"Q6",q:"TSH: 0.8 mU/L (normal) | Free T4: 1.1 ng/dL (normal) | Total T4: 16 μg/dL (↑) | Patient is on oral contraceptive pills | No symptoms",answer:"E",answerFull:"E. Elevated TBG (OCP use)",explain:"Normal TSH + normal free T4 + elevated total T4 + OCP use = elevated TBG from estrogen. Total T4 appears high because more T4 is protein-bound. Free T4 (the active form) is normal. Patient is EUTHYROID. Do NOT treat — no thyroid disease."},
+            {num:"Q7",q:"TSH: 48 mU/L (↑↑) | Free T4: 0.3 ng/dL (↓) | Total T4: 2.1 μg/dL (↓) | Symptoms: fatigue, cold intolerance, constipation, dry skin, goiter",answer:"A",answerFull:"A. Primary hypothyroidism",explain:"High TSH + low free T4 = primary hypothyroidism. Thyroid gland itself is failing → low T4 → removes feedback → pituitary releases excess TSH (compensatory). Symptoms reflect low metabolic rate. Most common cause: Hashimoto's thyroiditis (autoimmune)."},
+            {num:"Q8",q:"TSH: 0.1 mU/L (↓) | Free T4: 0.2 ng/dL (↓↓) | History of pituitary tumor removed 2 years ago | No goiter",answer:"B",answerFull:"B. Secondary hypothyroidism",explain:"Low TSH + low free T4 + pituitary history = secondary hypothyroidism. Pituitary failure → ↓TSH → thyroid not stimulated → low T4. Key distinction from primary: TSH is LOW (not high). No goiter (TSH needed to drive follicular cell growth). Treat with levothyroxine (cannot use TSH to monitor — use free T4 levels instead)."}
+        ]
+    }
+];
+
+const brsMatchContainer=document.getElementById('brsmatch-container');
+matchSets.forEach((set,sIdx)=>{
+    const sec=document.createElement('div');sec.className='match-section';
+    sec.innerHTML=`<div class="match-title">${set.title}</div><div class="match-directions">${set.directions}</div>
+        <div class="match-choices"><div class="match-choice-label">Answer Choices:</div><div class="match-choice-items">${set.choices.map(c=>`<span class="match-choice-item">${c}</span>`).join('')}</div></div>
+        <div class="match-q-list" id="mset-${sIdx}"></div>`;
+    brsMatchContainer.appendChild(sec);
+    const qList=sec.querySelector(`#mset-${sIdx}`);
+    set.items.forEach((item,iIdx)=>{
+        const qDiv=document.createElement('div');qDiv.className='match-q-item';
+        qDiv.innerHTML=`<div class="match-q-text"><strong>${item.num}.</strong> ${item.q}</div>
+            <div class="match-opts">${set.choices.map((c,ci)=>`<button class="match-opt" data-answer="${item.answer}" data-choice="${String.fromCharCode(65+ci)}" data-sidx="${sIdx}" data-iidx="${iIdx}" onclick="selectMatch(this)">${String.fromCharCode(65+ci)}</button>`).join('')}</div>
+            <div class="match-fb" id="mfb-${sIdx}-${iIdx}"></div>`;
+        qList.appendChild(qDiv);
+    });
+});
+
+function selectMCQ(btn){
+    const isCorrect=btn.dataset.correct==='true';const qidx=btn.dataset.qidx;const bucket=btn.dataset.bucket;
+    btn.closest('.mcq-item').querySelectorAll('.mcq-opt').forEach(b=>{b.disabled=true;});
+    if(isCorrect){btn.classList.add('correct');}else{btn.classList.add('incorrect');btn.closest('.mcq-item').querySelectorAll('.mcq-opt').forEach(b=>{if(b.dataset.correct==='true')b.classList.add('correct');});}
+    const expId=qidx.startsWith('g')?`gexp-${qidx.slice(1)}`:`vexp-${qidx.slice(1)}`;
+    const expEl=document.getElementById(expId);if(expEl)expEl.classList.add('show');
+    recordScore(bucket,isCorrect);
+}
+function selectMatch(btn){
+    const sIdx=parseInt(btn.dataset.sidx);const iIdx=parseInt(btn.dataset.iidx);
+    const isCorrect=btn.dataset.choice===btn.dataset.answer;
+    btn.closest('.match-q-item').querySelectorAll('.match-opt').forEach(b=>{b.disabled=true;if(b.dataset.choice===btn.dataset.answer)b.classList.add('correct');});
+    if(!isCorrect)btn.classList.add('incorrect');
+    const fb=document.getElementById(`mfb-${sIdx}-${iIdx}`);
+    fb.classList.add('show',isCorrect?'correct':'incorrect');
+    fb.innerHTML=isCorrect?`✓ Correct! ${matchSets[sIdx].items[iIdx].explain}`:`✗ Correct: ${matchSets[sIdx].items[iIdx].answerFull}. ${matchSets[sIdx].items[iIdx].explain}`;
+    recordScore('brsmatch',isCorrect);
+}
+
+const concepts=[
+    {q:"Why is total T4 elevated in OCP users, and why is this NOT hyperthyroidism?", a:"Estrogen → ↑hepatic TBG synthesis → more T4 bound to TBG → higher TOTAL T4. But FREE T4 is unchanged (equilibrium adjusts; more binding protein → more total bound, same free). TSH is normal. Patient is euthyroid. Only FREE T4 and TSH reflect thyroid function."},
+    {q:"Two mechanisms by which hypothyroidism causes hyperprolactinemia?", a:"(1) ↑TRH (compensatory for low T4) → TRH directly stimulates prolactin secretion from lactotrophs; (2) Thyrotroph hyperplasia (enlarged pituitary from TSH-producing cell growth) → may compress the pituitary stalk → reduced dopamine delivery → stalk effect → ↑PRL. Both mechanisms resolve with levothyroxine treatment."},
+    {q:"Thyroid hormone synthesis pathway: from iodide to T3/T4 — name all steps.", a:"(1) Iodide trapping: NIS (Na⁺/I⁻ symporter) pumps I⁻ into follicular cell; (2) Pendrin: transports I⁻ into follicular lumen; (3) Thyroid peroxidase (TPO): oxidizes I⁻ → I₀ → iodination of tyrosines in thyroglobulin → MIT + DIT; (4) TPO: coupling reaction → MIT+DIT=T3; DIT+DIT=T4; (5) Endocytosis of thyroglobulin → lysosomal proteolysis → releases T3/T4; (6) Deiodinase (peripheral): T4→T3 (T3 is 4× more potent)."},
+    {q:"PTU vs. Methimazole: key differences?", a:"PTU: inhibits TPO + inhibits peripheral T4→T3 conversion (type 1 deiodinase). Preferred in: thyroid storm (rapid T3 reduction), first trimester pregnancy. Hepatotoxicity risk. Methimazole: inhibits TPO only. Preferred in: non-pregnant adults, second/third trimester. Once daily. Less hepatotoxicity."},
+    {q:"Iodine deficiency vs. iodine excess: what happens to thyroid function in each?", a:"Deficiency: ↓T3/T4 → ↑TSH → goiter (hyperplasia). Symptoms: hypothyroidism, cold intolerance. Excess: Wolff-Chaikoff effect → transient ↓T3/T4 synthesis (used pre-surgery). Chronic iodine excess → Jod-Basedow (hyperthyroidism in previously iodine-deficient patients given iodine). Both extremes are pathological."},
+    {q:"Pernicious anemia: mechanism, labs, and autoimmune association?", a:"Autoimmune destruction of parietal cells → ↓intrinsic factor → B12 malabsorption at terminal ileum. Labs: macrocytic anemia (MCV >100), hypersegmented neutrophils, ↑MMA AND ↑homocysteine. Association: Hashimoto's thyroiditis and Graves' disease often coexist (clustered autoimmune conditions: type 1 DM, vitiligo, Addison's, pernicious anemia)."}
+];
+const conceptGrid=document.getElementById('concepts-grid');
+concepts.forEach(c=>{
+    const fc=document.createElement('div');fc.className='fc';
+    fc.innerHTML=`<div class="fc-inner"><div class="fc-front"><div class="fc-label">Question</div><div class="fc-q">${c.q}</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${c.a}</div></div></div>`;
+    fc.onclick=()=>fc.classList.toggle('flipped');
+    conceptGrid.appendChild(fc);
+});
+</script>
+</body>
+</html>

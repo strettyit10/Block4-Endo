@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biochem Hub #3: Practice Question Bank</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+        .hub-banner { display: flex; align-items: center; gap: 0; margin-bottom: 28px; background: #161B22; border: 1px solid #21262D; border-radius: 10px; overflow: hidden; }
+        .hub-step { padding: 12px 20px; font-size: 0.82em; font-weight: 600; color: #9CA3AF; display: flex; align-items: center; gap: 8px; flex: 1; justify-content: center; text-decoration: none; transition: all 0.2s; border-right: 1px solid #21262D; }
+        .hub-step:last-child { border-right: none; }
+        .hub-step:hover { background: #1C2128; color: #E6EDF3; }
+        .hub-step.done { color: #4ADE80; }
+        .hub-step.current { background: linear-gradient(135deg, #004D56, #006B78); color: #00E5FF; font-weight: 700; }
+        .hub-step .step-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: 800; }
+        .hub-step.done .step-num { background: rgba(74,222,128,0.2); color: #4ADE80; }
+        .hub-step.current .step-num { background: rgba(0,229,255,0.2); color: #00E5FF; }
+        .hub-step:not(.done):not(.current) .step-num { background: #21262D; }
+        .header { background: linear-gradient(135deg, #001B2E 0%, #003344 50%, #004D56 100%); border: 1px solid #004D56; border-radius: 12px; padding: 32px; margin-bottom: 28px; position: relative; overflow: hidden; }
+        .header::after { content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(0,188,212,0.12) 0%, transparent 70%); }
+        .header h1 { font-size: 2em; color: #E6EDF3; margin-bottom: 8px; }
+        .header h1 span { color: #00BCD4; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.95em; margin-bottom: 18px; }
+        .header-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+        .meta-tag { background: rgba(0,188,212,0.12); border: 1px solid rgba(0,188,212,0.3); color: #00BCD4; padding: 5px 12px; border-radius: 20px; font-size: 0.82em; font-weight: 600; }
+        .source-strip { display: flex; gap: 12px; margin-bottom: 28px; }
+        .source-card { flex: 1; background: #161B22; border: 1px solid #21262D; border-radius: 10px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; }
+        .source-icon { font-size: 2em; }
+        .source-info h3 { font-size: 0.95em; font-weight: 700; color: #E6EDF3; margin-bottom: 3px; }
+        .source-info p { font-size: 0.82em; color: #9CA3AF; }
+        .section-title { color: #00BCD4; font-size: 1em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #21262D; }
+        .lecture-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 18px; margin-bottom: 32px; }
+        .lecture-card { background: #161B22; border: 1px solid #30363D; border-radius: 12px; padding: 22px; text-decoration: none; color: inherit; transition: all 0.2s; position: relative; overflow: hidden; }
+        .lecture-card:hover { border-color: var(--lc-accent); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+        .lecture-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--lc-accent); }
+        .lc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .lc-tag { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--lc-accent); }
+        .lc-badge { background: rgba(0,0,0,0.3); border: 1px solid #30363D; border-radius: 12px; padding: 3px 10px; font-size: 0.78em; color: #9CA3AF; }
+        .lc-title { font-size: 1.05em; font-weight: 700; color: #E6EDF3; margin-bottom: 10px; line-height: 1.3; }
+        .lc-qcounts { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+        .qc-pill { padding: 3px 10px; border-radius: 12px; font-size: 0.78em; font-weight: 600; }
+        .qc-gusom { background: rgba(0,188,212,0.12); color: #00BCD4; border: 1px solid rgba(0,188,212,0.25); }
+        .qc-brs { background: rgba(255,165,0,0.1); color: #FFA000; border: 1px solid rgba(255,165,0,0.25); }
+        .lc-topics { font-size: 0.82em; color: #9CA3AF; line-height: 1.5; }
+        .approach-box { background: #161B22; border: 1px solid #21262D; border-radius: 12px; padding: 24px; margin-bottom: 28px; }
+        .approach-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-top: 16px; }
+        .approach-step { background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 14px; }
+        .step-label { font-size: 0.72em; font-weight: 700; color: #00BCD4; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+        .step-text { font-size: 0.88em; color: #D1D5DB; line-height: 1.4; }
+        .footer-links { display: flex; gap: 12px; flex-wrap: wrap; padding-top: 20px; border-top: 1px solid #21262D; }
+        .footer-link { color: #00BCD4; text-decoration: none; font-size: 0.88em; }
+        .footer-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Hub Progression Banner -->
+    <div class="hub-banner">
+        <a href="GUSOM-Biochem-ActiveDrills.html" class="hub-step done">
+            <span class="step-num">✓</span> Hub #1: Core Concepts
+        </a>
+        <a href="GUSOM-Biochem-Step1-ActiveDrills.html" class="hub-step done">
+            <span class="step-num">✓</span> Hub #2: Step 1 Extensions
+        </a>
+        <span class="hub-step current">
+            <span class="step-num">3</span> Hub #3: Practice Questions
+        </span>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Biochem Hub #3: <span>Practice Question Bank</span></h1>
+        <p class="subtitle">GUSOM in-house exam questions + BRS Biochemistry Ch. 9 board-style questions — per-lecture, fully interactive</p>
+        <div class="header-meta">
+            <span class="meta-tag">📝 GUSOM In-House Questions</span>
+            <span class="meta-tag">📚 BRS Biochemistry Ch. 9 (Q1–35)</span>
+            <span class="meta-tag">5 Lecture Hubs</span>
+            <span class="meta-tag">Score Tracking</span>
+        </div>
+    </div>
+
+    <!-- Source Strip -->
+    <div class="source-strip">
+        <div class="source-card">
+            <span class="source-icon">🏫</span>
+            <div class="source-info">
+                <h3>GUSOM In-House Questions</h3>
+                <p>Weeks 2, 3, 5, 6 · Dr. Danielsen, Dr. Sherman, Dr. Notario, Dr. Jonklaas</p>
+            </div>
+        </div>
+        <div class="source-card">
+            <span class="source-icon">📖</span>
+            <div class="source-info">
+                <h3>BRS Biochemistry, Ch. 9</h3>
+                <p>Molecular Endocrinology & Overview of Tissue Metabolism · Q1–35 mapped per lecture</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lecture Grid -->
+    <div class="section-title">Select a Lecture</div>
+    <div class="lecture-grid">
+        <a href="GUSOM-Biochem-Hub3-L1-IntroHormones.html" class="lecture-card" style="--lc-accent:#1565C0">
+            <div class="lc-header">
+                <span class="lc-tag">Lecture 1</span>
+                <span class="lc-badge">Most Questions</span>
+            </div>
+            <div class="lc-title">Introduction to Hormone Action</div>
+            <div class="lc-qcounts">
+                <span class="qc-pill qc-gusom">2 GUSOM Qs</span>
+                <span class="qc-pill qc-brs">12 BRS Qs</span>
+            </div>
+            <div class="lc-topics">Glycoprotein dimers · Scatchard plot · Receptor types · RIA/immunoassays · Catecholamine metabolism · Testosterone receptor table</div>
+        </a>
+        <a href="GUSOM-Biochem-Hub3-L2-AdrenalSynthesis.html" class="lecture-card" style="--lc-accent:#C62828">
+            <div class="lc-header">
+                <span class="lc-tag">Lecture 2</span>
+                <span class="lc-badge">Heavy Step 1</span>
+            </div>
+            <div class="lc-title">Adrenal Synthesis & Glucocorticoids</div>
+            <div class="lc-qcounts">
+                <span class="qc-pill qc-gusom">1 GUSOM Q</span>
+                <span class="qc-pill qc-brs">9 BRS Qs</span>
+            </div>
+            <div class="lc-topics">PTH organs · Cushing's DST workup · Adrenal insufficiency · POMC/ACTH · Glucocorticoid mechanism · N-acetylcysteine</div>
+        </a>
+        <a href="GUSOM-Biochem-Hub3-L3-SexSteroids.html" class="lecture-card" style="--lc-accent:#6A1B9A">
+            <div class="lc-header">
+                <span class="lc-tag">Lecture 3</span>
+                <span class="lc-badge">GnRH Axis</span>
+            </div>
+            <div class="lc-title">Sex Steroids & Gonadotropin Axis</div>
+            <div class="lc-qcounts">
+                <span class="qc-pill qc-brs">6 BRS Qs</span>
+            </div>
+            <div class="lc-topics">GnRH → LH/FSH → gonadal steroids · Prolactin/galactorrhea · Acromegaly/ectopic GHRH · G6PD & NADPH for steroidogenesis · B12 & succinyl-CoA</div>
+        </a>
+        <a href="GUSOM-Biochem-Hub3-L4-PosteriorPituitary.html" class="lecture-card" style="--lc-accent:#00838F">
+            <div class="lc-header">
+                <span class="lc-tag">Lecture 4</span>
+                <span class="lc-badge">Most GUSOM Qs</span>
+            </div>
+            <div class="lc-title">Posterior Pituitary Hormones</div>
+            <div class="lc-qcounts">
+                <span class="qc-pill qc-gusom">3 GUSOM Qs</span>
+                <span class="qc-pill qc-brs">2 BRS Qs</span>
+            </div>
+            <div class="lc-topics">AVP/osmolality physiology · Oxytocin & preterm labor · Non-amidated AVP mutation · Dopamine & prolactin axis · Pituitary damage syndromes</div>
+        </a>
+        <a href="GUSOM-Biochem-Hub3-L5-ThyroidSynthesis.html" class="lecture-card" style="--lc-accent:#E65100">
+            <div class="lc-header">
+                <span class="lc-tag">Lecture 5</span>
+                <span class="lc-badge">Clinical Focus</span>
+            </div>
+            <div class="lc-title">Thyroid Hormone Synthesis & Action</div>
+            <div class="lc-qcounts">
+                <span class="qc-pill qc-gusom">2 GUSOM Qs</span>
+                <span class="qc-pill qc-brs">4 BRS Qs</span>
+            </div>
+            <div class="lc-topics">TBG/OCP & total vs. free T4 · Hyperprolactinemia workup · Tyrosine precursor · Iodine deficiency/goiter · B12 deficiency/pernicious anemia</div>
+        </a>
+    </div>
+
+    <!-- Recommended Approach -->
+    <div class="approach-box">
+        <div class="section-title">Recommended Approach</div>
+        <div class="approach-steps">
+            <div class="approach-step">
+                <div class="step-label">Step 1 — Attempt First</div>
+                <div class="step-text">Try each question independently before checking the answer. Cover explanations.</div>
+            </div>
+            <div class="approach-step">
+                <div class="step-label">Step 2 — Read All Explanations</div>
+                <div class="step-text">Even correct answers should be reinforced with the full rationale and teaching point.</div>
+            </div>
+            <div class="approach-step">
+                <div class="step-label">Step 3 — Identify Weak Areas</div>
+                <div class="step-text">Review Concept Cards for any topics you missed. Link to Hub #1 flashcards if needed.</div>
+            </div>
+            <div class="approach-step">
+                <div class="step-label">Step 4 — Check Your Score</div>
+                <div class="step-text">Use the Score Summary tab to track performance per lecture and source.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="footer-links">
+        <a href="GUSOM-Biochem-ActiveDrills.html" class="footer-link">← Hub #1: Core Concepts</a>
+        <a href="GUSOM-Biochem-Step1-ActiveDrills.html" class="footer-link">← Hub #2: Step 1 Extensions</a>
+        <a href="GUSOM-Biochem-QuestionBank.html" class="footer-link">Full Question Bank</a>
+        <a href="GUSOM-Biochem-Step1-BlockChallenge.html" class="footer-link">Step 1 Block Challenge</a>
+    </div>
+</div>
+</body>
+</html>

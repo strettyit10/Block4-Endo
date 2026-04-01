@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub #3 · L3: Sex Steroids — Practice Questions</title>
+    <style>
+        :root { --accent: #6A1B9A; --accent-dark: #4A148C; --accent-light: rgba(106,27,154,0.12); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-flex; align-items: center; gap: 6px; color: #00BCD4; text-decoration: none; font-size: 0.85em; margin-bottom: 18px; }
+        .back-link:hover { text-decoration: underline; }
+        .header { background: linear-gradient(135deg, #0F0519 0%, #1A0730 100%); border-bottom: 3px solid var(--accent); padding: 24px 28px; margin-bottom: 24px; border-radius: 10px; }
+        .header h1 { color: #E6EDF3; font-size: 1.7em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.88em; }
+        .source-pills { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .sp { padding: 3px 10px; border-radius: 12px; font-size: 0.78em; font-weight: 600; }
+        .sp-brs { background: rgba(255,160,0,0.1); color: #FFA000; border: 1px solid rgba(255,160,0,0.3); }
+        .tab-nav { display: flex; gap: 6px; margin-bottom: 22px; flex-wrap: wrap; background: #161B22; padding: 10px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 8px 14px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .tab-content { display: none; animation: fadeIn 0.2s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+        .info-box { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 4px; font-size: 0.88em; color: #E1BEE7; margin-bottom: 20px; }
+        .q-source { font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .q-source.brs { color: #FFA000; }
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .mcq-q { color: #E6EDF3; font-weight: 600; margin-bottom: 14px; font-size: 0.98em; line-height: 1.55; }
+        .mcq-opts { display: flex; flex-direction: column; gap: 8px; }
+        .mcq-opt { background: #1C2128; border: 1px solid #30363D; border-radius: 6px; padding: 11px 15px; cursor: pointer; transition: all 0.2s; color: #8B949E; font-size: 0.93em; }
+        .mcq-opt:hover:not(:disabled) { background: #30363D; color: var(--accent); border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74,222,128,0.12); color: #4ADE80; border-color: #4ADE80; cursor: default; }
+        .mcq-opt.incorrect { background: rgba(239,68,68,0.12); color: #ff6b6b; border-color: #EF4444; cursor: default; }
+        .mcq-opt:disabled { cursor: default; }
+        .mcq-explain { background: #130A1A; border-left: 3px solid var(--accent); padding: 14px; margin-top: 14px; border-radius: 4px; font-size: 0.88em; color: #D1D5DB; display: none; line-height: 1.55; }
+        .mcq-explain.show { display: block; }
+        .teach-point { background: rgba(106,27,154,0.12); border-left: 3px solid var(--accent); padding: 10px; margin-top: 10px; border-radius: 4px; font-size: 0.9em; color: #E1BEE7; font-weight: 600; }
+        .match-section { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 24px; }
+        .match-title { color: var(--accent); font-weight: 700; font-size: 1em; margin-bottom: 6px; }
+        .match-directions { font-size: 0.85em; color: #9CA3AF; margin-bottom: 16px; line-height: 1.5; }
+        .match-choices { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; padding: 12px; background: #1C2128; border-radius: 8px; border: 1px solid #30363D; }
+        .match-choice-label { font-size: 0.82em; font-weight: 700; color: #FFA000; }
+        .match-choice-items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .match-choice-item { background: rgba(255,160,0,0.08); border: 1px solid rgba(255,160,0,0.25); color: #FFA000; padding: 3px 10px; border-radius: 12px; font-size: 0.82em; font-weight: 600; }
+        .match-q-list { display: flex; flex-direction: column; gap: 10px; }
+        .match-q-item { background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 14px; }
+        .match-q-text { font-size: 0.92em; color: #E6EDF3; margin-bottom: 10px; line-height: 1.5; }
+        .match-opts { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+        .match-opt { padding: 6px 14px; background: #0D1117; border: 1px solid #30363D; border-radius: 20px; cursor: pointer; font-size: 0.85em; font-weight: 600; color: #9CA3AF; transition: all 0.2s; }
+        .match-opt:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+        .match-opt.correct { background: rgba(74,222,128,0.12); border-color: #4ADE80; color: #4ADE80; }
+        .match-opt.incorrect { background: rgba(239,68,68,0.12); border-color: #EF4444; color: #ff6b6b; }
+        .match-opt:disabled { cursor: default; }
+        .match-fb { font-size: 0.83em; padding: 7px 10px; border-radius: 5px; display: none; }
+        .match-fb.show { display: block; }
+        .match-fb.correct { background: rgba(74,222,128,0.08); color: #4ADE80; }
+        .match-fb.incorrect { background: rgba(239,68,68,0.08); color: #ff6b6b; }
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 150px; }
+        .fc-inner { position: relative; width: 100%; min-height: 150px; transform-style: preserve-3d; transition: transform 0.45s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 150px; backface-visibility: hidden; padding: 16px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #130A1A; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.68em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.92em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.88em; color: #D1FAE5; line-height: 1.5; }
+        .score-dashboard { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 24px; }
+        .score-title { font-size: 1em; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+        .score-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #21262D; }
+        .score-row:last-child { border-bottom: none; }
+        .score-label { font-size: 0.9em; color: #D1D5DB; }
+        .score-val { font-size: 1em; font-weight: 700; color: #E6EDF3; }
+        .reset-btn { background: #30363D; color: #9CA3AF; border: 1px solid #30363D; border-radius: 6px; padding: 8px 16px; cursor: pointer; font-size: 0.85em; font-weight: 600; margin-top: 14px; }
+        .score-bar-wrap { background: #0D1117; border-radius: 4px; height: 8px; flex: 1; margin: 0 14px; }
+        .score-bar-fill { height: 100%; border-radius: 4px; background: var(--accent); transition: width 0.4s; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="GUSOM-Biochem-Hub3-ActiveDrills.html" class="back-link">← Hub #3: Practice Questions</a>
+    <div class="header">
+        <h1>🟣 L3 · Sex Steroids & Gonadotropin Axis — Practice Questions</h1>
+        <p class="subtitle">GUSOM Endocrine Block · Hub #3 · Exam-Focused Question Practice</p>
+        <div class="source-pills">
+            <span class="sp sp-brs">BRS Biochem Ch. 9 · Q25, Q28, Q32–34 + GnRH Axis Matching</span>
+        </div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('brs-vig',this)">🏥 BRS Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('brs-match',this)">📚 BRS Matching</button>
+        <button class="tab-btn" onclick="switchTab('concepts',this)">🧠 Concept Cards</button>
+        <button class="tab-btn" onclick="switchTab('score',this)">📊 My Score</button>
+    </div>
+
+    <div id="brs-vig" class="tab-content active">
+        <div class="info-box">BRS Biochemistry Ch. 9 vignette questions mapped to L3 topics: GnRH/LH/FSH axis, prolactin/galactorrhea, ectopic GHRH, G6PD deficiency and NADPH for steroidogenesis, B12 and succinyl-CoA.</div>
+        <div id="brsvig-container"></div>
+    </div>
+    <div id="brs-match" class="tab-content">
+        <div class="info-box">BRS-style matching sets: gonadotropin axis regulation; sex steroid target tissues and enzymes.</div>
+        <div id="brsmatch-container"></div>
+    </div>
+    <div id="concepts" class="tab-content">
+        <div class="info-box">Click to flip. Key concepts for the gonadotropin axis and sex steroid synthesis.</div>
+        <div class="fc-grid" id="concepts-grid"></div>
+    </div>
+    <div id="score" class="tab-content">
+        <div class="score-dashboard">
+            <div class="score-title">📊 Performance Summary — L3 Practice Questions</div>
+            <div class="score-row"><span class="score-label">BRS Vignettes</span><div class="score-bar-wrap"><div class="score-bar-fill" id="bar-brsvig" style="width:0%"></div></div><span class="score-val" id="score-brsvig">—</span></div>
+            <div class="score-row"><span class="score-label">BRS Matching</span><div class="score-bar-wrap"><div class="score-bar-fill" id="bar-brsmatch" style="width:0%"></div></div><span class="score-val" id="score-brsmatch">—</span></div>
+            <div class="score-row" style="font-weight:700;"><span class="score-label">Overall</span><div class="score-bar-wrap"><div class="score-bar-fill" id="bar-overall" style="width:0%;background:#4ADE80"></div></div><span class="score-val" id="score-overall">—</span></div>
+            <button class="reset-btn" onclick="resetAll()">Reset All Scores</button>
+        </div>
+    </div>
+</div>
+<script>
+function switchTab(tabName, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabName).classList.add('active');
+    if(btn) btn.classList.add('active');
+    updateScoreDisplay();
+}
+const scores = { brsvig:{c:0,t:0}, brsmatch:{c:0,t:0} };
+function recordScore(bucket, correct) { scores[bucket].t++; if(correct) scores[bucket].c++; updateScoreDisplay(); }
+function updateScoreDisplay() {
+    Object.keys(scores).forEach(k => {
+        const el=document.getElementById(`score-${k}`); const bar=document.getElementById(`bar-${k}`);
+        if(el){if(scores[k].t===0){el.textContent='—';if(bar)bar.style.width='0%';}else{el.textContent=`${scores[k].c}/${scores[k].t}`;if(bar)bar.style.width=`${Math.round(scores[k].c/scores[k].t*100)}%`;}}
+    });
+    const total=Object.values(scores).reduce((a,v)=>({c:a.c+v.c,t:a.t+v.t}),{c:0,t:0});
+    const el=document.getElementById('score-overall'); const bar=document.getElementById('bar-overall');
+    if(total.t===0){el.textContent='—';bar.style.width='0%';}else{el.textContent=`${total.c}/${total.t} (${Math.round(total.c/total.t*100)}%)`;bar.style.width=`${Math.round(total.c/total.t*100)}%`;}
+}
+function resetAll(){
+    if(!confirm('Reset all scores?')) return;
+    Object.keys(scores).forEach(k=>{scores[k].c=0;scores[k].t=0;});
+    document.querySelectorAll('.mcq-opt,.match-opt').forEach(b=>{b.classList.remove('correct','incorrect');b.disabled=false;});
+    document.querySelectorAll('.mcq-explain,.match-fb').forEach(el=>el.classList.remove('show'));
+    updateScoreDisplay();
+}
+
+const brsVigs = [
+    {
+        source:"BRS Biochemistry Ch. 9 · Q34",
+        q:"A 16-year-old male has a genetic mutation causing markedly reduced pulsatile GnRH release from the hypothalamus (Kallmann syndrome variant). He has absent puberty and cryptorchidism. Which hormones would be most directly and severely affected by this mutation?",
+        opts:[
+            {text:"A. Cortisol and aldosterone", correct:false, explain:"The HPA axis (CRH → ACTH → cortisol/aldosterone) is independent of GnRH. GnRH deficiency does not affect the adrenal axis."},
+            {text:"B. T3 and T4", correct:false, explain:"The HPT axis (TRH → TSH → T3/T4) is also independent of GnRH. Thyroid function would be unaffected."},
+            {text:"C. GH and IGF-1", correct:false, explain:"GH secretion is regulated by GHRH (not GnRH) from the hypothalamus. GH and IGF-1 would not be directly affected."},
+            {text:"D. ADH and oxytocin", correct:false, explain:"ADH (AVP) and oxytocin are posterior pituitary hormones regulated by osmolality and neural signals — completely independent of GnRH."},
+            {text:"E. LH and FSH", correct:true, explain:"GnRH (from hypothalamic pulsatile neurons) is the primary stimulus for LH and FSH release from anterior pituitary gonadotrophs. Without GnRH → no LH surge (no ovulation in females; no testosterone production via Leydig cells in males) and no FSH (no folliculogenesis, no spermatogenesis). This is Kallmann syndrome: GnRH deficiency → hypogonadotropic hypogonadism + anosmia (the olfactory bulb and GnRH neurons share the same developmental migration path)."}
+        ],
+        teach:"GnRH → LH + FSH → Gonads (testosterone/estradiol). GnRH must be PULSATILE — continuous GnRH agonists paradoxically SUPPRESS LH/FSH (receptor downregulation). Clinical use: leuprolide (continuous GnRH agonist) → treats prostate cancer, precocious puberty, endometriosis."
+    },
+    {
+        source:"BRS Biochemistry Ch. 9 · Q28",
+        q:"A 24-year-old male presents to his physician with white milky discharge from both nipples for 3 months. He has no other complaints. Labs reveal prolactin of 185 ng/mL (normal male: <20 ng/mL). MRI shows a 0.8 cm pituitary mass. What is the most likely diagnosis?",
+        opts:[
+            {text:"A. Prolactinoma (lactotroph adenoma)", correct:true, explain:"Prolactinoma is the most common secretory pituitary adenoma. In males, it typically presents later than in females (because galactorrhea and menstrual irregularity are less obvious early markers). High PRL → suppresses GnRH pulsatility → hypogonadism (low testosterone, low libido, infertility, erectile dysfunction) + galactorrhea. Treatment: dopamine agonist (cabergoline > bromocriptine). Surgery for macroprolactinomas or resistant cases."},
+            {text:"B. Hypothyroidism-induced hyperprolactinemia", correct:false, explain:"Hypothyroidism can cause hyperprolactinemia via elevated TRH (TRH stimulates both TSH and PRL). However, this patient has no signs of hypothyroidism and has a pituitary mass on MRI — pointing to a prolactinoma as the primary diagnosis."},
+            {text:"C. Drug-induced hyperprolactinemia (antipsychotics)", correct:false, explain:"Antipsychotics (dopamine D2 blockers) block dopamine-mediated inhibition of prolactin → ↑PRL. However, there's no mention of antipsychotic use, and a clear pituitary mass is identified on MRI — making prolactinoma more likely."},
+            {text:"D. Acromegaly with co-secretion", correct:false, explain:"Some GH adenomas co-secrete PRL, but acromegaly would show features of GH excess (coarsening of features, enlarged hands/feet, glucose intolerance). No such features are mentioned."},
+            {text:"E. Physiologic hyperprolactinemia from exercise", correct:false, explain:"Exercise transiently raises PRL but not to 185 ng/mL, and would not cause a pituitary mass on MRI."}
+        ],
+        teach:"Prolactin is unique: under INHIBITORY control (dopamine from hypothalamus normally suppresses it). Causes of ↑PRL: (1) Prolactinoma; (2) Hypothyroidism (↑TRH); (3) Dopamine antagonists (antipsychotics, metoclopramide); (4) Stalk effect (compression blocks dopamine delivery); (5) Pregnancy/suckling. Cabergoline > bromocriptine (better tolerated, more effective)."
+    },
+    {
+        source:"BRS Biochemistry Ch. 9 · Q25",
+        q:"A 30-year-old woman presents with coarsening of facial features, progressively enlarging hands and feet, and new-onset glucose of 310 mg/dL (type 2 diabetes). MRI of the pituitary is normal. CT of the abdomen reveals a 3 cm pancreatic mass. What is the most likely explanation for her acromegalic features?",
+        opts:[
+            {text:"A. A GH-secreting pituitary microadenoma too small for MRI", correct:false, explain:"While small pituitary adenomas can be missed, a normal pituitary MRI with a pancreatic mass makes ectopic GH/GHRH secretion from the pancreatic tumor the more likely explanation."},
+            {text:"B. Pancreatic tumor secreting ectopic GHRH, causing excess GH from the pituitary", correct:false, explain:"Partial credit — ectopic GHRH from a pancreatic neuroendocrine tumor can cause acromegaly by chronically stimulating pituitary GH secretion. This would be secondary (not primary) GH excess."},
+            {text:"C. Insulinoma causing hyperglycemia-driven GH excess", correct:false, explain:"Insulinomas cause hypoglycemia, not hyperglycemia. Hypoglycemia is actually a stimulus for GH secretion, but an insulinoma would cause the opposite of what's described."},
+            {text:"D. Pancreatic neuroendocrine tumor secreting ectopic GH or GHRH causing secondary acromegaly", correct:true, explain:"Pancreatic neuroendocrine tumors (NETs) can ectopically secrete GHRH (or rarely GH itself). GHRH drives pituitary somatotroph hyperplasia and excess GH → IGF-1 excess → acromegaly. Glucose intolerance is a classic consequence of GH excess (GH is counter-regulatory: induces insulin resistance). Normal pituitary MRI + pancreatic mass = ectopic source."},
+            {text:"E. IGF-1-secreting hepatocellular carcinoma", correct:false, explain:"Hepatocellular carcinoma does not typically secrete IGF-1 in amounts sufficient to cause acromegaly. IGF-1-secreting tumors causing acromegaly are exceedingly rare."}
+        ],
+        teach:"Ectopic hormone syndromes: key examples: (1) Ectopic ACTH: small cell lung cancer → Cushing's; (2) Ectopic GHRH: pancreatic/carcinoid NETs → acromegaly (pituitary somatotroph hyperplasia); (3) Ectopic PTHrP: squamous cell lung cancer → hypercalcemia of malignancy. Normal pituitary MRI + acromegalic features → look for ectopic source."
+    },
+    {
+        source:"BRS Biochemistry Ch. 9 · Q32",
+        q:"A male infant of Mediterranean ancestry is treated for malaria with primaquine. Over the next 24 hours, he develops pallor, jaundice, and hemolytic anemia. Which enzyme deficiency is responsible?",
+        opts:[
+            {text:"A. Glucose-6-phosphatase (von Gierke disease pathway)", correct:false, explain:"Glucose-6-phosphatase deficiency causes glycogen storage disease (von Gierke's) — hypoglycemia and hepatomegaly, not hemolysis. Glucose-6-phosphatase is in the ER and plays no role in red cell redox defense."},
+            {text:"B. Pyruvate kinase — impairs glycolysis in RBCs", correct:false, explain:"Pyruvate kinase deficiency causes chronic non-spherocytic hemolytic anemia but is not triggered by primaquine or oxidant drugs. The mechanism is glycolytic, not related to the HMP shunt."},
+            {text:"C. Glucose-6-phosphate dehydrogenase (G6PD) — impairs NADPH generation", correct:true, explain:"G6PD is the first enzyme of the HMP (hexose monophosphate) shunt. It generates NADPH from NADP⁺. NADPH is needed to regenerate reduced glutathione (GSH), which protects RBCs from oxidative damage. G6PD deficiency: RBCs vulnerable to oxidant stress (primaquine, dapsone, fava beans, infection). Primaquine → oxidative metabolites → membrane damage → intravascular hemolysis. X-linked recessive; highest prevalence in Mediterranean, African, and South/Southeast Asian populations."},
+            {text:"D. Hexokinase — prevents glucose entry into glycolysis", correct:false, explain:"Hexokinase deficiency is a rare glycolytic enzyme defect causing hemolytic anemia but is not triggered by drugs or oxidant stress and is not linked to Mediterranean ancestry."},
+            {text:"E. Phosphofructokinase — impairs glycolytic flux", correct:false, explain:"PFK deficiency (Tarui disease) causes exercise intolerance and mild hemolysis but is not drug-triggered and is unrelated to oxidant stress."}
+        ],
+        teach:"G6PD: rate-limiting enzyme of HMP shunt → NADPH → reduces glutathione (GSH) → scavenges ROS. Why steroids need NADPH too: steroidogenesis (especially cytochrome P450 enzymes — CYP11A1, CYP17A1) requires NADPH as electron donor. G6PD deficiency → ↓NADPH → ↑oxidant damage in RBCs + impaired steroidogenesis."
+    },
+    {
+        source:"BRS Biochemistry Ch. 9 · Q33",
+        q:"A 55-year-old man with strict veganism for 5 years develops megaloblastic anemia. Labs: B12 = 90 pg/mL (normal >200). Which metabolic intermediate is deficient due to B12 deficiency, contributing to impaired heme synthesis?",
+        opts:[
+            {text:"A. Porphobilinogen (PBG)", correct:false, explain:"PBG is synthesized from ALA (aminolevulinic acid) by ALA dehydratase. This step does not require B12."},
+            {text:"B. Succinyl-CoA", correct:true, explain:"Vitamin B12 (specifically adenosylcobalamin) is required as a cofactor for methylmalonyl-CoA mutase, which converts methylmalonyl-CoA → Succinyl-CoA (a TCA cycle intermediate). Succinyl-CoA + Glycine → ALA (aminolevulinic acid) via ALA synthase (rate-limiting step of heme synthesis). B12 deficiency → ↓Succinyl-CoA → impaired ALA synthesis → impaired heme synthesis. Also: methylcobalamin is needed for methionine synthase (homocysteine → methionine); deficiency → homocysteinemia + ↓methionine."},
+            {text:"C. ALA (5-aminolevulinic acid)", correct:false, explain:"ALA is synthesized FROM succinyl-CoA + glycine. It is the product of the B12-dependent pathway, not deficient independently. If succinyl-CoA is low, ALA will also be reduced as a downstream effect."},
+            {text:"D. Uroporphyrinogen III", correct:false, explain:"Uroporphyrinogen III is further downstream in the heme synthesis pathway. Its deficiency would reflect a porphyria enzyme defect, not B12 deficiency."},
+            {text:"E. Protoporphyrin IX", correct:false, explain:"Protoporphyrin IX combines with Fe²⁺ to form heme. Its deficiency would reflect iron deficiency anemia or a late-stage porphyria."}
+        ],
+        teach:"B12 (cobalamin) has two active forms: (1) Methylcobalamin: methionine synthase → homocysteine → methionine; (2) Adenosylcobalamin: methylmalonyl-CoA mutase → methylmalonyl-CoA → succinyl-CoA (enters TCA cycle + heme synthesis). B12 deficiency → ↑methylmalonic acid AND ↑homocysteine — elevated methylmalonic acid is the most specific marker. Folate deficiency only elevates homocysteine."
+    }
+];
+
+const brsVigContainer = document.getElementById('brsvig-container');
+brsVigs.forEach((mcq,idx) => {
+    const div = document.createElement('div');
+    div.className = 'mcq-item';
+    div.innerHTML = `<div class="q-source brs">${mcq.source}</div>
+        <div class="mcq-q">${idx+1}. ${mcq.q}</div>
+        <div class="mcq-opts">${mcq.opts.map((o,oi)=>`<button class="mcq-opt" data-bucket="brsvig" data-correct="${o.correct}" data-qidx="v${idx}" data-oi="${oi}" onclick="selectMCQ(this)">${o.text}</button>`).join('')}</div>
+        <div class="mcq-explain" id="vexp-${idx}"><strong>Explanation:</strong> ${mcq.opts.find(o=>o.correct).explain}<div class="teach-point">💡 ${mcq.teach}</div></div>`;
+    brsVigContainer.appendChild(div);
+});
+
+const matchSets = [
+    {
+        title:"BRS-Style Matching · Gonadotropin Axis: Hormone → Primary Target and Effect",
+        directions:"DIRECTIONS: Match each hormone to its primary gonadal target cell and action. Each answer used once.",
+        choices:["A. LH → Leydig cells → testosterone production","B. FSH → Sertoli cells → spermatogenesis support","C. LH → Theca cells → androgen precursors","D. FSH → Granulosa cells → aromatase → estradiol","E. GnRH → Anterior pituitary gonadotrophs → LH + FSH release"],
+        items:[
+            {num:"Q1",q:"A pulsatile decapeptide from hypothalamic neurons that, when secreted in a pulsatile pattern, stimulates the anterior pituitary to release gonadotropins.",answer:"E",answerFull:"E",explain:"GnRH (gonadotropin-releasing hormone) must be pulsatile. Continuous GnRH → receptor downregulation → paradoxical suppression. Clinical use of continuous GnRH agonists (leuprolide) exploits this: castration effect for prostate cancer, endometriosis."},
+            {num:"Q2",q:"In males, this anterior pituitary hormone targets interstitial cells to produce the primary circulating androgen.",answer:"A",answerFull:"A",explain:"LH targets Leydig cells (interstitial cells) → activates cAMP → stimulates testosterone synthesis from cholesterol. Testosterone → spermatogenesis (with FSH) + negative feedback on hypothalamus/pituitary."},
+            {num:"Q3",q:"In females, this pituitary hormone acts on the INNER layer of the follicle to provide androgen substrate that aromatase can convert to estrogen.",answer:"C",answerFull:"C",explain:"Two-cell hypothesis: LH → Theca cells → androgens (androstenedione). FSH → Granulosa cells → aromatase → converts androgens to estradiol. Both cell types and both hormones are required for estrogen synthesis."},
+            {num:"Q4",q:"In males, this pituitary hormone supports the nursing cells of the seminiferous tubules, promoting spermatogenesis and inhibin production.",answer:"B",answerFull:"B",explain:"FSH → Sertoli cells → (1) ABP (androgen-binding protein) concentrates testosterone in seminiferous tubules; (2) Inhibin (feedback to suppress FSH); (3) supports spermatogenesis. Sertoli cells also secrete AMH (anti-Müllerian hormone) in fetal development."}
+        ]
+    },
+    {
+        title:"BRS-Style Matching · Sex Steroid Enzyme → Clinical Consequence of Inhibition/Excess",
+        directions:"DIRECTIONS: Match each enzyme to the most relevant clinical scenario when blocked or overactive.",
+        choices:["A. Aromatase excess → gynecomastia in males","B. 5α-reductase deficiency → ambiguous genitalia at birth, male puberty","C. 17β-HSD deficiency → testosterone cannot be made from androstenedione","D. Aromatase inhibition → decreased estrogen → used in breast cancer (ER+)","E. SHBG increase → lower free testosterone despite normal total"],
+        items:[
+            {num:"Q5",q:"A 45-year-old obese male presents with gynecomastia. Adipose tissue contains high amounts of which enzyme that may explain this finding?",answer:"A",answerFull:"A",explain:"Adipose tissue expresses high levels of aromatase → converts testosterone to estradiol. Obese males: excess adipose → excess aromatase → excess estradiol → gynecomastia. Also explains why exogenous testosterone can cause gynecomastia (testosterone aromatized to estradiol in fat)."},
+            {num:"Q6",q:"A 46,XY individual is born with ambiguous genitalia (micropenis, hypospadias) but undergoes virilization at puberty and identifies as male. What enzyme deficiency is responsible?",answer:"B",answerFull:"B",explain:"5α-reductase deficiency: cannot convert testosterone to DHT. DHT is required for external genitalia masculinization in utero (testosterone alone handles internal structures — Wolffian duct development). At puberty, the high testosterone levels are sufficient to drive virilization despite DHT deficiency."},
+            {num:"Q7",q:"A post-menopausal woman with ER+ breast cancer is prescribed anastrozole. What is the mechanism?",answer:"D",answerFull:"D",explain:"Anastrozole is an aromatase inhibitor. In post-menopausal women, the main estrogen source is aromatase in peripheral tissues (adrenal androgens → estradiol). Blocking aromatase → ↓estrogen → reduced ER+ tumor growth. First-line therapy for post-menopausal ER+ breast cancer."}
+        ]
+    }
+];
+
+const brsMatchContainer = document.getElementById('brsmatch-container');
+matchSets.forEach((set,sIdx) => {
+    const sec = document.createElement('div'); sec.className = 'match-section';
+    sec.innerHTML = `<div class="match-title">${set.title}</div><div class="match-directions">${set.directions}</div>
+        <div class="match-choices"><div class="match-choice-label">Answer Choices:</div><div class="match-choice-items">${set.choices.map(c=>`<span class="match-choice-item">${c}</span>`).join('')}</div></div>
+        <div class="match-q-list" id="mset-${sIdx}"></div>`;
+    brsMatchContainer.appendChild(sec);
+    const qList = sec.querySelector(`#mset-${sIdx}`);
+    set.items.forEach((item,iIdx) => {
+        const qDiv = document.createElement('div'); qDiv.className = 'match-q-item';
+        qDiv.innerHTML = `<div class="match-q-text"><strong>${item.num}.</strong> ${item.q}</div>
+            <div class="match-opts">${set.choices.map((c,ci)=>`<button class="match-opt" data-answer="${item.answer}" data-choice="${String.fromCharCode(65+ci)}" data-sidx="${sIdx}" data-iidx="${iIdx}" onclick="selectMatch(this)">${String.fromCharCode(65+ci)}</button>`).join('')}</div>
+            <div class="match-fb" id="mfb-${sIdx}-${iIdx}"></div>`;
+        qList.appendChild(qDiv);
+    });
+});
+
+function selectMCQ(btn) {
+    const isCorrect=btn.dataset.correct==='true'; const qidx=btn.dataset.qidx; const bucket=btn.dataset.bucket;
+    btn.closest('.mcq-item').querySelectorAll('.mcq-opt').forEach(b=>{b.disabled=true;});
+    if(isCorrect){btn.classList.add('correct');}else{btn.classList.add('incorrect');btn.closest('.mcq-item').querySelectorAll('.mcq-opt').forEach(b=>{if(b.dataset.correct==='true')b.classList.add('correct');});}
+    const expId=qidx.startsWith('g')?`gexp-${qidx.slice(1)}`:`vexp-${qidx.slice(1)}`;
+    const expEl=document.getElementById(expId); if(expEl)expEl.classList.add('show');
+    recordScore(bucket,isCorrect);
+}
+function selectMatch(btn) {
+    const sIdx=parseInt(btn.dataset.sidx); const iIdx=parseInt(btn.dataset.iidx);
+    const isCorrect=btn.dataset.choice===btn.dataset.answer;
+    btn.closest('.match-q-item').querySelectorAll('.match-opt').forEach(b=>{b.disabled=true;if(b.dataset.choice===btn.dataset.answer)b.classList.add('correct');});
+    if(!isCorrect)btn.classList.add('incorrect');
+    const fb=document.getElementById(`mfb-${sIdx}-${iIdx}`);
+    fb.classList.add('show',isCorrect?'correct':'incorrect');
+    fb.innerHTML=isCorrect?`✓ Correct! ${matchSets[sIdx].items[iIdx].explain}`:`✗ Correct: ${matchSets[sIdx].items[iIdx].answerFull}. ${matchSets[sIdx].items[iIdx].explain}`;
+    recordScore('brsmatch',isCorrect);
+}
+
+const concepts = [
+    {q:"GnRH pulsatile vs. continuous: what is the clinical relevance?", a:"Pulsatile GnRH → stimulates LH + FSH (physiologic). Continuous GnRH agonists (leuprolide) → receptor downregulation → suppresses LH/FSH → medical castration. Used for: prostate cancer, precocious puberty, endometriosis, uterine fibroids."},
+    {q:"Two-cell model of ovarian estrogen synthesis: which cell makes what, controlled by which hormone?", a:"Theca cells (LH → cAMP → androgens: androstenedione). Granulosa cells (FSH → aromatase → converts androstenedione to estradiol). Both cell types needed for estrogen. Post-LH surge: both cells luteinize → corpus luteum → progesterone."},
+    {q:"G6PD: what pathway does it control, and why is NADPH critical for steroidogenesis?", a:"G6PD → HMP shunt → NADPH. Steroidogenesis: cytochrome P450 enzymes (CYP11A1 = cholesterol side-chain cleavage; CYP17A1; CYP19A1 = aromatase) all require NADPH as electron donor. G6PD deficiency → ↓NADPH → impaired adrenal/gonadal steroid synthesis + RBC oxidative damage."},
+    {q:"B12 deficiency: which two enzymes are affected, and what metabolites accumulate?", a:"(1) Methylmalonyl-CoA mutase (requires adenosylcobalamin): methylmalonyl-CoA → succinyl-CoA; ↑methylmalonic acid accumulates. (2) Methionine synthase (requires methylcobalamin): homocysteine → methionine; ↑homocysteine accumulates. Both ↑MMA and ↑homocysteine = B12 deficiency. Only ↑homocysteine = folate OR B12."},
+    {q:"Prolactinoma: primary treatment and mechanism?", a:"Dopamine agonists (cabergoline > bromocriptine). Mechanism: D2 receptors on lactotrophs → Gi → ↓cAMP → inhibits prolactin secretion AND causes tumor shrinkage. Dopamine normally inhibits prolactin; prolactinoma responds to dopaminergic stimulation. Surgery = second-line."},
+    {q:"5α-reductase vs. aromatase: what does each convert testosterone to, and where is each clinically relevant?", a:"5α-reductase: testosterone → DHT (more potent androgen). Location: prostate, skin, external genitalia. Deficiency: ambiguous genitalia at birth, virilization at puberty. Inhibitor: finasteride (BPH, male pattern baldness). Aromatase: testosterone → estradiol. Location: adipose, liver, gonads, brain. Excess: gynecomastia. Inhibitors (anastrozole): ER+ breast cancer in post-menopausal women."}
+];
+const conceptGrid=document.getElementById('concepts-grid');
+concepts.forEach(c=>{
+    const fc=document.createElement('div');fc.className='fc';
+    fc.innerHTML=`<div class="fc-inner"><div class="fc-front"><div class="fc-label">Question</div><div class="fc-q">${c.q}</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${c.a}</div></div></div>`;
+    fc.onclick=()=>fc.classList.toggle('flipped');
+    conceptGrid.appendChild(fc);
+});
+</script>
+</body>
+</html>
