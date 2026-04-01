@@ -258,6 +258,8 @@ function checkFIB(i) {
 renderFlashcards(); renderMCQ(); renderVigs(); renderTraps(); renderFIB();
 
 renderRef();
+function fixCardHeights(){document.querySelectorAll(".fc").forEach(c=>{const f=c.querySelector(".fc-front"),b=c.querySelector(".fc-back");const h=Math.max(f.scrollHeight,b.scrollHeight)+16;c.style.minHeight=h+"px";c.querySelector(".fc-inner").style.minHeight=h+"px";f.style.minHeight=h+"px";b.style.minHeight=h+"px";});}
+setTimeout(fixCardHeights,80);
 </script>
 </body>
 </html>

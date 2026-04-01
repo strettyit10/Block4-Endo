@@ -164,6 +164,8 @@ function renderTraps(){document.getElementById('trapsContainer').innerHTML=traps
 function renderFIB(){document.getElementById('fibContainer').innerHTML=fibs.map((f,i)=>`<div class="fib-item"><div class="fib-prompt">${i+1}. ${f.prompt}</div><input class="fib-input" id="fib${i}" placeholder="Type your answer(s)…"/><button class="fib-btn" onclick="chkFIB(${i})">Check</button><div class="fib-result" id="fibres${i}"></div><div style="font-size:0.78em;color:#6B7280;margin-top:6px;">Hint: ${f.hint}</div></div>`).join('');}
 function chkFIB(i){const f=fibs[i];const v=document.getElementById('fib'+i).value.toLowerCase().trim();const ok=f.answers.some(a=>v.includes(a.toLowerCase()));const r=document.getElementById('fibres'+i);r.className=ok?'fib-result correct':'fib-result incorrect';r.textContent=ok?'✅ Correct! '+f.hint:'❌ Review: '+f.hint;}
 renderFlashcards();renderMCQ();renderVigs();renderTraps();renderFIB();
+function fixCardHeights(){document.querySelectorAll(".fc").forEach(c=>{const f=c.querySelector(".fc-front"),b=c.querySelector(".fc-back");const h=Math.max(f.scrollHeight,b.scrollHeight)+16;c.style.minHeight=h+"px";c.querySelector(".fc-inner").style.minHeight=h+"px";f.style.minHeight=h+"px";b.style.minHeight=h+"px";});}
+setTimeout(fixCardHeights,80);
 document.getElementById('refContainer').innerHTML=REF_HTML;
 </script>
 </body>
