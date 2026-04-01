@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Physiology L3: Posterior Pituitary Hormones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #00897B; --accent-dark: #00695C; --accent-light: rgba(0,137,123,0.15); }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif; background:#0D1117; color:#E6EDF3; min-height:100vh; }
+        .container { max-width:1100px; margin:0 auto; padding:20px; }
+        .header { background:linear-gradient(135deg,#161B22 0%,#162020 100%); border-bottom:3px solid var(--accent); padding:28px 30px; margin-bottom:28px; border-radius:10px; }
+        .header .back { font-size:0.8em; color:#6B7280; text-decoration:none; display:inline-block; margin-bottom:10px; }
+        .header .back:hover { color:var(--accent); }
+        .header h1 { color:#E6EDF3; font-size:1.9em; margin-bottom:6px; }
+        .header .subtitle { color:#9CA3AF; font-size:0.9em; }
+        .header .accent-tag { color:#80CBC4; font-weight:600; }
+        .tab-nav { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; background:#161B22; padding:12px; border-radius:8px; border:1px solid #21262D; }
+        .tab-btn { padding:9px 18px; background:#1C2128; color:#8B949E; border:1px solid #30363D; border-radius:6px; cursor:pointer; font-weight:600; font-size:0.88em; transition:all 0.2s; }
+        .tab-btn:hover { background:#30363D; color:var(--accent); }
+        .tab-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+        .tab-content { display:none; animation:fadeIn 0.25s ease; }
+        .tab-content.active { display:block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);} }
+        .fc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+        .fc { background:#161B22; border:1px solid #30363D; border-radius:10px; cursor:pointer; perspective:800px; min-height:160px; }
+        .fc-inner { position:relative; width:100%; height:100%; min-height:160px; transform-style:preserve-3d; transition:transform 0.5s; }
+        .fc.flipped .fc-inner { transform:rotateY(180deg); }
+        .fc-front,.fc-back { position:absolute; width:100%; min-height:160px; backface-visibility:hidden; padding:18px; border-radius:10px; display:flex; flex-direction:column; justify-content:center; }
+        .fc-front { background:#161B22; border-top:3px solid var(--accent); }
+        .fc-back { background:#162020; transform:rotateY(180deg); border-top:3px solid #4ADE80; }
+        .fc-label { font-size:0.7em; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; }
+        .fc-front .fc-label { color:var(--accent); }
+        .fc-back .fc-label { color:#4ADE80; }
+        .fc-q { font-size:0.95em; color:#E6EDF3; line-height:1.5; font-weight:500; }
+        .fc-a { font-size:0.92em; color:#D1FAE5; line-height:1.5; }
+        .fc-hint { margin-top:10px; font-size:0.75em; color:#6B7280; text-align:center; }
+        .mcq-item { background:#161B22; border:1px solid #30363D; border-radius:10px; padding:20px; margin-bottom:16px; }
+        .mcq-num { font-size:0.75em; color:#6B7280; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:8px; }
+        .mcq-stem { font-size:0.95em; color:#E6EDF3; margin-bottom:14px; line-height:1.6; }
+        .mcq-stem strong { color:#FCD34D; }
+        .mcq-options { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+        .mcq-opt { padding:10px 14px; background:#1C2128; border:1px solid #30363D; border-radius:6px; cursor:pointer; font-size:0.9em; color:#C9D1D9; transition:all 0.2s; display:flex; align-items:flex-start; gap:10px; }
+        .mcq-opt:hover:not(.revealed) { background:#21262D; border-color:var(--accent); }
+        .mcq-opt.correct { background:rgba(74,222,128,0.15); border-color:#4ADE80; color:#D1FAE5; }
+        .mcq-opt.wrong { background:rgba(239,68,68,0.1); border-color:#EF4444; color:#FCA5A5; }
+        .mcq-opt .letter { font-weight:700; min-width:20px; }
+        .mcq-explanation { background:#1C2128; border-left:3px solid #4ADE80; padding:12px 14px; border-radius:0 6px 6px 0; font-size:0.87em; color:#9CA3AF; display:none; margin-top:4px; }
+        .mcq-explanation.visible { display:block; }
+        .mcq-explanation .exp-label { color:#4ADE80; font-weight:600; margin-bottom:4px; }
+        .teaching-pt { background:rgba(0,137,123,0.1); border:1px solid var(--accent); border-radius:8px; padding:12px 14px; margin-top:10px; font-size:0.87em; color:#B2DFDB; display:none; }
+        .teaching-pt.visible { display:block; }
+        .teaching-pt .tp-label { font-weight:700; color:var(--accent); margin-bottom:4px; }
+        .vig-item { background:#161B22; border:1px solid #30363D; border-radius:10px; padding:22px; margin-bottom:20px; }
+        .vig-banner { background:rgba(0,137,123,0.2); border:1px solid var(--accent); border-radius:6px; padding:8px 14px; font-size:0.8em; color:#B2DFDB; font-weight:600; margin-bottom:14px; }
+        .vig-stem { font-size:0.93em; line-height:1.7; color:#D1D5DB; margin-bottom:14px; }
+        .vig-stem strong { color:#FCD34D; }
+        .trap-item { background:#1A1212; border:1px solid #7F1D1D; border-radius:10px; padding:18px; margin-bottom:14px; }
+        .trap-header { color:#FCA5A5; font-size:0.85em; font-weight:700; margin-bottom:8px; }
+        .trap-myth { background:rgba(239,68,68,0.1); border-left:3px solid #EF4444; padding:8px 12px; border-radius:0 6px 6px 0; font-size:0.9em; color:#FCA5A5; margin-bottom:8px; }
+        .trap-truth { background:rgba(74,222,128,0.1); border-left:3px solid #4ADE80; padding:8px 12px; border-radius:0 6px 6px 0; font-size:0.9em; color:#D1FAE5; }
+        .trap-myth-label { font-size:0.75em; color:#EF4444; font-weight:700; margin-bottom:4px; }
+        .trap-truth-label { font-size:0.75em; color:#4ADE80; font-weight:700; margin-bottom:4px; }
+        .fib-item { background:#161B22; border:1px solid #30363D; border-radius:10px; padding:18px; margin-bottom:14px; }
+        .fib-prompt { font-size:0.93em; color:#E6EDF3; margin-bottom:12px; line-height:1.6; }
+        .fib-input { width:100%; background:#0D1117; border:1px solid #30363D; border-radius:6px; padding:8px 12px; color:#E6EDF3; font-size:0.9em; font-family:'Inter',sans-serif; margin-bottom:8px; }
+        .fib-input:focus { outline:none; border-color:var(--accent); }
+        .fib-btn { background:var(--accent); color:white; border:none; padding:7px 16px; border-radius:6px; cursor:pointer; font-size:0.85em; font-weight:600; }
+        .fib-result { margin-top:8px; font-size:0.88em; padding:8px 12px; border-radius:6px; display:none; }
+        .fib-result.correct { background:rgba(74,222,128,0.15); color:#D1FAE5; border:1px solid #4ADE80; display:block; }
+        .fib-result.incorrect { background:rgba(239,68,68,0.1); color:#FCA5A5; border:1px solid #EF4444; display:block; }
+        .ref-table { width:100%; border-collapse:collapse; margin-bottom:20px; font-size:0.88em; }
+        .ref-table th { background:var(--accent); color:white; padding:9px 12px; text-align:left; }
+        .ref-table td { padding:8px 12px; border:1px solid #30363D; color:#C9D1D9; vertical-align:top; }
+        .ref-table tr:nth-child(even) td { background:#161B22; }
+        .ref-table tr:nth-child(odd) td { background:#1C2128; }
+        .ref-table td.hl { color:var(--accent); font-weight:600; }
+        .ref-table td.hl-red { color:#F87171; font-weight:600; }
+        .section-title { font-size:0.8em; font-weight:700; color:#6B7280; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px; padding-bottom:6px; border-bottom:1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="GUSOM-Phys-ActiveDrills.html" class="back">← Back to Physiology Hub</a>
+        <h1>Lecture 3: <span class="accent-tag">Posterior Pituitary Hormones</span></h1>
+        <div class="subtitle">Vasopressin (ADH/AVP) · Oxytocin · Osmoregulation · Diabetes Insipidus · DDAVP</div>
+    </div>
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
+    </div>
+    <div id="tab-flashcards" class="tab-content active"><div class="section-title">Flashcards — Click to Flip</div><div class="fc-grid" id="fcGrid"></div></div>
+    <div id="tab-mcq" class="tab-content"><div class="section-title">MCQ Practice</div><div id="mcqContainer"></div></div>
+    <div id="tab-vignettes" class="tab-content"><div class="section-title">Clinical Vignettes</div><div id="vigContainer"></div></div>
+    <div id="tab-traps" class="tab-content"><div class="section-title">⚠️ Test Traps</div><div id="trapsContainer"></div></div>
+    <div id="tab-fib" class="tab-content"><div class="section-title">Fill-in-Blank</div><div id="fibContainer"></div></div>
+    <div id="tab-ref" class="tab-content"><div class="section-title">Quick Reference</div><div id="refContainer"></div></div>
+</div>
+<script>
+function switchTab(name){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+name).classList.add('active');event.target.classList.add('active');}
+
+const flashcards=[
+{q:"Where are vasopressin and oxytocin synthesized vs stored?",a:"Synthesized in HYPOTHALAMIC NEURONS (supraoptic and paraventricular nuclei). Transported via fast axonal transport down infundibular stalk → stored in Herring bodies in POSTERIOR PITUITARY → released from fenestrated capillaries into general circulation."},
+{q:"What structural features protect AVP and OXT from enzymatic degradation in blood?",a:"Both nonapeptides have: (1) Cyclic disulfide bond at N-terminus → protects from aminopeptidases. (2) Amide group at C-terminus → protects from carboxypeptidases. The cyclic disulfide is also essential for biological activity."},
+{q:"V2 receptor: where is it? What G protein? What happens?",a:"Location: Distal tubule and collecting duct of kidney. G protein: Gs → ↑cAMP → PKA activation → insertion of Aquaporin-2 (AQP2) water channels into apical membrane → water reabsorption → concentrated urine."},
+{q:"V1a receptor: where is it? What G protein? What happens?",a:"Location: Vascular smooth muscle, myoepithelial cells (breast/uterus), CNS. G protein: Gq → PLC → IP3 → Ca²⁺ release → vasoconstriction and smooth muscle contraction. DDAVP does NOT bind V1a (designed to avoid vasoconstriction)."},
+{q:"What is the osmotic threshold for ADH secretion? For thirst?",a:"ADH threshold: ~280 mOsm/kg. Thirst threshold: 285-290 mOsm/kg (5-10 mOsm higher than ADH threshold). This ordering makes physiological sense: conserve water first (ADH), drink water only when conservation is maximal."},
+{q:"Why does drinking cold water inhibit ADH secretion BEFORE osmolality normalizes?",a:"Oropharyngeal cold-sensitive receptors sense water entering the throat → send inhibitory signals to magnocellular AVP neurons → ADH secretion decreases immediately. This is an anticipatory reflex — prevents overshooting correction. Thirst is also relieved before osmolality normalizes."},
+{q:"Distinguish central DI from nephrogenic DI: ADH level, response to DDAVP, urine osmolality.",a:"Central DI: ADH LOW (can't make it). DDAVP → urine concentrates (kidney OK). Urine hypotonic. Treat: DDAVP.\nNephrogenic DI: ADH HIGH (made, can't use it — kidney can't respond). DDAVP → urine stays dilute (kidney broken). Urine hypotonic. Treat: thiazides ± indomethacin."},
+{q:"What are the 4 causes of diabetes insipidus?",a:"1. Central (neurogenic): can't make/secrete AVP (head trauma, tumors, familial mutations)\n2. Nephrogenic: can't respond to AVP (V2R mutations, lithium, hypercalcemia)\n3. Gestational: placenta produces vasopressinase that degrades AVP faster\n4. Primary polydipsia (dipsogenic/psychogenic): excessive drinking, not a true AVP deficiency"},
+{q:"Why does alcohol cause increased urination?",a:"Ethanol SUPPRESSES ADH secretion from the posterior pituitary → kidneys cannot reabsorb water → dilute urine → dehydration. This is why drinking alcohol causes subsequent thirst and dehydration ('hangover' dehydration)."},
+{q:"Oxytocin: what are its two main peripheral targets and what does it do at each?",a:"1. BREAST: Binds myoepithelial cells surrounding alveoli → Gq → Ca²⁺ → contraction → milk ejected into ducts (let-down reflex). Triggered by suckling + anticipatory stimuli.\n2. UTERUS: Binds myometrial cells → Gq → Ca²⁺ + PLA2 → prostaglandins → uterine contractions. Uterine OT receptors only expressed near term (prevents premature labor)."},
+{q:"How does DDAVP differ structurally and pharmacologically from native AVP?",a:"Structural: 1-deamino (deaminated at N-terminus) + 8-D-arginine (D instead of L arginine). Effects: (1) Binds V2R selectively — no V1a → no vasoconstriction. (2) Longer half-life (resistant to enzymatic degradation). (3) Resistant to vasopressinase → works in gestational DI. Administered intranasally (bypasses first-pass, avoids GI degradation)."},
+{q:"What is the role of angiotensin II in AVP regulation?",a:"Angiotensin II (product of RAAS activation when BP/BV drops) stimulates AVP secretion from the posterior pituitary. This creates a coordinated response to hypovolemia: RAAS → angiotensin II → (1) aldosterone (sodium retention) + (2) AVP (water retention) + (3) thirst."},
+];
+
+const mcqs=[
+{stem:"A 30-year-old man with bipolar disorder has been taking lithium for 3 years. He now presents with polydipsia, polyuria, and excessive thirst. Serum Na⁺ is 149 mEq/L. Urine is very dilute. Serum AVP is markedly elevated. Administration of DDAVP does NOT significantly concentrate his urine. What is the most likely diagnosis?",
+options:["Central diabetes insipidus","Nephrogenic diabetes insipidus","Gestational diabetes insipidus","Primary polydipsia","SIADH"],
+correct:1,
+explanations:["Central DI: AVP would be LOW (can't make it). DDAVP would WORK (kidney responsive). Here AVP is high and DDAVP fails — rules out central DI.","CORRECT. Lithium is the classic cause of nephrogenic DI. It impairs V2R signaling in the collecting duct → can't insert AQP2 → can't concentrate urine. AVP is high (the signal is there but can't act). DDAVP doesn't work because the kidney receptor/signaling is broken. Treat with thiazides + low-salt diet.","Gestational DI occurs in pregnant women only — this is a male patient.","Primary polydipsia: AVP would be LOW (suppressed by all the water drinking). Serum sodium would be LOW (too much water). Neither fits here.","SIADH: hyponatremia, concentrated urine, euvolemia. This patient has hypernatremia and dilute urine — opposite of SIADH."],
+teaching:"Lithium → nephrogenic DI in up to 20% of users. High AVP + no response to DDAVP = nephrogenic DI. Treatment: thiazide diuretics (paradoxically concentrate urine by causing mild volume depletion → proximal tubule absorbs more → less delivered to collecting duct)."
+},
+{stem:"A 25-year-old woman at 32 weeks gestation develops polyuria and polydipsia. Serum sodium is 148 mEq/L. AVP levels are undetectable. DDAVP administration causes significant urine concentration. What is the most likely cause?",
+options:["Primary polydipsia","Nephrogenic diabetes insipidus","Central diabetes insipidus","Gestational diabetes insipidus","SIADH of pregnancy"],
+correct:3,
+explanations:["Primary polydipsia: excessive drinking → dilute serum → low Na⁺ (not high). AVP suppressed because serum is dilute. Doesn't fit with high Na⁺ or positive DDAVP response.","Nephrogenic DI: DDAVP would NOT work (kidney is the problem). Doesn't fit — DDAVP works here.","Central DI: possible, but the context (pregnancy, undetectable AVP) specifically suggests gestational DI.","CORRECT. Gestational DI: placental trophoblast mass produces vasopressinase — an enzyme that degrades native AVP faster than normal. AVP is undetectable (being rapidly destroyed). DDAVP is resistant to vasopressinase → concentrates urine effectively. Resolves after delivery when vasopressinase falls.","SIADH: concentrated urine, low serum Na⁺, euvolemia. This patient has high Na⁺ and dilute urine."],
+teaching:"Gestational DI = vasopressinase from placenta destroys native AVP. DDAVP is the treatment because its structural modifications make it resistant to vasopressinase. Resolves spontaneously after delivery."
+},
+{stem:"During a water deprivation test, a patient with suspected DI has the following results: Serum osmolality rises to 310 mOsm/kg. Urine osmolality remains at 90 mOsm/kg (hypotonic). After DDAVP injection, urine osmolality rises to only 110 mOsm/kg. What is the diagnosis?",
+options:["Central DI (complete)","Central DI (partial)","Nephrogenic DI","Primary polydipsia","Normal physiology"],
+correct:2,
+explanations:["Complete central DI: DDAVP should cause a robust increase in urine osmolality (to >300-400) because the kidney is intact and just waiting for the signal. Minimal response suggests kidney problem.","Partial central DI: DDAVP might cause some increase (10-50%), but the minimal response here (90→110 = only 22% increase) is more consistent with nephrogenic.","CORRECT. Nephrogenic DI: DDAVP does not meaningfully concentrate urine even when given exogenously — kidney cannot respond to V2R signaling. The minimal response (90→110) is the classic nephrogenic DI pattern.","Primary polydipsia: serum osmolality would remain near normal (or drop) during water deprivation because the person is just over-drinking. Kidneys would concentrate urine normally during deprivation.","Normal physiology: kidneys should concentrate urine to >700-800 mOsm/kg with water deprivation. 90 mOsm/kg indicates total inability to concentrate."],
+teaching:"Water deprivation test interpretation: (1) Cannot concentrate → DI. (2) Respond to DDAVP = central DI. (3) Don't respond to DDAVP = nephrogenic DI. (4) Concentrate normally with deprivation = primary polydipsia."
+},
+{stem:"A nursing mother notices milk 'lets down' (flows spontaneously) when she hears her baby crying in the next room. What is the mechanism?",
+options:["Prolactin release stimulated by auditory input","Oxytocin release from posterior pituitary triggered by auditory/emotional cues","Dopamine inhibition reduced by baby's cry","Milk pressure builds until passive flow","GnRH-mediated reflex"],
+correct:1,
+explanations:["Prolactin drives milk PRODUCTION (synthesis), not ejection. A crying baby would not cause prolactin to surge and ejection to happen in seconds.","CORRECT. Oxytocin mediates milk ejection (let-down). The HPA-like axis here: auditory/emotional stimuli → hypothalamus → OT release → posterior pituitary → blood → myoepithelial cells in breast → contraction → milk ejected. This demonstrates that visual, auditory, and olfactory stimuli (not just suckling) can trigger OT release.","Dopamine inhibits prolactin — reducing it would slowly increase milk production, not cause instant ejection.","Passive pressure would not account for the rapid, reflex-like nature of let-down.","GnRH has no role in lactation."],
+teaching:"Prolactin = milk PRODUCTION. Oxytocin = milk EJECTION. The let-down reflex (OT-mediated) can be conditioned — anticipatory stimuli (hearing, seeing, thinking about baby) trigger OT release. Stress and anxiety can block OT → why 'relaxed' breastfeeding environments matter."
+},
+{stem:"A patient with traumatic brain injury involving the hypothalamus develops diabetes insipidus. Which lab pattern is MOST expected?",
+options:["↓ Serum Na⁺, concentrated urine, ↑ AVP","↑ Serum Na⁺, dilute urine, ↓ AVP","↑ Serum Na⁺, concentrated urine, ↑ AVP","↓ Serum Na⁺, dilute urine, ↓ AVP","Normal serum Na⁺, dilute urine, normal AVP"],
+correct:1,
+explanations:["This pattern (↓Na⁺, concentrated urine, ↑AVP) = SIADH — too much ADH, not too little.","CORRECT. Central DI from hypothalamic injury: cannot make/release AVP → kidneys cannot concentrate urine → excrete large volumes of dilute urine → water lost → serum Na⁺ rises → hypernatremia. AVP is low (hypothalamus cannot produce it).","High AVP would cause water retention → Na⁺ would be LOW, not high.","Low AVP + dilute urine → water loss → hypernatremia. This answer has the wrong Na⁺ direction.","Normal findings in a patient who is clearly symptomatic with DI is not the expected pattern."],
+teaching:"DI = HYPER-natremia + dilute urine + polydipsia/polyuria. The serum is becoming concentrated (losing free water). SIADH = HYPO-natremia + concentrated urine (too much water retained). Memorize: DI and SIADH are electrolyte OPPOSITES."
+},
+{stem:"Tocolysis (inhibiting preterm labor) with atosiban (an oxytocin receptor antagonist) has been found to be no more effective than placebo in many trials. What physiological principle BEST explains this finding?",
+options:["Oxytocin is not secreted during labor","Oxytocin acts through Gq, which cannot be blocked","Oxytocin is only a MINOR contributor to initiating labor; other factors (prostaglandins, mechanical stretch) are predominant","Atosiban has insufficient affinity for the oxytocin receptor","Progesterone blocks atosiban from reaching the uterus"],
+correct:2,
+explanations:["Oxytocin IS secreted during labor and IS required for amplifying contractions once started. But it may not be the primary INITIATOR.","Gq receptors can absolutely be antagonized by competitive antagonists. This is not the issue.","CORRECT. While OT amplifies labor (positive feedback loop), it is not the primary initiator. Prostaglandins, cervical ripening, mechanical distension, and hormonal changes (↓progesterone, ↑estrogen receptor expression) are the primary drivers of labor onset. Blocking just OT removes only one minor trigger.","Atosiban has proven receptor affinity and pharmacokinetics — this is not the limitation.","Progesterone doesn't physically block drug access."],
+teaching:"Oxytocin amplifies labor (positive feedback, Ferguson reflex) but is not the sole or primary initiator. Multiple parallel pathways drive labor. Blocking one (OT) leaves others intact. Clinically, OT can be given to AUGMENT labor (when already started) with success — but blocking it has limited efficacy for prevention."
+},
+{stem:"A researcher blocks all afferent input to the hypothalamus in an experimental animal. The animal is then deprived of water. Which vasopressin response is MOST expected?",
+options:["Normal AVP secretion driven by osmoreceptors in circumventricular organs (OVLT/SFO)","Absent AVP secretion because all feedback is blocked","Increased AVP secretion due to loss of inhibitory baroreceptor input","Decreased AVP secretion due to loss of excitatory osmoreceptor input","Constant, non-pulsatile AVP secretion regardless of osmolality"],
+correct:0,
+explanations:["CORRECT. Osmoreceptors in circumventricular organs (OVLT and SFO) are within the brain itself and can directly sense plasma osmolality — they project DIRECTLY to magnocellular AVP neurons in the hypothalamus. These would not require afferent input from the periphery. Osmotic regulation of AVP can continue even when peripheral afferents are cut.","Not all input would be blocked — osmoreceptors in circumventricular organs are intrinsic to the brain.","Loss of baroreceptor input removes inhibitory signals → AVP could rise even more during water deprivation — this is possible but not the primary mechanism described.","Osmotic excitation is intrinsic (OVLT/SFO) and doesn't require peripheral afferents.","AVP secretion patterns are determined by osmolality, not just afferents — pulsatility would continue."],
+teaching:"Osmoreceptors for AVP regulation are in the OVLT and SFO — circumventricular organs that are intrinsic to the brain and directly sense blood osmolality. They don't depend on peripheral sensory nerves. Baroreceptors (peripherally located, aortic arch, carotid) do require intact afferent nerves."
+},
+{stem:"Which of the following CORRECTLY describes a property of DDAVP that distinguishes it from native vasopressin?",
+options:["Binds both V1a and V2 receptors with equal affinity","Causes vasoconstriction more potently than native AVP","Does not cause water reabsorption in the kidney","Selective for V2 receptor; does not bind V1a receptor","Has a shorter half-life due to deamination"],
+correct:3,
+explanations:["DDAVP is SELECTIVE for V2, not equal binding. It was engineered to eliminate V1a binding.","DDAVP causes LESS vasoconstriction (no V1a binding) — not more. This is a safety advantage.","DDAVP does cause water reabsorption via V2 → AQP2 insertion. That's the whole therapeutic goal.","CORRECT. The D-arginine substitution at position 8 increases V2 receptor selectivity and eliminates V1a binding → no vasoconstriction, no hypertension. The 1-deamination increases half-life. Safe for long-term use in DI.","DDAVP has a LONGER half-life (not shorter) due to the protective deamination at the N-terminus."],
+teaching:"DDAVP engineered advantages: (1) V2-selective only → no vasoconstriction. (2) Longer half-life. (3) Resistant to vasopressinase. (4) Intranasal delivery bypasses first-pass metabolism. All modifications increase safety and efficacy over native AVP."
+},
+{stem:"A patient has SIADH (syndrome of inappropriate ADH secretion). Which lab set is MOST consistent?",
+options:["Serum Na⁺ 152, serum osmolality 310, urine osmolality 65","Serum Na⁺ 118, serum osmolality 248, urine osmolality 620","Serum Na⁺ 145, serum osmolality 295, urine osmolality 300","Serum Na⁺ 135, serum osmolality 285, urine osmolality 285","Serum Na⁺ 155, serum osmolality 320, urine osmolality 80"],
+correct:1,
+explanations:["Hypernatremia + dilute urine = DIABETES INSIPIDUS (losing free water). Opposite of SIADH.","CORRECT. SIADH: inappropriate retention of free water → dilutes blood → hyponatremia + low serum osmolality. But kidneys continue to concentrate urine inappropriately (high urine osmolality). Classic SIADH pattern: ↓serum Na⁺, ↓serum Osm, ↑urine Osm.","Normal sodium and osmolality does not fit SIADH.","Normal values — no pathology here.","Severe hypernatremia + very dilute urine = severe DI."],
+teaching:"SIADH: ADH acts inappropriately → kidneys retain water → serum Na⁺ drops → serum osmolality drops. But ADH still signals kidneys to concentrate urine (high urine Osm). Key finding: inappropriately concentrated urine in the face of hyponatremia + hypo-osmolality. Causes: brain injury, malignancy (ectopic ADH from small cell lung cancer), drugs (SSRIs, carbamazepine)."
+},
+{stem:"A woman in active labor has been pushing for 2 hours. Her contractions are 5 minutes apart and slowing. The obstetrician administers IV oxytocin. What is the expected mechanism of action in the uterus?",
+options:["OT binds V2R → cAMP → PKA → smooth muscle relaxation","OT binds OTR → Gs → cAMP → smooth muscle contraction","OT binds OTR → Gq → PLC → IP3 → Ca²⁺ → smooth muscle contraction; also PLA2 → prostaglandins","OT crosses into myometrial cells and directly opens Ca²⁺ channels","OT binds beta-1 adrenergic receptors on myometrium"],
+correct:2,
+explanations:["V2R is the vasopressin receptor for water reabsorption in the kidney. OT does not use V2R in the uterus.","OT receptor does NOT couple to Gs. Gs → cAMP pathway would activate PKA → cause smooth muscle RELAXATION (β2 adrenergic effect). OT causes contraction.","CORRECT. Uterine OT receptor → Gq → PLC → IP3 → ER Ca²⁺ release → myometrial contraction. ALSO activates PLA2 → releases arachidonic acid → prostaglandins → additional uterine effects (softening/ripening). This is how IV oxytocin augments labor.","OT is a peptide — it does not cross membranes. It binds surface GPCR (OTR).","Beta-1 adrenergic receptors are primarily cardiac. OT does not bind adrenergic receptors."],
+teaching:"OTR → Gq → PLC → IP3 → Ca²⁺ = contraction. Also PLA2 → prostaglandins. Beta-2 agonists (tocolytics like terbutaline) work by OPPOSING this — Gs → cAMP → PKA → smooth muscle relaxation. Knowing the receptor signaling predicts which drugs promote vs inhibit labor."
+}
+];
+
+const vignettes=[
+{banner:"Clinical Vignette | DI Differential",
+stem:`A 22-year-old woman presents with 3-month history of drinking 8-10 liters of water per day and urinating constantly. She works as a nurse and is otherwise healthy. Serum Na⁺ 136 mEq/L (<strong>low-normal</strong>). Serum osmolality 278 mOsm/kg (slightly low). Urine osmolality 70 mOsm/kg (dilute). AVP level: undetectable (suppressed). Water deprivation test: serum osmolality rises to 295, urine concentrates normally to 780 mOsm/kg.`,
+question:"What is the most likely diagnosis, and what is the mechanism?",
+options:["Central DI — cannot produce ADH","Nephrogenic DI — kidneys cannot respond to ADH","Primary polydipsia — excessive voluntary water intake dilutes plasma, suppresses ADH, causes dilute urine","SIADH — inappropriate ADH retention","Gestational DI — vasopressinase from placenta"],
+correct:2,
+explanations:["Central DI: serum Na⁺ would be HIGH (losing free water). Low-normal Na⁺ here suggests too much water ingestion. And water deprivation normalizes urine concentration → kidney is intact.","Nephrogenic DI: DDAVP would fail to concentrate urine. Here, water deprivation alone concentrates urine normally (to 780) — kidney is working fine.","CORRECT. Primary polydipsia: excessive water drinking → dilutes serum → low-normal Na⁺ + low serum Osm → AVP suppressed (appropriately) → dilute urine. With water deprivation, serum Osm rises → AVP rises appropriately → urine concentrates normally. Kidney is fine. The problem is behavioral/inappropriate thirst.","SIADH: concentrated urine despite hyponatremia, not dilute urine with normal-low sodium.","No pregnancy history; not gestational DI."],
+teaching:"Primary polydipsia differentiator: (1) Low-normal or low serum Na⁺ (diluted by excess water — opposite of DI). (2) AVP appropriately suppressed (not absent from pathology). (3) Kidney concentrates urine normally with water deprivation. Treatment: water restriction (psychiatric support if psychogenic)."
+},
+{banner:"Clinical Vignette | Head Trauma & DI",
+stem:`A 28-year-old man is in the ICU following severe motor vehicle accident with traumatic brain injury. On day 3, he develops polyuria (6 L/day). Serum Na⁺ 156 mEq/L. Serum osmolality 320 mOsm/kg. Urine osmolality 85 mOsm/kg. Urine specific gravity 1.002 (very dilute). <strong>AVP level: < 1 pg/mL (undetectable)</strong>.`,
+question:"What is the correct treatment?",
+options:["IV furosemide to force urine concentration","IV normal saline only","Intranasal or IV DDAVP","Oral thiazide diuretics","Fluid restriction"],
+correct:2,
+explanations:["Furosemide is a loop diuretic — it would make the diuresis WORSE, not better.","Normal saline replaces volume but does not address the underlying AVP deficiency. Water would continue to be wasted.","CORRECT. Central DI from hypothalamic/stalk injury → no AVP → kidneys waste free water → hypernatremia. Treat with DDAVP (desmopressin) — V2R agonist → AQP2 insertion → water reabsorption → urine concentrates → serum Na⁺ corrects. Also replace free water deficit carefully (risk of rapid Na⁺ correction → cerebral edema).","Thiazides are for nephrogenic DI (where DDAVP fails). Here DDAVP is the correct treatment.","Fluid restriction in a patient who is hypernatremic from water loss would worsen the hypernatremia."],
+teaching:"Central DI after TBI: ABCs → recognize DI → replace water losses + give DDAVP. Correct hypernatremia SLOWLY to avoid cerebral edema (rapid correction of hyperosmolality → water rushes into brain cells). Target Na⁺ correction rate: <0.5 mEq/L/hour."
+},
+{banner:"Clinical Vignette | Oxytocin & Pair Bonding",
+stem:`Researchers study two related rodent species: prairie voles (monogamous) and montane voles (non-monogamous). Both species produce vasopressin. However, prairie voles show pair bonding after mating while montane voles do not. Brain imaging reveals that montane voles have <strong>absent V1a receptors</strong> in the ventral pallidum (reward circuitry), while prairie voles express them highly.`,
+question:"What conclusion can be drawn about vasopressin and pair bonding?",
+options:["Vasopressin levels (not receptors) determine pair bonding","V1a receptor expression in reward brain areas mediates pair bonding behavior","Oxytocin (not vasopressin) is solely responsible for pair bonding in voles","The absence of V1a receptors increases vasopressin, which causes pair bonding","Pair bonding requires high AVP + low OXT simultaneously"],
+correct:1,
+explanations:["The key finding is receptor DISTRIBUTION in brain (not simply hormone levels). Both species make vasopressin — the difference is where V1a receptors are expressed.","CORRECT. V1a receptor distribution in the ventral pallidum (brain reward center) determines whether vasopressin can trigger pair bonding. Prairie voles express V1a there; montane voles don't. This illustrates that hormone RECEPTOR DISTRIBUTION in specific brain regions (not just hormone level) determines behavioral outcome.","Oxytocin also plays roles in pair bonding, but this experiment specifically implicates vasopressin V1a receptor distribution.","Absence of V1a doesn't increase AVP — AVP is made in both species. The signal is there, but the receptor isn't.","No evidence for this specific mechanism."],
+teaching:"Vasopressin and oxytocin are 'social neuropeptides' with diverse behavioral roles beyond traditional endocrine functions: pair bonding, social memory, trust, and reproductive behavior. The key lesson: receptor distribution in specific brain regions determines behavioral effects, independent of circulating hormone levels."
+},
+{banner:"Clinical Vignette | AVP Regulation",
+stem:`A 45-year-old man with severe septic shock has been in the ICU for 3 days. He is on norepinephrine at high doses to maintain BP. Despite this, his BP remains low (MAP 58 mmHg). His team considers adding vasopressin. His serum osmolality is 298 mOsm/kg, serum Na⁺ 142 mEq/L. <strong>Serum AVP is surprisingly low at 2 pg/mL</strong> despite the profound hypotension.`,
+question:"Why might AVP be low in a patient with life-threatening hypotension?",
+options:["Hypotension is not a stimulus for AVP release","The posterior pituitary has been depleted of stored vasopressin","Sepsis-induced hypothalamic dysfunction suppresses CRH and AVP","The kidneys are releasing vasopressinase into circulation","AVP receptor downregulation prevents measurement of true levels"],
+correct:1,
+explanations:["Hypotension IS a major stimulus for AVP release. The finding of low AVP despite hypotension is the UNEXPECTED/pathological finding being asked about.","CORRECT. 'Vasopressin deficiency of septic shock' — prolonged maximal stimulus for AVP release (days of hypotension) can DEPLETE posterior pituitary AVP stores. This is called relative vasopressin deficiency. Exogenous vasopressin infusion can restore vascular tone and reduce catecholamine requirements (vasopressin-sparing effect).","Sepsis affects many pathways, but AVP is not primarily CRH-dependent (AVP comes from posterior pituitary in response to osmolality/blood pressure, not the HPA axis).","Vasopressinase is a placental enzyme — not relevant in non-pregnant patients.","AVP receptor downregulation wouldn't explain the low serum level."],
+teaching:"Vasopressin deficiency in septic shock: sustained maximal AVP secretion over days → depletion of posterior pituitary stores → relative vasopressin deficiency → reduced vasopressor tone despite high norepinephrine. Low-dose vasopressin infusion is used as a vasopressor adjunct in septic shock."
+}
+];
+
+const traps=[
+{title:"TRAP #1: DI causes hyponatremia",myth:"Diabetes insipidus causes hyponatremia (low sodium) because the patient is losing water and becoming dehydrated.",truth:"DI causes HYPERNATREMIA. Losing free water concentrates the serum sodium. Remember: in DI, you lose more water than sodium → serum Na⁺ rises. Hyponatremia is SIADH (retaining too much water, diluting Na⁺). DI and SIADH are electrolyte OPPOSITES."},
+{title:"TRAP #2: Nephrogenic DI has low ADH",myth:"In nephrogenic DI, both the kidney and the pituitary are malfunctioning, resulting in low ADH.",truth:"Nephrogenic DI has HIGH ADH. The hypothalamus and posterior pituitary are WORKING — they make lots of ADH (because the kidney isn't responding and water is being lost → feedback stimulates more ADH). The kidney is the broken link. Urine stays dilute despite high serum AND high ADH."},
+{title:"TRAP #3: Alcohol is antidiuretic because it's fluid",myth:"Drinking alcohol keeps you hydrated because you're ingesting liquid.",truth:"Alcohol SUPPRESSES ADH → promotes diuresis → you lose more water than you take in from the alcohol. Hence dehydration and thirst after drinking. Beer potomania: people who drink huge amounts of beer can get hyponatremia from the combination of water overload and low solute intake."},
+{title:"TRAP #4: Oxytocin causes milk production",myth:"Oxytocin is the hormone responsible for milk production in breastfeeding mothers.",truth:"OXYTOCIN = milk EJECTION (let-down reflex). PROLACTIN = milk PRODUCTION (synthesis). Oxytocin contracts myoepithelial cells to squeeze milk out of alveoli into ducts. Prolactin acts on alveolar epithelial cells to synthesize milk. Dopamine inhibits prolactin (hence breastfeeding = sustained prolactin)."},
+{title:"TRAP #5: DDAVP works via V1a receptors for antidiuresis",myth:"DDAVP causes antidiuresis by binding V1a receptors in the kidney.",truth:"DDAVP is SELECTIVE FOR V2 RECEPTORS in the kidney (collecting duct). The 8-D-arginine modification eliminates V1a binding. V1a → vasoconstriction (smooth muscle). V2 → water reabsorption (kidney). DDAVP keeps the water-retaining effect without the blood pressure effect."},
+{title:"TRAP #6: Water deprivation test can diagnose DI by osmolality alone",myth:"The water deprivation test is complete once you see that urine osmolality doesn't rise — that tells you DI is present and identifies the type.",truth:"Water deprivation tells you DI is present (can't concentrate urine). But to DISTINGUISH central from nephrogenic DI, you MUST give DDAVP: Central DI → urine concentrates after DDAVP (kidney is fine, just needed the signal). Nephrogenic DI → urine does NOT concentrate after DDAVP (kidney can't respond). The DDAVP challenge step is ESSENTIAL for typing."}
+];
+
+const fibs=[
+{prompt:"In the kidney collecting duct, AVP binds the ________ receptor (coupled to Gs), leading to ↑cAMP → PKA → insertion of ________ water channels → water reabsorption.",answers:["v2","aquaporin-2","aqp2"],hint:"V2 receptor → Aquaporin-2 (AQP2) insertion"},
+{prompt:"The osmotic threshold for AVP release is approximately ________ mOsm/kg. The threshold for thirst is approximately ________ mOsm/kg HIGHER than the AVP threshold.",answers:["280","5","10","5-10"],hint:"AVP threshold ~280; Thirst threshold 5-10 mOsm higher"},
+{prompt:"DDAVP differs from native AVP in two key structural ways: ________ at position 1 (protects from aminopeptidases) and ________ arginine at position 8 (increases V2 selectivity).",answers:["deamination","1-deamino","d-arginine","d arginine"],hint:"1-Deamino (at N-terminus) + D-arginine at position 8"},
+{prompt:"Prolactin causes milk ________. Oxytocin causes milk ________.",answers:["production","ejection","let-down"],hint:"Prolactin = production; Oxytocin = ejection (let-down reflex)"},
+{prompt:"In gestational DI, native AVP is destroyed by ________ from the placenta. DDAVP is preferred because it is resistant to this enzyme.",answers:["vasopressinase"],hint:"Vasopressinase from trophoblast mass degrades native AVP"}
+];
+
+const refData={
+headers:["Feature","Central DI","Nephrogenic DI","Gestational DI","Primary Polydipsia"],
+rows:[
+["Cause","Can't make/release AVP (trauma, tumor, familial)","Can't respond to AVP (V2R mutations, lithium, hypercalcemia)","Placental vasopressinase degrades AVP","Excessive voluntary water intake (psychiatric, OCD)"],
+["Serum Na⁺","⭐ HIGH (hypernatremia)","⭐ HIGH (hypernatremia)","⭐ HIGH (hypernatremia)","⭐ LOW-normal or LOW"],
+["AVP level","LOW (can't make it)","HIGH (can't use it)","LOW (being destroyed)","LOW (suppressed by water overload)"],
+["Urine osmolality","Low (dilute)","Low (dilute)","Low (dilute)","Low (dilute — same as DI)"],
+["Response to DDAVP","✅ YES — urine concentrates","❌ NO — kidney can't respond","✅ YES — DDAVP is vasopressinase-resistant","✅ YES (same as central DI)"],
+["Treatment","DDAVP (intranasal/oral)","Thiazides ± indomethacin","DDAVP (resolves postpartum)","Water restriction; psychiatric support"],
+]
+};
+
+// Standard render functions
+function renderFlashcards(){const g=document.getElementById('fcGrid');flashcards.forEach((fc,i)=>{g.innerHTML+=`<div class="fc" id="fc-${i}" onclick="flipCard(${i})"><div class="fc-inner"><div class="fc-front"><div class="fc-label">Question</div><div class="fc-q">${fc.q}</div><div class="fc-hint">Click to flip</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${fc.a.replace(/\n/g,'<br>')}</div></div></div></div>`;});}
+function flipCard(i){document.getElementById('fc-'+i).classList.toggle('flipped');}
+function renderMCQ(){const c=document.getElementById('mcqContainer');mcqs.forEach((q,qi)=>{let o=q.options.map((opt,oi)=>`<div class="mcq-opt" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${opt}</span></div><div class="mcq-explanation" id="exp-${qi}-${oi}"><div class="exp-label">${oi===q.correct?'✅ Correct':'❌ Incorrect'}</div>${q.explanations[oi]}</div>`).join('');c.innerHTML+=`<div class="mcq-item"><div class="mcq-num">Question ${qi+1}/${mcqs.length}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options">${o}</div><div class="teaching-pt" id="tp-${qi}"><div class="tp-label">🎯 Teaching Point</div>${q.teaching}</div></div>`;});}
+function selectOpt(qi,oi){const q=mcqs[qi];q.options.forEach((_,idx)=>{const el=document.getElementById(`opt-${qi}-${idx}`);el.classList.add('revealed');el.style.pointerEvents='none';if(idx===q.correct)el.classList.add('correct');else el.classList.add('wrong');document.getElementById(`exp-${qi}-${idx}`).classList.add('visible');});document.getElementById(`tp-${qi}`).classList.add('visible');}
+function renderVignettes(){const c=document.getElementById('vigContainer');vignettes.forEach((v,vi)=>{let o=v.options.map((opt,oi)=>`<div class="mcq-opt" id="vopt-${vi}-${oi}" onclick="selectVigOpt(${vi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${opt}</span></div><div class="mcq-explanation" id="vexp-${vi}-${oi}"><div class="exp-label">${oi===v.correct?'✅ Correct':'❌ Incorrect'}</div>${v.explanations[oi]}</div>`).join('');c.innerHTML+=`<div class="vig-item"><div class="vig-banner">🏥 ${v.banner}</div><div class="vig-stem">${v.stem}</div><p style="font-weight:600;color:#B2DFDB;margin-bottom:12px;font-size:0.93em;">${v.question}</p><div class="mcq-options">${o}</div><div class="teaching-pt" id="vtp-${vi}"><div class="tp-label">🎯 Teaching Point</div>${v.teaching}</div></div>`;});}
+function selectVigOpt(vi,oi){const v=vignettes[vi];v.options.forEach((_,idx)=>{const el=document.getElementById(`vopt-${vi}-${idx}`);el.classList.add('revealed');el.style.pointerEvents='none';if(idx===v.correct)el.classList.add('correct');else el.classList.add('wrong');document.getElementById(`vexp-${vi}-${idx}`).classList.add('visible');});document.getElementById(`vtp-${vi}`).classList.add('visible');}
+function renderTraps(){const c=document.getElementById('trapsContainer');traps.forEach(t=>{c.innerHTML+=`<div class="trap-item"><div class="trap-header">⚠️ ${t.title}</div><div class="trap-myth"><div class="trap-myth-label">❌ COMMON MISCONCEPTION</div>${t.myth}</div><div class="trap-truth"><div class="trap-truth-label">✅ WHAT'S ACTUALLY TRUE</div>${t.truth}</div></div>`;});}
+function renderFIB(){const c=document.getElementById('fibContainer');fibs.forEach((f,fi)=>{c.innerHTML+=`<div class="fib-item"><div class="fib-prompt">${f.prompt}</div><input class="fib-input" id="fib-input-${fi}" placeholder="Type your answer..."/><button class="fib-btn" onclick="checkFIB(${fi})">Check</button><div class="fib-result" id="fib-result-${fi}"></div></div>`;});}
+function checkFIB(fi){const inp=document.getElementById(`fib-input-${fi}`).value.trim().toLowerCase();const f=fibs[fi];const ok=f.answers.some(a=>inp.includes(a.toLowerCase()));const el=document.getElementById(`fib-result-${fi}`);el.className='fib-result '+(ok?'correct':'incorrect');el.textContent=ok?`✅ Correct! ${f.hint}`:`❌ Not quite. Hint: ${f.hint}`;}
+function renderRef(){const c=document.getElementById('refContainer');let h=`<table class="ref-table"><tr>`;refData.headers.forEach(hdr=>h+=`<th>${hdr}</th>`);h+='</tr>';refData.rows.forEach(row=>{h+='<tr>';row.forEach(cell=>{const cls=cell.includes('⭐')?'hl':'';h+=`<td class="${cls}">${cell}</td>`;});h+='</tr>';});h+='</table>';c.innerHTML=h;}
+renderFlashcards();renderMCQ();renderVignettes();renderTraps();renderFIB();renderRef();
+</script>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physiology Block Challenge | GUSOM Endocrine</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0D1117;--card:#161B22;--border:#30363D;--text:#E6EDF3;--muted:#8B949E;--green:#3FB950;--red:#F85149;--yellow:#D29922;--accent:#6E40C9}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+/* LOBBY */
+#lobby{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:32px;text-align:center}
+.lobby-badge{display:inline-block;padding:4px 14px;background:rgba(110,64,201,.25);color:#b08fff;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:.05em;margin-bottom:18px}
+.lobby-title{font-size:36px;font-weight:800;margin-bottom:8px}
+.lobby-sub{font-size:16px;color:var(--muted);margin-bottom:28px}
+.lobby-stats{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.stat-pill{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 24px;min-width:120px}
+.stat-num{font-size:26px;font-weight:800;color:var(--accent)}
+.stat-label{font-size:12px;color:var(--muted);margin-top:2px}
+.start-btn{background:var(--accent);color:#fff;border:none;border-radius:10px;padding:16px 40px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .2s;letter-spacing:.02em}
+.start-btn:hover{opacity:.88}
+.lecture-legend{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.lleg{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.lleg-dot{width:10px;height:10px;border-radius:50%}
+/* EXAM */
+#exam{display:none}
+.exam-header{position:sticky;top:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+.exam-title{font-size:14px;font-weight:600;color:var(--accent)}
+.timer{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text)}
+.timer.warn{color:var(--yellow)}
+.timer.crit{color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.qnum{font-size:13px;color:var(--muted)}
+.progress-bar{height:4px;background:var(--border)}
+.progress-fill{height:4px;background:var(--accent);transition:width .3s}
+.exam-body{max-width:820px;margin:0 auto;padding:32px}
+.q-block{margin-bottom:40px}
+.q-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.q-num-badge{background:var(--accent);color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.lecture-tag{font-size:11px;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:2px 8px;white-space:nowrap}
+.q-stem{font-size:15px;font-weight:600;line-height:1.7;color:var(--text);flex:1}
+.options{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.opt{background:#0D1117;border:1px solid var(--border);border-radius:8px;padding:11px 16px;text-align:left;color:var(--text);cursor:pointer;font-size:13px;font-family:'Inter',sans-serif;line-height:1.4;transition:all .2s;display:flex;gap:10px;align-items:flex-start}
+.opt:hover:not(:disabled){border-color:var(--accent);background:rgba(110,64,201,.1)}
+.opt.correct{border-color:var(--green)!important;background:rgba(63,185,80,.1)!important}
+.opt.wrong{border-color:var(--red)!important;background:rgba(248,81,73,.1)!important}
+.opt.reveal{border-color:rgba(63,185,80,.4)!important}
+.opt:disabled{cursor:default}
+.opt-letter{font-weight:700;color:var(--muted);min-width:18px}
+.expl{font-size:12px;color:var(--muted);margin-top:5px;display:none;line-height:1.5;padding-left:2px}
+.teach{background:rgba(110,64,201,.12);border:1px solid rgba(110,64,201,.35);border-radius:8px;padding:14px;margin-top:12px;font-size:13px;line-height:1.6;display:none;color:#C9D1D9}
+.teach strong{color:#b08fff}
+.divider{height:1px;background:var(--border);margin:32px 0}
+.submit-row{text-align:center;padding:32px 0 60px}
+.submit-btn{background:var(--green);color:#0D1117;border:none;border-radius:10px;padding:16px 40px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .2s}
+.submit-btn:hover{opacity:.88}
+/* RESULTS */
+#results{display:none;padding:40px 32px;max-width:820px;margin:0 auto}
+.score-hero{text-align:center;padding:40px;background:var(--card);border-radius:16px;border:1px solid var(--border);margin-bottom:32px}
+.score-num{font-size:64px;font-weight:900}
+.score-label{font-size:16px;color:var(--muted);margin-top:6px}
+.score-grade{font-size:24px;font-weight:700;margin-top:10px}
+.grade-A{color:var(--green)}
+.grade-B{color:#58A6FF}
+.grade-C{color:var(--yellow)}
+.grade-D{color:var(--red)}
+.stats-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.result-stat{flex:1;min-width:140px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center}
+.result-stat .n{font-size:28px;font-weight:800}
+.result-stat .l{font-size:12px;color:var(--muted);margin-top:4px}
+.by-lecture{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:28px}
+.by-lecture h3{font-size:14px;font-weight:700;margin-bottom:14px;color:var(--accent)}
+.lec-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.lec-name{font-size:12px;color:var(--muted);width:160px;flex-shrink:0}
+.lec-bar-wrap{flex:1;background:var(--border);border-radius:4px;height:8px}
+.lec-bar{height:8px;border-radius:4px;background:var(--green);transition:width .5s}
+.lec-pct{font-size:12px;color:var(--muted);width:36px;text-align:right}
+.review-section h3{font-size:16px;font-weight:700;margin-bottom:20px}
+.review-q{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:14px}
+.review-header{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.status-chip{padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.chip-correct{background:rgba(63,185,80,.2);color:var(--green)}
+.chip-wrong{background:rgba(248,81,73,.2);color:var(--red)}
+.chip-skip{background:rgba(210,153,34,.2);color:var(--yellow)}
+.back-lobby{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 24px;cursor:pointer;font-size:14px;font-weight:600;font-family:'Inter',sans-serif;margin-top:16px;display:block;margin:16px auto 0}
+</style>
+</head>
+<body>
+
+<!-- LOBBY -->
+<div id="lobby">
+  <div class="lobby-badge">PHYSIOLOGY BLOCK CHALLENGE</div>
+  <div class="lobby-title">All 6 Lectures • 40 Questions</div>
+  <div class="lobby-sub">Timed exam format · Mixed lecture difficulty · Detailed review after submission</div>
+  <div class="lobby-stats">
+    <div class="stat-pill"><div class="stat-num">40</div><div class="stat-label">Questions</div></div>
+    <div class="stat-pill"><div class="stat-num">50</div><div class="stat-label">Minutes</div></div>
+    <div class="stat-pill"><div class="stat-num">6</div><div class="stat-label">Lectures</div></div>
+    <div class="stat-pill"><div class="stat-num">75%</div><div class="stat-label">Target Score</div></div>
+  </div>
+  <button class="start-btn" onclick="startExam()">Start Block</button>
+  <div class="lecture-legend">
+    <div class="lleg"><div class="lleg-dot" style="background:#5C6BC0"></div>L1 HP Relationships I</div>
+    <div class="lleg"><div class="lleg-dot" style="background:#7B1FA2"></div>L2 HP Relationships II</div>
+    <div class="lleg"><div class="lleg-dot" style="background:#00897B"></div>L3 Posterior Pituitary</div>
+    <div class="lleg"><div class="lleg-dot" style="background:#1565C0"></div>L4 GH Axis</div>
+    <div class="lleg"><div class="lleg-dot" style="background:#E65100"></div>L5 HP Adrenal Axis</div>
+    <div class="lleg"><div class="lleg-dot" style="background:#C62828"></div>L6 Stress Integration</div>
+  </div>
+</div>
+
+<!-- EXAM -->
+<div id="exam">
+  <div class="exam-header">
+    <span class="exam-title">Physiology Block Challenge</span>
+    <div class="timer" id="timer">50:00</div>
+    <span class="qnum" id="qnum">0 / 40 answered</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+  <div class="exam-body" id="exam-body"></div>
+  <div class="submit-row"><button class="submit-btn" onclick="submitExam()">Submit Block</button></div>
+</div>
+
+<!-- RESULTS -->
+<div id="results">
+  <div class="score-hero">
+    <div class="score-num" id="score-num">—</div>
+    <div class="score-label">Score (correct / 40)</div>
+    <div class="score-grade" id="score-grade"></div>
+  </div>
+  <div class="stats-row" id="stats-row"></div>
+  <div class="by-lecture" id="by-lecture"></div>
+  <div class="review-section">
+    <h3>Question Review</h3>
+    <div id="review-container"></div>
+  </div>
+  <button class="back-lobby" onclick="location.reload()">← Back to Lobby</button>
+</div>
+
+<script>
+const TOTAL_TIME = 50 * 60; // 50 minutes
+let timeLeft = TOTAL_TIME;
+let timerInterval = null;
+let userAnswers = {};
+let examStarted = false;
+let submitted = false;
+
+const questions = [
+  // L1 — Hypothalamic-Pituitary Relationships I
+  {lec:1,color:"#5C6BC0",
+   stem:"Which hypothalamic nucleus is the primary site of GnRH synthesis and release for the control of the anterior pituitary reproductive axis?",
+   opts:["Supraoptic nucleus (SON)","Paraventricular nucleus (PVN)","Arcuate nucleus (ARC)","Suprachiasmatic nucleus (SCN)","Dorsomedial nucleus (DMN)"],
+   correct:2,
+   expls:["SON: primarily ADH and oxytocin (magnocellular)","PVN: primarily CRH, TRH, and also ADH/OT; not the primary GnRH source","Correct! The arcuate nucleus is the primary source of GnRH (also kisspeptin) that drives the hypothalamic-pituitary-gonadal axis","SCN: circadian rhythm regulation, not primarily GnRH","DMN: involved in feeding/autonomic regulation, not GnRH"],
+   teach:"<strong>Key:</strong> Arcuate nucleus → GnRH → anterior pituitary. PVN → CRH + TRH + vasopressin. SON → ADH + OT (magnocellular neurons projecting to posterior pituitary)."},
+  {lec:1,color:"#5C6BC0",
+   stem:"A neurosurgeon accidentally severs the pituitary stalk. Which single hormone would be expected to INCREASE after stalk section, while all others decrease?",
+   opts:["GH","TSH","LH","Prolactin","ACTH"],
+   correct:3,
+   expls:["GH decreases — loses hypothalamic GHRH stimulation","TSH decreases — loses TRH stimulation","LH decreases — loses GnRH stimulation","Correct! Prolactin uniquely increases because the stalk carries DOPAMINE (prolactin-inhibiting hormone, PIH) from hypothalamus to anterior pituitary. Cutting the stalk removes dopamine → uninhibited prolactin secretion","ACTH decreases — loses CRH stimulation"],
+   teach:"<strong>Dopamine = PIH (prolactin-inhibiting hormone)</strong>: This is the only anterior pituitary hormone under primary INHIBITORY hypothalamic control. All others are primarily stimulated. Classic high-yield exam point: stalk section or dopamine antagonists (antipsychotics) → hyperprolactinemia."},
+  {lec:1,color:"#5C6BC0",
+   stem:"The hypothalamic-pituitary portal system differs from systemic circulation in that hypothalamic releasing hormones reach the anterior pituitary at concentrations approximately:",
+   opts:["Equal to systemic concentrations — no difference","10× higher than systemic concentrations","100-1000× higher than if released into systemic circulation","Lower than systemic concentrations due to dilution","Completely variable — portal system concentration is irrelevant"],
+   correct:2,
+   expls:["Incorrect — the portal system creates a significant concentration gradient","10× may be an underestimate — the key concept is orders-of-magnitude higher concentrations","Correct! The portal system delivers hypothalamic hormones in very high concentrations directly to the anterior pituitary, avoiding systemic dilution. This is why microgram quantities of releasing hormones can effectively control anterior pituitary function","Incorrect — portal system concentrates, not dilutes","Concentration IS the entire physiological rationale for the portal system"],
+   teach:"<strong>Portal system purpose:</strong> Hypothalamic hormones are released into the median eminence → portal capillaries → anterior pituitary. Bypassing systemic circulation means 100-1000× higher local concentrations at the target. This allows very small peptide quantities to exert powerful control."},
+  {lec:1,color:"#5C6BC0",
+   stem:"Which pairing of hypothalamic releasing hormone and its anterior pituitary target is INCORRECT?",
+   opts:["CRH → ACTH from corticotropes","TRH → TSH from thyrotropes","GHRH → GH from somatotropes","GnRH → prolactin from lactotropes","Somatostatin → inhibition of GH and TSH"],
+   correct:3,
+   expls:["Correct pairing","Correct pairing — TRH also stimulates prolactin (minor effect)","Correct pairing","INCORRECT pairing! GnRH acts on GONADOTROPES to stimulate LH and FSH. Prolactin is primarily under dopaminergic (PIH) inhibitory control, not GnRH","Correct — somatostatin inhibits both GH and TSH secretion"],
+   teach:"<strong>GnRH → LH + FSH (gonadotropes)</strong> — not prolactin. Prolactin control is unique: primarily dopamine INHIBITION. Note: TRH does mildly stimulate prolactin, which is why hypothyroidism can cause mild hyperprolactinemia."},
+  // L2 — Hypothalamic-Pituitary Relationships II
+  {lec:2,color:"#7B1FA2",
+   stem:"A 28-year-old woman has irregular cycles. Serum LH is very high, FSH is mildly elevated, estradiol is elevated (280 pg/mL). She is mid-cycle. This estradiol-LH pattern best demonstrates:",
+   opts:["Long-loop negative feedback suppressing pituitary","Short-loop feedback from LH inhibiting hypothalamus","Ultrashort feedback within the pituitary","Positive feedback — high estradiol triggering the LH surge","Loss of GnRH pulsatility from chronic high estrogen"],
+   correct:3,
+   expls:["Incorrect — negative feedback would SUPPRESS LH, not elevate it","Short-loop: LH feeds back on hypothalamus — not the description here","Ultrashort: anterior pituitary hormones feedback within the pituitary itself","Correct! Mid-cycle estradiol surge (sustained >200 pg/mL for >36h) REVERSES to positive feedback on the pituitary gonadotropes → massive LH surge → ovulation trigger. This is the classic exception to negative feedback.","This would suppress GnRH and LH — opposite of what's described"],
+   teach:"<strong>Positive feedback exception:</strong> Normally estradiol suppresses LH (negative feedback). But when estradiol is HIGH (>200 pg/mL) and SUSTAINED (>36 hours), it switches to positive feedback → LH surge → ovulation. This is the ONLY significant positive feedback in the HPG axis."},
+  {lec:2,color:"#7B1FA2",
+   stem:"Anterior pituitary acidophils stain with acidic dyes. Which two hormones are produced by acidophilic cells?",
+   opts:["ACTH and TSH","FSH and LH","GH and Prolactin","Prolactin and ACTH","MSH and beta-endorphin"],
+   correct:2,
+   expls:["ACTH: basophil. TSH: basophil","FSH/LH: basophils (gonadotropes)","Correct! GH (from somatotropes) and Prolactin (from lactotropes) are both made by ACIDOPHILIC cells. Mnemonic: 'GPA' — Growth hormone, Prolactin = Acidophils","Prolactin is acidophilic; ACTH is basophilic","MSH and beta-endorphin are POMC cleavage products made by corticotropes (basophils)"],
+   teach:"<strong>Mnemonic: GPA</strong> — GH and Prolactin = Acidophils. All others (ACTH, TSH, FSH, LH) = Basophils. Chromophobes = degranulated or non-secretory. Board question: 'What cells make up most anterior pituitary?' — Chromophobes (~50%), then acidophils (~40%), basophils (~10%)."},
+  {lec:2,color:"#7B1FA2",
+   stem:"GnRH must be released in a PULSATILE pattern to maintain gonadotropin secretion. Continuous GnRH administration has which effect?",
+   opts:["Sustained high LH and FSH — ideal for fertility treatment","Paradoxical downregulation of GnRH receptors → suppression of LH/FSH","Increased pulse frequency of GnRH → increased FSH preferentially","Switch to positive feedback on estradiol production","No effect — receptor saturation maintains steady secretion"],
+   correct:1,
+   expls:["Incorrect — this is a critical misconception. Continuous GnRH → receptor downregulation → hormone suppression","Correct! Continuous GnRH paradoxically downregulates (desensitizes) GnRH receptors on gonadotropes → ↓ LH/FSH → ↓ sex steroids. GnRH agonists used therapeutically to suppress sex hormone production (prostate cancer, endometriosis, central precocious puberty)","Incorrect — pulsatility determines LH vs. FSH ratio (faster pulses → LH; slower → FSH), but continuous = suppression","Incorrect — this is not the mechanism of continuous GnRH","Receptor saturation actually leads to downregulation, not steady response"],
+   teach:"<strong>GnRH agonist paradox:</strong> Leuprolide (GnRH agonist) given continuously → medical castration. This exploits pulsatile requirement. Used for: central precocious puberty (to delay it), prostate cancer (↓ testosterone), endometriosis (↓ estrogen). First 1-2 weeks: testosterone flare; then suppression."},
+  {lec:2,color:"#7B1FA2",
+   stem:"A 19-year-old female college cross-country runner presents with amenorrhea (8 months), stress fractures, and a BMI of 17.2. LH and FSH are both low. Serum cortisol is elevated. What is the primary mechanism of her amenorrhea?",
+   opts:["Primary ovarian failure from stress-induced oocyte apoptosis","Elevated prolactin inhibiting GnRH pulses","Chronic cortisol suppression of HPG axis at hypothalamic and pituitary levels","Elevated androgens from adrenal stress response suppressing LH surge","Direct estrogen deficiency suppressing the endometrium without HPG involvement"],
+   correct:2,
+   expls:["Low LH/FSH indicates central suppression, not primary ovarian failure (which would show HIGH LH/FSH)","Prolactin is not mentioned as elevated; while hyperprolactinemia can suppress GnRH, this is not the primary mechanism here","Correct! Chronic cortisol elevation (from undernutrition + exercise stress) suppresses GnRH pulsatility at the hypothalamus and blunts LH/FSH response at the pituitary → functional hypothalamic amenorrhea. This is the Female Athlete Triad.","Adrenal stress doesn't primarily cause androgen-mediated LH suppression in this context","HPG suppression IS the mechanism; estrogen deficiency is the consequence, not the cause"],
+   teach:"<strong>Female Athlete Triad:</strong> Energy deficiency + amenorrhea + low bone density. Mechanism: ↑ cortisol + ↓ nutrition → ↓ GnRH pulses → ↓ LH/FSH → ↓ estrogen → amenorrhea + osteoporosis. Low LH/FSH = central cause."},
+  // L3 — Posterior Pituitary / ADH
+  {lec:3,color:"#00897B",
+   stem:"A 25-year-old man presents with polyuria (12 L/day) and polydipsia. Serum Na is 148 mEq/L (high), serum osmolality 305 mOsm/kg (high), urine osmolality 80 mOsm/kg (very dilute). Desmopressin (DDAVP) administration raises urine osmolality to 550 mOsm/kg. What is the diagnosis?",
+   opts:["Nephrogenic diabetes insipidus","Primary polydipsia (psychogenic)","Central (neurogenic) diabetes insipidus","Gestational diabetes insipidus","Type 2 diabetes mellitus"],
+   correct:2,
+   expls:["Nephrogenic DI: kidneys don't respond to ADH. DDAVP would NOT raise urine osmolality in nephrogenic DI.","Primary polydipsia: serum osmolality would be LOW (diluted from excess water drinking), not HIGH","Correct! Central DI: lack of ADH production/release from posterior pituitary. High serum osmolality + very dilute urine. DDAVP (synthetic ADH) works because kidneys are intact → urine concentrates. Response to DDAVP = central DI.","Gestational DI: increased vasopressinase during pregnancy; DDAVP (resistant to vasopressinase) would also work, but this patient is a 25-year-old man","No glycosuria is mentioned; DM causes osmotic diuresis from glucose, not ADH deficiency"],
+   teach:"<strong>DI diagnostic algorithm:</strong> High serum osmolality + dilute urine → DI. Then: DDAVP test. Response (urine concentrates) = Central DI. No response = Nephrogenic DI. Primary polydipsia: low/normal serum osmolality, urine concentrates after water deprivation."},
+  {lec:3,color:"#00897B",
+   stem:"Vasopressin (ADH) acts on V2 receptors in the collecting duct. Which signaling cascade is activated, and what is the final effector molecule?",
+   opts:["Gq → PLC → IP3/DAG → PKC → increased paracellular permeability","Gs → adenylyl cyclase → cAMP → PKA → AQP2 vesicle insertion into apical membrane","Gi → decreased cAMP → decreased AQP2 → water diuresis","Gs → cAMP → direct AQP2 gene transcription without vesicle insertion","Tyrosine kinase receptor → JAK/STAT → long-term AQP2 upregulation"],
+   correct:1,
+   expls:["Gq/PLC is the V1a receptor pathway (vasoconstriction). V2 receptors use Gs, not Gq.","Correct! V2R → Gs → adenylyl cyclase → ↑cAMP → PKA activation → phosphorylation of AQP2-containing vesicles → vesicle fusion with apical membrane → ↑ water permeability. Rapid action (minutes).","Gi would decrease cAMP → oppose ADH action. This is not V2R signaling.","cAMP does drive long-term AQP2 gene transcription, but the ACUTE (rapid) response is vesicle insertion, not transcription.","JAK/STAT is cytokine receptor signaling; not relevant to vasopressin V2 action"],
+   teach:"<strong>V2R = Gs = cAMP = AQP2 insertion</strong> (rapid). V1aR = Gq = vasoconstriction. V1bR (V3) = Gq = ACTH release. DDAVP: selective V2 agonist (no V1a activity) → treats central DI without vasoconstriction. Tolvaptan: V2 antagonist → aquaretic used in SIADH."},
+  {lec:3,color:"#00897B",
+   stem:"In a healthy person, which serum osmolality threshold first triggers ADH (vasopressin) release, and which higher threshold triggers the thirst mechanism?",
+   opts:["ADH: 295 mOsm/kg; Thirst: 300 mOsm/kg","ADH: 280 mOsm/kg; Thirst: 285-290 mOsm/kg","ADH: 280 mOsm/kg; Thirst: 295-300 mOsm/kg","ADH: 270 mOsm/kg; Thirst: 280 mOsm/kg","Both triggered simultaneously at 290 mOsm/kg"],
+   correct:2,
+   expls:["The numbers are reversed — ADH threshold is LOWER than thirst threshold","Close but slightly off — thirst threshold is higher than 285-290 (closer to 295-300)","Correct! ADH release begins at ~280 mOsm/kg (early defense). Thirst is triggered at ~295-300 mOsm/kg (backup). This tiered system means kidneys respond first; behavioral water-seeking is the last resort.","ADH threshold of 270 is too low","They are not simultaneous — ADH is the earlier, more sensitive response"],
+   teach:"<strong>Osmoregulation hierarchy:</strong> 280 mOsm/kg → ADH release (kidneys concentrate urine). 295 mOsm/kg → thirst (behavioral response). The lower ADH threshold = kidneys are the first line of defense. If ADH fails → thirst + drinking compensates. This is why patients with central DI drink enormous amounts to compensate."},
+  {lec:3,color:"#00897B",
+   stem:"Oxytocin differs from vasopressin in its primary physiological roles. Which of the following is a function of OXYTOCIN specifically?",
+   opts:["Concentrating urine by inserting AQP2 in collecting duct","Vasoconstriction via V1a receptors in vascular smooth muscle","Stimulating milk PRODUCTION in mammary gland alveolar cells","Stimulating milk EJECTION (let-down) by contracting mammary myoepithelial cells","Regulating blood osmolality via hypothalamic osmoreceptors"],
+   correct:3,
+   expls:["AQP2 insertion = vasopressin (ADH) via V2 receptors. Not oxytocin.","Vasoconstriction via V1aR = vasopressin. Oxytocin has some V1a homology but vasoconstriction is primarily vasopressin's role.","Milk PRODUCTION = prolactin (from anterior pituitary). A classic distinction: oxytocin vs. prolactin.","Correct! Oxytocin stimulates myoepithelial cells in the mammary gland to contract → milk EJECTION (let-down reflex). Prolactin stimulates milk SYNTHESIS/production.","Osmolality regulation = vasopressin via hypothalamic osmoreceptors. Oxytocin is primarily volume/stretch/social stimulus-triggered."],
+   teach:"<strong>Oxytocin vs Prolactin:</strong> Oxytocin = milk EJECTION (let-down); also uterine contractions, social bonding. Prolactin = milk PRODUCTION (synthesis). Both are needed for breastfeeding — but different roles. Oxytocin also triggers uterine contractions in labor (Ferguson reflex = positive feedback stretch → more OT)."},
+  // L4 — Growth Hormone Axis
+  {lec:4,color:"#1565C0",
+   stem:"GH has 'dual roles' depending on nutritional state. In the FED state, GH primarily acts as:",
+   opts:["Diabetogenic hormone — blocks glucose uptake in all tissues","Lipolytic hormone — breaks down fat to fuel the brain","Anabolic hormone — working with insulin to promote protein synthesis and cell growth","Counter-regulatory hormone opposing insulin in glucose regulation","Anti-inflammatory hormone suppressing cytokines"],
+   correct:2,
+   expls:["The diabetogenic effect is a FASTING-state effect. Fed-state GH is anabolic with insulin.","Lipolysis is a fasting-state GH effect.","Correct! In the FED state, GH + insulin work synergistically: GH drives protein synthesis in muscle and promotes IGF-1-mediated anabolic effects. GH = 'anabolic hormone' in fed state.","Counter-regulatory effects are in FASTING — opposing insulin to maintain blood glucose.","Not a primary GH function."],
+   teach:"<strong>GH dual roles:</strong> FED = anabolic (with insulin → protein synthesis, cell growth). FASTING = diabetogenic/glucose-sparing (blocks glucose uptake in muscle/fat, drives lipolysis, maintains blood glucose for brain). Key: INSULIN IS REQUIRED for IGF-1 production by the liver — explaining why malnourished children have low IGF-1 despite high GH."},
+  {lec:4,color:"#1565C0",
+   stem:"A 14-year-old boy has been growing at 3 cm/year (vs. normal 5-7 cm/year) since age 8. Labs: GH undetectable after stimulation testing; IGF-1 very low. His parents are of normal height. Growth plates are open. What is the diagnosis and treatment?",
+   opts:["Laron syndrome — treat with recombinant IGF-1","Constitutional growth delay — reassurance only","GH deficiency (pituitary dwarfism) — treat with recombinant GH","Laron syndrome — treat with recombinant GH","Nutritional short stature — caloric supplementation"],
+   correct:2,
+   expls:["Laron syndrome: high GH + low IGF-1 + GH receptor defect. This patient has LOW GH — opposite of Laron.","Constitutional delay: normal variant, growth plates open, bone age delayed but catch-up occurs. GH would be normal.","Correct! Low GH (fails stimulation test) + low IGF-1 = GH deficiency (pituitary/hypothalamic origin). Treat with recombinant GH while growth plates are open to restore normal growth velocity.","Laron syndrome has HIGH GH because receptor is broken → no feedback. Wrong diagnosis.","Normal parents, open plates, very low GH on stimulation → this is a GH deficiency, not nutritional."],
+   teach:"<strong>Distinction: GH deficiency vs. Laron syndrome:</strong> GH deficiency → low GH + low IGF-1 → treat with GH. Laron syndrome → HIGH GH + low IGF-1 → GH receptor defect → GH doesn't work → treat with recombinant IGF-1 (not GH). Both present similarly but opposite GH levels."},
+  {lec:4,color:"#1565C0",
+   stem:"The gold standard test to diagnose ACROMEGALY (GH excess in an adult) is:",
+   opts:["Single random GH level — GH > 10 ng/mL diagnostic","IGF-1 level alone — IGF-1 > 2 standard deviations above mean","Oral glucose tolerance test (OGTT) — failure of GH to suppress below 1 ng/mL is diagnostic","MRI pituitary with gadolinium — visualization of adenoma is diagnostic","Insulin tolerance test — peak GH response confirms excess"],
+   correct:2,
+   expls:["Random GH is unreliable — GH is pulsatile and may be normal between pulses even in acromegaly","IGF-1 is a good screening test but not the confirmatory gold standard","Correct! OGTT gold standard: glucose normally SUPPRESSES GH. In acromegaly (autonomous GH secretion), glucose fails to suppress GH below 1 ng/mL (or 0.4 ng/mL by some criteria). This confirms autonomous excess.","MRI finds the adenoma but doesn't biochemically confirm GH excess — an adenoma could be non-functional","ITT tests for GH DEFICIENCY, not excess; and is used for pituitary insufficiency evaluation"],
+   teach:"<strong>Acromegaly diagnosis:</strong> Screen with IGF-1. Confirm with OGTT → GH should suppress (<1 ng/mL) with glucose load. If it doesn't suppress = autonomous GH secretion = acromegaly. Then MRI to find the adenoma. Also: acromegaly = post-epiphyseal closure; gigantism = pre-closure."},
+  {lec:4,color:"#1565C0",
+   stem:"A pituitary adenoma compresses the optic chiasm. The classic visual field defect is:",
+   opts:["Right homonymous hemianopsia","Left superior quadrantanopsia","Bitemporal hemianopsia","Central scotoma","Monocular blindness (right eye only)"],
+   correct:2,
+   expls:["Homonymous hemianopsia = retrochiasmal lesion (optic tract/radiation, occipital cortex)","Superior quadrantanopsia = lesion in temporal lobe (Meyer's loop) or optic radiation","Correct! The optic chiasm carries nasal fibers (from temporal visual fields) that CROSS. Chiasm compression → loss of both nasal fiber groups → bitemporal hemianopsia (loss of peripheral/side vision in BOTH eyes). Classic presentation of pituitary macroadenoma.","Central scotoma = optic nerve or macular disease","Monocular blindness = optic nerve anterior to chiasm"],
+   teach:"<strong>Visual field anatomy at chiasm:</strong> Nasal retinal fibers (seeing the temporal visual field) CROSS at the chiasm. Chiasm compression (pituitary tumor, craniopharyngioma) → bilateral temporal field loss = bitemporal hemianopsia. Classic 'can't see the sides while looking straight ahead.'"},
+  // L5 — Hypothalamic-Pituitary-Adrenal Axis
+  {lec:5,color:"#E65100",
+   stem:"The adrenal cortex is organized into three zones with distinct products. Which zone/product pairing is CORRECT?",
+   opts:["Zona glomerulosa → glucocorticoids (cortisol)","Zona fasciculata → mineralocorticoids (aldosterone)","Zona reticularis → androgens (DHEA/androstenedione)","Zona fasciculata → androgens","Zona glomerulosa → androgens"],
+   correct:2,
+   expls:["Zona glomerulosa → MINERALOCORTICOIDS (aldosterone). Mnemonic GFR = Salt (Glom), Sugar (Fasc), Sex (Retic)","Zona fasciculata → GLUCOCORTICOIDS (cortisol), not mineralocorticoids","Correct! Zona reticularis → androgens (DHEA, androstenedione). GFR: Salt/Sugar/Sex from outside in.","Zona fasciculata → cortisol (glucocorticoids), not androgens","Zona glomerulosa → aldosterone (mineralocorticoids), not androgens"],
+   teach:"<strong>GFR mnemonic (outside → inside):</strong> Glomerulosa = aldosterone (Salt). Fasciculata = cortisol (Sugar). Reticularis = androgens (Sex). 'The deeper you go, the sweeter it gets.' Medulla = catecholamines (epinephrine/NE)."},
+  {lec:5,color:"#E65100",
+   stem:"A patient is found to have a cortisol-secreting adrenal adenoma. Which combination of lab findings is most consistent?",
+   opts:["Low cortisol, high ACTH, hyperpigmentation","High cortisol, high ACTH, no hyperpigmentation","High cortisol, low ACTH, no hyperpigmentation","High cortisol, low ACTH, with hyperpigmentation","Low ACTH, low cortisol, hyperkalemia"],
+   correct:2,
+   expls:["Low cortisol + high ACTH = primary adrenal insufficiency (Addison's)","High cortisol + high ACTH = Cushing's DISEASE (pituitary adenoma) or ectopic ACTH; the adrenal adenoma here is autonomous","Correct! Adrenal adenoma secretes cortisol autonomously → long-loop negative feedback suppresses ACTH → LOW ACTH. No melanocyte stimulation (ACTH drives pigmentation) → NO hyperpigmentation. This is Cushing's SYNDROME (adrenal cause), not Cushing's Disease.","Hyperpigmentation requires high ACTH → only in ACTH-dependent causes","Low ACTH + low cortisol would suggest pituitary failure (secondary AI), not autonomous adrenal excess"],
+   teach:"<strong>Cushing's Disease vs Syndrome:</strong> Disease = pituitary adenoma → high ACTH → high cortisol (bilateral adrenal hyperplasia). Syndrome = adrenal cause or exogenous steroid → high cortisol → negative feedback suppresses ACTH → low ACTH. Hyperpigmentation only in ACTH-excess states (ACTH has some MSH activity)."},
+  {lec:5,color:"#E65100",
+   stem:"POMC (proopiomelanocortin) is cleaved in corticotrope cells to produce multiple hormones. Which set of POMC products is CORRECTLY listed?",
+   opts:["ACTH, FSH, LH, and MSH","ACTH, β-endorphin, MSH, and β-lipotropin","ACTH, GH, prolactin, and MSH","CRH, ACTH, and cortisol","ACTH, vasopressin, and CRH"],
+   correct:1,
+   expls:["FSH and LH are not POMC products — they are made by gonadotropes from separate genes","Correct! POMC → ACTH + β-endorphin + MSH (α, β, γ) + β-lipotropin. MSH is completely contained within the ACTH sequence. These are all co-released with ACTH from corticotropes.","GH and prolactin are separate anterior pituitary hormones, not POMC products","CRH is made in the hypothalamus; cortisol is made in the adrenal — neither is a POMC product","Vasopressin and CRH are hypothalamic; not POMC cleavage products"],
+   teach:"<strong>POMC = Big Pre-cursor:</strong> One gene produces many peptides by differential cleavage. In anterior pituitary corticotropes: ACTH (39 aa) + β-endorphin (opioid) + β-lipotropin + MSH. MSH is contained within ACTH sequence → excess ACTH has some MSH receptor activity → hyperpigmentation in Addison's disease."},
+  {lec:5,color:"#E65100",
+   stem:"A patient presents with fatigue, hypotension, hyponatremia, hyperkalemia, weight loss, and hyperpigmentation. Morning cortisol is very low; ACTH is very high. This presentation is MOST consistent with:",
+   opts:["Secondary adrenal insufficiency from pituitary failure","Cushing's syndrome from an adrenal adenoma","Primary adrenal insufficiency (Addison's disease)","Ectopic ACTH syndrome from small cell lung cancer","Congenital adrenal hyperplasia"],
+   correct:2,
+   expls:["Secondary AI: pituitary fails → low ACTH + low cortisol. Electrolytes less affected (aldosterone still intact). No hyperpigmentation.","Cushing's: high cortisol, not low. Opposite presentation.","Correct! Addison's: adrenal destruction → low cortisol + high ACTH (no negative feedback). Mineralocorticoid loss → hyponatremia + hyperkalemia + hypotension. ACTH excess → MSH receptor stimulation → hyperpigmentation. Autoimmune is most common cause.","Ectopic ACTH: very HIGH cortisol from excess ACTH → Cushing's features, not adrenal insufficiency","CAH: enzymatic defect in steroid synthesis — presenting more in neonates; specific enzyme pattern"],
+   teach:"<strong>Addison's vs Secondary AI:</strong> Both have low cortisol. Addison's (primary): high ACTH, hyperpigmentation, hyperkalemia, hyponatremia (aldosterone also lost). Secondary (pituitary): low ACTH, no hyperpigmentation, electrolytes relatively preserved (aldosterone axis still intact because it's mainly RAAS-controlled)."},
+  {lec:5,color:"#E65100",
+   stem:"A patient takes exogenous prednisone (synthetic glucocorticoid) for 3 months, then abruptly stops. Which is the most dangerous immediate complication?",
+   opts:["Rebound hypercortisolism — adrenal glands over-secreting cortisol","Addisonian crisis — adrenal insufficiency from HPA axis suppression","Cushing's syndrome — persistent steroid effects after stopping","Acute aldosterone excess — sodium and water retention","Thyroid storm — HPA suppression releases TSH feedback"],
+   correct:1,
+   expls:["Rebound hypercortisolism does not occur — the adrenal glands are ATROPHIED from suppression, not primed to over-secrete","Correct! Chronic exogenous glucocorticoids → suppress CRH/ACTH → adrenal cortex atrophies. Abrupt stop → HPA axis cannot produce cortisol quickly enough → adrenal crisis: hypotension, hypoglycemia, electrolyte disturbances. Life-threatening.","Cushing's features will fade after stopping — but the acute danger is insufficiency, not excess","Aldosterone axis (RAAS-controlled) is relatively preserved; acute stop does not cause aldosterone excess","Thyroid axis is independent of this mechanism"],
+   teach:"<strong>Steroid taper rule:</strong> Patients on chronic steroids (>2-3 weeks at significant doses) must be TAPERED slowly to allow HPA axis recovery. Abrupt cessation → adrenal crisis. Also: patients on steroids need stress dosing during surgery/illness ('sick day rules'). This is a major clinical safety issue."},
+  {lec:5,color:"#E65100",
+   stem:"Licorice ingestion has been associated with hypertension and hypokalemia, mimicking hyperaldosteronism. The mechanism involves inhibition of which enzyme?",
+   opts:["CYP11B1 (11β-hydroxylase) — blocking cortisol synthesis","3β-HSD — blocking pregnenolone conversion","11β-HSD2 — allowing cortisol to act on mineralocorticoid receptors in the kidney","Aldosterone synthase (CYP11B2) — directly reducing aldosterone","17α-hydroxylase — shunting to mineralocorticoid pathway"],
+   correct:2,
+   expls:["CYP11B1 inhibition would cause androgen excess (CAH) and REDUCE cortisol/mineralocorticoids — not hypertension","3β-HSD inhibition blocks early steroidogenesis — not the licorice mechanism","Correct! 11β-HSD2 in kidney converts cortisol → cortisone, preventing cortisol from binding MR. Licorice (glycyrrhizin) INHIBITS 11β-HSD2 → cortisol accumulates in kidney → cortisol acts on MR (it has equal MR affinity) → pseudoaldosteronism: hypertension, hypokalemia, low renin, low aldosterone","Aldosterone synthase inhibition would cause aldosterone deficiency (hypotension, hyperkalemia) — opposite","17α-hydroxylase inhibition blocks cortisol/androgen synthesis, not related to licorice mechanism"],
+   teach:"<strong>11β-HSD2 is the kidney's cortisol 'guard':</strong> Normally inactivates cortisol → cortisone before it can bind MR. Licorice inhibits this → excess cortisol acts on MR → pseudohyperaldosteronism. Same mechanism in apparent mineralocorticoid excess (AME) syndrome (genetic 11β-HSD2 deficiency). Treatment: stop licorice; spironolactone for symptoms."},
+  // L6 — Stress Integration
+  {lec:6,color:"#C62828",
+   stem:"A soldier describes an 8-month deployment: first month was overwhelming (poor sleep, rapid heart rate, high stress). Months 2-7 he adapted and 'felt functional.' Month 8 he became exhausted, couldn't recover from minor illnesses, and felt 'burned out.' This trajectory maps onto which model?",
+   opts:["The Reactive Scope Model — predictive → reactive → overload","General Adaptation Syndrome — Alarm → Resistance → Exhaustion","Allostasis — shifting set points through change","Homeostatic failure — fixed set points exceeded","The SAM axis timeline — seconds → minutes → hours"],
+   correct:1,
+   expls:["Reactive Scope describes hormone concentration zones, not time course of adaptation stages","Correct! GAS (Selye): Month 1 = Alarm (initial overwhelm, resistance lowest). Months 2-7 = Resistance (adaptation, body coping). Month 8 = Exhaustion (reserves depleted, can't sustain response). Classic 3-stage progression.","Allostasis is the concept of set point shifting, not specifically the 3-stage progression described","Homeostatic failure is the terminal state in Reactive Scope model, not a 3-stage time course","SAM axis is about seconds-to-minutes rapid response — not an 8-month adaptation narrative"],
+   teach:"<strong>GAS timeline:</strong> Named by Hans Selye based on rat experiments. The model is descriptive and applies to virtually any sustained stressor (occupational, military, relationship, illness). Key insight: the stress response itself has a finite capacity — the body cannot mount an infinite adaptive response."},
+  {lec:6,color:"#C62828",
+   stem:"Which property of cortisol explains why chronic stress impairs wound healing and increases risk of skin infection?",
+   opts:["Cortisol reduces EPO production → anemia → reduced oxygen delivery","Cortisol inhibits fibroblast activity and connective tissue production (collagen synthesis)","Cortisol directly lyses neutrophils at the wound site","Cortisol reduces aldosterone → hyponatremia → impaired cell membrane integrity","Cortisol upregulates osteoclast activity → calcium mobilization impairs wound repair"],
+   correct:1,
+   expls:["Cortisol actually stimulates EPO and RBC production — to increase oxygen delivery for the stress response","Correct! Cortisol inhibits fibroblasts → less collagen, ECM proteins (proteoglycans, glycosaminoglycans) produced. Also suppresses T-cells and antibody production → impaired immune defense. Combined: poor wound healing + susceptibility to infection. This is why Cushing's patients have thin, fragile skin and striae.","Cortisol's immune effect is on lymphocytes/T-cells, not direct neutrophil lysis","Aldosterone regulation is separate — cortisol doesn't primarily reduce aldosterone (RAAS controls aldosterone)","Osteoclast activation impairs bone, not wound repair through this mechanism"],
+   teach:"<strong>Glucocorticoid effects on skin/connective tissue:</strong> Inhibition of fibroblasts → less ECM → thin skin, striae, poor wound healing, easy bruising. This is why chronic steroid users (or Cushing's patients) have fragile, thin skin. Striae = skin stretched with inadequate collagen support."},
+  {lec:6,color:"#C62828",
+   stem:"In the Reactive Scope Model, predictive homeostasis is said to be 'influenced by predictability.' A patient undergoes pre-surgical counseling and detailed preparation for a major operation. What physiological prediction does this model make about their cortisol response DURING surgery compared to an unprepared patient?",
+   opts:["No difference — surgical incision is a stressor regardless of preparation","Higher cortisol — preparation increases anxiety and sensitizes the HPA axis","Lower cortisol surge — predictive homeostasis allows pre-set adjustments, reducing the reactive response needed","Complete blunting of cortisol — preparation eliminates the stress response","Variable — predictability affects epinephrine only, not cortisol"],
+   correct:2,
+   expls:["Not supported — research shows preparation does modulate the stress response","Preparation-related sensitization is not the prediction of the model; the model predicts the opposite","Correct! If a stressor is predictable and anticipated, the body can pre-set its baseline (predictive homeostasis zone) before the stressor arrives. The 'reactive' excursion needed is smaller. Better-prepared patients typically show blunted cortisol surges. This is the physiological basis of surgical pre-hab, pre-op counseling, and mental preparation in athletes.","Complete blunting is unrealistic — a surgical incision still triggers stress hormones","The Reactive Scope model explicitly applies to hormones broadly — not limited to epinephrine"],
+   teach:"<strong>Clinical application:</strong> Predictability = smaller stress response. This is why: pre-op counseling ↓ anesthesia requirements; elite athletes show smaller cortisol spikes from training they've mastered; graduated exposure therapy works for anxiety disorders. The 'alarm' response is modulated by cognitive/predictive inputs."},
+  {lec:6,color:"#C62828",
+   stem:"A 45-year-old patient with PTSD from a severe car accident develops impaired episodic memory and cognitive difficulties 3 years after the event. MRI shows bilateral hippocampal volume loss. Serum cortisol remains persistently elevated. Which mechanism most directly explains the hippocampal findings?",
+   opts:["Cortisol-driven chronic sympathetic activation → cerebral vasoconstriction → ischemic atrophy","Chronic GR overstimulation in hippocampus → dendritic retraction, impaired neurogenesis, neuronal apoptosis","ACTH receptor activation in the hippocampus causes direct neurotoxicity","Cortisol-mediated suppression of IGF-1 → reduced hippocampal trophic support","Loss of long-loop feedback from hippocampus → ACTH excess damages hippocampal cells"],
+   correct:1,
+   expls:["Chronic sympathetic activation causes cardiovascular effects; cerebral ischemic atrophy from hypertension is possible but NOT the direct GR-mediated mechanism described here","Correct! The hippocampus has the highest GR density in the brain. Chronic cortisol → sustained GR activation → dendritic retraction (dendrites shrink), impaired neurogenesis in dentate gyrus, and eventually cell death. This is the molecular basis of PTSD and depression-associated hippocampal volume loss.","ACTH receptors (MC2R) are not significantly expressed in hippocampal neurons; this is not the mechanism","IGF-1 suppression is a cortisol effect, but this is not the primary mechanism of hippocampal atrophy","ACTH does not have direct neurotoxic effects on hippocampus in this way"],
+   teach:"<strong>PTSD/hippocampus connection:</strong> Chronic hypercortisolemia → hippocampal atrophy → impaired memory, impaired fear extinction (can't override traumatic memories). This creates a cycle: impaired extinction → continued PTSD → continued hypercortisolemia → more atrophy. Treatment: reducing cortisol burden + neuroplasticity interventions (exercise, antidepressants increase BDNF)."},
+  {lec:6,color:"#C62828",
+   stem:"Epinephrine from the adrenal medulla CANNOT directly affect the hippocampus during a stress response. Which mechanism allows peripheral stress signals to influence central memory consolidation?",
+   opts:["Epinephrine diffuses across the BBB at the median eminence","Epinephrine activates β-adrenergic receptors on vagal afferents, which then signal the nucleus of the solitary tract and locus coeruleus → NE released centrally","Epinephrine is converted to norepinephrine in the bloodstream, which then crosses the BBB","Epinephrine activates peripheral ACTH receptors → ACTH crosses BBB","Epinephrine stimulates adrenal cortex to release more cortisol → cortisol crosses BBB → hippocampus"],
+   correct:1,
+   expls:["The median eminence has a fenestrated blood-brain barrier for hypothalamic releasing hormones, but epinephrine crossing the BBB this way to affect hippocampus is not the primary mechanism","Correct! Epinephrine cannot cross the BBB (it's charged). But it activates β-adrenergic receptors on vagal afferents → signal reaches the NTS (brainstem) → activates the locus coeruleus → locus coeruleus neurons release NE throughout the brain (including hippocampus and amygdala) → enhances memory consolidation of emotionally arousing events.","Epinephrine is NOT converted to NE in blood; NE is a precursor to epinephrine, not the reverse","ACTH crosses the BBB poorly; this is not the mechanism","Cortisol does cross the BBB and does affect hippocampus — but this describes a separate pathway from the peripheral-to-central epinephrine signaling question"],
+   teach:"<strong>Peripheral-to-central stress signal:</strong> Epinephrine → vagus → NTS → locus coeruleus → NE release in brain. This explains why emotionally arousing experiences are remembered better (β-blockers given after trauma may reduce PTSD severity — active research area). Cortisol crosses BBB directly; epinephrine uses this indirect vagal-NE route."},
+  {lec:6,color:"#C62828",
+   stem:"Chronic psychological stress is associated with increased rates of upper respiratory infections, impaired vaccine responses, and slower wound healing. Which two cortisol mechanisms DIRECTLY account for all three of these observations?",
+   opts:["↑ ACTH → melanocyte stimulation → altered immune surveillance; ↑ CRH → mast cell activation","Cortisol inhibits T-lymphocyte proliferation + suppresses antibody (immunoglobulin) production; combined with inhibition of fibroblast activity → impaired wound healing","Cortisol inhibits EPO → anemia → reduced immune cell delivery; ↓ GH → reduced IGF-1 → impaired lymphocyte maturation","Cortisol-driven hyperglycemia → impairs neutrophil function; cortisol-driven hypertension → impairs lymph circulation","Cortisol drives IL-6 release → systemic inflammation → paradoxical immune activation"],
+   correct:1,
+   expls:["ACTH/melanocyte stimulation is not the immune mechanism; CRH/mast cell effects exist but aren't the primary explanation","Correct! (1) T-cell inhibition (reduces cellular immunity) + reduced antibody production (impairs vaccine response, reduces B-cell function) → increased infection susceptibility and poor vaccine response. (2) Fibroblast inhibition → poor wound healing. Cortisol does both via GR-mediated genomic effects.","EPO suppression is not a primary cortisol effect (cortisol actually stimulates EPO slightly); IGF-1 suppression plays a minor role","Hyperglycemia impairs neutrophil function (diabetes mechanism), but this is secondary; hypertension/lymph mechanism is not a direct cortisol immune action","Cortisol is anti-inflammatory — it INHIBITS IL-6 production, not stimulates it"],
+   teach:"<strong>Cortisol's immunosuppressive actions:</strong> Initially (acute), cortisol briefly enhances some immune functions. Chronically: T-cell inhibition + reduced antibody production + inhibited inflammatory mediators → net immunosuppression. Clinically: why stressed students get more colds around exams, why bereaved individuals have higher infection rates, and why glucocorticoid drugs are used as immunosuppressants."}
+];
+
+function startExam(){
+  document.getElementById('lobby').style.display='none';
+  document.getElementById('exam').style.display='block';
+  examStarted=true;
+  renderExam();
+  startTimer();
+}
+
+function renderExam(){
+  const body=document.getElementById('exam-body');
+  body.innerHTML=questions.map((q,i)=>`
+    <div class="q-block" id="qb${i}">
+      <div class="q-header">
+        <span class="q-num-badge">Q${i+1}</span>
+        <span class="lecture-tag" style="color:${q.color};border-color:${q.color}40">L${q.lec}</span>
+        <div class="q-stem">${q.stem}</div>
+      </div>
+      <div class="options" id="opts${i}">
+        ${q.opts.map((o,oi)=>`
+          <button class="opt" id="opt${i}_${oi}" onclick="selectAnswer(${i},${oi})">
+            <span class="opt-letter">${String.fromCharCode(65+oi)}.</span>
+            <span>${o}</span>
+          </button>`).join('')}
+      </div>
+      <div class="teach" id="teach${i}"><strong>Teaching Point:</strong> ${q.teach}</div>
+    </div>
+    ${i<questions.length-1?'<div class="divider"></div>':''}`).join('');
+}
+
+function selectAnswer(qi,oi){
+  if(submitted) return;
+  userAnswers[qi]=oi;
+  // Visual selection feedback
+  for(let i=0;i<questions[qi].opts.length;i++){
+    const btn=document.getElementById(`opt${qi}_${i}`);
+    btn.classList.remove('reveal');
+  }
+  document.getElementById(`opt${qi}_${oi}`).classList.add('reveal');
+  // Update progress
+  const answered=Object.keys(userAnswers).length;
+  document.getElementById('qnum').textContent=`${answered} / ${questions.length} answered`;
+  document.getElementById('prog').style.width=`${(answered/questions.length)*100}%`;
+}
+
+function startTimer(){
+  timerInterval=setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60).toString().padStart(2,'0');
+    const s=(timeLeft%60).toString().padStart(2,'0');
+    const el=document.getElementById('timer');
+    el.textContent=`${m}:${s}`;
+    el.className='timer';
+    if(timeLeft<=300) el.classList.add('warn');
+    if(timeLeft<=60) el.classList.add('crit');
+    if(timeLeft<=0){clearInterval(timerInterval);submitExam();}
+  },1000);
+}
+
+function submitExam(){
+  if(submitted) return;
+  submitted=true;
+  clearInterval(timerInterval);
+  // Reveal all answers
+  questions.forEach((q,qi)=>{
+    const chosen=userAnswers[qi];
+    q.opts.forEach((o,oi)=>{
+      const btn=document.getElementById(`opt${qi}_${oi}`);
+      btn.disabled=true;
+      if(oi===q.correct) btn.classList.add('correct');
+      else if(oi===chosen && oi!==q.correct) btn.classList.add('wrong');
+      // Show explanations
+      const expl=document.createElement('div');
+      expl.className='expl';
+      expl.style.display='block';
+      expl.textContent=q.expls[oi];
+      btn.appendChild(expl);
+    });
+    document.getElementById(`teach${qi}`).style.display='block';
+  });
+  // Show results
+  setTimeout(showResults,1000);
+}
+
+function showResults(){
+  document.getElementById('exam').style.display='none';
+  const res=document.getElementById('results');
+  res.style.display='block';
+  // Score calc
+  let correct=0,skipped=0;
+  const lecStats={};
+  for(let l=1;l<=6;l++) lecStats[l]={correct:0,total:0};
+  questions.forEach((q,i)=>{
+    lecStats[q.lec].total++;
+    if(userAnswers[i]===undefined) skipped++;
+    else if(userAnswers[i]===q.correct){correct++;lecStats[q.lec].correct++;}
+  });
+  const pct=Math.round((correct/questions.length)*100);
+  const scoreEl=document.getElementById('score-num');
+  scoreEl.textContent=`${correct}/40`;
+  const grade=pct>=90?'A':pct>=80?'B':pct>=70?'C':'D';
+  const gradeLabels={A:'Excellent — Exam Ready ✓',B:'Good — Minor Review Needed',C:'Fair — Targeted Review Advised',D:'Needs Significant Review'};
+  const gradeEl=document.getElementById('score-grade');
+  gradeEl.textContent=`${pct}% — ${gradeLabels[grade]}`;
+  gradeEl.className=`score-grade grade-${grade}`;
+
+  // Stats row
+  document.getElementById('stats-row').innerHTML=`
+    <div class="result-stat"><div class="n" style="color:var(--green)">${correct}</div><div class="l">Correct</div></div>
+    <div class="result-stat"><div class="n" style="color:var(--red)">${questions.length-correct-skipped}</div><div class="l">Incorrect</div></div>
+    <div class="result-stat"><div class="n" style="color:var(--yellow)">${skipped}</div><div class="l">Skipped</div></div>
+    <div class="result-stat"><div class="n">${pct}%</div><div class="l">Score</div></div>`;
+
+  // By lecture
+  const lecNames={1:'L1: HP Relationships I',2:'L2: HP Relationships II',3:'L3: Posterior Pituitary',4:'L4: GH Axis',5:'L5: HPA Axis',6:'L6: Stress Integration'};
+  const lecColors={1:'#5C6BC0',2:'#7B1FA2',3:'#00897B',4:'#1565C0',5:'#E65100',6:'#C62828'};
+  let lecHtml='<h3>Performance by Lecture</h3>';
+  for(let l=1;l<=6;l++){
+    const p=lecStats[l].total>0?Math.round((lecStats[l].correct/lecStats[l].total)*100):0;
+    lecHtml+=`<div class="lec-row">
+      <div class="lec-name" style="color:${lecColors[l]}">${lecNames[l]}</div>
+      <div class="lec-bar-wrap"><div class="lec-bar" style="width:${p}%;background:${lecColors[l]}"></div></div>
+      <div class="lec-pct">${p}%</div>
+    </div>`;
+  }
+  document.getElementById('by-lecture').innerHTML=lecHtml;
+
+  // Review
+  let reviewHtml='';
+  questions.forEach((q,i)=>{
+    const ua=userAnswers[i];
+    const isCorrect=ua===q.correct;
+    const isSkipped=ua===undefined;
+    const status=isSkipped?'Skipped':isCorrect?'Correct':'Incorrect';
+    const chipClass=isSkipped?'chip-skip':isCorrect?'chip-correct':'chip-wrong';
+    reviewHtml+=`<div class="review-q">
+      <div class="review-header">
+        <span class="q-num-badge" style="background:${q.color}">Q${i+1}</span>
+        <span class="status-chip ${chipClass}">${status}</span>
+        ${!isSkipped&&!isCorrect?`<span style="font-size:12px;color:var(--muted)">You chose ${String.fromCharCode(65+ua)} | Correct: ${String.fromCharCode(65+q.correct)}</span>`:''}
+        ${isCorrect?`<span style="font-size:12px;color:var(--muted)">You chose ${String.fromCharCode(65+ua)}</span>`:''}
+      </div>
+      <div style="font-size:13px;color:#C9D1D9;line-height:1.6;margin-bottom:10px">${q.stem}</div>
+      <div style="font-size:12px;background:#0D1117;padding:12px;border-radius:6px;border-left:3px solid ${q.color};color:#C9D1D9;line-height:1.6">${q.teach}</div>
+    </div>`;
+  });
+  document.getElementById('review-container').innerHTML=reviewHtml;
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

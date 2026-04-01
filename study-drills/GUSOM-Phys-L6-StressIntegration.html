@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phys L6 – Stress Integration | GUSOM Endocrine</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#C62828;--bg:#0D1117;--card:#161B22;--border:#30363D;--text:#E6EDF3;--muted:#8B949E;--green:#3FB950;--red:#F85149;--yellow:#D29922}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--card);border-bottom:3px solid var(--accent);padding:20px 32px;display:flex;align-items:center;gap:16px}
+.back-btn{color:var(--accent);text-decoration:none;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .2s}
+.back-btn:hover{background:rgba(198,40,40,.15)}
+.header-text h1{font-size:22px;font-weight:700}
+.header-text p{font-size:13px;color:var(--muted);margin-top:2px}
+nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 32px;display:flex;gap:4px;overflow-x:auto}
+.tab{padding:12px 20px;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.section{display:none;padding:32px;max-width:1000px;margin:0 auto}
+.section.active{display:block}
+h2{font-size:18px;font-weight:700;margin-bottom:20px;color:var(--text)}
+/* Flashcards */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.flip-card{height:200px;cursor:pointer;perspective:1000px}
+.flip-card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s}
+.flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.flip-front{background:var(--card);border-top:3px solid var(--accent)}
+.flip-front p{font-size:14px;font-weight:600;color:var(--text);line-height:1.5}
+.flip-back{background:#1c1c1c;border-top:3px solid #888;transform:rotateY(180deg)}
+.flip-back p{font-size:13px;color:var(--text);line-height:1.6}
+.card-hint{font-size:11px;color:var(--muted);margin-top:8px}
+/* MCQ */
+.mcq-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:20px}
+.mcq-stem{font-size:15px;font-weight:600;margin-bottom:16px;line-height:1.6}
+.mcq-options{display:flex;flex-direction:column;gap:8px}
+.opt-btn{background:#0D1117;border:1px solid var(--border);border-radius:8px;padding:12px 16px;text-align:left;color:var(--text);cursor:pointer;font-size:13px;transition:all .2s;font-family:'Inter',sans-serif;line-height:1.4}
+.opt-btn:hover:not(:disabled){border-color:var(--accent);background:rgba(198,40,40,.08)}
+.opt-btn.correct{border-color:var(--green)!important;background:rgba(63,185,80,.12)!important}
+.opt-btn.wrong{border-color:var(--red)!important;background:rgba(248,81,73,.12)!important}
+.opt-btn:disabled{cursor:default}
+.opt-expl{font-size:12px;color:var(--muted);margin-top:6px;padding-left:12px;display:none;line-height:1.5}
+.teaching-box{background:rgba(198,40,40,.1);border:1px solid rgba(198,40,40,.4);border-radius:8px;padding:14px;margin-top:14px;font-size:13px;line-height:1.6;display:none}
+.teaching-box strong{color:var(--accent)}
+/* Vignettes */
+.vignette{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:20px}
+.vignette-case{background:#0D1117;border-left:3px solid var(--accent);padding:14px 16px;border-radius:0 6px 6px 0;margin-bottom:16px;font-size:14px;line-height:1.7}
+/* Traps */
+.trap-card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--yellow);border-radius:10px;padding:20px;margin-bottom:14px}
+.trap-label{font-size:11px;font-weight:700;color:var(--yellow);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.trap-title{font-size:14px;font-weight:600;margin-bottom:10px}
+.trap-body{font-size:13px;color:#C9D1D9;line-height:1.6}
+/* FIB */
+.fib-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:14px}
+.fib-q{font-size:14px;font-weight:600;margin-bottom:12px;line-height:1.6}
+.fib-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.fib-input{background:#0D1117;border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:var(--text);font-size:13px;font-family:'Inter',sans-serif;flex:1;min-width:200px}
+.fib-input:focus{outline:none;border-color:var(--accent)}
+.fib-check{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:8px 16px;cursor:pointer;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;transition:opacity .2s}
+.fib-check:hover{opacity:.85}
+.fib-result{font-size:13px;margin-top:10px;padding:10px 14px;border-radius:6px;display:none;line-height:1.5}
+.fib-result.correct{background:rgba(63,185,80,.12);border:1px solid rgba(63,185,80,.4);color:var(--green)}
+.fib-result.wrong{background:rgba(248,81,73,.12);border:1px solid rgba(248,81,73,.4);color:var(--red)}
+/* Ref table */
+.ref-table-wrap{overflow-x:auto;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:rgba(198,40,40,.2);color:var(--text);padding:10px 14px;text-align:left;font-weight:600;border:1px solid var(--border)}
+td{padding:10px 14px;border:1px solid var(--border);color:#C9D1D9;vertical-align:top;line-height:1.5}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:rgba(198,40,40,.25);color:var(--accent);margin-bottom:6px}
+.progress-bar{background:var(--border);border-radius:10px;height:6px;margin-bottom:20px}
+.progress-fill{background:var(--accent);height:6px;border-radius:10px;transition:width .3s}
+.counter{font-size:13px;color:var(--muted);margin-bottom:16px}
+</style>
+</head>
+<body>
+<header>
+  <a href="GUSOM-Phys-ActiveDrills.html" class="back-btn">← Hub</a>
+  <div class="header-text">
+    <h1>Lecture 6 — Stress, Stress Hormones & Pathophysiology Integration</h1>
+    <p>Physiology · GAS Model · Allostasis · Reactive Scope · SAM vs HPA · Chronic Stress Consequences</p>
+  </div>
+</header>
+<nav>
+  <button class="tab active" onclick="showTab('fc')">Flashcards</button>
+  <button class="tab" onclick="showTab('mcq')">MCQ</button>
+  <button class="tab" onclick="showTab('vig')">Vignettes</button>
+  <button class="tab" onclick="showTab('traps')">Test Traps</button>
+  <button class="tab" onclick="showTab('fib')">Fill-in-Blank</button>
+  <button class="tab" onclick="showTab('ref')">Reference Table</button>
+</nav>
+
+<div id="fc" class="section active">
+  <h2>Flashcards <span style="color:var(--muted);font-weight:400;font-size:14px">(click to flip)</span></h2>
+  <div id="fc-grid" class="cards-grid"></div>
+</div>
+<div id="mcq" class="section">
+  <h2>Multiple Choice Questions</h2>
+  <div id="mcq-container"></div>
+</div>
+<div id="vig" class="section">
+  <h2>Clinical Vignettes</h2>
+  <div id="vig-container"></div>
+</div>
+<div id="traps" class="section">
+  <h2>Test Traps & High-Yield Distinctions</h2>
+  <div id="traps-container"></div>
+</div>
+<div id="fib" class="section">
+  <h2>Fill in the Blank</h2>
+  <div id="fib-container"></div>
+</div>
+<div id="ref" class="section">
+  <h2>Reference Table — SAM vs HPA Axis</h2>
+  <div id="ref-container"></div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────────
+
+const flashcards = [
+  {q:"What are the 3 stages of the General Adaptation Syndrome (GAS) model?", a:"Alarm → Resistance → Exhaustion.\nAlarm: strong initial response, resistance drops, epinephrine surges.\nResistance: adaptation, less sensitivity to individual hormones.\nExhaustion: body can't sustain the stress response."},
+  {q:"How does allostasis differ from homeostasis?", a:"Homeostasis = stability through constancy (fixed set points).\nAllostasis = stability through CHANGE — set points shift to facilitate survival under stress.\nConcept: 'moving away from set points in the name of overall stability.'"},
+  {q:"What is allostatic load?", a:"The cumulative total of different stressors an organism must adapt to over time.\nHigh allostatic load = greater wear on physiological systems → disease risk.\nLow allostatic load (e.g., summer with abundant resources) vs. high (mating season, winter)."},
+  {q:"What are the 4 zones of the Reactive Scope Model?", a:"1. Predictive homeostasis — normal cyclical baseline (influenced by predictability)\n2. Reactive homeostasis — elevated response to unexpected stressors (alarm + resistance)\n3. Homeostatic overload — exceeds reactive max; maps to exhaustion (e.g., Takotsubo)\n4. Homeostatic failure — below predictive minimum; hormone secretion insufficient for function"},
+  {q:"Describe the SAM axis: stimulus, effector, hormones, and time course.", a:"Stressor → hypothalamus (PVN) → preganglionic sympathetic neurons → splanchnic nerves → chromaffin cells of adrenal medulla.\nHormones: epinephrine (75%) + norepinephrine (25%).\nTime course: peak ~30 seconds; returns to baseline within minutes (short-lived)."},
+  {q:"What are the key adrenergic receptor targets and their effects during acute stress?", a:"β1: ↑ cardiac output (HR + contractility)\nβ2: bronchodilation; vasodilation of skeletal muscle & liver; glycogenolysis + lipolysis; ↑ glucagon\nα1: vasoconstriction of skin & visceral vessels\nNet: redirect blood to muscles/brain, mobilize energy substrates."},
+  {q:"How does cortisol support the body during chronic stress?", a:"Metabolic: glycogenolysis, insulin resistance in muscle/adipose, protein catabolism, lipolysis, hepatic gluconeogenesis → sustained hyperglycemia.\nPermissive: upregulates adrenergic receptors → sensitizes tissues to epinephrine.\nCognitive: normal levels enhance memory consolidation + motor learning.\nAnti-inflammatory: inhibits arachidonic acid pathways, suppresses T-cells."},
+  {q:"What are the 4 major pathological consequences of chronic cortisol excess?", a:"1. Osteoporosis — inhibits osteoblasts, activates osteoclasts, ↑ renal Ca²⁺ excretion\n2. Immunosuppression — T-cell inhibition, reduced antibody production\n3. Reproductive suppression — inhibits HPG axis at every level → amenorrhea\n4. Hippocampal atrophy — chronic GR activation → neuronal damage, impaired memory"},
+  {q:"What is Takotsubo (broken heart) syndrome and where does it fit in the Reactive Scope Model?", a:"Stress-induced cardiomyopathy from a massive catecholamine surge (epinephrine).\nApical ballooning of LV → mimics MI (chest pain, ECG changes, ↑ troponin).\nECHO shows characteristic apical dysfunction; reversible in most cases.\nReactive Scope: represents HOMEOSTATIC OVERLOAD — hormones exceed the reactive range maximum."},
+  {q:"Why does predictability reduce the physiological stress response?", a:"Predictive homeostasis: the brain can anticipate a stressor and pre-adjust baseline hormone levels/receptor sensitivity before the stressor arrives.\nResult: the reactive (unexpected) stress response is blunted — a smaller, more controlled hormonal excursion is needed.\nClinical relevance: pre-surgical anxiety counseling, exposure therapy, athletic training all exploit this."},
+  {q:"How do pro-inflammatory cytokines activate the HPA axis, and what is sickness behavior?", a:"IL-1β, IL-6, TNF-α (released by macrophages/monocytes during infection or inflammation) → stimulate CRH release from the hypothalamic PVN.\nCRH then → ↑ACTH → ↑cortisol (anti-inflammatory feedback: cortisol suppresses the cytokine storm that triggered it).\nCRH also activates the LC-NE system (locus coeruleus-norepinephrine) → arousal, anxiety.\nSickness behavior: fatigue, anorexia, social withdrawal, hyperalgesia, cognitive slowing, fever — an evolved adaptive response to redirect energy to fighting infection.\nClinical relevance: the same cytokine → CRH → HPA axis pathway is activated in psychological depression, explaining overlapping symptoms."},
+  {q:"How does chronic stress affect the GI tract and promote cancer progression?", a:"GI effects:\n• ↑CRH → ↑gut motility (urgency, diarrhea) + altered secretion\n• ↑Intestinal permeability ('leaky gut') → bacterial translocation → local inflammation\n• ↑Gastric acid + ↓mucosal prostaglandins (cortisol suppresses PGs) → stress ulcers\nCancer/metastasis mechanisms:\n• Cortisol → ↓NK (natural killer) cell activity → ↓tumor immune surveillance\n• β-adrenergic signaling → VEGF upregulation → tumor angiogenesis\n• Chronic stress → ↑inflammatory cytokines + ↓apoptosis in some tumor cells\n• Clinical data: chronic stress associated with faster cancer progression and ↑metastasis in multiple tumor types"},
+  {q:"What physiological mechanisms explain the benefits of stress reduction interventions?", a:"Exercise: ↑BDNF → hippocampal neurogenesis; ↓baseline cortisol + CRH; ↑endorphins; ↑serotonin/DA; reverses hippocampal atrophy\nMindfulness/meditation: ↓amygdala reactivity (structural); ↓HPA reactivity to stressors; lower 24-hr cortisol with regular practice\nSocial support: ↑oxytocin → anti-cortisol + anti-inflammatory; ↑vagal tone (↓HR, ↓sympathetic); loneliness itself ↑IL-6 and cortisol\nSleep: restores cortisol circadian rhythm; ↑growth hormone release (anabolic repair); ↓CRH baseline; consolidates memories (hippocampal off-load)\nCBT/therapy: restructures appraisal → ↓frequency/magnitude of cortisol spikes; ↓amygdala hyperreactivity; measurable ↓urinary cortisol and ↓IL-6"}
+];
+
+const mcqs = [
+  {
+    stem:"A researcher studying stress in Arctic ground squirrels notes that animals preparing for hibernation show higher allostatic load scores than those during summer foraging. Which concept best explains why the squirrel's cortisol set point shifts upward during pre-hibernation?",
+    options:["A. Homeostatic failure because cortisol exceeds the reactive range","B. Predictive homeostasis in which baseline fluctuates in anticipation of metabolic demands","C. Homeostatic overload driving Takotsubo-equivalent cardiac stress","D. Exhaustion stage of the General Adaptation Syndrome","E. Loss of long-loop negative feedback from the adrenal cortex"],
+    correct:1,
+    explanations:[
+      "Incorrect. Homeostatic failure means hormone levels fall BELOW the predictive minimum — the opposite of what's described.",
+      "Correct! Predictive homeostasis describes normal cyclical shifts in baseline that are influenced by predictable, anticipated events (seasonal changes). The squirrel's physiology adjusts its 'normal' range ahead of hibernation demands.",
+      "Incorrect. Homeostatic overload means hormone levels exceed the reactive range maximum — indicating a pathological acute event, not a controlled anticipatory shift.",
+      "Incorrect. GAS exhaustion implies the organism can no longer sustain the stress response. The squirrel is still functionally adapting.",
+      "Incorrect. Loss of negative feedback would cause uncontrolled hypercortisolism (like Cushing's), not a predictive physiological adjustment."
+    ],
+    teaching:"<strong>Key concept:</strong> Predictive homeostasis means the baseline is NOT truly flat — it shifts cyclically in preparation for anticipated stressors. This is why allostatic load can be LOW even during periods of elevated baseline hormones, as long as those elevations are purposeful and controlled."
+  },
+  {
+    stem:"A 58-year-old woman is brought to the ED after suddenly collapsing upon learning of her husband's unexpected death. ECG shows diffuse ST changes, troponin is mildly elevated, and echocardiography shows apical ballooning with preserved basal function. Coronary angiography is normal. What is the underlying mechanism?",
+    options:["A. Thrombotic occlusion of the left anterior descending artery","B. Massive catecholamine surge driving myocardial toxicity and vasospasm","C. Adrenal insufficiency leading to profound hypotension","D. Cortisol-induced direct cardiomyocyte apoptosis","E. Homeostatic failure with cortisol falling below the predictive range minimum"],
+    correct:1,
+    explanations:[
+      "Incorrect. Normal coronary angiography rules out thrombotic occlusion — this is a critical distinguishing feature of Takotsubo.",
+      "Correct! Takotsubo (broken heart) syndrome is caused by a massive catecholamine (epinephrine) surge — the prototypical example of homeostatic overload. The myocardium becomes stunned, not infarcted. The apical-sparing pattern reflects differential β-receptor density.",
+      "Incorrect. Adrenal insufficiency would present with hypotension, hyponatremia, and hyperkalemia — not acute LV dysfunction with apical ballooning.",
+      "Incorrect. Cortisol has permissive and anti-inflammatory effects; it does not directly cause the acute apical ballooning pattern of Takotsubo.",
+      "Incorrect. Homeostatic failure (hormone below minimum) would not cause a catecholamine surge. This scenario is the opposite — excess hormone driving pathology."
+    ],
+    teaching:"<strong>Teaching point:</strong> Takotsubo places in the Reactive Scope Model's HOMEOSTATIC OVERLOAD zone — the catecholamine surge exceeds what the cardiovascular system can handle. It is the quintessential example used to illustrate how intense acute stress can drive hormone concentrations above the reactive maximum."
+  },
+  {
+    stem:"A 30-year-old marathon runner presents with secondary amenorrhea, low BMD on DEXA, and a history of significant caloric restriction during training. Her serum cortisol is elevated, LH/FSH are low, and estradiol is low. Why does chronic cortisol elevation suppress reproduction?",
+    options:["A. Cortisol directly inhibits ovarian granulosa cell estrogen synthesis","B. Cortisol inhibits the HPG axis at every level: hypothalamus, pituitary, and gonads","C. Elevated cortisol stimulates prolactin, which suppresses GnRH","D. Cortisol drives excess androgen production that negatively feeds back on LH","E. Cortisol competes with estradiol for binding to estrogen receptors"],
+    correct:1,
+    explanations:[
+      "Incorrect. While cortisol can affect ovarian function, its primary HPG-suppressive mechanism is at the hypothalamic and pituitary levels, not exclusively direct ovarian suppression.",
+      "Correct! Cortisol inhibits GnRH release from the hypothalamus, blunts pituitary LH/FSH secretion, and directly inhibits gonadal steroidogenesis — suppressing the axis at every level. This is an evolved mechanism to inhibit reproduction when survival resources are insufficient.",
+      "Incorrect. Elevated prolactin (hyperprolactinemia) can cause amenorrhea, but this is NOT the primary mechanism of stress-induced amenorrhea. Cortisol acts directly on the HPG axis.",
+      "Incorrect. Chronic stress does not typically cause excess androgen production sufficient to suppress reproduction through this mechanism.",
+      "Incorrect. Cortisol and estradiol bind to distinct steroid receptors (GR/MR vs. ER) — they do not compete for the same receptor."
+    ],
+    teaching:"<strong>Triad connection:</strong> This case represents the Female Athlete Triad — disordered eating + amenorrhea + low bone density. Cortisol drives the reproductive suppression AND the bone loss (inhibits osteoblasts, activates osteoclasts, increases renal Ca²⁺ excretion). Both are evolutionary strategies: reproduction is expensive; bone remodeling is expensive — suppress them during resource scarcity."
+  },
+  {
+    stem:"In the General Adaptation Syndrome, Stage 2 (Resistance) is characterized by which of the following compared to Stage 1 (Alarm)?",
+    options:["A. Higher resistance to the stressor; greater sensitivity to individual stress hormones","B. Lower cortisol; higher epinephrine dominating the response","C. Greater overall resistance to the stressor; reduced sensitivity to individual hormones","D. Transition to homeostatic failure; HPA axis shutdown","E. Return to predictive homeostasis baseline; stressor is resolved"],
+    correct:2,
+    explanations:[
+      "Incorrect. During Resistance, the body has REDUCED sensitivity to individual hormones — a form of adaptation/desensitization, not increased sensitivity.",
+      "Incorrect. Epinephrine is the dominant alarm-phase hormone. During Resistance, HPA-driven cortisol is more central. Overall epinephrine does not dominate Stage 2.",
+      "Correct! Stage 2 (Resistance): the body has adapted to the ongoing stressor — overall resistance IS greater, but receptor downregulation and signaling adaptation mean reduced sensitivity to individual stress hormones. The body is responding 'smarter' but is burning through reserves.",
+      "Incorrect. Homeostatic failure is a terminal condition (Stage 4 in Reactive Scope). Stage 2 is an active adaptive phase.",
+      "Incorrect. Returning to baseline would mean the stressor is resolved. Stage 2 still involves active HPA/SAM output — the stressor is still present."
+    ],
+    teaching:"<strong>GAS summary:</strong> Alarm = epinephrine surge, resistance drops initially, sensitization. Resistance = adaptation, hormones still elevated but receptors desensitize, resistance rises — the body is 'managing.' Exhaustion = depletion; the organism can no longer maintain the stress response. Selye's rats died at ~2 months of continuous stress."
+  },
+  {
+    stem:"A patient takes propranolol (non-selective β-blocker) before a public speaking event to control performance anxiety. Which physiological effect of the SAM axis is this most directly counteracting?",
+    options:["A. Vasoconstriction of skeletal muscle via α1 receptors","B. Increased glycogenolysis and lipolysis via β2 receptors","C. Increased cardiac output and heart rate via β1 receptors","D. Bronchodilation via β2 receptors","E. Glucagon secretion via β2 receptors"],
+    correct:2,
+    explanations:[
+      "Incorrect. α1 receptors mediate vasoconstriction of skin/visceral vessels. Propranolol is a β-blocker and does NOT block α1 receptors.",
+      "Incorrect. While propranolol does block β2-mediated metabolic effects, the primary target for performance anxiety management is the cardiovascular system (palpitations, tremor).",
+      "Correct! β1 receptors drive ↑ HR and ↑ contractility during stress. Propranolol blocks β1 → reduces palpitations, tremor, and the somatic anxiety cues that reinforce psychological distress. This is the primary clinical use in performance anxiety.",
+      "Incorrect. β2 receptor blockade would cause bronchoconstriction — this is actually a dangerous side effect of non-selective β-blockers in asthmatic patients.",
+      "Incorrect. Glucagon secretion via β2 is a metabolic effect; this is not the primary reason β-blockers are used for performance anxiety."
+    ],
+    teaching:"<strong>Clinical pearl:</strong> Non-selective β-blockers (propranolol) are used as an anxiolytic alternative when benzodiazepines are contraindicated (e.g., musicians, performers). They blunt the peripheral somatic signs of anxiety — tachycardia, tremor — without sedation. They do NOT treat the psychological component. Also: β2 blockade can cause bronchoconstriction → contraindicated in asthma."
+  },
+  {
+    stem:"A medical student is stressed during exam week. After 48 hours of poor sleep and high cortisol, she notices improved recall and motor skill retention from her studying. Which cortisol mechanism explains this effect?",
+    options:["A. Cortisol inhibits hippocampal LTP to reduce distracting memories","B. Cortisol activates GR/MR receptors in the brain → enhanced synaptic plasticity and memory consolidation at normal physiological elevations","C. Cortisol increases BDNF in the prefrontal cortex → dendritic hypertrophy","D. Cortisol suppresses the amygdala → reduced fear prevents memory interference","E. Cortisol crosses the BBB and directly stimulates cholinergic neurotransmission"],
+    correct:1,
+    explanations:[
+      "Incorrect. NORMAL cortisol levels enhance, not inhibit, hippocampal plasticity. LTP inhibition occurs with CHRONIC excess cortisol — not acute physiological elevations.",
+      "Correct! At normal physiological elevations, cortisol binds GC and MC receptors in the brain, increasing synaptic plasticity in the hippocampus → enhanced motor learning and memory consolidation. This is an adaptive stress response — the brain prioritizes encoding survival-relevant information.",
+      "Incorrect. Cortisol does not significantly increase BDNF in the PFC at normal stress levels; it may actually reduce BDNF with chronic excess.",
+      "Incorrect. Cortisol does not specifically suppress amygdala function at acute stress levels — in fact, amygdala activation is enhanced acutely.",
+      "Incorrect. Cortisol does cross the BBB (unlike epinephrine), but its primary mechanism of action is genomic (GR/MR nuclear receptors), not direct cholinergic stimulation."
+    ],
+    teaching:"<strong>Cortisol paradox:</strong> Acute/normal cortisol = ↑ memory, ↑ plasticity, ↑ cognition (beneficial).\nChronic/excess cortisol = hippocampal atrophy, ↓ memory, dendritic retraction.\nThis is a major reason why chronic stress impairs academic performance even though acute stress may sharpen it."
+  },
+  {
+    stem:"A patient on chronic high-dose prednisone for rheumatoid arthritis develops pathological vertebral fractures. DEXA shows severely low BMD. Which two cortisol mechanisms account for this bone loss?",
+    options:["A. ↑ PTH secretion + ↑ calcitonin inhibition","B. Inhibition of osteoblasts + activation of osteoclasts via RANKL signaling, compounded by ↑ renal calcium excretion","C. ↓ vitamin D activation in the kidney + ↑ intestinal phosphate absorption","D. Direct osteocyte apoptosis + suppression of IGF-1 (growth factor for bone)","E. ↑ aldosterone → calcium wasting + ↓ calcitonin"],
+    correct:1,
+    explanations:[
+      "Incorrect. PTH is not primarily elevated by glucocorticoids; the main mechanism is direct bone cell effects and renal calcium loss.",
+      "Correct! Glucocorticoids act at two levels simultaneously: (1) directly inhibit osteoblast activity (less bone laid down) and (2) increase signaling that activates osteoclasts via RANKL (more bone resorbed). Additionally, increased renal calcium excretion reduces Ca²⁺ availability for bone mineralization. Triple hit.",
+      "Incorrect. Glucocorticoids DO impair intestinal calcium absorption (by decreasing vitamin D receptor expression in the gut), but the primary mechanism is direct osteoblast/osteoclast effects.",
+      "Incorrect. While GC excess can suppress IGF-1, direct osteocyte apoptosis is not the primary described mechanism for GC-induced osteoporosis.",
+      "Incorrect. Aldosterone mediates Na⁺/K⁺ balance; it is not the mechanism for glucocorticoid-induced bone loss."
+    ],
+    teaching:"<strong>Bisphosphonates</strong> are used prophylactically in patients starting long-term high-dose steroids to prevent GC-induced osteoporosis. Remember: cortisol inhibits osteoblasts AND activates osteoclasts — a net negative bone balance. Clinically, glucocorticoid-induced osteoporosis is the most common form of secondary osteoporosis."
+  },
+  {
+    stem:"Which finding would most accurately distinguish the Resistance stage (Stage 2) of GAS from the Exhaustion stage (Stage 3)?",
+    options:["A. Stage 2: cortisol is high; Stage 3: cortisol is low","B. Stage 2: organism is adapting and maintaining function; Stage 3: organism can no longer sustain the stress response","C. Stage 2: epinephrine dominates; Stage 3: cortisol dominates","D. Stage 2: immune function is suppressed; Stage 3: immune function is restored","E. Stage 2: allostasis is failing; Stage 3: allostasis is restored"],
+    correct:1,
+    explanations:[
+      "Partially true but oversimplified. Cortisol levels don't neatly drop in Stage 3 — rather, the ABILITY to sustain adequate output is impaired. Cortisol can be high or collapse depending on HPA reserve.",
+      "Correct! This is the most accurate conceptual distinction. Stage 2: the body is actively adapting and can still maintain physiological function despite the ongoing stressor. Stage 3: the body's reserves are depleted — it cannot continue mounting the stress response, leading to organ failure or death (as in Selye's rats after 2 months).",
+      "Incorrect. The SAM/epinephrine vs HPA/cortisol distinction is about time course (seconds vs hours), not GAS stages. Both axes are active throughout multiple stages.",
+      "Incorrect. Immune suppression is a cortisol effect that appears throughout the stress response. It does not define Stage 2 vs. 3.",
+      "Incorrect. Allostasis is the framework that replaces the homeostasis concept; 'failing allostasis' maps approximately to homeostatic overload/failure in the Reactive Scope Model, not specifically Stage 2 GAS."
+    ],
+    teaching:"<strong>Selye's GAS context:</strong> He exposed rats to continuous cold, infection, hemorrhage, etc. for up to 2 months — at which point they died (Exhaustion). The key point: the stress response itself is not infinitely sustainable. This became the foundation for understanding chronic stress as pathological."
+  },
+  {
+    stem:"A patient is prescribed hydrocortisone for adrenal insufficiency. Their cardiologist asks if the replacement dose will affect their heart rate response during exercise. Which property of cortisol is most relevant to this question?",
+    options:["A. Cortisol's direct chronotropic effect on cardiac β1 receptors","B. Cortisol's permissive upregulation of adrenergic receptor expression in target tissues","C. Cortisol's inhibition of phosphodiesterase → elevated cAMP → enhanced adrenergic signaling","D. Cortisol's vasoconstrictive effect via vascular α1 receptor upregulation","E. Cortisol's stimulation of epinephrine synthesis in adrenal chromaffin cells"],
+    correct:1,
+    explanations:[
+      "Incorrect. Cortisol does NOT have direct chronotropic effects. It is not a direct cardiac receptor agonist.",
+      "Correct! Cortisol has a PERMISSIVE effect — it upregulates adrenergic receptor expression in vascular and cardiac tissue, sensitizing target organs to epinephrine and norepinephrine. Without adequate cortisol (as in AI), the patient will have blunted cardiovascular responses to stress/exercise despite normal SAM axis output.",
+      "Incorrect. This is the mechanism of methylxanthines (theophylline, caffeine), not cortisol.",
+      "Incorrect. Cortisol upregulates adrenergic receptors broadly — not specifically α1 vascular receptors, and this is a genomic effect (hours), not a direct vasoconstrictor.",
+      "Incorrect. Cortisol does play a role in supporting adrenal medullary function, but the primary permissive cardiac effect is via receptor upregulation, not direct synthesis of epinephrine."
+    ],
+    teaching:"<strong>Permissive effect of cortisol:</strong> This is a KEY concept. Cortisol doesn't directly cause many effects — it ENABLES other hormones to act more effectively by upregulating their receptors. This explains why adrenal insufficiency can cause hemodynamic instability even when the SAM axis is intact: without cortisol, tissues are unresponsive to catecholamines."
+  },
+  {
+    stem:"Which of the following correctly pairs a chronic stress consequence with its mechanism?",
+    options:["A. Amenorrhea → direct cortisol binding to estrogen receptors","B. Immunosuppression → cortisol upregulates arachidonic acid release from membrane phospholipids","C. Hippocampal atrophy → prolonged GR activation → neuronal dendritic retraction and reduced synaptic plasticity","D. Osteoporosis → cortisol stimulates PTH, which directly resorbs bone","E. Hypertension → cortisol inhibits the renin-angiotensin system"],
+    correct:2,
+    explanations:[
+      "Incorrect. Cortisol does NOT bind estrogen receptors. Amenorrhea occurs because cortisol inhibits the HPG axis at the hypothalamus/pituitary level (reduces GnRH/LH/FSH), not via ER competition.",
+      "Incorrect. Cortisol INHIBITS arachidonic acid release (by inducing lipocortin/annexin-A1, which inhibits phospholipase A2). This is how glucocorticoids are anti-inflammatory.",
+      "Correct! Chronic GR activation in the hippocampus (and throughout the brain) leads to dendritic retraction, reduced synaptogenesis, and eventually neuronal death — resulting in hippocampal atrophy. Clinically: PTSD and chronic depression are associated with hippocampal volume loss.",
+      "Incorrect. Cortisol does not primarily act via PTH. GC-induced osteoporosis involves direct osteoblast inhibition + osteoclast activation + increased renal Ca²⁺ excretion.",
+      "Incorrect. Cortisol can cause hypertension by having weak mineralocorticoid activity (binds MR), but it does NOT inhibit RAAS — if anything, cortisol supports vascular tone."
+    ],
+    teaching:"<strong>Chronic stress → hippocampal atrophy:</strong> At normal levels, cortisol enhances hippocampal plasticity (memory consolidation). With chronic excess, prolonged GR activation causes: dendritic retraction, reduced BDNF, impaired neurogenesis → measurable hippocampal volume loss on MRI. This is seen in chronic PTSD, depression, and Cushing's disease."
+  },
+  {
+    stem:"A patient with bacterial pneumonia develops profound fatigue, loss of appetite, social withdrawal, cognitive slowing, and hyperalgesia — even before antibiotic therapy has had time to work. These symptoms arise from the immune-to-brain signaling that activates which central pathway?",
+    options:["A. Epinephrine from adrenal medulla → blood-brain barrier bypass via circumventricular organs","B. Pro-inflammatory cytokines (IL-1β, IL-6, TNF-α) → stimulate hypothalamic CRH → HPA axis activation + locus coeruleus arousal → sickness behavior","C. Bacterial endotoxins crossing the BBB to directly stimulate cortisol release","D. Cortisol inhibiting the frontal lobe to cause cognitive slowing","E. Aldosterone excess from volume depletion → cerebellar dysfunction"],
+    correct:1,
+    explanations:[
+      "Incorrect. Epinephrine does NOT cross the BBB (charged catecholamine). Circumventricular organ bypass applies to some peptides, but the primary sickness behavior pathway is cytokine → CRH.",
+      "Correct! Pro-inflammatory cytokines (released by macrophages at the infection site) reach the hypothalamus and stimulate CRH from the PVN. CRH then: (1) drives HPA axis → ↑cortisol (negative feedback to resolve inflammation), and (2) activates the locus coeruleus-NE system → arousal, anxiety, hyperalgesia. These collectively produce sickness behavior: fatigue, anorexia, withdrawal, fever, cognitive slowing. This is an evolved response to redirect metabolic energy from activity to immune function.",
+      "Incorrect. Bacterial endotoxins (LPS) can reach the brain via circumventricular organs or vagal signaling, but they work THROUGH cytokine release → CRH, not by directly stimulating cortisol.",
+      "Incorrect. Cortisol's cognitive effects are mediated via GR/MR receptors in the hippocampus, not direct frontal lobe inhibition. This also doesn't explain the fatigue/anorexia constellation.",
+      "Incorrect. Aldosterone acts on renal tubules; it does not explain sickness behavior."
+    ],
+    teaching:"<strong>Cytokine → CRH → sickness behavior:</strong> This pathway explains why psychological depression and medical illness have overlapping symptoms (fatigue, anhedonia, withdrawal, cognitive slowing, hypersomnia). Chronic inflammatory conditions (RA, IBD, cancer) chronically activate the CRH → HPA axis — contributing to high rates of comorbid depression. Conversely, psychosocial stress → ↑IL-6 (even without infection) → same pathway activated in reverse."
+  },
+  {
+    stem:"A researcher finds that in mice with chronic unpredictable stress, tumor growth is 3-fold faster and there are significantly more lung metastases compared to unstressed controls. The researcher blocks β-adrenergic receptors (propranolol) in the stressed mice and finds tumor progression returns toward normal. Which two mechanisms best explain the propranolol effect?",
+    options:["A. β-blockade → ↓ cortisol synthesis → ↑NK cell activity","B. β-blockade → ↓ VEGF-driven tumor angiogenesis + ↓ catecholamine-mediated NK cell suppression","C. β-blockade → ↑ glucocorticoid receptor sensitivity → enhanced tumor apoptosis","D. β-blockade → ↑ parasympathetic tone → direct tumor cell killing via vagal fibers","E. β-blockade → ↓ CRH → ↓ ACTH → ↓ cortisol → ↑ immune surveillance"],
+    correct:1,
+    explanations:[
+      "Incorrect. β-blockers do not directly inhibit cortisol synthesis. The adrenal cortex is regulated by ACTH, not β-adrenergic receptors.",
+      "Correct! Chronic β-adrenergic (catecholamine) signaling in tumors drives: (1) VEGF upregulation → tumor angiogenesis and new blood vessel formation supporting metastasis, and (2) suppression of NK cell cytotoxicity (β2-receptor activation impairs NK cell function). Propranolol blocks both pathways → ↓ angiogenesis + restored NK cell anti-tumor surveillance. This is the mechanistic basis for epidemiological data showing propranolol use associated with slower cancer progression in some malignancies.",
+      "Incorrect. GC receptor sensitivity is not a direct β-blocker mechanism, and enhanced apoptosis via this pathway is not established.",
+      "Incorrect. Vagal fibers don't directly kill tumor cells. The vagus does modulate inflammation, but direct tumor killing is not a recognized mechanism.",
+      "Incorrect. β-blockers act at the peripheral level (adrenergic receptors in tissues/tumors), not centrally on the HPA axis. CRH is regulated by higher CNS inputs and cytokines, not by β-receptor blockade directly."
+    ],
+    teaching:"<strong>Stress and cancer — two mechanisms:</strong> (1) Cortisol → ↓NK cell activity → ↓tumor immune surveillance (this is why immunosuppressed patients have higher cancer risk). (2) β-adrenergic signaling (from chronic sympathetic activation) → VEGF → tumor angiogenesis → metastasis. Both mechanisms explain why chronic stress is associated with faster cancer progression. Clinical relevance: some oncology trials are now testing β-blockers as adjuncts to chemotherapy."
+  }
+];
+
+const vignettes = [
+  {
+    title:"Vignette 1 — The Marathon and the Broken Heart",
+    badge:"SAM Axis / Homeostatic Overload",
+    stem:`A 34-year-old woman is running a marathon in extreme heat (38°C). At mile 22 she collapses. Paramedics note her heart rate is 180 bpm, BP is 90/60, she is diaphoretic and confused. Serum catecholamines are markedly elevated. She is transported to the ED where ECG shows ST elevations and echo shows apical ballooning with preserved basal wall motion. Troponin is mildly elevated. Coronary angiography is normal. She recovers fully within 72 hours.
+
+Questions:
+1. What syndrome does this presentation represent, and where does it fall in the Reactive Scope Model?
+2. What is the physiologic mechanism driving the cardiac findings?
+3. What receptor subtype explains why the APEX is preferentially affected?`,
+    answer:`1. Takotsubo (stress) cardiomyopathy — Homeostatic Overload zone. Catecholamines exceed the reactive range maximum — the body cannot handle this hormone concentration sustainably. Extreme exercise heat stress drove a massive epinephrine surge.
+
+2. Massive catecholamine (epinephrine) release → β-adrenergic receptor overstimulation → myocardial stunning (not infarction). cAMP-mediated calcium overload → contractile dysfunction. The characteristic apical ballooning occurs because the APEX has higher β2-receptor density than the base.
+
+3. β2-adrenergic receptors are more concentrated at the apex. At extreme epinephrine concentrations, β2 signaling switches from Gs (stimulatory) to Gi (inhibitory), causing apical dysfunction while the base (β1-dominant) continues to contract normally. Result: apical ballooning = 'takotsubo' (Japanese octopus trap shape).
+
+Key distinction from STEMI: normal coronaries on angiography + full recovery. This is temporary myocardial stunning, not permanent infarction.`
+  },
+  {
+    title:"Vignette 2 — The Resident with Amenorrhea",
+    badge:"Chronic Stress / HPG Suppression",
+    stem:`A 27-year-old internal medicine resident presents after 8 months of secondary amenorrhea. She has been working 80-hour weeks with significant sleep deprivation, skipping meals, and exercising 5x/week. BMI is 19. Labs: LH 1.2 mIU/mL (low), FSH 1.8 mIU/mL (low), estradiol 28 pg/mL (low), prolactin normal, TSH normal, cortisol elevated at 28 mcg/dL at 8 AM. Pelvic ultrasound is normal. Pregnancy test negative.
+
+Questions:
+1. What is the diagnosis, and what is the mechanism linking her lifestyle to her amenorrhea?
+2. At which level(s) of the HPG axis does cortisol act to suppress reproduction?
+3. What bone risk does she face, and what two cortisol mechanisms drive it?`,
+    answer:`1. Functional hypothalamic amenorrhea (FHA) secondary to chronic stress. Mechanism: chronic cortisol elevation (from sleep deprivation + caloric restriction + exercise) suppresses GnRH pulsatility from the hypothalamus → ↓ LH/FSH → ↓ ovarian estradiol → amenorrhea. This is an evolutionary adaptation — suppress reproduction when survival resources are insufficient.
+
+2. Cortisol suppresses the HPG axis at EVERY level:
+   - Hypothalamus: reduces GnRH pulse frequency/amplitude
+   - Pituitary: blunts LH/FSH response to GnRH
+   - Gonads: directly inhibits ovarian steroidogenesis
+   Note: Low LH + Low FSH + Low estradiol = central (not primary ovarian failure).
+
+3. Bone risk: stress fractures and long-term osteoporosis.
+   Cortisol mechanism 1: Inhibits osteoblasts directly → less bone formed.
+   Cortisol mechanism 2: Upregulates RANKL signaling → activates osteoclasts → more bone resorbed.
+   Plus: estrogen deficiency removes its protective effect on bone (no suppression of osteoclasts).
+   → Double hit on bone. This is the Female Athlete Triad: amenorrhea + low BMD + energy deficiency.`
+  },
+  {
+    title:"Vignette 3 — The Veteran with a Shrinking Memory",
+    badge:"Chronic Stress / Hippocampal Atrophy",
+    stem:`A 42-year-old combat veteran presents with nightmares, hypervigilance, intrusive memories, and progressive memory difficulty. He served 3 combat tours. Neuropsychological testing shows episodic memory deficits. MRI brain shows bilateral hippocampal volume loss of 15% compared to age-matched controls. Serum cortisol is elevated; 24-hour urinary free cortisol is also elevated. He is diagnosed with PTSD.
+
+Questions:
+1. What cortisol mechanism explains the hippocampal atrophy?
+2. How does this differ from acute cortisol's effect on the hippocampus?
+3. What two additional chronic stress consequences would you screen for in this patient?`,
+    answer:`1. Chronic GR (glucocorticoid receptor) overstimulation in the hippocampus → dendritic retraction, impaired neurogenesis in the dentate gyrus, reduced BDNF, and eventually neuronal loss → measurable hippocampal volume reduction. The hippocampus has the highest GR density of any brain region, making it exquisitely vulnerable to glucocorticoid excess.
+
+2. ACUTE cortisol elevations → enhanced synaptic plasticity in the hippocampus → improved motor learning and memory consolidation. This is protective and adaptive.
+CHRONIC cortisol excess → the opposite: dendritic retraction, decreased LTP, impaired memory encoding. Classic example of the difference between acute adaptive vs. chronic maladaptive stress responses.
+
+3. Screen for:
+   - Immune dysfunction: chronic cortisol → T-cell suppression, reduced antibody production → increased infection risk
+   - Cardiovascular disease: chronic sympathetic activation → hypertension, endothelial dysfunction
+   - Also consider: depression (HPA dysregulation is central to MDD), sleep disorders, metabolic syndrome (insulin resistance from sustained cortisol).`
+  },
+  {
+    title:"Vignette 4 — Selye's Framework in the Clinic",
+    badge:"GAS Model / Allostasis Integration",
+    stem:`A 52-year-old executive presents with fatigue, weight gain (central), difficulty sleeping, frequent infections, and 'feeling like I used to bounce back but now I can't.' He has been under 'constant high-stress' for 5 years: job pressures, divorce, and caring for an ill parent. Physical exam: BP 148/92, truncal obesity, stretch marks (striae), proximal muscle weakness. Labs: fasting glucose 118 mg/dL (impaired), cortisol 24 mcg/dL (elevated). He asks: 'Why did my body just... stop adapting?'
+
+Questions:
+1. Map his presentation onto the General Adaptation Syndrome stages.
+2. What distinguishes allostasis from homeostasis in explaining his symptom trajectory?
+3. Name three cortisol-mediated mechanisms explaining his specific physical findings.`,
+    answer:`1. GAS mapping:
+   - For years, he maintained Stage 2 (Resistance) — his body adapted, he 'bounced back.'
+   - Now he has entered Stage 3 (Exhaustion) — HPA axis no longer sustaining adaptive response; allostatic load has overwhelmed reserve capacity.
+   - His body can no longer sustain the fight — organs, immune system, metabolic systems showing decompensation.
+
+2. Homeostasis predicts a stable set point — yet his cortisol, BP, and glucose have all shifted upward persistently. Allostasis explains this: his body was making adaptive set-point shifts to survive increasing stressors (predictive homeostasis working). But ALLOSTATIC LOAD — the cumulative burden of 5 years of major stressors — has now exceeded the capacity for adaptation, causing homeostatic overload and failure signs.
+
+3. Cortisol mechanisms → physical findings:
+   (a) Insulin resistance in muscle/adipose + hepatic gluconeogenesis → impaired fasting glucose (118)
+   (b) Inhibition of fibroblasts / ECM protein production → striae (skin thinning, stretch marks)
+   (c) Redistribution of fat: cortisol drives central/visceral adiposity (including buffalo hump, moon face, truncal obesity) while peripheral fat is mobilized via lipolysis — creating the characteristic Cushingoid distribution
+   Bonus: Immune suppression → frequent infections; upregulated gluconeogenesis + insulin resistance → metabolic syndrome`
+  }
+];
+
+const traps = [
+  {
+    label:"Test Trap",
+    title:"GAS 'Resistance' Does NOT Mean High Resistance to All Stressors",
+    body:"In Stage 2 (Resistance), overall resistance to THE SPECIFIC STRESSOR is greater — BUT the organism shows REDUCED sensitivity to individual stress hormones (receptor downregulation). Common trap: 'Stage 2 = the body is responding more strongly.' Actually, the body is adapting smarter with LESS hormonal reactivity per event. Also: Resistance to one stressor can temporarily increase resistance to unrelated stressors (cross-resistance). Selye's key finding."
+  },
+  {
+    label:"Test Trap",
+    title:"Allostasis ≠ Homeostasis — The Set Point MOVES",
+    body:"Homeostasis = stability at a FIXED set point. Allostasis = stability achieved by MOVING the set point (e.g., shifting cortisol baseline upward before a known stressor). Do NOT say 'allostasis maintains a constant internal environment' — that's homeostasis. Allostasis VIOLATES fixed set points in the name of survival. Allostatic LOAD is the cumulative cost of these shifts — high allostatic load = disease risk, NOT adaptation."
+  },
+  {
+    label:"Test Trap",
+    title:"Acute vs. Chronic Cortisol — Opposite Brain Effects",
+    body:"ACUTE physiological cortisol: enhances hippocampal synaptic plasticity, motor learning, memory consolidation. CHRONIC excess cortisol: hippocampal atrophy, dendritic retraction, memory impairment — the OPPOSITE. Questions will give a stressed student doing well on exams vs. a PTSD patient with memory loss. Same hormone, opposite effect based on time course and dose. This distinction frequently appears in psychiatry/neuroscience crossover questions."
+  },
+  {
+    label:"Test Trap",
+    title:"Takotsubo Is NOT a STEMI — Normal Coronaries, Reversible, Apical Ballooning",
+    body:"Takotsubo = Homeostatic Overload. The catecholamine surge causes myocardial STUNNING, not infarction. Keys: (1) Normal coronary angiography — no atherosclerotic obstruction. (2) Apical ballooning — LV apex dysfunctional, base preserved (opposite of LAD territory STEMI). (3) Reversible within days to weeks. (4) Trigger = emotional/physical shock (grief, fright, natural disaster). Elevated troponin and ECG changes mimic STEMI — always do angiography. Classic board question: 'ECG changes after receiving bad news, normal cath' = Takotsubo."
+  },
+  {
+    label:"Test Trap",
+    title:"Cortisol Crosses the BBB — Epinephrine Does NOT",
+    body:"This is a pharmacology/physiology crossover trap. Cortisol is a small lipophilic steroid — it crosses the blood-brain barrier and directly acts on GR/MR receptors in hippocampus, amygdala, PFC. This is how cortisol causes hippocampal atrophy and alters mood/cognition. Epinephrine (catecholamine) is a charged molecule that CANNOT cross the BBB — its 'stress effects' on the brain are mediated indirectly (via vagal afferents, NE from locus coeruleus, etc.). Do NOT say 'epinephrine acts on the hippocampus directly.'"
+  },
+  {
+    label:"Test Trap",
+    title:"Cytokines Cause Sickness Behavior Directly — They Don't, They Use CRH",
+    body:"A common misconception: IL-1β, IL-6, and TNF-α directly cause fatigue, anorexia, and cognitive slowing. In reality, these cytokines primarily work by stimulating CRH release from the hypothalamus (PVN), which then activates the full HPA axis + LC-NE system. The cortisol and NE output from these axes mediates much of the sickness behavior. Why does this matter? It explains: (1) why anti-inflammatory drugs (which block cytokine signaling) also improve mood in some patients; (2) why depression and chronic inflammatory disease share overlapping biology; (3) why CRH antagonists are being studied as antidepressants. Don't skip the 'CRH step' — cytokines don't bypass it."
+  },
+  {
+    label:"Test Trap",
+    title:"Stress 'Causes' Cancer — The Mechanism Is Nuanced (NK Cells + VEGF, Not Direct Mutation)",
+    body:"Chronic stress does NOT cause cancer by directly mutating DNA. The evidence-based mechanisms are: (1) Cortisol → ↓NK cell cytotoxicity → ↓immune surveillance of abnormal/pre-cancerous cells → tumors that would otherwise be eliminated can proliferate. (2) β-adrenergic signaling (from chronic SAM axis activation) → VEGF upregulation → tumor angiogenesis → metastasis support. Chronic stress does NOT increase mutation rates directly. It FACILITATES tumor escape from immune control and supports metastatic spread. This is why immunosuppressed patients (transplant patients on high-dose steroids) have elevated cancer risk."
+  }
+];
+
+const fibItems = [
+  {
+    q:"In the Reactive Scope Model, the zone of hormone concentration that encompasses the body's response to UNPREDICTED stressors is called _______, while hormone concentrations that EXCEED this maximum and cause pathology (e.g., Takotsubo) are called _______.",
+    answers:[["reactive homeostasis","homeostatic overload"],["reactive","overload"]],
+    multi:true,
+    hint:"Zone 2 (unexpected stressors) and Zone 3 (pathological excess)"
+  },
+  {
+    q:"Selye's model predicts that after prolonged continuous stress, an organism enters Stage _____ (name), in which the body can no longer sustain the stress response. Selye's rats died after approximately _____ months.",
+    answers:[["exhaustion","two"],["exhaustion","2"]],
+    multi:true,
+    hint:"GAS final stage + Selye's rat experiment timeline"
+  },
+  {
+    q:"Cortisol's ability to sensitize target tissues to epinephrine by upregulating adrenergic receptor expression without directly causing a response is called a _____ effect.",
+    answers:[["permissive"]],
+    multi:false,
+    hint:"This is how cortisol 'enables' other hormones to act"
+  },
+  {
+    q:"The clinical syndrome in which a massive catecholamine surge causes reversible apical LV ballooning, mimics MI, but has normal coronary arteries is called _____ syndrome (also known as broken heart syndrome).",
+    answers:[["takotsubo","tako-tsubo"]],
+    multi:false,
+    hint:"Named after a Japanese octopus trap; maps to homeostatic overload"
+  },
+  {
+    q:"In chronic stress, cortisol inhibits the HPG axis at every level to suppress reproduction. The result in a woman is _____. The proposed evolutionary rationale is that reproduction is suppressed when _____ resources are insufficient.",
+    answers:[["amenorrhea","survival"],["secondary amenorrhea","survival"]],
+    multi:true,
+    hint:"Functional hypothalamic amenorrhea + evolutionary stress resource logic"
+  }
+];
+
+const refData = {
+  headers:["Feature","SAM Axis","HPA Axis"],
+  rows:[
+    ["Full name","Sympathetic-Adrenal-Medullary axis","Hypothalamic-Pituitary-Adrenal axis"],
+    ["Key hormones","Epinephrine (75%), Norepinephrine (25%)","Cortisol (primary); ACTH (intermediate)"],
+    ["Origin of signal","PVN of hypothalamus → preganglionic neurons → splanchnic nerves → adrenal medulla chromaffin cells","PVN → CRH → anterior pituitary corticotropes → ACTH → zona fasciculata"],
+    ["Time to effect","Seconds (peak ~30 sec); returns to baseline minutes","Minutes to hours; effects sustained"],
+    ["Duration","Short-lived (acute response)","Prolonged (chronic stress management)"],
+    ["Primary function","Immediate fight-or-flight: ↑ HR, bronchodilation, vasoconstriction, energy mobilization","Sustained energy mobilization; anti-inflammatory; permissive adrenergic sensitization"],
+    ["Key receptors","β1 (cardiac), β2 (metabolic/pulmonary), α1 (vascular)","GR (most tissues), MR (kidney, hippocampus)"],
+    ["CNS penetration","Does NOT cross the BBB (charged catecholamine)","Crosses the BBB (lipophilic steroid)"],
+    ["Feedback mechanism","Auto-inhibitory (receptor downregulation)","Long-loop cortisol → PVN + anterior pituitary"],
+    ["GAS stage relevance","Primary driver of Stage 1 (Alarm)","Sustained through Stage 2 (Resistance); depleted in Stage 3"],
+    ["Reactive Scope zone","Drives from Predictive → Reactive; extreme surge = Homeostatic Overload (Takotsubo)","Maintains Reactive homeostasis; chronic excess → Homeostatic Overload → atrophy, osteoporosis"],
+    ["Clinical pharmacology","β-blockers blunt (propranolol for anxiety); α-blockers for pheochromocytoma","Glucocorticoids (prednisone) mimic; metyrapone/ketoconazole inhibit synthesis"],
+    ["Chronic excess consequences","Hypertension, arrhythmia, Takotsubo, ↑VEGF→tumor angiogenesis","Osteoporosis, immunosuppression, amenorrhea, hippocampal atrophy, ↓NK cells→↑cancer risk, GI dysfunction"],
+    ["Cytokine inputs","N/A (SAM not directly activated by cytokines)","IL-1β/IL-6/TNF-α → stimulate CRH → ↑ACTH → ↑cortisol (anti-inflammatory feedback); underlies sickness behavior"],
+    ["Stress reduction (reversal)","Exercise, β-blocker (pharmacological)","Exercise (↑BDNF, ↓baseline cortisol), mindfulness (↓amygdala reactivity), CBT (↓cortisol spikes), social support (↑oxytocin), sleep (restores circadian rhythm)"]
+  ]
+};
+
+// ── RENDER FUNCTIONS ──────────────────────────────────────────────────────────
+
+function renderFlashcards(){
+  const grid=document.getElementById('fc-grid');
+  grid.innerHTML=flashcards.map((c,i)=>`
+    <div class="flip-card" id="fc${i}" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-front"><p>${c.q}</p><span class="card-hint">tap to reveal</span></div>
+        <div class="flip-back"><p>${c.a.replace(/\n/g,'<br>')}</p></div>
+      </div>
+    </div>`).join('');
+}
+
+function renderMCQ(){
+  const con=document.getElementById('mcq-container');
+  con.innerHTML=mcqs.map((q,qi)=>`
+    <div class="mcq-block">
+      <div class="mcq-stem">Q${qi+1}. ${q.stem}</div>
+      <div class="mcq-options" id="opts${qi}">
+        ${q.options.map((o,oi)=>`
+          <button class="opt-btn" id="opt${qi}_${oi}" onclick="selectOpt(${qi},${oi})">
+            ${o}
+            <div class="opt-expl" id="expl${qi}_${oi}">${q.explanations[oi]}</div>
+          </button>`).join('')}
+      </div>
+      <div class="teaching-box" id="teach${qi}"><strong>Teaching Point:</strong> ${q.teaching}</div>
+    </div>`).join('');
+}
+
+function selectOpt(qi,oi){
+  const q=mcqs[qi];
+  for(let i=0;i<q.options.length;i++){
+    const btn=document.getElementById(`opt${qi}_${i}`);
+    btn.disabled=true;
+    btn.classList.add(i===q.correct?'correct':'wrong');
+    document.getElementById(`expl${qi}_${i}`).style.display='block';
+  }
+  document.getElementById(`teach${qi}`).style.display='block';
+}
+
+function renderVignettes(){
+  const con=document.getElementById('vig-container');
+  con.innerHTML=vignettes.map((v,i)=>`
+    <div class="vignette">
+      <div style="margin-bottom:12px"><span class="badge">${v.badge}</span><h3 style="font-size:16px;font-weight:700;margin-top:4px">${v.title}</h3></div>
+      <div class="vignette-case">${v.stem.replace(/\n/g,'<br>')}</div>
+      <button onclick="toggleAnswer('va${i}',this)" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:8px 18px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit">Show Answer</button>
+      <div id="va${i}" style="display:none;margin-top:14px;background:#0D1117;border-left:3px solid var(--green);padding:14px 16px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7;color:#C9D1D9">${v.answer.replace(/\n/g,'<br>')}</div>
+    </div>`).join('');
+}
+
+function toggleAnswer(id,btn){
+  const el=document.getElementById(id);
+  const show=el.style.display==='none';
+  el.style.display=show?'block':'none';
+  btn.textContent=show?'Hide Answer':'Show Answer';
+}
+
+function renderTraps(){
+  document.getElementById('traps-container').innerHTML=traps.map(t=>`
+    <div class="trap-card">
+      <div class="trap-label">⚠ ${t.label}</div>
+      <div class="trap-title">${t.title}</div>
+      <div class="trap-body">${t.body}</div>
+    </div>`).join('');
+}
+
+function renderFIB(){
+  const con=document.getElementById('fib-container');
+  con.innerHTML=fibItems.map((item,i)=>`
+    <div class="fib-block">
+      <div class="fib-q">Q${i+1}. ${item.q}</div>
+      <div class="fib-row">
+        <input class="fib-input" id="fib${i}" placeholder="Type your answer..." onkeydown="if(event.key==='Enter')checkFIB(${i})">
+        <button class="fib-check" onclick="checkFIB(${i})">Check</button>
+      </div>
+      <div class="fib-result" id="fibres${i}"></div>
+    </div>`).join('');
+}
+
+function checkFIB(i){
+  const val=document.getElementById(`fib${i}`).value.trim().toLowerCase();
+  const item=fibItems[i];
+  const res=document.getElementById(`fibres${i}`);
+  let correct;
+  if(item.multi){
+    correct=item.answers.some(pair=>pair.every(a=>val.includes(a.toLowerCase())));
+  } else {
+    correct=item.answers[0].some(a=>val.includes(a.toLowerCase()));
+  }
+  res.style.display='block';
+  res.className='fib-result '+(correct?'correct':'wrong');
+  if(correct){
+    res.innerHTML='✓ Correct! '+item.hint;
+  } else {
+    const ansDisplay=item.multi?item.answers[0].join(' + '):item.answers[0][0];
+    res.innerHTML=`✗ Review: Expected "${ansDisplay}" — Hint: ${item.hint}`;
+  }
+}
+
+function renderRef(){
+  const {headers,rows}=refData;
+  document.getElementById('ref-container').innerHTML=`
+    <div class="ref-table-wrap">
+      <table>
+        <thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+        <tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table>
+    </div>`;
+}
+
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+renderFlashcards();
+renderMCQ();
+renderVignettes();
+renderTraps();
+renderFIB();
+renderRef();
+</script>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Physiology L4: GH Axis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--accent:#1565C0;--accent-dark:#0D47A1;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',sans-serif;background:#0D1117;color:#E6EDF3;min-height:100vh;}
+        .container{max-width:1100px;margin:0 auto;padding:20px;}
+        .header{background:linear-gradient(135deg,#161B22 0%,#0D1A2E 100%);border-bottom:3px solid var(--accent);padding:28px 30px;margin-bottom:28px;border-radius:10px;}
+        .header .back{font-size:0.8em;color:#6B7280;text-decoration:none;display:inline-block;margin-bottom:10px;}
+        .header .back:hover{color:var(--accent);}
+        .header h1{color:#E6EDF3;font-size:1.9em;margin-bottom:6px;}
+        .header .subtitle{color:#9CA3AF;font-size:0.9em;}
+        .header .accent-tag{color:#90CAF9;font-weight:600;}
+        .tab-nav{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;background:#161B22;padding:12px;border-radius:8px;border:1px solid #21262D;}
+        .tab-btn{padding:9px 18px;background:#1C2128;color:#8B949E;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.88em;transition:all 0.2s;}
+        .tab-btn:hover{background:#30363D;color:var(--accent);}
+        .tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+        .tab-content{display:none;animation:fadeIn 0.25s ease;}
+        .tab-content.active{display:block;}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+        .fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+        .fc{background:#161B22;border:1px solid #30363D;border-radius:10px;cursor:pointer;perspective:800px;min-height:160px;}
+        .fc-inner{position:relative;width:100%;height:100%;min-height:160px;transform-style:preserve-3d;transition:transform 0.5s;}
+        .fc.flipped .fc-inner{transform:rotateY(180deg);}
+        .fc-front,.fc-back{position:absolute;width:100%;min-height:160px;backface-visibility:hidden;padding:18px;border-radius:10px;display:flex;flex-direction:column;justify-content:center;}
+        .fc-front{background:#161B22;border-top:3px solid var(--accent);}
+        .fc-back{background:#0D1A2E;transform:rotateY(180deg);border-top:3px solid #4ADE80;}
+        .fc-label{font-size:0.7em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+        .fc-front .fc-label{color:#90CAF9;}
+        .fc-back .fc-label{color:#4ADE80;}
+        .fc-q{font-size:0.95em;color:#E6EDF3;line-height:1.5;font-weight:500;}
+        .fc-a{font-size:0.92em;color:#D1FAE5;line-height:1.5;}
+        .fc-hint{margin-top:10px;font-size:0.75em;color:#6B7280;text-align:center;}
+        .mcq-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:20px;margin-bottom:16px;}
+        .mcq-num{font-size:0.75em;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+        .mcq-stem{font-size:0.95em;color:#E6EDF3;margin-bottom:14px;line-height:1.6;}
+        .mcq-stem strong{color:#FCD34D;}
+        .mcq-options{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+        .mcq-opt{padding:10px 14px;background:#1C2128;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-size:0.9em;color:#C9D1D9;transition:all 0.2s;display:flex;align-items:flex-start;gap:10px;}
+        .mcq-opt:hover:not(.revealed){background:#21262D;border-color:var(--accent);}
+        .mcq-opt.correct{background:rgba(74,222,128,0.15);border-color:#4ADE80;color:#D1FAE5;}
+        .mcq-opt.wrong{background:rgba(239,68,68,0.1);border-color:#EF4444;color:#FCA5A5;}
+        .mcq-opt .letter{font-weight:700;min-width:20px;}
+        .mcq-explanation{background:#1C2128;border-left:3px solid #4ADE80;padding:12px 14px;border-radius:0 6px 6px 0;font-size:0.87em;color:#9CA3AF;display:none;margin-top:4px;}
+        .mcq-explanation.visible{display:block;}
+        .mcq-explanation .exp-label{color:#4ADE80;font-weight:600;margin-bottom:4px;}
+        .teaching-pt{background:rgba(21,101,192,0.12);border:1px solid var(--accent);border-radius:8px;padding:12px 14px;margin-top:10px;font-size:0.87em;color:#BBDEFB;display:none;}
+        .teaching-pt.visible{display:block;}
+        .teaching-pt .tp-label{font-weight:700;color:#90CAF9;margin-bottom:4px;}
+        .vig-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:22px;margin-bottom:20px;}
+        .vig-banner{background:rgba(21,101,192,0.2);border:1px solid var(--accent);border-radius:6px;padding:8px 14px;font-size:0.8em;color:#BBDEFB;font-weight:600;margin-bottom:14px;}
+        .vig-stem{font-size:0.93em;line-height:1.7;color:#D1D5DB;margin-bottom:14px;}
+        .vig-stem strong{color:#FCD34D;}
+        .trap-item{background:#1A1212;border:1px solid #7F1D1D;border-radius:10px;padding:18px;margin-bottom:14px;}
+        .trap-header{color:#FCA5A5;font-size:0.85em;font-weight:700;margin-bottom:8px;}
+        .trap-myth{background:rgba(239,68,68,0.1);border-left:3px solid #EF4444;padding:8px 12px;border-radius:0 6px 6px 0;font-size:0.9em;color:#FCA5A5;margin-bottom:8px;}
+        .trap-truth{background:rgba(74,222,128,0.1);border-left:3px solid #4ADE80;padding:8px 12px;border-radius:0 6px 6px 0;font-size:0.9em;color:#D1FAE5;}
+        .trap-myth-label{font-size:0.75em;color:#EF4444;font-weight:700;margin-bottom:4px;}
+        .trap-truth-label{font-size:0.75em;color:#4ADE80;font-weight:700;margin-bottom:4px;}
+        .fib-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:18px;margin-bottom:14px;}
+        .fib-prompt{font-size:0.93em;color:#E6EDF3;margin-bottom:12px;line-height:1.6;}
+        .fib-input{width:100%;background:#0D1117;border:1px solid #30363D;border-radius:6px;padding:8px 12px;color:#E6EDF3;font-size:0.9em;font-family:'Inter',sans-serif;margin-bottom:8px;}
+        .fib-input:focus{outline:none;border-color:var(--accent);}
+        .fib-btn{background:var(--accent);color:white;border:none;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:600;}
+        .fib-result{margin-top:8px;font-size:0.88em;padding:8px 12px;border-radius:6px;display:none;}
+        .fib-result.correct{background:rgba(74,222,128,0.15);color:#D1FAE5;border:1px solid #4ADE80;display:block;}
+        .fib-result.incorrect{background:rgba(239,68,68,0.1);color:#FCA5A5;border:1px solid #EF4444;display:block;}
+        .ref-table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:0.88em;}
+        .ref-table th{background:var(--accent);color:white;padding:9px 12px;text-align:left;}
+        .ref-table td{padding:8px 12px;border:1px solid #30363D;color:#C9D1D9;vertical-align:top;}
+        .ref-table tr:nth-child(even) td{background:#161B22;}
+        .ref-table tr:nth-child(odd) td{background:#1C2128;}
+        .ref-table td.hl{color:#90CAF9;font-weight:600;}
+        .section-title{font-size:0.8em;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #21262D;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="GUSOM-Phys-ActiveDrills.html" class="back">← Back to Physiology Hub</a>
+        <h1>Lecture 4: <span class="accent-tag">Hypothalamic-Pituitary-GH Axis</span></h1>
+        <div class="subtitle">GHRH · GH · IGF-1 · Dual roles of GH · Disorders: Dwarfism · Laron · Gigantism · Acromegaly</div>
+    </div>
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
+    </div>
+    <div id="tab-flashcards" class="tab-content active"><div class="section-title">Flashcards — Click to Flip</div><div class="fc-grid" id="fcGrid"></div></div>
+    <div id="tab-mcq" class="tab-content"><div class="section-title">MCQ Practice</div><div id="mcqContainer"></div></div>
+    <div id="tab-vignettes" class="tab-content"><div class="section-title">Clinical Vignettes</div><div id="vigContainer"></div></div>
+    <div id="tab-traps" class="tab-content"><div class="section-title">⚠️ Test Traps</div><div id="trapsContainer"></div></div>
+    <div id="tab-fib" class="tab-content"><div class="section-title">Fill-in-Blank</div><div id="fibContainer"></div></div>
+    <div id="tab-ref" class="tab-content"><div class="section-title">Quick Reference</div><div id="refContainer"></div></div>
+</div>
+<script>
+function switchTab(n){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');event.target.classList.add('active');}
+
+const flashcards=[
+{q:"Trace the GH axis: hypothalamus → pituitary → target organs. What are the feedback loops?",a:"GHRH → somatotropes → GH → liver (primary) + muscle/adipose/bone.\nIGF-1 from liver: long-loop (→ ↓GHRH, ↑SS, ↓GH)\nGH: short-loop (→ ↓GHRH, ↑SS)\nGHRH: ultrashort-loop (auto-inhibits itself)"},
+{q:"What are the two major roles of GH depending on nutritional state?",a:"FED state (high AA): Protein anabolism — ↑protein synthesis, ↑glucose uptake (insulin-like effects), cell division\nFASTING state (low glucose): Glucose-sparing — ↑lipolysis, ↓glucose uptake in muscle/adipose, ↑gluconeogenesis (liver). Preserves glucose for brain."},
+{q:"Why is insulin required for GH to drive IGF-1 production?",a:"Insulin UPREGULATES GH receptor expression on liver cells. Without insulin (e.g., in T1DM), even normal GH secretion cannot trigger adequate IGF-1 release from the liver → growth failure despite normal GH levels."},
+{q:"What is GHBP and IGFBP? Why do they matter?",a:"GHBP (GH-binding protein): circulates with ~50% of GH, extends half-life from minutes to ~20 min.\nIGFBP (IGF-binding protein): >99% of IGF-1 circulates bound; half-life extended to ~12 hours. IGFBP proteases release IGF-1 to activate it. Much longer-acting signal than GH itself."},
+{q:"Distinguish gigantism from acromegaly.",a:"GIGANTISM: Excess GH BEFORE epiphyseal plate closure (childhood/puberty). Proportionate tall stature; heart failure is #1 cause of death (heart must supply enormous body).\nACROMEGALY: Excess GH AFTER epiphyseal plate closure (adult). Plates fused → can't grow taller. Instead: acral enlargement (hands, feet, jaw), macroglossia, skin thickening, organ enlargement, insulin resistance → DM, bitemporal hemianopsia if pituitary mass."},
+{q:"What is Laron syndrome and what is the diagnostic pattern?",a:"Laron syndrome = GH receptor (or post-receptor signaling) mutation. GH is made normally (often elevated) but cannot signal → no IGF-1 production.\nDiagnostic pattern: ↑GH + ↓IGF-1 + NO response to recombinant GH injection.\nTreatment: recombinant IGF-1 (mecasermin), NOT recombinant GH."},
+{q:"Name 5 major stimulators of GH secretion.",a:"1. Fasting / hypoglycemia (↓glucose)\n2. High serum amino acids\n3. Deep sleep (slow-wave, stage 4) / melatonin\n4. Exercise (most powerful acute stimulus)\n5. Sex steroids (puberty: estradiol, testosterone amplify GH)"},
+{q:"Name 4 major inhibitors of GH secretion.",a:"1. Hyperglycemia (elevated blood glucose — most important inhibitor)\n2. Elevated free fatty acids\n3. Chronic hypercortisolemia (Cushing's, prolonged stress)\n4. Somatostatin (GHIH) — the direct hypothalamic inhibitor of somatotropes"},
+{q:"What is the diabetogenic effect of GH?",a:"Chronically elevated GH → ↑glucose-sparing in muscle/adipose → sustained hyperglycemia → insulin resistance. Over time, this can deplete beta-cell reserve → true T2DM. Disorders with excess GH (acromegaly, gigantism) have markedly ↑risk of DM. This is why an OGTT (glucose suppression test) is used to diagnose acromegaly — normal: GH suppresses; acromegaly: GH fails to suppress."},
+{q:"When during a person's life is GH most important?",a:"Most CRITICAL: Childhood (linear growth requires GH starting shortly after birth). Highest LEVELS: Puberty (sex steroids amplify GH → final growth spurts). Least critical: Adulthood (other hormones compensate). Note: Fetal growth uses hPL from placenta, not maternal GH."},
+];
+
+const mcqs=[
+{stem:"A 49-year-old man presents with gradual enlargement of his hands and feet over 10 years, deepening of his voice, and new-onset headaches. Serum IGF-1 is markedly elevated. An oral glucose tolerance test shows GH level of 8 ng/mL (should suppress to <1). MRI reveals a <strong>1.2 cm pituitary adenoma</strong>. What is the diagnosis and first-line treatment?",
+options:["Gigantism; recombinant GH receptor antagonist","Acromegaly; surgical resection of pituitary adenoma","Laron syndrome; recombinant IGF-1","Cushing's disease; transsphenoidal adenomectomy","Pituitary dwarfism; recombinant GH"],
+correct:1,
+explanations:["Gigantism occurs BEFORE epiphyseal closure (childhood). This is an adult with post-closure changes = acromegaly.","CORRECT. Acromegaly = GH excess after epiphyseal plate closure → acral enlargement, organomegaly, insulin resistance. GH fails to suppress on OGTT = diagnostic. MRI shows pituitary adenoma (GH-secreting). First-line: transsphenoidal surgical resection. Adjuncts: somatostatin analogues (octreotide), dopamine agonists, GH receptor antagonist (pegvisomant).","Laron syndrome: GH HIGH but IGF-1 LOW. This patient has HIGH IGF-1 — opposite pattern.","Cushing's disease = pituitary ACTH adenoma → excess cortisol. Different hormone entirely.","Pituitary dwarfism = GH deficiency in childhood. This adult has excess GH."],
+teaching:"OGTT GH suppression test: normal → GH suppresses to <1 ng/mL after glucose load. Acromegaly → GH fails to suppress (sometimes paradoxically rises). This is the gold-standard diagnostic test for acromegaly."
+},
+{stem:"A 14-year-old girl is evaluated for short stature. Her bone age is 11 years. GH level is low on stimulation testing. IGF-1 is low. She responds to recombinant GH therapy with improved growth velocity. What is the diagnosis?",
+options:["Laron syndrome","Acromegaly","Pituitary dwarfism (GH deficiency)","Constitutional growth delay","Hypothyroidism"],
+correct:2,
+explanations:["Laron syndrome: GH would be NORMAL or HIGH (receptor can't respond). Treatment with recombinant GH would NOT work. This patient responds to GH → pituitary (not receptor) is the problem.","Acromegaly = excess GH → tall stature, not short.","CORRECT. GH deficiency from pituitary (pituitary dwarfism): low GH on stimulation + low IGF-1 + responds to recombinant GH. Proportionate short stature, delayed bone age.","Constitutional growth delay: GH stimulation test would be normal. Bone age delayed but eventual normal adult height expected.","Hypothyroidism can cause growth failure but would present with specific T3/T4 findings; GH stimulation would be normal."],
+teaching:"Pituitary dwarfism: pituitary can't make GH → ↓GH + ↓IGF-1 + responds to exogenous GH. Proportionate body. Laron: pituitary makes GH (high or normal) but receptor broken → ↑GH + ↓IGF-1 + does NOT respond to exogenous GH → need exogenous IGF-1."
+},
+{stem:"A child has uncontrolled Type 1 diabetes mellitus (complete insulin deficiency). Despite having normal GH secretion and pituitary function, the child has significantly impaired linear growth. What is the mechanism?",
+options:["GH directly requires insulin as a co-factor for receptor binding","Without insulin, the liver cannot upregulate GH receptors → impaired IGF-1 production","T1DM causes autoimmune destruction of somatotropes","GH is metabolically inactivated by high blood glucose","Insulin deficiency causes low IGF-1 binding protein production"],
+correct:1,
+explanations:["GH does not require insulin as a receptor co-factor.","CORRECT. Insulin upregulates GH receptor expression on hepatocytes. No insulin → reduced GH receptor expression → liver cannot respond to GH → reduced IGF-1 production → impaired growth. GH is made normally, but the insulin 'permission' to make IGF-1 is missing.","T1DM is autoimmune destruction of beta cells, not somatotropes.","Hyperglycemia does not metabolically inactivate GH.","IGFBP changes are not the primary mechanism here."],
+teaching:"GH → IGF-1 axis REQUIRES insulin as a permissive factor (upregulates GH receptor on liver). In uncontrolled T1DM: no insulin → liver ignores GH → no IGF-1 → growth failure. Children with T1DM on inadequate insulin therapy can develop Mauriac syndrome (growth retardation, hepatomegaly). Explains why 'a balanced meal promotes growth.'"
+},
+{stem:"During which period of sleep is the largest pulse of GH secretion expected?",
+options:["REM sleep in early morning (stage 5)","Light sleep (stage 1-2) occurring immediately after lying down","Deep slow-wave sleep (stage 3-4) occurring shortly after sleep onset","During the dream phase when brain activity is highest","Equally distributed throughout all stages of sleep"],
+correct:2,
+explanations:["REM sleep (stage 5): brain is active, vivid dreams. GH pulses are NOT largest here.","Early light sleep: GH has not peaked yet.","CORRECT. The largest daily GH pulse occurs during DEEP SLOW-WAVE SLEEP (stages 3-4), typically 1-2 hours after sleep onset. Melatonin rises with darkness → also contributes. This is why 'sleeping is when you grow' — tissue repair is maximal during deep sleep GH pulses.","Dream (REM) phase is not the peak GH time.","GH is strongly pulsatile and definitely NOT uniform across sleep stages."],
+teaching:"GH secretion pattern: largest pulse = deep sleep (stage 4) + melatonin. Exercise also causes a large pulse. After the large sleep peak, the next pulse will be smaller (dual regulatory pathways → somatostatin rises after peak → suppresses subsequent pulse). Clinical application: GH therapy in children should consider timing relative to sleep."
+},
+{stem:"A patient with acromegaly develops progressive difficulty fitting into gloves, frontal headaches, and is found to have bitemporal hemianopsia on visual field testing. Which structure is being compressed by the pituitary adenoma?",
+options:["Optic tract (left or right)","Optic radiations in the temporal lobe","Optic chiasm","Optic nerve (CN II) at the orbit","Lateral geniculate nucleus"],
+correct:2,
+explanations:["Optic tract compression: homonymous hemianopsia (ipsilateral visual field loss on both eyes). Bitemporal = bilateral temporal field loss = chiasm.","Optic radiation compression: quadrantanopia or homonymous hemianopsia.","CORRECT. The optic chiasm sits JUST ABOVE the pituitary gland. A growing pituitary adenoma expands upward → compresses the crossing nasal fibers at the chiasm → BITEMPORAL HEMIANOPSIA (loss of peripheral vision in both temporal visual fields — 'tunnel vision'). Classic pituitary mass finding.","CN II in the orbit is too far anterior to be compressed by a pituitary mass.","Lateral geniculate: too far posterior."],
+teaching:"Pituitary adenoma → suprasellar extension → compresses optic chiasm → BITEMPORAL HEMIANOPSIA. Always check visual fields in patients with pituitary masses. The bitemporal pattern is because the nasal retinal fibers (serving temporal visual fields) are the ones that cross at the chiasm."
+},
+{stem:"Which of the following best describes the metabolic action of GH in adipose tissue during the fasting state?",
+options:["Promotes glucose uptake into adipocytes via GLUT-4 translocation","Stimulates triglyceride synthesis and fat storage","Promotes lipolysis → releases free fatty acids and glycerol into blood","Inhibits hormone-sensitive lipase activity","Increases leptin secretion from adipocytes"],
+correct:2,
+explanations:["GLUT-4 translocation is an insulin effect. GH opposes insulin action in the fasting state.","GH does NOT promote fat storage in fasting — it mobilizes fat stores.","CORRECT. In the fasting state, GH promotes LIPOLYSIS in adipose tissue → releases FFAs + glycerol → FFAs serve as energy substrate for most tissues → spares glucose for brain. This is the glucose-sparing effect of GH.","GH ACTIVATES hormone-sensitive lipase (or signaling that leads to lipolysis) — does not inhibit it.","Leptin is regulated by fat mass and feeding state; not primarily by GH."],
+teaching:"GH glucose-sparing effects in fasting: (1) ↓Glucose uptake in muscle/adipose, (2) ↑Lipolysis in adipose (FFAs as fuel), (3) ↑Gluconeogenesis in liver. Together: blood glucose preserved for brain. Chronically: these effects cause insulin resistance (diabetogenic)."
+},
+{stem:"A 10-year-old girl has been receiving pulsatile GnRH therapy to induce puberty. Her physician notes that she has started a major growth spurt. Which mechanism BEST explains why puberty correlates with the peak in linear growth?",
+options:["GnRH directly stimulates somatotropes to secrete GH","Estrogen from developing gonads amplifies GH secretion and IGF-1 production","Puberty increases cortisol, which stimulates the GH axis","LH and FSH directly stimulate bone plate chondrocytes","Progesterone closes epiphyseal plates, triggering final growth spurt"],
+correct:1,
+explanations:["GnRH acts on gonadotropes, not somatotropes directly.","CORRECT. Sex steroids (estradiol, testosterone) rising during puberty amplify GH secretion from somatotropes → higher GH peaks → ↑IGF-1 → maximal linear growth. Estrogens also increase IGF-1 receptor expression in chondrocytes. This is why pubertal growth spurts are so dramatic.","Cortisol in chronic excess actually INHIBITS GH.","LH/FSH stimulate gonads to produce sex steroids; they don't act directly on chondrocytes.","Progesterone is part of the female cycle; estrogen (estradiol) closes epiphyseal plates by stimulating final ossification at the end of puberty."],
+teaching:"Puberty peak growth = sex steroids → amplify GH axis → highest lifetime GH levels → massive IGF-1 → chondrocyte proliferation. At the END of puberty, estrogen (even in males via aromatization of testosterone) causes epiphyseal plate fusion/closure → linear growth stops."
+},
+{stem:"A 19-year-old is found to have an extremely elevated random GH level. His height is 7'2\". He was always the tallest child in school and his feet grew to size 17 by age 15. He now presents with worsening heart failure. What is the most likely cause of his cardiac disease?",
+options:["GH-induced hypertension causing left ventricular hypertrophy","Insulin resistance from diabetogenic effect of GH causing cardiomyopathy","The massive body size requires an enlarged heart to supply blood, leading to eccentric hypertrophy and eventual failure","Excess GH stimulates cardiomyocyte proliferation causing hypertrophic cardiomyopathy","Low cortisol from pituitary compression causing adrenal insufficiency-related cardiac failure"],
+correct:2,
+explanations:["Hypertension can contribute, but the primary driver is mechanical.","Diabetogenic effects and insulin resistance are more associated with acromegaly and long-term; the primary cause here is mechanical.","CORRECT. In gigantism, the heart must pump blood through a body of extraordinary size — the heart enlarges (eccentric hypertrophy) to compensate → eventually fails. This is the #1 cause of death in gigantism. The metabolic demands of an enormous body exceed what any heart can sustain indefinitely.","GH can cause some myocardial hypertrophy, but the primary issue in gigantism is mechanical pump failure.","Pituitary compression causing Addison's is possible but not the primary cardiac mechanism."],
+teaching:"Gigantism #1 cause of death = HEART FAILURE. The heart has to supply an enormous body → mechanical overload → dilated cardiomyopathy/failure. This is distinct from acromegaly (where insulin resistance, hypertension, and sleep apnea are additional cardiovascular risk factors)."
+},
+{stem:"A researcher is studying IGF-1 signal transduction. They find that IGF-1 receptor activation triggers MAPK and PI3K pathways. What cellular outcomes do these pathways MOST mediate?",
+options:["Cell death (apoptosis) and differentiation only","Mitogenesis (cell division) and anti-apoptotic survival signaling","Steroidogenesis in adrenal cells","Sodium-potassium pump regulation","Insulin secretion from pancreatic beta cells"],
+correct:1,
+explanations:["IGF-1 is anti-apoptotic (pro-survival), not pro-apoptotic.","CORRECT. IGF-1 receptor → MAPK (mitogen-activated protein kinase) → cell proliferation and differentiation. PI3K → Akt → anti-apoptotic survival. Together: IGF-1 is mitogenic (drives cell division) AND anti-apoptotic (prevents programmed cell death). This explains why excess IGF-1 (in acromegaly) increases cancer risk — specifically colon cancer, breast cancer.","Steroidogenesis is ACTH/LH/FSH-mediated, not primarily IGF-1.","Na-K pump regulation is not a major IGF-1 function.","Beta cell insulin secretion is driven by glucose/incretins, not IGF-1."],
+teaching:"IGF-1 = powerful mitogen + survival factor → explains why acromegaly patients have elevated risk of colon polyps/colon cancer (screen with colonoscopy in all acromegaly patients). Cancer surveillance is an important part of acromegaly management."
+},
+{stem:"Which oral glucose tolerance test (OGTT) result would be MOST consistent with acromegaly?",
+options:["GH suppresses from 15 ng/mL to 0.3 ng/mL at 2 hours post-glucose","GH suppresses from 8 ng/mL to <1 ng/mL at 1 hour post-glucose","GH remains at 12 ng/mL at 2 hours despite glucose load (fails to suppress)","GH rises from undetectable to 18 ng/mL after glucose load","GH is undetectable at baseline and remains undetectable throughout"],
+correct:2,
+explanations:["Normal response — GH suppresses completely. Rules out acromegaly.","Normal response — GH suppresses to <1. Rules out acromegaly.","CORRECT. In acromegaly, GH fails to suppress below 1 ng/mL (or nadir >1) after a glucose load. This is the GOLD STANDARD diagnostic test. Normal physiology: high glucose → inhibits GHRH → somatostatin rises → GH suppressed. In acromegaly: tumor autonomously secretes GH regardless of glucose.","GH rising after glucose (paradoxical rise) is the most extreme acromegaly finding — highly diagnostic.","Undetectable baseline GH = GH deficiency (pituitary dwarfism). Opposite of acromegaly."],
+teaching:"OGTT for acromegaly: give 75g glucose → measure GH at 0, 30, 60, 90, 120 min. Normal: nadir GH <1 ng/mL. Acromegaly: GH nadir >1 ng/mL. Some patients have a paradoxical rise. The elevated IGF-1 is the screening test; OGTT confirms."
+}
+];
+
+const vignettes=[
+{banner:"Clinical Vignette | Acromegaly",
+stem:`A 50-year-old man returns to see his physician after 5 years. The doctor notices that his face looks different — his jaw appears more prominent, his nose wider, and his brow more prominent than before. The patient mentions his ring size increased from 10 to 13 in 8 years, and he now wears size 14 shoes (was size 11). He reports <strong>increasing fatigue, excessive sweating, and occasional headaches</strong>. Random GH is 28 ng/mL, IGF-1 is 650 ng/mL (markedly elevated for age). Fasting glucose 118 mg/dL (impaired).`,
+question:"What sequence of events led to this presentation?",
+options:["Low GH from pituitary failure → compensatory GH receptor upregulation → receptor-driven growth","GH receptor gain-of-function mutation → autonomous tissue growth without pituitary involvement","GH-secreting pituitary adenoma → autonomously elevated GH → liver IGF-1 → acral tissue/bone growth + insulin resistance","Ectopic IGF-1 secretion from liver tumor → peripheral tissue growth independent of GH","Chronic hypercortisolemia from adrenal tumor → tissue hypertrophy and metabolic changes"],
+correct:2,
+explanations:["Pituitary failure causes LOW GH, not growth. Receptor upregulation doesn't cause the clinical syndrome.","GH receptor gain-of-function would give ↑GH effect with normal GH level. This patient has markedly elevated GH.","CORRECT. GH-secreting pituitary adenoma → sustained high GH → liver IGF-1 ↑↑ → acral growth (slow, over years), organomegaly, skin thickening, insulin resistance (→ impaired fasting glucose), metabolic effects. The slow progression explains why it takes 8-12 years to diagnose acromegaly on average.","Ectopic IGF-1 is theoretically possible but rare; GH would be low in that case (suppressed by negative feedback).","Cushing's: central obesity, striae, NOT acral enlargement."],
+teaching:"Acromegaly hallmarks: gradual jaw/hands/feet enlargement (acral = extremities), skin thickening, ↑sweating, headaches (from tumor), bitemporal hemianopsia (if chiasm compressed), insulin resistance → DM, and colon cancer risk. Mean time to diagnosis: 8-12 years (insidious onset). Always measure IGF-1 as screening test."
+},
+{banner:"Clinical Vignette | Laron Syndrome vs GH Deficiency",
+stem:`Two children are referred for evaluation of short stature. Child A: GH level undetectable on stimulation testing; IGF-1 low; responds with improved growth after recombinant GH injections. Child B: GH level 22 ng/mL on stimulation testing (high); IGF-1 markedly low; no improvement after 6 months of high-dose recombinant GH; MRI of pituitary is normal.`,
+question:"Which diagnosis matches each child?",
+options:["Child A = Laron syndrome; Child B = GH deficiency","Child A = constitutional growth delay; Child B = pituitary dwarfism","Child A = GH deficiency (pituitary dwarfism); Child B = Laron syndrome","Both children have central hypothyroidism","Child A = acromegaly; Child B = gigantism"],
+correct:2,
+explanations:["The key differentiator is GH level on stimulation + response to exogenous GH. Child A has LOW GH → pituitary is the problem. Laron would have HIGH GH.","Constitutional growth delay: GH stimulation test is normal. Child A has undetectable GH.","CORRECT. Child A: ↓GH + responds to recombinant GH = pituitary dwarfism (can't make GH; kidney is intact and responds to signal). Child B: ↑GH + ↓IGF-1 + no response to exogenous GH = Laron syndrome (receptor can't respond; making GH but can't use it). Child B needs recombinant IGF-1.","No evidence for central hypothyroidism in either.","Acromegaly/gigantism = GH excess with tall stature, not short."],
+teaching:"The distinguishing test: GH stimulation test + response to exogenous GH. GH deficiency: LOW GH → RESPONDS to recombinant GH. Laron syndrome: HIGH GH → DOES NOT respond → IGF-1 is treatment."
+},
+{banner:"Clinical Vignette | GH & Nutrition",
+stem:`A 17-year-old male athlete eats a meal of white rice, sugar-sweetened beverages, and candy before a workout (high carbohydrate, very low protein). His trainer wants to know if this pre-workout meal will optimize muscle growth and recovery. A comparison is made to a meal with adequate protein (chicken, eggs, complex carbohydrates).`,
+question:"Based on GH axis physiology, which meal is more conducive to GH-mediated muscle growth after the workout?",
+options:["High-carb meal, because glucose is the primary fuel for post-workout protein synthesis","Both meals are equal because exercise is the dominant GH stimulus regardless of nutrition","Balanced meal (protein + carbs), because high AA drives GH release, and insulin enables IGF-1 production in the liver","High-carb meal only if workout is very intense","Neither — GH only matters for growth during sleep, not post-workout"],
+correct:2,
+explanations:["High carb → hyperglycemia → inhibits GH release. Not conducive to GH-mediated growth.","Exercise IS a major GH stimulus, but nutrition determines whether the GH can translate to IGF-1 and muscle growth.","CORRECT. A balanced meal: (1) High AA → stimulates GH secretion. (2) Moderate glucose → insulin response → insulin upregulates GH receptor on liver → IGF-1 production enabled. High-carb only: hyperglycemia suppresses GH; low AA means no stimulus for anabolic GH release.","High carb without protein blunts the GH response regardless of workout intensity.","GH also has important post-workout pulses (exercise stimulates large GH pulse). Sleep is the largest pulse, but post-workout matters."],
+teaching:"'A balanced meal promotes growth': high AA → ↑GH; moderate glucose → insulin → enables liver IGF-1. High carb only → ↑glucose → ↓GH + insufficient AA for anabolism. This is the physiological basis for post-workout nutrition timing and protein intake in growth/muscle repair."
+},
+{banner:"Clinical Vignette | Fasting & GH",
+stem:`A healthy 24-year-old medical student fasts for 24 hours (water only). At the end of the fast, his GH level is significantly elevated. His blood glucose is 62 mg/dL, insulin is undetectable, and serum free fatty acids are elevated.`,
+question:"Which of the following best describes the metabolic role of the elevated GH at this point?",
+options:["GH drives glucose uptake into muscle and adipose to correct hypoglycemia","GH promotes protein synthesis in muscle to prevent catabolism","GH spares glucose by promoting lipolysis and inhibiting glucose uptake in muscle/adipose; preserving brain glucose supply","GH stimulates pancreatic beta cells to secrete insulin","GH is elevated to drive bone growth in preparation for resumed eating"],
+correct:2,
+explanations:["GH OPPOSES insulin in fasting — it INHIBITS glucose uptake into muscle/adipose. The opposite of this option.","GH in fasting: protein catabolism CAN occur in muscle to supply gluconeogenic substrates. GH is not primarily anabolic in the fasted state.","CORRECT. Fasting GH: ↑lipolysis (FFAs → fuel for most tissues), ↓glucose uptake in muscle/adipose (glucose-sparing), ↑gluconeogenesis in liver → maintains brain glucose supply during extended fast. This is the glucose-sparing effect.","GH opposes insulin. Does not stimulate beta cells.","GH doesn't specifically promote bone growth during fasting (no adequate substrates)."],
+teaching:"GH is the 'fasting guardian hormone': protects blood glucose for the brain during starvation by making the rest of the body use fat instead. Chronically elevated fasting GH → insulin resistance. This also explains why prolonged fasting can cause insulin resistance even without T2DM."
+}
+];
+
+const traps=[
+{title:"TRAP #1: GH level alone diagnoses GH disorders",myth:"A single elevated GH measurement confirms GH excess, and a single low GH rules out acromegaly.",truth:"GH is pulsatile — a random high value may be a normal pulse. Diagnosis of acromegaly requires OGTT (oral glucose tolerance test): normal GH suppresses to <1 ng/mL. Acromegaly: GH fails to suppress. IGF-1 is the best SCREENING test (reflects integrated 24-hour GH exposure)."},
+{title:"TRAP #2: Laron syndrome is the same as pituitary dwarfism",myth:"Laron syndrome = 'severe pituitary dwarfism' because both cause short stature.",truth:"Laron syndrome has HIGH GH (pituitary working overtime trying to compensate) but LOW IGF-1 (receptor can't respond). Pituitary dwarfism has LOW GH and LOW IGF-1 (pituitary can't make GH). They look clinically similar but have opposite GH levels and DIFFERENT treatments: dwarfism → recombinant GH; Laron → recombinant IGF-1."},
+{title:"TRAP #3: Estrogen closes growth plates (so gives more growth)",myth:"The estrogen surge in puberty directly stimulates bone growth and increases final adult height.",truth:"Estrogen (rising in puberty) initially STIMULATES growth (via GH/IGF-1 amplification). But sustained high estrogen at the END of puberty causes EPIPHYSEAL PLATE FUSION (ossification) → LINEAR GROWTH STOPS. Estrogen (even from testosterone aromatization in males) is what closes growth plates. This is why very early puberty → short final height (plates close too soon)."},
+{title:"TRAP #4: GH and insulin have opposing roles in ALL tissues",myth:"GH and insulin always oppose each other in every tissue.",truth:"In the FED state, GH has INSULIN-LIKE effects in many tissues (promotes glucose uptake, protein synthesis). Only in the FASTING state does GH become anti-insulin (glucose-sparing). Context determines GH's metabolic role. In both fed and fasted states, GH drives IGF-1 from liver (indirectly mitogenic/anabolic)."},
+{title:"TRAP #5: Fetal growth is GH-dependent",myth:"Maternal GH or fetal GH drives intrauterine growth, so GH-deficient infants are born small.",truth:"Fetal growth is largely GH-INDEPENDENT. It is driven by placental factors (hPL), insulin (fetal), and IGF-1/IGF-2. GH-deficient infants are born with NORMAL size — growth failure emerges postnatally when GH becomes necessary. This is a classic exam point."},
+];
+
+const fibs=[
+{prompt:"GH excess BEFORE epiphyseal plate closure causes ________. GH excess AFTER epiphyseal plate closure causes ________.",answers:["gigantism","acromegaly"],hint:"Gigantism (before) / Acromegaly (after)"},
+{prompt:"The ________ is the primary target organ for GH; GH stimulates it to release ________ (also called somatomedin C), which has a half-life of ~12 hours.",answers:["liver","igf-1","igf1","somatomedin"],hint:"Liver → IGF-1 (somatomedin C)"},
+{prompt:"In Laron syndrome, GH levels are ________ and IGF-1 levels are ________. Treatment is recombinant ________, NOT recombinant GH.",answers:["high","elevated","raised","low","decreased","igf-1","igf1"],hint:"GH = HIGH; IGF-1 = LOW; Treat with recombinant IGF-1"},
+{prompt:"The gold standard test for diagnosing acromegaly is the ________ test. Normal: GH suppresses to < ________ ng/mL after glucose load.",answers:["ogtt","oral glucose","glucose tolerance","1"],hint:"OGTT (oral glucose tolerance test); GH must suppress to <1 ng/mL"},
+{prompt:"GH in the fasting state promotes ________ in adipose and ________ in the liver to maintain brain glucose supply.",answers:["lipolysis","gluconeogenesis"],hint:"Lipolysis in adipose + gluconeogenesis in liver"}
+];
+
+const refData={
+headers:["Feature","GH Deficiency","Laron Syndrome","Gigantism","Acromegaly"],
+rows:[
+["GH level","⭐ LOW","⭐ HIGH or normal","⭐ HIGH","⭐ HIGH"],
+["IGF-1 level","Low","⭐ Very LOW","High","High"],
+["Bone age","Delayed","Delayed","Advanced","N/A (adult)"],
+["Timing","Childhood onset","Childhood onset","Before epiphyseal closure","After epiphyseal closure"],
+["Response to recombinant GH","✅ Responds — grows","❌ Does NOT respond","N/A (excess GH, not deficiency)","N/A"],
+["Primary treatment","Recombinant GH","Recombinant IGF-1","Surgery (adenomectomy)","Surgery; octreotide; pegvisomant"],
+["#1 cause of death (if untreated)","Short stature complications","Similar to dwarfism","⭐ Heart failure (massive body)","CV disease, DM complications"],
+]
+};
+
+function renderFlashcards(){const g=document.getElementById('fcGrid');flashcards.forEach((fc,i)=>{g.innerHTML+=`<div class="fc" id="fc-${i}" onclick="flipCard(${i})"><div class="fc-inner"><div class="fc-front"><div class="fc-label">Question</div><div class="fc-q">${fc.q}</div><div class="fc-hint">Click to flip</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${fc.a.replace(/\n/g,'<br>')}</div></div></div></div>`;});}
+function flipCard(i){document.getElementById('fc-'+i).classList.toggle('flipped');}
+function renderMCQ(){const c=document.getElementById('mcqContainer');mcqs.forEach((q,qi)=>{let o=q.options.map((opt,oi)=>`<div class="mcq-opt" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${opt}</span></div><div class="mcq-explanation" id="exp-${qi}-${oi}"><div class="exp-label">${oi===q.correct?'✅ Correct':'❌ Incorrect'}</div>${q.explanations[oi]}</div>`).join('');c.innerHTML+=`<div class="mcq-item"><div class="mcq-num">Q${qi+1}/${mcqs.length}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options">${o}</div><div class="teaching-pt" id="tp-${qi}"><div class="tp-label">🎯 Teaching Point</div>${q.teaching}</div></div>`;});}
+function selectOpt(qi,oi){const q=mcqs[qi];q.options.forEach((_,idx)=>{const el=document.getElementById(`opt-${qi}-${idx}`);el.classList.add('revealed');el.style.pointerEvents='none';if(idx===q.correct)el.classList.add('correct');else el.classList.add('wrong');document.getElementById(`exp-${qi}-${idx}`).classList.add('visible');});document.getElementById(`tp-${qi}`).classList.add('visible');}
+function renderVignettes(){const c=document.getElementById('vigContainer');vignettes.forEach((v,vi)=>{let o=v.options.map((opt,oi)=>`<div class="mcq-opt" id="vopt-${vi}-${oi}" onclick="selectVigOpt(${vi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${opt}</span></div><div class="mcq-explanation" id="vexp-${vi}-${oi}"><div class="exp-label">${oi===v.correct?'✅ Correct':'❌ Incorrect'}</div>${v.explanations[oi]}</div>`).join('');c.innerHTML+=`<div class="vig-item"><div class="vig-banner">🏥 ${v.banner}</div><div class="vig-stem">${v.stem}</div><p style="font-weight:600;color:#BBDEFB;margin-bottom:12px;font-size:0.93em;">${v.question}</p><div class="mcq-options">${o}</div><div class="teaching-pt" id="vtp-${vi}"><div class="tp-label">🎯 Teaching Point</div>${v.teaching}</div></div>`;});}
+function selectVigOpt(vi,oi){const v=vignettes[vi];v.options.forEach((_,idx)=>{const el=document.getElementById(`vopt-${vi}-${idx}`);el.classList.add('revealed');el.style.pointerEvents='none';if(idx===v.correct)el.classList.add('correct');else el.classList.add('wrong');document.getElementById(`vexp-${vi}-${idx}`).classList.add('visible');});document.getElementById(`vtp-${vi}`).classList.add('visible');}
+function renderTraps(){const c=document.getElementById('trapsContainer');traps.forEach(t=>{c.innerHTML+=`<div class="trap-item"><div class="trap-header">⚠️ ${t.title}</div><div class="trap-myth"><div class="trap-myth-label">❌ COMMON MISCONCEPTION</div>${t.myth}</div><div class="trap-truth"><div class="trap-truth-label">✅ WHAT'S ACTUALLY TRUE</div>${t.truth}</div></div>`;});}
+function renderFIB(){const c=document.getElementById('fibContainer');fibs.forEach((f,fi)=>{c.innerHTML+=`<div class="fib-item"><div class="fib-prompt">${f.prompt}</div><input class="fib-input" id="fib-input-${fi}" placeholder="Type your answer..."/><button class="fib-btn" onclick="checkFIB(${fi})">Check</button><div class="fib-result" id="fib-result-${fi}"></div></div>`;});}
+function checkFIB(fi){const inp=document.getElementById(`fib-input-${fi}`).value.trim().toLowerCase();const f=fibs[fi];const ok=f.answers.some(a=>inp.includes(a.toLowerCase()));const el=document.getElementById(`fib-result-${fi}`);el.className='fib-result '+(ok?'correct':'incorrect');el.textContent=ok?`✅ Correct! ${f.hint}`:`❌ Not quite. Hint: ${f.hint}`;}
+function renderRef(){const c=document.getElementById('refContainer');let h=`<table class="ref-table"><tr>`;refData.headers.forEach(hdr=>h+=`<th>${hdr}</th>`);h+='</tr>';refData.rows.forEach(row=>{h+='<tr>';row.forEach(cell=>{const cls=cell.includes('⭐')?'hl':'';h+=`<td class="${cls}">${cell}</td>`;});h+='</tr>';});h+='</table>';c.innerHTML=h;}
+renderFlashcards();renderMCQ();renderVignettes();renderTraps();renderFIB();renderRef();
+</script>
+</body>
+</html>

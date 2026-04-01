@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Physiology L5: HPA Axis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--accent:#E65100;--accent-dark:#BF360C;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Inter',sans-serif;background:#0D1117;color:#E6EDF3;min-height:100vh;}
+        .container{max-width:1100px;margin:0 auto;padding:20px;}
+        .header{background:linear-gradient(135deg,#161B22 0%,#1A1008 100%);border-bottom:3px solid var(--accent);padding:28px 30px;margin-bottom:28px;border-radius:10px;}
+        .header .back{font-size:0.8em;color:#6B7280;text-decoration:none;display:inline-block;margin-bottom:10px;}
+        .header .back:hover{color:var(--accent);}
+        .header h1{color:#E6EDF3;font-size:1.9em;margin-bottom:6px;}
+        .header .subtitle{color:#9CA3AF;font-size:0.9em;}
+        .header .accent-tag{color:#FFCC80;font-weight:600;}
+        .tab-nav{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;background:#161B22;padding:12px;border-radius:8px;border:1px solid #21262D;}
+        .tab-btn{padding:9px 18px;background:#1C2128;color:#8B949E;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.88em;transition:all 0.2s;}
+        .tab-btn:hover{background:#30363D;color:var(--accent);}
+        .tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+        .tab-content{display:none;animation:fadeIn 0.25s ease;}
+        .tab-content.active{display:block;}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+        .fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+        .fc{background:#161B22;border:1px solid #30363D;border-radius:10px;cursor:pointer;perspective:800px;min-height:160px;}
+        .fc-inner{position:relative;width:100%;height:100%;min-height:160px;transform-style:preserve-3d;transition:transform 0.5s;}
+        .fc.flipped .fc-inner{transform:rotateY(180deg);}
+        .fc-front,.fc-back{position:absolute;width:100%;min-height:160px;backface-visibility:hidden;padding:18px;border-radius:10px;display:flex;flex-direction:column;justify-content:center;}
+        .fc-front{background:#161B22;border-top:3px solid var(--accent);}
+        .fc-back{background:#1A1008;transform:rotateY(180deg);border-top:3px solid #4ADE80;}
+        .fc-label{font-size:0.7em;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+        .fc-front .fc-label{color:#FFCC80;}
+        .fc-back .fc-label{color:#4ADE80;}
+        .fc-q{font-size:0.95em;color:#E6EDF3;line-height:1.5;font-weight:500;}
+        .fc-a{font-size:0.92em;color:#D1FAE5;line-height:1.5;}
+        .fc-hint{margin-top:10px;font-size:0.75em;color:#6B7280;text-align:center;}
+        .mcq-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:20px;margin-bottom:16px;}
+        .mcq-num{font-size:0.75em;color:#6B7280;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;}
+        .mcq-stem{font-size:0.95em;color:#E6EDF3;margin-bottom:14px;line-height:1.6;}
+        .mcq-stem strong{color:#FCD34D;}
+        .mcq-options{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+        .mcq-opt{padding:10px 14px;background:#1C2128;border:1px solid #30363D;border-radius:6px;cursor:pointer;font-size:0.9em;color:#C9D1D9;transition:all 0.2s;display:flex;align-items:flex-start;gap:10px;}
+        .mcq-opt:hover:not(.revealed){background:#21262D;border-color:var(--accent);}
+        .mcq-opt.correct{background:rgba(74,222,128,0.15);border-color:#4ADE80;color:#D1FAE5;}
+        .mcq-opt.wrong{background:rgba(239,68,68,0.1);border-color:#EF4444;color:#FCA5A5;}
+        .mcq-opt .letter{font-weight:700;min-width:20px;}
+        .mcq-explanation{background:#1C2128;border-left:3px solid #4ADE80;padding:12px 14px;border-radius:0 6px 6px 0;font-size:0.87em;color:#9CA3AF;display:none;margin-top:4px;}
+        .mcq-explanation.visible{display:block;}
+        .mcq-explanation .exp-label{color:#4ADE80;font-weight:600;margin-bottom:4px;}
+        .teaching-pt{background:rgba(230,81,0,0.1);border:1px solid var(--accent);border-radius:8px;padding:12px 14px;margin-top:10px;font-size:0.87em;color:#FFE0B2;display:none;}
+        .teaching-pt.visible{display:block;}
+        .teaching-pt .tp-label{font-weight:700;color:#FFCC80;margin-bottom:4px;}
+        .vig-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:22px;margin-bottom:20px;}
+        .vig-banner{background:rgba(230,81,0,0.15);border:1px solid var(--accent);border-radius:6px;padding:8px 14px;font-size:0.8em;color:#FFE0B2;font-weight:600;margin-bottom:14px;}
+        .vig-stem{font-size:0.93em;line-height:1.7;color:#D1D5DB;margin-bottom:14px;}
+        .vig-stem strong{color:#FCD34D;}
+        .trap-item{background:#1A1212;border:1px solid #7F1D1D;border-radius:10px;padding:18px;margin-bottom:14px;}
+        .trap-header{color:#FCA5A5;font-size:0.85em;font-weight:700;margin-bottom:8px;}
+        .trap-myth{background:rgba(239,68,68,0.1);border-left:3px solid #EF4444;padding:8px 12px;border-radius:0 6px 6px 0;font-size:0.9em;color:#FCA5A5;margin-bottom:8px;}
+        .trap-truth{background:rgba(74,222,128,0.1);border-left:3px solid #4ADE80;padding:8px 12px;border-radius:0 6px 6px 0;font-size:0.9em;color:#D1FAE5;}
+        .trap-myth-label{font-size:0.75em;color:#EF4444;font-weight:700;margin-bottom:4px;}
+        .trap-truth-label{font-size:0.75em;color:#4ADE80;font-weight:700;margin-bottom:4px;}
+        .fib-item{background:#161B22;border:1px solid #30363D;border-radius:10px;padding:18px;margin-bottom:14px;}
+        .fib-prompt{font-size:0.93em;color:#E6EDF3;margin-bottom:12px;line-height:1.6;}
+        .fib-input{width:100%;background:#0D1117;border:1px solid #30363D;border-radius:6px;padding:8px 12px;color:#E6EDF3;font-size:0.9em;font-family:'Inter',sans-serif;margin-bottom:8px;}
+        .fib-input:focus{outline:none;border-color:var(--accent);}
+        .fib-btn{background:var(--accent);color:white;border:none;padding:7px 16px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:600;}
+        .fib-result{margin-top:8px;font-size:0.88em;padding:8px 12px;border-radius:6px;display:none;}
+        .fib-result.correct{background:rgba(74,222,128,0.15);color:#D1FAE5;border:1px solid #4ADE80;display:block;}
+        .fib-result.incorrect{background:rgba(239,68,68,0.1);color:#FCA5A5;border:1px solid #EF4444;display:block;}
+        .ref-table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:0.88em;}
+        .ref-table th{background:var(--accent);color:white;padding:9px 12px;text-align:left;}
+        .ref-table td{padding:8px 12px;border:1px solid #30363D;color:#C9D1D9;vertical-align:top;}
+        .ref-table tr:nth-child(even) td{background:#161B22;}
+        .ref-table tr:nth-child(odd) td{background:#1C2128;}
+        .ref-table td.hl{color:#FFCC80;font-weight:600;}
+        .ref-table td.hl-red{color:#F87171;font-weight:600;}
+        .section-title{font-size:0.8em;font-weight:700;color:#6B7280;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #21262D;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="GUSOM-Phys-ActiveDrills.html" class="back">← Back to Physiology Hub</a>
+        <h1>Lecture 5: <span class="accent-tag">Hypothalamic-Pituitary-Adrenal Axis</span></h1>
+        <div class="subtitle">Adrenal layers · SAM axis · CRH-ACTH-Cortisol · POMC · Cortisol actions · Cushing's · Addison's · CAH · 11β-HSD2</div>
+    </div>
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
+    </div>
+    <div id="tab-flashcards" class="tab-content active"><div class="section-title">Flashcards — Click to Flip</div><div class="fc-grid" id="fcGrid"></div></div>
+    <div id="tab-mcq" class="tab-content"><div class="section-title">MCQ Practice</div><div id="mcqContainer"></div></div>
+    <div id="tab-vignettes" class="tab-content"><div class="section-title">Clinical Vignettes</div><div id="vigContainer"></div></div>
+    <div id="tab-traps" class="tab-content"><div class="section-title">⚠️ Test Traps</div><div id="trapsContainer"></div></div>
+    <div id="tab-fib" class="tab-content"><div class="section-title">Fill-in-Blank</div><div id="fibContainer"></div></div>
+    <div id="tab-ref" class="tab-content"><div class="section-title">Quick Reference</div><div id="refContainer"></div></div>
+</div>
+<script>
+function switchTab(n){document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');event.target.classList.add('active');}
+
+const flashcards=[
+{q:"Name the 3 adrenal cortex layers and their products. Mnemonic?",a:"Outer → Zona Glomerulosa → Mineralocorticoids (aldosterone)\nMiddle → Zona Fasciculata → Glucocorticoids (cortisol)\nInner → Zona Reticularis → Androgens (DHEA, androstenedione)\nMnemonic: 'GFR = Salt, Sugar, Sex' (outer to inner)"},
+{q:"What is POMC and what are its cleavage products?",a:"POMC = proopiomelanocortin (prohormone in corticotropes of anterior pituitary). Cleavage products: ACTH (39 aa), MSH (13 aa — fully contained within ACTH sequence), β-endorphin, β-lipotropin. All co-released when ACTH is released."},
+{q:"What regulates aldosterone secretion? What does NOT regulate it?",a:"PRIMARY regulators: Angiotensin II (RAAS) and extracellular K⁺ (hyperkalemia directly stimulates glomerulosa).\nACTH: permissive only (maintains enzyme expression; does NOT trigger aldosterone release).\nCortisol: does NOT regulate aldosterone release (11β-HSD2 converts cortisol to inactive cortisone in kidney to prevent cortisol from activating MR)."},
+{q:"Describe all major metabolic actions of cortisol.",a:"↑Glycogenolysis; ↑gluconeogenesis (liver); ↑protein catabolism (muscle → AA substrate); ↑lipolysis (adipose); Induces insulin resistance in muscle/adipose → hyperglycemia. Liver: ↑AA uptake, ↑protein synthesis, ↑plasma protein secretion. Net: raises blood glucose, spares glucose for brain/muscles."},
+{q:"What are the immune/anti-inflammatory effects of cortisol?",a:"↓Arachidonic acid pathway (→ ↓prostaglandins, leukotrienes)\n↓T-cell cytokine release (↓IL-2, interferon)\n↓Antibody production (sustained cortisol)\n↓Fibroblast activity → ↓collagen/ECM\nPermissive: adrenal insufficiency → ↑eosinophils (no cortisol suppression)"},
+{q:"What is the role of 11β-HSD2 in mineralocorticoid specificity?",a:"11β-HSD2 (hydroxysteroid dehydrogenase type 2): expressed in aldosterone-sensitive tissues (kidney collecting duct, colon, salivary glands). Converts active CORTISOL → inactive CORTISONE. This prevents cortisol from flooding and activating MRs (since cortisol has nearly equal affinity for MR and GR). Without 11β-HSD2 (deficiency or inhibition by licorice/glycyrrhizin) → cortisol activates MR → hypertension + hypokalemia."},
+{q:"Cushing's disease vs Cushing's syndrome: what's the difference? ACTH levels?",a:"Cushing's DISEASE: ACTH-secreting pituitary adenoma → ↑ACTH → ↑cortisol + hyperpigmentation (excess ACTH cleaved to MSH).\nCushing's SYNDROME: Excess cortisol from ANY cause. If adrenal tumor: ↓ACTH (cortisol feeds back → suppresses CRH/ACTH). If ectopic ACTH (small cell lung cancer): ↑↑ACTH.\nAll share the same cortisol excess signs (moon face, buffalo hump, striae, osteoporosis, DM, HTN)."},
+{q:"Classic findings of Addison's disease and mechanism of each.",a:"↓Cortisol → fatigue, hypoglycemia, hypotension, ↑eosinophils (loss of immunosuppression)\n↓Aldosterone → hyponatremia, hyperkalemia, salt craving, ↓BP\n↓Androgens → ↓pubic/axillary hair (in women especially)\n↑ACTH (loss of long-loop feedback) → ↑MSH → hyperpigmentation (bronze tan, mucous membranes)\nCause: autoimmune (#1), TB/infection"},
+{q:"What is the cortisol circadian rhythm and why does it matter?",a:"Cortisol peaks at WAKING (~6-8 AM) and declines throughout the day. Pre-waking rise driven by ↑CRH (SCN-mediated) → ↑ACTH → ↑cortisol → glucose mobilized from glycogen (after overnight fast). Lowest levels in early sleep. Clinical: exogenous steroid given at night → maximal suppression of HPA axis (suppresses the morning CRH surge). Cushing's screening: midnight salivary cortisol (should be near zero; elevated = Cushing's)."},
+{q:"What is the permissive effect of cortisol on adrenergic receptors?",a:"Cortisol upregulates adrenergic receptor expression in vascular smooth muscle and other tissues. Without cortisol (adrenal insufficiency), vasopressors (NE, EPI) have markedly REDUCED efficacy → refractory hypotension. This is why adrenal crisis requires immediate hydrocortisone (not just fluids/vasopressors). Physiological cortisol is permissive for normal hemodynamic response to catecholamines."},
+{q:"What enzyme is deficient in classic CAH, and what accumulates as a result?",a:"21-hydroxylase (CYP21A2) deficiency — the most common CAH (95% of cases).\nBlocked reaction: 17-hydroxyprogesterone (17-OHP) → 11-deoxycortisol (→ cortisol path) AND progesterone → deoxycorticosterone (→ aldosterone path).\nResult: ↓Cortisol + ↓Aldosterone → ↑↑ACTH (no feedback) → adrenal hyperplasia + shunting of precursors to androgens (DHEA, androstenedione → testosterone).\nDiagnostic marker: ↑↑ 17-hydroxyprogesterone (17-OHP) on newborn screen or serum."},
+{q:"Describe the classic neonatal presentation of salt-wasting CAH.",a:"Salt-wasting CAH (21-hydroxylase deficiency, 75% of classic cases):\n↓Aldosterone → Na⁺ wasted, K⁺ retained → hyponatremia + hyperkalemia\n↓Cortisol → hypoglycemia + stress intolerance\n↑Androgens → ambiguous genitalia in 46,XX females (virilization: clitoral enlargement, labial fusion)\nPresents at 1–2 weeks of life with: vomiting, dehydration, shock, ↓Na⁺, ↑K⁺\nMale neonates: appear normal at birth → crisis first presentation (no virilization sign)\nTreatment: hydrocortisone (replaces cortisol, suppresses ACTH) + fludrocortisone (replaces aldosterone)"},
+{q:"How do you distinguish CAH from Addison's disease on labs?",a:"BOTH: ↑ACTH + ↓cortisol + ↓aldosterone + hypoNa + hyperK\nKEY DIFFERENCES:\nCAH: ↑↑ 17-OHP (builds up behind enzyme block) — NOT elevated in Addison's\nCAH: ↑Androgens (DHEA, testosterone) → virilization in females, precocious puberty\nCAH: Adrenal glands are HYPERPLASTIC (excess ACTH + androgenic precursors)\nAddison's: ↓Androgens (adrenal cortex destroyed); ↓ 17-OHP or normal\nAddison's: Adrenal glands are ATROPHIC (autoimmune destruction)\nAge: CAH presents in neonates/infants; Addison's typically adults"},
+];
+
+const mcqs=[
+{stem:"A 45-year-old woman develops easy bruisability, central obesity with thin extremities, purple striae on her abdomen, and a rounded 'moon face.' Her serum cortisol is elevated. Dexamethasone suppression testing shows <strong>low-dose dex does NOT suppress cortisol</strong>, but high-dose dex DOES suppress cortisol. What is the most likely diagnosis?",
+options:["Primary adrenal tumor secreting cortisol autonomously","Ectopic ACTH-producing tumor (small cell lung cancer)","Cushing's disease (ACTH-secreting pituitary adenoma)","Exogenous steroid use","Addison's disease"],
+correct:2,
+explanations:["Adrenal tumor: ACTH would be suppressed (cortisol feeds back → pituitary shuts down ACTH). AND high-dose dex would NOT suppress (tumor is autonomous). Low-dose doesn't suppress in any Cushing's type (low-dose dex screens for Cushing's — anything that is Cushing's fails to suppress with low-dose).","Ectopic ACTH (e.g., small cell lung cancer): ACTH is VERY high, cortisol very high. NEITHER low nor high dose dex suppresses (ectopic tumor doesn't have pituitary dex receptor feedback). Doesn't fit — high-dose dex suppresses here.","CORRECT. Cushing's DISEASE (pituitary adenoma): The pituitary tumor still has some feedback response, just at a higher threshold. High-dose dex (8 mg) can still suppress the pituitary tumor's ACTH secretion. Low-dose (1 mg) does NOT suppress (shifted set point). Hallmark: suppresses with HIGH-dose dex but NOT low-dose.","Exogenous steroids: ACTH would be suppressed (exogenous steroid provides long-loop feedback → pituitary shuts down). BOTH doses of dex would suppress (patient is receiving exogenous GC; dex would add to it but also suppress).","Addison's = hypocortisolism (opposite of this clinical picture)."],
+teaching:"Dex suppression test: Overnight 1-mg test (low-dose) — screens for ANY Cushing's. Pituitary Cushing's: suppresses with 8-mg (high-dose) but not 1-mg. Adrenal Cushing's: ACTH already low; neither dose suppresses. Ectopic ACTH: neither dose suppresses (ectopic tumor insensitive to feedback)."
+},
+{stem:"A 32-year-old woman with known Addison's disease presents to the ER after vomiting for 2 days and unable to keep her oral hydrocortisone down. She is hypotensive (BP 78/50), and lethargic. Na⁺ 122 mEq/L, K⁺ 6.2 mEq/L. What is the mechanism of her hypotension and the MOST important immediate treatment?",
+options:["Hyponatremia causing cerebral edema → CNS-mediated hypotension; treat with hypertonic saline","Low cortisol → loss of permissive effect on vascular adrenergic receptors + low aldosterone → Na⁺/H₂O loss; treat with IV hydrocortisone + normal saline","Low ACTH → myocardial dysfunction; treat with ACTH infusion","GnRH suppression causing low sex steroids → hypotension; treat with sex steroid replacement","Low MSH → vasodilation; treat with synthetic MSH"],
+correct:1,
+explanations:["Hypertonic saline would worsen the hyperkalemia and is not the first-line. The hypotension here is adrenal-mediated.","CORRECT. Adrenal crisis: (1) ↓Cortisol → loss of permissive effect on vascular adrenergic receptors → vasopressors don't work → refractory hypotension. (2) ↓Aldosterone → Na⁺/water wasting → hypovolemia → shock. Treatment: IV hydrocortisone (100 mg IV immediately, then 50-100 mg q6-8h) + 0.9% NS for volume resuscitation. Life-threatening emergency.","ACTH infusion wouldn't help if adrenal gland is destroyed (Addison's = primary adrenal failure).","Sex steroids don't directly mediate this acute hemodynamic crisis.","MSH doesn't regulate vascular tone in this way."],
+teaching:"Adrenal crisis = medical emergency. Life-threatening: refractory hypotension + hyponatremia + hyperkalemia. Treat with IV HYDROCORTISONE (not just fluids — cortisol is needed to restore adrenergic sensitivity). Also replace volume with NS. Fludrocortisone (mineralocorticoid) added after stabilization for long-term aldosterone replacement."
+},
+{stem:"A patient with a large pituitary tumor has the following lab abnormalities: Low cortisol, low ACTH, low TSH, low T4, low LH, low FSH, low testosterone, low IGF-1, and elevated prolactin. What is the mechanism for the elevated prolactin?",
+options:["The pituitary tumor is a prolactinoma secreting prolactin directly","Pituitary cell destruction has paradoxically stimulated lactotropes","Stalk compression by the tumor prevents dopamine from reaching the anterior pituitary","Low TRH from hypothalamic damage stimulates prolactin","Low cortisol has removed the inhibitory effect on prolactin secretion"],
+correct:2,
+explanations:["Prolactinomas do cause elevated prolactin, but a non-secreting tumor with stalk compression is the context here (all other hormones are LOW, suggesting destruction/compression, not a secreting adenoma).","Pituitary destruction would reduce prolactin production, not increase it, unless the stalk is compressed.","CORRECT. Stalk effect: the pituitary tumor compresses the infundibular stalk → dopamine (PIH) from hypothalamus cannot reach the anterior pituitary → dopaminergic inhibition of lactotropes is removed → prolactin rises. All other hormones fall (lose their releasing hormones). Classic: non-functioning pituitary adenoma + elevated prolactin = stalk effect, not prolactinoma.","Low TRH would REDUCE prolactin (TRH stimulates both TSH and PRL).","Low cortisol doesn't directly cause elevated prolactin."],
+teaching:"Pan-hypopituitarism + elevated prolactin = stalk effect from non-functioning adenoma. Distinguish from prolactinoma (which gives isolated prolactin elevation). Treatment differs: prolactinoma → dopamine agonist (cabergoline/bromocriptine); non-functioning adenoma with stalk effect → resect the mass."
+},
+{stem:"A patient develops hypertension and severe hypokalemia. Serum aldosterone is undetectable. Serum cortisol is elevated. She is on no medications. She has been eating large amounts of black licorice daily. What is the mechanism?",
+options:["Black licorice contains synthetic aldosterone that activates MR directly","Glycyrrhizin in licorice inhibits 11β-HSD2 → cortisol activates mineralocorticoid receptors","Licorice stimulates the adrenal zona glomerulosa to produce excess aldosterone","Licorice contains phytoestrogens that activate MR via estrogen receptor crosstalk","Licorice blocks GR, diverting cortisol to exclusively activate MR"],
+correct:1,
+explanations:["Black licorice does not contain synthetic aldosterone.","CORRECT. Glycyrrhizin (active compound in natural black licorice) is a potent INHIBITOR of 11β-HSD2 → cortisol is NOT converted to inactive cortisone in kidney/aldosterone-sensitive tissues → cortisol accumulates and activates MINERALOCORTICOID RECEPTORS (MR) → sodium retention, potassium excretion → hypertension + hypokalemia. Aldosterone is LOW (suppressed by high 'effective mineralocorticoid' activity feedback).","Aldosterone is LOW — the glomerulosa is not overproducing it.","Phytoestrogens do not explain MR activation in this manner.","GR blockade would cause cortisol to accumulate, but the MR pathway still requires 11β-HSD2 to be present."],
+teaching:"11β-HSD2 is the 'gatekeeper' protecting MR from cortisol. Block 11β-HSD2 → cortisol becomes a mineralocorticoid → HTN + hypokalemia + LOW aldosterone. Same mechanism: apparent mineralocorticoid excess syndrome (genetic 11β-HSD2 deficiency), carbenoxolone, excessive licorice ingestion."
+},
+{stem:"A patient with septic shock on vasopressors is not responding to norepinephrine or phenylephrine at high doses. Serum cortisol is found to be low. What is the physiological basis for the refractory hypotension?",
+options:["Low cortisol causes bradycardia, reducing cardiac output","Low cortisol directly causes vasodilation through cGMP pathway","Without cortisol, the permissive upregulation of vascular adrenergic receptor expression is lost → vasopressors have reduced efficacy","Low cortisol causes ACTH to rise, which then blocks adrenergic receptors","Cortisol deficiency causes severe acidosis, impairing catecholamine binding"],
+correct:2,
+explanations:["Cortisol deficiency can cause mild bradycardia indirectly, but primary mechanism is vascular resistance.","Cortisol doesn't primarily act via cGMP for its hemodynamic effects.","CORRECT. Cortisol upregulates adrenergic receptor expression (α1, β1) in vascular smooth muscle and heart — a permissive effect. Without cortisol → ↓adrenergic receptors → vasopressors (NE, phenylephrine) cannot work effectively → refractory hypotension. This is why stress-dose hydrocortisone is given in vasopressor-dependent septic shock when adrenal insufficiency is suspected.","ACTH does not block adrenergic receptors.","Acidosis can impair catecholamine effects, but the primary mechanism here is receptor downregulation."],
+teaching:"Cortisol's permissive effect on hemodynamics: crucial in critical illness. 'Relative adrenal insufficiency of critical illness' — patients who don't mount adequate cortisol response may need 'stress-dose steroids' (hydrocortisone 200-300 mg/day IV). This is controversial but supported by evidence in vasopressor-dependent septic shock."
+},
+{stem:"A 28-year-old woman who has taken prednisone 40 mg daily for 6 months for Crohn's disease is abruptly stopping the medication without tapering. Which complication should she be warned about?",
+options:["Addisonian crisis from HPA axis suppression","Immediate Cushing's syndrome symptoms appearing","Rebound hypercortisolism from overactivated adrenal glands","Autoimmune adrenalitis triggered by steroid withdrawal","Permanent destruction of corticotropes requiring lifelong replacement"],
+correct:0,
+explanations:["CORRECT. Long-term exogenous glucocorticoids → suppress CRH and ACTH via long-loop feedback → adrenal glands atrophy (no ACTH stimulation) → sudden stoppage = adrenal glands can't produce cortisol fast enough → Addisonian crisis risk: hypotension, nausea, fatigue, electrolyte abnormalities. Must TAPER steroids slowly to allow HPA recovery.","Cushing's symptoms were present DURING steroid use. After stopping, they would resolve, not appear.","Adrenal glands have been suppressed/atrophied, not hyperactivated.","Autoimmune adrenalitis is a cause of PRIMARY adrenal insufficiency — not a withdrawal effect.","Corticotrope suppression is usually REVERSIBLE with slow taper, but recovery takes months. Permanent destruction is rare."],
+teaching:"HPA suppression from exogenous steroids: rule of thumb — any patient taking >20 mg prednisone/day for >3 weeks likely has HPA suppression. NEVER stop abruptly. Taper slowly (speed depends on duration/dose). Patients need 'sick day rules' — double their steroid dose if ill (unable to mount stress cortisol response)."
+},
+{stem:"Which of the following is a direct effect of ACTH on the adrenal cortex?",
+options:["ACTH directly triggers aldosterone release from zona glomerulosa","ACTH stimulates cholesterol uptake and conversion to pregnenolone in zona fasciculata cells","ACTH binds to mineralocorticoid receptors to promote sodium retention","ACTH directly stimulates epinephrine release from the adrenal medulla","ACTH inhibits cortisol synthesis to prevent excess glucocorticoid production"],
+correct:1,
+explanations:["ACTH is permissive for mineralocorticoid synthesis but does NOT directly trigger aldosterone release. Aldosterone is triggered by Ang II and hyperkalemia.","CORRECT. ACTH binds MC2R on zona fasciculata cells → Gs → cAMP → PKA → (1) StAR protein expression (moves cholesterol into mitochondria) + (2) upregulates steroidogenic enzymes → cholesterol converted to pregnenolone → subsequent enzymatic steps → cortisol.","ACTH binds MC2R (not MR). MR binds aldosterone and cortisol.","ACTH acts on the cortex, not the medulla. The medulla is regulated by sympathetic preganglionic neurons.","ACTH STIMULATES cortisol synthesis — it's the main driver."],
+teaching:"ACTH → zona fasciculata → StAR protein (mitochondrial cholesterol transport) + enzyme upregulation → pregnenolone → cortisol. The rate-limiting step in steroidogenesis is cholesterol transport into the mitochondria (via StAR). ACTH controls this."
+},
+{stem:"A medical student is reviewing cortisol actions for her Step 1 exam. She correctly identifies that cortisol affects bone. Which of the following best describes cortisol's effect on bone?",
+options:["↑ Osteoblast activity → ↑ bone formation → increased bone density","↓ Osteoblast activity + ↑ osteoclast signaling + ↑ renal Ca²⁺ excretion → osteoporosis","↑ Calcium absorption from GI tract → hypercalcemia → bone resorption","Cortisol has no significant effect on bone; only PTH and calcitriol regulate bone","↓ Osteoclast activity → decreased bone resorption → improved bone density"],
+correct:1,
+explanations:["Cortisol inhibits osteoblasts (not stimulates). The opposite is true.","CORRECT. Cortisol: (1) Directly inhibits osteoblasts → ↓bone formation, (2) Increases signals driving osteoclast activity → ↑bone resorption, (3) Decreases GI Ca²⁺ absorption (opposes calcitriol), (4) Increases renal Ca²⁺ excretion → negative calcium balance → osteoporosis. This is why chronic steroid use is a major cause of secondary osteoporosis.","Cortisol DECREASES GI Ca²⁺ absorption (by opposing calcitriol action in gut). Opposite of this option.","Cortisol has major effects on bone — one of the biggest clinical problems of chronic steroid use.","Cortisol INCREASES osteoclast activity (bone resorption)."],
+teaching:"Steroid-induced osteoporosis: cortisol → ↓osteoblasts + ↑osteoclasts + ↓Ca²⁺ absorption + ↑Ca²⁺ excretion → net bone loss. Patients on long-term steroids need calcium + vitamin D supplementation and possibly bisphosphonates. Bone density monitoring (DEXA scan) recommended."
+},
+{stem:"A 55-year-old woman with metastatic small cell lung cancer develops hyponatremia, confusion, and muscle cramps. Serum Na⁺ 115 mEq/L. Urine osmolality 650 mOsm/kg (concentrated). Serum ACTH is markedly elevated at 2,400 pg/mL. What endocrine syndrome is most consistent?",
+options:["Central diabetes insipidus from brain metastases","Primary adrenal insufficiency from adrenal metastases","Ectopic ACTH syndrome from tumor → hypercortisolism → also co-secretion of ADH → SIADH-like picture","Addison's disease from autoimmune destruction","Secondary hypothyroidism from pituitary metastases"],
+correct:2,
+explanations:["Central DI: hypernatremia + dilute urine. This patient has hyponatremia + concentrated urine — opposite.","Primary adrenal insufficiency: ACTH would be elevated, but the tumor context and the hyponatremia pattern here suggest something else. Also, Addison's wouldn't cause this ACTH level from an adrenal source.","CORRECT. Small cell lung cancer is the #1 cause of ectopic ACTH production. Markedly elevated ACTH → severe hypercortisolism. Additionally, ectopic ACTH tumors often also secrete ADH (or the hypercortisolism itself affects Na⁺ balance) → SIADH-like picture with hyponatremia. Very high ACTH, rapid onset, metabolic alkalosis, hypokalemia, and glucose intolerance are characteristic.","Addison's = low cortisol + high ACTH, but not from a tumor secreting its own ACTH. This ACTH is ectopic.","Secondary hypothyroidism: low TSH, low T4. Not related to the finding here."],
+teaching:"Ectopic ACTH syndrome: small cell lung cancer (#1), carcinoid tumors. Features: very high ACTH (often >200-300 pg/mL), rapid onset of hypercortisolism, hypokalemia (ACTH → massive cortisol → some MR binding), metabolic alkalosis. Often presents without classic Cushing's habitus (too rapid onset). Neither low-dose nor high-dose dex suppresses."
+},
+{stem:"A <strong>2-week-old genetic female (46,XX)</strong> presents to the ER with poor feeding, vomiting, lethargy, and shock. Parents report she had slightly unusual genitalia at birth — the pediatrician noted clitoral enlargement and partial labial fusion. Labs: Na⁺ 115 mEq/L, K⁺ 7.1 mEq/L, glucose 38 mg/dL, ACTH markedly elevated. Newborn screening flagged an elevated <strong>17-hydroxyprogesterone (17-OHP)</strong>. What is the diagnosis and underlying enzymatic defect?",
+options:["Addison's disease from autoimmune adrenal destruction; adrenal cortex atrophy on imaging","Congenital adrenal hyperplasia (CAH) from 21-hydroxylase deficiency; ↓cortisol + ↓aldosterone + shunting to androgens","11β-HSD2 deficiency; excess cortisol activating mineralocorticoid receptors causing hyponatremia","Pituitary panhypopituitarism; low ACTH causing all adrenal products to be low","Ectopic ACTH syndrome; cortisol excess causing electrolyte abnormalities"],
+correct:1,
+explanations:["Addison's: autoimmune, typically in adults. Would not explain elevated 17-OHP or virilized genitalia. ACTH would be high, but 17-OHP would NOT be elevated (no enzyme block). Adrenals would be atrophic (destroyed), not hyperplastic.","CORRECT. 21-hydroxylase deficiency (most common CAH): CYP21A2 enzyme block → cannot convert 17-OHP to 11-deoxycortisol (→ cortisol) or progesterone to deoxycorticosterone (→ aldosterone). Result: ↓cortisol → ↑ACTH → adrenal hyperplasia + 17-OHP builds up → shunted to androgens → virilization of 46,XX fetus (clitoral enlargement, labial fusion). Salt-wasting (↓aldosterone) → hypoNa + hyperK + shock. Diagnostic marker: ↑↑ 17-OHP.","11β-HSD2 deficiency: causes apparent mineralocorticoid excess — HTN + hypokalemia (opposite electrolytes). Does not explain virilization or neonatal crisis with hyponatremia.","Panhypopituitarism: ACTH would be LOW, not elevated. All adrenal products would be low, but no virilization or 17-OHP accumulation.","Ectopic ACTH: causes Cushing's features (excess cortisol), not cortisol deficiency. Would not explain virilization or this neonatal presentation."],
+teaching:"CAH red flags: (1) neonatal salt-wasting crisis (hypoNa + hyperK + shock at 1-2 weeks), (2) virilized genitalia in 46,XX infant (ambiguous genitalia), (3) ↑↑ 17-OHP on newborn screen. Diagnosis: serum 17-OHP + ACTH + cortisol. Treatment: hydrocortisone (suppresses ACTH → stops androgen excess) + fludrocortisone (replaces aldosterone). Males with CAH often missed at birth (no virilization) — present later with salt-wasting crisis."
+},
+{stem:"A medical student asks: 'If both CAH (21-hydroxylase deficiency) and Addison's disease have elevated ACTH and low cortisol, what single lab test would most reliably distinguish them?' Which answer is correct?",
+options:["Serum aldosterone — it is elevated in CAH but low in Addison's","Serum 17-hydroxyprogesterone (17-OHP) — it is markedly elevated in CAH but NOT elevated in Addison's","Serum ACTH — CAH has higher ACTH than Addison's","Serum sodium — hyponatremia is specific to CAH, not Addison's","Cortisol response to cosyntropin (ACTH stimulation) — CAH cortisol rises, Addison's does not"],
+correct:1,
+explanations:["Aldosterone is LOW in BOTH classic (salt-wasting) CAH and Addison's disease. Not helpful for distinguishing them.","CORRECT. 17-hydroxyprogesterone (17-OHP) is the KEY distinguishing marker. In 21-hydroxylase deficiency CAH: 17-OHP cannot be converted to 11-deoxycortisol (enzyme blocked) → 17-OHP accumulates to very high levels. In Addison's: the adrenal cortex is destroyed, but there is no specific enzyme block → 17-OHP levels are normal or low. ↑↑ 17-OHP is PATHOGNOMONIC for 21-OH deficiency CAH.","Both conditions can have significantly elevated ACTH. This does not distinguish them.","Both Addison's and salt-wasting CAH cause hyponatremia (low aldosterone in both). Not specific.","In Addison's: adrenal cortex is destroyed → cortisol does NOT rise with cosyntropin. In CAH: adrenal cortex is HYPERPLASTIC (driven by excess ACTH) but enzymatically blocked → cortisol also does NOT rise adequately (and 17-OHP rises dramatically). This test is less specific than 17-OHP alone."],
+teaching:"17-OHP is the diagnostic marker for 21-hydroxylase deficiency: The enzyme block causes 17-OHP to pile up — levels are often >10,000 ng/dL in affected neonates (normal <100 ng/dL). This is why it's on the newborn screening panel. Also useful to remember: CAH has ↑androgens + virilization; Addison's has ↓androgens (adrenal gland is destroyed, can't make any steroids). The adrenals are HYPERPLASTIC in CAH (excess ACTH stimulus) vs ATROPHIC in Addison's."
+},
+{stem:"Which finding distinguishes PRIMARY adrenal insufficiency (Addison's) from SECONDARY adrenal insufficiency (pituitary failure)?",
+options:["Primary: normal aldosterone; Secondary: ↓ aldosterone","Primary: ↓ cortisol; Secondary: normal cortisol","Primary: ↑ ACTH + hyperpigmentation + hyperkalemia; Secondary: ↓ ACTH + no hyperpigmentation + normal K⁺","Primary: caused by autoimmune disease; Secondary: always caused by tumors","Primary: responds to ACTH stimulation test; Secondary: does not respond"],
+correct:2,
+explanations:["Aldosterone is regulated by Ang II/K⁺, not primarily by ACTH. In primary (Addison's), aldosterone IS low (adrenal cortex destroyed). In secondary, aldosterone may be relatively preserved (glomerulosa responds to Ang II, not ACTH primarily).","Both have low cortisol — this does not distinguish them.","CORRECT. Primary (Addison's): ACTH is HIGH (adrenal cortex destroyed → no cortisol → no negative feedback → hypothalamus/pituitary produce excess CRH/ACTH) → excess ACTH cleaved to MSH → HYPERPIGMENTATION. Also low aldosterone → HYPERKALEMIA, hyponatremia. Secondary (pituitary failure): ACTH is LOW (pituitary can't make it) → no MSH excess → NO hyperpigmentation. Aldosterone preserved → normal K⁺.","Secondary insufficiency can be from tumors, but also surgery, radiation, autoimmune hypophysitis, etc. Primary can be from causes besides autoimmune.","ACTH stimulation test: In primary, adrenal doesn't respond (destroyed). In secondary, adrenal initially may respond (gland intact, just unstimulated), then atrophies. But this choice is imprecise."],
+teaching:"Key distinguishing features: Hyperpigmentation + hyperkalemia = PRIMARY (Addison's). Normal skin + normal K⁺ = SECONDARY. The reason: primary → ↑ACTH (→ MSH → pigmentation) + ↓aldosterone (→ K⁺ retention). Secondary → ↓ACTH (→ no MSH, no pigmentation) + aldosterone relatively preserved."
+}
+];
+
+const vignettes=[
+{banner:"Clinical Vignette | Addison's Disease",
+stem:`A 35-year-old woman presents with 6 months of progressive fatigue, unintentional weight loss (15 lbs), nausea, and orthostatic lightheadedness. She notes her skin has become increasingly tanned despite minimal sun exposure, and her gums appear darker than usual. Labs: Na⁺ 129 mEq/L, K⁺ 5.8 mEq/L, glucose 58 mg/dL, AM cortisol 1.5 µg/dL (severely low), ACTH 1,100 pg/mL (markedly elevated). Cosyntropin (synthetic ACTH) stimulation test: cortisol does not rise.`,
+question:"What is the diagnosis, cause of hyperpigmentation, and cause of hyperkalemia?",
+options:["Secondary adrenal insufficiency from pituitary tumor; hyperpigmentation from low MSH; hyperkalemia from low renin","Cushing's disease; hyperpigmentation from excess cortisol; hyperkalemia from GC effect on kidney","Primary adrenal insufficiency (Addison's); hyperpigmentation from excess ACTH/MSH; hyperkalemia from aldosterone deficiency","SIADH with ectopic CRH; hyperpigmentation from ectopic MSH; hyperkalemia from water excess diluting K⁺","Ectopic ACTH from lung cancer; all findings from excess cortisol effects"],
+correct:2,
+explanations:["Secondary adrenal insufficiency: ACTH would be LOW (not 1,100 pg/mL). No hyperpigmentation in secondary (ACTH is low). This lab pattern excludes secondary.","Cushing's: excess cortisol, not deficiency. Opposite of this clinical picture.","CORRECT. Primary adrenal insufficiency (Addison's): adrenal cortex destroyed (autoimmune, TB) → low cortisol + low aldosterone → loss of negative feedback → ↑CRH → ↑ACTH to 1,100 pg/mL → MSH (contained within ACTH) → HYPERPIGMENTATION (mucous membranes characteristic). Low aldosterone → ↑K⁺, ↓Na⁺. Cosyntropin test: adrenal is destroyed → can't respond even to exogenous ACTH.","SIADH would cause low Na⁺ and concentrated urine, but not this hormone pattern.","Ectopic ACTH would cause excess cortisol with Cushing's features, not cortisol deficiency."],
+teaching:"Addison's classic triad: (1) Hyperpigmentation — especially mucous membranes, skin creases, buccal mucosa. (2) Hyperkalemia + hyponatremia (low aldosterone). (3) Hypoglycemia + fatigue (low cortisol). Cosyntropin test distinguishes primary (no cortisol response) from secondary (cortisol eventually responds after adrenal priming). Treatment: hydrocortisone + fludrocortisone."
+},
+{banner:"Clinical Vignette | Cushing's Syndrome Workup",
+stem:`A 40-year-old man presents with 30-lb weight gain concentrated in the abdomen and face, purple stretch marks on his abdomen, easy bruising, proximal muscle weakness, and impaired fasting glucose. Physical exam: central obesity, 'moon face,' 'buffalo hump.' Overnight low-dose dexamethasone suppression test: cortisol does NOT suppress (17 µg/dL). ACTH level: 8 pg/mL (LOW). MRI of pituitary: normal. CT of adrenal glands: <strong>2.5 cm right adrenal mass</strong>.`,
+question:"What is the diagnosis and mechanism?",
+options:["Cushing's disease from pituitary adenoma; high ACTH drives adrenal hyperplasia","Ectopic ACTH from bronchial carcinoid; ACTH stimulates right adrenal","Primary adrenal adenoma secreting cortisol autonomously; cortisol feeds back → suppresses ACTH","Nelson's syndrome from prior bilateral adrenalectomy","Pseudo-Cushing's from alcohol use"],
+correct:2,
+explanations:["Pituitary Cushing's: ACTH would be HIGH (adenoma secreting it). Here ACTH is low → rules out pituitary source.","Ectopic ACTH: ACTH would be very HIGH (>300 pg/mL often). Here ACTH is low.","CORRECT. Primary adrenal adenoma → autonomously secretes cortisol → cortisol feeds back → suppresses pituitary ACTH (low at 8) → atrophy of the other adrenal (no ACTH stimulation). Low ACTH + right adrenal mass + dex non-suppression = adrenal adenoma. Treatment: laparoscopic adrenalectomy. Post-op: temporary cortisol replacement needed (other adrenal is atrophied).","Nelson's syndrome: after bilateral adrenalectomy, ACTH-secreting pituitary tumor enlarges dramatically (no cortisol to suppress it). ACTH would be extremely high. No prior surgery mentioned.","Pseudo-Cushing's (alcoholism): cortisol elevated but ACTH suppressed. Usually no discrete mass. But alcohol-related Cushing's is a diagnosis of exclusion."],
+teaching:"Low ACTH Cushing's = adrenal source (primary adrenal adenoma or carcinoma). High ACTH Cushing's = pituitary (Cushing's disease — responds to high-dose dex) or ectopic (small cell lung cancer, carcinoid — does NOT respond to high-dose dex). This distinction drives the entire workup."
+},
+{banner:"Clinical Vignette | Exogenous Steroids",
+stem:`A 55-year-old man with rheumatoid arthritis has been on prednisone 30 mg daily for 2 years. He develops a respiratory infection and is told by a friend to stop his prednisone immediately because 'steroids suppress immunity.' He stops abruptly and 3 days later comes to the ER with severe hypotension (BP 75/45), nausea, vomiting, abdominal pain, and hypoglycemia. He looks ill. Labs: Na⁺ 128, K⁺ 5.5, glucose 52.`,
+question:"What happened and how should he be treated?",
+options:["He developed septic shock from an untreated infection; blood cultures + antibiotics","His rheumatoid arthritis flared causing a systemic inflammatory response; restart prednisone orally","Adrenal crisis from HPA suppression — adrenal glands atrophied from 2 years of exogenous steroids; cannot produce cortisol after abrupt withdrawal; treat with IV hydrocortisone + normal saline","He developed SIADH from the respiratory infection; treat with fluid restriction","Cushing's crisis from abrupt cortisol removal; treat with corticotropin injections"],
+correct:2,
+explanations:["Infection is possible but the primary problem is adrenal crisis (electrolytes, hypoglycemia, and hemodynamics fit adrenal insufficiency more than pure sepsis). Both should be treated, but adrenal crisis is the primary issue.","RA flare wouldn't explain electrolyte picture + hypotension + hypoglycemia this acutely.","CORRECT. 2 years of prednisone → HPA axis suppressed → adrenal atrophy → abrupt cessation → no cortisol production → adrenal crisis. Treatment: IV hydrocortisone (100 mg bolus → 50-100 mg q6h × 24h) + NS for volume. Then taper over weeks-months to allow adrenal recovery. 'Sick day rules': never stop steroids abruptly.","SIADH: concentrated urine, euvolemic. This is more consistent with adrenal crisis.","Cushing's crisis is not a real clinical entity. The problem is cortisol DEFICIENCY after withdrawal."],
+teaching:"Sick day rules for steroid patients: NEVER stop abruptly. If ill (unable to take oral meds, major illness, surgery): double or triple dose, or switch to IV. Patients should wear medic-alert bracelets. Duration of HPA suppression depends on dose and length — recovery can take 6-12 months."
+}
+];
+
+const traps=[
+{title:"TRAP #1: Addison's causes hyponatremia AND hypokalemia",myth:"Addison's disease (adrenal insufficiency) causes both low sodium AND low potassium because everything is 'low.'",truth:"Addison's causes LOW SODIUM but HIGH POTASSIUM. Aldosterone deficiency: sodium is WASTED (lost in urine), potassium is RETAINED (can't excrete K⁺). Hyponatremia + HYPERKALEMIA is the classic finding. Low potassium would suggest Conn's syndrome (too MUCH aldosterone)."},
+{title:"TRAP #2: Cushing's disease and Cushing's syndrome are the same thing",myth:"Cushing's disease and Cushing's syndrome both describe pituitary ACTH overproduction.",truth:"Cushing's DISEASE: specifically a pituitary ACTH-secreting adenoma. Cushing's SYNDROME: any cause of excess cortisol (adrenal tumor, ectopic ACTH, exogenous steroids, Cushing's disease). Cushing's disease IS a subtype of Cushing's syndrome. The distinction matters for ACTH level interpretation and treatment."},
+{title:"TRAP #3: Aldosterone is controlled primarily by ACTH",myth:"ACTH is the main regulator of aldosterone secretion from the zona glomerulosa.",truth:"Aldosterone is regulated primarily by ANGIOTENSIN II and HYPERKALEMIA (extracellular K⁺). ACTH has only a permissive role (maintains enzyme expression but does not trigger secretion). Even in panhypopituitarism (no ACTH), aldosterone function is relatively preserved because the glomerulosa responds to the RAAS."},
+{title:"TRAP #4: Cortisol increases immune function (because stress = fight)",myth:"Cortisol is released during stress to boost the immune system for the battle ahead.",truth:"Acutely, cortisol has a brief pro-immune effect. But SUSTAINED cortisol is profoundly IMMUNOSUPPRESSIVE: ↓T-cell cytokines, ↓antibody production, ↓fibroblasts, ↓prostaglandins. This is why chronic stress increases infection risk and why steroids are used to treat autoimmune disease."},
+{title:"TRAP #5: 11β-HSD2 activates cortisol for kidney action",myth:"11β-HSD2 activates cortisol to make it work as a mineralocorticoid in the kidney.",truth:"11β-HSD2 INACTIVATES cortisol (converts it to cortisone) in the kidney. This PREVENTS cortisol from flooding MRs. Without 11β-HSD2, cortisol would cause aldosterone-like effects (HTN + hypokalemia). This enzyme protects mineralocorticoid specificity for aldosterone."},
+{title:"TRAP #6: CAH and Addison's are indistinguishable because both have ↑ACTH and ↓cortisol",myth:"CAH and Addison's disease both show elevated ACTH with low cortisol, so they are essentially the same disease with the same workup.",truth:"CAH and Addison's share ↑ACTH + ↓cortisol, but are fundamentally DIFFERENT. Key distinctions: (1) 17-OHP is MARKEDLY ELEVATED in CAH (enzyme block causes 17-OHP to pile up) — it is NOT elevated in Addison's. (2) Androgens are HIGH in CAH (shunting of precursors) — they are LOW in Addison's (adrenal gland destroyed). (3) Adrenals are HYPERPLASTIC in CAH (excess ACTH drives growth) — ATROPHIC in Addison's (autoimmune destruction). (4) CAH presents in NEONATES (virilized genitalia, salt-wasting crisis) — Addison's typically in ADULTS. The single best distinguishing lab is serum 17-OHP."},
+];
+
+const fibs=[
+{prompt:"The adrenal cortex from outer to inner: zona ________ → mineralocorticoids; zona ________ → glucocorticoids; zona ________ → androgens. Mnemonic: 'GFR = Salt, _____, Sex.'",answers:["glomerulosa","fasciculata","reticularis","sugar"],hint:"Glomerulosa/Fasciculata/Reticularis; Sugar"},
+{prompt:"ACTH is cleaved from the prohormone ________ (POMC). When ACTH is markedly elevated, the co-released product ________ causes hyperpigmentation.",answers:["pomc","proopiomelanocortin","msh","melanocyte"],hint:"POMC → ACTH + MSH (melanocyte-stimulating hormone)"},
+{prompt:"In Addison's disease, serum ACTH is ________ (high/low), cortisol is ________, aldosterone is ________, and potassium is ________.",answers:["high","low","low","high"],hint:"ACTH = HIGH; Cortisol = LOW; Aldosterone = LOW; K⁺ = HIGH"},
+{prompt:"The dexamethasone suppression test: In Cushing's DISEASE (pituitary), cortisol ________ (does/does not) suppress with LOW-dose dex, but ________ (does/does not) suppress with HIGH-dose dex.",answers:["does not","does"],hint:"Low-dose: does NOT suppress. High-dose: DOES suppress (pituitary still has feedback at high threshold)"},
+{prompt:"11β-HSD2 in the kidney converts active ________ to inactive ________, preventing cortisol from activating mineralocorticoid receptors. Inhibition by ________ (found in black licorice) → apparent mineralocorticoid excess.",answers:["cortisol","cortisone","glycyrrhizin","licorice"],hint:"Cortisol → Cortisone (via 11β-HSD2); inhibited by glycyrrhizin in licorice"}
+];
+
+const refData={
+headers:["Feature","Addison's (Primary)","Secondary AI (Pituitary)","Cushing's Disease (Pituitary)","Cushing's Syndrome (Adrenal)"],
+rows:[
+["Cortisol","⭐ LOW","⭐ LOW","⭐ HIGH","⭐ HIGH"],
+["ACTH level","⭐ HIGH (↑↑)","⭐ LOW (↓↓)","⭐ HIGH (↑)","⭐ LOW (suppressed by cortisol)"],
+["Hyperpigmentation","✅ YES (↑ACTH → MSH)","❌ NO (ACTH is low)","✅ YES (↑ACTH → MSH)","❌ NO (ACTH suppressed)"],
+["Aldosterone","LOW (glomerulosa destroyed)","Relatively preserved","Usually normal","Usually normal"],
+["K⁺","HIGH (↓aldosterone)","Normal","Usually normal","Usually normal"],
+["Na⁺","LOW (↓aldosterone)","May be slightly low","Normal to high","Normal to high"],
+["Response to high-dose dex","N/A (no cortisol to suppress)","N/A","✅ SUPPRESSES (pituitary has feedback)","❌ Does NOT suppress (autonomous)"],
+["Treatment","HC + fludrocortisone","HC; treat underlying cause","Transsphenoidal surgery","Adrenalectomy"],
+]
+};
+
+const cahRefData={
+headers:["Feature","CAH (21-OH Deficiency)","Addison's Disease"],
+rows:[
+["ACTH","⭐ HIGH (no cortisol feedback)","⭐ HIGH (no cortisol feedback)"],
+["Cortisol","⭐ LOW (blocked synthesis)","⭐ LOW (gland destroyed)"],
+["Aldosterone","LOW (salt-wasting form)","LOW"],
+["⭐ 17-OHP","⭐ MARKEDLY ELEVATED (enzyme block)","Normal or LOW"],
+["Androgens (DHEA/testosterone)","⭐ HIGH (shunted from blocked pathway)","LOW (gland destroyed)"],
+["Adrenal gland size","HYPERPLASTIC (ACTH-driven)","ATROPHIC (autoimmune destruction)"],
+["Genitalia (46,XX)","Virilized — ambiguous genitalia","Normal"],
+["Typical age of onset","Neonatal / infancy","Adults (peak 30–50 years)"],
+["Cause","Enzyme deficiency (genetic)","Autoimmune (#1), TB, fungal"],
+["Treatment","Hydrocortisone + Fludrocortisone","Hydrocortisone + Fludrocortisone"],
+]
+};
+
+function renderFlashcards(){const g=document.getElementById('fcGrid');flashcards.forEach((fc,i)=>{g.innerHTML+=`<div class="fc" id="fc-${i}" onclick="flipCard(${i})"><div class="fc-inner"><div class="fc-front"><div class="fc-label">Question</div><div class="fc-q">${fc.q}</div><div class="fc-hint">Click to flip</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${fc.a.replace(/\n/g,'<br>')}</div></div></div></div>`;});}
+function flipCard(i){document.getElementById('fc-'+i).classList.toggle('flipped');}
+function renderMCQ(){const c=document.getElementById('mcqContainer');mcqs.forEach((q,qi)=>{let o=q.options.map((opt,oi)=>`<div class="mcq-opt" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${opt}</span></div><div class="mcq-explanation" id="exp-${qi}-${oi}"><div class="exp-label">${oi===q.correct?'✅ Correct':'❌ Incorrect'}</div>${q.explanations[oi]}</div>`).join('');c.innerHTML+=`<div class="mcq-item"><div class="mcq-num">Q${qi+1}/${mcqs.length}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options">${o}</div><div class="teaching-pt" id="tp-${qi}"><div class="tp-label">🎯 Teaching Point</div>${q.teaching}</div></div>`;});}
+function selectOpt(qi,oi){const q=mcqs[qi];q.options.forEach((_,idx)=>{const el=document.getElementById(`opt-${qi}-${idx}`);el.classList.add('revealed');el.style.pointerEvents='none';if(idx===q.correct)el.classList.add('correct');else el.classList.add('wrong');document.getElementById(`exp-${qi}-${idx}`).classList.add('visible');});document.getElementById(`tp-${qi}`).classList.add('visible');}
+function renderVignettes(){const c=document.getElementById('vigContainer');vignettes.forEach((v,vi)=>{let o=v.options.map((opt,oi)=>`<div class="mcq-opt" id="vopt-${vi}-${oi}" onclick="selectVigOpt(${vi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${opt}</span></div><div class="mcq-explanation" id="vexp-${vi}-${oi}"><div class="exp-label">${oi===v.correct?'✅ Correct':'❌ Incorrect'}</div>${v.explanations[oi]}</div>`).join('');c.innerHTML+=`<div class="vig-item"><div class="vig-banner">🏥 ${v.banner}</div><div class="vig-stem">${v.stem}</div><p style="font-weight:600;color:#FFE0B2;margin-bottom:12px;font-size:0.93em;">${v.question}</p><div class="mcq-options">${o}</div><div class="teaching-pt" id="vtp-${vi}"><div class="tp-label">🎯 Teaching Point</div>${v.teaching}</div></div>`;});}
+function selectVigOpt(vi,oi){const v=vignettes[vi];v.options.forEach((_,idx)=>{const el=document.getElementById(`vopt-${vi}-${idx}`);el.classList.add('revealed');el.style.pointerEvents='none';if(idx===v.correct)el.classList.add('correct');else el.classList.add('wrong');document.getElementById(`vexp-${vi}-${idx}`).classList.add('visible');});document.getElementById(`vtp-${vi}`).classList.add('visible');}
+function renderTraps(){const c=document.getElementById('trapsContainer');traps.forEach(t=>{c.innerHTML+=`<div class="trap-item"><div class="trap-header">⚠️ ${t.title}</div><div class="trap-myth"><div class="trap-myth-label">❌ COMMON MISCONCEPTION</div>${t.myth}</div><div class="trap-truth"><div class="trap-truth-label">✅ WHAT'S ACTUALLY TRUE</div>${t.truth}</div></div>`;});}
+function renderFIB(){const c=document.getElementById('fibContainer');fibs.forEach((f,fi)=>{c.innerHTML+=`<div class="fib-item"><div class="fib-prompt">${f.prompt}</div><input class="fib-input" id="fib-input-${fi}" placeholder="Type your answer..."/><button class="fib-btn" onclick="checkFIB(${fi})">Check</button><div class="fib-result" id="fib-result-${fi}"></div></div>`;});}
+function checkFIB(fi){const inp=document.getElementById(`fib-input-${fi}`).value.trim().toLowerCase();const f=fibs[fi];const ok=f.answers.some(a=>inp.includes(a.toLowerCase()));const el=document.getElementById(`fib-result-${fi}`);el.className='fib-result '+(ok?'correct':'incorrect');el.textContent=ok?`✅ Correct! ${f.hint}`:`❌ Not quite. Hint: ${f.hint}`;}
+function renderRef(){const c=document.getElementById('refContainer');
+  // Main adrenal conditions table
+  let h=`<div class="section-title" style="margin-top:0">Adrenal Conditions: ACTH, Cortisol, Aldosterone Overview</div><table class="ref-table"><tr>`;refData.headers.forEach(hdr=>h+=`<th>${hdr}</th>`);h+='</tr>';refData.rows.forEach(row=>{h+='<tr>';row.forEach(cell=>{const cls=cell.includes('⭐')?'hl':'';h+=`<td class="${cls}">${cell}</td>`;});h+='</tr>';});h+='</table>';
+  // CAH vs Addison's table
+  h+=`<div class="section-title" style="margin-top:24px">⭐ CAH vs Addison's — Key Distinguishing Features</div><table class="ref-table"><tr>`;cahRefData.headers.forEach(hdr=>h+=`<th>${hdr}</th>`);h+='</tr>';cahRefData.rows.forEach(row=>{h+='<tr>';row.forEach(cell=>{const cls=cell.includes('⭐')?'hl':(cell.includes('LOW')||cell.includes('ATROPHIC')||cell.includes('Normal')||cell.includes('Adults'))?'':'';h+=`<td class="${cls}">${cell}</td>`;});h+='</tr>';});h+='</table>';
+  c.innerHTML=h;}
+renderFlashcards();renderMCQ();renderVignettes();renderTraps();renderFIB();renderRef();
+</script>
+</body>
+</html>

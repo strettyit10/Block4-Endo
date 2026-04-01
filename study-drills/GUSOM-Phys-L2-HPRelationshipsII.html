@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Physiology L2: Hypothalamic-Pituitary Relationships II</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #7B1FA2; --accent-dark: #6A0080; --accent-light: rgba(123,31,162,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #161B22 0%, #1E1A2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: #CE93D8; font-weight: 600; }
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1E1A2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: #CE93D8; }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
+        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
+        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74,222,128,0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239,68,68,0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .mcq-explanation.visible { display: block; }
+        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+        .teaching-pt { background: rgba(123,31,162,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #E9D5FF; display: none; }
+        .teaching-pt.visible { display: block; }
+        .teaching-pt .tp-label { font-weight: 700; color: #CE93D8; margin-bottom: 4px; }
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: rgba(123,31,162,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #E9D5FF; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+        .trap-item { background: #1A1212; border: 1px solid #7F1D1D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-header { color: #FCA5A5; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; }
+        .trap-myth { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #FCA5A5; margin-bottom: 8px; }
+        .trap-truth { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D1FAE5; }
+        .trap-myth-label { font-size: 0.75em; color: #EF4444; font-weight: 700; margin-bottom: 4px; }
+        .trap-truth-label { font-size: 0.75em; color: #4ADE80; font-weight: 700; margin-bottom: 4px; }
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: #CE93D8; font-weight: 600; }
+        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="GUSOM-Phys-ActiveDrills.html" class="back">← Back to Physiology Hub</a>
+        <h1>Lecture 2: <span class="accent-tag">Hypothalamic-Pituitary Relationships II</span></h1>
+        <div class="subtitle">Adenohypophysis histology · Feedback loops (long/short/ultrashort) · Pulsatile secretion · Positive feedback · Hormones influencing growth</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
+    </div>
+
+    <div id="tab-flashcards" class="tab-content active"><div class="section-title">Core Concept Flashcards — Click to Flip</div><div class="fc-grid" id="fcGrid"></div></div>
+    <div id="tab-mcq" class="tab-content"><div class="section-title">Multiple Choice Practice</div><div id="mcqContainer"></div></div>
+    <div id="tab-vignettes" class="tab-content"><div class="section-title">Clinical Vignettes</div><div id="vigContainer"></div></div>
+    <div id="tab-traps" class="tab-content"><div class="section-title">⚠️ Test Traps — Common Exam Misconceptions</div><div id="trapsContainer"></div></div>
+    <div id="tab-fib" class="tab-content"><div class="section-title">Fill in the Blank — Complete the Concept</div><div id="fibContainer"></div></div>
+    <div id="tab-ref" class="tab-content"><div class="section-title">Quick Reference Table</div><div id="refContainer"></div></div>
+</div>
+
+<script>
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
+
+const flashcards = [
+    { q: "What are the three staining categories of anterior pituitary cells and what do they produce?", a: "Acidophils (pink/eosinophilic) → GH (somatotropes) + Prolactin (lactotropes)\nBasophils (purple/hematoxylin) → FSH/LH (gonadotropes), ACTH (corticotropes), TSH (thyrotropes)\nChromophobes (clear) → non-secretory supporting cells" },
+    { q: "Define long-loop, short-loop, and ultrashort-loop negative feedback.", a: "Long-loop: terminal (effector) hormone → inhibits hypothalamus AND pituitary (e.g., cortisol → ↓CRH, ↓ACTH)\nShort-loop: anterior pituitary hormone → inhibits hypothalamus (e.g., GH → ↓GHRH)\nUltrashort-loop: hypothalamic hormone inhibits ITS OWN releasing neuron (via axon collaterals)" },
+    { q: "Why is pulsatile secretion important? What creates it?", a: "Continuous hormone exposure → receptor desensitization/downregulation → target cell becomes unresponsive. Pulsatile secretion prevents this. Created by ultrashort-loop autoinhibition of hypothalamic releasing neurons." },
+    { q: "What is the one clinical situation where estradiol creates POSITIVE feedback on GnRH?", a: "During the FOLLICULAR PHASE of the menstrual cycle: sustained rising estradiol (above threshold, for long enough duration) switches GnRH regulation from negative to positive feedback → LH surge → ovulation. This is the exception to the negative feedback rule." },
+    { q: "How does the pars intermedia differ between fetus/children and adults?", a: "In fetuses and young children: pars intermedia is functional and secretes MSH. In adults: involutes (degenerates) and becomes non-functional. Remnants visible as eosinophilic colloid-filled cysts between anterior and posterior lobes on histology." },
+    { q: "Which pituitary cell type is the most common? Which produces GH?", a: "Most common: Somatotropes (GH-secreting acidophils) — account for ~50% of anterior pituitary cells. GH-secreting adenomas are the 3rd most common pituitary adenoma (after prolactinomas and non-secreting)." },
+    { q: "What is IGF-1 and what is its primary source?", a: "IGF-1 (insulin-like growth factor 1, aka somatomedin C): a 70-aa peptide that mediates most of GH's growth-promoting effects. Primary source: LIVER (in response to GH stimulation). Has a much longer half-life than GH (~12 hours vs ~20 min) because it circulates bound to IGFBP." },
+    { q: "Name 5 hormones that influence growth, and the most critical period for each.", a: "GH: childhood & puberty (linear growth)\nThyroid hormones: fetal/infant CNS dev; pubertal bone growth\nInsulin: fetal growth; fuels GH-IGF1 axis\nSex steroids: puberty (anabolism; epiphyseal fusion)\nPTH/calcitriol/calcitonin: bone growth via Ca²⁺ retention throughout childhood" },
+    { q: "Which feedback loop creates the SHARPEST pulsatile GH peaks?", a: "DUAL regulatory pathways (GHRH stimulates; somatostatin inhibits) sharpen peaks. When GH rises → IGF-1 feeds back (long loop) to ↑somatostatin AND ↓GHRH simultaneously → drives rapid trough. When trough hits, autoinhibition releases → next peak can form. The presence of both stimulatory AND inhibitory inputs creates sharper peaks and deeper troughs." },
+    { q: "Why doesn't maternal GH drive fetal growth?", a: "The syncytiotrophoblast forms a functional blood-brain barrier that prevents maternal GH from crossing the placenta. Instead, human placental lactogen (hPL, also called hCS) — made by the placenta — drives fetal growth. hPL has high structural homology to GH." },
+];
+
+const mcqs = [
+    {
+        stem: "On H&E staining of the adenohypophysis, which cell type stains with EOSIN (appears pink)?",
+        options: ["Thyrotropes (TSH-secreting)", "Corticotropes (ACTH-secreting)", "Somatotropes (GH-secreting)", "Gonadotropes (LH/FSH-secreting)", "Chromophobes"],
+        correct: 2,
+        explanations: [
+            "Thyrotropes are BASOPHILS (purple/hematoxylin-staining).",
+            "Corticotropes are BASOPHILS (purple/hematoxylin-staining).",
+            "CORRECT. Somatotropes are ACIDOPHILS — they stain with eosin (pink). Lactotropes (prolactin) are also acidophils. Mnemonic: Acidophils make GH and PRL ('Acid Growth PRoLactin').",
+            "Gonadotropes are BASOPHILS (purple/hematoxylin-staining).",
+            "Chromophobes are non-secretory supporting cells that don't stain prominently."
+        ],
+        teaching: "Acidophils (pink) = GH-somatotropes + PRL-lactotropes. Basophils (purple) = TSH, ACTH, FSH/LH-producing cells. H&E can distinguish the category but not the specific hormone; need immunohistochemistry for exact identification."
+    },
+    {
+        stem: "A patient with a GH-secreting pituitary adenoma has elevated IGF-1. Doctors are considering treatment options. Octreotide (a somatostatin analogue) is given. By which feedback mechanism does it work?",
+        options: ["Long-loop negative feedback", "Short-loop negative feedback", "Ultrashort-loop negative feedback", "Direct inhibition of somatotropes at the pituitary", "Stimulation of hypothalamic GHRH release"],
+        correct: 3,
+        explanations: [
+            "Long-loop: terminal organ hormone (IGF-1) inhibiting hypothalamus/pituitary. Octreotide is not IGF-1.",
+            "Short-loop: anterior pituitary GH inhibiting hypothalamic GHRH. Octreotide is not GH.",
+            "Ultrashort-loop: hypothalamic hormone auto-inhibiting itself. Not applicable here.",
+            "CORRECT. Octreotide is a somatostatin analogue that binds somatostatin receptors DIRECTLY on somatotropes at the anterior pituitary → inhibits GH secretion. This is direct pituitary-level action, not feedback per se.",
+            "Octreotide does not stimulate GHRH — that would increase GH."
+        ],
+        teaching: "Somatostatin acts at TWO levels: hypothalamus (inhibits GHRH release) AND pituitary (directly inhibits somatotropes). Octreotide (long-acting somatostatin analogue) exploits the pituitary-level effect to suppress GH in acromegaly."
+    },
+    {
+        stem: "During the menstrual cycle, estradiol levels gradually rise over 2 weeks. In the final 48 hours before ovulation, a dramatic surge in LH occurs. What best explains this switch from negative to positive feedback?",
+        options: ["Estradiol suddenly drops, releasing the pituitary from inhibition", "Progesterone rises and stimulates GnRH directly", "Sustained high estradiol crosses a threshold, switching GnRH regulation to positive feedback", "FSH triggers positive feedback by inhibiting somatostatin", "A new pituitary cell type (kisspeptin cells) activates"],
+        correct: 2,
+        explanations: [
+            "Estradiol does NOT drop before the LH surge — it actually peaks. It is the sustained high level that triggers positive feedback.",
+            "Progesterone is secreted by the corpus luteum AFTER ovulation, not before.",
+            "CORRECT. When estradiol rises above a threshold AND is sustained for a sufficient duration (both conditions required), the system switches from negative to positive feedback on GnRH → massive LH surge (and smaller FSH surge) → ovulation. This is the key mechanism of the mid-cycle LH surge.",
+            "FSH doesn't inhibit somatostatin to cause the LH surge.",
+            "Kisspeptin neurons in the hypothalamus are involved in GnRH regulation, but this answer conflates the mechanism."
+        ],
+        teaching: "The estradiol/LH surge switch is a CLASSIC positive feedback exception in endocrinology. Threshold + duration are both required. Progesterone blocks this switch later (luteal phase) — explains why OCPs (containing progesterone) suppress ovulation."
+    },
+    {
+        stem: "A child is born with congenital isolated growth hormone deficiency. Which scenario best describes what will happen WITHOUT treatment?",
+        options: ["The child will have normal height because thyroid hormones compensate fully", "The child will have disproportionately short limbs relative to trunk", "The child will have proportionate short stature with delayed bone age", "The child will develop gigantism due to excess somatostatin", "The child will be unaffected until puberty begins"],
+        correct: 2,
+        explanations: [
+            "Thyroid hormones partially support growth but cannot fully compensate for GH deficiency. Height will be significantly below normal.",
+            "GH deficiency causes PROPORTIONATE short stature — limbs are short, but in proportion to trunk (unlike achondroplasia, which is disproportionate).",
+            "CORRECT. Isolated GH deficiency (pituitary dwarfism) causes proportionate short stature with delayed bone age (epiphyses don't fuse prematurely). Body proportions are normal. Treatment: recombinant GH.",
+            "Gigantism is from GH EXCESS before epiphyseal closure — opposite scenario.",
+            "GH is critical for linear growth beginning shortly after birth; effects are apparent in early childhood, not just at puberty."
+        ],
+        teaching: "GH deficiency = proportionate short stature (pituitary dwarfism). Disproportionate short stature = achondroplasia (FGFR3 mutation, cartilage problem). Distinguishing these is high-yield: ask about limb-to-trunk ratio and bone age."
+    },
+    {
+        stem: "In an experiment, the ultrashort-loop feedback in somatotrope-regulating neurons is blocked. Which of the following changes in GH secretion pattern is MOST expected?",
+        options: ["GH secretion becomes constant and continuous rather than pulsatile", "GH secretion ceases entirely", "GH pulses become larger and less frequent", "GH levels increase gradually with age", "Short-loop and long-loop feedback compensate fully, maintaining normal pulsatility"],
+        correct: 0,
+        explanations: [
+            "CORRECT. Ultrashort-loop auto-inhibition via axon collaterals is what creates the pulsatile ON-OFF pattern. Block this → the GHRH neuron cannot auto-inhibit → more continuous secretion rather than sharp pulsatile peaks. Pulsatility would be blunted or eliminated.",
+            "GH would not cease entirely — short-loop and long-loop feedback still exist, but pulsatility would be disrupted.",
+            "Pulses becoming larger is possible but 'less frequent' is less likely; the primary change is loss of the sharp pulsatile pattern.",
+            "Gradual age-related increases are not the expected result of blocking ultrashort feedback.",
+            "Short and long loops operate on a different timescale and cannot fully replace the ultrashort pulsatile generator."
+        ],
+        teaching: "Ultrashort-loop = the 'pacemaker' of pulsatile secretion. Block it → lose pulsatility → receptor desensitization → ultimately decreased hormone effectiveness. This is why GH is given via pulsatile or episodic injection regimens rather than continuous infusion in GH deficiency."
+    },
+    {
+        stem: "A neonatologist is monitoring a premature infant born at 28 weeks gestation. Concerns arise about nervous system development. Which hormone is MOST critical for proper prenatal and early postnatal brain development?",
+        options: ["Growth hormone (GH)", "Aldosterone", "Thyroid hormone (T3/T4)", "Cortisol", "Oxytocin"],
+        correct: 2,
+        explanations: [
+            "GH is important for postnatal linear growth but does not cross the blood-brain barrier; its contribution to early CNS development is indirect (via IGF-1).",
+            "Aldosterone regulates sodium/potassium — not brain development.",
+            "CORRECT. Thyroid hormone is absolutely critical for fetal and neonatal brain development. Congenital hypothyroidism → cretinism (permanent intellectual disability + growth retardation) if not treated within weeks. T3 acts directly on CNS receptors to drive neuronal differentiation, myelination, and synaptic development.",
+            "Cortisol is important for lung surfactant production and late fetal maturation, but is not the primary driver of CNS development.",
+            "Oxytocin promotes bonding and has minor CNS effects but is not critical for early brain development."
+        ],
+        teaching: "Thyroid hormone + early brain = CRITICAL. Neonatal thyroid screening (PKU screen) identifies congenital hypothyroidism within days of birth. Early treatment with levothyroxine prevents intellectual disability. This is why newborn screening exists."
+    },
+    {
+        stem: "Which of the following correctly describes an ACIDOPHIL of the anterior pituitary?",
+        options: ["Produces TSH; stains purple with hematoxylin", "Produces ACTH from the prohormone POMC; stains purple", "Produces GH or prolactin; stains pink with eosin", "Non-secretory supporting cell; does not stain prominently", "Produces FSH and LH; stains pink with eosin"],
+        correct: 2,
+        explanations: [
+            "TSH-producing thyrotropes are BASOPHILS (purple), not acidophils.",
+            "ACTH-producing corticotropes are BASOPHILS (purple), not acidophils.",
+            "CORRECT. Acidophils stain pink with eosin. They include somatotropes (GH) and lactotropes (prolactin). Both produce hydrophobic proteins that take up eosin staining.",
+            "Non-secretory cells are chromophobes — they don't stain prominently. Not acidophils.",
+            "FSH/LH-producing gonadotropes are BASOPHILS (purple), not acidophils."
+        ],
+        teaching: "Memory aid: 'Acidophils make Growth hormone and PRolactin (APG PR)' — both drive growth/development. 'Basophils make the rest': TSH, ACTH, FSH, LH. Chromophobes = clear = 'chromatic-phobic' = don't take up stain."
+    },
+    {
+        stem: "A 16-year-old female gymnast exercises intensely 6 hours/day and restricts caloric intake. She has not menstruated in 8 months. Which of the following best explains the amenorrhea?",
+        options: ["Direct toxicity of excess exercise on ovarian follicles", "Elevated prolactin from stress-induced lactotrope stimulation", "Suppression of the HPG axis by elevated GnIH and cortisol from chronic stress", "Low estrogen causing positive feedback on GnRH, inhibiting ovulation", "Increased somatostatin suppressing LH and FSH"],
+        correct: 2,
+        explanations: [
+            "Exercise does not cause direct follicular toxicity at this level.",
+            "Elevated prolactin can cause amenorrhea, but prolactin does not rise purely from exercise stress to this degree without another cause.",
+            "CORRECT. Chronic stress (and caloric restriction) → ↑cortisol → stimulates GnIH release → GnIH inhibits GnRH pulsatility at hypothalamus + cortisol directly suppresses gonadotropes at pituitary → ↓LH/FSH → anovulation. This is the 'female athlete triad': energy restriction + amenorrhea + low bone density.",
+            "Low estrogen causes NEGATIVE feedback on GnRH (allowing GnRH to rise), not inhibition of ovulation. Positive feedback of estradiol occurs at high levels.",
+            "Somatostatin regulates GH/TSH, not the HPG axis directly."
+        ],
+        teaching: "Female athlete triad = disordered eating + amenorrhea + osteoporosis. The mechanism is chronic stress/energy deficit → ↑GnIH + ↑cortisol → HPG suppression → ↓LH/FSH → anovulation. This is REVERSIBLE with improved energy balance and stress reduction."
+    }
+];
+
+const vignettes = [
+    {
+        banner: "Clinical Vignette | Feedback Loop Analysis",
+        stem: `A 35-year-old man with a history of pituitary adenoma resection 5 years ago is being monitored. His labs show: <strong>Cortisol 2 µg/dL (low)</strong>, ACTH 4 pg/mL (low), CRH elevated. He has fatigue and hypotension. His treating physician concludes he has secondary adrenal insufficiency.`,
+        question: "Which feedback loop is disrupted, and at which level?",
+        options: ["Long-loop feedback — cortisol cannot inhibit the pituitary or hypothalamus", "Short-loop feedback — ACTH cannot inhibit the pituitary itself", "The problem is at the anterior pituitary level — cannot respond to CRH by secreting ACTH", "Ultrashort-loop feedback — CRH neuron is auto-stimulating", "Primary adrenal insufficiency — the adrenal gland itself cannot respond to ACTH"],
+        correct: 2,
+        explanations: [
+            "Long-loop feedback involves cortisol feeding back to hypothalamus/pituitary. Here cortisol is low, so if long-loop were intact, it should have DECREASED CRH/ACTH. The hypothalamus IS responding (CRH elevated), so long-loop cannot work — but the primary problem is at the pituitary.",
+            "Short-loop feedback: ACTH → inhibits hypothalamic CRH. ACTH is low here (not high), so not a short-loop excess problem.",
+            "CORRECT. CRH is elevated (hypothalamus working fine), but ACTH is low. The pituitary is not responding to CRH → pituitary is the broken link. This is secondary adrenal insufficiency: pituitary cannot produce ACTH → adrenal not stimulated → low cortisol. Prior adenoma resection likely damaged corticotropes.",
+            "Ultrashort-loop would affect pulsatility — this presents as low ACTH, not pulsatility disorder.",
+            "Primary adrenal insufficiency: ACTH would be HIGH (adrenal doesn't respond → no cortisol → no negative feedback → CRH/ACTH rise). Here ACTH is low → pituitary problem."
+        ],
+        teaching: "Secondary adrenal insufficiency = pituitary problem → low ACTH → low cortisol → CRH rises (hypothalamus trying to compensate). NO hyperpigmentation (ACTH is low, so no excess MSH). Contrast with PRIMARY (Addison's): ↑ACTH + hyperpigmentation."
+    },
+    {
+        banner: "Clinical Vignette | Pulsatile GnRH Therapy",
+        stem: `A 24-year-old woman with Kallmann syndrome (congenital GnRH deficiency) has failed to develop secondary sex characteristics and has never menstruated. She would like to achieve pregnancy. Two treatment regimens are proposed: (A) Continuous GnRH pump at constant low dose 24 hours/day; (B) Pulsatile GnRH pump delivering a bolus every 90 minutes.`,
+        question: "Which regimen will successfully restore LH and FSH secretion and potentially allow ovulation?",
+        options: ["Regimen A, because continuous GnRH maximally stimulates gonadotropes", "Regimen B, because pulsatile GnRH mimics the normal physiological pattern and prevents desensitization", "Both regimens will work equally well", "Neither regimen; the patient requires high-dose daily injections only", "Regimen A, because constant GnRH prevents premature LH surge"],
+        correct: 1,
+        explanations: [
+            "Continuous GnRH → receptor downregulation → gonadotropes become desensitized → DECREASED LH and FSH. This is the opposite of the desired effect.",
+            "CORRECT. Pulsatile GnRH (every 60-90 minutes) mimics the natural GnRH secretion pattern, maintains receptor sensitivity, and produces physiological LH and FSH release. Pulsatile GnRH pumps are used clinically for Kallmann syndrome and hypogonadotropic hypogonadism to induce ovulation.",
+            "They do NOT work equally well — continuous GnRH is actively suppressive.",
+            "High-dose injections would be continuous — same desensitization problem.",
+            "Constant GnRH prevents ovulation by suppressing the LH surge — used as CONTRACEPTION or cancer treatment, not fertility."
+        ],
+        teaching: "Pulsatile GnRH = physiological and stimulates FSH/LH. Continuous GnRH = desensitization = medical castration. This is a fundamental concept tested directly on USMLE Step 1."
+    },
+    {
+        banner: "Clinical Vignette | Growth Hormone & Growth",
+        stem: `A 10-year-old boy is brought in for evaluation of short stature. His bone age is 7 years. Height is 3rd percentile. GH stimulation test (arginine + GHRH infusion) shows <strong>GH rises normally to 22 ng/mL</strong> (>10 = normal). IGF-1 level is <strong>markedly low</strong> at 45 ng/mL (expected >200 for age). He does not respond to recombinant GH injections.`,
+        question: "What is the most likely diagnosis?",
+        options: ["Constitutional growth delay", "Pituitary dwarfism (GH deficiency)", "Hypothyroidism-related growth failure", "Growth hormone insensitivity (Laron syndrome)", "Malnutrition with secondary GH resistance"],
+        correct: 3,
+        explanations: [
+            "Constitutional growth delay: GH stimulation test would be normal AND IGF-1 would eventually normalize; bone age is delayed (consistent) but GH response is normal — this option might seem right, but the key differentiator is the very low IGF-1 despite normal GH response.",
+            "Pituitary dwarfism: GH would be LOW on stimulation test. Here GH rises normally → rules out GH deficiency.",
+            "Hypothyroidism: check TSH/T4 — possible, but doesn't explain elevated GH with low IGF-1 pattern.",
+            "CORRECT. GH rises normally (pituitary working) but IGF-1 is very low AND doesn't respond to exogenous GH → Laron syndrome (GH receptor mutation). The GH receptor can't respond → liver can't make IGF-1.",
+            "Malnutrition can cause GH resistance, but the specific pattern of normal GH stimulation + no response to exogenous GH + markedly low IGF-1 is most consistent with Laron."
+        ],
+        teaching: "Laron syndrome diagnostic triad: normal/high GH + low IGF-1 + no response to recombinant GH. Treatment: recombinant IGF-1 (mecasermin). The 'intermediate' in the GH → IGF-1 axis is broken."
+    }
+];
+
+const traps = [
+    {
+        title: "TRAP #1: GH deficiency is most impactful in adults",
+        myth: "GH deficiency in adults causes severe disease and requires urgent treatment.",
+        truth: "Adults can tolerate low GH levels reasonably well — other hormones compensate (sex steroids, thyroid hormone, insulin). GH deficiency is MOST IMPACTFUL in childhood when linear growth is dependent on it. In adults, GH deficiency may contribute to body composition changes but is not immediately life-threatening."
+    },
+    {
+        title: "TRAP #2: All anterior pituitary hormones are glycoproteins",
+        myth: "All anterior pituitary hormones are glycoproteins.",
+        truth: "FSH, LH, TSH, and hCG are glycoproteins (with carbohydrate side chains). GH, prolactin, and ACTH are simple polypeptides (no sugar chains). The alpha subunit is shared by TSH, LH, FSH, and hCG; their beta subunit determines biological specificity."
+    },
+    {
+        title: "TRAP #3: Positive estradiol feedback always triggers LH surge",
+        myth: "Any rise in estradiol will trigger positive feedback and an LH surge.",
+        truth: "BOTH conditions must be met: estradiol must (1) rise above a threshold concentration AND (2) be sustained for a sufficient duration. A brief spike won't trigger positive feedback. The luteal phase progesterone actually BLOCKS positive feedback — this is why combined OCPs suppress ovulation."
+    },
+    {
+        title: "TRAP #4: Short-loop feedback means hormones feed back only to the nearest organ",
+        myth: "'Short-loop' feedback means the feedback signal doesn't travel far.",
+        truth: "Short-loop feedback specifically means the ANTERIOR PITUITARY HORMONE (e.g., GH) inhibits its OWN hypothalamic releasing hormone (e.g., GHRH). It's 'short' relative to long-loop (which involves the distal effector organ hormone). Length of the feedback loop, not distance."
+    },
+    {
+        title: "TRAP #5: Maternal GH drives fetal growth",
+        myth: "Maternal growth hormone crosses the placenta to drive fetal linear growth.",
+        truth: "Maternal GH CANNOT cross the syncytiotrophoblast barrier. Fetal growth is driven by human placental lactogen (hPL/hCS) from the placenta, and to some degree by fetal insulin and fetal GH. This is why GH deficiency in the mother doesn't stunt fetal growth."
+    },
+    {
+        title: "TRAP #6: Chromophobes secrete 'chromophobic' hormones",
+        myth: "Chromophobes are a distinct secretory cell type with a specific hormonal product.",
+        truth: "Chromophobes are NON-SECRETORY supporting cells (they simply don't stain prominently). They have no known hormonal product. Don't invent a 'chromophobic hormone' — they're just not secreting cells on H&E."
+    }
+];
+
+const fibs = [
+    { prompt: "In the anterior pituitary, ________ cells stain pink with eosin and produce GH and prolactin, while ________ cells stain purple with hematoxylin and produce TSH, ACTH, FSH, and LH.", answers: ["acidophil", "basophil"], hint: "Acidophils = pink = GH/PRL; Basophils = purple = TSH, ACTH, FSH, LH" },
+    { prompt: "The three types of negative feedback loops in the HPA axis are: (1) ________ loop = cortisol inhibits CRH and ACTH; (2) ________ loop = ACTH inhibits hypothalamus; (3) ________ loop = CRH neuron inhibits itself via axon collaterals.", answers: ["long", "short", "ultrashort"], hint: "Long / Short / Ultrashort" },
+    { prompt: "Pulsatile secretion is essential because constant hormone levels cause receptor ________ in target cells, reducing hormone effectiveness over time.", answers: ["desensitization", "downregulation"], hint: "Desensitization or downregulation" },
+    { prompt: "The mid-cycle LH surge is triggered when sustained high ________ levels switch GnRH regulation from negative to ________ feedback.", answers: ["estradiol", "positive"], hint: "Estradiol → positive feedback → LH surge → ovulation" },
+    { prompt: "Human placental lactogen (hPL) drives fetal growth because maternal ________ cannot cross the ________.", answers: ["gh", "placenta", "syncytiotrophoblast"], hint: "Maternal GH cannot cross the syncytiotrophoblast barrier" }
+];
+
+const refData = {
+    headers: ["Feedback Type", "Signal Source", "Target", "Example", "Clinical Relevance"],
+    rows: [
+        ["Long-loop negative", "Terminal effector hormone (from distal gland)", "Hypothalamus + Anterior pituitary", "Cortisol → ↓CRH + ↓ACTH; IGF-1 → ↓GHRH + ↓GH", "Cushing's: high cortisol → low CRH/ACTH. Addison's: low cortisol → high CRH/ACTH"],
+        ["Short-loop negative", "Anterior pituitary hormone", "Hypothalamus", "GH → ↓GHRH; ACTH → ↓CRH", "Short loop helps create GH pulsatile peaks"],
+        ["Ultrashort-loop negative", "Hypothalamic hormone itself (via axon collaterals)", "Same releasing neuron", "GHRH → auto-inhibits GHRH neuron", "Creates pulsatile rhythm; prevents receptor downregulation"],
+        ["⭐ Positive feedback (exception)", "Sustained estradiol above threshold", "GnRH neurons", "Estradiol → ↑GnRH → LH surge → ovulation", "Blocked by progesterone (OCPs); exploited in fertility treatments"],
+        ["Herring bodies (histology)", "N/A (histology finding)", "Posterior pituitary", "Swollen axon terminals storing ADH/OXT", "EM: electron-dense granules = peptide hormones (hydrophilic)"],
+    ]
+};
+
+// Render functions (same pattern as L1)
+function renderFlashcards() {
+    const grid = document.getElementById('fcGrid');
+    flashcards.forEach((fc, i) => {
+        grid.innerHTML += `<div class="fc" id="fc-${i}" onclick="flipCard(${i})"><div class="fc-inner"><div class="fc-front"><div class="fc-label">Question</div><div class="fc-q">${fc.q}</div><div class="fc-hint">Click to flip</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${fc.a.replace(/\n/g,'<br>')}</div></div></div></div>`;
+    });
+}
+function flipCard(i) { document.getElementById('fc-'+i).classList.toggle('flipped'); }
+
+function renderMCQ() {
+    const c = document.getElementById('mcqContainer');
+    mcqs.forEach((q, qi) => {
+        let optHtml = q.options.map((opt,oi) => `<div class="mcq-opt" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${opt}</span></div><div class="mcq-explanation" id="exp-${qi}-${oi}"><div class="exp-label">${oi===q.correct?'✅ Correct':'❌ Incorrect'}</div>${q.explanations[oi]}</div>`).join('');
+        c.innerHTML += `<div class="mcq-item"><div class="mcq-num">Question ${qi+1} of ${mcqs.length}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options">${optHtml}</div><div class="teaching-pt" id="tp-${qi}"><div class="tp-label">🎯 Teaching Point</div>${q.teaching}</div></div>`;
+    });
+}
+function selectOpt(qi,oi) {
+    const q = mcqs[qi];
+    q.options.forEach((_,idx) => { const el=document.getElementById(`opt-${qi}-${idx}`); el.classList.add('revealed'); el.style.pointerEvents='none'; if(idx===q.correct)el.classList.add('correct'); else el.classList.add('wrong'); document.getElementById(`exp-${qi}-${idx}`).classList.add('visible'); });
+    document.getElementById(`tp-${qi}`).classList.add('visible');
+}
+
+function renderVignettes() {
+    const c = document.getElementById('vigContainer');
+    vignettes.forEach((v,vi) => {
+        let optHtml = v.options.map((opt,oi) => `<div class="mcq-opt" id="vopt-${vi}-${oi}" onclick="selectVigOpt(${vi},${oi})"><span class="letter">${String.fromCharCode(65+oi)}.</span><span>${opt}</span></div><div class="mcq-explanation" id="vexp-${vi}-${oi}"><div class="exp-label">${oi===v.correct?'✅ Correct':'❌ Incorrect'}</div>${v.explanations[oi]}</div>`).join('');
+        c.innerHTML += `<div class="vig-item"><div class="vig-banner">🏥 ${v.banner}</div><div class="vig-stem">${v.stem}</div><p style="font-weight:600;color:#E9D5FF;margin-bottom:12px;font-size:0.93em;">${v.question}</p><div class="mcq-options">${optHtml}</div><div class="teaching-pt" id="vtp-${vi}"><div class="tp-label">🎯 Teaching Point</div>${v.teaching}</div></div>`;
+    });
+}
+function selectVigOpt(vi,oi) {
+    const v=vignettes[vi]; v.options.forEach((_,idx) => { const el=document.getElementById(`vopt-${vi}-${idx}`); el.classList.add('revealed'); el.style.pointerEvents='none'; if(idx===v.correct)el.classList.add('correct'); else el.classList.add('wrong'); document.getElementById(`vexp-${vi}-${idx}`).classList.add('visible'); }); document.getElementById(`vtp-${vi}`).classList.add('visible');
+}
+
+function renderTraps() {
+    const c = document.getElementById('trapsContainer');
+    traps.forEach(t => { c.innerHTML += `<div class="trap-item"><div class="trap-header">⚠️ ${t.title}</div><div class="trap-myth"><div class="trap-myth-label">❌ COMMON MISCONCEPTION</div>${t.myth}</div><div class="trap-truth"><div class="trap-truth-label">✅ WHAT'S ACTUALLY TRUE</div>${t.truth}</div></div>`; });
+}
+
+function renderFIB() {
+    const c = document.getElementById('fibContainer');
+    fibs.forEach((f,fi) => { c.innerHTML += `<div class="fib-item"><div class="fib-prompt">${f.prompt}</div><input class="fib-input" id="fib-input-${fi}" placeholder="Type your answer..."/><button class="fib-btn" onclick="checkFIB(${fi})">Check</button><div class="fib-result" id="fib-result-${fi}"></div></div>`; });
+}
+function checkFIB(fi) {
+    const input = document.getElementById(`fib-input-${fi}`).value.trim().toLowerCase();
+    const f = fibs[fi];
+    const correct = f.answers.some(a => input.includes(a.toLowerCase()));
+    const el = document.getElementById(`fib-result-${fi}`);
+    el.className = 'fib-result '+(correct?'correct':'incorrect');
+    el.textContent = correct ? `✅ Correct! ${f.hint}` : `❌ Not quite. Hint: ${f.hint}`;
+}
+
+function renderRef() {
+    const c = document.getElementById('refContainer');
+    let html = `<table class="ref-table"><tr>`;
+    refData.headers.forEach(h => html += `<th>${h}</th>`);
+    html += '</tr>';
+    refData.rows.forEach(row => { html += '<tr>'; row.forEach(cell => { const cls = cell.includes('⭐') ? 'hl' : ''; html += `<td class="${cls}">${cell}</td>`; }); html += '</tr>'; });
+    html += '</table>';
+    c.innerHTML = html;
+}
+
+renderFlashcards(); renderMCQ(); renderVignettes(); renderTraps(); renderFIB(); renderRef();
+</script>
+</body>
+</html>

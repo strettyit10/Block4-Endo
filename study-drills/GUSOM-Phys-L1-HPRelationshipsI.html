@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Physiology L1: Hypothalamic-Pituitary Relationships I</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #5C6BC0; --accent-dark: #3949AB; --accent-light: rgba(92,107,192,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* FLASHCARDS */
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
+        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
+
+        /* MCQ */
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
+        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .mcq-explanation.visible { display: block; }
+        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+        .mcq-explanation .exp-wrong { border-left-color: #EF4444; }
+        .teaching-pt { background: rgba(92,107,192,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #C7D2FE; display: none; }
+        .teaching-pt.visible { display: block; }
+        .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+
+        /* VIGNETTES */
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: rgba(92,107,192,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #C7D2FE; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+
+        /* TEST TRAPS */
+        .trap-item { background: #1A1212; border: 1px solid #7F1D1D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-header { color: #FCA5A5; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; }
+        .trap-myth { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #FCA5A5; margin-bottom: 8px; }
+        .trap-truth { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D1FAE5; }
+        .trap-myth-label { font-size: 0.75em; color: #EF4444; font-weight: 700; margin-bottom: 4px; }
+        .trap-truth-label { font-size: 0.75em; color: #4ADE80; font-weight: 700; margin-bottom: 4px; }
+
+        /* FILL-IN-BLANK */
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+
+        /* REF TABLE */
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
+
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="GUSOM-Phys-ActiveDrills.html" class="back">← Back to Physiology Hub</a>
+        <h1>Lecture 1: <span class="accent-tag">Hypothalamic-Pituitary Relationships I</span></h1>
+        <div class="subtitle">Endocrine gland classification · H-P anatomy · Portal system · Hypothalamic hormones · Prolactin exception</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Core Concept Flashcards — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
+
+    <!-- MCQ -->
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice</div>
+        <div id="mcqContainer"></div>
+    </div>
+
+    <!-- VIGNETTES -->
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes</div>
+        <div id="vigContainer"></div>
+    </div>
+
+    <!-- TEST TRAPS -->
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">⚠️ Test Traps — Common Exam Misconceptions</div>
+        <div id="trapsContainer"></div>
+    </div>
+
+    <!-- FILL-IN-BLANK -->
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill in the Blank — Complete the Pathway</div>
+        <div id="fibContainer"></div>
+    </div>
+
+    <!-- REFERENCE TABLE -->
+    <div id="tab-ref" class="tab-content">
+        <div class="section-title">Quick Reference Table</div>
+        <div id="refContainer"></div>
+    </div>
+</div>
+
+<script>
+// ─── TAB NAVIGATION ───────────────────────────────────
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
+
+// ─── FLASHCARD DATA ───────────────────────────────────
+const flashcards = [
+    { q: "What is the primary endocrine role of the hypothalamus?", a: "Master regulator of the endocrine system — coordinates anterior pituitary via releasing/inhibiting hormones through the portal system, and secretes ADH + oxytocin for the posterior pituitary." },
+    { q: "What is the infundibulum and why is it important?", a: "The pituitary stalk — connects hypothalamus to pituitary. Contains portal vessels (anterior aspect) and axonal projections (posterior aspect). Cutting it raises prolactin, drops all other anterior pituitary hormones." },
+    { q: "Adenohypophysis vs neurohypophysis — what type of tissue is each?", a: "Adenohypophysis = GLANDULAR tissue (pars distalis); secretes anterior pituitary hormones. Neurohypophysis = NEURAL tissue (axon terminals from hypothalamic neurons); stores and releases ADH + oxytocin." },
+    { q: "What is the hypophyseal portal system?", a: "A two-capillary network: (1) first capillary bed in the median eminence (where hypothalamic RH/IH enter), (2) portal vessels down infundibulum, (3) second capillary bed in adenohypophysis. Allows direct delivery of hypothalamic hormones to anterior pituitary at high concentrations." },
+    { q: "Which anterior pituitary hormone is under EXCLUSIVELY inhibitory control?", a: "PROLACTIN. Dopamine (PIH = prolactin-inhibiting hormone) is its only regulator. All other anterior pituitary hormones have at least one releasing hormone. Block the stalk → prolactin rises." },
+    { q: "PIH (prolactin-inhibiting hormone) is actually which molecule?", a: "DOPAMINE — a small catecholamine, not a peptide. This distinguishes it from all other hypothalamic regulatory hormones, which are peptides or small proteins." },
+    { q: "Name the 3 main ways the hypothalamus controls the body.", a: "1) Makes ADH + oxytocin (transported to posterior pituitary via fast axonal transport)\n2) Releases RH/IH into portal system → controls adenohypophysis\n3) Sympathetic output via splanchnic nerve → adrenal medulla (epinephrine secretion)" },
+    { q: "Which organs are NOT under hypothalamic-pituitary control?", a: "Pancreas (insulin regulated by blood glucose), parathyroid glands (regulated by blood Ca²⁺). Both are self-regulating based on metabolic substrates." },
+    { q: "What is the median eminence and why is its BBB significance?", a: "The region where hypothalamic neurons release hormones into the portal bloodstream. The blood-brain barrier here is WEAKENED — allowing hypothalamic peptides to enter portal circulation and allowing feedback signals to return to the hypothalamus." },
+    { q: "What are the circumventricular organs and their endocrine function?", a: "Regions where BBB is absent or minimal — 'windows' for the brain to sense blood composition. Endocrine examples: Median eminence, Neurohypophysis, OVLT (senses osmolarity for AVP regulation), Pineal gland (melatonin). SFO also senses angiotensin II." },
+    { q: "What does TRH stimulate? (Two answers!)", a: "TRH stimulates BOTH TSH (its main target, thyrotropes) AND PROLACTIN (lactotropes). This is why hypothyroidism can cause galactorrhea — elevated TRH stimulates prolactin." },
+    { q: "Where is GnRH released from? And what happens with continuous (non-pulsatile) GnRH?", a: "GnRH released from medial preoptic nucleus. Continuous GnRH → pituitary desensitization → DECREASED LH and FSH. This is exploited therapeutically (leuprolide for prostate cancer, endometriosis)." },
+];
+
+// ─── MCQ DATA ─────────────────────────────────────────
+const mcqs = [
+    {
+        stem: "The infundibular stalk of the pituitary is ligated experimentally. Twenty-four hours later, which serum hormone level is MOST LIKELY to be elevated?",
+        options: ["TSH", "ACTH", "Prolactin", "GH", "FSH"],
+        correct: 2,
+        explanations: [
+            "TSH would DECREASE — loss of TRH from the hypothalamus reduces TSH release.",
+            "ACTH would DECREASE — loss of CRH reduces ACTH release.",
+            "CORRECT. Prolactin is the only anterior pituitary hormone under exclusively inhibitory hypothalamic control (via dopamine/PIH). Cutting the stalk removes dopamine inhibition → prolactin levels rise.",
+            "GH would DECREASE — loss of GHRH reduces GH release.",
+            "FSH would DECREASE — loss of GnRH reduces FSH and LH release."
+        ],
+        teaching: "Prolactin = only anterior pituitary hormone with NO releasing hormone. Only dopamine (PIH) controls it. Stalk section → prolactin disinhibition. Used clinically: stalk compression by pituitary mass can cause hyperprolactinemia."
+    },
+    {
+        stem: "A patient develops amenorrhea and galactorrhea. Prolactin is found to be elevated. Which of the following is the MOST LIKELY mechanism if the cause is hypothyroidism?",
+        options: ["Decreased dopamine secretion from hypothalamus", "Increased TRH stimulating prolactin secretion", "Pituitary adenoma secreting prolactin", "Loss of estrogen feedback on the pituitary", "Increased GnRH secretion"],
+        correct: 1,
+        explanations: [
+            "Dopamine suppression could cause hyperprolactinemia, but this is not the mechanism in hypothyroidism.",
+            "CORRECT. In hypothyroidism, TRH rises (to try to stimulate more TSH/T3/T4). TRH stimulates BOTH TSH AND prolactin. Elevated TRH → elevated prolactin → galactorrhea and amenorrhea. This is a classic boards presentation.",
+            "Could be true for primary prolactinoma, but question specifies hypothyroidism mechanism.",
+            "Estrogen loss does not directly explain hyperprolactinemia.",
+            "Increased GnRH would raise LH/FSH, not prolactin."
+        ],
+        teaching: "TRH is a 'two-fer': stimulates TSH AND prolactin. Hypothyroidism → ↑TRH → ↑prolactin → galactorrhea + amenorrhea. Always check TSH when you find elevated prolactin without obvious pituitary tumor."
+    },
+    {
+        stem: "A medical student learns that the hypothalamus controls the adrenal medulla. Which of the following is the CORRECT pathway?",
+        options: ["Hypothalamus → CRH → anterior pituitary → ACTH → adrenal medulla", "Hypothalamus → portal system → adrenal medulla directly", "Hypothalamus → pre-autonomic neurons → preganglionic neurons → splanchnic nerve → chromaffin cells", "Hypothalamus → posterior pituitary → ADH → adrenal medulla", "Hypothalamus → GnRH → gonadotropes → adrenal medulla"],
+        correct: 2,
+        explanations: [
+            "This describes the HPA axis pathway to the adrenal CORTEX (not medulla). Medulla is controlled neurally, not hormonally.",
+            "There is no direct portal connection to the adrenal medulla.",
+            "CORRECT. This is the SAM (sympathetic-adrenal-medullary) axis. Pre-autonomic neurons from PVN → preganglionic neurons in spinal cord → splanchnic nerve → chromaffin cells (modified postganglionic neurons) in adrenal medulla → epinephrine + NE release.",
+            "ADH does not regulate the adrenal medulla.",
+            "GnRH acts on gonadotropes to regulate LH/FSH, not the adrenal medulla."
+        ],
+        teaching: "Adrenal CORTEX = hormonally controlled (HPA axis via CRH-ACTH-cortisol). Adrenal MEDULLA = neurally controlled (SAM axis via sympathetic preganglionic neurons through splanchnic nerve). Two completely different regulatory pathways."
+    },
+    {
+        stem: "GnRH is being administered continuously via an infusion pump to a patient with hypogonadotropic hypogonadism. After 2 weeks of treatment, LH and FSH levels are LOWER than before treatment. What is the most likely explanation?",
+        options: ["Increased GnRH degradation in the portal system", "Downregulation/desensitization of pituitary GnRH receptors", "Negative feedback from elevated sex steroids", "Increased somatostatin release from hypothalamus", "Depletion of TSH from thyrotrope cells"],
+        correct: 1,
+        explanations: [
+            "Portal degradation is not the primary issue here.",
+            "CORRECT. Continuous (non-pulsatile) GnRH causes GnRH receptor downregulation on gonadotropes → decreased LH and FSH. Pulsatile GnRH is required for normal LH/FSH release. This is the basis for using GnRH agonists (leuprolide) as a medical 'castration' — initial flare then profound suppression.",
+            "If sex steroids were elevated, that might explain reduced LH/FSH, but the question tells us the treatment itself caused the drop (before sex steroids had a chance to rise).",
+            "Somatostatin regulates GH, not LH/FSH.",
+            "TSH is from thyrotropes and regulated by TRH/T3/T4, not GnRH."
+        ],
+        teaching: "GnRH must be PULSATILE to maintain LH/FSH secretion. Continuous GnRH → receptor desensitization → hypogonadism. GnRH agonist therapy (leuprolide) initially causes a 'flare' (brief ↑LH/FSH) then sustained suppression — used to treat prostate cancer, endometriosis, precocious puberty."
+    },
+    {
+        stem: "Which of the following best describes the function of the median eminence?",
+        options: ["It stores oxytocin and ADH before release", "It is the site where hypothalamic RH/IH enter the portal capillary bed for transport to the adenohypophysis", "It forms the posterior boundary of the pituitary gland", "It is the primary site of GH secretion", "It generates the circadian rhythm for cortisol release"],
+        correct: 1,
+        explanations: [
+            "Oxytocin and ADH are stored in the neurohypophysis (posterior pituitary), not the median eminence.",
+            "CORRECT. The median eminence is the critical interface where hypothalamic neurons release releasing/inhibiting hormones into the first capillary bed of the portal system. The BBB is weakened here to allow this.",
+            "The median eminence is at the base of the hypothalamus, above the pituitary stalk — not the posterior boundary of the pituitary.",
+            "GH is secreted from somatotropes in the anterior pituitary, not the median eminence.",
+            "Cortisol circadian rhythm is generated by the SCN (suprachiasmatic nucleus), not the median eminence."
+        ],
+        teaching: "Median eminence = 'loading dock' for hypothalamic hormones into portal circulation. Key circumventricular organ (BBB weaker here). Hormones cross into portal blood → travel to adenohypophysis → regulate anterior pituitary secretory cells."
+    },
+    {
+        stem: "Which of the following CORRECTLY pairs the hypothalamic nucleus with its primary hormonal output?",
+        options: ["Supraoptic nucleus → CRH", "Paraventricular nucleus → GnRH", "Ventromedial nucleus → GHRH", "Periventricular nucleus → TRH", "Dorsomedial nucleus → somatostatin"],
+        correct: 2,
+        explanations: [
+            "Supraoptic nucleus releases ADH (vasopressin) and oxytocin — not CRH.",
+            "Paraventricular nucleus (PVN) releases CRH (plus ADH, oxytocin) — not GnRH. GnRH comes from the medial preoptic nucleus.",
+            "CORRECT. The ventromedial nucleus releases GHRH (growth hormone-releasing hormone).",
+            "Periventricular nucleus releases SOMATOSTATIN (GHIH) — not TRH. TRH comes from the anterior hypothalamic area.",
+            "Dorsomedial nucleus releases GnIH (gonadotropin-inhibiting hormone) — not somatostatin."
+        ],
+        teaching: "Key nuclei: PVN = CRH (stress integration); SON = ADH + OT; Medial preoptic = GnRH; Ventromedial = GHRH; Periventricular = Somatostatin; Anterior = TRH; Dorsomedial = GnIH. These are testable!"
+    },
+    {
+        stem: "A patient's blood glucose is measured at regular intervals after a carbohydrate-rich but protein-poor meal. Which anterior pituitary hormone axis is LEAST LIKELY to be significantly activated by this meal?",
+        options: ["TSH axis (thyroid)", "Prolactin axis", "ACTH axis (adrenal)", "GH axis (somatotrophs)", "LH/FSH axis (gonadotropes)"],
+        correct: 3,
+        explanations: [
+            "TSH axis is regulated by TRH and thyroid hormone feedback — a single meal has modest acute effects.",
+            "Prolactin is tonically suppressed by dopamine; a meal has modest effects.",
+            "ACTH axis responds to stress and circadian rhythm — a single carb meal is not a major stressor.",
+            "CORRECT. GH secretion is INHIBITED by elevated serum glucose. A carb-rich meal → hyperglycemia → actively suppresses GH release. GH is stimulated by fasting/hypoglycemia, high AA, exercise, and sleep.",
+            "LH/FSH are regulated by GnRH pulsatility and sex steroid feedback — relatively unaffected by a single meal."
+        ],
+        teaching: "GH is the main axis that's actively suppressed by hyperglycemia. This is why the oral glucose tolerance test (OGTT) is used to diagnose acromegaly — if GH fails to suppress after a glucose load, suspect GH-secreting adenoma."
+    },
+    {
+        stem: "Which of the following is NOT a peptide or protein hormone?",
+        options: ["GnRH", "CRH", "Dopamine (PIH)", "TRH", "Somatostatin"],
+        correct: 2,
+        explanations: [
+            "GnRH is a 10-amino acid peptide.",
+            "CRH is a 41-amino acid peptide.",
+            "CORRECT. Dopamine (PIH = prolactin-inhibiting hormone) is a CATECHOLAMINE (small molecule derived from tyrosine) — NOT a peptide. This is unique among hypothalamic regulatory hormones.",
+            "TRH is a modified tripeptide.",
+            "Somatostatin is a 14-amino acid peptide (or 28-aa form)."
+        ],
+        teaching: "All hypothalamic regulatory hormones are peptides EXCEPT dopamine (PIH), which is a catecholamine. This structural difference matters pharmacologically — dopamine agonists (bromocriptine, cabergoline) can be used to suppress prolactin secretion in prolactinomas."
+    }
+];
+
+// ─── VIGNETTE DATA ────────────────────────────────────
+const vignettes = [
+    {
+        banner: "Clinical Vignette | Stalk Compression",
+        stem: `A 38-year-old woman presents with amenorrhea, milky nipple discharge, and decreased libido for 6 months. She is not pregnant. MRI reveals a <strong>1.5 cm mass at the pituitary stalk</strong>. Labs: Prolactin 180 ng/mL (elevated), TSH normal, LH/FSH low, IGF-1 low. The mass does not appear to secrete hormones itself on functional testing.`,
+        question: "What mechanism best explains the elevated prolactin?",
+        options: ["The mass is a prolactinoma secreting prolactin directly", "Stalk compression prevents dopamine from reaching the anterior pituitary", "The mass is secreting TRH which stimulates prolactin", "Decreased estrogen from low LH/FSH causing prolactin to rise", "Increased CRH from the mass stimulating prolactin"],
+        correct: 1,
+        explanations: [
+            "A prolactinoma would typically show features consistent with primary pituitary adenoma; the question states the mass does NOT secrete hormones itself.",
+            "CORRECT. This is 'stalk effect' or 'stalk compression.' Any mass at the stalk physically blocks dopamine (PIH) transit from hypothalamus to anterior pituitary → dopamine inhibition removed → prolactin rises. This is distinct from a prolactinoma.",
+            "TRH could raise prolactin in hypothyroidism, but TSH is stated to be normal here.",
+            "Low estrogen does not directly cause hyperprolactinemia.",
+            "CRH stimulates ACTH, not prolactin."
+        ],
+        teaching: "Any mass compressing the pituitary stalk → stalk effect hyperprolactinemia. Prolactin is the only hormone that rises (dopamine removed). Other pituitary hormones fall (lose their releasing hormones). Key differential: prolactinoma vs stalk compression — both give ↑prolactin, but treatment differs (dopamine agonists vs. treating the underlying mass)."
+    },
+    {
+        banner: "Clinical Vignette | Hypothalamic Control",
+        stem: `In a physiology experiment, rats are given a drug that selectively blocks dopamine receptors on lactotrope cells of the anterior pituitary. <strong>No other receptors are affected.</strong> After 2 hours, blood is drawn from the rats.`,
+        question: "Which of the following changes in serum hormone levels is MOST expected?",
+        options: ["Increased GH, decreased prolactin", "Increased prolactin, no change in GH", "Decreased prolactin, increased TSH", "Increased LH and FSH", "Decreased ACTH and cortisol"],
+        correct: 1,
+        explanations: [
+            "GH would not increase (that requires GHRH stimulation). Prolactin would not decrease — blocking dopamine receptors removes inhibition → prolactin rises.",
+            "CORRECT. Blocking dopamine receptors on lactotropes prevents dopamine (PIH) from inhibiting prolactin secretion → prolactin rises significantly. GH is unaffected (no dopamine regulation there). All other hormones are also unaffected.",
+            "Prolactin would increase (not decrease). TSH is regulated by TRH/T3 feedback, not dopamine.",
+            "LH/FSH are regulated by GnRH pulsatility, not by dopamine receptors on lactotropes.",
+            "ACTH/cortisol are regulated by the CRH-ACTH-cortisol axis, not dopamine at the pituitary level."
+        ],
+        teaching: "Dopamine (PIH) is the sole inhibitor of prolactin. Block dopamine receptors → prolactin rises. This is why antipsychotics (which block D2 receptors broadly) cause hyperprolactinemia as a side effect → galactorrhea, amenorrhea, sexual dysfunction."
+    },
+    {
+        banner: "Clinical Vignette | Integration",
+        stem: `A 52-year-old woman with no chronic illnesses presents with fatigue, weight gain, dry skin, cold intolerance, constipation, and milky nipple discharge. She denies being pregnant or recently breastfeeding. TSH is 45 mIU/L (markedly elevated), free T4 is very low. <strong>Prolactin is 68 ng/mL</strong> (mildly elevated).`,
+        question: "What is the most likely mechanism for the elevated prolactin?",
+        options: ["Compression of the pituitary stalk by a mass", "Ectopic prolactin secretion from the thyroid gland", "Elevated TRH stimulating prolactin release from lactotropes", "Decreased dopamine from hypothyroidism", "Autoimmune destruction of dopamine-producing neurons"],
+        correct: 2,
+        explanations: [
+            "No mass has been mentioned; the presentation is classic primary hypothyroidism.",
+            "The thyroid does not secrete prolactin.",
+            "CORRECT. Primary hypothyroidism → ↓T3/T4 → loss of negative feedback on TRH → ↑TRH → TRH stimulates BOTH TSH and prolactin from the anterior pituitary. Classic boards: hypothyroidism + galactorrhea = elevated TRH driving prolactin.",
+            "Dopamine is not reduced in hypothyroidism. The issue is increased TRH stimulation.",
+            "No evidence for autoimmune damage to dopamine neurons."
+        ],
+        teaching: "Primary hypothyroidism → ↑TRH → ↑TSH AND ↑prolactin. This is a classic 'two-for-one' exam concept. Always check thyroid function when you see hyperprolactinemia! Treatment is levothyroxine → TSH normalizes → TRH drops → prolactin normalizes."
+    }
+];
+
+// ─── TEST TRAPS ───────────────────────────────────────
+const traps = [
+    {
+        title: "TRAP #1: Posterior pituitary makes hormones",
+        myth: "The posterior pituitary PRODUCES ADH and oxytocin.",
+        truth: "The posterior pituitary only STORES and RELEASES ADH and oxytocin. These hormones are synthesized in hypothalamic neurons (SON and PVN), packaged in vesicles, and transported via fast axonal transport to the posterior pituitary, where they are stored in Herring bodies."
+    },
+    {
+        title: "TRAP #2: Cutting the stalk kills ALL pituitary hormones",
+        myth: "Cutting the pituitary stalk will decrease ALL pituitary hormone levels.",
+        truth: "Cutting the stalk causes PROLACTIN to RISE (dopamine inhibition removed) while all other anterior pituitary hormones DECREASE (lose their releasing hormones). Prolactin is the exception because its only regulation is inhibitory."
+    },
+    {
+        title: "TRAP #3: Pancreas is controlled by the hypothalamus",
+        myth: "The pancreas is regulated by the hypothalamus-pituitary axis like other endocrine organs.",
+        truth: "The pancreas self-regulates. Insulin secretion is controlled by blood glucose (and incretins, amino acids, etc.), NOT by hypothalamic-pituitary hormones. Same for PTH — parathyroid glands respond to blood calcium independently."
+    },
+    {
+        title: "TRAP #4: Dopamine = PIH is a peptide",
+        myth: "Prolactin-inhibiting hormone (PIH/dopamine) is a peptide like other hypothalamic regulatory hormones.",
+        truth: "PIH is DOPAMINE — a catecholamine (small molecule), NOT a peptide. This is why dopamine agonists (bromocriptine, cabergoline) work orally to suppress prolactin. All other hypothalamic regulatory hormones are peptides or small proteins."
+    },
+    {
+        title: "TRAP #5: Anterior pituitary has its own independent blood supply",
+        myth: "The anterior pituitary gets blood from the inferior hypophyseal artery, like the posterior pituitary.",
+        truth: "The POSTERIOR pituitary gets blood from the inferior hypophyseal artery. The ANTERIOR pituitary receives blood from the SUPERIOR hypophyseal artery via the portal system (dense capillary network). They have separate blood supplies."
+    },
+    {
+        title: "TRAP #6: GnRH agonists always increase LH and FSH",
+        myth: "GnRH agonists (like leuprolide) continuously stimulate LH and FSH secretion.",
+        truth: "INITIALLY yes (brief flare), but continuous non-pulsatile GnRH → GnRH receptor desensitization/downregulation → paradoxical DECREASE in LH and FSH. This is therapeutically exploited for prostate cancer (medical castration), endometriosis, and central precocious puberty."
+    }
+];
+
+// ─── FILL-IN-BLANK DATA ───────────────────────────────
+const fibs = [
+    {
+        prompt: "Complete the pathway: Hypothalamus releases ________ → enters portal system → stimulates anterior pituitary corticotropes to release ________ → stimulates zona fasciculata to produce ________.",
+        answers: ["crh", "acth", "cortisol"],
+        hint: "Three blanks: CRH → ACTH → Cortisol (the HPA axis)"
+    },
+    {
+        prompt: "The only anterior pituitary hormone regulated exclusively by INHIBITORY hypothalamic control is ________. The hypothalamic inhibitor is ________ (chemical name).",
+        answers: ["prolactin", "dopamine"],
+        hint: "Two blanks: Prolactin / Dopamine (PIH)"
+    },
+    {
+        prompt: "The ________ nucleus of the hypothalamus releases GnRH, while the ________ nucleus releases CRH and is the key stress-integrating region.",
+        answers: ["medial preoptic", "paraventricular", "pvn"],
+        hint: "Medial preoptic → GnRH; Paraventricular (PVN) → CRH"
+    },
+    {
+        prompt: "Hypothalamic hormones reach the anterior pituitary via the ________ portal system. The first capillary bed is in the ________, and the second is in the anterior lobe.",
+        answers: ["hypophyseal", "median eminence"],
+        hint: "Hypophyseal portal system; first capillary bed = median eminence"
+    },
+    {
+        prompt: "Blood supply to the anterior pituitary comes from the ________ hypophyseal artery. Blood supply to the posterior pituitary comes from the ________ hypophyseal artery.",
+        answers: ["superior", "inferior"],
+        hint: "Superior = anterior pituitary; Inferior = posterior pituitary"
+    }
+];
+
+// ─── REFERENCE TABLE DATA ─────────────────────────────
+const refData = {
+    headers: ["Hypothalamic Hormone", "Type", "Target Cell", "Anterior Pituitary Hormone Released", "Special Notes"],
+    rows: [
+        ["GnRH", "Peptide", "Gonadotropes", "LH, FSH", "Must be pulsatile; continuous → desensitization"],
+        ["GnIH", "Peptide", "Gonadotropes", "↓LH, ↓FSH", "Stress → ↑GnIH → amenorrhea"],
+        ["CRH", "41-aa peptide", "Corticotropes", "ACTH", "Co-released with vasopressin; stress-responsive"],
+        ["TRH", "Modified tripeptide", "Thyrotropes, Lactotropes", "TSH AND Prolactin", "⭐ TRH stimulates BOTH TSH and prolactin"],
+        ["GHRH", "44-aa peptide", "Somatotropes", "GH", "Converges on PKA with somatostatin"],
+        ["Somatostatin (GHIH)", "14/28-aa peptide", "Somatotropes", "↓GH (and ↓TSH)", "Also GI effects; co-regulates pituitary with GHRH"],
+        ["Dopamine (PIH)", "⭐ CATECHOLAMINE", "Lactotropes", "↓Prolactin ONLY", "⭐ Only inhibitory; small molecule; NOT a peptide"],
+    ]
+};
+
+// ─── RENDER FUNCTIONS ────────────────────────────────
+
+// Flashcards
+function renderFlashcards() {
+    const grid = document.getElementById('fcGrid');
+    flashcards.forEach((fc, i) => {
+        grid.innerHTML += `
+        <div class="fc" id="fc-${i}" onclick="flipCard(${i})">
+            <div class="fc-inner">
+                <div class="fc-front">
+                    <div class="fc-label">Question</div>
+                    <div class="fc-q">${fc.q}</div>
+                    <div class="fc-hint">Click to reveal answer</div>
+                </div>
+                <div class="fc-back">
+                    <div class="fc-label">Answer</div>
+                    <div class="fc-a">${fc.a.replace(/\n/g, '<br>')}</div>
+                </div>
+            </div>
+        </div>`;
+    });
+}
+
+function flipCard(i) {
+    document.getElementById('fc-' + i).classList.toggle('flipped');
+}
+
+// MCQ
+function renderMCQ() {
+    const container = document.getElementById('mcqContainer');
+    mcqs.forEach((q, qi) => {
+        let optHtml = q.options.map((opt, oi) =>
+            `<div class="mcq-opt" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi})">
+                <span class="letter">${String.fromCharCode(65+oi)}.</span>
+                <span>${opt}</span>
+            </div>
+            <div class="mcq-explanation" id="exp-${qi}-${oi}">
+                <div class="exp-label">${oi === q.correct ? '✅ Correct' : '❌ Incorrect'}</div>
+                ${q.explanations[oi]}
+            </div>`
+        ).join('');
+        container.innerHTML += `
+        <div class="mcq-item">
+            <div class="mcq-num">Question ${qi+1} of ${mcqs.length}</div>
+            <div class="mcq-stem">${q.stem}</div>
+            <div class="mcq-options">${optHtml}</div>
+            <div class="teaching-pt" id="tp-${qi}">
+                <div class="tp-label">🎯 Teaching Point</div>
+                ${q.teaching}
+            </div>
+        </div>`;
+    });
+}
+
+function selectOpt(qi, oi) {
+    const q = mcqs[qi];
+    // Mark all options in this question
+    q.options.forEach((_, optIdx) => {
+        const el = document.getElementById(`opt-${qi}-${optIdx}`);
+        el.classList.add('revealed');
+        el.style.pointerEvents = 'none';
+        if (optIdx === q.correct) el.classList.add('correct');
+        else el.classList.add('wrong');
+        document.getElementById(`exp-${qi}-${optIdx}`).classList.add('visible');
+    });
+    document.getElementById(`tp-${qi}`).classList.add('visible');
+}
+
+// Vignettes
+function renderVignettes() {
+    const container = document.getElementById('vigContainer');
+    vignettes.forEach((v, vi) => {
+        let optHtml = v.options.map((opt, oi) =>
+            `<div class="mcq-opt" id="vopt-${vi}-${oi}" onclick="selectVigOpt(${vi},${oi})">
+                <span class="letter">${String.fromCharCode(65+oi)}.</span>
+                <span>${opt}</span>
+            </div>
+            <div class="mcq-explanation" id="vexp-${vi}-${oi}">
+                <div class="exp-label">${oi === v.correct ? '✅ Correct' : '❌ Incorrect'}</div>
+                ${v.explanations[oi]}
+            </div>`
+        ).join('');
+        container.innerHTML += `
+        <div class="vig-item">
+            <div class="vig-banner">🏥 ${v.banner}</div>
+            <div class="vig-stem">${v.stem}</div>
+            <p style="font-weight:600; color:#C7D2FE; margin-bottom:12px; font-size:0.93em;">${v.question}</p>
+            <div class="mcq-options">${optHtml}</div>
+            <div class="teaching-pt" id="vtp-${vi}">
+                <div class="tp-label">🎯 Teaching Point</div>
+                ${v.teaching}
+            </div>
+        </div>`;
+    });
+}
+
+function selectVigOpt(vi, oi) {
+    const v = vignettes[vi];
+    v.options.forEach((_, optIdx) => {
+        const el = document.getElementById(`vopt-${vi}-${optIdx}`);
+        el.classList.add('revealed');
+        el.style.pointerEvents = 'none';
+        if (optIdx === v.correct) el.classList.add('correct');
+        else el.classList.add('wrong');
+        document.getElementById(`vexp-${vi}-${optIdx}`).classList.add('visible');
+    });
+    document.getElementById(`vtp-${vi}`).classList.add('visible');
+}
+
+// Traps
+function renderTraps() {
+    const container = document.getElementById('trapsContainer');
+    traps.forEach(t => {
+        container.innerHTML += `
+        <div class="trap-item">
+            <div class="trap-header">⚠️ ${t.title}</div>
+            <div class="trap-myth">
+                <div class="trap-myth-label">❌ COMMON MISCONCEPTION</div>
+                ${t.myth}
+            </div>
+            <div class="trap-truth">
+                <div class="trap-truth-label">✅ WHAT'S ACTUALLY TRUE</div>
+                ${t.truth}
+            </div>
+        </div>`;
+    });
+}
+
+// Fill-in-blank
+function renderFIB() {
+    const container = document.getElementById('fibContainer');
+    fibs.forEach((f, fi) => {
+        container.innerHTML += `
+        <div class="fib-item">
+            <div class="fib-prompt">${f.prompt}</div>
+            <input class="fib-input" id="fib-input-${fi}" placeholder="Type your answer here..." />
+            <button class="fib-btn" onclick="checkFIB(${fi})">Check Answer</button>
+            <div class="fib-result" id="fib-result-${fi}"></div>
+        </div>`;
+    });
+}
+
+function checkFIB(fi) {
+    const input = document.getElementById(`fib-input-${fi}`).value.trim().toLowerCase();
+    const f = fibs[fi];
+    const correct = f.answers.some(ans => input.includes(ans.toLowerCase()));
+    const resultEl = document.getElementById(`fib-result-${fi}`);
+    resultEl.className = 'fib-result ' + (correct ? 'correct' : 'incorrect');
+    resultEl.textContent = correct ? `✅ Correct! ${f.hint}` : `❌ Not quite. Hint: ${f.hint}`;
+}
+
+// Reference Table
+function renderRef() {
+    const container = document.getElementById('refContainer');
+    let html = `<table class="ref-table"><tr>`;
+    refData.headers.forEach(h => html += `<th>${h}</th>`);
+    html += '</tr>';
+    refData.rows.forEach(row => {
+        html += '<tr>';
+        row.forEach(cell => {
+            let cls = '';
+            if (cell.includes('⭐')) cls = 'hl';
+            html += `<td class="${cls}">${cell}</td>`;
+        });
+        html += '</tr>';
+    });
+    html += '</table>';
+    container.innerHTML = html;
+}
+
+// ─── INIT ─────────────────────────────────────────────
+renderFlashcards();
+renderMCQ();
+renderVignettes();
+renderTraps();
+renderFIB();
+renderRef();
+</script>
+</body>
+</html>

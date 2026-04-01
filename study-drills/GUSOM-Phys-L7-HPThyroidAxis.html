@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phys L7 – HP-Thyroid Axis | GUSOM Endocrine</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#00838F;--bg:#0D1117;--card:#161B22;--border:#30363D;--text:#E6EDF3;--muted:#8B949E;--green:#3FB950;--red:#F85149;--yellow:#D29922}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{background:var(--card);border-bottom:3px solid var(--accent);padding:20px 32px;display:flex;align-items:center;gap:16px}
+.back-btn{color:var(--accent);text-decoration:none;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--accent);border-radius:6px;transition:background .2s}
+.back-btn:hover{background:rgba(0,131,143,.15)}
+.header-text h1{font-size:22px;font-weight:700}
+.header-text p{font-size:13px;color:var(--muted);margin-top:2px}
+nav{background:var(--card);border-bottom:1px solid var(--border);padding:0 32px;display:flex;gap:4px;overflow-x:auto}
+.tab{padding:12px 20px;font-size:13px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;color:var(--muted);white-space:nowrap;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.section{display:none;padding:32px;max-width:1000px;margin:0 auto}
+.section.active{display:block}
+h2{font-size:18px;font-weight:700;margin-bottom:20px}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.flip-card{height:210px;cursor:pointer;perspective:1000px}
+.flip-card-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s}
+.flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;border:1px solid var(--border);padding:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.flip-front{background:var(--card);border-top:3px solid var(--accent)}
+.flip-front p{font-size:14px;font-weight:600;color:var(--text);line-height:1.5}
+.flip-back{background:#1c1c1c;border-top:3px solid #888;transform:rotateY(180deg)}
+.flip-back p{font-size:12.5px;color:var(--text);line-height:1.6}
+.card-hint{font-size:11px;color:var(--muted);margin-top:8px}
+.mcq-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:20px}
+.mcq-stem{font-size:15px;font-weight:600;margin-bottom:16px;line-height:1.6}
+.mcq-options{display:flex;flex-direction:column;gap:8px}
+.opt-btn{background:#0D1117;border:1px solid var(--border);border-radius:8px;padding:12px 16px;text-align:left;color:var(--text);cursor:pointer;font-size:13px;transition:all .2s;font-family:'Inter',sans-serif;line-height:1.4}
+.opt-btn:hover:not(:disabled){border-color:var(--accent);background:rgba(0,131,143,.08)}
+.opt-btn.correct{border-color:var(--green)!important;background:rgba(63,185,80,.12)!important}
+.opt-btn.wrong{border-color:var(--red)!important;background:rgba(248,81,73,.12)!important}
+.opt-btn:disabled{cursor:default}
+.opt-expl{font-size:12px;color:var(--muted);margin-top:6px;padding-left:12px;display:none;line-height:1.5}
+.teaching-box{background:rgba(0,131,143,.1);border:1px solid rgba(0,131,143,.4);border-radius:8px;padding:14px;margin-top:14px;font-size:13px;line-height:1.6;display:none}
+.teaching-box strong{color:var(--accent)}
+.vignette{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:20px}
+.vignette-case{background:#0D1117;border-left:3px solid var(--accent);padding:14px 16px;border-radius:0 6px 6px 0;margin-bottom:16px;font-size:14px;line-height:1.7}
+.badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:rgba(0,131,143,.25);color:var(--accent);margin-bottom:6px}
+.trap-card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--yellow);border-radius:10px;padding:20px;margin-bottom:14px}
+.trap-label{font-size:11px;font-weight:700;color:var(--yellow);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.trap-title{font-size:14px;font-weight:600;margin-bottom:10px}
+.trap-body{font-size:13px;color:#C9D1D9;line-height:1.6}
+.fib-block{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:14px}
+.fib-q{font-size:14px;font-weight:600;margin-bottom:12px;line-height:1.6}
+.fib-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.fib-input{background:#0D1117;border:1px solid var(--border);border-radius:6px;padding:8px 12px;color:var(--text);font-size:13px;font-family:'Inter',sans-serif;flex:1;min-width:200px}
+.fib-input:focus{outline:none;border-color:var(--accent)}
+.fib-check{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:8px 16px;cursor:pointer;font-size:13px;font-weight:600;font-family:'Inter',sans-serif}
+.fib-check:hover{opacity:.85}
+.fib-result{font-size:13px;margin-top:10px;padding:10px 14px;border-radius:6px;display:none;line-height:1.5}
+.fib-result.correct{background:rgba(63,185,80,.12);border:1px solid rgba(63,185,80,.4);color:var(--green)}
+.fib-result.wrong{background:rgba(248,81,73,.12);border:1px solid rgba(248,81,73,.4);color:var(--red)}
+.ref-table-wrap{overflow-x:auto;margin-top:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:rgba(0,131,143,.25);color:var(--text);padding:10px 14px;text-align:left;font-weight:600;border:1px solid var(--border)}
+td{padding:10px 14px;border:1px solid var(--border);color:#C9D1D9;vertical-align:top;line-height:1.5}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+</style>
+</head>
+<body>
+<header>
+  <a href="GUSOM-Phys-ActiveDrills.html" class="back-btn">← Hub</a>
+  <div class="header-text">
+    <h1>Lecture 7 — Hypothalamic-Pituitary-Thyroid Axis</h1>
+    <p>Physiology · TRH-TSH Axis · T4/T3 · Deiodination · Carrier Proteins · Axis Patterns in Disease</p>
+  </div>
+</header>
+<nav>
+  <button class="tab active" onclick="showTab('fc')">Flashcards</button>
+  <button class="tab" onclick="showTab('mcq')">MCQ</button>
+  <button class="tab" onclick="showTab('vig')">Vignettes</button>
+  <button class="tab" onclick="showTab('traps')">Test Traps</button>
+  <button class="tab" onclick="showTab('fib')">Fill-in-Blank</button>
+  <button class="tab" onclick="showTab('ref')">Reference Table</button>
+</nav>
+
+<div id="fc" class="section active">
+  <h2>Flashcards <span style="color:var(--muted);font-weight:400;font-size:14px">(click to flip)</span></h2>
+  <div id="fc-grid" class="cards-grid"></div>
+</div>
+<div id="mcq" class="section"><h2>Multiple Choice Questions</h2><div id="mcq-container"></div></div>
+<div id="vig" class="section"><h2>Clinical Vignettes</h2><div id="vig-container"></div></div>
+<div id="traps" class="section"><h2>Test Traps & High-Yield Distinctions</h2><div id="traps-container"></div></div>
+<div id="fib" class="section"><h2>Fill in the Blank</h2><div id="fib-container"></div></div>
+<div id="ref" class="section"><h2>Reference Table — HP-Thyroid Axis Patterns</h2><div id="ref-container"></div></div>
+
+<script>
+const flashcards = [
+  {q:"What is the HP-Thyroid Axis cascade from hypothalamus to peripheral action?", a:"TRH (hypothalamus PVN) → portal blood → TSH from thyrotropes (ant. pituitary) → TSHR on thyroid follicular cells (Gs→cAMP→PKA) → T4 (80%) + T3 (20%) secreted → peripheral deiodination: T4→T3 (active) → T3 acts at nuclear receptors (TR) → negative feedback on both hypothalamus and pituitary."},
+  {q:"Which is more potent — T3 or T4 — and what is the source of circulating T3?", a:"T3 is 3–5× more potent (higher TR affinity, shorter half-life ~1 day vs T4 ~7 days).\nSource of circulating T3: ~20% direct thyroid secretion + ~80% from peripheral conversion of T4 by Type I 5'-deiodinase (liver, kidney)."},
+  {q:"Name the 3 types of deiodinase and their reactions and locations.", a:"Type I: T4→T3 (outer ring); liver, kidney, thyroid → main source of plasma T3; inhibited in illness\nType II: T4→T3 (local); brain, pituitary, BAT → local T3 for CNS + pituitary feedback\nType III: T4→rT3 (inactive) and T3→T2; placenta, skin → inactivates thyroid hormones;↑ in critical illness"},
+  {q:"What are TBG, transthyretin, and albumin's roles in thyroid hormone transport? Which is most important?", a:"TBG (thyroxine-binding globulin) ~70% of T4 — most clinically important carrier; increases with estrogen.\nTransthyretin (TTR/prealbumin) ~15% — also a CSF carrier; decreases in inflammation.\nAlbumin ~15% — low affinity, high capacity.\nFREE hormone (<0.05% of T4) = biologically active fraction. Only free T4/T3 drives receptor activation and feedback."},
+  {q:"Estrogen increases TBG. A pregnant woman has total T4 = 18 µg/dL (high). Is she hyperthyroid?", a:"NO — she is euthyroid.\nElevated estrogen (pregnancy, OCP) → ↑ hepatic TBG synthesis → more T4 is protein-bound → total T4 rises BUT free T4 is unchanged → TSH is normal.\nRule: ALWAYS check TSH + free T4. Total T4 is misleading when TBG changes."},
+  {q:"What is the most sensitive test of thyroid axis function, and why?", a:"TSH — because of the log-linear relationship between free T4 and TSH.\nA small change in free T4 causes a large, amplified change in TSH (inverse relationship).\nTSH is often the first test to become abnormal — even in subclinical disease when T4/T3 are still normal."},
+  {q:"What is euthyroid sick syndrome (non-thyroidal illness) and why is it important NOT to treat it?", a:"During critical illness (sepsis, surgery, fasting): ↑ Type III deiodinase + ↓ Type I deiodinase → T4→rT3 (inactive) instead of T3 → low T3, ↑ rT3, normal/low TSH.\nThis is an ADAPTIVE response — reduces metabolic rate/catabolism during illness.\nTSH is normal or low (not elevated like primary hypothyroidism).\nDo NOT treat with levothyroxine — studies show no benefit and possible harm."},
+  {q:"What are T3's key cardiovascular and metabolic effects?", a:"Cardiovascular: ↑ β1-adrenergic receptor expression (sensitizes to catecholamines) → ↑ HR, ↑ contractility, ↑ CO. Also directly ↑ SR Ca²⁺-ATPase.\nMetabolic: ↑ Na/K-ATPase expression → ↑ O₂ consumption → ↑ BMR. ↑ UCP1 in BAT → thermogenesis.\nLipid: ↑ LDL receptor expression → ↓ LDL/cholesterol.\nGI: ↑ motility → diarrhea in hyperthyroidism, constipation in hypothyroidism."},
+  {q:"Why is fetal/neonatal thyroid hormone so critical, and what happens if it's deficient?", a:"T3 is ESSENTIAL for fetal CNS development: myelination, neuronal migration, synaptogenesis.\nMaternal hypothyroidism in 1st trimester (before fetal thyroid function is established) → CRETINISM: irreversible intellectual disability, short stature, coarse features, large tongue, umbilical hernia.\nPostnatal: universal newborn screening (TSH on PKU card at 24–48 hrs) detects congenital hypothyroidism — early levothyroxine treatment prevents neurological damage."},
+  {q:"Graves disease: what drives the hyperthyroidism, and what does TSH look like?", a:"Graves = autoimmune: Thyroid-Stimulating Immunoglobulins (TSIs) bind and activate the TSH receptor (TSHR) — mimicking TSH but not subject to negative feedback regulation.\nResult: autonomous T3/T4 overproduction → ↑↑ free T4 and T3 → negative feedback → TSH is SUPPRESSED (very low or undetectable).\nDistinguishing feature: TSH low + T4 high + positive TSI antibodies + diffuse goiter + ophthalmopathy."}
+];
+
+const mcqs = [
+  {
+    stem:"A 45-year-old woman presents with fatigue, weight gain of 12 lbs over 6 months, cold intolerance, constipation, and bradycardia (HR 52). Her TSH returns at 45 mIU/L (normal 0.5–4.5), free T4 is 0.4 ng/dL (low). What is the diagnosis and what is the underlying mechanism?",
+    opts:["A. Secondary hypothyroidism — pituitary failure causing low TSH and low T4","B. Primary hypothyroidism — thyroid gland failure → loss of T3/T4 negative feedback → compensatory TSH elevation","C. Subclinical hypothyroidism — elevated TSH but normal free T4 and symptoms","D. Euthyroid sick syndrome — critical illness causing low T4 and elevated TSH","E. Graves disease — TSI antibodies suppressing TSH"],
+    correct:1,
+    expls:["Secondary hypothyroidism: pituitary fails → LOW TSH + low T4. This patient has very HIGH TSH — opposite of pituitary failure.","Correct! Primary hypothyroidism: thyroid gland destruction/dysfunction → ↓ T3/T4 → loss of negative feedback on pituitary → ↑↑ TSH. Classic features: weight gain (↓ BMR), cold intolerance, constipation (↓ GI motility), bradycardia (↓ β-adrenergic sensitization). Most common cause in developed world: Hashimoto's thyroiditis (autoimmune).","Subclinical hypothyroidism: elevated TSH + NORMAL free T4 (asymptomatic or mild symptoms). This patient has low free T4 = overt hypothyroidism, not subclinical.","Euthyroid sick syndrome: TSH is typically normal or LOW (not elevated). Occurs during acute illness. This patient has chronic symptoms over 6 months — not critical illness.","Graves: TSH would be SUPPRESSED (near zero). T4 would be HIGH. Causes hyperthyroidism, not the hypothyroid picture described."],
+    teach:"<strong>Primary vs Secondary hypothyroidism:</strong> High TSH = primary (thyroid failure, pituitary compensates). Low TSH = secondary (pituitary failure, can't compensate). The most common cause of primary hypothyroidism in the US is Hashimoto's thyroiditis (autoimmune anti-TPO and anti-thyroglobulin antibodies → lymphocytic infiltration → gland destruction)."
+  },
+  {
+    stem:"A 28-year-old woman on oral contraceptive pills (estrogen-containing) has a total T4 of 16 µg/dL (elevated; normal 5–12). TSH is 1.9 mIU/L (normal). Free T4 is 1.1 ng/dL (normal). She feels well. What is the most appropriate next step?",
+    opts:["A. Start methimazole for subclinical hyperthyroidism","B. Order a thyroid ultrasound to evaluate for multinodular goiter","C. No treatment needed — elevated total T4 is due to increased TBG from estrogen; free T4 and TSH are normal","D. Repeat TSH in 6 weeks — this may represent early subclinical hyperthyroidism","E. Check anti-TPO antibodies to exclude autoimmune thyroiditis"],
+    correct:2,
+    expls:["Methimazole is for hyperthyroidism. TSH and free T4 are normal — she is euthyroid. Treating would cause iatrogenic hypothyroidism.","Ultrasound evaluates thyroid nodules/goiter causing hormone overproduction — not indicated here. Her free T4 is normal; this is a binding protein issue, not thyroid pathology.","Correct! OCP → estrogen → ↑ hepatic TBG synthesis → more T4 protein-bound → total T4 rises. But free T4 = unchanged (biologically active fraction). TSH confirms she is euthyroid. No action needed; reassure the patient.","Subclinical hyperthyroidism = low TSH + normal free T4. TSH here is 1.9 (normal). This is not subclinical hyperthyroidism.","Anti-TPO antibodies test for Hashimoto's (hypothyroidism) or the autoimmune component of Graves — not relevant here where free T4 and TSH are both normal."],
+    teach:"<strong>TBG trap:</strong> Conditions that increase TBG (estrogen, pregnancy, OCP, hepatitis, genetic) → ↑ total T4/T3 but NORMAL free T4/T3 and NORMAL TSH. Patient is euthyroid. Conditions that decrease TBG (androgens, nephrotic syndrome, liver failure, high-dose glucocorticoids) → ↓ total T4/T3 but NORMAL free T4/T3 and NORMAL TSH. Always interpret total T4 with TSH and free T4."
+  },
+  {
+    stem:"An ICU patient with severe septic shock has TSH 0.3 mIU/L (low), free T4 0.7 ng/dL (borderline low), and free T3 0.6 pg/mL (very low). Reverse T3 (rT3) is markedly elevated. What is the correct interpretation and management?",
+    opts:["A. Secondary hypothyroidism from pituitary ischemia — start hydrocortisone and levothyroxine","B. Primary hypothyroidism complicating sepsis — start levothyroxine immediately","C. Euthyroid sick syndrome (non-thyroidal illness) — do NOT treat with thyroid hormone; address the underlying illness","D. Graves disease with TSH suppression — this patient needs methimazole","E. Subclinical hypothyroidism — monitor TSH and consider levothyroxine if TSH rises above 10"],
+    correct:2,
+    expls:["Secondary hypothyroidism would require TSH to be low AND clinical hypothyroidism. The markedly elevated rT3 and sepsis context point to euthyroid sick syndrome. Starting levothyroxine in sepsis worsens outcomes.","Primary hypothyroidism: TSH would be HIGH. Here TSH is low-normal — this excludes primary thyroid gland failure.","Correct! Euthyroid sick syndrome: ↑ Type III deiodinase during critical illness → T4→rT3 (inactive) instead of T3. The very high rT3 is the diagnostic clue. TSH is low/normal (stress and dopamine suppress it). This is adaptive — reducing metabolic rate preserves energy. Treat the sepsis, not the thyroid.","Graves would require high free T4/T3 and low TSH with clinical hyperthyroidism. Low T3 + high rT3 is the opposite.","Subclinical hypothyroidism requires ELEVATED TSH + normal T4. TSH here is low. This is not subclinical hypothyroidism."],
+    teach:"<strong>Euthyroid sick syndrome clues:</strong> Low T3 + elevated rT3 + low-normal TSH in a critically ill patient. Mechanism: ↑ Type III deiodinase shunts T4 to rT3 (inactive) → conserves catabolism. Historically treated with T3 replacement → randomized trials showed no benefit and possibly harm. Always look for rT3 elevation when confused about thyroid labs in ICU patients."
+  },
+  {
+    stem:"TSH is produced by thyrotrope cells (basophils) in the anterior pituitary. The TSH receptor on thyroid follicular cells uses which signaling cascade to stimulate thyroid hormone synthesis?",
+    opts:["A. Gi → ↓ cAMP → ↓ PKA → decreased NIS expression","B. Gs → adenylyl cyclase → ↑ cAMP → PKA activation → upregulates NIS, TPO, and thyroglobulin processing","C. Gq → PLC → IP3/DAG → PKC → direct iodide oxidation","D. Tyrosine kinase receptor → RAS/MAPK → gene transcription of T4","E. JAK/STAT → direct nuclear entry → thyroid peroxidase synthesis"],
+    correct:1,
+    expls:["Gi → ↓ cAMP would INHIBIT thyroid hormone synthesis — the opposite of TSH action.","Correct! TSHR is a GPCR coupled to Gs → activates adenylyl cyclase → ↑ cAMP → PKA activation → phosphorylates key proteins that upregulate: NIS (Na-Iodide Symporter, for iodide uptake), TPO (thyroid peroxidase, for iodide oxidation/organification), and thyroglobulin processing. This is the primary pathway. At high TSH levels, Gq pathway also activates → drives follicular cell growth/hypertrophy.","Gq/PLC is the secondary TSHR pathway at HIGH concentrations — drives cell GROWTH, not primarily synthesis.","Tyrosine kinase (insulin, GF) → RAS/MAPK is a growth factor receptor pathway — not the primary TSHR mechanism.","JAK/STAT is the cytokine receptor pathway (e.g., for EPO, GH) — not relevant to TSHR signaling."],
+    teach:"<strong>TSHR signaling:</strong> Gs→cAMP→PKA = primary pathway for synthesis (↑ NIS, TPO, Tg). Gq pathway = secondary, drives cell proliferation. This is why TSH excess (as in primary hypothyroidism) causes goiter — both synthesis AND follicular cell growth are stimulated. Also: TSIs in Graves bind TSHR and activate both pathways → diffuse goiter + hormone excess."
+  },
+  {
+    stem:"A 6-year-old boy from a rural area of sub-Saharan Africa presents with intellectual disability, short stature, a large tongue, umbilical hernia, and coarse facial features. His mother had no prenatal care and lived in an iodine-deficient region. Which mechanism best explains his condition?",
+    opts:["A. Maternal Graves disease — TSIs crossed the placenta causing fetal hyperthyroidism","B. Congenital absence of the TSHR gene — no response to TSH","C. Maternal iodine deficiency → maternal hypothyroidism → insufficient T3 for fetal brain myelination and neural migration during first trimester","D. Neonatal thyroid agenesis detected at birth — treatable with levothyroxine","E. Type 2 deiodinase deficiency — cannot convert T4→T3 in the brain"],
+    correct:2,
+    expls:["Maternal Graves/TSIs → fetal hyperthyroidism → tachycardia, small for gestational age, premature birth — not this picture.","TSHR absence would cause hypothyroidism — but the clinical picture here (irreversible intellectual disability) points to in utero thyroid hormone deficiency from maternal disease, not fetal receptor.","Correct! Cretinism = irreversible intellectual disability from maternal hypothyroidism during the first trimester. The fetal thyroid is not functional until ~12 weeks. Before this window, the fetal brain depends entirely on MATERNAL T3 for myelination, neuronal migration, and synaptogenesis. Iodine deficiency → maternal hypothyroidism → insufficient T3 for fetal brain → cretinism.","Neonatal thyroid agenesis caught by newborn screening + treated with levothyroxine → normal development. The 6-year-old with irreversible features represents untreated/undetected in utero deficiency.","Type II deiodinase deficiency is a theoretical concept — not a described syndrome causing cretinism."],
+    teach:"<strong>Cretinism prevention:</strong> Iodized salt programs and iodine supplementation in pregnancy. Critical window: first 12 weeks before fetal thyroid is functional. After 12 weeks, fetal thyroid contributes. Universal newborn TSH screening (PKU card) catches congenital hypothyroidism at birth — early levothyroxine prevents intellectual disability. Late-diagnosed cases (like this boy) have irreversible damage."
+  },
+  {
+    stem:"A patient has a TSH of 0.1 mIU/L (suppressed) and free T4 of 1.4 ng/dL (normal). She has mild tremor but otherwise feels well. What is the most likely diagnosis?",
+    opts:["A. Overt hyperthyroidism — TSH suppressed and T4 elevated","B. Subclinical hyperthyroidism — TSH suppressed with normal free T4/T3","C. Euthyroid sick syndrome — TSH suppressed due to critical illness","D. Secondary hypothyroidism — TSH suppressed due to pituitary failure","E. Hashimoto's thyroiditis — autoimmune destruction causing fluctuating TSH"],
+    correct:1,
+    expls:["Overt hyperthyroidism requires elevated free T4 AND/OR T3 in addition to suppressed TSH. Here free T4 is normal.","Correct! Subclinical hyperthyroidism: suppressed TSH (<0.1) with normal free T4 and T3. May be asymptomatic or have mild symptoms (tremor, palpitations). Common causes: exogenous levothyroxine overdose, small toxic nodule, early Graves. Treat if TSH persistently <0.1 due to risk of atrial fibrillation and osteoporosis.","Euthyroid sick syndrome: occurs in critical illness. A tremulous woman who is otherwise feeling well is not acutely critically ill.","Secondary hypothyroidism: low TSH + LOW free T4 (pituitary can't stimulate thyroid → T4 falls). Here T4 is normal, which is inconsistent.","Hashimoto's typically presents with elevated TSH (primary hypothyroidism) — not suppressed TSH."],
+    teach:"<strong>Subclinical vs. overt thyroid disease:</strong> Subclinical hyperthyroidism = low TSH + NORMAL free T4/T3. Overt = low TSH + HIGH free T4/T3. Subclinical hypothyroidism = HIGH TSH + NORMAL free T4. Overt = HIGH TSH + LOW free T4. Subclinical hyperthyroidism is treated (especially if TSH <0.1) due to: ↑ atrial fibrillation risk, ↑ osteoporosis risk, especially in postmenopausal women."
+  },
+  {
+    stem:"The anterior pituitary thyrotrope cells use Type II deiodinase to locally convert T4→T3. What is the physiological significance of this?",
+    opts:["A. The pituitary responds only to circulating T3 levels, not T4","B. The pituitary can regulate its local T3 concentration independently, making it more sensitive to T4 and able to provide precise TSH feedback control","C. Type II deiodinase prevents T3 from crossing the blood-brain barrier into the pituitary","D. This allows the pituitary to inactivate excess T3 to prevent hyperthyroid symptoms","E. Type II deiodinase in the pituitary converts T3 back to T4 for storage"],
+    correct:1,
+    expls:["The pituitary responds to BOTH circulating T3 AND locally-produced T3 from T4 conversion by its own Type II deiodinase.","Correct! Thyrotrope cells have high Type II deiodinase activity — they convert T4 to T3 locally and intracellularly. This means the pituitary responds sensitively to plasma T4 levels (converts them to T3 locally), allowing fine-tuned feedback control. It also explains why levothyroxine (T4) effectively suppresses TSH even though T3 is the active feedback signal.","Type II deiodinase doesn't block BBB transport — it facilitates local T4→T3 conversion.","Type III deiodinase inactivates T3 (to T2) — not Type II. Type II makes T3.","Type II is specifically a 5'-deiodinase that removes iodine from the outer ring of T4 to PRODUCE T3 — not the reverse."],
+    teach:"<strong>Clinical implication:</strong> Patients on levothyroxine (T4) monotherapy: the pituitary uses its Type II deiodinase to convert T4→T3 locally → effectively suppresses TSH. However, peripheral T3 may be suboptimal for some tissues if Type I deiodinase is impaired (e.g., in hypothyroid patients). This is the rationale for combination T4+T3 therapy in refractory hypothyroid symptoms — still debated."
+  },
+  {
+    stem:"Which pair correctly describes the effect of T3 on cholesterol metabolism and its clinical implication?",
+    opts:["A. T3 ↓ LDL receptor expression → ↑ LDL → hypothyroid patients have low cholesterol","B. T3 ↑ LDL receptor expression → ↑ LDL clearance → ↓ serum LDL; hypothyroid patients have hypercholesterolemia","C. T3 has no direct effect on cholesterol — cholesterol changes in thyroid disease are mediated by cortisol","D. T3 ↑ HMG-CoA reductase → ↑ cholesterol synthesis → hyperthyroid patients have high LDL","E. T3 blocks PCSK9 → ↑ LDL receptor recycling → ↓ LDL in hypothyroidism"],
+    correct:1,
+    expls:["T3 INCREASES (not decreases) LDL receptor expression. Therefore hypothyroid patients have REDUCED receptor expression → ↑ LDL — hypercholesterolemia, not low cholesterol.","Correct! T3 upregulates LDL receptor expression in hepatocytes → ↑ LDL uptake and clearance → ↓ serum LDL. In hypothyroidism (↓ T3) → ↓ LDL receptor → impaired clearance → ↑ LDL, ↑ total cholesterol, ↑ cardiovascular risk. Treating hypothyroidism with levothyroxine reduces LDL as T3 levels normalize.","Cortisol does affect lipid metabolism, but the cholesterol-lowering effect of T3 is direct and independent.","T3 does not upregulate HMG-CoA reductase (the rate-limiting enzyme of cholesterol synthesis). T3 reduces cholesterol by increasing its clearance.","T3 doesn't work via PCSK9 blockade — that's the mechanism of PCSK9 inhibitor drugs (evolocumab, alirocumab)."],
+    teach:"<strong>Hypothyroidism and cardiovascular risk:</strong> ↓ T3 → ↓ LDL receptors → ↑ LDL + ↑ total cholesterol. Also: ↓ HR, ↓ CO (bradycardia). Plus: possible diastolic dysfunction, pericardial effusion in severe cases. Treating hypothyroidism with levothyroxine improves the lipid profile — before starting a statin, always check TSH in new hypercholesterolemia."
+  },
+  {
+    stem:"A 35-year-old woman has TSH 8.2 mIU/L (elevated) and free T4 of 1.0 ng/dL (normal). She is asymptomatic. Anti-TPO antibodies are elevated. What is the MOST important reason to consider treating her with levothyroxine?",
+    opts:["A. Elevated TSH alone requires treatment regardless of symptoms","B. Anti-TPO positivity indicates active thyroid destruction requiring immediate replacement","C. She is of reproductive age — subclinical hypothyroidism + anti-TPO positivity increases risk of pregnancy complications (miscarriage, preeclampsia, impaired fetal neurodevelopment)","D. TSH 8.2 indicates severe overt hypothyroidism requiring high-dose replacement","E. Free T4 of 1.0 is critically low and requires urgent correction"],
+    correct:2,
+    expls:["Not all elevated TSH requires treatment — subclinical hypothyroidism management depends on TSH level, symptoms, and patient context (pregnancy, fertility, etc.).","Anti-TPO positivity is important context but alone doesn't mandate treatment — it signals Hashimoto's thyroiditis as the underlying cause.","Correct! In a woman of reproductive age planning pregnancy, subclinical hypothyroidism (TSH >2.5) + anti-TPO antibodies is an indication to treat. Subclinical hypothyroidism in pregnancy increases risk of miscarriage, preeclampsia, gestational hypertension, and impaired fetal neurodevelopment (maternal T3 is critical in 1st trimester before fetal thyroid is functional). ATA guidelines recommend treating TSH >2.5 in pregnant women.","TSH 8.2 with NORMAL free T4 = subclinical hypothyroidism — not severe overt hypothyroidism (which requires low free T4).","Free T4 of 1.0 ng/dL is NORMAL (reference ~0.8–1.8). Not critically low."],
+    teach:"<strong>Subclinical hypothyroidism treatment thresholds:</strong> TSH 4.5–10 + asymptomatic → treat only if: pregnant/planning pregnancy, anti-TPO positive, symptomatic, TSH >10 consistently. TSH >10 → treat regardless. Anti-TPO antibodies predict progression to overt hypothyroidism (~4%/year). Key board concept: TSH goal in pregnancy is <2.5 mIU/L in first trimester."
+  },
+  {
+    stem:"In the HP-Thyroid axis, which level (hypothalamus vs. pituitary) provides MORE SENSITIVE negative feedback to T3, and what is the structural reason?",
+    opts:["A. Hypothalamus — it has more TRH neurons that directly sense circulating T3","B. Pituitary — thyrotrope cells have high Type II deiodinase activity, generating local T3 from T4 and making them exquisitely sensitive to both T3 and T4","C. Both are equally sensitive — the feedback is symmetric","D. Hypothalamus — TRH neurons express thyroid hormone transporters (MCT8) at higher density","E. Pituitary — TSH itself binds to TSHR on the pituitary, creating an ultrashort loop"],
+    correct:1,
+    expls:["The hypothalamus does respond to T3, but the pituitary is demonstrably more sensitive — small T4/T3 changes cause larger TSH changes than TRH changes.","Correct! Anterior pituitary thyrotropes have HIGH Type II deiodinase — they locally convert T4→T3 intracellularly. This means they respond to BOTH circulating T3 AND to T4 (via local conversion). This dual sensing makes the pituitary exquisitely sensitive — explaining the log-linear relationship where small T4 changes cause large TSH changes. It also explains why T4 monotherapy effectively suppresses TSH.","The feedback is NOT symmetric — pituitary TSH changes are much more sensitive indicators than hypothalamic TRH changes in clinical practice.","MCT8 (monocarboxylate transporter 8) is important for T3 transport in the brain (mutations cause Allan-Herndon-Dudley syndrome), but is not the primary reason for pituitary sensitivity.","TSH does NOT bind TSHRs on the pituitary — the pituitary doesn't have TSHR. This would be a short-loop feedback by TSH on the hypothalamus (which does occur minimally)."],
+    teach:"<strong>Why TSH is the best axis test:</strong> The pituitary thyrotrope is so exquisitely sensitive to T3 (via local Type II deiodinase) that it detects tiny free T4 changes before any other tissue shows symptoms. Even a 15% change in free T4 can double or halve TSH. This amplified inverse relationship makes TSH the most sensitive early indicator of thyroid axis dysfunction."
+  }
+];
+
+const vignettes = [
+  {
+    title:"Vignette 1 — Reading the Axis",
+    badge:"Axis Interpretation",
+    stem:`For each lab combination, identify the most likely diagnosis and provide the mechanism:
+
+A) TSH 68 mIU/L | Free T4 0.3 ng/dL | Free T3 low | Anti-TPO antibodies positive
+B) TSH 0.02 mIU/L | Free T4 3.1 ng/dL | Free T3 high | Diffuse goiter | Exophthalmos
+C) TSH 0.4 mIU/L | Free T4 0.9 ng/dL | Free T3 very low | rT3 markedly elevated | Patient in septic shock ICU
+D) TSH 1.8 mIU/L | Free T4 0.9 ng/dL | Total T4 17 µg/dL | Patient is 16 weeks pregnant
+E) TSH 0.2 mIU/L | Free T4 1.3 ng/dL (normal) | Patient on levothyroxine 175 µg/day`,
+    answer:`A) Primary hypothyroidism (Hashimoto's thyroiditis)
+Mechanism: Autoimmune destruction of thyroid follicular cells (anti-TPO = anti-thyroid peroxidase) → ↓ T3/T4 production → loss of negative feedback → ↑↑ TSH. Hashimoto's is the most common cause of hypothyroidism in iodine-sufficient countries.
+
+B) Primary hyperthyroidism — Graves disease
+Mechanism: TSIs (thyroid-stimulating immunoglobulins) bind and activate TSHR autonomously → ↑ T3/T4 → negative feedback suppresses TSH (near zero). Diffuse goiter = TSI stimulating follicular cell growth. Exophthalmos = autoimmune orbital fibroblast infiltration (separate from thyroid hormone levels). TSH suppressed.
+
+C) Euthyroid sick syndrome (non-thyroidal illness)
+Mechanism: Critical illness ↑ Type III deiodinase → T4→rT3 (inactive) instead of T3 → very low T3, markedly elevated rT3, low-normal TSH (dopamine/stress suppresses TSH). DO NOT TREAT — adaptive response reducing catabolism. Treat the sepsis.
+
+D) Euthyroid with elevated TBG from pregnancy
+Mechanism: ↑ Estrogen → ↑ hepatic TBG synthesis → more T4 protein-bound → total T4 ↑, but FREE T4 is normal → TSH is normal → euthyroid. Classic trap: elevated total T4 in pregnancy ≠ hyperthyroidism. Always check free T4 and TSH.
+
+E) Levothyroxine overdose / iatrogenic subclinical hyperthyroidism
+Mechanism: Excess exogenous T4 → free T4 at high-normal → strong negative feedback on pituitary → TSH suppressed. Free T4 is normal (not frankly elevated) = subclinical hyperthyroidism. Reduce levothyroxine dose to achieve TSH 0.5–2.5 mIU/L.`
+  },
+  {
+    title:"Vignette 2 — The Pregnant Patient",
+    badge:"TBG / Pregnancy / Fetal Brain",
+    stem:`A 26-year-old woman is 8 weeks pregnant when she presents for her first prenatal visit. She reports fatigue and mild nausea (typical of early pregnancy). Labs: TSH 3.8 mIU/L (slightly elevated; ATA goal <2.5 in 1st trimester), free T4 0.85 ng/dL (low-normal), total T4 16 µg/dL (elevated), anti-TPO antibodies positive (3× upper limit of normal).
+
+Questions:
+1. Why is TSH goal <2.5 mIU/L in the first trimester — what is happening to the fetal brain at this stage?
+2. What does the elevated total T4 but low-normal free T4 tell you?
+3. What does anti-TPO positivity mean for this pregnancy?
+4. Should she be treated? With what?`,
+    answer:`1. Fetal thyroid is not functional until approximately week 12. For the entire first trimester, the fetal brain depends ENTIRELY on maternal T3 for:
+   - Neuronal migration
+   - Myelination of axons
+   - Synaptogenesis
+   Even mild maternal hypothyroidism (TSH 2.5–4.5) during this window can impair fetal neurodevelopment. The ATA recommends TSH <2.5 mIU/L in the first trimester (more conservative than non-pregnant goal of <4.5). After week 12, the fetal thyroid contributes and the risk window narrows.
+
+2. Total T4 is elevated because pregnancy → ↑ estrogen → ↑ hepatic TBG synthesis → more T4 is protein-bound → total T4 ↑. But free T4 is low-normal (0.85), indicating that the biologically active fraction is slightly reduced. TSH of 3.8 confirms mild hypothyroidism despite normal-looking total T4. This is a perfect example of why total T4 is misleading in pregnancy — always use free T4 + TSH.
+
+3. Anti-TPO positivity indicates Hashimoto's thyroiditis. Implications:
+   - 4× increased risk of miscarriage
+   - Increased risk of preeclampsia
+   - Increased risk of postpartum thyroiditis
+   - Increased risk of progression to overt hypothyroidism during pregnancy
+   Anti-TPO alone (without elevated TSH) still warrants closer monitoring (TSH q4 weeks in pregnancy).
+
+4. Yes, she should be treated. TSH 3.8 exceeds the 1st trimester goal of 2.5 mIU/L + anti-TPO positive + first trimester.
+   Treatment: levothyroxine (T4) — synthetic T4 is the standard of care. Goal TSH <2.5 in first trimester.
+   Monitor TSH every 4 weeks in first trimester, then once in second/third trimester if stable.
+   Note: levothyroxine requirements typically increase ~30-50% during pregnancy — most women with pre-existing hypothyroidism need higher doses.`
+  },
+  {
+    title:"Vignette 3 — The Hypermetabolic Patient",
+    badge:"Hyperthyroidism / T3 Actions",
+    stem:`A 32-year-old woman presents with 3 months of palpitations (HR 118 at rest), 15-lb weight loss despite increased appetite, heat intolerance, tremor, and diarrhea. She also mentions her eyes look "bulgier" than usual. Physical exam: thyroid is diffusely enlarged and non-tender. Labs: TSH <0.01 mIU/L (suppressed), free T4 5.8 ng/dL (high), free T3 high. TSI antibodies positive.
+
+Questions:
+1. For each symptom, name the specific T3 mechanism responsible.
+2. Why is TSH suppressed despite the enlarged thyroid (goiter)?
+3. Why does treating with a beta-blocker (propranolol) rapidly improve palpitations, tremor, and heat intolerance — before anti-thyroid drugs fully work?`,
+    answer:`1. T3 mechanisms behind each symptom:
+   - Palpitations/tachycardia (HR 118): ↑ β1-adrenergic receptor expression + direct ↑ SR Ca²⁺-ATPase → ↑ HR + ↑ contractility
+   - Weight loss despite ↑ appetite: ↑ Na/K-ATPase → ↑ BMR → high metabolic demand exceeds caloric intake
+   - Heat intolerance: ↑ thermogenesis (↑ UCP1 in BAT + ↑ metabolic rate → excess heat generation)
+   - Tremor: enhanced β-adrenergic signaling in skeletal muscle + direct effects on neuromuscular junction
+   - Diarrhea: ↑ GI motility (T3 stimulates intestinal smooth muscle)
+   - Exophthalmos: NOT caused by T3 directly — mediated by TSI binding to TSH receptors on orbital fibroblasts → glycosaminoglycan deposition → exophthalmos. Can persist/worsen even after thyroid is treated.
+
+2. TSH is suppressed because: TSI (thyroid-stimulating immunoglobulins) bind and chronically activate TSHR → autonomous T3/T4 overproduction → high free T3/T4 → strong negative feedback on anterior pituitary → TSH nearly zero. The goiter develops because TSI also activates the Gq pathway on follicular cells → cell growth/hypertrophy. TSH is LOW despite goiter because the driver of growth is the TSI, not TSH.
+
+3. Beta-blockers (propranolol) immediately block β-adrenergic receptors, which are UPREGULATED by excess T3. This rapidly blunts the adrenergic manifestations: ↓ HR (β1 block), ↓ tremor (peripheral β2 block), ↓ sweating/heat (β-mediated thermogenesis).
+   Important: propranolol also inhibits Type I deiodinase → reduces peripheral T4→T3 conversion (minor effect at standard doses).
+   Anti-thyroid drugs (PTU, methimazole) take weeks to reduce T3/T4 levels. Beta-blockers provide immediate symptom control while waiting for anti-thyroid drugs to work.`
+  }
+];
+
+const traps = [
+  {
+    label:"Test Trap",
+    title:"Total T4 ≠ Free T4 — Binding Protein Changes Are NOT Thyroid Disease",
+    body:"Pregnancy, OCP, estrogen therapy → ↑ TBG → ↑ total T4, NORMAL free T4, NORMAL TSH = euthyroid. Androgens, nephrotic syndrome, liver failure → ↓ TBG → ↓ total T4, NORMAL free T4, NORMAL TSH = euthyroid. You CANNOT diagnose thyroid disease from total T4 alone. Always check TSH first, then free T4. Classic board vignette: pregnant woman with 'elevated T4' — answer is no treatment needed."
+  },
+  {
+    label:"Test Trap",
+    title:"Euthyroid Sick Syndrome — Low T3 in ICU ≠ Hypothyroidism",
+    body:"ICU patients: ↓ T3, ↑ rT3, low-normal TSH. This is NOT primary hypothyroidism (which would show HIGH TSH). It is NOT secondary hypothyroidism (low TSH + low T4 from pituitary failure — different clinical context). Do NOT treat with levothyroxine in critical illness — no survival benefit, possibly harmful. The discriminating lab: elevated REVERSE T3 (rT3) confirms non-thyroidal illness. Wait until patient recovers to reassess thyroid function."
+  },
+  {
+    label:"Test Trap",
+    title:"Low TSH ≠ Always Hyperthyroidism",
+    body:"Low TSH has multiple causes: (1) Hyperthyroidism (Graves, toxic nodule) — T4 HIGH. (2) Subclinical hyperthyroidism — T4 NORMAL. (3) Secondary hypothyroidism (pituitary failure) — T4 LOW. (4) Euthyroid sick syndrome — T4 low-normal. (5) Levothyroxine over-replacement — T4 normal or slightly high. (6) First trimester pregnancy — hCG has weak TSHR activity → transiently suppresses TSH. Always pair TSH with free T4 to determine direction of axis failure."
+  },
+  {
+    label:"Test Trap",
+    title:"Graves Ophthalmopathy Is NOT Caused by T3 — and Persists After Treatment",
+    body:"Exophthalmos in Graves disease is caused by TSIs binding TSHR on orbital fibroblasts → glycosaminoglycan deposition → orbital inflammation and expansion → proptosis, diplopia. This is independent of thyroid hormone levels. Treating the thyroid (radioactive iodine, methimazole) does NOT reliably resolve ophthalmopathy — it can actually worsen it (especially RAI). Treatment for ophthalmopathy: systemic glucocorticoids, orbital radiation, selenium, teprotumumab (IGF-1R antibody)."
+  },
+  {
+    label:"Test Trap",
+    title:"T3 vs. T4 — Which Is Active, Which Is Prohormone, Which Feeds Back?",
+    body:"T4 = prohormone (4 iodines, longer half-life ~7 days, ~80% of thyroid secretion). T3 = active hormone (3 iodines, ~3-5× more potent, half-life ~1 day). Feedback signal = T3 (not T4) at nuclear receptor (TR). The pituitary converts T4→T3 locally via Type II deiodinase to sense T4 levels. So: levothyroxine (T4) suppresses TSH because the pituitary converts it to T3 intracellularly. Classic trap: 'T4 is more potent' is WRONG. T3 is more potent. T4 is more abundant in circulation."
+  }
+];
+
+const fibItems = [
+  {q:"TSH receptor on thyroid follicular cells couples to the _____ G-protein subunit, leading to ↑ cAMP → PKA activation → upregulation of NIS and thyroid peroxidase.",
+   answers:["gs","g-s","alpha-s"], hint:"Gs protein → adenylyl cyclase"},
+  {q:"In the liver and kidney, the enzyme _____ (Type ___) deiodinase converts T4 to T3 and is the primary source of circulating T3.",
+   answers:[["type i","type 1","i deiodinase","1 deiodinase"]], hint:"The liver/kidney deiodinase — blocked in illness"},
+  {q:"A woman on oral contraceptives has an elevated total T4 but normal TSH and free T4. The mechanism is increased _____ synthesis in the liver driven by estrogen.",
+   answers:["tbg","thyroxine-binding globulin","thyroxine binding globulin"], hint:"The major thyroid hormone carrier protein"},
+  {q:"During critical illness, Type III deiodinase converts T4 to _____ (abbreviated rT3), an inactive isomer that is diagnostically elevated in euthyroid sick syndrome.",
+   answers:["reverse t3","rt3","reverse-t3"], hint:"Inactive T4 metabolite — the 'mirror image' of T3"},
+  {q:"T3 upregulates _____ receptors in hepatocytes, increasing cholesterol clearance from the bloodstream — explaining why hypothyroid patients develop hypercholesterolemia.",
+   answers:["ldl","ldl receptor","low density lipoprotein"], hint:"The receptor that clears bad cholesterol from blood"}
+];
+
+const refData = {
+  headers:["Condition","TSH","Free T4","Free T3","Other Clue"],
+  rows:[
+    ["Normal (euthyroid)","0.5–4.5 mIU/L (normal)","Normal","Normal","—"],
+    ["Primary hypothyroidism","↑↑ HIGH (>10 typical)","↓ Low","↓ Low","Anti-TPO+ (Hashimoto's); ↑ cholesterol"],
+    ["Subclinical hypothyroidism","↑ Elevated (4.5–10)","Normal","Normal","May have mild symptoms; treat if pregnant or TSH >10"],
+    ["Secondary hypothyroidism","↓ LOW","↓ Low","↓ Low","Pituitary failure; no goiter; check other ant. pituitary hormones"],
+    ["Graves disease (primary hyperthyroid)","↓↓ SUPPRESSED (<0.01)","↑↑ High","↑↑ High","TSI positive; diffuse goiter; ophthalmopathy"],
+    ["Toxic nodule / MNG hyperthyroid","↓ Suppressed","↑ High","↑ High","No TSI; hot nodule on thyroid scan"],
+    ["Subclinical hyperthyroidism","↓ Suppressed (<0.1)","Normal","Normal","Treat if TSH <0.1 persistently (↑ Afib, osteoporosis risk)"],
+    ["Euthyroid sick syndrome","Normal or ↓ Low","Normal or ↓ Low","↓↓ Very low","rT3 ↑↑ markedly; critical illness context"],
+    ["Elevated TBG (pregnancy/OCP)","Normal","Normal (free)","Normal (free)","Total T4 ↑; free T4 normal; patient euthyroid"],
+    ["Decreased TBG (nephrotic/liver failure)","Normal","Normal (free)","Normal (free)","Total T4 ↓; free T4 normal; patient euthyroid"],
+    ["Hashimoto's thyroiditis","↑ Elevated","↓ Low","↓ Low","Anti-TPO+; anti-Tg+; firm goiter; lymphocytic infiltrate on biopsy"],
+    ["Levothyroxine over-replacement","↓ Suppressed","Normal or ↑ slightly","Normal","Iatrogenic; review dose; goal TSH 0.5–2.5 mIU/L"]
+  ]
+};
+
+function renderFlashcards(){
+  document.getElementById('fc-grid').innerHTML=flashcards.map((c,i)=>`
+    <div class="flip-card" id="fc${i}" onclick="this.classList.toggle('flipped')">
+      <div class="flip-card-inner">
+        <div class="flip-front"><p>${c.q}</p><span class="card-hint">tap to reveal</span></div>
+        <div class="flip-back"><p>${c.a.replace(/\n/g,'<br>')}</p></div>
+      </div>
+    </div>`).join('');
+}
+
+function renderMCQ(){
+  document.getElementById('mcq-container').innerHTML=mcqs.map((q,qi)=>`
+    <div class="mcq-block">
+      <div class="mcq-stem">Q${qi+1}. ${q.stem}</div>
+      <div class="mcq-options" id="opts${qi}">
+        ${q.opts.map((o,oi)=>`
+          <button class="opt-btn" id="opt${qi}_${oi}" onclick="selectOpt(${qi},${oi})">
+            ${o}<div class="opt-expl" id="expl${qi}_${oi}">${q.expls[oi]}</div>
+          </button>`).join('')}
+      </div>
+      <div class="teaching-box" id="teach${qi}"><strong>Teaching Point:</strong> ${q.teach}</div>
+    </div>`).join('');
+}
+
+function selectOpt(qi,oi){
+  const q=mcqs[qi];
+  for(let i=0;i<q.opts.length;i++){
+    const btn=document.getElementById(`opt${qi}_${i}`);
+    btn.disabled=true;
+    btn.classList.add(i===q.correct?'correct':'wrong');
+    document.getElementById(`expl${qi}_${i}`).style.display='block';
+  }
+  document.getElementById(`teach${qi}`).style.display='block';
+}
+
+function renderVignettes(){
+  document.getElementById('vig-container').innerHTML=vignettes.map((v,i)=>`
+    <div class="vignette">
+      <div style="margin-bottom:12px"><span class="badge">${v.badge}</span><h3 style="font-size:16px;font-weight:700;margin-top:4px">${v.title}</h3></div>
+      <div class="vignette-case">${v.stem.replace(/\n/g,'<br>')}</div>
+      <button onclick="toggleAnswer('va${i}',this)" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:8px 18px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit">Show Answer</button>
+      <div id="va${i}" style="display:none;margin-top:14px;background:#0D1117;border-left:3px solid var(--green);padding:14px 16px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.7;color:#C9D1D9">${v.answer.replace(/\n/g,'<br>')}</div>
+    </div>`).join('');
+}
+
+function toggleAnswer(id,btn){
+  const el=document.getElementById(id);
+  const show=el.style.display==='none';
+  el.style.display=show?'block':'none';
+  btn.textContent=show?'Hide Answer':'Show Answer';
+}
+
+function renderTraps(){
+  document.getElementById('traps-container').innerHTML=traps.map(t=>`
+    <div class="trap-card">
+      <div class="trap-label">⚠ ${t.label}</div>
+      <div class="trap-title">${t.title}</div>
+      <div class="trap-body">${t.body}</div>
+    </div>`).join('');
+}
+
+function renderFIB(){
+  document.getElementById('fib-container').innerHTML=fibItems.map((item,i)=>`
+    <div class="fib-block">
+      <div class="fib-q">Q${i+1}. ${item.q}</div>
+      <div class="fib-row">
+        <input class="fib-input" id="fib${i}" placeholder="Type your answer..." onkeydown="if(event.key==='Enter')checkFIB(${i})">
+        <button class="fib-check" onclick="checkFIB(${i})">Check</button>
+      </div>
+      <div class="fib-result" id="fibres${i}"></div>
+    </div>`).join('');
+}
+
+function checkFIB(i){
+  const val=document.getElementById(`fib${i}`).value.trim().toLowerCase();
+  const item=fibItems[i];
+  let correct;
+  if(Array.isArray(item.answers[0])){
+    correct=item.answers[0].some(a=>val.includes(a.toLowerCase()));
+  } else {
+    correct=item.answers.some(a=>val.includes(a.toLowerCase()));
+  }
+  const res=document.getElementById(`fibres${i}`);
+  res.style.display='block';
+  res.className='fib-result '+(correct?'correct':'wrong');
+  const ansDisplay=Array.isArray(item.answers[0])?item.answers[0][0]:item.answers[0];
+  res.innerHTML=correct?`✓ Correct! ${item.hint}`:`✗ Review: Expected "${ansDisplay}" — Hint: ${item.hint}`;
+}
+
+function renderRef(){
+  const {headers,rows}=refData;
+  document.getElementById('ref-container').innerHTML=`
+    <div class="ref-table-wrap">
+      <table>
+        <thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+        <tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table>
+    </div>`;
+}
+
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+renderFlashcards();renderMCQ();renderVignettes();renderTraps();renderFIB();renderRef();
+</script>
+</body>
+</html>

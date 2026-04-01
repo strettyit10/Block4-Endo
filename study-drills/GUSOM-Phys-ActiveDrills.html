@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Physiology — Active Learning Drills Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0F1117; color: #E8EAF0; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+
+        .hero { text-align: center; padding: 50px 20px 40px; background: linear-gradient(135deg, #0F1117 0%, #1A1D26 50%, #0F1117 100%); border-bottom: 2px solid #2A2E42; margin-bottom: 40px; }
+        .hero h1 { font-size: 2.6em; color: #E8EAF0; margin-bottom: 8px; }
+        .hero .subject-badge { display: inline-block; background: #1B4332; color: #B7E4C7; padding: 5px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 12px; }
+        .hero p { color: #9CA3AF; font-size: 1.05em; max-width: 620px; margin: 0 auto; }
+
+        .modes-guide { background: #1A1D26; border: 1px solid #2A2E42; border-radius: 10px; padding: 24px 28px; margin-bottom: 40px; }
+        .modes-guide h3 { color: #B7E4C7; font-size: 1.1em; margin-bottom: 16px; }
+        .modes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .mode-item { background: #0F1117; border: 1px solid #2A2E42; border-radius: 8px; padding: 12px 14px; }
+        .mode-icon { font-size: 1.3em; margin-bottom: 6px; }
+        .mode-name { font-size: 0.85em; font-weight: 600; color: #E8EAF0; margin-bottom: 3px; }
+        .mode-desc { font-size: 0.78em; color: #9CA3AF; }
+
+        .lectures-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; margin-bottom: 40px; }
+
+        .lecture-card { display: block; text-decoration: none; background: #1A1D26; border: 1px solid #2A2E42; border-radius: 12px; padding: 24px; transition: all 0.25s ease; position: relative; overflow: hidden; }
+        .lecture-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--accent); }
+        .lecture-card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+
+        .card-number { font-size: 0.78em; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+        .card-title { font-size: 1.1em; font-weight: 700; color: #E8EAF0; margin-bottom: 8px; line-height: 1.3; }
+        .card-subtitle { font-size: 0.83em; color: #9CA3AF; margin-bottom: 14px; }
+        .card-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+        .badge { font-size: 0.72em; padding: 3px 9px; border-radius: 12px; font-weight: 600; background: #2A2E42; color: #9CA3AF; }
+        .badge.fc { background: rgba(99, 102, 241, 0.2); color: #818CF8; }
+        .badge.mcq { background: rgba(34, 197, 94, 0.2); color: #4ADE80; }
+        .badge.vig { background: rgba(251, 146, 60, 0.2); color: #FB923C; }
+        .badge.trap { background: rgba(239, 68, 68, 0.2); color: #F87171; }
+        .badge.fib { background: rgba(6, 182, 212, 0.2); color: #22D3EE; }
+        .badge.ref { background: rgba(250, 204, 21, 0.15); color: #FCD34D; }
+
+        .challenge-card { display: block; text-decoration: none; background: linear-gradient(135deg, #1A1D26 0%, #221D26 100%); border: 2px solid #7C3AED; border-radius: 12px; padding: 30px; text-align: center; transition: all 0.25s ease; }
+        .challenge-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3); }
+        .challenge-icon { font-size: 2.8em; margin-bottom: 12px; }
+        .challenge-title { font-size: 1.4em; font-weight: 700; color: #C4B5FD; margin-bottom: 8px; }
+        .challenge-desc { font-size: 0.9em; color: #9CA3AF; }
+
+        .section-header { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+
+        .resources-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+        .resource-link { display: block; background: #1A1D26; border: 1px solid #2A2E42; border-radius: 8px; padding: 16px 20px; text-decoration: none; color: #E8EAF0; transition: all 0.2s; }
+        .resource-link:hover { border-color: #4ADE80; }
+        .resource-link .r-label { font-size: 0.75em; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
+        .resource-link .r-name { font-size: 0.95em; font-weight: 600; }
+    </style>
+</head>
+<body>
+<div class="hero">
+    <span class="subject-badge">GUSOM Endocrine Block</span>
+    <h1>Physiology<br>Active Learning Drills</h1>
+    <p>Six lecture-specific drill modules covering the hypothalamic-pituitary axes, posterior pituitary hormones, growth hormone, adrenal physiology, and stress integration.</p>
+</div>
+
+<div class="container">
+
+    <div class="modes-guide">
+        <h3>📚 What's in Each Lecture Module</h3>
+        <div class="modes-grid">
+            <div class="mode-item"><div class="mode-icon">🃏</div><div class="mode-name">Flashcards</div><div class="mode-desc">Core concept cards; flip to reveal answer</div></div>
+            <div class="mode-item"><div class="mode-icon">❓</div><div class="mode-name">MCQ Practice</div><div class="mode-desc">Multiple-choice with explanations per option</div></div>
+            <div class="mode-item"><div class="mode-icon">🏥</div><div class="mode-name">Clinical Vignettes</div><div class="mode-desc">Patient-based scenarios; Step 1 style</div></div>
+            <div class="mode-item"><div class="mode-icon">⚠️</div><div class="mode-name">Test Traps</div><div class="mode-desc">High-yield misconceptions &amp; exam pitfalls</div></div>
+            <div class="mode-item"><div class="mode-icon">✏️</div><div class="mode-name">Fill-in-the-Blank</div><div class="mode-desc">Complete the pathway or table</div></div>
+            <div class="mode-item"><div class="mode-icon">📊</div><div class="mode-name">Reference Table</div><div class="mode-desc">Quick-reference summary of key facts</div></div>
+        </div>
+    </div>
+
+    <div class="section-header">Lecture Drill Modules</div>
+    <div class="lectures-grid">
+
+        <a class="lecture-card" href="GUSOM-Phys-L1-HPRelationshipsI.html" style="--accent: #5C6BC0;">
+            <div class="card-number">Lecture 1</div>
+            <div class="card-title">Hypothalamic-Pituitary Relationships I</div>
+            <div class="card-subtitle">Anatomy · Portal System · Hypothalamic Hormones</div>
+            <div class="card-badges">
+                <span class="badge fc">Flashcards</span>
+                <span class="badge mcq">MCQ ×8</span>
+                <span class="badge vig">Vignettes ×3</span>
+                <span class="badge trap">Test Traps</span>
+                <span class="badge fib">Fill-in-Blank</span>
+            </div>
+        </a>
+
+        <a class="lecture-card" href="GUSOM-Phys-L2-HPRelationshipsII.html" style="--accent: #7B1FA2;">
+            <div class="card-number">Lecture 2</div>
+            <div class="card-title">Hypothalamic-Pituitary Relationships II</div>
+            <div class="card-subtitle">Adenohypophysis Histology · Feedback Loops · Pulsatile Secretion</div>
+            <div class="card-badges">
+                <span class="badge fc">Flashcards</span>
+                <span class="badge mcq">MCQ ×8</span>
+                <span class="badge vig">Vignettes ×3</span>
+                <span class="badge trap">Test Traps</span>
+                <span class="badge fib">Fill-in-Blank</span>
+            </div>
+        </a>
+
+        <a class="lecture-card" href="GUSOM-Phys-L3-PosteriorPituitary.html" style="--accent: #00897B;">
+            <div class="card-number">Lecture 3</div>
+            <div class="card-title">Posterior Pituitary Hormones</div>
+            <div class="card-subtitle">Vasopressin · Oxytocin · Diabetes Insipidus · DDAVP</div>
+            <div class="card-badges">
+                <span class="badge fc">Flashcards</span>
+                <span class="badge mcq">MCQ ×10</span>
+                <span class="badge vig">Vignettes ×4</span>
+                <span class="badge trap">Test Traps</span>
+                <span class="badge fib">Fill-in-Blank</span>
+            </div>
+        </a>
+
+        <a class="lecture-card" href="GUSOM-Phys-L4-GHAxis.html" style="--accent: #1565C0;">
+            <div class="card-number">Lecture 4</div>
+            <div class="card-title">GH Axis</div>
+            <div class="card-subtitle">GHRH · GH · IGF-1 · Acromegaly · Laron Syndrome</div>
+            <div class="card-badges">
+                <span class="badge fc">Flashcards</span>
+                <span class="badge mcq">MCQ ×10</span>
+                <span class="badge vig">Vignettes ×4</span>
+                <span class="badge trap">Test Traps</span>
+                <span class="badge fib">Fill-in-Blank</span>
+            </div>
+        </a>
+
+        <a class="lecture-card" href="GUSOM-Phys-L5-HPAdrenalAxis.html" style="--accent: #E65100;">
+            <div class="card-number">Lecture 5</div>
+            <div class="card-title">Hypothalamic-Pituitary-Adrenal Axis</div>
+            <div class="card-subtitle">CRH · ACTH · Cortisol · Cushing's · Addison's</div>
+            <div class="card-badges">
+                <span class="badge fc">Flashcards</span>
+                <span class="badge mcq">MCQ ×10</span>
+                <span class="badge vig">Vignettes ×4</span>
+                <span class="badge trap">Test Traps</span>
+                <span class="badge fib">Fill-in-Blank</span>
+            </div>
+        </a>
+
+        <a class="lecture-card" href="GUSOM-Phys-L6-StressIntegration.html" style="--accent: #C62828;">
+            <div class="card-number">Lecture 6</div>
+            <div class="card-title">Stress, Stress Hormones &amp; Pathophysiology Integration</div>
+            <div class="card-subtitle">SAM Axis · GAS Model · Allostasis · Reactive Scope · Cytokines/CRH · Chronic Stress · Stress Reduction</div>
+            <div class="card-badges">
+                <span class="badge fc">Flashcards ×13</span>
+                <span class="badge mcq">MCQ ×12</span>
+                <span class="badge vig">Vignettes ×4</span>
+                <span class="badge trap">Test Traps ×7</span>
+                <span class="badge fib">Fill-in-Blank</span>
+            </div>
+        </a>
+
+        <a class="lecture-card" href="GUSOM-Phys-L7-HPThyroidAxis.html" style="--accent: #00838F;">
+            <div class="card-number">Lecture 7</div>
+            <div class="card-title">Hypothalamic-Pituitary-Thyroid Axis</div>
+            <div class="card-subtitle">TRH → TSH → T4/T3 · Deiodinase Types · Carrier Proteins · TBG Changes · Negative Feedback · T3 Actions · Axis Interpretation</div>
+            <div class="card-badges">
+                <span class="badge fc">Flashcards ×10</span>
+                <span class="badge mcq">MCQ ×10</span>
+                <span class="badge vig">Vignettes ×3</span>
+                <span class="badge trap">Test Traps ×5</span>
+                <span class="badge fib">Fill-in-Blank ×5</span>
+                <span class="badge ref">Ref Table</span>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="section-header">Block Challenge</div>
+    <a class="challenge-card" href="GUSOM-Phys-BlockChallenge.html">
+        <div class="challenge-icon">🏆</div>
+        <div class="challenge-title">Physiology Block Challenge</div>
+        <div class="challenge-desc">40-question timed mixed-lecture challenge spanning all six physiology lectures. Integrates SAM vs HPA comparisons, multi-axis clinical cases, and Step 1 reasoning.</div>
+    </a>
+
+    <div class="resources-row">
+        <a class="resource-link" href="GUSOM-Phys-StudyGuide.html">
+            <div class="r-label">📖 Study Guide</div>
+            <div class="r-name">Physiology Study Guide — All 7 Lectures</div>
+        </a>
+        <a class="resource-link" href="GUSOM-Biochem-ActiveDrills.html">
+            <div class="r-label">← Previous Subject</div>
+            <div class="r-name">Biochemistry Active Drills Hub</div>
+        </a>
+    </div>
+
+</div>
+</body>
+</html>
