@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biochem L5: Thyroid Synthesis — Step 1 Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #E65100; --accent-dark: #BF360C; --accent-light: rgba(230,81,0,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* FLASHCARDS */
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
+        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
+
+        /* MCQ */
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
+        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .mcq-explanation.visible { display: block; }
+        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+        .mcq-explanation .exp-wrong { border-left-color: #EF4444; }
+        .teaching-pt { background: rgba(230,81,0,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #FFCC99; display: none; }
+        .teaching-pt.visible { display: block; }
+        .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+
+        /* VIGNETTES */
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: rgba(230,81,0,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #FFCC99; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+        .vig-diagnosis { margin-top: 12px; padding: 10px 12px; background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; border-radius: 0 6px 6px 0; color: #D1FAE5; font-size: 0.87em; }
+        .vig-diagnosis .dx-label { font-weight: 700; color: #4ADE80; }
+
+        /* TEST TRAPS */
+        .trap-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-statement { color: #E6EDF3; font-size: 0.95em; margin-bottom: 12px; line-height: 1.6; font-weight: 500; }
+        .trap-buttons { display: flex; gap: 10px; margin-bottom: 10px; }
+        .trap-btn { padding: 9px 18px; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.88em; background: #1C2128; }
+        .trap-btn-correct { color: #4ADE80; border-color: #4ADE80; }
+        .trap-btn-trap { color: #ff6b6b; border-color: #ff6b6b; }
+        .trap-btn:hover:not(:disabled) { opacity: 0.85; }
+        .trap-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .trap-result { display: none; padding: 10px 14px; border-radius: 6px; font-size: 0.88em; line-height: 1.5; margin-top: 4px; }
+        .trap-result.show { display: block; }
+        .trap-result.correct-choice { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; color: #D1FAE5; }
+        .trap-result.wrong-choice { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; color: #FCA5A5; }
+        .trap-verdict { font-weight: 700; margin-bottom: 4px; }
+        .trap-explain { font-size: 0.9em; opacity: 0.9; }
+
+        /* FILL-IN-BLANK */
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+
+        /* CHALLENGE DRILL */
+        .drill-section { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .drill-title { font-size: 0.85em; color: var(--accent); font-weight: 700; margin-bottom: 12px; text-transform: uppercase; }
+        .drill-item { background: #1C2128; border: 1px solid #30363D; border-radius: 6px; padding: 14px; margin-bottom: 12px; }
+        .drill-q { color: #E6EDF3; font-weight: 600; margin-bottom: 8px; font-size: 0.95em; }
+        .drill-options { display: flex; flex-direction: column; gap: 6px; }
+        .drill-opt { padding: 8px 12px; background: #161B22; border: 1px solid #30363D; border-radius: 4px; cursor: pointer; font-size: 0.88em; color: #C9D1D9; transition: all 0.2s; }
+        .drill-opt:hover:not(.revealed) { border-color: var(--accent); background: #21262D; }
+        .drill-opt.correct { background: rgba(74,222,128,0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .drill-opt.wrong { background: rgba(239,68,68,0.1); border-color: #EF4444; color: #FCA5A5; }
+
+        /* REF TABLE */
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
+
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="GUSOM-Biochem-Step1.html" class="back">← Back to Biochem Step 1 Hub</a>
+        <h1>Biochem L5: <span class="accent-tag">Thyroid Hormone Synthesis</span> — Step 1 Hub</h1>
+        <div class="subtitle">USMLE Step 1 · Thyroid diseases · Cancer types · Pharmacology · Graves' vs Hashimoto's vs subacute</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Trap Detector</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('drill')">🎯 Challenge Drill</button>
+        <button class="tab-btn" onclick="switchTab('ref')">📋 USMLE Map</button>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Core Concept Flashcards — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
+
+    <!-- MCQ -->
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice</div>
+        <div id="mcqContainer"></div>
+    </div>
+
+    <!-- VIGNETTES -->
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes</div>
+        <div id="vigContainer"></div>
+    </div>
+
+    <!-- TEST TRAPS -->
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">⚠️ Trap Detector — Common Exam Misconceptions</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:10px 14px;background:#161B22;border:1px solid #30363D;border-radius:8px;"><span style="font-size:0.85em;color:#9CA3AF;">Click <strong style="color:#4ADE80;">CORRECT ✓</strong> or <strong style="color:#ff6b6b;">TRAP ✗</strong> for each statement.</span><div style="display:flex;align-items:center;gap:14px;"><span id="trap-score" style="font-size:0.9em;font-weight:700;color:#E6EDF3;">Score: 0/0</span><button onclick="resetTraps()" style="background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:5px 12px;color:#9CA3AF;cursor:pointer;font-size:0.82em;">Reset</button></div></div>
+        <div id="trapsContainer"></div>
+    </div>
+
+    <!-- FILL-IN-BLANK -->
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill in the Blank — Complete the Pathway</div>
+        <div id="fibContainer"></div>
+    </div>
+
+    <!-- CHALLENGE DRILL -->
+    <div id="tab-drill" class="tab-content">
+        <div class="section-title">Challenge Drill — Apply Knowledge</div>
+        <div id="drillContainer"></div>
+    </div>
+
+    <!-- REFERENCE TABLE -->
+    <div id="tab-ref" class="tab-content">
+        <div class="section-title">USMLE Mapping: GUSOM LO → Step 1 Extensions</div>
+        <div id="refContainer"></div>
+    </div>
+</div>
+
+<script>
+// ─── TAB NAVIGATION ───────────────────────────────────
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
+
+// ─── FLASHCARD DATA ───────────────────────────────────
+const flashcards = [
+    { q: "Thyroid hormone synthesis: what is the first step?", a: "Iodine uptake via sodium-iodide symporter (NIS) on basolateral thyroid follicular cell membrane. Active transport (requires energy and Na+ gradient). This is rate-limiting and sensitive to TSH." },
+    { q: "Where is TPO and where is it positioned?", a: "Thyroid peroxidase is embedded in the apical membrane (facing the follicle) of thyroid follicular cells. Catalyzes organification (iodine → organic iodine on tyrosine residues) and coupling (forming T3 and T4)." },
+    { q: "Organification of iodine — what does TPO do?", a: "TPO catalyzes oxidation of iodine (I⁻ → I⁺ or higher oxidation states) and incorporation onto tyrosine residues in thyroglobulin to form MIT (monoiodotyrosine) and DIT (diiodotyrosine). These are the building blocks for T3 and T4." },
+    { q: "Coupling reaction — which MIT + DIT combinations make T3 vs T4?", a: "T4 (thyroxine): DIT + DIT = two iodines, four tyrosines total. T3: MIT + DIT = one + two = three iodines. In normal thyroid, ~80% T4 and ~20% T3 stored and released." },
+    { q: "T4 vs T3: which is more potent? Which is more abundant in blood?", a: "T3 is 3-4x more potent (higher receptor affinity). T4 is ~100x more abundant in blood (90:1 T4:T3 ratio). T4 is a prohormone; most T3 activity comes from peripheral T4→T3 conversion by deiodinases." },
+    { q: "What are the three deiodinase enzymes and what do they do?", a: "D1 (Type I): ~5 prime 5' outer ring deiodinase — converts T4→T3 (most T3 in tissues); also converts rT3→T2. D2: Inner ring deiodinase — converts T4→T3 (esp. brain/pituitary). D3: Inactivates T4→rT3 and T3→T2." },
+    { q: "What is reverse T3 (rT3) and is it active?", a: "rT3 is deiodinated from the inner ring of T4 (instead of outer ring) — 3,3',5'-triiodothyronine. INACTIVE hormone. Elevated in illness, stress, fasting. D3 preference in tissues under stress diverts metabolism toward rT3 instead of T3 (protective in illness)." },
+    { q: "TSH: what does it do to the thyroid?", a: "TSH binds GPCR on thyroid cells → ↑cAMP → promotes iodine uptake (NIS), TPO expression, thyroglobulin synthesis, hormone release, and thyroid cell growth (hyperplasia with chronic stimulation). TSH is the master regulator of thyroid function." },
+    { q: "Negative feedback: what inhibits TRH and TSH?", a: "T3 (primary) and T4 (secondary) inhibit both TRH (hypothalamus) and TSH (anterior pituitary). T3 is ~10x more potent for feedback than T4. This is why TSH is the best single screening test (sensitive to small T3/T4 changes)." },
+    { q: "Wolff-Chaikoff effect: what is it and when does it occur?", a: "Acute, high-dose iodine exposure (e.g., iodine antiseptic, contrast agents, amiodarone) → transiently DECREASES thyroid hormone synthesis (organification inhibition by excess I⁻). Usually self-limited (escape within days), but in patients on propylthiouracil or with iodine deficiency, can cause hypothyroidism." },
+    { q: "Iodine deficiency: most common cause of hypothyroidism WORLDWIDE. What are the consequences?", a: "↓thyroid hormone synthesis → ↑TSH (compensatory) → thyroid hyperplasia and enlargement = ENDEMIC GOITER. In infants: cretinism (intellectual disability, short stature, macroglossia). In adults: hypothyroidism. Solved by iodized salt in most developed nations." },
+    { q: "Most common cause of hypothyroidism in the US?", a: "Hashimoto's thyroiditis (autoimmune). Anti-TPO (tissue peroxidase) and anti-thyroglobulin antibodies → lymphocytic infiltration and destruction. Can present with Hashitoxicosis (early hyperthyroid phase from follicle rupture releasing stored hormone)." },
+    { q: "Hashimoto's histology: what are Hürthle cells and why are they pathognomonic?", a: "Hürthle cells (Askanazy cells) are eosinophilic epithelial cells with oxyphilic cytoplasm (packed with mitochondria). Pathognomonic for Hashimoto's thyroiditis. Represent activated thyroid cells fighting autoimmune attack." },
+    { q: "Subacute thyroiditis (de Quervain's): causes, phases, and key lab finding?", a: "Post-viral infection → inflammatory thyroiditis. PHASES: (1) Hyperthyroid (hormone release from damaged follicles), (2) Hypothyroid (depleted stores), (3) recovery. Key lab: ELEVATED ESR, LOW radioactive iodine uptake (inflamed, not synthesizing). Treated with NSAIDs or steroids." },
+    { q: "Riedel's thyroiditis: histology, associated disease, and treatment?", a: "Fibrous replacement of thyroid ('woody' hard gland) → can compress trachea. Associated with IgG4-related disease (systemic fibrosis syndrome). Treat with glucocorticoids or surgical decompression if tracheal compression." },
+    { q: "Graves' disease: which cells make the pathogenic antibody?", a: "Graves' is Type II hypersensitivity mediated by TSH receptor antibodies (TSI = thyroid-stimulating immunoglobulin). These antibodies bind TSH receptor and ACTIVATE it (mimic TSH) → constitutive hormone release without negative feedback." },
+    { q: "Graves' disease: three unique clinical features NOT seen in other causes of hyperthyroidism?", a: "1) Exophthalmos/proptosis (orbital fibroblast expansion from TSI-induced cytokine release) 2) Pretibial myxedema (dermopathy on shins/feet) 3) Thyroid acropachy (finger swelling with nail changes). These are TSI-mediated, not thyroid hormone-mediated; don't improve simply from treating hyperthyroidism." },
+    { q: "Graves' radioactive iodine uptake pattern?", a: "DIFFUSE, HOMOGENEOUS uptake (whole gland is active, not nodules). This distinguishes Graves' from toxic multinodular goiter (patchy uptake) or toxic adenoma (single hot nodule)." },
+    { q: "Methimazole vs PTU: which is preferred EXCEPT in what scenarios?", a: "Methimazole preferred (longer half-life, once daily dosing, no liver toxicity). EXCEPTIONS: (1) 1st trimester pregnancy (methimazole causes aplasia cutis + choanal atresia) — use PTU; (2) thyroid storm (PTU blocks D1 deiodinase → rapidly lowers T3) — use PTU." },
+    { q: "PTU's unique advantage in thyroid storm?", a: "PTU blocks BOTH TPO (blocks synthesis) AND D1 deiodinase (blocks peripheral T4→T3 conversion). Methimazole only blocks TPO. In thyroid storm, rapid T3 lowering is critical; PTU achieves this faster by cutting off both synthesis and peripheral conversion." },
+    { q: "Agranulocytosis: class effect of which drugs?", a: "BOTH methimazole and PTU carry agranulocytosis risk (~0.1-0.3%). Warn patients: fever + sore throat → stop drug immediately + get CBC (absolute neutrophil count). This is the main limiting side effect of both drugs, not specific to PTU." },
+    { q: "PTU's additional unique side effect (not methimazole)?", a: "Drug-induced lupus and ANCA-associated vasculitis (p-ANCA). Makes PTU riskier for long-term use. Methimazole preferred for chronic hyperthyroidism management." },
+    { q: "Thyroid storm: what is it and what precipitates it?", a: "Severe hyperthyroidism + precipitant (infection, surgery, iodine exposure, stopping antithyroid drugs) → fever >38.5°C, extreme tachycardia, altered mental status, delirium. Mortality ~10% even with treatment. Medical emergency." },
+    { q: "Thyroid storm treatment ORDER (critical!)?", a: "1st: Propranolol (β-blocker) — blocks adrenergic effects + blocks peripheral T4→T3 conversion. 2nd: PTU (1 hour later) — blocks synthesis + D1. 3rd: Iodine solution (1 hour AFTER PTU) — blocks release + synthesis (Wolff-Chaikoff). 4th: Glucocorticoids (block T4→T3). 5th: Treat precipitant." },
+    { q: "Why must iodine be given AFTER PTU in thyroid storm, not before?", a: "If iodine given first, it is rapidly incorporated into new thyroid hormone synthesis by TPO. PTU must block TPO FIRST so that when iodine arrives, it cannot be used for synthesis. This is why timing is critical." },
+    { q: "Propranolol in hyperthyroidism: does it treat the disease or just symptoms?", a: "SYMPTOMATIC only. Propranolol blocks adrenergic manifestations (tachycardia, tremor, anxiety) and blocks D1-mediated T4→T3 conversion (lowers T3). But does NOT reduce thyroid hormone synthesis. Used for symptom control while waiting for antithyroid drugs to work." },
+    { q: "Radioactive iodine (I-131): mechanism of action?", a: "I-131 is taken up by NIS (same as regular iodine) → emits β-radiation → destroys follicular cells. Results in permanent hypothyroidism (expected, treated with levothyroxine). Safe in non-pregnant patients. Contraindicated in pregnancy." },
+    { q: "Radioactive iodine contraindications?", a: "Absolute: pregnancy and breastfeeding (I-131 crosses placenta/into breast milk; destroys fetal thyroid). Also not first-line if severe thyroiditis (can worsen inflammation) or eye disease (may exacerbate exophthalmos)." },
+    { q: "Levothyroxine (T4): why is it preferred over T3 supplementation?", a: "T4 has long half-life (~7 days) → stable serum levels → once-daily dosing. T3 is short half-life (~2 days) → fluctuating levels. T4 peripherally converts to T3 based on metabolic needs (more physiologic). Except in rare myxedema coma (IV T3 may be faster)." },
+    { q: "Papillary thyroid cancer: frequency and prognosis?", a: "Most common (80% of all thyroid cancers). Best prognosis (~95% 10-year survival, even with lymph node spread). Spreads lymphatically (not hematogenously). Histology: orphan Annie eye nuclei (ground-glass), psammoma bodies (calcifications), nuclear grooves." },
+    { q: "Follicular thyroid cancer: histology, spread pattern, and diagnosis challenge?", a: "10% of thyroid cancers. Grows in uniform follicles. Diagnosis: capsular and/or vascular invasion REQUIRED (cannot diagnose on FNA alone; need surgical specimen). Spreads hematogenously (lung, bone). Associated with iodine deficiency." },
+    { q: "Medullary thyroid cancer: cell origin, marker, and genetic syndrome?", a: "Arises from parafollicular C-cells (not follicular cells) → secretes calcitonin (tumor marker). Associated with MEN2A and MEN2B (germline RET mutation). Amyloid deposits in stroma (calcitonin polymerizes). Treat: total thyroidectomy + lymph node dissection. Screen family members for RET." },
+    { q: "Anaplastic thyroid cancer: what makes it so aggressive?", a: "Undifferentiated (worst prognosis), elderly patients, rapid growth, local invasion + tracheal compression, poor outcome (months to few years). Most aggressive thyroid malignancy. Often unresectable at presentation." },
+    { q: "Thyroid lymphoma: what underlying thyroid disease is it associated with?", a: "Associated with Hashimoto's thyroiditis. If patient with known Hashimoto's develops rapidly enlarging thyroid mass, suspect lymphoma transformation." },
+    { q: "Amiodarone's effect on thyroid labs: is this hypothyroidism?", a: "Amiodarone is 37% iodine by weight → blocks D1 (inhibits peripheral T4→T3 conversion). In EUTHYROID patients: ↑T4, ↓T3, ↑rT3. This is EXPECTED and normal (amiodarone-induced euthyroid pattern), NOT thyroid disease. Continue amiodarone if tolerated." },
+    { q: "Amiodarone can cause BOTH hypothyroidism AND hyperthyroidism?", a: "YES. Type I (Wolff-Chaikoff mechanism — high iodine inhibits synthesis) → hypothyroidism. Type II (thyroiditis-like, follicle destruction) → transient hyperthyroidism (Jod-Basedow effect). Type III: pre-existing thyroid disease unmasked. Both are dose-dependent and iodine concentration-dependent." },
+    { q: "Iodine-containing drugs and contrast agents: what is the risk?", a: "High iodine content → Wolff-Chaikoff effect (acute synthesis inhibition) OR Jod-Basedow effect (hyperthyroidism from iodine triggering synthesis in nodular gland). Risk especially in iodine-deficient patients or with pre-existing thyroid disease. Avoid repeat contrast exposure." },
+    { q: "Saturated potassium iodide (SSKI, Lugol's iodine): pre-op use and mechanism?", a: "Used 7-10 days before thyroidectomy. Blocks thyroid hormone RELEASE (Wolff-Chaikoff effect slows synthesis, high iodine blocks iodine-dependent proteases needed for hormone release). Also DECREASES thyroid vascularity and gland size → safer surgery with less bleeding." },
+    { q: "Congenital hypothyroidism: main causes and outcome if untreated?", a: "Causes: iodine deficiency (worldwide) or thyroid agenesis/dysgenesis (US). Untreated: CRETINISM — severe intellectual disability, growth retardation, macroglossia, umbilical hernia, myxedema. Newborn screening (TSH or T4) + early levothyroxine → NORMAL development." },
+    { q: "Neonatal Graves': cause and duration?", a: "Maternal TSI (antibodies) crosses placenta → stimulates fetal/neonatal thyroid. Symptoms appear within days/weeks of birth (thyroiditis, goiter, hyperthyroidism, tachycardia, poor feeding). TRANSIENT — resolves when maternal antibodies are cleared (weeks to months). Treat with PTU or methimazole." },
+    { q: "Factitious hyperthyroidism: labs and distinguishing feature?", a: "Exogenous T4 intake (athlete abusing for weight loss, surreptitious). Labs: ↑T3/T4, suppressed TSH, LOW radioactive iodine uptake (thyroid not actively synthesizing), LOW thyroglobulin (no stimulation of synthesis). Diagnosis: measure thyroglobulin." },
+    { q: "Toxic multinodular goiter (Plummer disease): epidemiology and RAI pattern?", a: "Multiple autonomous nodules → constitutive hormone release. Most common in elderly. RAI scan: PATCHY uptake (some nodules 'hot', others suppressed). NO exophthalmos (differs from Graves'). Treatment: RAI or surgery." },
+    { q: "Toxic adenoma: single autonomous nodule. Why doesn't it grow unlimited?", a: "Single 'hot' nodule suppresses surrounding thyroid (TSH suppressed → no stimulus for normal tissue). TSH-independent, self-limited growth. Suppressed TSH paradoxically protects from malignancy (low TSH = lower cancer risk)." },
+    { q: "Subacute thyroiditis hyperthyroid phase: distinguish from Graves' by RAI uptake?", a: "Subacute: LOW radioactive iodine uptake (inflamed, cannot synthesize). Graves': HIGH diffuse uptake (active synthesis). This single test distinguishes them: high uptake = Graves'; low uptake = subacute (or factitious)." },
+    { q: "Myxedema coma: precipitants and treatment essentials?", a: "Severe hypothyroidism + precipitant (infection, cold, anesthesia, medications). Treatment: IV levothyroxine OR IV T3 (T3 faster in emergencies) + GLUCOCORTICOIDS (adrenal insufficiency may coexist) + supportive care (rewarming, fluids, ventilator if needed)." },
+    { q: "Selenium deficiency: thyroid hormone consequence?", a: "Selenium is cofactor for glutathione peroxidase AND for deiodinases (especially D1). Deficiency → impaired deiodinase activity → ↑T4, ↓T3 (resembles amiodarone effect). Seen in selenium-poor populations or with long-term parenteral nutrition." },
+];
+
+// ─── MCQ DATA ─────────────────────────────────────────
+const mcqs = [
+    {
+        stem: "A 52-year-old woman presents with fatigue, cold intolerance, and diffuse thyroid enlargement. TSH is 28 mIU/L, free T4 is low, and anti-TPO and anti-thyroglobulin antibodies are positive. Which histologic finding is PATHOGNOMONIC for this diagnosis?",
+        options: ["Uniform follicular architecture", "Psammoma bodies and orphan Annie eye nuclei", "Hürthle cells (eosinophilic epithelial cells with oxyphilic cytoplasm)", "C-cell hyperplasia and amyloid deposits", "Fibrous replacement of thyroid parenchyma"],
+        correct: 2,
+        explanations: [
+            "Uniform follicles suggest follicular carcinoma, not autoimmune thyroiditis.",
+            "Psammoma bodies and orphan Annie eyes are pathognomonic for papillary cancer.",
+            "CORRECT. Hürthle cells (Askanazy cells) are eosinophilic epithelial cells packed with mitochondria. They are PATHOGNOMONIC for Hashimoto's thyroiditis. They represent thyroid cells activated by autoimmune attack.",
+            "C-cell hyperplasia and amyloid deposits are seen in medullary cancer (RET mutations, MEN2).",
+            "Fibrous replacement is seen in Riedel's thyroiditis (IgG4-related disease)."
+        ],
+        teaching: "Hashimoto's = anti-TPO + anti-thyroglobulin antibodies + lymphocytic infiltration + HÜRTHLE CELLS. These oxyphilic cells are the hallmark and are 100% specific for Hashimoto's."
+    },
+    {
+        stem: "A 35-year-old man with Graves' disease is undergoing thyroidectomy. Seven days pre-operatively, Lugol's iodine (saturated KI) is given. Which of the following best explains the rationale for this timing and agent?",
+        options: [
+            "Iodine is incorporated into new thyroid hormone synthesis, replacing radioactive iodine previously taken up",
+            "High iodine concentration inhibits thyroid peroxidase, blocking synthesis, and blocks the proteases required for hormone RELEASE; also decreases thyroid vascularity",
+            "Iodine competitively inhibits TSH receptor binding, reducing thyroid stimulation",
+            "Lugol's iodine prevents agranulocytosis from methimazole",
+            "Iodine decreases anti-TSH receptor antibody titers"
+        ],
+        correct: 1,
+        explanations: [
+            "While high iodine does affect synthesis, this explanation doesn't address the release-blocking mechanism or vascularity reduction.",
+            "CORRECT. High iodine causes Wolff-Chaikoff effect (blocks synthesis) AND blocks iodine-dependent proteases (e.g., serine protease) needed for thyroglobulin proteolysis and hormone release from follicles. Additionally, high iodine DECREASES thyroid vascularity and reduces gland size — critical for safe surgery with minimal blood loss. Timing: 7-10 days before surgery gives time for maximal effect.",
+            "Iodine doesn't block TSH receptor.",
+            "Lugol's iodine doesn't prevent agranulocytosis; that is an inherent risk of thionamides.",
+            "Iodine doesn't change antibody titers."
+        ],
+        teaching: "SSKI (saturated KI, Lugol's) pre-op: Blocks BOTH synthesis (Wolff-Chaikoff) AND release (blocks proteases). Also decreases vascularity. This is why it's given 7-10 days before thyroidectomy — dramatic reduction in bleeding risk and gland manipulability."
+    },
+    {
+        stem: "A 28-year-old woman is diagnosed with Graves' disease and is planning pregnancy in 3 months. Which antithyroid drug is MOST appropriate and why?",
+        options: [
+            "Methimazole (longer half-life, once-daily dosing)",
+            "Propranolol (controls symptoms without affecting synthesis)",
+            "Propylthiouracil (blocks both synthesis and peripheral T4→T3 conversion)",
+            "Radioactive iodine (definitive cure, safe in pregnancy)",
+            "High-dose iodine solution (Wolff-Chaikoff effect)"
+        ],
+        correct: 2,
+        explanations: [
+            "Methimazole is preferred in non-pregnant patients BUT is contraindicated in 1st trimester (causes aplasia cutis, choanal atresia). Since this patient is planning pregnancy in 3 months, 1st trimester exposure is likely.",
+            "Propranolol is symptomatic only; doesn't treat hyperthyroidism.",
+            "CORRECT. PTU is preferred in 1st trimester pregnancy because it DOES NOT cross the placenta as readily as methimazole AND has lower teratogenic risk (no aplasia cutis or choanal atresia reported). PTU can be used in 1st trimester; after 1st trimester, many physicians switch to methimazole (better long-term safety profile).",
+            "Radioactive iodine is ABSOLUTELY CONTRAINDICATED in pregnancy (crosses placenta, destroys fetal thyroid).",
+            "High-dose iodine is for short-term use (thyroid storm prep), not long-term management, and would expose the fetus."
+        ],
+        teaching: "PTU in 1st trimester pregnancy. Methimazole preferred in non-pregnant or after 1st trimester. PTU has hepatotoxicity risk (rare, but monitor LFTs), but it is the safer choice in pregnancy."
+    },
+    {
+        stem: "A 58-year-old man with a history of atrial fibrillation is on amiodarone therapy. Routine labs show: TSH 2.1, free T4 elevated at 2.2 ng/dL (normal 0.8-1.8), free T3 low at 2.0 pg/mL (normal 2.3-4.2), and reverse T3 elevated. The patient is clinically euthyroid with no symptoms of hyper- or hypothyroidism. What is the MOST appropriate interpretation?",
+        options: [
+            "The patient has amiodarone-induced hyperthyroidism (Type I) — stop amiodarone and start methimazole",
+            "The patient has amiodarone-induced hypothyroidism (Type II) — start levothyroxine immediately",
+            "The patient has amiodarone-induced euthyroid pattern — a NORMAL finding from amiodarone's inhibition of deiodinase I; no thyroid disease is present; continue amiodarone monitoring TSH",
+            "The patient needs radioactive iodine to treat the overactive thyroid",
+            "Elevated reverse T3 proves thyroid hormone resistance; needs TSH receptor antibody testing"
+        ],
+        correct: 2,
+        explanations: [
+            "Type I (Wolff-Chaikoff) and Type II (thyroiditis) cause actual thyroid disease. This patient is euthyroid, so these do not apply.",
+            "Again, patient is euthyroid with normal TSH; this is not hypothyroidism.",
+            "CORRECT. Amiodarone is 37% iodine and blocks D1 deiodinase (blocks peripheral T4→T3 conversion). In EUTHYROID patients, this causes: ↑T4 (from reduced conversion), ↓T3 (from reduced conversion and increased rT3 conversion), ↑rT3 (shunted metabolism). TSH remains normal because the gland adjusts. This is EXPECTED and NORMAL. Continue amiodarone if tolerated; monitor TSH to detect true thyroid disease.",
+            "Radioactive iodine is for hyperthyroidism with actual thyroid disease; not indicated here.",
+            "Reverse T3 elevation is from D1 blockade, not thyroid resistance."
+        ],
+        teaching: "Amiodarone euthyroid pattern is common and should NOT trigger unnecessary interventions. Key: TSH is normal, patient is euthyroid. Continue amiodarone. Only change management if TSH becomes abnormal (indicating true Type I or Type II disease)."
+    },
+    {
+        stem: "A 42-year-old woman with a 2-week history of viral upper respiratory infection now presents with severe neck pain, fever, and a firm, enlarged thyroid. ESR is markedly elevated. Radioactive iodine uptake is LOW. Laboratory values show suppressed TSH and elevated free T4. Which of the following best describes the MOST LIKELY mechanism of the current presentation?",
+        options: [
+            "TSH-receptor antibodies (TSI) have developed — Graves' disease",
+            "Thyroid follicles are damaged and destroying themselves, releasing pre-formed thyroid hormone into circulation from damaged stores",
+            "Iodine deficiency causing compensatory thyroid hyperplasia and increased hormone release",
+            "Toxic adenoma autonomously releasing hormone independent of TSH",
+            "Infection-triggered autoimmune thyroiditis with anti-TPO antibodies"
+        ],
+        correct: 1,
+        explanations: [
+            "Graves' causes high RAI uptake (active synthesis), not low uptake.",
+            "CORRECT. This is subacute thyroiditis (de Quervain's) — post-viral inflammation → follicle destruction → release of pre-formed hormone from damaged stores (not new synthesis) → transient hyperthyroidism. LOW RAI uptake is the KEY (inflamed thyroid is not synthesizing, just leaking). ESR elevated, neck pain, fever, and low RAI uptake are classic. Phases: hyperthyroid → hypothyroid (depleted stores) → recovery.",
+            "Iodine deficiency would cause goiter and hypothyroidism, not acute thyroiditis with pain and fever.",
+            "Toxic adenoma would show RAI uptake in the nodule and suppressed uptake in normal thyroid (not diffusely low).",
+            "Anti-TPO suggests Hashimoto's (chronic), not acute subacute thyroiditis."
+        ],
+        teaching: "Subacute thyroiditis = post-viral + painful + high ESR + LOW RAI uptake. The low uptake PROVES the thyroid is not synthesizing (inflamed). High T4 is from pre-formed hormone release, not active synthesis. Treat: NSAIDs or steroids (not antithyroid drugs, which are useless if synthesis is blocked)."
+    },
+    {
+        stem: "A 72-year-old woman with a long-standing multinodular goiter and suppressed TSH (0.1 mIU/L) is found to be clinically hyperthyroid. RAI scan shows multiple 'hot' nodules scattered throughout the gland with varying uptake patterns. Which treatment option is MOST appropriate?",
+        options: [
+            "Methimazole for 12-18 months to induce remission",
+            "PTU to rapidly lower T3 and achieve euthyroidism",
+            "Radioactive iodine (RAI) or surgical thyroidectomy to eliminate autonomous nodules",
+            "High-dose iodine (SSKI) to block hormone release indefinitely",
+            "TSH-suppressive levothyroxine therapy to shrink the nodules"
+        ],
+        correct: 2,
+        explanations: [
+            "Methimazole works by blocking TPO and new synthesis; it does NOT eliminate autonomous nodules. Once stopped, hyperthyroidism recurs. Not appropriate for toxic MNG.",
+            "PTU is for symptomatic relief during thyroid storm or hyperthyroid crisis, not chronic management of MNG.",
+            "CORRECT. Toxic multinodular goiter (Plummer disease) with autonomous nodules requires DEFINITIVE treatment: RAI (destroys nodules via NIS uptake and β-radiation) or thyroidectomy. These modalities eliminate the autonomous tissue. RAI is preferred (less invasive) unless contraindicated or patient has severe eye disease.",
+            "SSKI is for SHORT-TERM use (pre-op prep) to block release and decrease vascularity. Long-term use leads to iodine-induced hypothyroidism (paradoxically, from Wolff-Chaikoff escape).",
+            "Levothyroxine would further suppress TSH and stimulate autonomous nodules (wrong direction)."
+        ],
+        teaching: "Toxic MNG = autonomous nodules = MUST be eliminated (RAI or surgery). Antithyroid drugs only temporary relief. RAI = definitive, less invasive. Both will result in hypothyroidism (expected; treat with levothyroxine)."
+    },
+    {
+        stem: "A 45-year-old man presents to the ED in thyroid storm with fever (39.2°C), heart rate 160, systolic BP 180, agitation, and delirium. He has known Graves' disease and ran out of his antithyroid medication 2 weeks ago. Which of the following treatment sequences is CORRECT?",
+        options: [
+            "Iodine solution FIRST (Wolff-Chaikoff effect), then methimazole 1 hour later",
+            "Propranolol FIRST (symptom control + D1 blockade), then PTU 1 hour later, then iodine 1 hour AFTER PTU",
+            "High-dose PTU FIRST (rapid synthesis blocking), then propranolol, then iodine immediately",
+            "Radioactive iodine immediately to destroy the overactive thyroid",
+            "Glucocorticoids FIRST to suppress TSH, then antithyroid drugs"
+        ],
+        correct: 1,
+        explanations: [
+            "Iodine FIRST is WRONG. If iodine given first, it is rapidly incorporated into new hormone synthesis by TPO (making more thyroid hormone). Catastrophic.",
+            "CORRECT. Order: (1) Propranolol — β-blocker blocks adrenergic effects (tachycardia, tremor, agitation) AND blocks peripheral T4→T3 conversion (lowers T3 fastest). (2) PTU 1 hour later — blocks TPO synthesis AND D1 (blocks T4→T3 conversion). (3) Iodine 1 hour AFTER PTU — now TPO is blocked, so iodine cannot be used for synthesis. Iodine blocks release and causes Wolff-Chaikoff (synthesis inhibition). (4) Glucocorticoids (stress dose) — block T4→T3 conversion + adrenal support. (5) Treat precipitant.",
+            "PTU first (before blocking with iodine) is correct, but propranolol must come FIRST for symptom control and D1 blockade.",
+            "RAI is for stable, non-emergent patients. Contraindicated in thyroid storm (can worsen thyroiditis).",
+            "Glucocorticoids help but are NOT first-line. β-blocker symptom control is immediate priority."
+        ],
+        teaching: "Thyroid storm: Propranolol → PTU → Iodine (1 hr after PTU) → Glucocorticoids. The 1-hour gap between PTU and iodine is CRITICAL (must block synthesis BEFORE iodine arrives). Propranolol first controls the life-threatening cardiac/neuro effects."
+    },
+    {
+        stem: "A 28-year-old woman with Graves' disease is being considered for thyroidectomy. She has been euthyroid on methimazole for 8 months. Preoperatively, Lugol's iodine solution is started 10 days before surgery. Within 2 days of starting iodine, her free T4 and T3 levels DROP significantly. What accounts for this rapid decrease?",
+        options: [
+            "The high iodine concentration has destroyed most follicular cells, reducing hormone synthesis capacity",
+            "Iodine has permanently inhibited thyroid peroxidase (TPO) activity",
+            "High iodine has blocked the proteases required to release thyroid hormone from thyroglobulin — the hormone is trapped in follicles",
+            "Methimazole and iodine have synergistic TSH-suppressing effects",
+            "Iodine has displaced T4 and T3 from thyroid-binding globulin (TBG), allowing urinary excretion"
+        ],
+        correct: 2,
+        explanations: [
+            "Iodine doesn't destroy cells acutely; its effect is on synthesis and release, not on cell death.",
+            "TPO inhibition would slow NEW synthesis, but wouldn't cause rapid release of pre-formed hormone.",
+            "CORRECT. High iodine blocks the serine proteases required to cleave thyroglobulin (a large protein in the follicular colloid) into T3, T4, MIT, DIT. Without these proteases, hormone cannot be released from the gland, even though it was already synthesized and stored. The hormone is 'trapped' in follicles. This is the Wolff-Chaikoff RELEASE-blocking mechanism, separate from synthesis inhibition. Rapid hormone clearance from circulation + blocked release = fast T4/T3 drop.",
+            "Methimazole doesn't suppress TSH (it lowers hormone, which would RAISE TSH); this explanation doesn't fit.",
+            "Iodine doesn't displace T4/T3 from binding proteins."
+        ],
+        teaching: "High iodine blocks TWO steps: (1) synthesis (Wolff-Chaikoff effect on TPO), (2) RELEASE (blocks serine proteases that cleave thyroglobulin). Release-blocking is rapid and is why T4/T3 drop so quickly on SSKI."
+    },
+    {
+        stem: "A 22-year-old athletic male is found to have suppressed TSH (0.15 mIU/L), elevated free T4, elevated free T3, but LOW thyroglobulin level and LOW radioactive iodine uptake. The patient is clinically euthyroid with normal vital signs. Which is the MOST LIKELY diagnosis?",
+        options: [
+            "Graves' disease — TSI-mediated thyroid stimulation",
+            "Toxic adenoma — autonomous hormone-producing nodule",
+            "Factitious hyperthyroidism — exogenous thyroid hormone ingestion",
+            "Subacute thyroiditis — viral inflammation with hormone release",
+            "Amiodarone-induced hyperthyroidism — Type I Wolff-Chaikoff effect"
+        ],
+        correct: 2,
+        explanations: [
+            "Graves' would show HIGH radioactive iodine uptake (diffuse, active synthesis).",
+            "Toxic adenoma would show uptake in the nodule itself (patchy, not low overall).",
+            "CORRECT. Factitious hyperthyroidism = exogenous T4 or T3 intake. Key labs: (1) ↑free T4 and T3 (from exogenous), (2) SUPPRESSED TSH (negative feedback), (3) LOW thyroglobulin (no thyroid stimulation, no synthesis), (4) LOW radioactive iodine uptake (thyroid is not synthesizing). Athletic male taking T4 for weight loss is classic presentation. Diagnosis: ask patient directly, measure TSH receptor antibodies (negative), check for levothyroxine in urine.",
+            "Subacute would show LOW uptake BUT elevated thyroglobulin (released from damaged follicles), not low.",
+            "Amiodarone would cause specific pattern (high T4, low T3, high rT3), not this pattern, and uptake would be normal (not suppressed like from exogenous hormone)."
+        ],
+        teaching: "Factitious hyperthyroidism: ↑T3/T4 + LOW thyroglobulin + LOW RAI uptake = exogenous hormone. The thyroid is not working (no stimulation = no synthesis = no thyroglobulin). Distinguished from Graves' (high uptake) and subacute (high thyroglobulin)."
+    },
+    {
+        stem: "A 35-year-old woman with Hashimoto's thyroiditis is found to be hypothyroid. However, 2 months ago, she had a transient episode of elevated T4, suppressed TSH, and palpitations that resolved spontaneously. Which of the following best explains this clinical course?",
+        options: [
+            "She developed secondary Graves' disease superimposed on Hashimoto's",
+            "She had a toxic nodule that spontaneously stopped producing hormone",
+            "Early Hashimoto's can present with a hyperthyroid phase (Hashitoxicosis) from follicle destruction releasing pre-formed hormone; after stores depleted, she became hypothyroid",
+            "She took exogenous thyroid hormone transiently",
+            "She had subacute thyroiditis which resolved, followed by Hashimoto's"
+        ],
+        correct: 2,
+        explanations: [
+            "Graves' involves TSI antibodies, which are different from TPO antibodies (Hashimoto's). Two simultaneous autoimmune diseases is very rare.",
+            "Toxic nodules don't resolve spontaneously.",
+            "CORRECT. Hashitoxicosis = early Hashimoto's presenting with a HYPERTHYROID phase. As lymphocytes infiltrate and damage follicles, stored thyroid hormone leaks into circulation → transient ↑T4/T3, suppressed TSH, symptoms (palpitations). Once stores are depleted and follicles are destroyed, the patient becomes hypothyroid and requires levothyroxine. This phase is often MISSED because patients present with hyperthyroid symptoms. Key: antibodies are anti-TPO/anti-thyroglobulin (Hashimoto's pattern), not TSI (Graves' pattern).",
+            "Patient has anti-TPO antibodies; unlikely to be taking hormone exogenously.",
+            "Subacute has very high ESR and neck pain (Hashitoxicosis does not); different disease entirely."
+        ],
+        teaching: "Hashitoxicosis = the forgotten hyperthyroid phase of Hashimoto's. Not all Hashimoto's patients present hypothyroid. Early phase: follicle destruction → hormone release → transient hyperthyroidism. Later: hypothyroidism. Antibodies and ultrasound (patchy infiltration, not diffuse uptake) distinguish it from Graves'."
+    },
+    {
+        stem: "A 64-year-old woman presents with a palpable thyroid nodule. Fine-needle aspiration (FNA) shows 'follicular neoplasm.' The pathologist notes that the cells are consistent with follicular carcinoma, but cannot definitively diagnose malignancy. Why is the pathologist unable to make a definitive diagnosis of follicular cancer on FNA alone?",
+        options: [
+            "FNA samples are too small and diluted to be reliable for cancer diagnosis",
+            "Follicular cancer REQUIRES capsular and/or vascular invasion for diagnosis, which CANNOT be determined on FNA alone (requires surgical specimen with intact capsule)",
+            "Follicular carcinoma is so rare that pathologists are unfamiliar with it",
+            "FNA cannot distinguish follicular cancer from Hürthle cell carcinoma",
+            "The nuclei in follicular lesions are too small to assess for atypia"
+        ],
+        correct: 1,
+        explanations: [
+            "FNA samples are adequate for many diagnoses; this is too vague.",
+            "CORRECT. Follicular cancer is defined by invasion, not cytology. Pathologists can see 'follicular cells with follicles' on FNA, but they cannot see whether the tumor has broken through the CAPSULE or invaded BLOOD VESSELS — both require intact tissue architecture that FNA destroys. Therefore, FNA cannot diagnose follicular cancer; it only says 'follicular neoplasm — suspicious, needs surgery.' Surgical excision (total or partial thyroidectomy) provides the specimen to assess capsular and vascular invasion.",
+            "Follicular carcinoma is uncommon but not rare; pathologists are trained to recognize it.",
+            "Hürthle cell carcinoma is a variant of follicular cancer; if anything, it has the same diagnostic challenge.",
+            "Nuclei assessment is part of cytology; follicular lesions can show atypia on FNA."
+        ],
+        teaching: "FNA 'follicular neoplasm' = CANNOT diagnose cancer (need invasion to diagnose). Requires thyroidectomy (lobectomy or total) to get intact capsule + assess for vascular invasion. Then pathologist can make definitive malignancy call."
+    },
+    {
+        stem: "A 52-year-old man with papillary thyroid cancer (T3N1) underwent total thyroidectomy and received radioactive iodine. Two weeks later, he develops severe neck pain, fever, and a firm thyroid mass. TSH is suppressed at 0.05, and free T4 is elevated. What is the MOST likely explanation for his acute deterioration?",
+        options: [
+            "The papillary cancer has metastasized to the lungs and caused pneumonia",
+            "Thyroid storm triggered by inadequate PTU coverage before RAI",
+            "Radiation thyroiditis from RAI — inflammatory response to iodine-131 destroying thyroid tissue and releasing stored hormone + inflammatory cytokines",
+            "Development of medullary cancer as a second primary malignancy",
+            "Acute bacterial infection of the thyroid (abscess)"
+        ],
+        correct: 2,
+        explanations: [
+            "Lung metastases would not cause acute local thyroid symptoms and fever.",
+            "PTU is not given pre-RAI in thyroidectomized patients (no thyroid left to synthesize). Thyroid storm requires a functioning gland.",
+            "CORRECT. RAI thyroiditis is a real, acute inflammatory complication occurring days to weeks after I-131 administration. The β-radiation destroys follicular cells → release of stored thyroid hormone (causing suppressed TSH + elevated T4) AND inflammatory cytokines → fever, pain, swelling. Treated with NSAIDs, glucocorticoids. Not true thyroid storm, but superficially similar. More common if large amount of thyroid tissue is present (post-subtotal thyroidectomy or in metastases).",
+            "Second primary medullary cancer would not present acutely with fever and pain.",
+            "Bacterial abscess is rare post-thyroidectomy and would show WBC elevation + localized infection on imaging."
+        ],
+        teaching: "RAI thyroiditis: acute complication post-I-131 in thyroidectomized patients with thyroid remnant. Fever + pain + elevated T4 = NOT thyroid storm (no TSH-mediated synthesis). Treat: NSAIDs, steroids if severe."
+    },
+];
+
+// ─── VIGNETTES ───────────────────────────────────────
+const vignettes = [
+    {
+        banner: "GRAVES' DISEASE WORKUP",
+        stem: "<strong>Case:</strong> 34-year-old woman with 2-month history of palpitations, tremor, heat intolerance, and weight loss despite good appetite. Exam: diffuse goiter, warm skin, hyperreflexia. TSH suppressed at 0.01, free T4 elevated, free T3 elevated. Anti-TPO antibodies NEGATIVE, TSH receptor antibodies (TSI) POSITIVE. RAI uptake scan: diffuse, homogeneous uptake throughout gland.",
+        diagnosis: "<span class='dx-label'>Diagnosis: Graves' disease</span> — TSI-mediated Type II hypersensitivity. TSI mimics TSH → constitutive hormone release. Diffuse RAI uptake (not nodular) confirms active synthesis. Anti-TPO negative excludes Hashimoto's."
+    },
+    {
+        banner: "SUBACUTE THYROIDITIS",
+        stem: "<strong>Case:</strong> 48-year-old man with 2-week URI followed by severe neck pain, fever, fatigue. ESR 85 (markedly elevated), TSH 0.05, free T4 1.8 (elevated), free T3 elevated, anti-TPO negative. RAI uptake: LOW (suppressed). Ultrasound: hyperechoic, enlarged gland.",
+        diagnosis: "<span class='dx-label'>Diagnosis: Subacute thyroiditis (de Quervain's)</span> — post-viral inflammation → follicle destruction → hormone RELEASE (low RAI uptake proves no synthesis). ESR elevated, pain, fever pathognomonic. Will progress: hyperthyroid → hypothyroid → recovery. Treat: NSAIDs, steroids if severe (not antithyroid drugs)."
+    },
+    {
+        banner: "HASHIMOTO'S + HASHITOXICOSIS",
+        stem: "<strong>Case:</strong> 42-year-old woman with mild tremor and palpitations. Labs: TSH 0.2, free T4 1.6 (high-normal), anti-TPO 800+ (very high), anti-thyroglobulin positive. Ultrasound: heterogeneous echotexture with patchy infiltration. Repeat labs 3 months later: TSH 8.5, free T4 0.6 (low), anti-TPO still positive.",
+        diagnosis: "<span class='dx-label'>Diagnosis: Hashimoto's with Hashitoxicosis</span> — early Hashimoto's presenting with hyperthyroid phase. Antibodies attacking thyroid → follicle destruction releases stored hormone → transient ↑T4/T3. As destruction progresses, stores deplete → hypothyroidism. Patchy ultrasound pattern (infiltration) distinguishes from Graves' (diffuse). Starts on levothyroxine for hypothyroid phase."
+    },
+    {
+        banner: "TOXIC MULTINODULAR GOITER (PLUMMER DISEASE)",
+        stem: "<strong>Case:</strong> 72-year-old woman with long-standing large goiter, now with fatigue, weight loss, heat intolerance. TSH 0.05, free T4 elevated, free T3 elevated. RAI scan: multiple 'hot' nodules scattered throughout gland with varying uptake, some areas suppressed. No eye disease. Physical exam: palpable nodules.",
+        diagnosis: "<span class='dx-label'>Diagnosis: Toxic multinodular goiter</span> — multiple autonomous nodules functioning independently of TSH. Patchy RAI pattern (hot + cold areas) distinguishes from Graves' (diffuse uptake). Elderly, long-standing goiter. Treatment: RAI or thyroidectomy (antithyroid drugs only temporary). Post-treatment hypothyroidism expected, treated with levothyroxine."
+    },
+    {
+        banner: "MEDULLARY THYROID CANCER + MEN2A",
+        stem: "<strong>Case:</strong> 38-year-old man with family history of thyroid cancer (father at age 35). Elevated serum calcitonin (450 pg/mL, normal <10), elevated CEA. Ultrasound: 1.5 cm right thyroid nodule, right cervical lymph nodes. Genetic testing: RET proto-oncogene mutation identified (germline). Family screening initiated.",
+        diagnosis: "<span class='dx-label'>Diagnosis: Medullary thyroid cancer (MEN2A)</span> — C-cell origin (parafollicular cells), calcitonin is tumor marker. Associated with germline RET mutations → MEN2A syndrome (medullary cancer + pheochromocytoma + hyperparathyroidism). Treatment: total thyroidectomy + bilateral neck dissection + calcitonin monitoring. First-degree relatives screened for RET mutation; prophylactic thyroidectomy offered if positive."
+    },
+    {
+        banner: "CONGENITAL HYPOTHYROIDISM (NEWBORN SCREENING)",
+        stem: "<strong>Case:</strong> 3-day-old newborn screened on day of life 2. TSH elevated at 35 mIU/L, free T4 low. Infant clinically appears well (no jaundice beyond normal physiologic range). Ultrasound: thyroid tissue present but small (dysgenesis). Started on levothyroxine 10 mcg/kg/day within 48 hours of diagnosis.",
+        diagnosis: "<span class='dx-label'>Diagnosis: Congenital hypothyroidism (thyroid dysgenesis)</span> — missed newborn screening in developed countries is rare due to TSH/T4 screening. Early levothyroxine initiation is CRITICAL — prevents cretinism (intellectual disability, growth retardation, macroglossia). Prognosis with early treatment: normal development and intelligence. Without treatment: severe, irreversible intellectual disability."
+    },
+    {
+        banner: "PAPILLARY THYROID CANCER",
+        stem: "<strong>Case:</strong> 52-year-old woman with history of radiation exposure (head/neck as child). Palpable 0.8 cm right thyroid nodule. FNA: orphan Annie eye nuclei, psammoma bodies (concentric calcifications), nuclear grooves. TSH normal. Ultrasound: right lobe nodule, right cervical lymph nodes enlarged. No distant metastases on imaging.",
+        diagnosis: "<span class='dx-label'>Diagnosis: Papillary thyroid cancer</span> — Most common (80%), best prognosis (~95% 10-year survival). Spreads lymphatically (not hematogenously), hence lymph node involvement is common but not grave. Histology: orphan Annie eyes + psammoma bodies pathognomonic. Treatment: total thyroidectomy + lymph node dissection + RAI. TSH-suppressive levothyroxine post-op."
+    },
+    {
+        banner: "AMIODARONE-INDUCED EUTHYROID PATTERN",
+        stem: "<strong>Case:</strong> 68-year-old man with atrial fibrillation on amiodarone for 4 months. Routine labs: TSH 2.1 (normal), free T4 2.4 (elevated), free T3 2.0 (low), reverse T3 elevated. Clinically asymptomatic, heart rate well-controlled at 65. No thyroid antibodies.",
+        diagnosis: "<span class='dx-label'>Diagnosis: Amiodarone-induced euthyroid pattern</span> — Amiodarone (37% iodine) blocks D1 deiodinase (peripheral T4→T3 conversion). In euthyroid patients: ↑T4, ↓T3, ↑rT3, NORMAL TSH. This is EXPECTED, not disease. Continue amiodarone if tolerated. Monitor TSH; if TSH becomes abnormal (high or low), then consider Type I or Type II amiodarone-induced thyroid disease and adjust accordingly."
+    },
+    {
+        banner: "RIEDEL'S THYROIDITIS WITH TRACHEAL COMPRESSION",
+        stem: "<strong>Case:</strong> 61-year-old woman with progressive dyspnea on exertion, stridor on inspiration. Exam: very hard, 'woody' thyroid, fixed, non-tender. Biopsy: fibrous replacement of thyroid parenchyma. Associated with IgG4-related systemic disease (elevated serum IgG4, involvement of other organs).",
+        diagnosis: "<span class='dx-label'>Diagnosis: Riedel's thyroiditis (IgG4-related disease)</span> — Fibrous replacement → very firm ('woody'), fixed gland. May compress trachea, esophagus. Associated with IgG4-related disease (multiorgan fibrosis). Treatment: glucocorticoids (suppress IgG4) or surgical decompression if severe airway compromise. Hypothyroidism expected (fibrosis destroys thyroid tissue)."
+    },
+    {
+        banner: "FACTITIOUS HYPERTHYROIDISM IN ATHLETE",
+        stem: "<strong>Case:</strong> 24-year-old male bodybuilder presenting with palpitations, tremor, weight loss despite high protein intake. TSH suppressed at 0.1, free T4 elevated, free T3 elevated, thyroglobulin LOW (0.5 ng/mL, normal 3-40), RAI uptake suppressed. Urine positive for levothyroxine metabolites.",
+        diagnosis: "<span class='dx-label'>Diagnosis: Factitious hyperthyroidism</span> — Exogenous T4 ingestion (for weight loss, 'cutting'). Key labs: ↑T3/T4 + LOW thyroglobulin (no thyroid stimulation) + LOW RAI uptake (no synthesis). Urine/plasma levothyroxine confirms. Counsel patient on risks (cardiac arrhythmia, osteoporosis, sudden cardiac death). Gradual taper to avoid iatrogenic hypothyroidism."
+    },
+];
+
+// ─── TRAP DATA ─────────────────────────────────────────
+const traps = [
+    {
+        trap: "PTU is preferred over methimazole for most cases of hyperthyroidism.",
+        myth: "PTU is the standard first-line agent.",
+        truth: "INCORRECT. Methimazole is preferred for most patients (longer half-life, once-daily dosing, no hepatotoxicity). PTU is reserved for: (1) 1st trimester pregnancy (aplasia cutis risk from methimazole), (2) thyroid storm (PTU blocks D1 for faster T3 lowering), (3) methimazole allergy. Chronic use of PTU carries agranulocytosis + lupus/ANCA vasculitis risk."
+    },
+    {
+        trap: "Exophthalmos in Graves' disease improves after treating hyperthyroidism with antithyroid drugs.",
+        myth: "TSH suppression and euthyroidism will resolve eye disease.",
+        truth: "INCORRECT. Exophthalmos is caused by TSI-mediated orbital fibroblast expansion and cytokine infiltration. It is INDEPENDENT of thyroid hormone levels. Treating hyperthyroidism does not improve exophthalmos; it may even worsen it initially. Exophthalmos is treated separately: orbital glucocorticoids, orbital decompression, ocular radiation if severe. ~20% worsen after RAI."
+    },
+    {
+        trap: "Agranulocytosis is a unique side effect of PTU only.",
+        myth: "Methimazole does not cause agranulocytosis.",
+        truth: "INCORRECT. Agranulocytosis is a CLASS EFFECT of both PTU and methimazole (~0.1-0.3% incidence). Both require the same warning to patients: fever + sore throat → stop drug immediately + CBC (check neutrophil count). Incidence is similar. No drug is safer in this regard."
+    },
+    {
+        trap: "In thyroid storm, iodine should be given BEFORE PTU to maximize the Wolff-Chaikoff effect.",
+        myth: "Iodine first will block synthesis faster.",
+        truth: "INCORRECT. If iodine given FIRST, it is rapidly incorporated into new hormone synthesis by TPO (making MORE thyroid hormone — catastrophic). PTU MUST block TPO FIRST so that when iodine arrives 1 hour later, TPO is already inhibited and iodine cannot be used. Timing: Propranolol → PTU (1 hr) → Iodine (1 hr after PTU)."
+    },
+    {
+        trap: "Follicular thyroid cancer can be definitively diagnosed by fine-needle aspiration (FNA) alone.",
+        myth: "FNA cytology is sufficient for follicular cancer diagnosis.",
+        truth: "INCORRECT. Follicular cancer is DEFINED by capsular and/or vascular invasion — features requiring intact tissue architecture that FNA destroys. FNA shows 'follicular cells forming follicles' but cannot assess invasion status. FNA diagnosis: 'follicular neoplasm' → requires thyroidectomy to get intact specimen → then pathologist assesses capsular/vascular invasion to diagnose malignancy."
+    },
+    {
+        trap: "Medullary thyroid cancer arises from follicular cells, same as papillary and follicular cancers.",
+        myth: "All thyroid cancers originate from follicular epithelium.",
+        truth: "INCORRECT. Medullary cancer arises from parafollicular C-CELLS (neuroendocrine), which secrete calcitonin (not T3/T4). Papillary and follicular cancers arise from follicular cells. Medullary cancer is associated with germline RET mutations (MEN2A, MEN2B). Different origin → different biology, markers (calcitonin not thyroglobulin), and management."
+    },
+    {
+        trap: "Radioactive iodine is the preferred treatment for hyperthyroidism in a pregnant woman.",
+        myth: "RAI has no fetal effects; use anytime.",
+        truth: "INCORRECT. Radioactive iodine is ABSOLUTELY CONTRAINDICATED in pregnancy. I-131 crosses the placenta → concentrates in fetal thyroid → destroys fetal thyroid → fetal hypothyroidism, goiter, potentially cretinism. Use PTU in 1st trimester (lower placental transfer than methimazole, no aplasia cutis risk). After 1st trimester, many switch to methimazole (better long-term safety)."
+    },
+    {
+        trap: "Subacute thyroiditis shows high radioiodine uptake because the inflamed gland is hyperactive.",
+        myth: "Inflammation causes increased thyroid function.",
+        truth: "INCORRECT. Subacute thyroiditis shows LOW radioactive iodine uptake because the inflamed thyroid is NOT synthesizing new hormone — it is only leaking pre-formed hormone from damaged follicles. High T4/T3 is from follicle rupture and hormone release, not active synthesis. Low RAI uptake is the KEY diagnostic finding that distinguishes subacute from Graves' (high uptake) and confirms the mechanism."
+    },
+    {
+        trap: "Hashimoto's patients are always hypothyroid at presentation.",
+        myth: "Hashimoto's = hypothyroidism.",
+        truth: "INCORRECT. Early Hashimoto's can present with Hashitoxicosis (hyperthyroid phase) from follicle destruction and hormone release into circulation. TSH suppressed, T4/T3 elevated, but antibodies (anti-TPO, anti-thyroglobulin) are positive. Over months to years, gland is destroyed → stores deplete → hypothyroidism. Always check antibodies to distinguish Hashitoxicosis from Graves' (which has TSI, not anti-TPO)."
+    },
+    {
+        trap: "Amiodarone's effects on thyroid labs (elevated T4, low T3, high rT3) always indicate thyroid disease requiring treatment.",
+        myth: "Abnormal labs always mean disease.",
+        truth: "INCORRECT. Amiodarone blocks D1 deiodinase (peripheral T4→T3 conversion). In EUTHYROID patients without thyroid disease, this causes ↑T4, ↓T3, ↑rT3 with NORMAL TSH. This is EXPECTED and NORMAL (amiodarone-induced euthyroid pattern), not disease. Continue amiodarone if tolerated. Only intervene if TSH becomes abnormal (then consider Type I or Type II amiodarone-induced thyroid disease)."
+    },
+    {
+        trap: "Papillary thyroid cancer has the worst prognosis of all thyroid cancers.",
+        myth: "Papillary cancer is highly aggressive and lethal.",
+        truth: "INCORRECT. Papillary thyroid cancer has the BEST prognosis (~95% 10-year survival, >99% 5-year survival), even with lymph node metastases. Anaplastic cancer has the WORST prognosis (months to few years). Follicular and medullary intermediate. Papillary is indolent, slow-growing, and treatment-responsive."
+    },
+    {
+        trap: "PTU is preferred in thyroid storm because it is more potent than methimazole at blocking TPO.",
+        myth: "PTU has superior potency.",
+        truth: "INCORRECT REASONING, but CORRECT CONCLUSION. PTU is preferred in thyroid storm not because of superior TPO blocking, but because it ALSO blocks D1 deiodinase (peripheral T4→T3 conversion), which methimazole does NOT do. In thyroid storm, rapid T3 lowering is critical. PTU achieves this via two mechanisms (synthesis block + D1 block), making it faster at lowering T3. Methimazole only blocks synthesis."
+    },
+];
+
+// ─── FILL-IN-BLANK DATA ─────────────────────────────────
+const fibs = [
+    {
+        prompt: "The first step in thyroid hormone synthesis is _________ uptake via NIS on the basolateral membrane of thyroid follicular cells.",
+        answer: "iodine",
+        alternatives: ["iodide", "I-", "I minus"]
+    },
+    {
+        prompt: "Thyroid peroxidase (TPO) catalyzes two reactions: (1) _________ of iodine (incorporation onto tyrosine) and (2) coupling (forming T3 and T4).",
+        answer: "organification",
+        alternatives: ["oxidation", "iodination"]
+    },
+    {
+        prompt: "DIT + DIT coupling produces _________, the major thyroid hormone stored and released.",
+        answer: "T4",
+        alternatives: ["thyroxine"]
+    },
+    {
+        prompt: "T3 is _________ times more potent than T4 but is _________ in blood abundance.",
+        answer: "3-4, less abundant",
+        alternatives: ["3 to 4, less", "three to four, much less"]
+    },
+    {
+        prompt: "The most potent negative feedback inhibitor of TSH and TRH is _________.",
+        answer: "T3",
+        alternatives: ["triiodothyronine"]
+    },
+    {
+        prompt: "The Wolff-Chaikoff effect is triggered by _________ iodine exposure and causes _________ hormone synthesis.",
+        answer: "high-dose, decreased",
+        alternatives: ["excessive, reduced", "acute high, decreased"]
+    },
+    {
+        prompt: "The most common cause of hypothyroidism WORLDWIDE is _________ deficiency.",
+        answer: "iodine",
+        alternatives: ["I"]
+    },
+    {
+        prompt: "The most common cause of hypothyroidism in the US is _________ thyroiditis, an autoimmune disease mediated by anti-TPO and anti-_________ antibodies.",
+        answer: "Hashimoto's, thyroglobulin",
+        alternatives: ["Hashimoto, thyroglobulin"]
+    },
+    {
+        prompt: "Graves' disease is mediated by antibodies to the _________ receptor; these antibodies are called TSI (thyroid-___________ immunoglobulin).",
+        answer: "TSH, stimulating",
+        alternatives: ["TSH, stimulatory"]
+    },
+    {
+        prompt: "Three unique clinical features of Graves' disease NOT seen in other hyperthyroid states are: (1) ___________, (2) pretibial myxedema, and (3) thyroid acropachy.",
+        answer: "exophthalmos",
+        alternatives: ["proptosis", "eye disease", "orbital enlargement"]
+    },
+    {
+        prompt: "Methimazole is contraindicated in _________ trimester of pregnancy due to risk of aplasia cutis and choanal atresia.",
+        answer: "first",
+        alternatives: ["1st"]
+    },
+    {
+        prompt: "In thyroid storm, _________ must be given AFTER PTU (with 1-hour gap) to prevent incorporation of iodine into new hormone synthesis.",
+        answer: "iodine solution",
+        alternatives: ["iodine", "SSKI", "saturated KI"]
+    },
+];
+
+// ─── CHALLENGE DRILL DATA ─────────────────────────────────
+const drills = [
+    {
+        type: "TYPE 1: Thyroid Disease Pattern Recognizer",
+        items: [
+            {
+                q: "Suppressed TSH, elevated T4/T3, HIGH RAI uptake, diffuse distribution, TSI antibodies positive, exophthalmos → ?",
+                options: ["Graves' disease", "Toxic multinodular goiter", "Toxic adenoma", "Subacute thyroiditis"],
+                correct: 0
+            },
+            {
+                q: "Suppressed TSH, elevated T4/T3, LOW RAI uptake, high ESR, neck pain, post-URI → ?",
+                options: ["Graves' disease", "Subacute thyroiditis", "Hashimoto's", "Toxic adenoma"],
+                correct: 1
+            },
+            {
+                q: "Elevated TSH, low T4, anti-TPO positive, anti-thyroglobulin positive, lymphocytic infiltration on biopsy, Hürthle cells → ?",
+                options: ["Subacute thyroiditis", "Riedel's thyroiditis", "Hashimoto's thyroiditis", "Iodine deficiency"],
+                correct: 2
+            },
+            {
+                q: "Elevated T4/T3, suppressed TSH, LOW thyroglobulin, LOW RAI uptake, clinically euthyroid → ?",
+                options: ["Graves' disease", "Toxic adenoma", "Factitious hyperthyroidism", "Amiodarone euthyroid pattern"],
+                correct: 2
+            },
+        ]
+    },
+    {
+        type: "TYPE 2: Cancer Type Classifier",
+        items: [
+            {
+                q: "Orphan Annie eye nuclei, psammoma bodies, nuclear grooves, RET/PTC mutations, lymphatic spread, excellent prognosis → ?",
+                options: ["Follicular cancer", "Papillary cancer", "Medullary cancer", "Anaplastic cancer"],
+                correct: 1
+            },
+            {
+                q: "Uniform follicles, capsular and vascular invasion, hematogenous spread (lung, bone), RAS mutations, iodine deficiency association → ?",
+                options: ["Papillary cancer", "Follicular cancer", "Medullary cancer", "Lymphoma"],
+                correct: 1
+            },
+            {
+                q: "Parafollicular C-cells, calcitonin marker, amyloid in stroma, MEN2A/2B (RET mutations), worst prognosis among non-anaplastic → ?",
+                options: ["Papillary cancer", "Follicular cancer", "Medullary cancer", "Anaplastic cancer"],
+                correct: 2
+            },
+            {
+                q: "Undifferentiated, elderly, rapid growth, local invasion/tracheal compression, months-to-years survival → ?",
+                options: ["Papillary cancer", "Medullary cancer", "Anaplastic cancer", "Follicular cancer"],
+                correct: 2
+            },
+        ]
+    },
+    {
+        type: "TYPE 3: Thyroid Storm Treatment Sequencer",
+        items: [
+            {
+                q: "Which drug should be given FIRST in thyroid storm?",
+                options: ["Iodine solution", "PTU", "Propranolol", "Glucocorticoids"],
+                correct: 2
+            },
+            {
+                q: "Why is propranolol given BEFORE PTU and iodine?",
+                options: [
+                    "It more rapidly lowers TSH than PTU",
+                    "It blocks adrenergic symptoms (tachycardia, tremor) and blocks peripheral T4→T3 conversion; symptom control is life-saving",
+                    "It prevents iodine from being incorporated into new hormone",
+                    "It blocks TSH receptor antibodies"
+                ],
+                correct: 1
+            },
+            {
+                q: "How long should PTU be given before iodine solution in thyroid storm?",
+                options: ["Immediately together", "15 minutes before", "1 hour before (PTU must block TPO first so iodine cannot be used for synthesis)", "2 hours before"],
+                correct: 2
+            },
+        ]
+    },
+    {
+        type: "TYPE 4: Drug Contraindication Matcher",
+        items: [
+            {
+                q: "Methimazole is contraindicated in which scenario?",
+                options: ["Thyroid storm", "First trimester pregnancy (aplasia cutis, choanal atresia risk)", "Chronic hyperthyroidism (>1 year)", "Elderly patients"],
+                correct: 1
+            },
+            {
+                q: "Radioactive iodine (I-131) is contraindicated in which scenario?",
+                options: ["Toxic multinodular goiter", "Graves' disease in non-pregnant adults", "Pregnancy and breastfeeding", "Toxic adenoma"],
+                correct: 2
+            },
+            {
+                q: "PTU is PREFERRED (not just acceptable) in which scenario?",
+                options: [
+                    "Most cases of hyperthyroidism (for potency)",
+                    "First trimester pregnancy (lower teratogenicity than methimazole)",
+                    "Thyroid storm (blocks both synthesis AND D1 deiodinase for faster T3 lowering)",
+                    "Chronic hypothyroidism management"
+                ],
+                correct: 1
+            },
+        ]
+    },
+];
+
+// ─── REFERENCE TABLE DATA ─────────────────────────────────
+const refData = `
+<table class="ref-table">
+    <thead>
+        <tr>
+            <th>GUSOM LO Concept</th>
+            <th>Step 1 Extension</th>
+            <th>Key Disease/Drug</th>
+            <th>Buzzword/Marker</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Iodine uptake (NIS)</strong></td>
+            <td>Iodine deficiency → endemic goiter (worldwide leading cause of hypothyroidism); in US, Hashimoto's most common</td>
+            <td>Iodine deficiency goiter; Hashimoto's autoimmune</td>
+            <td>Endemic goiter; anti-TPO, anti-thyroglobulin Ab</td>
+        </tr>
+        <tr>
+            <td><strong>TPO & organification</strong></td>
+            <td>Hashimoto's anti-TPO antibodies destroy enzyme; Riedel's fibrous replacement; subacute viral inflammation</td>
+            <td>Hashimoto's thyroiditis; Riedel's; Subacute thyroiditis</td>
+            <td>Hürthle cells; IgG4-related disease; elevated ESR</td>
+        </tr>
+        <tr>
+            <td><strong>T4↔T3 conversion (Deiodinases D1, D2, D3)</strong></td>
+            <td>PTU advantage: blocks D1 → faster T3 lowering in thyroid storm vs methimazole; Amiodarone blocks D1; Selenium deficiency impairs deiodinases</td>
+            <td>Thyroid storm (PTU preferred); Amiodarone euthyroid pattern</td>
+            <td>Thyroid storm treatment order; Amiodarone: ↑T4, ↓T3, ↑rT3 normal</td>
+        </tr>
+        <tr>
+            <td><strong>TSH regulation & feedback</strong></td>
+            <td>TSH is best single screening test (sensitive to T3/T4 changes); Suppressed TSH in hyperthyroidism; Elevated in hypothyroidism</td>
+            <td>All thyroid disorders</td>
+            <td>Negative feedback loop; TSH most sensitive marker</td>
+        </tr>
+        <tr>
+            <td><strong>Thyroid hormone release</strong></td>
+            <td>Subacute thyroiditis: pre-formed hormone release (LOW RAI uptake); SSKI pre-op blocks release via protease inhibition; Wolff-Chaikoff effect</td>
+            <td>Subacute thyroiditis; Pre-op thyroidectomy prep</td>
+            <td>Low RAI uptake; SSKI 7-10 days pre-op; ↓vascularity</td>
+        </tr>
+        <tr>
+            <td><strong>Graves' Disease</strong></td>
+            <td>TSI-mediated Type II hypersensitivity (NOT just high T4); Exophthalmos from orbital fibroblast expansion (TSI-independent, doesn't improve with hormone normalization); Diffuse RAI uptake (not nodular)</td>
+            <td>Graves' hyperthyroidism</td>
+            <td>TSI+, exophthalmos/proptosis, pretibial myxedema, acropachy, diffuse RAI uptake</td>
+        </tr>
+        <tr>
+            <td><strong>Methimazole vs PTU</strong></td>
+            <td>Methimazole preferred EXCEPT: 1st trimester (aplasia cutis, choanal atresia risk) → PTU; Thyroid storm (PTU blocks D1, faster T3 lowering) → PTU. Both cause agranulocytosis (same incidence, same warning).</td>
+            <td>Hyperthyroidism management; Pregnancy; Thyroid storm</td>
+            <td>PTU in 1st trimester; PTU in thyroid storm; agranulocytosis class effect</td>
+        </tr>
+        <tr>
+            <td><strong>Radioactive Iodine (I-131)</strong></td>
+            <td>Taken up by NIS → β-radiation destroys follicular cells → permanent hypothyroidism (expected). Contraindicated in pregnancy (crosses placenta, destroys fetal thyroid). Used for Graves', toxic MNG, thyroid cancer post-thyroidectomy.</td>
+            <td>Graves' disease; Toxic MNG; Thyroid cancer</td>
+            <td>I-131 uptake on scan; permanent hypothyroidism post-RAI; contraindicated pregnancy/breastfeeding</td>
+        </tr>
+        <tr>
+            <td><strong>Iodine-containing drugs (Amiodarone)</strong></td>
+            <td>Amiodarone 37% iodine → blocks D1 (↑T4, ↓T3, ↑rT3 in euthyroid = NORMAL). Can cause Type I (Wolff-Chaikoff, hypothyroidism) or Type II (thyroiditis, hyperthyroidism). Euthyroid pattern common, does NOT need treatment if TSH normal.</td>
+            <td>Amiodarone-induced thyroid effects</td>
+            <td>Amiodarone euthyroid pattern (high T4, low T3, high rT3, normal TSH); do NOT treat if TSH normal</td>
+        </tr>
+        <tr>
+            <td><strong>Saturated KI/SSKI pre-op</strong></td>
+            <td>Blocks hormone RELEASE (blocks iodine-dependent proteases) + synthesis (Wolff-Chaikoff) + decreases vascularity and gland size. Timing: 7-10 days before thyroidectomy. Must give AFTER PTU in thyroid storm (1 hr gap, PTU blocks TPO first).</td>
+            <td>Pre-thyroidectomy prep</td>
+            <td>SSKI/Lugol's iodine; ↓vascularity; ↓gland size; safe surgery</td>
+        </tr>
+        <tr>
+            <td><strong>Propranolol in hyperthyroidism</strong></td>
+            <td>Blocks adrenergic symptoms (tachycardia, tremor, anxiety) + blocks peripheral T4→T3 conversion (lowers T3). Symptomatic only, does NOT cure hyperthyroidism. Given FIRST in thyroid storm before PTU/iodine.</td>
+            <td>Hyperthyroidism symptom management; Thyroid storm</td>
+            <td>β-blocker first in thyroid storm; blocks T4→T3 conversion</td>
+        </tr>
+        <tr>
+            <td><strong>Hashimoto's thyroiditis</strong></td>
+            <td>Autoimmune, most common hypothyroidism in US. Anti-TPO (most sensitive) + anti-thyroglobulin antibodies. Hashitoxicosis (early hyperthyroid phase from follicle destruction releasing hormone, not active synthesis). Hürthle cells pathognomonic.</td>
+            <td>Hashimoto's hypothyroidism</td>
+            <td>Anti-TPO Ab (most sensitive), Hürthle cells pathognomonic, lymphocytic infiltration, Hashitoxicosis (early phase)</td>
+        </tr>
+        <tr>
+            <td><strong>Subacute thyroiditis</strong></td>
+            <td>Post-viral inflammation (de Quervain's). PHASES: hyperthyroid (hormone release) → hypothyroid (depleted stores) → recovery. Elevated ESR, LOW RAI uptake (inflamed, not synthesizing). Treat NSAIDs/steroids (NOT antithyroid drugs).</td>
+            <td>Subacute thyroiditis</td>
+            <td>Post-URI, painful tender thyroid, fever, elevated ESR, LOW RAI uptake, transient phases</td>
+        </tr>
+        <tr>
+            <td><strong>Riedel's thyroiditis</strong></td>
+            <td>Fibrous replacement → 'woody' hard thyroid, fixed. Associated with IgG4-related disease. May compress trachea. Treat glucocorticoids or surgery if airway compromise.</td>
+            <td>Riedel's thyroiditis</td>
+            <td>'Woody' thyroid; IgG4-related disease; tracheal compression risk</td>
+        </tr>
+        <tr>
+            <td><strong>Congenital hypothyroidism</strong></td>
+            <td>Iodine deficiency (worldwide) or thyroid agenesis (US). Newborn screening (TSH or T4) catches ~95%. Early levothyroxine → NORMAL development. Without treatment → CRETINISM (intellectual disability, growth retardation, macroglossia, umbilical hernia).</td>
+            <td>Congenital hypothyroidism; Cretinism</td>
+            <td>Newborn screening; early levothyroxine critical; cretinism prevention</td>
+        </tr>
+        <tr>
+            <td><strong>Myxedema coma</strong></td>
+            <td>Severe hypothyroidism + precipitant. Treat: IV levothyroxine or IV T3 + GLUCOCORTICOIDS (adrenal insufficiency may coexist) + supportive care.</td>
+            <td>Severe hypothyroidism emergency</td>
+            <td>IV T3/T4; add glucocorticoids; extreme mortality if untreated</td>
+        </tr>
+        <tr>
+            <td><strong>Neonatal Graves'</strong></td>
+            <td>Maternal TSI crosses placenta → neonatal thyroid stimulation. Transient (resolves as maternal antibodies cleared). Treat with PTU or methimazole. Screen mothers with Graves' for neonatal risk.</td>
+            <td>Neonatal hyperthyroidism</td>
+            <td>Maternal TSI crosses placenta; transient disease; PTU/methimazole for neonate</td>
+        </tr>
+        <tr>
+            <td><strong>Factitious hyperthyroidism</strong></td>
+            <td>Exogenous T4 intake (athlete, weight loss). Labs: ↑T3/T4, suppressed TSH, LOW thyroglobulin (no stimulation), LOW RAI uptake (no synthesis). Diagnosis: thyroglobulin or urine/plasma levothyroxine.</td>
+            <td>Factitious hyperthyroidism</td>
+            <td>Low thyroglobulin, low RAI uptake, detect exogenous hormone; counsel on risks</td>
+        </tr>
+        <tr>
+            <td><strong>Papillary thyroid cancer</strong></td>
+            <td>Most common (80%), best prognosis (95% 10-year survival, even with node spread). Lymphatic spread (not hematogenous). RET/PTC mutations. Histology: orphan Annie eyes, psammoma bodies, nuclear grooves. Treat: thyroidectomy + lymph node dissection + RAI.</td>
+            <td>Thyroid cancer</td>
+            <td>Orphan Annie eyes, psammoma bodies, lymphatic spread, excellent prognosis</td>
+        </tr>
+        <tr>
+            <td><strong>Follicular thyroid cancer</strong></td>
+            <td>10% of cancers. Uniform follicles. REQUIRES capsular/vascular invasion for diagnosis (cannot diagnose on FNA alone, need surgical specimen). Hematogenous spread (lung, bone). RAS mutations. Iodine deficiency association.</td>
+            <td>Thyroid cancer</td>
+            <td>FNA shows follicles only (not cancer); need thyroidectomy for invasion assessment; hematogenous spread</td>
+        </tr>
+        <tr>
+            <td><strong>Medullary thyroid cancer</strong></td>
+            <td>Parafollicular C-CELLS (not follicular), secretes calcitonin (tumor marker). MEN2A/2B (germline RET). Amyloid in stroma. Treat thyroidectomy + lymph node dissection. Screen first-degree relatives for RET.</td>
+            <td>Thyroid cancer; MEN syndromes</td>
+            <td>Calcitonin marker, C-cells/parafollicular origin, RET mutations, MEN2A/2B, amyloid</td>
+        </tr>
+        <tr>
+            <td><strong>Anaplastic thyroid cancer</strong></td>
+            <td>Most aggressive, elderly patients. Undifferentiated, rapid growth, local invasion, tracheal compression. Poor prognosis (months to few years). Worst of all thyroid cancers.</td>
+            <td>Thyroid cancer</td>
+            <td>Worst prognosis, elderly, rapid, tracheal compression, unresectable</td>
+        </tr>
+        <tr>
+            <td><strong>Thyroid lymphoma</strong></td>
+            <td>Associated with Hashimoto's thyroiditis. If existing Hashimoto's patient develops rapidly enlarging thyroid mass → suspect lymphoma (transformation).</td>
+            <td>Thyroid lymphoma</td>
+            <td>Associated with Hashimoto's; rapid enlargement in existing Hashimoto's patient</td>
+        </tr>
+        <tr>
+            <td><strong>Toxic multinodular goiter (Plummer disease)</strong></td>
+            <td>Multiple autonomous nodules → constitutive hormone release. Elderly. Patchy RAI uptake (hot and cold areas). NO exophthalmos (differs from Graves'). Treatment: RAI or surgery (antithyroid drugs only temporary). Permanent hypothyroidism expected post-RAI.</td>
+            <td>Thyroid nodule/hyperthyroidism</td>
+            <td>Patchy RAI uptake, multiple nodules, elderly, no eye disease, RAI/surgery definitive</td>
+        </tr>
+        <tr>
+            <td><strong>Toxic adenoma</strong></td>
+            <td>Single autonomous 'hot' nodule. TSH suppressed, T3/T4 elevated, low thyroglobulin. Suppressed TSH paradoxically protects surrounding tissue (no stimulation = no cancer risk). Treatment: RAI or surgery.</td>
+            <td>Thyroid nodule</td>
+            <td>Single hot nodule on RAI, TSH-independent, low thyroglobulin</td>
+        </tr>
+        <tr>
+            <td><strong>Levothyroxine replacement</strong></td>
+            <td>Preferred long-term agent (longer half-life ~7 days, stable levels, once daily). Converted peripherally to T3 based on metabolic needs (physiologic). Taken on empty stomach. Monitor TSH to adjust dose.</td>
+            <td>Hypothyroidism management</td>
+            <td>Levothyroxine long half-life, once daily, empty stomach, monitor TSH for dose titration</td>
+        </tr>
+    </tbody>
+</table>
+`;
+
+// ─── RENDER FUNCTIONS ─────────────────────────────────
+function renderFlashcards() {
+    const grid = document.getElementById('fcGrid');
+    grid.innerHTML = '';
+    flashcards.forEach((fc, idx) => {
+        const card = document.createElement('div');
+        card.className = 'fc';
+        card.innerHTML = `
+            <div class="fc-inner">
+                <div class="fc-front">
+                    <div class="fc-label">Question</div>
+                    <div class="fc-q">${fc.q}</div>
+                    <div class="fc-hint">Click to reveal answer</div>
+                </div>
+                <div class="fc-back">
+                    <div class="fc-label">Answer</div>
+                    <div class="fc-a">${fc.a}</div>
+                </div>
+            </div>
+        `;
+        card.addEventListener('click', () => card.classList.toggle('flipped'));
+        grid.appendChild(card);
+    });
+}
+
+function renderMCQ() {
+    const container = document.getElementById('mcqContainer');
+    container.innerHTML = '';
+    mcqs.forEach((mcq, idx) => {
+        const item = document.createElement('div');
+        item.className = 'mcq-item';
+        let optHTML = '';
+        mcq.options.forEach((opt, oIdx) => {
+            const letter = String.fromCharCode(65 + oIdx);
+            optHTML += `
+                <div class="mcq-opt" onclick="revealMCQ(${idx}, ${oIdx})">
+                    <span class="letter">${letter})</span> ${opt}
+                </div>
+            `;
+        });
+        item.innerHTML = `
+            <div class="mcq-num">Q${idx + 1}</div>
+            <div class="mcq-stem">${mcq.stem}</div>
+            <div class="mcq-options" id="mcq-opts-${idx}">${optHTML}</div>
+            <div class="mcq-explanation" id="mcq-exp-${idx}"></div>
+            <div class="teaching-pt" id="mcq-tp-${idx}"><div class="tp-label">Key Teaching Point</div><div id="mcq-tp-text-${idx}"></div></div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function revealMCQ(qIdx, oIdx) {
+    const mcq = mcqs[qIdx];
+    const optsDiv = document.getElementById(`mcq-opts-${qIdx}`);
+    const expDiv = document.getElementById(`mcq-exp-${qIdx}`);
+    const tpDiv = document.getElementById(`mcq-tp-${qIdx}`);
+    const tpText = document.getElementById(`mcq-tp-text-${qIdx}`);
+
+    document.querySelectorAll(`#mcq-opts-${qIdx} .mcq-opt`).forEach((opt, idx) => {
+        opt.classList.add('revealed');
+        if (idx === mcq.correct) opt.classList.add('correct');
+        else if (idx === oIdx) opt.classList.add('wrong');
+    });
+
+    expDiv.innerHTML = `<div class="exp-label">Explanation:</div> ${mcq.explanations[oIdx]}`;
+    expDiv.classList.add('visible');
+    tpText.innerHTML = mcq.teaching;
+    tpDiv.classList.add('visible');
+}
+
+function renderVignettes() {
+    const container = document.getElementById('vigContainer');
+    container.innerHTML = '';
+    vignettes.forEach((vig, idx) => {
+        const item = document.createElement('div');
+        item.className = 'vig-item';
+        item.innerHTML = `
+            <div class="vig-banner">${vig.banner}</div>
+            <div class="vig-stem">${vig.stem}</div>
+            <div class="vig-diagnosis">${vig.diagnosis}</div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+let trapState = {correct: 0, total: 0};
+
+function renderTraps() {
+    const container = document.getElementById('trapsContainer');
+    container.innerHTML = '';
+    trapState = {correct: 0, total: traps.length};
+    updateTrapScore();
+    traps.forEach((t, idx) => {
+        const el = document.createElement('div');
+        el.className = 'trap-item';
+        el.innerHTML = `<div class="trap-statement">${idx+1}. ${t.myth}</div>
+            <div class="trap-buttons">
+                <button class="trap-btn trap-btn-correct" onclick="answerTrap(${idx},true)">CORRECT ✓</button>
+                <button class="trap-btn trap-btn-trap" onclick="answerTrap(${idx},false)">TRAP ✗</button>
+            </div>
+            <div class="trap-result" id="trap-res-${idx}">
+                <div class="trap-verdict" id="trap-verdict-${idx}"></div>
+                <div class="trap-explain" id="trap-explain-${idx}"></div>
+            </div>`;
+        container.appendChild(el);
+    });
+}
+
+function answerTrap(idx, userSaysCorrect) {
+    const result = document.getElementById(`trap-res-${idx}`);
+    const verdict = document.getElementById(`trap-verdict-${idx}`);
+    const explain = document.getElementById(`trap-explain-${idx}`);
+    const isActual = traps[idx].correct;
+    const isUserCorrect = (userSaysCorrect === isActual);
+    document.querySelectorAll(`[onclick*="answerTrap(${idx},"]`).forEach(b => b.disabled = true);
+    if (isUserCorrect) { trapState.correct++; result.classList.add('correct-choice'); verdict.innerHTML = '✓ Correct!'; }
+    else { result.classList.add('wrong-choice'); verdict.innerHTML = '✗ Incorrect'; }
+    result.classList.add('show');
+    explain.innerHTML = traps[idx].truth;
+    updateTrapScore();
+}
+
+function updateTrapScore() {
+    const el = document.getElementById('trap-score');
+    if (el) el.textContent = `Score: ${trapState.correct}/${trapState.total}`;
+}
+
+function resetTraps() {
+    trapState.correct = 0;
+    trapState.total = traps.length;
+    document.querySelectorAll('.trap-result').forEach(r => r.classList.remove('show','correct-choice','wrong-choice'));
+    document.querySelectorAll('.trap-btn').forEach(b => b.disabled = false);
+    updateTrapScore();
+}
+
+function renderFIB() {
+    const container = document.getElementById('fibContainer');
+    container.innerHTML = '';
+    fibs.forEach((fib, idx) => {
+        const item = document.createElement('div');
+        item.className = 'fib-item';
+        item.innerHTML = `
+            <div class="fib-prompt">${fib.prompt}</div>
+            <input type="text" class="fib-input" id="fib-input-${idx}" placeholder="Type your answer...">
+            <button class="fib-btn" onclick="checkFIB(${idx})">Check Answer</button>
+            <div class="fib-result" id="fib-result-${idx}"></div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function checkFIB(idx) {
+    const fib = fibs[idx];
+    const input = document.getElementById(`fib-input-${idx}`).value.trim().toLowerCase();
+    const result = document.getElementById(`fib-result-${idx}`);
+    const isCorrect = input === fib.answer.toLowerCase() || fib.alternatives.some(alt => input === alt.toLowerCase());
+
+    result.classList.remove('correct', 'incorrect');
+    result.className = 'fib-result ' + (isCorrect ? 'correct' : 'incorrect');
+    result.innerHTML = isCorrect ? `✓ Correct! Answer: ${fib.answer}` : `✗ Not quite. Expected: ${fib.answer}`;
+}
+
+function renderDrill() {
+    const container = document.getElementById('drillContainer');
+    container.innerHTML = '';
+    const shuffleArr = arr => [...arr].map(v => [Math.random(), v]).sort((a,b) => a[0]-b[0]).map(v => v[1]);
+    drillMatchers.forEach((drill, dIdx) => {
+        const section = document.createElement('div');
+        section.style.marginBottom = '32px';
+        section.innerHTML = `<div style="font-weight:700;color:#FCD34D;margin-bottom:8px;font-size:1em;">${drill.type}</div><div style="color:#9CA3AF;font-size:0.85em;margin-bottom:16px;">${drill.instructions}</div>`;
+        const allTargets = drill.items.map(i => i.target);
+        drill.items.forEach((item, iIdx) => {
+            const others = allTargets.filter(t => t !== item.target);
+            const options = shuffleArr([item.target, ...shuffleArr(others).slice(0, 3)]);
+            const itemEl = document.createElement('div');
+            itemEl.className = 'drill-item-q';
+            itemEl.style.cssText = 'background:#161B22;border:1px solid #30363D;border-radius:8px;padding:16px;margin-bottom:12px;';
+            const optsHtml = options.map(opt => `<button class="drill-opt" data-correct="${opt === item.target}" data-didx="${dIdx}" data-iidx="${iIdx}" onclick="checkDrillOpt(this)" style="display:block;width:100%;text-align:left;background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:9px 13px;margin:4px 0;cursor:pointer;color:#C9D1D9;font-size:0.85em;transition:all 0.2s;">${opt}</button>`).join('');
+            itemEl.innerHTML = `<div style="font-weight:600;color:#E6EDF3;margin-bottom:12px;font-size:0.93em;">${item.stimulus}</div>${optsHtml}<div id="drill-fb-${dIdx}-${iIdx}" style="display:none;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;"></div>`;
+            section.appendChild(itemEl);
+        });
+        container.appendChild(section);
+    });
+}
+
+function checkDrillOpt(btn) {
+    const isCorrect = btn.dataset.correct === 'true';
+    const dIdx = parseInt(btn.dataset.didx);
+    const iIdx = parseInt(btn.dataset.iidx);
+    const item = drillMatchers[dIdx].items[iIdx];
+    btn.closest('.drill-item-q').querySelectorAll('.drill-opt').forEach(b => {
+        b.disabled = true;
+        if (b.dataset.correct === 'true') { b.style.cssText += ';background:rgba(74,222,128,0.15);border-color:#4ADE80;color:#D1FAE5;'; }
+    });
+    if (!isCorrect) { btn.style.cssText += ';background:rgba(239,68,68,0.15);border-color:#EF4444;color:#FCA5A5;'; }
+    const fb = document.getElementById(`drill-fb-${dIdx}-${iIdx}`);
+    if (isCorrect) { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(74,222,128,0.1);color:#D1FAE5;'; fb.innerHTML = '✓ Correct!'; }
+    else { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(239,68,68,0.1);color:#FCA5A5;'; fb.innerHTML = `✗ Correct: ${item.target}`; }
+}
+
+function renderRef() {
+    document.getElementById('refContainer').innerHTML = refData;
+}
+
+// ─── INIT ─────────────────────────────────────────────
+renderFlashcards();
+renderMCQ();
+renderVignettes();
+renderTraps();
+renderFIB();
+renderDrill();
+renderRef();
+</script>
+</body>
+</html>

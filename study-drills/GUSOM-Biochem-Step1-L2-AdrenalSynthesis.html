@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biochem L2: Adrenal Synthesis — Step 1 Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #C62828; --accent-dark: #AD1457; --accent-light: rgba(198,40,40,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
+
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
+        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .mcq-explanation.visible { display: block; }
+        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: rgba(198,40,40,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #FCA5A5; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+
+        .trap-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-statement { color: #E6EDF3; font-size: 0.95em; margin-bottom: 12px; line-height: 1.6; font-weight: 500; }
+        .trap-buttons { display: flex; gap: 10px; margin-bottom: 10px; }
+        .trap-btn { padding: 9px 18px; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.88em; background: #1C2128; }
+        .trap-btn-correct { color: #4ADE80; border-color: #4ADE80; }
+        .trap-btn-trap { color: #ff6b6b; border-color: #ff6b6b; }
+        .trap-btn:hover:not(:disabled) { opacity: 0.85; }
+        .trap-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .trap-result { display: none; padding: 10px 14px; border-radius: 6px; font-size: 0.88em; line-height: 1.5; margin-top: 4px; }
+        .trap-result.show { display: block; }
+        .trap-result.correct-choice { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; color: #D1FAE5; }
+        .trap-result.wrong-choice { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; color: #FCA5A5; }
+        .trap-verdict { font-weight: 700; margin-bottom: 4px; }
+        .trap-explain { font-size: 0.9em; opacity: 0.9; }
+
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
+
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+        .challenge-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 20px; }
+        .challenge-card { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; }
+        .challenge-title { color: var(--accent); font-weight: 600; margin-bottom: 12px; font-size: 0.95em; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="#" class="back">← Back to Biochem Step 1 Hub</a>
+        <h1>Biochem L2: Adrenal Synthesis</h1>
+        <p class="subtitle"><span class="accent-tag">USMLE Step 1</span> · CAH patterns · Pheochromocytoma · MEN syndromes · Cushing's workup</p>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Trap Detector</button>
+        <button class="tab-btn" onclick="switchTab('fillin')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('challenge')">🎯 Challenge Drill</button>
+        <button class="tab-btn" onclick="switchTab('map')">📋 USMLE Map</button>
+    </div>
+
+    <!-- FLASHCARDS TAB -->
+    <div id="flashcards" class="tab-content active">
+        <div class="section-title">High-Yield Step 1 Concepts</div>
+        <div class="fc-grid">
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Adrenal Zones</div>
+                        <div class="fc-q">What is the GFR/ACE mnemonic for adrenal zones?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a"><strong>G</strong>lomerulosa → Aldosterone · <strong>F</strong>asciculata → Cortisol · <strong>R</strong>eticularis → Estrogen/Androgens</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Steroid Synthesis</div>
+                        <div class="fc-q">What is the rate-limiting step in adrenal steroid synthesis?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">Cholesterol → Pregnenolone via StAR (steroidogenic acute regulatory protein) + CYP11A1 (P450scc). StAR is rate-limiting—ACTH ↑ StAR expression.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">21-Hydroxylase Deficiency</div>
+                        <div class="fc-q">Why is 21-OH deficiency the most common CAH (90-95%)?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">21-hydroxylase is the final step for both cortisol AND aldosterone synthesis. Loss → ↓cortisol, ↓aldosterone (salt-wasting), ↑17-OHP (marker), virilization in females (46,XX).</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">11β-Hydroxylase Deficiency</div>
+                        <div class="fc-q">Why does 11β-OH deficiency cause hypertension, not hypotension?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">11-deoxycorticosterone (DOC) accumulates upstream of the block. DOC is a potent mineralocorticoid → HTN + hypokalemia. Also ↑androgens → virilization. Key: ↑17-OHP distinguishes from Conn's.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">17α-Hydroxylase Deficiency</div>
+                        <div class="fc-q">Why does 17α-OH deficiency cause feminization in 46,XY individuals?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">17α-hydroxylase is the gateway to BOTH cortisol AND androgen synthesis. Loss → ↓testosterone (Wolffian duct regression), ↓DHT (female external genitalia), ↑mineralocorticoids (HTN, hypokalemia).</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">3β-HSD Deficiency</div>
+                        <div class="fc-q">What steroids are affected in 3β-HSD deficiency? Why the unusual virilization pattern?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">Early enzyme → all steroid pathways blocked. ↑DHEA (weak androgen) → mild female virilization; salt-wasting. 46,XY with ambiguous genitalia (testosterone ↓). Rare form of CAH.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Lipoid CAH</div>
+                        <div class="fc-q">Why is StAR/CYP11A1 (lipoid CAH) the most severe form?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">Very first step → NO steroids made. Lipid droplets accumulate in adrenal. 46,XY → phenotypic female (no testosterone). Always salt-wasting + adrenal failure. Most severe form.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Cortisol Regulation</div>
+                        <div class="fc-q">What are the two diagnostic cortisol screening tests for Cushing's syndrome?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">24-hour urinary free cortisol (UFC) and late-night salivary cortisol (loss of normal diurnal rhythm). 1mg overnight dexamethasone suppression test (DST) if screening abnormal.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">High-Dose DST</div>
+                        <div class="fc-q">How does high-dose DST differentiate pituitary from ectopic Cushing's?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a"><strong>Pituitary</strong> (70%): Cortisol suppresses by ≥50% (responds to high-dose dexamethasone feedback). <strong>Ectopic/Adrenal</strong>: NO suppression (autonomous secretion).</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Cushing's Disease vs Syndrome</div>
+                        <div class="fc-q">Distinguish Cushing's disease from Cushing's syndrome.</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a"><strong>Cushing's disease</strong> = pituitary ACTH secretion (70%). <strong>Cushing's syndrome</strong> = any hypercortisolism (includes adrenal, ectopic ACTH, pituitary).</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Addison's Disease</div>
+                        <div class="fc-q">What are the two most common etiologies of Addison's disease (primary AI)?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a"><strong>Worldwide</strong>: TB (adrenal destruction). <strong>US</strong>: Autoimmune (most common). Key finding: ↑ACTH + ↓cortisol + hyperpigmentation + hyponatremia + hyperkalemia.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Nelson's Syndrome</div>
+                        <div class="fc-q">What is Nelson's syndrome and when does it occur?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">Post-bilateral adrenalectomy for Cushing's disease: loss of cortisol feedback → ACTH-secreting pituitary adenoma enlarges unopposed → hyperpigmentation + visual field defects. Pituitary tumor complications.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Waterhouse-Friderichsen</div>
+                        <div class="fc-q">What organism and pathophysiology underlie Waterhouse-Friderichsen syndrome?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a"><strong>Neisseria meningitidis</strong> sepsis → bilateral adrenal hemorrhage → acute adrenal insufficiency → shock + DIC + purpuric rash. Medical emergency.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Conn's Syndrome</div>
+                        <div class="fc-q">How do you screen for Conn's syndrome (primary hyperaldosteronism)?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">Aldosterone:renin ratio >20-30 on 12-hour upright positioning. Differentiator from secondary hyperaldosteronism (↑renin = renal artery stenosis, CHF, cirrhosis, nephrotic syndrome).</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Adrenal Androgens</div>
+                        <div class="fc-q">What is the adrenal androgen marker and what does adrenarche represent?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">DHEA-S (dehydroepiandrosterone sulfate) is the most abundant adrenal androgen. Adrenarche = pubertal rise of adrenal androgens (independent of gonadal hormones). Key in PCOS vs late-onset CAH differentiation.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">PCOS vs Late-Onset CAH</div>
+                        <div class="fc-q">How do you distinguish PCOS from late-onset 21-OH CAH?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a"><strong>17-OHP level</strong>: CAH (↑↑17-OHP; diagnostic), PCOS (normal 17-OHP). Both: hirsutism, anovulation, elevated androgens, insulin resistance. CAH requires treatment; PCOS does not.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Pheochromocytoma</div>
+                        <div class="fc-q">What is the classic triad of pheochromocytoma symptoms?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a"><strong>Episodic</strong> severe HTN, diaphoresis, headache. Also palpitations, chest/abdominal pain. "Rule of 10s": 10% bilateral, 10% malignant, 10% extra-adrenal, 10% pediatric.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Pheochromocytoma Diagnosis</div>
+                        <div class="fc-q">What is the first diagnostic test for pheochromocytoma?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">Plasma free metanephrines or 24-hour urinary catecholamines/metanephrines (best sensitivity). Imaging (CT/MRI) only if biochemistry positive. Localization ≠ diagnosis.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Pheo: α-blocker First</div>
+                        <div class="fc-q">Why must α-blockers be given BEFORE β-blockers in pheochromocytoma treatment?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">β-blocker first → unopposed α-adrenergic effects → hypertensive crisis. α-blockers (phenoxybenzamine or phentolamine) block catecholamine effects first, THEN add β-blocker to prevent reflex tachycardia.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">MEN Syndromes</div>
+                        <div class="fc-q">What are the classic components of MEN2A vs MEN2B?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a"><strong>MEN2A</strong> (RET): Medullary thyroid cancer + Pheochromocytoma + Hyperparathyroidism. <strong>MEN2B</strong> (RET): MTC + Pheo + Mucosal neuromas + Marfanoid habitus (NO hyperparathyroidism).</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Primary vs Secondary AI</div>
+                        <div class="fc-q">What is the key lab differentiator between primary and secondary adrenal insufficiency?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a"><strong>Primary</strong>: ↑ACTH (pituitary tries to compensate), hyperpigmentation, both glucocorticoid AND mineralocorticoid deficiency. <strong>Secondary</strong>: ↓ACTH, no hyperpigmentation, glucocorticoid deficiency only (aldosterone preserved via RAS).</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fc" onclick="this.classList.toggle('flipped')">
+                <div class="fc-inner">
+                    <div class="fc-front">
+                        <div class="fc-label">Zona Glomerulosa Limitation</div>
+                        <div class="fc-q">Why can the zona glomerulosa NOT make cortisol even with maximal ACTH stimulation?</div>
+                    </div>
+                    <div class="fc-back">
+                        <div class="fc-label">Answer</div>
+                        <div class="fc-a">Lacks 17α-hydroxylase → cannot convert pregnenolone to 17-OH pregnenolone → blocks cortisol synthesis. Structurally limited to mineralocorticoid synthesis (GFR mnemonic).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MCQ TAB -->
+    <div id="mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice</div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 1</div>
+            <div class="mcq-stem">A 35-year-old male presents with episodic severe hypertension (BP 180/120), diaphoresis, severe headache, and palpitations. CT shows a 4 cm right adrenal mass. Which drug should be given FIRST before surgical resection?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Metoprolol</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> Esmolol infusion</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Phenoxybenzamine</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Nitroprusside</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> Hydralazine</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: C (Phenoxybenzamine)</div>
+                <strong>Why:</strong> Pheochromocytoma → catecholamine excess. Must block α-adrenergic effects FIRST with phenoxybenzamine (long-acting) or phentolamine (short-acting). β-blockade must come SECOND to prevent unopposed α effects and hypertensive crisis. Other agents are not first-line for pheo prep.
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 2</div>
+            <div class="mcq-stem">Which MEN syndrome includes hyperparathyroidism as a component?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> MEN1</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> MEN2A</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> MEN2B</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> MEN2A and MEN2B</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> All three</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B and A (both correct)</div>
+                <strong>Why:</strong> MEN1 = "3 Ps" (Parathyroid, Pituitary, Pancreas). MEN2A = Medullary thyroid + Pheo + Hyperparathyroidism. MEN2B = Medullary thyroid + Pheo + Mucosal neuromas (NO hyperparathyroidism). Both MEN1 and MEN2A have hyperparathyroidism; MEN2B does NOT.
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 3</div>
+            <div class="mcq-stem">A 16-year-old with severe sepsis from meningococcemia develops purpuric rash, DIC, and acute cardiovascular collapse. Autopsy reveals bilateral adrenal hemorrhage with necrosis. Which syndrome describes this presentation?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Cushing's syndrome</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> Waterhouse-Friderichsen syndrome</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Nelson's syndrome</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Conn's syndrome</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> Addisonian crisis (chronic)</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B (Waterhouse-Friderichsen)</div>
+                <strong>Why:</strong> Neisseria meningitidis sepsis → bilateral adrenal hemorrhage → acute adrenal insufficiency → shock. Classic presentation: meningococcemia + purpura + adrenal necrosis. Acute, life-threatening adrenal crisis.
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 4</div>
+            <div class="mcq-stem">A woman presents with hypertension, hypokalemia, virilization (facial hair, clitoromegaly), and elevated 17-hydroxyprogesterone. Another patient has hypertension, hypokalemia, virilization but NORMAL 17-OHP. How do you distinguish these two enzyme deficiencies?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> 17-OHP level (first has 21-OH; second has 11β-OH deficiency)</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> Urinary cortisol (first has more severe deficiency)</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Blood pressure response to treatment</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Ultrasound of adrenals</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> ACTH level</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: A (17-OHP)</div>
+                <strong>Why:</strong> <strong>21-OH deficiency</strong>: ↑17-OHP (pregnenolone backs up before 21-hydroxylase step). <strong>11β-OH deficiency</strong>: Normal 17-OHP but ↑11-deoxycortisol + ↑DOC (upstream accumulation after 17α-OH step). 17-OHP is the marker enzyme deficiency differentiator.
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 5</div>
+            <div class="mcq-stem">Why is the zona glomerulosa unable to synthesize cortisol regardless of ACTH level?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Lacks StAR protein</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> Lacks 17α-hydroxylase (CYP17A1)</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Lacks 11β-hydroxylase</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Lacks 21-hydroxylase</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> Cannot respond to ACTH</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B (Lacks 17α-hydroxylase)</div>
+                <strong>Why:</strong> 17α-hydroxylase is the gateway enzyme converting pregnenolone to 17-OH pregnenolone (essential for cortisol branch). Zona glomerulosa LACKS this enzyme → can ONLY make mineralocorticoids. GFR mnemonic enforces this limitation.
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 6</div>
+            <div class="mcq-stem">A patient with hypertension and hypokalemia has low plasma renin activity and high aldosterone concentration. CT shows a unilateral adrenal nodule. What is the next diagnostic step?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Start spironolactone</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> Adrenal vein sampling</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Immediate surgery</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Repeat aldosterone:renin ratio</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> PET/CT scan</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B (Adrenal vein sampling)</div>
+                <strong>Why:</strong> Biochemistry confirms Conn's (↑aldosterone, ↓renin). Imaging (CT) shows adenoma location. Adrenal vein sampling confirms SOURCE (unilateral vs bilateral). If unilateral → surgical candidate. If bilateral hyperplasia → medical management (spironolactone/eplerenone).
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 7</div>
+            <div class="mcq-stem">A patient with Cushing's disease undergoes bilateral adrenalectomy. Years later, develops worsening hyperpigmentation, visual field defects, and enlarging pituitary tumor. What is the diagnosis?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Recurrent Cushing's disease</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> Nelson's syndrome</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Ectopic ACTH syndrome</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Secondary Addison's disease</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> Adrenal rest carcinoma</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B (Nelson's Syndrome)</div>
+                <strong>Why:</strong> Post-bilateral adrenalectomy → loss of cortisol feedback inhibition → ACTH-secreting pituitary tumor grows unopposed → ↑ACTH → hyperpigmentation + pituitary mass effects (visual field defects, CN compression). Prevention: pituitary radiation or medical therapy after adrenalectomy.
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 8</div>
+            <div class="mcq-stem">A patient presents with weakness, weight loss, hyperpigmentation, hyponatremia (Na 128), and hyperkalemia (K 6.2). What distinguishes PRIMARY adrenal insufficiency from secondary AI?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Cortisol level</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> ACTH level and hyperpigmentation + hyponatremia + hyperkalemia</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Urinary free cortisol</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Response to ACTH stimulation test</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> MRI findings</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B (ACTH + clinical features)</div>
+                <strong>Why:</strong> <strong>Primary AI</strong> = ↑ACTH (pituitary compensates) + hyperpigmentation (ACTH stimulates melanocytes) + hyponatremia + hyperkalemia (mineralocorticoid deficiency). <strong>Secondary AI</strong> = ↓ACTH (no stimulation) + no hyperpigmentation + hyponatremia only (aldosterone preserved via RAS).
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 9</div>
+            <div class="mcq-stem">A 28-year-old woman presents with hirsutism, oligomenorrhea, and infertility. Labs show elevated LH:FSH ratio and elevated testosterone. 17-OHP is normal. DHEA-S is mildly elevated. What is the most likely diagnosis?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Late-onset 21-OH CAH</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> PCOS (Polycystic Ovary Syndrome)</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Androgen-secreting tumor</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Ovarian hyperandrogenism</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> Cushing's syndrome</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B (PCOS)</div>
+                <strong>Why:</strong> Both PCOS and late-onset CAH present with hirsutism, irregular periods, elevated androgens. Key differentiator: <strong>17-OHP is NORMAL in PCOS</strong> but ↑↑ in CAH. DHEA-S is mildly elevated in both, but normal 17-OHP rules out CAH. Pelvic ultrasound would show cysts in PCOS.
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 10</div>
+            <div class="mcq-stem">In a patient with suspected Cushing's syndrome, the 1mg overnight dexamethasone suppression test is abnormal (cortisol not suppressed). High-dose dexamethasone (8mg) is then given, and cortisol decreases by 60%. What is the most likely source of hypercortisolism?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Primary adrenal adenoma/carcinoma</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> Pituitary Cushing's disease</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Ectopic ACTH (small cell lung cancer)</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Ectopic CRH syndrome</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> Non-ACTH secreting adrenal carcinoma</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B (Pituitary Cushing's Disease)</div>
+                <strong>Why:</strong> High-dose DST suppresses by ≥50% ONLY in pituitary Cushing's disease (feedback-sensitive ACTH tumor). Ectopic ACTH and adrenal sources do NOT suppress with high-dose DST (autonomous secretion). Pituitary accounts for 70% of Cushing's syndrome.
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 11</div>
+            <div class="mcq-stem">A woman with hirsutism and irregular menses has elevated DHEA-S (700 ng/dL; normal <300). Which organ is the likely source of excess androgen?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Ovary</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> Adrenal gland</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Liver</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Pituitary</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> Thyroid</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B (Adrenal gland)</div>
+                <strong>Why:</strong> DHEA-S is produced ONLY by adrenal zona reticularis. Ovarian tumors produce testosterone/androstenedione (not DHEA-S). Elevated DHEA-S with hirsutism → adrenal androgen excess (CAH, Cushing's, or adrenal tumor). Check 17-OHP to rule out CAH.
+            </div>
+        </div>
+
+        <div class="mcq-item">
+            <div class="mcq-num">Question 12</div>
+            <div class="mcq-stem">A 40-year-old with pheochromocytoma has been started on metoprolol by another physician. Hours later, develops severe hypertensive crisis (BP 220/140) and refusal to operate. Why did this happen?</div>
+            <div class="mcq-options">
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">A</span> Metoprolol dose was too low</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">B</span> Unopposed α-adrenergic effects from catecholamine surge</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">C</span> Patient developed anaphylaxis</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">D</span> Tumor necrosis released catecholamines</div>
+                <div class="mcq-opt" onclick="revealMCQ(this)"><span class="letter">E</span> Metoprolol is contraindicated in pheo</div>
+            </div>
+            <div class="mcq-explanation">
+                <div class="exp-label">Answer: B (Unopposed α effects)</div>
+                <strong>Why:</strong> β-blockers without prior α-blockade allow catecholamine α-effects to predominate unopposed → severe HTN. MUST give α-blocker FIRST (phenoxybenzamine days to weeks), then add β-blocker to prevent reflex tachycardia. This is a critical sequencing rule in pheo management.
+            </div>
+        </div>
+    </div>
+
+    <!-- VIGNETTES TAB -->
+    <div id="vignettes" class="tab-content">
+        <div class="section-title">Step 1-Style Case Presentations</div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 1 — Neonatal Presentation</div>
+            <div class="vig-stem">A 3-day-old 46,XX infant presents with poor feeding, lethargy, hypotension, hyponatremia (Na 125), and hyperkalemia (K 7.1). Vital signs show shock requiring ICU admission. On examination, the infant has virilization with clitoromegaly and labial fusion. Labs reveal elevated 17-hydroxyprogesterone (17-OHP 18 ng/mL; normal <3). The mother reports no prior endocrine history.</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: 21-Hydroxylase Deficiency (Salt-Wasting Form)</strong><br>
+                Classic neonatal presentation with BOTH virilization AND salt-wasting crisis. Elevated 17-OHP is diagnostic. 46,XX virilization from excess androgens. Treatment: hydrocortisone + fludrocortisone + IV fluids/electrolyte correction.
+            </div>
+        </div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 2 — Adolescent Hypertension</div>
+            <div class="vig-stem">A 16-year-old female presents for evaluation of hypertension (BP 155/95) discovered on school screening. She complains of hirsutism, irregular menstrual periods, and clitoral enlargement over the past 2 years. Labs show elevated 17-OHP (8.2 ng/mL), normal renin (1.5 ng/mL/hr), and mild hypokalemia (K 3.4). Cortisol is normal. 24h UFC is normal. No spontaneous hypokalemia.</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: 11β-Hydroxylase Deficiency</strong><br>
+                Key clue: HTN + virilization + elevated 17-OHP. Unlike 21-OH, aldosterone is preserved (renin normal) but DOC accumulates → HTN + hypokalemia. Distinguish from Conn's by elevated 17-OHP and adrenal source. Treatment: dexamethasone to suppress ACTH.
+            </div>
+        </div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 3 — Primary Amenorrhea + HTN</div>
+            <div class="vig-stem">A 18-year-old 46,XY individual with female external genitalia presents with primary amenorrhea and hypertension (BP 158/98). Labs reveal cortisol very low (3 μg/dL), ACTH high (118 pg/mL), elevated 11-deoxycortisol (8.5 ng/dL), and no uterus on ultrasound. 17-OHP is normal. Karyotype confirms 46,XY.</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: 17α-Hydroxylase Deficiency</strong><br>
+                46,XY with phenotypic female (no testosterone → Wolffian ducts regress; no DHT → female external genitalia). Primary amenorrhea (no estrogen/androgen for endometrial proliferation). HTN + hypokalemia from mineralocorticoid excess. Treatment: hydrocortisone (suppresses excess DOC + restores glucocorticoid).
+            </div>
+        </div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 4 — Episodic Hypertension + Sweating</div>
+            <div class="vig-stem">A 35-year-old male presents to the ED with acute severe headache, diaphoresis, and BP 185/110. Wife notes he has had 3-4 episodes over the past month, each lasting 30-60 minutes, with palpitations and chest pressure. Between episodes, BP is 145/90. Physical exam shows no orthostatic changes. Plasma free metanephrines are elevated (650 pg/mL; normal <90). CT abdomen shows a 3.5 cm right adrenal mass.</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: Pheochromocytoma (Right Adrenal)</strong><br>
+                Classic triad: episodic severe HTN, diaphoresis, headache. Elevated metanephrines confirm catecholamine excess. Next: α-blockade FIRST (phenoxybenzamine), then β-blocker, then surgical resection. Check for MEN2A/2B (pheochromocytoma in 50% of MEN2).
+            </div>
+        </div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 5 — Bilateral Pheo + Hypercalcemia</div>
+            <div class="vig-stem">A 22-year-old male presents with hypertension and episodic sweating. Imaging shows bilateral adrenal masses. Plasma metanephrines are markedly elevated. Labs also show ionized calcium 5.8 mg/dL (high-normal), PTH 85 pg/mL (elevated). Thyroid ultrasound shows a 1.5 cm nodule with suspicious features. Genetic testing ordered.</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: MEN2A (RET Mutation)</strong><br>
+                Bilateral pheochromocytoma + hyperparathyroidism + medullary thyroid cancer (thyroid nodule in young patient with MEN). 50% of MEN2A have bilateral pheo; always assess for other components. Treatment: prophylactic thyroidectomy, parathyroid surgery, pheo resection, RET screening of family.
+            </div>
+        </div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 6 — Meningococcemia + Shock</div>
+            <div class="vig-stem">A 14-year-old boy admitted with severe meningococcal meningitis develops rapidly progressive shock, DIC with purpuric rash, and refractory hypotension despite fluid resuscitation and pressors. Cortisol at admission was 15 μg/dL (low-normal), but 4 hours later is 8 μg/dL. Imaging shows bilateral adrenal hemorrhage with necrosis. Patient dies from multiorgan failure within 24 hours.</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: Waterhouse-Friderichsen Syndrome</strong><br>
+                Neisseria meningitidis sepsis → bilateral adrenal hemorrhage → acute fulminant adrenal insufficiency → shock. Medical emergency. Treatment: immediate IV hydrocortisone + empiric antibiotics + aggressive support. Mortality high despite therapy. Prevention: meningococcal vaccination.
+            </div>
+        </div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 7 — Post-Adrenalectomy Pituitary Enlargement</div>
+            <div class="vig-stem">A 52-year-old woman treated 2 years ago with bilateral adrenalectomy for severe Cushing's disease now returns with worsening symptoms. She reports progressive darkening of skin, bitemporal visual field defects, and headaches. MRI shows a 2.5 cm pituitary mass compressing the optic chiasm. ACTH is 412 pg/mL (markedly elevated). Cortisol is very low (adrenally insufficient).</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: Nelson's Syndrome</strong><br>
+                Post-bilateral adrenalectomy: loss of cortisol feedback → ACTH-secreting adenoma grows unopposed → ↑ACTH → hyperpigmentation. Pituitary tumor mass effects (bitemporal hemianopia, headache). Should have received pituitary radiation or medical therapy post-adrenalectomy. Treatment: pituitary surgery/radiation, glucocorticoid + mineralocorticoid replacement.
+            </div>
+        </div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 8 — Ectopic ACTH + Rapid Onset</div>
+            <div class="vig-stem">A 58-year-old male smoker develops severe hypokalemia (K 2.8), hypertension, hyperglycemia (glucose 285), and purple striae over 4 weeks. 24h UFC is 850 μg (very high). ACTH is 185 pg/mL. Low-dose DST shows no suppression. High-dose DST (8mg) shows no suppression (cortisol drops only 10%). CXH reveals a 3 cm hilar mass. CT chest confirms small cell lung cancer.</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: Ectopic ACTH Syndrome (Small Cell Lung Cancer)</strong><br>
+                Rapid onset severe Cushing's (weeks), very high cortisol/ACTH, NO suppression on high-dose DST, hypokalemia out of proportion. Lung mass on imaging. Ectopic ACTH from malignancy is autonomous → resistant to dexamethasone feedback. Treatment: treat underlying cancer, metyrapone/mitotane for symptom control.
+            </div>
+        </div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 9 — Addison's Disease Workup</div>
+            <div class="vig-stem">A 45-year-old woman presents with 3-month history of progressive fatigue, weight loss (10 lbs), hypotension (BP 95/58), and diffuse hyperpigmentation of skin and oral mucosa. Labs show hyponatremia (Na 128), hyperkalemia (K 6.5), cortisol 6 μg/dL (low), ACTH 156 pg/mL (high). Chest X-ray is clear. TB testing is negative.</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: Primary Adrenal Insufficiency (Addison's Disease) — Autoimmune</strong><br>
+                Classic presentation: ↓cortisol + ↑ACTH + hyperpigmentation + hyponatremia + hyperkalemia + hypotension. TB negative and clear CXR rule out tuberculous AI. Most likely: autoimmune (most common in US). Worldwide, TB is most common. Treatment: lifelong glucocorticoid + mineralocorticoid replacement.
+            </div>
+        </div>
+
+        <div class="vig-item">
+            <div class="vig-banner">VIGNETTE 10 — PCOS vs CAH Differentiation</div>
+            <div class="vig-stem">A 24-year-old woman with irregular menstrual cycles, hirsutism, and obesity (BMI 32) has elevated testosterone (95 ng/dL; normal <70). LH:FSH ratio is elevated at 4.2. Pelvic ultrasound shows multiple small ovarian cysts. DHEA-S is 220 ng/dL (mildly elevated). Fasting glucose is 105 mg/dL (impaired fasting glucose). 17-OHP level is normal (0.8 ng/mL).</div>
+            <div style="margin-top: 14px; padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); color: #C7D2FE; font-size: 0.9em;">
+                <strong>Diagnosis: PCOS (Polycystic Ovary Syndrome)</strong><br>
+                Clinical features (hirsutism, amenorrhea, obesity) + ovarian cysts + elevated androgens + insulin resistance. KEY DIFFERENTIATOR: Normal 17-OHP rules out late-onset 21-OH CAH (which would have ↑17-OHP). PCOS does not require glucocorticoid therapy; CAH does. Management: oral contraceptives, metformin, lifestyle modification.
+            </div>
+        </div>
+    </div>
+
+    <!-- TRAP DETECTOR TAB -->
+    <div id="traps" class="tab-content">
+        <div class="section-title">High-Yield Concept Traps</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:10px 14px;background:#161B22;border:1px solid #30363D;border-radius:8px;"><span style="font-size:0.85em;color:#9CA3AF;">Click <strong style="color:#4ADE80;">CORRECT ✓</strong> or <strong style="color:#ff6b6b;">TRAP ✗</strong> for each statement.</span><div style="display:flex;align-items:center;gap:14px;"><span id="trap-score" style="font-size:0.9em;font-weight:700;color:#E6EDF3;">Score: 0/0</span><button onclick="resetTraps()" style="background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:5px 12px;color:#9CA3AF;cursor:pointer;font-size:0.82em;">Reset</button></div></div>
+        <div id="trapsContainer"></div>
+    </div>
+
+    <!-- FILL-IN-BLANK TAB -->
+    <div id="fillin" class="tab-content">
+        <div class="section-title">Fill-in-the-Blank: Enzyme Names & Markers</div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The rate-limiting enzyme complex that transports cholesterol into the mitochondrial matrix is __________ and __________.</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="StAR,CYP11A1">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The enzyme that catalyzes the FINAL step in cortisol synthesis is __________ (also called CYP11B1).</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="11-beta-hydroxylase,11β-hydroxylase">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The most abundant adrenal androgen marker is __________ (abbreviated __________).</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="Dehydroepiandrosterone sulfate, DHEA-S">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">In 21-hydroxylase deficiency, the diagnostic marker that accumulates is __________ (abbreviated __________).</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="17-hydroxyprogesterone, 17-OHP">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The potent mineralocorticoid that accumulates in 11β-hydroxylase deficiency (causing HTN) is __________ (abbreviated __________).</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="11-deoxycorticosterone, DOC">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The enzyme deficient in the most severe form of CAH (lipoid CAH) is __________ or __________.</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="StAR, CYP11A1">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The α-blocking agent used FIRST in pheochromocytoma management is __________ or __________.</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="phenoxybenzamine, phentolamine">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The organism responsible for Waterhouse-Friderichsen syndrome is __________ (Gram-__________ diplococcus).</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="Neisseria meningitidis, negative">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The diagnostic screening test(s) for Cushing's syndrome are __________ and __________.</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="24-hour urinary free cortisol, late-night salivary cortisol">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The high-dose dexamethasone suppression test shows ≥__________ % suppression in pituitary Cushing's disease.</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="50">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+
+        <div class="fib-item">
+            <div class="fib-prompt">The most common cause of Addison's disease globally is __________, but in the US it is __________.</div>
+            <input type="text" class="fib-input" placeholder="Answer" data-answer="TB, autoimmune">
+            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
+            <div class="fib-result"></div>
+        </div>
+    </div>
+
+    <!-- CHALLENGE DRILL TAB -->
+    <div id="challenge" class="tab-content">
+        <div class="section-title">Interactive Challenges</div>
+
+        <div style="margin-bottom: 30px;">
+            <h3 style="color: #E6EDF3; margin-bottom: 16px; font-size: 1.05em;">Challenge Type 1: CAH Pattern Recognition</h3>
+            <p style="color: #9CA3AF; margin-bottom: 16px; font-size: 0.9em;">Given a patient's lab pattern, identify the enzyme deficiency.</p>
+
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <div class="challenge-title">Case A</div>
+                    <div style="font-size: 0.88em; line-height: 1.6; color: #C9D1D9;">
+                        <strong>Cortisol:</strong> ↓↓ <br>
+                        <strong>Aldosterone:</strong> ↓ <br>
+                        <strong>Androgens:</strong> ↑↑ <br>
+                        <strong>17-OHP:</strong> ↑↑↑ <br>
+                        <strong>BP:</strong> Normal/low <br>
+                        <strong>K+:</strong> High <br>
+                        <div style="margin-top: 12px; padding: 10px; background: #0D1117; border-radius: 6px; border: 1px solid #30363D; color: var(--accent); font-weight: 600;">
+                            Answer: 21-Hydroxylase Deficiency
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-title">Case B</div>
+                    <div style="font-size: 0.88em; line-height: 1.6; color: #C9D1D9;">
+                        <strong>Cortisol:</strong> ↓↓ <br>
+                        <strong>Aldosterone:</strong> Normal/↑ <br>
+                        <strong>Androgens:</strong> ↑↑ <br>
+                        <strong>11-Deoxycortisol:</strong> ↑↑↑ <br>
+                        <strong>BP:</strong> ↑ (HTN) <br>
+                        <strong>K+:</strong> ↓ (Hypokalemia) <br>
+                        <div style="margin-top: 12px; padding: 10px; background: #0D1117; border-radius: 6px; border: 1px solid #30363D; color: var(--accent); font-weight: 600;">
+                            Answer: 11β-Hydroxylase Deficiency
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-title">Case C</div>
+                    <div style="font-size: 0.88em; line-height: 1.6; color: #C9D1D9;">
+                        <strong>Cortisol:</strong> ↓↓ <br>
+                        <strong>Aldosterone:</strong> ↑↑ <br>
+                        <strong>Androgens:</strong> ↓↓ <br>
+                        <strong>Renin:</strong> Suppressed <br>
+                        <strong>BP:</strong> ↑ (HTN) <br>
+                        <strong>K+:</strong> ↓ (Hypokalemia) <br>
+                        <div style="margin-top: 12px; padding: 10px; background: #0D1117; border-radius: 6px; border: 1px solid #30363D; color: var(--accent); font-weight: 600;">
+                            Answer: 17α-Hydroxylase Deficiency
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-title">Case D</div>
+                    <div style="font-size: 0.88em; line-height: 1.6; color: #C9D1D9;">
+                        <strong>Cortisol:</strong> ↓↓↓ (absent) <br>
+                        <strong>All Steroids:</strong> ↓↓↓ <br>
+                        <strong>ACTH:</strong> ↑↑↑ <br>
+                        <strong>Adrenal Imaging:</strong> Lipid accumulation <br>
+                        <strong>Phenotype:</strong> 46,XY female <br>
+                        <div style="margin-top: 12px; padding: 10px; background: #0D1117; border-radius: 6px; border: 1px solid #30363D; color: var(--accent); font-weight: 600;">
+                            Answer: Lipoid CAH (StAR/CYP11A1)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <h3 style="color: #E6EDF3; margin-bottom: 16px; font-size: 1.05em;">Challenge Type 2: MEN Syndrome Assignment</h3>
+            <p style="color: #9CA3AF; margin-bottom: 16px; font-size: 0.9em;">Assign each feature to the correct MEN syndrome.</p>
+
+            <div style="background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px;">
+                <table style="width: 100%; font-size: 0.9em; color: #C9D1D9;">
+                    <tr style="border-bottom: 1px solid #30363D;">
+                        <td style="padding: 10px;"><strong>Feature</strong></td>
+                        <td style="padding: 10px;"><strong>MEN1</strong></td>
+                        <td style="padding: 10px;"><strong>MEN2A</strong></td>
+                        <td style="padding: 10px;"><strong>MEN2B</strong></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #30363D; background: #1C2128;">
+                        <td style="padding: 10px;">Medullary Thyroid Cancer</td>
+                        <td style="padding: 10px; color: #9CA3AF;">No</td>
+                        <td style="padding: 10px; color: var(--accent); font-weight: 600;">Yes</td>
+                        <td style="padding: 10px; color: var(--accent); font-weight: 600;">Yes</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #30363D;">
+                        <td style="padding: 10px;">Pheochromocytoma</td>
+                        <td style="padding: 10px; color: #9CA3AF;">No</td>
+                        <td style="padding: 10px; color: var(--accent); font-weight: 600;">Yes</td>
+                        <td style="padding: 10px; color: var(--accent); font-weight: 600;">Yes</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #30363D; background: #1C2128;">
+                        <td style="padding: 10px;">Hyperparathyroidism</td>
+                        <td style="padding: 10px; color: var(--accent); font-weight: 600;">Yes</td>
+                        <td style="padding: 10px; color: var(--accent); font-weight: 600;">Yes</td>
+                        <td style="padding: 10px; color: #9CA3AF;">No</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #30363D;">
+                        <td style="padding: 10px;">Mucosal Neuromas</td>
+                        <td style="padding: 10px; color: #9CA3AF;">No</td>
+                        <td style="padding: 10px; color: #9CA3AF;">No</td>
+                        <td style="padding: 10px; color: var(--accent); font-weight: 600;">Yes</td>
+                    </tr>
+                    <tr style="background: #1C2128;">
+                        <td style="padding: 10px;">Pituitary Adenoma</td>
+                        <td style="padding: 10px; color: var(--accent); font-weight: 600;">Yes</td>
+                        <td style="padding: 10px; color: #9CA3AF;">No</td>
+                        <td style="padding: 10px; color: #9CA3AF;">No</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px;">
+            <h3 style="color: #E6EDF3; margin-bottom: 16px; font-size: 1.05em;">Challenge Type 3: Cushing's Workup Algorithm</h3>
+            <p style="color: #9CA3AF; margin-bottom: 16px; font-size: 0.9em;">Arrange diagnostic steps in correct order.</p>
+
+            <div style="background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; font-size: 0.9em; color: #C9D1D9;">
+                <div style="margin-bottom: 12px; padding: 10px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent);">
+                    <strong style="color: var(--accent);">Step 1: Screening</strong> → 24h UFC or late-night salivary cortisol (if abnormal, proceed)
+                </div>
+                <div style="margin-bottom: 12px; padding: 10px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent);">
+                    <strong style="color: var(--accent);">Step 2: Low-Dose DST (1mg overnight)</strong> → If cortisol not suppressed → confirms hypercortisolism; proceed to localization
+                </div>
+                <div style="margin-bottom: 12px; padding: 10px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent);">
+                    <strong style="color: var(--accent);">Step 3A: ACTH level</strong> → If high (>20 pg/mL) → ACTH-dependent (pituitary or ectopic); if low → ACTH-independent (adrenal)
+                </div>
+                <div style="margin-bottom: 12px; padding: 10px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent);">
+                    <strong style="color: var(--accent);">Step 3B: If ACTH-dependent</strong> → High-dose DST (8mg) + CRH stim test; pituitary suppresses ≥50%, ectopic doesn't
+                </div>
+                <div style="padding: 10px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent);">
+                    <strong style="color: var(--accent);">Step 4: Imaging</strong> → Pituitary MRI (ACTH-dependent source) vs CT chest/abdomen (ectopic workup)
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <h3 style="color: #E6EDF3; margin-bottom: 16px; font-size: 1.05em;">Challenge Type 4: Primary vs Secondary AI Classifier</h3>
+            <p style="color: #9CA3AF; margin-bottom: 16px; font-size: 0.9em;">Given lab values, identify the type of adrenal insufficiency.</p>
+
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <div class="challenge-title">Patient A</div>
+                    <div style="font-size: 0.88em; line-height: 1.6; color: #C9D1D9;">
+                        <strong>Cortisol:</strong> 5 μg/dL (↓) <br>
+                        <strong>ACTH:</strong> 156 pg/mL (↑↑↑) <br>
+                        <strong>Hyperpigmentation:</strong> Yes <br>
+                        <strong>Na:</strong> 128 (↓) <br>
+                        <strong>K+:</strong> 6.5 (↑) <br>
+                        <div style="margin-top: 12px; padding: 10px; background: #0D1117; border-radius: 6px; border: 1px solid #30363D; color: var(--accent); font-weight: 600;">
+                            Answer: PRIMARY Adrenal Insufficiency
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-title">Patient B</div>
+                    <div style="font-size: 0.88em; line-height: 1.6; color: #C9D1D9;">
+                        <strong>Cortisol:</strong> 8 μg/dL (↓) <br>
+                        <strong>ACTH:</strong> 8 pg/mL (↓) <br>
+                        <strong>Hyperpigmentation:</strong> No <br>
+                        <strong>Na:</strong> 132 (↓) <br>
+                        <strong>K+:</strong> 4.2 (Normal) <br>
+                        <div style="margin-top: 12px; padding: 10px; background: #0D1117; border-radius: 6px; border: 1px solid #30363D; color: var(--accent); font-weight: 600;">
+                            Answer: SECONDARY Adrenal Insufficiency
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- USMLE MAP TAB -->
+    <div id="map" class="tab-content">
+        <div class="section-title">GUSOM LO → USMLE Step 1 Mapping</div>
+        <table class="ref-table">
+            <tr>
+                <th>GUSOM Learning Objective</th>
+                <th>Step 1 Extension/High-Yield</th>
+                <th>Buzzwords</th>
+                <th>Key Differentiator</th>
+            </tr>
+            <tr>
+                <td><strong>Adrenal zones & steroid synthesis</strong></td>
+                <td>GFR/ACE mnemonic; StAR + CYP11A1 rate-limiting; enzyme cascades</td>
+                <td>Glomerulosa (aldosterone only), Fasciculata (cortisol), Reticularis (androgens); 17α-OH gateway to cortisol & androgens</td>
+                <td>Zona glomerulosa CANNOT make cortisol (lacks 17α-hydroxylase)</td>
+            </tr>
+            <tr>
+                <td><strong>21-OH CAH</strong></td>
+                <td>Most common (90-95%); ↑17-OHP diagnostic marker; salt-wasting (75%); virilization in 46,XX</td>
+                <td>↓Cortisol, ↓Aldosterone, ↑Androgens, ↑17-OHP, hyponatremia, hyperkalemia, ambiguous genitalia (females)</td>
+                <td>↑17-OHP is diagnostic; distinguish from 11β-OH (which has ↑DOC, ↑BP)</td>
+            </tr>
+            <tr>
+                <td><strong>11β-OH CAH</strong></td>
+                <td>Second most common; HTN + hypokalemia (DOC effect); virilization; normal/low 17-OHP</td>
+                <td>↓Cortisol, ↑11-Deoxycortisol, ↑DOC (mineralocorticoid), ↑Androgens, HTN, hypokalemia</td>
+                <td>HTN distinguishes from 21-OH; DOC accumulation is potent mineralocorticoid; 17-OHP NOT elevated</td>
+            </tr>
+            <tr>
+                <td><strong>17α-OH CAH</strong></td>
+                <td>Rare; feminization (opposite of others); HTN + hypokalemia; 46,XY → female phenotype</td>
+                <td>↓Cortisol, ↓Androgens, ↑Mineralocorticoids (HTN, hypokalemia), 46,XY with female external genitalia, no virilization</td>
+                <td>Feminization NOT virilization; low androgens; 46,XY female phenotype distinguishes from 21-OH/11β-OH</td>
+            </tr>
+            <tr>
+                <td><strong>3β-HSD CAH</strong></td>
+                <td>Rare; early enzyme → all steroids blocked; ↑DHEA (weak androgen); mild virilization females; salt-wasting</td>
+                <td>↓↓All steroids, ↑DHEA, 46,XY ambiguous genitalia, salt-wasting</td>
+                <td>Rare form; blocks all three pathways (cortisol, mineralocorticoid, androgen)</td>
+            </tr>
+            <tr>
+                <td><strong>Lipoid CAH (StAR/P450scc)</strong></td>
+                <td>Most severe; NO steroids; 46,XY → phenotypic female; always salt-wasting; adrenal failure</td>
+                <td>↓↓↓All steroids (absent), lipid droplet accumulation in adrenal, 46,XY female, adrenal crisis in infancy</td>
+                <td>First enzyme in pathway → complete block; most severe phenotype; highest mortality if untreated</td>
+            </tr>
+            <tr>
+                <td><strong>Cortisol regulation (HPA axis)</strong></td>
+                <td>Screening tests (24h UFC, late-night salivary cortisol); Low-dose DST (confirms hypercortisolism); ACTH level differentiates ACTH-dependent vs independent</td>
+                <td>Dexamethasone suppression test, ACTH, CRH stimulation, diurnal rhythm loss</td>
+                <td>Low-dose DST: abnormal cortisol = Cushing's syndrome. ACTH: high → ACTH-dependent (pituitary/ectopic), low → ACTH-independent (adrenal)</td>
+            </tr>
+            <tr>
+                <td><strong>Cushing's syndrome (disease vs ectopic)</strong></td>
+                <td>Cushing's disease (pituitary, 70%); High-dose DST suppression ≥50% → pituitary; no suppression → ectopic/adrenal</td>
+                <td>ACTH-secreting pituitary tumor; rapid onset in ectopic; hypokalemia out of proportion in ectopic</td>
+                <td>High-dose DST: pituitary suppresses, ectopic does NOT; CRH stim: pituitary responds, ectopic does NOT</td>
+            </tr>
+            <tr>
+                <td><strong>Addison's disease (primary AI)</strong></td>
+                <td>Autoimmune (US), TB (worldwide); ↑ACTH + ↓Cortisol + hyperpigmentation + hyponatremia + hyperkalemia</td>
+                <td>Primary adrenal insufficiency, bilateral adrenal destruction/inflammation, mineralocorticoid deficiency</td>
+                <td>Primary AI = BOTH glucocorticoid + mineralocorticoid deficiency; hyperpigmentation (↑ACTH); distinguish from secondary AI (↓ACTH, no hyperpigmentation)</td>
+            </tr>
+            <tr>
+                <td><strong>Secondary AI</strong></td>
+                <td>Pituitary/hypothalamic lesion (tumor, infarction, surgery); ↓ACTH + ↓Cortisol; NO hyperpigmentation; aldosterone preserved</td>
+                <td>Low ACTH, glucocorticoid deficiency only, mineralocorticoid intact (via RAS)</td>
+                <td>Key: No hyperpigmentation (low ACTH); hyponatremia but NOT hyperkalemia (aldosterone preserved)</td>
+            </tr>
+            <tr>
+                <td><strong>Waterhouse-Friderichsen Syndrome</strong></td>
+                <td>Neisseria meningitidis sepsis → bilateral adrenal hemorrhage → acute adrenal crisis</td>
+                <td>Gram-negative diplococcus, meningococcemia, petechial/purpuric rash, DIC, shock, adrenal necrosis</td>
+                <td>Medical emergency; rapid progression; high mortality; autopsy finding of bilateral adrenal hemorrhage</td>
+            </tr>
+            <tr>
+                <td><strong>Nelson's Syndrome</strong></td>
+                <td>Post-bilateral adrenalectomy for pituitary Cushing's; loss of cortisol feedback → ACTH adenoma enlarges unopposed</td>
+                <td>Hyperpigmentation (↑ACTH), visual field defects (pituitary mass), headache, growing pituitary tumor</td>
+                <td>Complication of treating pituitary Cushing's; prevented by pituitary radiation post-adrenalectomy</td>
+            </tr>
+            <tr>
+                <td><strong>Conn's syndrome (Primary Hyperaldosteronism)</strong></td>
+                <td>Aldosterone:renin ratio >20-30; distinguish unilateral adenoma from bilateral hyperplasia (adrenal vein sampling)</td>
+                <td>Low renin, high aldosterone, HTN, hypokalemia, metabolic alkalosis</td>
+                <td>Distinguish from secondary hyperaldosteronism (↑renin = renal artery stenosis, CHF, cirrhosis, nephrotic syndrome)</td>
+            </tr>
+            <tr>
+                <td><strong>Adrenal androgens & PCOS</strong></td>
+                <td>DHEA-S is adrenal marker; PCOS has elevated androgens but normal 17-OHP; late-onset 21-OH CAH mimics PCOS but ↑17-OHP diagnostic</td>
+                <td>DHEA-S, adrenarche, hirsutism, anovulation, insulin resistance, elevated LH:FSH</td>
+                <td>17-OHP level differentiates CAH from PCOS; normal 17-OHP = PCOS; ↑17-OHP = CAH</td>
+            </tr>
+            <tr>
+                <td><strong>Pheochromocytoma</strong></td>
+                <td>Catecholamine-secreting adrenal tumor (medulla); episodic HTN, diaphoresis, headache; Rule of 10s (bilateral, malignant, extra-adrenal, pediatric); diagnosis: plasma metanephrines or 24h urinary catecholamines</td>
+                <td>Episodic symptoms, severe HTN, MEN2A/2B association, RET mutation screening, α-blockade FIRST then β-blockade</td>
+                <td>Must give α-blocker BEFORE β-blocker to prevent unopposed α-adrenergic crisis; biochemistry confirms diagnosis, imaging localizes</td>
+            </tr>
+            <tr>
+                <td><strong>MEN Syndromes</strong></td>
+                <td>MEN1 (3Ps: Parathyroid, Pituitary, Pancreas); MEN2A (Medullary thyroid + Pheo + Hyperparathyroidism, RET mutation); MEN2B (MTC + Pheo + Mucosal neuromas + Marfanoid, RET mutation, NO hyperparathyroidism)</td>
+                <td>RET proto-oncogene, bilateral pheo (50% in MEN2), medullary thyroid cancer screening, prophylactic thyroidectomy</td>
+                <td>MEN2B has neuromas & marfanoid habitus (NO hyperparathyroidism); MEN2A has hyperparathyroidism; MEN1 has pituitary adenoma</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<script>
+function switchTab(tabName) {
+    const contents = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-btn');
+    contents.forEach(c => c.classList.remove('active'));
+    buttons.forEach(b => b.classList.remove('active'));
+    document.getElementById(tabName).classList.add('active');
+    event.target.classList.add('active');
+}
+
+const traps = [
+    { myth: "In 21-OH deficiency, aldosterone is elevated due to ACTH overstimulation.", correct: false, truth: "Aldosterone is DECREASED in 21-OH deficiency. 21-hydroxylase catalyzes the final step for aldosterone synthesis → loss of enzyme → hypoaldosteronism. This causes salt-wasting, hyponatremia, and hyperkalemia. ACTH ↑ to compensate but cannot bypass the enzyme block." },
+    { myth: "If you stimulate the zona glomerulosa with supraphysiologic ACTH levels, it can produce cortisol.", correct: false, truth: "Zona glomerulosa STRUCTURALLY LACKS 17α-hydroxylase. No amount of ACTH stimulation will enable this zone to make cortisol. The GFR mnemonic enforces this: Zona Glomerulosa ONLY makes aldosterone. Period. This is a fixed, anatomic limitation." },
+    { myth: "Primary adrenal insufficiency causes glucocorticoid deficiency but preserves mineralocorticoid function.", correct: false, truth: "Primary AI involves BOTH glucocorticoid AND mineralocorticoid deficiency. The adrenal cortex is destroyed or dysfunctional → cortisol ↓ AND aldosterone ↓ → hyponatremia, hyperkalemia, hypotension. Secondary AI preserves aldosterone (RAS still works), but primary does not." },
+    { myth: "Start beta-blockers (like metoprolol) first to control the tachycardia and hypertension in pheochromocytoma.", correct: false, truth: "ALPHA-BLOCKERS FIRST (phenoxybenzamine or phentolamine). β-blocker without prior α-blockade → unopposed α-adrenergic effects → hypertensive crisis. Sequence: α-block (days to weeks) → then β-block (to prevent reflex tachycardia) → surgery. This is critical." },
+    { myth: "A patient with pituitary Cushing's disease is treated with bilateral adrenalectomy. Years later, the pituitary ACTH tumor shrinks due to lack of stimulation.", correct: false, truth: "Nelson's syndrome: Bilateral adrenalectomy REMOVES the source of cortisol feedback → ACTH tumor grows unopposed → hyperpigmentation + pituitary mass effects. Prevention: pituitary radiation or medical therapy post-adrenalectomy. This is why total pituitary irradiation is often done alongside adrenalectomy." },
+    { myth: "17α-hydroxylase deficiency causes virilization in females (like 21-OH and 11β-OH deficiencies).", correct: false, truth: "17α-OH deficiency causes FEMINIZATION, not virilization. 17α-hydroxylase is the gateway to androgen synthesis → loss → ↓testosterone, ↓androstenedione → NO virilization. In 46,XY, causes phenotypic female. Opposite of 21-OH and 11β-OH." },
+    { myth: "Both MEN2A and MEN2B include hyperparathyroidism as a feature.", correct: false, truth: "MEN2A (RET): Medullary thyroid + Pheochromocytoma + Hyperparathyroidism. MEN2B (RET): Medullary thyroid + Pheochromocytoma + Mucosal neuromas + Marfanoid habitus (NO hyperparathyroidism). Key differentiator: MEN2B has neuromas and marfanoid body habitus instead." },
+    { myth: "High-dose dexamethasone suppresses cortisol in ectopic ACTH syndrome, distinguishing it from primary adrenal Cushing's.", correct: false, truth: "High-dose DST does NOT suppress cortisol in ectopic ACTH syndrome. Ectopic ACTH (small cell lung, carcinoid, etc.) is autonomous → no feedback sensitivity. Only pituitary Cushing's shows ≥50% suppression with high-dose DST. Ectopic and adrenal sources both resist suppression." },
+    { myth: "Secondary adrenal insufficiency (pituitary or hypothalamic lesion) causes hyperpigmentation like primary AI.", correct: false, truth: "Hyperpigmentation requires HIGH ACTH. Secondary AI has LOW ACTH → no melanocyte stimulation → NO hyperpigmentation. This clinical finding (or lack thereof) is a key differentiator. Primary AI: ↑ACTH + hyperpigmentation. Secondary: ↓ACTH + no hyperpigmentation." },
+    { myth: "Pheochromocytomas are always unilateral, benign, and located within the adrenal gland.", correct: false, truth: "10% bilateral (especially in MEN2A/2B). 10% malignant (poor prognosis). 10% extra-adrenal (paragangliomas; can occur along sympathetic chain). 10% in children (hereditary syndromes more common). Always assess for MEN2A/2B with RET screening and genetic counseling." }
+];
+
+let trapState = {correct: 0, total: 0};
+
+function renderTraps() {
+    const container = document.getElementById('trapsContainer');
+    container.innerHTML = '';
+    trapState = {correct: 0, total: traps.length};
+    updateTrapScore();
+    traps.forEach((t, idx) => {
+        const el = document.createElement('div');
+        el.className = 'trap-item';
+        el.innerHTML = `<div class="trap-statement">${idx+1}. ${t.myth}</div>
+            <div class="trap-buttons">
+                <button class="trap-btn trap-btn-correct" onclick="answerTrap(${idx},true)">CORRECT ✓</button>
+                <button class="trap-btn trap-btn-trap" onclick="answerTrap(${idx},false)">TRAP ✗</button>
+            </div>
+            <div class="trap-result" id="trap-res-${idx}">
+                <div class="trap-verdict" id="trap-verdict-${idx}"></div>
+                <div class="trap-explain" id="trap-explain-${idx}"></div>
+            </div>`;
+        container.appendChild(el);
+    });
+}
+
+function answerTrap(idx, userSaysCorrect) {
+    const result = document.getElementById(`trap-res-${idx}`);
+    const verdict = document.getElementById(`trap-verdict-${idx}`);
+    const explain = document.getElementById(`trap-explain-${idx}`);
+    const isActual = traps[idx].correct;
+    const isUserCorrect = (userSaysCorrect === isActual);
+    document.querySelectorAll(`[onclick*="answerTrap(${idx},"]`).forEach(b => b.disabled = true);
+    if (isUserCorrect) { trapState.correct++; result.classList.add('correct-choice'); verdict.innerHTML = '✓ Correct!'; }
+    else { result.classList.add('wrong-choice'); verdict.innerHTML = '✗ Incorrect'; }
+    result.classList.add('show');
+    explain.innerHTML = traps[idx].truth;
+    updateTrapScore();
+}
+
+function updateTrapScore() {
+    const el = document.getElementById('trap-score');
+    if (el) el.textContent = `Score: ${trapState.correct}/${trapState.total}`;
+}
+
+function resetTraps() {
+    trapState.correct = 0;
+    trapState.total = traps.length;
+    document.querySelectorAll('.trap-result').forEach(r => r.classList.remove('show','correct-choice','wrong-choice'));
+    document.querySelectorAll('.trap-btn').forEach(b => b.disabled = false);
+    updateTrapScore();
+}
+
+const drillMatchers = [
+    { type: "Zone → Steroid Product", instructions: "Match adrenal zone to its primary steroid product.", items: [
+        { stimulus: "Zona Glomerulosa", target: "Aldosterone" },
+        { stimulus: "Zona Fasciculata", target: "Cortisol" },
+        { stimulus: "Zona Reticularis", target: "Androgens (DHEA-S, androstenedione)" },
+        { stimulus: "Adrenal Medulla", target: "Epinephrine & Norepinephrine" }
+    ]},
+    { type: "Enzyme → Function", instructions: "Match enzyme to its role in adrenal steroid synthesis.", items: [
+        { stimulus: "21-hydroxylase (P450c21)", target: "Cortisol & aldosterone synthesis" },
+        { stimulus: "11β-hydroxylase (P450c11)", target: "Final step: 11-deoxycortisol → cortisol" },
+        { stimulus: "17α-hydroxylase (P450c17)", target: "Cortisol & androgen pathway (glomerulosa lacks this)" },
+        { stimulus: "3β-HSD (3-beta-hydroxysteroid dehydrogenase)", target: "Pregnenolone → progesterone conversion" }
+    ]},
+    { type: "Deficiency → Clinical Feature", instructions: "Match enzyme deficiency to its consequence.", items: [
+        { stimulus: "21-OH deficiency (most common CAH)", target: "↑17-OHP, ↑androgens, virilization, salt-wasting" },
+        { stimulus: "11β-OH deficiency", target: "↑deoxycortisol, ↑androgens, virilization, HTN, hypokalemia" },
+        { stimulus: "17α-OH deficiency (rare)", target: "↓cortisol, ↓androgens, FEMINIZATION, HTN, hypokalemia" },
+        { stimulus: "3β-HSD deficiency", target: "↑17-OHP, ↓cortisol, virilization (milder than 21-OH)" }
+    ]}
+];
+
+function renderDrill() {
+    const container = document.getElementById('drillContainer');
+    container.innerHTML = '';
+    const shuffleArr = arr => [...arr].map(v => [Math.random(), v]).sort((a,b) => a[0]-b[0]).map(v => v[1]);
+    drillMatchers.forEach((drill, dIdx) => {
+        const section = document.createElement('div');
+        section.style.marginBottom = '32px';
+        section.innerHTML = `<div style="font-weight:700;color:#FCD34D;margin-bottom:8px;font-size:1em;">${drill.type}</div><div style="color:#9CA3AF;font-size:0.85em;margin-bottom:16px;">${drill.instructions}</div>`;
+        const allTargets = drill.items.map(i => i.target);
+        drill.items.forEach((item, iIdx) => {
+            const others = allTargets.filter(t => t !== item.target);
+            const options = shuffleArr([item.target, ...shuffleArr(others).slice(0, 3)]);
+            const itemEl = document.createElement('div');
+            itemEl.className = 'drill-item-q';
+            itemEl.style.cssText = 'background:#161B22;border:1px solid #30363D;border-radius:8px;padding:16px;margin-bottom:12px;';
+            const optsHtml = options.map(opt => `<button class="drill-opt" data-correct="${opt === item.target}" data-didx="${dIdx}" data-iidx="${iIdx}" onclick="checkDrillOpt(this)" style="display:block;width:100%;text-align:left;background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:9px 13px;margin:4px 0;cursor:pointer;color:#C9D1D9;font-size:0.85em;transition:all 0.2s;">${opt}</button>`).join('');
+            itemEl.innerHTML = `<div style="font-weight:600;color:#E6EDF3;margin-bottom:12px;font-size:0.93em;">${item.stimulus}</div>${optsHtml}<div id="drill-fb-${dIdx}-${iIdx}" style="display:none;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;"></div>`;
+            section.appendChild(itemEl);
+        });
+        container.appendChild(section);
+    });
+}
+
+function checkDrillOpt(btn) {
+    const isCorrect = btn.dataset.correct === 'true';
+    const dIdx = parseInt(btn.dataset.didx);
+    const iIdx = parseInt(btn.dataset.iidx);
+    const item = drillMatchers[dIdx].items[iIdx];
+    btn.closest('.drill-item-q').querySelectorAll('.drill-opt').forEach(b => {
+        b.disabled = true;
+        if (b.dataset.correct === 'true') { b.style.cssText += ';background:rgba(74,222,128,0.15);border-color:#4ADE80;color:#D1FAE5;'; }
+    });
+    if (!isCorrect) { btn.style.cssText += ';background:rgba(239,68,68,0.15);border-color:#EF4444;color:#FCA5A5;'; }
+    const fb = document.getElementById(`drill-fb-${dIdx}-${iIdx}`);
+    if (isCorrect) { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(74,222,128,0.1);color:#D1FAE5;'; fb.innerHTML = '✓ Correct!'; }
+    else { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(239,68,68,0.1);color:#FCA5A5;'; fb.innerHTML = `✗ Correct: ${item.target}`; }
+}
+
+function revealMCQ(element) {
+    const parent = element.parentElement;
+    const allOpts = parent.querySelectorAll('.mcq-opt');
+    if (element.classList.contains('revealed')) return;
+
+    allOpts.forEach(opt => {
+        opt.classList.add('revealed');
+        if (opt.textContent.includes('Answer:') || opt.classList.contains('correct')) {
+            opt.classList.add('correct');
+        } else if (!opt.classList.contains('correct')) {
+            opt.classList.add('wrong');
+        }
+    });
+
+    const explanation = parent.querySelector('.mcq-explanation');
+    if (explanation) explanation.classList.add('visible');
+
+    allOpts.forEach(opt => opt.style.pointerEvents = 'none');
+}
+
+function checkFIB(button) {
+    const input = button.previousElementSibling;
+    const result = button.nextElementSibling;
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctAnswers = input.dataset.answer.split(',').map(a => a.trim().toLowerCase());
+
+    const isCorrect = correctAnswers.some(ans => userAnswer.includes(ans) || ans.includes(userAnswer));
+
+    if (isCorrect) {
+        result.className = 'fib-result correct';
+        result.textContent = 'Correct!';
+    } else {
+        result.className = 'fib-result incorrect';
+        result.textContent = 'Incorrect. Accepted answers: ' + input.dataset.answer;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderTraps();
+});
+</script>
+</body>
+</html>

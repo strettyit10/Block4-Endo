@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Biochem L1: Intro to Hormone Action — Step 1 Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #1565C0; --accent-dark: #0D47A1; --accent-light: rgba(21,101,192,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; line-height: 1.5; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* FLASHCARDS */
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
+        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
+
+        /* MCQ */
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
+        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .mcq-explanation.visible { display: block; }
+        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+        .mcq-explanation .exp-wrong { border-left-color: #EF4444; }
+        .teaching-pt { background: rgba(21,101,192,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #C7D2FE; display: none; }
+        .teaching-pt.visible { display: block; }
+        .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+
+        /* VIGNETTES */
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: rgba(21,101,192,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #C7D2FE; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+        .vig-qa { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid #30363D; }
+        .vig-qa.visible { display: block; }
+        .vig-q { font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+        .vig-a { color: #D1FAE5; font-size: 0.92em; line-height: 1.6; }
+        .vig-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; margin-top: 10px; }
+
+        /* TEST TRAPS */
+        .trap-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-statement { color: #E6EDF3; font-size: 0.95em; margin-bottom: 12px; line-height: 1.6; font-weight: 500; }
+        .trap-buttons { display: flex; gap: 10px; margin-bottom: 10px; }
+        .trap-btn { padding: 9px 18px; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.88em; background: #1C2128; }
+        .trap-btn-correct { color: #4ADE80; border-color: #4ADE80; }
+        .trap-btn-trap { color: #ff6b6b; border-color: #ff6b6b; }
+        .trap-btn:hover:not(:disabled) { opacity: 0.85; }
+        .trap-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .trap-result { display: none; padding: 10px 14px; border-radius: 6px; font-size: 0.88em; line-height: 1.5; margin-top: 4px; }
+        .trap-result.show { display: block; }
+        .trap-result.correct-choice { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; color: #D1FAE5; }
+        .trap-result.wrong-choice { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; color: #FCA5A5; }
+        .trap-verdict { font-weight: 700; margin-bottom: 4px; }
+        .trap-explain { font-size: 0.9em; opacity: 0.9; }
+
+        /* FILL-IN-BLANK */
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+
+        /* CHALLENGE DRILL */
+        .drill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+        .drill-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; }
+        .drill-header { color: var(--accent); font-weight: 600; font-size: 0.85em; margin-bottom: 12px; }
+        .drill-option { padding: 8px 12px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; margin-bottom: 8px; cursor: pointer; font-size: 0.9em; transition: all 0.2s; }
+        .drill-option:hover { background: #21262D; border-color: var(--accent); }
+        .drill-option.selected { background: var(--accent); color: white; border-color: var(--accent); }
+        .drill-option.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .drill-option.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+
+        /* REF TABLE */
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
+
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="#" class="back">← Back to Biochem Step 1 Hub</a>
+        <h1>Biochem L1: <span class="accent-tag">Intro to Hormone Action</span></h1>
+        <div class="subtitle">USMLE Step 1 · Builds on in-house content · Signal transduction diseases · Pharmacology integration</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Trap Detector</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('drill')">🎯 Challenge Drill</button>
+        <button class="tab-btn" onclick="switchTab('ref')">📋 USMLE Map</button>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Core Concept Flashcards — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
+
+    <!-- MCQ -->
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice</div>
+        <div id="mcqContainer"></div>
+    </div>
+
+    <!-- VIGNETTES -->
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes</div>
+        <div id="vigContainer"></div>
+    </div>
+
+    <!-- TEST TRAPS -->
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">⚠️ Test Traps — Common Exam Misconceptions</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:10px 14px;background:#161B22;border:1px solid #30363D;border-radius:8px;"><span style="font-size:0.85em;color:#9CA3AF;">Click <strong style="color:#4ADE80;">CORRECT ✓</strong> or <strong style="color:#ff6b6b;">TRAP ✗</strong> for each statement.</span><div style="display:flex;align-items:center;gap:14px;"><span id="trap-score" style="font-size:0.9em;font-weight:700;color:#E6EDF3;">Score: 0/0</span><button onclick="resetTraps()" style="background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:5px 12px;color:#9CA3AF;cursor:pointer;font-size:0.82em;">Reset</button></div></div>
+        <div id="trapsContainer"></div>
+    </div>
+
+    <!-- FILL-IN-BLANK -->
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill in the Blank — Key Pathways</div>
+        <div id="fibContainer"></div>
+    </div>
+
+    <!-- CHALLENGE DRILL -->
+    <div id="tab-drill" class="tab-content">
+        <div class="section-title">Challenge Drill — Interactive Classifiers</div>
+        <div id="drillContainer"></div>
+    </div>
+
+    <!-- REFERENCE TABLE -->
+    <div id="tab-ref" class="tab-content">
+        <div class="section-title">USMLE Map: GUSOM LO → Step 1 Extensions</div>
+        <div id="refContainer"></div>
+    </div>
+</div>
+
+<script>
+// ─── TAB NAVIGATION ───────────────────────────────────
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
+
+// ─── FLASHCARD DATA ───────────────────────────────────
+const flashcards = [
+    { q: "G-protein coupled receptors (Gs-coupled) — what second messenger? List 5 hormones.", a: "cAMP ↑ (adenylyl cyclase → PKA activation). Gs hormones: PTH, glucagon, TSH, ACTH, LH, FSH, ADH(V2), β-adrenergic, calcitonin, CRH, GHRH." },
+    { q: "G-protein coupled receptors (Gi-coupled) — what second messenger? Examples?", a: "cAMP ↓ (adenylyl cyclase inhibition). Gi hormones: somatostatin, α2-adrenergic, M2/M4 muscarinic, dopamine D2, opioids. Pertussis toxin locks Gi OFF." },
+    { q: "G-protein coupled receptors (Gq-coupled) — what second messenger? List hormones.", a: "IP3/DAG ↑ (phospholipase C activation → Ca2+ release). Gq hormones: GnRH, oxytocin, ADH(V1a), α1-adrenergic, M1/M3 muscarinic, angiotensin II, gastrin, histamine H1." },
+    { q: "Receptor tyrosine kinases (RTK) — what signaling mechanism? Examples?", a: "Ligand binding → autophosphorylation → Ras/MAPK pathway OR PI3K/Akt. RTK hormones: insulin, IGF-1, EGF, PDGF, FGF. Achondroplasia = constitutively active FGFR3 (gain-of-function)." },
+    { q: "JAK-STAT pathway — which hormones? Name the kinase.", a: "Growth hormone, prolactin, EPO, TPO, cytokines/interleukins. JAK2-STAT5 is the classic pair. GH receptor recruits JAK2; phosphorylates STAT5 → nucleus → gene expression." },
+    { q: "Guanylyl cyclase-coupled receptors — what second messenger? Examples?", a: "cGMP ↑ (guanylyl cyclase activates). ANP and BNP activate membrane guanylyl cyclase → cGMP → protein kinase G (PKG) → natriuresis and vasodilation." },
+    { q: "Nuclear receptor superfamily — list all 4 types of ligands.", a: "1) Steroids (cortisol, aldosterone, estrogen, progesterone, testosterone)\n2) Thyroid hormone (T3, T4)\n3) Vitamin D (calcitriol)\n4) Retinoic acid (retinoids)" },
+    { q: "McCune-Albright syndrome — mutation type, affected protein, classic triad.", a: "Somatic (post-zygotic, mosaic) activating Gs mutation. Gs locks constitutively ON → ↑cAMP in multiple tissues. Triad: precocious puberty + café-au-lait spots + polyostotic fibrous dysplasia." },
+    { q: "Cholera toxin mechanism — what does it ADP-ribosylate? Result?", a: "ADP-ribosylates Gs α-subunit → locks Gs permanently ON → uncontrolled cAMP → intestinal Cl− secretion → severe rice-water diarrhea + dehydration." },
+    { q: "Pertussis toxin mechanism — what does it ADP-ribosylate? Result?", a: "ADP-ribosylates Gi α-subunit → locks Gi OFF → no Gi inhibition → ↑cAMP in immune cells → excessive histamine sensitization, white blood cell dysfunction, whooping cough." },
+    { q: "Achondroplasia — mutation, inheritance, molecular mechanism.", a: "Activating (gain-of-function) mutation in FGFR3 → constitutive signaling → excessive inhibition of bone growth. Autosomal dominant. Classic findings: short limbs (rhizomelic), normal trunk, preserved intelligence." },
+    { q: "Receptor downregulation — what causes it? Clinical example with drug?", a: "Prolonged agonist stimulation → receptor inactivation/internalization → loss of responsiveness. Example: continuous GnRH agonist (leuprolide) → GnRH receptor desensitization → ↓FSH/LH → medical castration for prostate cancer + endometriosis." },
+    { q: "Selective estrogen receptor modulator (SERM) — what is it? Tamoxifen tissue effects?", a: "SERM = tissue-selective ER agonist/antagonist based on coactivator availability. Tamoxifen: ANTAGONIST in breast (blocks ER+cell growth), AGONIST in bone (prevents osteoporosis), AGONIST in uterus (risk of endometrial hyperplasia/cancer)." },
+    { q: "Raloxifene (SERM) — how does it differ from tamoxifen?", a: "Raloxifene: ANTAGONIST in breast + uterus (major advantage!), AGONIST in bone. Preferred post-menopause for osteoporosis — no endometrial cancer risk." },
+    { q: "RU-486 (mifepristone) — receptor, mechanism, clinical use.", a: "Progesterone receptor ANTAGONIST (competitive inhibitor) + weak glucocorticoid receptor antagonist. Abortifacient: blocks progesterone → uterine endometrium shedding → pregnancy termination (medical abortion)." },
+    { q: "POMC processing — starting peptide, 2 main cleavage products, hyperpigmentation link.", a: "Pro-opiomelanocortin (POMC) → ACTH + β-endorphin (in corticotrophs). ACTH further cleaved → α-MSH (melanocyte-stimulating hormone). Bilateral adrenalectomy → no cortisol feedback → ↑ACTH/MSH → skin darkening (Addison's sign)." },
+    { q: "hCG and TSH cross-reactivity — shared subunit, clinical consequence.", a: "hCG and TSH share the same ALPHA subunit (β subunits are unique). Molar pregnancy → massive hCG → activates TSH receptor → thyrotoxicosis without thyroid disease. hCG also causes false-positive TSH elevation in some assays." },
+    { q: "Paraneoplastic syndrome — definition, ectopic hormone example.", a: "Malignant tumor secretes hormone normally made elsewhere (ectopic production). Example: small cell lung cancer (SCLC) secretes ACTH → Cushing's syndrome with very high cortisol. Carcinoid tumors secrete serotonin/substance P → flushing, diarrhea." },
+    { q: "Hormone storage and secretion types — regulated vs constitutive.", a: "REGULATED: peptide hormones stored in secretory granules (vesicles) → exocytosis upon stimulus (e.g., insulin, ACTH). CONSTITUTIVE: steroid hormones have no storage → synthesized de novo on demand (lipid-soluble, diffuse out via membrane)." },
+    { q: "Bioavailability of hormones — which can be given orally? Why?", a: "Peptide hormones (insulin, GH, ACTH) = CANNOT be taken orally (destroyed by GI proteases). Must inject. Steroid hormones (cortisol, estrogen, testosterone) and thyroid hormone = CAN be oral (lipid-soluble, resistant to proteolysis)." },
+];
+
+const mcqs = [
+    {
+        stem: "A 45-year-old man presents with signs of <strong>Cushing's syndrome</strong>. Serum cortisol is elevated at 28 mcg/dL (normal <18). ACTH is also elevated at 95 pg/mL (normal 10-50). A CT scan of the abdomen shows no adrenal mass. Chest X-ray reveals a small solitary nodule. Which of the following BEST explains this clinical picture?",
+        options: [
+            "Pituitary adenoma secreting excess ACTH",
+            "Ectopic ACTH secretion from a lung neoplasm (paraneoplastic syndrome)",
+            "Primary adrenal adenoma with autonomous cortisol production",
+            "Adrenal insufficiency with secondary pituitary compensation",
+            "Hypothyroidism causing compensatory ACTH elevation"
+        ],
+        correct: 1,
+        explanations: [
+            "Pituitary adenoma is the most common cause of ACTH-dependent Cushing's, but would expect adrenal imaging to show bilateral hyperplasia. Lung nodule is a red herring.",
+            "CORRECT. Ectopic ACTH from small cell lung cancer (SCLC) is the classic scenario: bilateral adrenal hyperplasia (no discrete mass), elevated ACTH, elevated cortisol. Paraneoplastic syndromes are high-yield Step 1 — lung cancer + Cushing's = think ectopic ACTH first.",
+            "Primary adrenal adenoma would show LOW ACTH (negative feedback), not elevated.",
+            "Adrenal insufficiency = LOW cortisol, not elevated.",
+            "Hypothyroidism does not cause this pattern."
+        ],
+        teaching: "Paraneoplastic syndromes = malignancy secreting hormone ectopically. SCLC is notorious for ectopic ACTH, also ectopic ADH (SIADH). Other ectopic hormones: carcinoid tumors (serotonin, substance P), pancreatic neuroendocrine tumors (insulin, VIP). Key: normal imaging of the expected gland but biochemical evidence of hormone excess."
+    },
+    {
+        stem: "An 8-year-old girl is brought to clinic with vaginal bleeding and breast development. Physical exam reveals <strong>café-au-lait spots</strong> on the trunk and <strong>multiple bony deformities</strong>. A pelvic ultrasound shows ovarian cysts. Which genetic mechanism underlies this constellation?",
+        options: [
+            "Inactivating mutation in tumor suppressor p53 (germline)",
+            "Somatic activating mutation in GNAS (Gs α-subunit gene) → constitutively active Gs",
+            "Loss of function mutation in FGFR3",
+            "Germline activating mutation in RET proto-oncogene",
+            "Inactivating PTEN mutation"
+        ],
+        correct: 1,
+        explanations: [
+            "p53 mutations → Li-Fraumeni syndrome (cancer predisposition), not this endocrine picture.",
+            "CORRECT. McCune-Albright syndrome: somatic (post-zygotic, mosaic) activating mutation in GNAS → constitutively active Gs → uncontrolled cAMP signaling in multiple tissues. Classic triad: precocious puberty (ovarian cysts, early menses) + café-au-lait spots + polyostotic fibrous dysplasia (bone deformities). Why somatic? Germline GNAS mutations are embryonic lethal. This is why features are patchy/asymmetric (mosaic distribution reflects timing of mutation during development).",
+            "FGFR3 loss-of-function → taller stature, not short; and doesn't cause precocious puberty.",
+            "RET mutations → multiple endocrine neoplasia type 2 (thyroid cancer, pheochromocytoma, parathyroid), not this.",
+            "PTEN loss → Cowden syndrome (hamartomas, cancer risk), not McCune-Albright."
+        ],
+        teaching: "McCune-Albright is somatic activating Gs mutation → cAMP ↑ in gonads (precocious puberty), bones (fibrous dysplasia), skin melanocytes (café-au-lait). The triplet is pathognomonic. Note: Gs is Gαs (alpha subunit), encoded by GNAS gene. Mnemonic: Activate Gs = EVERYTHING GOES UP (precocious puberty, bone lesions, skin pigmentation)."
+    },
+    {
+        stem: "A 72-year-old man with prostate cancer is started on <strong>leuprolide</strong>, a GnRH agonist. He is given an anti-androgen concurrently. On day 2 of therapy, his serum testosterone RISES dramatically before declining over the next 2 weeks. Which explains the initial testosterone surge and the rationale for concurrent anti-androgen use?",
+        options: [
+            "Leuprolide is initially a GnRH antagonist, then switches to agonist activity",
+            "Leuprolide initially stimulates GnRH receptors → ↑LH → ↑testosterone (initial flare), then continuous stimulation → receptor downregulation → ↓LH → ↓testosterone",
+            "Anti-androgens prevent the initial testosterone rise by direct testicular inhibition",
+            "Leuprolide activates a different GPCR pathway initially",
+            "Testosterone elevation is a side effect unrelated to GnRH receptor activation"
+        ],
+        correct: 1,
+        explanations: [
+            "Leuprolide is a GnRH agonist throughout; it does not switch mechanism.",
+            "CORRECT. GnRH agonists have biphasic effect: (1) INITIAL: continuous agonism → LH/FSH surge → testosterone spike (clinical flare — can cause cancer pain, urinary obstruction, spinal cord compression in metastatic disease). (2) SUBSEQUENT: sustained agonism → GnRH receptor downregulation/desensitization → LH/FSH suppression → testosterone drops to castrate levels. Anti-androgens (bicalutamide, flutamide) given concurrently to block testosterone effects during the flare phase, preventing clinical deterioration. This is a critical Step 1 pharmacology point.",
+            "Anti-androgens don't prevent the rise; they block peripheral androgen effects while the flare occurs.",
+            "GnRH receptors are Gq-coupled; continuous stimulation still causes desensitization, not pathway switch.",
+            "The rise IS directly related to GnRH receptor activation and subsequent LH surge."
+        ],
+        teaching: "Leuprolide = continuous agonism → desensitization. This is THE example of receptor downregulation in clinical practice. Flare phenomenon is clinically significant in prostate cancer (pain crisis, cord compression risk) and endometriosis (initial symptom worsening). Always give anti-androgen cover. Compare: GnRH antagonists (e.g., degarelix, leuprorelin, cetrorelix) block receptors directly → no flare, immediate LH/FSH suppression."
+    },
+    {
+        stem: "A 55-year-old postmenopausal woman is treated with <strong>tamoxifen</strong> for ER-positive breast cancer. After 3 years, she develops endometrial cancer. Bone density remains normal. Which property of tamoxifen explains this side effect profile?",
+        options: [
+            "Tamoxifen is a pure estrogen receptor antagonist in all tissues",
+            "Tamoxifen is a selective estrogen receptor modulator (SERM): ER antagonist in breast but ER agonist in uterus",
+            "Tamoxifen irreversibly binds ER and prevents all estrogen signaling",
+            "Tamoxifen activates a different estrogen receptor isoform in the uterus",
+            "Endometrial cancer is unrelated to tamoxifen; it is age-related"
+        ],
+        correct: 1,
+        explanations: [
+            "If tamoxifen were a pure antagonist everywhere, there would be no endometrial cancer risk.",
+            "CORRECT. Tamoxifen is a SERM: tissue-selective agonist/antagonist depending on coactivator expression. In ER+ breast: acts as ANTAGONIST (blocks estrogen-driven cancer cell growth). In bone: acts as AGONIST (maintains bone density, prevents osteoporosis). In uterus: acts as AGONIST (stimulates endometrial proliferation) → endometrial hyperplasia → endometrial cancer risk. This is why raloxifene is preferred long-term for postmenopausal osteoporosis — it is antagonist in uterus (no endometrial risk).",
+            "Tamoxifen is reversible competitive inhibitor, not irreversible.",
+            "Both ER-α and ER-β are blocked/activated similarly; tissue selectivity is due to coactivator/corepressor availability, not receptor isoform differences.",
+            "While age is a risk factor, tamoxifen significantly increases endometrial cancer incidence — this is a known adverse effect."
+        ],
+        teaching: "SERM = Selective Estrogen Receptor Modulator. Tissue selectivity depends on availability of coactivators (AF-1, AF-2 domains) in that tissue. Tamoxifen used short-term (5 years) for breast cancer because efficacy outweighs endometrial risk. Raloxifene = better long-term for bone (antagonist in endometrium = NO cancer risk). This is classic Step 1 pharmacology + molecular mechanism integration."
+    },
+    {
+        stem: "A 28-year-old woman presents with <strong>amenorrhea and galactorrhea</strong>. Prolactin level is 85 ng/mL (normal <25). TSH is 8.2 mIU/L (normal 0.4-4.0). Free T4 is low at 0.6 ng/dL (normal 0.8-1.8). Which is the PRIMARY mechanism driving hyperprolactinemia in this patient?",
+        options: [
+            "Pituitary adenoma secreting prolactin",
+            "Hypothyroidism-induced TRH elevation → TRH stimulates prolactin secretion",
+            "Dopamine deficiency in the hypothalamus",
+            "Excess GnRH suppressing dopamine",
+            "Primary gonadal dysfunction"
+        ],
+        correct: 1,
+        explanations: [
+            "Pituitary adenoma causes hyperprolactinemia but would not explain the TSH and free T4 abnormalities. Also, this patient's prolactin is high but not extremely high (>200 suggests adenoma).",
+            "CORRECT. Hypothyroidism → ↓ negative feedback on hypothalamus → ↑TRH. TRH stimulates BOTH TSH (its main target) AND PROLACTIN (lactotropes also have TRH receptors). This is why hypothyroid patients often present with galactorrhea + amenorrhea. Treating the hypothyroidism will normalize both TSH and prolactin.",
+            "Dopamine deficiency would cause hyperprolactinemia but doesn't explain hypothyroidism.",
+            "GnRH doesn't suppress dopamine; GnRH is downstream of dopamine in the hypothalamus.",
+            "Primary gonadal dysfunction wouldn't cause the pattern of hyperprolactinemia + hypothyroidism."
+        ],
+        teaching: "TRH has TWO targets: TSH (main) and prolactin (secondary). This is a frequent USMLE trap. Always check TSH and free T4 in hyperprolactinemia. Hypothyroidism is one of the most common secondary causes of hyperprolactinemia. Mechanism: low T4 → less feedback inhibition → high TRH → TRH + TSH + prolactin all elevated."
+    },
+    {
+        stem: "A patient with <strong>choriocarcinoma</strong> (placental tumor) develops <strong>thyrotoxicosis</strong> without thyroid disease. TSH is suppressed (<0.01 mIU/L). Free T4 and T3 are elevated. hCG is markedly elevated at 500,000 mIU/L (normal <5). Which receptor does hCG activate to explain thyrotoxicosis?",
+        options: [
+            "GH receptor (JAK-STAT pathway)",
+            "TSH receptor — hCG cross-reactivity due to shared alpha subunit",
+            "T3 receptor (nuclear receptor) in thyroid follicles",
+            "FGFR3 in thyroid tissue",
+            "Insulin receptor causing compensatory T3 increase"
+        ],
+        correct: 1,
+        explanations: [
+            "GH doesn't cause thyrotoxicosis; GH excess causes acromegaly/gigantism.",
+            "CORRECT. hCG (human chorionic gonadotropin) and TSH share the SAME ALPHA subunit (both are glycoprotein hormones); their beta subunits differ. At extremely high hCG levels (as in molar pregnancy or choriocarcinoma), hCG cross-activates TSH receptor → thyroid stimulation → T4/T3 release → thyrotoxicosis. This is secondary thyrotoxicosis (thyroid IS responsive) but TSH is appropriately suppressed (pituitary feedback is intact). Classic exam scenario: elevated hCG + suppressed TSH + elevated free T4 = think hCG/TSH receptor cross-reactivity.",
+            "hCG doesn't bind nuclear receptors.",
+            "FGFR3 is not expressed significantly in thyroid.",
+            "hCG doesn't affect insulin signaling directly."
+        ],
+        teaching: "Glycoprotein hormone cross-reactivity is high-yield. hCG, TSH, LH, FSH all have shared alpha subunit + unique beta. At physiologic hCG (pregnancy), no thyrotoxicosis. But molar pregnancy (hydatidiform mole) or choriocarcinoma → extremely high hCG → TSH receptor activation → thyrotoxicosis. This is why some pregnant women have mild hyperthyroidism in first trimester (high normal hCG). Treat the underlying malignancy; thyrotoxicosis resolves."
+    },
+    {
+        stem: "A 45-year-old man presents with severe <strong>watery diarrhea</strong> after eating contaminated food at a street vendor. Stool osmotic gap is normal (suggesting secretory mechanism). Serum electrolytes show severe hypokalemia and metabolic acidosis. Which toxin-G-protein interaction best explains his intestinal secretion?",
+        options: [
+            "Pertussis toxin → Gi inactivation → unopposed adenylyl cyclase → ↑cAMP → Cl− secretion",
+            "Cholera toxin → Gs activation (ADP-ribosylation) → adenylyl cyclase constitutively ON → ↑cAMP → Cl− secretion",
+            "Botulinum toxin → SNARE cleavage → no ACh release → decreased parasympathetic tone",
+            "Staphylococcal enterotoxin → direct epithelial damage → bloody diarrhea",
+            "Rotavirus → viral destruction of villi → fat malabsorption → steatorrhea"
+        ],
+        correct: 1,
+        explanations: [
+            "Pertussis toxin causes inactivation of Gi (locks Gi OFF), not relevant to acute diarrhea. Pertussis affects respiratory epithelium and immune cells (whooping cough), not intestine.",
+            "CORRECT. Cholera toxin (from Vibrio cholerae) ADP-ribosylates the alpha subunit of Gs → locks Gs permanently in GTP-bound (active) state → adenylyl cyclase constitutively ON → massive ↑cAMP → activation of PKA → phosphorylation of CFTR (cystic fibrosis transmembrane conductance regulator) and Na-K-ATPase → net Cl− and Na+ secretion into intestinal lumen → osmotic diarrhea (following water passively) → severe dehydration. Classic 'rice-water stool' appearance. Pertussis affects different G-protein (Gi) in respiratory epithelium.",
+            "Botulinum toxin affects acetylcholine release but doesn't cause secretory diarrhea.",
+            "Staph enterotoxin causes inflammatory diarrhea with blood; this patient has secretory diarrhea.",
+            "Rotavirus causes viral gastroenteritis but doesn't involve G-protein signaling."
+        ],
+        teaching: "Cholera toxin = ADP-ribosylates Gs → constitutive activation → uncontrolled cAMP → Cl− secretion → massive watery diarrhea. Pertussis toxin = ADP-ribosylates Gi → inactivation (locks Gi OFF) → no Gi braking on adenylyl cyclase → relative ↑cAMP in immune cells. Both are bacterial exotoxins; both modify G-proteins; different targets and tissues. High-yield for Step 1: mechanism → clinical manifestation → electrolyte abnormalities."
+    },
+    {
+        stem: "An infant is born with <strong>short stature and rhizomelic short limbs</strong> (arms and legs disproportionately short relative to trunk). Intelligence is normal. Genetic testing reveals a heterozygous <strong>ACTIVATING mutation in FGFR3</strong>. Parents have normal height. Which inheritance pattern and molecular mechanism explain this presentation?",
+        options: [
+            "Autosomal recessive loss-of-function mutation → lack of bone growth signaling",
+            "Autosomal dominant gain-of-function mutation → constitutive FGFR3 signaling → excessive negative regulation of bone growth",
+            "X-linked dominant → only males affected",
+            "Mitochondrial inheritance → maternal transmission only",
+            "Somatic mutation → confined to affected tissues only"
+        ],
+        correct: 1,
+        explanations: [
+            "Achondroplasia is NOT loss-of-function (would cause tall stature, not short). It is gain-of-function.",
+            "CORRECT. Achondroplasia: heterozygous activating (gain-of-function) mutation in FGFR3 → constitutively active receptor → excessive FGF signaling in growth plate → inhibition of chondrocyte proliferation → shortened long bones (rhizomelic pattern). Autosomal dominant (one mutant allele sufficient for phenotype). Homozygous = embryonic lethal. ~80% of cases are de novo mutations (new mutations in sperm/egg), so normal parents can have affected child. Classic features: short limbs, normal trunk, normal intelligence, characteristic facies (frontal bossing, midface hypoplasia).",
+            "Achondroplasia is autosomal dominant, not X-linked.",
+            "Not mitochondrial.",
+            "Somatic mutations would cause mosaic features (like McCune-Albright), not this uniform pattern. Achondroplasia affects all osteoblasts from conception onward."
+        ],
+        teaching: "Achondroplasia = FGFR3 gain-of-function (mutant = constitutively active). FGFRs normally inhibit bone growth via negative feedback on growth plate chondrocytes. Activating mutation → excessive inhibition → short limbs. Contrast: FGFR3 loss-of-function in other contexts (rare) → tall stature. Classic boards question: infant with disproportionate short stature + new dominant mutation = achondroplasia. Mention normal cognition to rule out skeletal dysplasias with intellectual disability."
+    },
+    {
+        stem: "A 52-year-old woman with type 2 diabetes is started on a new medication. Within 2 weeks, she develops <strong>gynecomastia</strong> (breast tissue enlargement) and <strong>sexual dysfunction</strong>. Lab work shows elevated prolactin (88 ng/mL) and low testosterone (180 ng/dL, normal 300–1000). Which mechanism most likely explains this adverse effect?",
+        options: [
+            "Direct stimulation of prolactin secretion from pituitary lactotropes",
+            "Dopamine D2 receptor antagonism → removal of dopamine inhibition on prolactin → hyperprolactinemia",
+            "GH receptor activation → secondary prolactin elevation",
+            "Hypothyroidism-induced TRH elevation (same as in Q5)",
+            "Direct testicular suppression via FGFR3 inhibition"
+        ],
+        correct: 1,
+        explanations: [
+            "Some drugs directly stimulate prolactin, but the mechanism isn't described here.",
+            "CORRECT. Dopamine is the primary prolactin-inhibiting hormone (PIH). D2 receptor antagonists (e.g., antipsychotics like risperidone, haloperidol; metoclopramide; some antidepressants) block dopamine's inhibitory effect on lactotropes → disinhibition → hyperprolactinemia → galactorrhea, gynecomastia, sexual dysfunction. This is a common side effect of D2-blocking drugs. The question hints at an antidiabetic medication; some sulfonylureas and older agents can have dopamine antagonism as a side effect.",
+            "GH doesn't cause hyperprolactinemia.",
+            "Hypothyroidism wasn't mentioned; this is a drug side effect, not secondary.",
+            "FGFR3 inhibition doesn't directly cause hyperprolactinemia."
+        ],
+        teaching: "Dopamine = primary inhibitor of prolactin. Remove dopamine → prolactin rises. Classic drugs: antipsychotics (D2 blockers), metoclopramide (antiemetic, D2 blocker). This is why antipsychotic users develop hyperprolactinemia + sexual side effects. Clinical clue: hyperprolactinemia + low testosterone in a non-lactating patient on a new drug = think D2 antagonism."
+    },
+    {
+        stem: "A 35-year-old woman with endometriosis is treated with a GnRH agonist (continuous leuprolide). After 3 months, her endometriosis pain paradoxically worsens and she reports hot flashes. Estradiol is now <20 pg/mL (severely suppressed). Which pathophysiologic mechanism causes the initial symptom flare before clinical improvement?",
+        options: [
+            "The drug activates estrogen receptors directly",
+            "Initial GnRH agonism → LH/FSH surge → transient ovarian steroid production surge → symptom flare; then sustained agonism → receptor downregulation → hormone suppression → clinical improvement",
+            "Direct stimulation of endometrial proliferation",
+            "Estrogen rebound after drug washout",
+            "Hypothyroidism from ovarian suppression"
+        ],
+        correct: 1,
+        explanations: [
+            "Leuprolide is a GnRH agonist, not an estrogen agonist.",
+            "CORRECT. Same mechanism as leuprolide in prostate cancer (Q3). Initial continuous GnRH agonism → LH/FSH surge → ovarian estrogen/progesterone spike → endometriosis lesions stimulated → pain worsening. After ~2 weeks, sustained GnRH agonism → GnRH receptor desensitization/downregulation → LH/FSH suppression → ovarian hormone suppression → endometriosis lesions regress → pain improves. 'Flare phenomenon.' To prevent initial flare in endometriosis patients (unlike prostate cancer where anti-androgens are standard), hormonal add-back therapy (progestin or low-dose estrogen) can be given concurrently.",
+            "Leuprolide eventually suppresses estrogen; it doesn't stimulate endometrial proliferation.",
+            "No estrogen rebound in the first 3 months of active agonism.",
+            "Hypothyroidism from ovarian suppression doesn't occur; thyroid function is independent."
+        ],
+        teaching: "Flare phenomenon occurs with all GnRH agonists in BOTH prostate cancer and endometriosis. In prostate cancer, anti-androgen cover prevents pain crisis. In endometriosis, add-back hormone therapy (progestin or estrogen) prevents symptom worsening while agonism takes effect. This is a classic boards scenario: patient worsens initially after starting GnRH agonist = reassure that this is expected flare, not drug failure."
+    }
+];
+
+const vignettes = [
+    {
+        banner: "Precocious Puberty + Skin + Bones",
+        stem: "A 9-year-old girl is brought to clinic by her mother with concerns about <strong>early pubic hair development and vaginal bleeding</strong> starting at age 7. Physical exam reveals <strong>several light brown patches with irregular borders</strong> on her trunk and arms (café-au-lait spots). She has a history of <strong>multiple bone fractures</strong> from minor trauma, and X-rays show areas of abnormal bone structure with fibrous appearance. Brain MRI looking for pituitary pathology is normal.",
+        qa: [
+            { q: "What diagnosis connects all three findings (precocious puberty + café-au-lait + fibrous bone lesions)?", a: "McCune-Albright syndrome — somatic activating Gs mutation causing constitutive cAMP signaling in multiple tissues." },
+            { q: "Why are the features patchy/asymmetric rather than generalized?", a: "Somatic (post-zygotic) mutation occurs during early development. Different tissues are affected depending on the timing and distribution of the mutant cell population (mosaicism)." },
+            { q: "What is the molecular mechanism in the ovarian tissue?", a: "Gs activation → ↑cAMP → PKA activation → increased steroidogenesis (testosterone + estrogen) → independent of LH/FSH. Gonadotropins are normal or low (negative feedback from steroids), distinguishing this from true central precocious puberty." }
+        ]
+    },
+    {
+        banner: "Severe Diarrhea + Hypokalemia + Normal TSH",
+        stem: "A 42-year-old traveler returns from Southeast Asia with <strong>3 days of profuse, watery diarrhea</strong> (≥1 L per day). He recalls eating undercooked seafood at a street market. Physical exam shows signs of severe dehydration: tachycardia, hypotension, reduced skin turgor. Labs: severe hypokalemia (2.1 mEq/L), hypernatremia (155 mEq/L), metabolic acidosis (pH 7.18). Stool osmotic gap is <50 mOsm/kg, consistent with secretory diarrhea.",
+        qa: [
+            { q: "What toxin and bacterial organism are responsible?", a: "Cholera toxin from Vibrio cholerae. Acquired from contaminated water/seafood." },
+            { q: "How does cholera toxin cause secretion at the molecular level?", a: "ADP-ribosylates Gs α-subunit → locks Gs permanently active → adenylyl cyclase constitutively ON → massive cAMP → PKA activation → CFTR phosphorylation + Na-K-ATPase dysregulation → net Cl- and Na+ secretion into intestinal lumen → osmotic water loss." },
+            { q: "Why is fluid/electrolyte replacement the key treatment?", a: "The intestine is not damaged; it's just pumping out ions via cAMP-mediated secretion. Restoring intravascular volume and correcting electrolytes is the mainstay. Antibiotics (doxycycline) reduce bacterial load but don't reverse toxin effect. Bismuth subsalicylate may help by reducing secretion." }
+        ]
+    },
+    {
+        banner: "Precocious Puberty — Central vs Peripheral",
+        stem: "A 7-year-old boy presents with breast development and accelerated growth. LH is elevated at 2.5 IU/L (pubertal range), FSH is elevated at 1.8 IU/L. Testosterone is elevated at 85 ng/dL (pubertal). Brain MRI reveals a small hypothalamic hamartoma.",
+        qa: [
+            { q: "Is this central or peripheral precocious puberty? How do the LH/FSH levels help distinguish?", a: "CENTRAL precocious puberty. Elevated LH and FSH (indicating activation of GnRH axis) distinguish this from peripheral causes. The hamartoma is likely secreting GnRH, driving pituitary gonadotropin release." },
+            { q: "How would McCune-Albright (from the first vignette) differ in this patient?", a: "McCune-Albright: normal/low LH/FSH (no GnRH axis activation), but elevated ovarian/testicular steroids from local cAMP signaling. Here: elevated gonadotropins. This is the key distinguishing lab finding." }
+        ]
+    },
+    {
+        banner: "Medical Castration for Cancer",
+        stem: "A 68-year-old man with metastatic prostate cancer is started on <strong>leuprolide (GnRH agonist)</strong> plus <strong>bicalutamide (androgen receptor antagonist)</strong>. On day 1 of treatment, serum testosterone is 450 ng/dL (baseline was 480 ng/dL). By day 3, his PSA-related pain worsens, and he reports dysuria and lower back pain. By day 14, testosterone drops to 18 ng/dL (castrate level) and symptoms improve.",
+        qa: [
+            { q: "Why does pain worsen before improving? What is this phenomenon called?", a: "Flare phenomenon. Initial continuous GnRH agonism triggers LH/FSH surge → transient testosterone spike → tumor stimulation → pain/obstruction. Bicalutamide is given to block androgen effects during this flare window." },
+            { q: "What is the mechanism of hormone suppression after day 3?", a: "Sustained GnRH agonism → GnRH receptor desensitization and downregulation on pituitary gonadotropes → LH/FSH suppression → testicular testosterone production drops to castrate levels (<50 ng/dL)." },
+            { q: "Why not use a GnRH antagonist instead?", a: "GnRH antagonists (e.g., degarelix, cetrorelix) block receptors directly → no LH/FSH surge → no flare phenomenon. But they are more expensive. Agonists + anti-androgen cover is more cost-effective and equally efficacious." }
+        ]
+    },
+    {
+        banner: "SERM Tissue Selectivity",
+        stem: "A 58-year-old postmenopausal woman on <strong>tamoxifen</strong> for ER-positive breast cancer (now 4 years on therapy) undergoes screening colonoscopy. Colonoscopy is normal, but routine labs show abnormal uterine bleeding. Pelvic ultrasound reveals <strong>thickened endometrium (15 mm, normal <5 mm)</strong>, and endometrial biopsy shows adenocarcinoma. She asks why bone density on her DEXA scan is normal despite being 8 years postmenopausal.",
+        qa: [
+            { q: "How does tamoxifen cause endometrial cancer while protecting bone?", a: "SERM mechanism: tamoxifen acts as ER ANTAGONIST in breast (blocks growth signals) but ER AGONIST in uterus (stimulates proliferation) and bone (maintains density). Tissue selectivity depends on coactivator/corepressor availability in each tissue." },
+            { q: "Why is raloxifene preferred for long-term postmenopausal osteoporosis?", a: "Raloxifene is ANTAGONIST in both breast AND uterus (no endometrial proliferation risk) while being AGONIST in bone. Avoids the endometrial cancer risk associated with tamoxifen." },
+            { q: "What is the mechanism by which SERMs achieve tissue selectivity?", a: "Nuclear receptor agonists/antagonists are NOT intrinsically 'agonist' or 'antagonist' — they are ligands that recruit different coactivators or corepressors depending on the tissue's transcriptional machinery. The same molecule is an agonist in bone (coactivator-rich) and antagonist in uterus (corepressor-rich)." }
+        ]
+    },
+    {
+        banner: "Thyrotoxicosis from Pregnancy Tumor",
+        stem: "A 32-year-old woman at 10 weeks gestation presents with <strong>palpitations, tremor, weight loss despite normal appetite, and heat intolerance</strong>. Initial TSH is suppressed at <0.01 mIU/L. Free T4 is elevated at 2.1 ng/dL (normal 0.8–1.8). TPO antibodies are negative. She denies iodine supplementation. Follow-up labs show an extraordinarily elevated hCG of 580,000 mIU/L (normal at 10 weeks is ~60,000). Pelvic ultrasound reveals <strong>no normal fetal tissue, only abnormal trophoblastic proliferation</strong>.",
+        qa: [
+            { q: "What is the underlying diagnosis?", a: "Molar pregnancy (hydatidiform mole) — abnormal placental tissue producing extremely high hCG without viable fetus." },
+            { q: "How does hCG cause thyrotoxicosis?", a: "hCG and TSH share the same alpha subunit (both are glycoprotein hormones). At massively elevated hCG levels, hCG cross-activates TSH receptor on thyroid → T4/T3 release. This is secondary thyrotoxicosis (thyroid responds normally), not Graves' disease (autoimmune)." },
+            { q: "Why is TSH suppressed if hCG is stimulating the thyroid?", a: "Elevated free T4 → negative feedback on thyrotropes → TSH suppression. Pituitary feedback loop remains intact despite non-physiologic thyroid stimulation from hCG." }
+        ]
+    },
+    {
+        banner: "Ectopic Hormone from Lung Cancer",
+        stem: "A 62-year-old male smoker with no prior endocrine history presents with <strong>progressive weakness, fatigue, and muscle cramps</strong>. Labs show severe hypokalemia (2.1 mEq/L), hypernatremia (152 mEq/L), and metabolic alkalosis (pH 7.52, HCO3 38 mEq/L). Morning cortisol is extremely elevated at 52 mcg/dL (normal <18). ACTH is also elevated at 120 pg/mL (normal 10–50). Dexamethasone suppression test (low dose: 1 mg overnight) shows NO suppression of cortisol (remained 50 mcg/dL). Chest X-ray reveals a 3 cm hilar mass suggestive of small cell lung cancer (SCLC).",
+        qa: [
+            { q: "What syndrome does this patient have, and what is the molecular mechanism?", a: "Ectopic ACTH syndrome (paraneoplastic syndrome). SCLC secretes ACTH ectopically → stimulates adrenal cortisol production → Cushing's syndrome. The tumor-derived ACTH is not suppressed by dexamethasone because it's not regulated by normal pituitary feedback loops." },
+            { q: "Why is the dexamethasone suppression test NOT suppressed (unlike pituitary Cushing's)?", a: "In pituitary Cushing's, dexamethasone suppresses pituitary ACTH production (negative feedback) → cortisol drops. In ectopic ACTH, the tumor produces ACTH autonomously, independent of feedback. Dexamethasone doesn't reach tumor cells or doesn't suppress their ACTH secretion → no suppression." },
+            { q: "Why is ACTH elevated despite high cortisol (normally cortisol suppresses ACTH)?", a: "Normal feedback is disrupted. Tumor ACTH is autonomous, not responsive to cortisol levels. This distinguishes ectopic ACTH from pituitary adenoma, where cortisol typically suppresses ACTH somewhat." }
+        ]
+    },
+    {
+        banner: "Constitutive Steroid Secretion from Adrenal Adenoma",
+        stem: "A 45-year-old woman is found incidentally on CT scan to have a 2.5 cm left adrenal nodule. She is referred to endocrinology for evaluation. Labs show: morning cortisol 18 mcg/dL (upper normal), ACTH 3 pg/mL (suppressed, normal 10–50), 24-hour urine free cortisol 42 mcg/24h (normal <50, borderline). Dexamethasone overnight suppression test: cortisol drops to 2 mcg/dL (normal suppression).",
+        qa: [
+            { q: "What is the most likely diagnosis?", a: "Non-functioning adrenal adenoma OR subclinical Cushing's syndrome (autonomous cortisol secretion without overt hormone excess symptoms). Adenoma cells have autonomous steroidogenesis — they synthesize cortisol de novo without ACTH stimulation." },
+            { q: "Why is ACTH suppressed while cortisol is normal/borderline?", a: "Cortisol is produced directly by the adenoma cells (autonomous, de novo synthesis of steroids, which is CONSTITUTIVE). Even borderline elevated cortisol suppresses pituitary ACTH via negative feedback. The adenoma is not dependent on ACTH." },
+            { q: "How does adrenal steroid synthesis differ mechanistically from other hormones?", a: "Steroid hormones have NO secretory granules. They are synthesized de novo from cholesterol via enzymatic cascades (StAR protein, P450 enzymes) and immediately released (constitutive secretion). Unlike peptide hormones (stored in granules, regulated secretion), steroids cannot be 'stored' and are always being made and released." }
+        ]
+    },
+    {
+        banner: "Carcinoid Tumor with Ectopic Serotonin",
+        stem: "A 55-year-old man presents with episodic <strong>flushing of the face and neck</strong> (lasting 2–5 minutes), <strong>severe watery diarrhea</strong> (8–10 times per day), and <strong>wheezing</strong>. Symptoms are worse after eating certain foods. Physical exam reveals <strong>hepatomegaly</strong> and telangiectasias (dilated blood vessels) on the face. 24-hour urine 5-HIAA is markedly elevated at 185 mcg/24h (normal <8). Abdominal imaging shows a small bowel primary tumor with liver metastases.",
+        qa: [
+            { q: "What is the diagnosis and what hormone is being secreted ectopically?", a: "Carcinoid tumor (neuroendocrine tumor) producing serotonin (and substance P, histamine). Ectopic serotonin/substance P secretion into bloodstream causes carcinoid syndrome." },
+            { q: "Why does the flushing and diarrhea occur?", a: "Serotonin and substance P cause: (1) cutaneous vasodilation → flushing. (2) Intestinal smooth muscle contraction + secretion → diarrhea. (3) Bronchoconstriction → wheezing. Carcinoid syndrome occurs typically when tumor has metastasized to liver (serotonin can bypass first-pass hepatic metabolism)." },
+            { q: "What is the role of 5-HIAA measurement?", a: "5-HIAA (5-hydroxyindoleacetic acid) is the major urinary metabolite of serotonin. Elevated 5-HIAA confirms serotonin excess and is a diagnostic marker for carcinoid/neuroendocrine tumors." }
+        ]
+    },
+    {
+        banner: "Addison's Disease — Adrenal Insufficiency",
+        stem: "A 38-year-old woman presents with <strong>progressive fatigue, weakness, weight loss, and muscle pain</strong>. She also notes <strong>darkening of her skin</strong>, particularly in sun-exposed areas and over knuckles. Labs show: cortisol 4 mcg/dL (low, normal >10), ACTH 180 pg/mL (markedly elevated, normal 10–50), Na 128 mEq/L (hyponatremia, normal 135–145), K 6.2 mEq/L (hyperkalemia, normal 3.5–5.0). Thyroid function tests are normal.",
+        qa: [
+            { q: "What is the diagnosis and what is the molecular mechanism of skin darkening?", a: "Primary adrenal insufficiency (Addison's disease). Loss of adrenal cortex → no cortisol feedback → pituitary ACTH rises dramatically. ACTH is processed from POMC, which is also cleaved to α-MSH (melanocyte-stimulating hormone). High ACTH → high MSH → melanocyte stimulation → skin darkening (Addison's sign)." },
+            { q: "Why does hyponatremia develop in adrenal insufficiency?", a: "Loss of aldosterone (adrenal hormone) → inability to retain sodium → hyponatremia + hyperkalemia. Also, SIADH can develop from stress in acute adrenal crisis." },
+            { q: "What is the role of elevated POMC processing?", a: "Corticotrophs produce POMC, which is cleaved to ACTH + β-endorphin (+ MSH). No cortisol feedback → excess POMC processing → not just high ACTH, but also high β-endorphin (contributes to depression/mood changes in Addison's) and high MSH (pigmentation)." }
+        ]
+    }
+];
+
+const traps = [
+    { myth: "Cholera toxin ACTIVATES Gi, increasing cAMP.", truth: "FALSE: Cholera toxin ADP-ribosylates Gs (not Gi) and locks Gs ON. Pertussis toxin inactivates Gi.", correct: false },
+    { myth: "Pertussis toxin activates Gi to increase cAMP in whooping cough.", truth: "TRAP: Pertussis toxin ADP-ribosylates Gi and locks Gi OFF (inactivates). Loss of Gi inhibition → relative ↑cAMP. Incorrect statement.", correct: false },
+    { myth: "Achondroplasia involves a LOSS-OF-FUNCTION mutation in FGFR3.", truth: "TRAP: Achondroplasia is a GAIN-OF-FUNCTION (activating) mutation → constitutive FGFR3 signaling → excessive bone growth inhibition.", correct: false },
+    { myth: "Leuprolide (GnRH agonist) immediately suppresses LH and FSH.", truth: "TRAP: Leuprolide initially causes LH/FSH surge (flare phenomenon) before receptor downregulation leads to suppression.", correct: false },
+    { myth: "Tamoxifen is a pure estrogen receptor antagonist in all tissues.", truth: "TRAP: Tamoxifen is a SERM (selective ER modulator) — antagonist in breast, agonist in bone and uterus. Tissue selectivity depends on coactivators.", correct: false },
+    { myth: "McCune-Albright involves a GERMLINE activating Gs mutation inherited from parents.", truth: "TRAP: McCune-Albright is a SOMATIC (post-zygotic) activating Gs mutation, not germline. This is why features are patchy/mosaic; heterozygous germline Gs mutations are embryonic lethal.", correct: false },
+    { myth: "Pseudohypoparathyroidism (PHP 1a) has HIGH PTH and HIGH calcium due to impaired PTH secretion.", truth: "FALSE: PHP 1a has HIGH PTH and LOW calcium (target organ resistance — PTH cannot signal due to Gs defect in kidney/bone).", correct: false },
+    { myth: "ANP (atrial natriuretic peptide) signals through a Gs-coupled GPCR.", truth: "TRAP: ANP signals through a GUANYLYL CYCLASE-coupled receptor → cGMP (not cAMP). PKG activation → natriuresis.", correct: false },
+    { myth: "hCG and TSH share the same BETA subunit, explaining cross-reactivity.", truth: "TRAP: They share the same ALPHA subunit (both glycoprotein hormones). Beta subunits are unique to each hormone.", correct: false },
+    { myth: "Continuous GnRH agonist therapy INCREASES LH and FSH (opposite of antagonist).", truth: "FALSE: Continuous GnRH agonist causes initial surge, then sustained receptor downregulation → DECREASED LH/FSH. Antagonists block directly without flare.", correct: false },
+    { myth: "RU-486 (mifepristone) is a PROGESTERONE RECEPTOR AGONIST.", truth: "TRAP: RU-486 is a progesterone receptor ANTAGONIST (competitive inhibitor), making it an abortifacient.", correct: false },
+    { myth: "In the JAK-STAT pathway, JAK kinase is part of the cytokine receptor structure itself.", truth: "TRAP: JAK is NOT part of the receptor; cytokine receptors lack intrinsic kinase activity and RECRUIT JAK proteins (associated, not structural).", correct: false }
+];
+
+const fillInBlanks = [
+    { prompt: "The Gs-activating toxin of cholera causes diarrhea by ADP-ribosylating _____, locking this G-protein permanently active.", answer: "Gs" },
+    { prompt: "Achondroplasia is caused by a _____-of-function mutation in FGFR3, resulting in shortened limbs.", answer: "gain" },
+    { prompt: "GH and prolactin signal through the _____ pathway, requiring JAK2 kinase activation.", answer: "JAK-STAT" },
+    { prompt: "Leuprolide (GnRH agonist) causes ↓LH/FSH by triggering GnRH receptor _____, removing the stimulus for gonadotropin release.", answer: "downregulation" },
+    { prompt: "The McCune-Albright triad consists of precocious puberty + café-au-lait spots + _____.", answer: "polyostotic fibrous dysplasia" },
+    { prompt: "ANP activates the enzyme _____, which produces cGMP, leading to vasodilation and natriuresis.", answer: "guanylyl cyclase" },
+    { prompt: "hCG cross-reacts with _____ receptor due to shared alpha subunit, explaining thyrotoxicosis in molar pregnancy.", answer: "TSH" },
+    { prompt: "Tamoxifen acts as an estrogen receptor AGONIST in _____ tissue (protecting from osteoporosis) but ANTAGONIST in _____ (blocking tumor growth).", answer: "bone;breast" },
+    { prompt: "RU-486 (mifepristone) blocks the _____ receptor, making it an abortifacient by preventing endometrial progesterone signaling.", answer: "progesterone" },
+    { prompt: "POMC is cleaved in corticotrophs to produce _____ and _____, both of which regulate cortisol secretion and other physiologic responses.", answer: "ACTH;β-endorphin" }
+];
+
+const drillMatchers = [
+    {
+        type: "Receptor-Pathway Matcher",
+        instructions: "Match each hormone/effector to its G-protein coupled receptor and second messenger",
+        items: [
+            { stimulus: "TSH, PTH, glucagon, ADH(V2), FSH", target: "Gs-coupled → cAMP ↑" },
+            { stimulus: "Somatostatin, α2-adrenergic, dopamine D2", target: "Gi-coupled → cAMP ↓" },
+            { stimulus: "GnRH, oxytocin, ADH(V1a), α1-adrenergic", target: "Gq-coupled → IP3/DAG ↑" },
+            { stimulus: "GH, prolactin, EPO, cytokines", target: "JAK-STAT" },
+            { stimulus: "ANP, BNP", target: "Guanylyl cyclase → cGMP ↑" },
+            { stimulus: "Insulin, IGF-1, EGF, PDGF", target: "RTK (tyrosine kinase)" }
+        ]
+    },
+    {
+        type: "Toxin Mechanism Sequencer",
+        instructions: "Match toxin → molecular target → outcome",
+        items: [
+            { stimulus: "Cholera", target: "Gs ADP-ribosylation (locks ON) → ↑cAMP → intestinal Cl⁻ secretion → rice-water diarrhea" },
+            { stimulus: "Pertussis", target: "Gi ADP-ribosylation (locks OFF) → unopposed adenylyl cyclase → ↑cAMP in immune cells → whooping cough + lymphocytosis" },
+            { stimulus: "Botulinum", target: "SNARE cleavage → no ACh release → flaccid paralysis" }
+        ]
+    },
+    {
+        type: "SERM Tissue Effect Classifier",
+        instructions: "Classify tamoxifen and raloxifene effects as agonist or antagonist in each tissue",
+        items: [
+            { stimulus: "Tamoxifen in breast", target: "ANTAGONIST (blocks ER+ growth)" },
+            { stimulus: "Tamoxifen in bone", target: "AGONIST (maintains density)" },
+            { stimulus: "Tamoxifen in uterus", target: "AGONIST (risk of endometrial hyperplasia)" },
+            { stimulus: "Raloxifene in breast", target: "ANTAGONIST" },
+            { stimulus: "Raloxifene in bone", target: "AGONIST" },
+            { stimulus: "Raloxifene in uterus", target: "ANTAGONIST (preferred post-menopause)" }
+        ]
+    },
+    {
+        type: "Disease-Mutation Matcher",
+        instructions: "Match disease/toxin to the affected protein and mutation type",
+        items: [
+            { stimulus: "McCune-Albright syndrome", target: "Somatic activating Gs mutation (GNAS gene)" },
+            { stimulus: "Achondroplasia", target: "Activating FGFR3 mutation (AD, de novo common)" },
+            { stimulus: "Pseudohypoparathyroidism 1a", target: "Inactivating Gs mutation (maternal allele, Albright features)" },
+            { stimulus: "Cholera", target: "Gs ADP-ribosylation by bacterial exotoxin" },
+            { stimulus: "Pertussis", target: "Gi ADP-ribosylation by bacterial exotoxin" }
+        ]
+    }
+];
+
+const refTable = [
+    {
+        lo: "Hormone classes & synthesis",
+        step1: "Steroid synthesis (de novo, constitutive); peptide storage (granules, regulated); post-translational modification (POMC processing)",
+        associations: "Carcinoid (ectopic hormone); paraneoplastic syndromes; adrenal insufficiency (POMC/ACTH/MSH ↑)",
+        keywords: "POMC, ectopic hormone, constitutive secretion, regulated secretion"
+    },
+    {
+        lo: "Receptor types & binding",
+        step1: "Gs/Gi/Gq signaling; RTK & JAK-STAT pathways; guanylyl cyclase receptors; nuclear receptors (steroids, T3, vitamin D, retinoids)",
+        associations: "McCune-Albright (Gs ↑), Achondroplasia (FGFR3 ↑); Cholera (Gs locked ON); Pertussis (Gi locked OFF); hyperprolactinemia (D2 antagonism)",
+        keywords: "cAMP, IP3/DAG, cGMP, RTK, JAK-STAT, nuclear receptor"
+    },
+    {
+        lo: "Second messengers & Kd",
+        step1: "cAMP (Gs), cGMP (guanylyl cyclase), IP3/DAG (Gq), tyrosine phosphorylation (RTK); STAT phosphorylation (JAK); receptor desensitization (Kd shift, internalization)",
+        associations: "Leuprolide flare (receptor downregulation); ANP/BNP natriuresis (cGMP/PKG); PKA-mediated phosphorylation effects",
+        keywords: "desensitization, downregulation, second messenger, affinity, Kd"
+    },
+    {
+        lo: "Nuclear receptors",
+        step1: "Ligand-bound → coactivator recruitment → chromatin remodeling → gene transcription. SERMs = tissue-selective agonist/antagonist based on coactivator availability. Glucocorticoid receptor (pharmacology of steroids). RU-486 = PR antagonist.",
+        associations: "Tamoxifen (ER SERM — antagonist breast, agonist bone/uterus); Raloxifene (ER SERM — antagonist breast/uterus, agonist bone); RU-486 (abortifacient via PR antagonism); steroid therapy (GR agonism)",
+        keywords: "SERM, coactivator, corepressor, estrogen receptor, progesterone receptor, glucocorticoid receptor"
+    },
+    {
+        lo: "Hormone measurement",
+        step1: "Immunoassays (RIA, ELISA, chemiluminescence); cross-reactivity (hCG ↑ → TSH assay ↑, molar pregnancy → thyrotoxicosis); serial measurements for diagnosis (ACTH with cortisol suppression test)",
+        associations: "Molar pregnancy + thyrotoxicosis (hCG/TSH cross-reactivity); ectopic ACTH + dexamethasone non-suppression (diagnosis); POMC processing (ACTH + MSH)",
+        keywords: "immunoassay, cross-reactivity, specificity, sensitivity, dexamethasone suppression test"
+    },
+    {
+        lo: "Carrier proteins & hormone transport",
+        step1: "Steroid carrier proteins (SHBG, CBG, albumin); hydrophobic hormones use carriers; water-soluble peptides don't require carriers. Bioavailability differences (oral peptides destroyed; oral steroids OK).",
+        associations: "Oral contraceptives (oral estrogen/progesterone); insulin must be injected; GH must be injected. Hypothyroidism treated with oral levothyroxine.",
+        keywords: "SHBG, CBG, bioavailability, first-pass metabolism"
+    },
+    {
+        lo: "Feedback & control",
+        step1: "Negative feedback (cortisol suppresses ACTH); loss of feedback → hormone ↑ (adrenal insufficiency, McCune-Albright). Continuous agonism → receptor downregulation (leuprolide). Hypothalamic control via portal system.",
+        associations: "Addison's disease (ACTH ↑, cortisol ↓, no feedback); ectopic ACTH (no dexamethasone suppression); stalk section → prolactin ↑ (loss of dopamine inhibition)",
+        keywords: "negative feedback, receptor downregulation, flare phenomenon, autonomous secretion"
+    },
+    {
+        lo: "G-protein signaling, Toxins, Molecular Diseases",
+        step1: "Cholera toxin ADP-ribosylates Gs (locks ON); Pertussis toxin ADP-ribosylates Gi (locks OFF); McCune-Albright = somatic Gs activating mutation; Achondroplasia = FGFR3 gain-of-function; Leuprolide = continuous GnRH agonism → receptor downregulation",
+        associations: "Watery diarrhea (Cholera); whooping cough (Pertussis); precocious puberty (McCune-Albright); short limbs (Achondroplasia); medical castration (leuprolide + anti-androgen for prostate cancer flare suppression)",
+        keywords: "ADP-ribosylation, Gs, Gi, GNAS, FGFR3, leuprolide, flare phenomenon"
+    }
+];
+
+// ─── RENDER FUNCTIONS ─────────────────────────────────
+
+function renderFlashcards() {
+    const container = document.getElementById('fcGrid');
+    container.innerHTML = '';
+    flashcards.forEach((card, i) => {
+        const el = document.createElement('div');
+        el.className = 'fc';
+        el.innerHTML = `
+            <div class="fc-inner">
+                <div class="fc-front">
+                    <div class="fc-label">Card ${i+1}</div>
+                    <div class="fc-q">${card.q}</div>
+                    <div class="fc-hint">Click to reveal</div>
+                </div>
+                <div class="fc-back">
+                    <div class="fc-label">Answer</div>
+                    <div class="fc-a">${card.a}</div>
+                </div>
+            </div>
+        `;
+        el.onclick = () => el.classList.toggle('flipped');
+        container.appendChild(el);
+    });
+}
+
+function renderMCQ() {
+    const container = document.getElementById('mcqContainer');
+    container.innerHTML = '';
+    mcqs.forEach((q, i) => {
+        const el = document.createElement('div');
+        el.className = 'mcq-item';
+        let optionsHtml = '';
+        q.options.forEach((opt, j) => {
+            const isCorrect = j === q.correct;
+            optionsHtml += `
+                <div class="mcq-opt" onclick="selectOption(this, ${isCorrect}, '${q.explanations[j].replace(/'/g, "\\'")}')">
+                    <span class="letter">${String.fromCharCode(65+j)}.</span>
+                    <span>${opt}</span>
+                </div>
+            `;
+        });
+        el.innerHTML = `
+            <div class="mcq-num">Question ${i+1}</div>
+            <div class="mcq-stem">${q.stem}</div>
+            <div class="mcq-options">${optionsHtml}</div>
+            <div class="mcq-explanation"></div>
+            <div class="teaching-pt">
+                <div class="tp-label">Key Teaching Point</div>
+                <div>${q.teaching}</div>
+            </div>
+        `;
+        container.appendChild(el);
+    });
+}
+
+function selectOption(el, correct, explanation) {
+    if (el.classList.contains('revealed')) return;
+    const mcqItem = el.closest('.mcq-item');
+    mcqItem.querySelectorAll('.mcq-opt').forEach(opt => opt.classList.add('revealed'));
+    el.classList.add(correct ? 'correct' : 'wrong');
+    const expEl = mcqItem.querySelector('.mcq-explanation');
+    expEl.innerHTML = `<div class="exp-label">${correct ? 'Correct!' : 'Incorrect'}</div><div>${explanation}</div>`;
+    expEl.classList.add('visible');
+    mcqItem.querySelector('.teaching-pt').classList.add('visible');
+}
+
+function renderVignettes() {
+    const container = document.getElementById('vigContainer');
+    container.innerHTML = '';
+    vignettes.forEach((v, i) => {
+        const el = document.createElement('div');
+        el.className = 'vig-item';
+        let qaHtml = '';
+        v.qa.forEach(qa => {
+            qaHtml += `<div><div class="vig-q">${qa.q}</div><div class="vig-a">${qa.a}</div></div>`;
+        });
+        el.innerHTML = `
+            <div class="vig-banner">${v.banner}</div>
+            <div class="vig-stem">${v.stem}</div>
+            <button class="vig-btn" onclick="toggleVigQA(this)">Reveal Questions & Answers</button>
+            <div class="vig-qa">${qaHtml}</div>
+        `;
+        container.appendChild(el);
+    });
+}
+
+function toggleVigQA(btn) {
+    const qa = btn.nextElementSibling;
+    qa.classList.toggle('visible');
+    btn.textContent = qa.classList.contains('visible') ? 'Hide Q&A' : 'Reveal Questions & Answers';
+}
+
+let trapState = {correct: 0, total: 0};
+
+function renderTraps() {
+    const container = document.getElementById('trapsContainer');
+    container.innerHTML = '';
+    trapState = {correct: 0, total: traps.length};
+    updateTrapScore();
+    traps.forEach((t, idx) => {
+        const el = document.createElement('div');
+        el.className = 'trap-item';
+        el.innerHTML = `<div class="trap-statement">${idx+1}. ${t.myth}</div>
+            <div class="trap-buttons">
+                <button class="trap-btn trap-btn-correct" onclick="answerTrap(${idx},true)">CORRECT ✓</button>
+                <button class="trap-btn trap-btn-trap" onclick="answerTrap(${idx},false)">TRAP ✗</button>
+            </div>
+            <div class="trap-result" id="trap-res-${idx}">
+                <div class="trap-verdict" id="trap-verdict-${idx}"></div>
+                <div class="trap-explain" id="trap-explain-${idx}"></div>
+            </div>`;
+        container.appendChild(el);
+    });
+}
+
+function answerTrap(idx, userSaysCorrect) {
+    const result = document.getElementById(`trap-res-${idx}`);
+    const verdict = document.getElementById(`trap-verdict-${idx}`);
+    const explain = document.getElementById(`trap-explain-${idx}`);
+    const isActual = traps[idx].correct;
+    const isUserCorrect = (userSaysCorrect === isActual);
+    document.querySelectorAll(`[onclick*="answerTrap(${idx},"]`).forEach(b => b.disabled = true);
+    if (isUserCorrect) { trapState.correct++; result.classList.add('correct-choice'); verdict.innerHTML = '✓ Correct!'; }
+    else { result.classList.add('wrong-choice'); verdict.innerHTML = '✗ Incorrect'; }
+    result.classList.add('show');
+    explain.innerHTML = traps[idx].truth;
+    updateTrapScore();
+}
+
+function updateTrapScore() {
+    const el = document.getElementById('trap-score');
+    if (el) el.textContent = `Score: ${trapState.correct}/${trapState.total}`;
+}
+
+function resetTraps() {
+    trapState.correct = 0;
+    trapState.total = traps.length;
+    document.querySelectorAll('.trap-result').forEach(r => r.classList.remove('show','correct-choice','wrong-choice'));
+    document.querySelectorAll('.trap-btn').forEach(b => b.disabled = false);
+    updateTrapScore();
+}
+
+function renderFIB() {
+    const container = document.getElementById('fibContainer');
+    container.innerHTML = '';
+    fillInBlanks.forEach((q, i) => {
+        const el = document.createElement('div');
+        el.className = 'fib-item';
+        const answers = q.answer.split(';');
+        el.innerHTML = `
+            <div style="margin-bottom: 10px;"><strong>Q${i+1}:</strong> ${q.prompt}</div>
+            <input type="text" class="fib-input" placeholder="Type answer..." data-answers="${q.answer}" data-index="${i}">
+            <button class="fib-btn" onclick="checkFIB(this)">Check</button>
+            <div class="fib-result"></div>
+        `;
+        container.appendChild(el);
+    });
+}
+
+function checkFIB(btn) {
+    const input = btn.previousElementSibling;
+    const answers = input.getAttribute('data-answers').split(';').map(a => a.toLowerCase().trim());
+    const userAnswer = input.value.toLowerCase().trim();
+    const resultEl = input.nextElementSibling.nextElementSibling;
+    const isCorrect = answers.includes(userAnswer);
+    resultEl.textContent = isCorrect ? `✓ Correct! Answer: ${answers.join(' or ')}` : `✗ Incorrect. Answer: ${answers.join(' or ')}`;
+    resultEl.className = `fib-result ${isCorrect ? 'correct' : 'incorrect'}`;
+}
+
+function renderDrill() {
+    const container = document.getElementById('drillContainer');
+    container.innerHTML = '';
+    const shuffleArr = arr => [...arr].map(v => [Math.random(), v]).sort((a,b) => a[0]-b[0]).map(v => v[1]);
+    drillMatchers.forEach((drill, dIdx) => {
+        const section = document.createElement('div');
+        section.style.marginBottom = '32px';
+        section.innerHTML = `<div style="font-weight:700;color:#FCD34D;margin-bottom:8px;font-size:1em;">${drill.type}</div><div style="color:#9CA3AF;font-size:0.85em;margin-bottom:16px;">${drill.instructions}</div>`;
+        const allTargets = drill.items.map(i => i.target);
+        drill.items.forEach((item, iIdx) => {
+            const others = allTargets.filter(t => t !== item.target);
+            const options = shuffleArr([item.target, ...shuffleArr(others).slice(0, 3)]);
+            const itemEl = document.createElement('div');
+            itemEl.className = 'drill-item-q';
+            itemEl.style.cssText = 'background:#161B22;border:1px solid #30363D;border-radius:8px;padding:16px;margin-bottom:12px;';
+            const optsHtml = options.map(opt => `<button class="drill-opt" data-correct="${opt === item.target}" data-didx="${dIdx}" data-iidx="${iIdx}" onclick="checkDrillOpt(this)" style="display:block;width:100%;text-align:left;background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:9px 13px;margin:4px 0;cursor:pointer;color:#C9D1D9;font-size:0.85em;transition:all 0.2s;">${opt}</button>`).join('');
+            itemEl.innerHTML = `<div style="font-weight:600;color:#E6EDF3;margin-bottom:12px;font-size:0.93em;">${item.stimulus}</div>${optsHtml}<div id="drill-fb-${dIdx}-${iIdx}" style="display:none;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;"></div>`;
+            section.appendChild(itemEl);
+        });
+        container.appendChild(section);
+    });
+}
+
+function checkDrillOpt(btn) {
+    const isCorrect = btn.dataset.correct === 'true';
+    const dIdx = parseInt(btn.dataset.didx);
+    const iIdx = parseInt(btn.dataset.iidx);
+    const item = drillMatchers[dIdx].items[iIdx];
+    btn.closest('.drill-item-q').querySelectorAll('.drill-opt').forEach(b => {
+        b.disabled = true;
+        if (b.dataset.correct === 'true') { b.style.cssText += ';background:rgba(74,222,128,0.15);border-color:#4ADE80;color:#D1FAE5;'; }
+    });
+    if (!isCorrect) { btn.style.cssText += ';background:rgba(239,68,68,0.15);border-color:#EF4444;color:#FCA5A5;'; }
+    const fb = document.getElementById(`drill-fb-${dIdx}-${iIdx}`);
+    if (isCorrect) { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(74,222,128,0.1);color:#D1FAE5;'; fb.innerHTML = '✓ Correct!'; }
+    else { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(239,68,68,0.1);color:#FCA5A5;'; fb.innerHTML = `✗ Correct: ${item.target}`; }
+}
+
+function renderRef() {
+    const container = document.getElementById('refContainer');
+    container.innerHTML = '';
+    let html = `<table class="ref-table"><thead><tr><th>GUSOM LO</th><th>Step 1 Extension</th><th>High-Yield Associations</th><th>Key Buzzwords</th></tr></thead><tbody>`;
+    refTable.forEach(row => {
+        html += `<tr><td>${row.lo}</td><td>${row.step1}</td><td>${row.associations}</td><td><span class="hl">${row.keywords}</span></td></tr>`;
+    });
+    html += `</tbody></table>`;
+    container.innerHTML = html;
+}
+
+// ─── INITIALIZATION ───────────────────────────────────
+renderFlashcards();
+renderMCQ();
+renderVignettes();
+renderTraps();
+renderFIB();
+renderDrill();
+renderRef();
+
+// ─── TAB SWITCH WITH RENDER ───────────────────────────
+const originalSwitchTab = switchTab;
+switchTab = function(name) {
+    originalSwitchTab(name);
+};
+</script>
+</body>
+</html>

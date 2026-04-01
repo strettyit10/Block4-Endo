@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUSOM Endocrine — Biochemistry Step 1 Hub #2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F1117;
+    --card: #1A1D26;
+    --card2: #21253A;
+    --border: #2A2E42;
+    --text: #E8EAF0;
+    --muted: #8A8FAA;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, #0D1321 0%, #12151F 50%, #1A1200 100%);
+    border-bottom: 1px solid #3D3300;
+    padding: 36px 24px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,193,7,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .site-header .eyebrow {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: #FFD54F; margin-bottom: 10px;
+  }
+  .site-header h1 { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .site-header .hub-tag {
+    display: inline-block;
+    background: rgba(255,193,7,0.15); border: 1px solid rgba(255,193,7,0.35);
+    border-radius: 8px; padding: 3px 14px; font-size: 0.75rem; font-weight: 700;
+    color: #FFD54F; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .site-header p { font-size: 0.95rem; color: var(--muted); max-width: 640px; margin: 0 auto; line-height: 1.6; }
+  .header-badges {
+    display: flex; justify-content: center; gap: 10px;
+    flex-wrap: wrap; margin-top: 18px;
+  }
+  .header-badge {
+    background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 14px; font-size: 0.78rem; color: var(--muted);
+  }
+  .header-badge.hl { background: rgba(255,193,7,0.1); color: #FFD54F; border-color: rgba(255,193,7,0.3); }
+
+  /* ── PROGRESSION BANNER ── */
+  .progression-banner {
+    background: linear-gradient(135deg, #0D1321 0%, #111827 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .prog-step {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.82rem;
+  }
+  .prog-step .step-dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 800;
+  }
+  .prog-step.done .step-dot { background: rgba(34,197,94,0.2); border: 2px solid #22C55E; color: #22C55E; }
+  .prog-step.active .step-dot { background: rgba(255,193,7,0.2); border: 2px solid #FFD54F; color: #FFD54F; }
+  .prog-step.done .step-label { color: #6EE7B7; text-decoration: none; }
+  .prog-step.active .step-label { color: #FFD54F; font-weight: 700; }
+  .prog-step.done .step-label a { color: #6EE7B7; text-decoration: none; font-weight: 600; }
+  .prog-step.done .step-label a:hover { text-decoration: underline; }
+  .prog-arrow { color: var(--muted); font-size: 1rem; }
+
+  /* ── MAIN ── */
+  .main { max-width: 1040px; margin: 0 auto; padding: 44px 20px 80px; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 16px; padding-left: 2px;
+  }
+
+  /* ── STEP 1 FOCUS BANNER ── */
+  .focus-banner {
+    background: linear-gradient(135deg, #1A1200 0%, #1E1508 100%);
+    border: 1px solid rgba(255,193,7,0.25);
+    border-radius: var(--radius);
+    padding: 20px 24px; margin-bottom: 40px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .focus-icon { font-size: 2rem; flex-shrink: 0; margin-top: 2px; }
+  .focus-text h3 { font-size: 1rem; font-weight: 700; color: #FFD54F; margin-bottom: 6px; }
+  .focus-text p { font-size: 0.85rem; color: #B8A060; line-height: 1.6; }
+  .focus-pillrow { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .focus-pill {
+    background: rgba(255,193,7,0.1); border: 1px solid rgba(255,193,7,0.2);
+    border-radius: 10px; padding: 2px 10px; font-size: 0.7rem;
+    color: #FFD54F; font-weight: 600;
+  }
+
+  /* ── LECTURE GRID ── */
+  .lecture-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    margin-bottom: 52px;
+  }
+
+  .lecture-card {
+    display: block; text-decoration: none;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px 22px 20px;
+    transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+    position: relative; overflow: hidden;
+  }
+  .lecture-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--accent);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .lecture-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    border-color: var(--accent);
+  }
+
+  .card-number {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  }
+  .card-title { font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+  .card-subtitle { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; line-height: 1.5; }
+
+  .card-step1 {
+    font-size: 0.73rem; color: #B8A060; margin-bottom: 14px;
+    padding: 7px 10px; background: rgba(255,193,7,0.05);
+    border-radius: 6px; border: 1px solid rgba(255,193,7,0.15);
+    line-height: 1.5;
+  }
+  .card-step1 strong { color: #FFD54F; font-weight: 700; }
+
+  .card-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .pill {
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    border-radius: 12px; padding: 3px 10px; font-size: 0.7rem; color: var(--muted);
+  }
+  .pill.new {
+    background: rgba(255,255,255,0.1); border-color: var(--accent);
+    color: #fff; font-weight: 600;
+  }
+  .pill.step1 {
+    background: rgba(255,193,7,0.1); border-color: rgba(255,193,7,0.3);
+    color: #FFD54F; font-weight: 600;
+  }
+
+  .card-cta {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--border); padding-top: 14px; margin-top: 4px;
+  }
+  .cta-text { font-size: 0.82rem; font-weight: 600; color: var(--accent); }
+  .cta-arrow { font-size: 1rem; color: var(--accent); transition: transform 0.2s; }
+  .lecture-card:hover .cta-arrow { transform: translateX(4px); }
+
+  /* ── BLOCK CHALLENGE CARD ── */
+  .challenge-card {
+    display: block; text-decoration: none;
+    background: linear-gradient(135deg, #1A1200 0%, #211600 100%);
+    border: 1px solid rgba(255,193,7,0.3); border-radius: var(--radius);
+    padding: 28px 28px 24px;
+    transition: transform 0.18s, box-shadow 0.18s;
+    position: relative; overflow: hidden; margin-bottom: 52px;
+  }
+  .challenge-card::after {
+    content: '🏅'; position: absolute; right: 24px; top: 50%;
+    transform: translateY(-50%); font-size: 3.5rem; opacity: 0.12;
+  }
+  .challenge-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 40px rgba(255,193,7,0.15);
+  }
+  .challenge-eyebrow {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: #FFD54F; margin-bottom: 8px;
+  }
+  .challenge-title { font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .challenge-desc {
+    font-size: 0.88rem; color: #B8A060; margin-bottom: 18px;
+    max-width: 560px; line-height: 1.6;
+  }
+  .challenge-modes { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mode-chip {
+    background: rgba(255,193,7,0.1); border: 1px solid rgba(255,193,7,0.2);
+    border-radius: 12px; padding: 4px 12px; font-size: 0.75rem;
+    color: #FFD54F; font-weight: 600;
+  }
+  .challenge-cta {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+    background: #B8860B; color: #fff; border-radius: 10px;
+    padding: 10px 20px; font-size: 0.88rem; font-weight: 700; transition: background 0.2s;
+  }
+  .challenge-card:hover .challenge-cta { background: #9A7209; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px; margin-bottom: 44px;
+  }
+  .stat-box {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px; text-align: center;
+  }
+  .stat-number { font-size: 1.6rem; font-weight: 800; color: #FFD54F; }
+  .stat-label { font-size: 0.73rem; color: var(--muted); margin-top: 2px; }
+
+  /* ── MODES GUIDE ── */
+  .modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin-bottom: 48px;
+  }
+  .mode-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px;
+  }
+  .mode-card.step1-mode { border-color: rgba(255,193,7,0.25); background: #1C1A00; }
+  .mode-icon { font-size: 1.4rem; margin-bottom: 8px; }
+  .mode-name { font-size: 0.85rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .mode-name .badge-new {
+    display: inline-block; background: rgba(255,193,7,0.15); color: #FFD54F;
+    font-size: 0.6rem; font-weight: 700; padding: 1px 7px; border-radius: 8px;
+    text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px; vertical-align: middle;
+  }
+  .mode-desc { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; color: var(--muted); font-size: 0.78rem;
+    padding: 32px 20px; border-top: 1px solid var(--border);
+  }
+  .footer a { color: #FFD54F; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- PROGRESSION BANNER -->
+<div class="progression-banner">
+  <div class="prog-step done">
+    <div class="step-dot">✓</div>
+    <div class="step-label"><a href="GUSOM-Biochem-ActiveDrills.html">Hub #1 — In-House Biochemistry</a></div>
+  </div>
+  <div class="prog-arrow">→</div>
+  <div class="prog-step active">
+    <div class="step-dot">2</div>
+    <div class="step-label">Hub #2 — USMLE Step 1 Extension</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="site-header">
+  <div class="eyebrow">GUSOM Endocrine Block · USMLE Step 1 Preparation</div>
+  <div class="hub-tag">Hub #2 · Step 1 Extension Series</div>
+  <h1>Biochemistry Step 1 Active Drills</h1>
+  <p>After mastering the GUSOM in-house material in Hub #1, advance here for USMLE Step 1–depth coverage. Each lecture extends GUSOM learning objectives to classic Step 1 presentations, clinical pharmacology, genetic syndromes, and must-know buzzwords.</p>
+  <div class="header-badges">
+    <span class="header-badge hl">5 Lectures · Step 1 Clinical Depth</span>
+    <span class="header-badge">100+ Step 1 Flashcards</span>
+    <span class="header-badge">60 MCQs</span>
+    <span class="header-badge">50 Clinical Vignettes</span>
+    <span class="header-badge">54 Trap Detector Items</span>
+    <span class="header-badge hl">📋 USMLE Map per Lecture</span>
+    <span class="header-badge hl">🎯 Challenge Drills</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- STEP 1 FOCUS BANNER -->
+  <div class="focus-banner">
+    <div class="focus-icon">🎓</div>
+    <div class="focus-text">
+      <h3>What's Different About Hub #2?</h3>
+      <p>Hub #2 is not a repeat — it extends each GUSOM learning objective to the clinical depth and multiple-choice format you'll face on Step 1. Content includes disease presentation and workup, pharmacology mechanisms and adverse effects, genetic syndromes and their testing patterns, and classic high-yield buzzword–diagnosis pairs.</p>
+      <div class="focus-pillrow">
+        <span class="focus-pill">Signal Transduction Diseases</span>
+        <span class="focus-pill">Endocrine Pharmacology</span>
+        <span class="focus-pill">Genetic Syndromes</span>
+        <span class="focus-pill">Workup Algorithms</span>
+        <span class="focus-pill">Classic Buzzwords</span>
+        <span class="focus-pill">MEN Syndromes</span>
+        <span class="focus-pill">Thyroid Cancers</span>
+        <span class="focus-pill">CAH Step 1 Patterns</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="section-title">At a Glance</div>
+  <div class="stats-bar">
+    <div class="stat-box"><div class="stat-number">100+</div><div class="stat-label">Step 1 Flashcards</div></div>
+    <div class="stat-box"><div class="stat-number">60</div><div class="stat-label">MCQ Questions</div></div>
+    <div class="stat-box"><div class="stat-number">50</div><div class="stat-label">Clinical Vignettes</div></div>
+    <div class="stat-box"><div class="stat-number">54</div><div class="stat-label">Trap Detector Items</div></div>
+    <div class="stat-box"><div class="stat-number">5</div><div class="stat-label">USMLE Maps</div></div>
+    <div class="stat-box"><div class="stat-number">7</div><div class="stat-label">Tabs per Lecture</div></div>
+  </div>
+
+  <!-- LECTURE CARDS -->
+  <div class="section-title">Step 1 Lecture Hubs</div>
+  <div class="lecture-grid">
+
+    <!-- L1 -->
+    <a class="lecture-card" href="GUSOM-Biochem-Step1-L1-IntroHormones.html" style="--accent: #1565C0;">
+      <div class="card-number">Lecture 1 · Step 1</div>
+      <div class="card-title">Intro to Hormone Action</div>
+      <div class="card-subtitle">G-protein diseases · receptor pharmacology · paraneoplastic syndromes · SERMs · RU-486 · POMC processing · hCG/TSH cross-reactivity</div>
+      <div class="card-step1">
+        <strong>Step 1 Extensions:</strong> McCune-Albright (Gs mutation), Cholera &amp; Pertussis toxin (ADP-ribosylation), Achondroplasia (FGFR3 gain-of-function), leuprolide &amp; receptor downregulation, tamoxifen vs raloxifene, mifepristone (RU-486)
+      </div>
+      <div class="card-pills">
+        <span class="pill">🃏 20 Flashcards</span>
+        <span class="pill">❓ 12 MCQs</span>
+        <span class="pill">🏥 10 Vignettes</span>
+        <span class="pill">⚠️ 12 Trap Detectors</span>
+        <span class="pill">✏️ 10 Fill-in-Blank</span>
+        <span class="pill new">🎯 Challenge Drill</span>
+        <span class="pill step1">📋 USMLE Map</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 1 — Step 1</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- L2 -->
+    <a class="lecture-card" href="GUSOM-Biochem-Step1-L2-AdrenalSynthesis.html" style="--accent: #C62828;">
+      <div class="card-number">Lecture 2 · Step 1</div>
+      <div class="card-title">Adrenal Hormone Synthesis</div>
+      <div class="card-subtitle">Pheochromocytoma · MEN1/2A/2B · Waterhouse-Friderichsen · Nelson's syndrome · Cushing's workup · PCOS vs CAH · adrenal insufficiency</div>
+      <div class="card-step1">
+        <strong>Step 1 Extensions:</strong> Pheo 10% rule &amp; α-blockade first, RET mutations in MEN2A/2B, 24h UFC + late-night salivary cortisol + high-dose DST algorithm, Nelson's from bilateral adrenalectomy, secondary vs primary AI distinction
+      </div>
+      <div class="card-pills">
+        <span class="pill">🃏 20+ Flashcards</span>
+        <span class="pill">❓ 12 MCQs</span>
+        <span class="pill">🏥 10 Vignettes</span>
+        <span class="pill">⚠️ 10 Trap Detectors</span>
+        <span class="pill">✏️ 10 Fill-in-Blank</span>
+        <span class="pill new">🎯 Challenge Drill</span>
+        <span class="pill step1">📋 USMLE Map</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 2 — Step 1</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- L3 -->
+    <a class="lecture-card" href="GUSOM-Biochem-Step1-L3-SexSteroids.html" style="--accent: #6A1B9A;">
+      <div class="card-number">Lecture 3 · Step 1</div>
+      <div class="card-title">Sex Steroid Synthesis &amp; Action</div>
+      <div class="card-subtitle">Turner syndrome · Klinefelter · AIS complete · 5α-reductase deficiency · PCOS management · emergency contraception · gynecomastia causes</div>
+      <div class="card-step1">
+        <strong>Step 1 Extensions:</strong> 45,X bicuspid aortic valve/coarctation, 47,XXY azoospermia + ↑breast cancer risk, AIS gonadectomy timing, clomiphene &amp; spironolactone in PCOS, Cu-IUD most effective EC, finasteride vs dutasteride, aromatase inhibitors
+      </div>
+      <div class="card-pills">
+        <span class="pill">🃏 20 Flashcards</span>
+        <span class="pill">❓ 12 MCQs</span>
+        <span class="pill">🏥 10 Vignettes</span>
+        <span class="pill">⚠️ 10 Trap Detectors</span>
+        <span class="pill">✏️ 10 Fill-in-Blank</span>
+        <span class="pill new">🎯 Challenge Drill</span>
+        <span class="pill step1">📋 USMLE Map</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 3 — Step 1</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- L4 -->
+    <a class="lecture-card" href="GUSOM-Biochem-Step1-L4-PosteriorPituitary.html" style="--accent: #00838F;">
+      <div class="card-number">Lecture 4 · Step 1</div>
+      <div class="card-title">Posterior Pituitary Hormones</div>
+      <div class="card-subtitle">Central vs nephrogenic DI etiology · SIADH drug causes · osmotic demyelination · CSW vs SIADH · vaptans · Sheehan syndrome · psychogenic polydipsia</div>
+      <div class="card-step1">
+        <strong>Step 1 Extensions:</strong> Lithium #1 drug for nephrogenic DI, SSRIs/carbamazepine/vincristine in SIADH, correction limit 10–12 mEq/L/day, demeclocycline dual role (causes &amp; treats), vaptans as aquaretics, Sheehan's — prolactin lost first
+      </div>
+      <div class="card-pills">
+        <span class="pill">🃏 20 Flashcards</span>
+        <span class="pill">❓ 12 MCQs</span>
+        <span class="pill">🏥 10 Vignettes</span>
+        <span class="pill">⚠️ 10 Trap Detectors</span>
+        <span class="pill">✏️ 10 Fill-in-Blank</span>
+        <span class="pill new">🎯 Challenge Drill</span>
+        <span class="pill step1">📋 USMLE Map</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 4 — Step 1</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+    <!-- L5 -->
+    <a class="lecture-card" href="GUSOM-Biochem-Step1-L5-ThyroidSynthesis.html" style="--accent: #E65100;">
+      <div class="card-number">Lecture 5 · Step 1</div>
+      <div class="card-title">Thyroid Hormone Synthesis &amp; Action</div>
+      <div class="card-subtitle">Thyroid disease types · thyroid cancers · thyroid storm treatment order · methimazole contraindications · amiodarone · RAI · congenital hypothyroidism</div>
+      <div class="card-step1">
+        <strong>Step 1 Extensions:</strong> Papillary = psammoma bodies + orphan Annie eyes + RET/BRAF; medullary = C-cells + MEN2; thyroid storm: propranolol → PTU → iodine (1h wait) → glucocorticoids; methimazole = aplasia cutis in 1st trimester; amiodarone = 37% iodine
+      </div>
+      <div class="card-pills">
+        <span class="pill">🃏 47 Flashcards</span>
+        <span class="pill">❓ 12 MCQs</span>
+        <span class="pill">🏥 10 Vignettes</span>
+        <span class="pill">⚠️ 12 Trap Detectors</span>
+        <span class="pill">✏️ 12 Fill-in-Blank</span>
+        <span class="pill new">🎯 Challenge Drill</span>
+        <span class="pill step1">📋 USMLE Map</span>
+      </div>
+      <div class="card-cta">
+        <span class="cta-text">Open Lecture 5 — Step 1</span>
+        <span class="cta-arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- CUMULATIVE STEP 1 CHALLENGE -->
+  <div class="section-title">Cumulative Assessment</div>
+  <a class="challenge-card" href="GUSOM-Biochem-Step1-BlockChallenge.html">
+    <div class="challenge-eyebrow">🏅 All 5 Lectures · Step 1 Integration Mode</div>
+    <div class="challenge-title">Step 1 Block Challenge</div>
+    <div class="challenge-desc">
+      Comprehensive Step 1 simulation integrating all five biochemistry lecture extensions. Designed to replicate the clinical reasoning, multi-step vignettes, and two-step question format of USMLE Step 1.
+    </div>
+    <div class="challenge-modes">
+      <span class="mode-chip">📖 Multi-Step Vignettes (10)</span>
+      <span class="mode-chip">⚡ MCQ Gauntlet (20)</span>
+      <span class="mode-chip">🔬 Lab Interpretation Drill</span>
+      <span class="mode-chip">💊 Drug Mechanism Matcher</span>
+      <span class="mode-chip">🧬 Genetic Syndrome Classifier</span>
+      <span class="mode-chip">📊 Performance Dashboard</span>
+    </div>
+    <div class="challenge-cta">Enter Step 1 Block Challenge →</div>
+  </a>
+
+  <!-- WHAT'S IN EACH HUB -->
+  <div class="section-title">What's in Each Step 1 Lecture Hub (7 Tabs)</div>
+  <div class="modes-grid">
+    <div class="mode-card step1-mode">
+      <div class="mode-icon">🃏</div>
+      <div class="mode-name">Flashcards <span class="badge-new">Step 1</span></div>
+      <div class="mode-desc">20–47 cards per lecture focusing on Step 1 buzzword-diagnosis pairs, drug mechanisms, classic genetic presentations, and must-know clinical associations not emphasized in the GUSOM lecture alone.</div>
+    </div>
+    <div class="mode-card step1-mode">
+      <div class="mode-icon">❓</div>
+      <div class="mode-name">MCQ Practice <span class="badge-new">Step 1</span></div>
+      <div class="mode-desc">12 Step 1–format 5-option questions per lecture — lengthy vignettes, two-step reasoning, "best next step" format, and classic distractors. Per-option explanations with teaching points.</div>
+    </div>
+    <div class="mode-card step1-mode">
+      <div class="mode-icon">🏥</div>
+      <div class="mode-name">Clinical Vignettes <span class="badge-new">Step 1</span></div>
+      <div class="mode-desc">10 vignettes per lecture written to Step 1 length and complexity. Covers classic presentations: pheo workup, thyroid storm management, water deprivation test, PCOS, AIS, and more.</div>
+    </div>
+    <div class="mode-card step1-mode">
+      <div class="mode-icon">⚠️</div>
+      <div class="mode-name">Trap Detector <span class="badge-new">Step 1</span></div>
+      <div class="mode-desc">10–12 Step 1–specific traps per lecture. Read the statement, click CORRECT ✓ or TRAP ✗, then see explanation + running score. Targets the confusing edge cases that appear on Step 1.</div>
+    </div>
+    <div class="mode-card step1-mode">
+      <div class="mode-icon">✏️</div>
+      <div class="mode-name">Fill-in-Blank <span class="badge-new">Step 1</span></div>
+      <div class="mode-desc">10–12 questions per lecture. Type drug names, lab values, buzzwords, and clinical decision thresholds. Color-coded feedback. Reinforces recall under test conditions.</div>
+    </div>
+    <div class="mode-card step1-mode">
+      <div class="mode-icon">🎯</div>
+      <div class="mode-name">Challenge Drill <span class="badge-new">Step 1</span></div>
+      <div class="mode-desc">4 interactive drill types per lecture: workup algorithm sequencers, MEN syndrome builders, drug–mechanism matchers, and syndrome classifiers — all at Step 1 clinical depth.</div>
+    </div>
+    <div class="mode-card step1-mode">
+      <div class="mode-icon">📋</div>
+      <div class="mode-name">USMLE Map <span class="badge-new">Step 1</span></div>
+      <div class="mode-desc">Structured reference table per lecture: GUSOM Learning Objective → Step 1 Clinical Extension → High-Yield Associations → Key Buzzwords. The fastest way to confirm your Step 1 coverage.</div>
+    </div>
+  </div>
+
+  <!-- HOW TO USE THIS HUB -->
+  <div class="section-title">Recommended Approach</div>
+  <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 48px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;">
+      <div>
+        <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #FFD54F; margin-bottom: 6px;">Step 1 — Review the Map</div>
+        <div style="font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Open the 📋 USMLE Map tab first. See how your GUSOM LOs connect to Step 1 objectives and identify the new clinical associations for that lecture.</div>
+      </div>
+      <div>
+        <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #FFD54F; margin-bottom: 6px;">Step 2 — Drill Flashcards</div>
+        <div style="font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Work through the 🃏 Flashcards to build Step 1 vocabulary — buzzword pairs, drug adverse effects, and genetic syndrome features at clinical depth.</div>
+      </div>
+      <div>
+        <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #FFD54F; margin-bottom: 6px;">Step 3 — Vignettes &amp; MCQs</div>
+        <div style="font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Work through full-length 🏥 Vignettes and ❓ MCQs. Apply reasoning under realistic Step 1 vignette pressure before reviewing explanations.</div>
+      </div>
+      <div>
+        <div style="font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #FFD54F; margin-bottom: 6px;">Step 4 — Lock in Details</div>
+        <div style="font-size: 0.8rem; color: var(--muted); line-height: 1.6;">Finish with ⚠️ Trap Detector, ✏️ Fill-in-Blank, and 🎯 Challenge Drill. These lock in the precise details and edge cases that Step 1 uses to differentiate high scorers.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  GUSOM Endocrine Block · Biochemistry Step 1 Hub #2 · 2026 · 5 Lecture Hubs ·
+  <a href="GUSOM-Biochem-ActiveDrills.html">← Return to Hub #1 (In-House)</a>
+</div>
+
+</body>
+</html>

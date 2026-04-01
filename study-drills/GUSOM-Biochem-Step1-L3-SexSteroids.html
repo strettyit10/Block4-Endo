@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biochem L3: Sex Steroids — Step 1 Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #6A1B9A; --accent-dark: #4A0E4E; --accent-light: rgba(106,27,154,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* FLASHCARDS */
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
+        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
+
+        /* MCQ */
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
+        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .mcq-explanation.visible { display: block; }
+        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+        .teaching-pt { background: rgba(106,27,154,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #D8B4FE; display: none; }
+        .teaching-pt.visible { display: block; }
+        .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+
+        /* VIGNETTES */
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: rgba(106,27,154,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #D8B4FE; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+        .vig-question { font-size: 0.92em; color: #E6EDF3; margin-bottom: 12px; font-weight: 600; }
+        .vig-answer { background: #1C2128; border-left: 3px solid var(--accent); padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D8B4FE; margin-bottom: 10px; display: none; }
+        .vig-answer.visible { display: block; }
+        .vig-expand { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+
+        /* TEST TRAPS */
+        .trap-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-statement { color: #E6EDF3; font-size: 0.95em; margin-bottom: 12px; line-height: 1.6; font-weight: 500; }
+        .trap-buttons { display: flex; gap: 10px; margin-bottom: 10px; }
+        .trap-btn { padding: 9px 18px; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.88em; background: #1C2128; }
+        .trap-btn-correct { color: #4ADE80; border-color: #4ADE80; }
+        .trap-btn-trap { color: #ff6b6b; border-color: #ff6b6b; }
+        .trap-btn:hover:not(:disabled) { opacity: 0.85; }
+        .trap-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .trap-result { display: none; padding: 10px 14px; border-radius: 6px; font-size: 0.88em; line-height: 1.5; margin-top: 4px; }
+        .trap-result.show { display: block; }
+        .trap-result.correct-choice { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; color: #D1FAE5; }
+        .trap-result.wrong-choice { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; color: #FCA5A5; }
+        .trap-verdict { font-weight: 700; margin-bottom: 4px; }
+        .trap-explain { font-size: 0.9em; opacity: 0.9; }
+
+        /* FILL-IN-BLANK */
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+
+        /* CHALLENGE DRILL */
+        .drill-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .drill-type { font-size: 0.75em; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+        .drill-q { font-size: 0.95em; color: #E6EDF3; margin-bottom: 12px; font-weight: 500; }
+        .drill-opts { display: flex; flex-direction: column; gap: 8px; }
+        .drill-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; }
+        .drill-opt:hover { background: #21262D; border-color: var(--accent); }
+        .drill-opt.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+        /* USMLE MAP */
+        .map-row { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .map-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; align-items: start; }
+        .map-section { padding: 12px; background: #1C2128; border-radius: 6px; border-left: 3px solid var(--accent); }
+        .map-label { font-size: 0.7em; color: var(--accent); font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+        .map-content { font-size: 0.88em; color: #C9D1D9; line-height: 1.5; }
+
+        /* REF TABLE */
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
+
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="#" class="back">← Back to Biochem Step 1 Hub</a>
+        <h1>Biochem L3: <span class="accent-tag">Sex Steroids — Step 1 Hub</span></h1>
+        <div class="subtitle">USMLE Step 1 · Turner/Klinefelter/AIS · PCOS · Sex steroid pharmacology</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Trap Detector</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('drills')">🎯 Challenge Drill</button>
+        <button class="tab-btn" onclick="switchTab('usmle')">📋 USMLE Map</button>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Core Concept Flashcards — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
+
+    <!-- MCQ -->
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice</div>
+        <div id="mcqContainer"></div>
+    </div>
+
+    <!-- VIGNETTES -->
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes</div>
+        <div id="vigContainer"></div>
+    </div>
+
+    <!-- TEST TRAPS -->
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">⚠️ Test Traps — Common Exam Misconceptions</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:10px 14px;background:#161B22;border:1px solid #30363D;border-radius:8px;"><span style="font-size:0.85em;color:#9CA3AF;">Click <strong style="color:#4ADE80;">CORRECT ✓</strong> or <strong style="color:#ff6b6b;">TRAP ✗</strong> for each statement.</span><div style="display:flex;align-items:center;gap:14px;"><span id="trap-score" style="font-size:0.9em;font-weight:700;color:#E6EDF3;">Score: 0/0</span><button onclick="resetTraps()" style="background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:5px 12px;color:#9CA3AF;cursor:pointer;font-size:0.82em;">Reset</button></div></div>
+        <div id="trapsContainer"></div>
+    </div>
+
+    <!-- FILL-IN-BLANK -->
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill in the Blank — Complete the Pathway</div>
+        <div id="fibContainer"></div>
+    </div>
+
+    <!-- CHALLENGE DRILL -->
+    <div id="tab-drills" class="tab-content">
+        <div class="section-title">Challenge Drill — Advanced Pattern Recognition</div>
+        <div id="drillContainer"></div>
+    </div>
+
+    <!-- USMLE MAP -->
+    <div id="tab-usmle" class="tab-content">
+        <div class="section-title">USMLE Mapping: GUSOM LO → Step 1</div>
+        <div id="usmleContainer"></div>
+    </div>
+</div>
+
+<script>
+// ─── TAB NAVIGATION ───────────────────────────────────
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
+
+// ─── FLASHCARD DATA ───────────────────────────────────
+const flashcards = [
+    { q: "Turner syndrome karyotype and key features?", a: "45,X. Female phenotype with streak gonads, short stature, webbed neck, bicuspid aortic valve, coarctation of aorta, horseshoe kidney, lymphedema at birth, shield chest, widely spaced nipples. ↑FSH/LH (primary gonadal failure), ↓estrogen, primary amenorrhea. Rx: GH for height, estrogen replacement." },
+    { q: "Klinefelter syndrome karyotype and key features?", a: "47,XXY. Male phenotype (tall from low testosterone), small firm testes, gynecomastia (aromatization), ↓testosterone, ↑FSH/LH, azoospermia (infertility). ↑risk breast cancer and extragonadal germ cell tumors. Rx: testosterone replacement." },
+    { q: "Complete Androgen Insensitivity (AIS) — genotype, phenotype, and labs?", a: "46,XY genotype, female phenotype. No uterus (AMH from Sertoli cells causes Müllerian regression), blind-ending vagina, undescended testes in inguinal canal or labia. ↑testosterone (end-organ resistance), ↑LH, ↑estradiol (peripheral aromatization). NOT detected until puberty/primary amenorrhea workup. Rx: gonadectomy (malignant potential) + estrogen replacement." },
+    { q: "5α-reductase deficiency — genotype, phenotype at birth, and at puberty?", a: "46,XY but female/ambiguous external genitalia at birth (lack DHT for virilization). NO uterus (AMH present). At puberty: virilization (testosterone → DHT via alternative 5α-reductase activity or from adrenal). Classic: 'penis at 12'. ↓DHT/testosterone ratio, ↑testosterone:DHT ratio." },
+    { q: "PCOS: classic hormonal pattern and two key mechanisms?", a: "↑LH:FSH ratio (>2:1), ↑androgens (acne, hirsutism). Mechanism 1: excess LH → excess theca cell androgen production. Mechanism 2: insulin resistance → ↑insulin → ↑androgens in theca; also ↓FSH → ↓aromatase → ↓estrogen conversion → ↑LH feedback." },
+    { q: "PCOS treatment options and mechanisms?", a: "OCPs (↓FSH/LH → ↓androgens), metformin (insulin sensitizer), spironolactone (anti-androgen via AR blockade), clomiphene (ER antagonist → ↑GnRH → ↑FSH → ovulation for fertility)." },
+    { q: "Finasteride mechanism and clinical uses?", a: "Blocks 5α-reductase (NOT androgen receptor). Converts testosterone → DHT, so ↓DHT systemically. BPH (shrinks prostate), male-pattern baldness. Works because DHT drives these conditions. Dutasteride = longer acting 5α-reductase inhibitor." },
+    { q: "Testosterone → estradiol pathway and gynecomastia examples?", a: "Aromatase (primarily in adipose, some in testis/brain) converts testosterone → estradiol. High-dose anabolic steroids → ↓LH/FSH (negative feedback) + aromatization → ↑estradiol → gynecomastia + testicular atrophy + azoospermia." },
+    { q: "Gynecomastia: 4 major causes to know?", a: "Klinefelter (↑estradiol from aromatization of constitutive testosterone), liver cirrhosis (↓estrogen metabolism), obesity (↑aromatase in adipose), high-dose anabolic steroids (aromatization + ↓LH/FSH). Also: HCG-secreting tumors, hyperthyroidism, anti-androgens (spironolactone, finasteride), cimetidine, marijuana." },
+    { q: "OCPs mechanism: how do they prevent pregnancy?", a: "Combined estrogen+progestin inhibit GnRH pulsatility → ↓FSH (no follicle development) + ↓LH surge (no ovulation). Also thicken cervical mucus, thin endometrium. Progestin-only 'mini-pill' works primarily via cervical mucus thickening." },
+    { q: "Clomiphene mechanism and clinical use?", a: "Selective ER antagonist at hypothalamus. Blocks estrogen negative feedback → ↑GnRH pulsatility → ↑FSH/LH → follicle development and ovulation. Used for anovulatory infertility (especially PCOS). Does NOT work if patient is actually ER-positive (breast cancer)." },
+    { q: "Emergency contraception: Plan B, ulipristal, Cu-IUD differences?", a: "Plan B (levonorgestrel) = high-dose progestin, works within 72h. Ulipristal (ella) = progesterone receptor modulator, works up to 120h (5 days). Cu-IUD = most effective (>99%), works up to 5 days, best EC option if eligible." },
+    { q: "GnRH agonists (leuprolide): mechanism and clinical uses?", a: "Continuous (non-pulsatile) GnRH → downregulation of GnRH receptors → ↓FSH/LH. Initial flare (↑FSH/LH × 1-2 weeks) then profound suppression. Uses: prostate cancer (plus antiandrogen for flare), endometriosis, uterine fibroids, precocious puberty." },
+    { q: "Inhibin B: what does it do and why is it clinically useful?", a: "Sertoli cell hormone that specifically suppresses FSH (not LH). ↑FSH in male = Sertoli/tubular dysfunction marker. ↑FSH in female = primary ovarian failure. Inhibin B low = poor ovarian reserve." },
+    { q: "Aromatase inhibitors (letrozole, anastrozole): mechanism and use?", a: "Block aromatase (blocks testosterone → estradiol conversion). Used in ER+ breast cancer in post-menopausal women. Side effect: ↓estrogen → joint pain, osteoporosis risk." },
+    { q: "Male infertility workup: how do you differentiate primary vs secondary hypogonadism?", a: "↑FSH = primary testicular failure (Sertoli/tubular damage). ↓FSH = secondary hypogonadism (hypothalamic/pituitary disease). Both have ↓testosterone, but FSH direction tells you where the lesion is." },
+    { q: "Hypospadias: what is it and what genetic defects cause it?", a: "Urethral opening on ventral surface of penis (not at tip). Associated with 5α-reductase deficiency (↓DHT during development) and in-utero exposure to estrogen/progestins. Genetic: can be X-linked or autosomal." },
+    { q: "Cryptorchidism: clinical significance and associations?", a: "Undescended testis. ↑risk seminoma if uncorrected. Associated with AIS (undescended due to Müllerian regression from AMH) and Klinefelter syndrome. Requires surgical correction (orchiopexy) if not descended by 1 year of age." },
+    { q: "Anabolic steroid abuse: consequences on HPT axis and gonads?", a: "↓LH/FSH via negative feedback from exogenous testosterone → testicular atrophy + azoospermia (infertility). Also: ↑estradiol (aromatization) → gynecomastia. Labs show: ↑testosterone, ↓LH/FSH, ↓spermatogenesis. Reversible if caught early." },
+    { q: "Two-cell model: how do theca and granulosa cells cooperate to make estradiol?", a: "Theca cells (LH-responsive) produce androstenedione → transported to granulosa cells. Granulosa cells (FSH-responsive) express aromatase → androstenedione → estradiol. PCOS disrupts this: excess LH → ↑theca androgen but ↓FSH (↓aromatase) → ↓estrogen conversion." },
+];
+
+// ─── MCQ DATA ─────────────────────────────────────────
+const mcqs = [
+    {
+        num: 1,
+        stem: "A <strong>16-year-old female</strong> presents with <strong>short stature (4'11\"), webbed neck, and primary amenorrhea</strong>. Karyotype is ordered. Which chromosome abnormality is MOST likely?",
+        options: ["46,XX", "45,X", "47,XXX", "46,XY", "47,XXY"],
+        correct: 1,
+        explanations: [
+            "46,XX = normal female karyotype.",
+            "CORRECT. Turner syndrome (45,X). Classic features: short stature (from haploinsufficiency of SHOX gene), webbed neck, primary amenorrhea (streak gonads), typically also has bicuspid aortic valve, coarctation of aorta, horseshoe kidney. ↑FSH/LH from gonadal failure.",
+            "47,XXX = Triple X syndrome; patients are usually tall and fertile.",
+            "46,XY = normal male karyotype.",
+            "47,XXY = Klinefelter syndrome; male phenotype, not female."
+        ],
+        teaching: "Turner = 45,X = female, short, streak gonads. Klinefelter = 47,XXY = male, tall, small testes. Easy to mix up — remember: TURNER is the SHORT female syndrome. Both have ↑FSH/LH (primary gonadal failure)."
+    },
+    {
+        num: 2,
+        stem: "A <strong>25-year-old male</strong> is evaluated for infertility. Labs show: <strong>↓testosterone, ↑FSH, ↑LH</strong>. Physical exam: small firm testes. Which diagnosis is MOST likely?",
+        options: ["Secondary hypogonadism (pituitary disease)", "Klinefelter syndrome", "5α-reductase deficiency", "Delayed puberty", "Prolactinoma"],
+        correct: 1,
+        explanations: [
+            "Secondary hypogonadism shows ↓FSH and ↓LH (problem is at hypothalamus/pituitary, not testis).",
+            "CORRECT. Klinefelter (47,XXY). Pattern of ↓testosterone + ↑FSH + ↑LH = primary testicular failure. Small firm testes, infertility, ↑gynecomastia risk (aromatization of testosterone). Karyotype confirms 47,XXY.",
+            "5α-reductase deficiency: male would be undervirilized with ambiguous/female-appearing genitalia at birth; doesn't fit 'infertile adult male' presentation.",
+            "Delayed puberty: labs would show ↓testosterone + ↓FSH/LH (both are low, not elevated).",
+            "Prolactinoma: would cause ↓LH/FSH and erectile dysfunction; doesn't fit the labs."
+        ],
+        teaching: "↑FSH + ↑LH = primary (testicular) failure. ↓FSH + ↓LH = secondary (hypothalamic/pituitary) failure. In Klinefelter, testes are damaged (primary) → Sertoli cells fail → ↑FSH."
+    },
+    {
+        num: 3,
+        stem: "<strong>18-year-old with primary amenorrhea</strong>: physical exam shows blind-ending vagina, no uterus on ultrasound, and <strong>inguinal masses bilaterally</strong>. Karyotype: <strong>46,XY</strong>. Testosterone is <strong>elevated</strong>. What is the diagnosis?",
+        options: ["5α-reductase deficiency", "Complete Androgen Insensitivity Syndrome (AIS)", "Müllerian agenesis", "Klinefelter syndrome", "PCOS"],
+        correct: 1,
+        explanations: [
+            "5α-reductase deficiency: 46,XY but WOULD have Wolffian structures (vas deferens, seminal vesicles) — not compatible with no uterus from genetic failure. Also, external genitalia would be female/ambiguous, not fully virilized.",
+            "CORRECT. Complete AIS. 46,XY genotype but female phenotype: end-organ AR insensitivity. Testosterone is ELEVATED (produced normally but ineffective). No uterus = AMH from Sertoli cells causes Müllerian regression (Wolffian structures fail to develop without androgen receptor signaling). Inguinal/intra-abdominal testes = lack of virilization of gubernaculum. NOT detected until primary amenorrhea workup. Requires gonadectomy (malignant potential in undescended gonads) + estrogen replacement.",
+            "Müllerian agenesis (MRKH): 46,XX with normal ovaries and normal testosterone.",
+            "Klinefelter: 47,XXY; patient has 46,XY.",
+            "PCOS: 46,XX with normal Müllerian structures and secondary amenorrhea (not primary)."
+        ],
+        teaching: "AIS KEY FACTS: 46,XY female. ↑testosterone (resistance, not deficiency). NO uterus (AMH). Testes in inguinal canals (undescended). Detected at primary amenorrhea. Gonadectomy + estrogen replacement."
+    },
+    {
+        num: 4,
+        stem: "<strong>12-year-old raised as female</strong> is brought to the ER for acute abdominal pain. Imaging reveals undescended gonads. Karyotype: 46,XY. At puberty, this patient is likely to virilize. Which enzyme deficiency explains this presentation?",
+        options: ["17α-hydroxylase deficiency", "5α-reductase deficiency", "3β-hydroxysteroid dehydrogenase deficiency", "17,20-lyase deficiency", "Aromatase deficiency"],
+        correct: 1,
+        explanations: [
+            "17α-hydroxylase: would cause primary hypogonadism + hypertension (block cortisol synthesis → ↑DOC).",
+            "CORRECT. 5α-reductase deficiency. Female/ambiguous external genitalia at birth (lack DHT during development) → raised female. NO uterus (AMH regression from testes). At puberty: Leydig cells produce testosterone → can be converted to DHT via alternative pathways or adrenal sources → virilization. Key: ↓DHT/testosterone ratio, but ↑testosterone:DHT ratio. Classic: 'penis at 12.'",
+            "3β-HSD: would present with salt-wasting (low cortisol/aldo) + severe undervirilization.",
+            "17,20-lyase: would block androgen synthesis entirely (severe undervirilization, not virilization at puberty).",
+            "Aromatase: would present with gynecomastia in males, not undervirilization in 46,XY."
+        ],
+        teaching: "5α-reductase deficiency = ONLY sex chromosome disorder where patient virilizes at puberty despite female appearance at birth. Key: intact Wolffian ducts (vas deferens, seminal vesicles, epididymis) but female external genitalia/lack uterus."
+    },
+    {
+        num: 5,
+        stem: "A <strong>28-year-old woman with PCOS</strong> has <strong>hirsutism, acne, anovulation, and insulin resistance</strong>. Labs show <strong>LH:FSH ratio >2:1, elevated testosterone</strong>. Which statement BEST explains the hormonal dysregulation?",
+        options: ["↑FSH stimulates excessive follicle growth", "↑insulin directly increases LH secretion from pituitary", "↓FSH leads to ↓aromatase in granulosa cells → ↓estrogen conversion → ↑LH feedback", "↓testosterone feedback increases GnRH pulsatility", "↑progesterone inhibits ovulation"],
+        correct: 2,
+        explanations: [
+            "FSH is actually LOW in PCOS (relative to LH), not elevated.",
+            "Insulin does not directly stimulate LH pituitary secretion; it increases androgen synthesis in theca cells.",
+            "CORRECT. In PCOS: excess LH → ↑theca androgen production. But ↓FSH (from ↑LH feedback) → ↓aromatase in granulosa cells → ↓conversion of androgens to estradiol. This ↓estrogen → ↑LH feedback (unopposed). Result: vicious cycle of ↑LH:FSH ratio, ↑androgens, ↓estrogen.",
+            "Testosterone feedback opposes GnRH pulsatility; low T would increase GnRH, not high T.",
+            "Progesterone is low in anovulatory PCOS; there is no corpus luteum to produce it."
+        ],
+        teaching: "PCOS mechanism: excess LH (from GnRH/genetics/insulin) → ↑theca androgens BUT ↓FSH → ↓aromatase → ↓estrogen → ↑LH feedback. This is a two-hit: overproduction of androgens + impaired conversion to estrogen."
+    },
+    {
+        num: 6,
+        stem: "<strong>Clomiphene is given to a woman with anovulatory infertility due to PCOS</strong>. How does clomiphene induce ovulation?",
+        options: ["Acts as an ER agonist to stimulate FSH release", "Directly stimulates granulosa cells to produce estradiol", "Blocks estrogen negative feedback at hypothalamus → ↑GnRH → ↑FSH → ovulation", "Inhibits aromatase to increase circulating androgens", "Stimulates LH secretion directly from pituitary"],
+        correct: 2,
+        explanations: [
+            "Clomiphene is an ER ANTAGONIST, not agonist.",
+            "Clomiphene does not directly act on granulosa cells; it works systemically.",
+            "CORRECT. Clomiphene = selective ER antagonist at hypothalamus (and some pituitary). Blocks estrogen negative feedback → ↑GnRH pulsatility → ↑FSH release → follicle development and ovulation. In PCOS, this restores the ↑FSH needed to drive aromatase in granulosa cells.",
+            "Clomiphene does not inhibit aromatase.",
+            "GnRH (from hypothalamus) stimulates LH, not clomiphene directly."
+        ],
+        teaching: "Clomiphene = ER antagonist. Blocks inhibitory feedback → ↑GnRH → ↑FSH. Used for anovulation (PCOS, hypothalamic amenorrhea). Does NOT work if patient is ER-negative (breast cancer)."
+    },
+    {
+        num: 7,
+        stem: "A woman comes to clinic 3 days after unprotected intercourse. She wants emergency contraception. Which is the MOST EFFECTIVE option?",
+        options: ["Plan B (levonorgestrel) — take now", "Ulipristal (ella) — progesterone receptor modulator", "Copper IUD — insert now", "Combined OCP — high-dose estrogen", "Mifepristone — within 7 days"],
+        correct: 2,
+        explanations: [
+            "Plan B: progestin-only, effective within 72 hours, ~85-90% effective if no ovulation yet.",
+            "Ulipristal: progesterone receptor modulator, works up to 120 hours (5 days), ~98% effective.",
+            "CORRECT. Cu-IUD is >99% effective and works up to 5 days (120 hours). Most effective EC option. Works by copper toxicity to sperm and altered endometrium. Can be left in place for long-term contraception.",
+            "Combined OCP in high doses: less effective than modern EC options; risk of severe nausea.",
+            "Mifepristone: abortifacient (terminates early pregnancy), not EC; regulated strictly; beyond 'EC window' timing here."
+        ],
+        teaching: "EC efficacy: Cu-IUD (>99%) > Ulipristal (5 days) > Plan B (72h). Cu-IUD is gold standard if eligible. Timing matters: sooner = better for all methods."
+    },
+    {
+        num: 8,
+        stem: "<strong>A 22-year-old bodybuilder takes high-dose anabolic steroids for 6 months</strong>. He now has <strong>small testes, azoospermia, and gynecomastia</strong>. Which mechanism BEST explains both testicular atrophy AND gynecomastia?",
+        options: ["Direct DHT toxicity to Sertoli cells", "↓LH/FSH from negative feedback + aromatization of excess testosterone → ↑estradiol", "Androgen receptor blockade by steroids", "↓Inhibin B from Sertoli cell death", "Direct testicular toxicity from steroid metabolites"],
+        correct: 1,
+        explanations: [
+            "DHT doesn't directly kill Sertoli cells; the issue is suppressed LH/FSH.",
+            "CORRECT. Exogenous testosterone → negative feedback → ↓LH/FSH → Leydig cells atrophy → ↓endogenous testosterone production (testes shrink). ALSO: excess exogenous testosterone + adipose aromatase → ↑estradiol → gynecomastia. Dual mechanism: Leydig cell failure (small testes) + aromatization (gynecomastia).",
+            "Anabolic steroids enhance AR signaling, not block it.",
+            "Inhibin B would be low (from Sertoli suppression), but this is a consequence, not the primary mechanism.",
+            "Steroid metabolites don't directly toxify; the problem is physiologic (feedback suppression)."
+        ],
+        teaching: "Anabolic steroid abuse: ↓LH/FSH (feedback) → testicular atrophy + azoospermia. PLUS aromatization → gynecomastia. Reversible if caught early, but prolonged use → permanent Leydig cell damage."
+    },
+    {
+        num: 9,
+        stem: "<strong>A 55-year-old male with cirrhosis presents with spider angiomata, jaundice, and gynecomastia</strong>. His testosterone and estradiol are both measured and found to be <strong>elevated</strong>. What is the mechanism of gynecomastia in cirrhosis?",
+        options: ["↓cortisol metabolism → ↑cortisol → stimulates breast tissue", "Liver failure → ↓SHBG → ↑free testosterone → local DHT conversion", "Liver failure → ↓estrogen metabolism → ↑estradiol", "↓aldosterone feedback → ↑LH → ↑testosterone", "↓GnRH from hypothalamic fibrosis"],
+        correct: 2,
+        explanations: [
+            "Cortisol and gynecomastia are not closely linked in this context.",
+            "SHBG decrease would explain ↑free testosterone, but the issue is primarily ↑circulating estradiol in cirrhosis.",
+            "CORRECT. In cirrhosis, the liver (primary site of estrogen metabolism/inactivation) fails → ↑estradiol accumulation. Also: ↑aromatase activity in adipose tissue (from shunting of androgens). Result: ↑estradiol/testosterone ratio → gynecomastia. Even if total testosterone is normal or elevated, the ↑estradiol drives breast development.",
+            "Aldosterone deficiency does not directly cause gynecomastia.",
+            "GnRH is unaffected in cirrhosis; LH/FSH are often normal or elevated."
+        ],
+        teaching: "Cirrhosis + gynecomastia = ↓estrogen metabolism + ↑aromatase activity → ↑estradiol. Classic boards presentation: spider angiomata + jaundice + gynecomastia = think liver failure and estrogen metabolism."
+    },
+    {
+        num: 10,
+        stem: "<strong>A 17-year-old with 46,XY karyotype and female phenotype presents with primary amenorrhea</strong>. Testosterone is elevated, but LH is also elevated. Imaging shows absent uterus. What is the NEXT BEST STEP in management?",
+        options: ["Start estrogen replacement", "Perform gonadectomy", "Order DEXA scan for bone density", "Check androgen receptor mutation", "Repeat testosterone and LH measurements"],
+        correct: 1,
+        explanations: [
+            "Estrogen replacement alone would not address the malignant potential of undescended testes.",
+            "CORRECT. Gonadectomy is the NEXT BEST STEP. This is AIS: 46,XY female (ar androgen insensitivity). Undescended testes have ↑risk of seminoma and other malignancies (especially if intra-abdominal). Standard of care is bilateral gonadectomy, then hormone replacement therapy (estrogen + progestin).",
+            "DEXA is important long-term (post-gonadectomy), but not the immediate next step.",
+            "AR mutation testing can confirm AIS diagnosis but does not change management (still need gonadectomy).",
+            "Labs are already diagnostic; repeating them delays necessary intervention."
+        ],
+        teaching: "AIS diagnosis and management: Confirm with AR mutation testing (optional), then proceed to BILATERAL GONADECTOMY (malignancy risk), then estrogen/progestin + DEXA monitoring (bone health)."
+    },
+    {
+        num: 11,
+        stem: "Which drug is used to treat <strong>benign prostatic hyperplasia (BPH)</strong> by blocking <strong>5α-reductase</strong>?",
+        options: ["Spironolactone", "Flutamide", "Finasteride", "Leuprolide", "Clomiphene"],
+        correct: 2,
+        explanations: [
+            "Spironolactone: anti-androgen (blocks AR), not 5α-reductase.",
+            "Flutamide: anti-androgen (blocks AR), used in prostate cancer, not BPH.",
+            "CORRECT. Finasteride (and dutasteride) blocks 5α-reductase → ↓DHT (the active driver of prostate growth in BPH). Also used for male-pattern baldness. Does NOT block the androgen receptor itself.",
+            "Leuprolide: GnRH agonist → ↓LH/FSH; used in prostate cancer, not BPH.",
+            "Clomiphene: ER antagonist; used for infertility, not BPH."
+        ],
+        teaching: "Finasteride = 5α-reductase inhibitor. Spironolactone/Flutamide = AR blockers. Know the difference: finasteride for BPH/baldness, AR blockers for prostate cancer."
+    },
+    {
+        num: 12,
+        stem: "A woman with PCOS is counseled on contraceptive options. Which mechanism BEST explains why OCPs help PCOS symptoms (hirsutism, acne)?",
+        options: ["Estrogen increases aromatase activity in adipose tissue", "Progestin blocks 5α-reductase in skin", "Estrogen + progestin inhibit GnRH → ↓FSH/LH → ↓androgen production + ↑SHBG → ↓free androgens", "Progestin blocks the androgen receptor in hair follicles", "Estrogen increases insulin sensitivity directly"],
+        correct: 2,
+        explanations: [
+            "Increased aromatase activity would worsen, not improve, PCOS.",
+            "Progestin does not block 5α-reductase.",
+            "CORRECT. OCPs suppress GnRH pulsatility → ↓LH (↓ theca androgen production) + ↓FSH. ALSO: estrogen ↑SHBG (sex hormone-binding globulin) → ↓free testosterone. Dual action: ↓total androgens + ↓free androgens → improvement in hirsutism and acne over 3-6 months.",
+            "Progestin does not block AR in skin (that's spironolactone).",
+            "OCPs improve insulin resistance minimally; this is not their primary benefit in PCOS."
+        ],
+        teaching: "OCPs in PCOS: ↓LH (↓androgen production) + ↑SHBG (↓free T). Spironolactone adds AR blockade. Metformin improves insulin resistance. Combination therapy is often needed."
+    }
+];
+
+// ─── VIGNETTE DATA ────────────────────────────────────
+const vignettes = [
+    {
+        banner: "Turner Syndrome | Short Stature & Amenorrhea",
+        stem: `A 15-year-old girl is evaluated for <strong>short stature and primary amenorrhea</strong>. Height is 4'10" (25th percentile for her age should be ~5'5"). Physical exam reveals <strong>webbed neck, widely spaced nipples, and a cardiac murmur</strong>. Pelvic ultrasound shows small streak gonads. Labs: <strong>↑FSH/LH, ↓estrogen</strong>.`,
+        question: "What is the diagnosis and what are the three most important early interventions?",
+        answer: "Turner syndrome (45,X). (1) GH therapy for height gain (SHOX haploinsufficiency). (2) Estrogen replacement at puberty (monitor for ovarian reserve if any). (3) Screen for cardiac anomalies (bicuspid aortic valve, coarctation of aorta, aortic stenosis) and renal disease (horseshoe kidney) — cardiology and nephrology referral. Prognosis: normal intellect, infertility in most (unless rare mosaic with functional ovarian tissue)."
+    },
+    {
+        banner: "Klinefelter Syndrome | Infertility & Gynecomastia",
+        stem: `A 26-year-old male presents because he and his partner have been trying to conceive for 2 years without success. History: tall (6'3"), always had small testes even in adolescence, developed breast tissue at age 14 (partially regressed after puberty). Labs: <strong>↓testosterone (200 ng/dL), ↑FSH, ↑LH, ↑estradiol</strong>. Semen analysis: azoospermia.`,
+        question: "What is the diagnosis and management plan?",
+        answer: "Klinefelter syndrome (47,XXY). Confirmed with karyotype. Management: (1) Testosterone replacement therapy (improves muscle mass, energy, but does NOT restore spermatogenesis in azoospermic males). (2) Evaluate for infertility treatments (TESE/TESA if sperm retrieval desired). (3) Screen for ↑breast cancer risk, hypogonadism complications (bone loss, metabolic syndrome). (4) Genetic counseling regarding X-linked traits and fertility options."
+    },
+    {
+        banner: "Complete AIS | Primary Amenorrhea with 46,XY",
+        stem: `An 18-year-old woman comes to gynecology clinic for primary amenorrhea evaluation. She reports never menstruating. History: assigned female at birth, normal female development (though not menstruating). Recently, she discovered bilateral <strong>inguinal lumps</strong> while bathing. On exam: blind-ending vagina, <strong>no uterus on ultrasound</strong>. Labs: <strong>karyotype 46,XY, testosterone elevated (650 ng/dL, high-normal for males), LH elevated</strong>.`,
+        question: "What is the diagnosis, and what are the two most critical next steps?",
+        answer: "Complete Androgen Insensitivity Syndrome (AIS). 46,XY female due to complete AR dysfunction. Elevated testosterone reflects end-organ insensitivity, not overproduction. Next steps: (1) Confirm diagnosis with AR gene sequencing (optional but helpful). (2) URGENT: Bilateral gonadectomy (undescended testes have 30-50% malignancy risk, especially seminoma; risk is lower post-pubertally but still significant). (3) Post-gonadectomy: estrogen + progestin replacement + DEXA scan for bone density monitoring (long-term estrogen deficiency risk before gonadectomy)."
+    },
+    {
+        banner: "5α-Reductase Deficiency | Virilization at Puberty",
+        stem: `A 13-year-old raised as a girl presents to pediatrics with acute confusion and concern from parents: development of <strong>male external genitalia and deepening of voice</strong> over the past 6 months. History: At birth, assigned female due to ambiguous/female-appearing external genitalia. Pelvic imaging shows <strong>no uterus, but bilateral gonads present</strong>. Karyotype: 46,XY. Labs: <strong>↑testosterone, ↓DHT, ↑testosterone:DHT ratio</strong>.`,
+        question: "What is the diagnosis and how do you counsel the family?",
+        answer: "5α-Reductase deficiency. 46,XY but raised female due to lack of DHT-dependent external genitalia virilization at birth (DHT is critical for urethral fusion, phallus development). At puberty, rising testosterone gets shunted to DHT via alternative pathways or adrenal 5α-reductase → virilization. Classic: 'penis at 12.' Counsel: (1) This is not a medical emergency (virilization is expected and normal for this condition). (2) Family and patient should discuss gender identity (some patients choose to live as male, others continue as female — both are medically supported). (3) Reproductive counseling: Wolffian structures (vas deferens, epididymis, seminal vesicles) present and functional → potential fertility as male if desired. (4) Regular testosterone, DHT monitoring."
+    },
+    {
+        banner: "PCOS | Infertility Workup",
+        stem: `A 28-year-old woman seeks fertility evaluation. History: <strong>irregular periods (every 2-3 months), significant hirsutism and acne, weight gain</strong>. BMI 32. Labs: <strong>↑testosterone (75 ng/dL), LH:FSH ratio 3:1, ↑insulin fasting, normal prolactin and TSH</strong>. Pelvic ultrasound: <strong>bilateral ovaries with >12 follicles each (polycystic appearance)</strong>.`,
+        question: "Confirm diagnosis and outline a treatment plan for ovulation induction and PCOS management.",
+        answer: "PCOS diagnosis confirmed (Rotterdam criteria: oligovulation + hyperandrogenism + polycystic ovaries on imaging). Underlying pathophysiology: ↑LH (from genetic factors ± insulin resistance) → ↑theca androgens but ↓FSH → ↓aromatase → ↓estrogen conversion. Insulin resistance (BMI 32, ↑fasting insulin) perpetuates androgenesis. Treatment plan: (1) Lifestyle: weight loss (5-10% can restore ovulation). (2) Metformin 1000-2000 mg daily (insulin sensitizer). (3) For ovulation induction: Clomiphene 50-100 mg daily × 5 days (ER antagonist → ↑FSH → ovulation). If clomiphene fails, consider letrozole or FSH injection. (4) Cosmetic/metabolic: Spironolactone 50-100 mg BID for hirsutism, OCPs for acne if not pursuing pregnancy. (5) Monitor for type 2 diabetes, dyslipidemia."
+    },
+    {
+        banner: "Anabolic Steroid Abuse | Testicular Atrophy",
+        stem: `A 24-year-old competitive bodybuilder presents to his physician complaining of <strong>infertility (married 1 year, no pregnancy)</strong>. He admits to using <strong>high-dose testosterone and trenbolone injections for 8 months</strong>. On exam: <strong>small, soft testes (volume ~8 mL, normal is 15-30 mL)</strong>, mild gynecomastia. Labs: <strong>↓LH/FSH (suppressed), ↓testosterone (200 ng/dL, LOW despite ongoing injections), azoospermia on semen analysis</strong>.`,
+        question: "Explain the mechanism of testicular atrophy and azoospermia, and discuss prognosis for fertility recovery.",
+        answer: "Mechanism: Exogenous anabolic steroids + aromatization → ↑estradiol + direct ↓GnRH → ↓LH/FSH → Leydig cell atrophy → testicular shrinkage + failure of spermatogenesis (Sertoli cells require FSH + testosterone). Gynecomastia from aromatization of excess testosterone → ↑estradiol. Labs show paradoxical ↓testosterone despite injections because endogenous production is suppressed. Prognosis: If steroid use stopped NOW, recovery of spermatogenesis can occur over 6-12 months (Leydig cells regenerate). However, very high doses or prolonged duration can cause permanent damage. Fertility management: (1) STOP all anabolic steroids immediately. (2) Consider hCG ± GnRH agonist to stimulate endogenous LH/FSH recovery. (3) Monitor LH/FSH/testosterone recovery. (4) Recheck semen analysis in 3-6 months. (5) If fertility not restored, may need testosterone + hCG or ART."
+    },
+    {
+        banner: "Cirrhosis & Gynecomastia | Estrogen Metabolism Failure",
+        stem: `A 58-year-old male with Child-Pugh Class B cirrhosis (from alcoholic liver disease) presents with <strong>breast tenderness, prominent breast tissue (grade II gynecomastia), spider angiomata, jaundice, and ascites</strong>. Labs: <strong>↑estradiol (180 pg/mL, HIGH), testosterone normal-to-high (600 ng/dL)</strong>. PT elevated, albumin low.`,
+        question: "Explain the pathophysiology of gynecomastia in cirrhosis and discuss whether finasteride would be helpful.",
+        answer: "Pathophysiology: (1) LIVER FAILURE → ↓estrogen metabolism (hepatic inactivation of estradiol is impaired) → ↑circulating estradiol accumulation. (2) ↑aromatase activity in adipose and liver cirrhosis tissues → ↑testosterone → estradiol conversion. (3) ↑SHBG (from liver disease and collateral portal shunting) paradoxically increases bound (inactive) sex hormones but also increases aromatase activity. Result: ↑estradiol/testosterone ratio → gynecomastia. Finasteride would NOT help because finasteride blocks 5α-reductase (testosterone → DHT), NOT aromatase (testosterone → estradiol). Gynecomastia in cirrhosis is estrogen-driven, not DHT-driven. Options: (1) Treat underlying liver disease if possible. (2) Consider liver transplant evaluation. (3) If medically necessary: spironolactone (anti-androgen, also manages ascites/hypertension) or tamoxifen (ER antagonist in breast tissue). (4) Avoid aromatase inhibitors in cirrhosis (worsens hypogonadism)."
+    },
+    {
+        banner: "Emergency Contraception | Plan B vs Cu-IUD",
+        stem: `A 24-year-old woman comes to urgent care 2 hours after unprotected intercourse. She is <strong>very anxious and wants immediate relief</strong>. She is otherwise healthy, nulliparous, no contraindications to any method. The clinic has Plan B (levonorgestrel), oral mifepristone (if available), and a provider trained in IUD insertion. She asks: "What should I take right now?"`,
+        question: "Counsel her on EC options, efficacy, and timing, and recommend the best choice for her situation.",
+        answer: "Options & Efficacy: (1) Cu-IUD: >99% effective, works up to 5 days (120 hours). Mechanism: copper toxicity to sperm + altered endometrium. Can be left in for 10 years of contraception. BEST choice for this patient: she presents early (2 hours), is nulliparous (safe to insert), and would benefit from long-term contraception. (2) Levonorgestrel (Plan B): ~85-90% effective within 72 hours (less effective if already ovulated). Progestin-only. (3) Ulipristal (ella): 98% effective up to 120 hours; progesterone receptor modulator. May be better if >72 hours but <5 days. (4) Mifepristone: Not EC; abortifacient (terminates pregnancy); not indicated here. Recommendation: Cu-IUD insertion NOW (most effective, earliest presentation). If she refuses IUD, Plan B is acceptable (though less effective). Counsel: Efficacy is time-sensitive (sooner = better for all); Cu-IUD is gold standard if eligible."
+    },
+    {
+        banner: "Clomiphene for Anovulatory Infertility | PCOS",
+        stem: `A 32-year-old with PCOS (confirmed: polycystic ovaries + ↑LH:FSH + ↑testosterone) has been trying to conceive for 18 months. She is on metformin 2000 mg daily and has lost 8 pounds. Labs: normal prolactin, TSH, normal uterus and fallopian tubes on hysterosalpingography. Partner has normal semen analysis. She is started on <strong>clomiphene 50 mg daily × 5 days</strong> (days 3-7 of cycle).`,
+        question: "Explain how clomiphene induces ovulation in PCOS and what monitoring is needed during treatment.",
+        answer: "Mechanism: Clomiphene = selective ER antagonist at hypothalamus (also weak antagonism at pituitary). Blocks estrogen negative feedback → ↑GnRH pulsatility → ↑FSH secretion → stimulates follicle development and aromatase activity in granulosa cells → ↑estradiol → LH surge → ovulation. In PCOS, the ↑FSH restores the balance that's lost (PCOS has ↓FSH relative to LH). Monitoring: (1) Serial transvaginal ultrasound starting day 10-12 to track follicle growth (goal: dominant follicle ≥18 mm). (2) Serum estradiol levels (if available) to confirm adequate follicle development. (3) LH surge detection (home urine LH kit) or ultrasound confirmation of ovulation (corpus luteum). (4) Progesterone level 7 days post-ovulation (>3 ng/mL confirms ovulation). Side effects to discuss: hot flashes, ovarian hyperstimulation (rare with clomiphene). If ovulation occurs: track pregnancy. If no ovulation after 5 cycles, consider letrozole or FSH injection. Success rate: ~80% ovulation induction, ~40% pregnancy per cycle."
+    },
+    {
+        banner: "GnRH Agonist for Prostate Cancer | Leuprolide",
+        stem: `A 68-year-old male is diagnosed with <strong>metastatic prostate cancer (high PSA 145, Gleason 9, bone metastases)</strong>. He is started on <strong>leuprolide 7.5 mg IM monthly (GnRH agonist) PLUS bicalutamide 50 mg daily (AR antagonist)</strong>. On day 1-2 of leuprolide, he develops <strong>bone pain, elevated PSA (flare)</strong>.`,
+        question: "Explain why he is experiencing a flare reaction and why bicalutamide is also given.",
+        answer: "GnRH Agonist Mechanism: Leuprolide is a long-acting GnRH agonist. Like all GnRH agonists, it causes a BIPHASIC response: (1) INITIAL FLARE (days 1-2): continuous GnRH → initial stimulation of LH/FSH → ↑testosterone and ↑PSA. Cancer cells secrete more PSA, and testosterone-driven metastases activate. Patient experiences bone pain from increased tumor activity. (2) DOWNREGULATION (days 3-7): continuous GnRH desensitizes pituitary GnRH receptors → ↓LH/FSH → ↓testosterone (medical castration). Why Bicalutamide: Bicalutamide (or flutamide) is an androgen receptor antagonist. Given FIRST (3-7 days before leuprolide or simultaneously), it blocks the AR during the testosterone flare → prevents flare symptoms and tumor acceleration. This is called 'flare protection.' Outcome: After 1-2 weeks, testosterone drops to castrate levels (<50 ng/dL) → ↓PSA → tumor regression. Management: Continue both drugs; flare symptoms should resolve within 1-2 weeks. NSAIDs or low-dose opioids for bone pain during flare window."
+    }
+];
+
+// ─── TEST TRAP DATA ───────────────────────────────────
+const traps = [
+    {
+        trap: "Turner syndrome is 47,XXY",
+        myth: "Turner syndrome = 47,XXY (female with three sex chromosomes)",
+        truth: "TRAP. Turner = 45,X (missing one X chromosome). 47,XXY = Klinefelter (male). Easy mix-up but MUST remember: Turner = 45,X = short female; Klinefelter = 47,XXY = tall male."
+    },
+    {
+        trap: "In Klinefelter, testosterone is elevated",
+        myth: "Klinefelter patients have high testosterone (↑androgens)",
+        truth: "TRAP. Klinefelter = ↓testosterone (testicular failure). Small firm testes fail to produce adequate testosterone. Labs show ↓T + ↑FSH/LH (primary hypogonadism). Patients present with hypogonadism symptoms, NOT hyperandrogenism."
+    },
+    {
+        trap: "AIS patients have a uterus",
+        myth: "46,XY females with AIS have normal female internal organs including uterus",
+        truth: "TRAP. AIS = NO uterus. The Sertoli cells in testes produce AMH (anti-Müllerian hormone), which causes Müllerian duct regression. Result: no uterus, no fallopian tubes, no upper vagina. Only a blind-ending vaginal pouch. This is a KEY diagnostic clue."
+    },
+    {
+        trap: "5α-reductase deficiency presents at birth with male phenotype",
+        myth: "Babies with 5α-reductase deficiency are obviously male from birth",
+        truth: "TRAP. 5α-reductase deficiency = female/ambiguous external genitalia at birth (lack of DHT prevents virilization). Raised as female. Then at PUBERTY: testosterone → DHT (via alternative pathways) → virilization (penis at 12). This is the classic boards presentation."
+    },
+    {
+        trap: "Clomiphene acts as an estrogen agonist at hypothalamus",
+        myth: "Clomiphene stimulates GnRH by agonizing estrogen receptors",
+        truth: "TRAP. Clomiphene is an ER ANTAGONIST at hypothalamus. Blocks estrogen negative feedback → ↑GnRH → ↑FSH. If it were an agonist, it would SUPPRESS GnRH (like estrogen does)."
+    },
+    {
+        trap: "Cu-IUD is the least effective form of emergency contraception",
+        myth: "Copper IUD has the lowest efficacy among EC methods",
+        truth: "TRAP. Cu-IUD is the MOST effective EC (>99%). Levonorgestrel (~85%) and ulipristal (~98%) are less effective. Cu-IUD works up to 5 days AND can be left in for long-term contraception."
+    },
+    {
+        trap: "In PCOS, FSH is elevated relative to LH",
+        myth: "PCOS = high FSH with normal/low LH",
+        truth: "TRAP. PCOS = ↑LH relative to FSH (LH:FSH >2:1). FSH is LOW because of ↓pulsatile GnRH and ↑feedback from excess androgens. The problem is excess LH (↑theca androgens) + deficient FSH (↓aromatase)."
+    },
+    {
+        trap: "Finasteride treats BPH by blocking the androgen receptor",
+        myth: "Finasteride is an androgen receptor antagonist",
+        truth: "TRAP. Finasteride blocks 5α-REDUCTASE (testosterone → DHT converter), NOT the AR. Spironolactone and flutamide block the AR. Finasteride works because DHT (not testosterone) drives BPH; blocking its production shrinks the prostate."
+    },
+    {
+        trap: "Turner syndrome patients have normal fertility",
+        myth: "Turner women can have normal pregnancies and children",
+        truth: "TRAP. Turner = streak gonads (non-functional ovaries) → primary ovarian failure → infertility in most cases. Some mosaic Turner patients (45,X/46,XX) may have partial fertility, but this is rare. Standard treatment is estrogen replacement + assisted reproduction (donor eggs) if pregnancy desired."
+    },
+    {
+        trap: "In AIS, testosterone levels are low",
+        myth: "AIS patients have hypogonadism with low testosterone",
+        truth: "TRAP. AIS = ↑testosterone (produced normally but ineffective due to AR insensitivity). The problem is the receptor, not production. Distinguish from other 46,XY DSDs where testosterone may be genuinely LOW (enzyme deficiencies)."
+    }
+];
+
+// ─── FILL-IN-BLANK DATA ───────────────────────────────
+const fibs = [
+    { prompt: "Turner syndrome presents with short stature, webbed neck, and __________ (primary or secondary) amenorrhea.", answer: "primary", hint: "Patient has never menstruated." },
+    { prompt: "Klinefelter syndrome (47,XXY) causes __________ testis volume due to primary testicular failure.", answer: "small", hint: "Sertoli cells are damaged." },
+    { prompt: "Complete AIS: 46,XY female with __________ testosterone levels (high or low) and absent uterus (due to __________) from Sertoli cells.", answer: "high\nAMH", hint: "Testes produce both testosterone and AMH." },
+    { prompt: "5α-reductase deficiency: female genitalia at birth, but virilization at puberty. The problem is __________ (↓ or ↑) DHT production.", answer: "low", hint: "DHT is needed for male genitalia development." },
+    { prompt: "PCOS: ↑LH:FSH ratio (>2:1) due to excess __________  from theca cells and ↓__________  (enzyme) from granulosa cells.", answer: "androgen\naromatase", hint: "LH stimulates theca; FSH stimulates granulosa." },
+    { prompt: "Finasteride blocks __________  (enzyme), converting testosterone → DHT. Used in BPH and male-pattern baldness.", answer: "5α-reductase", hint: "DHT drives these conditions." },
+    { prompt: "Clomiphene is an __________ (agonist or antagonist) at estrogen receptors in the hypothalamus, leading to ↑GnRH → ↑FSH.", answer: "antagonist", hint: "Blocks negative feedback." },
+    { prompt: "OCPs contain __________ + __________ to inhibit GnRH pulsatility → ↓FSH/LH and prevent ovulation.", answer: "estrogen\nprogestin", hint: "Combined oral contraceptives." },
+    { prompt: "GnRH agonists (like leuprolide) cause INITIAL ↑FSH/LH (flare), then downregulation. Used in prostate cancer + __________ (AR antagonist) to prevent flare.", answer: "bicalutamide", hint: "Or flutamide." },
+    { prompt: "Inhibin B from __________ cells specifically suppresses FSH. ↑FSH in males = indicator of __________ failure.", answer: "Sertoli\ntubular", hint: "Sertoli cells = FSH target in males." },
+];
+
+// ─── CHALLENGE DRILL DATA ─────────────────────────────
+const drills = [
+    {
+        type: "Sex Chromosome Disorder Classifier",
+        q: "46,XY female with inguinal masses, no uterus, ↑testosterone, ↑LH → Diagnosis?",
+        opts: ["Turner syndrome", "Klinefelter syndrome", "5α-reductase deficiency", "Complete AIS"],
+        answer: 3
+    },
+    {
+        type: "Hormonal Pattern Matcher",
+        q: "↓testosterone, ↑FSH, ↑LH, small testes → Primary or secondary hypogonadism? Likely diagnosis?",
+        opts: ["Secondary; pituitary disease", "Primary testicular failure; Klinefelter", "Primary; 5α-reductase deficiency", "Secondary; hypothyroidism"],
+        answer: 1
+    },
+    {
+        type: "Drug-Mechanism Matcher",
+        q: "Finasteride mechanism in BPH?",
+        opts: ["Blocks GnRH", "Blocks 5α-reductase (testosterone→DHT)", "Blocks androgen receptor", "Stimulates FSH"],
+        answer: 1
+    },
+    {
+        type: "Gynecomastia Cause Classifier",
+        q: "Which syndrome causes gynecomastia via constitutive aromatization of testosterone?",
+        opts: ["Turner syndrome", "Klinefelter syndrome", "AIS", "PCOS"],
+        answer: 1
+    },
+    {
+        type: "Sex Chromosome Disorder Classifier",
+        q: "45,X karyotype, short stature, webbed neck, streak gonads, ↑FSH/LH, ↓estrogen → Diagnosis?",
+        opts: ["Turner syndrome", "Klinefelter syndrome", "5α-reductase deficiency", "AIS"],
+        answer: 0
+    },
+    {
+        type: "Hormonal Pattern Matcher",
+        q: "↓FSH, ↓LH, ↓testosterone, normal testis volume → Primary or secondary hypogonadism?",
+        opts: ["Primary testicular failure", "Secondary hypogonadism (hypothalamic/pituitary)", "Klinefelter syndrome", "Turner syndrome"],
+        answer: 1
+    },
+    {
+        type: "Drug-Mechanism Matcher",
+        q: "Clomiphene mechanism in PCOS-induced infertility?",
+        opts: ["ER agonist → inhibits GnRH", "ER antagonist → blocks negative feedback → ↑GnRH → ↑FSH", "AR antagonist", "5α-reductase inhibitor"],
+        answer: 1
+    },
+    {
+        type: "Test Trap Detector",
+        q: "Which statement about AIS is CORRECT?",
+        opts: ["Testosterone is LOW due to testicular failure", "Testosterone is HIGH due to end-organ insensitivity", "Uterus is present (female phenotype)", "FSH is LOW (secondary hypogonadism)"],
+        answer: 1
+    }
+];
+
+// ─── USMLE MAP DATA ───────────────────────────────────
+const usmleMaps = [
+    {
+        gusom: "Testosterone/DHT pathway",
+        step1: "5α-reductase inhibitors (finasteride, dutasteride) — BPH, male-pattern baldness. USMLE loves: finasteride blocks 5α-reductase (NOT AR).",
+        keywords: "Finasteride, 5α-reductase, BPH, alopecia",
+        disease: "Benign Prostatic Hyperplasia, male-pattern baldness"
+    },
+    {
+        gusom: "Testosterone → estradiol via aromatase",
+        step1: "Aromatization explains gynecomastia in obesity, liver cirrhosis (↓estrogen metabolism), high-dose anabolic steroids.",
+        keywords: "Aromatase, gynecomastia, obesity, cirrhosis",
+        disease: "Gynecomastia (multifactorial)"
+    },
+    {
+        gusom: "High-dose anabolic steroids",
+        step1: "↓LH/FSH (negative feedback) → testicular atrophy + azoospermia. ALSO aromatization of excess androgens → gynecomastia.",
+        keywords: "Anabolic steroids, testicular atrophy, azoospermia, gynecomastia",
+        disease: "Anabolic steroid abuse"
+    },
+    {
+        gusom: "Two-cell model",
+        step1: "PCOS: ↑LH:FSH ratio (>2:1), ↑theca androgens, ↓FSH → ↓aromatase → ↓estrogen conversion. Insulin resistance contributes.",
+        keywords: "PCOS, LH:FSH ratio, insulin resistance, hyperandrogenism",
+        disease: "Polycystic Ovary Syndrome"
+    },
+    {
+        gusom: "Turner syndrome",
+        step1: "45,X female: short stature (SHOX), webbed neck, streak gonads, ↑FSH/LH, ↓estrogen → primary amenorrhea. Cardiac (bicuspid AV, coarctation) and renal (horseshoe kidney) screening essential.",
+        keywords: "Turner, 45,X, streak gonads, short stature, primary amenorrhea",
+        disease: "Turner Syndrome"
+    },
+    {
+        gusom: "Klinefelter syndrome",
+        step1: "47,XXY male: tall, small firm testes, gynecomastia, ↓testosterone, ↑FSH/LH, azoospermia, ↑breast cancer risk.",
+        keywords: "Klinefelter, 47,XXY, testicular atrophy, azoospermia, gynecomastia",
+        disease: "Klinefelter Syndrome"
+    },
+    {
+        gusom: "AIS",
+        step1: "46,XY female phenotype, no uterus (AMH), blind-ending vagina, ↑testosterone (insensitivity), ↑LH, inguinal/intra-abdominal testes (malignancy risk) → gonadectomy + estrogen.",
+        keywords: "AIS, 46,XY, androgen receptor insensitivity, primary amenorrhea",
+        disease: "Complete Androgen Insensitivity Syndrome"
+    },
+    {
+        gusom: "5α-reductase deficiency",
+        step1: "46,XY, female/ambiguous genitalia at birth (↓DHT), virilization at puberty (↑testosterone), no uterus (AMH). ↑testosterone:DHT ratio.",
+        keywords: "5α-reductase deficiency, virilization at puberty, female at birth",
+        disease: "5α-Reductase Deficiency"
+    },
+    {
+        gusom: "OCPs",
+        step1: "Combined estrogen+progestin → ↓GnRH pulsatility → ↓FSH (no follicle) + ↓LH surge (no ovulation). Also ↑SHBG (↓free androgens), thicken cervical mucus, thin endometrium.",
+        keywords: "OCP, GnRH suppression, contraception, ↑SHBG",
+        disease: "Contraception (PCOS, acne, hirsutism)"
+    },
+    {
+        gusom: "Clomiphene",
+        step1: "ER antagonist at hypothalamus → ↓negative feedback → ↑GnRH → ↑FSH → ovulation. Used for anovulatory infertility (PCOS).",
+        keywords: "Clomiphene, ER antagonist, GnRH, ovulation induction",
+        disease: "Anovulatory infertility (PCOS)"
+    },
+    {
+        gusom: "GnRH agonists",
+        step1: "Leuprolide: continuous GnRH → downregulation → ↓FSH/LH. Initial flare (↑FSH/LH × 1-2 weeks), then profound suppression. Uses: prostate cancer (+ AR antagonist), endometriosis, fibroids, precocious puberty.",
+        keywords: "GnRH agonist, leuprolide, downregulation, medical castration",
+        disease: "Prostate cancer, endometriosis, precocious puberty"
+    },
+    {
+        gusom: "Emergency contraception",
+        step1: "Plan B (levonorgestrel): <72h, ~85% effective. Ulipristal (ella): <120h, ~98%. Cu-IUD: <120h, >99% most effective, long-term option.",
+        keywords: "Emergency contraception, Plan B, Cu-IUD, ulipristal",
+        disease: "Unprotected intercourse"
+    }
+];
+
+// ─── RENDER FUNCTIONS ─────────────────────────────────
+function renderFlashcards() {
+    const grid = document.getElementById('fcGrid');
+    grid.innerHTML = '';
+    flashcards.forEach((fc, idx) => {
+        const card = document.createElement('div');
+        card.className = 'fc';
+        card.onclick = () => card.classList.toggle('flipped');
+        card.innerHTML = `
+            <div class="fc-inner">
+                <div class="fc-front">
+                    <div class="fc-label">Question</div>
+                    <div class="fc-q">${fc.q}</div>
+                    <div class="fc-hint">Click to reveal answer</div>
+                </div>
+                <div class="fc-back">
+                    <div class="fc-label">Answer</div>
+                    <div class="fc-a">${fc.a}</div>
+                </div>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function renderMCQs() {
+    const container = document.getElementById('mcqContainer');
+    container.innerHTML = '';
+    mcqs.forEach((mcq, idx) => {
+        const item = document.createElement('div');
+        item.className = 'mcq-item';
+        const optionsHTML = mcq.options.map((opt, i) => `
+            <div class="mcq-opt" onclick="revealMCQ(${idx}, ${i})">
+                <span class="letter">${String.fromCharCode(65+i)}.</span>
+                <span>${opt}</span>
+            </div>
+        `).join('');
+        item.innerHTML = `
+            <div class="mcq-num">Question ${mcq.num || idx + 1}</div>
+            <div class="mcq-stem">${mcq.stem}</div>
+            <div class="mcq-options">${optionsHTML}</div>
+            <div class="mcq-explanation" id="exp-${idx}">
+                <div class="exp-label">Explanation:</div>
+                <div id="exp-text-${idx}"></div>
+            </div>
+            <div class="teaching-pt" id="tp-${idx}">
+                <div class="tp-label">Teaching Point:</div>
+                <div>${mcq.teaching}</div>
+            </div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function revealMCQ(idx, chosen) {
+    const mcq = mcqs[idx];
+    const opts = document.querySelectorAll(`#mcq-item-${idx} .mcq-opt`);
+    document.querySelectorAll('.mcq-opt').forEach(o => o.classList.remove('revealed'));
+    document.querySelectorAll(`#mcq-item-${idx} .mcq-opt`).forEach((opt, i) => {
+        opt.classList.add('revealed');
+        if (i === mcq.correct) opt.classList.add('correct');
+        if (i === chosen && i !== mcq.correct) opt.classList.add('wrong');
+    });
+    document.getElementById(`exp-${idx}`).classList.add('visible');
+    document.getElementById(`exp-text-${idx}`).innerHTML = mcq.explanations[chosen];
+    document.getElementById(`tp-${idx}`).classList.add('visible');
+}
+
+function renderVignettes() {
+    const container = document.getElementById('vigContainer');
+    container.innerHTML = '';
+    vignettes.forEach((vig, idx) => {
+        const item = document.createElement('div');
+        item.className = 'vig-item';
+        item.innerHTML = `
+            <div class="vig-banner">${vig.banner}</div>
+            <div class="vig-stem">${vig.stem}</div>
+            <div class="vig-question"><strong>Question:</strong> ${vig.question}</div>
+            <button class="vig-expand" onclick="toggleVigAnswer(${idx})">Show Answer</button>
+            <div class="vig-answer" id="vig-ans-${idx}">
+                <strong>Answer:</strong> ${vig.answer}
+            </div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function toggleVigAnswer(idx) {
+    const ans = document.getElementById(`vig-ans-${idx}`);
+    ans.classList.toggle('visible');
+}
+
+let trapState = {correct: 0, total: 0};
+
+function renderTraps() {
+    const container = document.getElementById('trapsContainer');
+    container.innerHTML = '';
+    trapState = {correct: 0, total: traps.length};
+    updateTrapScore();
+    traps.forEach((t, idx) => {
+        const el = document.createElement('div');
+        el.className = 'trap-item';
+        el.innerHTML = `<div class="trap-statement">${idx+1}. ${t.myth}</div>
+            <div class="trap-buttons">
+                <button class="trap-btn trap-btn-correct" onclick="answerTrap(${idx},true)">CORRECT ✓</button>
+                <button class="trap-btn trap-btn-trap" onclick="answerTrap(${idx},false)">TRAP ✗</button>
+            </div>
+            <div class="trap-result" id="trap-res-${idx}">
+                <div class="trap-verdict" id="trap-verdict-${idx}"></div>
+                <div class="trap-explain" id="trap-explain-${idx}"></div>
+            </div>`;
+        container.appendChild(el);
+    });
+}
+
+function answerTrap(idx, userSaysCorrect) {
+    const result = document.getElementById(`trap-res-${idx}`);
+    const verdict = document.getElementById(`trap-verdict-${idx}`);
+    const explain = document.getElementById(`trap-explain-${idx}`);
+    const isActual = traps[idx].correct;
+    const isUserCorrect = (userSaysCorrect === isActual);
+    document.querySelectorAll(`[onclick*="answerTrap(${idx},"]`).forEach(b => b.disabled = true);
+    if (isUserCorrect) { trapState.correct++; result.classList.add('correct-choice'); verdict.innerHTML = '✓ Correct!'; }
+    else { result.classList.add('wrong-choice'); verdict.innerHTML = '✗ Incorrect'; }
+    result.classList.add('show');
+    explain.innerHTML = traps[idx].truth;
+    updateTrapScore();
+}
+
+function updateTrapScore() {
+    const el = document.getElementById('trap-score');
+    if (el) el.textContent = `Score: ${trapState.correct}/${trapState.total}`;
+}
+
+function resetTraps() {
+    trapState.correct = 0;
+    trapState.total = traps.length;
+    document.querySelectorAll('.trap-result').forEach(r => r.classList.remove('show','correct-choice','wrong-choice'));
+    document.querySelectorAll('.trap-btn').forEach(b => b.disabled = false);
+    updateTrapScore();
+}
+
+function renderFIB() {
+    const container = document.getElementById('fibContainer');
+    container.innerHTML = '';
+    fibs.forEach((fib, idx) => {
+        const item = document.createElement('div');
+        item.className = 'fib-item';
+        item.innerHTML = `
+            <div class="fib-prompt">${fib.prompt}</div>
+            <input type="text" class="fib-input" id="fib-input-${idx}" placeholder="Type your answer...">
+            <button class="fib-btn" onclick="checkFIB(${idx})">Check Answer</button>
+            <div class="fib-result" id="fib-result-${idx}"></div>
+            <div style="font-size: 0.8em; color: #6B7280; margin-top: 6px;">Hint: ${fib.hint}</div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function checkFIB(idx) {
+    const input = document.getElementById(`fib-input-${idx}`).value.trim().toLowerCase();
+    const correct = fibs[idx].answer.toLowerCase();
+    const result = document.getElementById(`fib-result-${idx}`);
+    const matches = input === correct || correct.split('\n').some(ans => input === ans.toLowerCase());
+    result.className = 'fib-result ' + (matches ? 'correct' : 'incorrect');
+    result.innerHTML = matches ? '✓ Correct!' : `✗ Expected: ${fibs[idx].answer}`;
+}
+
+function renderDrill() {
+    const container = document.getElementById('drillContainer');
+    container.innerHTML = '';
+    const shuffleArr = arr => [...arr].map(v => [Math.random(), v]).sort((a,b) => a[0]-b[0]).map(v => v[1]);
+    drillMatchers.forEach((drill, dIdx) => {
+        const section = document.createElement('div');
+        section.style.marginBottom = '32px';
+        section.innerHTML = `<div style="font-weight:700;color:#FCD34D;margin-bottom:8px;font-size:1em;">${drill.type}</div><div style="color:#9CA3AF;font-size:0.85em;margin-bottom:16px;">${drill.instructions}</div>`;
+        const allTargets = drill.items.map(i => i.target);
+        drill.items.forEach((item, iIdx) => {
+            const others = allTargets.filter(t => t !== item.target);
+            const options = shuffleArr([item.target, ...shuffleArr(others).slice(0, 3)]);
+            const itemEl = document.createElement('div');
+            itemEl.className = 'drill-item-q';
+            itemEl.style.cssText = 'background:#161B22;border:1px solid #30363D;border-radius:8px;padding:16px;margin-bottom:12px;';
+            const optsHtml = options.map(opt => `<button class="drill-opt" data-correct="${opt === item.target}" data-didx="${dIdx}" data-iidx="${iIdx}" onclick="checkDrillOpt(this)" style="display:block;width:100%;text-align:left;background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:9px 13px;margin:4px 0;cursor:pointer;color:#C9D1D9;font-size:0.85em;transition:all 0.2s;">${opt}</button>`).join('');
+            itemEl.innerHTML = `<div style="font-weight:600;color:#E6EDF3;margin-bottom:12px;font-size:0.93em;">${item.stimulus}</div>${optsHtml}<div id="drill-fb-${dIdx}-${iIdx}" style="display:none;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;"></div>`;
+            section.appendChild(itemEl);
+        });
+        container.appendChild(section);
+    });
+}
+
+function checkDrillOpt(btn) {
+    const isCorrect = btn.dataset.correct === 'true';
+    const dIdx = parseInt(btn.dataset.didx);
+    const iIdx = parseInt(btn.dataset.iidx);
+    const item = drillMatchers[dIdx].items[iIdx];
+    btn.closest('.drill-item-q').querySelectorAll('.drill-opt').forEach(b => {
+        b.disabled = true;
+        if (b.dataset.correct === 'true') { b.style.cssText += ';background:rgba(74,222,128,0.15);border-color:#4ADE80;color:#D1FAE5;'; }
+    });
+    if (!isCorrect) { btn.style.cssText += ';background:rgba(239,68,68,0.15);border-color:#EF4444;color:#FCA5A5;'; }
+    const fb = document.getElementById(`drill-fb-${dIdx}-${iIdx}`);
+    if (isCorrect) { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(74,222,128,0.1);color:#D1FAE5;'; fb.innerHTML = '✓ Correct!'; }
+    else { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(239,68,68,0.1);color:#FCA5A5;'; fb.innerHTML = `✗ Correct: ${item.target}`; }
+}
+
+function renderUSMLEMap() {
+    const container = document.getElementById('usmleContainer');
+    container.innerHTML = '';
+    usmleMaps.forEach((map, idx) => {
+        const item = document.createElement('div');
+        item.className = 'map-row';
+        item.innerHTML = `
+            <div class="map-col">
+                <div class="map-section">
+                    <div class="map-label">GUSOM LO</div>
+                    <div class="map-content">${map.gusom}</div>
+                </div>
+                <div class="map-section">
+                    <div class="map-label">Step 1 Extension</div>
+                    <div class="map-content">${map.step1}</div>
+                </div>
+                <div class="map-section">
+                    <div class="map-label">Buzzwords & Disease</div>
+                    <div class="map-content"><strong>Keywords:</strong> ${map.keywords}<br><strong>Disease:</strong> ${map.disease}</div>
+                </div>
+            </div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+// ─── INITIALIZE ────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    renderFlashcards();
+    renderMCQs();
+    renderVignettes();
+    renderTraps();
+    renderFIB();
+    renderDrill();
+    renderUSMLEMap();
+});
+</script>
+</body>
+</html>

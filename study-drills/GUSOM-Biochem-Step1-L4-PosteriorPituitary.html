@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biochem L4: Posterior Pituitary — Step 1 Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #00838F; --accent-dark: #004D56; --accent-light: rgba(0,131,143,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* FLASHCARDS */
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
+        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
+
+        /* MCQ */
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
+        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .mcq-explanation.visible { display: block; }
+        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+        .teaching-pt { background: rgba(0,131,143,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #A8E6F0; display: none; }
+        .teaching-pt.visible { display: block; }
+        .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+
+        /* VIGNETTES */
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: rgba(0,131,143,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #A8E6F0; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+        .vig-q { font-size: 0.9em; color: #E6EDF3; margin-bottom: 12px; font-weight: 600; }
+        .vig-opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .vig-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; }
+        .vig-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .vig-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .vig-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .vig-explain { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .vig-explain.visible { display: block; }
+
+        /* TEST TRAPS */
+        .trap-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-statement { color: #E6EDF3; font-size: 0.95em; margin-bottom: 12px; line-height: 1.6; font-weight: 500; }
+        .trap-buttons { display: flex; gap: 10px; margin-bottom: 10px; }
+        .trap-btn { padding: 9px 18px; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.88em; background: #1C2128; }
+        .trap-btn-correct { color: #4ADE80; border-color: #4ADE80; }
+        .trap-btn-trap { color: #ff6b6b; border-color: #ff6b6b; }
+        .trap-btn:hover:not(:disabled) { opacity: 0.85; }
+        .trap-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .trap-result { display: none; padding: 10px 14px; border-radius: 6px; font-size: 0.88em; line-height: 1.5; margin-top: 4px; }
+        .trap-result.show { display: block; }
+        .trap-result.correct-choice { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; color: #D1FAE5; }
+        .trap-result.wrong-choice { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; color: #FCA5A5; }
+        .trap-verdict { font-weight: 700; margin-bottom: 4px; }
+        .trap-explain { font-size: 0.9em; opacity: 0.9; }
+
+        /* FILL-IN-BLANK */
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+
+        /* REFERENCE TABLE */
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
+
+        /* CHALLENGE DRILL */
+        .challenge-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .challenge-type { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="GUSOM-Biochem-Step1-Hub.html" class="back">← Back to Biochem Step 1 Hub</a>
+        <h1>Biochem L4: <span class="accent-tag">Posterior Pituitary — Step 1 Hub</span></h1>
+        <div class="subtitle">USMLE Step 1 · DI differential · SIADH causes & treatment · Osmotic demyelination · Sheehan syndrome</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Trap Detector</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('challenge')">🎯 Challenge Drill</button>
+        <button class="tab-btn" onclick="switchTab('map')">📋 USMLE Map</button>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Core Concept Flashcards — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
+
+    <!-- MCQ -->
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice — Step 1 Style</div>
+        <div id="mcqContainer"></div>
+    </div>
+
+    <!-- VIGNETTES -->
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes — Real-World Presentations</div>
+        <div id="vigContainer"></div>
+    </div>
+
+    <!-- TEST TRAPS -->
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">⚠️ Trap Detector — Common Exam Misconceptions</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:10px 14px;background:#161B22;border:1px solid #30363D;border-radius:8px;"><span style="font-size:0.85em;color:#9CA3AF;">Click <strong style="color:#4ADE80;">CORRECT ✓</strong> or <strong style="color:#ff6b6b;">TRAP ✗</strong> for each statement.</span><div style="display:flex;align-items:center;gap:14px;"><span id="trap-score" style="font-size:0.9em;font-weight:700;color:#E6EDF3;">Score: 0/0</span><button onclick="resetTraps()" style="background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:5px 12px;color:#9CA3AF;cursor:pointer;font-size:0.82em;">Reset</button></div></div>
+        <div id="trapsContainer"></div>
+    </div>
+
+    <!-- FILL-IN-BLANK -->
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill in the Blank — Complete the Pathway</div>
+        <div id="fibContainer"></div>
+    </div>
+
+    <!-- CHALLENGE DRILL -->
+    <div id="tab-challenge" class="tab-content">
+        <div class="section-title">🎯 Challenge Drill — Advanced Synthesis</div>
+        <div id="challengeContainer"></div>
+    </div>
+
+    <!-- USMLE MAP -->
+    <div id="tab-map" class="tab-content">
+        <div class="section-title">📋 USMLE Mapping: GUSOM LO → Step 1 Extensions</div>
+        <div id="mapContainer"></div>
+    </div>
+</div>
+
+<script>
+// ─── TAB NAVIGATION ───────────────────────────────────
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
+
+// ─── FLASHCARD DATA ───────────────────────────────────
+const flashcards = [
+    { q: "Define central diabetes insipidus (central DI). What is it NOT?", a: "Central DI = deficient ADH production/secretion from posterior pituitary. NOT nephrogenic DI (kidneys don't respond to ADH). Causes: head trauma (most common acquired), craniopharyngioma (most common in children), pituitary surgery, histiocytosis X, sarcoidosis, anorexia nervosa, idiopathic." },
+    { q: "What is the mechanism of nephrogenic DI? Name the #1 drug cause.", a: "Kidneys are resistant/unresponsive to ADH. V2 receptor or AQP2 mutation signaling is defective. #1 DRUG CAUSE: Lithium (blocks V2 signaling in collecting duct). Others: demeclocycline, hypercalcemia, hypokalemia, hereditary (X-linked recessive for V2)." },
+    { q: "Desmopressin (DDAVP) water deprivation test — what does it distinguish?", a: "Desmopressin is synthetic ADH. AFTER water restriction: central DI responds (urine concentrates to >600 mOsm/kg), nephrogenic DI does NOT respond. This is the KEY diagnostic test. Urine stays dilute in nephrogenic DI even with desmopressin." },
+    { q: "What is osmotic demyelination syndrome (central pontine myelinolysis)? When does it occur?", a: "Neurologic complication from RAPID correction of CHRONIC hyponatremia. Symptoms: locked-in syndrome, dysarthria, dysphagia, quadriplegia. Max correction rate: ≤10–12 mEq/L per 24 hours. Risk factors: alcoholics, malnutrition, hypokalemia. NEVER correct >12 mEq/day or you cause CNS demyelination." },
+    { q: "List the major causes of SIADH (5 categories).", a: "1) CNS: stroke, tumor, hemorrhage, infection, trauma. 2) Pulmonary: SCLC (most common), pneumonia, TB, abscess. 3) Drugs: SSRIs, SNRIs, TCAs, carbamazepine, vincristine, cyclophosphamide, chlorpropamide, NSAIDs, opioids. 4) Ectopic ADH: SCLC. 5) Surgery/pain/stress." },
+    { q: "Demeclocycline — what is its DUAL role in SIADH?", a: "Demeclocycline CAUSES nephrogenic DI by blocking ADH action at V2 receptor (same as lithium). But it's USED therapeutically to TREAT chronic SIADH — by inducing nephrogenic DI, it overcomes the ectopic ADH problem. Mild SIADH → fluid restriction; chronic/moderate → demeclocycline." },
+    { q: "SIADH treatment algorithm based on severity.", a: "Mild hyponatremia (Na 125–130, asymptomatic) → FLUID RESTRICTION. Moderate (Na 120–125) → DEMECLOCYCLINE or urea. Severe (Na <120 OR symptomatic: seizures, altered mental status) → HYPERTONIC SALINE (3% NaCl) + furosemide. Refractory → vaptans (tolvaptan, conivaptan = V2 antagonists causing aquaresis)." },
+    { q: "Cerebral salt wasting (CSW) vs SIADH — how do you distinguish?", a: "BOTH present with: hyponatremia + high urine Na + low plasma osmolality. DIFFERENTIATE by VOLUME STATUS: CSW = HYPOvolemic (low BP, low CVP, ↓skin turgor) → TREAT with IV SALINE. SIADH = euvolemic/hypervolemic → TREAT with FLUID RESTRICTION. CSW common after subarachnoid hemorrhage." },
+    { q: "Vaptans (tolvaptan, conivaptan) — mechanism of action and clinical use.", a: "Vaptans are V2 receptor ANTAGONISTS (not agonists!). Block V2 → aquaresis (free water excretion WITHOUT electrolyte loss) → serum Na rises. Used for refractory SIADH when fluid restriction/demeclocycline fail. Caution: can correct Na too rapidly if not monitored." },
+    { q: "Psychogenic polydipsia — lab findings and diagnostic approach.", a: "Excessive water intake → dilutional hyponatremia + LOW urine osmolality + LOW plasma osmolality. ADH appropriately suppressed (unlike SIADH). Water deprivation test → urine concentrates normally (unlike central DI). Diagnosis: history of excessive thirst, normal ADH suppression, normal response to water deprivation." },
+    { q: "What is Sheehan syndrome? Which hormone is lost FIRST?", a: "Postpartum pituitary necrosis from hemorrhage/hypotension during delivery → panhypopituitarism. FIRST SIGN: failure to lactate (prolactin deficiency). Then GH ↓, then TSH/ACTH ↓, finally LH/FSH ↓. Classic: woman can't breastfeed postpartum." },
+    { q: "Oxytocin pharmacology — doses, clinical uses, and side effect risk.", a: "Synthetic oxytocin (Pitocin) for labor induction. HIGH DOSES can cause water retention (V2-like effect — structural similarity to ADH) → hyponatremia/SIADH-like picture. Uterotonic: contracts uterus, stops postpartum hemorrhage. Milk ejection reflex: stress INHIBITS oxytocin (but NOT prolactin)." },
+    { q: "Central vs nephrogenic DI — clinical features and distinguishing tests.", a: "CENTRAL DI: ADH deficient. Responds to desmopressin. Caused by pituitary/hypothalamus damage. NEPHROGENIC DI: ADH elevated (kidney resistance). Does NOT respond to desmopressin. Caused by renal resistance. Both: polyuria (dilute urine), polydipsia, dehydration. Test: DDAVP response." },
+    { q: "Lithium's mechanism of nephrogenic DI — why does it cause polyuria?", a: "Lithium blocks inositol metabolism in collecting duct cells → impairs V2 receptor signaling (phosphatidylinositol pathway) → aquaporin-2 (AQP2) channels not inserted into apical membrane → kidney cannot concentrate urine despite high ADH levels. Result: nephrogenic DI (ADH RESISTANT)." },
+    { q: "SSRIs and carbamazepine in SIADH — what is the mechanism?", a: "SSRIs (fluoxetine, sertraline, paroxetine, citalopram) and carbamazepine INCREASE ADH secretion or enhance ADH action → SIADH pattern (hyponatremia, high urine Na, low plasma osm). Common drugs to cause SIADH — frequently tested on Step 1." },
+    { q: "Hyponatremia correction rate — what is the maximum safe rate and why?", a: "Maximum correction: 10–12 mEq/L per 24 hours (or 8 mEq/L per 24 hours in chronic hyponatremia). Exceeding this → osmotic demyelination syndrome. Brain cells extrude solutes to match decreased extracellular osmolality; if corrected too fast, water moves out of cells → demyelination, esp pontine." },
+    { q: "Desmopressin (DDAVP) — how is it administered? Why not oral ADH?", a: "Peptide hormones degraded by GI enzymes. Desmopressin given as: intranasal spray/powder (preferred), subcutaneous, IV, or PO (lysine vasopressin tab). DDAVP = more selective for V2 (renal) than V1 (vascular) — good for DI, minimal vasoconstrictive effects." },
+    { q: "ADH/vasopressin V1, V2, V3 receptor locations and functions.", a: "V1a = vascular smooth muscle, liver, platelets → IP3/DAG pathway → vasoconstriction. V2 = renal collecting duct, endothelium → cAMP → aquaporin-2 insertion, water reabsorption. V3 = anterior pituitary corticotropes → IP3 pathway → ACTH regulation. Step 1: know V1a (vasoconstriction) vs V2 (water reabsorption)." },
+    { q: "Circumventricular organs in ADH regulation — which one senses osmolarity?", a: "OVLT (organum vasculosum of lamina terminalis) senses plasma osmolarity (BBB absent here) → osmoreceptor signals SON/PVN → ADH release when plasma osm >280–290 mOsm/kg. Also: SFO (subfornical organ) senses angiotensin II (low blood volume). These are 'windows' where brain senses blood composition." },
+];
+
+// ─── MCQ DATA ─────────────────────────────────────────
+const mcqs = [
+    {
+        num: "Q1",
+        stem: "A 58-year-old man with a recent pituitary adenoma resection presents with <strong>polyuria (4L/day) and polydipsia</strong>. Plasma osmolality 302 mOsm/kg, urine osmolality 150 mOsm/kg (dilute). A water deprivation test is performed, and after desmopressin injection, urine osmolality rises to 650 mOsm/kg. What is the diagnosis?",
+        options: [
+            "A) Nephrogenic diabetes insipidus",
+            "B) Central diabetes insipidus",
+            "C) SIADH",
+            "D) Psychogenic polydipsia",
+            "E) Primary polydipsia"
+        ],
+        correct: 1,
+        explanations: [
+            "Nephrogenic DI would NOT respond to desmopressin — urine stays dilute. This patient DOES respond to desmopressin.",
+            "CORRECT. Central DI from pituitary surgery (ADH deficiency). Responds to desmopressin (synthetic ADH). Dilute urine + high plasma osm before DDAVP, concentrates after DDAVP = central DI.",
+            "SIADH presents with low plasma osmolality and inappropriately concentrated urine — opposite picture.",
+            "Psychogenic polydipsia: water deprivation leads to normal urine concentration; no need for desmopressin.",
+            "Primary polydipsia is psychogenic — same physiology as psychogenic polydipsia."
+        ],
+        teaching: "DDAVP water deprivation test is THE diagnostic test. Central DI = ADH deficient = responds to desmopressin. Nephrogenic DI = kidney resistant = does NOT respond. Psychogenic = excessive water intake, normal ADH suppression, normal concentration after deprivation."
+    },
+    {
+        num: "Q2",
+        stem: "A 45-year-old bipolar patient on <strong>lithium therapy for 3 years</strong> develops polyuria (3L/day) and polydipsia. Plasma osmolality 295 mOsm/kg, urine osmolality 180 mOsm/kg. After water deprivation and desmopressin injection, urine osmolality remains 200 mOsm/kg (does NOT concentrate). What is the mechanism of DI in this patient?",
+        options: [
+            "A) Lithium inhibits ADH secretion from the hypothalamus",
+            "B) Lithium causes pituitary necrosis like Sheehan syndrome",
+            "C) Lithium blocks V2 receptor signaling in the renal collecting duct",
+            "D) Lithium increases aquaporin-2 expression, causing excessive water reabsorption",
+            "E) Lithium causes hypercalcemia, which directly blocks ADH action"
+        ],
+        correct: 2,
+        explanations: [
+            "Lithium does NOT inhibit ADH secretion — ADH levels are actually elevated in lithium nephrogenic DI (kidney resistance, not hormone deficiency).",
+            "Lithium doesn't cause necrosis — Sheehan syndrome is postpartum necrosis.",
+            "CORRECT. Lithium blocks inositol metabolism in collecting duct cells → impairs V2 receptor signaling (IP3 pathway) → aquaporin-2 channels not inserted → kidney CANNOT concentrate urine despite adequate ADH. This is NEPHROGENIC DI — no response to DDAVP.",
+            "Lithium actually REDUCES AQP2 insertion — opposite of what's stated.",
+            "Lithium can cause hypercalcemia, but the direct mechanism of DI is V2 blockade, not calcium."
+        ],
+        teaching: "Lithium = #1 drug cause of nephrogenic DI. Blocks V2 receptor IP3 pathway → AQP2 can't be inserted into collecting duct cells → kidney ignores ADH → polyuria. Does NOT respond to desmopressin. Demeclocycline causes same mechanism but is used therapeutically to treat SIADH."
+    },
+    {
+        num: "Q3",
+        stem: "A 62-year-old man with SCLC presents with <strong>confusion, Na 115 mEq/L, euvolemic on exam</strong>. Plasma osmolality 230 mOsm/kg, urine osmolality 450 mOsm/kg (inappropriately concentrated), urine Na 95 mEq/L. He develops seizures. What is the MOST appropriate initial treatment?",
+        options: [
+            "A) IV normal saline (0.9% NaCl)",
+            "B) IV hypertonic saline (3% NaCl) + furosemide",
+            "C) Desmopressin injection",
+            "D) Fluid restriction alone",
+            "E) Demeclocycline 300mg BID"
+        ],
+        correct: 1,
+        explanations: [
+            "Normal saline in SIADH worsens hyponatremia — patient can't excrete free water, so isotonic fluids stay in intracellular space.",
+            "CORRECT. Symptomatic hyponatremia (seizures from cerebral edema) requires URGENT correction with 3% hypertonic saline + furosemide. Target: ↑Na by 6–12 mEq/L in first 1–2 hours to stop symptoms. Slow correction to max 10–12 mEq/day total to avoid osmotic demyelination. SIADH from ectopic ADH (SCLC).",
+            "Desmopressin would worsen hyponatremia in SIADH.",
+            "Fluid restriction is long-term therapy for asymptomatic/mild SIADH, not emergent symptomatic seizures.",
+            "Demeclocycline is for chronic SIADH, not acute symptomatic hyponatremia."
+        ],
+        teaching: "Symptomatic hyponatremia (Na <120, seizures, altered mental status) = EMERGENCY → 3% saline + furosemide. Asymptomatic or mild → fluid restriction. Chronic SIADH → demeclocycline (induces nephrogenic DI). Refractory → vaptans. DO NOT correct >12 mEq/day or risk osmotic demyelination."
+    },
+    {
+        num: "Q4",
+        stem: "A 55-year-old woman presents with amenorrhea, hypothyroidism (TSH 8.2), and <strong>inability to lactate</strong> postpartum. MRI shows a shrunken pituitary gland. FSH and LH are low. What is the most likely diagnosis?",
+        options: [
+            "A) Prolactinoma from elevated TRH",
+            "B) Sheehan syndrome",
+            "C) Primary hypothyroidism with secondary hypogonadism",
+            "D) Central hypothyroidism with secondary hypoprolactinemia",
+            "E) Pituitary apoplexy"
+        ],
+        correct: 1,
+        explanations: [
+            "Prolactinoma would cause ELEVATED prolactin and galactorrhea — this patient has failure to lactate (LOW prolactin).",
+            "CORRECT. Postpartum pituitary necrosis from hemorrhage (Sheehan syndrome). FIRST hormone lost = prolactin (can't lactate). Then GH, then TSH/ACTH, finally LH/FSH. Amenorrhea from low LH/FSH. Hypothyroidism from low TSH. Shrunken pituitary on MRI.",
+            "Primary hypothyroidism would have HIGH TSH, not pituitary atrophy.",
+            "Central hypothyroidism fits (low TSH, low T4) but doesn't explain failure to lactate — that requires prolactin deficiency.",
+            "Apoplexy is acute hemorrhage with severe symptoms; this presentation is chronic/subacute."
+        ],
+        teaching: "Sheehan syndrome = postpartum pituitary necrosis → panhypopituitarism. Classic: woman can't breastfeed (prolactin lost FIRST). Then GH, TSH, ACTH, LH/FSH. Caused by obstetric hemorrhage/hypotension. Step 1 loves this diagnosis — know the hormone loss order."
+    },
+    {
+        num: "Q5",
+        stem: "A patient with chronic hyponatremia (Na 112 mEq/L, duration unknown) is treated aggressively with hypertonic saline. <strong>In 12 hours, serum Na rises from 112 to 130 mEq/L</strong>. The next morning, the patient develops <strong>dysarthria, dysphagia, quadriplegia, and central pontine abnormalities on MRI</strong>. What complication has occurred?",
+        options: [
+            "A) Cerebral edema from inadequate Na correction",
+            "B) Hypernatremic hyperchloremic metabolic acidosis",
+            "C) Osmotic demyelination syndrome (central pontine myelinolysis)",
+            "D) Acute hypoglycemia from SIADH treatment",
+            "E) Hypokalemic hypomagnesemia inducing arrhythmia"
+        ],
+        correct: 2,
+        explanations: [
+            "Inadequate correction causes cerebral edema; this patient's Na rose 18 mEq/L in 12h — too FAST.",
+            "This wouldn't cause CNS symptoms like dysarthria/quadriplegia.",
+            "CORRECT. Osmotic demyelination syndrome from RAPID correction of CHRONIC hyponatremia. Corrected >12 mEq/L per 24h (this patient: 18 mEq/L in 12h). When osmolality rises too fast, brain can't adjust osmotically → water leaves neurons → demyelination, esp pontine. Locked-in syndrome, dysarthria, dysphagia, quadriplegia. Prevention: correct ≤10–12 mEq/L per 24h.",
+            "Hypoglycemia doesn't cause these focal neurologic signs.",
+            "Electrolyte abnormalities don't cause this specific pontine demyelination."
+        ],
+        teaching: "OSMOTIC DEMYELINATION SYNDROME = overtreatment of chronic hyponatremia. MAX correction: 10–12 mEq/L per 24 hours. Symptoms: locked-in, dysarthria, dysphagia, quadriplegia. Risk factors: alcoholism, malnutrition, hypokalemia. NEVER chase the Na too fast — slow is safe."
+    },
+    {
+        num: "Q6",
+        stem: "A 7-year-old boy with <strong>craniopharyngioma</strong> (seen on MRI) presents with <strong>polyuria and polydipsia</strong>. After water deprivation test, urine osmolality remains 200 mOsm/kg. After desmopressin injection, urine osmolality rises to 680 mOsm/kg. Which of the following is TRUE about the underlying pathophysiology?",
+        options: [
+            "A) The tumor is compressing the median eminence, preventing TRH release",
+            "B) The tumor is destroying ADH-secreting neurons in the supraoptic nucleus → ADH deficiency",
+            "C) The tumor is damaging the renal collecting duct, preventing aquaporin-2 insertion",
+            "D) The tumor is stimulating ADH secretion, causing SIADH",
+            "E) The patient has primary polydipsia from psychological stress"
+        ],
+        correct: 1,
+        explanations: [
+            "TRH destruction would cause hypothyroidism, not DI.",
+            "CORRECT. Craniopharyngioma is suprasellar → compresses/destroys posterior pituitary neurons (SON, PVN) that make ADH → ADH deficiency = central DI. Responds to DDAVP because kidneys are normal; they just need exogenous ADH.",
+            "The kidney is fine in central DI; the problem is ADH deficiency. Nephrogenic DI (kidney damage) would NOT respond to desmopressin.",
+            "Craniopharyngioma damages tissue; doesn't overstimulate ADH.",
+            "Craniopharyngioma is structural, not psychogenic."
+        ],
+        teaching: "Craniopharyngioma = most common tumor cause of central DI IN CHILDREN. Destroys hypothalamic ADH neurons → central DI. Responds to desmopressin. Also can cause hypopituitarism, visual field defects (bitemporal hemianopsia), hypothyroidism."
+    },
+    {
+        num: "Q7",
+        stem: "A 52-year-old woman on <strong>sertraline (SSRI) 50mg daily for depression</strong> develops <strong>hyponatremia (Na 124 mEq/L), euvolemic status, inappropriate urine concentration, and high urine Na</strong>. Which of the following explains the drug-induced SIADH?",
+        options: [
+            "A) Sertraline causes pituitary adenoma secreting ADH",
+            "B) Sertraline increases hypothalamic ADH synthesis and release",
+            "C) Sertraline blocks renal aquaporin-2 water channels",
+            "D) Sertraline causes nephrogenic DI, leading to compensatory ADH release",
+            "E) Sertraline blocks dopamine, causing increased TRH and ADH"
+        ],
+        correct: 1,
+        explanations: [
+            "SSRIs don't cause adenomas; they increase ADH secretion.",
+            "CORRECT. SSRIs enhance noradrenergic and serotonergic tone in hypothalamus → increase ADH secretion from SON/PVN → SIADH (hyponatremia, high urine osm, euvolemic). Also: SNRIs, TCAs, carbamazepine (also increases ADH), vincristine, cyclophosphamide, chlorpropamide, NSAIDs, opioids.",
+            "Aquaporin-2 blockade would cause nephrogenic DI, not SIADH.",
+            "SSRIs don't cause DI.",
+            "SSRIs don't significantly block dopamine."
+        ],
+        teaching: "SSRI-induced SIADH is common (occurs in ~0.5–1.5% of SSRI users). Mechanism: enhanced noradrenergic tone → ↑ADH. Other major drugs: carbamazepine, TCAs, vincristine, cyclophosphamide, NSAIDs, opioids. Treatment: stop SSRI, switch to alternative, or fluid restriction if needed."
+    },
+    {
+        num: "Q8",
+        stem: "A 58-year-old man with chronic SIADH from SCLC is started on <strong>demeclocycline 300mg BID</strong> for persistent hyponatremia despite fluid restriction. What is the mechanism by which demeclocycline treats SIADH?",
+        options: [
+            "A) It inhibits ADH secretion from the hypothalamus",
+            "B) It blocks V2 receptors in the renal collecting duct, inducing nephrogenic DI to overcome SIADH",
+            "C) It increases aquaporin-2 expression in collecting duct cells",
+            "D) It binds to ADH and promotes its clearance",
+            "E) It stimulates dopamine release to suppress ADH"
+        ],
+        correct: 1,
+        explanations: [
+            "Demeclocycline does NOT reduce ADH secretion — patient's ADH remains elevated (ectopic from tumor).",
+            "CORRECT. Demeclocycline (like lithium) blocks V2 receptor signaling in collecting duct → induces NEPHROGENIC DI (kidney can't respond to ADH) → even though ADH is high, kidneys excrete free water → serum Na rises. It CAUSES nephrogenic DI therapeutically to overcome the SIADH problem.",
+            "Opposite — demeclocycline REDUCES AQP2 action.",
+            "Demeclocycline doesn't bind or clear ADH.",
+            "Demeclocycline doesn't affect dopamine."
+        ],
+        teaching: "Demeclocycline has DUAL role: (1) CAUSES nephrogenic DI at therapeutic doses (slow onset, takes 5–7 days). (2) USED to TREAT chronic SIADH by inducing nephrogenic DI. Mild SIADH → fluid restriction; chronic/moderate → demeclocycline; severe → 3% saline + furosemide; refractory → vaptans."
+    },
+    {
+        num: "Q9",
+        stem: "During a prolonged cesarean delivery complicated by atonic uterus, the obstetric team administers <strong>high-dose synthetic oxytocin (Pitocin) for 8 hours continuously</strong>. Postoperatively, the patient develops <strong>confusion, seizures, and serum Na 119 mEq/L</strong>. What is the mechanism of hyponatremia in this case?",
+        options: [
+            "A) Oxytocin stimulates prolactin release, causing SIADH",
+            "B) Oxytocin at high doses has V2-like activity, causing water retention similar to ADH",
+            "C) Oxytocin destroys the supraoptic nucleus, reducing endogenous ADH",
+            "D) Oxytocin increases solute excretion, causing dilutional hyponatremia",
+            "E) Oxytocin activates osmoreceptors, causing excessive thirst and polydipsia"
+        ],
+        correct: 1,
+        explanations: [
+            "Oxytocin doesn't directly stimulate prolactin; this isn't the mechanism.",
+            "CORRECT. Synthetic oxytocin (Pitocin) at HIGH DOSES has V2-like activity due to structural similarity to ADH → causes water retention and hyponatremia (oxytocin-induced SIADH-like picture). Prolonged infusion + IV fluids → free water retention → severe hyponatremia. Can cause seizures, confusion, even death if severe.",
+            "Oxytocin doesn't destroy hypothalamic nuclei.",
+            "Oxytocin causes water retention, not solute excretion.",
+            "Oxytocin doesn't stimulate thirst."
+        ],
+        teaching: "HIGH-DOSE oxytocin (Pitocin) can cause water retention via V2-like activity. Risk: prolonged labor induction with IV hypotonic fluids → severe hyponatremia → seizures. Prevention: use hypertonic fluids if prolonged oxytocin, monitor Na, limit infusion duration. Oxytocin also: (1) uterotonic (stops hemorrhage), (2) inhibited by stress (unlike prolactin)."
+    },
+    {
+        num: "Q10",
+        stem: "A 28-year-old woman with excessive thirst and polydipsia has serum osmolality 280 mOsm/kg (low-normal) and <strong>urine osmolality 80 mOsm/kg (very dilute)</strong> without water deprivation. During water deprivation, urine osmolality rises to 420 mOsm/kg and then <strong>further improves to 580 mOsm/kg after desmopressin injection</strong>. Which pattern does this represent?",
+        options: [
+            "A) Central diabetes insipidus",
+            "B) Nephrogenic diabetes insipidus",
+            "C) Psychogenic polydipsia with partial central DI",
+            "D) SIADH",
+            "E) Hypercalcemia-induced nephrogenic DI"
+        ],
+        correct: 0,
+        explanations: [
+            "CORRECT. This is a PARTIAL central DI. Central DI (ADH deficiency) produces dilute urine and responds to desmopressin. This patient has partial ADH deficiency (urine concentrates during water deprivation AND further improves with desmopressin). Can occur with subtotal hypothalamic/pituitary injury.",
+            "Nephrogenic DI would NOT improve with desmopressin — stays dilute.",
+            "Psychogenic polydipsia: urine concentrates FULLY during water deprivation (to >600 mOsm/kg), and desmopressin is NOT needed. This patient's urine only reaches 420 during deprivation = true ADH deficiency.",
+            "SIADH presents with low-normal/low plasma osmolality and CONCENTRATED urine inappropriately — opposite of this patient.",
+            "Hypercalcemia DI wouldn't respond to desmopressin."
+        ],
+        teaching: "Central DI spectrum: (1) Complete: polyuria, responds fully to desmopressin. (2) Partial: some urine concentration on water deprivation, further improves with desmopressin. (3) Subclinical: borderline abnormalities. Always test with DDAVP to confirm central etiology (responsive) vs nephrogenic (non-responsive)."
+    },
+    {
+        num: "Q11",
+        stem: "A 32-year-old man with subarachnoid hemorrhage (SAH) develops <strong>hyponatremia (Na 119 mEq/L), high urine Na (80 mEq/L), and low-normal plasma osmolality</strong>. He is clinically HYPOvolemic (low BP, poor skin turgor). Another patient with SAH has identical lab values but is EUvolemic. How should these two patients be managed DIFFERENTLY?",
+        options: [
+            "A) Both should receive fluid restriction",
+            "B) Patient 1 (hypovolemic) → IV saline; Patient 2 (euvolemic) → fluid restriction",
+            "C) Both should receive hypertonic saline plus furosemide",
+            "D) Patient 1 → fluid restriction; Patient 2 → IV saline",
+            "E) Both should receive vaptans"
+        ],
+        correct: 1,
+        explanations: [
+            "Fluid restriction worsens hypovolemia in CSW.",
+            "CORRECT. This distinguishes CEREBRAL SALT WASTING (CSW) from SIADH. Both present with identical labs (hyponatremia + high urine Na + low plasma osm), but CSW = HYPOvolemic (from excess renal Na loss) → TREAT with IV SALINE (volume expansion). SIADH = euvolemic/hypervolemic → TREAT with FLUID RESTRICTION. Both occur post-SAH; CSW is from ANP/BNP release after SAH.",
+            "Hypertonic saline is for symptomatic severe hyponatremia, not routine CSW.",
+            "Opposite — this would worsen hypovolemia.",
+            "Vaptans are for refractory SIADH, not CSW."
+        ],
+        teaching: "CSW vs SIADH is a HIGH YIELD STEP 1 TRAP. Identical labs BUT different volume status → different treatment. CSW = hypovolemic (SAH, head injury, CNS bleeding) → IV normal or hypertonic saline. SIADH = euvolemic → fluid restriction. Determine volume status first (BP, CVP, skin turgor, weight change)."
+    },
+    {
+        num: "Q12",
+        stem: "A 5-year-old boy with <strong>X-linked recessive congenital nephrogenic DI</strong> has a mutation in which gene?",
+        options: [
+            "A) ADH gene (chromosome 20)",
+            "B) V2 receptor gene (AVPR2) on the X chromosome",
+            "C) Aquaporin-2 (AQP2) gene (autosomal)",
+            "D) V1a receptor gene (AVPR1A) on the X chromosome",
+            "E) Somatostatin receptor gene"
+        ],
+        correct: 1,
+        explanations: [
+            "ADH gene mutations cause central DI (ADH deficiency), not nephrogenic. Also ADH gene is on chromosome 20 (autosomal).",
+            "CORRECT. V2 RECEPTOR (AVPR2) is on X chromosome. X-linked recessive mutations → loss of functional V2 receptors in males → nephrogenic DI (kidneys can't respond to ADH). Females typically carriers (milder symptoms due to X-inactivation).",
+            "AQP2 mutations cause nephrogenic DI but are AUTOSOMAL RECESSIVE (usually), not X-linked.",
+            "V1a mutations would cause different phenotypes (vascular/hemostatic issues), not classic nephrogenic DI.",
+            "Somatostatin doesn't regulate water reabsorption."
+        ],
+        teaching: "Congenital nephrogenic DI = V2 receptor (X-linked recessive, most common) or AQP2 mutations (autosomal recessive, less common). V2 mutation = males affected, females carriers. AQP2 = affects both sexes equally. Both present with polyuria/polydipsia that does NOT respond to desmopressin."
+    },
+];
+
+// ─── VIGNETTE DATA ────────────────────────────────────
+const vignettes = [
+    {
+        banner: "Vignette 1: Post-Trauma Central DI",
+        stem: "A 24-year-old construction worker sustains a <strong>severe head injury with basilar skull fracture</strong>. After 3 days in the ICU, he develops <strong>polyuria (5L/day), polydipsia, and dehydration</strong>. Labs: Plasma osmolality 305 mOsm/kg, urine osmolality 200 mOsm/kg. Serum Na 148 mEq/L (hypernatremic dehydration).",
+        question: "What test would BEST confirm the diagnosis?",
+        options: [
+            "A) Cranial CT scan",
+            "B) Water deprivation test followed by desmopressin injection",
+            "C) 24-hour urine collection for sodium",
+            "D) Serum cortisol level",
+            "E) Thyroid function tests"
+        ],
+        correct: 1,
+        explain: "DDAVP water deprivation test is diagnostic. Before: dilute urine. After DDAVP: urine concentrates to >600 mOsm/kg = central DI (confirms ADH deficiency). Head trauma is the #1 ACQUIRED cause of central DI. Treat with desmopressin intranasal."
+    },
+    {
+        banner: "Vignette 2: Craniopharyngioma in Child",
+        stem: "A 6-year-old boy presents with <strong>polyuria, visual field defect (bitemporal hemianopsia), and short stature</strong>. MRI shows a <strong>cystic suprasellar mass</strong> compressing the pituitary stalk. Labs show low IGF-1 (GH deficiency) and elevated TSH with low T4.",
+        question: "Besides GH and TSH/T4, what other posterior pituitary hormone is MOST likely deficient?",
+        options: [
+            "A) Oxytocin",
+            "B) ADH (vasopressin)",
+            "C) Prolactin",
+            "D) ACTH",
+            "E) FSH"
+        ],
+        correct: 1,
+        explain: "Craniopharyngioma compresses both anterior AND posterior pituitary → ADH deficiency (central DI). Combined anterior + posterior hormone deficiency in this child. Visual field defect (hemianopsia) from optic chiasm compression. Treat tumor surgically; replace hormones (desmopressin, levothyroxine, GH)."
+    },
+    {
+        banner: "Vignette 3: Lithium Nephrogenic DI",
+        stem: "A 48-year-old woman on <strong>lithium 900mg daily for bipolar disorder</strong> (treated for 5 years) develops <strong>polyuria 3–4L/day and polydipsia</strong>. Plasma osmolality 298 mOsm/kg, urine osmolality 180 mOsm/kg. Water deprivation test: urine osmolality does NOT change significantly (remains ~200 mOsm/kg). After desmopressin: urine osmolality still ~210 mOsm/kg.",
+        question: "What is the MOST appropriate management?",
+        options: [
+            "A) Continue lithium, give desmopressin",
+            "B) Discontinue lithium, replace with alternative mood stabilizer",
+            "C) Continue lithium with amiloride (K-sparing diuretic) to prevent nephrogenic DI",
+            "D) Add thiazide diuretic to reduce urine output",
+            "E) Perform kidney biopsy to assess for lithium toxicity"
+        ],
+        correct: 1,
+        explain: "No response to desmopressin = nephrogenic DI. Lithium is #1 drug cause. If mood stabilizer is critical and patient stable with DI symptoms, discontinue lithium and switch to alternative (valproate, lamotrigine). If must continue lithium: adequate hydration, NSAIDs (reduce urine output paradoxically in lithium DI), amiloride (reduces lithium accumulation in collecting duct)."
+    },
+    {
+        banner: "Vignette 4: SSRI-Induced SIADH",
+        stem: "A 58-year-old man on <strong>fluoxetine 40mg daily for depression</strong> (started 6 weeks ago) develops <strong>confusion, nausea, and lethargy</strong>. Labs: Na 121 mEq/L, plasma osmolality 245 mOsm/kg, urine osmolality 380 mOsm/kg (inappropriately concentrated), urine Na 92 mEq/L. He is euvolemic on exam.",
+        question: "What is the mechanism of hyponatremia in this case, and how should it be managed?",
+        options: [
+            "A) SIADH from SSRI-induced ADH secretion — initial therapy: hypertonic saline",
+            "B) SIADH from SSRI-induced ADH secretion — initial therapy: fluid restriction and SSRI discontinuation",
+            "C) Central DI from SSRI neurotoxicity — therapy: desmopressin",
+            "D) Nephrogenic DI with secondary polydipsia — therapy: amiloride",
+            "E) Psychogenic polydipsia — therapy: lithium"
+        ],
+        correct: 1,
+        explain: "SSRI-induced SIADH (fluoxetine enhances noradrenergic/serotonergic tone → ↑ADH). Euvolemic + inappropriately concentrated urine + high urine Na. Management: mild/asymptomatic → fluid restriction; if symptomatic or Na <120 → hypertonic saline. Most importantly: STOP SSRI, switch to alternative antidepressant (bupropion does not cause SIADH)."
+    },
+    {
+        banner: "Vignette 5: SCLC with SIADH + Hyponatremia Crisis",
+        stem: "A 62-year-old male smoker with newly diagnosed <strong>small cell lung cancer (SCLC)</strong> presents with <strong>severe confusion, slurred speech, and a witnessed seizure</strong>. Labs: Na 112 mEq/L, plasma osmolality 220 mOsm/kg, urine osmolality 520 mOsm/kg, urine Na 105 mEq/L. SCLC produces ectopic ADH.",
+        question: "What is the MOST appropriate initial treatment?",
+        options: [
+            "A) Fluid restriction 500mL/day",
+            "B) Demeclocycline 300mg BID",
+            "C) IV hypertonic saline (3% NaCl) + IV furosemide, target ↑Na 6–12 mEq/L in first 1–2 hours",
+            "D) Desmopressin (DDAVP) injection",
+            "E) Vaptans (tolvaptan) monotherapy"
+        ],
+        correct: 2,
+        explain: "SIADH from ectopic SCLC. SYMPTOMATIC hyponatremia (Na <120, seizures, altered mental status) = EMERGENCY. MUST use 3% hypertonic saline + furosemide to rapidly raise Na 6–12 mEq/L in first 1–2 hours to stop seizures. Then slow correction (10–12 mEq/day total) to prevent osmotic demyelination. Long-term: treat cancer, fluid restriction, demeclocycline, or vaptans."
+    },
+    {
+        banner: "Vignette 6: Osmotic Demyelination After Overtreatment",
+        stem: "A 70-year-old alcoholic with chronic hyponatremia (Na 110 mEq/L, duration >2 weeks) is admitted. Physicians aggressively correct Na with hypertonic saline, achieving <strong>Na 135 mEq/L within 18 hours</strong>. Patient then develops <strong>locked-in syndrome, quadriplegia, and dysarthria</strong>. MRI shows <strong>central pontine demyelination</strong>.",
+        question: "What complication has occurred, and what was the critical error?",
+        options: [
+            "A) Hypernatremic encephalopathy — need to slowly reduce Na back down",
+            "B) Osmotic demyelination syndrome from TOO-RAPID correction of chronic hyponatremia",
+            "C) Hemorrhagic stroke from hypertensive crisis",
+            "D) Wernicke encephalopathy from thiamine deficiency",
+            "E) Hepatic encephalopathy from liver failure"
+        ],
+        correct: 1,
+        explain: "OSMOTIC DEMYELINATION from overcorrection (corrected 25 mEq/L in 18h). Max safe rate: 10–12 mEq/L per 24 hours for chronic hyponatremia. Brain cells can't osmotically adjust that quickly → water exits neurons → demyelination, esp pons. Risk factors: alcoholism, malnutrition, hypokalemia. Locked-in, dysarthria, dysphagia, quadriplegia. Irreversible once occurs — PREVENTION is key."
+    },
+    {
+        banner: "Vignette 7: Sheehan Syndrome",
+        stem: "A 34-year-old woman had an <strong>uncomplicated vaginal delivery 4 weeks ago but experienced severe postpartum hemorrhage</strong> requiring transfusion. She now reports <strong>inability to breastfeed (no milk production), severe fatigue, cold intolerance, and amenorrhea</strong>. Labs: low prolactin, low TSH with low T4, low cortisol, low LH/FSH. MRI shows shrunken pituitary.",
+        question: "Which hormone deficiency FIRST appeared in this patient's clinical course?",
+        options: [
+            "A) TSH deficiency (hypothyroidism) — explains cold intolerance",
+            "B) Prolactin deficiency — explains failure to lactate",
+            "C) ACTH deficiency — explains fatigue",
+            "D) GH deficiency — explains poor wound healing",
+            "E) LH/FSH deficiency — explains amenorrhea"
+        ],
+        correct: 1,
+        explain: "Sheehan syndrome = postpartum pituitary necrosis. FIRST sign: failure to lactate (prolactin deficiency). Then: GH → TSH/ACTH → LH/FSH. Caused by postpartum hemorrhage and hypotension. Pituitary gland is vulnerable peripartum. Treat with hormone replacement (prolactin agonists not helpful; let breastfeeding occur naturally with restored circulation, or she'll have to use formula)."
+    },
+    {
+        banner: "Vignette 8: CSW vs SIADH Post-SAH",
+        stem: "Two patients both develop <strong>hyponatremia (Na 118 mEq/L), high urine Na (75 mEq/L), and low plasma osmolality</strong> after subarachnoid hemorrhage. Patient A is <strong>hypotensive, tachycardic, with poor skin turgor and weight loss</strong>. Patient B is <strong>normotensive, normal CVP, euvolemic</strong>.",
+        question: "What is the correct management for each patient?",
+        options: [
+            "A) Both → fluid restriction",
+            "B) Both → hypertonic saline",
+            "C) Patient A → IV saline (normal or hypertonic); Patient B → fluid restriction",
+            "D) Patient A → fluid restriction; Patient B → hypertonic saline",
+            "E) Both → demeclocycline"
+        ],
+        correct: 2,
+        explain: "Patient A = CEREBRAL SALT WASTING (CSW) — hypovolemic from renal salt wasting → IV saline to restore volume and Na. Patient B = SIADH — euvolemic from inappropriate ADH secretion → fluid restriction. Both have identical labs but DIFFERENT volume status = DIFFERENT treatment. CSW from ANP/BNP surge after SAH; SIADH from hypothalamic ADH dysregulation."
+    },
+    {
+        banner: "Vignette 9: Oxytocin-Induced Hyponatremia",
+        stem: "A 28-year-old G2P0 with poor labor progression receives <strong>high-dose IV oxytocin (Pitocin) infusion at 20 mU/min × 10 hours</strong> plus IV fluids (1L normal saline + 500mL 5% dextrose). Delivery is uncomplicated, but postoperatively she develops <strong>severe headache, confusion, and lethargy</strong>. Labs: Na 119 mEq/L (severe hyponatremia).",
+        question: "What is the mechanism of hyponatremia?",
+        options: [
+            "A) Excessive free water intake from polydipsia",
+            "B) Oxytocin at high doses has V2-like activity causing water retention (similar to ADH effect)",
+            "C) Uterotonic effect causing myometrial edema and fluid retention",
+            "D) Adrenal insufficiency from oxytocin suppressing ACTH",
+            "E) Nephrogenic DI from oxytocin toxicity"
+        ],
+        correct: 1,
+        explain: "HIGH-DOSE SYNTHETIC OXYTOCIN has V2-like activity (structural similarity to ADH) → water retention → hyponatremia. Risk increased with prolonged infusion + hypotonic IV fluids. Mechanism: oxytocin at high doses activates V2 receptors on collecting duct → aquaporin-2 insertion → free water reabsorption. Prevention: use isotonic fluids during prolonged oxytocin, limit infusion duration, monitor Na. This is an obstetric emergency if severe."
+    },
+    {
+        banner: "Vignette 10: Psychogenic Polydipsia",
+        stem: "A 35-year-old woman with a history of psychiatric illness reports <strong>excessive thirst and polydipsia (drinking 8–10L/day)</strong>. She has normal weight and appears euvolemic. Labs: plasma osmolality 275 mOsm/kg (low), serum Na 136 mEq/L (low-normal), urine osmolality 95 mOsm/kg (very dilute).",
+        question: "What test would BEST confirm psychogenic polydipsia and exclude central DI?",
+        options: [
+            "A) Plasma ADH level — high in SIADH, low in psychogenic polydipsia",
+            "B) Water deprivation test — patient's urine concentrates normally without desmopressin in psychogenic polydipsia",
+            "C) Osmotic threshold determination — lower in central DI",
+            "D) Desmopressin challenge — positive in central DI",
+            "E) MRI of hypothalamus/pituitary — normal in psychogenic polydipsia"
+        ],
+        correct: 1,
+        explain: "WATER DEPRIVATION TEST distinguishes psychogenic polydipsia from central DI. Psychogenic: after water restriction, urine osmolality rises to >600 mOsm/kg NORMALLY (kidneys are intact, ADH is suppressed appropriately → water deprivation triggers ADH release and concentration). Desmopressin NOT needed. Central DI: urine stays dilute during deprivation, then concentrates with desmopressin. Key: psychogenic has normal ADH response to deprivation."
+    },
+];
+
+// ─── TRAP DATA ────────────────────────────────────────
+const traps = [
+    {
+        header: "TRAP 1: Nephrogenic DI Response to Desmopressin",
+        myth: "In nephrogenic DI, giving desmopressin will concentrate the urine because the kidneys can now respond to ADH.",
+        truth: "TRAP! Nephrogenic DI is kidney RESISTANCE to ADH. Desmopressin does NOT concentrate the urine — urine stays dilute. The kidneys CANNOT respond to ADH, even synthetic desmopressin."
+    },
+    {
+        header: "TRAP 2: Osmotic Demyelination Timing",
+        myth: "Osmotic demyelination occurs when chronic hyponatremia is corrected too SLOWLY.",
+        truth: "TRAP! It occurs with RAPID correction of CHRONIC hyponatremia. Max safe rate: 10–12 mEq/L per 24 hours. Correct too FAST → demyelination. Correct too slow → prolonged cerebral edema from hyponatremia itself."
+    },
+    {
+        header: "TRAP 3: SIADH vs CSW Differential",
+        myth: "SIADH and cerebral salt wasting are primarily distinguished by serum sodium level.",
+        truth: "TRAP! Both have ↓Na. Distinguished by VOLUME STATUS. CSW = hypovolemic (low BP, poor turgor, weight loss) → IV saline. SIADH = euvolemic/hypervolemic (normal BP, JVD) → fluid restriction."
+    },
+    {
+        header: "TRAP 4: Demeclocycline in SIADH Mechanism",
+        myth: "Demeclocycline treats SIADH by increasing ADH production or blocking ADH secretion.",
+        truth: "TRAP! Demeclocycline treats SIADH by INDUCING NEPHROGENIC DI. It blocks V2 receptor signaling → kidneys can't respond to ADH → free water excretion → Na rises. Demeclocycline CAUSES and TREATS nephrogenic DI."
+    },
+    {
+        header: "TRAP 5: Lithium and Central DI",
+        myth: "Lithium causes central DI by reducing ADH production from the hypothalamus.",
+        truth: "TRAP! Lithium causes NEPHROGENIC DI by blocking V2 receptor signaling in the collecting duct. ADH levels are ELEVATED in lithium DI — the problem is kidney resistance, not hormone deficiency."
+    },
+    {
+        header: "TRAP 6: SIADH Electrolytes",
+        myth: "SIADH causes hypernatremia due to excessive water reabsorption.",
+        truth: "TRAP! SIADH causes DILUTIONAL HYPONATREMIA. Excessive water reabsorption at the kidney dilutes serum Na. Low plasma osmolality is the hallmark."
+    },
+    {
+        header: "TRAP 7: Sodium Correction Rate Limits",
+        myth: "The maximum safe rate of sodium correction in chronic hyponatremia is 25 mEq/L per day.",
+        truth: "TRAP! Maximum is 10–12 mEq/L per 24 hours. Correcting 25 mEq/L per day → osmotic demyelination syndrome. This is a CRITICAL safety threshold frequently tested."
+    },
+    {
+        header: "TRAP 8: Carbamazepine Effect on Water Balance",
+        myth: "Carbamazepine causes diabetes insipidus (DI).",
+        truth: "TRAP! Carbamazepine causes SIADH, NOT DI. It increases ADH secretion → hyponatremia, not polyuria. Confusion: anticonvulsants have mixed effects (some → SIADH, some → hyponatremia)."
+    },
+    {
+        header: "TRAP 9: Vaptans Mechanism",
+        myth: "Vaptans treat SIADH by activating V2 receptors to increase water reabsorption.",
+        truth: "TRAP! Vaptans ANTAGONIZE V2 receptors → aquaresis (free water excretion) → Na rises. They're V2 ANTAGONISTS, not agonists. Opposite effect of agonists."
+    },
+    {
+        header: "TRAP 10: Stress Effect on Prolactin vs Oxytocin",
+        myth: "Both prolactin and oxytocin are suppressed by stress.",
+        truth: "TRAP! Stress INHIBITS oxytocin release (impairs milk letdown reflex) but DOES NOT suppress prolactin (dopamine inhibition is tonic). Stress can actually slightly ↑prolactin via stress hormones."
+    },
+];
+
+// ─── FILL-IN-BLANK DATA ────────────────────────────────
+const fibs = [
+    { id: "fib1", prompt: "The #1 ACQUIRED cause of central DI is ________ and the #1 cause in CHILDREN is ________.", answer: "head trauma; craniopharyngioma" },
+    { id: "fib2", prompt: "The #1 DRUG cause of nephrogenic DI is __________.", answer: "lithium" },
+    { id: "fib3", prompt: "SIADH drug causes include: SSRIs, __________, __________, vincristine, cyclophosphamide.", answer: "carbamazepine (or TCAs); chlorpropamide (or NSAIDs, opioids)" },
+    { id: "fib4", prompt: "The maximum SAFE rate of sodium correction in chronic hyponatremia is __________ mEq/L per __________ hours.", answer: "10-12; 24" },
+    { id: "fib5", prompt: "Osmotic demyelination syndrome occurs with __________ (rapid/slow) correction of __________ hyponatremia.", answer: "rapid; chronic" },
+    { id: "fib6", prompt: "Demeclocycline treats SIADH by inducing __________ DI (i.e., by __________ ADH action).", answer: "nephrogenic; blocking" },
+    { id: "fib7", prompt: "In Sheehan syndrome, the FIRST hormone lost is __________, causing failure to __________.", answer: "prolactin; lactate (or breastfeed)" },
+    { id: "fib8", prompt: "CSW vs SIADH are distinguished by __________ status (CSW = __________, SIADH = __________).", answer: "volume; hypovolemic; euvolemic" },
+    { id: "fib9", prompt: "Vaptans work by __________ V2 receptors, causing __________ (aquaresis or water reabsorption?).", answer: "antagonizing (or blocking); aquaresis (or free water excretion)" },
+    { id: "fib10", prompt: "High-dose oxytocin (Pitocin) can cause hyponatremia via __________ activity (V1, V2, V3?).", answer: "V2" },
+];
+
+// ─── CHALLENGE DRILL DATA ──────────────────────────────
+const challenges = [
+    {
+        type: "TYPE 1: Polyuria/Hyponatremia Differential",
+        stem: "Given the following labs, identify the diagnosis:\n• Polyuria 3–4L/day\n• Serum Na 135–140 (high-normal or high)\n• Plasma osmolality 305 mOsm/kg (HIGH)\n• Urine osmolality 150 mOsm/kg (LOW)\n• Response to DDAVP: urine osmolality rises to 580 mOsm/kg",
+        answer: "CENTRAL DI: High plasma osm + low urine osm + RESPONSIVE to DDAVP = ADH deficiency. Kidneys work fine but need exogenous ADH."
+    },
+    {
+        type: "TYPE 1: Polyuria/Hyponatremia Differential",
+        stem: "Given the following labs, identify the diagnosis:\n• Polyuria 3–4L/day\n• Serum Na 140–145 (elevated)\n• Plasma osmolality 310 mOsm/kg (HIGH)\n• Urine osmolality 160 mOsm/kg (LOW)\n• Response to DDAVP: urine osmolality remains 180 mOsm/kg (NO CHANGE)",
+        answer: "NEPHROGENIC DI: High plasma osm + low urine osm + NO response to DDAVP = kidney resistance to ADH. Kidneys cannot respond even with synthetic ADH."
+    },
+    {
+        type: "TYPE 1: Polyuria/Hyponatremia Differential",
+        stem: "Given the following labs, identify the diagnosis:\n• Excessive thirst and polydipsia (8–10L/day)\n• Serum Na 135 (low-normal)\n• Plasma osmolality 272 mOsm/kg (LOW)\n• Urine osmolality 85 mOsm/kg (very dilute)\n• Water deprivation test: urine osmolality rises to 620 mOsm/kg\n• ADH appropriately suppressed",
+        answer: "PSYCHOGENIC POLYDIPSIA: Low plasma osm + dilute urine (ADH appropriately suppressed) + normal response to water deprivation. Urine concentrates normally WITHOUT desmopressin."
+    },
+    {
+        type: "TYPE 1: Polyuria/Hyponatremia Differential",
+        stem: "Given the following labs, identify the diagnosis:\n• Hyponatremia (Na 124 mEq/L)\n• Serum osmolality 250 mOsm/kg (LOW)\n• Urine osmolality 420 mOsm/kg (inappropriately CONCENTRATED)\n• Euvolemic on exam\n• Urine Na 80 mEq/L (HIGH)",
+        answer: "SIADH: Low plasma osm + inappropriately concentrated urine + euvolemic + high urine Na. Caused by increased/inappropriate ADH secretion. Treat with fluid restriction or demeclocycline."
+    },
+    {
+        type: "TYPE 2: SIADH Drug Cause Classifier",
+        items: [
+            { drug: "Fluoxetine", answer: "CAUSES SIADH" },
+            { drug: "Carbamazepine", answer: "CAUSES SIADH" },
+            { drug: "Demeclocycline", answer: "CAUSES nephrogenic DI (NOT SIADH)" },
+            { drug: "Vincristine", answer: "CAUSES SIADH" },
+            { drug: "Lamotrigine", answer: "Does NOT cause SIADH" },
+            { drug: "Lithium", answer: "CAUSES nephrogenic DI (NOT SIADH)" },
+            { drug: "NSAIDs", answer: "CAUSES SIADH" },
+            { drug: "Opioids", answer: "CAUSES SIADH" },
+        ],
+        instruction: "Mark each drug as 'CAUSES SIADH', 'CAUSES nephrogenic DI', or 'Does NOT cause either'."
+    },
+    {
+        type: "TYPE 3: DI Treatment Matcher",
+        items: [
+            { di: "Central DI", treatment: "Desmopressin (intranasal, PO, SC, IV)" },
+            { di: "Nephrogenic DI (lithium)", treatment: "Discontinue lithium if possible; otherwise thiazide diuretic, NSAIDs, amiloride, adequate hydration" },
+            { di: "Nephrogenic DI (hypercalcemia)", treatment: "Treat hypercalcemia (IV saline, bisphosphonates, calcitonin); correct underlying cause" },
+            { di: "Gestational DI", treatment: "Desmopressin (safe in pregnancy); vasopressinase from placenta is cause" },
+        ],
+        instruction: "Match each DI type to its treatment."
+    },
+    {
+        type: "TYPE 4: Hyponatremia Workup Algorithm",
+        instruction: "Arrange these workup steps in CORRECT order for a patient with hyponatremia:\n\n1. Measure serum osmolality\n2. Assess VOLUME STATUS clinically (BP, CVP, skin turgor, weight)\n3. Obtain serum Na and basic metabolic panel\n4. Determine URINE osmolality\n5. Assess urine Na\n6. If euvolemic + low plasma osm + concentrated urine → SIADH vs CSW based on volume\n7. If hypovolemic + low osm + high urine Na → CSW (treat with IV saline)\n8. If euvolemic + SIADH → fluid restriction or demeclocycline\n\nCORRECT SEQUENCE: 3 → 1 → 2 → 4 → 5 → 6/7/8 (branching based on findings)",
+        answer: "Step 3 (get labs) → Step 1 (plasma osm) → Step 2 (volume status) → Step 4 (urine osm) → Step 5 (urine Na) → then diagnostic classification + treatment."
+    },
+];
+
+// ─── USMLE MAP DATA ────────────────────────────────────
+const usmleMapContent = `
+<table class="ref-table">
+    <tr>
+        <th>GUSOM LO</th>
+        <th>Step 1 Extension</th>
+        <th>Key Drugs/Causes</th>
+        <th>Clinical Buzzwords</th>
+    </tr>
+    <tr>
+        <td><strong>ADH/Vasopressin Physiology</strong></td>
+        <td>Osmoreceptor-ADH reflex, V1a/V2/V3 receptors, circumventricular organs (OVLT)</td>
+        <td>Desmopressin, vaptans, V2 antagonists</td>
+        <td>Osmotic threshold, aquaporin-2, V2-mediated cAMP pathway</td>
+    </tr>
+    <tr>
+        <td><strong>Central DI</strong></td>
+        <td>Head trauma (most common acquired), craniopharyngioma (most common in children), pituitary surgery, histiocytosis X, sarcoidosis, anorexia nervosa, idiopathic</td>
+        <td>Desmopressin intranasal/PO/SC/IV</td>
+        <td>Polyuria + polydipsia, responds to DDAVP, high plasma osm, low urine osm</td>
+    </tr>
+    <tr>
+        <td><strong>Nephrogenic DI</strong></td>
+        <td>Lithium (#1 drug), demeclocycline, hypercalcemia, hypokalemia, hereditary (V2 or AQP2 mutation, X-linked recessive)</td>
+        <td>Lithium removal, amiloride, NSAIDs, adequate hydration</td>
+        <td>Polyuria + polydipsia, NO response to DDAVP, ADH levels ELEVATED</td>
+    </tr>
+    <tr>
+        <td><strong>SIADH</strong></td>
+        <td>CNS (stroke, tumor, trauma, infection), pulmonary (SCLC most common), drugs (SSRIs, carbamazepine, vincristine, cyclophosphamide, NSAIDs, opioids), ectopic ADH (SCLC), surgery/pain</td>
+        <td>Fluid restriction (mild), demeclocycline (chronic), hypertonic saline + furosemide (symptomatic), vaptans (refractory)</td>
+        <td>Hyponatremia + high urine osm + euvolemic + high urine Na, low plasma osm</td>
+    </tr>
+    <tr>
+        <td><strong>Osmotic Demyelination</strong></td>
+        <td>Complication of RAPID correction of CHRONIC hyponatremia; max safe rate 10–12 mEq/L per 24h</td>
+        <td>Prevention: slow Na correction; avoid overcorrection</td>
+        <td>Locked-in syndrome, dysarthria, dysphagia, quadriplegia, central pontine demyelination on MRI</td>
+    </tr>
+    <tr>
+        <td><strong>Cerebral Salt Wasting (CSW)</strong></td>
+        <td>Post-SAH, head injury, CNS bleeding; distinguished from SIADH by VOLUME STATUS (CSW = hypovolemic)</td>
+        <td>IV normal saline or hypertonic saline; volume expansion is KEY</td>
+        <td>Hyponatremia + high urine Na + low plasma osm + HYPOvolemia (low BP, poor turgor, weight loss)</td>
+    </tr>
+    <tr>
+        <td><strong>Psychogenic Polydipsia</strong></td>
+        <td>Excessive water intake from psychiatric disease; water deprivation → urine concentrates normally (unlike central DI)</td>
+        <td>Water restriction, psychiatric treatment</td>
+        <td>Low plasma osm + dilute urine + ADH appropriately suppressed; urine concentrates after water deprivation WITHOUT desmopressin</td>
+    </tr>
+    <tr>
+        <td><strong>Sheehan Syndrome</strong></td>
+        <td>Postpartum pituitary necrosis from hemorrhage/hypotension → panhypopituitarism; FIRST hormone lost = prolactin</td>
+        <td>Hormone replacement (levothyroxine, hydrocortisone, GH if needed)</td>
+        <td>Failure to lactate postpartum, hypothyroidism, amenorrhea, fatigue, shrunken pituitary on MRI</td>
+    </tr>
+    <tr>
+        <td><strong>Oxytocin Physiology</strong></td>
+        <td>Milk ejection reflex (suckling → oxytocin release), uterine contractions, pair bonding; high doses → V2-like activity → water retention/hyponatremia</td>
+        <td>Synthetic oxytocin (Pitocin) for labor induction, uterotonic for postpartum hemorrhage</td>
+        <td>Stress inhibits oxytocin (NOT prolactin), milk letdown reflex, high-dose Pitocin → hyponatremia risk</td>
+    </tr>
+    <tr>
+        <td><strong>Drug-Induced SIADH</strong></td>
+        <td>SSRIs, SNRIs, TCAs, carbamazepine, vincristine, cyclophosphamide, chlorpropamide, NSAIDs, opioids ALL cause SIADH</td>
+        <td>Stop offending drug, switch to alternative (e.g., SSRI → bupropion), fluid restriction, demeclocycline</td>
+        <td>SSRI-induced SIADH is common (~0.5–1.5% of users); carbamazepine is frequently tested</td>
+    </tr>
+</table>
+
+<div style="margin-top: 20px; background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 16px;">
+    <h3 style="color: var(--accent); margin-bottom: 12px;">STEP 1 HIGH-YIELD SUMMARY</h3>
+    <ul style="color: #C9D1D9; line-height: 1.8;">
+        <li><strong>DI differential:</strong> Central (responds to DDAVP) vs nephrogenic (does not respond)</li>
+        <li><strong>SIADH hallmark:</strong> Hyponatremia + inappropriately concentrated urine + euvolemic</li>
+        <li><strong>CSW vs SIADH:</strong> Identical labs, but different volume status → different treatment (CSW = IV saline, SIADH = fluid restriction)</li>
+        <li><strong>Osmotic demyelination:</strong> Occurs with RAPID (not slow) correction of CHRONIC hyponatremia. Max 10–12 mEq/L per 24h</li>
+        <li><strong>Lithium DI:</strong> Nephrogenic (not central) — blocks V2 receptor signaling. ADH is HIGH, kidneys don't respond</li>
+        <li><strong>Demeclocycline:</strong> CAUSES nephrogenic DI therapeutically to overcome SIADH</li>
+        <li><strong>SIADH drugs:</strong> SSRIs, carbamazepine, vincristine, cyclophosphamide, NSAIDs, opioids</li>
+        <li><strong>Sheehan syndrome:</strong> Postpartum necrosis → FIRST sign is failure to lactate (prolactin lost first)</li>
+        <li><strong>High-dose oxytocin:</strong> V2-like activity → water retention → hyponatremia risk</li>
+        <li><strong>DDAVP water deprivation test:</strong> THE diagnostic test. Central DI responds; nephrogenic DI does not</li>
+    </ul>
+</div>
+`;
+
+// ─── RENDERING FUNCTIONS ──────────────────────────────
+function renderFlashcards() {
+    const container = document.getElementById('fcGrid');
+    container.innerHTML = '';
+    flashcards.forEach((card, idx) => {
+        const fcDiv = document.createElement('div');
+        fcDiv.className = 'fc';
+        fcDiv.innerHTML = `
+            <div class="fc-inner">
+                <div class="fc-front">
+                    <div class="fc-label">Question ${idx + 1}</div>
+                    <div class="fc-q">${card.q}</div>
+                    <div class="fc-hint">Click to reveal</div>
+                </div>
+                <div class="fc-back">
+                    <div class="fc-label">Answer</div>
+                    <div class="fc-a">${card.a}</div>
+                </div>
+            </div>
+        `;
+        fcDiv.onclick = () => fcDiv.classList.toggle('flipped');
+        container.appendChild(fcDiv);
+    });
+}
+
+function renderMCQ() {
+    const container = document.getElementById('mcqContainer');
+    container.innerHTML = '';
+    mcqs.forEach((q, idx) => {
+        const mcqDiv = document.createElement('div');
+        mcqDiv.className = 'mcq-item';
+        let optHTML = '';
+        q.options.forEach((opt, oidx) => {
+            const letter = String.fromCharCode(65 + oidx);
+            optHTML += `
+                <div class="mcq-opt" onclick="revealMCQ(this, ${oidx}, ${q.correct})">
+                    <span class="letter">${letter})</span> ${opt.replace(/^[A-E]\)\s*/, '')}
+                </div>
+            `;
+        });
+        let expHTML = q.explanations.map((exp, eidx) => `
+            <div class="mcq-explanation" id="exp${idx}-${eidx}">
+                <div class="exp-label">${String.fromCharCode(65 + eidx)}) ${exp.substring(0, 20)}...</div>
+                <div>${exp}</div>
+            </div>
+        `).join('');
+        let tpHTML = q.teaching ? `<div class="teaching-pt" id="tp${idx}"><div class="tp-label">Teaching Pearl:</div>${q.teaching}</div>` : '';
+
+        mcqDiv.innerHTML = `
+            <div class="mcq-num">Question ${idx + 1}</div>
+            <div class="mcq-stem">${q.stem}</div>
+            <div class="mcq-options">${optHTML}</div>
+            <div id="expContainer${idx}"></div>
+            ${tpHTML}
+        `;
+        container.appendChild(mcqDiv);
+    });
+}
+
+function revealMCQ(element, selected, correct) {
+    const parent = element.parentElement.parentElement;
+    parent.querySelectorAll('.mcq-opt').forEach((opt, idx) => {
+        opt.classList.add('revealed');
+        if (idx === correct) opt.classList.add('correct');
+        else if (idx === selected && selected !== correct) opt.classList.add('wrong');
+    });
+    const expIdx = Array.from(element.parentElement.children).indexOf(element);
+    parent.querySelectorAll('.mcq-explanation').forEach((exp, idx) => {
+        if (idx === selected || idx === correct) exp.classList.add('visible');
+    });
+    parent.querySelector('.teaching-pt')?.classList.add('visible');
+}
+
+function renderVignettes() {
+    const container = document.getElementById('vigContainer');
+    container.innerHTML = '';
+    vignettes.forEach((vig, idx) => {
+        const vigDiv = document.createElement('div');
+        vigDiv.className = 'vig-item';
+        const vigOptHTML = vig.options.map((opt, oidx) => `
+            <div class="vig-opt" onclick="revealVig(this, ${oidx}, ${vig.correct})">${opt}</div>
+        `).join('');
+        vigDiv.innerHTML = `
+            <div class="vig-banner">${vig.banner}</div>
+            <div class="vig-stem">${vig.stem}</div>
+            <div class="vig-q"><strong>${vig.question}</strong></div>
+            <div class="vig-opts">${vigOptHTML}</div>
+            <div class="vig-explain" id="vigExp${idx}"><div style="color: #4ADE80; font-weight: 600; margin-bottom: 4px;">Explanation:</div>${vig.explain}</div>
+        `;
+        container.appendChild(vigDiv);
+    });
+}
+
+function revealVig(element, selected, correct) {
+    const parent = element.parentElement.parentElement;
+    parent.querySelectorAll('.vig-opt').forEach((opt, idx) => {
+        opt.classList.add('revealed');
+        if (idx === correct) opt.classList.add('correct');
+        else if (idx === selected && selected !== correct) opt.classList.add('wrong');
+    });
+    parent.querySelector('.vig-explain').classList.add('visible');
+}
+
+let trapState = {correct: 0, total: 0};
+
+function renderTraps() {
+    const container = document.getElementById('trapsContainer');
+    container.innerHTML = '';
+    trapState = {correct: 0, total: traps.length};
+    updateTrapScore();
+    traps.forEach((t, idx) => {
+        const el = document.createElement('div');
+        el.className = 'trap-item';
+        el.innerHTML = `<div class="trap-statement">${idx+1}. ${t.myth}</div>
+            <div class="trap-buttons">
+                <button class="trap-btn trap-btn-correct" onclick="answerTrap(${idx},true)">CORRECT ✓</button>
+                <button class="trap-btn trap-btn-trap" onclick="answerTrap(${idx},false)">TRAP ✗</button>
+            </div>
+            <div class="trap-result" id="trap-res-${idx}">
+                <div class="trap-verdict" id="trap-verdict-${idx}"></div>
+                <div class="trap-explain" id="trap-explain-${idx}"></div>
+            </div>`;
+        container.appendChild(el);
+    });
+}
+
+function answerTrap(idx, userSaysCorrect) {
+    const result = document.getElementById(`trap-res-${idx}`);
+    const verdict = document.getElementById(`trap-verdict-${idx}`);
+    const explain = document.getElementById(`trap-explain-${idx}`);
+    const isActual = traps[idx].correct;
+    const isUserCorrect = (userSaysCorrect === isActual);
+    document.querySelectorAll(`[onclick*="answerTrap(${idx},"]`).forEach(b => b.disabled = true);
+    if (isUserCorrect) { trapState.correct++; result.classList.add('correct-choice'); verdict.innerHTML = '✓ Correct!'; }
+    else { result.classList.add('wrong-choice'); verdict.innerHTML = '✗ Incorrect'; }
+    result.classList.add('show');
+    explain.innerHTML = traps[idx].truth;
+    updateTrapScore();
+}
+
+function updateTrapScore() {
+    const el = document.getElementById('trap-score');
+    if (el) el.textContent = `Score: ${trapState.correct}/${trapState.total}`;
+}
+
+function resetTraps() {
+    trapState.correct = 0;
+    trapState.total = traps.length;
+    document.querySelectorAll('.trap-result').forEach(r => r.classList.remove('show','correct-choice','wrong-choice'));
+    document.querySelectorAll('.trap-btn').forEach(b => b.disabled = false);
+    updateTrapScore();
+}
+
+function renderDrill() {
+    const container = document.getElementById('drillContainer');
+    container.innerHTML = '';
+    const shuffleArr = arr => [...arr].map(v => [Math.random(), v]).sort((a,b) => a[0]-b[0]).map(v => v[1]);
+    drillMatchers.forEach((drill, dIdx) => {
+        const section = document.createElement('div');
+        section.style.marginBottom = '32px';
+        section.innerHTML = `<div style="font-weight:700;color:#FCD34D;margin-bottom:8px;font-size:1em;">${drill.type}</div><div style="color:#9CA3AF;font-size:0.85em;margin-bottom:16px;">${drill.instructions}</div>`;
+        const allTargets = drill.items.map(i => i.target);
+        drill.items.forEach((item, iIdx) => {
+            const others = allTargets.filter(t => t !== item.target);
+            const options = shuffleArr([item.target, ...shuffleArr(others).slice(0, 3)]);
+            const itemEl = document.createElement('div');
+            itemEl.className = 'drill-item-q';
+            itemEl.style.cssText = 'background:#161B22;border:1px solid #30363D;border-radius:8px;padding:16px;margin-bottom:12px;';
+            const optsHtml = options.map(opt => `<button class="drill-opt" data-correct="${opt === item.target}" data-didx="${dIdx}" data-iidx="${iIdx}" onclick="checkDrillOpt(this)" style="display:block;width:100%;text-align:left;background:#1C2128;border:1px solid #30363D;border-radius:6px;padding:9px 13px;margin:4px 0;cursor:pointer;color:#C9D1D9;font-size:0.85em;transition:all 0.2s;">${opt}</button>`).join('');
+            itemEl.innerHTML = `<div style="font-weight:600;color:#E6EDF3;margin-bottom:12px;font-size:0.93em;">${item.stimulus}</div>${optsHtml}<div id="drill-fb-${dIdx}-${iIdx}" style="display:none;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;"></div>`;
+            section.appendChild(itemEl);
+        });
+        container.appendChild(section);
+    });
+}
+
+function checkDrillOpt(btn) {
+    const isCorrect = btn.dataset.correct === 'true';
+    const dIdx = parseInt(btn.dataset.didx);
+    const iIdx = parseInt(btn.dataset.iidx);
+    const item = drillMatchers[dIdx].items[iIdx];
+    btn.closest('.drill-item-q').querySelectorAll('.drill-opt').forEach(b => {
+        b.disabled = true;
+        if (b.dataset.correct === 'true') { b.style.cssText += ';background:rgba(74,222,128,0.15);border-color:#4ADE80;color:#D1FAE5;'; }
+    });
+    if (!isCorrect) { btn.style.cssText += ';background:rgba(239,68,68,0.15);border-color:#EF4444;color:#FCA5A5;'; }
+    const fb = document.getElementById(`drill-fb-${dIdx}-${iIdx}`);
+    if (isCorrect) { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(74,222,128,0.1);color:#D1FAE5;'; fb.innerHTML = '✓ Correct!'; }
+    else { fb.style.cssText = 'display:block;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:0.85em;background:rgba(239,68,68,0.1);color:#FCA5A5;'; fb.innerHTML = `✗ Correct: ${item.target}`; }
+}
+
+function renderFIB() {
+    const container = document.getElementById('fibContainer');
+    container.innerHTML = '';
+    fibs.forEach((fib, idx) => {
+        const fibDiv = document.createElement('div');
+        fibDiv.className = 'fib-item';
+        fibDiv.innerHTML = `
+            <div class="fib-prompt"><strong>${idx + 1}.</strong> ${fib.prompt}</div>
+            <input type="text" class="fib-input" id="fib-input-${fib.id}" placeholder="Type your answer...">
+            <button class="fib-btn" onclick="checkFIB('${fib.id}', '${fib.answer.toLowerCase()}')">Check</button>
+            <div class="fib-result" id="fib-result-${fib.id}"></div>
+        `;
+        container.appendChild(fibDiv);
+    });
+}
+
+function checkFIB(id, correctAnswer) {
+    const input = document.getElementById(`fib-input-${id}`);
+    const result = document.getElementById(`fib-result-${id}`);
+    const userAnswer = input.value.toLowerCase().trim();
+
+    // Flexible matching for multiple acceptable answers
+    const correct = correctAnswer.split(';').map(a => a.trim()).some(a =>
+        userAnswer === a || userAnswer.includes(a.split('(')[0].trim())
+    );
+
+    result.className = correct ? 'fib-result correct' : 'fib-result incorrect';
+    result.textContent = correct ?
+        '✓ Correct! ' + correctAnswer :
+        '✗ Incorrect. Acceptable answers: ' + correctAnswer;
+}
+
+function renderChallenge() {
+    const container = document.getElementById('challengeContainer');
+    container.innerHTML = '';
+    challenges.forEach((ch, idx) => {
+        const chDiv = document.createElement('div');
+        chDiv.className = 'challenge-item';
+        let html = `<div class="challenge-type">${ch.type}</div><div style="color: #E6EDF3; margin: 12px 0; line-height: 1.6;">${ch.stem}</div>`;
+        if (ch.items) {
+            html += `<div style="background: #0D1117; padding: 12px; border-radius: 6px; margin: 12px 0;">`;
+            ch.items.forEach((item, iidx) => {
+                html += `<div style="margin: 8px 0; color: #C9D1D9;">
+                    <strong>${iidx + 1}.</strong> ${item.drug || item.di || item}
+                    <div style="color: var(--accent); font-size: 0.85em; margin-top: 4px; font-weight: 600;">${item.answer || item.treatment || ''}</div>
+                </div>`;
+            });
+            html += `</div>`;
+        }
+        if (ch.answer) {
+            html += `<div style="background: rgba(0,131,143,0.1); border: 1px solid var(--accent); border-radius: 6px; padding: 12px; margin-top: 12px; color: #A8E6F0;">
+                <strong>Answer:</strong> ${ch.answer}
+            </div>`;
+        }
+        if (ch.instruction && !ch.items) {
+            html += `<div style="background: rgba(0,131,143,0.1); border: 1px solid var(--accent); border-radius: 6px; padding: 12px; margin-top: 12px; color: #A8E6F0; white-space: pre-wrap;">${ch.instruction}</div>`;
+        }
+        chDiv.innerHTML = html;
+        container.appendChild(chDiv);
+    });
+}
+
+function renderUSLEMap() {
+    const container = document.getElementById('mapContainer');
+    container.innerHTML = usmleMapContent;
+}
+
+// ─── INIT ─────────────────────────────────────────────
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+
+    // Lazy render on tab switch
+    if (name === 'flashcards') renderFlashcards();
+    if (name === 'mcq') renderMCQ();
+    if (name === 'vignettes') renderVignettes();
+    if (name === 'traps') renderTraps();
+    if (name === 'fib') renderFIB();
+    if (name === 'challenge') renderChallenge();
+    if (name === 'map') renderUSLEMap();
+}
+
+// Initial render
+document.addEventListener('DOMContentLoaded', () => {
+    renderFlashcards();
+});
+</script>
+</body>
+</html>
