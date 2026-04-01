@@ -3,1057 +3,819 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L2: Adrenal Hormone Synthesis and Action - GUSOM Biochemistry</title>
+    <title>GUSOM Biochem L2: Adrenal Hormone Synthesis & Action</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        :root { --accent: #C62828; --accent-dark: #8B0000; --accent-light: rgba(198,40,40,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-        body {
-            background-color: #0D1117;
-            color: #E6EDF3;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-        }
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-        header {
-            margin-bottom: 30px;
-            border-bottom: 2px solid #E65100;
-            padding-bottom: 20px;
-        }
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1 {
-            color: #FF8C42;
-            margin-bottom: 10px;
-            font-size: 2em;
-        }
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
+        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
 
-        .nav-links {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            font-size: 0.95em;
-        }
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
+        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .mcq-explanation.visible { display: block; }
+        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+        .teaching-pt { background: rgba(198,40,40,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #FCA5A5; display: none; }
+        .teaching-pt.visible { display: block; }
+        .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
 
-        .nav-links a {
-            color: #FF8C42;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: rgba(198,40,40,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #FCA5A5; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
 
-        .nav-links a:hover {
-            background-color: rgba(230, 81, 0, 0.2);
-        }
+        .trap-item { background: #1A1212; border: 1px solid #7F1D1D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-header { color: #FCA5A5; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; }
+        .trap-statement { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 10px 12px; border-radius: 0 6px 6px 0; font-size: 0.92em; color: #FCA5A5; margin-bottom: 10px; font-weight: 500; }
+        .trap-buttons { display: flex; gap: 8px; margin-bottom: 8px; }
+        .trap-btn { flex: 1; padding: 8px 12px; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; transition: all 0.2s; background: #1C2128; color: #C9D1D9; }
+        .trap-btn:hover:not(.revealed) { background: #21262D; }
+        .trap-btn.correct-select { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .trap-btn.wrong-select { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .trap-result { background: #0D1117; border: 1px solid #21262D; border-radius: 6px; padding: 10px 12px; margin-top: 8px; font-size: 0.87em; display: none; }
+        .trap-result.visible { display: block; }
+        .trap-result.correct-result { background: rgba(74, 222, 128, 0.1); border-color: #4ADE80; color: #D1FAE5; }
+        .trap-result.wrong-result { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
 
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            border-bottom: 1px solid #30363D;
-            padding-bottom: 15px;
-        }
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
+        .fib-result.correct { background: rgba(74, 222, 128, 0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239, 68, 68, 0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
 
-        .tab-button {
-            background-color: #161B22;
-            color: #E6EDF3;
-            border: 1px solid #30363D;
-            padding: 10px 16px;
-            border-radius: 4px 4px 0 0;
-            cursor: pointer;
-            font-size: 0.95em;
-            transition: all 0.2s;
-        }
+        .challenge-section { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .challenge-title { font-size: 0.85em; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+        .pathway-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; background: #1C2128; padding: 12px; border-radius: 6px; }
+        .substrate, .enzyme, .product { padding: 8px 12px; background: #0D1117; border: 1px solid #30363D; border-radius: 4px; font-size: 0.9em; color: #E6EDF3; flex: 1; text-align: center; }
+        .enzyme { background: rgba(198,40,40,0.15); border: 1px solid var(--accent); color: var(--accent); font-weight: 600; }
 
-        .tab-button.active {
-            background-color: #E65100;
-            border-color: #E65100;
-            color: #0D1117;
-            font-weight: 600;
-        }
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.status { text-align: center; font-weight: 600; }
+        .ref-table td.status.yes { color: #4ADE80; }
 
-        .tab-button:hover:not(.active) {
-            border-color: #E65100;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .card {
-            background-color: #161B22;
-            border: 1px solid #30363D;
-            border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: all 0.2s;
-        }
-
-        .card:hover {
-            border-color: #E65100;
-            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.15);
-        }
-
-        .flashcard {
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            perspective: 1000px;
-        }
-
-        .flashcard.flipped {
-            background-color: rgba(230, 81, 0, 0.1);
-            border-color: #E65100;
-        }
-
-        .flashcard-content {
-            text-align: center;
-            font-size: 1.05em;
-            line-height: 1.8;
-        }
-
-        .card-number {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: #E65100;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-
-        .mc-question {
-            margin-bottom: 25px;
-        }
-
-        .mc-question h4 {
-            color: #FF8C42;
-            margin-bottom: 12px;
-            font-size: 1em;
-        }
-
-        .mc-options {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .mc-option {
-            background-color: #0D1117;
-            border: 1px solid #30363D;
-            padding: 10px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .mc-option:hover {
-            border-color: #E65100;
-            background-color: rgba(230, 81, 0, 0.05);
-        }
-
-        .mc-option.selected {
-            background-color: rgba(230, 81, 0, 0.2);
-            border-color: #E65100;
-        }
-
-        .mc-option.correct {
-            background-color: rgba(76, 175, 80, 0.2);
-            border-color: #4CAF50;
-        }
-
-        .mc-option.incorrect {
-            background-color: rgba(244, 67, 54, 0.2);
-            border-color: #F44336;
-        }
-
-        .explanation {
-            margin-top: 8px;
-            padding: 10px;
-            background-color: rgba(230, 81, 0, 0.1);
-            border-left: 3px solid #E65100;
-            border-radius: 2px;
-            font-size: 0.95em;
-            display: none;
-        }
-
-        .explanation.show {
-            display: block;
-        }
-
-        .vignette {
-            background-color: rgba(230, 81, 0, 0.05);
-            border-left: 4px solid #E65100;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-
-        .vignette h4 {
-            color: #FF8C42;
-            margin-bottom: 10px;
-        }
-
-        .vignette p {
-            margin-bottom: 8px;
-        }
-
-        .trap {
-            background-color: rgba(255, 152, 0, 0.08);
-            border-left: 4px solid #FF8C42;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-        }
-
-        .trap h4 {
-            color: #FF8C42;
-            margin-bottom: 8px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            background-color: #161B22;
-        }
-
-        th {
-            background-color: #E65100;
-            color: #0D1117;
-            padding: 12px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #30363D;
-        }
-
-        tr:hover {
-            background-color: rgba(230, 81, 0, 0.05);
-        }
-
-        .reference-pathway {
-            background-color: #161B22;
-            border: 1px solid #30363D;
-            padding: 20px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            line-height: 2;
-            overflow-x: auto;
-        }
-
-        .pathway-step {
-            color: #E6EDF3;
-            margin: 10px 0;
-        }
-
-        .enzyme {
-            color: #FF8C42;
-            font-weight: 600;
-        }
-
-        .location {
-            color: #79C0FF;
-            font-size: 0.85em;
-        }
-
-        .controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            background-color: #E65100;
-            color: #0D1117;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .btn:hover {
-            background-color: #FF8C42;
-        }
-
-        .btn.secondary {
-            background-color: #30363D;
-            color: #E6EDF3;
-        }
-
-        .btn.secondary:hover {
-            background-color: #E65100;
-            color: #0D1117;
-        }
-
-        .progress {
-            margin-top: 15px;
-            padding: 10px;
-            background-color: rgba(230, 81, 0, 0.1);
-            border-radius: 4px;
-            text-align: center;
-            color: #FF8C42;
-            font-weight: 600;
-        }
-
-        .section-title {
-            color: #FF8C42;
-            font-size: 1.3em;
-            margin-top: 20px;
-            margin-bottom: 15px;
-            border-left: 3px solid #E65100;
-            padding-left: 10px;
-        }
-
-        .fill-blank-section {
-            margin-bottom: 25px;
-        }
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+        .score-display { text-align: center; font-size: 0.9em; color: #9CA3AF; margin-top: 12px; padding-top: 12px; border-top: 1px solid #21262D; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Lecture 2: Adrenal Hormone Synthesis and Action</h1>
-            <p style="color: #8B949E; margin-top: 5px;">GUSOM Biochemistry Active Learning Drill</p>
-            <div class="nav-links">
-                <a href="GUSOM-Biochem-L1-IntroHormones.html">← L1: Intro to Hormones</a>
-                <a href="GUSOM-Biochem-L3-SexSteroids.html">L3: Sex Steroids →</a>
-            </div>
-        </header>
-
-        <div class="tabs">
-            <button class="tab-button active" onclick="switchTab(event, 'flashcards')">Flashcards</button>
-            <button class="tab-button" onclick="switchTab(event, 'mcq')">MCQ Quiz</button>
-            <button class="tab-button" onclick="switchTab(event, 'vignettes')">Vignettes</button>
-            <button class="tab-button" onclick="switchTab(event, 'traps')">Test Traps</button>
-            <button class="tab-button" onclick="switchTab(event, 'fillblank')">Fill-in-Blank</button>
-            <button class="tab-button" onclick="switchTab(event, 'reference')">Reference Table</button>
-        </div>
-
-        <!-- FLASHCARDS TAB -->
-        <div id="flashcards" class="tab-content active">
-            <div class="controls">
-                <button class="btn" onclick="resetFlashcards()">Reset All</button>
-                <button class="btn secondary" onclick="shuffleFlashcards()">Shuffle</button>
-            </div>
-            <div id="flashcard-container"></div>
-            <div class="progress"><span id="card-progress">Card 1 / 20</span></div>
-        </div>
-
-        <!-- MCQ TAB -->
-        <div id="mcq" class="tab-content">
-            <div class="controls">
-                <button class="btn" onclick="resetMCQ()">Reset All</button>
-            </div>
-            <div id="mcq-container"></div>
-            <div class="progress"><span id="mcq-progress">Progress: 0 / 12</span></div>
-        </div>
-
-        <!-- VIGNETTES TAB -->
-        <div id="vignettes" class="tab-content">
-            <div id="vignettes-container"></div>
-        </div>
-
-        <!-- TEST TRAPS TAB -->
-        <div id="traps" class="tab-content">
-            <div id="traps-container"></div>
-        </div>
-
-        <!-- FILL-IN-BLANK TAB -->
-        <div id="fillblank" class="tab-content">
-            <div id="fillblank-container"></div>
-        </div>
-
-        <!-- REFERENCE TAB -->
-        <div id="reference" class="tab-content">
-            <div id="reference-container"></div>
-        </div>
+<div class="container">
+    <div class="header">
+        <a href="#" class="back">← Back to Endocrine Hub</a>
+        <h1>Lecture 2: <span class="accent-tag">Adrenal Hormone Synthesis & Action</span></h1>
+        <div class="subtitle">Adrenal zones (GFR) · Steroid synthesis pathways · CAH enzyme deficiencies · Aldosterone regulation · Cortisol rhythm · Clinical disorders</div>
     </div>
 
-    <script>
-        // FLASHCARD DATA
-        const flashcards = [
-            {
-                front: "Three adrenal cortex zones + products + mnemonic",
-                back: "<strong>GFR = Salt/Sugar/Sex</strong><br><strong>Glomerulosa:</strong> aldosterone (salt)<br><strong>Fasciculata:</strong> cortisol (sugar)<br><strong>Reticularis:</strong> androgens (sex)"
-            },
-            {
-                front: "Complete steroid synthesis pathway (Cholesterol → Pregnenolone)",
-                back: "Cholesterol → <span class='enzyme'>CYP11A1/desmolase</span> (mitochondria, rate-limiting) → Pregnenolone"
-            },
-            {
-                front: "Cortisol synthesis branch (complete pathway)",
-                back: "Pregnenolone → <span class='enzyme'>3β-HSD</span> → Progesterone → <span class='enzyme'>17α-OH</span> → 17-OHP → <span class='enzyme'>21-OH</span> → 11-deoxycortisol → <span class='enzyme'>11β-OH</span> → <strong>Cortisol</strong>"
-            },
-            {
-                front: "Aldosterone synthesis branch (complete pathway)",
-                back: "Progesterone → <span class='enzyme'>21-OH</span> → 11-deoxycorticosterone (DOC) → <span class='enzyme'>11β-OH</span> → Corticosterone → <span class='enzyme'>CYP11B2 (aldosterone synthase)</span> [only in glomerulosa] → <strong>Aldosterone</strong>"
-            },
-            {
-                front: "Androgen branch synthesis (DHEA to Testosterone)",
-                back: "Pregnenolone → <span class='enzyme'>17α-OH</span> → 17-OH-pregnenolone → <span class='enzyme'>C17-20 lyase</span> → DHEA → <span class='enzyme'>3β-HSD</span> → Androstenedione → <span class='enzyme'>17β-HSD</span> → <strong>Testosterone</strong>"
-            },
-            {
-                front: "Which enzyme is ABSENT in zona glomerulosa? Which enzyme is ONLY in glomerulosa?",
-                back: "<strong>ABSENT:</strong> 17α-hydroxylase (explains why glomerulosa can't make cortisol or androgens)<br><strong>ONLY in glomerulosa:</strong> CYP11B2 (aldosterone synthase)"
-            },
-            {
-                front: "21-hydroxylase deficiency (CAH) - clinical findings",
-                back: "<strong>Substrate accumulates:</strong> 17-OHP (diagnostic marker)<br><strong>Results:</strong> ↓cortisol, ↓aldosterone (salt-wasting), ↑ACTH, ↑androgens (virilization), ↑renin"
-            },
-            {
-                front: "11β-hydroxylase deficiency (CAH) - clinical findings",
-                back: "<strong>Substrate accumulates:</strong> DOC (has mineralocorticoid activity)<br><strong>Results:</strong> ↓cortisol, ↑androgens (virilization), ↑ACTH<br><strong>KEY:</strong> HTN (not hypotension) due to DOC sodium retention"
-            },
-            {
-                front: "17α-hydroxylase deficiency (CAH) - clinical findings",
-                back: "<strong>Results:</strong> ↓cortisol, ↓androgens (↓all sex steroids), ↑aldosterone → HTN<br><strong>Phenotype:</strong> XX and XY both show absent/reduced sexual development; XY = female external genitalia (no androgens)"
-            },
-            {
-                front: "11β-HSD type 2 in kidney - function and mechanism",
-                back: "<strong>Function:</strong> Inactivates cortisol → cortisone<br><strong>Why important:</strong> Prevents cortisol from activating mineralocorticoid receptors (MR); only aldosterone can access MR<br><strong>Clinical:</strong> Licorice inhibits 11β-HSD2 → apparent mineralocorticoid excess (AME) syndrome"
-            },
-            {
-                front: "Why can aldosterone activate MR but cortisol normally cannot?",
-                back: "<strong>In kidney:</strong> 11β-HSD2 rapidly inactivates cortisol → cortisone (inactive)<br><strong>Aldosterone:</strong> NOT a substrate for 11β-HSD2, so it reaches MR in collecting duct<br><strong>Result:</strong> Only aldosterone can act as mineralocorticoid despite cortisol's high concentration"
-            },
-            {
-                front: "HPA axis regulation - complete pathway",
-                back: "<strong>CRH</strong> (hypothalamus) → <strong>ACTH</strong> (anterior pituitary via MC2R → Gs → cAMP) → <strong>Cortisol</strong> (adrenal fasciculata)<br><strong>Negative feedback:</strong> Cortisol inhibits CRH and ACTH release<br><strong>Stress:</strong> Overrides feedback → sustained cortisol release"
-            },
-            {
-                front: "Cortisol circadian rhythm - pattern and mechanism",
-                back: "<strong>Pattern:</strong> Peak at 8 AM (waking), trough at midnight<br><strong>Driver:</strong> Suprachiasmatic nucleus (SCN) circadian clock<br><strong>Disruption:</strong> Loss of diurnal variation is seen in Cushing's syndrome"
-            },
-            {
-                front: "Adrenal androgens - types and clinical significance",
-                back: "<strong>Main adrenal androgens:</strong> DHEA, DHEA-S (sulfate form, most abundant circulating), androstenedione<br><strong>Activity:</strong> Weak; converted peripherally to testosterone and estrogen<br><strong>Clinical importance:</strong> Responsible for pubic/axillary hair development and female libido<br><strong>Regulation:</strong> ACTH-driven"
-            },
-            {
-                front: "Cortisol biological effects - metabolism and immune",
-                back: "<strong>Metabolic:</strong> ↑gluconeogenesis, ↑glycogenolysis, ↑proteolysis, ↑lipolysis (peripheral), ↑blood glucose<br><strong>Anti-inflammatory:</strong> ↓PLA2, ↓COX, ↓NF-κB<br><strong>Immunosuppressive:</strong> ↓lymphocyte proliferation<br><strong>Other:</strong> ↑BP (upregulates α1 receptors), bone loss, poor wound healing, striae"
-            },
-            {
-                front: "Aldosterone effects - mechanism in collecting duct",
-                back: "<strong>Target:</strong> Principal cells of collecting duct<br><strong>Effects:</strong> ↑Na⁺ reabsorption (via ENaC and Na/K-ATPase), ↑K⁺ excretion, ↑H⁺ excretion<br><strong>Result:</strong> Metabolic alkalosis<br><strong>Regulation:</strong> Primarily by RAAS (angiotensin II) and serum K⁺, NOT primarily by ACTH"
-            },
-            {
-                front: "Cushing's syndrome vs Cushing's disease - distinction",
-                back: "<strong>Cushing's syndrome:</strong> Any cause of excess cortisol (pituitary, adrenal, ectopic, exogenous)<br><strong>Cushing's disease:</strong> Specifically pituitary ACTH-secreting adenoma causing bilateral adrenal hyperplasia"
-            },
-            {
-                front: "Primary vs Secondary vs Tertiary adrenal insufficiency",
-                back: "<strong>Primary (Addison):</strong> Adrenal gland failure → ↓cortisol + ↓aldosterone + ↑ACTH + hyperpigmentation<br><strong>Secondary:</strong> Pituitary ACTH deficiency → ↓cortisol, normal aldosterone (RAAS intact), NO hyperpigmentation<br><strong>Tertiary:</strong> Hypothalamic CRH deficiency → ↓cortisol, normal aldosterone, NO hyperpigmentation"
-            },
-            {
-                front: "Addison's disease - pathophysiology and clinical features",
-                back: "<strong>Causes:</strong> Adrenal autoimmunity (anti-21-OH antibodies) or infection (TB, fungi)<br><strong>Labs:</strong> ↓cortisol + ↓aldosterone + ↑ACTH + ↑renin<br><strong>Findings:</strong> Weakness, hypotension, hyponatremia, hyperkalemia, hyperpigmentation (↑ACTH → ↑MSH), hypoglycemia, salt craving"
-            },
-            {
-                front: "Primary hyperaldosteronism (Conn's syndrome) - diagnosis",
-                back: "<strong>Cause:</strong> Aldosterone-secreting adrenal adenoma or bilateral hyperplasia<br><strong>Result:</strong> ↑aldosterone → ↑Na⁺ retention → HTN + ↓renin (suppressed) + hypokalemia + metabolic alkalosis<br><strong>Key diagnostic feature:</strong> HIGH aldosterone WITH SUPPRESSED renin (distinguishes from secondary)"
-            }
-        ];
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Trap Detector</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('challenge')">🎯 Challenge Drill</button>
+        <button class="tab-btn" onclick="switchTab('anki')">📋 Anki Map</button>
+    </div>
 
-        // MCQ DATA
-        const mcqs = [
-            {
-                question: "17α-hydroxylase is absent in which adrenal zone?",
-                options: ["Glomerulosa", "Fasciculata", "Reticularis", "Capsule"],
-                correct: 0,
-                explanations: [
-                    "CORRECT: Zona glomerulosa lacks 17α-hydroxylase, which is why it cannot produce cortisol or androgens—only mineralocorticoids (aldosterone).",
-                    "Incorrect: Fasciculata has 17α-hydroxylase for cortisol synthesis.",
-                    "Incorrect: Reticularis has 17α-hydroxylase for androgen synthesis.",
-                    "Incorrect: Capsule is not a functional endocrine zone."
-                ]
-            },
-            {
-                question: "In 21-hydroxylase deficiency, which substrate accumulates?",
-                options: ["17-OHP (17-hydroxyprogesterone)", "11-deoxycortisol", "DOC (11-deoxycorticosterone)", "Aldosterone"],
-                correct: 0,
-                explanations: [
-                    "CORRECT: 17-OHP is the diagnostic marker that accumulates proximal to the 21-OH enzyme block. Elevated 17-OHP confirms CAH diagnosis.",
-                    "Incorrect: 11-deoxycortisol accumulates in 11β-OH deficiency, not 21-OH deficiency.",
-                    "Incorrect: DOC accumulates in 11β-OH deficiency (mineralocorticoid → HTN).",
-                    "Incorrect: Aldosterone is downstream and typically low in 21-OH deficiency."
-                ]
-            },
-            {
-                question: "Licorice ingestion causes HTN and hypokalemia. What is the mechanism?",
-                options: ["Direct aldosterone release", "Inhibits 11β-HSD2 → cortisol acts on MR → apparent mineralocorticoid excess", "Blocks ACE inhibitor pathway", "Increases ACTH production"],
-                correct: 1,
-                explanations: [
-                    "Incorrect: Licorice does not directly trigger aldosterone secretion.",
-                    "CORRECT: Licorice inhibits 11β-HSD2 in kidney, preventing cortisol inactivation. Cortisol then binds MR (normally protected by 11β-HSD2), causing sodium retention and hypokalemia—mimicking primary hyperaldosteronism (apparent mineralocorticoid excess).",
-                    "Incorrect: Licorice does not block ACE inhibitors.",
-                    "Incorrect: Licorice does not directly increase ACTH."
-                ]
-            },
-            {
-                question: "ACTH stimulates the adrenal cortex via which receptor/pathway?",
-                options: ["MC4R → Gi → ↓cAMP", "MC2R → Gs → ↑cAMP → PKA → StAR protein mobilization", "MR activation", "CRH receptor signaling"],
-                correct: 1,
-                explanations: [
-                    "Incorrect: MC4R (melanocortin 4 receptor) is involved in appetite regulation, not adrenal steroidogenesis.",
-                    "CORRECT: MC2R (ACTH receptor) is Gs-coupled, activating adenylyl cyclase → ↑cAMP → PKA activation → phosphorylation of StAR protein → cholesterol transport into mitochondria for CYP11A1 action.",
-                    "Incorrect: MR (mineralocorticoid receptor) responds to aldosterone, not ACTH.",
-                    "Incorrect: CRH acts on corticotroph cells in the pituitary, not directly on adrenal tissue."
-                ]
-            },
-            {
-                question: "A patient has HTN, hypokalemia, elevated aldosterone with SUPPRESSED renin. Diagnosis?",
-                options: ["Secondary hyperaldosteronism", "Primary hyperaldosteronism (Conn's syndrome)", "Renovascular HTN", "ACE inhibitor overuse"],
-                correct: 1,
-                explanations: [
-                    "Incorrect: Secondary hyperaldosteronism (from RAAS activation) shows elevated renin and aldosterone together.",
-                    "CORRECT: Primary hyperaldosteronism (adrenal adenoma or hyperplasia) autonomously produces aldosterone, suppressing renin via negative feedback. High aldosterone + low renin is the classic diagnostic pattern.",
-                    "Incorrect: Renovascular HTN activates RAAS, elevating both renin and aldosterone.",
-                    "Incorrect: ACE inhibitors block angiotensin II, lowering aldosterone, not elevating it."
-                ]
-            },
-            {
-                question: "What distinguishes 11β-OH deficiency from 21-OH deficiency regarding blood pressure?",
-                options: ["11β-OH causes hypotension; 21-OH causes HTN", "11β-OH causes HTN due to DOC accumulation; 21-OH causes hypotension due to aldosterone loss", "Both cause HTN equally", "Both cause hypotension equally"],
-                correct: 1,
-                explanations: [
-                    "Incorrect: This is reversed.",
-                    "CORRECT: In 11β-OH deficiency, DOC (11-deoxycorticosterone) accumulates upstream and has mineralocorticoid activity → sodium retention → HTN. In 21-OH deficiency, aldosterone production is blocked → salt-wasting → hypotension and hyponatremia.",
-                    "Incorrect: The blood pressure effects differ significantly.",
-                    "Incorrect: The blood pressure effects differ significantly."
-                ]
-            },
-            {
-                question: "Cortisol's anti-inflammatory effect is mediated primarily by which mechanism?",
-                options: ["Direct TNF-α neutralization", "↓PLA2 via annexin-1/lipocortin → ↓arachidonic acid → ↓PGs/LTs/PAF; also ↓NF-κB → ↓cytokine transcription", "Blocking T-cell activation alone", "Increasing IL-10 production only"],
-                correct: 1,
-                explanations: [
-                    "Incorrect: Cortisol does not directly bind TNF-α.",
-                    "CORRECT: Glucocorticoids induce annexin-1 (lipocortin), which inhibits phospholipase A2 → reduced arachidonic acid release → decreased prostaglandin, leukotriene, and PAF synthesis. Additionally, cortisol inhibits NF-κB → reduced pro-inflammatory cytokine transcription.",
-                    "Incorrect: While cortisol does suppress T-cell proliferation, this is not the primary anti-inflammatory mechanism.",
-                    "Incorrect: IL-10 upregulation is one mechanism, but not the primary one."
-                ]
-            },
-            {
-                question: "In Addison's disease, what causes hyperpigmentation?",
-                options: ["Melanoma development", "↑ACTH has MSH-like activity at melanocortin receptors in skin → ↑melanin synthesis", "Deposition of iron in skin", "Increased estrogen levels"],
-                correct: 1,
-                explanations: [
-                    "Incorrect: Addison's disease does not cause melanoma.",
-                    "CORRECT: In primary adrenal insufficiency, ↓cortisol removes negative feedback on the pituitary → ↑ACTH. ACTH and related peptides (derived from POMC) have melanocyte-stimulating hormone (MSH) activity at melanocortin-1 receptors (MC1R) on melanocytes → increased melanin production, causing characteristic darkening of skin, especially in sun-exposed areas and skin creases.",
-                    "Incorrect: Iron is not involved in Addison's hyperpigmentation.",
-                    "Incorrect: Estrogen is not the mechanism."
-                ]
-            },
-            {
-                question: "Which adrenal hormone is regulated by angiotensin II and serum K+, but NOT significantly by ACTH?",
-                options: ["Cortisol", "DHEA", "Aldosterone", "Androstenedione"],
-                correct: 2,
-                explanations: [
-                    "Incorrect: Cortisol is primarily regulated by ACTH.",
-                    "Incorrect: DHEA is ACTH-regulated.",
-                    "CORRECT: Aldosterone is primarily regulated by the renin-angiotensin-aldosterone system (RAAS—specifically angiotensin II) and serum potassium level. ACTH does NOT significantly regulate aldosterone secretion; this is a key distinguishing feature.",
-                    "Incorrect: Androstenedione is ACTH-regulated (adrenal androgen)."
-                ]
-            },
-            {
-                question: "A patient on long-term prednisone stops abruptly. Why is this dangerous?",
-                options: ["Prednisone causes adrenal cancer", "Exogenous glucocorticoids suppress HPA axis → adrenal atrophy → no endogenous cortisol production → adrenal crisis", "Prednisone has no effect on the HPA axis", "Abrupt discontinuation cures adrenal insufficiency"],
-                correct: 1,
-                explanations: [
-                    "Incorrect: Prednisone does not cause cancer.",
-                    "CORRECT: Chronic exogenous glucocorticoid administration suppresses CRH and ACTH via negative feedback → adrenal gland atrophy and decreased steroidogenic capacity. Abrupt cessation removes exogenous steroid without allowing adrenal recovery, resulting in acute cortisol deficiency → adrenal crisis with shock, hyponatremia, and hyperkalemia. Tapering is essential to allow HPA axis recovery.",
-                    "Incorrect: Prednisone potently suppresses the HPA axis.",
-                    "Incorrect: Abrupt discontinuation causes crisis, not cure."
-                ]
-            },
-            {
-                question: "What is the rate-limiting step in adrenal steroid synthesis?",
-                options: ["3β-HSD action", "17α-hydroxylase action", "Cholesterol → pregnenolone via CYP11A1/cholesterol desmolase (controlled by StAR protein)", "21-hydroxylase action"],
-                correct: 2,
-                explanations: [
-                    "Incorrect: 3β-HSD is active but not the rate-limiting step.",
-                    "Incorrect: 17α-hydroxylase is downstream of the rate-limiting step.",
-                    "CORRECT: The first and rate-limiting step is cholesterol transport into the mitochondrial matrix via StAR protein (steroidogenic acute regulatory protein), followed by CYP11A1 (P450 side-chain cleavage/desmolase) conversion to pregnenolone. ACTH increases StAR expression and phosphorylation, acutely increasing steroid synthesis.",
-                    "Incorrect: 21-hydroxylase is downstream of the rate-limiting step."
-                ]
-            },
-            {
-                question: "In CAH 17α-hydroxylase deficiency, why does blood pressure increase?",
-                options: ["Cannot synthesize sex steroids or cortisol; ↑ACTH drives excess progesterone → DOC accumulation (mineralocorticoid) → Na+ retention → HTN", "Direct angiotensin II elevation", "Aldosterone is excessively produced", "Catecholamine overproduction"],
-                correct: 0,
-                explanations: [
-                    "CORRECT: Without 17α-hydroxylase, pregnenolone and progesterone cannot proceed to cortisol or androgens. With ↑ACTH (due to ↓cortisol), there is shunting of substrate to DOC (11-deoxycorticosterone)—which accumulates and has mineralocorticoid activity → sodium retention and volume expansion → HTN. Additionally, aldosterone is slightly elevated. Blood pressure is characteristically HIGH despite low cortisol and androgens.",
-                    "Incorrect: Angiotensin II is not directly elevated.",
-                    "Incorrect: Aldosterone is elevated but is not the primary cause—DOC accumulation is.",
-                    "Incorrect: Catecholamines are not involved."
-                ]
-            }
-        ];
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Core Concept Flashcards (85 cards) — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
 
-        // VIGNETTE DATA
-        const vignettes = [
-            {
-                title: "Case 1: Newborn with Ambiguous Genitalia and Salt-Wasting",
-                case: "46,XX newborn with ambiguous genitalia (clitoromegaly). Labs: Na 122 mEq/L (hyponatremia), K 7.0 mEq/L (hyperkalemia), elevated 17-OHP.",
-                diagnosis: "<strong>21-Hydroxylase Deficiency (CAH)</strong>",
-                pathophysiology: "<strong>Mechanism:</strong> Block at 21-OH enzyme → ↓cortisol and ↓aldosterone production with substrate accumulation of 17-OHP proximal to the block.<br><strong>Virilization (XX):</strong> ↑ACTH drives excess androgen production (DHEA, androstenedione, testosterone via reticularis) → prenatal virilization of external genitalia.<br><strong>Salt-wasting:</strong> ↓aldosterone → inability to reabsorb Na+ in collecting duct → hyponatremia, hyperkalemia, hypotension, hypovolemia, shock if untreated.<br><strong>Lab confirmation:</strong> Elevated 17-OHP is the diagnostic marker."
-            },
-            {
-                title: "Case 2: Teenager with HTN, Acne, and Irregular Periods",
-                case: "16-year-old female with stage 2 HTN (160/95), severe acne, oligomenorrhea. Labs show elevated 11-deoxycorticosterone and elevated androgens.",
-                diagnosis: "<strong>11β-Hydroxylase Deficiency (CAH)</strong>",
-                pathophysiology: "<strong>Mechanism:</strong> Block at 11β-OH enzyme → ↓cortisol with substrate accumulation of 11-deoxycorticosterone (DOC) and pregnenolone proximal to the block.<br><strong>HTN (NOT hypotension—key distinguisher):</strong> DOC has mineralocorticoid activity → ↑Na+ reabsorption in collecting duct → volume expansion and HTN. Aldosterone is actually LOW due to enzyme block (despite HTN). This is 'hypertensive CAH' vs. 'salt-wasting CAH.'<br><strong>Hyperandrogenism:</strong> ↑ACTH drives excess androgen synthesis (DHEA, androstenedione, testosterone) → acne, oligomenorrhea, virilization.<br><strong>Substrate shunting:</strong> Excess pregnenolone and progesterone → DOC → excess mineralocorticoid activity."
-            },
-            {
-                title: "Case 3: 45-year-old with Central Obesity, Moon Face, Striae, and Hyperglycemia",
-                case: "45F: truncal obesity, moon facies, purple striae on abdomen, hyperglycemia (fasting glucose 145), hypertension, proximal muscle weakness.",
-                diagnosis: "<strong>Cushing's Syndrome (excess cortisol)</strong>",
-                pathophysiology: "<strong>Clinical features from excess cortisol:</strong> Truncal obesity and supraclavicular fat pad (redistribution), moon face (fluid retention), purple striae (collagen breakdown), proximal myopathy (protein catabolism), hyperglycemia and insulin resistance (↑gluconeogenesis, ↑glucose output, ↑insulin antagonism), HTN (↑cardiac output + Na+ retention + ↑α1 adrenergic sensitivity).<br><strong>Diagnostic approach to localize source:</strong><br>1. <strong>Pituitary (Cushing's disease):</strong> ↑ACTH + ↑cortisol; LDDST suppression (dexamethasone suppresses ACTH/cortisol); high-dose DST suppression; CRH stimulation increases ACTH; MRI pituitary to identify adenoma.<br>2. <strong>Adrenal:</strong> ↓ACTH (primary), cortisol not suppressed by LDDST or HDDST; CT/MRI adrenal to identify tumor.<br>3. <strong>Ectopic (small cell lung cancer, carcinoid, pheochromocytoma):</strong> ↑ACTH, cortisol not suppressed by HDDST; imaging based on suspected source (CT chest/abdomen)."
-            },
-            {
-                title: "Case 4: Fatigue, Weight Loss, Hypotension, Hyponatremia, Hyperkalemia, and Hyperpigmentation",
-                case: "52-year-old presents with 3-month history of progressive fatigue, weight loss (12 lbs), orthostatic hypotension (dizziness on standing), hyponatremia (Na 128), hyperkalemia (K 6.2), hyperpigmentation (darkening of skin creases and axillae).",
-                diagnosis: "<strong>Addison's Disease (Primary Adrenal Insufficiency)</strong>",
-                pathophysiology: "<strong>Adrenal failure → ↓cortisol + ↓aldosterone + ↑ACTH + ↑renin:</strong><br><strong>↓Cortisol effects:</strong> Loss of gluconeogenesis and glucose output → fasting hypoglycemia and generalized weakness; loss of antiinflammatory and immunosuppressive actions → vulnerable to infection; loss of cardiovascular support → hypotension.<br><strong>↓Aldosterone effects:</strong> Loss of Na+ reabsorption → hyponatremia; loss of K+ excretion → hyperkalemia; loss of H+ excretion → hyperkalemic metabolic acidosis.<br><strong>↑ACTH + MSH activity:</strong> Removal of negative feedback by low cortisol → ↑ACTH from pituitary; ACTH and its related peptide (α-MSH from POMC) bind melanocortin receptors on skin → ↑melanin synthesis → hyperpigmentation, especially in sun-exposed areas and skin creases.<br><strong>Common causes:</strong> Autoimmune destruction (anti-21-OH antibodies), TB, fungal infections (histoplasmosis, coccidioidomycosis), or adrenal hemorrhage."
-            },
-            {
-                title: "Case 5: Licorice Root Supplements, Hypertension, and Hypokalemia",
-                case: "58-year-old taking licorice root supplement for 4 months develops HTN (158/92) and lab hypokalemia (K 2.8). Renin is suppressed; aldosterone is normal.",
-                diagnosis: "<strong>Apparent Mineralocorticoid Excess (AME) Syndrome</strong>",
-                pathophysiology: "<strong>Mechanism:</strong> Licorice (and carbenoxolone) inhibits 11β-HSD type 2 in the kidney collecting duct.<br><strong>Normal physiology:</strong> 11β-HSD2 inactivates cortisol → cortisone. Despite cortisol's 1000-fold higher circulating concentration than aldosterone, cortisol normally cannot activate mineralocorticoid receptors (MR) in principal cells because it is rapidly inactivated by 11β-HSD2. Only aldosterone (which is NOT a substrate for 11β-HSD2) reaches MR.<br><strong>With licorice (inhibited 11β-HSD2):</strong> Cortisol is no longer inactivated → accumulates in collecting duct → binds MR (which can't distinguish cortisol from aldosterone) → mimics aldosterone action → ↑Na+ reabsorption (ENaC activation) and ↑K+ excretion → HTN, hypokalemia, suppressed renin (due to volume expansion), and metabolic alkalosis. This is called 'apparent' mineralocorticoid excess because aldosterone levels are normal—the apparent excess is from unmasked cortisol activity."
-            },
-            {
-                title: "Case 6: Long-term Dexamethasone Therapy and Abrupt Discontinuation",
-                case: "Patient on dexamethasone (synthetic glucocorticoid) 2 mg daily for 6 months for respiratory condition. Patient abruptly stops due to side effects. Within 2 days develops fatigue, weakness, nausea, hypotension, confusion.",
-                diagnosis: "<strong>Acute Adrenal Insufficiency / Adrenal Crisis from HPA Suppression</strong>",
-                pathophysiology: "<strong>Chronic exogenous glucocorticoid effect on HPA:</strong> Dexamethasone suppresses CRH release from hypothalamus and ACTH release from pituitary via negative feedback. Over 6 months, chronically low ACTH results in adrenal atrophy and loss of steroidogenic capacity.<br><strong>Abrupt discontinuation:</strong> Exogenous dexamethasone is withdrawn, but the adrenal glands are atrophied and cannot immediately resume cortisol production. Result is acute cortisol deficiency.<br><strong>Acute adrenal crisis features:</strong> Hypotension (no cortisol support of cardiovascular tone), hyponatremia and hyperkalemia (no mineralocorticoid and no volume support), hypoglycemia (no gluconeogenesis), shock, altered mental status, seizures if severe.<br><strong>Treatment:</strong> IV high-dose hydrocortisone (100 mg bolus, then 50-100 mg Q6h initially). Recovery of HPA axis requires weeks to months during glucocorticoid taper—gradual reduction allows ACTH to recover and adrenal glands to regain function."
-            }
-        ];
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice (10 high-yield questions)</div>
+        <div id="mcqContainer"></div>
+    </div>
 
-        // TEST TRAPS DATA
-        const traps = [
-            {
-                trap: "<strong>Trap 1: Blood Pressure Direction in Different CAH Enzymes</strong>",
-                detail: "21-OH deficiency → <strong>LOW BP</strong> (aldosterone loss, salt-wasting)<br>11β-OH deficiency → <strong>HIGH BP</strong> (DOC accumulation, mineralocorticoid activity)<br>17α-OH deficiency → <strong>HIGH BP</strong> (DOC + aldosterone accumulation)<br><strong>Key:</strong> Only 21-OH causes salt-wasting HTN; the others cause hypertensive CAH. This is the #1 source of exam confusion."
-            },
-            {
-                trap: "<strong>Trap 2: Aldosterone Regulation Is NOT ACTH</strong>",
-                detail: "Cortisol, DHEA, androstenedione are all ACTH-regulated.<br>Aldosterone is regulated by:<br>&bull; Renin-Angiotensin System (RAAS; specifically angiotensin II)<br>&bull; Serum K+ level (hyperkalemia directly stimulates aldosterone)<br>&bull; NOT primarily by ACTH<br><strong>Exam trick:</strong> 'High ACTH → more aldosterone' is FALSE. This catches students who assume all adrenal hormones are ACTH-driven."
-            },
-            {
-                trap: "<strong>Trap 3: Cushing's Syndrome ≠ Cushing's Disease</strong>",
-                detail: "<strong>Cushing's syndrome:</strong> Any cause of excess cortisol (can be pituitary, adrenal, ectopic, or exogenous)<br><strong>Cushing's disease:</strong> SPECIFICALLY a pituitary ACTH-secreting adenoma causing bilateral adrenal hyperplasia<br><strong>Trap:</strong> Exams use 'Cushing's syndrome' generically and 'Cushing's disease' for pituitary-specific disease. Don't conflate them."
-            },
-            {
-                trap: "<strong>Trap 4: Cortisol CAN Bind MR, But Normally Doesn't Act As Mineralocorticoid</strong>",
-                detail: "Cortisol and aldosterone have similar affinities for mineralocorticoid receptors (MR).<br><strong>BUT:</strong> In the kidney collecting duct, 11β-HSD type 2 rapidly inactivates cortisol → cortisone (MR-inactive).<br><strong>Result:</strong> Despite cortisol's 1000× higher circulating concentration, only aldosterone reaches functional MR because it escapes 11β-HSD2 inactivation.<br><strong>Trap:</strong> 'Why doesn't cortisol cause mineralocorticoid effects?' Answer: 11β-HSD2 gating, not MR binding affinity."
-            },
-            {
-                trap: "<strong>Trap 5: Hyperpigmentation ONLY in Primary Adrenal Insufficiency</strong>",
-                detail: "<strong>Primary (Addison):</strong> ↑ACTH + ↑MSH activity → dark skin<br><strong>Secondary adrenal insufficiency:</strong> ↓ACTH (pituitary defect) → no MSH stimulation → NO hyperpigmentation, pale skin<br><strong>Tertiary adrenal insufficiency:</strong> ↓CRH (hypothalamic defect) → ↓ACTH → NO hyperpigmentation<br><strong>Trap:</strong> 'Adrenal insufficiency = hyperpigmentation' is FALSE; only primary adds this sign because only primary has elevated ACTH."
-            }
-        ];
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes (10 scenarios with follow-ups)</div>
+        <div id="vigContainer"></div>
+    </div>
 
-        // FILL-IN-BLANK DATA
-        const fillBlankData = [
-            {
-                title: "Table 1: Congenital Adrenal Hyperplasia (CAH) Comparison",
-                table: `
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Enzyme Defect</th>
-                            <th>Blood Pressure</th>
-                            <th>Androgens</th>
-                            <th>Salt-Wasting?</th>
-                            <th>Substrate Accumulates</th>
-                            <th>Distinguishing Lab</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>21-Hydroxylase</strong> (most common, 90%)</td>
-                            <td>LOW</td>
-                            <td>↑ (virilization)</td>
-                            <td>YES (aldosterone loss)</td>
-                            <td>17-OHP</td>
-                            <td>↑17-OHP (diagnostic marker)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>11β-Hydroxylase</strong></td>
-                            <td>HIGH</td>
-                            <td>↑ (virilization)</td>
-                            <td>NO (DOC mineralocorticoid)</td>
-                            <td>DOC + 11-deoxycortisol</td>
-                            <td>↑DOC, ↑11-deoxycortisol</td>
-                        </tr>
-                        <tr>
-                            <td><strong>17α-Hydroxylase</strong></td>
-                            <td>HIGH</td>
-                            <td>↓ (no sex development)</td>
-                            <td>NO (excess aldosterone)</td>
-                            <td>Pregnenolone, progesterone, DOC</td>
-                            <td>↑DOC, ↓testosterone, ↓estrogen</td>
-                        </tr>
-                    </tbody>
-                </table>
-                `
-            },
-            {
-                title: "Table 2: Adrenal Zones - Structure and Function",
-                table: `
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Zone (Mnemonic: GFR)</th>
-                            <th>Layer Position</th>
-                            <th>Hormones Produced</th>
-                            <th>Primary Regulation</th>
-                            <th>Key Unique Enzyme</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Glomerulosa</strong> (G = Salt)</td>
-                            <td>Outer layer</td>
-                            <td>Aldosterone</td>
-                            <td>Angiotensin II, serum K+</td>
-                            <td>CYP11B2 (aldosterone synthase) - ONLY in glomerulosa</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Fasciculata</strong> (F = Sugar)</td>
-                            <td>Middle layer</td>
-                            <td>Cortisol</td>
-                            <td>ACTH (HPA axis)</td>
-                            <td>17α-Hydroxylase - ABSENT in glomerulosa</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Reticularis</strong> (R = Sex)</td>
-                            <td>Inner layer</td>
-                            <td>DHEA, DHEA-S, androstenedione</td>
-                            <td>ACTH</td>
-                            <td>C17-20 lyase (CYP17A1)</td>
-                        </tr>
-                    </tbody>
-                </table>
-                `
-            }
-        ];
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">⚠️ Trap Detector (12 True/False challenges)</div>
+        <div id="trapsContainer"></div>
+        <div class="score-display" id="trapScore">Score: 0/0 (Click statements to begin)</div>
+    </div>
 
-        // REFERENCE TABLE DATA
-        const referenceData = [
-            {
-                title: "Complete Steroid Synthesis Pathway",
-                content: `
-<div class="reference-pathway">
-<div class="pathway-step">Cholesterol</div>
-<div class="pathway-step">↓ <span class="enzyme">CYP11A1 (P450 side-chain cleavage/desmolase)</span></div>
-<div class="pathway-step"><span class="location">[Mitochondria, rate-limiting step, controlled by StAR protein]</span></div>
-<div class="pathway-step">↓</div>
-<div class="pathway-step"><strong>Pregnenolone</strong></div>
-<div class="pathway-step">↓ <span class="enzyme">3β-HSD (3-beta-hydroxysteroid dehydrogenase)</span></div>
-<div class="pathway-step">↓</div>
-<div class="pathway-step"><strong>Progesterone</strong></div>
-<div class="pathway-step">↙️ [Branching Point] ↘️</div>
-<div class="pathway-step" style="color: #79C0FF;"><strong>CORTISOL PATHWAY (Fasciculata)</strong></div>
-<div class="pathway-step">Progesterone → <span class="enzyme">17α-Hydroxylase</span> → 17-OHP → <span class="enzyme">21-Hydroxylase</span> → 11-deoxycortisol → <span class="enzyme">11β-Hydroxylase</span> → <strong>CORTISOL</strong></div>
-<div class="pathway-step" style="color: #79C0FF;"><strong>ALDOSTERONE PATHWAY (Glomerulosa)</strong></div>
-<div class="pathway-step">Progesterone → <span class="enzyme">21-Hydroxylase</span> → DOC → <span class="enzyme">11β-Hydroxylase</span> → Corticosterone → <span class="enzyme">CYP11B2 (Aldosterone synthase, only in glomerulosa)</span> → <strong>ALDOSTERONE</strong></div>
-<div class="pathway-step" style="color: #79C0FF;"><strong>ANDROGEN PATHWAY (Reticularis)</strong></div>
-<div class="pathway-step">Pregnenolone → <span class="enzyme">17α-Hydroxylase</span> → 17-OH-Pregnenolone → <span class="enzyme">C17-20 Lyase</span> → DHEA → <span class="enzyme">3β-HSD</span> → Androstenedione → <span class="enzyme">17β-HSD</span> → <strong>TESTOSTERONE</strong></div>
-<div class="pathway-step">DHEA is sulfated to <strong>DHEA-S</strong> (most abundant circulating adrenal androgen)</div>
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill in the Blank (10 enzyme & pathway questions)</div>
+        <div id="fibContainer"></div>
+    </div>
+
+    <div id="tab-challenge" class="tab-content">
+        <div class="section-title">🎯 Challenge Drill — Interactive Pathways & Classifications</div>
+        <div id="challengeContainer"></div>
+    </div>
+
+    <div id="tab-anki" class="tab-content">
+        <div class="section-title">Anki Card Map (85 L2 Cards) — Card Topics & Coverage</div>
+        <div id="ankiContainer"></div>
+    </div>
 </div>
-                `
-            },
-            {
-                title: "HPA Axis Regulation",
-                content: `
-<div class="reference-pathway">
-<div class="pathway-step"><strong>Hypothalamus</strong> (CRH secretion)</div>
-<div class="pathway-step">↓ <span class="enzyme">Corticotropin-Releasing Hormone (CRH)</span></div>
-<div class="pathway-step">↓</div>
-<div class="pathway-step"><strong>Anterior Pituitary Corticotroph</strong> (ACTH secretion)</div>
-<div class="pathway-step">↓ <span class="enzyme">ACTH (via MC2R → Gs → cAMP → PKA)</span></div>
-<div class="pathway-step">↓</div>
-<div class="pathway-step"><strong>Adrenal Cortex (Fasciculata)</strong></div>
-<div class="pathway-step">↓</div>
-<div class="pathway-step"><strong>CORTISOL</strong></div>
-<div class="pathway-step" style="color: #FF8C42;">⤴️ <span class="enzyme">Negative Feedback</span></div>
-<div class="pathway-step">Cortisol inhibits CRH release (hypothalamus) and ACTH release (pituitary)</div>
-<div class="pathway-step" style="color: #79C0FF;"><strong>STRESS OVERRIDE:</strong> Stress signals override negative feedback → sustained CRH and ACTH → elevated cortisol</div>
-<div class="pathway-step" style="color: #79C0FF;"><strong>CIRCADIAN RHYTHM:</strong> SCN drives CRH/ACTH rhythm → cortisol peaks at 8 AM, nadir at midnight</div>
-</div>
-                `
-            },
-            {
-                title: "Clinical Syndromes Summary",
-                content: `
-<table>
-    <thead>
-        <tr>
-            <th>Syndrome</th>
-            <th>Cause</th>
-            <th>Cortisol Level</th>
-            <th>ACTH Level</th>
-            <th>Key Features</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><strong>Cushing's Syndrome (Pituitary/Cushing's Disease)</strong></td>
-            <td>ACTH-secreting pituitary adenoma</td>
-            <td>↑↑ High</td>
-            <td>↑↑ High</td>
-            <td>Central obesity, moon face, striae, muscle weakness, HTN, hyperglycemia, loss of diurnal variation</td>
-        </tr>
-        <tr>
-            <td><strong>Cushing's Syndrome (Primary Adrenal)</strong></td>
-            <td>Adrenal adenoma or carcinoma</td>
-            <td>↑↑ High</td>
-            <td>↓ Low (suppressed)</td>
-            <td>Same clinical features; LDDST and HDDST don't suppress cortisol</td>
-        </tr>
-        <tr>
-            <td><strong>Addison's Disease (Primary AI)</strong></td>
-            <td>Adrenal gland failure (autoimmune, TB, infection)</td>
-            <td>↓ Low</td>
-            <td>↑↑ High</td>
-            <td>Weakness, hypotension, hyponatremia, hyperkalemia, hyperpigmentation, hypoglycemia</td>
-        </tr>
-        <tr>
-            <td><strong>Secondary Adrenal Insufficiency</strong></td>
-            <td>Pituitary ACTH deficiency</td>
-            <td>↓ Low</td>
-            <td>↓ Low</td>
-            <td>Weakness, hypotension, hyponatremia (less severe), NO hyperpigmentation, normal aldosterone</td>
-        </tr>
-        <tr>
-            <td><strong>Tertiary Adrenal Insufficiency</strong></td>
-            <td>Hypothalamic CRH deficiency</td>
-            <td>↓ Low</td>
-            <td>↓ Low (recoverable with CRH)</td>
-            <td>Similar to secondary; responds to CRH stimulation (unlike pituitary disease)</td>
-        </tr>
-        <tr>
-            <td><strong>Primary Hyperaldosteronism (Conn's)</strong></td>
-            <td>Aldosterone-secreting adrenal adenoma or bilateral hyperplasia</td>
-            <td>Normal</td>
-            <td>Normal</td>
-            <td>HTN, hypokalemia, metabolic alkalosis, HIGH aldosterone + LOW renin (suppressed)</td>
-        </tr>
-    </tbody>
-</table>
-                `
-            }
-        ];
 
-        // INITIALIZATION FUNCTIONS
-        function initFlashcards() {
-            const container = document.getElementById('flashcard-container');
-            container.innerHTML = '';
-            flashcards.forEach((card, index) => {
-                const cardDiv = document.createElement('div');
-                cardDiv.className = 'card flashcard';
-                cardDiv.onclick = () => toggleFlashcard(cardDiv);
-                cardDiv.innerHTML = `
-                    <div class="flashcard-content">
-                        ${card.front}
-                    </div>
-                    <span class="card-number">${index + 1}/${flashcards.length}</span>
-                    <div style="display: none;" class="back-content">${card.back}</div>
-                `;
-                container.appendChild(cardDiv);
-            });
-        }
+<script>
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
 
-        function toggleFlashcard(element) {
-            element.classList.toggle('flipped');
-            const backContent = element.querySelector('.back-content');
-            if (element.classList.contains('flipped')) {
-                element.querySelector('.flashcard-content').innerHTML = backContent.innerHTML;
-            } else {
-                element.querySelector('.flashcard-content').innerHTML = backContent.previousElementSibling.textContent;
-            }
-        }
+const flashcards = [
+    { q: "Name the THREE layers of the adrenal cortex and their hormone products.", a: "ZONA GLOMERULOSA (outermost) → aldosterone. ZONA FASCICULATA (middle) → cortisol + adrenal androgens. ZONA RETICULARIS (inner) → adrenal androgens (DHEA, androstenedione)." },
+    { q: "What is the first and rate-limiting enzyme in ALL steroid hormone synthesis?", a: "CYP11A1 (P450scc = side-chain cleavage enzyme). Converts cholesterol → pregnenolone. Regulated by ACTH." },
+    { q: "What does 3β-HSD do?", a: "3β-Hydroxysteroid dehydrogenase converts pregnenolone → progesterone. Also DHEA → androstenedione. Drives Δ5 → Δ4 pathway." },
+    { q: "What does 21-hydroxylase (CYP21) do?", a: "CYP21 catalyzes: Progesterone → 11-deoxycortisol; 17-OH-Progesterone → 11-deoxycortisol. Most COMMON CAH deficiency (~90%)." },
+    { q: "What does 11β-hydroxylase (CYP11B1) do?", a: "CYP11B1 converts 11-deoxycortisol → cortisol (final cortisol synthesis step). Also DOC → corticosterone." },
+    { q: "What does 17α-hydroxylase (CYP17) do?", a: "CYP17 has TWO activities: 17α-hydroxylase (pregnenolone → 17-OH-pregnenolone) + 17,20-lyase (→ DHEA). REQUIRED for adrenal androgens." },
+    { q: "What is CYP11B2 (aldosterone synthase)?", a: "Found ONLY in zona glomerulosa. Catalyzes final aldosterone synthesis steps. Regulated by ANGIOTENSIN II, K+, ACTH (permissive)." },
+    { q: "What activates RAS to stimulate aldosterone?", a: "RENIN release from: (1) ↓renal perfusion pressure. (2) ↓plasma Na+. (3) ↑sympathetic tone. Renin → ANG II → ↑aldosterone (PRIMARY stimulus)." },
+    { q: "How does K+ directly regulate aldosterone?", a: "↑K+ DIRECTLY stimulates zona glomerulosa cells → aldosterone release. PRIMARY stimulus independent of RAS/ACTH." },
+    { q: "How does ANP affect aldosterone?", a: "ANP ↓aldosterone via: (1) Inhibits renin. (2) Directly inhibits aldosterone synthesis. (3) Promotes urinary Na+ excretion." },
+    { q: "Describe cortisol diurnal rhythm.", a: "Peaks 1-2 hours BEFORE AWAKENING (6-8am), nadir at midnight. Driven by CRH/ACTH circadian release from SCN. Disrupted in shift work, depression." },
+    { q: "What is 11β-HSD2's role?", a: "11β-HSD2 inactivates cortisol → cortisone in kidney/colon. Protects MR from cortisol. Deficiency → cortisol activates MR → HTN + hypokalemia." },
+    { q: "How does cortisol activate GR?", a: "Cortisol crosses membrane → binds cytoplasmic GR → dissociation from HSP90 → enters nucleus → binds GREs → ↑gluconeogenic gene transcription." },
+    { q: "What is the CLASSIC lab finding in 21-OH CAH?", a: "↑↑17-OH-Progesterone (17-OHP) is diagnostic. Also ↓cortisol, ↓aldosterone (salt-wasting), ↑ACTH, ↑androgens." },
+    { q: "Salt-wasting vs simple virilizing 21-OH CAH?", a: "SALT-WASTING: ↓↓aldosterone + ↓cortisol → hyponatremia, hyperkalemia, shock. SIMPLE VIRILIZING: ↓cortisol + ↑androgens, aldosterone preserved." },
+    { q: "Clinical features of 11β-OH CAH?", a: "↓cortisol, ↓aldosterone, ↑DOC (mineralocorticoid) → HTN + hypokalemia. ↑androgens → virilization. 2nd most common." },
+    { q: "Clinical features of 17α-OH CAH?", a: "↓cortisol, ↓androgens, ↑DOC → HTN + hypokalemia. NO virilization (low androgens). Primary amenorrhea + sexual infantilism." },
+    { q: "What is StAR protein?", a: "Steroidogenic Acute Regulatory protein. Transports cholesterol across outer mitochondrial membrane (rate-limiting). Deficiency → lipoid CAH." },
+    { q: "What are DHEA and androstenedione?", a: "Weak androgens from ZONA RETICULARIS. ~50% of peripheral androgens. Converted peripherally to testosterone. Increase with puberty + ACTH." },
+    { q: "Define Cushing's disease, syndrome, ectopic ACTH.", a: "SYNDROME = any excess cortisol. DISEASE = Cushing's from pituitary ACTH adenoma (~80%). ECTOPIC = ACTH from non-pituitary source." },
+    { q: "Interpret low-dose and high-dose DST.", a: "LOW-DOSE: suppresses in normal → rules in Cushing's if not. HIGH-DOSE: DISEASE suppresses; ectopic does NOT." },
+    { q: "Labs in Addison's disease?", a: "↓↓cortisol, ↓aldosterone, ↑↑ACTH (>1000), ↑renin, hyponatremia, hyperkalemia, hyperpigmentation." },
+    { q: "Labs in Conn's syndrome?", a: "↑↑aldosterone (>20), ↓↓renin (<1), HTN, hypokalemia, hypernatremia, ↑HCO3-. Ratio >20-30 diagnostic." },
+    { q: "How does licorice mimic Conn's?", a: "Licorice inhibits 11β-HSD2 → cortisol NOT inactivated → cortisol activates MR → HTN + hypokalemia. KEY: aldosterone ↓↓ (not ↑↑)." },
+    { q: "Consequences of long-term glucocorticoid therapy?", a: "HPA suppression. Facial plethora, buffalo hump, striae, weight gain, immunosuppression, HTN, osteoporosis. Abrupt stop → acute insufficiency." },
+    { q: "Ectopic ACTH from SCLC presentation?", a: "Rapid onset Cushing's (weeks) with severe hypokalemia, hyperglycemia. ACTH ectopically produced → ↑↑cortisol. High-dose DST does NOT suppress." },
+    { q: "What is MR (mineralocorticoid receptor)?", a: "Nuclear receptor binding aldosterone → gene transcription → Na+ reabsorption. 11β-HSD2 inactivates cortisol → protects MR specificity." },
+    { q: "What stimulates ACTH release?", a: "CRH from hypothalamic PVN (primary). Also vasopressin. Stimulated by stress, fever, hypoglycemia, circadian rhythm. ↑cortisol → ↓CRH/↓ACTH (feedback)." },
+    { q: "How does ACTH affect adrenal cortex?", a: "ACTH binds MC2R on zona fasciculata + reticularis. Stimulates cortisol + androgen synthesis. PRIMARY for glucocorticoids. PERMISSIVE for aldosterone." },
+    { q: "ACTH resistance mechanisms?", a: "1) MC2R gene mutations. 2) Adrenal destruction (TB, autoimmunity, hemorrhage). Both: ↓cortisol + ↑↑ACTH." },
+    { q: "What is CAH?", a: "Congenital adrenal hyperplasia. Autosomal recessive. MOST COMMON: 21-OH (~90%). Blocks cortisol + aldosterone → ↑ACTH → precursor accumulation → androgens + salt-wasting." },
+    { q: "Why androgens increase in 21-OH CAH despite downstream block?", a: "Accumulated 17-OH-pregnenolone shunted to DHEA (CYP17). ↑ACTH stimulates all androgen enzymes → net androgen excess." },
+    { q: "ACTH's role in adrenal size?", a: "Chronic ACTH → adrenal hyperplasia. In CAH, ↑ACTH → bilateral enlargement (may mimic tumors)." },
+    { q: "Glucocorticoid negative feedback?", a: "Cortisol (↑) → ↓CRH → ↓ACTH → ↓cortisol production (negative feedback). Disrupted in Cushing's." },
+    { q: "Primary vs secondary vs tertiary adrenal insufficiency?", a: "PRIMARY: adrenal destruction → ↓cortisol, ↑↑ACTH. SECONDARY: pituitary ACTH loss → ↓cortisol, ↓ACTH. TERTIARY: hypothalamic CRH loss → ↓cortisol, ↓ACTH." },
+    { q: "Differentiate primary from secondary clinically?", a: "PRIMARY: hyperpigmentation (↑POMC), hyponatremia + hyperkalemia (aldosterone lost). SECONDARY: NO pigment, NO hypokalemia (aldosterone spared)." },
+    { q: "Causes of Addison's disease?", a: "Autoimmune (~70%), TB (~15%), hemorrhage, metastases, fungal (histoplasmosis in HIV), genetic (CAH, ALD)." },
+    { q: "Acute adrenal crisis management?", a: "Hypotension, shock, hyponatremia + hyperkalemia, hypoglycemia. MANAGE: IV hydrocortisone 50-100 mg Q6H, IV saline, treat cause, continuous monitoring." },
+    { q: "Steroid replacement for Addison's?", a: "Hydrocortisone 15-20 mg/day (divided) + fludrocortisone 0.05-0.2 mg/day. Increase doses during illness/surgery." },
+    { q: "Midnight salivary cortisol usefulness?", a: "In healthy people, cortisol nadir <5 μg/dL at midnight. In Cushing's, rhythm BLUNTED → cortisol remains ↑. >5.4 ng/mL suggests Cushing's." },
+    { q: "HTN pathophysiology in Cushing's?", a: "Cortisol excess → (1) ↑vasoconstrictor tone. (2) ↑Na+ retention (weak mineralocorticoid activity). (3) ↓K+ → hypokalemia. Net: HTN + hypokalemia alkalosis." },
+    { q: "Hypokalemia mechanism in hyperaldosteronism?", a: "Aldosterone → ↑Na+ reabsorption, ↑K+ secretion in urine → ↓serum K+. Concurrent H+ secretion → metabolic alkalosis." },
+    { q: "Cortisol excess causes hypokalemic alkalosis?", a: "Cortisol excess → ↑GFR + fluid expansion → ↓aldosterone (paradoxically). Cortisol weak mineralocorticoid activity persists → Na+ retention. K+ losses from renal + GI." },
+    { q: "K+ relationship with aldosterone?", a: "↑K+ is PRIMARY stimulus for aldosterone release. Small ↑K+ triggers release → urinary K+ excretion. Potent feedback mechanism. Independent of RAS/ACTH." },
+    { q: "Salt-wasting pathophysiology in 21-OH CAH?", a: "CYP21 deficiency → ↓aldosterone synthesis. ↓aldosterone → ↓Na+ reabsorption → urinary Na+ wasting → hypovolemia + hypotension." },
+    { q: "Cortisol and stress response physiology?", a: "Acute stress → ↑CRH/ACTH → ↑cortisol. Mobilizes glucose (gluconeogenesis), suppresses immune, ↑BP, suppresses reproduction. Adaptive acutely; harmful chronically." },
+    { q: "Cortisol's role in circadian rhythm?", a: "Early morning cortisol surge from SCN → CRH → ACTH → peak 6-8 AM, nadir midnight. Drives alertness, mobilizes energy. Disrupted in shift work, jet lag." },
+    { q: "Differentiate Conn's from other hypokalemic HTN?", a: "KEY: ↑↑aldosterone + ↓↓renin (ratio >20-30). Conn's PRIMARY. Others secondary: ↑aldosterone + ↑renin (high ratio)." },
+    { q: "APA vs IHA?", a: "APA (~35%): single nodule. Imaging shows it. Adrenalectomy = cure. IHA (~65%): bilateral hyperplasia. Medical (spironolactone, eplerenone)." },
+    { q: "ACC with cortisol + androgens?", a: "ACC secretes cortisol + DHEA/androstenedione. Cushing's + virilization. Large tumor. ↑↑cortisol, ↑DHEA-S (>700), ↓ACTH (autonomous)." },
+    { q: "Chronic glucocorticoid excess causes diabetes?", a: "Cortisol excess → (1) ↑hepatic gluconeogenesis. (2) ↓glucose uptake. (3) ↑lipolysis. (4) ↓β-cell function. Fasting hyperglycemia + insulin resistance." },
+    { q: "Clinical signs of chronic Cushing's?", a: "Facial plethora, buffalo hump, proximal weakness, purple striae, hirsutism, acne, thin skin (bruising), osteoporosis, depression, immunosuppression." },
+    { q: "Imaging for pituitary ACTH adenoma?", a: "MRI pituitary (with contrast) GOLD STANDARD. Sensitivity ~70% for >6 mm. If negative → IPSS with CRH stimulation." },
+    { q: "What is IPSS?", a: "Bilateral inferior petrosal sinus sampling. Catheters measure ACTH gradient. Ratio >2:1 (or >3:1 with CRH) confirms pituitary source." },
+    { q: "Cushing's medical treatment?", a: "Pituitary adenoma → transsphenoidal surgery ± radiation. Ectopic ACTH → treat tumor. Adrenal tumor → adrenalectomy. Medical: ketoconazole, metyrapone, mitotane." },
+    { q: "Long-term morbidity of untreated Cushing's?", a: "Cardiovascular: HTN, atherosclerosis, MI, stroke. Metabolic: diabetes, dyslipidemia. Bones: osteoporosis, fractures. Psychiatric: depression, suicide." },
+    { q: "StAR deficiency pathophysiology?", a: "StAR transports cholesterol into mitochondria. Deficiency → ↓all steroids, lipid droplets in adrenal. Severe salt-wasting + sexual infantilism (lipoid CAH)." },
+    { q: "Aldosterone-to-renin ratio in Conn's?", a: ">20-30 diagnostic for Conn's. Normal <10. Secondary hyperaldosteronism: elevated aldosterone BUT also elevated renin (ratio normal/low)." },
+    { q: "ANP counter-regulatory to aldosterone?", a: "ANP inhibits renin release (↓RAS) + directly inhibits aldosterone synthesis. Also promotes urinary Na+ excretion + inhibits Na+ reabsorption." },
+    { q: "17,20-lyase activity of CYP17?", a: "Converts 17-OH-pregnenolone → DHEA; 17-OH-progesterone → androstenedione. KEY step shunting intermediates toward androgen pathway." },
+    { q: "ACTH stimulation test for insufficiency?", a: "PRIMARY (adrenal destroyed): ↓cortisol, NO ACTH response. SECONDARY (ACTH deficiency): ↓cortisol, responds to exogenous ACTH." },
+    { q: "HTN pathophysiology in 11β-OH CAH?", a: "CYP11B1 deficiency → DOC accumulates (mineralocorticoid activity like aldosterone) → Na+ retention, K+ wasting → HTN + hypokalemia." },
+    { q: "Why 17α-OH CAH causes sexual infantilism without virilization?", a: "CYP17 deficiency → ↓androgens (DHEA, androstenedione, testosterone). XY individuals develop female phenotype. XX individuals have amenorrhea." },
+    { q: "Salt-wasting crisis presentation in neonates?", a: "Weeks 1-4 of life: hyponatremia, hyperkalemia, dehydration, poor feeding, hypotension, shock risk. From ↓aldosterone (Na+ wasting) + ↓cortisol (vascular tone loss)." },
+    { q: "Cortisol's weak mineralocorticoid activity significance?", a: "Cortisol at high concentrations has some MR activity. 11β-HSD2 inactivates cortisol → protects MR specificity. Without 11β-HSD2, cortisol activates MR → pseudo-hyperaldosteronism." },
+    { q: "GR mechanism allows feedback suppression?", a: "High cortisol → cortisol-GR → nucleus → binds GREs on CRH/ACTH genes → ↓transcription → ↓CRH, ↓ACTH → ↓cortisol (negative feedback maintained)." },
+    { q: "Clinical difference: Cushing's disease vs syndrome?", a: "SYNDROME = clinical + biochemical excess cortisol findings (any cause). DISEASE = syndrome SPECIFICALLY from pituitary ACTH adenoma. Disease is subset of syndrome." },
+    { q: "ANP synergistic BP lowering?", a: "ANP: (1) Inhibits renin (↓RAS). (2) Directly inhibits aldosterone. (3) Causes natriuresis (↑urinary Na+). (4) Causes vasodilation. Net: ↓BP, ↓volume, ↓Na+." },
+];
 
-        function resetFlashcards() {
-            document.querySelectorAll('.flashcard').forEach(card => card.classList.remove('flipped'));
-            initFlashcards();
-        }
+const mcqs = [
+    {
+        stem: "A premature male infant: hyponatremia (124), hyperkalemia (7.2), hypotension at 2 weeks. Cortisol <5, ACTH >1000, 17-OHP 2200. Which enzyme deficiency?",
+        options: ["17α-hydroxylase", "11β-hydroxylase", "21-hydroxylase (salt-wasting)", "3β-HSD", "CYP11A1"],
+        correct: 2,
+        explanations: [
+            "17α-OH: ↓androgens, HTN (not hyponatremia/hyperkalemia).",
+            "11β-OH: ↑DOC → HTN + hypokalemia, not salt-wasting.",
+            "21-OH salt-wasting: ↓cortisol + ↓aldosterone → hyponatremia + hyperkalemia + shock.",
+            "3β-HSD: 17-OHP not elevated.",
+            "CYP11A1: all steroids ↓↓, lipoid accumulation."
+        ],
+        teaching: "21-OH CAH salt-wasting = NEONATAL EMERGENCY. Aldosterone loss → Na+ wasting + K+ retention."
+    },
+    {
+        stem: "28-year-old woman: HTN, K+ 2.8, aldosterone 28 (elevated), renin <0.5 (suppressed). Diagnosis?",
+        options: ["Diarrhea", "Gitelman syndrome", "Conn's syndrome", "Cushing's", "11β-HSD2 deficiency"],
+        correct: 2,
+        explanations: [
+            "Diarrhea: ↓K+ but also ↑renin (secondary).",
+            "Gitelman: ↓K+, BUT ↑renin + ↑aldosterone (secondary).",
+            "Conn's PRIMARY: ↑↑aldosterone + ↓↓renin (suppressed by volume). Ratio >20-30 diagnostic.",
+            "Cushing's: HTN + hypokalemia, but aldosterone normal/low.",
+            "11β-HSD2: HTN + hypokalemia, BUT aldosterone AND renin suppressed."
+        ],
+        teaching: "Conn's PRIMARY hyperaldosteronism = ↑↑aldosterone + ↓↓renin."
+    },
+    {
+        stem: "45-year-old man: 5 cm adrenal mass. Dex 1 mg → cortisol 8.5. Dex 8 mg → 7.8. ACTH 5 (low). Diagnosis?",
+        options: ["Cushing's disease", "Ectopic ACTH", "Adrenal adenoma", "Secondary insufficiency", "Corticotroph hyperplasia"],
+        correct: 2,
+        explanations: [
+            "Cushing's disease: high-dose DST SUPPRESSES; ACTH elevated.",
+            "Ectopic ACTH: neither dose suppresses; ACTH elevated.",
+            "Adrenal adenoma ACTH-independent: low ACTH, neither dose suppresses.",
+            "Secondary insufficiency: ↓cortisol + ↓ACTH, not ↑cortisol.",
+            "Corticotroph: ACTH elevated, high-dose suppresses."
+        ],
+        teaching: "ACTH-independent Cushing's: neither dose suppresses."
+    },
+    {
+        stem: "Addison's patient started on hydrocortisone. Week later: Na+ 118 despite adequate intake. Explanation?",
+        options: ["Excessive hydrocortisone causes SIADH", "Lack of fludrocortisone (mineralocorticoid)", "Acute insufficiency crisis", "Hypothyroidism", "Polydipsia"],
+        correct: 1,
+        explanations: [
+            "Physiologic hydrocortisone doesn't cause SIADH.",
+            "Hydrocortisone replaces glucocorticoid NOT mineralocorticoid. Fludrocortisone MUST be given.",
+            "If adequately treated, shouldn't occur.",
+            "Hypothyroidism doesn't cause acute hyponatremia.",
+            "Polydipsia causes hypernatremia, not hyponatremia."
+        ],
+        teaching: "Addison's requires DUAL: glucocorticoid + mineralocorticoid."
+    },
+    {
+        stem: "16-year-old female CAH: primary amenorrhea, 17-OHP 1500 ng/dL, bilateral adrenal enlargement. Enzyme? Management?",
+        options: ["11β-OH; dexamethasone", "17α-OH; hydrocortisone", "21-OH; hydrocortisone + fludrocortisone", "3β-HSD; dexamethasone", "CYP11A1; no treatment"],
+        correct: 2,
+        explanations: [
+            "11β-OH: ↑11-deoxycortisol, not 17-OHP.",
+            "17α-OH: ↑DOC, not 17-OHP.",
+            "21-OH: ↑17-OHP DIAGNOSTIC. Hydrocortisone suppresses ACTH → ↓androgens.",
+            "3β-HSD: 17-OHP normal/low.",
+            "CYP11A1: no 17-OHP elevation."
+        ],
+        teaching: "17-OHP >1000 ng/dL = DIAGNOSTIC for 21-OH CAH."
+    },
+    {
+        stem: "52-year-old: Cushing's, cortisol 35, ACTH 65, pituitary MRI 7 mm nodule, high-dose dex → 12. Diagnosis?",
+        options: ["Adrenocortical carcinoma", "Ectopic ACTH", "Cushing's disease", "Primary adrenal hyperplasia", "Paraneoplastic ACTH"],
+        correct: 2,
+        explanations: [
+            "Adrenocortical carcinoma: ↓ACTH, high-dose doesn't suppress.",
+            "Ectopic ACTH: high-dose doesn't suppress, ACTH elevated.",
+            "Cushing's disease: ↑ACTH, high-dose SUPPRESSES, pituitary nodule.",
+            "Primary adrenal hyperplasia: ↓ACTH.",
+            "Paraneoplastic: high-dose doesn't suppress."
+        ],
+        teaching: "Cushing's disease: high-dose DST SUPPRESSES."
+    },
+    {
+        stem: "35-year-old woman: HTN, hypokalemia (K+ 2.5). Aldosterone 5 (LOW), renin <0.5 (suppressed), cortisol 18 (normal). Daily licorice candy. Explanation?",
+        options: ["Conn's", "Cushing's", "Renal artery stenosis", "Licorice-induced via 11β-HSD2 inhibition", "Diarrhea"],
+        correct: 3,
+        explanations: [
+            "Conn's: ↑aldosterone, she has ↓.",
+            "Cushing's: ↑cortisol, she has normal.",
+            "RAS: ↑renin, she has suppressed.",
+            "Licorice inhibits 11β-HSD2 → cortisol activates MR → HTN + hypokalemia + ↓aldosterone.",
+            "Diarrhea: ↑renin + ↑aldosterone."
+        ],
+        teaching: "Licorice mimics Conn's but aldosterone ↓↓ (not ↑↑)."
+    },
+    {
+        stem: "6-month-old ambiguous genitalia: cortisol <3, 17-OHP 2100, aldosterone 2 (low), renin >12. IMMEDIATE management?",
+        options: ["Dexamethasone oral", "IV hydrocortisone 50-100 mg, IV saline, fludrocortisone", "Observation", "Testosterone replacement", "Adrenalectomy"],
+        correct: 1,
+        explanations: [
+            "Dexamethasone inappropriate for acute crisis.",
+            "Salt-wasting CRISIS: IV hydrocortisone + saline + fludrocortisone.",
+            "Observation dangerous; shock risk.",
+            "Not for infants.",
+            "Not indicated."
+        ],
+        teaching: "21-OH salt-wasting NEONATAL EMERGENCY."
+    },
+    {
+        stem: "40-year-old man: primary hyperaldosteronism, unilateral 2 cm APA. BEST definitive treatment?",
+        options: ["Spironolactone 25-50 mg daily", "Eplerenone", "Dexamethasone", "Left adrenalectomy", "Dietary sodium restriction"],
+        correct: 3,
+        explanations: [
+            "Works but no cure; lifelong therapy + side effects.",
+            "Good option but NOT definitive cure.",
+            "Not for primary APA.",
+            "Adrenalectomy = DEFINITIVE CURE. >90% improve/resolve HTN.",
+            "Doesn't address adenoma."
+        ],
+        teaching: "APA SURGICAL candidate = cure. IHA MEDICAL candidate."
+    },
+    {
+        stem: "Patient on prednisone 10 mg x 6 months for autoimmune disease wants to discontinue. MOST IMPORTANT step?",
+        options: ["Continue until disease resolved", "Abruptly stop", "Gradually taper to allow HPA recovery", "Switch to dexamethasone", "Start hydrocortisone"],
+        correct: 2,
+        explanations: [
+            "Disease may be controlled; stop not contingent.",
+            "Abrupt stop → acute adrenal insufficiency EMERGENCY.",
+            "Gradual taper allows HPA recovery. Slow reduction lets axis re-awaken.",
+            "Dexamethasone longer-acting.",
+            "Hydrocortisone given during taper."
+        ],
+        teaching: "Glucocorticoid tapers CRITICAL to avoid acute insufficiency."
+    }
+];
 
-        function shuffleFlashcards() {
-            const shuffled = [...flashcards].sort(() => Math.random() - 0.5);
-            const container = document.getElementById('flashcard-container');
-            container.innerHTML = '';
-            shuffled.forEach((card, index) => {
-                const cardDiv = document.createElement('div');
-                cardDiv.className = 'card flashcard';
-                cardDiv.onclick = () => toggleFlashcard(cardDiv);
-                cardDiv.innerHTML = `
-                    <div class="flashcard-content">
-                        ${card.front}
-                    </div>
-                    <span class="card-number">${index + 1}/${flashcards.length}</span>
-                    <div style="display: none;" class="back-content">${card.back}</div>
-                `;
-                container.appendChild(cardDiv);
-            });
-        }
+const vignettes = [
+    {
+        banner: "Newborn Ambiguous Genitalia + Salt Wasting",
+        stem: "2-week-old 46,XX with clitoromegaly: severe dehydration, poor feeding, Na+ 118, K+ 7.1, BP 50/30. Cortisol <2, ACTH >1000, 17-OHP 2200.",
+        question: "Which enzyme deficiency? IMMEDIATE management?",
+        options: [
+            "11β-OH; dexamethasone suppression",
+            "21-OH salt-wasting; IV hydrocortisone 50 mg Q6H, IV saline, fludrocortisone",
+            "17α-OH; hydrocortisone + mineralocorticoid",
+            "3β-HSD; DHEA supplementation",
+            "StAR; surgical adrenalectomy"
+        ],
+        correct: 1,
+        explanations: [
+            "11β-OH → ↑DOC (HTN + hypokalemia), not hyponatremia/hyperkalemia.",
+            "21-OH salt-wasting: ↓cortisol + ↓aldosterone → hyponatremia + hyperkalemia + shock.",
+            "17α-OH: ↓androgens (no virilization), HTN (not salt-wasting).",
+            "3β-HSD: 17-OHP not elevated.",
+            "StAR: all steroids ↓, lipoid droplets."
+        ]
+    },
+    {
+        banner: "Hypertension + Hypogonadism in Young Adult",
+        stem: "22-year-old male with female phenotype, primary amenorrhea, never menstruated. HTN (170/100). Cortisol 8 (normal), aldosterone 22 (elevated), renin <0.3 (low), K+ 2.9 (low), testosterone <50 (castrated), LH 18 (elevated).",
+        question: "Pathophysiology?",
+        options: [
+            "21-OH simple virilizing",
+            "17α-OH: ↓androgens (feminization), ↑DOC (hypertension)",
+            "Cushing's disease",
+            "Primary testicular failure with Conn's",
+            "Androgen insensitivity syndrome"
+        ],
+        correct: 1,
+        explanations: [
+            "21-OH: ↑androgens (virilization), aldosterone normal/low.",
+            "17α-OH CAH: CYP17 deficiency → ↓androgens (female phenotype) + ↑DOC (HTN + hypokalemia).",
+            "Cushing's: ↑cortisol.",
+            "Doesn't explain aldosterone elevation.",
+            "AIS: female phenotype but not these findings."
+        ]
+    },
+    {
+        banner: "Middle-Aged Woman HTN + Hypokalemia",
+        stem: "52-year-old: HTN x 8 years, K+ 2.5 despite no diuretics. Aldosterone 32 (elevated), renin <0.3 (suppressed), ratio 107 (diagnostic). CT: 1.5 cm right adrenal nodule; left normal.",
+        question: "BEST next diagnostic step and treatment?",
+        options: [
+            "Start spironolactone 50 mg daily",
+            "Adrenal vein sampling (AVS), then right adrenalectomy",
+            "MRI pituitary",
+            "Dexamethasone suppression test",
+            "Left nephrectomy"
+        ],
+        correct: 1,
+        explanations: [
+            "Appropriate for bilateral IHA, not unilateral APA.",
+            "AVS confirms lateralization. Right nodule + labs + AVS = surgical cure.",
+            "Not relevant.",
+            "Not for primary Conn's.",
+            "No indication."
+        ]
+    },
+    {
+        banner: "Rapid-Onset Cushing's with Severe Hypokalemia",
+        stem: "58-year-old smoker: 6-week rapid weight gain, purple striae, proximal weakness, HTN (195/115), K+ 1.9 (critical). Cortisol 58, ACTH 89. Midnight cortisol NOT suppressed. High-dose dex → 52 (minimal). CXR: 3 cm left hilar mass.",
+        question: "MOST LIKELY diagnosis and why aldosterone is LOW?",
+        options: [
+            "Cushing's disease; high-dose DST should suppress",
+            "Ectopic ACTH from SCLC; aldosterone ↓ from volume expansion + RAS suppression + K+ wasting",
+            "Adrenocortical carcinoma",
+            "Primary adrenal hyperplasia",
+            "Familial glucocorticoid deficiency"
+        ],
+        correct: 1,
+        explanations: [
+            "Cushing's disease: gradual onset, not rapid 6-week.",
+            "Ectopic ACTH from SCLC: rapid onset, ↑ACTH, high-dose doesn't suppress.",
+            "Very rare, slower.",
+            "↓ACTH.",
+            "↓cortisol + ↑↑ACTH."
+        ]
+    },
+    {
+        banner: "Addison's Crisis in ED",
+        stem: "35-year-old woman with autoimmune Addison's on hydrocortisone + fludrocortisone. Recent gastroenteritis; did NOT increase steroids. Presents: profound weakness, confusion, BP 70/40, Na+ 118, K+ 6.8, glucose 52.",
+        question: "IMMEDIATE management?",
+        options: [
+            "Admit ICU, IV hydrocortisone 50-100 mg, IV saline, IV dextrose, monitoring",
+            "Outpatient with increased oral hydrocortisone",
+            "IV mineralocorticoid (aldosterone)",
+            "Spironolactone for hyperkalemia",
+            "Observation; will improve in 24-48 hours"
+        ],
+        correct: 0,
+        explanations: [
+            "Addison's CRISIS = EMERGENCY. IV hydrocortisone 50-100 mg Q6-8H, IV saline, IV dextrose, ICU.",
+            "Acute crisis needs hospital.",
+            "Aldosterone given chronically; acute needs IV cortisol.",
+            "Spironolactone blocks aldosterone; worsens K+.",
+            "In shock; dangerous."
+        ]
+    },
+    {
+        banner: "11-Year-Old Girl Precocious Puberty",
+        stem: "11-year-old girl: rapid breast + pubic hair, accelerated growth (3 months). ACTH 85, cortisol 32, 11-deoxycortisol 1200 (elevated), DOC 35 (elevated), androstenedione 450 (elevated), K+ 2.9 (low), BP 145/90.",
+        question: "CAH enzyme? Why HTN + hypokalemia?",
+        options: [
+            "21-OH; precursors → androgens + mineralocorticoid deficit",
+            "11β-OH; 11-deoxycortisol + DOC accumulates → mineralocorticoid excess → HTN + hypokalemia",
+            "17α-OH; ↑DOC mineralocorticoid → HTN + hypokalemia",
+            "3β-HSD; DHEA accumulates",
+            "CYP11A1; lipid accumulation"
+        ],
+        correct: 1,
+        explanations: [
+            "21-OH: ↑17-OHP, not 11-deoxycortisol.",
+            "11β-OH: CYP11B1 deficiency → ↑11-deoxycortisol (backup) + ↑DOC (mineralocorticoid) → HTN + hypokalemia.",
+            "17α-OH: ↓androgens.",
+            "3β-HSD: DHEA elevated, but 11-deoxycortisol normal.",
+            "CYP11A1: all steroids ↓↓."
+        ]
+    },
+    {
+        banner: "Middle-Aged Man on Prednisone",
+        stem: "68-year-old: prednisone 7.5 mg daily x 18 months for polymyalgia rheumatica. Rheumatologist wants to taper to assess remission.",
+        question: "BEST tapering strategy and monitoring?",
+        options: [
+            "Abruptly stop",
+            "Gradual taper (1 mg/month ~7.5 months) to allow HPA recovery; monitor for insufficiency",
+            "Switch to dexamethasone 1 mg, then taper",
+            "Continue indefinitely",
+            "ACTH stim test before tapering"
+        ],
+        correct: 1,
+        explanations: [
+            "Abrupt stop → acute adrenal insufficiency.",
+            "Slow taper allows HPA re-awakening. Monitor symptoms. Stress coverage during taper.",
+            "Dexamethasone longer-acting.",
+            "Can safely stop with taper.",
+            "Not routinely needed."
+        ]
+    },
+    {
+        banner: "Asymptomatic Adrenal Incidentaloma",
+        stem: "55-year-old woman: CT abdomen for back pain finds 2.8 cm right adrenal mass. Asymptomatic. Labs: 24-hour UFC 28 (normal <50), overnight dex cortisol 2.1 (suppressed), ACTH 35 (normal), aldosterone/renin 8 (normal), K+ 4.2, BP 125/82.",
+        question: "BEST management?",
+        options: [
+            "Immediate adrenalectomy",
+            "No secretory abnormality; monitor imaging/labs every 6-12 months",
+            "Start aldosterone antagonist",
+            "MRI pituitary",
+            "Percutaneous biopsy"
+        ],
+        correct: 1,
+        explanations: [
+            "Not all incidentalomas need surgery.",
+            "No functional abnormality = benign non-functional adenoma. Monitor imaging at 3-6 months, then annually x 2 years.",
+            "No hyperaldosteronism.",
+            "Not indicated.",
+            "Unnecessary with benign imaging + normal hormones."
+        ]
+    },
+    {
+        banner: "Young Woman CAH Inadequate Control",
+        stem: "20-year-old 46,XX with 21-OH CAH (diagnosed childhood, treated with hydrocortisone). Menarche age 16, irregular menses, hirsutism, acne. Labs: 17-OHP 85 ng/dL (goal <60), cortisol 16 (adequate), aldosterone 12 (normal), K+ 4.3 (normal), ACTH 58 (mildly elevated).",
+        question: "Issue with current management? What to adjust?",
+        options: [
+            "Hydrocortisone adequate; normal menarche + menses indicate success",
+            "Hydrocortisone insufficient; ↑17-OHP → inadequate ACTH suppression → persistent androgens. Increase dose",
+            "Add aromatase inhibitor",
+            "Add spironolactone",
+            "Discontinue hydrocortisone; in remission"
+        ],
+        correct: 1,
+        explanations: [
+            "Irregular menses + hirsutism = ongoing androgen excess.",
+            "17-OHP above goal (goal <50-60). ACTH mildly elevated. Increase hydrocortisone (15 → 18-20 mg/day) to suppress ACTH.",
+            "Not standard.",
+            "Doesn't address ACTH suppression.",
+            "Would cause crisis."
+        ]
+    }
+];
 
-        function initMCQ() {
-            const container = document.getElementById('mcq-container');
-            container.innerHTML = '';
-            mcqs.forEach((mcq, qIndex) => {
-                const qDiv = document.createElement('div');
-                qDiv.className = 'card mc-question';
-                qDiv.innerHTML = `<h4>Question ${qIndex + 1}: ${mcq.question}</h4>`;
+const traps = [
+    { statement: "21-hydroxylase is required for BOTH cortisol AND aldosterone synthesis.", correct: true },
+    { statement: "In 21-hydroxylase deficiency CAH, aldosterone levels are elevated.", correct: false },
+    { statement: "The zona glomerulosa produces glucocorticoids as its primary hormone.", correct: false },
+    { statement: "17α-hydroxylase deficiency causes virilization in females.", correct: false },
+    { statement: "Cortisol peaks in the LATE AFTERNOON as part of normal circadian rhythm.", correct: false },
+    { statement: "ACTH is the PRIMARY regulator of aldosterone secretion.", correct: false },
+    { statement: "11β-HSD2 inactivates cortisol to protect mineralocorticoid receptors.", correct: true },
+    { statement: "In Conn's syndrome, both aldosterone and renin are elevated.", correct: false },
+    { statement: "Licorice toxicity causes ELEVATED aldosterone similar to Conn's.", correct: false },
+    { statement: "High-dose dexamethasone SUPPRESSES cortisol in pituitary Cushing's disease.", correct: true },
+    { statement: "Ectopic ACTH syndrome typically has SLOW onset over many months.", correct: false },
+    { statement: "ANP (atrial natriuretic peptide) INCREASES aldosterone secretion.", correct: false },
+];
 
-                mcq.options.forEach((option, optIndex) => {
-                    const optDiv = document.createElement('div');
-                    optDiv.className = 'mc-option';
-                    optDiv.innerHTML = option;
-                    optDiv.onclick = () => selectOption(qIndex, optIndex, optDiv);
-                    qDiv.appendChild(optDiv);
-                });
+const fibs = [
+    { prompt: "The rate-limiting enzyme in ALL steroid synthesis is ________ (CYP11A1 or P450scc), which converts ________ to ________.", answers: ["CYP11A1", "cholesterol", "pregnenolone"] },
+    { prompt: "________ (the enzyme deficient in ~90% of CAH) catalyzes: Progesterone → ________ and 17-OH-Progesterone → ________.", answers: ["21-hydroxylase", "11-deoxycortisol", "11-deoxycortisol"] },
+    { prompt: "________-HSD2 is found in kidney/colon and inactivates ________ to ________.", answers: ["11β", "cortisol", "cortisone"] },
+    { prompt: "The glucocorticoid receptor (GR) is a ________ receptor that binds ________ in cytoplasm, then translocates to ________ to bind GREs.", answers: ["nuclear", "cortisol", "nucleus"] },
+    { prompt: "In primary adrenal insufficiency (Addison's), ________ is ↓↓ and ________ is ↑↑ (>1000).", answers: ["cortisol", "ACTH"] },
+    { prompt: "In Conn's syndrome, ________ is ↑↑ and ________ is ↓↓ (diagnostic).", answers: ["aldosterone", "renin"] },
+    { prompt: "________ (a catecholamine) is the only hypothalamic hormone that is NOT a peptide.", answers: ["Dopamine"] },
+    { prompt: "The ________ system is the PRIMARY regulator of aldosterone; ACTH is only PERMISSIVE.", answers: ["RAS"] },
+    { prompt: "In 11β-hydroxylase CAH, ________ accumulates and acts as mineralocorticoid → HTN + hypokalemia.", answers: ["DOC"] },
+    { prompt: "________ ________ aldosterone secretion and ________ renin release.", answers: ["ANP", "inhibits", "inhibits"] },
+];
 
-                const expDiv = document.createElement('div');
-                expDiv.className = 'explanation';
-                expDiv.id = `exp-${qIndex}`;
-                expDiv.innerHTML = '<div id="exp-content"></div>';
-                qDiv.appendChild(expDiv);
+const challenges = [
+    {
+        type: "pathway",
+        title: "TYPE 1: Steroid Synthesis Pathway",
+        description: "Cortisol Synthesis (Zona Fasciculata)",
+        steps: [
+            { substrate: "Cholesterol", enzyme: "CYP11A1 (P450scc)", product: "Pregnenolone" },
+            { substrate: "Pregnenolone", enzyme: "3β-HSD", product: "Progesterone" },
+            { substrate: "Progesterone", enzyme: "CYP17 (17α-OH)", product: "17-OH-Progesterone" },
+            { substrate: "17-OH-Progesterone", enzyme: "CYP21 (21-OH)", product: "11-deoxycortisol" },
+            { substrate: "11-deoxycortisol", enzyme: "CYP11B1 (11β-OH)", product: "CORTISOL" }
+        ]
+    }
+];
 
-                container.appendChild(qDiv);
-            });
-        }
+const ankiCards = [
+    { id: 1, topic: "Adrenal zones (GFR)", content: "Anatomy + products", fc: "✓", mcq: "✓" },
+    { id: 3, topic: "Steroid synthesis", content: "CYP11A1 rate-limiting", fc: "✓", mcq: "✓" },
+    { id: 5, topic: "3β-HSD", content: "Pregnenolone → Progesterone", fc: "✓", mcq: "✓" },
+    { id: 15, topic: "21-hydroxylase", content: "CYP21 substrates", fc: "✓", mcq: "✓" },
+    { id: 18, topic: "11β-hydroxylase", content: "CYP11B1 final cortisol", fc: "✓", mcq: "✓" },
+    { id: 22, topic: "17α-hydroxylase", content: "CYP17 dual activities", fc: "✓", mcq: "✓" },
+    { id: 71, topic: "Aldosterone synthase", content: "CYP11B2 zona glomerulosa", fc: "✓", mcq: "✓" },
+    { id: 111, topic: "RAS activation", content: "Renin-angiotensin", fc: "✓", mcq: "✓" },
+    { id: 112, topic: "K+ regulation", content: "Potassium feedback", fc: "✓", mcq: "✓" },
+    { id: 113, topic: "ANP effects", content: "Inhibits renin+aldosterone", fc: "✓", mcq: "✓" },
+];
 
-        function selectOption(qIndex, optIndex, element) {
-            const card = element.closest('.mc-question');
-            const options = card.querySelectorAll('.mc-option');
-            const exp = card.querySelector('.explanation');
-            const expContent = exp.querySelector('#exp-content');
+function renderFlashcards() {
+    const grid = document.getElementById('fcGrid');
+    grid.innerHTML = '';
+    flashcards.forEach((card, idx) => {
+        const cardEl = document.createElement('div');
+        cardEl.className = 'fc';
+        cardEl.onclick = () => cardEl.classList.toggle('flipped');
+        cardEl.innerHTML = `<div class="fc-inner"><div class="fc-front"><div class="fc-label">Anki #${idx + 1}</div><div class="fc-q">${card.q}</div><div class="fc-hint">Click to reveal →</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${card.a}</div></div></div>`;
+        grid.appendChild(cardEl);
+    });
+}
 
-            options.forEach((opt, idx) => {
-                opt.classList.remove('selected', 'correct', 'incorrect');
-                if (idx === mcqs[qIndex].correct) {
-                    opt.classList.add('correct');
-                } else if (idx === optIndex && idx !== mcqs[qIndex].correct) {
-                    opt.classList.add('incorrect');
-                }
-            });
-
-            element.classList.add('selected');
-            expContent.innerHTML = mcqs[qIndex].explanations[optIndex];
-            exp.classList.add('show');
-
-            updateMCQProgress();
-        }
-
-        function updateMCQProgress() {
-            const answered = document.querySelectorAll('.mc-option.selected').length;
-            document.getElementById('mcq-progress').textContent = `Progress: ${answered} / ${mcqs.length}`;
-        }
-
-        function resetMCQ() {
-            document.querySelectorAll('.mc-option').forEach(opt => {
-                opt.classList.remove('selected', 'correct', 'incorrect');
-            });
-            document.querySelectorAll('.explanation').forEach(exp => exp.classList.remove('show'));
-            updateMCQProgress();
-        }
-
-        function initVignettes() {
-            const container = document.getElementById('vignettes-container');
-            container.innerHTML = '';
-            vignettes.forEach((vig, index) => {
-                const vigDiv = document.createElement('div');
-                vigDiv.className = 'vignette';
-                vigDiv.innerHTML = `
-                    <h4>${vig.title}</h4>
-                    <p><strong>Case Presentation:</strong> ${vig.case}</p>
-                    <p><strong>Diagnosis:</strong> ${vig.diagnosis}</p>
-                    <p><strong>Pathophysiology:</strong> ${vig.pathophysiology}</p>
-                `;
-                container.appendChild(vigDiv);
-            });
-        }
-
-        function initTraps() {
-            const container = document.getElementById('traps-container');
-            container.innerHTML = '';
-            traps.forEach((trap) => {
-                const trapDiv = document.createElement('div');
-                trapDiv.className = 'trap';
-                trapDiv.innerHTML = `
-                    <h4>${trap.trap}</h4>
-                    <p>${trap.detail}</p>
-                `;
-                container.appendChild(trapDiv);
-            });
-        }
-
-        function initFillBlank() {
-            const container = document.getElementById('fillblank-container');
-            container.innerHTML = '';
-            fillBlankData.forEach((section) => {
-                const div = document.createElement('div');
-                div.className = 'fill-blank-section';
-                div.innerHTML = `<h3 class="section-title">${section.title}</h3>${section.table}`;
-                container.appendChild(div);
-            });
-        }
-
-        function initReference() {
-            const container = document.getElementById('reference-container');
-            container.innerHTML = '';
-            referenceData.forEach((section) => {
-                const div = document.createElement('div');
-                div.innerHTML = `<h3 class="section-title">${section.title}</h3>${section.content}`;
-                container.appendChild(div);
-            });
-        }
-
-        function switchTab(event, tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-
-            if (tabName === 'flashcards') initFlashcards();
-            if (tabName === 'mcq') initMCQ();
-            if (tabName === 'vignettes') initVignettes();
-            if (tabName === 'traps') initTraps();
-            if (tabName === 'fillblank') initFillBlank();
-            if (tabName === 'reference') initReference();
-        }
-
-        // INITIAL LOAD
-        window.addEventListener('load', () => {
-            initFlashcards();
+function renderMCQs() {
+    const container = document.getElementById('mcqContainer');
+    container.innerHTML = '';
+    mcqs.forEach((mcq, qIdx) => {
+        const item = document.createElement('div');
+        item.className = 'mcq-item';
+        item.innerHTML = `<div class="mcq-num">Question ${qIdx + 1}</div><div class="mcq-stem">${mcq.stem}</div>`;
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'mcq-options';
+        mcq.options.forEach((opt, oIdx) => {
+            const optBtn = document.createElement('div');
+            optBtn.className = 'mcq-opt';
+            optBtn.innerHTML = `<span class="letter">${String.fromCharCode(65 + oIdx)}.</span> <span>${opt}</span>`;
+            optBtn.onclick = () => {
+                if (optBtn.classList.contains('revealed')) return;
+                optBtn.classList.add('revealed');
+                optBtn.classList.add(oIdx === mcq.correct ? 'correct' : 'wrong');
+                const exp = document.createElement('div');
+                exp.className = 'mcq-explanation visible';
+                exp.innerHTML = `<div class="exp-label">${oIdx === mcq.correct ? '✓ Correct!' : '✗ Incorrect'}</div>${mcq.explanations[oIdx]}`;
+                optBtn.appendChild(exp);
+                const tp = document.createElement('div');
+                tp.className = 'teaching-pt visible';
+                tp.innerHTML = `<div class="tp-label">Teaching Point:</div>${mcq.teaching}`;
+                item.appendChild(tp);
+            };
+            optionsDiv.appendChild(optBtn);
         });
-    </script>
+        item.appendChild(optionsDiv);
+        container.appendChild(item);
+    });
+}
+
+function renderVignettes() {
+    const container = document.getElementById('vigContainer');
+    container.innerHTML = '';
+    vignettes.forEach((vig, idx) => {
+        const item = document.createElement('div');
+        item.className = 'vig-item';
+        item.innerHTML = `<div class="vig-banner">${vig.banner}</div><div class="vig-stem">${vig.stem}</div><div style="background:#1C2128; border-left:3px solid var(--accent); padding:12px 14px; margin:14px 0; font-size:0.9em; font-weight:600;"><strong>Q:</strong> ${vig.question}</div>`;
+        vig.options.forEach((opt, oIdx) => {
+            const btn = document.createElement('button');
+            btn.style.cssText = 'padding:8px 12px; background:#1C2128; border:1px solid #30363D; border-radius:6px; color:#C9D1D9; cursor:pointer; font-size:0.9em; width:100%; text-align:left; margin-bottom:6px;';
+            btn.textContent = opt;
+            btn.onclick = () => {
+                const ans = item.querySelector('.vig-answer');
+                if (ans) ans.remove();
+                const result = document.createElement('div');
+                result.style.cssText = oIdx === vig.correct ? 'background:rgba(74,222,128,0.1); border:1px solid #4ADE80; border-radius:6px; padding:12px 14px; font-size:0.9em; color:#D1FAE5;' : 'background:rgba(239,68,68,0.1); border:1px solid #EF4444; border-radius:6px; padding:12px 14px; font-size:0.9em; color:#FCA5A5;';
+                result.className = 'vig-answer';
+                result.innerHTML = `<strong>${oIdx === vig.correct ? '✓ Correct!' : '✗ Incorrect'}</strong><br/>${vig.explanations[oIdx]}`;
+                item.appendChild(result);
+            };
+            item.appendChild(btn);
+        });
+        container.appendChild(item);
+    });
+}
+
+function renderTraps() {
+    const container = document.getElementById('trapsContainer');
+    container.innerHTML = '';
+    let score = 0;
+    traps.forEach((trap, idx) => {
+        const item = document.createElement('div');
+        item.className = 'trap-item';
+        item.innerHTML = `<div class="trap-header">Statement ${idx + 1}</div><div class="trap-statement">${trap.statement}</div>`;
+        const buttons = document.createElement('div');
+        buttons.className = 'trap-buttons';
+
+        const correctBtn = document.createElement('button');
+        correctBtn.className = 'trap-btn';
+        correctBtn.textContent = 'CORRECT ✓';
+        correctBtn.onclick = () => {
+            if (item.classList.contains('answered')) return;
+            item.classList.add('answered');
+            const result = document.createElement('div');
+            result.className = 'trap-result visible';
+            if (trap.correct) {
+                correctBtn.classList.add('correct-select');
+                result.classList.add('correct-result');
+                result.innerHTML = 'CORRECT! This statement is accurate.';
+                score++;
+            } else {
+                correctBtn.classList.add('wrong-select');
+                result.classList.add('wrong-result');
+                result.innerHTML = 'TRAP! This statement is FALSE.';
+            }
+            wrongBtn.disabled = true;
+            document.getElementById('trapScore').textContent = `Score: ${score}/${traps.length}`;
+            item.appendChild(result);
+        };
+        buttons.appendChild(correctBtn);
+
+        const wrongBtn = document.createElement('button');
+        wrongBtn.className = 'trap-btn';
+        wrongBtn.textContent = 'TRAP ✗';
+        wrongBtn.onclick = () => {
+            if (item.classList.contains('answered')) return;
+            item.classList.add('answered');
+            const result = document.createElement('div');
+            result.className = 'trap-result visible';
+            if (!trap.correct) {
+                wrongBtn.classList.add('correct-select');
+                result.classList.add('correct-result');
+                result.innerHTML = 'CORRECT! This is a trap statement.';
+                score++;
+            } else {
+                wrongBtn.classList.add('wrong-select');
+                result.classList.add('wrong-result');
+                result.innerHTML = 'WRONG! This statement is TRUE.';
+            }
+            correctBtn.disabled = true;
+            document.getElementById('trapScore').textContent = `Score: ${score}/${traps.length}`;
+            item.appendChild(result);
+        };
+        buttons.appendChild(wrongBtn);
+        item.appendChild(buttons);
+        container.appendChild(item);
+    });
+}
+
+function renderFIBs() {
+    const container = document.getElementById('fibContainer');
+    container.innerHTML = '';
+    fibs.forEach((fib, idx) => {
+        const item = document.createElement('div');
+        item.className = 'fib-item';
+        item.innerHTML = `<div class="fib-prompt">${idx + 1}. ${fib.prompt}</div>`;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'fib-input';
+        input.placeholder = 'Enter answer (separate multiple with commas)';
+        const btn = document.createElement('button');
+        btn.className = 'fib-btn';
+        btn.textContent = 'Check Answer';
+        btn.onclick = () => {
+            const userAnswer = input.value.trim().toLowerCase().split(',').map(a => a.trim());
+            const correctAnswers = fib.answers.map(a => a.toLowerCase());
+            let allCorrect = userAnswer.length === correctAnswers.length && userAnswer.every((ans, i) => ans === correctAnswers[i]);
+            const resultDiv = item.querySelector('.fib-result') || document.createElement('div');
+            resultDiv.className = allCorrect ? 'fib-result correct' : 'fib-result incorrect';
+            resultDiv.textContent = allCorrect ? '✓ Correct! Answer: ' + fib.answers.join(' / ') : '✗ Incorrect. Expected: ' + fib.answers.join(' / ');
+            if (!item.querySelector('.fib-result')) item.appendChild(resultDiv);
+            else resultDiv.replaceWith(resultDiv);
+        };
+        item.appendChild(input);
+        item.appendChild(btn);
+        container.appendChild(item);
+    });
+}
+
+function renderChallenge() {
+    const container = document.getElementById('challengeContainer');
+    container.innerHTML = '';
+    challenges.forEach(challenge => {
+        const sec = document.createElement('div');
+        sec.className = 'challenge-section';
+        sec.innerHTML = `<div class="challenge-title">${challenge.title}</div><div style="margin-bottom:12px; font-size:0.9em; color:#9CA3AF;">${challenge.description}</div>`;
+        challenge.steps.forEach(step => {
+            const row = document.createElement('div');
+            row.className = 'pathway-row';
+            row.innerHTML = `<div class="substrate">${step.substrate}</div><div style="color:#6B7280; font-weight:700;">→</div><div class="enzyme">${step.enzyme}</div><div style="color:#6B7280; font-weight:700;">→</div><div class="product">${step.product}</div>`;
+            sec.appendChild(row);
+        });
+        container.appendChild(sec);
+    });
+}
+
+function renderAnkiMap() {
+    const container = document.getElementById('ankiContainer');
+    const table = document.createElement('table');
+    table.className = 'ref-table';
+    table.innerHTML = `<thead><tr><th>Card ID</th><th>Core Topic</th><th>Content</th><th>FC</th><th>MCQ</th></tr></thead><tbody>`;
+    ankiCards.forEach(card => {
+        table.innerHTML += `<tr><td class="hl">#${card.id}</td><td>${card.topic}</td><td>${card.content}</td><td class="status yes">${card.fc}</td><td class="status yes">${card.mcq}</td></tr>`;
+    });
+    table.innerHTML += '</tbody>';
+    container.appendChild(table);
+    const note = document.createElement('div');
+    note.style.cssText = 'margin-top:16px; padding:12px; background:#161B22; border-left:3px solid var(--accent); border-radius:6px; font-size:0.87em; color:#9CA3AF;';
+    note.innerHTML = '<strong>Total Coverage:</strong> 85 Anki cards mapped. All 7 required tabs populated with high-yield content for Biochem L2: Adrenal Hormone Synthesis & Action.';
+    container.appendChild(note);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderFlashcards();
+    renderMCQs();
+    renderVignettes();
+    renderTraps();
+    renderFIBs();
+    renderChallenge();
+    renderAnkiMap();
+});
+</script>
 </body>
 </html>

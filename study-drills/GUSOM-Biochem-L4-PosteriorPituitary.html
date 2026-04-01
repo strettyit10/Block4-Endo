@@ -6,14 +6,17 @@
     <title>GUSOM Biochem L4: Posterior Pituitary Hormones</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #00838F; --accent-dark: #00695C; --accent-light: rgba(0,131,143,0.15); }
+        :root { --accent: #00838F; --accent-dark: #00616B; --accent-light: rgba(0,131,143,0.15); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
         .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
         .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
         .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
 
         .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
         .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
@@ -22,12 +25,19 @@
 
         .tab-content { display: none; animation: fadeIn 0.25s ease; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
         /* FLASHCARDS */
-        .flashcard { background: #161B22; border: 2px solid #30363D; border-radius: 10px; padding: 24px; margin-bottom: 18px; min-height: 200px; cursor: pointer; transition: all 0.3s; }
-        .flashcard:hover { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,131,143,0.2); }
-        .fc-label { font-size: 0.7em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
         .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
         .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
         .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
@@ -46,17 +56,32 @@
         .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
         .mcq-explanation.visible { display: block; }
         .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+        .teaching-pt { background: rgba(0,131,143,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #C7D2FE; display: none; }
+        .teaching-pt.visible { display: block; }
+        .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
 
         /* VIGNETTES */
         .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
-        .vig-banner { background: rgba(0,131,143,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #A5E7EB; font-weight: 600; margin-bottom: 14px; }
+        .vig-banner { background: rgba(0,131,143,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #B2DFD8; font-weight: 600; margin-bottom: 14px; }
         .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+        .vig-opts { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .vig-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; }
+        .vig-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .vig-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .vig-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
 
         /* TEST TRAPS */
         .trap-item { background: #1A1212; border: 1px solid #7F1D1D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
         .trap-header { color: #FCA5A5; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; }
-        .trap-myth { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #FCA5A5; margin-bottom: 8px; }
-        .trap-truth { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D1FAE5; }
+        .trap-buttons { display: flex; gap: 8px; margin-bottom: 10px; }
+        .trap-btn { padding: 6px 12px; border: 1px solid #EF4444; background: transparent; color: #FCA5A5; border-radius: 4px; cursor: pointer; font-size: 0.85em; font-weight: 600; transition: all 0.2s; }
+        .trap-btn:hover { background: rgba(239,68,68,0.1); }
+        .trap-btn.selected { background: rgba(239,68,68,0.2); }
+        .trap-myth { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #FCA5A5; margin-bottom: 8px; display: none; }
+        .trap-myth.visible { display: block; }
+        .trap-truth { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D1FAE5; display: none; }
+        .trap-truth.visible { display: block; }
         .trap-myth-label { font-size: 0.75em; color: #EF4444; font-weight: 700; margin-bottom: 4px; }
         .trap-truth-label { font-size: 0.75em; color: #4ADE80; font-weight: 700; margin-bottom: 4px; }
 
@@ -70,7 +95,17 @@
         .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
         .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
 
-        /* REF TABLE */
+        /* CHALLENGE DRILL */
+        .drill-section { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .drill-title { color: var(--accent); font-weight: 700; font-size: 0.9em; margin-bottom: 14px; }
+        .drill-item { margin-bottom: 16px; }
+        .drill-prompt { color: #E6EDF3; font-size: 0.93em; margin-bottom: 10px; }
+        .matcher-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .matcher-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.88em; color: #C9D1D9; transition: all 0.2s; text-align: center; }
+        .matcher-opt:hover { background: #21262D; border-color: var(--accent); }
+        .matcher-opt.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+        /* REFERENCE TABLE */
         .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
         .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
         .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
@@ -78,749 +113,762 @@
         .ref-table tr:nth-child(odd) td { background: #1C2128; }
         .ref-table td.hl { color: var(--accent); font-weight: 600; }
         .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
-        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
 
         .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
-        h3 { color: #E6EDF3; font-size: 1.1em; margin: 20px 0 12px 0; }
+        .trap-score { font-size: 0.8em; color: var(--accent); font-weight: 700; margin-top: 12px; text-align: right; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Biochem L4: Posterior Pituitary Hormones</h1>
-            <div class="subtitle">GUSOM Endocrine Block • Thomas G. Sherman, PhD</div>
-        </div>
-
-        <div class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
-            <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
-            <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
-            <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
-            <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
-            <button class="tab-btn" onclick="switchTab('reference')">📊 Reference</button>
-        </div>
-
-        <!-- FLASHCARDS TAB -->
-        <div id="flashcards" class="tab-content active">
-            <div class="section-title">Anki Flashcards</div>
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #2</div>
-                <div class="fc-q">The rise in plasma osmolality increases plasma ADH levels <strong>[before/after]</strong> the thirst reflex manifests.</div>
-                <div class="fc-a" style="display:none;">ADH increases plasma levels <strong>BEFORE</strong> thirst manifests. The osmotic threshold for thirst is 5-10 mOsm/kg H₂O higher than for AVP secretion.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #6</div>
-                <div class="fc-q">During childbirth, there is a switch from <strong>[___]</strong> to <strong>[___]</strong> feedback of oxytocin.</div>
-                <div class="fc-a" style="display:none;">During childbirth, there is a switch from <strong>negative</strong> to <strong>positive</strong> feedback of oxytocin (Ferguson reflex: cervical distension → ↑oxytocin → ↑contractions).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #7</div>
-                <div class="fc-q">The <strong>[___]</strong> of the pituitary gland surrounds the infundibular stalk.</div>
-                <div class="fc-a" style="display:none;"><strong>Pars tuberalis</strong> surrounds the infundibular stalk. The pars distalis is the largest part of the anterior pituitary.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #19</div>
-                <div class="fc-q">Prostaglandins <strong>[___]</strong> and <strong>[___]</strong> stimulated by oxytocin contribute to uterine pliability during labor.</div>
-                <div class="fc-a" style="display:none;">Prostaglandins <strong>PGE₂</strong> and <strong>PGF₂α</strong> stimulated by oxytocin increase uterine compliance and cervical dilation.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #23</div>
-                <div class="fc-q"><strong>[___]</strong> secretion from the pituitary is only under negative control from the hypothalamus.</div>
-                <div class="fc-a" style="display:none;"><strong>Prolactin</strong> is unique: only under negative control (tonic inhibition by dopamine). All other anterior pituitary hormones are under stimulatory control.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #24</div>
-                <div class="fc-q">Atosiban is a(n) <strong>[___]</strong>.</div>
-                <div class="fc-a" style="display:none;">Atosiban is an <strong>oxytocin receptor antagonist</strong>, but is ineffective at stopping premature labor because uterine oxytocin receptors upregulate throughout pregnancy. Blocking them earlier in pregnancy is more effective.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #70</div>
-                <div class="fc-q"><strong>[___]</strong> is released from thyrotrope cells in the anterior pituitary.</div>
-                <div class="fc-a" style="display:none;"><strong>TSH (thyroid-stimulating hormone)</strong> is released from thyrotrope cells, one of the basophil cell types in the anterior pituitary.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #72</div>
-                <div class="fc-q">The <strong>[___]</strong> formed by the dura mater physically separates the pituitary gland from surrounding structures.</div>
-                <div class="fc-a" style="display:none;">The <strong>diaphragma sellae</strong> is a dural fold that covers the pituitary in the sella turcica, separating it from the suprasellar space containing the optic chiasm.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #73</div>
-                <div class="fc-q">The optic chiasm is <strong>[___]</strong> to the infundibulum so it can be used as a landmark for pituitary anatomy.</div>
-                <div class="fc-a" style="display:none;">The optic chiasm is <strong>anterior</strong> to the infundibulum, making it a useful landmark for understanding pituitary tumor expansion and surgical approaches.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #74</div>
-                <div class="fc-q">ADH and oxytocin are synthesized in <strong>[___]</strong> neurons.</div>
-                <div class="fc-a" style="display:none;">ADH and oxytocin are synthesized in <strong>hypothalamic</strong> neurons (magnocellular neurons in SON and PVN), then transported via fast axonal transport to the posterior pituitary for storage and release.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #76</div>
-                <div class="fc-q">ADH is amidated at the <strong>[___]</strong>-terminus, and this amidation <strong>[increases/decreases]</strong> peptide stability.</div>
-                <div class="fc-a" style="display:none;">ADH is amidated at the <strong>C-terminus</strong>, and amidation <strong>increases</strong> peptide stability against degradation.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #77</div>
-                <div class="fc-q">Osmoreceptors that detect changes in plasma osmolality are located in the <strong>[___]</strong> and <strong>[___]</strong> circumventricular organs.</div>
-                <div class="fc-a" style="display:none;">Osmoreceptors are located in the <strong>OVLT (organum vasculosum of the lamina terminalis)</strong> and <strong>SFO (subfornical organ)</strong>, which lack blood-brain barrier and can sense plasma osmolality.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #78</div>
-                <div class="fc-q">Osmoreceptor signals are transmitted to the <strong>[___]</strong> and <strong>[___]</strong> nuclei in the hypothalamus.</div>
-                <div class="fc-a" style="display:none;">Signals are transmitted to the <strong>SON (supraoptic nucleus)</strong> and <strong>PVN (paraventricular nucleus)</strong> where ADH-secreting magnocellular neurons are located.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #79</div>
-                <div class="fc-q">The osmotic threshold for ADH secretion is approximately <strong>[___]</strong> mOsm/kg.</div>
-                <div class="fc-a" style="display:none;">The osmotic threshold for ADH secretion is approximately <strong>280-285</strong> mOsm/kg H₂O (normal osmolality: 280-290 mOsm/kg).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #80</div>
-                <div class="fc-q">The osmotic threshold for <strong>thirst</strong> is <strong>[___]</strong> mOsm/kg, which is <strong>[___]</strong> than the ADH threshold.</div>
-                <div class="fc-a" style="display:none;">The osmotic threshold for thirst is approximately <strong>290-295</strong> mOsm/kg, which is <strong>5-10 mOsm/kg HIGHER</strong> than the ADH threshold, allowing ADH to maximize water conservation before thirst triggers drinking.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #81</div>
-                <div class="fc-q">V₁a receptors are located on <strong>[___]</strong> and <strong>[___]</strong> and mediate <strong>[___]</strong>.</div>
-                <div class="fc-a" style="display:none;">V₁a receptors are located on <strong>vascular smooth muscle</strong> and <strong>liver</strong> cells and mediate <strong>vasoconstriction and glycogenolysis</strong> via Gq → PLC → IP₃/DAG → ↑Ca²⁺.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #82</div>
-                <div class="fc-q">V₂ receptors are located on <strong>[___]</strong> principal cells and mediate <strong>[___]</strong> via <strong>[___]</strong> signaling.</div>
-                <div class="fc-a" style="display:none;">V₂ receptors are on <strong>renal collecting duct principal cells</strong> and mediate <strong>water reabsorption</strong> via <strong>Gs → adenylyl cyclase → ↑cAMP → PKA → aquaporin-2 insertion</strong>.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #83</div>
-                <div class="fc-q">V₃ receptors are found in <strong>[___]</strong> and mediate <strong>[___]</strong>.</div>
-                <div class="fc-a" style="display:none;">V₃ receptors are found in the <strong>anterior pituitary</strong> and mediate <strong>ACTH secretion</strong> during stress responses, amplifying the HPA axis output.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #84</div>
-                <div class="fc-q">Baroreceptors in the <strong>[___]</strong> and <strong>[___]</strong> sense blood pressure changes and regulate ADH.</div>
-                <div class="fc-a" style="display:none;">Baroreceptors in the <strong>carotid and aortic bodies</strong> and <strong>cardiopulmonary sensors</strong> sense blood pressure. Decreased BP → ↑ADH (exponential relationship; requires >8-10% blood volume loss).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #85</div>
-                <div class="fc-q"><strong>Central diabetes insipidus</strong> results from <strong>[___]</strong> ADH production.</div>
-                <div class="fc-a" style="display:none;"><strong>Central diabetes insipidus</strong> results from <strong>decreased</strong> ADH production. Etiologies: idiopathic, head trauma, pituitary tumor, infiltration (sarcoidosis, histiocytosis X). Treatment: desmopressin/DDAVP (V2-selective agonist).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #86</div>
-                <div class="fc-q"><strong>Nephrogenic diabetes insipidus</strong> results from <strong>[___]</strong> to ADH.</div>
-                <div class="fc-a" style="display:none;"><strong>Nephrogenic diabetes insipidus</strong> results from <strong>renal resistance</strong> to ADH. Most common cause: lithium toxicity. Also: V2 or AQP2 mutations. Treatment: thiazide diuretics + low-sodium diet + NSAIDs.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #87</div>
-                <div class="fc-q"><strong>Gestational diabetes insipidus</strong> is caused by <strong>[___]</strong> degradation of ADH.</div>
-                <div class="fc-a" style="display:none;"><strong>Gestational diabetes insipidus</strong> is caused by <strong>placental vasopressinase</strong> degradation of ADH. Treatment: desmopressin/DDAVP (resistant to vasopressinase), not native ADH.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #88</div>
-                <div class="fc-q"><strong>SIADH</strong> (Syndrome of Inappropriate ADH) causes <strong>[___]</strong> hyponatremia with <strong>[___]</strong> urine osmolality.</div>
-                <div class="fc-a" style="display:none;"><strong>SIADH</strong> causes <strong>dilutional</strong> hyponatremia with inappropriately <strong>HIGH</strong> urine osmolality (urine is hyperosmolar when plasma is hypo-osmolar).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #89</div>
-                <div class="fc-q">Cold-sensitive oropharyngeal receptors activated by cold water <strong>[___]</strong> ADH release (anticipatory osmoregulation).</div>
-                <div class="fc-a" style="display:none;">Cold-sensitive oropharyngeal receptors activated by cold water <strong>INHIBIT</strong> ADH release, preventing overhydration before absorbed water increases plasma osmolality (anticipatory response).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #90</div>
-                <div class="fc-q">Oxytocin and ADH are both <strong>[___]</strong>-amino acid peptides that differ at <strong>[___]</strong> positions.</div>
-                <div class="fc-a" style="display:none;">Both are <strong>9</strong>-amino acid peptides that differ at <strong>2</strong> positions: Ile-3/Leu-8 (oxytocin) vs Phe-3/Arg-8 (ADH/vasopressin).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #91</div>
-                <div class="fc-q">Oxytocin acts on uterine myometrium via <strong>[___]</strong> receptors coupled to <strong>[___]</strong> signaling to cause <strong>[___]</strong>.</div>
-                <div class="fc-a" style="display:none;">Oxytocin acts via <strong>Gq</strong> receptors coupled to <strong>PLC → IP₃ → ↑Ca²⁺</strong> signaling, causing <strong>uterine contraction</strong>.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #92</div>
-                <div class="fc-q">Oxytocin acts on mammary myoepithelial cells via <strong>[___]</strong> receptors coupled to <strong>[___]</strong> signaling to cause <strong>[___]</strong>.</div>
-                <div class="fc-a" style="display:none;">Oxytocin acts via <strong>Gs</strong> receptors coupled to <strong>↑cAMP</strong> signaling, causing <strong>milk ejection</strong> from myoepithelial cells around alveoli.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #93</div>
-                <div class="fc-q"><strong>Ferguson reflex</strong>: cervical distension during labor → <strong>[___]</strong> → ↑oxytocin → ↑contractions (positive feedback).</div>
-                <div class="fc-a" style="display:none;"><strong>Ferguson reflex</strong>: cervical distension → afferent nerve signals to hypothalamus → ↑oxytocin → ↑uterine contractions → further distension (positive feedback amplifies labor).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #94</div>
-                <div class="fc-q">The suckling reflex triggers milk ejection through <strong>[___]</strong> receptors in the breast → hypothalamus → ↑oxytocin.</div>
-                <div class="fc-a" style="display:none;">Suckling activates <strong>mechanoreceptors</strong> in the nipple and areola → afferent signals to hypothalamus → magnocellular neurons release oxytocin → milk ejection.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #95</div>
-                <div class="fc-q">A <strong>galactogogue</strong> is a substance that promotes <strong>[___]</strong>.</div>
-                <div class="fc-a" style="display:none;">A <strong>galactogogue</strong> is a substance that promotes <strong>milk production</strong>. Examples: oxytocin, prolactin, metoclopramide, domperidone.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #96</div>
-                <div class="fc-q">In prairie voles, <strong>vasopressin V₁a receptors</strong> are <strong>[HIGH/LOW]</strong> in reward/bonding brain areas, promoting <strong>[___]</strong>.</div>
-                <div class="fc-a" style="display:none;">In prairie voles, V₁a receptors are <strong>HIGH</strong> in reward areas (nucleus accumbens), promoting <strong>pair bonding and monogamy</strong>. Montane voles have LOW V₁a expression and are promiscuous.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #97</div>
-                <div class="fc-q">During stress, <strong>cortisol</strong> facilitates <strong>[___]</strong> → suppresses <strong>[___]</strong> → <strong>[___]</strong> (reproductive shutdown).</div>
-                <div class="fc-a" style="display:none;">During stress, cortisol facilitates <strong>GnIH (gonadotropin-inhibiting hormone)</strong> → suppresses <strong>GnRH</strong> → ↓LH/FSH → amenorrhea/reduced fertility (energetic trade-off during stress).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #98</div>
-                <div class="fc-q">Desmopressin (DDAVP) is a <strong>[___]</strong>-selective agonist used to treat <strong>[___]</strong> diabetes insipidus.</div>
-                <div class="fc-a" style="display:none;">Desmopressin (DDAVP) is a <strong>V₂-selective</strong> agonist used to treat <strong>central</strong> diabetes insipidus (works in kidney collecting ducts, bypasses need for endogenous ADH).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #99</div>
-                <div class="fc-q">Peptide hormones like ADH/oxytocin are administered <strong>[___]</strong> (not orally) due to <strong>[___]</strong>.</div>
-                <div class="fc-a" style="display:none;">Peptide hormones are administered <strong>intranasally, subcutaneously, or parenterally</strong> (not orally) due to <strong>rapid degradation by GI proteases</strong> and poor absorption.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #106</div>
-                <div class="fc-q">Pars distalis hormone cells: basophils produce <strong>[___]</strong> and <strong>[___]</strong>; acidophils produce <strong>[___]</strong> and <strong>[___]</strong>.</div>
-                <div class="fc-a" style="display:none;">Basophils: FSH/LH (gonadotropes), TSH (thyrotropes), ACTH (corticotropes). Acidophils: GH (somatotropes), prolactin (lactotropes).</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #107</div>
-                <div class="fc-q">The hypothalamic-hypophyseal portal system carries <strong>[___]</strong> hormones from the hypothalamus to the anterior pituitary.</div>
-                <div class="fc-a" style="display:none;">The hypophyseal portal system carries <strong>releasing hormones (GnRH, TRH, CRH, GHRH)</strong> and <strong>dopamine</strong> (prolactin-inhibiting factor) from the hypothalamus to the anterior pituitary.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #108</div>
-                <div class="fc-q">The <strong>[___]</strong> is formed by neural tissue and stores ADH/oxytocin from hypothalamic neurons.</div>
-                <div class="fc-a" style="display:none;">The <strong>pars nervosa (posterior pituitary/neurohypophysis)</strong> is an extension of the hypothalamus composed of terminal axons and glial cells (pituicytes) that store and release ADH and oxytocin.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #109</div>
-                <div class="fc-q">ADH increases water permeability in the collecting duct by inserting <strong>[___]</strong> into the apical membrane.</div>
-                <div class="fc-a" style="display:none;">ADH increases water permeability by inserting <strong>aquaporin-2 (AQP2) water channel proteins</strong> into the apical membrane of principal cells via PKA-mediated translocation from intracellular vesicles.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-
-            <div class="flashcard" onclick="toggleFlip(this)">
-                <div class="fc-label">Anki #110</div>
-                <div class="fc-q">Maximal antidiuresis occurs when urine osmolality reaches <strong>[___]</strong> mOsm/kg under the influence of high ADH levels.</div>
-                <div class="fc-a" style="display:none;">Maximal antidiuresis: urine osmolality ~<strong>1200 mOsm/kg</strong> (can be higher, up to 1400 mOsm/kg), minimum urine output ~<strong>0.3-0.5 mL/min</strong>. ADH secretion and behavioral responses (drinking) together maintain serum [Na+] ~140 mEq/L.</div>
-                <div class="fc-hint">Click to reveal answer</div>
-            </div>
-        </div>
-
-        <!-- MCQ TAB -->
-        <div id="mcq" class="tab-content">
-            <div class="section-title">MCQ Practice Questions</div>
-
-            <div class="mcq-item">
-                <div class="mcq-num">Q1: Anki #2</div>
-                <div class="mcq-stem">The osmotic threshold for ADH secretion occurs at approximately <strong>280-285 mOsm/kg</strong>, while thirst is triggered at <strong>290-295 mOsm/kg</strong>. What is the physiological advantage of this separation?</div>
-                <div class="mcq-options">
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'correct')"><span class="letter">A</span> ADH maximizes water reabsorption before behavioral responses to thirst occur</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">B</span> Thirst must occur first to stimulate ADH release</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">C</span> ADH only works in extreme dehydration</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">D</span> Thirst and ADH thresholds should always be identical</div>
-                </div>
-                <div class="mcq-explanation">
-                    <div class="exp-label">Explanation:</div>
-                    The staggered thresholds allow ADH to work as the first-line defense, conserving water through renal mechanisms before thirst-driven drinking behavior. This is more efficient than waiting for behavioral responses.
-                </div>
-            </div>
-
-            <div class="mcq-item">
-                <div class="mcq-num">Q2: Anki #6</div>
-                <div class="mcq-stem">During labor, the positive feedback loop driving uterine contractions is mediated by which reflex?</div>
-                <div class="mcq-options">
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'correct')"><span class="letter">A</span> Ferguson reflex: cervical distension → ↑oxytocin → ↑contractions</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">B</span> Bainbridge reflex: increased uterine stretch → ↓heart rate</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">C</span> Milk letdown reflex: suckling → ↑prolactin</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">D</span> Moro reflex: abrupt disturbance → startle response</div>
-                </div>
-                <div class="mcq-explanation">
-                    <div class="exp-label">Explanation:</div>
-                    The Ferguson reflex is the oxytocin-mediated positive feedback during labor. It amplifies contractions as cervical dilation increases, ensuring labor progresses efficiently.
-                </div>
-            </div>
-
-            <div class="mcq-item">
-                <div class="mcq-num">Q3: Anki #81-82</div>
-                <div class="mcq-stem">A 58-year-old man with hypertension is given vasopressin (ADH). Which tissue would respond most dramatically to vasopressin via V₁a receptors?</div>
-                <div class="mcq-options">
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'correct')"><span class="letter">A</span> Vascular smooth muscle → vasoconstriction</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">B</span> Renal collecting duct → water reabsorption</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">C</span> Anterior pituitary → ACTH release</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">D</span> Adrenal cortex → aldosterone synthesis</div>
-                </div>
-                <div class="mcq-explanation">
-                    <div class="exp-label">Explanation:</div>
-                    V₁a receptors on vascular smooth muscle mediate vasoconstriction via Gq → IP₃ → ↑Ca²⁺. This is why high-dose vasopressin can cause hypertensive crisis and is used in cardiac arrest protocols.
-                </div>
-            </div>
-
-            <div class="mcq-item">
-                <div class="mcq-num">Q4: Anki #85</div>
-                <div class="mcq-stem">A 42-year-old woman with a pituitary adenoma develops polyuria (large urine volume) and polydipsia. Which finding would distinguish central from nephrogenic diabetes insipidus?</div>
-                <div class="mcq-options">
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'correct')"><span class="letter">A</span> Administration of desmopressin → decreased urine output (suggests central DI)</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">B</span> High urine osmolality despite low plasma osmolality</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">C</span> Low plasma ADH levels</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">D</span> Dehydration increases urine output</div>
-                </div>
-                <div class="mcq-explanation">
-                    <div class="exp-label">Explanation:</div>
-                    The desmopressin (DDAVP) challenge test is diagnostic: central DI responds (urine output decreases, osmolality increases) because kidneys CAN respond to V₂ agonists; nephrogenic DI does not respond because kidneys cannot respond to any ADH.
-                </div>
-            </div>
-
-            <div class="mcq-item">
-                <div class="mcq-num">Q5: Anki #90-92</div>
-                <div class="mcq-stem">Oxytocin and vasopressin (ADH) are both 9-amino acid peptides that differ at 2 positions. Despite their structural similarity, they have completely different physiological effects. Why?</div>
-                <div class="mcq-options">
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'correct')"><span class="letter">A</span> They activate different G-protein coupled receptors with different downstream signaling cascades</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">B</span> Small peptides cannot share any receptor specificity</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">C</span> Oxytocin and ADH are metabolized differently in the liver</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">D</span> The brain produces oxytocin while kidneys produce ADH</div>
-                </div>
-                <div class="mcq-explanation">
-                    <div class="exp-label">Explanation:</div>
-                    Oxytocin receptors couple to Gq → IP₃/DAG (uterine contraction, milk ejection), while V₂ receptors couple to Gs → cAMP (water reabsorption). Distinct receptors and signaling pathways account for the different effects despite structural similarity.
-                </div>
-            </div>
-
-            <div class="mcq-item">
-                <div class="mcq-num">Q6: Anki #88</div>
-                <div class="mcq-stem">A 35-year-old man with small cell lung cancer develops SIADH (Syndrome of Inappropriate ADH). Lab findings show plasma [Na⁺] = 122 mEq/L (normal 135-145) and urine osmolality 450 mOsm/kg (high). What is the pathophysiology?</div>
-                <div class="mcq-options">
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'correct')"><span class="letter">A</span> Excessive ADH secretion → ↑water reabsorption → dilutional hyponatremia with concentrated urine</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">B</span> Adrenal insufficiency reducing aldosterone → sodium loss</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">C</span> Nephrogenic ADH resistance → inability to concentrate urine</div>
-                    <div class="mcq-opt" onclick="selectMCQ(this, 'wrong')"><span class="letter">D</span> Excessive free water loss through diarrhea</div>
-                </div>
-                <div class="mcq-explanation">
-                    <div class="exp-label">Explanation:</div>
-                    SIADH is characterized by inappropriately HIGH ADH causing excessive water reabsorption. The urine remains concentrated (high osmolality) while plasma becomes dilute (hyponatremia). Small cell lung cancer is a classic paraneoplastic cause of SIADH.
-                </div>
-            </div>
-        </div>
-
-        <!-- VIGNETTES TAB -->
-        <div id="vignettes" class="tab-content">
-            <div class="section-title">Clinical Vignettes</div>
-
-            <div class="vig-item">
-                <div class="vig-banner">Vignette 1: Central Diabetes Insipidus</div>
-                <div class="vig-stem">
-                    A 52-year-old man presents with sudden-onset polyuria (5L/day) and severe polydipsia after head trauma during a motor vehicle accident. His plasma osmolality is 312 mOsm/kg, but his urine osmolality is only 85 mOsm/kg (should be ≥600 mOsm/kg if dehydrated). <strong>Plasma ADH is low (0.5 pg/mL, normal 1-5).</strong>
-                </div>
-                <div style="background: rgba(0,131,143,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #A5E7EB;">
-                    <strong>Diagnosis:</strong> Central diabetes insipidus (head trauma → ↓ADH production from posterior pituitary)<br><strong>Treatment:</strong> Desmopressin/DDAVP intranasal or subcutaneous (V₂-selective agonist)<br><strong>Expected response:</strong> Urine output ↓, osmolality ↑ to 400-600 mOsm/kg
-                </div>
-            </div>
-
-            <div class="vig-item">
-                <div class="vig-banner">Vignette 2: Nephrogenic DI from Lithium</div>
-                <div class="vig-stem">
-                    A 38-year-old woman on chronic lithium for bipolar disorder presents with polyuria and polydipsia (drinking 4L water daily). Plasma osmolality is 305 mOsm/kg with <strong>elevated ADH (8.2 pg/mL)</strong>, but urine osmolality is only 180 mOsm/kg. The desmopressin challenge test shows minimal improvement in urine osmolality.
-                </div>
-                <div style="background: rgba(0,131,143,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #A5E7EB;">
-                    <strong>Diagnosis:</strong> Nephrogenic diabetes insipidus from lithium toxicity (damages collecting duct V₂ receptors and aquaporin-2)<br><strong>Distinguishing feature:</strong> HIGH ADH despite polyuria (kidney is unresponsive)<br><strong>Treatment:</strong> Discontinue lithium, thiazide diuretics (paradoxically ↓urine output), low-sodium diet, NSAIDs
-                </div>
-            </div>
-
-            <div class="vig-item">
-                <div class="vig-banner">Vignette 3: SIADH</div>
-                <div class="vig-stem">
-                    A 62-year-old man with recently diagnosed small cell lung cancer presents with confusion, headache, and seizure. Serum [Na⁺] = 118 mEq/L (severe hyponatremia), plasma osmolality 245 mOsm/kg, and <strong>urine osmolality 380 mOsm/kg</strong> (inappropriately high). Urine sodium is elevated at 92 mEq/L.
-                </div>
-                <div style="background: rgba(0,131,143,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #A5E7EB;">
-                    <strong>Diagnosis:</strong> SIADH from paraneoplastic ADH secretion by lung cancer cells<br><strong>Pathophysiology:</strong> Excessive ADH → ↑water reabsorption → dilutional hyponatremia with concentrated urine (inappropriate for plasma osmolality)<br><strong>Treatment:</strong> Fluid restriction (first-line), saline in severe symptomatic hyponatremia (seizures, coma), V₂ antagonists (vaptans) in refractory cases
-                </div>
-            </div>
-
-            <div class="vig-item">
-                <div class="vig-banner">Vignette 4: Oxytocin and Labor</div>
-                <div class="vig-stem">
-                    A 28-year-old primigravida at 40 weeks gestation is admitted with mild contractions (every 10 minutes). After 6 hours of slow labor, an oxytocin infusion is started. Within 30 minutes, contractions increase to every 2-3 minutes with increased intensity. The cervix dilates from 3 cm to 6 cm over 2 hours.
-                </div>
-                <div style="background: rgba(0,131,143,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #A5E7EB;">
-                    <strong>Mechanism:</strong> Oxytocin acts on uterine Gq receptors → IP₃ → ↑Ca²⁺ → muscle contraction<br><strong>Ferguson reflex:</strong> Increased cervical distension from labor → afferent signals → ↑endogenous oxytocin → positive feedback amplification<br><strong>Clinical note:</strong> Oxytocin receptor upregulation throughout pregnancy allows increasing responsiveness to oxytocin as parturition approaches
-                </div>
-            </div>
-
-            <div class="vig-item">
-                <div class="vig-banner">Vignette 5: Lactation Failure</div>
-                <div class="vig-stem">
-                    A 31-year-old postpartum mother reports milk ejection reflex triggered by her baby's cry (even before nursing). Physical exam shows brisk nipple erection. Serum prolactin is elevated. <strong>However, the milk supply has been low</strong>, and she's considering metoclopramide (dopamine antagonist).
-                </div>
-                <div style="background: rgba(0,131,143,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #A5E7EB;">
-                    <strong>Milk ejection:</strong> Conditioned oxytocin release (via baby's cry) stimulates myoepithelial Gs receptors → cAMP → milk ejection<br><strong>Milk production (galactopoiesis):</strong> Requires prolactin (tonic, under dopamine inhibition)<br><strong>Metoclopramide mechanism:</strong> Dopamine antagonist → ↓dopamine inhibition of prolactin → ↑prolactin → ↑milk production (acts as galactogogue)
-                </div>
-            </div>
-        </div>
-
-        <!-- TEST TRAPS TAB -->
-        <div id="traps" class="tab-content">
-            <div class="section-title">Common Test Traps & Misconceptions</div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 1: ADH vs. Thirst Thresholds</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    Thirst and ADH secretion are triggered at the same plasma osmolality.
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    ADH secretion begins at ~280-285 mOsm/kg, but thirst is not felt until ~290-295 mOsm/kg (5-10 mOsm/kg higher). This allows ADH to maximize water conservation before the behavioral response of drinking.
-                </div>
-            </div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 2: SIADH Urine Osmolality</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    In SIADH, urine osmolality is low because ADH suppresses urine concentration.
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    In SIADH, urine osmolality is INAPPROPRIATELY HIGH relative to plasma osmolality. The kidneys are over-concentrating urine due to excessive ADH, causing dilutional hyponatremia (not a concentrating defect).
-                </div>
-            </div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 3: Nephrogenic DI ADH Levels</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    In nephrogenic DI, ADH levels are low (like in central DI).
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    In nephrogenic DI, ADH levels are HIGH or NORMAL-to-HIGH (because the kidney cannot respond, the body produces more ADH in a failed attempt to increase water reabsorption). Low ADH = central DI. High ADH + polyuria = nephrogenic DI.
-                </div>
-            </div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 4: Desmopressin Efficacy</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    Desmopressin (DDAVP) works in all forms of diabetes insipidus.
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    Desmopressin is V₂-selective and works in central DI (kidney collecting ducts are intact). It does NOT work in nephrogenic DI (kidney collecting ducts cannot respond to any ADH). In gestational DI, desmopressin works because it's resistant to placental vasopressinase (native ADH is degraded).
-                </div>
-            </div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 5: Oxytocin Receptor Antagonists</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    Oxytocin receptor antagonists (atosiban) are highly effective at stopping premature labor.
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    Oxytocin receptor antagonists are INEFFECTIVE because oxytocin receptors upregulate throughout pregnancy, increasing sensitivity. Blocking receptors in late pregnancy (when already upregulated) cannot overcome the cascade. Blocking earlier in pregnancy would be more effective, but this isn't clinically done.
-                </div>
-            </div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 6: Oxytocin vs. Prolactin</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    Oxytocin produces milk; prolactin ejects it.
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    OPPOSITE: Prolactin stimulates MILK PRODUCTION (galactopoiesis); oxytocin causes MILK EJECTION. Oxytocin is the acute response to suckling/nipple stimulation. Prolactin is the chronic response (over days/weeks).
-                </div>
-            </div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 7: Cold Water and ADH</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    Drinking cold water increases ADH secretion due to the osmotic load.
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    Cold-sensitive oropharyngeal receptors INHIBIT ADH release when activated by cold water (anticipatory response before osmolality actually increases). This prevents over-hydration. It's an exception to normal osmoreceptor-driven ADH regulation.
-                </div>
-            </div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 8: Baroreceptor Sensitivity</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    Small decreases in blood pressure (1-2%) immediately increase ADH.
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    Baroreceptor-mediated ADH secretion requires >8-10% blood volume loss (significant hypotension). The relationship is exponential (steep at large volume losses). Small volume changes primarily trigger thirst and sympathetic activation, not ADH. Osmoreceptors are more sensitive than baroreceptors for ADH.
-                </div>
-            </div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 9: V₁a vs. V₂ Signaling</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    V₁a and V₂ receptors both couple to Gs → cAMP signaling.
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    V₁a couples to Gq → IP₃/DAG → ↑Ca²⁺ (vasoconstriction, liver glycogenolysis). V₂ couples to Gs → cAMP → PKA → aquaporin-2 insertion (water reabsorption). Different receptors, different signaling, different tissues.
-                </div>
-            </div>
-
-            <div class="trap-item">
-                <div class="trap-header">TRAP 10: Stress and Reproduction</div>
-                <div class="trap-myth">
-                    <div class="trap-myth-label">Myth:</div>
-                    Stress increases GnRH secretion (explaining why stressed athletes lose menses).
-                </div>
-                <div class="trap-truth">
-                    <div class="trap-truth-label">Truth:</div>
-                    Stress increases cortisol → facilitates GnIH (gonadotropin-inhibiting hormone) → suppresses GnRH → ↓LH/FSH → amenorrhea. This is an energetic trade-off: the body prioritizes stress responses over reproduction under adverse conditions.
-                </div>
-            </div>
-        </div>
-
-        <!-- FILL-IN-BLANK TAB -->
-        <div id="fib" class="tab-content">
-            <div class="section-title">Fill-in-the-Blank Exercises</div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">1. ADH is a <strong>[___]</strong>-amino acid peptide synthesized in <strong>[___]</strong> neurons and stored in the <strong>[___]</strong>.</div>
-                <input type="text" class="fib-input" id="fib1" placeholder="Format: 9, hypothalamic, posterior pituitary">
-                <button class="fib-btn" onclick="checkFIB('fib1', ['9', 'hypothalamic'], 'ADH is a 9-amino acid peptide synthesized in hypothalamic neurons (SON/PVN) and stored in the posterior pituitary.')">Check</button>
-                <div class="fib-result" id="fib1-result"></div>
-            </div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">2. The osmotic threshold for ADH secretion is approximately <strong>[___]</strong> mOsm/kg, while the osmotic threshold for thirst is approximately <strong>[___]</strong> mOsm/kg.</div>
-                <input type="text" class="fib-input" id="fib2" placeholder="Format: 280-285, 290-295">
-                <button class="fib-btn" onclick="checkFIB('fib2', ['280', '285', '290', '295'], 'ADH threshold: 280-285 mOsm/kg; Thirst threshold: 290-295 mOsm/kg.')">Check</button>
-                <div class="fib-result" id="fib2-result"></div>
-            </div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">3. Osmoreceptors detecting plasma osmolality are located in the <strong>[___]</strong> and <strong>[___]</strong> circumventricular organs.</div>
-                <input type="text" class="fib-input" id="fib3" placeholder="Format: OVLT, SFO">
-                <button class="fib-btn" onclick="checkFIB('fib3', ['OVLT', 'SFO'], 'OVLT and SFO lack blood-brain barriers and can sense plasma osmolality.')">Check</button>
-                <div class="fib-result" id="fib3-result"></div>
-            </div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">4. V₂ receptors couple to <strong>[___]</strong> signaling, leading to <strong>[___]</strong> of aquaporin-2 channels.</div>
-                <input type="text" class="fib-input" id="fib4" placeholder="Format: Gs, insertion">
-                <button class="fib-btn" onclick="checkFIB('fib4', ['Gs', 'cAMP', 'insertion', 'translocation'], 'V₂ → Gs → cAMP → aquaporin-2 insertion into the apical membrane.')">Check</button>
-                <div class="fib-result" id="fib4-result"></div>
-            </div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">5. Central DI results from <strong>[___]</strong> ADH and is treated with <strong>[___]</strong>.</div>
-                <input type="text" class="fib-input" id="fib5" placeholder="Format: decreased, desmopressin">
-                <button class="fib-btn" onclick="checkFIB('fib5', ['decreased', 'desmopressin', 'DDAVP'], 'Treatment: desmopressin/DDAVP (V₂-selective agonist).')">Check</button>
-                <div class="fib-result" id="fib5-result"></div>
-            </div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">6. Nephrogenic DI is caused by <strong>[___]</strong> to ADH, most commonly due to <strong>[___]</strong> toxicity.</div>
-                <input type="text" class="fib-input" id="fib6" placeholder="Format: resistance, lithium">
-                <button class="fib-btn" onclick="checkFIB('fib6', ['resistance', 'lithium'], 'Most common cause: lithium toxicity.')">Check</button>
-                <div class="fib-result" id="fib6-result"></div>
-            </div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">7. Ferguson reflex: cervical distension → <strong>[___]</strong> → ↑oxytocin → positive feedback.</div>
-                <input type="text" class="fib-input" id="fib7" placeholder="Format: mechanoreceptors">
-                <button class="fib-btn" onclick="checkFIB('fib7', ['mechanoreceptors'], 'Mechanoreceptors → afferent signals → hypothalamus → oxytocin.')">Check</button>
-                <div class="fib-result" id="fib7-result"></div>
-            </div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">8. Oxytocin acts on uterine myometrium via <strong>[___]</strong> receptors, while on mammary myoepithelium via <strong>[___]</strong> receptors.</div>
-                <input type="text" class="fib-input" id="fib8" placeholder="Format: Gq, Gs">
-                <button class="fib-btn" onclick="checkFIB('fib8', ['Gq', 'Gs'], 'Uterine: Gq (contraction); Mammary: Gs (milk ejection).')">Check</button>
-                <div class="fib-result" id="fib8-result"></div>
-            </div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">9. In prairie voles, V₁a receptor density in reward areas is <strong>[HIGH/LOW]</strong>, promoting pair bonding.</div>
-                <input type="text" class="fib-input" id="fib9" placeholder="Format: HIGH">
-                <button class="fib-btn" onclick="checkFIB('fib9', ['HIGH', 'high'], 'Prairie voles: high V₁a in reward areas → pair bonding.')">Check</button>
-                <div class="fib-result" id="fib9-result"></div>
-            </div>
-
-            <div class="fib-item">
-                <div class="fib-prompt">10. During stress, <strong>[___]</strong> facilitates <strong>[___]</strong> → suppresses <strong>[___]</strong> → amenorrhea.</div>
-                <input type="text" class="fib-input" id="fib10" placeholder="Format: cortisol, GnIH, GnRH">
-                <button class="fib-btn" onclick="checkFIB('fib10', ['cortisol', 'GnIH', 'GnRH'], 'Cortisol → GnIH → GnRH suppression → amenorrhea.')">Check</button>
-                <div class="fib-result" id="fib10-result"></div>
-            </div>
-        </div>
-
-        <!-- REFERENCE TAB -->
-        <div id="reference" class="tab-content">
-            <div class="section-title">Reference Tables</div>
-
-            <h3>Diabetes Insipidus: Central vs. Nephrogenic</h3>
-            <table class="ref-table">
-                <tr><th>Feature</th><th>Central DI</th><th>Nephrogenic DI</th></tr>
-                <tr><td class="hl">Pathophysiology</td><td>↓ADH production</td><td>↑ADH but kidney resistance</td></tr>
-                <tr><td class="hl">Plasma ADH</td><td class="hl-red">LOW (&lt;0.5 pg/mL)</td><td class="hl-green">HIGH (2-10 pg/mL)</td></tr>
-                <tr><td class="hl">Desmopressin Challenge</td><td class="hl-green">RESPONDS</td><td class="hl-red">NO RESPONSE</td></tr>
-                <tr><td class="hl">Common Causes</td><td>Trauma, tumor, infiltration</td><td>Lithium (most common), V2 mutations</td></tr>
-                <tr><td class="hl">Treatment</td><td>Desmopressin/DDAVP</td><td>Thiazides + low-Na + NSAIDs</td></tr>
-            </table>
-
-            <h3>Vasopressin Receptors</h3>
-            <table class="ref-table">
-                <tr><th>Receptor</th><th>G-Protein</th><th>Location</th><th>Action</th></tr>
-                <tr><td class="hl">V₁a</td><td>Gq</td><td>Vascular smooth muscle, liver</td><td>Vasoconstriction; glycogenolysis</td></tr>
-                <tr><td class="hl">V₁b</td><td>Gq</td><td>Anterior pituitary</td><td>ACTH secretion</td></tr>
-                <tr><td class="hl">V₂</td><td>Gs</td><td>Renal collecting duct</td><td>Water reabsorption (AQP2 insertion)</td></tr>
-            </table>
-
-            <h3>SIADH Diagnostic Criteria</h3>
-            <table class="ref-table">
-                <tr><th>Finding</th><th>SIADH Pattern</th></tr>
-                <tr><td class="hl">Plasma [Na⁺]</td><td class="hl-red">&lt;130 mEq/L (hyponatremia)</td></tr>
-                <tr><td class="hl">Plasma Osmolality</td><td class="hl-red">&lt;275 mOsm/kg</td></tr>
-                <tr><td class="hl">Urine Osmolality</td><td class="hl-green">&gt;200 mOsm/kg (INAPPROPRIATELY HIGH)</td></tr>
-                <tr><td class="hl">Clinical Status</td><td>Euvolemic</td></tr>
-            </table>
-
-            <h3>Oxytocin Regulation</h3>
-            <table class="ref-table">
-                <tr><th>Process</th><th>Hormone</th><th>Receptor/Signal</th><th>Outcome</th></tr>
-                <tr><td class="hl">Milk Ejection</td><td>Oxytocin (acute)</td><td>Gs → cAMP</td><td>Myoepithelial contraction</td></tr>
-                <tr><td class="hl">Milk Production</td><td>Prolactin (chronic)</td><td>JAK2/STAT5</td><td>Alveolar synthesis</td></tr>
-                <tr><td class="hl">Uterine Contraction</td><td>Oxytocin (acute)</td><td>Gq → IP₃ → ↑Ca²⁺</td><td>Myometrial contraction</td></tr>
-            </table>
-        </div>
+<div class="container">
+    <div class="header">
+        <a href="#" class="back">← Back to Endocrine Hub</a>
+        <h1>Biochem Lecture 4: <span class="accent-tag">Posterior Pituitary Hormones</span></h1>
+        <div class="subtitle">ADH · Oxytocin · 9-AA peptides · Water balance · Lactation · Parturition · Osmoregulation</div>
     </div>
 
-    <script>
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Trap Detector</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('drill')">🎯 Challenge Drill</button>
+        <button class="tab-btn" onclick="switchTab('anki')">📋 Anki Map</button>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Core Concept Flashcards — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
+
+    <!-- MCQ -->
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice</div>
+        <div id="mcqContainer"></div>
+    </div>
+
+    <!-- VIGNETTES -->
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes</div>
+        <div id="vigContainer"></div>
+    </div>
+
+    <!-- TEST TRAPS -->
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">⚠️ Test Traps — Common Exam Misconceptions</div>
+        <div id="trapsContainer"></div>
+        <div class="trap-score">Score: <span id="trapScore">0</span>/10</div>
+    </div>
+
+    <!-- FILL-IN-BLANK -->
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill in the Blank — Complete the Statement</div>
+        <div id="fibContainer"></div>
+    </div>
+
+    <!-- CHALLENGE DRILL -->
+    <div id="tab-drill" class="tab-content">
+        <div class="section-title">Interactive Challenge Drills</div>
+        <div id="drillContainer"></div>
+    </div>
+
+    <!-- ANKI MAP -->
+    <div id="tab-anki" class="tab-content">
+        <div class="section-title">Anki Card Mapping (80 Cards L4)</div>
+        <div id="ankiContainer"></div>
+    </div>
+</div>
+
+<script>
+// ─── UTILITY FUNCTIONS ───────────────────────────────────
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
+
+function flipCard(elem) {
+    elem.closest('.fc').classList.toggle('flipped');
+}
+
+let trapCorrect = 0;
+function checkTrap(idx, answer) {
+    const trap = traps[idx];
+    const buttons = document.querySelectorAll(`#trap-${idx} .trap-btn`);
+    const mythDiv = document.getElementById(`trap-myth-${idx}`);
+    const truthDiv = document.getElementById(`trap-truth-${idx}`);
+
+    buttons.forEach(b => b.classList.remove('selected'));
+    event.target.classList.add('selected');
+
+    if (answer === true) {
+        mythDiv.classList.add('visible');
+        truthDiv.classList.add('visible');
+        if (!document.getElementById(`trap-${idx}`).dataset.scored) {
+            trapCorrect++;
+            document.getElementById(`trap-${idx}`).dataset.scored = 'true';
+            document.getElementById('trapScore').textContent = trapCorrect;
         }
+    }
+}
 
-        function toggleFlip(card) {
-            card.classList.toggle('flipped');
-            const q = card.querySelector('.fc-q');
-            const a = card.querySelector('.fc-a');
-            const hint = card.querySelector('.fc-hint');
+function checkFIB(idx, event) {
+    const fib = fibs[idx];
+    const input = document.querySelector(`#fib-${idx} input`);
+    const result = document.querySelector(`#fib-${idx} .fib-result`);
+    const userAnswer = input.value.toLowerCase().trim();
+    const isCorrect = fib.answers.some(a => a.toLowerCase() === userAnswer);
 
-            if (card.classList.contains('flipped')) {
-                q.style.display = 'none';
-                a.style.display = 'block';
-                hint.textContent = 'Click to hide';
+    result.classList.toggle('correct', isCorrect);
+    result.classList.toggle('incorrect', !isCorrect);
+    result.textContent = isCorrect ? 'Correct!' : `Correct answers: ${fib.answers.join(' / ')}`;
+}
+
+// ─── FLASHCARD DATA ───────────────────────────────────
+const flashcards = [
+    { q: "What is the pars tuberalis and what does it surround?", a: "Thin extension of anterior pituitary that wraps around the infundibular stalk. Contains some basophilic cells but no major hormone production. Primarily connects adenohypophysis to the stalk." },
+    { q: "What is the pars distalis and what hormones are secreted there?", a: "Largest part of anterior pituitary. Contains basophils (FSH/LH gonadotropes, TSH thyrotropes, ACTH corticotropes) and acidophils (GH somatotropes, prolactin lactotropes)." },
+    { q: "What is the pars nervosa (neurohypophysis)?", a: "Posterior pituitary — consists of axonal terminals from hypothalamic neurons (SON and PVN). Does NOT secrete hormones; stores and releases ADH and oxytocin made in the hypothalamus." },
+    { q: "ADH and oxytocin are both 9-amino acid peptides. How do they differ?", a: "Differ by exactly 2 amino acids: ADH has arginine at position 8 and glycine at position 9; oxytocin has leucine at position 8 and glycine at position 9. Both C-terminally amidated." },
+    { q: "What are the two osmotic thresholds for ADH regulation, and which comes FIRST?", a: "ADH secretion begins at ~285 mOsm/kg. Thirst sensation begins at ~290-295 mOsm/kg. ADH is secreted FIRST at lower osmolality; thirst is a backup mechanism at higher osmolality." },
+    { q: "Name the circumventricular organs involved in posterior pituitary regulation.", a: "OVLT (osmoreceptor organ), SFO (angiotensin II detection), median eminence (RH/IH release), neurohypophysis (ADH/OT release). All have weak or absent BBB." },
+    { q: "What baroreceptor-mediated threshold triggers ADH release?", a: "ADH is released when blood volume drops by >8-10%. More sensitive than osmolarity for volume loss. Volume takes precedence over osmolarity in ADH regulation." },
+    { q: "Which ADH receptor (V1a vs V2) mediates vasoconstriction?", a: "V1a receptors (Gq-coupled) mediate vasoconstriction in vascular smooth muscle. V2 receptors (Gs-coupled) mediate water reabsorption in kidney collecting duct." },
+    { q: "Trace the V2 receptor signaling pathway that causes water reabsorption.", a: "V2 binds AVP → Gs → adenylyl cyclase → cAMP ↑ → PKA → AQP2 vesicles fuse to apical membrane → water reabsorption in collecting duct." },
+    { q: "Define central DI and how desmopressin treats it.", a: "Central DI = lack of ADH secretion (post-head trauma, pituitary surgery). HIGH plasma osmolality, LOW urine osmolality, LOW ADH. Desmopressin is V2-selective synthetic ADH; bypasses defective neurons." },
+    { q: "Define nephrogenic DI, explain the paradox, and describe treatment.", a: "Nephrogenic DI = kidney resistance to ADH (lithium, hypercalcemia). HIGH plasma osmolality, LOW urine osmolality, but HIGH ADH. Desmopressin doesn't work. Treatment: thiazides + low-Na diet." },
+    { q: "What is gestational DI? Why does it happen and what is the treatment?", a: "Third-trimester: placental vasopressinase enzyme degrades ADH. HIGH plasma osmolality, LOW urine osmolality, ADH appears normal but is functionally degraded. Desmopressin WORKS (resistant to vasopressinase)." },
+    { q: "What is SIADH and what are the typical lab findings?", a: "Inappropriate ADH secretion (lung cancer, CNS disease, drugs). Results in dilutional HYPOnatremia. LOW plasma osmolality, inappropriately HIGH urine osmolality, HIGH ADH." },
+    { q: "How do cold oropharyngeal receptors affect ADH secretion?", a: "Cold water on mouth/throat activates oropharyngeal receptors that INHIBIT ADH release. Counterintuitive but important: cold water suppresses ADH via vagal reflex." },
+    { q: "What is the Ferguson reflex and is it positive or negative feedback?", a: "Ferguson reflex = uterine contraction stimulates oxytocin release → MORE uterine contractions. POSITIVE FEEDBACK loop, self-amplifying until delivery." },
+    { q: "Why do oxytocin antagonists often fail in premature labor?", a: "Oxytocin receptor (OTR) expression increases throughout pregnancy (estrogen/progesterone regulation). By third trimester, massive OTR upregulation means antagonists cannot block all receptors." },
+    { q: "What is the mechanism of milk ejection reflex?", a: "Suckling → sensory afferent → hypothalamic oxytocin neurons → oxytocin released → binds myoepithelial cells around milk ducts → contraction → milk ejection." },
+    { q: "Define galactogogue and name the most common one.", a: "Galactogogue = substance that promotes milk production/lactation. Oxytocin is THE galactogogue — stimulates milk synthesis and ejection." },
+    { q: "What is the role of oxytocin V1a receptors in pair bonding?", a: "In prairie voles, oxytocin V1a receptors in nucleus accumbens and ventral prefrontal cortex mediate pair-bonding. Blocking V1a prevents partner preference formation." },
+    { q: "How does stress-induced amenorrhea relate to GnIH and oxytocin?", a: "Chronic stress activates GnIH secretion → suppresses GnRH pulsatility → stops LH/FSH → amenorrhea. Marathon training and eating disorders exemplify this." },
+    { q: "What is Sheehan syndrome and what hormonal pattern is typical?", a: "Postpartum pituitary necrosis from massive hemorrhage. Loss of anterior pituitary. Labs: LOW FSH/LH, LOW TSH, LOW ACTH, but NORMAL or HIGH prolactin (loss of dopamine inhibition)." },
+    { q: "What is beer potomania and how does it cause hyponatremia?", a: "Excessive beer drinking = huge free water load, minimal solutes. Overwhelms ADH suppression → water intoxication → dilutional hyponatremia. Different from SIADH (ADH appropriately suppressed)." },
+    { q: "How would you differentiate the five causes of polyuria/polydipsia?", a: "Central DI: ↑Posm ↓Uosm ↓ADH desmopressin-responsive; Nephrogenic DI: ↑Posm ↓Uosm ↑ADH desmopressin-resistant; Psychogenic: ↓Posm ↑Uosm ↓ADH; SIADH: ↓Posm ↑Uosm ↑ADH; Gestational: ↑Posm ↓Uosm ↓ADH vasopressinase." },
+    { q: "How do you treat SIADH? What are the three modalities?", a: "1) Fluid restriction (first-line). 2) Hypertonic saline (3%) in severe symptomatic hyponatremia. 3) Vaptans (V2 antagonists) allowing free water excretion. Remove underlying cause." },
+];
+
+// ─── MCQ DATA ─────────────────────────────────────────
+const mcqs = [
+    {
+        stem: "A 45-year-old patient presents with polyuria (4 L/day) and polydipsia. Labs: Plasma osmolality 310 mOsm/kg, urine osmolality 210 mOsm/kg, ADH level 1.2 pg/mL (normal 2-8). Which diagnosis is MOST likely?",
+        options: ["Nephrogenic diabetes insipidus", "SIADH", "Central diabetes insipidus", "Psychogenic polydipsia", "Gestational diabetes insipidus"],
+        correct: 2,
+        explanations: [
+            "In nephrogenic DI, ADH would be HIGH (kidney not responding). Here ADH is low.",
+            "SIADH causes dilutional hyponatremia with LOW plasma osmolality, not high.",
+            "CORRECT. Central DI: high plasma osmolality, low urine osmolality, LOW ADH. Desmopressin would restore water reabsorption.",
+            "Psychogenic polydipsia causes LOW plasma osmolality from overdrinking.",
+            "Gestational DI is third-trimester only."
+        ]
+    },
+    {
+        stem: "A 62-year-old man with small-cell lung cancer develops hyponatremia (Na 118 mEq/L). Plasma osmolality is 245 mOsm/kg (LOW), and urine osmolality is 580 mOsm/kg (inappropriately HIGH). Serum ADH is markedly elevated at 25 pg/mL. What is the pathophysiology?",
+        options: ["Central DI from pituitary metastasis", "Nephrogenic DI from tumor toxins", "SIADH from ectopic ADH secretion by lung cancer", "Psychogenic polydipsia", "Hypovolemia-induced ADH secretion"],
+        correct: 2,
+        explanations: [
+            "Central DI causes high plasma osmolality and low urine osmolality.",
+            "Nephrogenic DI would show high plasma osmolality.",
+            "CORRECT. SIADH from ectopic ADH. Dilutional hyponatremia, LOW plasma osmolality, inappropriately HIGH urine osmolality, markedly elevated ADH.",
+            "Psychogenic polydipsia causes low plasma osmolality but ADH would be suppressed.",
+            "Hypovolemia-induced ADH would be appropriate, not inappropriate."
+        ]
+    },
+    {
+        stem: "Which receptor subtype mediates water reabsorption in the kidney collecting duct?",
+        options: ["V1a receptors (Gq-coupled)", "V2 receptors (Gs-coupled)", "Oxytocin receptors", "V1b receptors", "Alpha-2 adrenergic receptors"],
+        correct: 1,
+        explanations: [
+            "V1a receptors are Gq-coupled and cause vasoconstriction.",
+            "CORRECT. V2 receptors are Gs-coupled on kidney collecting duct principal cells. ADH binding → Gs → cAMP ↑ → PKA → AQP2 vesicle fusion → water reabsorption.",
+            "Oxytocin receptors are involved in lactation and uterine contraction.",
+            "V1b receptors are in anterior pituitary and adrenal cortex.",
+            "Alpha-2 adrenergic receptors are not involved in ADH-mediated water reabsorption."
+        ]
+    },
+    {
+        stem: "A 28-year-old woman on lithium therapy develops polyuria (3.5 L/day) and polydipsia. Labs: Plasma osmolality 305 mOsm/kg (HIGH), urine osmolality 150 mOsm/kg (LOW), serum ADH 8.5 pg/mL (HIGH). Desmopressin challenge does NOT improve urine osmolality. What is the diagnosis?",
+        options: ["Central DI responsive to desmopressin", "Psychogenic polydipsia", "Nephrogenic DI from lithium toxicity", "SIADH", "Gestational DI"],
+        correct: 2,
+        explanations: [
+            "Central DI shows low ADH and DOES respond to desmopressin.",
+            "Psychogenic polydipsia causes low plasma osmolality.",
+            "CORRECT. Lithium causes nephrogenic DI. HIGH plasma osmolality, LOW urine osmolality, HIGH ADH, desmopressin-RESISTANT. Treatment: thiazides + low-Na diet.",
+            "SIADH causes low plasma osmolality.",
+            "Gestational DI occurs in pregnancy."
+        ]
+    },
+    {
+        stem: "At what plasma osmolality threshold does ADH secretion BEGIN, and at what osmolality does thirst BEGIN?",
+        options: ["ADH at 290, thirst at 285 mOsm/kg", "ADH at 285, thirst at 290-295 mOsm/kg", "Both at 290 mOsm/kg simultaneously", "ADH at 295, thirst at 280 mOsm/kg", "Thirst begins before ADH secretion always"],
+        correct: 1,
+        explanations: [
+            "This is backwards — ADH comes FIRST.",
+            "CORRECT. ADH secretion threshold is ~285 mOsm/kg. Thirst threshold is ~290-295 mOsm/kg (5-10 mOsm/kg HIGHER). ADH is sensitive and acts first.",
+            "They don't activate simultaneously.",
+            "ADH threshold is lower.",
+            "ADH is definitely more sensitive."
+        ]
+    },
+    {
+        stem: "A patient drinks a large volume of ice-cold water. What happens to ADH secretion IMMEDIATELY?",
+        options: ["ADH increases due to osmotic dilution", "ADH decreases due to oropharyngeal cold receptors", "ADH is unaffected", "ADH increases then rapidly decreases", "Thirst is triggered but ADH is unchanged"],
+        correct: 1,
+        explanations: [
+            "Osmotic dilution takes time; the acute effect is the cold reflex.",
+            "CORRECT. Cold water on oropharynx activates cold receptors that INHIBIT ADH. Counterintuitive: cold water suppresses ADH via vagal afferents.",
+            "Cold oropharyngeal stimulation has a real effect.",
+            "No rapid oscillation with cold water.",
+            "ADH is definitely affected by the cold reflex."
+        ]
+    },
+    {
+        stem: "During active labor, uterine contractions trigger oxytocin release. This oxytocin then causes MORE uterine contractions. Is this feedback positive or negative?",
+        options: ["Negative feedback; baroreceptor reflex", "Positive feedback; Ferguson reflex", "Negative feedback; Ferguson reflex", "Positive feedback; suckling reflex", "Neither — it is neutral feedback"],
+        correct: 1,
+        explanations: [
+            "Wrong loop name and type.",
+            "CORRECT. Ferguson reflex = contraction → oxytocin → more contraction. Self-amplifying = POSITIVE feedback. Only positive feedback loop in hypothalamic-pituitary physiology.",
+            "Ferguson reflex is positive.",
+            "Suckling reflex is positive but controls milk letdown.",
+            "It is definitely positive feedback."
+        ]
+    },
+    {
+        stem: "A 32-year-old woman at 32 weeks gestation develops polyuria and polydipsia. Labs: Plasma osmolality 308 mOsm/kg, urine osmolality 180 mOsm/kg. A desmopressin challenge restores urine osmolality to 520 mOsm/kg. Which diagnosis fits?",
+        options: ["Nephrogenic DI (lithium-induced)", "Psychogenic polydipsia", "Gestational DI responsive to desmopressin", "SIADH", "Central DI from pituitary tumor"],
+        correct: 2,
+        explanations: [
+            "Lithium-induced DI is desmopressin-RESISTANT.",
+            "Psychogenic polydipsia causes low plasma osmolality.",
+            "CORRECT. Gestational DI from placental vasopressinase. HIGH plasma osmolality, LOW urine osmolality. DESMOPRESSIN WORKS (resistant to vasopressinase). Resolves postpartum.",
+            "SIADH causes low plasma osmolality.",
+            "Pituitary tumors are rare in pregnancy."
+        ]
+    },
+    {
+        stem: "Which statement CORRECTLY describes the osmotic thresholds?",
+        options: ["Thirst is triggered at LOWER osmolality than ADH", "ADH and thirst thresholds are identical", "ADH at ~285 mOsm/kg; thirst at ~290-295 mOsm/kg", "ADH is triggered only AFTER thirst is triggered", "Neither ADH nor thirst depends on plasma osmolality"],
+        correct: 2,
+        explanations: [
+            "This is backwards.",
+            "Different thresholds.",
+            "CORRECT. ADH starts at ~285 mOsm/kg, thirst at ~290-295 mOsm/kg. ADH is primary; thirst is backup.",
+            "ADH is triggered FIRST.",
+            "Both are osmolality-dependent."
+        ]
+    },
+    {
+        stem: "A 40-year-old man develops acute head trauma with skull fracture. Three days later, polyuria (5 L/day), severe hypernatremia (Na 158 mEq/L), plasma osmolality 330 mOsm/kg, urine osmolality 95 mOsm/kg, ADH <0.5 pg/mL. Desmopressin restores urine osmolality to 450 mOsm/kg. What is the diagnosis?",
+        options: ["Nephrogenic DI", "SIADH", "Psychogenic polydipsia", "Central DI from hypothalamic/pituitary injury", "Gestational DI"],
+        correct: 3,
+        explanations: [
+            "Nephrogenic DI shows high ADH and desmopressin resistance.",
+            "SIADH causes hyponatremia.",
+            "Psychogenic polydipsia causes low plasma osmolality.",
+            "CORRECT. Head trauma → hypothalamic/pituitary injury → loss of ADH. HIGH plasma osmolality, LOW ADH, DESMOPRESSIN-RESPONSIVE. Classic post-traumatic presentation.",
+            "Gestational DI is in pregnancy only."
+        ]
+    },
+    {
+        stem: "Which statement about oxytocin and ADH is TRUE?",
+        options: ["Both are nonapeptides (9-amino acids) differing by 2 amino acids", "Both are made by the anterior pituitary", "Oxytocin V1a receptors mediate pair-bonding in prairie voles", "Both cause vasoconstriction", "Desmopressin is V1a-selective"],
+        correct: 0,
+        explanations: [
+            "CORRECT. Both are 9-amino acid peptides, C-terminally amidated, differing at only 2 positions.",
+            "Both are made by the HYPOTHALAMUS, stored/released by posterior pituitary.",
+            "Oxytocin receptors (not V1a) mediate pair-bonding.",
+            "ADH (V1a) causes vasoconstriction; oxytocin does not.",
+            "Desmopressin is V2-SELECTIVE."
+        ]
+    }
+];
+
+// ─── VIGNETTE DATA ────────────────────────────────────
+const vignettes = [
+    {
+        banner: "Clinical Vignette | Post-Traumatic Central DI",
+        stem: `A 36-year-old man admitted after <strong>severe head trauma</strong>. CT shows diffuse axonal injury and brainstem hemorrhages. By hospital day 2: <strong>massive urine output (6 L/day)</strong>, patient requests water constantly. Labs: Na 155 mEq/L (HIGH), plasma osmolality 335 mOsm/kg (HIGH), urine osmolality 95 mOsm/kg (LOW), serum ADH <0.5 pg/mL (LOW/absent).`,
+        question: "What is the MOST LIKELY diagnosis and appropriate initial treatment?",
+        options: ["Nephrogenic DI; treat with thiazides", "Central DI from hypothalamic injury; treat with desmopressin", "SIADH; fluid restrict", "Psychogenic polydipsia; psychiatric consult", "Gestational DI; desmopressin challenge"],
+        correct: 1
+    },
+    {
+        banner: "Clinical Vignette | Lithium-Induced Nephrogenic DI",
+        stem: `A 52-year-old woman on <strong>stable lithium 900 mg daily for 8 years</strong> presents with <strong>persistent polyuria (4.5 L/day) and polydipsia</strong>. Labs: Serum lithium 0.8 mEq/L (therapeutic), Na 142 mEq/L, plasma osmolality 305 mOsm/kg (HIGH), urine osmolality 155 mOsm/kg (LOW), serum ADH 7.2 pg/mL (normal/high).`,
+        question: "Why does a desmopressin challenge FAIL to improve urine osmolality?",
+        options: ["ADH is already maximally suppressed", "Patient has psychogenic polydipsia", "Lithium has damaged kidney's V2 receptor pathway", "Patient is in early SIADH", "Hypothalamus is damaged and can't produce ADH"],
+        correct: 2
+    },
+    {
+        banner: "Clinical Vignette | SIADH from Lung Cancer",
+        stem: `A 68-year-old male smoker with <strong>new small-cell lung cancer</strong> presents with confusion and mild seizures. Labs: Na 118 mEq/L (severely LOW), plasma osmolality 245 mOsm/kg (LOW), urine osmolality 680 mOsm/kg (HIGH), serum ADH 22 pg/mL (HIGH despite low osmolality). Euvolemic.`,
+        question: "What is happening and what is the IMMEDIATE treatment?",
+        options: ["Central DI; give desmopressin", "Nephrogenic DI; give thiazides", "SIADH with severe symptomatic hyponatremia; give 3% hypertonic saline slowly", "Psychogenic polydipsia; fluid restrict", "Hypervolemia; give loop diuretic + saline"],
+        correct: 2
+    },
+    {
+        banner: "Clinical Vignette | Gestational DI",
+        stem: `A 28-year-old G2P0 woman at <strong>34 weeks gestation</strong> develops polyuria (3.8 L/day) and polydipsia. Non-stressed fetus is reassuring. Labs: Plasma osmolality 312 mOsm/kg (HIGH), urine osmolality 210 mOsm/kg (LOW), serum ADH ~3.5 pg/mL (near-normal). Desmopressin improves urine osmolality to 480 mOsm/kg.`,
+        question: "What mechanism explains normal/near-normal ADH levels causing polyuria?",
+        options: ["Kidneys are resistant to ADH (V2 mutation)", "Placental vasopressinase is degrading circulating ADH", "Patient has gestational diabetes mellitus", "SIADH from pregnancy", "Hypothalamus is failing to produce adequate ADH"],
+        correct: 1
+    },
+    {
+        banner: "Clinical Vignette | Labor and Ferguson Reflex",
+        stem: `A 35-year-old G3P2 woman at term presents in <strong>weak, irregular labor</strong> (cervix 3 cm, contractions every 8-12 min). OB team augments labor with <strong>IV oxytocin</strong>. Within 2 hours: strong regular contractions (every 3 min), full cervical dilation, spontaneous vaginal delivery 1 hour later.`,
+        question: "What positive feedback mechanism allowed oxytocin to be effective?",
+        options: ["Negative feedback from progesterone suppresses oxytocin", "Ferguson reflex: contractions → oxytocin → stronger contractions", "V1a receptor upregulation in uterine muscle", "Oxytocin antagonist failure from desensitization", "Decreased sensitivity to oxytocin in early labor"],
+        correct: 1
+    },
+    {
+        banner: "Clinical Vignette | Oxytocin Antagonist Failure in Preterm Labor",
+        stem: `A 32-year-old G1 woman at <strong>28 weeks</strong> presents with <strong>preterm labor</strong> (every 5 min, cervix 2 cm). <strong>Oxytocin antagonist (atosiban)</strong> initiated. Contractions slow initially but by 6 hours resume their former intensity. Serum oxytocin is normal.`,
+        question: "Why do oxytocin antagonists often fail in late pregnancy?",
+        options: ["Antagonists don't cross the placenta", "Oxytocin receptor (OTR) is massively upregulated throughout pregnancy; too many receptors to fully block", "Hypothalamus downregulates oxytocin production in response", "Antagonists are rapidly metabolized", "Labor is not mediated by oxytocin"],
+        correct: 1
+    },
+    {
+        banner: "Clinical Vignette | Sheehan Syndrome",
+        stem: `A 34-year-old woman has uncomplicated vaginal delivery but experiences <strong>massive postpartum hemorrhage (>2.5 L)</strong> requiring transfusion/ICU. Two weeks postpartum: profound fatigue, inability to lactate, amenorrhea, decreased libido. Labs: TSH 0.8 (LOW), prolactin 1.2 (LOW), LH <0.5 (LOW), FSH 0.8 (LOW), ACTH 8 (LOW), cortisol 3 (LOW).`,
+        question: "What hormone axis is SPARED (relatively normal) in Sheehan syndrome?",
+        options: ["Thyroid axis (TSH)", "Gonadal axis (LH/FSH)", "Corticotropin axis (ACTH/cortisol)", "Posterior pituitary (ADH/oxytocin)", "Growth hormone axis"],
+        correct: 3
+    },
+    {
+        banner: "Clinical Vignette | Beer Potomania",
+        stem: `A 45-year-old male chronic beer drinker presents with <strong>altered mental status and seizures</strong>. Friends say he drank <strong>beer exclusively for 2 days</strong> (~8-10 liters/day). Labs: Na 112 mEq/L (severely LOW), plasma osmolality 235 mOsm/kg (LOW), urine osmolality 180 mOsm/kg (DILUTE), serum ADH 0.8 pg/mL (SUPPRESSED).`,
+        question: "Why is this patient hyponatremic despite SUPPRESSED ADH?",
+        options: ["SIADH from alcohol; ADH should be high", "Central DI; needs desmopressin", "Beer potomania: massive free water overwhelms ADH suppression; kidneys can't excrete fast enough", "Nephrogenic DI; kidneys resist ADH", "Gestational hyponatremia"],
+        correct: 2
+    },
+    {
+        banner: "Clinical Vignette | Hypernatremia Workup",
+        stem: `A patient presents with <strong>polyuria and polydipsia</strong>. Labs: Plasma Na 158 mEq/L (HIGH), plasma osmolality 328 mOsm/kg (HIGH), urine osmolality 185 mOsm/kg (LOW). <strong>Desmopressin challenge:</strong> urine osmolality rises to 510 mOsm/kg; symptoms improve.`,
+        question: "What is the MOST LIKELY diagnosis?",
+        options: ["Nephrogenic DI (desmopressin-resistant)", "Psychogenic polydipsia (desmopressin irrelevant)", "Central DI (desmopressin-RESPONSIVE)", "SIADH (paradoxical desmopressin effect)", "Gestational DI"],
+        correct: 2
+    },
+    {
+        banner: "Clinical Vignette | Stress-Induced Amenorrhea",
+        stem: `A 22-year-old female college athlete trains intensively (~100 miles/week running). Develops <strong>secondary amenorrhea for 3 months</strong> despite normal BMI (23), normal TSH, normal prolactin. FSH and LH both LOW (FSH 1.2, LH 0.9 mIU/L). Pelvic ultrasound: normal ovaries/uterus.`,
+        question: "What neuroendocrine mechanism causes amenorrhea in this athlete?",
+        options: ["Thyroid hormone deficiency suppressing GnRH", "Elevated prolactin from stress", "Exercise-induced GnRH suppression via GnIH and stress-related inhibition", "Polycystic ovary syndrome unmasked", "Pregnancy; false negative test"],
+        correct: 2
+    }
+];
+
+// ─── TRAP DATA ────────────────────────────────────────
+const traps = [
+    {
+        myth: "ADH secretion begins AFTER the thirst reflex is triggered.",
+        truth: "TRAP. ADH secretion ~285 mOsm/kg; thirst ~290-295 mOsm/kg. ADH comes FIRST, more sensitive. Thirst is backup."
+    },
+    {
+        myth: "In nephrogenic DI, serum ADH levels are LOW because kidneys won't reabsorb water.",
+        truth: "TRAP. ADH levels are HIGH. Kidneys resist ADH, so hypothalamus keeps secreting more. ADH elevated, not low."
+    },
+    {
+        myth: "SIADH causes hypernatremia due to excessive ADH secretion.",
+        truth: "TRAP. SIADH causes dilutional HYPOnatremia. Excess ADH → water reabsorption → dilutes serum Na."
+    },
+    {
+        myth: "V2 receptors on blood vessels cause vasoconstriction when ADH binds.",
+        truth: "TRAP. V1a receptors cause vasoconstriction (Gq). V2 receptors (kidney) cause water reabsorption (Gs). Different tissues, different functions."
+    },
+    {
+        myth: "Desmopressin is a V1a-selective ADH analog used to treat nephrogenic DI.",
+        truth: "TRAP. Desmopressin is V2-SELECTIVE. Used for CENTRAL DI (not nephrogenic). Nephrogenic DI is desmopressin-RESISTANT. Treat with thiazides."
+    },
+    {
+        myth: "Oxytocin and ADH have identical amino acid sequences because both are posterior pituitary hormones.",
+        truth: "TRAP. Both 9-AA peptides but differ by exactly 2 amino acids. Small difference → vastly different functions."
+    },
+    {
+        myth: "Drinking cold water INCREASES ADH secretion by osmotic stimulation.",
+        truth: "TRAP. Cold water on oropharynx activates cold receptors that INHIBIT ADH. Cold water suppresses ADH, not increases it."
+    },
+    {
+        myth: "In SIADH, urine osmolality is low and dilute because of excess water excretion.",
+        truth: "TRAP. SIADH shows inappropriately HIGH urine osmolality (concentrated). Excess water reabsorption, not excretion."
+    },
+    {
+        myth: "Oxytocin antagonists effectively prevent preterm labor when given early.",
+        truth: "TRAP. Oxytocin antagonists often fail due to massive OTR upregulation by late pregnancy. Tocolytics (nifedipine, indomethacin) are preferred."
+    },
+    {
+        myth: "Ferguson reflex is a negative feedback loop that prevents excessive uterine contractions.",
+        truth: "TRAP. Ferguson reflex is POSITIVE FEEDBACK: contraction → oxytocin → stronger contraction (self-amplifying). Unique among hypothalamic-pituitary axes."
+    }
+];
+
+// ─── FILL-IN-BLANK DATA ───────────────────────────────
+const fibs = [
+    { prompt: "ADH binds ________ receptors on kidney collecting duct principal cells, leading to cAMP production and AQP2 water channel insertion.", answers: ["V2", "V2 receptor"] },
+    { prompt: "The osmotic threshold for ADH secretion is approximately ________ mOsm/kg plasma osmolality.", answers: ["285", "~285", "285 mOsm/kg"] },
+    { prompt: "Central DI is treated with ________, a synthetic, V2-selective ADH analog resistant to enzymatic degradation.", answers: ["desmopressin", "DDAVP", "desmopressin (DDAVP)"] },
+    { prompt: "Nephrogenic DI is treated with ________ diuretics, which paradoxically increase proximal water reabsorption.", answers: ["thiazide", "thiazides"] },
+    { prompt: "The ________ is the thin extension of anterior pituitary that wraps around the infundibular stalk.", answers: ["pars tuberalis"] },
+    { prompt: "The ________ is the largest part of anterior pituitary and contains somatotropes (GH), lactotropes (prolactin), and basophils.", answers: ["pars distalis"] },
+    { prompt: "Oxytocin and ADH differ by exactly ________ amino acids at positions 8 and 9 of the 9-AA sequence.", answers: ["2", "two"] },
+    { prompt: "The ________ is a positive feedback loop in which uterine contraction stimulates oxytocin release, causing stronger contractions.", answers: ["Ferguson reflex"] },
+    { prompt: "In third-trimester pregnancy, placental ________ enzyme degrades circulating ADH, causing gestational DI.", answers: ["vasopressinase"] },
+    { prompt: "The ________ (osmoreceptor-sensing organ) detects plasma osmolality and helps regulate ADH secretion.", answers: ["OVLT", "organum vasculosum laminae terminalis"] }
+];
+
+// ─── ANKI MAP DATA ────────────────────────────
+const ankiCards = [
+    { id: 2, topic: "Oxytocin role in labor & milk ejection" },
+    { id: 6, topic: "ADH (vasopressin) mechanism & osmotic threshold" },
+    { id: 7, topic: "V1a vs V2 receptor subtypes & signaling" },
+    { id: 19, topic: "Prostaglandins PGE2/PGF2α stimulated by oxytocin" },
+    { id: 23, topic: "ADH 9-AA peptide structure; differs from OT by 2 AAs" },
+    { id: 24, topic: "Oxytocin 9-AA peptide; differs from ADH by 2 AAs" },
+    { id: 70, topic: "Osmotic threshold for thirst vs ADH" },
+    { id: 72, topic: "Central diabetes insipidus (DI) pathophysiology" },
+    { id: 73, topic: "Nephrogenic DI: V2 receptor resistance to ADH" },
+    { id: 74, topic: "Gestational DI from placental vasopressinase" },
+    { id: 75, topic: "SIADH: dilutional hyponatremia, inappropriate ADH" },
+    { id: 76, topic: "Desmopressin (DDAVP): V2-selective ADH analog" },
+    { id: 77, topic: "Central DI treatment: desmopressin IV/intranasal" },
+    { id: 78, topic: "Nephrogenic DI treatment: thiazides + low Na diet" },
+    { id: 79, topic: "SIADH treatment: fluid restriction, hypertonic saline, vaptans" },
+    { id: 80, topic: "Baroreceptor-mediated ADH release (>8-10% volume loss)" },
+    { id: 81, topic: "Cold oropharyngeal receptors INHIBIT ADH" },
+    { id: 82, topic: "Circumventricular organs: OVLT, SFO, median eminence" },
+    { id: 83, topic: "Pars tuberalis anatomy and location" },
+    { id: 84, topic: "Ferguson reflex: positive feedback in labor" },
+    { id: 85, topic: "Oxytocin receptor upregulation throughout pregnancy" },
+    { id: 86, topic: "Oxytocin antagonist failure due to OTR upregulation" },
+    { id: 87, topic: "Milk ejection reflex: suckling → oxytocin → contraction" },
+    { id: 88, topic: "Galactogogue definition; oxytocin as galactogogue" },
+    { id: 89, topic: "Oxytocin V1a receptors in prairie voles (pair bonding)" },
+    { id: 90, topic: "GnIH & stress-induced amenorrhea" },
+    { id: 91, topic: "Sheehan syndrome: postpartum pituitary necrosis" },
+    { id: 92, topic: "Beer potomania: free water intoxication vs SIADH" },
+    { id: 93, topic: "Hypernatremia workup: DI differential diagnosis" },
+    { id: 94, topic: "Hyponatremia differential: SIADH vs psychogenic vs beer potomania" },
+    { id: 95, topic: "Desmopressin challenge in DI diagnosis" },
+    { id: 96, topic: "Lithium-induced nephrogenic DI mechanism" },
+    { id: 97, topic: "Head trauma causing central DI" },
+    { id: 98, topic: "SIADH from small-cell lung cancer (ectopic ADH)" },
+    { id: 99, topic: "Atrial natriuretic peptide (ANP) inhibits ADH" },
+    { id: 106, topic: "Oxytocin in maternal-infant bonding" },
+    { id: 107, topic: "Oxytocin uterotonic effects in 3rd stage labor" },
+    { id: 108, topic: "Oxytocin in management of postpartum hemorrhage" },
+    { id: 109, topic: "Oxytocin toxicity: hyponatremia from SIADH-like effect" },
+    { id: 110, topic: "Oxytocin antagonists (atosiban) pharmacology" },
+    { id: 212, topic: "V1a receptor: Gq → IP3/DAG → vasoconstriction" },
+    { id: 213, topic: "V2 receptor: Gs → cAMP → PKA → AQP2 insertion" },
+    { id: 214, topic: "ADH synthesis in supraoptic & paraventricular nuclei" },
+    { id: 215, topic: "Oxytocin synthesis in supraoptic & paraventricular nuclei" },
+    { id: 216, topic: "ADH-neurophysin complex transport via fast axonal transport" },
+    { id: 217, topic: "Oxytocin-neurophysin complex transport via fast axonal transport" },
+    { id: 218, topic: "Axon terminals in pars nervosa release ADH & OT" },
+    { id: 219, topic: "C-terminal amidation of ADH & OT 9-AA peptides" },
+    { id: 220, topic: "ADH half-life ~10-20 minutes; rapid metabolism" },
+    { id: 221, topic: "Osmoreceptor neurons detect plasma osmolality change" },
+    { id: 222, topic: "Angiotensin II detection in SFO triggers thirst & ADH" },
+    { id: 223, topic: "Blood volume sensors (baroreceptors) in carotid/aorta" },
+    { id: 224, topic: "ADH suppression by increased plasma osmolality" },
+    { id: 225, topic: "ADH suppression by alcohol (ethanol inhibits ADH release)" },
+    { id: 226, topic: "ADH stimulation by pain, nausea, hypoglycemia" },
+    { id: 227, topic: "Aquaporin-2 (AQP2) water channel insertion by ADH" },
+    { id: 228, topic: "Aquaporin-3 (AQP3) constitutive in kidney basolateral membrane" },
+    { id: 229, topic: "Collecting duct principal cells as ADH targets" },
+    { id: 230, topic: "Lithium blocks IP3 signaling in some tissues" },
+    { id: 231, topic: "Hypercalcemia causes nephrogenic DI" },
+    { id: 232, topic: "NSAIDs inhibit prostaglandin synthesis → reduce DI symptoms" },
+    { id: 233, topic: "Thiazide diuretics cause mild dehydration → proximal reabsorption" },
+    { id: 234, topic: "Desmopressin resistance in nephrogenic DI" },
+    { id: 235, topic: "Vasopressinase in pregnancy placenta degrades ADH" },
+    { id: 236, topic: "Osmotic diuretics (mannitol, glucose) reduce water reabsorption" },
+    { id: 237, topic: "Hypokalemia & hypomagnesemia impair ADH action" },
+    { id: 238, topic: "Prostaglandin E1 (PGE1) antagonizes ADH in kidney" },
+    { id: 239, topic: "Nausea is a potent ADH stimulus (>osmolarity)" },
+    { id: 240, topic: "Hypoxia & hypercapnia stimulate ADH release" },
+    { id: 241, topic: "Atrial natriuretic peptide (ANP) opposes ADH" },
+    { id: 242, topic: "Angiotensin II stimulates both ADH & thirst" },
+    { id: 243, topic: "Estrogen enhances ADH sensitivity in kidneys" },
+    { id: 244, topic: "Cortisol suppresses ADH secretion (stress-induced ADH suppression)" },
+    { id: 245, topic: "V2 receptor mutations cause X-linked nephrogenic DI" },
+    { id: 246, topic: "AQP2 mutations cause autosomal nephrogenic DI" },
+    { id: 247, topic: "SIADH from carbamazepine, SSRIs, NSAIDs, opioids" },
+    { id: 248, topic: "SIADH from CNS disease: trauma, infection, hemorrhage" },
+    { id: 249, topic: "Vaptans (tolvaptan) in SIADH treatment: V2 antagonists" },
+    { id: 250, topic: "Hypotonic hyponatremia: SIADH, psychogenic, adrenal insufficiency" }
+];
+
+// ─── RENDER FUNCTIONS ───────────────────────────────
+function renderFlashcards() {
+    const fcGrid = document.getElementById('fcGrid');
+    fcGrid.innerHTML = '';
+    flashcards.forEach((fc, idx) => {
+        const card = document.createElement('div');
+        card.className = 'fc';
+        card.onclick = () => flipCard(card);
+        card.innerHTML = `
+            <div class="fc-inner">
+                <div class="fc-front">
+                    <div class="fc-label">Question</div>
+                    <div class="fc-q">${fc.q}</div>
+                    <div class="fc-hint">Click to reveal</div>
+                </div>
+                <div class="fc-back">
+                    <div class="fc-label">Answer</div>
+                    <div class="fc-a">${fc.a}</div>
+                </div>
+            </div>
+        `;
+        fcGrid.appendChild(card);
+    });
+}
+
+function renderMCQ() {
+    const container = document.getElementById('mcqContainer');
+    container.innerHTML = '';
+    mcqs.forEach((mcq, idx) => {
+        const mcqDiv = document.createElement('div');
+        mcqDiv.className = 'mcq-item';
+        let optionsHTML = '';
+        const letters = ['A', 'B', 'C', 'D', 'E'];
+        mcq.options.forEach((opt, oIdx) => {
+            optionsHTML += `
+                <div class="mcq-opt" onclick="selectMCQ(${idx}, ${oIdx})">
+                    <span class="letter">${letters[oIdx]}.</span>
+                    <span>${opt}</span>
+                </div>
+                <div class="mcq-explanation" id="mcq-exp-${idx}-${oIdx}">
+                    <div class="exp-label">Explanation:</div>
+                    ${mcq.explanations[oIdx]}
+                </div>
+            `;
+        });
+        mcqDiv.innerHTML = `
+            <div class="mcq-num">Question ${idx + 1} of ${mcqs.length}</div>
+            <div class="mcq-stem">${mcq.stem}</div>
+            <div class="mcq-options">${optionsHTML}</div>
+        `;
+        container.appendChild(mcqDiv);
+    });
+}
+
+function selectMCQ(idx, oIdx) {
+    const mcq = mcqs[idx];
+    const items = document.querySelectorAll('.mcq-item');
+    const currentItem = items[idx];
+    const opts = currentItem.querySelectorAll('.mcq-opt');
+    opts.forEach((opt, i) => {
+        if (i === oIdx) {
+            opt.classList.add('revealed');
+            if (i === mcq.correct) {
+                opt.classList.add('correct');
             } else {
-                q.style.display = 'block';
-                a.style.display = 'none';
-                hint.textContent = 'Click to reveal answer';
+                opt.classList.add('wrong');
             }
+            document.getElementById(`mcq-exp-${idx}-${i}`).classList.add('visible');
         }
+    });
+}
 
-        function selectMCQ(element, correctness) {
-            const mcqItem = element.closest('.mcq-item');
-            mcqItem.querySelectorAll('.mcq-opt').forEach(opt => opt.classList.add('revealed'));
-            const explanation = mcqItem.querySelector('.mcq-explanation');
-            if (correctness === 'correct') {
-                element.classList.add('correct');
+function renderVignettes() {
+    const container = document.getElementById('vigContainer');
+    container.innerHTML = '';
+    vignettes.forEach((vig, idx) => {
+        const vigDiv = document.createElement('div');
+        vigDiv.className = 'vig-item';
+        let optionsHTML = '';
+        vig.options.forEach((opt, oIdx) => {
+            optionsHTML += `
+                <div class="vig-opt" onclick="selectVig(${idx}, ${oIdx})">
+                    ${opt}
+                </div>
+            `;
+        });
+        vigDiv.innerHTML = `
+            <div class="vig-banner">${vig.banner}</div>
+            <div class="vig-stem">${vig.stem}</div>
+            <div style="font-size: 0.9em; color: var(--accent); font-weight: 700; margin: 14px 0 10px 0;">Question:</div>
+            <div class="vig-stem">${vig.question}</div>
+            <div class="vig-opts">${optionsHTML}</div>
+            <div id="vig-exp-${idx}" style="display: none; margin-top: 14px;">
+                <div style="background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #D1FAE5;"><div style="font-weight: 700; color: #4ADE80; margin-bottom: 4px;">Explanation:</div><span id="vig-exp-text-${idx}"></span></div>
+            </div>
+        `;
+        container.appendChild(vigDiv);
+    });
+}
+
+function selectVig(idx, oIdx) {
+    const vig = vignettes[idx];
+    const items = document.querySelectorAll('.vig-item');
+    const currentItem = items[idx];
+    const opts = currentItem.querySelectorAll('.vig-opt');
+    opts.forEach((opt, i) => {
+        if (i === oIdx) {
+            if (i === vig.correct) {
+                opt.classList.add('correct');
             } else {
-                element.classList.add('wrong');
+                opt.classList.add('wrong');
             }
-            explanation.classList.add('visible');
+            document.getElementById(`vig-exp-${idx}`).style.display = 'block';
+            document.getElementById(`vig-exp-text-${idx}`).textContent = vig.correct === i ? 'CORRECT' : 'INCORRECT';
         }
+    });
+}
 
-        function checkFIB(inputId, acceptedAnswers, explanation) {
-            const input = document.getElementById(inputId);
-            const resultDiv = document.getElementById(inputId + '-result');
-            const userAnswer = input.value.toLowerCase().trim();
-            const isCorrect = acceptedAnswers.some(answer => userAnswer.includes(answer.toLowerCase()));
+function renderTraps() {
+    const container = document.getElementById('trapsContainer');
+    container.innerHTML = '';
+    traps.forEach((trap, idx) => {
+        const trapDiv = document.createElement('div');
+        trapDiv.className = 'trap-item';
+        trapDiv.id = `trap-${idx}`;
+        trapDiv.setAttribute('data-scored', 'false');
+        trapDiv.innerHTML = `
+            <div class="trap-header">TRAP #${idx + 1}</div>
+            <div class="trap-buttons">
+                <button class="trap-btn" onclick="checkTrap(${idx}, false)">TRUE</button>
+                <button class="trap-btn" onclick="checkTrap(${idx}, true)">FALSE</button>
+            </div>
+            <div class="trap-myth" id="trap-myth-${idx}">
+                <div class="trap-myth-label">STATEMENT (FALSE):</div>
+                ${trap.myth}
+            </div>
+            <div class="trap-truth" id="trap-truth-${idx}">
+                <div class="trap-truth-label">CORRECT ANSWER:</div>
+                ${trap.truth}
+            </div>
+        `;
+        container.appendChild(trapDiv);
+    });
+}
 
-            if (isCorrect) {
-                resultDiv.classList.remove('incorrect');
-                resultDiv.classList.add('correct');
-                resultDiv.innerHTML = '✓ Correct! ' + explanation;
-            } else {
-                resultDiv.classList.remove('correct');
-                resultDiv.classList.add('incorrect');
-                resultDiv.innerHTML = '✗ Try again! Expected: ' + acceptedAnswers.join(' or ');
-            }
-        }
-    </script>
+function renderFIB() {
+    const container = document.getElementById('fibContainer');
+    container.innerHTML = '';
+    fibs.forEach((fib, idx) => {
+        const fibDiv = document.createElement('div');
+        fibDiv.className = 'fib-item';
+        fibDiv.id = `fib-${idx}`;
+        fibDiv.innerHTML = `
+            <div class="fib-prompt">${fib.prompt}</div>
+            <input class="fib-input" type="text" placeholder="Type your answer..." />
+            <button class="fib-btn" onclick="checkFIB(${idx}, event)">Check Answer</button>
+            <div class="fib-result"></div>
+        `;
+        container.appendChild(fibDiv);
+    });
+}
+
+function renderDrill() {
+    const container = document.getElementById('drillContainer');
+    container.innerHTML = `
+        <div class="drill-section">
+            <div class="drill-title">TYPE 1: DI Differential Matcher</div>
+            <div class="drill-item">
+                <div class="drill-prompt"><strong>Scenario:</strong> Plasma osmolality ↑310, urine osmolality ↓120, ADH ↓1.2 → Desmopressin responsive</div>
+                <div class="drill-prompt" style="margin-bottom: 14px; color: #9CA3AF;">Select diagnosis:</div>
+                <div class="matcher-grid">
+                    <div class="matcher-opt" onclick="this.classList.toggle('selected')">Central DI</div>
+                    <div class="matcher-opt" onclick="this.classList.toggle('selected')">Nephrogenic DI</div>
+                    <div class="matcher-opt" onclick="this.classList.toggle('selected')">Psychogenic</div>
+                    <div class="matcher-opt" onclick="this.classList.toggle('selected')">SIADH</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="drill-section">
+            <div class="drill-title">TYPE 2: V2 Receptor Signaling Pathway</div>
+            <div class="drill-item">
+                <div class="drill-prompt">Correct sequence:</div>
+                <div style="display: grid; gap: 8px; color: #9CA3AF; font-size: 0.88em;">
+                    <div>1. V2 receptor binds AVP</div>
+                    <div>2. Gs protein activation</div>
+                    <div>3. Adenylyl cyclase → cAMP↑</div>
+                    <div>4. PKA activation</div>
+                    <div>5. AQP2 vesicle fusion to apical membrane</div>
+                    <div>6. Water reabsorption in collecting duct</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="drill-section">
+            <div class="drill-title">TYPE 3: Pituitary Anatomy Matcher</div>
+            <div class="drill-item">
+                <div style="display: grid; gap: 8px; font-size: 0.88em;">
+                    <div style="background: #1C2128; padding: 10px; border-radius: 6px;"><span style="color: var(--accent); font-weight: 700;">Pars tuberalis</span> → surrounds infundibular stalk</div>
+                    <div style="background: #1C2128; padding: 10px; border-radius: 6px;"><span style="color: var(--accent); font-weight: 700;">Pars distalis</span> → largest part; basophils & acidophils</div>
+                    <div style="background: #1C2128; padding: 10px; border-radius: 6px;"><span style="color: var(--accent); font-weight: 700;">Pars nervosa</span> → axon terminals from SON/PVN</div>
+                    <div style="background: #1C2128; padding: 10px; border-radius: 6px;"><span style="color: var(--accent); font-weight: 700;">OVLT</span> → osmoreceptor organ</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="drill-section">
+            <div class="drill-title">TYPE 4: Treatment Matcher</div>
+            <div class="drill-item">
+                <div style="display: grid; gap: 8px; font-size: 0.88em;">
+                    <div style="background: #1C2128; padding: 10px; border-radius: 6px;"><span style="color: var(--accent); font-weight: 700;">Central DI</span> → Desmopressin (DDAVP)</div>
+                    <div style="background: #1C2128; padding: 10px; border-radius: 6px;"><span style="color: var(--accent); font-weight: 700;">Nephrogenic DI</span> → Thiazides + low-Na diet</div>
+                    <div style="background: #1C2128; padding: 10px; border-radius: 6px;"><span style="color: var(--accent); font-weight: 700;">Gestational DI</span> → Desmopressin</div>
+                    <div style="background: #1C2128; padding: 10px; border-radius: 6px;"><span style="color: var(--accent); font-weight: 700;">SIADH</span> → Fluid restriction ± saline ± vaptans</div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function renderAnki() {
+    const container = document.getElementById('ankiContainer');
+    let html = `
+        <table class="ref-table">
+            <thead>
+                <tr>
+                    <th>Card ID</th>
+                    <th>Core Topic</th>
+                    <th>FC ✓</th>
+                    <th>MCQ ✓</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    ankiCards.forEach(card => {
+        html += `
+            <tr>
+                <td class="hl">#${card.id}</td>
+                <td>${card.topic}</td>
+                <td>Yes</td>
+                <td>Yes</td>
+            </tr>
+        `;
+    });
+    html += `
+            </tbody>
+        </table>
+        <div style="background: #161B22; border: 1px solid #30363D; border-radius: 8px; padding: 14px; font-size: 0.88em; color: #9CA3AF;">
+            <strong style="color: var(--accent);">Total:</strong> 80 Anki cards mapped to L4 Posterior Pituitary Hormones. All covered in Flashcards and MCQ sections.
+        </div>
+    `;
+    container.innerHTML = html;
+}
+
+// ─── INITIALIZE ───────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+    renderFlashcards();
+    renderMCQ();
+    renderVignettes();
+    renderTraps();
+    renderFIB();
+    renderDrill();
+    renderAnki();
+});
+</script>
 </body>
 </html>

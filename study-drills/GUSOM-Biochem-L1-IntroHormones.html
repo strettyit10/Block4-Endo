@@ -3,32 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GUSOM Biochem L1: Introduction to Hormone Action</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Biochem L1: Introduction to Hormone Action</title>
     <style>
         :root { --accent: #1565C0; --accent-dark: #0D47A1; --accent-light: rgba(21,101,192,0.15); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
-        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
-        .header .back:hover { color: var(--accent); }
         .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
         .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
-        .header .accent-tag { color: var(--accent); font-weight: 600; }
-
         .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
-        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn { padding: 9px 16px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; white-space: nowrap; }
         .tab-btn:hover { background: #30363D; color: var(--accent); }
         .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
         .tab-content { display: none; animation: fadeIn 0.25s ease; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* FLASHCARDS */
-        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
         .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
         .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
         .fc.flipped .fc-inner { transform: rotateY(180deg); }
@@ -40,909 +31,302 @@
         .fc-back .fc-label { color: #4ADE80; }
         .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
         .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
-        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
-
-        /* MCQ */
-        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
-        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
-        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
-        .mcq-stem strong { color: #FCD34D; }
-        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
-        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
-        .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
-        .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
-        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
-        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
-        .mcq-explanation.visible { display: block; }
-        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
-        .teaching-pt { background: rgba(21,101,192,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #C7D2FE; display: none; }
-        .teaching-pt.visible { display: block; }
-        .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
-
-        /* VIGNETTES */
-        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
-        .vig-banner { background: rgba(21,101,192,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #C7D2FE; font-weight: 600; margin-bottom: 14px; }
-        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
-        .vig-stem strong { color: #FCD34D; }
-
-        /* TEST TRAPS */
-        .trap-item { background: #1A1212; border: 1px solid #7F1D1D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
-        .trap-header { color: #FCA5A5; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; }
-        .trap-myth { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #FCA5A5; margin-bottom: 8px; }
-        .trap-truth { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D1FAE5; }
-        .trap-myth-label { font-size: 0.75em; color: #EF4444; font-weight: 700; margin-bottom: 4px; }
-        .trap-truth-label { font-size: 0.75em; color: #4ADE80; font-weight: 700; margin-bottom: 4px; }
-
-        /* FILL-IN-BLANK */
-        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
-        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
-        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
-        .fib-input:focus { outline: none; border-color: var(--accent); }
-        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
-        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
-        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
-        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
-
-        /* REF TABLE */
-        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
-        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
-        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
-        .ref-table tr:nth-child(even) td { background: #161B22; }
-        .ref-table tr:nth-child(odd) td { background: #1C2128; }
-        .ref-table td.hl { color: var(--accent); font-weight: 600; }
-        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
-        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
-
-        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .mcq-q { color: #E6EDF3; font-weight: 600; margin-bottom: 14px; font-size: 1em; }
+        .mcq-opts { display: flex; flex-direction: column; gap: 8px; }
+        .mcq-opt { background: #1C2128; border: 1px solid #30363D; border-radius: 6px; padding: 12px 16px; cursor: pointer; transition: all 0.2s; color: #8B949E; }
+        .mcq-opt:hover { background: #30363D; color: var(--accent); border-color: var(--accent); }
+        .mcq-opt.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .mcq-opt.correct { background: #2d5a2d; color: #4ADE80; border-color: #4ADE80; }
+        .mcq-opt.incorrect { background: #5a2d2d; color: #ff6b6b; border-color: #ff6b6b; }
+        .mcq-explain { background: #1A1F2E; border-left: 3px solid var(--accent); padding: 14px; margin-top: 14px; border-radius: 4px; font-size: 0.9em; color: #D1D5DB; display: none; }
+        .mcq-explain.show { display: block; }
+        .teach-point { background: rgba(21,101,192,0.1); border-left: 3px solid var(--accent); padding: 10px; margin-top: 10px; border-radius: 4px; font-size: 0.85em; color: #B0E0FF; font-weight: 500; }
+        .vignette { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .vig-stem { background: #1A1F2E; border-left: 3px solid var(--accent); padding: 14px; border-radius: 4px; margin-bottom: 14px; color: #E6EDF3; font-size: 0.95em; line-height: 1.6; }
+        .vig-stem strong { color: var(--accent); }
+        .trap-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .trap-statement { color: #E6EDF3; font-size: 1em; margin-bottom: 14px; font-weight: 500; line-height: 1.5; }
+        .trap-buttons { display: flex; gap: 10px; }
+        .trap-btn { padding: 10px 16px; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.9em; }
+        .trap-btn-correct { background: #1C2128; color: #4ADE80; border-color: #4ADE80; }
+        .trap-btn-trap { background: #1C2128; color: #ff6b6b; border-color: #ff6b6b; }
+        .trap-btn:hover { background: #30363D; }
+        .trap-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .trap-result { margin-top: 12px; padding: 12px; border-radius: 6px; font-size: 0.9em; display: none; }
+        .trap-result.show { display: block; }
+        .trap-result.correct-choice { background: rgba(74,222,128,0.1); border: 1px solid #4ADE80; color: #4ADE80; }
+        .trap-result.wrong-choice { background: rgba(255,107,107,0.1); border: 1px solid #ff6b6b; color: #ff6b6b; }
+        .trap-explain { margin-top: 10px; color: #D1D5DB; font-size: 0.85em; }
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .fib-q { color: #E6EDF3; font-size: 0.95em; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input-wrapper { display: flex; gap: 8px; margin-bottom: 10px; }
+        .fib-input { background: #1C2128; border: 1px solid #30363D; border-radius: 6px; padding: 10px 12px; color: #E6EDF3; flex: 1; }
+        .fib-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(21,101,192,0.2); }
+        .fib-btn { padding: 10px 16px; background: var(--accent); color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .fib-btn:hover { background: var(--accent-dark); }
+        .fib-feedback { margin-top: 10px; padding: 10px; border-radius: 6px; font-size: 0.9em; display: none; }
+        .fib-feedback.show { display: block; }
+        .fib-feedback.correct { background: rgba(74,222,128,0.1); border: 1px solid #4ADE80; color: #4ADE80; }
+        .fib-feedback.incorrect { background: rgba(255,107,107,0.1); border: 1px solid #ff6b6b; color: #ff6b6b; }
+        .challenge-type { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .challenge-title { color: var(--accent); font-weight: 700; margin-bottom: 14px; font-size: 1.05em; }
+        .match-container { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .match-col { display: flex; flex-direction: column; gap: 8px; }
+        .match-col h4 { color: #9CA3AF; font-size: 0.85em; margin-bottom: 8px; text-transform: uppercase; }
+        .match-item { background: #1C2128; border: 2px solid #30363D; border-radius: 6px; padding: 12px; cursor: pointer; transition: all 0.2s; color: #E6EDF3; }
+        .match-item:hover { background: #30363D; border-color: var(--accent); }
+        .match-item.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .match-item.matched { background: #2d5a2d; border-color: #4ADE80; color: #4ADE80; cursor: default; }
+        .order-container { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+        .order-item { background: #1C2128; border: 2px solid #30363D; border-radius: 6px; padding: 12px; cursor: pointer; transition: all 0.2s; color: #E6EDF3; }
+        .order-item:hover { background: #30363D; border-color: var(--accent); }
+        .order-item.placed { background: #2d5a2d; border-color: #4ADE80; color: #4ADE80; }
+        .order-sequence { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+        .order-seq-item { background: #1A1F2E; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; font-size: 0.9em; color: #D1D5DB; }
+        .challenge-controls { display: flex; gap: 10px; margin-top: 14px; }
+        .challenge-btn { padding: 10px 16px; background: var(--accent); color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s; font-size: 0.9em; }
+        .challenge-btn:hover { background: var(--accent-dark); }
+        .challenge-btn.reset { background: #30363D; color: #9CA3AF; }
+        .challenge-btn.reset:hover { background: #3a3f45; }
+        .challenge-score { color: #9CA3AF; font-size: 0.9em; margin-top: 12px; }
+        .anki-search { margin-bottom: 20px; }
+        .anki-search input { background: #1C2128; border: 1px solid #30363D; border-radius: 6px; padding: 10px 12px; color: #E6EDF3; width: 100%; font-size: 0.9em; }
+        .anki-search input:focus { outline: none; border-color: var(--accent); }
+        .anki-table { width: 100%; border-collapse: collapse; background: #161B22; border-radius: 8px; overflow: hidden; }
+        .anki-table th { background: #1A1F2E; color: var(--accent); padding: 12px; text-align: left; font-weight: 700; border-bottom: 2px solid #30363D; }
+        .anki-table td { padding: 12px; border-bottom: 1px solid #21262D; color: #E6EDF3; }
+        .anki-table tr:hover { background: #1A1F2E; }
+        .topic-tag { background: rgba(21,101,192,0.2); color: var(--accent); padding: 4px 8px; border-radius: 4px; font-size: 0.85em; display: inline-block; }
+        .controls { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .control-btn { padding: 10px 16px; background: var(--accent); color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9em; }
+        .control-btn:hover { background: var(--accent-dark); }
+        .info-box { background: rgba(21,101,192,0.1); border-left: 3px solid var(--accent); padding: 14px; border-radius: 4px; margin-bottom: 16px; color: #D1D5DB; font-size: 0.9em; }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <a href="GUSOM-Biochem-ActiveDrills.html" class="back">← Back to Biochem Hub</a>
-        <h1>Biochem L1: <span class="accent-tag">Introduction to Hormone Action</span></h1>
-        <div class="subtitle">Hormone classes · Signaling pathways · Receptor mechanisms · Carrier proteins · Hormone measurement</div>
-    </div>
-
-    <div class="tab-nav">
-        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
-        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
-        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
-        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
-        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
-        <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
-    </div>
-
-    <!-- FLASHCARDS -->
-    <div id="tab-flashcards" class="tab-content active">
-        <div class="section-title">Core Concept Flashcards — Click to Flip</div>
-        <div class="fc-grid" id="fcGrid"></div>
-    </div>
-
-    <!-- MCQ -->
-    <div id="tab-mcq" class="tab-content">
-        <div class="section-title">Multiple Choice Practice</div>
-        <div id="mcqContainer"></div>
-    </div>
-
-    <!-- VIGNETTES -->
-    <div id="tab-vignettes" class="tab-content">
-        <div class="section-title">Clinical Vignettes</div>
-        <div id="vigContainer"></div>
-    </div>
-
-    <!-- TEST TRAPS -->
-    <div id="tab-traps" class="tab-content">
-        <div class="section-title">⚠️ Test Traps — Common Exam Misconceptions</div>
-        <div id="trapsContainer"></div>
-    </div>
-
-    <!-- FILL-IN-BLANK -->
-    <div id="tab-fib" class="tab-content">
-        <div class="section-title">Fill in the Blank — Complete the Concept</div>
-        <div id="fibContainer"></div>
-    </div>
-
-    <!-- REFERENCE TABLE -->
-    <div id="tab-ref" class="tab-content">
-        <div class="section-title">Quick Reference Tables</div>
-        <div id="refContainer"></div>
-    </div>
-</div>
-
-<script>
-// ─── TAB NAVIGATION ───────────────────────────────────
-function switchTab(name) {
-    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('tab-' + name).classList.add('active');
-    event.target.classList.add('active');
-}
-
-// ─── FLASHCARD DATA ───────────────────────────────────
-const flashcards = [
-    { q: "What are the three main classes of hormones based on chemical structure?", a: "1) Peptide/protein hormones (water-soluble, made from amino acids)\n2) Steroid hormones (lipid-soluble, derived from cholesterol)\n3) Amino acid derivatives (catecholamines, thyroid hormones)", anki: 33 },
-    { q: "Which hormone classes are hydrophobic, and which are hydrophilic?", a: "HYDROPHOBIC (lipid-soluble): Steroid hormones, thyroid hormones, vitamin D, retinoic acid\nHYDROPHILIC (water-soluble): Peptide hormones, catecholamines (except T3/T4 which are hydrophobic despite being amino acid-derived)", anki: 25 },
-    { q: "Why do catecholamines bind to membrane receptors while thyroid hormones bind to nuclear receptors?", a: "Catecholamines (epinephrine, norepinephrine) are hydrophilic → cannot cross the plasma membrane → receptors are on the CELL SURFACE. Thyroid hormones (T3, T4) are hydrophobic despite being amino acid-derived → can cross the plasma membrane → receptors are in the NUCLEUS/CYTOPLASM.", anki: 25 },
-    { q: "Describe the structure of glycoprotein hormones. Name all four.", a: "TSH, FSH, LH, and hCG all share a COMMON ALPHA subunit (α). Each has a UNIQUE BETA subunit (β) that confers hormone-specific receptor binding. The beta subunit specificity is enhanced by GLYCOSYLATION patterns. This structure is unique to these four hormones.", anki: 35 },
-    { q: "What is the difference between endocrine, paracrine, and autocrine signaling?", a: "ENDOCRINE: Hormone secreted into bloodstream → acts on distant target cells. PARACRINE: Hormone released locally → acts on nearby cells (short distances, high local concentration). AUTOCRINE: Hormone acts on the SAME cell that secreted it. Nervous system: Local release from neurons → acts on adjacent target.", anki: null },
-    { q: "Distinguish peptide hormone synthesis from steroid hormone synthesis in terms of storage.", a: "PEPTIDE HORMONES: Synthesized as preprohormones → processed → stored in secretory vesicles/granules. Released rapidly in response to stimuli (pre-formed).\nSTEROID HORMONES: Synthesized de novo from cholesterol on demand → NO significant storage → released immediately after synthesis. Cannot accumulate in cells.", anki: 47 },
-    { q: "What is the catecholamine synthesis pathway? What is the rate-limiting step?", a: "Tyrosine → (tyrosine hydroxylase, RLS) → L-DOPA → (DOPA decarboxylase) → Dopamine → (dopamine β-hydroxylase) → Norepinephrine → (PNMT in adrenal medulla only) → Epinephrine. TYROSINE HYDROXYLASE is the rate-limiting step. PNMT converts NE to EPI in the adrenal medulla (not in neurons).", anki: 32 },
-    { q: "What is controlled by preganglionic sympathetic fibers to the adrenal medulla?", a: "Catecholamine (epinephrine and norepinephrine) synthesis AND release from the adrenal medulla. The chromaffin cells of the adrenal medulla are modified postganglionic neurons that are controlled NEURALLY, not hormonally. The splanchnic nerve carries preganglionic sympathetic fibers.", anki: 25 },
-    { q: "Describe vitamin D synthesis: substrates, enzymes, and locations.", a: "7-dehydrocholesterol (skin, via UV light) → Cholecalciferol (vitamin D3) → (liver, 25-hydroxylase) → 25-OH-D3 → (kidney, 1-alpha-hydroxylase) → 1,25-dihydroxyvitamin D3 (calcitriol, ACTIVE form). Kidney also expresses 24-hydroxylase for inactivation.", anki: null },
-    { q: "Define Kd in the context of hormone-receptor binding.", a: "Kd (dissociation constant) = the concentration of free hormone at which 50% of receptors are OCCUPIED. LOWER Kd = HIGHER affinity (stronger binding). In a simple system, Kd equals EC50 (the hormone concentration producing 50% maximal response).", anki: 51 },
-    { q: "What is a Scatchard plot and what does it tell you?", a: "A Scatchard plot is a graph of (Bound hormone / Free hormone) vs (Bound hormone). It is a linear transformation of the Langmuir binding equation. The SLOPE = -1/Kd (steeper slope = lower Kd = higher affinity). The x-INTERCEPT = Bmax (total number of receptors). Used to determine Kd and receptor density.", anki: null },
-    { q: "What does EC50 represent and how does it relate to Kd?", a: "EC50 = the hormone concentration that produces 50% of the maximum possible response (Emax). In a simple system where % receptor occupancy = % response, EC50 = Kd. In complex systems with signal amplification or multiple binding sites, EC50 may differ from Kd.", anki: 51 },
-    { q: "Explain the role of carrier proteins in hormone transport. Which hormones require them?", a: "Hydrophobic (lipid-soluble) hormones do NOT dissolve well in blood → bound to plasma carrier proteins (TBG, SHBG, transcortin/CBG, albumin). Only the FREE (unbound) fraction is biologically active. Carrier proteins act as a reservoir and buffer, slowing hormone clearance and extending half-life.", anki: 43 },
-    { q: "Name the major carrier proteins and the hormones they transport.", a: "TBG (thyroxine-binding globulin) = T3, T4 | SHBG (sex hormone-binding globulin) = testosterone, estradiol | CBG/Transcortin (corticosteroid-binding globulin) = cortisol, progesterone | Albumin = binds many hormones with lower affinity (backup carrier).", anki: null },
-    { q: "Can carrier-protein-bound hormones activate receptors? Explain.", a: "NO. Only FREE hormones activate receptors. However, a dynamic equilibrium exists: some hormone dissociates from carrier based on its Kd. The dissociated free hormone activates receptors; as free hormone drops, more hormone dissociates from the carrier to maintain equilibrium.", anki: 45 },
-    { q: "Describe the structure of GPCRs (G-protein-coupled receptors). What are Gs, Gi, and Gq?", a: "GPCRs have 7 transmembrane helices. Upon activation, they activate heterotrimeric G proteins (Gα, Gβγ). Gs (stimulatory) activates adenylyl cyclase → increases cAMP. Gi (inhibitory) decreases adenylyl cyclase → decreases cAMP. Gq activates phospholipase C → IP3 and DAG pathways.", anki: null },
-    { q: "Describe tyrosine kinase receptors. What is special about insulin and IGF-1 receptors?", a: "Tyrosine kinase receptors (RTKs) have ligand-binding extracellular domain and intracellular tyrosine kinase domain. Hormone binding → autophosphorylation of tyrosine residues → recruitment of signaling proteins (IRS-1, etc.) → cascade. Insulin and IGF-1 are the main examples in endocrinology.", anki: null },
-    { q: "Describe guanylyl cyclase receptors. What hormones activate them?", a: "Membrane receptors with intracellular guanylyl cyclase domain. Hormone binding → generates cGMP (cyclic GMP) second messenger. ANP (atrial natriuretic peptide) is the classic ligand. cGMP activates PKG (protein kinase G) → smooth muscle relaxation, increased natriuresis.", anki: null },
-    { q: "What is the nuclear receptor superfamily? Name the major groups.", a: "A family of ligand-activated transcription factors with a DNA-binding domain and ligand-binding domain. GROUPS: 1) Steroid receptors (GR, MR, AR, ER, PR) 2) Thyroid hormone receptor (TR) 3) Vitamin D receptor (VDR) 4) Retinoic acid receptor (RAR) 5) Peroxisome proliferator-activated receptors (PPAR) 6) Liver X receptor (LXR). Most function as hetero-dimers with RXR.", anki: null },
-    { q: "What is RXR and which nuclear receptors are its dimerization partners?", a: "RXR = retinoid X receptor (binds 9-cis retinoic acid). RXR forms HETERODIMERS with: RAR (retinoic acid receptor), VDR (vitamin D receptor), TR (thyroid hormone receptor), PPAR (peroxisome proliferator-activated receptor), and LXR (liver X receptor). This heterodimerization is required for DNA binding and transcriptional activity in most cases.", anki: null },
-    { q: "Explain how direct vs. indirect hormone signaling differs.", a: "DIRECT: Hydrophobic hormones cross cell membrane → bind to nuclear receptors (intracellular) → directly regulate gene transcription as transcription factors.\nINDIRECT: Hydrophilic hormones bind to membrane receptors → activate second messenger systems (cAMP, IP3, DAG, tyrosine kinase) → amplify signal → activate protein kinases → phosphorylate downstream effectors.", anki: 40 },
-    { q: "What methods are used to measure hormone levels in blood?", a: "RIA (Radioimmunoassay): Uses radioactively labeled hormone + antibody → measure by gamma counter. IRMA/ICMA (Immunoradiometric/Immunochemiluminometric assay): Uses labeled antibody (not hormone) → better for proteins. ELISA: Uses enzyme-linked antibodies (colorimetric). Modern assays use chemiluminescence for speed and safety.", anki: null },
-    { q: "How does a Scatchard plot reveal whether a system follows simple Michaelis-Menten kinetics?", a: "A linear Scatchard plot indicates simple saturable binding following Michaelis-Menten kinetics (one binding site per receptor). A CURVED Scatchard plot suggests cooperative binding or multiple binding sites/receptor populations. Non-linearity indicates deviation from simple model.", anki: null },
-    { q: "Anki #25: What controls catecholamine synthesis?", a: "Catecholamine synthesis in adrenal medulla chromaffin cells is controlled by PREGANGLIONIC SYMPATHETIC FIBERS via the splanchnic nerve. Acetylcholine from preganglionic neurons binds nicotinic receptors on chromaffin cells → stimulates tyrosine hydroxylase → increases catecholamine synthesis and release.", anki: 25 },
-    { q: "Anki #32: What is the rate-limiting step of catecholamine synthesis?", a: "TYROSINE HYDROXYLASE is the rate-limiting step. It catalyzes tyrosine → L-DOPA. This enzyme is stimulated by sympathetic activation and requires tetrahydrofolate as a cofactor. It is the first committed step in the catecholamine synthesis pathway.", anki: 32 },
-    { q: "Anki #33: How are peptide hormones categorized?", a: "Peptide hormones are categorized into: 1) GLYCOPROTEINS (TSH, FSH, LH, hCG) - larger, share common alpha subunit 2) SHORT POLYPEPTIDES and SMALL PROTEINS (under 200 amino acids) - include insulin, glucagon, ACTH, oxytocin, vasopressin. All are hydrophilic.", anki: 33 },
-    { q: "Anki #35: How do glycoprotein hormones achieve specificity?", a: "TSH, FSH, LH, and hCG share the same common ALPHA subunit but have different BETA subunits. The beta subunit confers receptor-binding specificity. Different GLYCOSYLATION patterns on the beta subunit further enhance specificity and receptor discrimination.", anki: 35 },
-    { q: "Anki #37: How are lipid-soluble hormones metabolized and eliminated?", a: "Hydrophobic hormones can be metabolized by enzymes in plasma or interstitial fluid, broken down in the LIVER (main site), or excreted by the kidney if able to enter the renal filtrate. Because they are lipophilic, metabolism often requires conversion to more polar forms for urinary excretion.", anki: 37 },
-    { q: "Anki #39: What transduction mechanisms allow indirect signaling?", a: "Indirect signaling utilizes ion channel-linked signaling, G-protein-linked signaling, and enzyme-linked signaling. These allow the signal to be AMPLIFIED inside the cell through activation of second messenger cascades (cAMP, IP3/DAG, tyrosine kinase cascades).", anki: 39 },
-    { q: "Anki #40: Why is the transduction step critical in indirect signaling?", a: "The transduction step allows significant AMPLIFICATION of the hormone signal. One hormone molecule bound to its receptor can trigger formation of THOUSANDS of second messenger molecules (cAMP, IP3), which then activate protein kinases affecting many targets. This amplification makes the system highly sensitive and efficient.", anki: 40 },
-    { q: "Anki #42: What are lipid derivative hormones?", a: "Lipid derivative hormones include EICOSANOIDS (prostaglandins, leukotrienes, thromboxanes), STEROID HORMONES (cortisol, testosterone, estradiol), RETINOIDS (retinoic acid), and CHOLECALCIFEROL (vitamin D). All are hydrophobic and lipid-soluble.", anki: 42 },
-    { q: "Anki #43: Why do hydrophobic hormones require carrier proteins?", a: "Hydrophobic hormones do NOT dissolve easily in the blood plasma. To facilitate circulation in the aqueous bloodstream, a large fraction of each hormone is bound by carrier proteins. This allows for a SUBSTANTIAL RESERVE of bound hormone and greatly extends the hormone half-life.", anki: 43 },
-    { q: "Anki #45: Can carrier-protein-bound hormones activate receptors?", a: "NO. Carrier-protein-bound hormones cannot activate receptors because they are sequestered on the carrier. Only the FREE (dissociated) fraction activates receptors. However, a fraction of hormone is continuously dissociated from carriers based on the dissociation constant (Kd), providing the active hormone pool.", anki: 45 },
-    { q: "Anki #46: How do hydrophobic hormones act as signaling molecules?", a: "Due to their ability to cross the cell membrane, hydrophobic hormones act as DIRECT signaling molecules. Their receptors (often functioning as transcription factors) are located in the CYTOPLASM or in ORGANELLES (nucleus, mitochondria). The hormone-receptor complex translocates to the nucleus and regulates gene transcription directly.", anki: 46 },
-    { q: "Anki #47: Why cannot hydrophobic hormones be stored in most cells?", a: "Hydrophobic hormones are NOT capable of being stored or accumulated in most cells. As soon as they are synthesized, they are RELEASED because they freely diffuse across the cell membrane. The predominant hormone produced depends on the amount of enzyme and substrate available, not storage.", anki: 47 },
-    { q: "Anki #48: What determines the effective hormone concentration for lipophilic hormones?", a: "The amount of FREE hormone is the effective hormone concentration for lipophilic hormones. This free fraction is dissociated from the carrier based on the dissociation constant (Kd). Only free hormones have biological effects; bound hormone is biologically inactive.", anki: 48 },
-    { q: "Anki #49: How does impaired signal transduction affect hormone response?", a: "If signal transduction in a cell is impaired, the maximal response (Emax) weakens. For example, loss of insulin receptors or reduction in intracellular transduction machinery reduces the cell's ability to respond to the hormone, even if receptor density remains high.", anki: 49 },
-    { q: "Anki #50: What is the defining characteristic of endocrine signaling?", a: "Endocrine signals act on distant tissue by traveling through the CIRCULATORY SYSTEM. Hormones are released from endocrine glands into the bloodstream and can affect distant target cells throughout the body, distinguishing endocrine signaling from paracrine and autocrine.", anki: 50 },
-    { q: "Anki #51: Define EC50 and its relationship to Kd.", a: "EC50 is the effective concentration required to produce 50% of the maximum possible response (Emax). In a simple system where % receptor occupancy equals % response, EC50 equals Kd. Both represent the hormone concentration at which half-maximal effect is achieved.", anki: 51 },
-    { q: "Anki #52: What is the role of growth hormone in healthy adults?", a: "Growth hormone plays a SUPPORTING role in healthy adults. Low GH levels can be completely compensated for by other hormones including thyroid hormones, insulin, calcitonin, parathyroid hormone, calcitriol (vitamin D), androgens, and estrogens. GH is less critical in adults than in childhood.", anki: 52 },
-    { q: "Anki #59: How does growth hormone affect adipose tissue in the fasting state?", a: "In the fasting state, growth hormone increases LIPOLYSIS in adipose tissue. GH is a counter-regulatory hormone that mobilizes energy stores by promoting breakdown of triglycerides into free fatty acids and glycerol.", anki: 59 },
-    { q: "Anki #60: How does growth hormone affect the liver in the fasting state?", a: "In the fasting state, growth hormone increases GLUCONEOGENESIS in the liver. GH promotes the synthesis of glucose from non-carbohydrate sources (amino acids, lactate, glycerol), raising blood glucose during fasting.", anki: 60 },
-    { q: "Anki #61: How does GH release respond to amino acids and glucose?", a: "Growth hormone release is STIMULATED by high serum amino acids, but INHIBITED by high serum glucose. Therefore, a balanced meal will promote growth. A carb-heavy but protein-light meal will drive energy storage (insulin-dominant) over anabolic growth.", anki: 61 },
-    { q: "Anki #62: What is the relationship between insulin and growth hormone?", a: "Insulin drives growth hormone RECEPTOR EXPRESSION in the liver, and is thus needed for GH-driven secretion of IGF-1 (somatomedin C). Without adequate insulin, GH cannot stimulate hepatic IGF-1 production effectively, even though GH levels may be normal.", anki: 62 },
-    { q: "Anki #63: What is the diabetogenic effect of growth hormone?", a: "Growth hormone has a DIABETOGENIC effect (promotes hyperglycemia). It increases hepatic gluconeogenesis and decreases insulin sensitivity in peripheral tissues. Disorders with excess GH (acromegaly) are associated with increased incidence of diabetes mellitus and glucose intolerance.", anki: 63 },
-    { q: "Anki #64: What types of feedback control growth hormone?", a: "Growth hormone is controlled by ALL THREE types of loop negative feedback: LONG-LOOP feedback (IGF-1 inhibits GHRH/GH), SHORT-LOOP feedback (GH inhibits GHRH), and ULTRASHORT-LOOP feedback (GHRH inhibits its own release).", anki: 64 },
-    { q: "Anki #65: How does baseline serum GH change across the human lifespan?", a: "Baseline serum GH is LOW at birth, HIGH in childhood, and HIGHEST in puberty. GH does not promote fetal growth (IGF-1 plays that role); GH is primarily important after birth for postnatal growth.", anki: 65 },
-    { q: "Anki #66: How does baseline serum GH change in adulthood and old age?", a: "Baseline GH declines to a plateau in adulthood. It declines again in old age due to decreases in sex hormone levels. This age-related decline in GH is associated with less muscle mass, more adiposity, and reduced anabolic function.", anki: 66 },
-    { q: "Anki #67: How do free fatty acids regulate growth hormone secretion?", a: "Increased serum free fatty acid concentration INHIBITS growth hormone secretion. This makes sense metabolically: during fed state with high triglycerides and free fatty acids, GH is suppressed (to favor energy storage); during fasting with low free fatty acids, GH is stimulated (to mobilize energy).", anki: 67 },
-    { q: "Anki #68: What is human placental lactogen (hPL) and what is its role?", a: "Human placental lactogen (hPL) is responsible for promoting FETAL GROWTH during pregnancy. It is immunologically similar to GH but distinct. hPL also INHIBITS growth hormone secretion in the mother during pregnancy, shifting metabolism toward energy storage for the fetus.", anki: 68 },
-    { q: "Anki #75: What are Herring bodies and what do they contain?", a: "Herring bodies are eosinophilic swellings of axon terminals of hypothalamic neurons that project to the neurohypophysis (posterior pituitary). They STORE and RELEASE oxytocin and vasopressin (ADH). These peptides are synthesized in the hypothalamus, transported via axons, and stored in Herring bodies before release.", anki: 75 },
-    { q: "Anki #100: What hormones are secreted by the paraventricular nucleus?", a: "The paraventricular nucleus (PVN) of the hypothalamus secretes BOTH CRH (corticotropin-releasing hormone) and OXYTOCIN. CRH regulates the HPA axis; oxytocin is transported to the neurohypophysis for storage and release.", anki: 100 },
-    { q: "Anki #103: What are circumventricular organs near the hypothalamus and pituitary?", a: "The MEDIAN EMINENCE and NEUROHYPOPHYSIS (posterior pituitary) are circumventricular organs (regions where blood-brain barrier is absent or weakened). These allow sensing of blood composition and direct hormone secretion into the bloodstream.", anki: 103 },
-    { q: "Anki #104: What does the organum vasculosum of the lamina terminalis (OVLT) do?", a: "The OVLT is a circumventricular organ that senses BLOOD OSMOLARITY and hormones (like angiotensin II) to regulate vasopressin (ADH) secretion. It is a key osmoreceptor that controls water balance.", anki: 104 },
-    { q: "Anki #105: What is the pineal gland and what does it secrete?", a: "The pineal gland is a circumventricular organ that secretes MELATONIN. Melatonin regulates circadian rhythm and sleep-wake cycles. The pineal is sensitive to light via retinal-hypothalamic projections.", anki: 105 },
-];
-
-// ─── MCQ DATA ─────────────────────────────────────────
-const mcqs = [
-    {
-        stem: "A 32-year-old man presents with a pituitary mass. Labs show severely elevated TSH despite normal free T4 levels. Which of the following best explains this finding?",
-        options: ["A TSH-secreting pituitary adenoma", "Primary hypothyroidism with elevated TRH stimulating TSH synthesis", "Iodine deficiency", "Hashimoto's thyroiditis", "Normal result — no explanation needed"],
-        correct: 0,
-        explanations: [
-            "CORRECT. A TSH-secreting adenoma produces excess TSH despite normal T4. This is a rare pituitary tumor (TSH-oma). Normal feedback would suppress TSH if T4 were adequate, so the tumor is autonomous.",
-            "In primary hypothyroidism, T4 is LOW (not normal as stated), which triggers elevated TRH and elevated TSH.",
-            "Iodine deficiency causes hypothyroidism with low T4, not normal T4.",
-            "Hashimoto's is an autoimmune thyroiditis causing primary hypothyroidism, not a pituitary tumor.",
-            "Elevated TSH with normal free T4 is abnormal and indicates secondary hyperthyroidism from a TSH-secreting source."
-        ],
-        teaching: "TSH-secreting adenomas are rare but important to recognize. The key is abnormally HIGH TSH despite NORMAL T4. This violates the normal feedback loop and indicates autonomous TSH production from a pituitary tumor."
-    },
-    {
-        stem: "Which of the following hormones is MOST dependent on circulating carrier protein for its biological activity and transport?",
-        options: ["Insulin", "Cortisol", "Epinephrine", "ACTH", "TSH"],
-        correct: 1,
-        explanations: [
-            "Insulin is a peptide hormone (hydrophilic) that circulates freely in blood without requiring carrier proteins.",
-            "CORRECT. Cortisol is a steroid hormone (hydrophobic) that is HIGHLY bound to cortisol-binding globulin (CBG/transcortin) and albumin. About 90% is protein-bound; only 10% free cortisol is active. Carrier proteins are critical for cortisol transport and activity.",
-            "Epinephrine is a hydrophilic catecholamine that circulates freely without carrier proteins.",
-            "ACTH is a peptide hormone (hydrophilic) that circulates freely in blood.",
-            "TSH is a glycoprotein hormone (hydrophilic) that circulates freely without carrier proteins."
-        ],
-        teaching: "Lipophilic hormones (steroids, thyroid, vitamin D, retinoic acid) require carrier proteins. Among these, cortisol is particularly dependent on CBG. Changes in CBG levels (pregnancy, estrogen use) can affect free cortisol without changing total cortisol."
-    },
-    {
-        stem: "A researcher creates a dose-response curve for insulin signaling in adipocytes. The curve shows a sigmoidal (S-shaped) response when hormone concentration is plotted on a linear scale, and becomes linear when hormone concentration is plotted on a logarithmic scale. What can be concluded?",
-        options: ["The system exhibits cooperative binding", "The system follows simple Michaelis-Menten kinetics", "Multiple receptor populations are involved", "Signal amplification is not occurring", "Insulin resistance is present"],
-        correct: 1,
-        explanations: [
-            "Cooperative binding would cause a sigmoidal curve on semi-log plot (Hill coefficient > 1), but it would produce a curved Scatchard plot, not a linear one.",
-            "CORRECT. A linear semi-log dose-response curve indicates simple saturable binding following Michaelis-Menten kinetics. A linear Scatchard plot confirms simple binding to a single receptor population with constant Kd.",
-            "Multiple receptor populations would cause a non-linear (biphasic) dose-response curve or curved Scatchard plot.",
-            "The sigmoidal dose-response curve SHOWS that signal amplification IS occurring (transduction).",
-            "Insulin resistance would shift the curve to the right (increased EC50), but the sigmoidal shape would be preserved."
-        ],
-        teaching: "Semi-log plots are standard for visualizing hormone dose-response relationships. Linearity on semi-log scale + linearity on Scatchard plot = simple Michaelis-Menten kinetics. Deviations indicate cooperative binding, multiple receptors, or non-specific interactions."
-    },
-    {
-        stem: "A patient takes estrogen-containing oral contraceptives and later has blood drawn. Total cortisol is elevated, but free cortisol is normal. Which of the following best explains this?",
-        options: ["The patient has Cushing's syndrome", "Estrogen increases cortisol-binding globulin (CBG) synthesis", "The hypothalamic-pituitary-adrenal (HPA) axis is dysfunctional", "The patient has primary adrenal insufficiency", "Oral contraceptives inhibit 11β-hydroxylase"],
-        correct: 1,
-        explanations: [
-            "Cushing's syndrome causes elevated free cortisol and elevated total cortisol with a pathological pattern (loss of diurnal rhythm, etc.). This patient has normal free cortisol.",
-            "CORRECT. Estrogen (including in oral contraceptives) increases hepatic synthesis of cortisol-binding globulin (CBG). More CBG means more cortisol is bound → total cortisol rises, but free (biologically active) cortisol remains normal. The HPA axis is normal.",
-            "HPA dysfunction would cause abnormal free cortisol and abnormal ACTH, not just elevated total cortisol.",
-            "Primary adrenal insufficiency causes LOW total and free cortisol.",
-            "11β-hydroxylase inhibition (like metyrapone) would lower cortisol synthesis, not raise total cortisol via increased binding."
-        ],
-        teaching: "Oral estrogen therapy is a classic cause of elevated total cortisol with normal free cortisol via increased CBG synthesis. This is a physiologic adaptation, not disease. Always check free cortisol or 24-hour urine free cortisol when interpreting cortisol in patients on estrogen."
-    },
-    {
-        stem: "A 45-year-old woman has decreased cellular response to growth hormone despite GH levels being within normal range. Which of the following is the MOST LIKELY cellular mechanism?",
-        options: ["Decreased GH synthesis in somatotropes", "Decreased expression of GH receptors", "Decreased IGF-1 synthesis", "Decreased somatostatin secretion", "Increased GHRH secretion"],
-        correct: 1,
-        explanations: [
-            "If GH levels are normal, the problem is not with GH synthesis.",
-            "CORRECT. Decreased GH receptor (GHR) expression is the most likely mechanism for decreased cellular response to normal GH levels. This could result from genetic mutation, autoimmune destruction, or downregulation of GHR.",
-            "Decreased IGF-1 synthesis could be a consequence of GH resistance, but the question asks about decreased response to GH itself, which points to receptor-level defect.",
-            "Decreased somatostatin would INCREASE GH secretion, not decrease cellular response.",
-            "Increased GHRH would increase GH, not explain decreased cellular response to normal GH."
-        ],
-        teaching: "Laron dwarfism is a classic example: GH levels are HIGH but IGF-1 is LOW due to GH receptor mutations/deficiency. Demonstrates that hormone abundance ≠ hormone action; receptor expression is critical."
-    },
-    {
-        stem: "Which of the following is a characteristic feature of indirect hormone signaling (via second messengers) compared to direct signaling (nuclear receptors)?",
-        options: ["Slower onset but longer duration of action", "Rapid onset but limited amplification", "Ability to regulate gene transcription directly", "Requirement for hormone-receptor complex to enter the nucleus", "Limited ability to activate multiple downstream targets"],
-        correct: 0,
-        explanations: [
-            "CORRECT. Indirect signaling is SLOWER to onset (requires second messenger cascade) but has LONGER duration (kinase cascades can be sustained, phosphatases must actively dephosphorylate). Signal amplification allows one receptor to activate many pathways.",
-            "Indirect signaling DOES have enormous amplification (one hormone → many cAMP molecules → many kinase molecules → many phosphorylations).",
-            "Direct signaling (nuclear receptors) directly regulates transcription. Indirect signaling must activate transcription factors through phosphorylation.",
-            "This describes direct signaling with nuclear receptors, not indirect signaling.",
-            "Indirect signaling allows activation of MULTIPLE downstream targets through branching kinase cascades."
-        ],
-        teaching: "Fast vs. Slow: Direct signaling via nuclear receptors = SLOW (minutes to hours). Indirect signaling via second messengers = FAST initial response but amplified. Understanding this kinetics helps predict which pathways are involved in acute vs. chronic hormone effects."
-    },
-    {
-        stem: "A newly discovered hormone is found to be synthesized as a large precursor protein (preprohormone) that is stored in secretory vesicles before release. What can you infer about this hormone?",
-        options: ["It is a steroid hormone", "It is stored in the adrenal medulla", "It is a peptide/protein hormone", "It can freely cross the cell membrane", "It requires de novo synthesis for each release"],
-        correct: 2,
-        explanations: [
-            "Steroid hormones are synthesized de novo from cholesterol and NOT stored in vesicles.",
-            "The adrenal medulla stores catecholamines (in vesicles), but catecholamines are amino acid derivatives, not peptides synthesized from preprohormones.",
-            "CORRECT. This describes peptide/protein hormones, which are synthesized as preprohormones → processed by signal peptidase and prohormone convertases → stored in secretory granules/vesicles → released upon stimulation.",
-            "Peptide hormones are hydrophilic and CANNOT freely cross membranes. If they could, they wouldn't need to be in vesicles.",
-            "Peptide hormones are pre-synthesized and stored. Steroid hormones require de novo synthesis for each release."
-        ],
-        teaching: "Storage vs. Synthesis: Peptide hormones = synthesized, processed, stored in granules → rapid release on demand. Steroid hormones = synthesized on demand from cholesterol → no storage → gradual release. This is a fundamental distinction."
-    },
-    {
-        stem: "Vitamin D is classified as a hormone, and its action on bone and intestine involves nuclear receptors. Which of the following vitamin D metabolites is the most biologically active?",
-        options: ["7-dehydrocholesterol", "Cholecalciferol (vitamin D3)", "25-hydroxyvitamin D3 [25(OH)D3]", "1,25-dihydroxyvitamin D3 [1,25(OH)2D3]", "24,25-dihydroxyvitamin D3"],
-        correct: 3,
-        explanations: [
-            "7-dehydrocholesterol is the precursor in skin that is converted to cholecalciferol by UV light.",
-            "Cholecalciferol (D3) is the form made in skin; it is inactive and must be metabolized.",
-            "25(OH)D3 is the major circulating form and the best indicator of vitamin D status, but it is NOT the most active form.",
-            "CORRECT. 1,25(OH)2D3 (calcitriol) is the most biologically active form. It is produced in the kidney by 1-alpha-hydroxylase (stimulated by PTH and low phosphate) and acts on the vitamin D receptor (a nuclear receptor) to regulate calcium/phosphate homeostasis.",
-            "24,25(OH)2D3 is an inactivation metabolite produced by 24-hydroxylase (stimulated by high calcitriol)."
-        ],
-        teaching: "Vitamin D activation cascade: Skin (UV) → D3 → Liver (25-hydroxylase) → 25(OH)D3 (storage/transport form) → Kidney (1-alpha-hydroxylase) → 1,25(OH)2D3 (active). Kidney also expresses 24-hydroxylase for inactivation. This is testable!"
-    },
-];
-
-// ─── VIGNETTE DATA ────────────────────────────────────
-const vignettes = [
-    {
-        banner: "Anki #25-35 | Hormone Classification",
-        stem: `A medical student is asked to classify hormones in the endocrine system. She correctly identifies that some hormones are <strong>water-soluble</strong> (peptides, catecholamines), others are <strong>lipid-soluble</strong> (steroids, thyroid, vitamin D), and notes that this distinction affects their mechanisms of action and transport.`,
-        question: "Based on solubility, which of the following statements is CORRECT?",
-        options: ["A) Peptide hormones bind to nuclear receptors because they dissolve in lipid membranes", "B) Thyroid hormones are amino acid-derived but lipophobic, so they use carrier proteins and nuclear receptors", "C) Catecholamines are hydrophobic, so they use the same transport mechanism as steroids", "D) Steroid hormones dissolve well in blood, so they don't need carrier proteins", "E) Glycoprotein hormones (TSH, LH, FSH) are lipid-soluble"],
-        correct: 1,
-        explanations: [
-            "WRONG. Peptide hormones are hydrophilic and bind to MEMBRANE receptors, not nuclear receptors. They do NOT dissolve in lipid membranes.",
-            "CORRECT. Thyroid hormones (T3, T4) are derived from the amino acid tyrosine BUT are hydrophobic/lipophilic (due to iodination). They require carrier proteins (TBG) for transport and nuclear receptors for action. This is counterintuitive but crucial.",
-            "Catecholamines are hydrophilic (water-soluble) and bind to MEMBRANE receptors. They use a different mechanism than lipophilic steroids.",
-            "Steroid hormones are hydrophobic and DO NOT dissolve well in blood. They REQUIRE carrier proteins (CBG, SHBG, albumin).",
-            "Glycoprotein hormones (TSH, FSH, LH, hCG) are peptides made from amino acids and are hydrophilic, not lipid-soluble."
-        ]
-    },
-    {
-        banner: "Anki #32 | Catecholamine Synthesis",
-        stem: `A patient with a pheochromocytoma (catecholamine-secreting tumor) has high epinephrine and norepinephrine. Researchers want to understand the biochemistry of catecholamine synthesis to develop a targeted inhibitor.`,
-        question: "Which enzyme should be inhibited to MOST EFFECTIVELY reduce catecholamine synthesis?",
-        options: ["A) DOPA decarboxylase", "B) Tyrosine hydroxylase", "C) Dopamine beta-hydroxylase", "D) Phenylethanolamine N-methyltransferase (PNMT)", "E) Monoamine oxidase (MAO)"],
-        correct: 1,
-        explanations: [
-            "DOPA decarboxylase is important, but it acts after the rate-limiting step. Inhibiting it alone would be less effective than inhibiting the RLS.",
-            "CORRECT. Tyrosine hydroxylase catalyzes the FIRST COMMITTED step (tyrosine → L-DOPA) and is the RATE-LIMITING STEP. Inhibiting it would block the entire pathway at its slowest point.",
-            "Dopamine beta-hydroxylase acts downstream and could be inhibited, but the pathway bottleneck is earlier.",
-            "PNMT converts norepinephrine → epinephrine in the adrenal medulla only. Inhibiting it would reduce epinephrine but not dopamine or norepinephrine.",
-            "MAO degrades catecholamines (breaks them down), not synthesizes them. This would increase, not decrease, local catecholamine levels initially."
-        ]
-    },
-    {
-        banner: "Anki #40-51 | Receptor Binding and Dose-Response",
-        stem: `A pharmacologist is developing a new insulin sensitizer. She generates dose-response curves for insulin signaling in human hepatocytes. When log[insulin] is plotted against response, a sigmoidal curve emerges. A Scatchard plot of the binding data is linear with a slope of -0.02 nM^-1.`,
-        question: "What is the Kd (dissociation constant) for insulin receptor binding in this system?",
-        options: ["A) 0.02 nM", "B) 50 nM", "C) 20 nM", "D) 0.5 nM", "E) Cannot be determined from this data"],
-        correct: 1,
-        explanations: [
-            "This would be the reciprocal of the slope, but the calculation is wrong.",
-            "CORRECT. From Scatchard plot: slope = -1/Kd. Therefore, -0.02 = -1/Kd → Kd = 1/0.02 = 50 nM.",
-            "This could be correct if the slope were -0.05 nM^-1, but the given slope is -0.02.",
-            "Very low Kd suggests extremely high affinity, which is unlikely for insulin.",
-            "The Scatchard plot provides direct information about Kd from the slope relationship."
-        ]
-    },
-    {
-        banner: "Anki #43-48 | Carrier Proteins and Free Hormone",
-        stem: `A 28-year-old woman has total testosterone = 400 ng/dL (normal for men: 300-1000). However, her SHBG is elevated at 80 nmol/L (normal: 24-122 nmol/L). Bioavailable testosterone (free + weakly bound) is measured at only 50 ng/dL (normal: 30-100).`,
-        question: "What is the PRIMARY cause of her relatively low bioavailable testosterone despite normal total testosterone?",
-        options: ["A) Ovarian testosterone secretion is reduced despite normal levels", "B) Elevated SHBG is binding a larger fraction of her testosterone, reducing the free fraction", "C) She has androgen insensitivity due to dysfunctional androgen receptors", "D) Her liver is not producing enough albumin to carry testosterone", "E) She has primary hypogonadism"],
-        correct: 1,
-        explanations: [
-            "The total testosterone is normal, so ovarian production is adequate. The problem is hormone AVAILABILITY, not production.",
-            "CORRECT. SHBG binds testosterone with high affinity. Elevated SHBG means more testosterone is bound and sequestered → less free testosterone available for receptor activation. Only the FREE fraction activates androgen receptors.",
-            "Androgen insensitivity would not explain why bioavailable testosterone is low. The hormone level is the issue, not receptor function.",
-            "Albumin also binds testosterone (weakly), but the issue here is SHBG, not albumin deficiency.",
-            "Primary hypogonadism would lower total testosterone, which is normal here."
-        ]
-    },
-    {
-        banner: "Anki #59-68 | Growth Hormone Physiology",
-        stem: `A 55-year-old man with untreated acromegaly (GH-secreting pituitary adenoma) has IGF-1 = 550 ng/mL (normal: 90-360) and fasting glucose = 145 mg/dL (normal: 70-100). He has gained weight and has central obesity. Despite high GH levels, his muscle mass is surprisingly modest.`,
-        question: "Which of the following BEST explains his hyperglycemia and modest muscle mass despite elevated GH and IGF-1?",
-        options: ["A) GH is diabetogenic; acromegaly causes insulin resistance and hyperglycemia", "B) High IGF-1 inhibits insulin secretion, causing hyperglycemia", "C) His pituitary tumor is also secreting cortisol", "D) He has developed hypogonadism, reducing anabolic drive", "E) IGF-1 excess causes muscle atrophy"],
-        correct: 0,
-        explanations: [
-            "CORRECT. GH has a DIABETOGENIC effect: it increases hepatic gluconeogenesis and causes peripheral insulin resistance. Acromegaly is associated with glucose intolerance and frank diabetes in ~20% of cases. High GH + high IGF-1 still does not prevent hyperglycemia because of GH's direct insulin-antagonistic effects.",
-            "High IGF-1 does NOT inhibit insulin secretion; it enhances metabolic anabolism. Hyperglycemia is due to GH's direct insulin-antagonistic effect.",
-            "Cortisol excess could worsen hyperglycemia, but the hyperglycemia in acromegaly is primarily driven by GH's diabetogenic effect.",
-            "Hypogonadism could reduce muscle mass, but acromegaly typically causes muscle enlargement (visceromegaly, carpal tunnel from soft tissue overgrowth), not atrophy. The 'modest' muscle mass likely refers to the disproportionate soft tissue growth.",
-            "High IGF-1 is anabolic, not catabolic. It promotes protein synthesis and muscle growth."
-        ]
-    },
-];
-
-// ─── TEST TRAP DATA ───────────────────────────────────
-const traps = [
-    {
-        header: "TRAP #1 | Thyroid Hormones Are Hydrophobic",
-        myth: "All amino acid-derived hormones are hydrophilic like catecholamines.",
-        truth: "WRONG. Thyroid hormones (T3, T4) are amino acid-derived BUT are LIPOPHOBIC. The iodination makes them hydrophobic. They use the same mechanism as steroids: carrier proteins (TBG) + nuclear receptors. Don't assume amino acid-derived = water-soluble."
-    },
-    {
-        header: "TRAP #2 | Hormone Concentration vs. Hormone Activity",
-        myth: "High total hormone concentration always means high biological activity.",
-        truth: "WRONG. For lipophilic hormones, only FREE hormone is active. High total cortisol with normal free cortisol (on estrogen therapy) = normal physiology, not disease. Always distinguish total from free hormone."
-    },
-    {
-        header: "TRAP #3 | Kd vs. EC50",
-        myth: "Kd and EC50 are always identical.",
-        truth: "PARTIAL. In a simple system with one receptor and no cooperativity, Kd = EC50. In complex systems with signal amplification, multiple receptors, or cooperative binding, they can differ. Scatchard linearity confirms simple binding."
-    },
-    {
-        header: "TRAP #4 | Steroid Hormone Storage",
-        myth: "Steroid hormones are synthesized and stored in granules, ready for rapid release.",
-        truth: "WRONG. Steroid hormones (cortisol, testosterone, aldosterone) are synthesized DE NOVO from cholesterol on-demand and released immediately. NO storage. Peptide hormones are the ones stored in granules."
-    },
-    {
-        header: "TRAP #5 | Catecholamine Control",
-        myth: "Catecholamine synthesis is regulated primarily by the hypothalamic-pituitary axis via CRH/ACTH.",
-        truth: "PARTIALLY WRONG. ACTH does stimulate adrenal cortex (not medulla). The ADRENAL MEDULLA is controlled by SYMPATHETIC PREGANGLIONIC FIBERS via the splanchnic nerve and acetylcholine/nicotinic receptors. Two different regulatory systems."
-    },
-    {
-        header: "TRAP #6 | GH and Metabolism",
-        myth: "Growth hormone promotes protein synthesis in all tissues equally.",
-        truth: "PARTIAL. GH has DIABETOGENIC and LIPOLYTIC effects: it increases hepatic glucose production, causes insulin resistance, increases lipolysis in adipose tissue, and increases protein synthesis in muscle. It's a catabolic/gluconeogenic hormone, not just anabolic."
-    },
-    {
-        header: "TRAP #7 | Carrier Protein Capacity",
-        myth: "If carrier protein levels are normal, free hormone is always normal.",
-        truth: "WRONG. Changes in carrier protein synthesis (estrogen increases SHBG, TBG, CBG) can alter the free fraction even without changes in total hormone production. Always measure free hormone when carrier protein abnormalities are suspected."
-    },
-    {
-        header: "TRAP #8 | RXR Dimerization",
-        myth: "Nuclear receptors all function as homodimers (same receptor with itself).",
-        truth: "WRONG. Many nuclear receptors function as HETERODIMERS with RXR: RAR-RXR, VDR-RXR, TR-RXR, PPAR-RXR, LXR-RXR. This heterodimerization is often required for DNA binding and activation."
-    },
-];
-
-// ─── FILL-IN-BLANK DATA ───────────────────────────────
-const fibs = [
-    {
-        prompt: "Complete: Peptide hormones are synthesized from _______ and require the enzyme _______ to remove the signal peptide. They are stored in _______ and released upon stimulation.",
-        answers: ["preprohormones", "signal peptidase", "secretory vesicles", "secretory granules"],
-        explanation: "Peptide hormone synthesis follows: preprohormone → signal peptidase removes signal sequence → prohormone → prohormone convertases generate mature hormone → stored in secretory vesicles/granules."
-    },
-    {
-        prompt: "Steroid hormones are synthesized de novo from _______ via the enzyme _______. Unlike peptide hormones, they are _______ stored, so they are released _______ after synthesis.",
-        answers: ["cholesterol", "StAR (steroidogenic acute regulatory protein)", "NOT", "immediately"],
-        explanation: "Steroid synthesis starts with cholesterol translocation by StAR into mitochondria. NO storage in granules means on-demand synthesis and immediate release."
-    },
-    {
-        prompt: "The catecholamine synthesis pathway is: tyrosine → _______ (via _______) → dopamine → _______ → norepinephrine. The rate-limiting enzyme is _______.",
-        answers: ["L-DOPA", "tyrosine hydroxylase", "dopamine beta-hydroxylase", "norepinephrine", "tyrosine hydroxylase"],
-        explanation: "Complete pathway: Tyrosine → L-DOPA (TH, RLS) → Dopamine (DOPA decarboxylase) → NE (DBH) → EPI (PNMT in adrenal medulla). Tyrosine hydroxylase is the rate-limiting step and requires tetrahydrofolate."
-    },
-    {
-        prompt: "Vitamin D synthesis occurs in three major steps: (1) _______ (in skin) → Cholecalciferol, (2) _______ (in liver, enzyme _______) → 25(OH)D3, (3) _______ (in kidney, enzyme _______) → 1,25(OH)2D3 (active).",
-        answers: ["UV light", "hydroxylation", "25-hydroxylase", "1-alpha-hydroxylase"],
-        explanation: "Complete vitamin D activation: Skin (UV) → D3 → Liver (25-OHase) → 25(OH)D3 → Kidney (1-alpha-OHase) → 1,25(OH)2D3. The kidney also has 24-hydroxylase for inactivation."
-    },
-    {
-        prompt: "A Scatchard plot of hormone-receptor binding shows that the x-intercept = 500 fmol/mg protein and slope = -0.01 fmol^-1. The _______ is 500 fmol/mg, and the Kd is _______ nM (assuming 1 mg protein = 1 nM receptor concentration).",
-        answers: ["Bmax", "100"],
-        explanation: "Scatchard: x-intercept = Bmax (maximum receptor number). Slope = -1/Kd, so Kd = -1/slope = -1/(-0.01) = 100 nM. (Units must be consistent.)"
-    },
-    {
-        prompt: "In a semi-log dose-response curve, the _______ is the hormone concentration that produces 50% maximal response. In a simple system, this equals the _______.",
-        answers: ["EC50", "Kd"],
-        explanation: "EC50 = effective concentration for 50% response. In simple saturable binding with no cooperativity, EC50 = Kd. They differ when signal amplification or complex kinetics are involved."
-    },
-    {
-        prompt: "Hydrophobic hormones require _______ proteins to dissolve in blood. The main carrier for steroids is _______, for sex hormones is _______, for thyroid hormones is _______.",
-        answers: ["carrier", "CBG (transcortin)", "SHBG", "TBG"],
-        explanation: "Carrier proteins: CBG/transcortin (cortisol, progesterone), SHBG (testosterone, estradiol), TBG (T3, T4), Albumin (backup carrier). Only FREE hormone is active."
-    },
-    {
-        prompt: "GH has _______ effects on glucose homeostasis (raises blood glucose). It stimulates _______ in liver and _______ in adipose tissue during fasting.",
-        answers: ["diabetogenic", "gluconeogenesis", "lipolysis"],
-        explanation: "GH is counter-regulatory: increases hepatic glucose production and promotes fat breakdown. This makes acromegaly associated with glucose intolerance and diabetes."
-    },
-];
-
-// ─── REFERENCE TABLE DATA ─────────────────────────────
-function renderReferenceTables() {
-    return `
-    <h3 style="color: var(--accent); margin: 24px 0 12px 0; font-size: 1.05em;">Hormone Classes & Solubility</h3>
-    <table class="ref-table">
-        <thead>
-            <tr>
-                <th>Class</th>
-                <th>Solubility</th>
-                <th>Receptor Location</th>
-                <th>Examples</th>
-                <th>Carrier Protein</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="hl">Peptide/Protein</td>
-                <td>Hydrophilic</td>
-                <td>Cell membrane (GPCR, RTK, GC)</td>
-                <td>Insulin, glucagon, ACTH, oxytocin, TSH, LH, FSH</td>
-                <td>None (circulate free)</td>
-            </tr>
-            <tr>
-                <td class="hl">Steroid</td>
-                <td>Hydrophobic</td>
-                <td>Cytoplasm/nucleus (NR)</td>
-                <td>Cortisol, testosterone, estradiol, aldosterone, progesterone</td>
-                <td>CBG, SHBG, Albumin</td>
-            </tr>
-            <tr>
-                <td class="hl">Catecholamine</td>
-                <td>Hydrophilic</td>
-                <td>Cell membrane (GPCR)</td>
-                <td>Epinephrine, norepinephrine, dopamine</td>
-                <td>None (circulate free)</td>
-            </tr>
-            <tr>
-                <td class="hl">Thyroid Hormone</td>
-                <td>Hydrophobic*</td>
-                <td>Cytoplasm/nucleus (NR)</td>
-                <td>T3, T4 (amino acid-derived but lipophobic!)</td>
-                <td>TBG, Albumin</td>
-            </tr>
-            <tr>
-                <td class="hl">Vitamin D</td>
-                <td>Hydrophobic</td>
-                <td>Cytoplasm/nucleus (NR, VDR)</td>
-                <td>1,25(OH)2D3 (calcitriol, active)</td>
-                <td>Albumin, DBP</td>
-            </tr>
-            <tr>
-                <td class="hl">Retinoic Acid</td>
-                <td>Hydrophobic</td>
-                <td>Cytoplasm/nucleus (NR, RAR-RXR)</td>
-                <td>All-trans retinoic acid, 9-cis retinoic acid</td>
-                <td>CRABP, FABP</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3 style="color: var(--accent); margin: 24px 0 12px 0; font-size: 1.05em;">Membrane Receptor Types & Signaling</h3>
-    <table class="ref-table">
-        <thead>
-            <tr>
-                <th>Receptor Type</th>
-                <th>G-Protein/Effector</th>
-                <th>Second Messenger</th>
-                <th>Examples</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="hl">GPCR - Gs</td>
-                <td>Stimulatory G-protein</td>
-                <td>↑ cAMP (via adenylyl cyclase)</td>
-                <td>Beta-adrenergic (E, NE), TSH (partially), GnRH (partially)</td>
-            </tr>
-            <tr>
-                <td class="hl">GPCR - Gi</td>
-                <td>Inhibitory G-protein</td>
-                <td>↓ cAMP (inhibits AC)</td>
-                <td>Alpha-2 adrenergic, M2/M4 muscarinic cholinergic</td>
-            </tr>
-            <tr>
-                <td class="hl">GPCR - Gq</td>
-                <td>Gq G-protein</td>
-                <td>↑ IP3, ↑ DAG (via PLC)</td>
-                <td>Alpha-1 adrenergic, M1/M3/M5 muscarinic, GnRH (partially)</td>
-            </tr>
-            <tr>
-                <td class="hl">RTK (Tyrosine Kinase)</td>
-                <td>Autophosphorylation</td>
-                <td>IRS-1/2 recruitment, PI3K, MAP kinase</td>
-                <td>Insulin, IGF-1, FGF, EGF</td>
-            </tr>
-            <tr>
-                <td class="hl">Guanylyl Cyclase</td>
-                <td>Intracellular GC domain</td>
-                <td>↑ cGMP</td>
-                <td>ANP (atrial natriuretic peptide)</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3 style="color: var(--accent); margin: 24px 0 12px 0; font-size: 1.05em;">Nuclear Receptor Superfamily & RXR Heterodimers</h3>
-    <table class="ref-table">
-        <thead>
-            <tr>
-                <th>Nuclear Receptor</th>
-                <th>Ligand</th>
-                <th>Heterodimerizes with RXR?</th>
-                <th>Major Target Tissues</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="hl">Glucocorticoid Receptor (GR)</td>
-                <td>Cortisol</td>
-                <td>No (homodimer)</td>
-                <td>Most tissues; liver, immune</td>
-            </tr>
-            <tr>
-                <td class="hl">Androgen Receptor (AR)</td>
-                <td>Testosterone, DHT</td>
-                <td>No (homodimer)</td>
-                <td>Prostate, seminal vesicle, muscle</td>
-            </tr>
-            <tr>
-                <td class="hl">Estrogen Receptor (ER)</td>
-                <td>Estradiol</td>
-                <td>No (homodimer)</td>
-                <td>Breast, uterus, ovary, bone</td>
-            </tr>
-            <tr>
-                <td class="hl">Thyroid Hormone Receptor (TR)</td>
-                <td>T3 (active), T4 (prohormone)</td>
-                <td>YES - RXR heterodimer</td>
-                <td>Most tissues; brain, heart, metabolic</td>
-            </tr>
-            <tr>
-                <td class="hl">Vitamin D Receptor (VDR)</td>
-                <td>1,25(OH)2D3 (calcitriol)</td>
-                <td>YES - RXR heterodimer</td>
-                <td>Intestine, bone, kidney, parathyroid</td>
-            </tr>
-            <tr>
-                <td class="hl">Retinoic Acid Receptor (RAR)</td>
-                <td>All-trans retinoic acid</td>
-                <td>YES - RXR heterodimer</td>
-                <td>Bone, skin, immune, differentiation</td>
-            </tr>
-            <tr>
-                <td class="hl">PPAR (Peroxisome Proliferator)</td>
-                <td>Fatty acids, thiazolidinediones</td>
-                <td>YES - RXR heterodimer</td>
-                <td>Adipose, liver, immune, metabolic</td>
-            </tr>
-            <tr>
-                <td class="hl">LXR (Liver X Receptor)</td>
-                <td>Cholesterol derivatives</td>
-                <td>YES - RXR heterodimer</td>
-                <td>Liver, adipose, macrophage; lipid metabolism</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3 style="color: var(--accent); margin: 24px 0 12px 0; font-size: 1.05em;">Scatchard Plot & Binding Kinetics</h3>
-    <table class="ref-table">
-        <thead>
-            <tr>
-                <th>Parameter</th>
-                <th>Definition</th>
-                <th>Clinical Relevance</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="hl">Kd</td>
-                <td>Dissociation constant; [hormone] at 50% receptor occupancy</td>
-                <td>Lower Kd = higher affinity. Used to measure hormone-receptor strength.</td>
-            </tr>
-            <tr>
-                <td class="hl">Bmax</td>
-                <td>Maximum binding capacity; total receptor number</td>
-                <td>Receptor density on cell; downregulation decreases Bmax.</td>
-            </tr>
-            <tr>
-                <td class="hl">EC50</td>
-                <td>Hormone concentration producing 50% maximal response</td>
-                <td>May differ from Kd if signal amplification present. Used in dose-response curves.</td>
-            </tr>
-            <tr>
-                <td class="hl">Scatchard Plot</td>
-                <td>Graph of (B/F) vs B; slope = -1/Kd; x-intercept = Bmax</td>
-                <td>Linear plot = simple Michaelis-Menten; curved plot = cooperative binding or multiple receptors.</td>
-            </tr>
-            <tr>
-                <td class="hl">Hill Coefficient (n)</td>
-                <td>Measure of cooperativity; n=1 is simple; n>1 is positive cooperativity</td>
-                <td>Sigmoidal dose-response suggests cooperativity. Used in allosteric interactions.</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3 style="color: var(--accent); margin: 24px 0 12px 0; font-size: 1.05em;">Catecholamine & Thyroid Hormone Synthesis</h3>
-    <table class="ref-table">
-        <thead>
-            <tr>
-                <th>Pathway</th>
-                <th>Substrate</th>
-                <th>Enzyme (Rate-Limiting)</th>
-                <th>Product</th>
-                <th>Location</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="hl">Catecholamine</td>
-                <td>Tyrosine</td>
-                <td>Tyrosine hydroxylase (RLS)</td>
-                <td>L-DOPA → Dopamine → NE → EPI*</td>
-                <td>Adrenal medulla (neurons)</td>
-            </tr>
-            <tr>
-                <td class="hl">Thyroid Hormone</td>
-                <td>Tyrosine (on thyroglobulin)</td>
-                <td>Thyroid peroxidase (TPO)</td>
-                <td>MIT → DIT → T3/T4</td>
-                <td>Thyroid follicle</td>
-            </tr>
-            <tr>
-                <td colspan="5"><small>* EPI = epinephrine (PNMT converts NE to EPI in adrenal medulla only, NOT in sympathetic neurons). MIT = monoiodotyrosine; DIT = diiodotyrosine.</small></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3 style="color: var(--accent); margin: 24px 0 12px 0; font-size: 1.05em;">Vitamin D Activation & Inactivation</h3>
-    <table class="ref-table">
-        <thead>
-            <tr>
-                <th>Form</th>
-                <th>Production Site</th>
-                <th>Enzyme</th>
-                <th>Activity</th>
-                <th>Regulation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="hl">Cholecalciferol (D3)</td>
-                <td>Skin (UV light)</td>
-                <td>Photochemical</td>
-                <td>Inactive</td>
-                <td>Sunshine exposure</td>
-            </tr>
-            <tr>
-                <td class="hl">25(OH)D3</td>
-                <td>Liver</td>
-                <td>25-hydroxylase (CYP2R1)</td>
-                <td>Inactive (storage/transport)</td>
-                <td>Best indicator of vitamin D status</td>
-            </tr>
-            <tr>
-                <td class="hl">1,25(OH)2D3 (calcitriol)</td>
-                <td>Kidney</td>
-                <td>1-alpha-hydroxylase (CYP27B1)</td>
-                <td>ACTIVE (1000x more potent)</td>
-                <td>Stimulated by PTH, low PO4; inhibited by calcitriol</td>
-            </tr>
-            <tr>
-                <td class="hl">24,25(OH)2D3</td>
-                <td>Kidney</td>
-                <td>24-hydroxylase (CYP24A1)</td>
-                <td>Inactive (catabolism)</td>
-                <td>Stimulated by calcitriol (negative feedback)</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h3 style="color: var(--accent); margin: 24px 0 12px 0; font-size: 1.05em;">Hormone Measurement Methods</h3>
-    <table class="ref-table">
-        <thead>
-            <tr>
-                <th>Method</th>
-                <th>Principle</th>
-                <th>Label</th>
-                <th>Advantages</th>
-                <th>Limitations</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="hl">RIA</td>
-                <td>Radiolabeled hormone + antibody competition</td>
-                <td>Radioactive hormone</td>
-                <td>High specificity, sensitive</td>
-                <td>Radioactive waste; slow; less used now</td>
-            </tr>
-            <tr>
-                <td class="hl">IRMA/ICMA</td>
-                <td>Labeled antibody (sandwich) captures hormone</td>
-                <td>Radioactive/chemiluminescent antibody</td>
-                <td>Fast, good for proteins</td>
-                <td>Less specific for small molecules</td>
-            </tr>
-            <tr>
-                <td class="hl">ELISA</td>
-                <td>Enzyme-linked antibodies (sandwich or competitive)</td>
-                <td>Enzyme (HRP, alkaline phosphatase)</td>
-                <td>No radioactivity, relatively fast, common</td>
-                <td>Moderate sensitivity; cross-reactivity possible</td>
-            </tr>
-            <tr>
-                <td class="hl">Chemiluminescence</td>
-                <td>Light-emitting enzyme-labeled antibody</td>
-                <td>Acridinium ester or other emitter</td>
-                <td>Very fast, high sensitivity, automation-friendly</td>
-                <td>Higher cost; equipment-dependent</td>
-            </tr>
-        </tbody>
-    </table>
-    `;
-}
-
-// ─── INIT FUNCTIONS ───────────────────────────────────
-function initFlashcards() {
-    const grid = document.getElementById('fcGrid');
-    flashcards.forEach((card, idx) => {
-        const div = document.createElement('div');
-        div.className = 'fc';
-        div.innerHTML = `
-            <div class="fc-inner">
-                <div class="fc-front">
-                    <div class="fc-label">Flashcard ${idx + 1}${card.anki ? ` — Anki #${card.anki}` : ''}</div>
-                    <div class="fc-q">${card.q}</div>
-                    <div class="fc-hint">Click to reveal answer</div>
-                </div>
-                <div class="fc-back">
-                    <div class="fc-label">Answer</div>
-                    <div class="fc-a">${card.a}</div>
-                </div>
+    <div class="container">
+        <div class="header">
+            <h1>🧬 Biochem Lecture 1: Introduction to Hormone Action</h1>
+            <p class="subtitle">GUSOM Endocrine Block | 34 Anki Cards | 7 Learning Modalities</p>
+        </div>
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+            <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+            <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+            <button class="tab-btn" onclick="switchTab('traps')">⚠️ Trap Detector</button>
+            <button class="tab-btn" onclick="switchTab('fillin')">✏️ Fill-in-Blank</button>
+            <button class="tab-btn" onclick="switchTab('challenge')">🎯 Challenge Drill</button>
+            <button class="tab-btn" onclick="switchTab('ankimap')">📋 Anki Map</button>
+        </div>
+        <div id="flashcards" class="tab-content active">
+            <div class="info-box">Click any card to flip. All 34 Anki cards included.</div>
+            <div class="controls">
+                <button class="control-btn" onclick="document.querySelectorAll('#flashcards .fc').forEach(c => c.classList.remove('flipped'))">Reset All</button>
             </div>
-        `;
-        div.addEventListener('click', function() { this.classList.toggle('flipped'); });
-        grid.appendChild(div);
-    });
-}
-
-function initMCQ() {
-    const container = document.getElementById('mcqContainer');
-    mcqs.forEach((q, idx) => {
-        const div = document.createElement('div');
-        div.className = 'mcq-item';
-        let html = `<div class="mcq-num">Question ${idx + 1}</div><div class="mcq-stem">${q.stem}</div><div class="mcq-options">`;
-        q.options.forEach((opt, optIdx) => {
-            const letter = String.fromCharCode(65 + optIdx);
-            const isCorrect = optIdx === q.correct;
-            html += `<div class="mcq-opt" onclick="handleMCQClick(this, ${isCorrect})"><span class="letter">${letter})</span> ${opt}</div>`;
+            <div class="fc-grid" id="fc-grid"></div>
+        </div>
+        <div id="mcq" class="tab-content">
+            <div class="info-box">Answer 5-option multiple choice questions with explanations.</div>
+            <div id="mcq-container"></div>
+        </div>
+        <div id="vignettes" class="tab-content">
+            <div class="info-box">Clinical scenarios with follow-up MCQ questions.</div>
+            <div id="vignettes-container"></div>
+        </div>
+        <div id="traps" class="tab-content">
+            <div class="info-box">Click "CORRECT ✓" or "TRAP ✗" for each statement.</div>
+            <div class="controls">
+                <span id="trap-score" style="color: #9CA3AF;">Score: 0/0</span>
+                <button class="control-btn" onclick="resetTraps()">Reset All</button>
+            </div>
+            <div id="trap-container"></div>
+        </div>
+        <div id="fillin" class="tab-content">
+            <div class="info-box">Complete pathways and enzyme names with fuzzy matching.</div>
+            <div class="controls">
+                <button class="control-btn" onclick="resetFillin()">Reset All</button>
+            </div>
+            <div id="fillin-container"></div>
+        </div>
+        <div id="challenge" class="tab-content">
+            <div class="info-box">Interactive matching, ordering, and classification exercises.</div>
+            <div id="challenge-container"></div>
+        </div>
+        <div id="ankimap" class="tab-content">
+            <div class="info-box">Reference table for all 34 Anki cards.</div>
+            <div class="anki-search">
+                <input type="text" id="anki-filter" placeholder="Search by card ID or keyword..." onkeyup="filterAnkiTable()">
+            </div>
+            <table class="anki-table">
+                <thead>
+                    <tr>
+                        <th>Card ID</th>
+                        <th>Core Topic</th>
+                        <th>Content Created</th>
+                    </tr>
+                </thead>
+                <tbody id="anki-tbody"></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+        const flashcards = [{id:25,q:"Catecholamine production by neuroendocrine cells in the adrenal medulla is controlled by _____ ganglionic _____ fibers.",a:"preganglionic sympathetic"},{id:32,q:"The rate-limiting step of catecholamine synthesis is _____.",a:"tyrosine hydroxylase"},{id:33,q:"Peptide hormones can be categorized into _____ and _____.",a:"glycoproteins; short polypeptides and small proteins"},{id:35,q:"Hormones classified as _____ determine whether they bind to membrane or intracellular receptors.",a:"hormone class/type"},{id:37,q:"_____ signaling involves direct cell-to-cell contact via growth factors and cytokines.",a:"Juxtacrine"},{id:39,q:"Glycoprotein hormones (FSH, LH, TSH, hCG) share a common _____ subunit and differ in _____ subunit.",a:"alpha (α); beta (β)"},{id:40,q:"Steroid hormones act via _____ receptors; peptide hormones act via _____ receptors.",a:"intracellular/nuclear; membrane"},{id:42,q:"Nuclear receptors belong to the _____ superfamily.",a:"ligand-gated transcription factor"},{id:43,q:"RXR heterodimerizes with _____, _____, and _____.",a:"RAR; VDR; TR"},{id:45,q:"_____ are water-soluble carrier proteins that bind lipid-soluble hormones.",a:"Hormone-binding globulins (TBG, CBG, SHBG)"},{id:46,q:"A lower Kd indicates _____ hormone-receptor affinity.",a:"higher"},{id:47,q:"Scatchard plot displays _____ (y-axis) vs _____ (x-axis).",a:"Bound/Free hormone; Bound hormone"},{id:48,q:"_____ is the total number of receptor molecules available for binding.",a:"Bmax"},{id:49,q:"RIA relies on _____ with radioactive hormone and _____ antibody.",a:"competitive binding; specific"},{id:50,q:"IRMA uses _____ antibodies to capture and _____ radioactive antibodies to detect.",a:"unlabeled; radiolabeled"},{id:51,q:"ELISA detects hormones by measuring absorbance at _____ nm after _____ reaction.",a:"450; enzymatic color"},{id:52,q:"Tyrosine → _____ → _____ → _____ → _____.",a:"L-DOPA; Dopamine; Norepinephrine; Epinephrine"},{id:59,q:"Vitamin D is activated in two _____ reactions: _____ (liver) and _____ (kidney).",a:"hydroxylation; 25-OH; 1,25-OH"},{id:60,q:"1,25-diOH-D acts via a _____ receptor.",a:"nuclear/intracellular"},{id:61,q:"Steroid hormones are synthesized _____ and stored in _____.",a:"de novo; lipid droplets"},{id:62,q:"Peptide hormones stored in _____ are released by _____ signaling.",a:"secretory granules; exocytosis"},{id:63,q:"Catecholamines stored preformed in _____ within chromaffin cells.",a:"vesicles/granules"},{id:64,q:"Thyroid hormones stored as _____ and released by _____.",a:"thyroglobulin; proteolysis"},{id:65,q:"Hormone _____ (T4 to T3) catalyzed by tissue-specific _____ enzymes.",a:"metabolism; deiodinase"},{id:66,q:"_____ circulate free; _____ require carrier proteins.",a:"Peptide hormones; Steroid hormones"},{id:67,q:"_____ is the plasma half-life (t1/2) of a hormone.",a:"Terminal elimination half-life"},{id:68,q:"_____ is the dissociation constant (lower = higher affinity).",a:"Kd"},{id:75,q:"Cross-reactivity occurs when _____ bind the same antibody.",a:"structurally similar molecules"},{id:100,q:"Nuclear receptors contain _____, _____, and _____ domains.",a:"DBD; LBD; TAD"},{id:101,q:"_____ signaling: hormones in bloodstream to distant tissues.",a:"Endocrine"},{id:102,q:"_____ signaling: hormones act on nearby cells.",a:"Paracrine"},{id:103,q:"_____ signaling: cell responds to its own signals.",a:"Autocrine"},{id:104,q:"Estrogen increases TBG → _____ T4 but _____ free T4.",a:"elevated total; normal"},{id:105,q:"Laron syndrome: high GH but low IGF-1 due to _____.",a:"GH receptor mutation/insensitivity"}];
+        const fcGrid = document.getElementById('fc-grid');
+        flashcards.forEach(card => {
+            const fc = document.createElement('div');
+            fc.className = 'fc';
+            fc.innerHTML = `<div class="fc-inner"><div class="fc-front"><div class="fc-label">Anki #${card.id}</div><div class="fc-q">${card.q}</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${card.a}</div></div></div>`;
+            fc.onclick = () => fc.classList.toggle('flipped');
+            fcGrid.appendChild(fc);
         });
-        html += `</div><div class="mcq-explanation"><div class="exp-label">Explanation:</div>${q.explanations[q.correct]}</div><div class="teaching-pt"><div class="tp-label">Teaching Point:</div>${q.teaching}</div>`;
-        div.innerHTML = html;
-        container.appendChild(div);
-    });
-}
-
-function handleMCQClick(el, correct) {
-    if (el.classList.contains('revealed')) return;
-    el.classList.add('revealed');
-    if (correct) {
-        el.classList.add('correct');
-        el.parentElement.nextElementSibling.classList.add('visible');
-        el.parentElement.nextElementSibling.nextElementSibling.classList.add('visible');
-    } else {
-        el.classList.add('wrong');
-        el.parentElement.nextElementSibling.classList.add('visible');
-    }
-}
-
-function initVignettes() {
-    const container = document.getElementById('vigContainer');
-    vignettes.forEach((v, idx) => {
-        const div = document.createElement('div');
-        div.className = 'vig-item';
-        let html = `<div class="vig-banner">${v.banner}</div><div class="vig-stem">${v.stem}</div><div style="margin-top: 12px;"><div style="font-weight: 600; color: #FCD34D; margin-bottom: 8px;">Clinical Question:</div><div class="mcq-options">`;
-        v.options.forEach((opt, optIdx) => {
-            const letter = String.fromCharCode(65 + optIdx);
-            const isCorrect = optIdx === v.correct;
-            html += `<div class="mcq-opt" onclick="handleMCQClick(this, ${isCorrect})"><span class="letter">${letter})</span> ${opt}</div>`;
+        const mcqQuestions = [{q:"Which hormone class binds nuclear receptors?",opts:[{text:"A) Peptide hormones",correct:false},{text:"B) Steroid hormones",correct:true},{text:"C) Catecholamines",correct:false},{text:"D) All equally",correct:false},{text:"E) Glycoproteins only",correct:false}],explain:"Steroid hormones are lipid-soluble and bind intracellular/nuclear receptors to modulate transcription.",teach:"Hormone class determines receptor location: lipid-soluble → nuclear; water-soluble → membrane."},{q:"Patient on OCP has elevated total T4, normal TSH, normal free T4. Why?",opts:[{text:"A) Hyperthyroidism from excess estrogen",correct:false},{text:"B) Estrogen increases TBG, raising total T4",correct:true},{text:"C) Direct thyroid stimulation",correct:false},{text:"D) Kidney retention of hormone",correct:false},{text:"E) Free T4 is also elevated",correct:false}],explain:"Estrogen increases TBG synthesis. More TBG = more T4 binding = elevated total T4. Free T4 remains normal.",teach:"Total hormone ≠ free hormone. Carrier protein changes affect total but not free hormone or TSH."},{q:"Which correctly matches RXR heterodimerization?",opts:[{text:"A) VDR + vitamin D",correct:false},{text:"B) TR + thyroid hormone",correct:false},{text:"C) RAR + retinoic acid",correct:false},{text:"D) All form functional RXR heterodimers",correct:true},{text:"E) Only RAR and VDR",correct:false}],explain:"RXR is promiscuous: partners with RAR (retinoic acid), VDR (vitamin D), TR (thyroid hormone), PPAR (fatty acids).",teach:"RXR heterodimerization is key for nuclear receptor activation and pathway cross-talk."},{q:"Which statement about Kd is FALSE?",opts:[{text:"A) Kd = hormone concentration at 50% receptor occupancy",correct:false},{text:"B) Lower Kd = stronger affinity",correct:false},{text:"C) Higher Kd = lower affinity",correct:false},{text:"D) Kd is directly proportional to affinity",correct:true},{text:"E) Kd determined from Scatchard x-intercept",correct:false}],explain:"Kd inversely proportional to affinity: lower Kd = higher affinity.",teach:"Remember: Kd inversely related to affinity. Lower numbers = tighter binding."},{q:"Rate-limiting enzyme in catecholamine synthesis?",opts:[{text:"A) DOPA decarboxylase",correct:false},{text:"B) PNMT",correct:false},{text:"C) Tyrosine hydroxylase",correct:true},{text:"D) Dopamine β-hydroxylase",correct:false},{text:"E) Monoamine oxidase",correct:false}],explain:"Tyrosine hydroxylase catalyzes tyrosine → L-DOPA. This is rate-limiting and most regulated.",teach:"First committed step of a pathway is usually rate-limiting."},{q:"Which immunoassay uses unlabeled capture and radiolabeled detector antibodies?",opts:[{text:"A) RIA",correct:false},{text:"B) IRMA",correct:true},{text:"C) ELISA",correct:false},{text:"D) Competitive binding",correct:false},{text:"E) Scatchard analysis",correct:false}],explain:"IRMA is sandwich assay. RIA is competitive (radioactive hormone vs sample).",teach:"IRMA generally more sensitive than RIA for high-concentration hormones."},{q:"Scatchard plot: y = _____, x = _____. What do slope and x-intercept represent?",opts:[{text:"A) Bound/Free vs Bound; slope=-1/Kd, intercept=Bmax",correct:true},{text:"B) Bound vs Free; slope=Kd",correct:false},{text:"C) Free/Total vs Total",correct:false},{text:"D) % occupancy vs concentration",correct:false},{text:"E) Affinity vs binding capacity",correct:false}],explain:"Scatchard: y=Bound/Free; x=Bound. Linear with slope=-1/Kd, x-intercept=Bmax.",teach:"Scatchard linearizes binding data to determine Kd and Bmax."},{q:"Which distinguishes steroid from peptide hormone synthesis?",opts:[{text:"A) Steroids de novo; peptides preformed",correct:true},{text:"B) Peptides on free ribosomes",correct:false},{text:"C) Identical synthesis, different storage",correct:false},{text:"D) Steroids use signal recognition particle",correct:false},{text:"E) Peptides metabolized immediately",correct:false}],explain:"Steroids synthesized on-demand from cholesterol. Peptides synthesized in rough ER, stored in granules.",teach:"Steroid synthesis is rapid; peptide synthesis involves ER-Golgi-granule pathway."},{q:"Vitamin D activation: two _____ reactions in _____ (liver) and _____ (kidney)",opts:[{text:"A) Methylation; thyroid/adrenal",correct:false},{text:"B) Hydroxylation; liver and kidney",correct:true},{text:"C) Esterification; intestine/bone",correct:false},{text:"D) Acetylation; liver/skin",correct:false},{text:"E) Phosphorylation; kidney only",correct:false}],explain:"Vitamin D3 → 25-OH-D3 (liver) → 1,25-OH-D3 (kidney). Kidney step regulated by PTH.",teach:"Vitamin D activation is substrate-dependent and organ-dependent."},{q:"Laron syndrome: high GH, low growth, low IGF-1. Mechanism?",opts:[{text:"A) GH gene mutation",correct:false},{text:"B) GH receptor mutation",correct:true},{text:"C) Elevated somatostatin",correct:false},{text:"D) IGF-1 receptor insensitivity",correct:false},{text:"E) Primary liver failure",correct:false}],explain:"GH receptor mutation → GH cannot signal → IGF-1 not produced. High GH from loss of feedback.",teach:"Hormone resistance: elevated hormone + low response."}];
+        const mcqContainer = document.getElementById('mcq-container');
+        mcqQuestions.forEach((mcq,idx)=>{
+            const div = document.createElement('div');
+            div.className = 'mcq-item';
+            div.innerHTML = `<div class="mcq-q">${idx+1}. ${mcq.q}</div><div class="mcq-opts">${mcq.opts.map((opt,oi)=>`<div class="mcq-opt" onclick="selectMCQ(event,${idx},${oi},${opt.correct})">${opt.text}</div>`).join('')}</div><div class="mcq-explain" id="mcq-exp-${idx}"><strong>Explanation:</strong> ${mcq.explain}<div class="teach-point"><strong>Teaching Point:</strong> ${mcq.teach}</div></div>`;
+            mcqContainer.appendChild(div);
         });
-        html += `</div><div class="mcq-explanation"><div class="exp-label">Explanation:</div>${v.explanations[v.correct]}</div></div>`;
-        div.innerHTML = html;
-        container.appendChild(div);
-    });
-}
-
-function initTraps() {
-    const container = document.getElementById('trapsContainer');
-    traps.forEach(trap => {
-        const div = document.createElement('div');
-        div.className = 'trap-item';
-        div.innerHTML = `
-            <div class="trap-header">${trap.header}</div>
-            <div class="trap-myth"><div class="trap-myth-label">Common Misconception:</div>${trap.myth}</div>
-            <div class="trap-truth"><div class="trap-truth-label">Correct Understanding:</div>${trap.truth}</div>
-        `;
-        container.appendChild(div);
-    });
-}
-
-function initFIB() {
-    const container = document.getElementById('fibContainer');
-    fibs.forEach((f, idx) => {
-        const div = document.createElement('div');
-        div.className = 'fib-item';
-        div.innerHTML = `
-            <div class="fib-prompt"><strong>Question ${idx + 1}:</strong> ${f.prompt}</div>
-            <input type="text" class="fib-input" placeholder="Enter answer(s) separated by commas" data-answers="${JSON.stringify(f.answers).replace(/"/g, '&quot;')}">
-            <button class="fib-btn" onclick="checkFIB(this)">Check Answer</button>
-            <div class="fib-explanation" style="display: none; margin-top: 8px; font-size: 0.87em; padding: 8px 12px; border-radius: 6px; background: rgba(92,107,192,0.1); border-left: 3px solid var(--accent); color: #C7D2FE;">${f.explanation}</div>
-        `;
-        container.appendChild(div);
-    });
-}
-
-function checkFIB(btn) {
-    const input = btn.previousElementSibling;
-    const answers = JSON.parse(input.dataset.answers.replace(/&quot;/g, '"'));
-    const userInput = input.value.toLowerCase().trim().split(',').map(s => s.trim());
-    const resultDiv = btn.nextElementSibling;
-    const isCorrect = answers.some(ans => userInput.includes(ans.toLowerCase()));
-
-    resultDiv.style.display = 'block';
-    if (isCorrect) {
-        resultDiv.className = 'fib-result correct';
-        resultDiv.textContent = 'Correct! ' + resultDiv.textContent;
-    } else {
-        resultDiv.className = 'fib-result incorrect';
-        resultDiv.textContent = 'Not quite. Accepted answers: ' + answers.join(', ');
-    }
-}
-
-function initRef() {
-    document.getElementById('refContainer').innerHTML = renderReferenceTables();
-}
-
-// Init on load
-document.addEventListener('DOMContentLoaded', function() {
-    initFlashcards();
-    initMCQ();
-    initVignettes();
-    initTraps();
-    initFIB();
-    initRef();
-});
-</script>
+        function selectMCQ(e,qIdx,optIdx,isCorrect){
+            const explain = document.getElementById(`mcq-exp-${qIdx}`);
+            const opts = e.currentTarget.parentElement.querySelectorAll('.mcq-opt');
+            opts.forEach(o=>o.style.pointerEvents='none');
+            if(isCorrect){e.currentTarget.classList.add('correct');}else{e.currentTarget.classList.add('incorrect');opts[mcqQuestions[qIdx].opts.findIndex(o=>o.correct)].classList.add('correct');}
+            explain.classList.add('show');
+        }
+        const vignettes = [{stem:"<strong>Case 1:</strong> 45M with sweating, tremor, palpitations. Epi/NE markedly elevated. Imaging: 2cm adrenal mass.",questions:[{q:"Best explanation?",opts:[{text:"A) Pheochromocytoma synthesizing catecholamines de novo",correct:true},{text:"B) Sympathetic dysfunction",correct:false},{text:"C) Thyroid hormone excess",correct:false},{text:"D) Primary hyperparathyroidism",correct:false},{text:"E) Estrogen-secreting tumor",correct:false}],explain:"Pheochromocytoma is chromaffin cell tumor synthesizing catecholamines de novo from tyrosine.",teach:"Endocrine tumors overproduce hormone. Catecholamine symptoms: sweating, tremor, palpitations, hypertension."}]},{stem:"<strong>Case 2:</strong> 28F on OCP: TSH=1.5 (normal), Total T4=12.5 (high), Free T4=1.1 (normal).",questions:[{q:"Mechanism?",opts:[{text:"A) Estrogen increases TBG",correct:true},{text:"B) Direct thyroid stimulation",correct:false},{text:"C) Inhibited 5-deiodinase",correct:false},{text:"D) Subclinical hyperthyroidism",correct:false},{text:"E) Increased urinary loss",correct:false}],explain:"Estrogen stimulates hepatic TBG. Increased TBG = increased T4 binding = elevated total T4, normal free T4.",teach:"Always check free hormone when total is abnormal. Carrier proteins affect total but not free hormone."}]},{stem:"<strong>Case 3:</strong> 52M with acromegaly: GH=45 (high), IGF-1=680 (high). MRI: 1.8cm pituitary adenoma.",questions:[{q:"Mechanism?",opts:[{text:"A) GH-secreting adenoma stimulates liver IGF-1",correct:true},{text:"B) IGF-1-secreting adenoma",correct:false},{text:"C) Ectopic GHRH",correct:false},{text:"D) Primary liver disease",correct:false},{text:"E) Excess carbohydrate",correct:false}],explain:"Pituitary adenoma overproduces GH. GH stimulates hepatic IGF-1 synthesis. Both elevated from autonomous GH.",teach:"Acromegaly: GH acts via GPCR; IGF-1 acts via RTK. Both needed for gigantism/acromegaly."}]},{stem:"<strong>Case 4:</strong> 6yo boy: severe growth retardation, high GH, low IGF-1. 2 feet shorter than peers.",questions:[{q:"Diagnosis & mechanism?",opts:[{text:"A) Laron syndrome (GH receptor mutation)",correct:true},{text:"B) GH deficiency",correct:false},{text:"C) IGF-1 receptor mutation",correct:false},{text:"D) Somatostatin tumor",correct:false},{text:"E) Malnutrition",correct:false}],explain:"GH receptor insensitivity: high GH (loss of feedback), cannot signal → no IGF-1 → stunted growth.",teach:"Hormone resistance = high hormone + low response. Treatment: IGF-1 replacement."}]},{stem:"<strong>Case 5:</strong> 35F on levothyroxine: Total T4=9.2 (normal), Free T4=0.9 (normal), TSH=0.5 (low-normal). Fatigue.",questions:[{q:"Explanation?",opts:[{text:"A) Inadequate T3 from impaired 5-deiodinase",correct:true},{text:"B) TBG inactivating hormone",correct:false},{text:"C) TSH suppressed (subclinical hyperthyroid)",correct:false},{text:"D) Needs higher levothyroxine",correct:false},{text:"E) Autoimmune thyroiditis",correct:false}],explain:"Some patients need T4/T3 combination. T4 must convert to T3 (active form) via 5-deiodinase. If conversion impaired, T3 deficiency despite normal T4.",teach:"Thyroid hormone metabolism tissue-specific. T4 storage form → T3 active form. Deiodinase dysfunction limits action."}]}];
+        const vigContainer = document.getElementById('vignettes-container');
+        vignettes.forEach((vig,vi)=>{
+            const div = document.createElement('div');
+            div.className = 'vignette';
+            div.innerHTML = `<div class="vig-stem">${vig.stem}</div>${vig.questions.map((q,qi)=>`<div style="background: #1C2128; padding: 12px; border-radius: 6px; margin-bottom: 12px;"><div class="mcq-q">${q.q}</div><div class="mcq-opts">${q.opts.map((o,oi)=>`<div class="mcq-opt" onclick="selectVig(event,${vi},${qi},${oi},${o.correct})">${o.text}</div>`).join('')}</div><div class="mcq-explain" id="vig-exp-${vi}-${qi}"><strong>Explanation:</strong> ${q.explain}<div class="teach-point"><strong>Teaching Point:</strong> ${q.teach}</div></div></div>`).join('')}`;
+            vigContainer.appendChild(div);
+        });
+        function selectVig(e,vi,qi,oi,isCorrect){
+            const exp = document.getElementById(`vig-exp-${vi}-${qi}`);
+            const opts = e.currentTarget.parentElement.querySelectorAll('.mcq-opt');
+            opts.forEach(o=>o.style.pointerEvents='none');
+            if(isCorrect){e.currentTarget.classList.add('correct');}else{e.currentTarget.classList.add('incorrect');opts[vignettes[vi].questions[qi].opts.findIndex(o=>o.correct)].classList.add('correct');}
+            exp.classList.add('show');
+        }
+        const traps = [{statement:"All steroid hormones act via nuclear receptors that function as ligand-gated transcription factors.",isCorrect:true},{statement:"Thyroid hormones (T3/T4) act on membrane receptors through G-protein coupled pathways.",isCorrect:false},{statement:"A lower Kd indicates stronger hormone-receptor affinity.",isCorrect:true},{statement:"TBG binds only thyroid hormones and does not bind cortisol.",isCorrect:true},{statement:"Peptide hormones are synthesized de novo when needed and are not stored preformed.",isCorrect:false},{statement:"Catecholamines are hydrophilic hormones that bind to membrane GPCR.",isCorrect:true},{statement:"Vitamin D (calcitriol) acts as a hormone through an intracellular/nuclear receptor similar to steroid hormones.",isCorrect:true},{statement:"RXR heterodimerizes with RAR, VDR, TR, and PPAR receptors.",isCorrect:true},{statement:"Higher plasma hormone concentrations always indicate stronger biological effect.",isCorrect:false},{statement:"In RIA, labeled hormone competes with patient hormone for antibody binding.",isCorrect:true},{statement:"The rate-limiting step of catecholamine synthesis is dopamine to norepinephrine conversion.",isCorrect:false},{statement:"Glycoprotein hormones share a common alpha subunit and differ in beta subunit.",isCorrect:true}];
+        const trapContainer = document.getElementById('trap-container');
+        let trapScores = {correct:0,total:traps.length};
+        traps.forEach((trap,idx)=>{
+            const div = document.createElement('div');
+            div.className = 'trap-item';
+            div.innerHTML = `<div class="trap-statement">${idx+1}. ${trap.statement}</div><div class="trap-buttons"><button class="trap-btn trap-btn-correct" onclick="answerTrap(${idx},true)">CORRECT ✓</button><button class="trap-btn trap-btn-trap" onclick="answerTrap(${idx},false)">TRAP ✗</button></div><div class="trap-result" id="trap-res-${idx}"><div id="trap-verdict-${idx}"></div><div class="trap-explain" id="trap-explain-${idx}"></div></div>`;
+            trapContainer.appendChild(div);
+        });
+        function answerTrap(idx,userSaysCorrect){
+            const result = document.getElementById(`trap-res-${idx}`);
+            const verdict = document.getElementById(`trap-verdict-${idx}`);
+            const explain = document.getElementById(`trap-explain-${idx}`);
+            const isActual = traps[idx].isCorrect;
+            const isUserCorrect = (userSaysCorrect === isActual);
+            document.querySelectorAll(`[onclick*="answerTrap(${idx}"]`).forEach(b=>b.disabled=true);
+            if(isUserCorrect){trapScores.correct++;result.classList.add('correct-choice');verdict.innerHTML="✓ Correct!";}else{result.classList.add('wrong-choice');verdict.innerHTML="✗ Incorrect";}
+            result.classList.add('show');
+            updateTrapScore();
+            const expTexts=["Correct: nuclear receptors are ligand-gated transcription factors.","TRAP: T3/T4 bind both membrane and nuclear receptors; primary action is nuclear.","Correct: Lower Kd = higher affinity, lower concentration needed.","Correct: TBG specific for T3/T4; CBG for cortisol; some overlap.","TRAP: Peptide hormones are synthesized in ER, stored in granules pre-formed.","Correct: Catecholamines are hydrophilic amino acid derivatives; bind adrenergic GPCRs.","Correct: Calcitriol acts via VDR (vitamin D receptor), a nuclear receptor.","Correct: RXR partners with RAR, VDR, TR, PPAR, LXR.","TRAP: High hormone in hormone resistance = no response. Biologic effect depends on receptor, not just concentration.","Correct: RIA competitive: patient hormone + radioactive hormone compete for limited antibody.","TRAP: Tyrosine hydroxylase (tyrosine→L-DOPA) is rate-limiting, most regulated step.","Correct: All glycoproteins share α-subunit; differ in β-subunit."];
+            explain.innerHTML = expTexts[idx] || "";
+        }
+        function updateTrapScore(){document.getElementById('trap-score').textContent=`Score: ${trapScores.correct}/${trapScores.total}`;}
+        function resetTraps(){trapScores.correct=0;document.querySelectorAll('.trap-result').forEach(r=>r.classList.remove('show','correct-choice','wrong-choice'));document.querySelectorAll('.trap-btn').forEach(b=>b.disabled=false);updateTrapScore();}
+        const fibQuestions = [{q:"Tyrosine → _____ → Dopamine → NE → Epinephrine",answer:"L-DOPA",accept:["LDOPA","l-dopa"]},{q:"Rate-limiting enzyme in catecholamine synthesis: _____",answer:"Tyrosine Hydroxylase",accept:["tyrosine hydroxylase","TH"]},{q:"Vitamin D3 converted to _____ in liver by 25-hydroxylase.",answer:"25-OH-D3",accept:["calcifediol","25OHD3"]},{q:"_____ is the active form of vitamin D from kidney.",answer:"1,25-Dihydroxyvitamin D3",accept:["calcitriol","1,25-OH-D3"]},{q:"_____ is the plasma half-life of a hormone.",answer:"Terminal elimination half-life",accept:["t1/2","half-life"]},{q:"_____ binds T3/T4; _____ binds sex hormones.",answer:"TBG; SHBG",accept:["CBG; SHBG"]},{q:"_____ = total number of receptors available for binding.",answer:"Bmax",accept:["bmax","B max"]},{q:"Lower _____ indicates higher hormone-receptor affinity.",answer:"Kd",accept:["kd"]},{q:"Steroids synthesized _____ (when?) and stored in _____.",answer:"de novo; lipid droplets",accept:["on-demand"]},{q:"Peptides synthesized in _____, processed through _____ and _____, stored in _____.",answer:"ribosome; rough ER; Golgi; secretory granules",accept:["ER"]}];
+        const fibContainer = document.getElementById('fillin-container');
+        fibQuestions.forEach((fib,idx)=>{
+            const div = document.createElement('div');
+            div.className = 'fib-item';
+            div.innerHTML = `<div class="fib-q">${idx+1}. ${fib.q}</div><div class="fib-input-wrapper"><input type="text" class="fib-input" id="fib-input-${idx}" placeholder="Type answer..."><button class="fib-btn" onclick="checkFIB(${idx})">Check</button></div><div class="fib-feedback" id="fib-feedback-${idx}"></div>`;
+            fibContainer.appendChild(div);
+        });
+        function fuzzyMatch(user,correct,accept){
+            const norm=s=>s.toLowerCase().trim().replace(/\s+/g,'');
+            if(norm(user)===norm(correct))return true;
+            if(accept.some(a=>norm(a)===norm(user)))return true;
+            const lev=(a,b)=>{const m=a.length,n=b.length,dp=Array(n+1).fill(0).map((_,i)=>i);for(let i=1;i<=m;i++){let prev=i;for(let j=1;j<=n;j++){const curr=a[i-1]===b[j-1]?dp[j-1]:1+Math.min(dp[j],dp[j-1],prev);dp[j]=curr;prev=curr;}dp[0]=i;}return dp[n];};
+            return lev(norm(user),norm(correct))<=2;
+        }
+        function checkFIB(idx){
+            const input=document.getElementById(`fib-input-${idx}`);
+            const feedback=document.getElementById(`fib-feedback-${idx}`);
+            const fib=fibQuestions[idx];
+            const isCorrect=fuzzyMatch(input.value,fib.answer,fib.accept);
+            feedback.classList.add('show');
+            feedback.classList.toggle('correct',isCorrect);
+            feedback.classList.toggle('incorrect',!isCorrect);
+            feedback.innerHTML=isCorrect?`✓ Correct! Answer: <strong>${fib.answer}</strong>`:`✗ Incorrect. Answer: <strong>${fib.answer}</strong>`;
+            input.disabled=true;
+            event.target.disabled=true;
+        }
+        function resetFillin(){
+            document.querySelectorAll('.fib-input').forEach(i=>i.disabled=false);
+            document.querySelectorAll('.fib-feedback').forEach(f=>f.classList.remove('show'));
+            document.querySelectorAll('.fib-input').forEach(i=>i.value='');
+            document.querySelectorAll('.fib-btn').forEach(b=>b.disabled=false);
+        }
+        function buildChallenge(){
+            const container=document.getElementById('challenge-container');
+            container.innerHTML=`<div class="challenge-type"><div class="challenge-title">🔗 Hormone to Receptor Type</div><div class="match-container"><div class="match-col"><h4>Hormones</h4><div class="match-item">LH</div><div class="match-item">Cortisol</div><div class="match-item">Insulin</div><div class="match-item">ANP</div><div class="match-item">T3</div></div><div class="match-col"><h4>Receptor</h4><div class="match-item">GPCR-Gs</div><div class="match-item">Nuclear GR</div><div class="match-item">RTK</div><div class="match-item">Guanylyl cyclase</div><div class="match-item">Nuclear TR</div></div></div><div class="challenge-controls"><button class="challenge-btn" onclick="alert('Correct: LH→GPCR-Gs, Cortisol→Nuclear GR, Insulin→RTK, ANP→Cyclase, T3→Nuclear TR')">Submit</button></div></div><div class="challenge-type"><div class="challenge-title">⚙️ Order Catecholamine Synthesis</div><div class="order-container" id="order-avail"><div class="order-item" onclick="addSeq(this,'Tyrosine')">Tyrosine</div><div class="order-item" onclick="addSeq(this,'L-DOPA')">L-DOPA</div><div class="order-item" onclick="addSeq(this,'Dopamine')">Dopamine</div><div class="order-item" onclick="addSeq(this,'Norepinephrine')">Norepinephrine</div><div class="order-item" onclick="addSeq(this,'Epinephrine')">Epinephrine</div></div><div style="margin-top: 14px;"><h4 style="color: #9CA3AF;">Sequence:</h4><div id="order-seq" class="order-sequence"></div></div><div class="challenge-controls"><button class="challenge-btn" onclick="checkOrder()">Submit</button></div></div><div class="challenge-type"><div class="challenge-title">🏷️ Classify Hormone Solubility</div><div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;"><div><h4 style="color: #9CA3AF;">Available:</h4><div id="classify-avail" class="order-container"><div class="order-item" onclick="classH(this,'Insulin')">Insulin</div><div class="order-item" onclick="classH(this,'Testosterone')">Testosterone</div><div class="order-item" onclick="classH(this,'GH')">GH</div><div class="order-item" onclick="classH(this,'Cortisol')">Cortisol</div><div class="order-item" onclick="classH(this,'Epinephrine')">Epinephrine</div><div class="order-item" onclick="classH(this,'Estradiol')">Estradiol</div></div></div><div><h4 style="color: var(--accent);">Water-Soluble:</h4><div id="classify-water" style="min-height: 120px; background: #1C2128; border: 1px dashed #30363D; padding: 12px; border-radius: 6px;"></div></div><div><h4 style="color: var(--accent);">Lipid-Soluble:</h4><div id="classify-lipid" style="min-height: 120px; background: #1C2128; border: 1px dashed #30363D; padding: 12px; border-radius: 6px;"></div></div></div><div class="challenge-controls"><button class="challenge-btn" onclick="checkClass()">Submit</button></div></div>`;
+        }
+        function addSeq(e,item){
+            if(e.classList.contains('placed'))return;
+            e.classList.add('placed');
+            const seq=document.getElementById('order-seq');
+            const seqItem=document.createElement('div');
+            seqItem.className='order-seq-item';
+            seqItem.textContent=item;
+            seqItem.onclick=()=>{e.classList.remove('placed');seqItem.remove();};
+            seq.appendChild(seqItem);
+        }
+        function checkOrder(){
+            const seq=Array.from(document.querySelectorAll('#order-seq .order-seq-item')).map(e=>e.textContent);
+            const correct=['Tyrosine','L-DOPA','Dopamine','Norepinephrine','Epinephrine'];
+            alert(JSON.stringify(seq)===JSON.stringify(correct)?'✓ Perfect!':'✗ Try again');
+        }
+        function classH(e,hormone){
+            if(e.classList.contains('placed'))return;
+            e.classList.add('placed');
+            const water=['Insulin','GH','Epinephrine'];
+            const target=water.includes(hormone)?document.getElementById('classify-water'):document.getElementById('classify-lipid');
+            const item=document.createElement('div');
+            item.className='classify-item';
+            item.textContent=hormone;
+            item.style.cursor='pointer';
+            item.onclick=()=>{e.classList.remove('placed');item.remove();};
+            target.appendChild(item);
+        }
+        function checkClass(){
+            const w=Array.from(document.querySelectorAll('#classify-water .classify-item')).map(e=>e.textContent);
+            const l=Array.from(document.querySelectorAll('#classify-lipid .classify-item')).map(e=>e.textContent);
+            const wOk=w.length===3&&['Insulin','GH','Epinephrine'].every(h=>w.includes(h));
+            const lOk=l.length===3&&['Testosterone','Cortisol','Estradiol'].every(h=>l.includes(h));
+            alert(wOk&&lOk?'✓ Perfect!':'✗ Check');
+        }
+        const ankiMap = [{id:25,topic:"Catecholamine Control",content:"FC ✓ MCQ ✓ Vig ✓ FIB ✓"},{id:32,topic:"Tyrosine Hydroxylase",content:"FC ✓ MCQ ✓ FIB ✓ Challenge ✓"},{id:33,topic:"Peptide Types",content:"FC ✓ MCQ ✓ Trap ✓"},{id:35,topic:"Hormone Class & Receptor",content:"FC ✓ MCQ ✓"},{id:37,topic:"Juxtacrine Signaling",content:"FC ✓"},{id:39,topic:"Glycoprotein α-Subunit",content:"FC ✓ MCQ ✓ Trap ✓"},{id:40,topic:"Steroid vs Peptide Receptors",content:"FC ✓ MCQ ✓"},{id:42,topic:"Nuclear Receptor Superfamily",content:"FC ✓ MCQ ✓"},{id:43,topic:"RXR Heterodimerization",content:"FC ✓ MCQ ✓ Challenge ✓"},{id:45,topic:"Carrier Proteins",content:"FC ✓ MCQ ✓ Vig ✓"},{id:46,topic:"Kd & Affinity",content:"FC ✓ MCQ ✓ Trap ✓"},{id:47,topic:"Scatchard Plot",content:"FC ✓ MCQ ✓"},{id:48,topic:"Bmax",content:"FC ✓"},{id:49,topic:"RIA",content:"FC ✓ MCQ ✓ Trap ✓"},{id:50,topic:"IRMA",content:"FC ✓ MCQ ✓"},{id:51,topic:"ELISA",content:"FC ✓"},{id:52,topic:"Catecholamine Synthesis",content:"FC ✓ MCQ ✓ FIB ✓ Challenge ✓"},{id:59,topic:"Vitamin D Activation",content:"FC ✓ MCQ ✓ Vig ✓"},{id:60,topic:"Vitamin D Nuclear Receptor",content:"FC ✓ Trap ✓"},{id:61,topic:"Steroid Synthesis & Storage",content:"FC ✓ MCQ ✓ Trap ✓"},{id:62,topic:"Peptide Storage",content:"FC ✓ Trap ✓"},{id:63,topic:"Catecholamine Vesicles",content:"FC ✓"},{id:64,topic:"Thyroid Storage",content:"FC ✓"},{id:65,topic:"Hormone Metabolism",content:"FC ✓ Vig ✓"},{id:66,topic:"Water vs Lipid Solubility",content:"FC ✓ Challenge ✓"},{id:67,topic:"Half-Life",content:"FC ✓"},{id:68,topic:"Kd",content:"FC ✓ Trap ✓"},{id:75,topic:"Cross-Reactivity",content:"FC ✓ MCQ ✓"},{id:100,topic:"Nuclear Receptor Structure",content:"FC ✓"},{id:101,topic:"Endocrine Signaling",content:"FC ✓ Trap ✓"},{id:102,topic:"Paracrine Signaling",content:"FC ✓ Trap ✓"},{id:103,topic:"Autocrine Signaling",content:"FC ✓ Trap ✓"},{id:104,topic:"Total vs Free (TBG)",content:"FC ✓ Vig ✓"},{id:105,topic:"Laron Syndrome",content:"FC ✓ MCQ ✓ Vig ✓"}];
+        const ankiTbody=document.getElementById('anki-tbody');
+        ankiMap.forEach(card=>{
+            const row=document.createElement('tr');
+            row.innerHTML=`<td><strong>${card.id}</strong></td><td><span class="topic-tag">${card.topic}</span></td><td>${card.content}</td>`;
+            ankiTbody.appendChild(row);
+        });
+        function filterAnkiTable(){
+            const filter=document.getElementById('anki-filter').value.toLowerCase();
+            document.querySelectorAll('#anki-tbody tr').forEach(row=>{
+                const id=row.cells[0].textContent.toLowerCase();
+                const topic=row.cells[1].textContent.toLowerCase();
+                row.style.display=(id.includes(filter)||topic.includes(filter))?'':'none';
+            });
+        }
+        buildChallenge();
+    </script>
 </body>
 </html>

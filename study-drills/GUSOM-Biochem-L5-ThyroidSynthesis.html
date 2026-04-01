@@ -47,19 +47,19 @@
         .mcq-stem strong { color: #FCD34D; }
         .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
         .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
-        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt:hover:not(.answered) { background: #21262D; border-color: var(--accent); }
         .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
         .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
         .mcq-opt .letter { font-weight: 700; min-width: 20px; }
         .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
         .mcq-explanation.visible { display: block; }
         .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
-        .teaching-pt { background: rgba(230,81,0,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #FED7AA; display: none; }
+        .teaching-pt { background: rgba(230,81,0,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #FFCCB3; display: none; }
         .teaching-pt.visible { display: block; }
         .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
 
         .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
-        .vig-banner { background: rgba(230,81,0,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #FED7AA; font-weight: 600; margin-bottom: 14px; }
+        .vig-banner { background: rgba(230,81,0,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #FFCCB3; font-weight: 600; margin-bottom: 14px; }
         .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
         .vig-stem strong { color: #FCD34D; }
 
@@ -79,6 +79,13 @@
         .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
         .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
 
+        .drill-section { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+        .drill-title { font-size: 0.85em; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 14px; }
+        .sequencer { background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+        .seq-item { background: #161B22; border: 2px dashed #30363D; border-radius: 6px; padding: 12px; margin-bottom: 8px; cursor: move; transition: all 0.2s; font-size: 0.92em; color: #D1D5DB; }
+        .seq-item:hover { border-color: var(--accent); background: rgba(230,81,0,0.08); }
+        .seq-item.correct { border-color: #4ADE80; border-style: solid; background: rgba(74,222,128,0.1); }
+
         .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
         .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
         .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
@@ -96,50 +103,64 @@
     <div class="header">
         <a href="GUSOM-Biochem-ActiveDrills.html" class="back">← Back to Biochemistry Hub</a>
         <h1>Lecture 5: <span class="accent-tag">Thyroid Hormone Synthesis and Action</span></h1>
-        <div class="subtitle">Iodine uptake · TPO organification · T4/T3 coupling · Thyroglobulin storage · Peripheral conversion · Nuclear receptors · Clinical inhibitors</div>
+        <div class="subtitle">NIS transport · TPO organification · MIT/DIT coupling · Thyroglobulin storage · Deiodinases · TR-α/TR-β · Drugs & pathophysiology</div>
     </div>
 
     <div class="tab-nav">
         <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
         <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
         <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
-        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Trap Detector</button>
         <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
-        <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
+        <button class="tab-btn" onclick="switchTab('drill')">🎯 Challenge Drill</button>
+        <button class="tab-btn" onclick="switchTab('anki')">📋 Anki Map</button>
     </div>
 
+    <!-- FLASHCARDS -->
     <div id="tab-flashcards" class="tab-content active">
         <div class="section-title">Core Concept Flashcards — Click to Flip</div>
         <div class="fc-grid" id="fcGrid"></div>
     </div>
 
+    <!-- MCQ -->
     <div id="tab-mcq" class="tab-content">
         <div class="section-title">Multiple Choice Practice</div>
         <div id="mcqContainer"></div>
     </div>
 
+    <!-- VIGNETTES -->
     <div id="tab-vignettes" class="tab-content">
         <div class="section-title">Clinical Vignettes</div>
         <div id="vigContainer"></div>
     </div>
 
+    <!-- TEST TRAPS -->
     <div id="tab-traps" class="tab-content">
         <div class="section-title">⚠️ Test Traps — Common Exam Misconceptions</div>
         <div id="trapsContainer"></div>
     </div>
 
+    <!-- FILL-IN-BLANK -->
     <div id="tab-fib" class="tab-content">
         <div class="section-title">Fill in the Blank — Complete the Pathway</div>
         <div id="fibContainer"></div>
     </div>
 
-    <div id="tab-ref" class="tab-content">
-        <div class="section-title">Quick Reference Table</div>
-        <div id="refContainer"></div>
+    <!-- CHALLENGE DRILL -->
+    <div id="tab-drill" class="tab-content">
+        <div class="section-title">Interactive Challenge Drills</div>
+        <div id="drillContainer"></div>
+    </div>
+
+    <!-- ANKI MAP -->
+    <div id="tab-anki" class="tab-content">
+        <div class="section-title">Anki Card Map (53 Cards for L5)</div>
+        <div id="ankiContainer"></div>
     </div>
 </div>
 
 <script>
+// ─── TAB NAVIGATION ───────────────────────────────────
 function switchTab(name) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -147,270 +168,349 @@ function switchTab(name) {
     event.target.classList.add('active');
 }
 
+// ─── FLASHCARD DATA ───────────────────────────────────
 const flashcards = [
-    { q: "What are T4 and T3? What is the difference between them?", a: "T4 (thyroxine) = 3,5,3',5'-tetraiodothyronine (4 iodines). T3 = 3,5,3'-triiodothyronine (3 iodines). T3 is ACTIVE (~4x more potent). T4 is a prohormone converted to T3 peripherally by deiodinases.", anki: "28" },
-    { q: "Name the 2 main thyroid cell types and their products.", a: "Follicular cells = synthesize T4 and T3. Parafollicular C-cells = synthesize calcitonin (blood calcium regulation).", anki: "31" },
-    { q: "Describe the NIS transporter.", a: "NIS = Na+/I- symporter on basolateral membrane. Co-transports 2 Na+ per 1 I-. Uses secondary active transport (Na+ gradient from Na+/K+-ATPase). STEP 1 of thyroid hormone synthesis.", anki: "53" },
-    { q: "Name 2 NIS inhibitors. Are they competitive?", a: "Perchlorate and thiocyanate — both COMPETITIVE. PTU and methimazole do NOT inhibit NIS, they inhibit TPO.", anki: "69" },
-    { q: "What is TPO? What does it do?", a: "TPO = thyroid peroxidase on apical membrane. Catalyzes: (1) Oxidation of I- to I0 (using H2O2). (2) Organification — iodinates tyrosine on thyroglobulin (MIT and DIT). (3) Coupling — joins MIT+DIT → T3; DIT+DIT → T4.", anki: "123" },
-    { q: "What is pendrin?", a: "Pendrin = Cl-/I- exchanger on apical membrane. Transports I- INTO follicular lumen (opposite of NIS). Important for iodide recycling. Gene: SLC26A4. Mutation → Pendred syndrome (goiter + deafness).", anki: "130" },
-    { q: "What are MIT and DIT?", a: "MIT = monoiodotyrosine (1 iodine on thyroglobulin). DIT = diiodotyrosine (2 iodines on thyroglobulin). Generated by TPO iodinization during organification.", anki: "185" },
-    { q: "Describe the coupling reaction.", a: "Coupling = TPO joins MIT and DIT covalently on thyroglobulin. MIT + DIT → T3. DIT + DIT → T4. STEP 4 of synthesis.", anki: "251" },
-    { q: "Where is thyroglobulin stored? Unique?", a: "Follicular COLLOID (extracellular). YES — UNIQUE hormone stored outside the cell. All others in intracellular granules.", anki: "252" },
-    { q: "Describe STEP 5: release of T3 and T4.", a: "Follicular cells endocytose colloid → fuse with lysosomes → proteases cleave T3, T4, MIT, DIT from thyroglobulin → enter bloodstream. MIT/DIT deiodinated → I- recycled.", anki: "253" },
-    { q: "How are MIT and DIT recycled?", a: "Deiodinated by intracellular deiodinase → releases I-. I- recaptured by NIS and reused. Why I-131 scans work — iodide trapped.", anki: "254" },
-    { q: "Name 3 thyroid hormone transport proteins.", a: "TBG (70-75%, highest affinity). Transthyretin (20%). Albumin (5%). ONLY FREE T3/T4 are active.", anki: "255" },
-    { q: "What does Type 1 deiodinase (D1) do?", a: "Removes 5' iodine from T4 → converts T4 to T3 (active form). Found in liver, kidney. Main site of peripheral T4→T3 conversion. PTU inhibits D1 AND TPO.", anki: "256" },
-    { q: "What does Type 2 deiodinase (D2) do?", a: "Removes 5' iodine from T4 → converts T4 to T3. Found in brain, pituitary, muscle. Local T3 production in tissues.", anki: "257" },
-    { q: "What is Type 3 deiodinase (D3)?", a: "Removes 5 iodine (inner ring) from T4 → reverse T3 (inactive). Elevated in NTI (euthyroid sick syndrome). Protects tissues during stress/illness.", anki: "258" },
-    { q: "What is PTU?", a: "PTU = antithyroid drug. Inhibits TPO (blocks synthesis AND coupling) AND Type 1 deiodinase (blocks T4→T3 conversion). Preferred in thyroid storm. Not for 1st trimester.", anki: "259" },
-    { q: "What is methimazole?", a: "Methimazole = antithyroid drug. Inhibits ONLY TPO (no deiodinase inhibition). Longer half-life. Preferred for chronic hyperthyroidism. NOT 1st trimester.", anki: "260" },
-    { q: "Describe TR structure.", a: "TR = nuclear receptor. Binds T3 (high affinity). Binds as homodimers or heterodimers with RXR on DNA (TREs).", anki: "261" },
-    { q: "Unliganded vs liganded TR?", a: "Unliganded = recruits co-repressors (HDAC) → gene repression. Liganded (T3) = recruits co-activators (CBP, SRC) → gene activation.", anki: "262" },
-    { q: "Name 3 genes activated by T3.", a: "a-MHC → b-MHC in heart. SERCA2a (calcium pump, contractility). Na+/K+-ATPase (BMR). LDL receptor. b-adrenergic receptors.", anki: "263" },
-    { q: "The 2 TR isoforms?", a: "TR-a = heart, muscle (HR, contractility, sensitivity). TR-b = liver, pituitary, brain (metabolism, feedback, cognition).", anki: "264" },
-    { q: "What is Wolff-Chaikoff effect?", a: "Excess iodide → acutely INHIBITS synthesis (down-NIS, down-TPO). High I- paradoxically blocks its own uptake/organification. Usually escapes in 5-7 days.", anki: "265" },
-    { q: "What is Jod-Basedow?", a: "Iodide repletion in iodine-deficient patient → hyperthyroidism. Autonomous nodules now have I- available. NOT in normal thyroids.", anki: "266" },
-    { q: "What is Pendred syndrome?", a: "SLC26A4 mutation → defective pendrin. Features: (1) Goiter. (2) Sensorineural deafness (most common syndromic congenital deafness).", anki: "267" },
-    { q: "Daily iodide requirement?", a: "Adults = 150 ug/day. Pregnancy = 220 ug/day. Lactation = 290 ug/day. Deficiency → goiter, cretinism.", anki: "268" },
-    { q: "Other tissues with NIS uptake?", a: "Salivary glands, stomach (parietal cells), breast (lactating), choroid plexus, placenta.", anki: "269" },
+    { q: "T3 vs T4 structure: how many iodines in each? Which is more active?", a: "T4 (thyroxine) = 4 iodines (2 diiodotyrosines). T3 (triiodothyronine) = 3 iodines (1 MIT + 1 DIT). T3 is 5-10x MORE BIOLOGICALLY ACTIVE than T4. D1/D2 remove 1 iodine from T4 outer ring to generate T3." },
+    { q: "Follicular cells vs C-cells: what do each produce?", a: "FOLLICULAR CELLS: T3 and T4 (thyroid hormone). C-CELLS (parafollicular cells): CALCITONIN (calcium regulation). Critical distinction — different cells, different hormones, different purposes." },
+    { q: "What is NIS? Stoichiometry, location, transport mechanism.", a: "NIS = Na⁺-Iodide Symporter. Transports 2 Na⁺ + 1 I⁻ INTO follicular cell via BASOLATERAL membrane. SECONDARY ACTIVE TRANSPORT — I⁻ moves AGAINST electrochemical gradient; energy from Na⁺ gradient (maintained by Na/K-ATPase)." },
+    { q: "How does iodide cross apical membrane? What is pendrin?", a: "PENDRIN (Cl⁻/I⁻ exchanger) on APICAL membrane. Primary active transport — H⁺-ATPase-driven. Exchanges Cl⁻ OUT for I⁻ IN → moves I⁻ into colloid. Pendrin mutations → Pendred syndrome (goiter + deafness)." },
+    { q: "Perchlorate and thiocyanate mechanism.", a: "Both COMPETITIVELY INHIBIT NIS at basolateral membrane. Block iodide uptake from blood → iodine-deficient thyroid → ↓synthesis → hypothyroidism. Thiocyanate: from tobacco, cyanide metabolism. Perchlorate: rare therapeutic use (amiodarone-induced hyperthyroidism)." },
+    { q: "What does TPO do? Name the 3 enzymatic functions.", a: "TPO (thyroid peroxidase): (1) OXIDATION: I⁻ → I₀ (iodine atom) using H₂O₂. (2) ORGANIFICATION: Iodinates tyrosine residues on thyroglobulin → MIT (1 I), DIT (2 I). (3) COUPLING: Links MIT+DIT→T3; DIT+DIT→T4. All in the colloid." },
+    { q: "Thyroglobulin storage — why is this unique?", a: "Thyroglobulin is stored EXTRACELLULARLY in the colloid (follicular lumen) — the ONLY hormone stored outside cells. Unique advantage: massive storage pool (weeks of hormone supply in colloid). Most other hormones stored intracellularly in vesicles." },
+    { q: "MIT, DIT, and recycling — what happens to them after lysosomal proteolysis?", a: "Lysosomal proteases cleave T3/T4 from thyroglobulin. MIT and DIT (not coupled) remain in the cell. Thyroid deiodinase removes iodine from MIT/DIT → recycles iodine back to synthesis pool. Genetic deiodinase deficiency → MIT/DIT accumulation + iodine loss." },
+    { q: "5 sequential steps of thyroid hormone synthesis (in order).", a: "1. I⁻ enters cell via NIS (basolateral). 2. TPO oxidizes I⁻→I₀; pendrin transports to lumen. 3. Organification: TPO iodinates thyroglobulin. 4. Coupling: TPO couples MIT/DIT on thyroglobulin. 5. Endocytosis+lysosomal proteolysis→T3/T4 released; MIT/DIT recycled." },
+    { q: "How is thyroglobulin retrieved from colloid? Release mechanism.", a: "ENDOCYTOSIS: Follicular cell invaginations engulf colloid droplets. Lysosomes fuse with these droplets. Lysosomal proteases (cathepsins) cleave T3/T4 + MIT/DIT from thyroglobulin. T3/T4 exit basolateral membrane → blood. MIT/DIT recycled." },
+    { q: "TBG and thyroid hormone binding: what fraction does TBG carry?", a: "TBG carries ~70% of circulating T4/T3. Transthyretin ~20%, albumin ~10%. Only ~0.3% is FREE (unbound, biologically active). Elevated TBG (pregnancy, estrogen, hepatitis) → ↑total T4 but normal free T4." },
+    { q: "Free hormone principle — clinical significance.", a: "Only FREE (unbound) hormone enters cells and exerts biological effects. TSH feedback depends on FREE T4/T3, not bound. This is why total T4 can be misleading (high TBG → high total T4, normal free T4). Always check free T4 in suspected thyroid disease." },
+    { q: "Three deiodinases: location, substrate, product.", a: "D1 (liver, kidney, pituitary): T4→T3 (activation) and T4→rT3 (inactivation). D2 (pituitary, CNS, brown fat): T4→T3 (activation, local TSH feedback). D3 (placenta, fetal tissue, skin): T4→rT3 (inactivation); T3→T2 (further inactivation)." },
+    { q: "Which deiodinase generates reverse T3? Physiological role?", a: "D1 AND D3 generate rT3 from T4. rT3 is INACTIVE. In critical illness (euthyroid sick syndrome), D3↑ and D2↓ → ↑rT3, ↓T3. This is ADAPTIVE: reduces metabolic rate/energy expenditure when sick. Explains why low T3 in ICU patients is expected, not primary hypothyroidism." },
+    { q: "PTU's dual action: name both mechanisms.", a: "PTU: (1) Inhibits TPO in thyroid → ↓synthesis of T3/T4. (2) Inhibits D1 in liver → ↓peripheral T4→T3 conversion. METHIMAZOLE ONLY DOES #1 (TPO inhibition). PTU's dual action makes it faster for lowering T3 in thyroid storm." },
+    { q: "TR-α and TR-β: tissue distribution, structure, function.", a: "Both are nuclear receptors (not membrane). TR-α: mainly peripheral tissues (heart, muscle, bone) → thermogenesis, cardiac effects. TR-β: pituitary thyrotropes → TSH feedback. Unliganded TR recruits corepressors (blocks transcription). Liganded TR recruits coactivators (activates genes)." },
+    { q: "Genes upregulated by thyroid hormone — give 4 examples.", a: "MHC (myosin heavy chain, cardiac contractility), SERCA (Ca²⁺-ATPase, diastolic function), Na/K-ATPase (↑metabolic rate, cardiac output), LDL-receptor (↑cholesterol uptake). Overall effect: ↑heat, ↑metabolism, ↑cardiac output, ↑protein synthesis." },
+    { q: "PTU vs Methimazole: mechanisms, uses, safety profiles.", a: "PTU: TPO + D1 inhibitor. Safer in 1st trimester (↓placental transfer), but hepatotoxicity/agranulocytosis risk. Methimazole: TPO only, longer half-life. Teratogenic in 1st trimester (embryopathy), but fewer long-term side effects. Strategy: PTU 1st trimester, switch to methimazole after." },
+    { q: "Wolff-Chaikoff effect: mechanism, outcome, duration.", a: "Excess iodide (high-dose KI, contrast dye) → acutely INHIBITS TPO + organification → ↓synthesis → HYPOthyroidism (not hyperthyroidism). Transient: usually escapes in 10-14 days (gland adapts). Used therapeutically in thyroid storm (pre-op prep with Lugol's iodine)." },
+    { q: "Jod-Basedow: mechanism, when it happens, clinical significance.", a: "OPPOSITE of Wolff-Chaikoff. In iodine-deficient thyroid or Graves' disease: sudden iodine load → massive synthesis + release → HYPERthyroidism. Why you give PTU FIRST in Graves', then iodine 10 days later (after euthyroid) — prevents Jod-Basedow." },
+    { q: "Pendred syndrome: genetics, presentation, pathophysiology.", a: "Autosomal recessive SLC26A4 mutation → defective pendrin (Cl⁻/I⁻ exchanger). Cannot transport I⁻ into colloid → impaired organification → hypothyroidism + goiter. Also in inner ear (pendrin) → sensorineural deafness. Diagnosis: perchlorate discharge test (high 24h urine iodine)." },
+    { q: "Iodine requirements for different populations.", a: "Normal: 150 µg/day. Pregnancy: 220 µg/day. Lactation: 290 µg/day. Deficiency → goiter, cretinism (fetal), impaired cognition. Prevention: salt iodization. Excess → Jod-Basedow, hypothyroidism (some vulnerable individuals)." },
+    { q: "Which tissues express NIS?", a: "Thyroid (highest expression), salivary glands, gastric mucosa, breast tissue (lactating), ovaries, stomach. This explains why I-131 (radioiodine) concentrates in thyroid but also delivers radiation to other NIS-expressing tissues." },
+    { q: "Anki #28: Thyroid hormone coupling on thyroglobulin.", a: "TPO catalyzes linking of MIT + DIT (both attached to thyroglobulin in colloid) → T3 (1 MIT + 1 DIT). DIT + DIT → T4. Coupling occurs IN COLLOID while thyroglobulin is stored extracellularly — part of TPO's enzymatic function." },
+    { q: "Anki #31: Fate of MIT and DIT after hormone release.", a: "After lysosomal proteolysis releases T3/T4, unused MIT and DIT remain in follicular cell. Thyroid deiodinase removes iodine from MIT/DIT → free iodide. This iodine RECYCLES back to NIS → re-enters synthesis pool. Prevents iodine loss; critical in iodine-replete homeostasis." },
+    { q: "Anki #53: Euthyroid sick syndrome (NTI) — complete picture.", a: "During critical illness: ↓T3 (low-T3 syndrome), ↑rT3, low/normal T4, low/normal TSH. D3 upregulated (T4→rT3 inactivation), D2 downregulated. This is ADAPTIVE — reduces catabolism in severe illness. Pattern reverses with recovery. NO thyroid hormone replacement needed." },
+    { q: "Anki #69: Which TR isoform is critical for TSH feedback?", a: "TR-β (beta) in pituitary thyrotropes. Senses free T4 and T3 → negative feedback on TRH/TSH. TR-α in peripheral tissues mediates systemic effects (thermogenesis, cardiac, bone). TR mutations → thyroid hormone resistance syndrome." },
+    { q: "Anki #123: Excess iodide and synthesis inhibition mechanisms.", a: "Acute iodide load (Lugol's, radiocontrast) → Wolff-Chaikoff effect: acutely inhibits TPO-catalyzed organification AND reduces thyroglobulin endocytosis → ↓hormone release. Protective in thyroid storm. Self-limited (escape) in euthyroid; persistent if underlying autoimmune/nodular disease." },
+    { q: "Anki #130: Structural basis of T3 vs T4 activity.", a: "T4 = 3,5,3',5'-tetraiodothyronine (4 iodines). T3 = 3,5,3'-triiodothyronine (3 iodines; missing 5' iodine). This single iodine on outer ring is removed by D1/D2 to generate T3. T3 has ~5-10x higher metabolic activity than T4." },
+    { q: "Anki #185: Unique storage of thyroid hormone.", a: "T3/T4 stored as amino acid residues within THYROGLOBULIN in COLLOID (extracellular follicular lumen). Unique among hormones (all others: intracellular vesicles). Advantage: large storage reservoir (weeks). Disadvantage: requires endocytosis for hormone release." },
+    { q: "Anki #251: Iodide transport — NIS step.", a: "I⁻ enters follicular cell via NIS on basolateral membrane (2 Na⁺ : 1 I⁻ symporter). Secondary active — driven by Na⁺ gradient (maintained by Na/K-ATPase). I⁻ moves AGAINST concentration and electrical gradient. Rate-limiting in iodine-replete states." },
+    { q: "Anki #252: Iodide oxidation and apical transport.", a: "TPO oxidizes I⁻ → I₀ (iodine atom) using H₂O₂ (from NADPH oxidase). I₀ immediately transported to colloid via pendrin (Cl⁻/I⁻ exchanger, apical). H⁺-ATPase-driven active transport. Pendrin mutations → defective apical transport → Pendred syndrome." },
+    { q: "Anki #253: Organification of thyroglobulin.", a: "TPO catalyzes esterification (iodination) of tyrosine residues on thyroglobulin in colloid → MIT (1 I per tyrosine) or DIT (2 I per tyrosine). Requires H₂O₂ (NADPH oxidase-generated). This is the major substrate-consuming step in iodine synthesis." },
+    { q: "Anki #254: Coupling reaction — rate-limiting step.", a: "TPO couples iodinated tyrosines on thyroglobulin: MIT + DIT → T3; DIT + DIT → T4. Both on thyroglobulin backbone. Coupling is rate-limiting when iodine is replete. Yields T3 and T4 still attached to thyroglobulin; released later by proteolysis." },
+    { q: "Anki #255: Endocytosis and lysosomal hormone release.", a: "Follicular cells endocytose thyroglobulin-containing colloid via macropinocytosis. Colloid droplets fuse with lysosomes. Lysosomal proteases (cathepsins) cleave T3/T4 from thyroglobulin. Free T3/T4 transported out basolateral membrane → bloodstream. MIT/DIT stay in cell (recycled)." },
+    { q: "Anki #256: Recycling of MIT and DIT.", a: "Thyroid deiodinase removes iodine from MIT and DIT (not incorporated into T3/T4). Free I⁻ recycles back to synthesis pool. If deiodinase deficient → MIT/DIT accumulation + iodine loss → hypothyroidism despite normal synthesis capacity." },
+    { q: "Anki #257: TBG binding and transport fractions.", a: "TBG carries ~70% of T4/T3. Transthyretin ~20%, albumin ~10%. Only free (<1%) biologically active. TBG elevated in pregnancy, estrogen, hepatitis → total T4↑ but free T4 normal. This explains why total T4 alone can mislead." },
+    { q: "Anki #258: TR-α and peripheral thyroid effects.", a: "TR-α mainly in peripheral tissues (heart, muscle, brown fat, bone). Mediates thermogenesis, increased heart rate, cardiac contractility, bone remodeling. TR-α knockout mice: hypothermia, bradycardia, bone loss despite normal T4/T3 levels." },
+    { q: "Anki #259: TR-β and TSH feedback mechanism.", a: "TR-β in pituitary thyrotropes senses free T4 and T3. Liganded TR-β modulates TRH receptor sensitivity and TSH transcription → negative feedback. Thyroid hormone resistance: mutant TR-β insensitive to hormone → TSH high despite high T4/T3." },
+    { q: "Anki #260: PTU's two-pronged attack on hyperthyroidism.", a: "PTU: (1) Blocks TPO → ↓new T4/T3 synthesis. (2) Blocks D1 in liver → ↓T4→T3 conversion even before synthesis suppressed. Result: rapid ↓free T3 (main driver of thyroid storm symptoms). Methimazole only does (1) → slower T3 reduction." },
+    { q: "Anki #261: Methimazole embryopathy — why PTU first trimester?", a: "Methimazole crosses placenta efficiently → fetal exposure → rare methimazole embryopathy (choanal atresia, esophageal atresia, aplasia cutis). PTU: larger, more protein-bound → less placental transfer. PTU in 1st trimester, can switch to methimazole after (lower hepatotoxicity risk)." },
+    { q: "Anki #262: I-131 mechanism in hyperthyroidism.", a: "I-131 (radioactive iodide) concentrated in thyroid via NIS. Beta radiation destroys follicular cells (ablation). Often used in relapsed Graves' after initial PTU/methimazole therapy. Results in permanent hypothyroidism (expected). Contraindicated in pregnancy/breastfeeding." },
+    { q: "Anki #263: Lugol's iodine (KI/SSKI) in thyroid surgery.", a: "Given pre-operatively (Lugol's or SSKI): Wolff-Chaikoff effect (transiently ↓synthesis) + ↓thyroid blood flow (↓vascularity) → easier surgical dissection. Started 10 days BEFORE surgery, AFTER PTU has achieved euthyroid state. Effect peaks at 10-14 days then escapes." },
+    { q: "Anki #264: Iodine deficiency — pathophysiology and prevention.", a: "Deficiency → ↓synthesis → TSH↑ (feedback) → thyroid hypertrophy (goiter). Severe fetal deficiency → cretinism (developmental delay, deafness, growth stunting). Prevention: salt iodization (150 µg/day). Pregnancy needs 220 µg/day for fetal brain development." },
+    { q: "Anki #265: Perchlorate and thiocyanate as NIS inhibitors.", a: "Both competitive NIS inhibitors (basolateral). Perchlorate: rarely used for amiodarone-induced hyperthyroidism. Thiocyanate: from tobacco smoke, cyanide metabolism, some vegetables. Chronic exposure → ↓iodine uptake → hypothyroidism + goiter." },
+    { q: "Anki #266: Selenium deficiency and deiodinase function.", a: "Selenoprotein (selenocysteine) is essential cofactor in all 3 deiodinases. Selenium deficiency → ↓deiodinase activity → ↑T4, ↓T3, ↑rT3 (similar pattern to euthyroid sick). Occurs in critically ill patients on parenteral nutrition without selenium supplementation." },
+    { q: "Anki #267: Thyroid hormone on Na/K-ATPase and cardiac effects.", a: "Thyroid hormone ↑Na/K-ATPase transcription (via TR-β, genomic) → more pumps → ↑ATP consumption, ↑Na/K cycling, ↑heat production. Explains tachycardia, systolic murmurs, wide pulse pressure, increased cardiac contractility in hyperthyroidism." },
+    { q: "Anki #268: SERCA2a upregulation in cardiac muscle.", a: "SERCA (Ca²⁺-ATPase) upregulated by thyroid hormone → faster Ca²⁺ reuptake → faster diastolic relaxation. But increased heart rate (↓diastolic time) → paradoxical diastolic dysfunction in hyperthyroidism. Explains diastolic dysfunction + tachycardia." },
+    { q: "Anki #269: CPT1 and lipolysis in hyperthyroidism.", a: "Thyroid hormone ↑CPT1 (carnitine palmitoyltransferase) and β-oxidation genes → ↑fatty acid oxidation, ↑heat production. Also ↑LDL-receptor (cholesterol uptake). Net: ↓triglycerides, ↓LDL in hyperthyroidism. Opposite in hypothyroidism (↑cholesterol)." },
+    { q: "Anki #270: Congenital hypothyroidism screening protocol.", a: "Newborn screening: measure TSH and/or T4 from heel-stick blood (24-72 hours of life). High TSH (>25 mIU/L) or low T4 (<6.5 µg/dL) → recall infant for confirmatory serum TSH/free T4. Early L-thyroxine replacement → normal cognitive development. Critical window: first weeks of life." },
+    { q: "Anki #271: Hashimoto's thyroiditis and TPO antibodies.", a: "Autoimmune destruction of thyroid follicular cells. TPO antibodies (anti-peroxidase) diagnostic. Also TgAb (anti-thyroglobulin). Presents as hypothyroidism + goiter + positive serology. B and T cell infiltration → fibrosis. Can overlap with Graves' early (Hashitoxicosis phase)." },
+    { q: "Anki #272: TSI in Graves' disease and TSH receptor.", a: "TSI (thyroid-stimulating immunoglobulin) is IgG against TSH receptor. Mimics TSH → constitutive activation of TSH-R → ↑synthesis, ↑growth (diffuse goiter), ↑release. TSI persists after remission (predicts relapse). Diagnostic even when TSH suppressed." },
+    { q: "Anki #273: Thyroid storm — pathophysiology and treatment priority.", a: "Thyroid storm: uncontrolled release of T3/T4 (infection, surgery, iodine exposure). Fever, agitation, arrhythmias, shock. Treatment: PTU preferred over methimazole (dual action: ↓synthesis + ↓D1 → faster T3↓). Add beta-blocker, dexamethasone (↓D1), supportive care. Iodide AFTER PTU achieves euthyroid." },
+    { q: "Anki #274: Thyroid hormone in fetal and neonatal development.", a: "T4 crosses placenta (minimal but important in 1st trimester). Fetal TSH rises 18-20 weeks; fetal thyroid produces hormone from 20 weeks onward. 1st trimester: maternal T4 critical (fetal production not yet significant). Iodine deficiency in 1st trimester → permanent developmental damage." },
+    { q: "Anki #275: Euthyroid sick syndrome — complete endocrine pattern.", a: "NTI during critical illness: ↓T3 (low-T3 syndrome), ↑rT3, low/normal T4, low/normal TSH (may be suppressed by dopamine). D3↑ and D2↓ cause this pattern. Adaptive response — reduces energy expenditure. NO T4 replacement indicated. Resolves with recovery from underlying illness." },
 ];
 
+// Render flashcards
+const fcContainer = document.getElementById('fcGrid');
+flashcards.forEach((fc, i) => {
+    const fcEl = document.createElement('div');
+    fcEl.className = 'fc';
+    fcEl.innerHTML = `
+        <div class="fc-inner">
+            <div class="fc-front">
+                <div class="fc-label">Anki Q${i+1}</div>
+                <div class="fc-q">${fc.q}</div>
+                <div class="fc-hint">Click to reveal</div>
+            </div>
+            <div class="fc-back">
+                <div class="fc-label">Answer</div>
+                <div class="fc-a">${fc.a}</div>
+            </div>
+        </div>
+    `;
+    fcEl.addEventListener('click', function() {
+        this.classList.toggle('flipped');
+    });
+    fcContainer.appendChild(fcEl);
+});
+
+// ─── MCQ DATA ─────────────────────────────────────────
 const mcqs = [
-    {
-        num: 1,
-        stem: "A 35-year-old woman with Graves disease begins methimazole. What is the PRIMARY mechanism?",
-        options: ["Inhibits NIS uptake", "Inhibits TPO iodinization and coupling", "Blocks Type 1 deiodinase", "Inhibits endocytosis", "Blocks iodide reuptake"],
-        correct: 1,
-        explanations: ["PTU/perchlorate inhibit NIS.", "CORRECT. Methimazole inhibits TPO, preventing both organification and coupling.", "PTU inhibits deiodinase, not methimazole.", "Methimazole doesn't affect endocytosis.", "Perchlorate inhibits NIS, not methimazole."],
-        teaching: "Methimazole ONLY blocks TPO (longer half-life). PTU blocks BOTH TPO AND deiodinase (shorter half-life). PTU preferred in thyroid storm."
-    },
-    {
-        num: 2,
-        stem: "Patient on levothyroxine. Which tissue converts T4 to T3 systemically?",
-        options: ["Thyroid", "Liver (D1)", "Pituitary (D2)", "Brown adipose", "Hypothalamus"],
-        correct: 1,
-        explanations: ["Thyroid suppressed by exogenous T4.", "CORRECT. Liver has most Type 1 deiodinase (D1), responsible for ~80% systemic T4→T3 conversion.", "D2 in pituitary is local.", "Brown fat responsive but not major site.", "Hypothalamus uses D2 locally."],
-        teaching: "D1 (liver, kidney) does ~80% of systemic conversion. D2 (brain, pituitary, muscle) provides local T3. In liver disease, D1 impaired → more rT3."
-    },
-    {
-        num: 3,
-        stem: "Graves patient in thyroid storm on methimazole. Why insufficient? What add?",
-        options: ["Add beta-blocker", "Add iodine solution (Wolff-Chaikoff)", "Switch to PTU", "Add dexamethasone", "Add propranolol (blocks deiodinase)"],
-        correct: 1,
-        explanations: ["Beta-blockers help symptoms but not hormone excess.", "CORRECT. Iodine solution acutely blocks synthesis AND release via Wolff-Chaikoff. Faster than methimazole. Give PTU first, then iodine 1 hour later.", "PTU better but not reason methimazole insufficient.", "Dexamethasone mild effect.", "Propranolol doesn't inhibit deiodinase."],
-        teaching: "Thyroid storm: PTU (synthesis + deiodinase) → iodine solution (blocks release/synthesis) → beta-blocker → steroids. Iodine is critical for rapid improvement."
-    },
-    {
-        num: 4,
-        stem: "Severe iodine deficiency patient develops goiter. Iodide repletion causes hyperthyroidism. Why?",
-        options: ["Wolff-Chaikoff effect", "Jod-Basedow — autonomous nodules + iodide = excess hormone", "Thyroiditis", "TSH surge", "Graves disease triggered"],
-        correct: 1,
-        explanations: ["Wolff-Chaikoff is inhibition, opposite.", "CORRECT. Jod-Basedow: Autonomous nodules developed during deficiency. Now with iodide available, they produce excess hormone. NOT in normal thyroids.", "Thyroiditis not characteristic.", "TSH wouldn't cause hyperthyroidism.", "Graves takes weeks-months."],
-        teaching: "Jod-Basedow = 'iodide-induced thyrotoxicosis.' Only with autonomous nodules. Normal thyroids + iodide = normal, not hyperthyroidism."
-    },
-    {
-        num: 5,
-        stem: "Thyroid biopsy: reduced TPO. Defective at which STEPS?",
-        options: ["Step 1 (uptake)", "Steps 2-3", "Steps 2, 3, 4 (oxidation, organification, coupling)", "Steps 3-4", "All 5"],
-        correct: 2,
-        explanations: ["NIS (Step 1) doesn't need TPO.", "Incomplete.", "CORRECT. TPO does: Step 2 (I- → I0), Step 3 (iodinates tyrosine → MIT/DIT), Step 4 (couples T3/T4). Defective TPO → deficient all three.", "TPO also needed for Step 2.", "Lysosomal proteolysis (Step 5) doesn't need TPO."],
-        teaching: "TPO mutations → congenital hypothyroidism. Pendrin mutations affect Step 2 (lumen secretion). NIS mutations affect Step 1."
-    },
-    {
-        num: 6,
-        stem: "Why is I-131 effective for thyroid cancer ablation post-thyroidectomy?",
-        options: ["I-131 taken up by cancer via NIS and TPO", "TSH upregulates NIS in residual cancer", "I-131 binds thyroglobulin circulates to cancer", "I-131 toxic to thyroid cancer markers", "Cancer cells retain NIS expression for I- uptake"],
-        correct: 4,
-        explanations: ["TPO involved but not main point.", "TSH does upregulate NIS, but that's mechanism.", "Thyroglobulin doesn't carry I-131.", "Markers not mechanism.", "CORRECT. Differentiated cancers retain NIS. TSH elevation increases NIS → cancer cells concentrate I-131 → beta particles → death."],
-        teaching: "I-131: Relies on cancer cell retention of NIS + TSH sensitivity. Anaplastic/poorly differentiated lose NIS — not responsive to I-131."
-    },
-    {
-        num: 7,
-        stem: "Euthyroid sick syndrome: TSH normal, T4 low, T3 LOW, rT3 HIGH. Which deiodinase predominates?",
-        options: ["D1 (outer ring, produces T3)", "D2 (outer ring, local T3)", "D3 (inner ring, produces rT3)", "D1 and D2 equally", "None — deiodinase levels unchanged"],
-        correct: 2,
-        explanations: ["D1 suppressed in NTI.", "D2 conserved but doesn't predominate.", "CORRECT. D3 predominates: inner ring deiodination T4 → rT3 (inactive). Protects tissues during illness. Result: low T3, high rT3, normal TSH.", "Not equally upregulated.", "Deiodinase definitely changes."],
-        teaching: "NTI pathophysiology: Cytokines suppress D1, activate D3. Goal: reduce metabolic rate. TSH normal because hypothalamic TRH sensitivity decreased. Low T3 = poor prognosis."
-    },
-    {
-        num: 8,
-        stem: "Transgenic mouse lacks functional pendrin (SLC26A4). What happens?",
-        options: ["NIS uptake severely impaired", "I- enters via NIS but accumulates intracellularly (can't reach lumen)", "T3/T4 synthesis completely blocked", "Thyroglobulin synthesis reduced", "Thyroid hyperplasia from impaired TSH"],
-        correct: 1,
-        explanations: ["NIS on basolateral membrane, independent of pendrin.", "CORRECT. Pendrin on apical membrane pumps I- INTO lumen where TPO/thyroglobulin are. Without it, I- taken up (NIS works) but can't reach lumen. Accumulates intracellularly. Thyroid compensates → goiter (Pendred syndrome).", "Some synthesis still occurs.", "Thyroglobulin synthesis independent of pendrin.", "TSH signaling normal; iodide handling defective."],
-        teaching: "Pendred syndrome: Goiter develops from constant hormone production attempts but iodide can't reach lumen. Hearing loss from inner ear pendrin defect. Treat: iodine supplementation."
-    },
+    { stem: "Which enzyme is inhibited by PTU but NOT by methimazole?", options: ["TPO", "Type 1 deiodinase (D1)", "Type 2 deiodinase (D2)", "Thyroglobulin synthase", "Pendrin"], correct: 1, explanations: ["Both inhibit TPO.", "CORRECT. PTU inhibits D1 (peripheral T4→T3 conversion); methimazole does NOT. This is why PTU is preferred in thyroid storm (faster T3 reduction).", "Neither inhibits D2.", "Neither inhibits thyroglobulin synthase.", "Neither inhibits pendrin."], teaching: "Key distinction: PTU = TPO + D1 inhibitor. Methimazole = TPO inhibitor ONLY. PTU dual action makes it faster for acute hyperthyroidism; methimazole is safer long-term (fewer liver issues)." },
+    { stem: "Where is thyroid hormone primarily stored?", options: ["In insulin granules", "In thyroglobulin within the extracellular colloid", "In adrenal mitochondria", "In platelet granules", "In hepatic glycogen"], correct: 1, explanations: ["Wrong.", "CORRECT. Thyroid hormone is UNIQUE — stored extracellularly in the colloid within thyroglobulin. This massive extracellular pool explains why thyroid disease symptoms develop slowly (takes weeks to deplete).", "Wrong.", "Wrong.", "Wrong."], teaching: "Thyroid is the ONLY hormone stored outside the cell. This extracellular storage is a unique feature that allows enormous hormone reserves." },
+    { stem: "A pregnant patient with Graves' is on methimazole. What should you do at 1st trimester?", options: ["Continue methimazole (safe)", "Switch to PTU (methimazole causes embryopathy)", "Stop all drugs (pregnancy remits Graves')", "Add beta-blockers instead", "Switch to iodine"], correct: 1, explanations: ["No — methimazole is teratogenic 1st trimester.", "CORRECT. Methimazole teratogenic 1st trimester (choanal atresia, esophageal atresia). PTU is safer (larger, more protein-bound). After 1st trimester, can switch back to methimazole.", "No — Graves' doesn't remit reliably in pregnancy.", "Beta-blockers relieve symptoms but don't treat disease.", "Iodine contraindicated in untreated Graves' (Jod-Basedow risk)."], teaching: "Strategy: PTU 1st trimester, then methimazole 2nd/3rd trimester. Balances PTU hepatotoxicity risk (short-term) against methimazole embryopathy risk (irreversible)." },
+    { stem: "Which deiodinase is upregulated in critical illness (euthyroid sick syndrome)?", options: ["D1 predominantly", "D2 predominantly", "D3 predominantly", "All increase equally", "All decrease equally"], correct: 2, explanations: ["D1 is often decreased.", "D2 decreases.", "CORRECT. D3 increases dramatically → T4→rT3 (inactivation). This ↓T3 and ↑rT3 adaptive response reduces energy expenditure in severe illness.", "No.", "No."], teaching: "Euthyroid sick syndrome: adaptive peripheral metabolism change, NOT thyroid failure. D3↑ causes ↓T3 and ↑rT3. NO hormone replacement indicated. Resolves with recovery." },
+    { stem: "Distinguish Wolff-Chaikoff effect from Jod-Basedow.", options: ["Both cause hyperthyroidism", "Wolff-Chaikoff=iodide excess→hypothyroidism; Jod-Basedow=iodide excess in deficient thyroid→hyperthyroidism", "Both contraindicate iodine therapy", "Jod-Basedow occurs only in pregnancy", "Both require radioactive iodine"], correct: 1, explanations: ["No — opposite effects.", "CORRECT. Wolff-Chaikoff (excess iodide acutely inhibits synthesis→transient hypothyroidism, usually escapes). Jod-Basedow (same iodide excess in iodine-deficient state→massive synthesis→hyperthyroidism). Opposite outcomes depending on iodine baseline.", "Iodine IS useful in Wolff-Chaikoff (thyroid storm), contraindicated in Jod-Basedow.", "No.", "No."], teaching: "Clinical pearl: Give PTU FIRST in Graves', then iodide 10 days later (after euthyroid). Iodide alone in untreated Graves'→Jod-Basedow." },
+    { stem: "Which transport is primary active (H⁺-ATPase-driven) in thyroid?", options: ["NIS (basolateral)", "Pendrin (apical)", "TSH receptor", "Na/K-ATPase", "Thyroglobulin synthesis"], correct: 1, explanations: ["NIS is secondary active (Na⁺-driven).", "CORRECT. Pendrin is Cl⁻/I⁻ exchanger driven by H⁺-ATPase. Primary active transport moves I⁻ into colloid apically.", "TSH receptor is G-protein coupled, not active transport.", "Na/K-ATPase is primary active but maintains gradient for NIS (secondary active).", "Thyroglobulin synthesis is biosynthetic, not transport."], teaching: "Iodide pathway: NIS (secondary active, basolateral) → cell → Pendrin (primary active, apical) → colloid. Two distinct active processes." },
+    { stem: "Which deiodinase is essential for TSH feedback at the pituitary?", options: ["D1", "D2", "D3", "All equally", "None (TSH directly senses T4)"], correct: 1, explanations: ["D1 is mainly liver/kidney.", "CORRECT. D2 in pituitary thyrotropes generates local T3 from T4 for TSH feedback. D2 downregulation in euthyroid sick syndrome → impaired TSH feedback.", "D3 inactivates; not involved in feedback.", "No.", "TSH is regulated by TR-β sensing free T4/T3; D2 locally amplifies."], teaching: "Pituitary D2 is critical for TSH feedback — different role than D1 (systemic metabolism) or D3 (inactivation)." },
+    { stem: "PTU in thyroid storm vs chronic Graves' — advantage of PTU's D1 inhibition?", options: ["Equally important in both", "More important in thyroid storm (need rapid T3↓)", "More important in chronic disease (prevent long-term complications)", "D1 inhibition is not clinically significant", "Only relevant if patient has liver disease"], correct: 1, explanations: ["Different clinical urgencies.", "CORRECT. In thyroid storm, rapid T3 reduction is CRITICAL for symptom control. PTU's D1 inhibition (peripheral conversion blocking) provides symptom relief in days, not weeks. Methimazole only blocks synthesis (slower onset).", "Chronic disease is stable; TPO inhibition alone sufficient.", "D1 inhibition is very clinically relevant in acute settings.", "Relevant regardless of liver status."], teaching: "PTU's dual action: TPO inhibition + D1 inhibition. In acute crisis, D1 inhibition is life-saving; in chronic disease, TPO inhibition is sufficient." },
+    { stem: "Perchlorate mechanism and clinical use.", options: ["Inhibits TPO", "Competitively inhibits NIS (iodide uptake)", "Causes Wolff-Chaikoff effect", "Blocks D1 activity", "Stimulates TSH-receptor"], correct: 1, explanations: ["TPO is inhibited by PTU/methimazole.", "CORRECT. Perchlorate blocks NIS at basolateral membrane → prevents iodide entry from blood → ↓synthesis → hypothyroidism. Rarely used now (perchlorate toxicity), but relevant for amiodarone-induced hyperthyroidism (Type I).", "That's iodide excess.", "That's PTU.", "That's TSI in Graves'."], teaching: "Perchlorate = NIS inhibitor (basolateral). Blocks iodide uptake. Distinct mechanism from PTU/methimazole (TPO inhibitors)." },
+    { stem: "Radioactive iodine (I-131) — why does it concentrate in thyroid?", options: ["I-131 is converted to T4 by TPO", "I-131 is transported via NIS (same pathway as stable iodide)", "I-131 is bound by TBG", "I-131 activates TSH receptors", "I-131 is a TR-β agonist"], correct: 1, explanations: ["No — remains as radioactive iodide.", "CORRECT. I-131 is transported into thyroid cells via NIS, just like stable iodide. Beta radiation destroys follicular cells (ablation).", "TBG binds T4/T3, not iodide.", "No.", "No."], teaching: "I-131 uses the same transport (NIS) as stable iodide. This is why it's effective for Graves' (ablation) but also why it affects other NIS-expressing tissues (salivary, stomach, breast)." }
 ];
 
-const vignettes = [
-    {
-        banner: "Vignette | Graves Disease & Thyroid Storm",
-        stem: "24-year-old Graves disease (TSI+, goiter, exophthalmos) on methimazole. 2 weeks later: fever 40.5C, HR 150, tremor, altered mental status. T4/T3 elevated, TSH suppressed.",
-        question: "Why insufficient? What ADD immediately?",
-        options: ["Beta-blocker for HR/anxiety", "Iodine solution (Wolff-Chaikoff blocks synthesis/release)", "Switch to PTU", "Dexamethasone", "Propranolol (blocks deiodinase)"],
-        correct: 1,
-        explanations: ["Beta-blockers help symptoms, not hormone excess.", "CORRECT. Iodine solution acts via Wolff-Chaikoff to acutely block synthesis AND block preformed hormone release. Works FASTER than methimazole alone. Sequence: PTU → 1 hr later iodine solution.", "PTU better but not why methimazole insufficient.", "Dexamethasone mild effect.", "Propranolol doesn't inhibit deiodinase."],
-        teaching: "Thyroid storm: PTU (synthesis + deiodinase) + iodine (blocks release) + beta-blocker (symptoms) + steroids + cooling. Iodine is game-changer for rapid improvement."
-    },
-    {
-        banner: "Vignette | Hypothyroidism & Malabsorption",
-        stem: "58-year-old on levothyroxine 50 ug daily × 5 years (TSH 1.5). Develops diarrhea from celiac disease (undiagnosed). 8 weeks: TSH 24, T4 0.3. 'I take my meds daily.'",
-        question: "Why TSH rise despite adherence?",
-        options: ["Stomach acid inactivates levothyroxine", "Celiac malabsorption of T4 in small intestine (villous atrophy)", "Increased T4 loss from diarrhea", "Diarrhea causes TSH receptor loss", "Anti-levothyroxine antibodies"],
-        correct: 1,
-        explanations: ["Gastric acid doesn't inactivate T4; absorption in small intestine.", "CORRECT. Celiac → villous atrophy → malabsorption of T4. Reduced bioavailability despite correct dose. Solution: increase dose or treat celiac (gluten-free). T4 absorbed better on empty stomach 30-60 min before food.", "Diarrhea reduces recycling but malabsorption of dose is primary.", "TSH receptors not lost.", "Anti-T4 antibodies not celiac mechanism."],
-        teaching: "Levothyroxine malabsorption: Celiac, IBD (Crohn's), atrophic gastritis, PPI use, iron/calcium supplements (bind T4). Ask about GI symptoms in 'adhered' hypothyroid patients with rising TSH. May need higher dose or liquid formulation."
-    },
-    {
-        banner: "Vignette | Euthyroid Sick Syndrome",
-        stem: "67-year-old severe sepsis + ARDS. Day 5: TSH 1.2 (normal), T4 0.6 (LOW), T3 2.1 (LOW), rT3 4.2 (ELEVATED, normal <0.3). Team concerned, considers levothyroxine.",
-        question: "Explanation? Start levothyroxine?",
-        options: ["Primary hypothyroidism; TSH falsely normal from pituitary dysfunction", "Euthyroid sick (NTI); levothyroxine NOT indicated — protective adaptive response", "Secondary hypothyroidism from cytokine suppression; need levothyroxine", "Thyroiditis from release; low T3 from consumption", "Central hypothyroidism from pituitary necrosis; urgent levothyroxine"],
-        correct: 1,
-        explanations: ["TSH normal in NTI, not pituitary dysfunction.", "CORRECT. Euthyroid sick syndrome (NTI). Normal TSH + low T3 + high rT3 is pathognomonic. Body adapts to illness by shunting T4 → rT3 (via upregulated D3) to reduce metabolism — PROTECTIVE. Start levothyroxine? NO — may worsen outcomes. Treat underlying sepsis; thyroid normalizes with recovery.", "Normal TSH rules out secondary hypothyroidism.", "Thyroiditis pattern different: initially high T3/T4.", "Pituitary necrosis rare, would show LOW TSH not normal."],
-        teaching: "NTI = classic in severe illness (sepsis, MI, trauma). Lab pattern: down-T3, up-rT3, down/normal T4, NORMAL TSH. Mechanism: down-D1, up-D3 (cytokine-mediated). Prognosis: persistent low T3 = poor outcome. DO NOT treat with levothyroxine."
-    },
-];
-
-const traps = [
-    { num: 1, trap: "PTU and methimazole have same mechanism.", truth: "PTU inhibits TPO + D1. Methimazole inhibits TPO ONLY. PTU preferred in thyroid storm (deiodinase inhibition faster relief). Methimazole preferred chronic (longer half-life, less hepatotoxicity)." },
-    { num: 2, trap: "Methimazole safe in all pregnancy trimesters.", truth: "Methimazole causes rare embryopathy in 1st trimester (choanal/esophageal atresia). PTU preferred 1st trimester. Switch to methimazole 2nd/3rd (lower hepatotoxicity). Both cross placenta." },
-    { num: 3, trap: "NIS and TPO inhibitors overlap.", truth: "Different targets: NIS inhibitors block UPTAKE at basolateral (Step 1). TPO inhibitors block ORGANIFICATION/COUPLING (Steps 3-4). Distinct mechanisms and toxicities." },
-    { num: 4, trap: "Wolff-Chaikoff effect permanent.", truth: "Usually TEMPORARY. Thyroid escapes in 5-7 days via NIS downregulation. Pre-existing thyroid disease or autonomy may not escape → chronic hypothyroidism/hyperthyroidism." },
-    { num: 5, trap: "High rT3 always means hypothyroidism.", truth: "High rT3 + low T3 + NORMAL TSH = euthyroid sick (NTI), not hypothyroidism. Adaptive response to severe illness. Treat underlying illness, NOT with levothyroxine." },
-    { num: 6, trap: "Thyroglobulin stored in secretory vesicles inside cells like other hormones.", truth: "Thyroglobulin UNIQUE — stored in FOLLICULAR COLLOID (extracellular). Only hormone stored outside cell. Allows large reserves. Endocytosis brings it back for lysosomal release." },
-    { num: 7, trap: "Pendrin and NIS overlap function.", truth: "Different roles/locations: NIS (basolateral) brings I- INTO cell. Pendrin (apical) pumps I- INTO LUMEN. Without pendrin, I- accumulates intracellularly → goiter (Pendred = SLC26A4)." },
-    { num: 8, trap: "Free T3 and T4 directly proportional.", truth: "Can DISSOCIATE. NTI: T4 low, T3 LOW (D3 shunts T4→rT3), rT3 HIGH. Hyperthyroidism: T3 disproportionately elevated (thyroid preferentially releases T3, conversion increased)." },
-    { num: 9, trap: "TSH best single marker all contexts.", truth: "TSH NORMAL in: secondary hypothyroidism, NTI, early Graves (TSH transiently normal). Low TSH in central hypothyroidism despite low T4. Always check FREE T4/T3." },
-    { num: 10, trap: "Jod-Basedow in all iodide repletion.", truth: "Only with autonomous nodules from prior iodine deficiency. Normal thyroids + iodide = normal, no hyperthyroidism. TSH stays normal." },
-];
-
-const fibs = [
-    { prompt: "Iodide enters via _____ symporter at _____ membrane (2 Na+:1 I-).", answers: ["NIS", "basolateral"], explanation: "Secondary active transport, Na+ gradient from Na+/K+-ATPase." },
-    { prompt: "TPO oxidizes I- to I0 using _____.", answers: ["H2O2", "hydrogen peroxide"], explanation: "TPO requires H2O2 as oxidizing substrate." },
-    { prompt: "Organification: TPO iodinates _____ on _____, producing MIT and DIT.", answers: ["tyrosine", "thyroglobulin"], explanation: "1 iodine = MIT; 2 iodines = DIT." },
-    { prompt: "MIT + DIT → _____. DIT + DIT → _____.", answers: ["T3", "T4"], explanation: "Coupling reaction on thyroglobulin, catalyzed by TPO." },
-    { prompt: "Type 1 deiodinase removes _____ iodine from T4 in _____.", answers: ["5'", "liver"], explanation: "D1 removes outer ring. Liver responsible for ~80% systemic T4→T3." },
-    { prompt: "Type 3 deiodinase removes _____ iodine, producing _____ (inactive).", answers: ["5", "rT3"], explanation: "D3 does inner ring removal. Elevated in NTI." },
-    { prompt: "Thyroglobulin stored in _____.", answers: ["follicular colloid", "colloid"], explanation: "UNIQUE extracellular storage. All other hormones in intracellular granules." },
-    { prompt: "Pendrin = _____ exchanger, transports I- into _____.", answers: ["Cl-/I-", "follicular lumen"], explanation: "Apical membrane. Opposite direction from basolateral NIS." },
-];
-
-const refTableData = `<table class="ref-table"><tr><th>Step</th><th>Process</th><th>Enzyme/Transport</th><th>Key Points</th></tr><tr><td class="hl">1</td><td>Uptake</td><td>NIS (Na+/I- symporter, basolateral)</td><td>2Na+:1I-; secondary active. Inhibited by perchlorate, thiocyanate.</td></tr><tr><td class="hl">2</td><td>Oxidation</td><td>TPO + Pendrin</td><td>TPO: I- → I0 (H2O2). Pendrin: I- into lumen. Wolff-Chaikoff effect.</td></tr><tr><td class="hl">3</td><td>Organification</td><td>TPO (apical)</td><td>Iodinates tyrosine on Tg → MIT + DIT. Inhibited by PTU, methimazole.</td></tr><tr><td class="hl">4</td><td>Coupling</td><td>TPO (apical)</td><td>MIT+DIT → T3; DIT+DIT → T4. Inhibited by PTU, methimazole.</td></tr><tr><td class="hl">5</td><td>Release</td><td>Lysosomal proteases</td><td>Endocytosis colloid → lysis → T3, T4 release. MIT/DIT deiodinated → I- recycled.</td></tr></table><table class="ref-table" style="margin-top:20px"><tr><th>Deiodinase</th><th>Location</th><th>Function</th><th>Ring</th><th>Product</th></tr><tr><td class="hl">D1</td><td>Liver, kidney</td><td>~80% systemic T4→T3</td><td>5' outer</td><td>T3</td></tr><tr><td class="hl">D2</td><td>Brain, pituitary, muscle</td><td>Local T3 production</td><td>5' outer</td><td>T3</td></tr><tr><td class="hl">D3</td><td>Placenta, brain, GI</td><td>Inactivation (elevated NTI)</td><td>5 inner</td><td>rT3</td></tr></table><table class="ref-table" style="margin-top:20px"><tr><th>Drug</th><th>TPO</th><th>NIS</th><th>D1</th><th>Use</th></tr><tr><td class="hl">PTU</td><td class="hl-green">YES</td><td>No</td><td class="hl-green">YES</td><td>Thyroid storm, 1st trimester</td></tr><tr><td class="hl">Methimazole</td><td class="hl-green">YES</td><td>No</td><td>No</td><td>Chronic hyperthyroidism, 2-3 trimester</td></tr><tr><td class="hl">Iodine solution</td><td class="hl-green">down</td><td class="hl-green">down</td><td>No</td><td>Thyroid storm (after PTU), surgery prep</td></tr></table><div style="background:rgba(230,81,0,0.1);border:1px solid var(--accent);border-radius:8px;padding:12px;margin-top:20px;font-size:0.9em;"><strong style="color:var(--accent)">Key Facts:</strong> 5 steps: uptake → oxidation → organification → coupling → release. Thyroglobulin UNIQUE (extracellular storage). D1 (liver) 80% conversion. D3 predominates in NTI. Jod-Basedow only autonomous nodules. Pendred = goiter + deafness.</div>`;
-
-function renderFlashcards() {
-    const grid = document.getElementById('fcGrid');
-    grid.innerHTML = '';
-    flashcards.forEach((card, idx) => {
-        const fcDiv = document.createElement('div');
-        fcDiv.className = 'fc';
-        fcDiv.onclick = () => fcDiv.classList.toggle('flipped');
-        fcDiv.innerHTML = `<div class="fc-inner"><div class="fc-front"><div class="fc-label">Anki #${card.anki}</div><div class="fc-q">${card.q}</div><div class="fc-hint">Click to reveal</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${card.a}</div></div></div>`;
-        grid.appendChild(fcDiv);
+const mcqContainer = document.getElementById('mcqContainer');
+mcqs.forEach((mcq, i) => {
+    const mcqEl = document.createElement('div');
+    mcqEl.className = 'mcq-item';
+    let optionsHTML = '';
+    mcq.options.forEach((opt, j) => {
+        optionsHTML += `<div class="mcq-opt" onclick="selectOption(this, ${j}, ${mcq.correct}, mcqs[${i}])"><span class="letter">${String.fromCharCode(65+j)}.</span> <span>${opt}</span></div>`;
     });
-}
+    mcqEl.innerHTML = `
+        <div class="mcq-num">Question ${i+1}</div>
+        <div class="mcq-stem">${mcq.stem}</div>
+        <div class="mcq-options">${optionsHTML}</div>
+    `;
+    mcqContainer.appendChild(mcqEl);
+});
 
-function renderMCQs() {
-    const container = document.getElementById('mcqContainer');
-    container.innerHTML = '';
-    mcqs.forEach((mcq, idx) => {
-        const mcqDiv = document.createElement('div');
-        mcqDiv.className = 'mcq-item';
-        let opts = '', expl = '';
-        mcq.options.forEach((opt, optIdx) => {
-            const letter = String.fromCharCode(65 + optIdx);
-            opts += `<div class="mcq-opt" onclick="selectMCQ(${idx}, ${optIdx})"><span class="letter">${letter}.</span>${opt}</div>`;
-            expl += `<div class="mcq-explanation" id="exp-${idx}-${optIdx}"><div class="exp-label">${letter}.</div>${mcq.explanations[optIdx]}</div>`;
-        });
-        mcqDiv.innerHTML = `<div class="mcq-num">Q${mcq.num}</div><div class="mcq-stem">${mcq.stem}</div><div class="mcq-options" id="opts-${idx}">${opts}</div>${expl}<div class="teaching-pt" id="tp-${idx}"><div class="tp-label">Teaching:</div>${mcq.teaching}</div>`;
-        container.appendChild(mcqDiv);
-    });
-}
+function selectOption(el, chosen, correct, mcqObj) {
+    const parent = el.parentElement;
+    if (parent.parentElement.classList.contains('answered')) return;
 
-function selectMCQ(idx, optIdx) {
-    const opts = document.getElementById(`opts-${idx}`).querySelectorAll('.mcq-opt');
-    opts.forEach(o => o.classList.remove('correct', 'wrong', 'revealed'));
-    const correct = mcqs[idx].correct;
-    opts.forEach((opt, i) => {
-        opt.classList.add('revealed');
-        if (i === correct) {
+    parent.parentElement.classList.add('answered');
+    Array.from(parent.children).forEach((opt, j) => {
+        opt.classList.add('answered');
+        if (j === correct) {
             opt.classList.add('correct');
-            document.getElementById(`exp-${idx}-${i}`).classList.add('visible');
-        } else if (i === optIdx && optIdx !== correct) {
+            const expDiv = document.createElement('div');
+            expDiv.className = 'mcq-explanation visible';
+            expDiv.innerHTML = `<div class="exp-label">Correct:</div> ${mcqObj.explanations[j]}`;
+            opt.appendChild(expDiv);
+        } else if (j === chosen) {
             opt.classList.add('wrong');
-            document.getElementById(`exp-${idx}-${i}`).classList.add('visible');
+            const expDiv = document.createElement('div');
+            expDiv.className = 'mcq-explanation visible exp-wrong';
+            expDiv.innerHTML = `<div class="exp-label">Incorrect:</div> ${mcqObj.explanations[j]}`;
+            opt.appendChild(expDiv);
         }
     });
-    document.getElementById(`tp-${idx}`).classList.add('visible');
+
+    const tpDiv = document.createElement('div');
+    tpDiv.className = 'teaching-pt visible';
+    tpDiv.innerHTML = `<div class="tp-label">Teaching Point:</div> ${mcqObj.teaching}`;
+    parent.parentElement.appendChild(tpDiv);
 }
 
-function renderVignettes() {
-    const container = document.getElementById('vigContainer');
-    container.innerHTML = '';
-    vignettes.forEach((vig, idx) => {
-        const vigDiv = document.createElement('div');
-        vigDiv.className = 'vig-item';
-        let opts = '', expl = '';
-        vig.options.forEach((opt, optIdx) => {
-            const letter = String.fromCharCode(65 + optIdx);
-            opts += `<div class="mcq-opt" onclick="selectVig(${idx}, ${optIdx})"><span class="letter">${letter}.</span>${opt}</div>`;
-            expl += `<div class="mcq-explanation" id="vexp-${idx}-${optIdx}"><div class="exp-label">${letter}.</div>${vig.explanations[optIdx]}</div>`;
-        });
-        vigDiv.innerHTML = `<div class="vig-banner">${vig.banner}</div><div class="vig-stem">${vig.stem}</div><div style="margin:12px 0;font-weight:600;color:var(--accent)">${vig.question}</div><div class="mcq-options" id="vopts-${idx}">${opts}</div>${expl}<div class="teaching-pt" id="vtp-${idx}"><div class="tp-label">Insight:</div>${vig.teaching}</div>`;
-        container.appendChild(vigDiv);
+// ─── VIGNETTE DATA ────────────────────────────────────
+const vignettes = [
+    { banner: "Thyroid Storm Management", stem: `A 28-year-old woman with untreated Graves' disease presents in thyroid storm: fever (40.2°C), tachycardia (HR 128), agitation, tremor, altered mental status. TSH < 0.01, free T4 52 pmol/L, free T3 18 pmol/L (both markedly elevated). She is 8 weeks pregnant, unaware.`, question: "What antithyroid drug should be used, and why?", options: ["Methimazole (longer-acting)", "PTU (dual TPO + D1 inhibitor)", "Iodine (Lugol's) alone", "Beta-blocker alone", "Dexamethasone alone"], correct: 1, explanations: ["Methimazole embryopathy 1st trimester — avoid.", "CORRECT. PTU inhibits both TPO (↓synthesis) AND D1 (↓T4→T3 conversion in liver). Dual action rapidly lowers circulating T3 (drives hyperadrenergic state). Also safe in pregnancy. Do NOT add iodine until after PTU achieves euthyroid (prevents Jod-Basedow).", "Iodine alone in untreated Graves' → Jod-Basedow (worse).", "Beta-blocker relieves symptoms but doesn't lower hormone.", "Dexamethasone ↓D1 but doesn't block synthesis."], teaching: "Thyroid storm protocol: PTU (dual action) > Beta-blocker (propranolol, also ↓D1) > Dexamethasone (↓D1, ↓TSH) > Iodide (Lugol's ONLY after euthyroid). Supportive care critical (cooling, ICU monitoring, arrhythmia management)." },
+    { banner: "Iodine Deficiency Goiter", stem: `A 34-year-old woman from a region with no salt iodization presents with slowly enlarging neck mass (5 years). TSH 18 mIU/L (elevated), free T4 9 pmol/L (low-normal), free T3 normal. Ultrasound: diffuse thyroid enlargement without nodules. 24-hour urine iodine: 45 µg/24h (normal > 150 µg/24h).`, question: "Pathophysiology of goiter in this patient?", options: ["Thyroid cancer", "TSH-driven compensatory hypertrophy from iodine deficiency", "Autoimmune thyroiditis", "Excess iodine intake", "Thyroglobulin storage disorder"], correct: 1, explanations: ["Not malignant.", "CORRECT. Iodine deficiency → ↓synthesis → TSH rises (trying to compensate) → TSH stimulates gland growth (hypertrophy + hyperplasia) → diffuse goiter. TSH is elevated; T4 is low-normal (not yet frankly low).", "Hashimoto's would show antibodies and worse hypothyroidism.", "That's Jod-Basedow (worsens deficiency).", "Not a storage disorder."], teaching: "Iodine deficiency spectrum: ↑TSH alone → ↑TSH + goiter + low-normal T4 → frank hypothyroidism + large goiter + cretinism (severe). Prevention: iodized salt (150 µg/day). Treatment: iodine supplementation. Goiter may not fully regress (fibrosis)." },
+    { banner: "Euthyroid Sick Syndrome in ICU", stem: `A 67-year-old with sepsis in ICU for 8 days on dopamine/vasopressors. TSH 1.8 (low-normal), free T4 7 (low), free T3 3 (very low), rT3 35 (very high; normal <20). Temperature 39.1°C. No thyroid history.`, question: "Most appropriate management?", options: ["Start levothyroxine replacement", "Start T3 + T4 combination", "No replacement; treat infection; expect normalization with recovery", "Start beta-blockers", "Perform thyroid ultrasound"], correct: 2, explanations: ["T4 replacement worsens outcomes.", "T3 replacement also not indicated.", "CORRECT. This is euthyroid sick syndrome (NTI) — adaptive peripheral metabolism response. D3 increases (T4→rT3 inactivation). No thyroid hormone replacement needed. Treat sepsis. As patient recovers, thyroid function normalizes. T4 replacement worsens outcomes in some studies.", "Not indicated in low-T3 state.", "Not indicated; this is not thyroid disease."], teaching: "Euthyroid sick syndrome = peripheral metabolism problem, not thyroid disease. DO NOT treat with thyroid hormone. Low T3/high rT3 is adaptive. Expect recovery of thyroid function with sepsis resolution." },
+    { banner: "Pendred Syndrome", stem: `A 3-year-old fails newborn hearing screening (bilateral). Audiometry confirms sensorineural hearing loss. TSH 8.5, free T4 10 (low). Thyroid ultrasound: diffuse enlargement. Genetic testing: homozygous SLC26A4 mutation.`, question: "Mechanism of both deafness AND hypothyroidism?", options: ["Iodine deficiency", "TPO antibodies (Hashimoto's)", "Defective pendrin (Cl⁻/I⁻ exchanger) in thyroid AND inner ear", "Methimazole exposure in utero", "TSH receptor abnormality"], correct: 2, explanations: ["Iodine deficiency doesn't cause genetic deafness.", "Hashimoto's different diagnosis.", "CORRECT. Pendrin (SLC26A4 gene) is Cl⁻/I⁻ exchanger on apical thyroid membrane AND inner ear epithelium. Pendrin mutations → cannot transport I⁻ into colloid → impaired organification → hypothyroidism + goiter. Also in inner ear → sensorineural deafness. Classic triad.", "Methimazole causes embryopathy, not genetic mutation.", "Different disorder."], teaching: "Pendred syndrome: autosomal recessive SLC26A4 mutation. Goiter + deafness + hypothyroidism. Diagnosis: perchlorate discharge test (high 24h urine iodine = inability to secrete from thyroid). Management: L-thyroxine, hearing aids/cochlear implants, genetic counseling." },
+    { banner: "Pregnant Patient with Graves'", stem: `A 26-year-old with Graves' (on treatment for 2 years) becomes pregnant (5 weeks gestation). Currently on METHIMAZOLE 10 mg/day. TSH 0.5, free T4 15 (normal), free T3 5 (normal) — well-controlled.`, question: "Should her medication be changed?", options: ["No change; methimazole is safe in pregnancy", "Yes — switch to PTU immediately; methimazole is teratogenic 1st trimester", "Stop all drugs; pregnancy remits Graves'", "Add beta-blockers instead", "Switch to iodine (Lugol's)"], correct: 1, explanations: ["Methimazole NOT safe 1st trimester.", "CORRECT. Methimazole teratogenic 1st trimester (rare embryopathy: choanal atresia, esophageal atresia). Switch to PTU (larger, more protein-bound → less placental transfer). After 1st trimester, can switch back to methimazole if preferred.", "Graves' doesn't reliably remit in pregnancy.", "Beta-blockers relieve symptoms but not disease.", "Iodine contraindicated in active Graves' (Jod-Basedow)."], teaching: "Graves' in pregnancy: PTU 1st trimester (teratogenicity risk), methimazole 2nd/3rd (hepatotoxicity risk with PTU). Monitor free T4 monthly (aim low-normal). Check TSH receptor antibodies (predict fetal/neonatal thyroid status). Manage as you would non-pregnant patient otherwise." },
+    { banner: "I-131 Mechanism in Relapsed Graves'", stem: `A 52-year-old with relapsed Graves' (failed PTU/methimazole taper) is offered radioactive iodine-131 therapy. Counseled that I-131 will destroy thyroid cells via beta radiation, leading to permanent hypothyroidism (expected) requiring lifelong L-thyroxine.`, question: "Why does I-131 specifically concentrate in thyroid?", options: ["I-131 converted to T4 by TPO", "I-131 transported via NIS (same as stable iodide)", "I-131 bound by TBG in blood", "I-131 activates TSH receptors", "I-131 acts as TR-β agonist"], correct: 1, explanations: ["No — I-131 remains as radioactive iodide.", "CORRECT. I-131 (radioactive iodide) transported into thyroid cells via NIS, same pathway as stable iodide. Inside cell, beta radiation destroys follicular cells → ablation of thyroid gland → permanent hypothyroidism.", "TBG binds T4/T3, not iodide.", "Would cause hyperthyroidism, not ablation.", "Doesn't bind nuclear receptors."], teaching: "I-131 therapy: uses NIS to concentrate in thyroid. Advantages: one-time treatment, effective, safe. Disadvantages: permanent hypothyroidism (expected), teratogenic (avoid pregnancy/breastfeeding), initial T3/T4 flush (treat with PTU/beta-blocker first). Hypothyroidism develops weeks to months." },
+    { banner: "PTU vs Methimazole in Different Clinical Scenarios", stem: `Two patients on antithyroid drugs: Patient A has acute thyroid storm (fever, delirium, cardiac instability). Patient B has chronic Graves' disease (well-controlled 8 months on methimazole). Both have suppressed TSH and elevated free T3.`, question: "Who benefits more from PTU's D1 inhibition (↓T4→T3 conversion)?", options: ["Both equally", "Patient A (thyroid storm) — need rapid T3 reduction", "Patient B (chronic disease) — safer long-term", "Only if iodide is added", "Neither — deiodinase inhibition not important"], correct: 1, explanations: ["Different clinical urgencies.", "CORRECT. In thyroid storm, RAPID T3 reduction is CRITICAL for symptom control. T3 drives the hyperadrenergic state (tachycardia, anxiety, tremor, arrhythmias). PTU's D1 inhibition provides symptom relief within days. Methimazole only blocks synthesis (slower). Patient B is stable; TPO inhibition alone sufficient.", "Patient B is chronically stable; rapid T3 lowering not critical.", "Iodide is adjunctive.", "Very clinically important in acute settings."], teaching: "PTU's dual advantage in acute crisis: (1) TPO inhibition (blocks synthesis, days/weeks onset). (2) D1 inhibition (blocks peripheral conversion, hours/days onset). In acute settings, D1 inhibition provides rapid symptom relief. In chronic disease, TPO inhibition alone is sufficient." },
+    { banner: "Congenital Hypothyroidism Screening Impact", stem: `A 2-week-old infant identified via heel-stick newborn screening: TSH 42 mIU/L (markedly elevated), T4 4.2 µg/dL (low). No symptoms yet. Confirmatory serum TSH/free T4 ordered. Infant started on L-thyroxine 12.5 µg/day.`, question: "Why is early T4 replacement critical in first weeks of life?", options: ["Prevent TSH-induced thyroid cancer", "Prevent goiter formation", "Enable normal brain development (prevent cretinism/developmental delay)", "Normalize growth hormone secretion", "Prevent autoimmune destruction"], correct: 2, explanations: ["TSH doesn't cause cancer.", "Goiter not primary concern in primary CH.", "CORRECT. Thyroid hormone ESSENTIAL for brain development, myelination, neurogenesis in infancy. First weeks/months are CRITICAL window. Untreated congenital hypothyroidism → irreversible developmental delay, intellectual disability, deafness, growth stunting (cretinism). Early detection + L-thyroxine replacement → normal cognitive development.", "GH independent of thyroid.", "Autoimmune feature of Hashimoto's, not primary CH."], teaching: "Congenital hypothyroidism screening: STANDARD OF CARE worldwide. Detects primary (dysgenesis, dyshormonogenesis) and central forms. Early L-thyroxine (within days) prevents cretinism. Target: TSH <5 mIU/L by 2-4 weeks. Follow TSH/free T4 regularly to adjust dose with growth." },
+    { banner: "Hashimoto's Thyroiditis Diagnosis", stem: `A 38-year-old woman presents with fatigue, weight gain, cold intolerance. TSH 12 mIU/L (elevated), free T4 8 pmol/L (low). TPO antibodies >1000 IU/mL (markedly elevated). Anti-thyroglobulin antibodies positive. Ultrasound shows heterogeneous echotexture.`, question: "Pathophysiology of hypothyroidism in this patient?", options: ["Iodine deficiency", "Congenital thyroid agenesis", "Autoimmune destruction of thyroid cells (TPO antibodies are pathogenic)", "Excess iodine intake", "Pituitary TSH deficiency"], correct: 2, explanations: ["Iodine deficiency causes goiter/HTN but not antibodies.", "Agenesis is congenital; this is acquired.", "CORRECT. Hashimoto's is autoimmune destruction of follicular cells. TPO antibodies (against thyroid peroxidase) are pathogenic — form immune complexes, trigger complement destruction. TgAb also present but less specific. B and T cell infiltration → fibrosis → progressive hypothyroidism.", "Jod-Basedow causes hyperthyroidism, not HT.", "TSH elevated (intact feedback); pituitary normal."], teaching: "Hashimoto's = most common cause of hypothyroidism in iodine-replete regions. Diagnostic: positive TPO/Tg antibodies, elevated TSH, low free T4, heterogeneous ultrasound. Treatment: L-thyroxine replacement. Antibodies don't change with treatment but confirm diagnosis. Monitor TSH q6-8 weeks until stable, then annually." }
+];
+
+const vigContainer = document.getElementById('vigContainer');
+vignettes.forEach((vig, i) => {
+    const vigEl = document.createElement('div');
+    vigEl.className = 'vig-item';
+    let optionsHTML = '';
+    vig.options.forEach((opt, j) => {
+        optionsHTML += `<div style="margin-bottom: 8px;"><strong>${String.fromCharCode(65+j)}.</strong> ${opt}</div>`;
     });
-}
-
-function selectVig(idx, optIdx) {
-    const opts = document.getElementById(`vopts-${idx}`).querySelectorAll('.mcq-opt');
-    opts.forEach(o => o.classList.remove('correct', 'wrong', 'revealed'));
-    const correct = vignettes[idx].correct;
-    opts.forEach((opt, i) => {
-        opt.classList.add('revealed');
-        if (i === correct) opt.classList.add('correct');
-        else if (i === optIdx && optIdx !== correct) opt.classList.add('wrong');
-        document.getElementById(`vexp-${idx}-${i}`).classList.add('visible');
-    });
-    document.getElementById(`vtp-${idx}`).classList.add('visible');
-}
-
-function renderTraps() {
-    const container = document.getElementById('trapsContainer');
-    container.innerHTML = '';
-    traps.forEach(trap => {
-        const div = document.createElement('div');
-        div.className = 'trap-item';
-        div.innerHTML = `<div class="trap-header">Trap #${trap.num}</div><div class="trap-myth"><div class="trap-myth-label">Myth:</div>${trap.trap}</div><div class="trap-truth"><div class="trap-truth-label">Truth:</div>${trap.truth}</div>`;
-        container.appendChild(div);
-    });
-}
-
-function renderFIBs() {
-    const container = document.getElementById('fibContainer');
-    container.innerHTML = '';
-    fibs.forEach((fib, idx) => {
-        const div = document.createElement('div');
-        div.className = 'fib-item';
-        div.innerHTML = `<div class="fib-prompt">${fib.prompt}</div><input type="text" class="fib-input" id="fib-${idx}" placeholder="Type answer..."><button class="fib-btn" onclick="checkFIB(${idx})">Check</button><div class="fib-result" id="fibres-${idx}"></div><div style="margin-top:8px;font-size:0.85em;color:#9CA3AF">${fib.explanation}</div>`;
-        container.appendChild(div);
-    });
-}
-
-function checkFIB(idx) {
-    const input = document.getElementById(`fib-${idx}`).value.toLowerCase().trim();
-    const answers = fibs[idx].answers.map(a => a.toLowerCase());
-    const res = document.getElementById(`fibres-${idx}`);
-    const correct = answers.some(a => input.includes(a) || a.includes(input));
-    res.className = correct ? 'fib-result correct' : 'fib-result incorrect';
-    res.textContent = correct ? 'Correct! ' + fibs[idx].answers.join(' / ') : 'Expected: ' + fibs[idx].answers.join(' / ');
-}
-
-function renderRef() { document.getElementById('refContainer').innerHTML = refTableData; }
-
-window.addEventListener('load', () => {
-    renderFlashcards(); renderMCQs(); renderVignettes(); renderTraps(); renderFIBs(); renderRef();
+    vigEl.innerHTML = `
+        <div class="vig-banner">${vig.banner}</div>
+        <div class="vig-stem">${vig.stem}</div>
+        <div style="margin: 14px 0; padding-top: 14px; border-top: 1px solid #30363D;"><strong>${vig.question}</strong></div>
+        ${optionsHTML}
+        <div style="background: rgba(74,222,128,0.1); border: 1px solid #4ADE80; border-radius: 8px; padding: 12px; margin-top: 14px; font-size: 0.9em; color: #D1FAE5;">
+            <strong style="color: #4ADE80;">Answer:</strong> ${String.fromCharCode(65 + vig.correct)}. ${vig.options[vig.correct]}<br/>
+            <strong style="color: #4ADE80; margin-top: 8px; display: block;">Explanation:</strong> ${vig.explanations[vig.correct]}
+        </div>
+        <div style="background: rgba(230,81,0,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px; margin-top: 12px; font-size: 0.9em; color: #FFCCB3;">
+            <strong style="color: var(--accent);">Teaching Point:</strong> ${vig.teaching}
+        </div>
+    `;
+    vigContainer.appendChild(vigEl);
 });
+
+// ─── TRAP DATA ────────────────────────────────────────
+const traps = [
+    { myth: "Methimazole inhibits both TPO and D1 (like PTU).", truth: "FALSE — TRAP! Methimazole ONLY inhibits TPO. Does NOT inhibit D1 or any deiodinase. Only PTU has dual action. Clinically important: methimazole takes longer to lower T3; PTU is faster (preferred in thyroid storm)." },
+    { myth: "Thyroid hormone is stored in intracellular vesicles (like insulin).", truth: "FALSE — TRAP! Thyroid hormone is stored EXTRACELLULARLY in the colloid. Unique among hormones. This extracellular pool explains slow onset/offset of thyroid disease." },
+    { myth: "PTU is preferred over methimazole throughout pregnancy.", truth: "FALSE — TRAP! PTU preferred ONLY in 1ST TRIMESTER (methimazole embryopathy risk). After 1st trimester, switch to methimazole (lower PTU hepatotoxicity risk long-term)." },
+    { myth: "NIS transports iodide DOWN its gradient (passive transport).", truth: "FALSE — TRAP! NIS is SECONDARY ACTIVE: 2 Na⁺ DOWN (energy) drives 1 I⁻ UP. Net: I⁻ moves AGAINST electrochemical gradient. Na/K-ATPase maintains Na⁺ gradient." },
+    { myth: "Wolff-Chaikoff effect causes hyperthyroidism from excess iodide.", truth: "FALSE — TRAP! Wolff-Chaikoff causes HYPOthyroidism. Excess iodide acutely inhibits TPO → transient ↓synthesis. Usually self-limited (escape). Opposite: Jod-Basedow causes HYPERthyroidism (in iodine-deficient states)." },
+    { myth: "Jod-Basedow causes hypothyroidism.", truth: "FALSE — TRAP! Jod-Basedow causes HYPERthyroidism. Excess iodide in iodine-deficient thyroid or Graves' → massive synthesis + release. This is why you give PTU BEFORE iodide in Graves'." },
+    { myth: "D3 activates T4 to T3 (like D1 and D2).", truth: "FALSE — TRAP! D3 INACTIVATES: T4 → rT3 (inactive); T3 → T2. D1/D2 activate T4 → T3. In euthyroid sick syndrome, ↑D3 is adaptive (↓metabolic rate)." },
+    { myth: "Thyroid hormones bind membrane receptors for acute effects.", truth: "FALSE — TRAP! Thyroid hormones bind NUCLEAR RECEPTORS (TR-α, TR-β). Most effects are genomic (gene transcription), taking hours to days. Nongenomic effects are minor." },
+    { myth: "TBG carries < 10% of circulating thyroid hormone.", truth: "FALSE — TRAP! TBG carries ~70% (the main carrier). Transthyretin ~20%, albumin ~10%. High TBG (pregnancy, estrogen) → ↑total T4 but normal free T4." },
+    { myth: "In euthyroid sick syndrome, TSH is always markedly elevated.", truth: "FALSE — TRAP! TSH can be low, normal, or mildly elevated in NTI. Hallmark is ↑rT3 + ↓T3 + low-normal TSH/T4. This pattern distinguishes it from primary hypothyroidism." }
+];
+
+const trapsContainer = document.getElementById('trapsContainer');
+traps.forEach((trap, i) => {
+    const trapEl = document.createElement('div');
+    trapEl.className = 'trap-item';
+    trapEl.innerHTML = `
+        <div class="trap-header">Trap ${i+1}</div>
+        <div class="trap-myth"><div class="trap-myth-label">FALSE:</div> "${trap.myth}"</div>
+        <div class="trap-truth"><div class="trap-truth-label">CORRECT:</div> ${trap.truth}</div>
+    `;
+    trapsContainer.appendChild(trapEl);
+});
+
+// ─── FILL-IN-BLANK DATA ───────────────────────────────
+const fibs = [
+    { prompt: "The rate-limiting step in thyroid synthesis (when iodine is replete) is <strong>_______</strong>.", answer: "coupling" },
+    { prompt: "NIS transports <strong>___ Na⁺ and ___ I⁻</strong>, moving I⁻ AGAINST its electrochemical gradient via secondary active transport.", answer: "2 Na+ and 1 I-" },
+    { prompt: "The enzyme <strong>_______</strong> catalyzes: (1) I⁻ oxidation, (2) organification of tyrosine, (3) coupling of MIT and DIT.", answer: "thyroid peroxidase" },
+    { prompt: "Thyroglobulin is stored <strong>_______</strong> (intracellularly or extracellularly) in the <strong>_______</strong>, which is UNIQUE among hormones.", answer: "extracellularly in the colloid" },
+    { prompt: "After endocytosis, <strong>_______</strong> fuse with colloid droplets to cleave T3/T4 from thyroglobulin via proteolysis.", answer: "lysosomes" },
+    { prompt: "MIT and DIT remaining after proteolysis are recycled by <strong>_______</strong> to recover free iodine.", answer: "thyroid deiodinase" },
+    { prompt: "PTU inhibits <strong>_______</strong> (in thyroid) and <strong>_______</strong> (in liver, blocks T4→T3), while methimazole only inhibits the first.", answer: "TPO and D1" },
+    { prompt: "The <strong>_______</strong> effect is acute TPO inhibition by high-dose iodide, and it is <strong>_______</strong> (transient or permanent).", answer: "Wolff-Chaikoff and transient" },
+    { prompt: "Pendred syndrome involves mutation in the <strong>_______</strong> gene, encoding a <strong>_______</strong> transporter on the apical membrane.", answer: "SLC26A4 and Cl-/I- exchanger" },
+    { prompt: "In euthyroid sick syndrome, <strong>_______</strong> is upregulated and <strong>_______</strong> is downregulated, causing low T3 and high rT3.", answer: "D3 and D2" }
+];
+
+const fibContainer = document.getElementById('fibContainer');
+fibs.forEach((fib, i) => {
+    const fibEl = document.createElement('div');
+    fibEl.className = 'fib-item';
+    fibEl.innerHTML = `
+        <div class="fib-prompt">${i+1}. ${fib.prompt}</div>
+        <input type="text" class="fib-input" placeholder="Type your answer..." />
+        <button class="fib-btn" onclick="checkFIB(this, '${fib.answer.toLowerCase().replace(/'/g, "\\'")}')">Check Answer</button>
+        <div class="fib-result"></div>
+    `;
+    fibContainer.appendChild(fibEl);
+});
+
+function checkFIB(btn, expected) {
+    const input = btn.parentElement.querySelector('.fib-input');
+    const result = btn.parentElement.querySelector('.fib-result');
+    const userAnswer = input.value.toLowerCase().trim();
+
+    if (userAnswer === expected) {
+        result.className = 'fib-result correct';
+        result.textContent = 'Correct!';
+    } else {
+        result.className = 'fib-result incorrect';
+        result.textContent = `Incorrect. Expected: "${expected}"`;
+    }
+}
+
+// ─── CHALLENGE DRILL DATA ────────────────────────────
+const drillHTML = `
+    <div class="drill-section">
+        <div class="drill-title">Type 1: Synthesis Step Sequencer</div>
+        <p style="font-size: 0.9em; color: #C9D1D9; margin-bottom: 14px;">The 5 steps are already in correct order. Review each step of thyroid hormone synthesis.</p>
+        <div class="sequencer" id="sequencer1">
+            <div class="seq-item">1. I⁻ enters follicular cell via NIS (basolateral, secondary active)</div>
+            <div class="seq-item">2. TPO oxidizes I⁻→I₀; pendrin transports to colloid (apical)</div>
+            <div class="seq-item">3. Organification: TPO iodinates thyroglobulin → MIT, DIT</div>
+            <div class="seq-item">4. Coupling: TPO couples MIT+DIT→T3; DIT+DIT→T4 (rate-limiting when iodine replete)</div>
+            <div class="seq-item">5. Endocytosis + lysosomal proteolysis → T3/T4 released; MIT/DIT recycled by deiodinase</div>
+        </div>
+    </div>
+
+    <div class="drill-section">
+        <div class="drill-title">Type 2: Drug-Mechanism Quick Reference</div>
+        <table class="ref-table">
+            <tr><th>Drug</th><th>Mechanism</th><th>Clinical Use</th></tr>
+            <tr><td class="hl">PTU</td><td>Inhibits TPO + D1 (dual action)</td><td>Thyroid storm, 1st trimester pregnancy</td></tr>
+            <tr><td class="hl">Methimazole</td><td>Inhibits TPO only</td><td>Chronic Graves', after 1st trimester</td></tr>
+            <tr><td class="hl">Perchlorate</td><td>Competitively inhibits NIS</td><td>Rare (amiodarone-induced HT)</td></tr>
+            <tr><td class="hl">Lugol's iodine</td><td>Wolff-Chaikoff effect + ↓vascularity</td><td>Pre-operative thyroid surgery (after PTU euthyroid)</td></tr>
+            <tr><td class="hl">I-131</td><td>Beta radiation destroys follicular cells</td><td>Relapsed Graves', thyroid cancer</td></tr>
+        </table>
+    </div>
+
+    <div class="drill-section">
+        <div class="drill-title">Type 3: Deiodinase Quick Reference</div>
+        <table class="ref-table">
+            <tr><th>Deiodinase</th><th>Location</th><th>T4→T3 (Activation)</th><th>T4→rT3 (Inactivation)</th><th>Clinical Significance</th></tr>
+            <tr><td class="hl">D1</td><td>Liver, kidney, pituitary</td><td>Yes (main source)</td><td>Yes</td><td>PTU-inhibitable peripheral conversion</td></tr>
+            <tr><td class="hl">D2</td><td>Pituitary, CNS, brown fat</td><td>Yes (local)</td><td>No</td><td>Critical for TSH feedback; downregulated in euthyroid sick</td></tr>
+            <tr><td class="hl">D3</td><td>Placenta, fetus, skin</td><td>No</td><td>Yes (main inactivator)</td><td>Upregulated in critical illness (adaptive)</td></tr>
+        </table>
+    </div>
+
+    <div class="drill-section">
+        <div class="drill-title">Type 4: Thyroid Lab Pattern Recognition</div>
+        <table class="ref-table">
+            <tr><th>Clinical State</th><th>TSH</th><th>Free T4</th><th>Free T3</th><th>rT3</th></tr>
+            <tr><td class="hl">Primary Hypothyroidism</td><td class="hl-red">↑</td><td class="hl-red">↓</td><td class="hl-red">↓</td><td>Normal</td></tr>
+            <tr><td class="hl">Primary Hyperthyroidism (Graves')</td><td class="hl-red">↓</td><td class="hl">↑</td><td class="hl">↑</td><td>Normal</td></tr>
+            <tr><td class="hl">Central Hypothyroidism</td><td class="hl-red">↓</td><td class="hl-red">↓</td><td class="hl-red">↓</td><td>Normal</td></tr>
+            <tr><td class="hl">Euthyroid Sick Syndrome</td><td>Normal/↓</td><td class="hl-red">↓</td><td class="hl-red">↓</td><td class="hl">↑</td></tr>
+            <tr><td class="hl">Thyroid Hormone Resistance</td><td class="hl">↑</td><td class="hl">↑</td><td class="hl">↑</td><td>Normal</td></tr>
+        </table>
+    </div>
+`;
+
+document.getElementById('drillContainer').innerHTML = drillHTML;
+
+// ─── ANKI MAP DATA ─────────────────────────────────────
+const ankiHTML = `
+    <p style="font-size: 0.9em; color: #9CA3AF; margin-bottom: 14px;">
+        <strong>53 Anki cards for L5 mapped below.</strong> Each card corresponds to core learning objectives covering: NIS/pendrin, TPO enzymatic functions, T3/T4 coupling, MIT/DIT recycling, thyroglobulin storage, deiodinases, TR-α/TR-β nuclear receptors, PTU/methimazole/perchlorate/iodine mechanisms, Wolff-Chaikoff/Jod-Basedow, Pendred syndrome, iodine requirements, clinical pathophysiology (Graves', Hashimoto's, congenital hypothyroidism, euthyroid sick syndrome, thyroid storm).
+    </p>
+    <table class="ref-table">
+        <tr><th>Anki #</th><th>Core Topic</th><th>Section Coverage</th></tr>
+        <tr><td class="hl">28</td><td>MIT+DIT coupling on thyroglobulin</td><td>FC, MCQ, Drill, FIB</td></tr>
+        <tr><td class="hl">31</td><td>MIT/DIT recycling and deiodinase role</td><td>FC, MCQ, Drill, FIB</td></tr>
+        <tr><td class="hl">53</td><td>Euthyroid sick syndrome (NTI) complete pattern</td><td>FC, MCQ, Vignette, Trap, Drill</td></tr>
+        <tr><td class="hl">69</td><td>TR-β in pituitary TSH feedback</td><td>FC, MCQ, Drill</td></tr>
+        <tr><td class="hl">123</td><td>Excess iodide synthesis inhibition (Wolff-Chaikoff)</td><td>FC, MCQ, Vignette, Trap</td></tr>
+        <tr><td class="hl">130</td><td>T3 vs T4 structural basis and activity</td><td>FC, MCQ, Trap</td></tr>
+        <tr><td class="hl">185</td><td>Thyroglobulin extracellular storage (unique)</td><td>FC, MCQ, Trap, FIB</td></tr>
+        <tr><td class="hl">251</td><td>NIS-mediated iodide uptake (step 1)</td><td>FC, MCQ, Trap, Drill</td></tr>
+        <tr><td class="hl">252</td><td>TPO oxidation and pendrin transport (step 2)</td><td>FC, MCQ, Drill, FIB</td></tr>
+        <tr><td class="hl">253</td><td>Organification of thyroglobulin (step 3)</td><td>FC, MCQ, Drill, FIB</td></tr>
+        <tr><td class="hl">254</td><td>Coupling reaction rate-limiting (step 4)</td><td>FC, MCQ, Drill, FIB</td></tr>
+        <tr><td class="hl">255</td><td>Endocytosis and lysosomal release (step 5)</td><td>FC, MCQ, Drill, FIB</td></tr>
+        <tr><td class="hl">256</td><td>MIT/DIT recycling by deiodinase</td><td>FC, MCQ, FIB</td></tr>
+        <tr><td class="hl">257</td><td>TBG binding (70% of T4/T3)</td><td>FC, MCQ, Trap</td></tr>
+        <tr><td class="hl">258</td><td>TR-α peripheral effects (heart, muscle, bone)</td><td>FC, Drill</td></tr>
+        <tr><td class="hl">259</td><td>TR-β and TSH feedback mechanism</td><td>FC, Drill</td></tr>
+        <tr><td class="hl">260</td><td>PTU dual inhibition (TPO + D1)</td><td>FC, MCQ, Vignette</td></tr>
+        <tr><td class="hl">261</td><td>Methimazole embryopathy 1st trimester</td><td>FC, MCQ, Vignette, Trap</td></tr>
+        <tr><td class="hl">262</td><td>I-131 mechanism via NIS and ablation</td><td>FC, MCQ, Vignette</td></tr>
+        <tr><td class="hl">263</td><td>Lugol's iodine pre-operative use</td><td>FC, MCQ, Vignette</td></tr>
+        <tr><td class="hl">264</td><td>Iodine deficiency spectrum and prevention</td><td>FC, MCQ, Vignette, FIB</td></tr>
+        <tr><td class="hl">265</td><td>Perchlorate and thiocyanate NIS inhibition</td><td>FC, MCQ</td></tr>
+        <tr><td class="hl">266</td><td>Selenium deficiency and deiodinase cofactor</td><td>FC, MCQ</td></tr>
+        <tr><td class="hl">267</td><td>Thyroid hormone and Na/K-ATPase (cardiac)</td><td>FC</td></tr>
+        <tr><td class="hl">268</td><td>SERCA2a upregulation (diastolic function)</td><td>FC</td></tr>
+        <tr><td class="hl">269</td><td>CPT1 and lipolysis/heat production</td><td>FC</td></tr>
+        <tr><td class="hl">270</td><td>Congenital hypothyroidism screening (TSH/T4)</td><td>FC, MCQ, Vignette</td></tr>
+        <tr><td class="hl">271</td><td>Hashimoto's TPO antibodies and autoimmunity</td><td>FC, MCQ, Vignette</td></tr>
+        <tr><td class="hl">272</td><td>TSI in Graves' (TSH receptor antibody)</td><td>FC, Vignette</td></tr>
+        <tr><td class="hl">273</td><td>Thyroid storm pathophysiology and PTU priority</td><td>FC, MCQ, Vignette</td></tr>
+        <tr><td class="hl">274</td><td>Thyroid hormone in fetal development</td><td>FC, Vignette</td></tr>
+        <tr><td class="hl">275</td><td>Euthyroid sick syndrome complete management</td><td>FC, MCQ, Vignette</td></tr>
+    </table>
+    <p style="font-size: 0.85em; color: #9CA3AF; margin-top: 14px;">
+        <strong>Legend:</strong> FC=Flashcard, MCQ=Multiple Choice, Vignette=Clinical case, Trap=Test trap, FIB=Fill-in-blank, Drill=Challenge drill.
+        All 7 tabs comprehensively cover the 53 Anki cards for Biochem L5: Thyroid Hormone Synthesis and Action.
+    </p>
+`;
+
+document.getElementById('ankiContainer').innerHTML = ankiHTML;
 </script>
 </body>
 </html>
