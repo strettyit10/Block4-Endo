@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Biochem L3: Sex Steroid Synthesis and Action</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #6A1B9A; --accent-dark: #4A0E6B; --accent-light: rgba(106,27,154,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+
+        /* FLASHCARDS */
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+        .flashcard { background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 20px; cursor: pointer; min-height: 200px; display: flex; align-items: center; justify-content: center; text-align: center; transition: all 0.3s; position: relative; perspective: 1000px; }
+        .flashcard:hover { background: #252B32; border-color: var(--accent); }
+        .flashcard.flipped { background: #1a1a2e; border-color: var(--accent); }
+        .flashcard-inner { position: relative; width: 100%; height: 100%; }
+        .flashcard-front, .flashcard-back { position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; backface-visibility: hidden; }
+        .flashcard-front { color: var(--accent); font-weight: 600; font-size: 0.95em; line-height: 1.4; }
+        .flashcard-back { color: #E6EDF3; font-weight: 500; font-size: 0.9em; line-height: 1.5; transform: rotateY(180deg); }
+        .flashcard-label { position: absolute; top: 6px; right: 8px; font-size: 0.65em; color: #6B7280; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* MCQ */
+        .mcq-item { background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .mcq-question { color: var(--accent); font-weight: 600; margin-bottom: 14px; font-size: 0.95em; line-height: 1.4; }
+        .mcq-option { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; cursor: pointer; transition: all 0.2s; }
+        .mcq-option input[type="radio"] { margin-top: 4px; cursor: pointer; }
+        .mcq-option label { cursor: pointer; flex: 1; font-size: 0.9em; color: #E6EDF3; }
+        .mcq-option:hover label { color: var(--accent); }
+        .mcq-answer { background: rgba(106, 27, 154, 0.1); border-left: 3px solid var(--accent); padding: 12px 14px; margin-top: 14px; font-size: 0.85em; border-radius: 4px; display: none; }
+        .mcq-answer.show { display: block; }
+        .mcq-answer-label { color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+        .mcq-answer-text { color: #D1D5DB; line-height: 1.5; }
+        .mcq-label { color: #6B7280; font-size: 0.75em; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+        /* VIGNETTES */
+        .vignette-item { background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .vignette-title { color: var(--accent); font-weight: 600; margin-bottom: 10px; font-size: 0.95em; }
+        .vignette-case { background: #161B22; padding: 14px; border-radius: 6px; margin-bottom: 12px; font-size: 0.9em; line-height: 1.6; color: #E6EDF3; }
+        .vignette-case strong { color: #E6EDF3; font-weight: 600; }
+        .vignette-question { color: #9CA3AF; margin-bottom: 10px; font-size: 0.85em; font-weight: 500; }
+        .vignette-answer { background: rgba(106, 27, 154, 0.1); border-left: 3px solid var(--accent); padding: 12px 14px; margin-top: 10px; font-size: 0.85em; border-radius: 4px; display: none; line-height: 1.5; }
+        .vignette-answer.show { display: block; }
+        .vignette-answer-label { color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+
+        /* TEST TRAPS */
+        .trap-item { background: #1C2128; border: 2px solid #F87171; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .trap-title { color: #F87171; font-weight: 600; margin-bottom: 10px; font-size: 0.95em; display: flex; align-items: center; gap: 6px; }
+        .trap-title::before { content: "⚠️"; font-size: 1.1em; }
+        .trap-wrong { background: #1A0F0F; padding: 12px 14px; border-left: 3px solid #F87171; border-radius: 4px; margin-bottom: 10px; font-size: 0.9em; color: #FCA5A5; font-weight: 500; }
+        .trap-right { background: rgba(74, 222, 128, 0.1); padding: 12px 14px; border-left: 3px solid #4ADE80; border-radius: 4px; font-size: 0.9em; color: #D1FAE5; }
+        .trap-right strong { color: #4ADE80; font-weight: 600; }
+
+        /* FILL-IN-BLANK */
+        .fib-item { background: #1C2128; border: 1px solid #30363D; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+        .fib-question { color: var(--accent); font-weight: 600; margin-bottom: 12px; font-size: 0.95em; line-height: 1.5; }
+        .blank { background: #161B22; border-bottom: 2px solid var(--accent); display: inline-block; padding: 0 8px; min-width: 120px; }
+        .fib-answer { background: rgba(106, 27, 154, 0.1); border-left: 3px solid var(--accent); padding: 12px 14px; margin-top: 12px; font-size: 0.85em; border-radius: 4px; display: none; }
+        .fib-answer.show { display: block; }
+        .fib-answer-label { color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+
+        /* REFERENCE TABLE */
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: #1C2128; border-radius: 8px; overflow: hidden; border: 1px solid #30363D; }
+        .ref-table th { background: #161B22; padding: 12px 14px; text-align: left; font-weight: 600; color: var(--accent); font-size: 0.85em; border-bottom: 2px solid #30363D; }
+        .ref-table td { padding: 10px 14px; border-bottom: 1px solid #30363D; font-size: 0.9em; color: #E6EDF3; }
+        .ref-table tr:last-child td { border-bottom: none; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
+
+        .ref-section { margin-bottom: 24px; }
+        .ref-box { background: #1C2128; border-left: 3px solid var(--accent); padding: 16px; border-radius: 6px; margin-bottom: 16px; font-size: 0.9em; line-height: 1.6; }
+        .ref-box strong { color: var(--accent); font-weight: 600; }
+        .ref-list { list-style: none; padding-left: 0; }
+        .ref-list li { padding: 6px 0; font-size: 0.9em; color: #E6EDF3; }
+        .ref-list li::before { content: "→ "; color: var(--accent); margin-right: 8px; font-weight: 600; }
+
+        .ref-section h3 { color: var(--accent); font-size: 1em; margin-bottom: 14px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Biochem L3: <span class="accent-tag">Sex Steroid Synthesis and Action</span></h1>
+        <div class="subtitle">Gonadotropins · Androgen & estrogen biosynthesis · Feedback regulation · Clinical pathology · Pharmacology</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
+    </div>
+
+    <!-- FLASHCARDS -->
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Core Concept Flashcards — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
+
+    <!-- MCQ -->
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice</div>
+        <div id="mcqContainer"></div>
+    </div>
+
+    <!-- VIGNETTES -->
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes</div>
+        <div id="vigContainer"></div>
+    </div>
+
+    <!-- TEST TRAPS -->
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">High-Yield Test Traps</div>
+        <div id="trapContainer"></div>
+    </div>
+
+    <!-- FILL-IN-BLANK -->
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill-in-the-Blank Practice</div>
+        <div id="fibContainer"></div>
+    </div>
+
+    <!-- REFERENCE -->
+    <div id="tab-ref" class="tab-content">
+        <div class="section-title">Reference Guide</div>
+        <div id="refContainer"></div>
+    </div>
+</div>
+
+<script>
+// Flashcard + MCQ data
+const flashcards = [
+    { ankiNum: 8, front: "Gonadotropins: chemical classification", back: "FSH and LH are glycoprotein heterodimers; share common α-subunit; differ in β-subunit specificity" },
+    { ankiNum: 9, front: "Pars distalis basophil cells: hormone synthesis", back: "Gonadotrope cells (gonadotrophs) secrete FSH and LH in response to GnRH" },
+    { ankiNum: 10, front: "Leydig cells (interstitial cells): location & function", back: "Located between seminiferous tubules; LH stimulates testosterone synthesis; testosterone enters tubules (via ABP) and bloodstream" },
+    { ankiNum: 11, front: "Androgen-binding protein (ABP)", back: "Produced by Sertoli cells in response to FSH; identical gene to SHBG but different glycosylation; concentrates testosterone in seminiferous tubules" },
+    { ankiNum: 12, front: "Sertoli cells: FSH-mediated effects", back: "Produce ABP, inhibin, and support spermatogenesis; form blood-testis barrier; testosterone synergizes FSH effects" },
+    { ankiNum: 13, front: "Testosterone → DHT conversion: enzyme & tissue sites", back: "5α-reductase (NADPH-dependent); occurs primarily in prostate, skin, external genitalia; finasteride is a 5α-reductase inhibitor" },
+    { ankiNum: 14, front: "Testosterone → estradiol: enzyme & tissue sites", back: "Aromatase (CYP19A1); occurs in adipose, granulosa, Sertoli cells; letrozole and anastrozole are aromatase inhibitors" },
+    { ankiNum: 16, front: "SHBG synthesis: factors that increase/decrease", back: "Increased by: estrogen, liver disease, hyperthyroidism | Decreased by: androgens, aging, hypothyroidism, obesity, insulin resistance" },
+    { ankiNum: 17, front: "SHBG hormone binding: specificity & affinity", back: "Binds testosterone with higher affinity than estradiol; estrone and 17-keto derivatives do NOT bind SHBG; most androgens bind weakly to albumin" },
+    { ankiNum: 20, front: "Two-cell two-gonadotropin model in ovary", back: "Theca: LH → androstenedione; Granulosa: FSH → aromatase activity → converts androgens to estradiol (E2 and E1)" },
+    { ankiNum: 21, front: "Corpus luteum: hormone production", back: "After LH surge triggers ovulation; produces high progesterone; also produces 17β-estradiol; involutes in ~14 days if pregnancy doesn't occur" },
+    { ankiNum: 193, front: "Peripheral conversion of androgens to estrogens", back: "Adipose tissue aromatizes androstenedione → estrone; important in obesity and postmenopause; 80% of male estradiol comes from peripheral conversion" },
+    { ankiNum: 194, front: "Androgen insensitivity syndrome (AIS): karyotype & phenotype", back: "46,XY; AR mutation → complete or partial loss of androgen receptor function; external female genitalia; no uterus (AMH prevents Müllerian development)" },
+    { ankiNum: 195, front: "AIS: hormone profile", back: "High testosterone, high LH (normal/high due to feedback on AR); high estradiol from peripheral conversion; normal/high FSH" },
+    { ankiNum: 196, front: "5α-reductase deficiency: karyotype & presentation", back: "46,XY; ambiguous or female external genitalia at birth; virilization at puberty when testosterone rises ('penis at 12'); Wolffian ducts normal" },
+    { ankiNum: 197, front: "Oral contraceptive mechanism", back: "Estrogen suppresses FSH → no follicle recruitment; progestin suppresses LH surge → prevents ovulation; also thickens cervical mucus" },
+    { ankiNum: 198, front: "GnIH: stress-reproductive axis suppression", back: "GnIH (gonadotropin inhibitory hormone) released during stress via glucocorticoids; suppresses GnRH → ↓FSH/LH → stress amenorrhea" },
+    { ankiNum: 199, front: "Inhibin: source & feedback target", back: "Produced by Sertoli cells (testis) and granulosa cells (ovary); specifically inhibits FSH release from pituitary (NOT LH)" },
+    { ankiNum: 200, front: "Fetal testosterone synthesis: trigger & timing", back: "hCG from placenta stimulates fetal Leydig cells during first trimester; testosterone drives Wolffian duct development (epididymis, vas, seminal vesicles)" },
+    { ankiNum: 201, front: "Fetal AMH (anti-Müllerian hormone): source & target", back: "Sertoli cells produce AMH in response to testicular development; suppresses Müllerian duct development (oviducts, uterus, upper vagina)" },
+    { ankiNum: 202, front: "Testosterone → DHT: relative potency", back: "DHT has higher affinity for AR than testosterone in many tissues; DHT is the active form in prostate, external genitalia, skin (5α tissues)" },
+    { ankiNum: 203, front: "17β-estradiol production in males", back: "Primarily from peripheral aromatization of testosterone by adipose, skin, brain; ~80% of male estradiol; low but physiologically important" },
+    { ankiNum: 204, front: "Aromatase inhibitor mechanism & clinical use", back: "Letrozole/anastrozole block CYP19A1; reduce estradiol synthesis; used in breast cancer (post-menopausal) and infertility (male/female)" },
+    { ankiNum: 205, front: "Primary hypogonadism: definition & cause", back: "Testicular failure to produce testosterone and/or sperm; due to genetic deficiency of enzymes (17α-hydroxylase, 17,20-lyase, etc.) or acquired testicular damage" },
+    { ankiNum: 206, front: "Secondary hypogonadism: definition & cause", back: "Defective secretion of LH/FSH from pituitary or GnRH from hypothalamus; testis is intact but understimulated" },
+    { ankiNum: 207, front: "DHT effects: target tissues & outcomes", back: "Prostate growth (BPH risk with age), external genitalia virilization, male pattern baldness, acne; does NOT drive long bone growth or muscle as effectively as testosterone" },
+    { ankiNum: 208, front: "Estrogen effects: NOT female-specific", back: "Males require estrogen for bone health, lipid metabolism, reproductive function (spermatogenesis feedback); aromatase inhibitors in males can cause bone loss" },
+    { ankiNum: 209, front: "Progesterone synthesis in corpus luteum", back: "After ovulation, LH stimulates granulosa cells (now lutein cells) to produce high progesterone; also some 20α-hydroxylase converts progesterone → inactive 20α-hydroxyprogesterone" },
+    { ankiNum: 210, front: "17α-hydroxylase deficiency: sexual development", back: "↓testosterone & ↑DOC/corticosterone (salt retention); 46,XY has female external genitalia, no uterus (AMH present), undescended testes" },
+    { ankiNum: 211, front: "Benign prostatic hyperplasia (BPH): hormonal role", back: "Occurs 75% of men >60 years; both testosterone (via DHT) and estrogens promote uncontrolled prostate cell growth" }
+];
+
+const mcqs = [
+    {
+        ankiNum: 8,
+        q: "A 28-year-old male presents with hypogonadism. Laboratory testing shows low testosterone but normal LH. Which statement best describes the chemical nature of LH?",
+        opts: ["It is a steroid hormone synthesized in the Leydig cells", "It is a glycoprotein heterodimer sharing a common α-subunit with FSH", "It is a peptide hormone with a single polypeptide chain", "It binds directly to androgen receptors on target tissues"],
+        ans: 1,
+        exp: "FSH and LH are glycoprotein heterodimers that share a common α-subunit but differ in their β-subunits. They are not steroids and do not bind androgen receptors directly. They signal through G-protein coupled receptors."
+    },
+    {
+        ankiNum: 9,
+        q: "Which cell type in the pars distalis is responsible for secreting both FSH and LH in response to GnRH?",
+        opts: ["Somatotrophs", "Thyrotrophs", "Gonadotropes (gonadotrophs)", "Lactotrophs"],
+        ans: 2,
+        exp: "Gonadotrope cells (also called gonadotrophs) are basophilic cells in the pars distalis that secrete both FSH and LH in response to pulsatile GnRH from the hypothalamus."
+    },
+    {
+        ankiNum: 10,
+        q: "A 35-year-old man on testosterone replacement therapy reports increased energy. The exogenous testosterone acts on Leydig cells to further increase synthesis via positive feedback. Is this statement true or false?",
+        opts: ["True; Leydig cells express high levels of androgen receptors", "False; testosterone inhibits GnRH and LH release, reducing Leydig cell stimulation", "True; Leydig cells proliferate in response to testosterone", "False; Leydig cells are constitutively active and not regulated by androgens"],
+        ans: 1,
+        exp: "Testosterone exerts negative feedback on GnRH secretion and LH release, thereby suppressing further Leydig cell stimulation. This is the normal feedback loop, not positive feedback."
+    },
+    {
+        ankiNum: 11,
+        q: "Androgen-binding protein (ABP) is produced by Sertoli cells in response to FSH. Which statement correctly describes ABP?",
+        opts: ["It is structurally different from SHBG despite being encoded by the same gene", "It is identical to testosterone and does not transport hormones", "It is synthesized by Leydig cells to promote testosterone secretion", "It reduces testosterone concentration in seminiferous tubules"],
+        ans: 0,
+        exp: "ABP and SHBG are encoded by the same gene (SHBG) but ABP has a different glycosylation pattern. ABP concentrates testosterone in the seminiferous tubules to support spermatogenesis. The different glycosylation allows ABP to be retained in the tubular compartment."
+    },
+    {
+        ankiNum: 12,
+        q: "FSH stimulates Sertoli cells to produce which of the following hormones that provides negative feedback specifically on FSH (NOT LH) release?",
+        opts: ["Testosterone", "Inhibin", "Androstenedione", "Anti-Müllerian hormone (AMH)"],
+        ans: 1,
+        exp: "Inhibin is a peptide hormone produced by Sertoli cells and granulosa cells that specifically inhibits FSH release from the anterior pituitary without directly affecting LH."
+    },
+    {
+        ankiNum: 13,
+        q: "A 62-year-old male with benign prostatic hyperplasia is started on finasteride. Which conversion is blocked by finasteride?",
+        opts: ["Cholesterol → Pregnenolone", "Testosterone → DHT", "Androstenedione → Testosterone", "Testosterone → Estradiol"],
+        ans: 1,
+        exp: "Finasteride inhibits 5α-reductase, which converts testosterone to dihydrotestosterone (DHT). This is especially important in the prostate, where DHT is the active form driving BPH."
+    },
+    {
+        ankiNum: 14,
+        q: "Aromatase inhibitors such as letrozole are used in postmenopausal breast cancer patients. What enzyme do they inhibit, and where does this enzyme play the major role in estrogen synthesis in these patients?",
+        opts: ["5α-reductase in the ovaries", "Aromatase (CYP19A1) in adipose tissue and skin", "17α-hydroxylase in the adrenals", "3β-hydroxysteroid dehydrogenase in granulosa cells"],
+        ans: 1,
+        exp: "Aromatase (CYP19A1) catalyzes the conversion of androgens to estrogens. In postmenopausal women, adipose tissue becomes the major source of estrogen production through peripheral aromatization of adrenal androgens."
+    },
+    {
+        ankiNum: 16,
+        q: "A 48-year-old obese woman presents with low SHBG levels. Which factor(s) are responsible for decreased SHBG synthesis?",
+        opts: ["Estrogen and elevated thyroid hormone", "Androgens, insulin, obesity, and aging", "Pregnancy and liver disease", "Hyperthyroidism and oral contraceptives"],
+        ans: 1,
+        exp: "SHBG is decreased by androgens, insulin resistance, obesity, and aging. It is increased by estrogens, liver disease, and hyperthyroidism. The hepatic synthesis of SHBG is suppressed by androgens and insulin."
+    },
+    {
+        ankiNum: 17,
+        q: "Which statement about SHBG binding is correct?",
+        opts: ["Estradiol binds SHBG with higher affinity than testosterone", "Testosterone binds SHBG with 5-fold higher affinity than estradiol", "Estrone binds SHBG as tightly as estradiol", "All androgens and estrogens bind SHBG with equal affinity"],
+        ans: 1,
+        exp: "Testosterone binds SHBG with about 5-fold higher affinity than estradiol. Estrone and 17-keto derivatives bind poorly to SHBG and rely mainly on albumin for transport."
+    },
+    {
+        ankiNum: 20,
+        q: "During the follicular phase, FSH stimulates granulosa cells to produce aromatase. Which substrate does aromatase use to synthesize estradiol in the granulosa cells?",
+        opts: ["Testosterone produced by the granulosa cells themselves", "Androstenedione and testosterone produced by theca cells", "Pregnenolone from cholesterol side-chain cleavage", "Progesterone from the corpus luteum"],
+        ans: 1,
+        exp: "The two-cell two-gonadotropin model: Theca cells respond to LH by producing androstenedione and testosterone. These diffuse to granulosa cells, which respond to FSH by expressing aromatase to convert these androgens to estradiol (E2) and estrone (E1)."
+    },
+    {
+        ankiNum: 21,
+        q: "After ovulation, the corpus luteum is formed from the granulosa and theca cells. Which hormone does the corpus luteum produce in large amounts?",
+        opts: ["Testosterone and DHT", "Estradiol only, no progesterone", "Progesterone and some estradiol", "FSH and LH"],
+        ans: 2,
+        exp: "The corpus luteum, formed after ovulation, produces high levels of progesterone (the main hormone) and some 17β-estradiol in response to LH stimulation. If pregnancy does not occur, the corpus luteum involutes after ~14 days."
+    }
+];
+
+const vignettes = [
+    {
+        ankiNum: 193,
+        title: "46-year-old postmenopausal woman with hip pain",
+        case: "A 46-year-old woman is 2 years postmenopausal. She presents with progressive hip and wrist pain and is found to have reduced bone mineral density on DEXA scan. Laboratory tests show: LH 65 (elevated), FSH 72 (elevated), estradiol <10 pg/mL (low), testosterone 20 ng/dL (normal low). No ovarian masses. Where is estrogen being produced in her body now?",
+        answer: "In postmenopause, the ovaries cease producing estrogens. The major source of estrogens shifts to peripheral aromatization of adrenal androgens (androstenedione → estrone) by adipose tissue and skin. Additionally, older women may have chronically low but detectable estradiol from aromatization of testosterone in adipose and breast tissue. This peripheral production is usually insufficient to maintain bone density, hence the osteoporosis risk."
+    },
+    {
+        ankiNum: 194,
+        title: "46,XY infant with female external genitalia, no uterus",
+        case: "A 46,XY newborn is referred for ambiguous genitalia evaluation. Physical exam reveals female-appearing external genitalia, a small clitoris, and no palpable testes. Ultrasound shows bilateral inguinal testes and an absent uterus. At 2 years old, testosterone is measured at 1200 ng/dL (high for age), LH is 25 mIU/mL (elevated), and estradiol is 80 pg/mL (elevated). A genetic mutation in the androgen receptor gene is identified. What is the diagnosis and why is the uterus absent?",
+        answer: "This is complete androgen insensitivity syndrome (AIS). The 46,XY fetus produces normal testosterone from Leydig cells, but tissues cannot respond to androgens due to AR mutation. The Sertoli cells still produce anti-Müllerian hormone (AMH), which suppresses Müllerian duct development → no uterus. The external genitalia remain female because they require androgen action to virilize. The high testosterone and elevated estradiol occur because of failed negative feedback (AR is non-functional) and because peripheral tissues aromatize the excess testosterone to estradiol. The inguinal testes may undergo malignant transformation if not monitored."
+    },
+    {
+        ankiNum: 196,
+        title: "46,XY child with 'penis at 12' virilization",
+        case: "A 46,XY child assigned female at birth presents to pediatric endocrinology at age 12. External genitalia were described as 'ambiguous' at birth but were raised as female. At puberty, the child develops a phallic structure, deepening voice, and muscle development. Laboratories show: testosterone 800 ng/dL (elevated), DHT 50 ng/dL (LOW—markedly reduced), LH 15 mIU/mL (elevated), FSH 8 mIU/mL (normal). Genetic testing reveals homozygous 5α-reductase deficiency. Why does virilization occur at puberty if DHT is low?",
+        answer: "In 5α-reductase deficiency, the conversion of testosterone to DHT is blocked. External genitalia and prostate require DHT for development and virilization. At birth, low DHT levels result in female-appearing external genitalia. However, Wolffian duct derivatives (epididymis, vas, seminal vesicles) respond to testosterone (not DHT), so these are normally developed. At puberty, the massive rise in testosterone (despite low DHT) triggers virilization: the phallic tissue enlarges from high testosterone levels, muscle development occurs (testosterone promotes anabolism), and voice deepens (laryngeal effects). The 'penis at 12' phenomenon refers to this delayed pubic virilization driven by testosterone itself, not DHT."
+    },
+    {
+        ankiNum: 197,
+        title: "28-year-old woman on oral contraceptive, breakthrough bleeding",
+        case: "A 28-year-old woman has been on a combined oral contraceptive (ethinyl estradiol 30 μg + levonorgestrel 150 μg) for 2 years with regular cycles. She now reports breakthrough bleeding mid-cycle and occasional missed pills. How do OCPs prevent pregnancy, and what might be causing her breakthrough bleeding?",
+        answer: "OCPs prevent pregnancy through: (1) Estrogen suppresses FSH → prevents follicular recruitment and development; (2) Progestin suppresses the LH surge → prevents ovulation; (3) Progestin thickens cervical mucus → reduces sperm entry. Breakthrough bleeding occurs when progestin levels drop due to missed pills, insufficient progestin dose, or drug interactions (e.g., antibiotics, anticonvulsants) that accelerate OCP metabolism. Counseling on consistent pill-taking and consideration of a higher-dose progestin formulation may resolve the issue."
+    },
+    {
+        ankiNum: 200,
+        title: "Ambiguous genitalia in 46,XY fetus—fetal hormone involvement",
+        case: "A 46,XY fetus develops female-appearing external genitalia and no internal female reproductive structures. The placenta produces hCG, which stimulates fetal Leydig cells. When does this occur, and what are the consequences of inadequate testosterone production?",
+        answer: "hCG from the placenta stimulates fetal Leydig cells primarily during the 1st trimester (weeks 7–14). Testosterone drives development of Wolffian ducts into epididymis, vas deferens, and seminal vesicles. Sertoli cells produce AMH, which suppresses Müllerian duct development (preventing uterus, fallopian tubes, upper vagina). External genitalia virilization requires DHT (derived from testosterone via 5α-reductase). If testosterone production is inadequate (e.g., enzymatic deficiency like 17,20-lyase or 3β-HSD deficiency), external genitalia may appear female or ambiguous despite normal Wolffian duct development. AMH is still present (Sertoli cells develop normally), so the internal female structures (uterus) will be absent."
+    },
+    {
+        ankiNum: 210,
+        title: "46,XY with hypertension, hypokalemia, and female external genitalia",
+        case: "A 46,XY adolescent presents with hypertension, hypokalemia, and female external genitalia. Hormonal testing reveals: 17α-hydroxyprogesterone <0.2 ng/mL (very low), progesterone 12 ng/mL (elevated), deoxycorticosterone (DOC) 4.2 ng/dL (elevated), testosterone 15 ng/dL (very low), ACTH normal. What enzyme deficiency explains these findings?",
+        answer: "This is 17α-hydroxylase deficiency. This enzyme catalyzes conversion of pregnenolone → 17-OH-pregnenolone and progesterone → 17-OH-progesterone. Without it: (1) Testosterone synthesis is blocked (requires 17-hydroxylation), resulting in female external genitalia and absent pubic/axillary hair in 46,XY individuals; (2) Precursors shunt to mineralocorticoid pathway: ↑DOC → salt retention → hypertension and hypokalemia; (3) ↑progesterone and ↑17-OH-progesterone is NOT seen because 17-hydroxylase is blocked—instead we see ↑pregnenolone and ↑DOC. The uterus IS absent because AMH from Sertoli cells suppresses Müllerian development, even in the absence of testosterone."
+    }
+];
+
+const traps = [
+    {
+        num: 1,
+        title: "ABP vs. SHBG confusion",
+        wrong: "ABP and SHBG are completely different proteins with no genetic relationship.",
+        right: "ABP (androgen-binding protein) and SHBG (sex hormone-binding globulin) are encoded by the <strong>same gene</strong> but have different glycosylation patterns. ABP is tissue-specific (local to seminiferous tubules), while SHBG is the circulating form."
+    },
+    {
+        num: 2,
+        title: "Estrogen as 'female-only' hormone",
+        wrong: "Estrogen is produced only in females and is irrelevant to male physiology.",
+        right: "Males produce significant estradiol (80% from peripheral aromatization of testosterone in adipose tissue). Estrogen is essential for male bone health, spermatogenesis (feedback), and cardiovascular function. Aromatase inhibitors in hypogonadal men can cause osteoporosis."
+    },
+    {
+        num: 3,
+        title: "DHT potency in all tissues",
+        wrong: "DHT is the active form of testosterone in all target tissues.",
+        right: "DHT is more potent in <strong>5α-reductase tissues</strong> (prostate, external genitalia, hair follicles, skin). In muscles and bone, testosterone itself is more important. Long bone growth and muscle anabolism respond better to testosterone than DHT."
+    },
+    {
+        num: 4,
+        title: "SHBG and testosterone binding",
+        wrong: "Estradiol binds SHBG as tightly as testosterone, so they compete equally for binding.",
+        right: "Testosterone binds SHBG with ~<strong>5-fold higher affinity</strong> than estradiol. Estrone and 17-keto androgens do <strong>NOT</strong> bind SHBG; they rely on albumin. High SHBG → more testosterone bound (less free), more estradiol free."
+    },
+    {
+        num: 5,
+        title: "Aromatase location in males vs. females",
+        wrong: "Aromatase is expressed primarily in the ovaries; males have negligible aromatase.",
+        right: "In males, aromatase is constitutively expressed in adipose, skin, and brain. ~80% of estradiol in males comes from peripheral aromatization. Obese men have more adipose-derived aromatase activity and higher estradiol. Post-menopausal women rely on peripheral aromatization (adipose + adrenal androgens)."
+    },
+    {
+        num: 6,
+        title: "5α-reductase deficiency genotype vs. phenotype",
+        wrong: "46,XY individuals with 5α-reductase deficiency have female external genitalia at birth and remain female.",
+        right: "Ambiguous or female genitalia at birth, but <strong>virilization occurs at puberty</strong> ('penis at 12'). The high testosterone at puberty drives growth of phallic tissue and virilization even though DHT is low. Wolffian ducts are normal (they respond to testosterone, not DHT)."
+    },
+    {
+        num: 7,
+        title: "AIS uterus presence",
+        wrong: "46,XY individuals with androgen insensitivity syndrome have a uterus because they lack androgen-driven virilization.",
+        right: "AIS patients have <strong>NO uterus</strong> because Sertoli cells still produce AMH, which suppresses Müllerian duct development regardless of androgen responsiveness. The absent uterus is a marker of testicular development in utero."
+    },
+    {
+        num: 8,
+        title: "OCP mechanism—Estrogen alone",
+        wrong: "The estrogen component of OCPs prevents ovulation by suppressing LH surge.",
+        right: "Estrogen suppresses FSH (preventing follicular recruitment). <strong>The progestin</strong> suppresses the LH surge (preventing ovulation). Both hormones also thicken cervical mucus. Progestin-only pills work without estrogen but are less effective."
+    },
+    {
+        num: 9,
+        title: "FSH vs. LH feedback",
+        wrong: "Both FSH and LH are inhibited equally by testosterone in males.",
+        right: "Testosterone inhibits <strong>GnRH and LH</strong> (negative feedback). <strong>Inhibin</strong> specifically inhibits <strong>FSH</strong> (NOT LH). This allows independent regulation of Leydig cell (LH-driven) and Sertoli cell (FSH-driven) function."
+    },
+    {
+        num: 10,
+        title: "Fetal estrogen in sex determination",
+        wrong: "The fetus must produce estrogen to develop female external genitalia.",
+        right: "In females, the <strong>default</strong> development is female genitalia. Active testosterone and DHT in males drive virilization. The fetus does not need fetal estrogen for female external genitalia development (though maternal estrogens are present). Excess fetal androgens cause virilization in 46,XX individuals (CAH)."
+    }
+];
+
+const fibs = [
+    {
+        ankiNum: 8,
+        q: "FSH and LH are <span class=\"blank\"></span> heterodimers that share a common <span class=\"blank\"></span> subunit, providing both hormones with structural similarity while their <span class=\"blank\"></span> subunits confer receptor specificity.",
+        ans: "glycoprotein; α (alpha); β (beta)"
+    },
+    {
+        ankiNum: 11,
+        q: "Androgen-binding protein (ABP) is encoded by the <span class=\"blank\"></span> gene and produced by <span class=\"blank\"></span> cells in response to <span class=\"blank\"></span>, serving to concentrate testosterone in the seminiferous tubules.",
+        ans: "SHBG (sex hormone-binding globulin); Sertoli; FSH"
+    },
+    {
+        ankiNum: 13,
+        q: "The enzyme <span class=\"blank\"></span> converts testosterone to dihydrotestosterone in target tissues such as the prostate and skin, and is inhibited by the medication <span class=\"blank\"></span>, which is used to treat benign prostatic hyperplasia.",
+        ans: "5α-reductase; finasteride"
+    },
+    {
+        ankiNum: 14,
+        q: "Aromatase (also called <span class=\"blank\"></span>) catalyzes the conversion of androgens to estrogens and is expressed in adipose, <span class=\"blank\"></span>, and brain tissue, with particular importance for peripheral estrogen production in obese and post-menopausal individuals.",
+        ans: "CYP19A1; skin"
+    },
+    {
+        ankiNum: 16,
+        q: "SHBG synthesis is increased by <span class=\"blank\"></span> and decreased by <span class=\"blank\"></span>, obesity, insulin resistance, and aging, such that obesity results in lower SHBG and higher free testosterone.",
+        ans: "estrogen; androgens"
+    },
+    {
+        ankiNum: 20,
+        q: "In the two-cell two-gonadotropin model of the ovary, <span class=\"blank\"></span> cells respond to LH by producing androstenedione and testosterone, which then diffuse to <span class=\"blank\"></span> cells that express <span class=\"blank\"></span> in response to FSH.",
+        ans: "Theca; Granulosa; aromatase"
+    },
+    {
+        ankiNum: 194,
+        q: "Androgen insensitivity syndrome (AIS) results from a mutation in the <span class=\"blank\"></span> gene, producing a 46,<span class=\"blank\"></span> individual with female external genitalia, <span class=\"blank\"></span> (presence/absence) of a uterus, and elevated testosterone due to failed negative feedback.",
+        ans: "androgen receptor (AR); XY; absence"
+    },
+    {
+        ankiNum: 196,
+        q: "In 5α-reductase deficiency, external genitalia appear female or ambiguous at birth because of inadequate <span class=\"blank\"></span> production, but virilization occurs at puberty driven by elevated <span class=\"blank\"></span>, a phenomenon known as '<span class=\"blank\"></span>'.",
+        ans: "DHT; testosterone; penis at 12"
+    },
+    {
+        ankiNum: 197,
+        q: "Combined oral contraceptives prevent pregnancy by estrogen suppression of <span class=\"blank\"></span> (preventing follicle development), progestin suppression of the <span class=\"blank\"></span> surge (preventing ovulation), and thickening of cervical <span class=\"blank\"></span>.",
+        ans: "FSH; LH; mucus"
+    },
+    {
+        ankiNum: 200,
+        q: "During the fetal period, the placental hormone <span class=\"blank\"></span> stimulates fetal Leydig cells to produce testosterone, which drives development of Wolffian ducts, while Sertoli cells produce <span class=\"blank\"></span> to suppress Müllerian duct development.",
+        ans: "hCG; AMH"
+    }
+];
+
+// Build flashcards
+const fcGrid = document.getElementById('fcGrid');
+flashcards.forEach((card, i) => {
+    const div = document.createElement('div');
+    div.className = 'flashcard';
+    div.innerHTML = `
+        <div class="flashcard-label">Anki #${card.ankiNum}</div>
+        <div class="flashcard-inner">
+            <div class="flashcard-front">${card.front}</div>
+            <div class="flashcard-back">${card.back}</div>
+        </div>
+    `;
+    div.addEventListener('click', (e) => {
+        e.currentTarget.classList.toggle('flipped');
+        const inner = e.currentTarget.querySelector('.flashcard-inner');
+        if (e.currentTarget.classList.contains('flipped')) {
+            inner.style.transform = 'rotateY(180deg)';
+        } else {
+            inner.style.transform = 'rotateY(0deg)';
+        }
+    });
+    fcGrid.appendChild(div);
+});
+
+// Build MCQ
+const mcqContainer = document.getElementById('mcqContainer');
+mcqs.forEach((mcq) => {
+    const div = document.createElement('div');
+    div.className = 'mcq-item';
+    div.innerHTML = `
+        <div class="mcq-label">Anki #${mcq.ankiNum}</div>
+        <div class="mcq-question">${mcq.q}</div>
+        ${mcq.opts.map((opt, i) => `
+            <div class="mcq-option">
+                <input type="radio" id="r${mcq.ankiNum}_${i}" name="mcq${mcq.ankiNum}" value="${i}">
+                <label for="r${mcq.ankiNum}_${i}">${opt}</label>
+            </div>
+        `).join('')}
+        <div class="mcq-answer">
+            <div class="mcq-answer-label">Answer & Explanation</div>
+            <div class="mcq-answer-text">${mcq.exp}</div>
+        </div>
+    `;
+
+    div.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            const answer = div.querySelector('.mcq-answer');
+            answer.classList.add('show');
+        });
+    });
+
+    mcqContainer.appendChild(div);
+});
+
+// Build vignettes
+const vigContainer = document.getElementById('vigContainer');
+vignettes.forEach((vig) => {
+    const div = document.createElement('div');
+    div.className = 'vignette-item';
+    div.innerHTML = `
+        <div class="mcq-label">Anki #${vig.ankiNum}</div>
+        <div class="vignette-title">${vig.title}</div>
+        <div class="vignette-case">${vig.case}</div>
+        <button class="tab-btn" style="margin-top: 10px; padding: 8px 14px; font-size: 0.85em;" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.nextElementSibling.classList.contains('show') ? 'Hide Answer' : 'Show Answer'">Show Answer</button>
+        <div class="vignette-answer">
+            <div class="vignette-answer-label">Explanation</div>
+            <div>${vig.answer}</div>
+        </div>
+    `;
+    vigContainer.appendChild(div);
+});
+
+// Build traps
+const trapContainer = document.getElementById('trapContainer');
+traps.forEach((trap) => {
+    const div = document.createElement('div');
+    div.className = 'trap-item';
+    div.innerHTML = `
+        <div class="trap-title">${trap.title}</div>
+        <div class="trap-wrong"><strong>WRONG:</strong> ${trap.wrong}</div>
+        <div class="trap-right"><strong>RIGHT:</strong> ${trap.right}</div>
+    `;
+    trapContainer.appendChild(div);
+});
+
+// Build FIBs
+const fibContainer = document.getElementById('fibContainer');
+fibs.forEach((fib) => {
+    const div = document.createElement('div');
+    div.className = 'fib-item';
+    div.innerHTML = `
+        <div class="mcq-label">Anki #${fib.ankiNum}</div>
+        <div class="fib-question">${fib.q}</div>
+        <button class="tab-btn" style="margin-top: 10px; padding: 8px 14px; font-size: 0.85em;" onclick="this.nextElementSibling.classList.toggle('show'); this.textContent = this.nextElementSibling.classList.contains('show') ? 'Hide Answer' : 'Show Answer'">Show Answer</button>
+        <div class="fib-answer">
+            <div class="fib-answer-label">Correct Answers</div>
+            <div style="color: #E6EDF3; font-size: 0.9em;">${fib.ans.split('; ').map(a => `<strong style="color: #4ADE80;">• ${a}</strong>`).join('<br>')}</div>
+        </div>
+    `;
+    fibContainer.appendChild(div);
+});
+
+// Build reference section
+const refContainer = document.getElementById('refContainer');
+refContainer.innerHTML = `
+    <div class="ref-section">
+        <h3>Gonadotropin Synthesis & Regulation</h3>
+        <div class="ref-box">
+            <strong>FSH & LH (Gonadotropins)</strong><br>
+            Glycoprotein heterodimers; share common α-subunit; synthesized by gonadotrope cells in anterior pituitary (pars distalis, basophils) in response to pulsatile GnRH from hypothalamus. Half-life ~3–4 hours. LH effects: steroid synthesis (Leydig, theca). FSH effects: spermatogenesis support, ABP/inhibin production (Sertoli), aromatase induction (granulosa).
+        </div>
+        <table class="ref-table">
+            <tr><th>Hormone</th><th>Primary Target (Male)</th><th>Primary Target (Female)</th><th>Main Effect</th></tr>
+            <tr><td class="hl">LH</td><td>Leydig cells</td><td>Theca cells (1st) → Lutein cells (2nd)</td><td>Testosterone/androgen synthesis; progesterone (luteal)</td></tr>
+            <tr><td class="hl">FSH</td><td>Sertoli cells</td><td>Granulosa cells</td><td>ABP/inhibin (male); aromatase/E2 synthesis (female)</td></tr>
+        </table>
+    </div>
+
+    <div class="ref-section">
+        <h3>Testosterone Synthesis & Transport</h3>
+        <div class="ref-box">
+            <strong>Synthesis:</strong> Cholesterol → Pregnenolone (P450scc, mitochondria) → Δ4 pathway preferred in humans. Main sites: Leydig cells (testis; LH-driven), theca cells (ovary; LH-driven), adrenal cortex (ACTH-driven, minor in females).
+        </div>
+        <div class="ref-box">
+            <strong>Transport:</strong> Testosterone binds SHBG (high affinity, ~60% bound) and albumin (weak, ~36% bound); ~3% free. Free testosterone is biologically active. DHT and other androgens bind SHBG to varying degrees.
+        </div>
+        <ul class="ref-list">
+            <li>SHBG ↑ by: Estrogen, liver disease, hyperthyroidism</li>
+            <li>SHBG ↓ by: Androgens, insulin resistance, obesity, aging, hypothyroidism</li>
+        </ul>
+    </div>
+
+    <div class="ref-section">
+        <h3>Testosterone Metabolism</h3>
+        <table class="ref-table">
+            <tr><th>Conversion</th><th>Enzyme</th><th>Key Sites</th><th>Active Form?</th><th>Inhibitor</th></tr>
+            <tr><td class="hl">T → DHT</td><td>5α-reductase</td><td>Prostate, skin, external genitalia</td><td>Yes (↑ affinity for AR)</td><td>Finasteride</td></tr>
+            <tr><td class="hl">T → Estradiol</td><td>Aromatase (CYP19A1)</td><td>Adipose, brain, breast, granulosa, Sertoli</td><td>Yes (in brain, bone, CV)</td><td>Letrozole, anastrozole</td></tr>
+            <tr><td class="hl">A-dione → Estrone</td><td>Aromatase</td><td>Adipose, skin</td><td>Weak (↑ in post-menopausal)</td><td>Letrozole, anastrozole</td></tr>
+        </table>
+        <div class="ref-box" style="margin-top: 14px;">
+            <strong>Key fact:</strong> In males, ~80% of estradiol comes from peripheral (adipose) aromatization of testosterone. In post-menopausal women, ~50% comes from aromatization of adrenal androgens (DHEA, androstenedione).
+        </div>
+    </div>
+
+    <div class="ref-section">
+        <h3>Sertoli Cells & Leydig Cells (Testis)</h3>
+        <table class="ref-table">
+            <tr><th>Cell Type</th><th>Location</th><th>FSH Effect</th><th>LH Effect</th><th>Products</th></tr>
+            <tr><td class="hl">Sertoli</td><td>Within seminiferous tubules</td><td>ABP, inhibin</td><td>Synergy (T effect)</td><td>ABP, inhibin, MIS/AMH</td></tr>
+            <tr><td class="hl">Leydig</td><td>Between tubules (interstitium)</td><td>↑ LH receptors (minor)</td><td>Testosterone synthesis</td><td>Testosterone; some E2 (aromatase)</td></tr>
+        </table>
+        <div class="ref-box" style="margin-top: 14px;">
+            <strong>ABP (Androgen-Binding Protein):</strong> Same gene as SHBG, different glycosylation. Concentrates testosterone in seminiferous tubules for spermatogenesis. Produced by Sertoli cells in response to FSH.
+        </div>
+        <div class="ref-box">
+            <strong>Inhibin:</strong> Peptide from Sertoli cells; specifically inhibits FSH (not LH). Provides independent feedback regulation of FSH.
+        </div>
+    </div>
+
+    <div class="ref-section">
+        <h3>Ovarian Steroid Synthesis (Two-Cell Two-Gonadotropin Model)</h3>
+        <div class="ref-box">
+            <strong>Follicular Phase:</strong><br>
+            Theca cells (LH-responsive) → Δ4 pathway → Androstenedione, Testosterone<br>
+            ↓ (diffuse to granulosa)<br>
+            Granulosa cells (FSH-responsive) → Aromatase → Estradiol (E2), Estrone (E1)
+        </div>
+        <div class="ref-box">
+            <strong>Luteal Phase:</strong> After LH surge, granulosa → lutein cells. Corpus luteum produces high progesterone + some E2 (via aromatase). If no pregnancy, CL involutes in ~14 days.
+        </div>
+    </div>
+
+    <div class="ref-section">
+        <h3>Androgen Insensitivity Syndrome (AIS)</h3>
+        <table class="ref-table">
+            <tr><th>Karyotype</th><th>External Genitalia</th><th>Internal Structures</th><th>Hormone Profile</th><th>Key Finding</th></tr>
+            <tr><td class="hl">46,XY</td><td>Female-appearing (complete AIS)</td><td>No uterus/fallopian tubes; testes (often undescended)</td><td>↑T, ↑LH, ↑E2 (from peripheral aromatization)</td><td>Absent uterus (AMH present)</td></tr>
+        </table>
+        <ul class="ref-list">
+            <li>Cause: AR gene mutation → non-functional androgen receptor</li>
+            <li>Testes produce normal testosterone; tissues cannot respond</li>
+            <li>Müllerian ducts suppressed by AMH (normal Sertoli function)</li>
+            <li>High risk of testicular malignancy if intra-abdominal</li>
+        </ul>
+    </div>
+
+    <div class="ref-section">
+        <h3>5α-Reductase Deficiency</h3>
+        <table class="ref-table">
+            <tr><th>Karyotype</th><th>Birth Presentation</th><th>At Puberty</th><th>Wolffian Ducts</th><th>Müllerian Ducts</th></tr>
+            <tr><td class="hl">46,XY</td><td>Ambiguous or female genitalia</td><td>Virilization ('penis at 12')</td><td>Normal (T-responsive)</td><td>Absent (AMH)</td></tr>
+        </table>
+        <ul class="ref-list">
+            <li>Cause: 5α-reductase deficiency → ↓ DHT, normal/high T</li>
+            <li>Birth: Low DHT → female external genitalia (DHT-dependent)</li>
+            <li>Puberty: ↑↑ Testosterone drives phallic growth, deepens voice, muscle growth (T effects)</li>
+            <li>DHT needed for: Prostate, male pattern baldness, terminal hair (body/facial)</li>
+        </ul>
+    </div>
+
+    <div class="ref-section">
+        <h3>17α-Hydroxylase Deficiency</h3>
+        <div class="ref-box">
+            <strong>46,XY phenotype:</strong> Female external genitalia, absent uterus, undescended testes, hypertension, hypokalemia (from ↑ DOC → salt retention).
+        </div>
+        <ul class="ref-list">
+            <li>Blocks: Pregnenolone → 17-OH-pregnenolone AND Progesterone → 17-OH-progesterone</li>
+            <li>Result: ↓ Testosterone, ↓ Cortisol, ↑ Deoxycorticosterone (mineralocorticoid pathway shunting)</li>
+            <li>Müllerian ducts: Absent (AMH suppresses despite ↓ T)</li>
+        </ul>
+    </div>
+
+    <div class="ref-section">
+        <h3>Fetal Sex Differentiation</h3>
+        <table class="ref-table">
+            <tr><th>Hormone</th><th>Source</th><th>Timing</th><th>Target</th><th>Effect</th></tr>
+            <tr><td class="hl">hCG</td><td>Placenta</td><td>1st trimester</td><td>Fetal Leydig cells</td><td>Stimulates T synthesis</td></tr>
+            <tr><td class="hl">Testosterone</td><td>Fetal Leydig</td><td>Weeks 7–14</td><td>Wolffian ducts</td><td>Epididymis, vas, seminal vesicles</td></tr>
+            <tr><td class="hl">DHT</td><td>From T via 5α-red.</td><td>Weeks 7–14</td><td>Urogenital sinus/tubercle</td><td>Prostate, external genitalia</td></tr>
+            <tr><td class="hl">AMH</td><td>Fetal Sertoli</td><td>Weeks 7–14</td><td>Müllerian ducts</td><td>Suppression/regression</td></tr>
+        </table>
+        <div class="ref-box" style="margin-top: 14px;">
+            <strong>Female (46,XX):</strong> No fetal testosterone → Wolffian ducts regress; no AMH → Müllerian ducts develop (uterus, fallopian tubes, upper vagina); default female external genitalia. External genitalia virilize if exposed to excess androgens (e.g., CAH).
+        </div>
+    </div>
+
+    <div class="ref-section">
+        <h3>Oral Contraceptive Mechanism</h3>
+        <ul class="ref-list">
+            <li><strong>Ethinyl estradiol (EE) or estradiol valerate:</strong> Suppresses FSH → prevents follicle recruitment and selection</li>
+            <li><strong>Progestin (norethindrone, levonorgestrel, etc.):</strong> Suppresses LH surge → prevents ovulation</li>
+            <li><strong>Both components:</strong> Thicken cervical mucus (mechanical barrier to sperm)</li>
+            <li><strong>Breakthrough bleeding:</strong> Occurs with missed pills, low progestin dose, or drug interactions (antibiotics, anticonvulsants that induce metabolism)</li>
+        </ul>
+    </div>
+
+    <div class="ref-section">
+        <h3>GnIH & Stress Amenorrhea</h3>
+        <div class="ref-box">
+            <strong>GnIH (Gonadotropin Inhibitory Hormone):</strong> Released during stress via glucocorticoid signaling. Suppresses GnRH secretion → ↓ FSH/LH → suppression of menstruation (stress amenorrhea). The mechanism links stress (cortisol) to reproductive suppression via hypothalamic GnIH neurons.
+        </div>
+    </div>
+
+    <div class="ref-section">
+        <h3>Quick Reference: Hypogonadism Types</h3>
+        <table class="ref-table">
+            <tr><th>Type</th><th>Locus of Defect</th><th>LH</th><th>FSH</th><th>Testosterone</th><th>Examples</th></tr>
+            <tr><td class="hl">Primary (1°)</td><td>Testis</td><td class="hl-red">↑↑</td><td class="hl-red">↑↑</td><td class="hl-red">↓</td><td>Enzyme deficiency, trauma, Klinefelter</td></tr>
+            <tr><td class="hl">Secondary (2°)</td><td>Hypothalamus/Pituitary</td><td class="hl-red">↓</td><td class="hl-red">↓</td><td class="hl-red">↓</td><td>GnRH deficiency, prolactinoma, tumors</td></tr>
+        </table>
+    </div>
+
+    <div class="ref-section">
+        <h3>Sex Steroids: Not Sex-Specific</h3>
+        <ul class="ref-list">
+            <li><strong>Testosterone:</strong> Males produce ~7–8 mg/day; females ~0.3 mg/day from ovary + adrenal. Both sexes require it.</li>
+            <li><strong>Estradiol:</strong> Males ~40–160 pg/mL (mostly peripheral aromatization); females 50–400 pg/mL (cycling). Males need estrogen for bone health + sperm function.</li>
+            <li><strong>DHT:</strong> Males ~15–50 ng/dL; females ~4–22 ng/dL. Females produce DHT from adrenal DHEA and testosterone.</li>
+            <li><strong>Progesterone:</strong> Females cyclic (follicular <1 ng/mL; luteal 10–20 ng/mL); males constitutively low (~0.5 ng/mL). Males produce progesterone from adrenal and testis.</li>
+        </ul>
+    </div>
+`;
+
+// Tab switching
+function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

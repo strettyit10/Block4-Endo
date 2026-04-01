@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUSOM Biochem L5: Thyroid Hormone Synthesis and Action</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent: #E65100; --accent-dark: #D84315; --accent-light: rgba(230,81,0,0.15); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0D1117; color: #E6EDF3; min-height: 100vh; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        .header { background: linear-gradient(135deg, #161B22 0%, #1A1F2E 100%); border-bottom: 3px solid var(--accent); padding: 28px 30px; margin-bottom: 28px; border-radius: 10px; }
+        .header .back { font-size: 0.8em; color: #6B7280; text-decoration: none; display: inline-block; margin-bottom: 10px; }
+        .header .back:hover { color: var(--accent); }
+        .header h1 { color: #E6EDF3; font-size: 1.9em; margin-bottom: 6px; }
+        .header .subtitle { color: #9CA3AF; font-size: 0.9em; }
+        .header .accent-tag { color: var(--accent); font-weight: 600; }
+
+        .tab-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; background: #161B22; padding: 12px; border-radius: 8px; border: 1px solid #21262D; }
+        .tab-btn { padding: 9px 18px; background: #1C2128; color: #8B949E; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.88em; transition: all 0.2s; }
+        .tab-btn:hover { background: #30363D; color: var(--accent); }
+        .tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .fc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .fc { background: #161B22; border: 1px solid #30363D; border-radius: 10px; cursor: pointer; perspective: 800px; min-height: 160px; }
+        .fc-inner { position: relative; width: 100%; height: 100%; min-height: 160px; transform-style: preserve-3d; transition: transform 0.5s; }
+        .fc.flipped .fc-inner { transform: rotateY(180deg); }
+        .fc-front, .fc-back { position: absolute; width: 100%; min-height: 160px; backface-visibility: hidden; padding: 18px; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; }
+        .fc-front { background: #161B22; border-top: 3px solid var(--accent); }
+        .fc-back { background: #1A1F2E; transform: rotateY(180deg); border-top: 3px solid #4ADE80; }
+        .fc-label { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+        .fc-front .fc-label { color: var(--accent); }
+        .fc-back .fc-label { color: #4ADE80; }
+        .fc-q { font-size: 0.95em; color: #E6EDF3; line-height: 1.5; font-weight: 500; }
+        .fc-a { font-size: 0.92em; color: #D1FAE5; line-height: 1.5; }
+        .fc-hint { margin-top: 10px; font-size: 0.75em; color: #6B7280; text-align: center; }
+
+        .mcq-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .mcq-num { font-size: 0.75em; color: #6B7280; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+        .mcq-stem { font-size: 0.95em; color: #E6EDF3; margin-bottom: 14px; line-height: 1.6; }
+        .mcq-stem strong { color: #FCD34D; }
+        .mcq-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+        .mcq-opt { padding: 10px 14px; background: #1C2128; border: 1px solid #30363D; border-radius: 6px; cursor: pointer; font-size: 0.9em; color: #C9D1D9; transition: all 0.2s; display: flex; align-items: flex-start; gap: 10px; }
+        .mcq-opt:hover:not(.revealed) { background: #21262D; border-color: var(--accent); }
+        .mcq-opt.correct { background: rgba(74, 222, 128, 0.15); border-color: #4ADE80; color: #D1FAE5; }
+        .mcq-opt.wrong { background: rgba(239, 68, 68, 0.1); border-color: #EF4444; color: #FCA5A5; }
+        .mcq-opt .letter { font-weight: 700; min-width: 20px; }
+        .mcq-explanation { background: #1C2128; border-left: 3px solid #4ADE80; padding: 12px 14px; border-radius: 0 6px 6px 0; font-size: 0.87em; color: #9CA3AF; display: none; margin-top: 4px; }
+        .mcq-explanation.visible { display: block; }
+        .mcq-explanation .exp-label { color: #4ADE80; font-weight: 600; margin-bottom: 4px; }
+        .teaching-pt { background: rgba(230,81,0,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 12px 14px; margin-top: 10px; font-size: 0.87em; color: #FED7AA; display: none; }
+        .teaching-pt.visible { display: block; }
+        .teaching-pt .tp-label { font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+
+        .vig-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 22px; margin-bottom: 20px; }
+        .vig-banner { background: rgba(230,81,0,0.2); border: 1px solid var(--accent); border-radius: 6px; padding: 8px 14px; font-size: 0.8em; color: #FED7AA; font-weight: 600; margin-bottom: 14px; }
+        .vig-stem { font-size: 0.93em; line-height: 1.7; color: #D1D5DB; margin-bottom: 14px; }
+        .vig-stem strong { color: #FCD34D; }
+
+        .trap-item { background: #1A1212; border: 1px solid #7F1D1D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .trap-header { color: #FCA5A5; font-size: 0.85em; font-weight: 700; margin-bottom: 8px; }
+        .trap-myth { background: rgba(239,68,68,0.1); border-left: 3px solid #EF4444; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #FCA5A5; margin-bottom: 8px; }
+        .trap-truth { background: rgba(74,222,128,0.1); border-left: 3px solid #4ADE80; padding: 8px 12px; border-radius: 0 6px 6px 0; font-size: 0.9em; color: #D1FAE5; }
+        .trap-myth-label { font-size: 0.75em; color: #EF4444; font-weight: 700; margin-bottom: 4px; }
+        .trap-truth-label { font-size: 0.75em; color: #4ADE80; font-weight: 700; margin-bottom: 4px; }
+
+        .fib-item { background: #161B22; border: 1px solid #30363D; border-radius: 10px; padding: 18px; margin-bottom: 14px; }
+        .fib-prompt { font-size: 0.93em; color: #E6EDF3; margin-bottom: 12px; line-height: 1.6; }
+        .fib-input { width: 100%; background: #0D1117; border: 1px solid #30363D; border-radius: 6px; padding: 8px 12px; color: #E6EDF3; font-size: 0.9em; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
+        .fib-input:focus { outline: none; border-color: var(--accent); }
+        .fib-btn { background: var(--accent); color: white; border: none; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; }
+        .fib-result { margin-top: 8px; font-size: 0.88em; padding: 8px 12px; border-radius: 6px; display: none; }
+        .fib-result.correct { background: rgba(74,222,128,0.15); color: #D1FAE5; border: 1px solid #4ADE80; display: block; }
+        .fib-result.incorrect { background: rgba(239,68,68,0.1); color: #FCA5A5; border: 1px solid #EF4444; display: block; }
+
+        .ref-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88em; }
+        .ref-table th { background: var(--accent); color: white; padding: 9px 12px; text-align: left; }
+        .ref-table td { padding: 8px 12px; border: 1px solid #30363D; color: #C9D1D9; vertical-align: top; }
+        .ref-table tr:nth-child(even) td { background: #161B22; }
+        .ref-table tr:nth-child(odd) td { background: #1C2128; }
+        .ref-table td.hl { color: var(--accent); font-weight: 600; }
+        .ref-table td.hl-green { color: #4ADE80; font-weight: 600; }
+        .ref-table td.hl-red { color: #F87171; font-weight: 600; }
+
+        .section-title { font-size: 0.8em; font-weight: 700; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid #21262D; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="GUSOM-Biochem-ActiveDrills.html" class="back">← Back to Biochemistry Hub</a>
+        <h1>Lecture 5: <span class="accent-tag">Thyroid Hormone Synthesis and Action</span></h1>
+        <div class="subtitle">Iodine uptake · TPO organification · T4/T3 coupling · Thyroglobulin storage · Peripheral conversion · Nuclear receptors · Clinical inhibitors</div>
+    </div>
+
+    <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('flashcards')">🃏 Flashcards</button>
+        <button class="tab-btn" onclick="switchTab('mcq')">❓ MCQ Practice</button>
+        <button class="tab-btn" onclick="switchTab('vignettes')">🏥 Vignettes</button>
+        <button class="tab-btn" onclick="switchTab('traps')">⚠️ Test Traps</button>
+        <button class="tab-btn" onclick="switchTab('fib')">✏️ Fill-in-Blank</button>
+        <button class="tab-btn" onclick="switchTab('ref')">📊 Reference</button>
+    </div>
+
+    <div id="tab-flashcards" class="tab-content active">
+        <div class="section-title">Core Concept Flashcards — Click to Flip</div>
+        <div class="fc-grid" id="fcGrid"></div>
+    </div>
+
+    <div id="tab-mcq" class="tab-content">
+        <div class="section-title">Multiple Choice Practice</div>
+        <div id="mcqContainer"></div>
+    </div>
+
+    <div id="tab-vignettes" class="tab-content">
+        <div class="section-title">Clinical Vignettes</div>
+        <div id="vigContainer"></div>
+    </div>
+
+    <div id="tab-traps" class="tab-content">
+        <div class="section-title">⚠️ Test Traps — Common Exam Misconceptions</div>
+        <div id="trapsContainer"></div>
+    </div>
+
+    <div id="tab-fib" class="tab-content">
+        <div class="section-title">Fill in the Blank — Complete the Pathway</div>
+        <div id="fibContainer"></div>
+    </div>
+
+    <div id="tab-ref" class="tab-content">
+        <div class="section-title">Quick Reference Table</div>
+        <div id="refContainer"></div>
+    </div>
+</div>
+
+<script>
+function switchTab(name) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
+
+const flashcards = [
+    { q: "What are T4 and T3? What is the difference between them?", a: "T4 (thyroxine) = 3,5,3',5'-tetraiodothyronine (4 iodines). T3 = 3,5,3'-triiodothyronine (3 iodines). T3 is ACTIVE (~4x more potent). T4 is a prohormone converted to T3 peripherally by deiodinases.", anki: "28" },
+    { q: "Name the 2 main thyroid cell types and their products.", a: "Follicular cells = synthesize T4 and T3. Parafollicular C-cells = synthesize calcitonin (blood calcium regulation).", anki: "31" },
+    { q: "Describe the NIS transporter.", a: "NIS = Na+/I- symporter on basolateral membrane. Co-transports 2 Na+ per 1 I-. Uses secondary active transport (Na+ gradient from Na+/K+-ATPase). STEP 1 of thyroid hormone synthesis.", anki: "53" },
+    { q: "Name 2 NIS inhibitors. Are they competitive?", a: "Perchlorate and thiocyanate — both COMPETITIVE. PTU and methimazole do NOT inhibit NIS, they inhibit TPO.", anki: "69" },
+    { q: "What is TPO? What does it do?", a: "TPO = thyroid peroxidase on apical membrane. Catalyzes: (1) Oxidation of I- to I0 (using H2O2). (2) Organification — iodinates tyrosine on thyroglobulin (MIT and DIT). (3) Coupling — joins MIT+DIT → T3; DIT+DIT → T4.", anki: "123" },
+    { q: "What is pendrin?", a: "Pendrin = Cl-/I- exchanger on apical membrane. Transports I- INTO follicular lumen (opposite of NIS). Important for iodide recycling. Gene: SLC26A4. Mutation → Pendred syndrome (goiter + deafness).", anki: "130" },
+    { q: "What are MIT and DIT?", a: "MIT = monoiodotyrosine (1 iodine on thyroglobulin). DIT = diiodotyrosine (2 iodines on thyroglobulin). Generated by TPO iodinization during organification.", anki: "185" },
+    { q: "Describe the coupling reaction.", a: "Coupling = TPO joins MIT and DIT covalently on thyroglobulin. MIT + DIT → T3. DIT + DIT → T4. STEP 4 of synthesis.", anki: "251" },
+    { q: "Where is thyroglobulin stored? Unique?", a: "Follicular COLLOID (extracellular). YES — UNIQUE hormone stored outside the cell. All others in intracellular granules.", anki: "252" },
+    { q: "Describe STEP 5: release of T3 and T4.", a: "Follicular cells endocytose colloid → fuse with lysosomes → proteases cleave T3, T4, MIT, DIT from thyroglobulin → enter bloodstream. MIT/DIT deiodinated → I- recycled.", anki: "253" },
+    { q: "How are MIT and DIT recycled?", a: "Deiodinated by intracellular deiodinase → releases I-. I- recaptured by NIS and reused. Why I-131 scans work — iodide trapped.", anki: "254" },
+    { q: "Name 3 thyroid hormone transport proteins.", a: "TBG (70-75%, highest affinity). Transthyretin (20%). Albumin (5%). ONLY FREE T3/T4 are active.", anki: "255" },
+    { q: "What does Type 1 deiodinase (D1) do?", a: "Removes 5' iodine from T4 → converts T4 to T3 (active form). Found in liver, kidney. Main site of peripheral T4→T3 conversion. PTU inhibits D1 AND TPO.", anki: "256" },
+    { q: "What does Type 2 deiodinase (D2) do?", a: "Removes 5' iodine from T4 → converts T4 to T3. Found in brain, pituitary, muscle. Local T3 production in tissues.", anki: "257" },
+    { q: "What is Type 3 deiodinase (D3)?", a: "Removes 5 iodine (inner ring) from T4 → reverse T3 (inactive). Elevated in NTI (euthyroid sick syndrome). Protects tissues during stress/illness.", anki: "258" },
+    { q: "What is PTU?", a: "PTU = antithyroid drug. Inhibits TPO (blocks synthesis AND coupling) AND Type 1 deiodinase (blocks T4→T3 conversion). Preferred in thyroid storm. Not for 1st trimester.", anki: "259" },
+    { q: "What is methimazole?", a: "Methimazole = antithyroid drug. Inhibits ONLY TPO (no deiodinase inhibition). Longer half-life. Preferred for chronic hyperthyroidism. NOT 1st trimester.", anki: "260" },
+    { q: "Describe TR structure.", a: "TR = nuclear receptor. Binds T3 (high affinity). Binds as homodimers or heterodimers with RXR on DNA (TREs).", anki: "261" },
+    { q: "Unliganded vs liganded TR?", a: "Unliganded = recruits co-repressors (HDAC) → gene repression. Liganded (T3) = recruits co-activators (CBP, SRC) → gene activation.", anki: "262" },
+    { q: "Name 3 genes activated by T3.", a: "a-MHC → b-MHC in heart. SERCA2a (calcium pump, contractility). Na+/K+-ATPase (BMR). LDL receptor. b-adrenergic receptors.", anki: "263" },
+    { q: "The 2 TR isoforms?", a: "TR-a = heart, muscle (HR, contractility, sensitivity). TR-b = liver, pituitary, brain (metabolism, feedback, cognition).", anki: "264" },
+    { q: "What is Wolff-Chaikoff effect?", a: "Excess iodide → acutely INHIBITS synthesis (down-NIS, down-TPO). High I- paradoxically blocks its own uptake/organification. Usually escapes in 5-7 days.", anki: "265" },
+    { q: "What is Jod-Basedow?", a: "Iodide repletion in iodine-deficient patient → hyperthyroidism. Autonomous nodules now have I- available. NOT in normal thyroids.", anki: "266" },
+    { q: "What is Pendred syndrome?", a: "SLC26A4 mutation → defective pendrin. Features: (1) Goiter. (2) Sensorineural deafness (most common syndromic congenital deafness).", anki: "267" },
+    { q: "Daily iodide requirement?", a: "Adults = 150 ug/day. Pregnancy = 220 ug/day. Lactation = 290 ug/day. Deficiency → goiter, cretinism.", anki: "268" },
+    { q: "Other tissues with NIS uptake?", a: "Salivary glands, stomach (parietal cells), breast (lactating), choroid plexus, placenta.", anki: "269" },
+];
+
+const mcqs = [
+    {
+        num: 1,
+        stem: "A 35-year-old woman with Graves disease begins methimazole. What is the PRIMARY mechanism?",
+        options: ["Inhibits NIS uptake", "Inhibits TPO iodinization and coupling", "Blocks Type 1 deiodinase", "Inhibits endocytosis", "Blocks iodide reuptake"],
+        correct: 1,
+        explanations: ["PTU/perchlorate inhibit NIS.", "CORRECT. Methimazole inhibits TPO, preventing both organification and coupling.", "PTU inhibits deiodinase, not methimazole.", "Methimazole doesn't affect endocytosis.", "Perchlorate inhibits NIS, not methimazole."],
+        teaching: "Methimazole ONLY blocks TPO (longer half-life). PTU blocks BOTH TPO AND deiodinase (shorter half-life). PTU preferred in thyroid storm."
+    },
+    {
+        num: 2,
+        stem: "Patient on levothyroxine. Which tissue converts T4 to T3 systemically?",
+        options: ["Thyroid", "Liver (D1)", "Pituitary (D2)", "Brown adipose", "Hypothalamus"],
+        correct: 1,
+        explanations: ["Thyroid suppressed by exogenous T4.", "CORRECT. Liver has most Type 1 deiodinase (D1), responsible for ~80% systemic T4→T3 conversion.", "D2 in pituitary is local.", "Brown fat responsive but not major site.", "Hypothalamus uses D2 locally."],
+        teaching: "D1 (liver, kidney) does ~80% of systemic conversion. D2 (brain, pituitary, muscle) provides local T3. In liver disease, D1 impaired → more rT3."
+    },
+    {
+        num: 3,
+        stem: "Graves patient in thyroid storm on methimazole. Why insufficient? What add?",
+        options: ["Add beta-blocker", "Add iodine solution (Wolff-Chaikoff)", "Switch to PTU", "Add dexamethasone", "Add propranolol (blocks deiodinase)"],
+        correct: 1,
+        explanations: ["Beta-blockers help symptoms but not hormone excess.", "CORRECT. Iodine solution acutely blocks synthesis AND release via Wolff-Chaikoff. Faster than methimazole. Give PTU first, then iodine 1 hour later.", "PTU better but not reason methimazole insufficient.", "Dexamethasone mild effect.", "Propranolol doesn't inhibit deiodinase."],
+        teaching: "Thyroid storm: PTU (synthesis + deiodinase) → iodine solution (blocks release/synthesis) → beta-blocker → steroids. Iodine is critical for rapid improvement."
+    },
+    {
+        num: 4,
+        stem: "Severe iodine deficiency patient develops goiter. Iodide repletion causes hyperthyroidism. Why?",
+        options: ["Wolff-Chaikoff effect", "Jod-Basedow — autonomous nodules + iodide = excess hormone", "Thyroiditis", "TSH surge", "Graves disease triggered"],
+        correct: 1,
+        explanations: ["Wolff-Chaikoff is inhibition, opposite.", "CORRECT. Jod-Basedow: Autonomous nodules developed during deficiency. Now with iodide available, they produce excess hormone. NOT in normal thyroids.", "Thyroiditis not characteristic.", "TSH wouldn't cause hyperthyroidism.", "Graves takes weeks-months."],
+        teaching: "Jod-Basedow = 'iodide-induced thyrotoxicosis.' Only with autonomous nodules. Normal thyroids + iodide = normal, not hyperthyroidism."
+    },
+    {
+        num: 5,
+        stem: "Thyroid biopsy: reduced TPO. Defective at which STEPS?",
+        options: ["Step 1 (uptake)", "Steps 2-3", "Steps 2, 3, 4 (oxidation, organification, coupling)", "Steps 3-4", "All 5"],
+        correct: 2,
+        explanations: ["NIS (Step 1) doesn't need TPO.", "Incomplete.", "CORRECT. TPO does: Step 2 (I- → I0), Step 3 (iodinates tyrosine → MIT/DIT), Step 4 (couples T3/T4). Defective TPO → deficient all three.", "TPO also needed for Step 2.", "Lysosomal proteolysis (Step 5) doesn't need TPO."],
+        teaching: "TPO mutations → congenital hypothyroidism. Pendrin mutations affect Step 2 (lumen secretion). NIS mutations affect Step 1."
+    },
+    {
+        num: 6,
+        stem: "Why is I-131 effective for thyroid cancer ablation post-thyroidectomy?",
+        options: ["I-131 taken up by cancer via NIS and TPO", "TSH upregulates NIS in residual cancer", "I-131 binds thyroglobulin circulates to cancer", "I-131 toxic to thyroid cancer markers", "Cancer cells retain NIS expression for I- uptake"],
+        correct: 4,
+        explanations: ["TPO involved but not main point.", "TSH does upregulate NIS, but that's mechanism.", "Thyroglobulin doesn't carry I-131.", "Markers not mechanism.", "CORRECT. Differentiated cancers retain NIS. TSH elevation increases NIS → cancer cells concentrate I-131 → beta particles → death."],
+        teaching: "I-131: Relies on cancer cell retention of NIS + TSH sensitivity. Anaplastic/poorly differentiated lose NIS — not responsive to I-131."
+    },
+    {
+        num: 7,
+        stem: "Euthyroid sick syndrome: TSH normal, T4 low, T3 LOW, rT3 HIGH. Which deiodinase predominates?",
+        options: ["D1 (outer ring, produces T3)", "D2 (outer ring, local T3)", "D3 (inner ring, produces rT3)", "D1 and D2 equally", "None — deiodinase levels unchanged"],
+        correct: 2,
+        explanations: ["D1 suppressed in NTI.", "D2 conserved but doesn't predominate.", "CORRECT. D3 predominates: inner ring deiodination T4 → rT3 (inactive). Protects tissues during illness. Result: low T3, high rT3, normal TSH.", "Not equally upregulated.", "Deiodinase definitely changes."],
+        teaching: "NTI pathophysiology: Cytokines suppress D1, activate D3. Goal: reduce metabolic rate. TSH normal because hypothalamic TRH sensitivity decreased. Low T3 = poor prognosis."
+    },
+    {
+        num: 8,
+        stem: "Transgenic mouse lacks functional pendrin (SLC26A4). What happens?",
+        options: ["NIS uptake severely impaired", "I- enters via NIS but accumulates intracellularly (can't reach lumen)", "T3/T4 synthesis completely blocked", "Thyroglobulin synthesis reduced", "Thyroid hyperplasia from impaired TSH"],
+        correct: 1,
+        explanations: ["NIS on basolateral membrane, independent of pendrin.", "CORRECT. Pendrin on apical membrane pumps I- INTO lumen where TPO/thyroglobulin are. Without it, I- taken up (NIS works) but can't reach lumen. Accumulates intracellularly. Thyroid compensates → goiter (Pendred syndrome).", "Some synthesis still occurs.", "Thyroglobulin synthesis independent of pendrin.", "TSH signaling normal; iodide handling defective."],
+        teaching: "Pendred syndrome: Goiter develops from constant hormone production attempts but iodide can't reach lumen. Hearing loss from inner ear pendrin defect. Treat: iodine supplementation."
+    },
+];
+
+const vignettes = [
+    {
+        banner: "Vignette | Graves Disease & Thyroid Storm",
+        stem: "24-year-old Graves disease (TSI+, goiter, exophthalmos) on methimazole. 2 weeks later: fever 40.5C, HR 150, tremor, altered mental status. T4/T3 elevated, TSH suppressed.",
+        question: "Why insufficient? What ADD immediately?",
+        options: ["Beta-blocker for HR/anxiety", "Iodine solution (Wolff-Chaikoff blocks synthesis/release)", "Switch to PTU", "Dexamethasone", "Propranolol (blocks deiodinase)"],
+        correct: 1,
+        explanations: ["Beta-blockers help symptoms, not hormone excess.", "CORRECT. Iodine solution acts via Wolff-Chaikoff to acutely block synthesis AND block preformed hormone release. Works FASTER than methimazole alone. Sequence: PTU → 1 hr later iodine solution.", "PTU better but not why methimazole insufficient.", "Dexamethasone mild effect.", "Propranolol doesn't inhibit deiodinase."],
+        teaching: "Thyroid storm: PTU (synthesis + deiodinase) + iodine (blocks release) + beta-blocker (symptoms) + steroids + cooling. Iodine is game-changer for rapid improvement."
+    },
+    {
+        banner: "Vignette | Hypothyroidism & Malabsorption",
+        stem: "58-year-old on levothyroxine 50 ug daily × 5 years (TSH 1.5). Develops diarrhea from celiac disease (undiagnosed). 8 weeks: TSH 24, T4 0.3. 'I take my meds daily.'",
+        question: "Why TSH rise despite adherence?",
+        options: ["Stomach acid inactivates levothyroxine", "Celiac malabsorption of T4 in small intestine (villous atrophy)", "Increased T4 loss from diarrhea", "Diarrhea causes TSH receptor loss", "Anti-levothyroxine antibodies"],
+        correct: 1,
+        explanations: ["Gastric acid doesn't inactivate T4; absorption in small intestine.", "CORRECT. Celiac → villous atrophy → malabsorption of T4. Reduced bioavailability despite correct dose. Solution: increase dose or treat celiac (gluten-free). T4 absorbed better on empty stomach 30-60 min before food.", "Diarrhea reduces recycling but malabsorption of dose is primary.", "TSH receptors not lost.", "Anti-T4 antibodies not celiac mechanism."],
+        teaching: "Levothyroxine malabsorption: Celiac, IBD (Crohn's), atrophic gastritis, PPI use, iron/calcium supplements (bind T4). Ask about GI symptoms in 'adhered' hypothyroid patients with rising TSH. May need higher dose or liquid formulation."
+    },
+    {
+        banner: "Vignette | Euthyroid Sick Syndrome",
+        stem: "67-year-old severe sepsis + ARDS. Day 5: TSH 1.2 (normal), T4 0.6 (LOW), T3 2.1 (LOW), rT3 4.2 (ELEVATED, normal <0.3). Team concerned, considers levothyroxine.",
+        question: "Explanation? Start levothyroxine?",
+        options: ["Primary hypothyroidism; TSH falsely normal from pituitary dysfunction", "Euthyroid sick (NTI); levothyroxine NOT indicated — protective adaptive response", "Secondary hypothyroidism from cytokine suppression; need levothyroxine", "Thyroiditis from release; low T3 from consumption", "Central hypothyroidism from pituitary necrosis; urgent levothyroxine"],
+        correct: 1,
+        explanations: ["TSH normal in NTI, not pituitary dysfunction.", "CORRECT. Euthyroid sick syndrome (NTI). Normal TSH + low T3 + high rT3 is pathognomonic. Body adapts to illness by shunting T4 → rT3 (via upregulated D3) to reduce metabolism — PROTECTIVE. Start levothyroxine? NO — may worsen outcomes. Treat underlying sepsis; thyroid normalizes with recovery.", "Normal TSH rules out secondary hypothyroidism.", "Thyroiditis pattern different: initially high T3/T4.", "Pituitary necrosis rare, would show LOW TSH not normal."],
+        teaching: "NTI = classic in severe illness (sepsis, MI, trauma). Lab pattern: down-T3, up-rT3, down/normal T4, NORMAL TSH. Mechanism: down-D1, up-D3 (cytokine-mediated). Prognosis: persistent low T3 = poor outcome. DO NOT treat with levothyroxine."
+    },
+];
+
+const traps = [
+    { num: 1, trap: "PTU and methimazole have same mechanism.", truth: "PTU inhibits TPO + D1. Methimazole inhibits TPO ONLY. PTU preferred in thyroid storm (deiodinase inhibition faster relief). Methimazole preferred chronic (longer half-life, less hepatotoxicity)." },
+    { num: 2, trap: "Methimazole safe in all pregnancy trimesters.", truth: "Methimazole causes rare embryopathy in 1st trimester (choanal/esophageal atresia). PTU preferred 1st trimester. Switch to methimazole 2nd/3rd (lower hepatotoxicity). Both cross placenta." },
+    { num: 3, trap: "NIS and TPO inhibitors overlap.", truth: "Different targets: NIS inhibitors block UPTAKE at basolateral (Step 1). TPO inhibitors block ORGANIFICATION/COUPLING (Steps 3-4). Distinct mechanisms and toxicities." },
+    { num: 4, trap: "Wolff-Chaikoff effect permanent.", truth: "Usually TEMPORARY. Thyroid escapes in 5-7 days via NIS downregulation. Pre-existing thyroid disease or autonomy may not escape → chronic hypothyroidism/hyperthyroidism." },
+    { num: 5, trap: "High rT3 always means hypothyroidism.", truth: "High rT3 + low T3 + NORMAL TSH = euthyroid sick (NTI), not hypothyroidism. Adaptive response to severe illness. Treat underlying illness, NOT with levothyroxine." },
+    { num: 6, trap: "Thyroglobulin stored in secretory vesicles inside cells like other hormones.", truth: "Thyroglobulin UNIQUE — stored in FOLLICULAR COLLOID (extracellular). Only hormone stored outside cell. Allows large reserves. Endocytosis brings it back for lysosomal release." },
+    { num: 7, trap: "Pendrin and NIS overlap function.", truth: "Different roles/locations: NIS (basolateral) brings I- INTO cell. Pendrin (apical) pumps I- INTO LUMEN. Without pendrin, I- accumulates intracellularly → goiter (Pendred = SLC26A4)." },
+    { num: 8, trap: "Free T3 and T4 directly proportional.", truth: "Can DISSOCIATE. NTI: T4 low, T3 LOW (D3 shunts T4→rT3), rT3 HIGH. Hyperthyroidism: T3 disproportionately elevated (thyroid preferentially releases T3, conversion increased)." },
+    { num: 9, trap: "TSH best single marker all contexts.", truth: "TSH NORMAL in: secondary hypothyroidism, NTI, early Graves (TSH transiently normal). Low TSH in central hypothyroidism despite low T4. Always check FREE T4/T3." },
+    { num: 10, trap: "Jod-Basedow in all iodide repletion.", truth: "Only with autonomous nodules from prior iodine deficiency. Normal thyroids + iodide = normal, no hyperthyroidism. TSH stays normal." },
+];
+
+const fibs = [
+    { prompt: "Iodide enters via _____ symporter at _____ membrane (2 Na+:1 I-).", answers: ["NIS", "basolateral"], explanation: "Secondary active transport, Na+ gradient from Na+/K+-ATPase." },
+    { prompt: "TPO oxidizes I- to I0 using _____.", answers: ["H2O2", "hydrogen peroxide"], explanation: "TPO requires H2O2 as oxidizing substrate." },
+    { prompt: "Organification: TPO iodinates _____ on _____, producing MIT and DIT.", answers: ["tyrosine", "thyroglobulin"], explanation: "1 iodine = MIT; 2 iodines = DIT." },
+    { prompt: "MIT + DIT → _____. DIT + DIT → _____.", answers: ["T3", "T4"], explanation: "Coupling reaction on thyroglobulin, catalyzed by TPO." },
+    { prompt: "Type 1 deiodinase removes _____ iodine from T4 in _____.", answers: ["5'", "liver"], explanation: "D1 removes outer ring. Liver responsible for ~80% systemic T4→T3." },
+    { prompt: "Type 3 deiodinase removes _____ iodine, producing _____ (inactive).", answers: ["5", "rT3"], explanation: "D3 does inner ring removal. Elevated in NTI." },
+    { prompt: "Thyroglobulin stored in _____.", answers: ["follicular colloid", "colloid"], explanation: "UNIQUE extracellular storage. All other hormones in intracellular granules." },
+    { prompt: "Pendrin = _____ exchanger, transports I- into _____.", answers: ["Cl-/I-", "follicular lumen"], explanation: "Apical membrane. Opposite direction from basolateral NIS." },
+];
+
+const refTableData = `<table class="ref-table"><tr><th>Step</th><th>Process</th><th>Enzyme/Transport</th><th>Key Points</th></tr><tr><td class="hl">1</td><td>Uptake</td><td>NIS (Na+/I- symporter, basolateral)</td><td>2Na+:1I-; secondary active. Inhibited by perchlorate, thiocyanate.</td></tr><tr><td class="hl">2</td><td>Oxidation</td><td>TPO + Pendrin</td><td>TPO: I- → I0 (H2O2). Pendrin: I- into lumen. Wolff-Chaikoff effect.</td></tr><tr><td class="hl">3</td><td>Organification</td><td>TPO (apical)</td><td>Iodinates tyrosine on Tg → MIT + DIT. Inhibited by PTU, methimazole.</td></tr><tr><td class="hl">4</td><td>Coupling</td><td>TPO (apical)</td><td>MIT+DIT → T3; DIT+DIT → T4. Inhibited by PTU, methimazole.</td></tr><tr><td class="hl">5</td><td>Release</td><td>Lysosomal proteases</td><td>Endocytosis colloid → lysis → T3, T4 release. MIT/DIT deiodinated → I- recycled.</td></tr></table><table class="ref-table" style="margin-top:20px"><tr><th>Deiodinase</th><th>Location</th><th>Function</th><th>Ring</th><th>Product</th></tr><tr><td class="hl">D1</td><td>Liver, kidney</td><td>~80% systemic T4→T3</td><td>5' outer</td><td>T3</td></tr><tr><td class="hl">D2</td><td>Brain, pituitary, muscle</td><td>Local T3 production</td><td>5' outer</td><td>T3</td></tr><tr><td class="hl">D3</td><td>Placenta, brain, GI</td><td>Inactivation (elevated NTI)</td><td>5 inner</td><td>rT3</td></tr></table><table class="ref-table" style="margin-top:20px"><tr><th>Drug</th><th>TPO</th><th>NIS</th><th>D1</th><th>Use</th></tr><tr><td class="hl">PTU</td><td class="hl-green">YES</td><td>No</td><td class="hl-green">YES</td><td>Thyroid storm, 1st trimester</td></tr><tr><td class="hl">Methimazole</td><td class="hl-green">YES</td><td>No</td><td>No</td><td>Chronic hyperthyroidism, 2-3 trimester</td></tr><tr><td class="hl">Iodine solution</td><td class="hl-green">down</td><td class="hl-green">down</td><td>No</td><td>Thyroid storm (after PTU), surgery prep</td></tr></table><div style="background:rgba(230,81,0,0.1);border:1px solid var(--accent);border-radius:8px;padding:12px;margin-top:20px;font-size:0.9em;"><strong style="color:var(--accent)">Key Facts:</strong> 5 steps: uptake → oxidation → organification → coupling → release. Thyroglobulin UNIQUE (extracellular storage). D1 (liver) 80% conversion. D3 predominates in NTI. Jod-Basedow only autonomous nodules. Pendred = goiter + deafness.</div>`;
+
+function renderFlashcards() {
+    const grid = document.getElementById('fcGrid');
+    grid.innerHTML = '';
+    flashcards.forEach((card, idx) => {
+        const fcDiv = document.createElement('div');
+        fcDiv.className = 'fc';
+        fcDiv.onclick = () => fcDiv.classList.toggle('flipped');
+        fcDiv.innerHTML = `<div class="fc-inner"><div class="fc-front"><div class="fc-label">Anki #${card.anki}</div><div class="fc-q">${card.q}</div><div class="fc-hint">Click to reveal</div></div><div class="fc-back"><div class="fc-label">Answer</div><div class="fc-a">${card.a}</div></div></div>`;
+        grid.appendChild(fcDiv);
+    });
+}
+
+function renderMCQs() {
+    const container = document.getElementById('mcqContainer');
+    container.innerHTML = '';
+    mcqs.forEach((mcq, idx) => {
+        const mcqDiv = document.createElement('div');
+        mcqDiv.className = 'mcq-item';
+        let opts = '', expl = '';
+        mcq.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            opts += `<div class="mcq-opt" onclick="selectMCQ(${idx}, ${optIdx})"><span class="letter">${letter}.</span>${opt}</div>`;
+            expl += `<div class="mcq-explanation" id="exp-${idx}-${optIdx}"><div class="exp-label">${letter}.</div>${mcq.explanations[optIdx]}</div>`;
+        });
+        mcqDiv.innerHTML = `<div class="mcq-num">Q${mcq.num}</div><div class="mcq-stem">${mcq.stem}</div><div class="mcq-options" id="opts-${idx}">${opts}</div>${expl}<div class="teaching-pt" id="tp-${idx}"><div class="tp-label">Teaching:</div>${mcq.teaching}</div>`;
+        container.appendChild(mcqDiv);
+    });
+}
+
+function selectMCQ(idx, optIdx) {
+    const opts = document.getElementById(`opts-${idx}`).querySelectorAll('.mcq-opt');
+    opts.forEach(o => o.classList.remove('correct', 'wrong', 'revealed'));
+    const correct = mcqs[idx].correct;
+    opts.forEach((opt, i) => {
+        opt.classList.add('revealed');
+        if (i === correct) {
+            opt.classList.add('correct');
+            document.getElementById(`exp-${idx}-${i}`).classList.add('visible');
+        } else if (i === optIdx && optIdx !== correct) {
+            opt.classList.add('wrong');
+            document.getElementById(`exp-${idx}-${i}`).classList.add('visible');
+        }
+    });
+    document.getElementById(`tp-${idx}`).classList.add('visible');
+}
+
+function renderVignettes() {
+    const container = document.getElementById('vigContainer');
+    container.innerHTML = '';
+    vignettes.forEach((vig, idx) => {
+        const vigDiv = document.createElement('div');
+        vigDiv.className = 'vig-item';
+        let opts = '', expl = '';
+        vig.options.forEach((opt, optIdx) => {
+            const letter = String.fromCharCode(65 + optIdx);
+            opts += `<div class="mcq-opt" onclick="selectVig(${idx}, ${optIdx})"><span class="letter">${letter}.</span>${opt}</div>`;
+            expl += `<div class="mcq-explanation" id="vexp-${idx}-${optIdx}"><div class="exp-label">${letter}.</div>${vig.explanations[optIdx]}</div>`;
+        });
+        vigDiv.innerHTML = `<div class="vig-banner">${vig.banner}</div><div class="vig-stem">${vig.stem}</div><div style="margin:12px 0;font-weight:600;color:var(--accent)">${vig.question}</div><div class="mcq-options" id="vopts-${idx}">${opts}</div>${expl}<div class="teaching-pt" id="vtp-${idx}"><div class="tp-label">Insight:</div>${vig.teaching}</div>`;
+        container.appendChild(vigDiv);
+    });
+}
+
+function selectVig(idx, optIdx) {
+    const opts = document.getElementById(`vopts-${idx}`).querySelectorAll('.mcq-opt');
+    opts.forEach(o => o.classList.remove('correct', 'wrong', 'revealed'));
+    const correct = vignettes[idx].correct;
+    opts.forEach((opt, i) => {
+        opt.classList.add('revealed');
+        if (i === correct) opt.classList.add('correct');
+        else if (i === optIdx && optIdx !== correct) opt.classList.add('wrong');
+        document.getElementById(`vexp-${idx}-${i}`).classList.add('visible');
+    });
+    document.getElementById(`vtp-${idx}`).classList.add('visible');
+}
+
+function renderTraps() {
+    const container = document.getElementById('trapsContainer');
+    container.innerHTML = '';
+    traps.forEach(trap => {
+        const div = document.createElement('div');
+        div.className = 'trap-item';
+        div.innerHTML = `<div class="trap-header">Trap #${trap.num}</div><div class="trap-myth"><div class="trap-myth-label">Myth:</div>${trap.trap}</div><div class="trap-truth"><div class="trap-truth-label">Truth:</div>${trap.truth}</div>`;
+        container.appendChild(div);
+    });
+}
+
+function renderFIBs() {
+    const container = document.getElementById('fibContainer');
+    container.innerHTML = '';
+    fibs.forEach((fib, idx) => {
+        const div = document.createElement('div');
+        div.className = 'fib-item';
+        div.innerHTML = `<div class="fib-prompt">${fib.prompt}</div><input type="text" class="fib-input" id="fib-${idx}" placeholder="Type answer..."><button class="fib-btn" onclick="checkFIB(${idx})">Check</button><div class="fib-result" id="fibres-${idx}"></div><div style="margin-top:8px;font-size:0.85em;color:#9CA3AF">${fib.explanation}</div>`;
+        container.appendChild(div);
+    });
+}
+
+function checkFIB(idx) {
+    const input = document.getElementById(`fib-${idx}`).value.toLowerCase().trim();
+    const answers = fibs[idx].answers.map(a => a.toLowerCase());
+    const res = document.getElementById(`fibres-${idx}`);
+    const correct = answers.some(a => input.includes(a) || a.includes(input));
+    res.className = correct ? 'fib-result correct' : 'fib-result incorrect';
+    res.textContent = correct ? 'Correct! ' + fibs[idx].answers.join(' / ') : 'Expected: ' + fibs[idx].answers.join(' / ');
+}
+
+function renderRef() { document.getElementById('refContainer').innerHTML = refTableData; }
+
+window.addEventListener('load', () => {
+    renderFlashcards(); renderMCQs(); renderVignettes(); renderTraps(); renderFIBs(); renderRef();
+});
+</script>
+</body>
+</html>

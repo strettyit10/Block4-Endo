@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUSOM Endocrine — Biochemistry Block Challenge</title>
+<style>
+  :root {
+    --blue:#1565C0; --blue-light:#E3F2FD; --blue-mid:#90CAF9;
+    --orange:#E65100; --orange-light:#FFF3E0; --orange-mid:#FFCC80;
+    --green:#2E7D32; --green-light:#E8F5E9; --green-mid:#A5D6A7;
+    --purple:#6A1B9A; --purple-light:#F3E5F5; --purple-mid:#CE93D8;
+    --red:#C62828; --red-light:#FFEBEE; --red-mid:#EF9A9A;
+    --teal:#00695C; --teal-light:#E0F2F1; --teal-mid:#80CBC4;
+    --gray:#37474F; --gray-light:#ECEFF1; --gray-mid:#B0BEC5;
+    --gold:#F57F17; --gold-light:#FFF8E1;
+    --bg:#0D1117; --card:#161B22; --card2:#1E2530;
+    --shadow:0 4px 16px rgba(0,0,0,0.4);
+    --radius:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:#E6EDF3;line-height:1.6;}
+
+  /* TOP BAR */
+  .top-bar{background:linear-gradient(135deg,#1a237e,#4527a0,#6A1B9A);padding:18px 28px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
+  .top-bar h1{font-size:1.2rem;font-weight:800;flex:1;}
+  .top-bar a{color:rgba(255,255,255,0.7);font-size:0.82rem;text-decoration:none;}
+  .top-bar a:hover{color:#fff;}
+  .badge{background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 14px;font-size:0.78rem;border:1px solid rgba(255,255,255,0.2);}
+
+  /* SECTION NAV */
+  .section-nav{background:var(--card);border-bottom:1px solid #30363D;display:flex;overflow-x:auto;gap:0;padding:0 12px;position:sticky;top:60px;z-index:90;}
+  .sec-btn{padding:10px 20px;border:none;background:none;cursor:pointer;font-size:0.83rem;font-weight:700;color:#8B949E;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s;}
+  .sec-btn:hover{color:#E6EDF3;background:rgba(255,255,255,0.05);}
+  .sec-btn.active{color:#A78BFA;border-bottom-color:#A78BFA;}
+
+  /* PANELS */
+  .panel{display:none;max-width:980px;margin:0 auto;padding:28px 16px 80px;}
+  .panel.active{display:block;}
+
+  /* DASHBOARD */
+  .dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:28px;}
+  .dash-card{background:var(--card2);border-radius:var(--radius);padding:18px;text-align:center;border:1px solid #30363D;}
+  .dash-card .num{font-size:2.2rem;font-weight:900;color:#A78BFA;}
+  .dash-card .lbl{font-size:0.78rem;color:#8B949E;margin-top:2px;}
+  .hero-banner{background:linear-gradient(135deg,#1a237e,#4527a0);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:24px;border:1px solid #A78BFA44;}
+  .hero-banner h2{font-size:1.5rem;font-weight:800;margin-bottom:6px;}
+  .hero-banner p{color:rgba(255,255,255,0.75);font-size:0.9rem;max-width:600px;margin:0 auto;}
+
+  /* SECTION LABELS */
+  .sec-label{display:flex;align-items:center;gap:10px;margin:32px 0 16px;}
+  .sec-label .icon{font-size:1.4rem;}
+  .sec-label h3{font-size:1.05rem;font-weight:800;color:#E6EDF3;}
+  .sec-label .pill{background:#21262D;color:#8B949E;font-size:0.72rem;padding:3px 12px;border-radius:12px;border:1px solid #30363D;}
+
+  /* INTEGRATION VIGNETTES */
+  .vig-card{background:var(--card);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;border:1px solid #30363D;}
+  .vig-header{padding:10px 18px;display:flex;align-items:center;gap:10px;background:var(--card2);border-bottom:1px solid #30363D;}
+  .vig-header .vig-num{font-size:0.75rem;font-weight:800;color:#A78BFA;text-transform:uppercase;letter-spacing:0.5px;}
+  .vig-header .vig-lectures{font-size:0.72rem;color:#8B949E;}
+  .vig-stem{padding:18px;font-size:0.9rem;line-height:1.75;color:#E6EDF3;border-left:4px solid #F57F17;}
+  .vig-stem .prompt{font-weight:700;color:#FFCC80;margin-top:10px;font-size:0.85rem;}
+  .reveal-btn{width:100%;padding:11px;background:#21262D;border:none;border-top:1px solid #30363D;cursor:pointer;font-size:0.82rem;font-weight:700;color:#F57F17;transition:background 0.2s;}
+  .reveal-btn:hover{background:#2D333B;}
+  .vig-answer{display:none;padding:16px 18px;background:#0D2818;border-top:1px solid #238636;}
+  .vig-answer .ans-label{font-size:0.75rem;font-weight:800;color:#3FB950;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+  .vig-answer .ans-text{font-size:0.88rem;color:#E6EDF3;line-height:1.75;}
+  .vig-answer .why{font-size:0.8rem;color:#8B949E;margin-top:8px;font-style:italic;border-top:1px solid #21262D;padding-top:8px;}
+  .vig-answer .path-chain{background:#161B22;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:0.82rem;color:#A78BFA;font-family:monospace;line-height:1.8;}
+
+  /* MCQ GAUNTLET */
+  .mcq-card{background:var(--card);border-radius:var(--radius);margin-bottom:16px;border:1px solid #30363D;overflow:hidden;}
+  .mcq-header{background:var(--card2);padding:10px 18px;border-bottom:1px solid #30363D;display:flex;justify-content:space-between;align-items:center;}
+  .mcq-header .qnum{font-size:0.75rem;font-weight:800;color:#58A6FF;}
+  .mcq-header .difficulty{font-size:0.72rem;padding:2px 10px;border-radius:10px;}
+  .diff-easy{background:#0D2818;color:#3FB950;border:1px solid #238636;}
+  .diff-med{background:#2D1B00;color:#F0883E;border:1px solid #BD561D;}
+  .diff-hard{background:#2D0F0F;color:#FF7B72;border:1px solid #8B2020;}
+  .mcq-stem{padding:18px;font-size:0.9rem;line-height:1.75;color:#E6EDF3;}
+  .mcq-choices{display:flex;flex-direction:column;gap:8px;padding:0 18px 18px;}
+  .mcq-choice{background:#21262D;border:1.5px solid #30363D;border-radius:8px;padding:10px 16px;cursor:pointer;font-size:0.87rem;color:#E6EDF3;transition:all 0.2s;text-align:left;}
+  .mcq-choice:hover:not(:disabled){background:#2D333B;border-color:#58A6FF;}
+  .mcq-choice.correct{background:#0D2818;border-color:#3FB950;color:#3FB950;font-weight:700;}
+  .mcq-choice.wrong{background:#2D0F0F;border-color:#8B2020;color:#FF7B72;}
+  .mcq-choice.reveal-correct{background:#0D2818;border-color:#3FB950;color:#3FB950;}
+  .mcq-explain{display:none;padding:14px 18px 18px;border-top:1px solid #30363D;}
+  .mcq-explain .exp-label{font-size:0.75rem;font-weight:800;color:#A78BFA;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;}
+  .mcq-explain .exp-text{font-size:0.85rem;color:#C9D1D9;line-height:1.7;}
+  .choice-exp{font-size:0.78rem;color:#8B949E;margin-top:4px;padding-left:8px;border-left:2px solid #30363D;}
+
+  /* SCORE PROGRESS */
+  .score-tracker{background:var(--card2);border-radius:var(--radius);padding:16px;margin-bottom:20px;border:1px solid #30363D;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  .score-num{font-size:2rem;font-weight:900;color:#A78BFA;}
+  .score-bar-wrap{flex:1;min-width:200px;}
+  .score-bar{height:10px;background:#21262D;border-radius:5px;overflow:hidden;margin-top:4px;}
+  .score-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,#A78BFA,#60A5FA);transition:width 0.4s;}
+  .score-lbl{font-size:0.8rem;color:#8B949E;}
+
+  /* LADDER */
+  .ladder-container{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid #30363D;margin-bottom:20px;}
+  .level-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+  .level-tab{padding:6px 16px;border-radius:20px;font-size:0.8rem;font-weight:700;border:1.5px solid;cursor:default;}
+  .lvl1{border-color:#3FB950;color:#3FB950;background:#0D2818;}
+  .lvl2{border-color:#F0883E;color:#F0883E;background:#2D1B00;}
+  .lvl3{border-color:#FF7B72;color:#FF7B72;background:#2D0F0F;}
+  .lvl4{border-color:#A78BFA;color:#A78BFA;background:#1B1035;}
+  .level-tab.dim{opacity:0.35;}
+  .ladder-question-area{min-height:180px;}
+  .ladder-q{font-size:1rem;font-weight:700;color:#E6EDF3;margin-bottom:16px;line-height:1.6;}
+  .ladder-level-badge{display:inline-block;font-size:0.72rem;font-weight:800;padding:2px 10px;border-radius:10px;margin-bottom:10px;}
+  .ladder-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .ladder-choice{background:#21262D;border:1.5px solid #30363D;border-radius:8px;padding:10px 14px;cursor:pointer;font-size:0.85rem;color:#E6EDF3;transition:all 0.2s;text-align:left;}
+  .ladder-choice:hover:not(:disabled){background:#2D333B;border-color:#A78BFA;}
+  .ladder-choice.correct{background:#0D2818;border-color:#3FB950;color:#3FB950;font-weight:700;}
+  .ladder-choice.wrong{background:#2D0F0F;border-color:#8B2020;color:#FF7B72;}
+  .ladder-fb{padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-top:8px;display:none;}
+  .ladder-fb.ok{background:#0D2818;color:#3FB950;border:1px solid #238636;}
+  .ladder-fb.miss{background:#2D0F0F;color:#FF7B72;border:1px solid #8B2020;}
+  .ladder-progress{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+  .lp-dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;border:2px solid #30363D;color:#8B949E;}
+  .lp-dot.active{border-color:#A78BFA;color:#A78BFA;background:#1B1035;}
+  .lp-dot.done-ok{background:#0D2818;border-color:#3FB950;color:#3FB950;}
+  .lp-dot.done-miss{background:#2D0F0F;border-color:#8B2020;color:#FF7B72;}
+
+  /* ELIMINATION */
+  .elim-container{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid #30363D;}
+  .lives-display{display:flex;gap:8px;margin-bottom:16px;align-items:center;}
+  .life-heart{font-size:1.5rem;transition:all 0.3s;}
+  .life-heart.lost{filter:grayscale(1);opacity:0.3;}
+  .lives-label{font-size:0.85rem;color:#8B949E;margin-left:4px;}
+  .elim-q{font-size:0.95rem;font-weight:700;color:#E6EDF3;margin-bottom:14px;line-height:1.65;}
+  .elim-choices{display:flex;flex-direction:column;gap:8px;}
+  .elim-choice{background:#21262D;border:1.5px solid #30363D;border-radius:8px;padding:10px 16px;cursor:pointer;font-size:0.87rem;color:#E6EDF3;transition:all 0.2s;text-align:left;}
+  .elim-choice:hover:not(:disabled){background:#2D333B;border-color:#F57F17;}
+  .elim-choice.correct{background:#0D2818;border-color:#3FB950;color:#3FB950;font-weight:700;}
+  .elim-choice.wrong{background:#2D0F0F;border-color:#8B2020;color:#FF7B72;}
+  .elim-fb{padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-top:10px;display:none;}
+  .elim-fb.ok{background:#0D2818;color:#3FB950;}
+  .elim-fb.miss{background:#2D0F0F;color:#FF7B72;}
+  .elim-counter{font-size:0.82rem;color:#8B949E;margin-bottom:12px;}
+  .game-over-banner{background:linear-gradient(135deg,#4a0000,#8B2020);border-radius:var(--radius);padding:28px;text-align:center;display:none;}
+  .game-over-banner h3{font-size:1.6rem;font-weight:900;margin-bottom:8px;}
+  .victory-banner{background:linear-gradient(135deg,#0D4A0D,#1a6a1a);border-radius:var(--radius);padding:28px;text-align:center;display:none;}
+  .victory-banner h3{font-size:1.6rem;font-weight:900;margin-bottom:8px;color:#3FB950;}
+
+  /* STREAK */
+  .streak-container{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid #30363D;}
+  .streak-dots-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+  .s-dot{width:34px;height:34px;border-radius:50%;background:#21262D;border:2px solid #30363D;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#8B949E;transition:all 0.3s;}
+  .s-dot.hit{background:#0D2818;border-color:#3FB950;color:#3FB950;}
+  .s-dot.miss{background:#2D0F0F;border-color:#8B2020;color:#FF7B72;}
+  .s-dot.active-now{border-color:#A78BFA;color:#A78BFA;animation:glow 1s infinite alternate;}
+  @keyframes glow{from{box-shadow:0 0 0 0 #A78BFA44;}to{box-shadow:0 0 0 6px #A78BFA22;}}
+  .streak-best{font-size:0.85rem;color:#8B949E;margin-bottom:16px;}
+  .streak-q{font-size:0.95rem;font-weight:700;color:#E6EDF3;margin-bottom:14px;line-height:1.65;}
+  .streak-choices{display:flex;flex-direction:column;gap:8px;}
+  .streak-choice{background:#21262D;border:1.5px solid #30363D;border-radius:8px;padding:10px 16px;cursor:pointer;font-size:0.87rem;color:#E6EDF3;transition:all 0.2s;text-align:left;}
+  .streak-choice:hover:not(:disabled){background:#2D333B;border-color:#A78BFA;}
+  .streak-choice.correct{background:#0D2818;border-color:#3FB950;color:#3FB950;font-weight:700;}
+  .streak-choice.wrong{background:#2D0F0F;border-color:#8B2020;color:#FF7B72;}
+  .streak-fb{padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-top:10px;display:none;}
+  .streak-fb.ok{background:#0D2818;color:#3FB950;}
+  .streak-fb.miss{background:#2D0F0F;color:#FF7B72;}
+
+  /* FINAL SCORE SPLASH */
+  .final-splash{background:linear-gradient(135deg,#1a237e,#4527a0);border-radius:var(--radius);padding:36px;text-align:center;margin:28px 0;border:2px solid #A78BFA;}
+  .final-splash .big-num{font-size:4rem;font-weight:900;color:#A78BFA;}
+  .final-splash .grade{font-size:1.2rem;font-weight:700;margin:8px 0;}
+  .final-splash .sub{font-size:0.85rem;color:rgba(255,255,255,0.7);}
+
+  /* UTILITY */
+  .btn-primary{background:linear-gradient(135deg,#A78BFA,#60A5FA);color:#fff;border:none;border-radius:8px;padding:10px 24px;cursor:pointer;font-weight:800;font-size:0.9rem;transition:opacity 0.2s;}
+  .btn-primary:hover{opacity:0.85;}
+  .btn-secondary{background:#21262D;color:#E6EDF3;border:1px solid #30363D;border-radius:8px;padding:10px 24px;cursor:pointer;font-weight:700;font-size:0.88rem;}
+  .btn-secondary:hover{background:#2D333B;}
+  .tip-box{background:#1B1035;border-left:4px solid #A78BFA;border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;margin:12px 0;font-size:0.84rem;color:#C9D1D9;}
+  .tip-box strong{display:block;margin-bottom:3px;color:#A78BFA;}
+  .nav-back{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
+  .nav-back a{color:#58A6FF;font-size:0.85rem;text-decoration:none;}
+  .nav-back a:hover{text-decoration:underline;}
+  .section-divider{height:1px;background:#21262D;margin:32px 0;}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>🏆 Biochemistry Block Challenge</h1>
+  <span class="badge">All 5 Lectures</span>
+  <span class="badge">Step 1 Level</span>
+  <a href="GUSOM-Biochem-ActiveDrills.html">← Back to Per-Lecture Drills</a>
+</div>
+
+<nav class="section-nav">
+  <button class="sec-btn active" onclick="showPanel('dashboard')">📊 Dashboard</button>
+  <button class="sec-btn" onclick="showPanel('integration')">🔬 Integration Vignettes</button>
+  <button class="sec-btn" onclick="showPanel('mcq')">📝 MCQ Gauntlet</button>
+  <button class="sec-btn" onclick="showPanel('ladder')">🪜 Diagnosis Ladder</button>
+  <button class="sec-btn" onclick="showPanel('elimination')">💀 Elimination Round</button>
+  <button class="sec-btn" onclick="showPanel('streak')">🔥 Streak Challenge</button>
+</nav>
+
+<!-- ========== DASHBOARD ========== -->
+<div id="dashboard" class="panel active">
+  <div class="hero-banner">
+    <h2>🏆 Biochemistry Block Challenge</h2>
+    <p>This is your synthesis arena — where all 5 lectures collide. Attempt each section, then revisit what you got wrong. Aim for 80%+ across all modes before your in-house exam.</p>
+  </div>
+
+  <div class="dash-grid">
+    <div class="dash-card"><div class="num" id="dash-mcq">—</div><div class="lbl">MCQ Score</div></div>
+    <div class="dash-card"><div class="num" id="dash-ladder">—</div><div class="lbl">Ladder Score</div></div>
+    <div class="dash-card"><div class="num" id="dash-elim">—</div><div class="lbl">Elim Survived</div></div>
+    <div class="dash-card"><div class="num" id="dash-streak">—</div><div class="lbl">Best Streak</div></div>
+  </div>
+
+  <div class="sec-label"><span class="icon">🗺️</span><h3>What's in Each Section</h3></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;">
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('integration')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">🔬</div>
+      <div style="font-weight:800;margin-bottom:4px;">Integration Vignettes</div>
+      <div style="font-size:0.82rem;color:#8B949E;">10 rich clinical scenarios blending 2–3 lectures. Reveal full mechanistic explanations.</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('mcq')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">📝</div>
+      <div style="font-weight:800;margin-bottom:4px;">MCQ Gauntlet</div>
+      <div style="font-size:0.82rem;color:#8B949E;">15 Step 1-style questions with 4 answer choices and per-option explanations.</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('ladder')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">🪜</div>
+      <div style="font-weight:800;margin-bottom:4px;">Diagnosis Ladder</div>
+      <div style="font-size:0.82rem;color:#8B949E;">20 questions across 4 levels — beginner to Boss Round. Progress through all levels.</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('elimination')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">💀</div>
+      <div style="font-weight:800;margin-bottom:4px;">Elimination Round</div>
+      <div style="font-size:0.82rem;color:#8B949E;">3 lives. Get 3 wrong and you're out. How far can you go?</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('streak')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">🔥</div>
+      <div style="font-weight:800;margin-bottom:4px;">Streak Challenge</div>
+      <div style="font-size:0.82rem;color:#8B949E;">20-question MCQ streak. Break the chain = reset. Build to 20 and you're exam-ready.</div>
+    </div>
+  </div>
+
+  <style>.btn-card{cursor:pointer;transition:border-color 0.2s;}.btn-card:hover{border-color:#A78BFA!important;}</style>
+</div>
+
+<!-- ========== INTEGRATION VIGNETTES ========== -->
+<div id="integration" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">10 integration vignettes · All 5 lectures</span></div>
+
+  <!-- Vignette 1 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 1</span><span class="vig-lectures">Lectures 1 + 2 — GPCR signaling + CAH</span></div>
+    <div class="vig-stem">A researcher blocks Gs protein activity in adrenocortical cells and then administers ACTH. She observes no cortisol production. When she repeats the experiment with a different blocker targeting Gq proteins instead, ACTH still fails to drive cortisol synthesis.
+      <div class="prompt">→ Explain: (1) which G-protein ACTH normally uses, (2) why the Gq blocker had the same result, (3) what downstream pathway is disrupted.</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Full Mechanistic Answer</div>
+      <div class="path-chain">ACTH → MC2R (melanocortin receptor) → Gs → ↑adenylyl cyclase → ↑cAMP → PKA → phosphorylates StAR protein → cholesterol enters mitochondria → CYP11A1 → pregnenolone → cortisol pathway</div>
+      <div class="ans-text">(1) ACTH uses <strong>Gs</strong> (not Gq). Blocking Gs eliminates cAMP → no StAR protein phosphorylation → cholesterol cannot enter mitochondria → no cortisol.<br><br>(2) Gq blocker has the <em>same result</em> because ACTH does NOT use Gq. Cortisol production is 100% Gs-dependent in the fasciculata. The Gq blocker is simply irrelevant — it blocks something that was never engaged.<br><br>(3) Disrupted pathway: Gs → cAMP → PKA → StAR → cholesterol import. Without StAR, steroidogenesis cannot begin regardless of substrate availability.</div>
+      <div class="why">Combines L1 (GPCR Gs vs Gq) with L2 (ACTH → cortisol pathway). Classic Step 1 style: "researcher blocks X, what happens?"</div>
+    </div>
+  </div>
+
+  <!-- Vignette 2 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 2</span><span class="vig-lectures">Lectures 2 + 3 — CAH + Sex Steroids</span></div>
+    <div class="vig-stem">A 3-day-old 46,XX infant presents with ambiguous genitalia, hyperkalemia, hyponatremia, and hypotension. Serum 17-OHP is markedly elevated. The pediatric endocrinologist explains that the enzyme deficiency has redirected steroidogenesis toward sex steroid production.
+      <div class="prompt">→ Draw the full pathway explaining: what enzyme is deficient, what accumulates, where it goes, and why both XX and XY infants are affected differently.</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Full Answer</div>
+      <div class="path-chain">Cholesterol → Pregnenolone → Progesterone → 17-OHP ──[21-OH blocked]──→ Cannot → DOC/Cortisol/Aldosterone<br>Instead: 17-OHP → 17,20-lyase → DHEA → Androstenedione → Testosterone → (aromatase) → Estradiol</div>
+      <div class="ans-text"><strong>21-hydroxylase deficiency:</strong> 17-OHP accumulates. Without the ability to make DOC → ↓aldosterone → salt-wasting. ↓Cortisol → ↑ACTH → drives all upstream precursors harder → excess spills into androgen pathway.<br><br><strong>XX infants:</strong> Excess androgens act on androgen receptor → virilization → ambiguous genitalia (clitoromegaly, labial fusion). Gonads = normal ovaries.<br><br><strong>XY infants:</strong> Already have high androgens normally. CAH may not cause obvious genital ambiguity but does cause salt-wasting crisis. Later: precocious puberty, early closure of growth plates.</div>
+      <div class="why">Integrates L2 (21-OH deficiency, CAH pathophysiology) with L3 (androgen receptor action, sex steroid pathway). The most tested CAH vignette on Step 1.</div>
+    </div>
+  </div>
+
+  <!-- Vignette 3 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 3</span><span class="vig-lectures">Lectures 3 + 4 — Sex Steroids + ADH signaling</span></div>
+    <div class="vig-stem">A pregnant woman at 32 weeks has polyuria. Her obstetrician notes that placental vasopressinase is degrading endogenous ADH. She is given native ADH infusion — no effect. She is then given desmopressin (DDAVP) — urine concentrates normally.
+      <div class="prompt">→ Why did DDAVP work when native ADH didn't? What receptor does DDAVP target, and through what G-protein? Why is this relevant to the sex steroid context of pregnancy?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Why DDAVP worked:</strong> DDAVP is a synthetic ADH analog resistant to vasopressinase (structural modification). Native ADH is rapidly degraded. Both target the same V2 receptor.<br><br><strong>V2 receptor pathway:</strong> V2 → Gs → ↑cAMP → PKA → AQP-2 exocytosis to luminal membrane → water reabsorption in collecting duct.<br><br><strong>Sex steroid relevance:</strong> Estrogen (high in pregnancy) upregulates vasopressinase expression in the placenta — this is why gestational DI is a pregnancy-specific condition. Estrogen also resets the osmostat lower in pregnancy (tolerate lower serum osmolality). These combined effects make pregnant women uniquely susceptible to water dysregulation.</div>
+      <div class="why">Integrates L3 (estrogen, pregnancy) with L4 (gestational DI, V2/Gs/cAMP, DDAVP vs native ADH). Tests depth: not just "DDAVP for gestational DI" but WHY.</div>
+    </div>
+  </div>
+
+  <!-- Vignette 4 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 4</span><span class="vig-lectures">Lectures 4 + 5 — ADH + Thyroid</span></div>
+    <div class="vig-stem">A 55-year-old woman with known hypothyroidism (not on treatment) presents with confusion and serum Na⁺ of 122 (hyponatremia). Urine osmolality is elevated (600). Serum osmolality is low (255). TSH is markedly elevated.
+      <div class="prompt">→ What is causing the hyponatremia? How does hypothyroidism lead to inappropriate ADH secretion? What is the diagnosis?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Diagnosis: SIADH secondary to hypothyroidism.</strong><br><br>Hypothyroidism → ↓cardiac output → ↓effective arterial blood volume → baroreceptors perceive low volume → trigger non-osmotic ADH release → water retention → dilutional hyponatremia despite low serum osmolality (concentrated urine because ADH is active).<br><br>Labs fit SIADH: low serum Na⁺, low serum Osm, inappropriately concentrated urine (Uosm > serum Osm). High TSH confirms primary hypothyroidism as the cause.<br><br>Treatment: correct hypothyroidism (levothyroxine) + water restriction. Avoid rapid sodium correction (risk of osmotic demyelination syndrome).</div>
+      <div class="why">Integrates L4 (ADH regulation, non-osmotic release) with L5 (Hashimoto/hypothyroidism → ↑TSH). SIADH from hypothyroidism is Step 1 HY.</div>
+    </div>
+  </div>
+
+  <!-- Vignette 5 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 5</span><span class="vig-lectures">Lectures 1 + 5 — Nuclear Receptors + Thyroid Action</span></div>
+    <div class="vig-stem">T3 binds its receptor in the nucleus and alters gene transcription. A genetic mutation eliminates the DNA-binding domain of the thyroid hormone receptor. The patient has high T3/T4, high TSH, and no clinical hyperthyroidism.
+      <div class="prompt">→ Explain the mechanism of thyroid hormone resistance. Why is TSH elevated despite high T3/T4?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Thyroid hormone resistance (Refetoff syndrome).</strong> The mutated thyroid receptor cannot bind HRE (hormone response elements in DNA) → T3 cannot alter gene transcription → no metabolic effects despite high hormone levels.<br><br>Pituitary thyrotrophs are also resistant → cannot detect T3/T4 → no negative feedback → ↑TRH → ↑TSH → ↑T3/T4 (a futile loop).<br><br>Clinically: patient appears euthyroid or mildly symptomatic because peripheral tissues also resist. Unlike central hyperthyroidism (TSH-secreting adenoma), this is receptor-level resistance in all tissues.<br><br>Key Step 1 flag: ↑TSH + ↑T3/T4 + euthyroid = think thyroid hormone resistance (vs. TSH-oma = similar labs but hyperthyroid symptoms).</div>
+      <div class="why">Integrates L1 (nuclear receptor, HRE, gene transcription) with L5 (T3/T4 feedback, TSH regulation). Tests whether you understand the receptor mechanism, not just the hormone levels.</div>
+    </div>
+  </div>
+
+  <!-- Vignette 6 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 6</span><span class="vig-lectures">Lectures 2 + 5 — Adrenal + Thyroid Autoimmune</span></div>
+    <div class="vig-stem">A 38-year-old woman with known Hashimoto thyroiditis presents with severe fatigue, hyperpigmentation, and hypotension. Her cortisol is low, ACTH is very high. TSH is elevated, free T4 is low. She is HLA-DR3/DR4 positive.
+      <div class="prompt">→ What is the additional diagnosis? How do both conditions share a pathophysiologic mechanism? What is the triad called?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Addison disease (primary adrenal insufficiency)</strong> + Hashimoto thyroiditis = <strong>Schmidt syndrome</strong> (autoimmune polyglandular syndrome type 2 / APS-2).<br><br><strong>Shared mechanism:</strong> Both are T-cell mediated autoimmune destruction of endocrine glands. Autoantibodies target adrenal cortex (21-hydroxylase antibodies) and thyroid (anti-TPO). HLA-DR3 and DR4 are strong genetic risk factors for autoimmune endocrine disease.<br><br>Addison features: ↓cortisol → ↑ACTH (which stimulates MSH → hyperpigmentation) + ↓aldosterone → hypotension + salt-craving.<br><br>APS-2 can also include type 1 diabetes. All three = full APS-2 triad.</div>
+      <div class="why">Integrates L2 (adrenal zones, cortisol/ACTH/aldosterone) with L5 (Hashimoto mechanism). APS-2 / Schmidt syndrome = Step 1 favorite autoimmune endocrine combination.</div>
+    </div>
+  </div>
+
+  <!-- Vignette 7 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 7</span><span class="vig-lectures">Lectures 3 + 5 — Sex Steroids + Thyroid Binding</span></div>
+    <div class="vig-stem">A woman starts oral estrogen therapy. Her total T4 rises significantly, but her free T4 and TSH remain normal. She feels completely euthyroid.
+      <div class="prompt">→ Explain why total T4 rose without any change in thyroid function. What protein is involved?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Thyroxine-binding globulin (TBG) increase from estrogen.</strong> Estrogen → ↑hepatic TBG synthesis → more TBG in blood → binds more T4 → ↑total T4. But the increase in TBG "mops up" free T4 transiently → slight ↑TSH → thyroid makes slightly more T4 → new equilibrium where <strong>total T4 is higher but free T4 is normal</strong>.<br><br>Analogy: SHBG (from L3) binds sex steroids; TBG binds thyroid hormones. Both are carrier proteins — what matters is the FREE fraction.<br><br>Clinically important: pregnancy (high estrogen) causes same TBG rise → hypothyroid patients need 25-30% more levothyroxine. Do not misinterpret elevated total T4 as hyperthyroidism in pregnant or estrogen-taking patients.</div>
+      <div class="why">Integrates L3 (carrier proteins, SHBG concept) with L5 (T4 binding, TBG, free vs total hormone). Tests whether you know the carrier protein principle applies to thyroid hormones too.</div>
+    </div>
+  </div>
+
+  <!-- Vignette 8 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 8</span><span class="vig-lectures">Lectures 1 + 3 + 4 — GPCR + Sex Steroids + ADH</span></div>
+    <div class="vig-stem">Oxytocin and ADH are both synthesized in the hypothalamus and stored in the posterior pituitary. A drug selectively activates only Gq-coupled receptors. Predict: (1) which ADH receptor would be activated, (2) what would happen to blood pressure, (3) would water reabsorption increase?
+      <div class="prompt">→ Explain using receptor-specific G-protein coupling.</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text">(1) The <strong>V1 receptor</strong> is Gq-coupled. Selective Gq activation → V1 activated on vascular smooth muscle.<br><br>(2) Blood pressure would <strong>increase</strong>: Gq → PLC → IP₃ → ↑Ca²⁺ → smooth muscle contraction → vasoconstriction → ↑SVR → ↑BP.<br><br>(3) Water reabsorption would <strong>NOT increase</strong>: water reabsorption requires V2 receptor → Gs → cAMP → AQP-2. The drug activates Gq, not Gs, so V2-mediated AQP-2 insertion does not occur. Urine remains dilute.<br><br>Oxytocin receptor is also Gq → the drug would also stimulate oxytocin receptor → uterine contraction risk.<br><br>This is a classic "can you separate V1 and V2 by G-protein" question.</div>
+      <div class="why">Pure L1 (Gq vs Gs signaling) + L4 (V1 vs V2 receptor consequences) integration. Tests G-protein pharmacology prediction, not memorization.</div>
+    </div>
+  </div>
+
+  <!-- Vignette 9 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 9</span><span class="vig-lectures">Lectures 2 + 3 — 17α-hydroxylase + Sex Development</span></div>
+    <div class="vig-stem">Twin siblings — one 46,XX and one 46,XY — both present at age 17 with primary amenorrhea/lack of male development, hypertension, and ↑aldosterone. Neither has developed secondary sex characteristics. Both have undetectable androgens and estrogens.
+      <div class="prompt">→ What enzyme is deficient? Why do BOTH karyotypes lack sex development? Why is there HTN?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="path-chain">Pregnenolone → [17α-OH blocked] → Cannot make 17-OH-pregnenolone or 17-OH-progesterone<br>→ No DHEA, no androstenedione, no testosterone, no estradiol<br>→ Progesterone/DOC/Corticosterone pathway still open → ↑Aldosterone → HTN</div>
+      <div class="ans-text"><strong>17α-hydroxylase deficiency.</strong><br><br>XY (46,XY): No testosterone → no masculinization of external genitalia or brain → female phenotype. Testes present but non-functional. No uterus (MIF still secreted by Sertoli cells). No pubic hair (androgens absent).<br><br>XX (46,XX): No estrogen → no feminization → no breast development, no menstrual cycle. Ovaries present but non-functional. Primary amenorrhea.<br><br>Both: ↑aldosterone (mineralocorticoid pathway is intact and upregulated) → HTN + hypokalemia. ↓Cortisol → ↑ACTH.</div>
+      <div class="why">The classic "both sexes affected equally" CAH. Compare: 21-OH affects XX more visibly (virilization); 17α-OH affects both equally (no sex development). This distinction is HY Step 1.</div>
+    </div>
+  </div>
+
+  <!-- Vignette 10 -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 10</span><span class="vig-lectures">Lectures 4 + 5 + 1 — Full Integration Boss Vignette</span></div>
+    <div class="vig-stem">A 62-year-old woman with small cell lung cancer (SCLC) develops confusion, hyponatremia (Na⁺ 118), and seizures. She also has new-onset hypothyroidism (↑TSH, ↓free T4) and her cortisol is low with high ACTH. She is not on any medications. Urine sodium is 45 (elevated), urine osmolality 620.
+      <div class="prompt">→ (1) What is causing the hyponatremia? (2) How does SCLC cause this? (3) What do the cortisol/ACTH findings suggest as a separate diagnosis? (4) Sequence your treatment plan and explain why order matters.</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Boss-Level Answer</div>
+      <div class="ans-text">
+        <strong>(1) SIADH</strong> — low serum Na/Osm + high urine Na/Osm = inappropriate ADH secretion causing free water retention → dilutional hyponatremia.<br><br>
+        <strong>(2) SCLC mechanism:</strong> Small cell lung cancer cells are neuroendocrine and can ectopically secrete ADH (vasopressin) — this is non-osmotic, non-physiologic ADH → V2 → Gs → cAMP → AQP-2 → water retention regardless of serum osmolality. SCLC is the classic paraneoplastic SIADH.<br><br>
+        <strong>(3) Cortisol low + ACTH high = primary adrenal insufficiency (Addison disease)</strong> — possibly from adrenal metastasis (SCLC commonly metastasizes to adrenal glands) or autoimmune. Alternatively, ACTH can also be ectopically produced by SCLC (Cushing syndrome) but here ACTH is high without cortisol response, suggesting primary adrenal failure.<br><br>
+        <strong>(4) Treatment order (critical):</strong><br>
+        Step 1: <em>Hydrocortisone first</em> — before treating hyponatremia. Adrenal insufficiency independently causes hyponatremia (↓aldosterone → Na loss; ↓cortisol → ↑ADH). If you rapidly correct Na without addressing the adrenal insufficiency, you risk osmotic demyelination syndrome.<br>
+        Step 2: <em>Thyroid hormone (levothyroxine)</em> — after steroids are on board (steroids prevent adrenal crisis precipitated by T4 replacement).<br>
+        Step 3: <em>Fluid restriction ± hypertonic saline</em> for SIADH — raise Na slowly (max 8-10 mEq/L per 24h).<br>
+        Step 4: Address underlying SCLC.
+      </div>
+      <div class="why">This integrates L1 (receptor-signaling), L4 (ADH/SIADH, V2-Gs-cAMP), L5 (hypothyroidism/TBG), and L2 (cortisol/ACTH feedback, adrenal insufficiency). This is a Step 1 Boss-level question requiring you to manage multiple simultaneous endocrine crises in sequence.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn-primary" onclick="showPanel('mcq')">Next: MCQ Gauntlet →</button>
+    <button class="btn-secondary" onclick="showPanel('dashboard')">← Dashboard</button>
+  </div>
+</div>
+
+<!-- ========== MCQ GAUNTLET ========== -->
+<div id="mcq" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">15 Step 1-style MCQs · 4 answer choices each</span></div>
+
+  <div class="score-tracker">
+    <div><div class="score-num" id="mcq-score-disp">0/0</div><div class="score-lbl">Score</div></div>
+    <div class="score-bar-wrap">
+      <div class="score-lbl">Accuracy</div>
+      <div class="score-bar"><div class="score-fill" id="mcq-fill" style="width:0%"></div></div>
+    </div>
+    <button class="btn-secondary" onclick="resetMCQ()">↺ Reset</button>
+  </div>
+
+  <div id="mcq-list"></div>
+
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn-primary" onclick="showPanel('ladder')">Next: Diagnosis Ladder →</button>
+    <button class="btn-secondary" onclick="showPanel('dashboard')">← Dashboard</button>
+  </div>
+</div>
+
+<!-- ========== DIAGNOSIS LADDER ========== -->
+<div id="ladder" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">20 questions · 4 difficulty levels</span></div>
+
+  <div class="ladder-container">
+    <div class="level-tabs">
+      <div class="level-tab lvl1" id="ltab1">🟢 Level 1 · Recall</div>
+      <div class="level-tab lvl2 dim" id="ltab2">🟡 Level 2 · Apply</div>
+      <div class="level-tab lvl3 dim" id="ltab3">🔴 Level 3 · Analyze</div>
+      <div class="level-tab lvl4 dim" id="ltab4">💜 Boss Round</div>
+    </div>
+    <div class="ladder-progress" id="ladder-dots-row"></div>
+    <div class="ladder-question-area">
+      <div id="ladder-start-area" style="text-align:center;padding:30px 0;">
+        <div style="font-size:3rem;margin-bottom:12px;">🪜</div>
+        <div style="font-size:1rem;color:#8B949E;margin-bottom:20px;">20 questions across 4 levels. Complete each level to unlock the next.</div>
+        <button class="btn-primary" onclick="startLadder()">▶ Start Ladder</button>
+      </div>
+      <div id="ladder-active-area" style="display:none;">
+        <div class="ladder-level-badge" id="ladder-badge"></div>
+        <div class="ladder-q" id="ladder-q-text"></div>
+        <div class="ladder-choices" id="ladder-choice-grid"></div>
+        <div class="ladder-fb" id="ladder-fb-box"></div>
+      </div>
+      <div id="ladder-done-area" style="display:none;text-align:center;padding:20px 0;">
+        <div style="font-size:2.5rem;margin-bottom:10px;">🏆</div>
+        <div style="font-size:1.2rem;font-weight:800;margin-bottom:8px;" id="ladder-done-msg"></div>
+        <button class="btn-primary" onclick="startLadder()" style="margin-top:12px;">↺ Retry</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn-primary" onclick="showPanel('elimination')">Next: Elimination →</button>
+    <button class="btn-secondary" onclick="showPanel('dashboard')">← Dashboard</button>
+  </div>
+</div>
+
+<!-- ========== ELIMINATION ROUND ========== -->
+<div id="elimination" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">3 lives · How far can you go?</span></div>
+
+  <div class="elim-container">
+    <div id="elim-start-area" style="text-align:center;padding:30px 0;">
+      <div style="font-size:3rem;margin-bottom:12px;">💀</div>
+      <div style="font-size:1rem;color:#8B949E;margin-bottom:8px;">You have 3 lives. Get 3 wrong and it's over.</div>
+      <div style="font-size:0.85rem;color:#8B949E;margin-bottom:20px;">Questions increase in difficulty as you survive.</div>
+      <button class="btn-primary" onclick="startElim()">▶ Enter the Round</button>
+    </div>
+    <div id="elim-active-area" style="display:none;">
+      <div class="lives-display" id="elim-lives"></div>
+      <div class="elim-counter" id="elim-counter">Question 1 of 20</div>
+      <div class="elim-q" id="elim-q-text"></div>
+      <div class="elim-choices" id="elim-choices"></div>
+      <div class="elim-fb" id="elim-fb"></div>
+    </div>
+    <div class="game-over-banner" id="elim-gameover">
+      <h3>💀 Eliminated!</h3>
+      <div style="font-size:1rem;margin-bottom:12px;" id="go-msg"></div>
+      <button class="btn-primary" onclick="startElim()">↺ Try Again</button>
+    </div>
+    <div class="victory-banner" id="elim-victory">
+      <h3>🏆 You Survived!</h3>
+      <div style="font-size:1rem;margin-bottom:12px;" id="vic-msg"></div>
+      <button class="btn-primary" onclick="startElim()">↺ Go Again</button>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn-primary" onclick="showPanel('streak')">Next: Streak Challenge →</button>
+    <button class="btn-secondary" onclick="showPanel('dashboard')">← Dashboard</button>
+  </div>
+</div>
+
+<!-- ========== STREAK CHALLENGE ========== -->
+<div id="streak" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">20-question streak · Break it and reset</span></div>
+
+  <div class="streak-container">
+    <div id="streak-start-area" style="text-align:center;padding:30px 0;">
+      <div style="font-size:3rem;margin-bottom:12px;">🔥</div>
+      <div style="font-size:1rem;color:#8B949E;margin-bottom:8px;">Build a streak of 20 correct answers in a row.</div>
+      <div style="font-size:0.85rem;color:#8B949E;margin-bottom:20px;">One wrong answer resets your streak (but not your score).</div>
+      <button class="btn-primary" onclick="startStreak()">▶ Start Streak</button>
+    </div>
+    <div id="streak-active-area" style="display:none;">
+      <div class="streak-dots-row" id="streak-dots-row"></div>
+      <div class="streak-best">🔥 Current: <strong id="cur-streak">0</strong> &nbsp;|&nbsp; 🏆 Best: <strong id="best-streak">0</strong></div>
+      <div class="streak-q" id="streak-q-text"></div>
+      <div class="streak-choices" id="streak-choices"></div>
+      <div class="streak-fb" id="streak-fb"></div>
+    </div>
+    <div id="streak-done-area" style="display:none;text-align:center;padding:20px;">
+      <div style="font-size:2.5rem;margin-bottom:10px;" id="streak-done-icon"></div>
+      <div style="font-size:1.2rem;font-weight:800;margin-bottom:8px;" id="streak-done-msg"></div>
+      <button class="btn-primary" onclick="startStreak()" style="margin-top:12px;">↺ Retry</button>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;"></div>
+</div>
+
+<script>
+// ========== NAV ==========
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sec-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const order = ['dashboard','integration','mcq','ladder','elimination','streak'];
+  const idx = order.indexOf(id);
+  if (idx >= 0) document.querySelectorAll('.sec-btn')[idx].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function revealVig(btn) {
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+  btn.textContent = ans.style.display === 'block' ? '▼ Hide Answer' : '▶ Reveal Answer';
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+// ========== MCQ DATA ==========
+const mcqData = [
+  {
+    q: "A 4-year-old girl presents with virilization and salt-wasting. Serum 17-hydroxyprogesterone is markedly elevated. Which enzyme is deficient?",
+    opts: ["17α-hydroxylase","11β-hydroxylase","21-hydroxylase","3β-hydroxysteroid dehydrogenase"],
+    a: 2, diff: "easy",
+    explain: "21-hydroxylase is the most common CAH (95%). It blocks conversion of 17-OHP to 11-deoxycortisol and DOC, causing 17-OHP accumulation, ↓cortisol, ↓aldosterone (salt-wasting), and ↑androgens (virilization).",
+    choiceExp: ["17α-OH: causes HTN + no sex development (↓androgens + ↓cortisol, ↑aldosterone). No salt-wasting.","11β-OH: causes HTN + virilization (DOC accumulates as mineralocorticoid). No salt-wasting.","✅ 21-OH: salt-wasting + virilization + ↑17-OHP. Most common CAH.","3β-HSD: rare, causes mild androgen excess and salt-wasting but milder presentation."]
+  },
+  {
+    q: "A 46,XY patient has a completely female external phenotype, no uterus, and testosterone levels in the normal male range. Pubic hair is absent. LH is elevated. What is the diagnosis?",
+    opts: ["5α-reductase deficiency","Complete androgen insensitivity syndrome","17α-hydroxylase deficiency","Swyer syndrome (46,XY gonadal dysgenesis)"],
+    a: 1, diff: "medium",
+    explain: "Complete AIS: XY + female phenotype + no uterus + male-range testosterone + NO pubic hair (androgen receptor broken → no hair follicle response) + high LH (no androgen feedback).",
+    choiceExp: ["5α-RD: similar at birth, but VIRILIZES at puberty. Pubic hair can develop via testosterone. Testosterone high, DHT absent.","✅ AIS: complete receptor failure. Female phenotype permanently. No pubic hair. High T, high LH, high E (via aromatase).","17α-OH: no sex steroids at all → no development in either sex. HTN. No pubic hair in both XX and XY.","Swyer: XY + streak gonads (no testes) → no testosterone or MIF → female phenotype WITH uterus. Very low testosterone."]
+  },
+  {
+    q: "A pregnant woman at 30 weeks has polyuria. Plasma ADH is undetectable. Desmopressin is given — urine concentrates. Vasopressin infusion — no effect. What is the diagnosis?",
+    opts: ["Central DI","Nephrogenic DI","Gestational DI","Primary polydipsia"],
+    a: 2, diff: "medium",
+    explain: "Gestational DI: placental vasopressinase destroys native ADH (hence undetectable plasma ADH and no response to infused native ADH). DDAVP is resistant to vasopressinase → works. Resolves postpartum.",
+    choiceExp: ["Central DI: low ADH from pituitary damage. DDAVP works — but so would native ADH infusion (receptors intact). Vasopressin infusion would also work.","Nephrogenic DI: V2 receptor broken → neither native ADH nor DDAVP would concentrate urine.","✅ Gestational DI: vasopressinase degrades native ADH and native vasopressin, but not DDAVP (structural resistance). Pregnancy-specific.","Primary polydipsia: normal ADH, concentrates with water deprivation. Serum Na would be low/normal, not elevated."]
+  },
+  {
+    q: "A patient with bipolar disorder on lithium develops polyuria. Water deprivation + desmopressin fails to concentrate urine. Lithium most likely causes DI by:",
+    opts: ["Destroying ADH-producing neurons in hypothalamus","Blocking NIS-mediated iodide transport","Inhibiting V2 receptor-mediated cAMP generation and AQP-2 expression","Stimulating Gi protein to suppress adenylyl cyclase in hepatocytes"],
+    a: 2, diff: "medium",
+    explain: "Lithium enters principal cells via ENaC → downregulates adenylyl cyclase → ↓cAMP → ↓PKA → ↓AQP-2 expression and insertion. The V2 receptor is present but signaling is impaired downstream. Amiloride blocks ENaC → prevents lithium entry → used in treatment.",
+    choiceExp: ["Lithium does not destroy hypothalamic neurons. Central DI would respond to DDAVP.","NIS = thyroid. Lithium has no effect on iodide transport.","✅ Lithium → intracellular accumulation → ↓cAMP pathway → ↓AQP-2. This is nephrogenic DI (receptor pathway impaired). DDAVP fails.","Lithium does not primarily work via Gi. Its action is intracellular, not at the receptor coupling level."]
+  },
+  {
+    q: "A 32-year-old woman is started on PTU for Graves disease. Which of the following correctly describes PTU's mechanism compared to methimazole?",
+    opts: ["PTU inhibits NIS; methimazole inhibits TPO","PTU inhibits TPO and peripheral T4→T3 conversion; methimazole inhibits TPO only","PTU inhibits TSI production; methimazole inhibits TSH receptor binding","Both drugs have identical mechanisms; PTU is preferred in pregnancy only due to formulation"],
+    a: 1, diff: "easy",
+    explain: "PTU = two mechanisms: (1) blocks TPO (organification + coupling) and (2) inhibits 5'-deiodinase → blocks peripheral T4→T3 conversion. This dual action is critical in thyroid storm. Methimazole = TPO only. Neither drug inhibits NIS or TSI.",
+    choiceExp: ["NIS (sodium-iodide symporter) is not blocked by either drug. Both block TPO-dependent steps.","✅ PTU blocks TPO + peripheral conversion. Methimazole blocks TPO only. This is the Step 1 key distinction.","Neither drug blocks TSI production. Graves disease autoantibodies persist despite antithyroid drugs.","Wrong — they have different mechanisms. The pregnancy preference for PTU (1st trimester) is due to methimazole teratogenicity, but the mechanism difference is real and clinically important."]
+  },
+  {
+    q: "A researcher gives a drug that selectively activates Gq-coupled receptors. Which of the following pairs of effects would be expected?",
+    opts: ["↑cAMP + water reabsorption","Vasoconstriction + uterine contraction","↓cAMP + inhibition of insulin secretion","Receptor tyrosine kinase activation + GLUT-4 translocation"],
+    a: 1, diff: "medium",
+    explain: "Gq → PLC → IP₃ + DAG → ↑Ca²⁺ + PKC. Gq receptors include V1 (vasoconstriction), oxytocin receptor (uterine contraction), α₁-adrenergic, Gq-GnRH, Gq-TRH. Vasoconstriction (V1) + uterine contraction (oxytocin-R) are both Gq effects.",
+    choiceExp: ["↑cAMP is a Gs effect (V2, TSH, ACTH, FSH, LH, PTH). Not Gq.","✅ Vasoconstriction (V1-Gq) + uterine contraction (oxytocin-R/Gq). Both triggered by Gq activation.","↓cAMP is a Gi effect (somatostatin, Gi, dopamine D2, α2, opioids).","RTK + GLUT-4 = insulin receptor pathway, not GPCR."]
+  },
+  {
+    q: "A 17-year-old XY individual raised as female presents with primary amenorrhea, hypertension, and no secondary sex characteristics. Testosterone is undetectable. Aldosterone is elevated. Cortisol is low. What is the most likely enzyme deficiency?",
+    opts: ["21-hydroxylase","11β-hydroxylase","17α-hydroxylase","5α-reductase"],
+    a: 2, diff: "hard",
+    explain: "17α-hydroxylase: cannot make 17-OH intermediates → no sex steroids (testosterone + estrogen both absent) + no cortisol. But progesterone → corticosterone pathway is intact → ↑aldosterone → HTN. Both XY and XX lack all sex steroid development.",
+    choiceExp: ["21-OH: causes salt-wasting (not HTN) + virilization (androgens accumulate). 17-OHP elevated.","11β-OH: causes HTN + virilization (androgens accumulate). Not zero testosterone.","✅ 17α-OH: zero sex steroids + ↑aldosterone (HTN) + ↓cortisol. XY presents as phenotypically female with HTN. Classic.","5α-RD: testosterone is normal/high (can't convert to DHT). No effect on aldosterone or cortisol."]
+  },
+  {
+    q: "A patient has ↑serum T3, ↑serum T4, and ↑TSH. She is clinically euthyroid. What is the most likely explanation?",
+    opts: ["TSH-secreting pituitary adenoma","Graves disease with TSH antibodies","Thyroid hormone resistance (defective thyroid hormone receptor)","Hashimoto thyroiditis hashitoxicosis phase"],
+    a: 2, diff: "hard",
+    explain: "Thyroid hormone resistance: mutated receptor → T3 cannot drive gene transcription → no negative feedback on pituitary → ↑TSH → ↑T3/T4 (futile). Patient is euthyroid because tissue receptors are equally resistant. Compare: TSH-oma = ↑TSH + ↑T4 but patient IS hyperthyroid (pituitary autonomously secretes TSH, periphery responds normally).",
+    choiceExp: ["TSH-oma: ↑TSH + ↑T4, but patient shows symptoms of hyperthyroidism (palpitations, weight loss, tremor). TSH-oma doesn't suppress with TRH stimulation.","Graves: TSH is LOW (suppressed by high T3/T4 from TSI). Not elevated.","✅ Thyroid hormone resistance: ↑T3/T4 + ↑TSH + euthyroid. Receptor broken everywhere including pituitary.","Hashimoto hashitoxicosis: transient hyperthyroid phase with HIGH T4 and LOW TSH (suppressed). Patient would feel symptomatic."]
+  },
+  {
+    q: "A woman with obesity and insulin resistance has a borderline-normal total testosterone but clear signs of androgen excess. The most likely mechanism is:",
+    opts: ["Increased aromatase converting androgens to estrogens (feedback suppression of LH)","Hyperinsulinemia suppressing SHBG → ↑free testosterone","Adrenal 21-hydroxylase deficiency driving androgen excess","↑LH stimulation of theca cells independent of SHBG"],
+    a: 1, diff: "medium",
+    explain: "Hyperinsulinemia → ↓hepatic SHBG synthesis → less bound testosterone → more free (active) testosterone. Total testosterone normal but free fraction is elevated → androgen excess symptoms. This is the PCOS mechanism. Insulin also directly stimulates ovarian theca cells.",
+    choiceExp: ["Increased aromatase would convert androgens to estrogen → might actually reduce androgen effect. Not the primary mechanism here.","✅ ↓SHBG → ↑free T → androgen excess despite normal total T. PCOS + insulin resistance hallmark.","21-OH deficiency: late-onset (non-classic) can mimic PCOS but 17-OHP would be elevated. Not the 'most likely' in obesity/IR context.","↑LH does stimulate theca cells but the SHBG mechanism explains normal total T + androgen excess specifically."]
+  },
+  {
+    q: "Excess iodide temporarily inhibits thyroid hormone synthesis in a normal gland. This is used in thyroid storm management. This effect is called:",
+    opts: ["Jod-Basedow effect","Wolff-Chaikoff effect","Plummer effect","Grave-Chase phenomenon"],
+    a: 1, diff: "easy",
+    explain: "Wolff-Chaikoff effect: excess iodide (e.g., from Lugol's iodine, amiodarone, IV contrast) transiently inhibits TPO organification → blocks new thyroid hormone synthesis. Used before thyroid surgery or in thyroid storm. The gland eventually escapes this block (loss of NIS expression). Jod-Basedow is the OPPOSITE: excess iodide triggers hyperthyroidism in autonomous glands.",
+    choiceExp: ["Jod-Basedow: excess iodide TRIGGERS hyperthyroidism in autonomous nodular tissue. Opposite of Wolff-Chaikoff.","✅ Wolff-Chaikoff: normal gland inhibits synthesis with iodide flood. Temporary. Used clinically for thyroid storm prep.","'Plummer effect' is not a standard term — do not fall for made-up answers.","'Grave-Chase' is not real."]
+  },
+  {
+    q: "A patient with SCLC develops hyponatremia, confusion, and concentrated urine (Uosm 650). Which receptor mediates the ADH effect causing water retention?",
+    opts: ["V1 receptor → Gq → ↑Ca²⁺","V2 receptor → Gs → ↑cAMP → AQP-2","Oxytocin receptor → Gq → IP₃","AT1 receptor → Gq → aldosterone"],
+    a: 1, diff: "easy",
+    explain: "SCLC ectopically secretes ADH → binds V2 receptor in collecting duct principal cells → Gs → ↑adenylyl cyclase → ↑cAMP → PKA → exocytosis of AQP-2 water channels to luminal membrane → water reabsorption → concentrated urine + dilutional hyponatremia.",
+    choiceExp: ["V1/Gq: vasoconstriction, not water reabsorption. V1 is in vascular smooth muscle.","✅ V2/Gs/cAMP/AQP-2: the antidiuretic pathway. SIADH is mediated by this exact cascade.","Oxytocin receptor is Gq but has no role in renal water handling.","AT1/aldosterone: regulates Na+ reabsorption and K+ excretion via a different pathway (aldosterone → ENaC expression)."]
+  },
+  {
+    q: "A 28-year-old man has a serum Na of 152, urine output of 9L/day, urine osmolality of 70 mOsm/kg. After water deprivation, urine remains dilute. After DDAVP injection, urine osmolality rises to 720 mOsm/kg. What is the treatment?",
+    opts: ["Thiazide diuretics + low-salt diet","Desmopressin (DDAVP) long-term","Amiloride + fluid restriction","Lithium discontinuation only"],
+    a: 1, diff: "medium",
+    explain: "DDAVP response = intact V2 receptors = central DI (or gestational, but this is a man). No trauma/pregnancy context → likely central DI. Treatment is DDAVP (desmopressin) long-term (replaces the missing ADH). Thiazides are for nephrogenic DI (V2 receptors broken, DDAVP fails).",
+    choiceExp: ["Thiazides are for nephrogenic DI only. Central DI has intact V2 receptors — DDAVP works directly.","✅ DDAVP long-term = central DI treatment. Concentrates urine via intact V2/Gs/AQP-2 pathway.","Amiloride is for lithium-induced nephrogenic DI (blocks ENaC → prevents lithium entry into cells).","Lithium discontinuation applies only if lithium caused nephrogenic DI. This patient has central DI."]
+  },
+  {
+    q: "A woman 6 weeks pregnant is started on methimazole for Graves disease. At 10 weeks, her OBGYN switches her to PTU. Why?",
+    opts: ["PTU has a better half-life for once-daily dosing in pregnancy","Methimazole is teratogenic in the first trimester (aplasia cutis, choanal atresia)","PTU crosses the placenta less, protecting fetal thyroid","RAI would have been better — PTU is second-line"],
+    a: 1, diff: "easy",
+    explain: "Methimazole is teratogenic in the 1st trimester → associated with aplasia cutis congenita and choanal/esophageal atresia (methimazole embryopathy). PTU is preferred in 1st trimester. After 1st trimester, switch back to methimazole (PTU has rare but serious hepatotoxicity risk). RAI is absolutely contraindicated in pregnancy.",
+    choiceExp: ["PTU is actually dosed more frequently than methimazole (shorter half-life) — worse compliance.","✅ Methimazole teratogenicity (aplasia cutis, choanal atresia) → PTU in 1st trimester. Classic Step 1.","Both PTU and methimazole cross the placenta. The issue is teratogenicity, not placental crossing.","RAI is contraindicated in pregnancy — concentrated in fetal thyroid → fetal hypothyroidism."]
+  },
+  {
+    q: "A 45-year-old woman with chronic lymphocytic thyroiditis presents with a 3-week history of palpitations, heat intolerance, and elevated free T4. TSH is suppressed. Six weeks later, she is hypothyroid. What explains the initial hyperthyroid phase?",
+    opts: ["TSI antibodies developed transiently","TPO antibodies directly stimulated thyroid hormone synthesis","Autoimmune destruction of follicles released stored thyroid hormone (hashitoxicosis)","Iodide excess triggered Jod-Basedow effect"],
+    a: 2, diff: "medium",
+    explain: "Hashitoxicosis: early in Hashimoto's, lymphocytic infiltration destroys follicular cells → releases pre-formed T3/T4 stored in colloid → transient hyperthyroid phase (TSH suppressed, free T4 high). This is passive release, not active synthesis. As disease progresses, gland is destroyed → hypothyroid.",
+    choiceExp: ["TSI stimulate the TSH receptor continuously → that's Graves. In Hashimoto, the antibodies (anti-TPO, anti-Tg) destroy the gland, not stimulate it.","TPO antibodies do NOT stimulate synthesis — they participate in complement-mediated destruction.","✅ Hashitoxicosis = destructive release of pre-stored T3/T4. Transient hyperthyroid → then hypothyroid.","Jod-Basedow requires iodide excess and autonomous gland. No iodide exposure mentioned here."]
+  },
+  {
+    q: "A child (46,XX) presents at age 6 with advanced bone age, pubic hair, clitoromegaly, and elevated androgens. ACTH stimulation markedly increases 17-OHP. Cortisol is only mildly reduced. What form of CAH is this?",
+    opts: ["Classic salt-wasting 21-hydroxylase deficiency","Classic simple virilizing 21-hydroxylase deficiency","Non-classic (late-onset) 21-hydroxylase deficiency","11β-hydroxylase deficiency"],
+    a: 2, diff: "hard",
+    explain: "Non-classic (late-onset) CAH: partial 21-hydroxylase deficiency. Enough residual enzyme activity to prevent salt-wasting and maintain near-normal cortisol. 17-OHP is elevated (especially after ACTH stimulation) and androgens are excess → precocious puberty, advanced bone age, virilization. Presents later in childhood or early adolescence (not at birth).",
+    choiceExp: ["Classic salt-wasting: presents in neonates with severe salt crisis + ambiguous genitalia. Cortisol and aldosterone both markedly low.","Classic simple virilizing: virilization without salt-wasting. Aldosterone is sufficient. Presents earlier and more severely than this case.","✅ Non-classic CAH: partial enzyme, mild/no cortisol deficiency, no salt-wasting. Exaggerated 17-OHP on ACTH stimulation is the diagnostic test.","11β-OH: HTN + virilization. 17-OHP is NOT the accumulated metabolite (DOC accumulates instead). ACTH stim would show DOC rise, not 17-OHP."]
+  }
+];
+
+let mcqCorrect = 0, mcqTotal = 0;
+
+function buildMCQ() {
+  const container = document.getElementById('mcq-list');
+  container.innerHTML = '';
+  mcqData.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'mcq-card';
+    card.innerHTML = `
+      <div class="mcq-header">
+        <span class="qnum">Question ${i+1} of ${mcqData.length}</span>
+        <span class="difficulty diff-${item.diff === 'easy' ? 'easy' : item.diff === 'medium' ? 'med' : 'hard'}">${item.diff.charAt(0).toUpperCase()+item.diff.slice(1)}</span>
+      </div>
+      <div class="mcq-stem">${item.q}</div>
+      <div class="mcq-choices">
+        ${item.opts.map((opt,j) => `<button class="mcq-choice" onclick="answerMCQ(this,${i},${j})" data-qi="${i}" data-ci="${j}">${['A','B','C','D'][j]}. ${opt}</button>`).join('')}
+      </div>
+      <div class="mcq-explain" id="mcq-exp-${i}">
+        <div class="exp-label">📚 Explanation</div>
+        <div class="exp-text">${item.explain}</div>
+        <div style="margin-top:12px;">
+          ${item.choiceExp.map((ce,j) => `<div class="choice-exp" style="margin-bottom:6px;"><strong>${['A','B','C','D'][j]}.</strong> ${ce}</div>`).join('')}
+        </div>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+function answerMCQ(btn, qi, ci) {
+  const card = btn.closest('.mcq-card');
+  if (card.dataset.answered) return;
+  card.dataset.answered = '1';
+  const correct = mcqData[qi].a === ci;
+  const choices = card.querySelectorAll('.mcq-choice');
+  choices.forEach((c, j) => {
+    c.disabled = true;
+    if (j === ci) c.classList.add(correct ? 'correct' : 'wrong');
+    if (j === mcqData[qi].a && !correct) c.classList.add('reveal-correct');
+  });
+  card.querySelector('.mcq-explain').style.display = 'block';
+  if (correct) mcqCorrect++;
+  mcqTotal++;
+  updateMCQScore();
+}
+
+function updateMCQScore() {
+  document.getElementById('mcq-score-disp').textContent = `${mcqCorrect}/${mcqTotal}`;
+  const pct = mcqTotal ? Math.round(mcqCorrect/mcqTotal*100) : 0;
+  document.getElementById('mcq-fill').style.width = pct + '%';
+  document.getElementById('dash-mcq').textContent = mcqTotal ? `${pct}%` : '—';
+}
+
+function resetMCQ() {
+  mcqCorrect = 0; mcqTotal = 0;
+  updateMCQScore();
+  buildMCQ();
+}
+
+// ========== LADDER DATA ==========
+const ladderData = [
+  // Level 1 — Recall (5 questions)
+  {q:"Zone of adrenal cortex that produces aldosterone?",opts:["Glomerulosa","Fasciculata","Reticularis","Medulla"],a:0,lvl:1},
+  {q:"Which hormone uses a Gs-cAMP pathway in the thyroid follicular cell?",opts:["T3","TSH","Cortisol","Somatostatin"],a:1,lvl:1},
+  {q:"5α-reductase converts testosterone to?",opts:["Estradiol","Cortisol","DHT","Androstenedione"],a:2,lvl:1},
+  {q:"ADH V2 receptor: main G-protein?",opts:["Gq","Gi","Gs","G12"],a:2,lvl:1},
+  {q:"What antibody is characteristic of Graves disease?",opts:["Anti-TPO","Anti-thyroglobulin","TSI (thyroid-stimulating immunoglobulin)","Anti-TSH"],a:2,lvl:1},
+  // Level 2 — Apply (5 questions)
+  {q:"A CAH patient has HTN but NO salt-wasting. Which enzyme deficiency?",opts:["21-hydroxylase","11β-hydroxylase","17α-hydroxylase","5α-reductase"],a:1,lvl:2},
+  {q:"Primary polydipsia vs Central DI: which has LOW serum sodium?",opts:["Central DI","Nephrogenic DI","Primary polydipsia","Gestational DI"],a:2,lvl:2},
+  {q:"PTU is preferred over methimazole in which situation?",opts:["Hypothyroidism","Thyroid storm + 1st trimester pregnancy","Multinodular goiter","Thyroid cancer"],a:1,lvl:2},
+  {q:"AIS vs 5α-reductase deficiency: which virilizes at puberty?",opts:["AIS","5α-reductase deficiency","Both","Neither"],a:1,lvl:2},
+  {q:"Desmopressin selectively targets which receptor subtype?",opts:["V1","V2","Oxytocin receptor","AT1"],a:1,lvl:2},
+  // Level 3 — Analyze (5 questions)
+  {q:"High T3, high T4, high TSH, euthyroid patient. Diagnosis?",opts:["Graves disease","TSH-oma","Thyroid hormone resistance","Subclinical hyperthyroidism"],a:2,lvl:3},
+  {q:"A 46,XY patient has ↓cortisol, ↓androgens, ↑aldosterone, HTN, and no sex development. Enzyme?",opts:["21-hydroxylase","11β-hydroxylase","17α-hydroxylase","Aromatase"],a:2,lvl:3},
+  {q:"Why does hyperinsulinemia cause androgen excess in PCOS?",opts:["↑Aromatase activity","↓SHBG → ↑free testosterone","↑ACTH → ↑adrenal androgens","↑FSH → ↑theca cell stimulation"],a:1,lvl:3},
+  {q:"In central DI, water deprivation fails to concentrate urine. Why does desmopressin work?",opts:["DDAVP bypasses V2 receptor entirely","V2 receptors are intact — they just lacked endogenous ADH signal","DDAVP stimulates V1 → vasoconstriction improves renal perfusion","DDAVP increases NIS activity in the collecting duct"],a:1,lvl:3},
+  {q:"Lugol's iodine given before thyroid surgery: what effect does it rely on?",opts:["Jod-Basedow — iodide stimulates thyroid to produce more hormone preoperatively","Wolff-Chaikoff — excess iodide transiently inhibits organification → reduces vascularity","Iodide irreversibly destroys follicular cells","Iodide increases TBG binding, reducing free T4"],a:1,lvl:3},
+  // Level 4 — Boss (5 questions)
+  {q:"A drug blocks Gs globally. You give TSH, FSH, LH, ADH, and PTH. Which effects are ELIMINATED?",opts:["All hormone effects eliminated","Only antidiuretic effect of ADH eliminated","Effects of TSH, FSH, LH, ADH(V2), PTH eliminated (all Gs); V1 (Gq) vasoconstriction preserved","Only thyroid effects eliminated"],a:2,lvl:4},
+  {q:"A woman with Hashimoto hypothyroidism starts oral estrogen for menopause. Total T4 rises, free T4 stays normal, TSH stays normal. Why?",opts:["Estrogen stimulates thyroid to overproduce T4","Estrogen increases TBG → more bound T4 → transiently lower free T4 → slight TSH rise → more T4 → new equilibrium","Estrogen blocks TPO → less T4 degraded → accumulates in blood","Estrogen increases aromatase in thyroid tissue"],a:1,lvl:4},
+  {q:"A 21-OH deficiency patient (XX) is given high-dose glucocorticoids. ACTH falls to normal. Androgens fall. Salt-wasting resolves. What additional benefit does glucocorticoid treatment provide?",opts:["Provides mineralocorticoid activity (cortisol binds MR)","Suppresses ACTH → ↓drive on androgen pathway + indirectly allows aldosterone precursors to recover","Directly inhibits aromatase → prevents estrogen excess","Stimulates 21-hydroxylase gene expression"],a:1,lvl:4},
+  {q:"An XY newborn with gestational history of maternal low estriol has ambiguous genitalia. Testosterone and DHT are both undetectable. 17-OHP is normal. Cortisol is normal. Aldosterone is normal. What is the diagnosis?",opts:["21-hydroxylase deficiency","5α-reductase deficiency","Androgen insensitivity syndrome","Leydig cell aplasia (LH receptor defect)"],a:3,lvl:4},
+  {q:"A patient with SCLC has ↑ADH (SIADH). The oncology team gives demeclocycline. Mechanism?",opts:["Demeclocycline blocks V2 receptor directly","Demeclocycline (tetracycline) causes nephrogenic DI by inhibiting cAMP generation in collecting duct cells → blocks AQP-2 insertion","Demeclocycline stimulates Gi → ↓cAMP → water diuresis","Demeclocycline increases urinary excretion of ADH"],a:1,lvl:4}
+];
+
+const LEVEL_RANGES = {1:[0,4],2:[5,9],3:[10,14],4:[15,19]};
+let ladderIdx = 0, ladderScore = 0, ladderCorrect = [], ladderRunning = false;
+
+function startLadder() {
+  ladderIdx = 0; ladderScore = 0; ladderCorrect = [];
+  ladderRunning = true;
+  document.getElementById('ladder-start-area').style.display = 'none';
+  document.getElementById('ladder-done-area').style.display = 'none';
+  document.getElementById('ladder-active-area').style.display = 'block';
+  buildLadderDots();
+  showLadderQ();
+}
+
+function buildLadderDots() {
+  const row = document.getElementById('ladder-dots-row');
+  row.innerHTML = '';
+  ladderData.forEach((q, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'lp-dot' + (i === 0 ? ' active' : '');
+    dot.textContent = i + 1;
+    dot.id = 'ldot-' + i;
+    row.appendChild(dot);
+  });
+}
+
+function updateLadderDots() {
+  ladderData.forEach((q, i) => {
+    const dot = document.getElementById('ldot-' + i);
+    if (!dot) return;
+    dot.className = 'lp-dot';
+    if (i < ladderIdx) dot.className += ladderCorrect[i] ? ' done-ok' : ' done-miss';
+    else if (i === ladderIdx) dot.className += ' active';
+  });
+  // Update level tabs
+  for (let lv = 1; lv <= 4; lv++) {
+    const tab = document.getElementById('ltab' + lv);
+    if (!tab) continue;
+    const [start] = LEVEL_RANGES[lv];
+    if (ladderIdx >= start) tab.classList.remove('dim');
+    else tab.classList.add('dim');
+  }
+}
+
+function showLadderQ() {
+  if (ladderIdx >= ladderData.length) { endLadder(); return; }
+  updateLadderDots();
+  const q = ladderData[ladderIdx];
+  const badge = document.getElementById('ladder-badge');
+  const levelColors = {1:'#3FB950',2:'#F0883E',3:'#FF7B72',4:'#A78BFA'};
+  const levelBgs = {1:'#0D2818',2:'#2D1B00',3:'#2D0F0F',4:'#1B1035'};
+  badge.textContent = ['','🟢 Level 1 · Recall','🟡 Level 2 · Apply','🔴 Level 3 · Analyze','💜 Boss Round'][q.lvl];
+  badge.style.cssText = `color:${levelColors[q.lvl]};background:${levelBgs[q.lvl]};padding:3px 12px;border-radius:10px;font-weight:800;font-size:0.75rem;`;
+  document.getElementById('ladder-q-text').textContent = q.q;
+  const grid = document.getElementById('ladder-choice-grid');
+  grid.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'ladder-choice';
+    btn.textContent = ['A','B','C','D'][i] + '. ' + opt;
+    btn.onclick = () => answerLadder(btn, i);
+    grid.appendChild(btn);
+  });
+  document.getElementById('ladder-fb-box').style.display = 'none';
+}
+
+function answerLadder(btn, chosen) {
+  const q = ladderData[ladderIdx];
+  const correct = chosen === q.a;
+  if (correct) ladderScore++;
+  ladderCorrect[ladderIdx] = correct;
+  const btns = document.getElementById('ladder-choice-grid').querySelectorAll('.ladder-choice');
+  btns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === chosen) b.classList.add(correct ? 'correct' : 'wrong');
+    if (i === q.a && !correct) b.classList.add('correct');
+  });
+  const fb = document.getElementById('ladder-fb-box');
+  fb.textContent = correct ? '✅ Correct!' : '❌ Answer: ' + q.opts[q.a];
+  fb.className = 'ladder-fb ' + (correct ? 'ok' : 'miss');
+  fb.style.display = 'block';
+  ladderIdx++;
+  setTimeout(() => { fb.style.display = 'none'; showLadderQ(); }, 1300);
+}
+
+function endLadder() {
+  document.getElementById('ladder-active-area').style.display = 'none';
+  document.getElementById('ladder-done-area').style.display = 'block';
+  const pct = Math.round(ladderScore / ladderData.length * 100);
+  document.getElementById('ladder-done-msg').textContent = `Score: ${ladderScore}/${ladderData.length} (${pct}%) — ${pct >= 80 ? '🏆 Exam Ready!' : pct >= 60 ? '📚 Keep practicing' : '🔄 Review lectures'}`;
+  document.getElementById('dash-ladder').textContent = pct + '%';
+}
+
+// ========== ELIMINATION DATA ==========
+const elimData = [
+  {q:"What molecule does ADH V2 receptor insert into the collecting duct membrane?",opts:["Na/K ATPase","AQP-2 (aquaporin-2)","ROMK","NHE3"],a:1},
+  {q:"Which CAH has salt-wasting AND virilization?",opts:["17α-hydroxylase","11β-hydroxylase","21-hydroxylase","Aromatase deficiency"],a:2},
+  {q:"Insulin receptor signals via:",opts:["Gs → cAMP","Gq → IP3/DAG","Receptor tyrosine kinase → RAS/MAPK","Gi → ↓cAMP"],a:2},
+  {q:"Anti-TPO antibody is characteristic of:",opts:["Graves disease","De Quervain thyroiditis","Hashimoto thyroiditis","Papillary thyroid cancer"],a:2},
+  {q:"5α-reductase deficiency: what is the testosterone level?",opts:["Low","Normal to high","Undetectable","Same as female range"],a:1},
+  {q:"V1 receptor G-protein → leads to?",opts:["↑cAMP → water reabsorption","↑IP3/DAG → vasoconstriction","↓cAMP → inhibits secretion","↑DAG only → protein synthesis"],a:1},
+  {q:"17-hydroxyprogesterone accumulates in which CAH?",opts:["11β-hydroxylase def.","17α-hydroxylase def.","21-hydroxylase def.","Aromatase def."],a:2},
+  {q:"Coupling MIT + DIT in thyroid produces?",opts:["T4","Thyroglobulin","T3","Reverse T3"],a:2},
+  {q:"Primary polydipsia: expected serum osmolality?",opts:["High (>295)","Low to normal (<280)","Normal (285-295)","Extremely high (>320)"],a:1},
+  {q:"PTU additional mechanism vs methimazole?",opts:["Blocks NIS","Blocks peripheral T4→T3 (5′-deiodinase)","Destroys autoantibodies","Blocks TSH receptor"],a:1},
+  {q:"SIADH from SCLC: which receptor mediates water retention?",opts:["V1 → Gq","V2 → Gs → AQP-2","AT1 → Gq → aldosterone","ACTH receptor → Gs → cortisol"],a:1},
+  {q:"AIS: why do breasts develop in an XY patient?",opts:["Testosterone directly stimulates breast tissue","Testosterone is aromatized to estrogen, which acts normally","Anti-androgen antibodies cross-react with ER","Oxytocin drives mammary development"],a:1},
+  {q:"Gestational DI: why does DDAVP work but native ADH doesn't?",opts:["DDAVP binds V1; native ADH binds V2","DDAVP is resistant to vasopressinase; native ADH is degraded","DDAVP crosses placenta; native ADH does not","DDAVP has higher receptor affinity in pregnancy"],a:1},
+  {q:"Hashimoto: what explains the initial transient hyperthyroid phase?",opts:["TSI stimulation of thyroid receptor","Follicle destruction releases stored T3/T4","PTU is metabolized → hashitoxicosis","Excess iodide triggers Jod-Basedow"],a:1},
+  {q:"17α-hydroxylase deficiency: expected potassium level?",opts:["Hyperkalemia","Hypokalemia","Normal","Oscillates"],a:1},
+  {q:"SHBG is suppressed by which condition?",opts:["Hyperthyroidism","Hyperinsulinemia/obesity","High estrogen","Low androgens"],a:1},
+  {q:"Wolff-Chaikoff effect: iodide excess in normal gland →",opts:["Stimulates TSH receptor","Inhibits NIS-mediated iodide transport","Transiently inhibits TPO organification","Stimulates TBG production"],a:2},
+  {q:"In 21-OH deficiency, why does the adrenal become hyperplastic?",opts:["ACTH from pituitary rises → drives adrenal growth","TSH cross-reacts with ACTH receptor","Aldosterone stimulates adrenal proliferation","CRH directly stimulates adrenal cortex"],a:0},
+  {q:"TBG rises with estrogen therapy. Total T4 rises but free T4 is normal. Patient is:",opts:["Hyperthyroid","Hypothyroid","Euthyroid","Subclinically hypothyroid"],a:2},
+  {q:"Boss: A drug blocks 5′-deiodinase. In thyroid storm, which drug has this effect AND is preferred?",opts:["Methimazole","Propranolol (β-blocker)","PTU","Lugol's iodine"],a:2}
+];
+
+let elimLives = 3, elimIdx = 0, elimSurvived = 0, elimRunning = false;
+
+function startElim() {
+  elimLives = 3; elimIdx = 0; elimSurvived = 0; elimRunning = true;
+  document.getElementById('elim-start-area').style.display = 'none';
+  document.getElementById('elim-gameover').style.display = 'none';
+  document.getElementById('elim-victory').style.display = 'none';
+  document.getElementById('elim-active-area').style.display = 'block';
+  updateElimLives();
+  showElimQ();
+}
+
+function updateElimLives() {
+  const area = document.getElementById('elim-lives');
+  area.innerHTML = '<span class="lives-label">Lives:</span>';
+  for (let i = 0; i < 3; i++) {
+    const h = document.createElement('span');
+    h.className = 'life-heart' + (i >= elimLives ? ' lost' : '');
+    h.textContent = '❤️';
+    area.appendChild(h);
+  }
+}
+
+function showElimQ() {
+  if (elimIdx >= elimData.length) { elimVictory(); return; }
+  const q = elimData[elimIdx];
+  document.getElementById('elim-counter').textContent = `Question ${elimIdx+1} of ${elimData.length}`;
+  document.getElementById('elim-q-text').textContent = q.q;
+  const choicesEl = document.getElementById('elim-choices');
+  choicesEl.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'elim-choice';
+    btn.textContent = ['A','B','C','D'][i] + '. ' + opt;
+    btn.onclick = () => answerElim(btn, i);
+    choicesEl.appendChild(btn);
+  });
+  document.getElementById('elim-fb').style.display = 'none';
+}
+
+function answerElim(btn, chosen) {
+  if (!elimRunning) return;
+  const q = elimData[elimIdx];
+  const correct = chosen === q.a;
+  const btns = document.getElementById('elim-choices').querySelectorAll('.elim-choice');
+  btns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === chosen) b.classList.add(correct ? 'correct' : 'wrong');
+    if (i === q.a && !correct) b.classList.add('correct');
+  });
+  const fb = document.getElementById('elim-fb');
+  if (correct) {
+    elimSurvived++;
+    fb.textContent = '✅ Correct! Survive!';
+    fb.className = 'elim-fb ok';
+  } else {
+    elimLives--;
+    updateElimLives();
+    fb.textContent = '❌ Wrong! Answer: ' + q.opts[q.a] + `. Lives remaining: ${elimLives}`;
+    fb.className = 'elim-fb miss';
+  }
+  fb.style.display = 'block';
+  if (elimLives <= 0) {
+    elimRunning = false;
+    setTimeout(() => elimGameOver(), 1500);
+  } else {
+    elimIdx++;
+    setTimeout(() => { fb.style.display = 'none'; showElimQ(); }, 1600);
+  }
+}
+
+function elimGameOver() {
+  document.getElementById('elim-active-area').style.display = 'none';
+  document.getElementById('elim-gameover').style.display = 'block';
+  document.getElementById('go-msg').textContent = `Survived ${elimSurvived} questions correctly. Review the questions you missed!`;
+  document.getElementById('dash-elim').textContent = elimSurvived;
+}
+
+function elimVictory() {
+  document.getElementById('elim-active-area').style.display = 'none';
+  document.getElementById('elim-victory').style.display = 'block';
+  document.getElementById('vic-msg').textContent = `You survived all ${elimData.length} questions with ${elimLives} lives remaining! 🎉`;
+  document.getElementById('dash-elim').textContent = elimSurvived;
+}
+
+// ========== STREAK DATA ==========
+const streakPool = [
+  {q:"Zone producing aldosterone?",opts:["Glomerulosa","Fasciculata","Reticularis","Medulla"],a:0},
+  {q:"Most common CAH enzyme?",opts:["21-hydroxylase","11β-OH","17α-OH","3β-HSD"],a:0},
+  {q:"11β-OH CAH: BP?",opts:["Low","High","Normal","Oscillating"],a:1},
+  {q:"AIS: testosterone level?",opts:["Low","Normal female","High male range","Undetectable"],a:2},
+  {q:"5α-RD deficiency: DHT?",opts:["Normal","Elevated","Absent/undetectable","Slightly low"],a:2},
+  {q:"V2 receptor: G-protein?",opts:["Gq","Gi","Gs","G12"],a:2},
+  {q:"Central DI treatment?",opts:["Thiazide","DDAVP","Amiloride","Fluid restriction"],a:1},
+  {q:"Nephrogenic DI treatment?",opts:["DDAVP","Thiazide + low-Na","Methimazole","Cortisol"],a:1},
+  {q:"Gestational DI cause?",opts:["Pituitary destruction","Vasopressinase","V2 receptor mutation","Anti-ADH antibodies"],a:1},
+  {q:"Graves autoantibody?",opts:["Anti-TPO","Anti-thyroglobulin","TSI","Anti-TSH"],a:2},
+  {q:"PTU extra mechanism?",opts:["Blocks NIS","Blocks T4→T3 conversion","Destroys TSI","Blocks TSH receptor"],a:1},
+  {q:"Hashimoto antibodies (most sensitive)?",opts:["TSI","Anti-TPO","Anti-dsDNA","Anti-thyroglobulin"],a:1},
+  {q:"Wolff-Chaikoff: what does iodide excess do to normal thyroid?",opts:["Stimulates synthesis","Inhibits synthesis","No effect","Destroys follicles"],a:1},
+  {q:"MIT + DIT coupling → ?",opts:["T4","T3","Thyroglobulin","Reverse T3"],a:1},
+  {q:"DIT + DIT coupling → ?",opts:["T3","T4","Thyroglobulin","MIT"],a:1},
+  {q:"SHBG: suppressed by?",opts:["Estrogen","Insulin","TSH","GnRH"],a:1},
+  {q:"17α-OH deficiency: sex steroid levels?",opts:["High","Normal","Absent/very low","Elevated androgens only"],a:2},
+  {q:"Cortisol: main G-protein used by ACTH receptor?",opts:["Gq","Gi","Gs","G12"],a:2},
+  {q:"Desmopressin vs native ADH: why DDAVP used in gestational DI?",opts:["Higher potency","Resistant to vasopressinase","Crosses placenta less","V2-selective only"],a:1},
+  {q:"Lithium → DI type?",opts:["Central","Nephrogenic","Gestational","Primary polydipsia"],a:1}
+];
+
+let streakCurrent = 0, streakBest = 0, streakQIdx = 0, streakPool2 = [], streakRunning = false;
+
+function startStreak() {
+  streakCurrent = 0; streakQIdx = 0; streakRunning = true;
+  streakPool2 = [...streakPool]; shuffle(streakPool2);
+  document.getElementById('streak-start-area').style.display = 'none';
+  document.getElementById('streak-done-area').style.display = 'none';
+  document.getElementById('streak-active-area').style.display = 'block';
+  buildStreakDots();
+  showStreakQ();
+}
+
+function buildStreakDots() {
+  const row = document.getElementById('streak-dots-row');
+  row.innerHTML = '';
+  for (let i = 0; i < 20; i++) {
+    const dot = document.createElement('div');
+    dot.className = 's-dot' + (i === 0 ? ' active-now' : '');
+    dot.textContent = i + 1;
+    dot.id = 'sdot-' + i;
+    row.appendChild(dot);
+  }
+}
+
+function showStreakQ() {
+  if (streakQIdx >= 20) { streakDone(true); return; }
+  const q = streakPool2[streakQIdx % streakPool2.length];
+  document.getElementById('streak-q-text').textContent = q.q;
+  const choicesEl = document.getElementById('streak-choices');
+  choicesEl.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'streak-choice';
+    btn.textContent = ['A','B','C','D'][i] + '. ' + opt;
+    btn.onclick = () => answerStreak(btn, i, q);
+    choicesEl.appendChild(btn);
+  });
+  document.getElementById('streak-fb').style.display = 'none';
+  for (let i = 0; i < 20; i++) {
+    const dot = document.getElementById('sdot-' + i);
+    if (dot) dot.className = 's-dot' + (i < streakQIdx ? ' hit' : i === streakQIdx ? ' active-now' : '');
+  }
+  document.getElementById('cur-streak').textContent = streakCurrent;
+  document.getElementById('best-streak').textContent = streakBest;
+}
+
+function answerStreak(btn, chosen, q) {
+  if (!streakRunning) return;
+  const correct = chosen === q.a;
+  const btns = document.getElementById('streak-choices').querySelectorAll('.streak-choice');
+  btns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === chosen) b.classList.add(correct ? 'correct' : 'wrong');
+    if (i === q.a && !correct) b.classList.add('correct');
+  });
+  const fb = document.getElementById('streak-fb');
+  const dot = document.getElementById('sdot-' + streakQIdx);
+  if (correct) {
+    streakCurrent++;
+    if (streakCurrent > streakBest) { streakBest = streakCurrent; document.getElementById('dash-streak').textContent = streakBest; }
+    if (dot) dot.className = 's-dot hit';
+    fb.textContent = `🔥 Correct! Streak: ${streakCurrent}`;
+    fb.className = 'streak-fb ok';
+  } else {
+    if (dot) dot.className = 's-dot miss';
+    fb.textContent = '❌ Answer: ' + q.opts[q.a] + ` — Streak reset from ${streakCurrent}`;
+    fb.className = 'streak-fb miss';
+    streakCurrent = 0;
+  }
+  fb.style.display = 'block';
+  streakQIdx++;
+  document.getElementById('cur-streak').textContent = streakCurrent;
+  if (streakQIdx >= 20) {
+    setTimeout(() => streakDone(streakCurrent === 20 || streakBest >= 15), 1500);
+  } else {
+    setTimeout(() => { fb.style.display = 'none'; showStreakQ(); }, 1400);
+  }
+}
+
+function streakDone(perfect) {
+  streakRunning = false;
+  document.getElementById('streak-active-area').style.display = 'none';
+  document.getElementById('streak-done-area').style.display = 'block';
+  document.getElementById('streak-done-icon').textContent = perfect ? '🏆' : '📚';
+  document.getElementById('streak-done-msg').textContent = perfect
+    ? `Perfect run! Best streak: ${streakBest}/20. You are exam-ready. 🔥`
+    : `Best streak this run: ${streakBest}/20. Keep drilling — aim for 20 in a row!`;
+}
+
+// ========== INIT ==========
+buildMCQ();
+updateMCQScore();
+</script>
+</body>
+</html>
