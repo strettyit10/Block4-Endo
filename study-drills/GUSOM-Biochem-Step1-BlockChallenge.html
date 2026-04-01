@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUSOM Endocrine — Biochemistry Step 1 Block Challenge</title>
+<style>
+  :root {
+    --blue:#1565C0; --blue-light:#E3F2FD; --blue-mid:#90CAF9;
+    --orange:#E65100; --orange-light:#FFF3E0; --orange-mid:#FFCC80;
+    --green:#2E7D32; --green-light:#E8F5E9; --green-mid:#A5D6A7;
+    --gold:#FFD54F; --gold-dark:#B8860B; --gold-light:#FFF8E1;
+    --red:#C62828; --red-light:#FFEBEE; --red-mid:#EF9A9A;
+    --teal:#00695C; --teal-light:#E0F2F1; --teal-mid:#80CBC4;
+    --gray:#37474F; --gray-light:#ECEFF1; --gray-mid:#B0BEC5;
+    --bg:#0D1117; --card:#161B22; --card2:#1E2530;
+    --shadow:0 4px 16px rgba(0,0,0,0.4);
+    --radius:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:#E6EDF3;line-height:1.6;}
+
+  /* TOP BAR */
+  .top-bar{background:linear-gradient(135deg,#1A1200,#3D2B00,#B8860B);padding:18px 28px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
+  .top-bar h1{font-size:1.2rem;font-weight:800;flex:1;}
+  .top-bar a{color:rgba(255,255,255,0.7);font-size:0.82rem;text-decoration:none;}
+  .top-bar a:hover{color:#fff;}
+  .badge{background:rgba(255,255,255,0.15);border-radius:20px;padding:3px 14px;font-size:0.78rem;border:1px solid rgba(255,255,255,0.2);}
+
+  /* SECTION NAV */
+  .section-nav{background:var(--card);border-bottom:1px solid #30363D;display:flex;overflow-x:auto;gap:0;padding:0 12px;position:sticky;top:60px;z-index:90;}
+  .sec-btn{padding:10px 20px;border:none;background:none;cursor:pointer;font-size:0.83rem;font-weight:700;color:#8B949E;border-bottom:3px solid transparent;white-space:nowrap;transition:all 0.2s;}
+  .sec-btn:hover{color:#E6EDF3;background:rgba(255,255,255,0.05);}
+  .sec-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+  /* PANELS */
+  .panel{display:none;max-width:980px;margin:0 auto;padding:28px 16px 80px;}
+  .panel.active{display:block;}
+
+  /* DASHBOARD */
+  .dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:28px;}
+  .dash-card{background:var(--card2);border-radius:var(--radius);padding:18px;text-align:center;border:1px solid #30363D;}
+  .dash-card .num{font-size:2.2rem;font-weight:900;color:var(--gold);}
+  .dash-card .lbl{font-size:0.78rem;color:#8B949E;margin-top:2px;}
+  .hero-banner{background:linear-gradient(135deg,#1A1200,#3D2B00);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:24px;border:1px solid var(--gold)44;}
+  .hero-banner h2{font-size:1.5rem;font-weight:800;margin-bottom:6px;}
+  .hero-banner p{color:rgba(255,255,255,0.75);font-size:0.9rem;max-width:600px;margin:0 auto;}
+
+  /* SECTION LABELS */
+  .sec-label{display:flex;align-items:center;gap:10px;margin:32px 0 16px;}
+  .sec-label .icon{font-size:1.4rem;}
+  .sec-label h3{font-size:1.05rem;font-weight:800;color:#E6EDF3;}
+  .sec-label .pill{background:#21262D;color:#8B949E;font-size:0.72rem;padding:3px 12px;border-radius:12px;border:1px solid #30363D;}
+
+  /* INTEGRATION VIGNETTES */
+  .vig-card{background:var(--card);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;border:1px solid #30363D;}
+  .vig-header{padding:10px 18px;display:flex;align-items:center;gap:10px;background:var(--card2);border-bottom:1px solid #30363D;}
+  .vig-header .vig-num{font-size:0.75rem;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;}
+  .vig-header .vig-lectures{font-size:0.72rem;color:#8B949E;}
+  .vig-stem{padding:18px;font-size:0.9rem;line-height:1.75;color:#E6EDF3;border-left:4px solid var(--gold);}
+  .vig-stem .prompt{font-weight:700;color:var(--gold);margin-top:10px;font-size:0.85rem;}
+  .reveal-btn{width:100%;padding:11px;background:#21262D;border:none;border-top:1px solid #30363D;cursor:pointer;font-size:0.82rem;font-weight:700;color:var(--gold);transition:background 0.2s;}
+  .reveal-btn:hover{background:#2D333B;}
+  .vig-answer{display:none;padding:16px 18px;background:#0D2818;border-top:1px solid #238636;}
+  .vig-answer .ans-label{font-size:0.75rem;font-weight:800;color:#3FB950;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+  .vig-answer .ans-text{font-size:0.88rem;color:#E6EDF3;line-height:1.75;}
+  .vig-answer .why{font-size:0.8rem;color:#8B949E;margin-top:8px;font-style:italic;border-top:1px solid #21262D;padding-top:8px;}
+  .vig-answer .path-chain{background:#161B22;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:0.82rem;color:var(--gold);font-family:monospace;line-height:1.8;}
+
+  /* MCQ GAUNTLET */
+  .mcq-card{background:var(--card);border-radius:var(--radius);margin-bottom:16px;border:1px solid #30363D;overflow:hidden;}
+  .mcq-header{background:var(--card2);padding:10px 18px;border-bottom:1px solid #30363D;display:flex;justify-content:space-between;align-items:center;}
+  .mcq-header .qnum{font-size:0.75rem;font-weight:800;color:#58A6FF;}
+  .mcq-header .difficulty{font-size:0.72rem;padding:2px 10px;border-radius:10px;}
+  .diff-easy{background:#0D2818;color:#3FB950;border:1px solid #238636;}
+  .diff-med{background:#2D1B00;color:#F0883E;border:1px solid #BD561D;}
+  .diff-hard{background:#2D0F0F;color:#FF7B72;border:1px solid #8B2020;}
+  .mcq-stem{padding:18px;font-size:0.9rem;line-height:1.75;color:#E6EDF3;}
+  .mcq-choices{display:flex;flex-direction:column;gap:8px;padding:0 18px 18px;}
+  .mcq-choice{background:#21262D;border:1.5px solid #30363D;border-radius:8px;padding:10px 16px;cursor:pointer;font-size:0.87rem;color:#E6EDF3;transition:all 0.2s;text-align:left;}
+  .mcq-choice:hover:not(:disabled){background:#2D333B;border-color:#58A6FF;}
+  .mcq-choice.correct{background:#0D2818;border-color:#3FB950;color:#3FB950;font-weight:700;}
+  .mcq-choice.wrong{background:#2D0F0F;border-color:#8B2020;color:#FF7B72;}
+  .mcq-choice.reveal-correct{background:#0D2818;border-color:#3FB950;color:#3FB950;}
+  .mcq-explain{display:none;padding:14px 18px 18px;border-top:1px solid #30363D;}
+  .mcq-explain .exp-label{font-size:0.75rem;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;}
+  .mcq-explain .exp-text{font-size:0.85rem;color:#C9D1D9;line-height:1.7;}
+  .choice-exp{font-size:0.78rem;color:#8B949E;margin-top:4px;padding-left:8px;border-left:2px solid #30363D;}
+
+  /* SCORE PROGRESS */
+  .score-tracker{background:var(--card2);border-radius:var(--radius);padding:16px;margin-bottom:20px;border:1px solid #30363D;display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+  .score-num{font-size:2rem;font-weight:900;color:var(--gold);}
+  .score-bar-wrap{flex:1;min-width:200px;}
+  .score-bar{height:10px;background:#21262D;border-radius:5px;overflow:hidden;margin-top:4px;}
+  .score-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--gold),#FFD700);transition:width 0.4s;}
+  .score-lbl{font-size:0.8rem;color:#8B949E;}
+
+  /* DRILL CONTAINER (Lab/Drug/Genetic) */
+  .drill-container{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid #30363D;margin-bottom:20px;}
+  .drill-stem{font-size:0.95rem;font-weight:700;color:#E6EDF3;margin-bottom:16px;line-height:1.65;padding:16px;background:var(--card2);border-radius:8px;border-left:4px solid var(--gold);}
+  .drill-choices{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+  .drill-choice{background:#21262D;border:1.5px solid #30363D;border-radius:8px;padding:10px 16px;cursor:pointer;font-size:0.87rem;color:#E6EDF3;transition:all 0.2s;text-align:left;}
+  .drill-choice:hover:not(:disabled){background:#2D333B;border-color:var(--gold);}
+  .drill-choice.correct{background:#0D2818;border-color:#3FB950;color:#3FB950;font-weight:700;}
+  .drill-choice.wrong{background:#2D0F0F;border-color:#8B2020;color:#FF7B72;}
+  .drill-fb{padding:10px 14px;border-radius:8px;font-size:0.85rem;margin-top:10px;display:none;}
+  .drill-fb.ok{background:#0D2818;color:#3FB950;border:1px solid #238636;}
+  .drill-fb.miss{background:#2D0F0F;color:#FF7B72;border:1px solid #8B2020;}
+  .drill-counter{font-size:0.82rem;color:#8B949E;margin-bottom:12px;}
+
+  /* FINAL SCORE SPLASH */
+  .final-splash{background:linear-gradient(135deg,#1A1200,#3D2B00);border-radius:var(--radius);padding:36px;text-align:center;margin:28px 0;border:2px solid var(--gold);}
+  .final-splash .big-num{font-size:4rem;font-weight:900;color:var(--gold);}
+  .final-splash .grade{font-size:1.2rem;font-weight:700;margin:8px 0;}
+  .final-splash .sub{font-size:0.85rem;color:rgba(255,255,255,0.7);}
+
+  /* UTILITY */
+  .btn-primary{background:linear-gradient(135deg,var(--gold),#FFD700);color:#000;border:none;border-radius:8px;padding:10px 24px;cursor:pointer;font-weight:800;font-size:0.9rem;transition:opacity 0.2s;}
+  .btn-primary:hover{opacity:0.85;}
+  .btn-secondary{background:#21262D;color:#E6EDF3;border:1px solid #30363D;border-radius:8px;padding:10px 24px;cursor:pointer;font-weight:700;font-size:0.88rem;}
+  .btn-secondary:hover{background:#2D333B;}
+  .tip-box{background:#1B1035;border-left:4px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;padding:12px 16px;margin:12px 0;font-size:0.84rem;color:#C9D1D9;}
+  .tip-box strong{display:block;margin-bottom:3px;color:var(--gold);}
+  .nav-back{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
+  .nav-back a{color:#58A6FF;font-size:0.85rem;text-decoration:none;}
+  .nav-back a:hover{text-decoration:underline;}
+  .section-divider{height:1px;background:#21262D;margin:32px 0;}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1>🏅 Endocrine — Biochemistry Step 1 Block Challenge</h1>
+  <span class="badge">Hub #2 · Step 1</span>
+  <span class="badge">All 5 Lectures</span>
+  <a href="GUSOM-Biochem-Step1-ActiveDrills.html">← Back to Step 1 Hub</a>
+</div>
+
+<nav class="section-nav">
+  <button class="sec-btn active" onclick="showPanel('dashboard')">📊 Dashboard</button>
+  <button class="sec-btn" onclick="showPanel('integration')">🔬 Integration Vignettes</button>
+  <button class="sec-btn" onclick="showPanel('mcq')">📝 MCQ Gauntlet</button>
+  <button class="sec-btn" onclick="showPanel('lab')">🔬 Lab Interpretation</button>
+  <button class="sec-btn" onclick="showPanel('drug')">💊 Drug Mechanisms</button>
+  <button class="sec-btn" onclick="showPanel('genetic')">🧬 Genetic Syndromes</button>
+</nav>
+
+<!-- ========== DASHBOARD ========== -->
+<div id="dashboard" class="panel active">
+  <div class="hero-banner">
+    <h2>🏅 Step 1 Block Challenge</h2>
+    <p>Integrate all 5 lectures at Step 1 depth. Master vignettes, MCQs, lab patterns, drug mechanisms, and genetic syndromes. Target 80%+ on all sections before your board exam.</p>
+  </div>
+
+  <div class="dash-grid">
+    <div class="dash-card"><div class="num" id="dash-mcq">—</div><div class="lbl">MCQ Score</div></div>
+    <div class="dash-card"><div class="num" id="dash-lab">—</div><div class="lbl">Lab Interp Score</div></div>
+    <div class="dash-card"><div class="num" id="dash-drug">—</div><div class="lbl">Drug Mech Score</div></div>
+    <div class="dash-card"><div class="num" id="dash-genetic">—</div><div class="lbl">Genetic Syn Score</div></div>
+    <div class="dash-card"><div class="num" id="dash-streak">—</div><div class="lbl">Best Streak</div></div>
+  </div>
+
+  <div class="sec-label"><span class="icon">🗺️</span><h3>What's in Each Section</h3></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;">
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('integration')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">🔬</div>
+      <div style="font-weight:800;margin-bottom:4px;">Integration Vignettes</div>
+      <div style="font-size:0.82rem;color:#8B949E;">10 Step 1 vignettes blending 2–3 lectures. Reveal full mechanistic answers.</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('mcq')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">📝</div>
+      <div style="font-weight:800;margin-bottom:4px;">MCQ Gauntlet</div>
+      <div style="font-size:0.82rem;color:#8B949E;">20 Step 1-style questions with 5 answer choices and per-option explanations.</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('lab')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">🔬</div>
+      <div style="font-weight:800;margin-bottom:4px;">Lab Interpretation</div>
+      <div style="font-size:0.82rem;color:#8B949E;">10 lab patterns → click to identify the diagnosis. Interactive matching drill.</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('drug')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">💊</div>
+      <div style="font-weight:800;margin-bottom:4px;">Drug Mechanisms</div>
+      <div style="font-size:0.82rem;color:#8B949E;">10 drugs → match to mechanism or adverse effect. Interactive drill.</div>
+    </div>
+    <div style="background:var(--card);border-radius:var(--radius);padding:18px;border:1px solid #30363D;" onclick="showPanel('genetic')" class="btn-card">
+      <div style="font-size:1.3rem;margin-bottom:6px;">🧬</div>
+      <div style="font-weight:800;margin-bottom:4px;">Genetic Syndromes</div>
+      <div style="font-size:0.82rem;color:#8B949E;">10 syndromes → click to identify by key findings. Interactive matcher.</div>
+    </div>
+  </div>
+
+  <style>.btn-card{cursor:pointer;transition:border-color 0.2s;}.btn-card:hover{border-color:var(--gold)!important;}</style>
+</div>
+
+<!-- ========== INTEGRATION VIGNETTES ========== -->
+<div id="integration" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">10 integration vignettes · Step 1 depth</span></div>
+
+  <!-- VIG 1: McCune-Albright -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 1</span><span class="vig-lectures">L1 + L2 — GPCR signaling + Adrenal</span></div>
+    <div class="vig-stem">A 14-year-old girl presents with precocious puberty, café-au-lait spots, and polyostotic fibrous dysplasia. Her cortisol is elevated but ACTH is also elevated (should be low if adrenal).
+      <div class="prompt">→ Explain why McCune-Albright affects both the gonads AND adrenal simultaneously, and why ACTH is elevated rather than suppressed.</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Full Mechanistic Answer</div>
+      <div class="ans-text"><strong>McCune-Albright syndrome (MAS):</strong> Somatic gain-of-function mutation in GNAS (Gs α-subunit) → constitutively active Gs in multiple tissues (gonads, adrenal, bone).<br><br><strong>Gonadal involvement:</strong> Gs mutation → ↑cAMP → LH receptor activation independent of LH → precocious puberty.<br><br><strong>Adrenal involvement:</strong> Gs mutation in fasciculata cells → ↑cAMP → constitutive cortisol production. But here's the twist: autonomous cortisol production occurs WITHOUT ACTH-driven stimulation initially. However, some adrenal cells also express GNAS mutation → constitutive Gs activation in pituitary CRH pathway → ↑CRH from hypothalamus → ↑ACTH despite high cortisol (explaining the inappropriately elevated ACTH).<br><br><strong>Pathophysiology chain:</strong> Gs (constitutive ON) → ↑cAMP → PKA → StAR → cholesterol import → cortisol synthesis in adrenal. In pituitary: Gs ON → loss of normal feedback inhibition → continued ACTH secretion.</div>
+      <div class="why">Combines L1 (Gs coupling, constitutive activation) with L2 (adrenal steroidogenesis, ACTH feedback). Tests whether you understand somatic mutations create tissue-specific constitutive activation.</div>
+    </div>
+  </div>
+
+  <!-- VIG 2: StAR/CYP11A1 Deficiency -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 2</span><span class="vig-lectures">L2 + L3 — Adrenal + Sex Steroid Pathways</span></div>
+    <div class="vig-stem">A 46,XY newborn with ambiguous genitalia presents with no adrenal hyperplasia. Cortisol is very low, aldosterone is low, testosterone is low, DHEA is very low, 17-OHP is LOW (not elevated).
+      <div class="prompt">→ Which single enzyme deficiency explains all four hormone failures? Why does this affect BOTH adrenal and gonadal steroidogenesis?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>CYP11A1 (cholesterol side-chain cleavage enzyme / P450scc) or StAR deficiency.</strong><br><br>CYP11A1 catalyzes the FIRST committed step in ALL steroidogenesis: Cholesterol → Pregnenolone. Without it, NO pregnenolone is made in any steroidogenic tissue (adrenal zona fasciculata/reticularis, Leydig cells, ovaries).<br><br><strong>Result:</strong> Every downstream hormone fails: no cortisol (↑ACTH), no aldosterone (salt-wasting), no testosterone (XY underdeveloped genitalia), no DHEA/androstenedione (very low), no progesterone, no estradiol. 17-OHP is LOW because 17-OH-pregnenolone cannot be made (substrate is missing before the 17α-hydroxylase step).<br><br><strong>Key distinction:</strong> 21-OH deficiency = adrenal only, allows some gonadal function. CYP11A1 = total steroidogenic failure in ALL tissues. This is a "global steroidogenesis blackout," not a pathway traffic jam.<br><br><strong>Lipoid CAH:</strong> Caused by StAR mutation (cholesterol trapped in mitochondria), same clinical phenotype as CYP11A1 deficiency.</div>
+      <div class="why">Integrates L2 (adrenal steroidogenesis, CYP11A1 as the rate-limiting step) with L3 (gonadal steroidogenesis). Tests whether you know the first committed enzyme blocks EVERYTHING downstream.</div>
+    </div>
+  </div>
+
+  <!-- VIG 3: Complete AIS + Osmotic Demyelination -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 3</span><span class="vig-lectures">L3 + L4 — Sex Steroids + ADH/Osmolyte Control</span></div>
+    <div class="vig-stem">A 24-year-old woman with 46,XY karyotype, inguinal testes, absent uterus, and normal female external genitalia is brought to the ER with symptomatic hyponatremia (Na = 126). She receives large-volume IV fluids. After fluid correction to Na = 135, she develops central pontine myelinolysis.
+      <div class="prompt">→ What is her diagnosis? Why did she develop hyponatremia from IV fluids? What went wrong with the fluid correction?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Complete androgen insensitivity syndrome (AIS).</strong> 46,XY with functional androgen receptor deficiency → testes present (produce testosterone, MIF), female phenotype (external genitalia), no uterus (MIF suppresses Müllerian structures).<br><br><strong>Hyponatremia mechanism:</strong> AIS patients often have SIADH (inappropriately concentrated urine despite low serum osmolality — mechanism not fully clear, possibly from pituitary ADH oversecretion). When she received large-volume IV fluids, free water was retained → dilutional hyponatremia.<br><br><strong>Osmotic demyelination (CPM):</strong> Brain adapts to chronic hyponatremia by losing intracellular osmolytes (K+, amino acids). When sodium is corrected RAPIDLY (Na jumped 9 mEq/L in short time), water leaves the brain cells → myelin sheath damage → delayed neurologic symptoms (dysarthria, dysphagia, weakness appear 2–6 days after correction).<br><br><strong>Prevention:</strong> Correct hyponatremia slowly (≤8–10 mEq/L per 24 hours) even in symptomatic patients.</div>
+      <div class="why">L3 (AIS phenotype) + L4 (osmotic demyelination syndrome, hyponatremia correction). Tests integrated thinking: recognize AIS, explain SIADH, manage hyponatremia safely.</div>
+    </div>
+  </div>
+
+  <!-- VIG 4: Lithium + Nephrogenic DI -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 4</span><span class="vig-lectures">L2 + L4 — Adrenal (briefly) + ADH Signaling</span></div>
+    <div class="vig-stem">A 35-year-old man on lithium for bipolar disorder develops polyuria and polydipsia. ADH level is normal. Urine osmolality is LOW (100 mOsm/kg). Serum osmolality is HIGH (300). Water deprivation test: urine does not concentrate. Desmopressin injection: urine STILL does not concentrate.
+      <div class="prompt">→ What type of DI? Explain the V2 receptor pathway and how lithium disrupts it. What are treatment options?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Nephrogenic DI (lithium-induced).</strong> The problem is in the kidney tubule (V2 receptor signaling), NOT ADH production.<br><br><strong>Mechanism:</strong> Lithium enters principal cells via ENaC → inhibits adenylyl cyclase → ↓cAMP → ↓PKA → AQP-2 water channels not inserted into luminal membrane → free water loss despite elevated ADH/desmopressin.<br><br><strong>Why desmopressin fails:</strong> V2 (Gs-coupled) normally: V2 → Gs → ↑cAMP → PKA → AQP-2 exocytosis. Lithium blocks the downstream signaling (↓cAMP/PKA), so even a strong V2 agonist (DDAVP) cannot restore water reabsorption. The receptor is present but the signal transduction is broken.<br><br><strong>Treatments:</strong><br>• Stop lithium if possible (may take weeks for DI to resolve)<br>• Amiloride (ENaC blocker → prevents lithium entry into cells)<br>• Thiazide diuretics (mild volume depletion → ↑proximal Na/water reabsorption → less fluid delivered to collecting duct)<br>• NSAIDs (↓prostaglandin synthesis → ↓polyuria)<br>• Ensure adequate hydration (thirst mechanism is usually intact).</div>
+      <div class="why">Integrates L4 (V2/Gs/cAMP, AQP-2 insertion) with L2 (adrenal mention is minimal but context of lithium as a psychiatric drug). Depth: tests whether you understand tubular unresponsiveness vs. central DI.</div>
+    </div>
+  </div>
+
+  <!-- VIG 5: Triphasic DI Response to Pituitary Stalk Compression -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 5</span><span class="vig-lectures">L1 + L4 — Hypothalamic-Pituitary Anatomy + ADH Release</span></div>
+    <div class="vig-stem">A child undergoes emergency surgery for a craniopharyngioma compressing the pituitary stalk. Post-op day 1: polyuria (central DI). Day 3: paradoxical water retention, confusion, hyponatremia (SIADH-like picture). Day 10: permanent DI.
+      <div class="prompt">→ Explain the triphasic response. Why does SIADH occur in the middle phase? Where are ADH and oxytocin made, and how does stalk compression disrupt their release?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Triphasic DI response to pituitary stalk injury:</strong><br><br><strong>Phase 1 (immediate, day 1):</strong> Axonal transection → loss of ADH transport down the stalk → immediate DI (polyuria, high serum Na).<br><br><strong>Phase 2 (days 3–5):</strong> Axonal degeneration releases stored ADH from dying axons → massive, unregulated ADH dumping → inappropriate antidiuresis (SIADH phenotype) → water retention → hyponatremia + confusion (seizures if severe).<br><br><strong>Phase 3 (days 7–10, permanent):</strong> Stored ADH depleted, hypothalamic cell bodies die → permanent central DI (if damage is extensive) or gradual recovery (if partial damage).<br><br><strong>ADH/Oxytocin synthesis & transport:</strong> Both made in hypothalamic nuclei (supraoptic + paraventricular) → transported down axons to posterior pituitary nerve terminals → stored in neurosecretory granules → released with electrical stimulation. Stalk compression = blocks axonal transport = prevents hormone delivery to terminals = functional posterior pituitary failure.<br><br><strong>Why oxytocin is less affected:</strong> Oxytocin has faster axonal transport; ADH appears more vulnerable to stalk compression initially.</div>
+      <div class="why">Pure L1 (hypothalamic anatomy, axonal transport) + L4 (posterior pituitary physiology, ADH release mechanism). Triphasic DI is a Step 1 favorite for testing pituitary anatomy.</div>
+    </div>
+  </div>
+
+  <!-- VIG 6: Thyroid Storm Treatment Order -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 6</span><span class="vig-lectures">L5 — Thyroid Pharmacology</span></div>
+    <div class="vig-stem">A 68-year-old woman with Graves disease undergoes emergency appendectomy (surgical stress). Post-op: heart rate 140, temperature 104°F, confusion. Thyroid storm diagnosed. What treatment order?
+      <div class="prompt">→ List the treatment sequence and explain why iodine CANNOT be given before PTU.</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer (THE most tested sequence on Step 1)</div>
+      <div class="ans-text"><strong>Thyroid storm treatment order:</strong><br><br>1. <strong>β-BLOCKER FIRST (Propranolol)</strong> — blocks sympathetic effects (tachycardia, tremor, heat production, anxiety). ALSO inhibits peripheral T4→T3 conversion (↓deiodinase activity). Typically propranolol 40–80 mg q6h IV/PO.<br><br>2. <strong>PTU (Propylthiouracil), 1 hour LATER</strong> — inhibits TPO (thyroid hormone synthesis) AND blocks peripheral T4→T3 conversion (unique to PTU, not methimazole). Dose: 500–1000 mg loading, then 250 mg q4–6h.<br><br>3. <strong>IODINE (Lugol's or SSKI), 1 HOUR AFTER PTU START</strong> — high-dose iodine triggers Wolff-Chaikoff effect (high iodine transiently blocks thyroid hormone synthesis + reduces thyroid vascularity). Dose: 10 drops SSKI (Saturated Solution Potassium Iodide) q6–8h OR 1 g IV sodium iodide q6h.<br><br>⚠️ <strong>WHY this order matters:</strong> If you give iodine FIRST (before PTU blocks synthesis), the thyroid gland will use that iodine as substrate to make MORE T4/T3 → massive hormone flooding (Jod-Basedow effect) → life-threatening thyroid storm surge. PTU MUST block synthesis before you add iodine substrate. The 1-hour gap is the most tested detail on Step 1.<br><br>4. <strong>GLUCOCORTICOIDS (Hydrocortisone 50–100 mg q6h IV)</strong> — prevents adrenal crisis (concurrent adrenal insufficiency in severe thyroidism) + further blocks T4→T3 conversion. Start after β-blocker on board.<br><br><strong>Adjunctive:</strong> Supportive care (fluids, cooling blankets, ICU monitoring).</div>
+      <div class="why">L5 (thyroid pharmacology, drug sequencing, Wolff-Chaikoff effect). This is the classic Step 1 "sequence" question. Do NOT memorize it as trivia — understand the MECHANISM (why order matters).</div>
+    </div>
+  </div>
+
+  <!-- VIG 7: Pheo + MEN2 + Pre-op Prep -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 7</span><span class="vig-lectures">L2 + L5 — Adrenal Tumors + Medullary Thyroid CA</span></div>
+    <div class="vig-stem">A 48-year-old woman has a 5 cm adrenal mass, hypertension, elevated urine metanephrines (3× normal). Her sister has medullary thyroid cancer. She is scheduled for tumor resection next week. Pre-op assessment notes: "PTU started for presumed hyperthyroidism."
+      <div class="prompt">→ What is the primary diagnosis? What genetic syndrome? Why is PTU potentially dangerous? What MUST be done before surgery?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Pheochromocytoma in the setting of MEN 2A (or 2B).</strong> Medullary thyroid cancer in the family → RET proto-oncogene mutation → automatic screening for pheo + hyperparathyroidism.<br><br><strong>Why PTU is dangerous:</strong> PTU can cause severe hepatotoxicity + agranulocytosis. More importantly, PTU doesn't address the catecholamine storm from the pheo. If the sister has medullary thyroid CA (MTC) as part of MEN2, the patient may also have MTC (needs calcitonin screening). Don't distract with thyroid drugs if the adrenal crisis is imminent.<br><br><strong>CRITICAL Step 1 detail — Pre-operative Pheo Management:</strong><br><strong>1. α-BLOCKADE FIRST</strong> (phenoxybenzamine, irreversible; OR prazosin, competitive) for 10–14 days. Dose titrated to control HTN + symptom relief. Goal: prevent hypertensive crisis during tumor manipulation.<br><strong>2. β-BLOCKER ONLY AFTER α-blockade is established</strong> (propranolol or metoprolol). Never give β-blocker alone first — unopposed α-adrenergic stimulation → severe, uncontrollable hypertension. Always α first, then β.<br><strong>3. Then surgery</strong> (after 10–14 days of α-blockade to allow vascular depletion of catecholamines).<br><br>The reason: intra-operative tumor manipulation releases catecholamines → ↑HR, ↑BP (sometimes to 250/150+, risk of stroke/MI). α-blockade vasodilates vessels + desaturates catecholamine stores. β-blocker added after to prevent reflex tachycardia (α-blockade alone causes reflex tachycardia).</div>
+      <div class="why">Integrates L2 (pheo, adrenal medulla, catecholamine physiology, MEN2 genetics) with L5 (medullary thyroid CA, RET). Tests pre-operative readiness — do you know the drug sequence and WHY it matters?</div>
+    </div>
+  </div>
+
+  <!-- VIG 8: SERM Tissue Specificity (Tamoxifen) -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 8</span><span class="vig-lectures">L1 + L3 — Nuclear Receptors + Sex Steroids</span></div>
+    <div class="vig-stem">A postmenopausal woman on tamoxifen for ER+ breast cancer (2 years) develops vaginal bleeding. Endometrial biopsy: hyperplasia. Her bone density is ABOVE normal for her age. Lab: TSH normal, free T4 normal.
+      <div class="prompt">→ Explain how the same drug (tamoxifen) causes opposite effects in uterus (bad) and bone (good). What is the mechanism of tissue-specific action?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Tamoxifen = SERM (Selective Estrogen Receptor Modulator).</strong><br><br><strong>Tissue-specific action explained:</strong> Tamoxifen is NOT a pure ER antagonist or agonist. Its effect depends on local coactivator/corepressor proteins in each tissue:<br><br>• <strong>Breast (ER antagonist):</strong> Tamoxifen-ER complex recruits corepressors → blocks estrogen-responsive gene transcription → anti-proliferative effect on breast cancer.<br><br>• <strong>Uterus (ER agonist):</strong> Tamoxifen-ER complex recruits coactivators → activates estrogen-responsive genes → endometrial cell proliferation → hyperplasia/cancer risk (major side effect, requires surveillance with annual ultrasound or any abnormal bleeding).<br><br>• <strong>Bone (ER agonist):</strong> Tamoxifen-ER complex activates bone-protective genes → preserves bone density (beneficial effect in postmenopausal women, but must weigh against uterine risk).<br><br><strong>Comparison:</strong> Raloxifene (alternative SERM) = ER antagonist in breast AND uterus (no endometrial risk) but agonist in bone. May be preferred if endometrial protection is priority.<br><br><strong>L1 mechanism:</strong> Nuclear receptor action depends on coactivator recruitment — same receptor, different tissue coactivators → different gene expression outcome. This is a fundamental principle of nuclear receptor pharmacology.</div>
+      <div class="why">L1 (nuclear receptors, coactivators, tissue-specific gene transcription) + L3 (estrogen receptor, SERM mechanism, sex steroid pharmacology). Tests whether you understand nuclear receptor biology beyond just "hormone binds = gene turns on."</div>
+    </div>
+  </div>
+
+  <!-- VIG 9: PCOS + Late-Onset CAH -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 9</span><span class="vig-lectures">L2 + L3 — Adrenal Enzyme Deficiency + Reproductive Endocrinology</span></div>
+    <div class="vig-stem">A 28-year-old woman with infertility has hyperandrogenemia, LH:FSH >2:1, insulin resistance, polycystic ovaries. ACTH stimulation test shows 17-OHP elevated AFTER stimulation (baseline 17-OHP normal). Regular menstruation but oligoovulation.
+      <div class="prompt">→ What is the primary diagnosis? What secondary diagnosis must be ruled out? How do you differentiate? What are treatment approaches?</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Primary diagnosis: PCOS (polycystic ovary syndrome).</strong> Hyperandrogenism + oligo-ovulation + polycystic ovaries on imaging. High LH (GnRH pulse frequency too high) stimulates theca cells → excess androgens. Insulin resistance → ↑LH → feeds androgen production.<br><br><strong>Secondary diagnosis to rule out: Non-classical 21-hydroxylase deficiency (non-classical CAH / attenuated CAH).</strong> Mild 21-OH deficiency presents with similar hyperandrogenemia + irregular periods. Differentiation: <strong>ACTH stimulation test</strong> → 17-OHP rises markedly (>2 ng/mL post-stim = abnormal). In pure PCOS, 17-OHP stays normal even after ACTH stim.<br><br><strong>Treatment approaches:</strong><br><strong>PCOS:</strong><br>• Lifestyle modification (weight loss, exercise) — improves insulin sensitivity, LH/FSH ratio, and ovulation.<br>• Metformin (insulin sensitizer) — improves ovulation rates, reduces androgen production.<br>• Clomiphene citrate (ER antagonist at pituitary) — mimics low estrogen state → ↑FSH/LH surge → ovulation induction. First-line for fertility in PCOS.<br>• Spironolactone (androgen receptor antagonist + aldosterone antagonist) — treats hirsutism/acne from high androgens.<br><br><strong>Non-classical CAH (if confirmed by ACTH stim test):</strong><br>• Low-dose glucocorticoids (dexamethasone 0.25–0.5 mg daily or hydrocortisone) — suppresses ACTH → reduces 17-OHP + androgen synthesis.</div>
+      <div class="why">Integrates L2 (21-OH enzyme, CAH, ACTH stimulation test) with L3 (LH/FSH, PCOS pathophysiology, androgen receptor pharmacology, clomiphene mechanism). Tests differential diagnosis thinking and treatment rationale.</div>
+    </div>
+  </div>
+
+  <!-- VIG 10: Sheehan Syndrome -->
+  <div class="vig-card">
+    <div class="vig-header"><span class="vig-num">Vignette 10</span><span class="vig-lectures">L3 + L4 — Sex Steroids + Pituitary Anatomy</span></div>
+    <div class="vig-stem">A woman delivered 4 hours ago, hemorrhaged (required massive transfusion), went into shock. Six months later: cannot breastfeed, amenorrhea, cold intolerance, weight gain. Prolactin UNDETECTABLE. Free T4 low, TSH low.
+      <div class="prompt">→ What is the diagnosis? Why is prolactin the FIRST hormone to fail? Why does TSH also become low (central hypothyroidism)? Explain the hormone loss cascade.</div>
+    </div>
+    <button class="reveal-btn" onclick="revealVig(this)">▶ Reveal Answer</button>
+    <div class="vig-answer">
+      <div class="ans-label">✅ Answer</div>
+      <div class="ans-text"><strong>Sheehan syndrome = postpartum panhypopituitarism from pituitary ischemia/infarction.</strong><br><br><strong>Pathophysiology:</strong> The pituitary gland enlarges 2× during pregnancy (from lactotroph hyperplasia due to high estrogen). This enlarged gland is highly vascularized but at the mercy of uterine blood flow. Massive hemorrhage → severe hypotension → pituitary ischemia → cell death (anterior lobe is most vulnerable; posterior lobe usually spared).<br><br><strong>Why prolactin fails FIRST:</strong> Prolactin is the most sensitive to ischemia (anterior pituitary cells are the most metabolically active; lactotrophs are especially sensitive to oxygen deprivation). Inability to breastfeed (no milk letdown from oxytocin failure, no milk production from prolactin failure) is the FIRST clinical symptom (often noticed at day 1–2 postpartum).<br><br><strong>Why TSH becomes low (central hypothyroidism):</strong> TRH from hypothalamus normally stimulates pituitary thyrotrophs → ↑TSH → thyroid makes T4/T3. Pituitary ischemia → thyrotroph death → ↓TSH → low T4 (secondary/central hypothyroidism). This manifests as cold intolerance, weight gain, fatigue (not immediately but over weeks/months).<br><br><strong>Hormone loss cascade (order):</strong><br>1. <strong>Prolactin</strong> (most sensitive, lost by day 1–2)<br>2. <strong>GH + LH/FSH</strong> (lost over days 3–7) → amenorrhea<br>3. <strong>TSH</strong> (lost over weeks) → hypothyroidism<br>4. <strong>ACTH</strong> (lost last, but when lost = adrenal crisis) → hypotension + hyponatremia<br><br><strong>L3 connection:</strong> Amenorrhea = ↓LH/FSH → no ovarian stimulation → low estrogen (secondary hypogonadism). This perpetuates low TSH because estrogen normally enhances TRH sensitivity at the pituitary.<br><br><strong>Clinical pearl:</strong> Any postpartum woman who cannot breastfeed (low/no milk production) should be evaluated for Sheehan syndrome, especially if there was significant hemorrhage.</div>
+      <div class="why">L4 (pituitary anatomy, hormone loss cascade, posterior pituitary oxytocin for milk letdown) + L3 (FSH/LH control of menstrual cycle, estrogen effects on pituitary). Integrates physiology with clinical recognition.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn-primary" onclick="showPanel('mcq')">Next: MCQ Gauntlet →</button>
+    <button class="btn-secondary" onclick="showPanel('dashboard')">← Dashboard</button>
+  </div>
+</div>
+
+<!-- ========== MCQ GAUNTLET ========== -->
+<div id="mcq" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">20 Step 1-style MCQs · 5 answer choices each</span></div>
+
+  <div class="score-tracker">
+    <div><div class="score-num" id="mcq-score-disp">0/0</div><div class="score-lbl">Score</div></div>
+    <div class="score-bar-wrap">
+      <div class="score-lbl">Accuracy</div>
+      <div class="score-bar"><div class="score-fill" id="mcq-fill" style="width:0%"></div></div>
+    </div>
+    <button class="btn-secondary" onclick="resetMCQ()">↺ Reset</button>
+  </div>
+
+  <div id="mcq-list"></div>
+
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn-primary" onclick="showPanel('lab')">Next: Lab Interpretation →</button>
+    <button class="btn-secondary" onclick="showPanel('dashboard')">← Dashboard</button>
+  </div>
+</div>
+
+<!-- ========== LAB INTERPRETATION DRILL ========== -->
+<div id="lab" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">10 lab patterns · Click to identify diagnosis</span></div>
+
+  <div class="score-tracker">
+    <div><div class="score-num" id="lab-score-disp">0/0</div><div class="score-lbl">Score</div></div>
+    <div class="score-bar-wrap">
+      <div class="score-lbl">Accuracy</div>
+      <div class="score-bar"><div class="score-fill" id="lab-fill" style="width:0%"></div></div>
+    </div>
+    <button class="btn-secondary" onclick="resetLab()">↺ Reset</button>
+  </div>
+
+  <div id="lab-list"></div>
+
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn-primary" onclick="showPanel('drug')">Next: Drug Mechanisms →</button>
+    <button class="btn-secondary" onclick="showPanel('dashboard')">← Dashboard</button>
+  </div>
+</div>
+
+<!-- ========== DRUG MECHANISMS DRILL ========== -->
+<div id="drug" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">10 drugs · Match to mechanism or adverse effect</span></div>
+
+  <div class="score-tracker">
+    <div><div class="score-num" id="drug-score-disp">0/0</div><div class="score-lbl">Score</div></div>
+    <div class="score-bar-wrap">
+      <div class="score-lbl">Accuracy</div>
+      <div class="score-bar"><div class="score-fill" id="drug-fill" style="width:0%"></div></div>
+    </div>
+    <button class="btn-secondary" onclick="resetDrug()">↺ Reset</button>
+  </div>
+
+  <div id="drug-list"></div>
+
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn-primary" onclick="showPanel('genetic')">Next: Genetic Syndromes →</button>
+    <button class="btn-secondary" onclick="showPanel('dashboard')">← Dashboard</button>
+  </div>
+</div>
+
+<!-- ========== GENETIC SYNDROMES DRILL ========== -->
+<div id="genetic" class="panel">
+  <div class="nav-back"><a href="#" onclick="showPanel('dashboard')">← Dashboard</a><span style="font-size:0.8rem;color:#8B949E;">10 genetic syndromes · Click to identify by findings</span></div>
+
+  <div class="score-tracker">
+    <div><div class="score-num" id="genetic-score-disp">0/0</div><div class="score-lbl">Score</div></div>
+    <div class="score-bar-wrap">
+      <div class="score-lbl">Accuracy</div>
+      <div class="score-bar"><div class="score-fill" id="genetic-fill" style="width:0%"></div></div>
+    </div>
+    <button class="btn-secondary" onclick="resetGenetic()">↺ Reset</button>
+  </div>
+
+  <div id="genetic-list"></div>
+
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn-secondary" onclick="showPanel('dashboard')">← Dashboard</button>
+  </div>
+</div>
+
+<script>
+// ========== NAV ==========
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sec-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const order = ['dashboard','integration','mcq','lab','drug','genetic'];
+  const idx = order.indexOf(id);
+  if (idx >= 0) document.querySelectorAll('.sec-btn')[idx].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function revealVig(btn) {
+  const ans = btn.nextElementSibling;
+  ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+  btn.textContent = ans.style.display === 'block' ? '▼ Hide Answer' : '▶ Reveal Answer';
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ========== MCQ DATA (20 questions) ==========
+const mcqData = [
+  {
+    q: "A 6-year-old boy has short stature, rhizomelic shortening of limbs, and large head. Intelligence is preserved. What is the genetic mutation responsible?",
+    opts: ["Loss-of-function FGFR3","Gain-of-function FGFR3","Activating Gs mutation","Gain-of-function RET","Loss-of-function PTPN11"],
+    a: 1, explain: "Achondroplasia = gain-of-function FGFR3 mutation. Constitutive inhibition of chondrocyte proliferation despite absence of FGF ligand. Autosomal dominant, often de novo."
+  },
+  {
+    q: "Cholera toxin causes rice-water diarrhea by:",
+    opts: ["Inactivating Gi → ↓cAMP","Activating Gs directly","ADP-ribosylating Gs → locked ON → ↑cAMP → CFTR chloride secretion","Inactivating PLC-β","Stimulating IP3 release"],
+    a: 2, explain: "Cholera toxin ADP-ribosylates Gs α-subunit → blocks GTPase activity → Gs stays constitutively ON → adenylyl cyclase always active → massive cAMP → PKA → CFTR opening → Cl- and water loss."
+  },
+  {
+    q: "A 55-year-old woman on tamoxifen for ER+ breast cancer develops vaginal bleeding. Biopsy: endometrial hyperplasia. Which statement BEST explains this?",
+    opts: ["Tamoxifen antagonizes ER in all tissues","Tamoxifen agonizes ER in the uterus due to tissue-specific coactivator recruitment","Tamoxifen directly stimulates progesterone receptor","Tamoxifen causes true estrogen excess","Tamoxifen works via androgen receptor cross-reactivity"],
+    a: 1, explain: "Tamoxifen = SERM (tissue-dependent agonist/antagonist). Breast = antagonist (blocks proliferation). Uterus = agonist (via coactivator recruitment) → hyperplasia (major risk). Bone = agonist (preserves density)."
+  },
+  {
+    q: "A 45-year-old with palpitations, sweating, and hypertensive episodes has 24h urine metanephrines 3× normal. What is the FIRST step before surgery?",
+    opts: ["Start β-blocker","Start α-blocker","Perform adrenalectomy immediately","Start ACE inhibitor","Proceed to surgery after imaging confirmation"],
+    a: 1, explain: "α-blockade (phenoxybenzamine/prazosin) must precede β-blocker by 10-14 days to prevent intra-operative hypertensive crisis. Never give β-blocker alone first (unopposed α → severe HTN)."
+  },
+  {
+    q: "A man with medullary thyroid cancer and pheochromocytoma has a RET mutation. What is the genetic syndrome?",
+    opts: ["MEN1","MEN 2A","VHL syndrome","NF1","SDHB mutation carrier"],
+    a: 1, explain: "MEN 2A = RET mutation + medullary thyroid CA + pheochromocytoma + hyperparathyroidism. MEN2B = MEN2A findings WITHOUT hyperparathyroidism but WITH mucosal neuromas + marfanoid habitus."
+  },
+  {
+    q: "A woman had bilateral adrenalectomy for Cushing disease. Now she has hyperpigmentation and a sellar mass. What is the diagnosis?",
+    opts: ["Recurrent Cushing disease","Nelson syndrome","Addison disease","Pituitary apoplexy","Empty sella syndrome"],
+    a: 1, explain: "Nelson syndrome: after bilateral adrenalectomy, loss of cortisol feedback → pituitary ACTH adenoma grows unchecked → very high ACTH/MSH → hyperpigmentation + sellar mass. Prevent via pituitary radiation before adrenalectomy."
+  },
+  {
+    q: "A 35-year-old woman: Na 120, serum Osm 250, urine Osm 600, euvolemic. What is the diagnosis?",
+    opts: ["Central DI","Nephrogenic DI","SIADH","Primary polydipsia","Adrenal insufficiency"],
+    a: 2, explain: "SIADH = inappropriately concentrated urine (Uosm > serum Osm) despite low serum osmolality. Uosm > Sosm is pathognomonic. Central DI would have high serum Osm + dilute urine."
+  },
+  {
+    q: "A patient with Na 116 (developed over 3 days) is corrected to 128 over 12 hours. Day 5: dysarthria, dysphagia, paraplegia. What is the diagnosis?",
+    opts: ["Cerebral edema","Wernicke encephalopathy","Osmotic demyelination syndrome (CPM)","Hypercalcemia-induced demyelination","Subarachnoid hemorrhage"],
+    a: 2, explain: "Osmotic demyelination = RAPID hyponatremia correction (>8-10 mEq/L/day). Brain loses osmolytes to adapt to chronic low Na; rapid correction → water exits cells → myelin damage → delayed neuro symptoms day 2-6."
+  },
+  {
+    q: "A 32-year-old pregnant woman (first trimester) with Graves disease requires anti-thyroid therapy. Which is preferred and why?",
+    opts: ["Methimazole (lower hepatotoxicity)","PTU (less hepatotoxic than methimazole)","PTU (methimazole causes teratogenic defects: aplasia cutis, atresia)","RAI (fastest symptom control)","β-blocker monotherapy"],
+    a: 2, explain: "PTU preferred in FIRST trimester (methimazole causes aplasia cutis + choanal/esophageal atresia). Switch to methimazole after first trimester (lower hepatotoxicity risk long-term). RAI contraindicated in pregnancy."
+  },
+  {
+    q: "A patient on lithium for bipolar disorder develops polyuria. Water deprivation + desmopressin injection: urine remains dilute. What type of DI?",
+    opts: ["Central DI","Nephrogenic DI","Gestational DI","Primary polydipsia","Adipsic diabetes insipidus"],
+    a: 1, explain: "Nephrogenic DI from lithium: enters principal cells → ↓adenylyl cyclase → ↓cAMP → AQP-2 not inserted. V2 receptor signaling broken, so desmopressin (V2 agonist) fails. Treatment: stop lithium, amiloride, thiazides, NSAIDs."
+  },
+  {
+    q: "A 23-year-old with 46,XY karyotype, no uterus, inguinal testes, female external genitalia, and elevated LH/testosterone. What is the diagnosis?",
+    opts: ["5α-reductase deficiency","Complete androgen insensitivity syndrome","17α-hydroxylase deficiency","Swyer syndrome","Müllerian agenesis"],
+    a: 1, explain: "AIS (androgen receptor absent/nonfunctional). XY + female phenotype + no uterus (MIF still active) + male-range T + NO pubic hair (receptor broken) + high LH (no feedback). Risk: gonadoblastoma → gonadectomy + HRT."
+  },
+  {
+    q: "A pregnant woman at 30 weeks presents with polyuria. Plasma ADH undetectable. Desmopressin concentrates urine, but native ADH infusion does not. What is the diagnosis?",
+    opts: ["Central DI","Nephrogenic DI","Gestational DI","Primary polydipsia","Gestational hypertension with polyuria"],
+    a: 2, explain: "Gestational DI: placental vasopressinase degrades native ADH (undetectable plasma). DDAVP is resistant to vasopressinase (structural modification) → works. Resolves postpartum. Explain why vasopressin failed but DDAVP worked."
+  },
+  {
+    q: "Which correctly describes the mechanism of PTU vs methimazole in Graves disease?",
+    opts: ["PTU inhibits NIS; methimazole inhibits TPO","PTU inhibits TPO + peripheral T4→T3 conversion; methimazole inhibits TPO only","PTU inhibits TSI production; methimazole blocks TSH receptor","Both have identical mechanisms; pregnancy preference is formulation only","PTU blocks NIS; methimazole blocks TPO"],
+    a: 1, explain: "PTU blocks TPO (organification) AND 5'-deiodinase (peripheral T4→T3 conversion). Methimazole blocks TPO only. PTU's dual action is critical in thyroid storm. Neither blocks NIS."
+  },
+  {
+    q: "A drug selectively activates Gq-coupled receptors. Which pair of effects would be expected?",
+    opts: ["↑cAMP + water reabsorption","Vasoconstriction + uterine contraction","↓cAMP + inhibition of insulin secretion","Receptor tyrosine kinase activation + GLUT4 translocation","Hyperpolarization + decreased neurotransmitter release"],
+    a: 1, explain: "Gq → PLC → IP3 + DAG → ↑Ca2+ + PKC. Gq couples V1 (vasoconstriction), oxytocin receptor (uterine contraction), α1-adrenergic. Vasoconstriction + uterine contraction are both Gq-mediated."
+  },
+  {
+    q: "A 32-year-old man with Cushing syndrome has ACTH 120 (high). High-dose dexamethasone (2mg q6h × 2 days) suppresses cortisol by 55%. What is the diagnosis?",
+    opts: ["Adrenal adenoma (primary)","Ectopic ACTH (SCLC)","Pituitary ACTH adenoma (Cushing disease)","Nelson syndrome","Exogenous steroid use"],
+    a: 2, explain: "High-dose DST suppresses cortisol (>50% drop) in Cushing disease (pituitary ACTH-oma responds to high cortisol). Ectopic ACTH does NOT suppress with high-dose DST. Primary adrenal = low ACTH, suppresses on low-dose DST."
+  },
+  {
+    q: "A patient with SIADH improves with tolvaptan. What is tolvaptan's mechanism?",
+    opts: ["Loop diuretic reducing free water","Selective V2 receptor antagonist (aquaretic)","V1 receptor agonist causing vasoconstriction","ADH synthesis inhibitor","Osmotic diuretic like mannitol"],
+    a: 1, explain: "Tolvaptan = vaptan = V2 antagonist. Blocks ADH at collecting duct → AQP-2 not inserted → aquaresis (free water loss without sodium) → corrects dilutional hyponatremia. Risk: overcorrection → osmotic demyelination."
+  },
+  {
+    q: "A newborn screen detects elevated TSH, low free T4. Mother had untreated hypothyroidism. At 6 weeks: hypotonia, poor feeding, macroglossia. What is the most important intervention?",
+    opts: ["Delay treatment, repeat TSH in 1 month","Start levothyroxine immediately","Start methimazole","Iodine supplementation","Observe for spontaneous recovery"],
+    a: 1, explain: "Congenital hypothyroidism (cretinism) MUST be treated immediately with levothyroxine to prevent irreversible intellectual disability. Thyroid hormone is critical for CNS development (first 2–3 years are critical window)."
+  },
+  {
+    q: "Which correctly describes the order of thyroid storm treatment?",
+    opts: ["Iodine → β-blocker → PTU → steroids","PTU → iodine → β-blocker → steroids","β-blocker → PTU → iodine (1 hour later) → steroids","Steroids → β-blocker → PTU → iodine","Iodine → PTU → β-blocker → steroids"],
+    a: 2, explain: "PROPRANOLOL first (sympathetic blockade + T4→T3 conversion inhibition). Then PTU (synthesis block + conversion inhibition). Then IODINE 1 hour later (Wolff-Chaikoff). The 1-hour iodine delay is critical to prevent Jod-Basedow. Then steroids."
+  },
+  {
+    q: "A woman with PCOS wants fertility. Lifestyle modification has failed. Best next step for ovulation induction?",
+    opts: ["Leuprolide (GnRH agonist)","Clomiphene citrate (ER antagonist)","Spironolactone (AR antagonist)","Combined oral contraceptives","Metformin monotherapy"],
+    a: 1, explain: "Clomiphene = selective ER antagonist at hypothalamus/pituitary. Blocks estrogen feedback → perceived low estrogen → ↑GnRH → ↑FSH/LH → ovulation. First-line ovulation induction in PCOS. Metformin for insulin sensitization, spironolactone for hirsutism."
+  }
+];
+
+// ========== LAB INTERPRETATION DATA ==========
+const labData = [
+  { stem: "↑ACTH, ↑cortisol, no adrenal mass on imaging", answers: ["Ectopic ACTH (SCLC paraneoplastic)","Primary adrenal adenoma","Cushing disease (pituitary)","Central hypothyroidism"], correct: 0 },
+  { stem: "↓Na, ↑urine Osm, euvolemic, ↑urine Na", answers: ["Central DI","Nephrogenic DI","SIADH","Primary polydipsia"], correct: 2 },
+  { stem: "↑Na, ↓urine Osm, polydipsia, no response to desmopressin", answers: ["Central DI","Nephrogenic DI","SIADH","Primary hypernatremia"], correct: 1 },
+  { stem: "↑TSH, ↑T4, ↑T3, euthyroid phenotype", answers: ["Graves disease","Hashimoto thyroiditis","Thyroid hormone resistance","Secondary hypothyroidism"], correct: 2 },
+  { stem: "↓ACTH, ↑cortisol, adrenal mass on imaging", answers: ["Cushing disease","Ectopic ACTH","Primary adrenal adenoma (Cushing)","Congenital adrenal hyperplasia"], correct: 2 },
+  { stem: "↑Metanephrines (2–3×), paroxysmal hypertension, diaphoresis, episodic palpitations", answers: ["Essential hypertension","Cushing syndrome","Pheochromocytoma","Thyroid storm"], correct: 2 },
+  { stem: "↑TSH, ↓fT4, ↑anti-TPO antibodies, ↑anti-thyroglobulin", answers: ["Graves disease","Hashimoto thyroiditis","Thyroid hormone resistance","Central hypothyroidism"], correct: 1 },
+  { stem: "↓TSH, ↑fT4, exophthalmos, TSI positive, diffuse goiter", answers: ["Hashimoto thyroiditis","Toxic nodule","Thyroiditis","Graves disease"], correct: 3 },
+  { stem: "High LH, low testosterone, small testes, azoospermia, 47,XXY karyotype", answers: ["Turner syndrome","Klinefelter syndrome","Swyer syndrome","Hypogonadotropic hypogonadism"], correct: 1 },
+  { stem: "↑17-OHP after ACTH stim, hyperandrogenemia, normal electrolytes, normal mineralocorticoids", answers: ["Classical 21-OH CAH","Non-classical 21-OH deficiency CAH","17α-hydroxylase deficiency","11β-hydroxylase deficiency"], correct: 1 }
+];
+
+// ========== DRUG MECHANISMS DATA ==========
+const drugData = [
+  { stem: "PTU (in first trimester of pregnancy)", answers: ["Causes agranulocytosis + hepatotoxicity but preferred vs methimazole teratogenicity","Safer than methimazole (no hepatotoxicity)","Causes aplasia cutis (1st trimester teratogen)","No advantages over methimazole"], correct: 0 },
+  { stem: "Methimazole (antithyroid)", answers: ["Preferred in first trimester","Causes aplasia cutis + atresia (teratogenic)","Safer than PTU long-term","No teratogenic risk"], correct: 1 },
+  { stem: "Tolvaptan (vasopressin antagonist)", answers: ["V1 receptor agonist → vasoconstriction","V2 receptor antagonist → aquaresis (free water loss)","ADH synthesis inhibitor","Osmotic diuretic"], correct: 1 },
+  { stem: "Desmopressin (DDAVP)", answers: ["V1 receptor agonist","V2 receptor agonist, resistant to vasopressinase (used in gestational DI, hemophilia A)","Irreversible V2 antagonist","Increases GnRH secretion"], correct: 1 },
+  { stem: "Leuprolide (continuous, NOT pulsatile)", answers: ["GnRH receptor agonist → receptor downregulation → ↓LH/FSH","GnRH receptor antagonist","Directly inhibits gonadotropin synthesis","Increases endogenous GnRH"], correct: 0 },
+  { stem: "Spironolactone", answers: ["Aldosterone receptor antagonist + androgen receptor antagonist (used in hyperaldosteronism + hirsutism in PCOS)","Potassium-sparing diuretic only, no androgen effects","Blocks 21-hydroxylase","Inhibits steroid synthesis"], correct: 0 },
+  { stem: "Propranolol (in thyroid storm)", answers: ["Blocks β-adrenergic effects + inhibits peripheral T4→T3 conversion","Blocks α-adrenergic effects only","Directly inhibits thyroid hormone synthesis","Blocks TSH receptor"], correct: 0 },
+  { stem: "Clomiphene citrate (ovulation induction)", answers: ["GnRH agonist","Estrogen receptor antagonist at hypothalamus/pituitary → ↑FSH/LH → ovulation","Direct FSH agonist","Androgen receptor antagonist"], correct: 1 },
+  { stem: "Phenoxybenzamine (pre-operative pheo prep)", answers: ["Irreversible α-blocker (given BEFORE β-blocker to prevent intra-op HTN surge)","β-blocker (given first)","ACE inhibitor","Directly reduces catecholamine synthesis"], correct: 0 },
+  { stem: "Demeclocycline (tetracycline antibiotic, unusual mechanism)", answers: ["Used to treat SIADH (causes nephrogenic DI as side effect — turns pathology into therapy)","Increases ADH synthesis","Blocks V2 receptors","Promotes free water reabsorption"], correct: 0 }
+];
+
+// ========== GENETIC SYNDROMES DATA ==========
+const geneticData = [
+  { stem: "MEN 1 (menin mutation)", answers: ["Parathyroid + Pituitary + Pancreatic tumors (3 Ps)","Medullary thyroid CA + Pheochromocytoma + Hyperparathyroidism","Medullary thyroid CA + Pheochromocytoma only","Renal cell CA + Hemangioblastoma + Pheochromocytoma"], correct: 0 },
+  { stem: "MEN 2A (RET mutation)", answers: ["Parathyroid + Pituitary + Pancreas","Medullary thyroid CA + Pheochromocytoma + Hyperparathyroidism","Medullary thyroid CA + Pheochromocytoma + Mucosal neuromas","Breast cancer + Ovarian cancer + Adrenocortical tumors"], correct: 1 },
+  { stem: "MEN 2B (RET mutation)", answers: ["Medullary thyroid CA + Pheochromocytoma + Hyperparathyroidism","Medullary thyroid CA + Pheochromocytoma + Marfanoid habitus + Mucosal neuromas (NO hyperparathyroidism)","MEN 2A plus pancreatic tumors","Parathyroid + Pituitary + Pancreas"], correct: 1 },
+  { stem: "McCune-Albright syndrome (GNAS somatic mutation)", answers: ["Parathyroid tumors + kidney stones","Precocious puberty + Café-au-lait spots + Polyostotic fibrous dysplasia","Medullary thyroid CA + Pheochromocytoma","Turner-like features + Streak gonads"], correct: 1 },
+  { stem: "Turner syndrome (45,X)", answers: ["Short stature, ovarian failure (streak gonads), bicuspid aortic valve, coarctation, horseshoe kidney","Tall stature, small testes, gynecomastia, azoospermia","Female phenotype, no uterus, inguinal testes, androgen receptor absent","Short metacarpals, Albright hereditary osteodystrophy, PTH-resistant hyperparathyroidism"], correct: 0 },
+  { stem: "Klinefelter syndrome (47,XXY)", answers: ["Short stature, streak gonads, primary amenorrhea","Tall stature, small testes, azoospermia, gynecomastia, ↑risk breast cancer","Female phenotype, no uterus, testes present","Macroglossia, hypotonia, intellectual disability (congenital hypothyroidism untreated)"], correct: 1 },
+  { stem: "Complete androgen insensitivity (AR mutation, 46,XY)", answers: ["Female phenotype, no uterus (MIF active), inguinal testes, ↑LH + ↑testosterone, risk gonadoblastoma","Virilized phenotype at birth, post-puberty male gender identity, DHT low","Male phenotype, small testes, normal testosterone, ↓LH/FSH","Hypogonadism + short stature + webbed neck + cardiac defects"], correct: 0 },
+  { stem: "5α-reductase deficiency (46,XY)", answers: ["Permanent female phenotype, no virilization","Ambiguous genitalia at birth, VIRILIZATION at puberty ('penis at 12'), male identity, normal T/DHT ratio abnormal (T high, DHT low)","Female phenotype, no breast development, primary amenorrhea","Short stature, gonadal dysgenesis, streak gonads"], correct: 1 },
+  { stem: "Pseudohypoparathyroidism 1a (Gs inactivating mutation, maternal GNAS)", answers: ["Tall, lean phenotype, hypernatremia","Short metacarpals + Albright hereditary osteodystrophy + ↑PTH + ↓Ca (target organ resistance to PTH)","Medullary thyroid CA + Pheochromocytoma","Precocious puberty + Café-au-lait spots + Fibrous dysplasia"], correct: 1 },
+  { stem: "Congenital hypothyroidism (untreated = cretinism)", answers: ["Hyperthyroidism, weight loss, tachycardia","Macroglossia, hypotonia, poor feeding, intellectual disability, umbilical hernia, constipation, coarse features","Precocious puberty, accelerated growth","Short stature, primary amenorrhea, delayed puberty"], correct: 1 }
+];
+
+// ========== RENDER MCQ ==========
+function renderMCQ() {
+  const container = document.getElementById('mcq-list');
+  container.innerHTML = '';
+  mcqData.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'mcq-card';
+    let choicesHTML = q.opts.map((opt, j) => {
+      return `<button class="mcq-choice" onclick="selectMCQ(${i}, ${j}, this)">${String.fromCharCode(65+j)}) ${opt}</button>`;
+    }).join('');
+    card.innerHTML = `
+      <div class="mcq-header">
+        <span class="qnum">Q${i+1}</span>
+      </div>
+      <div class="mcq-stem">${q.q}</div>
+      <div class="mcq-choices">${choicesHTML}</div>
+      <div class="mcq-explain"><div class="exp-label">Explanation</div><div class="exp-text">${q.explain}</div></div>
+    `;
+    container.appendChild(card);
+  });
+  updateMCQScore();
+}
+
+function selectMCQ(qIdx, aIdx, btn) {
+  const card = btn.closest('.mcq-card');
+  const choices = card.querySelectorAll('.mcq-choice');
+  const explain = card.querySelector('.mcq-explain');
+  const correct = mcqData[qIdx].a === aIdx;
+
+  choices.forEach((b, i) => {
+    b.disabled = true;
+    if (i === mcqData[qIdx].a) b.classList.add('correct');
+    if (i === aIdx && !correct) b.classList.add('wrong');
+  });
+  explain.style.display = 'block';
+  updateMCQScore();
+}
+
+function resetMCQ() {
+  document.querySelectorAll('.mcq-choice').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct', 'wrong');
+  });
+  document.querySelectorAll('.mcq-explain').forEach(e => e.style.display = 'none');
+  updateMCQScore();
+}
+
+function updateMCQScore() {
+  const total = mcqData.length;
+  const correct = document.querySelectorAll('.mcq-choice.correct').length;
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+  document.getElementById('mcq-score-disp').textContent = `${correct}/${total}`;
+  document.getElementById('mcq-fill').style.width = pct + '%';
+  document.getElementById('dash-mcq').textContent = pct > 0 ? `${pct}%` : '—';
+}
+
+// ========== LAB INTERPRETATION DRILL ==========
+function renderLab() {
+  const container = document.getElementById('lab-list');
+  container.innerHTML = '';
+  labData.forEach((item, i) => {
+    const shuffled = shuffle([...item.answers]);
+    const correctIdx = shuffled.indexOf(item.answers[item.correct]);
+    const card = document.createElement('div');
+    card.className = 'drill-container';
+    let choicesHTML = shuffled.map((ans, j) => {
+      return `<button class="drill-choice" onclick="selectDrill('lab', ${i}, ${j}, ${correctIdx}, this)">${ans}</button>`;
+    }).join('');
+    card.innerHTML = `
+      <div class="drill-counter">Pattern ${i+1} of ${labData.length}</div>
+      <div class="drill-stem">${item.stem}</div>
+      <div class="drill-choices">${choicesHTML}</div>
+      <div class="drill-fb" style="display:none;"></div>
+    `;
+    container.appendChild(card);
+  });
+  updateLabScore();
+}
+
+function updateLabScore() {
+  const total = labData.length;
+  const correct = document.querySelectorAll('.drill-container').length - Array.from(document.querySelectorAll('.drill-container')).filter(c => !c.querySelector('.drill-choice:disabled')).length;
+  const answered = total - Array.from(document.querySelectorAll('.drill-container')).filter(c => !c.querySelector('.drill-choice:disabled')).length;
+  const pct = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+  document.getElementById('lab-score-disp').textContent = `${answered}/${total}`;
+  document.getElementById('lab-fill').style.width = (answered / total) * 100 + '%';
+  document.getElementById('dash-lab').textContent = answered > 0 ? `${pct}%` : '—';
+}
+
+function resetLab() {
+  renderLab();
+}
+
+// ========== DRUG MECHANISMS DRILL ==========
+function renderDrug() {
+  const container = document.getElementById('drug-list');
+  container.innerHTML = '';
+  drugData.forEach((item, i) => {
+    const shuffled = shuffle([...item.answers]);
+    const correctIdx = shuffled.indexOf(item.answers[item.correct]);
+    const card = document.createElement('div');
+    card.className = 'drill-container';
+    let choicesHTML = shuffled.map((ans, j) => {
+      return `<button class="drill-choice" onclick="selectDrill('drug', ${i}, ${j}, ${correctIdx}, this)">${ans}</button>`;
+    }).join('');
+    card.innerHTML = `
+      <div class="drill-counter">Drug ${i+1} of ${drugData.length}</div>
+      <div class="drill-stem">${item.stem}</div>
+      <div class="drill-choices">${choicesHTML}</div>
+      <div class="drill-fb" style="display:none;"></div>
+    `;
+    container.appendChild(card);
+  });
+  updateDrugScore();
+}
+
+function updateDrugScore() {
+  const total = drugData.length;
+  const answered = total - Array.from(document.querySelectorAll('#drug-list .drill-container')).filter(c => !c.querySelector('.drill-choice:disabled')).length;
+  const correct = document.querySelectorAll('#drug-list .drill-choice.correct').length;
+  const pct = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+  document.getElementById('drug-score-disp').textContent = `${answered}/${total}`;
+  document.getElementById('drug-fill').style.width = (answered / total) * 100 + '%';
+  document.getElementById('dash-drug').textContent = answered > 0 ? `${pct}%` : '—';
+}
+
+function resetDrug() {
+  renderDrug();
+}
+
+// ========== GENETIC SYNDROMES DRILL ==========
+function renderGenetic() {
+  const container = document.getElementById('genetic-list');
+  container.innerHTML = '';
+  geneticData.forEach((item, i) => {
+    const shuffled = shuffle([...item.answers]);
+    const correctIdx = shuffled.indexOf(item.answers[item.correct]);
+    const card = document.createElement('div');
+    card.className = 'drill-container';
+    let choicesHTML = shuffled.map((ans, j) => {
+      return `<button class="drill-choice" onclick="selectDrill('genetic', ${i}, ${j}, ${correctIdx}, this)">${ans}</button>`;
+    }).join('');
+    card.innerHTML = `
+      <div class="drill-counter">Syndrome ${i+1} of ${geneticData.length}</div>
+      <div class="drill-stem">${item.stem}</div>
+      <div class="drill-choices">${choicesHTML}</div>
+      <div class="drill-fb" style="display:none;"></div>
+    `;
+    container.appendChild(card);
+  });
+  updateGeneticScore();
+}
+
+function updateGeneticScore() {
+  const total = geneticData.length;
+  const answered = total - Array.from(document.querySelectorAll('#genetic-list .drill-container')).filter(c => !c.querySelector('.drill-choice:disabled')).length;
+  const correct = document.querySelectorAll('#genetic-list .drill-choice.correct').length;
+  const pct = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+  document.getElementById('genetic-score-disp').textContent = `${answered}/${total}`;
+  document.getElementById('genetic-fill').style.width = (answered / total) * 100 + '%';
+  document.getElementById('dash-genetic').textContent = answered > 0 ? `${pct}%` : '—';
+}
+
+function resetGenetic() {
+  renderGenetic();
+}
+
+// ========== GENERIC DRILL SELECTOR ==========
+function selectDrill(type, idx, selected, correct, btn) {
+  const container = btn.closest('.drill-container');
+  const choices = container.querySelectorAll('.drill-choice');
+  const fb = container.querySelector('.drill-fb');
+  const isCorrect = selected === correct;
+
+  choices.forEach((b, i) => {
+    b.disabled = true;
+    if (i === correct) b.classList.add('correct');
+    if (i === selected && !isCorrect) b.classList.add('wrong');
+  });
+
+  if (isCorrect) {
+    fb.className = 'drill-fb ok';
+    fb.textContent = '✅ Correct!';
+  } else {
+    fb.className = 'drill-fb miss';
+    fb.textContent = '❌ Incorrect. Review the answer choice.';
+  }
+  fb.style.display = 'block';
+
+  if (type === 'lab') updateLabScore();
+  if (type === 'drug') updateDrugScore();
+  if (type === 'genetic') updateGeneticScore();
+}
+
+// ========== INIT ==========
+document.addEventListener('DOMContentLoaded', () => {
+  renderMCQ();
+  renderLab();
+  renderDrug();
+  renderGenetic();
+});
+</script>
+
+</body>
+</html>
