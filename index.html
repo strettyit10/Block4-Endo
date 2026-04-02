@@ -6,113 +6,640 @@
   <title>GUSOM Block 4 | Endocrine Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./updated_style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --nav-bg: #041E42;
+      --bg: #f0f2f6;
+      --card: #ffffff;
+      --ink: #111827;
+      --ink-soft: #374151;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --line-strong: #d1d5db;
+      --radius-xl: 20px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.09), 0 2px 6px rgba(0,0,0,0.05);
+      --max-w: 1100px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ─────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      padding: 0 28px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .nav-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .nav-title {
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-sep {
+      width: 1px;
+      height: 16px;
+      background: rgba(255,255,255,0.22);
+      margin: 0 10px;
+    }
+
+    .nav-sub {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.82rem;
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: background 0.14s, color 0.14s;
+    }
+
+    .nav-link:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .nav-link-filled { background: rgba(255,255,255,0.14); color: #fff; }
+
+    /* ── PAGE WRAPPER ────────────────────────── */
+    .page {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 30px 20px 64px;
+    }
+
+    /* ── HERO ────────────────────────────────── */
+    .hero {
+      background: var(--card);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #041E42, #1f4b99 55%, transparent);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(31,75,153,0.055) 0%, transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: #dbeafe;
+      border: 1px solid #bfdbfe;
+      color: #1f4b99;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      line-height: 1.08;
+    }
+
+    .hero-sub {
+      color: var(--ink-soft);
+      font-size: 0.97rem;
+      line-height: 1.7;
+      max-width: 460px;
+      margin: 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 0.88rem;
+      transition: transform 0.14s, box-shadow 0.14s, background 0.14s;
+      white-space: nowrap;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-navy {
+      background: #041E42;
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(4,30,66,0.22);
+    }
+
+    .btn-navy:hover {
+      background: #0a2d5e;
+      box-shadow: 0 4px 14px rgba(4,30,66,0.28);
+    }
+
+    .btn-ghost {
+      background: #fff;
+      color: var(--ink);
+      border: 1.5px solid var(--line-strong);
+    }
+
+    .btn-ghost:hover { border-color: #9ca3af; background: #f9fafb; }
+
+    /* ── SECTION LABEL ───────────────────────── */
+    .section-label {
+      margin: 0 0 16px;
+    }
+
+    .section-label h2 {
+      margin: 0 0 4px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .section-label p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    /* ── TOOL CARDS ──────────────────────────── */
+    .tools-wrap { margin-bottom: 32px; }
+
+    .grid-top {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .grid-bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .tcard {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.17s ease, box-shadow 0.17s ease, border-color 0.17s ease;
+    }
+
+    .tcard:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--line-strong);
+    }
+
+    .tcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--tc, #1f4b99);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .tcard-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .tcard-icon {
+      width: 50px;
+      height: 50px;
+      flex-shrink: 0;
+      border-radius: 13px;
+      background: var(--tc-soft, #dbeafe);
+      border: 1px solid var(--tc-border, #bfdbfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.55rem;
+    }
+
+    .tcard-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .tcard h3 {
+      margin: 0 0 7px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .tcard p {
+      margin: 0 0 14px;
+      color: var(--ink-soft);
+      font-size: 0.855rem;
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .tcard-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .tcard-badge {
+      display: inline-flex;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--tc-soft, #dbeafe);
+      border: 1px solid var(--tc-border, #bfdbfe);
+      color: var(--tc, #1f4b99);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .tcard-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--tc, #1f4b99);
+      font-size: 0.83rem;
+      font-weight: 700;
+      transition: gap 0.14s;
+    }
+
+    .tcard:hover .tcard-open { gap: 8px; }
+
+    /* color themes */
+    .tc-blue   { --tc:#1f4b99; --tc-soft:#dbeafe; --tc-border:#bfdbfe; }
+    .tc-green  { --tc:#166534; --tc-soft:#dcfce7; --tc-border:#bbf7d0; }
+    .tc-rose   { --tc:#9f1239; --tc-soft:#ffe4e6; --tc-border:#fecdd3; }
+    .tc-teal   { --tc:#0d7377; --tc-soft:#ccfbf1; --tc-border:#99f6e4; }
+    .tc-amber  { --tc:#92400e; --tc-soft:#fef3c7; --tc-border:#fde68a; }
+
+    /* ── WORKFLOW ─────────────────────────────── */
+    .workflow-wrap { margin-bottom: 32px; }
+
+    .workflow-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .wstep {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      padding: 18px 16px 18px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.17s, border-color 0.17s;
+    }
+
+    .wstep:hover { transform: translateY(-1px); border-color: var(--line-strong); }
+
+    .wstep::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--ws, #1f4b99);
+    }
+
+    .wstep-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--ws-soft, #dbeafe);
+      border: 1.5px solid var(--ws-border, #bfdbfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--ws, #1f4b99);
+      margin-bottom: 12px;
+    }
+
+    .wstep h4 {
+      margin: 0 0 6px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .wstep p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .ws-1 { --ws:#1f4b99; --ws-soft:#dbeafe; --ws-border:#bfdbfe; }
+    .ws-2 { --ws:#166534; --ws-soft:#dcfce7; --ws-border:#bbf7d0; }
+    .ws-3 { --ws:#92400e; --ws-soft:#fef3c7; --ws-border:#fde68a; }
+    .ws-4 { --ws:#9f1239; --ws-soft:#ffe4e6; --ws-border:#fecdd3; }
+    .ws-5 { --ws:#0d7377; --ws-soft:#ccfbf1; --ws-border:#99f6e4; }
+
+    /* ── FOOTER ──────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .footer strong { color: var(--ink-soft); }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 920px) {
+      .grid-top { grid-template-columns: repeat(2, 1fr); }
+      .workflow-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 680px) {
+      .page { padding: 18px 14px 48px; }
+      .hero { flex-direction: column; padding: 24px 22px; }
+      .hero-actions { flex-direction: row; flex-wrap: wrap; width: 100%; }
+      .btn { flex: 1; justify-content: center; }
+      .grid-top, .grid-bottom { grid-template-columns: 1fr; }
+      .workflow-grid { grid-template-columns: 1fr; }
+      .nav-sub, .nav-sep { display: none; }
+      .footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
-  <main class="container">
-    <section class="hero">
-      <div class="eyebrow">GUSOM Block 4 • Endocrine Unit</div>
-      <h1>Endocrine Study Hub</h1>
-      <p class="subtitle">Your central starting point for endocrine study guides, active recall, question practice, and progress tracking. Start with core learning sections, then move into reference tools and review workflow.</p>
 
-      <div class="hero-actions">
-        <a class="button button-primary" href="https://www.uworld.com/" target="_blank" rel="noopener noreferrer">Open UWorld</a>
-        <a class="button button-secondary" href="https://drive.google.com/" target="_blank" rel="noopener noreferrer">Class Google Drive</a>
+  <!-- ── NAV ── -->
+  <nav class="nav">
+    <div class="nav-brand">
+      <div class="nav-logo">🎓</div>
+      <span class="nav-title">GUSOM</span>
+      <div class="nav-sep"></div>
+      <span class="nav-sub">Block 4 · Endocrine</span>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link nav-link-filled" href="https://www.uworld.com/" target="_blank" rel="noopener">UWorld ↗</a>
+      <a class="nav-link" href="https://drive.google.com/" target="_blank" rel="noopener">Class Drive ↗</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ── HERO ── -->
+    <div class="hero">
+      <div>
+        <div class="hero-eyebrow">Block 4 · Endocrine Unit</div>
+        <h1>Endocrine Study Hub</h1>
+        <p class="hero-sub">Your central workspace for in-house exam prep and USMLE Step 1 review — study guides, active recall drills, question banks, and progress tracking all in one place.</p>
       </div>
-    </section>
+      <div class="hero-actions">
+        <a class="btn btn-navy" href="https://www.uworld.com/" target="_blank" rel="noopener">
+          📋 Open UWorld
+        </a>
+        <a class="btn btn-ghost" href="https://drive.google.com/" target="_blank" rel="noopener">
+          📁 Class Google Drive
+        </a>
+      </div>
+    </div>
 
-    <section class="section-header">
-      <h2>Primary Learning Sections</h2>
-      <p>These are the main places to study, review, and apply material.</p>
-    </section>
+    <!-- ── STUDY TOOLS ── -->
+    <div class="tools-wrap">
+      <div class="section-label">
+        <h2>Study Tools</h2>
+        <p>All your endocrine resources, organized by learning stage.</p>
+      </div>
 
-    <section class="nav-grid">
-      <a class="nav-card" href="./study-guides/">
-        <div class="nav-icon">📘</div>
-        <h3>Study Guides</h3>
-        <p>Navigate summary notes, curated review pages, and structured endocrine content.</p>
-        <span class="nav-link">Open section →</span>
-      </a>
+      <!-- Row 1: Core learning tools -->
+      <div class="grid-top">
 
-      <a class="nav-card" href="./study-drills/">
-        <div class="nav-icon">🎯</div>
-        <h3>Active Recall Drills</h3>
-        <p>Practice mechanisms, clinical patterns, and trap questions through recall-based review.</p>
-        <span class="nav-link">Open section →</span>
-      </a>
+        <a class="tcard tc-blue" href="./study-guides/">
+          <div class="tcard-head">
+            <div class="tcard-icon">📘</div>
+            <div class="tcard-num">1</div>
+          </div>
+          <h3>Study Guides</h3>
+          <p>Navigate summary notes, curated review pages, concept breakdowns, and structured endocrine study documents.</p>
+          <div class="tcard-foot">
+            <span class="tcard-badge">Core Content</span>
+            <span class="tcard-open">Open →</span>
+          </div>
+        </a>
 
-      <a class="nav-card" href="./question-banks/">
-        <div class="nav-icon">🩺</div>
-        <h3>Board-Style Practice</h3>
-        <p>Keep exam-oriented practice sets and external QBank links organized in one place.</p>
-        <span class="nav-link">Open section →</span>
-      </a>
-    </section>
+        <a class="tcard tc-green" href="./study-drills/">
+          <div class="tcard-head">
+            <div class="tcard-icon">🎯</div>
+            <div class="tcard-num">2</div>
+          </div>
+          <h3>Active Recall Drills</h3>
+          <p>Build a strong foundation through gamified practice that trains recognition of vignettes, trap questions, mechanisms, and drug facts.</p>
+          <div class="tcard-foot">
+            <span class="tcard-badge">Foundational</span>
+            <span class="tcard-open">Open →</span>
+          </div>
+        </a>
 
-    <section class="section-header">
-      <h2>Supporting Tools</h2>
-      <p>Use these to monitor progress and quickly reference key information.</p>
-    </section>
+        <a class="tcard tc-rose" href="./question-banks/">
+          <div class="tcard-head">
+            <div class="tcard-icon">🩺</div>
+            <div class="tcard-num">3</div>
+          </div>
+          <h3>Board-Style Practice</h3>
+          <p>Exam-oriented question sources, categorized practice sets, and external QBank links organized in one place.</p>
+          <div class="tcard-foot">
+            <span class="tcard-badge">Application</span>
+            <span class="tcard-open">Open →</span>
+          </div>
+        </a>
 
-    <section class="tools-grid">
-      <a class="tool-card" href="./progress-tracker/">
-        <h3>📈 Progress Tracker</h3>
-        <p>Monitor lecture coverage, completion status, and weak areas for targeted review.</p>
-      </a>
+      </div>
 
-      <a class="tool-card" href="./databases/">
-        <h3>🧬 Databases</h3>
-        <p>Open high-yield tables, fact banks, and quick-reference repositories.</p>
-      </a>
-    </section>
+      <!-- Row 2: Utility tools -->
+      <div class="grid-bottom">
 
-    <section class="workflow">
-      <div class="section-header workflow-header">
-        <div>
-          <h2>Suggested Study Flow</h2>
-          <p>A simple path from first-pass learning to question-based application.</p>
-        </div>
+        <a class="tcard tc-teal" href="./progress-tracker/">
+          <div class="tcard-head">
+            <div class="tcard-icon">📈</div>
+            <div class="tcard-num">4</div>
+          </div>
+          <h3>Progress Tracker</h3>
+          <p>Monitor lecture coverage, completion status, and weak areas to stay on track throughout the block.</p>
+          <div class="tcard-foot">
+            <span class="tcard-badge">Tracking</span>
+            <span class="tcard-open">Open →</span>
+          </div>
+        </a>
+
+        <a class="tcard tc-amber" href="./databases/">
+          <div class="tcard-head">
+            <div class="tcard-icon">🧬</div>
+            <div class="tcard-num">5</div>
+          </div>
+          <h3>Databases</h3>
+          <p>High-yield tables, fact banks, and reference repositories for quick lookup during active study sessions.</p>
+          <div class="tcard-foot">
+            <span class="tcard-badge">Reference</span>
+            <span class="tcard-open">Open →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ── WORKFLOW ── -->
+    <div class="workflow-wrap">
+      <div class="section-label">
+        <h2>Recommended Study Workflow</h2>
+        <p>A simple path from first-pass learning to board-style application.</p>
       </div>
 
       <div class="workflow-grid">
-        <article class="workflow-step">
-          <div class="step-number">1</div>
-          <h3>Start with Guides</h3>
-          <p>Get a structured first pass through the material and identify the highest-yield concepts.</p>
-        </article>
-
-        <article class="workflow-step">
-          <div class="step-number">2</div>
-          <h3>Practice Recall</h3>
-          <p>Strengthen pattern recognition, mechanisms, and retention through active review.</p>
-        </article>
-
-        <article class="workflow-step">
-          <div class="step-number">3</div>
-          <h3>Use References</h3>
-          <p>Return to tables and fact banks when you need quick clarification or comparison.</p>
-        </article>
-
-        <article class="workflow-step">
-          <div class="step-number">4</div>
-          <h3>Do Questions</h3>
-          <p>Shift into board-style reasoning with practice sets and external QBanks.</p>
-        </article>
-
-        <article class="workflow-step">
-          <div class="step-number">5</div>
-          <h3>Track Gaps</h3>
-          <p>Log what is complete, what still feels weak, and what to review next.</p>
-        </article>
+        <div class="wstep ws-1">
+          <div class="wstep-num">1</div>
+          <h4>Study Guides</h4>
+          <p>Build a structured overview and identify the highest-yield concepts first.</p>
+        </div>
+        <div class="wstep ws-2">
+          <div class="wstep-num">2</div>
+          <h4>Active Recall Drills</h4>
+          <p>Practice vignettes, trap patterns, mechanisms, and key facts through active repetition.</p>
+        </div>
+        <div class="wstep ws-3">
+          <div class="wstep-num">3</div>
+          <h4>Reinforce with Databases</h4>
+          <p>Return to organized references and tables for clarification and comparison.</p>
+        </div>
+        <div class="wstep ws-4">
+          <div class="wstep-num">4</div>
+          <h4>Board-Style Practice</h4>
+          <p>Shift into question-based reasoning and exam-style thinking with practice sets.</p>
+        </div>
+        <div class="wstep ws-5">
+          <div class="wstep-num">5</div>
+          <h4>Track Progress</h4>
+          <p>Log what's complete, what feels weak, and where to focus your next review block.</p>
+        </div>
       </div>
-    </section>
+    </div>
 
+    <!-- ── FOOTER ── -->
     <footer class="footer">
-      <div>Built as a shared entry point for GUSOM Block 4 endocrine resources.</div>
-      <div class="footer-meta">Last updated: March 31, 2026</div>
+      <span>Built as a shared entry point for GUSOM Block 4 Endocrine resources.</span>
+      <span><strong>Last updated: March 31, 2026</strong></span>
     </footer>
-  </main>
+
+  </div>
 </body>
 </html>
-
