@@ -6,7 +6,7 @@
   <title>GUSOM Block 4 | Endocrine Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -27,72 +27,80 @@
       </div>
     </section>
 
-    <div class="section-header">
-      <div>
-        <h2>Core Sections</h2>
-        <p>Use quick tools first, then move into the main learning sections.</p>
+    <section class="section-shell">
+      <div class="section-header">
+        <div>
+          <h2>Core Sections</h2>
+          <p>Use the quick tools first, then move into your main study resources.</p>
+        </div>
       </div>
-    </div>
 
-    <section class="quick-actions">
-      <a class="dashboard-button dashboard-button-tracker" href="./progress-tracker/">
-        <span class="dashboard-button-icon">📈</span>
-        <span class="dashboard-button-content">
-          <span class="dashboard-button-title">Progress Tracker</span>
-          <span class="dashboard-button-text">Monitor lecture coverage, completion status, and weak areas.</span>
-        </span>
-        <span class="dashboard-button-arrow">→</span>
-      </a>
+      <section class="quick-actions" aria-label="Quick actions">
+        <a class="dashboard-button dashboard-button-tracker" href="./progress-tracker/">
+          <span class="dashboard-button-icon">📈</span>
+          <span class="dashboard-button-content">
+            <span class="dashboard-button-title">Progress Tracker</span>
+            <span class="dashboard-button-text">Monitor lecture coverage, completion status, and weak areas.</span>
+          </span>
+          <span class="dashboard-button-arrow">→</span>
+        </a>
 
-      <a class="dashboard-button dashboard-button-database" href="./databases/">
-        <span class="dashboard-button-icon">🧬</span>
-        <span class="dashboard-button-content">
-          <span class="dashboard-button-title">Databases</span>
-          <span class="dashboard-button-text">Open high-yield tables, fact banks, and reference repositories.</span>
-        </span>
-        <span class="dashboard-button-arrow">→</span>
-      </a>
-    </section>
+        <a class="dashboard-button dashboard-button-database" href="./databases/">
+          <span class="dashboard-button-icon">🧬</span>
+          <span class="dashboard-button-content">
+            <span class="dashboard-button-title">Databases</span>
+            <span class="dashboard-button-text">Open high-yield tables, fact banks, and reference repositories.</span>
+          </span>
+          <span class="dashboard-button-arrow">→</span>
+        </a>
+      </section>
 
-    <section class="grid">
-      <a class="card card-guides" href="./study-guides/">
-        <div class="card-topline">
-          <div class="card-heading">
-            <div class="card-icon">📘</div>
-            <div class="card-heading-text"><h3>Study Guides</h3></div>
+      <section class="grid">
+        <a class="card card-guides" href="./study-guides/">
+          <div class="card-topline">
+            <div class="card-heading">
+              <div class="card-icon">📘</div>
+              <div class="card-heading-text"><h3>Study Guides</h3></div>
+            </div>
+            <div class="card-number">1</div>
           </div>
-          <div class="card-number">1</div>
-        </div>
-        <p>Navigate summary notes, curated review pages, concept breakdowns, and structured endocrine study documents.</p>
-        <span class="card-tag">Core content review</span>
-        <span class="card-link">Open Section →</span>
-      </a>
-
-      <a class="card card-drills" href="./study-drills/">
-        <div class="card-topline">
-          <div class="card-heading">
-            <div class="card-icon">🎯</div>
-            <div class="card-heading-text"><h3>Active Recall Drills</h3></div>
+          <p>Navigate summary notes, curated review pages, concept breakdowns, and structured endocrine study documents.</p>
+          <div class="card-meta">
+            <span class="card-tag">Core content review</span>
+            <span class="card-link">Open Section →</span>
           </div>
-          <div class="card-number">2</div>
-        </div>
-        <p>Build a strong foundation for lecture learning and USMLE Step 1 review through active, gamified practice that trains recognition of clinical vignettes, trap questions, mechanisms, pathophysiology, drug facts, and process-based details.</p>
-        <span class="card-tag">Foundational learning</span>
-        <span class="card-link">Open Section →</span>
-      </a>
+        </a>
 
-      <a class="card card-qbanks" href="./question-banks/">
-        <div class="card-topline">
-          <div class="card-heading">
-            <div class="card-icon">🩺</div>
-            <div class="card-heading-text"><h3>Board-Style Practice</h3></div>
+        <a class="card card-drills" href="./study-drills/">
+          <div class="card-topline">
+            <div class="card-heading">
+              <div class="card-icon">🎯</div>
+              <div class="card-heading-text"><h3>Active Recall Drills</h3></div>
+            </div>
+            <div class="card-number">2</div>
           </div>
-          <div class="card-number">3</div>
-        </div>
-        <p>Keep exam-oriented question sources, categorized practice sets, and external QBank links organized in one place.</p>
-        <span class="card-tag">Application & testing</span>
-        <span class="card-link">Open Section →</span>
-      </a>
+          <p>Build a strong foundation for lecture learning and Step 1 review with active, gamified practice on vignettes, traps, mechanisms, and high-yield facts.</p>
+          <div class="card-meta">
+            <span class="card-tag">Foundational learning</span>
+            <span class="card-link">Open Section →</span>
+          </div>
+        </a>
+
+        <a class="card card-qbanks" href="./question-banks/">
+          <div class="card-topline">
+            <div class="card-heading">
+              <div class="card-icon">🩺</div>
+              <div class="card-heading-text"><h3>Board-Style Practice</h3></div>
+            </div>
+            <div class="card-number">3</div>
+          </div>
+          <p>Keep exam-oriented question sources, categorized practice sets, and external QBank links organized in one place.</p>
+          <div class="card-meta">
+            <span class="card-tag">Application & testing</span>
+            <span class="card-link">Open Section →</span>
+          </div>
+        </a>
+      </section>
     </section>
 
     <section class="workflow-panel">
