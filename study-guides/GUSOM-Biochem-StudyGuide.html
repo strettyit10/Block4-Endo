@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUSOM Endocrine | Biochemistry Study Guide</title>
+<style>
+  :root {
+    --navy: #1F3864; --blue: #2E75B6; --ltblue: #BDD7EE;
+    --yellow: #FFE699; --green: #E2EFDA; --orange: #FCE4D6;
+    --gray: #F2F2F2; --red: #C00000;
+    --navy-text: #FFFFFF; --blue-text: #FFFFFF;
+    --yellow-text: #7F6000; --green-text: #375623; --orange-text: #843C0C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 14px; color: #000; background: #fff; line-height: 1.5; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+  /* TITLE */
+  .title-block { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #1F3864 0%, #2E75B6 100%); color: white; border-radius: 8px; margin-bottom: 24px; }
+  .title-block h1 { font-size: 2.4em; margin-bottom: 8px; }
+  .title-block h2 { font-size: 1.4em; font-weight: normal; opacity: 0.9; }
+  .title-units { margin-top: 16px; }
+  .title-units p { font-size: 1.05em; margin: 4px 0; color: #BDD7EE; }
+
+  /* HEADINGS */
+  h1.unit { font-size: 1.8em; color: var(--navy); border-bottom: 3px solid var(--blue); padding-bottom: 8px; margin: 32px 0 16px; }
+  h2.section { font-size: 1.3em; color: var(--blue); margin: 24px 0 10px; border-left: 4px solid var(--blue); padding-left: 10px; }
+  h3.subsection { font-size: 1.1em; color: var(--navy); margin: 16px 0 8px; }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th { background: var(--navy); color: white; padding: 8px 10px; text-align: left; }
+  th.blue { background: var(--blue); }
+  th.orange { background: var(--orange); color: var(--orange-text); }
+  th.green { background: var(--green); color: var(--green-text); }
+  th.yellow { background: var(--yellow); color: var(--yellow-text); }
+  td { padding: 7px 10px; border: 1px solid #CCCCCC; vertical-align: top; }
+  tr:nth-child(even) td { background: #F8FBFF; }
+  td.hdr-cell { background: var(--ltblue); font-weight: bold; }
+  td.highlight-yellow { background: var(--yellow); }
+  td.highlight-red { color: var(--red); font-weight: bold; }
+
+  /* COLORED BOXES */
+  .box { border-radius: 6px; margin: 14px 0; overflow: hidden; }
+  .box-header { padding: 8px 14px; font-weight: bold; font-size: 1em; }
+  .box-body { padding: 12px 14px; }
+  .box.how-tested .box-header { background: var(--orange); color: var(--orange-text); }
+  .box.how-tested .box-body { background: #FEF9F6; }
+  .box.traps .box-header { background: var(--yellow); color: var(--yellow-text); }
+  .box.traps .box-body { background: #FFFDF0; }
+  .box.hy .box-header { background: var(--green); color: var(--green-text); }
+  .box.hy .box-body { background: #F4FAF0; }
+  .box.tips .box-header { background: var(--ltblue); color: var(--navy); }
+  .box.tips .box-body { background: #F0F7FF; }
+
+  /* BULLETS */
+  ul.styled { list-style: none; padding: 0; margin: 6px 0; }
+  ul.styled li { padding: 3px 0 3px 18px; position: relative; font-size: 13px; }
+  ul.styled li::before { content: "•"; position: absolute; left: 4px; color: var(--blue); font-weight: bold; }
+  ul.styled li.bold { font-weight: bold; }
+
+  /* MINI Q */
+  .mini-q { border: 2px solid var(--navy); border-radius: 6px; margin: 16px 0; overflow: hidden; }
+  .mini-q-header { background: var(--navy); color: white; padding: 7px 12px; font-weight: bold; font-size: 0.95em; }
+  .mini-q-stem { padding: 10px 12px; background: var(--gray); font-size: 13px; }
+  .mini-q-choice { padding: 5px 12px; border-top: 1px solid #ddd; font-size: 13px; }
+  .mini-q-choice.correct { background: var(--green); font-weight: bold; color: var(--green-text); }
+  .mini-q-answer { padding: 10px 12px; background: #EBF5E6; border-top: 2px solid var(--green); font-size: 13px; }
+  .mini-q-answer .answer-label { font-weight: bold; color: var(--green-text); }
+  .mini-q-answer .trap-label { font-weight: bold; color: var(--orange-text); }
+
+  /* RAPID REVIEW TABLE */
+  .rr-table td:first-child { background: var(--ltblue); font-weight: bold; width: 50%; }
+  .rr-table td:last-child { background: #F8FBF8; }
+
+  /* TWO-COL TIPS */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+  .tip-box { background: var(--ltblue); border-radius: 6px; padding: 12px; }
+  .tip-box.green { background: var(--green); }
+  .tip-box p.title { font-weight: bold; color: var(--navy); margin-bottom: 6px; }
+
+  /* FLOWCHART TABLE */
+  .pathway td { background: white; border: 2px solid var(--ltblue); text-align: center; padding: 6px; }
+  .pathway th { text-align: center; }
+
+  /* LECTURER TAG */
+  .lecturer-tag { color: var(--blue); font-style: italic; font-size: 12px; margin-bottom: 12px; display: block; }
+
+  /* PAGE DIVIDER */
+  .page-divider { border: none; border-top: 3px solid var(--navy); margin: 36px 0; }
+
+  /* PRINT */
+  @media print {
+    .page { padding: 0; }
+    h1.unit { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- TITLE -->
+<div class="title-block">
+  <h1>GUSOM Endocrine Block</h1>
+  <h2>BIOCHEMISTRY STUDY GUIDE</h2>
+  <p style="color:#BDD7EE;margin-top:8px;font-style:italic;">In-House Exam + USMLE Step 1 Integrated</p>
+  <div class="title-units">
+    <p>1 · Introduction to Hormone Action</p>
+    <p>2 · Adrenal Hormone Synthesis &amp; Action</p>
+    <p>3 · Sex Steroid Synthesis &amp; Action</p>
+    <p>4 · Posterior Pituitary Hormones (ADH + Oxytocin)</p>
+    <p>5 · Thyroid Hormone Synthesis &amp; Action</p>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="tip-box">
+    <p class="title">📌 ADHD Tips</p>
+    <ul class="styled">
+      <li>Color-coded boxes: Blue=Content | Orange=How Tested | Yellow=Test Trap | Green=Answer</li>
+      <li>Each unit ends with ⚡ HY Summary — skim this first, then go deep</li>
+      <li>Mini Qs appear throughout — try them before reading the answer</li>
+    </ul>
+  </div>
+  <div class="tip-box green">
+    <p class="title">📅 Exam Strategy</p>
+    <ul class="styled">
+      <li>In-House: 4–8 Qs per class — ALL tied to LOs</li>
+      <li>Step 1: Focus on mechanism + clinical application</li>
+      <li>Always ask: "What enzyme is missing?" and "What labs result?"</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="page-divider">
+
+<!-- ═══════════════════════════════════════════ UNIT 1 ═══════════════════════════════════════════ -->
+<h1 class="unit">UNIT 1: Introduction to Hormone Action</h1>
+<span class="lecturer-tag">Lecturer: Dr. Danielsen | GUSOM Class: Introduction to Hormones</span>
+
+<h2 class="section">1.1 Signaling Modes</h2>
+<table>
+  <tr><th>Mode</th><th>Definition</th><th>Example</th><th>Speed</th></tr>
+  <tr><td class="hdr-cell">Endocrine</td><td>Hormone released into bloodstream → distant target</td><td>Insulin from pancreas → liver</td><td>Minutes–hours</td></tr>
+  <tr><td class="hdr-cell">Paracrine</td><td>Signal acts on adjacent cells</td><td>Somatostatin inhibiting nearby islet cells</td><td>Seconds–minutes</td></tr>
+  <tr><td class="hdr-cell">Autocrine</td><td>Cell signals itself</td><td>IGF-1 on growth plate chondrocytes</td><td>Seconds</td></tr>
+  <tr><td class="hdr-cell">Neural</td><td>Neurotransmitter release at synapse</td><td>NE at adrenergic synapse</td><td>Milliseconds</td></tr>
+</table>
+
+<h2 class="section">1.2 Classes of Hormones — Master Table</h2>
+<table>
+  <tr><th>Class</th><th>Solubility</th><th>Carrier?</th><th>Receptor Location</th><th>Examples</th><th>Half-Life</th></tr>
+  <tr><td class="hdr-cell">AA Derivatives (hydrophilic)</td><td>Hydrophilic</td><td>No</td><td>Cell SURFACE (GPCR)</td><td>Epi, NE, Dopamine</td><td>Minutes</td></tr>
+  <tr><td class="hdr-cell">Thyroid Hormones (AA deriv.)</td><td>Hydrophobic</td><td>Yes (TBG)</td><td>NUCLEAR (TR)</td><td>T3, T4</td><td>T3: 1.5d | T4: 6.5d</td></tr>
+  <tr><td class="hdr-cell">Peptide Hormones</td><td>Hydrophilic</td><td>No</td><td>Cell SURFACE</td><td>Insulin, GH, TSH, FSH, LH, ACTH</td><td>Minutes</td></tr>
+  <tr><td class="hdr-cell">Steroid Hormones</td><td>Hydrophobic</td><td>Yes (CBG, SHBG, albumin)</td><td>NUCLEAR / cytoplasmic</td><td>Cortisol, aldosterone, testosterone, estradiol</td><td>Hours</td></tr>
+</table>
+
+<h2 class="section">1.3 Receptor Types &amp; Signal Transduction</h2>
+<h3 class="subsection">Membrane Receptors (Hydrophilic Hormones)</h3>
+<table>
+  <tr><th class="blue">Receptor Type</th><th class="blue">2nd Messenger</th><th class="blue">Hormones</th><th class="blue">Key Point</th></tr>
+  <tr><td>Gs-coupled GPCR</td><td>↑ cAMP → PKA</td><td>TSH, LH, FSH, ACTH, glucagon, PTH, ADH(V2)</td><td>Major steroid synthesis pathway</td></tr>
+  <tr><td>Gq-coupled GPCR</td><td>↑ IP3/DAG → PKC + Ca²⁺</td><td>TRH, GnRH, Oxytocin, ADH(V1a)</td><td>IP3 → ER Ca²⁺ release</td></tr>
+  <tr><td>Gi-coupled GPCR</td><td>↓ cAMP</td><td>Somatostatin, Dopamine (D2)</td><td>Inhibitory</td></tr>
+  <tr><td>RTK (enzyme-linked)</td><td>Tyr phosphorylation → RAS/MAPK, PI3K | JAK/STAT for GH/Prolactin</td><td>Insulin, IGF-1, GH, Prolactin</td><td>Insulin → RAS/PI3K; GH → JAK2/STAT5</td></tr>
+</table>
+
+<h3 class="subsection">Nuclear Receptors (Hydrophobic Hormones)</h3>
+<ul class="styled">
+  <li>Nuclear receptor superfamily: steroid/thyroid/retinoid receptors — all are TRANSCRIPTION FACTORS</li>
+  <li>Structure: ligand-binding domain (~27kD) + DNA-binding domain (zinc fingers, ~10kD)</li>
+  <li>Mechanism: hormone diffuses → binds receptor → receptor dimerizes → nucleus → binds HRE → activates or represses transcription</li>
+  <li><strong>RXR dimerizes with: TR (thyroid), RAR (retinoic acid), VDR (vitamin D), PPAR</strong></li>
+  <li>Steroid receptors (GR, MR, AR, PR, ER): cytoplasmic without hormone, homodimerize</li>
+  <li class="bold">TR unique: bound to DNA even WITHOUT hormone → REPRESSING transcription until T3 arrives</li>
+</ul>
+
+<div class="box how-tested">
+  <div class="box-header">🎯 HOW THIS IS TESTED — Unit 1</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Hydrophilic = surface receptor; Hydrophobic = nuclear receptor — tested frequently</li>
+      <li>Glycoprotein hormones (TSH/FSH/LH/hCG): SAME α-subunit, different β-subunit = specificity</li>
+      <li>Scatchard plot: straight negative slope = single receptor class. X-intercept = Bmax, slope = −1/Kd</li>
+      <li>TR/RAR/VDR: bound to DNA without hormone, REPRESSING transcription — hormone de-represses + activates</li>
+      <li>Pregnancy ↑ TBG → ↑ total T4 but FREE T4 normal → euthyroid (tested as "normal thyroid in pregnancy")</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box traps">
+  <div class="box-header">⚠️ TEST TRAPS — Unit 1</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Epinephrine = AA derivative but acts like a PEPTIDE (surface receptor), NOT like thyroid hormone</li>
+      <li>Thyroid hormones = AA derivatives but HYDROPHOBIC → nuclear receptor (exception to "AA derivatives = surface")</li>
+      <li>Nuclear receptors for steroids are ACTIVATED by hormone. TR is REPRESSED without hormone (activated by T3)</li>
+      <li>Dopamine = neurotransmitter AND endocrine hormone (prolactin inhibiting factor)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 1</div>
+  <div class="mini-q-stem">A hormone circulates at very low concentrations bound to a carrier protein. Its receptor is found in the nucleus and represses transcription in the absence of ligand. Which hormone is most likely described?</div>
+  <div class="mini-q-choice">A) Insulin</div>
+  <div class="mini-q-choice">B) Cortisol</div>
+  <div class="mini-q-choice correct">C) Triiodothyronine (T3) ✓</div>
+  <div class="mini-q-choice">D) Epinephrine</div>
+  <div class="mini-q-choice">E) Aldosterone</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ C — T3</span><br>
+    T3 is an AA derivative that is hydrophobic, travels on TBG, and its receptor (TR) is bound to TREs even without hormone — repressing transcription until T3 binds.<br>
+    <span class="trap-label">⚠️ Trap:</span> Cortisol also uses a nuclear receptor, but its receptor is cytoplasmic without hormone and does NOT repress DNA in the hormone-absent state. Only TR/RAR/VDR do that.
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 2</div>
+  <div class="mini-q-stem">A patient's serum total T4 is elevated during her second trimester of pregnancy. Her free T4 and TSH are both normal. What is the most likely explanation?</div>
+  <div class="mini-q-choice">A) Graves' disease with normal TSH feedback</div>
+  <div class="mini-q-choice">B) Thyroid adenoma</div>
+  <div class="mini-q-choice correct">C) Estrogen-induced increase in TBG levels ✓</div>
+  <div class="mini-q-choice">D) Placental hCG cross-reacting with TSH receptor</div>
+  <div class="mini-q-choice">E) Hashimoto's thyroiditis hyperthyroid phase</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ C — Estrogen ↑ TBG</span><br>
+    Pregnancy → estrogen → ↑TBG → more bound T4 → ↑total T4. But free T4 is unchanged, TSH normal = euthyroid. Normal pregnancy finding.<br>
+    <span class="trap-label">⚠️ Trap:</span> Graves' would suppress TSH. hCG cross-reactivity would also suppress TSH. Normal TSH + normal free T4 = normal thyroid function.
+  </div>
+</div>
+
+<div class="box hy">
+  <div class="box-header">⚡ HIGH-YIELD SUMMARY — Unit 1</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>3 classes: AA derivatives (hydrophilic=catecholamines, hydrophobic=TH), Peptides (hydrophilic), Steroids (hydrophobic)</li>
+      <li>Hydrophilic → surface receptor (GPCR or RTK) → 2nd messengers → fast effects</li>
+      <li>Hydrophobic → nuclear receptor → alters transcription → slow, sustained effects</li>
+      <li>RXR dimerizes with: TR, RAR, VDR, PPAR</li>
+      <li>Glycoprotein hormones: SAME α-subunit, DIFFERENT β-subunit = specificity</li>
+      <li>Only FREE hormone is active; carrier proteins extend half-life</li>
+      <li class="bold">TR: represses DNA without hormone; T3 binding = de-repression + activation</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="page-divider">
+
+<!-- ═══════════════════════════════════════════ UNIT 2 ═══════════════════════════════════════════ -->
+<h1 class="unit">UNIT 2: Adrenal Hormone Synthesis &amp; Action</h1>
+<span class="lecturer-tag">Lecturer: Dr. Danielsen | GUSOM Class: Adrenal Hormone Synthesis and Action</span>
+
+<h2 class="section">2.1 The Steroid Synthesis Roadmap</h2>
+<p style="font-weight:bold;color:#C00000;margin-bottom:10px;">ALL steroid hormones begin with: Cholesterol → Pregnenolone (via CHOLESTEROL DESMOLASE in MITOCHONDRIA)</p>
+
+<table class="pathway">
+  <tr>
+    <th style="background:#2E75B6;color:white;">ZONA GLOMERULOSA → ALDOSTERONE</th>
+    <th style="background:#1F3864;color:white;">ZONA FASCICULATA → CORTISOL</th>
+    <th style="background:#843C0C;color:white;">ZONA RETICULARIS → DHEA</th>
+  </tr>
+  <tr>
+    <td>
+      Cholesterol<br>↓ <em>desmolase (mito)</em><br>Pregnenolone<br>↓ <em>3β-HSD</em><br>Progesterone<br>↓ <em>21-hydroxylase</em><br>11-Deoxycorticosterone<br>↓ <em>11β-hydroxylase</em><br>Corticosterone<br>↓ <em>aldosterone synthase</em><br><strong>ALDOSTERONE ✅</strong><br><span style="color:#C00000">⚠️ NO 17α-hydroxylase here!</span>
+    </td>
+    <td>
+      Cholesterol<br>↓ <em>desmolase (mito)</em><br>Pregnenolone<br>↓ <em>17α-hydroxylase</em><br>17-OH-Pregnenolone<br>↓ <em>3β-HSD</em><br>17-OH-Progesterone<br>↓ <em>21-hydroxylase</em><br>11-Deoxycortisol<br>↓ <em>11β-hydroxylase</em><br><strong>CORTISOL ✅</strong><br><span style="color:#C00000">⚠️ NO aldosterone synthase here!</span>
+    </td>
+    <td>
+      Cholesterol<br>↓ <em>desmolase (mito)</em><br>Pregnenolone<br>↓ <em>17α-hydroxylase</em><br>17-OH-Pregnenolone<br>↓ <em>17,20-lyase (same enzyme!)</em><br><strong>DHEA (major)</strong><br>+ Androstenedione (minor)<br><br><span style="color:#C00000">⚠️ NO 21-hydroxylase here!</span>
+    </td>
+  </tr>
+  <tr>
+    <td style="background:#EBF4FF;font-weight:bold;color:#2E75B6;">Regulated by: Ang II, K⁺, ACTH (minor)</td>
+    <td style="background:#EBF4FF;font-weight:bold;color:#1F3864;">Regulated by: ACTH (CRH→ACTH→cortisol)</td>
+    <td style="background:#EBF4FF;font-weight:bold;color:#843C0C;">Regulated by: ACTH; adrenarche at age 6-8</td>
+  </tr>
+</table>
+
+<h2 class="section">2.2 Enzyme Deficiency Diseases — CAH</h2>
+<p style="font-weight:bold;color:#C00000;margin-bottom:10px;">Key concept: If you block an enzyme, substrate BUILDS UP upstream and shunts to alternate pathways</p>
+<table>
+  <tr><th>Deficiency</th><th>Cortisol</th><th>Aldosterone</th><th>Androgens</th><th>BP</th><th>Classic Presentation</th></tr>
+  <tr>
+    <td class="highlight-yellow"><strong>21β-Hydroxylase (MOST COMMON ~95%)</strong></td>
+    <td class="highlight-red">↓↓</td><td class="highlight-red">↓↓ SALT WASTING</td>
+    <td>↑↑ virilization</td><td class="highlight-red">LOW ↓</td>
+    <td>Newborn female: ambiguous genitalia. ↑17-OH-progesterone (HY!), hyponatremia, hyperkalemia, hypotension, ↑ACTH</td>
+  </tr>
+  <tr>
+    <td><strong>11β-Hydroxylase (2nd most common)</strong></td>
+    <td>↓</td><td>↓ (but 11-DOC ↑)</td>
+    <td>↑ virilization</td><td style="font-weight:bold;color:#C00000;">HIGH ↑</td>
+    <td>Virilization + HYPERTENSION (11-deoxycorticosterone = mineralocorticoid). ↑11-deoxycortisol</td>
+  </tr>
+  <tr>
+    <td><strong>17α-Hydroxylase (rare)</strong></td>
+    <td>↓</td><td>↑ (excess DOC/corticosterone)</td>
+    <td>↓↓ (no sex steroids)</td><td>HIGH ↑</td>
+    <td>46XY: female phenotype, no puberty. 46XX: primary amenorrhea. Hypertension + hypokalemia</td>
+  </tr>
+  <tr>
+    <td><strong>Cholesterol Desmolase / StAR</strong></td>
+    <td>↓↓↓</td><td>↓↓↓</td><td>↓↓↓</td><td>LOW ↓</td>
+    <td>LIPOID CAH — fetal lethal risk. All steroids absent. Massive lipid accumulation in adrenals</td>
+  </tr>
+</table>
+
+<h2 class="section">2.3 Cortisol vs Aldosterone Mechanisms</h2>
+<table>
+  <tr><th>Feature</th><th class="blue">CORTISOL (Glucocorticoid)</th><th class="orange">ALDOSTERONE (Mineralocorticoid)</th></tr>
+  <tr><td class="hdr-cell">Receptor</td><td>GR (cytoplasmic, dissociates from hsp90 on binding)</td><td>MR (similar mechanism)</td></tr>
+  <tr><td class="hdr-cell">DNA Targets</td><td>GREs — hundreds of genes (immune suppression, gluconeogenesis)</td><td>MREs — ENaC↑, Na/K-ATPase↑, ROMK↑</td></tr>
+  <tr><td class="hdr-cell">Carrier Protein</td><td>CBG ~90%; t½ ~70 min</td><td>~35% free; t½ ~20 min</td></tr>
+  <tr><td class="hdr-cell">Protection from Cross-Activation</td><td><strong>11β-HSD2</strong> in kidney converts cortisol → cortisone (inactive) — prevents cortisol from acting on MR despite 2000x higher concentration</td><td>Not inactivated by 11β-HSD2 → acts freely on MR</td></tr>
+  <tr><td class="hdr-cell">Regulation</td><td>CRH → ACTH → cortisol. Stress ↑, negative feedback to hypo/pit</td><td>Angiotensin II (primary), ↑K⁺, ACTH (minor)</td></tr>
+</table>
+
+<div class="box how-tested">
+  <div class="box-header">🎯 HOW THIS IS TESTED — Unit 2</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>21β-Hydroxylase deficiency is THE most tested enzyme defect.</strong> Buzzwords: virilized female newborn, ↑17-OH-progesterone, hyponatremia, hyperkalemia, hypotension, ↑ACTH</li>
+      <li>11β-Hydroxylase: same virilization BUT with HYPERTENSION (11-DOC) — the distinguishing feature</li>
+      <li>17α-Hydroxylase: NO sex steroids → sexual infantilism + hypertension + hypokalemia (opposite of 21β)</li>
+      <li>11β-HSD2 deficiency or licorice inhibition: syndrome like hyperaldosteronism but LOW aldosterone (cortisol acting on MR)</li>
+      <li>Lab pattern: ↑ACTH + ↑17-OH-progesterone → 21β-hydroxylase deficiency</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box traps">
+  <div class="box-header">⚠️ TEST TRAPS — Unit 2</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Glomerulosa: NO 17α-hydroxylase → cannot make cortisol or androgens</li>
+      <li>Fasciculata: NO aldosterone synthase → cannot make aldosterone</li>
+      <li>17α-hydroxylase and 17,20-lyase are the SAME enzyme (CYP17A1) — cytochrome B5 determines lyase activity</li>
+      <li>CYP11B1 vs CYP11B2: B2 (glomerulosa only) also has 18-hydroxylase/oxidase → makes aldosterone</li>
+      <li>Licorice (glycyrrhizinic acid) inhibits 11β-HSD2 → apparent mineralocorticoid excess: HTN + hypokalemia + LOW aldosterone</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 3</div>
+  <div class="mini-q-stem">A newborn female presents with ambiguous genitalia. Labs show hyponatremia, hyperkalemia, hypotension, markedly elevated 17-hydroxyprogesterone, and elevated ACTH. Which enzyme is most likely deficient?</div>
+  <div class="mini-q-choice">A) 11β-Hydroxylase</div>
+  <div class="mini-q-choice">B) 17α-Hydroxylase</div>
+  <div class="mini-q-choice">C) Aldosterone synthase</div>
+  <div class="mini-q-choice correct">D) 21β-Hydroxylase ✓</div>
+  <div class="mini-q-choice">E) Cholesterol desmolase</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ D — 21β-Hydroxylase</span><br>
+    Classic: 17-OH-progesterone cannot proceed → accumulates + shunts to androgens (virilization). No cortisol → ↑ACTH. No aldosterone → salt wasting (hyponatremia, hyperkalemia, hypotension).<br>
+    <span class="trap-label">⚠️ Trap:</span> 11β-Hydroxylase also causes virilization but causes HYPERTENSION due to 11-deoxycorticosterone buildup — the key distinguishing feature.
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 4</div>
+  <div class="mini-q-stem">A patient has hypertension, hypokalemia, low plasma renin, and LOW aldosterone. She eats large amounts of licorice. The most likely mechanism involves inhibition of which enzyme?</div>
+  <div class="mini-q-choice">A) 17α-Hydroxylase</div>
+  <div class="mini-q-choice">B) Aldosterone synthase</div>
+  <div class="mini-q-choice correct">C) 11β-Hydroxysteroid dehydrogenase type 2 (11β-HSD2) ✓</div>
+  <div class="mini-q-choice">D) Cholesterol desmolase</div>
+  <div class="mini-q-choice">E) 21β-Hydroxylase</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ C — 11β-HSD2</span><br>
+    Glycyrrhizinic acid in licorice inhibits 11β-HSD2 → cortisol not inactivated in kidney → cortisol acts on MR → Na+ retention, K+ loss, HTN — despite LOW aldosterone.<br>
+    <span class="trap-label">⚠️ Trap:</span> Low aldosterone with mineralocorticoid excess symptoms = apparent mineralocorticoid excess (AME). Primary hyperaldosteronism (Conn) would show HIGH aldosterone.
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 5</div>
+  <div class="mini-q-stem">A 16-year-old with 46,XY karyotype presents with primary amenorrhea, absent secondary sexual development, hypertension, and hypokalemia. Which enzyme deficiency best explains this?</div>
+  <div class="mini-q-choice">A) 21β-Hydroxylase</div>
+  <div class="mini-q-choice">B) 11β-Hydroxylase</div>
+  <div class="mini-q-choice correct">C) 17α-Hydroxylase ✓</div>
+  <div class="mini-q-choice">D) 5α-Reductase</div>
+  <div class="mini-q-choice">E) Aromatase</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ C — 17α-Hydroxylase</span><br>
+    Blocks cortisol AND sex steroid synthesis. ↑ACTH → pathway shunts to mineralocorticoids (DOC, corticosterone) → HTN + hypokalemia. No sex steroids → sexual infantilism regardless of karyotype.<br>
+    <span class="trap-label">⚠️ Trap:</span> 46XY with 17α-OH deficiency has female external phenotype (no androgens) but no uterus/tubes (MIF made by testes).
+  </div>
+</div>
+
+<div class="box hy">
+  <div class="box-header">⚡ HIGH-YIELD SUMMARY — Unit 2</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>GFR mnemonic: Glomerulosa=Aldosterone, Fasciculata=Cortisol, Reticularis=androgens</li>
+      <li>All steroids: Cholesterol → Pregnenolone (desmolase, MITOCHONDRIA) → everything else</li>
+      <li class="bold">21β-OH def: ↑17-OH-prog, ↓cortisol, ↓aldosterone, ↑androgens → virilization + salt-wasting + HYPOTENSION</li>
+      <li class="bold">11β-OH def: similar but 11-DOC accumulates → HYPERTENSION (key distinguisher!)</li>
+      <li>17α-OH def: ↑mineralocorticoids, ↓cortisol, ↓sex steroids → HTN + sexual infantilism</li>
+      <li>11β-HSD2 protects kidney MR from cortisol. Licorice inhibits it → apparent mineralocorticoid excess</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="page-divider">
+
+<!-- ═══════════════════════════════════════════ UNIT 3 ═══════════════════════════════════════════ -->
+<h1 class="unit">UNIT 3: Sex Steroid Synthesis &amp; Action</h1>
+<span class="lecturer-tag">Lecturer: Dr. Danielsen | GUSOM Class: Sex Steroid Synthesis and Action</span>
+
+<h2 class="section">3.1 Androgen Synthesis (Testes)</h2>
+<div class="two-col">
+  <div>
+    <h3 class="subsection">Testosterone Pathway</h3>
+    <ul class="styled">
+      <li>Cholesterol → Pregnenolone (desmolase)</li>
+      <li>Pregnenolone → DHEA (17α-OH → 17,20-lyase)</li>
+      <li>DHEA → Androstenedione (3β-HSD)</li>
+      <li><strong>Androstenedione → TESTOSTERONE (17β-HSD) ← KEY STEP</strong></li>
+      <li>Made by: LEYDIG CELLS (interstitial cells)</li>
+      <li>Regulated by: LH → cAMP → steroidogenesis</li>
+      <li>Carrier: SHBG ~60%, albumin ~38%, FREE ~2%</li>
+    </ul>
+  </div>
+  <div>
+    <h3 class="subsection">Testosterone Derivatives</h3>
+    <ul class="styled">
+      <li>T → <strong>DHT</strong> (dihydrotestosterone) via <strong>5α-reductase</strong> in prostate/genital skin/hair — more potent androgen; required for male external genitalia in utero</li>
+      <li>T → <strong>Estradiol</strong> via <strong>AROMATASE</strong> in adipose/brain — how men make estrogens</li>
+    </ul>
+  </div>
+</div>
+
+<h2 class="section">3.2 Ovarian Steroid Synthesis — Two-Cell Model</h2>
+<table>
+  <tr><th>THECAL CELLS (LH-dependent)</th><th class="blue">GRANULOSA CELLS (FSH-dependent)</th></tr>
+  <tr>
+    <td>LH → cAMP → androstenedione (primary output). Cannot aromatize. Androgens diffuse into granulosa cells.</td>
+    <td>FSH → ↑aromatase → converts androstenedione → E1 (estrone) and testosterone → E2 (estradiol). Primary estrogen in premenopausal women = <strong>17β-Estradiol (E2)</strong></td>
+  </tr>
+</table>
+
+<h2 class="section">3.3 Estrogen Across the Lifespan — HIGH YIELD</h2>
+<table>
+  <tr><th>Phase</th><th>Dominant Estrogen</th><th>Source</th><th>Potency</th></tr>
+  <tr><td class="hdr-cell">Reproductive years</td><td><strong>17β-Estradiol (E2)</strong></td><td>Ovarian granulosa cells</td><td>MOST potent</td></tr>
+  <tr><td class="hdr-cell">Pregnancy</td><td><strong>Estriol (E3)</strong></td><td>Placenta (from fetal precursors)</td><td>Weakest</td></tr>
+  <tr><td class="hdr-cell">Post-menopause</td><td><strong>Estrone (E1)</strong></td><td>Peripheral aromatization of adrenal androstenedione (FAT!)</td><td>Intermediate</td></tr>
+  <tr><td class="hdr-cell">Males</td><td>Estradiol (E2)</td><td>~80% from peripheral aromatization of testosterone in adipose/liver</td><td>—</td></tr>
+</table>
+
+<h2 class="section">3.4 Carrier Proteins for Sex Steroids</h2>
+<table>
+  <tr><th>Protein</th><th>Binds</th><th>Regulation</th><th>Clinical Note</th></tr>
+  <tr><td class="hdr-cell">SHBG (TeBG)</td><td>T > DHT > E2 (T binds 5x better than E2). Estrone does NOT bind SHBG</td><td>↑ by estrogens, liver disease, hyperthyroidism. ↓ by androgens, obesity, hypothyroidism</td><td>PCOS: ↓SHBG (androgens suppress it) → more free testosterone</td></tr>
+  <tr><td class="hdr-cell">CBG</td><td>Cortisol (primary), progesterone (equal affinity)</td><td>↑ by estrogens (pregnancy)</td><td>Progesterone t½ ~5 min (weak binding) — oral progesterone ineffective</td></tr>
+  <tr><td class="hdr-cell">Albumin</td><td>All steroids (low affinity, high capacity)</td><td>Liver synthesis</td><td>Safety net carrier</td></tr>
+</table>
+
+<h2 class="section">3.5 Key Sex Steroid Diseases</h2>
+<table>
+  <tr><th>Disease</th><th>Defect</th><th>Phenotype</th><th>Key Finding</th></tr>
+  <tr><td class="highlight-yellow"><strong>5α-Reductase Deficiency</strong></td><td>Cannot convert T → DHT</td><td>46XY: born female-appearing external genitalia; virilizes at puberty</td><td>Testes in inguinal canal. ↑T:DHT ratio</td></tr>
+  <tr><td class="highlight-yellow"><strong>Complete AIS (CAIS)</strong></td><td>Non-functional androgen receptor (X-linked)</td><td>46XY: complete female phenotype; absent uterus; inguinal testes</td><td>↑T, ↑E2, ↑LH. Primary amenorrhea. Never virilizes</td></tr>
+  <tr><td><strong>PCOS</strong></td><td>↑LH:FSH ratio → excess androgen, ↓SHBG</td><td>Hirsutism, irregular menses, obesity, ↓fertility, polycystic ovaries</td><td>LH:FSH >2:1, ↑testosterone/DHEA-S, ↓SHBG, insulin resistance</td></tr>
+  <tr><td><strong>Primary Hypogonadism (males)</strong></td><td>Testicular failure</td><td>Failure/regression of secondary sex characteristics</td><td>↓T, ↑↑LH and FSH</td></tr>
+</table>
+
+<div class="box how-tested">
+  <div class="box-header">🎯 HOW THIS IS TESTED — Unit 3</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>MOST TESTED:</strong> Ambiguous genitalia — 5α-Reductase def vs AIS: BOTH are 46XY females with testes</li>
+      <li>5α-Reductase def: virilizes at puberty (testosterone still works). AIS: NEVER virilizes (receptor broken)</li>
+      <li>Postmenopausal estrogen source = adipose aromatase. Obesity → more estrogen → ↑endometrial/breast cancer risk</li>
+      <li>Two-cell model: LH → thecal androgens; FSH → granulosa aromatase. BOTH required for ovarian estrogen synthesis</li>
+      <li>SHBG: obesity ↓SHBG → ↑free testosterone (link to PCOS, type 2 DM)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box traps">
+  <div class="box-header">⚠️ TEST TRAPS — Unit 3</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Estrogen is NOT female-specific: 80% of male estradiol comes from peripheral aromatization of testosterone</li>
+      <li>Androgens are NOT male-specific: women need androgens for estrogen synthesis (two-cell model)</li>
+      <li>5α-Reductase def vs AIS: BOTH 46XY with testes and female phenotype. 5α-red can virilize; AIS cannot</li>
+      <li>ABP (seminiferous tubules) = same GENE as SHBG, different glycosylation</li>
+      <li>Estriol = marker of fetal well-being. Low estriol → Down syndrome (triple screen)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 6</div>
+  <div class="mini-q-stem">A 17-year-old presents with primary amenorrhea, normal female external genitalia, no pubic/axillary hair, no uterus on imaging, and a 46,XY karyotype. Serum testosterone is elevated. Most likely diagnosis?</div>
+  <div class="mini-q-choice">A) 5α-Reductase deficiency</div>
+  <div class="mini-q-choice correct">B) Complete androgen insensitivity syndrome (CAIS) ✓</div>
+  <div class="mini-q-choice">C) Turner syndrome (45X)</div>
+  <div class="mini-q-choice">D) 17α-Hydroxylase deficiency</div>
+  <div class="mini-q-choice">E) Müllerian agenesis</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ B — CAIS</span><br>
+    46XY, non-functional AR, testes make testosterone (↑) but it cannot signal. Complete female phenotype. No uterus (MIF made). No pubic/axillary hair (requires androgen action). Primary amenorrhea.<br>
+    <span class="trap-label">⚠️ Trap:</span> 5α-Reductase def would show virilization at puberty. Turner = 45X. 17α-OH def = LOW testosterone (no sex steroids made).
+  </div>
+</div>
+
+<div class="box hy">
+  <div class="box-header">⚡ HIGH-YIELD SUMMARY — Unit 3</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Testosterone: Leydig cells; converted to DHT (5α-reductase) or E2 (aromatase)</li>
+      <li>DHT required for male external genitalia in utero AND prostate/beard hair at puberty</li>
+      <li>Two-cell model: Thecal (LH→androgens) + Granulosa (FSH→aromatase→estrogens)</li>
+      <li>Estrogens: E2 (reproductive); E3 (pregnancy, placenta); E1 (postmenopause, fat)</li>
+      <li class="bold">5α-Reductase def: 46XY female at birth → virilizes at puberty. CAIS: 46XY always female, ↑T</li>
+      <li>SHBG ↑ by estrogens/hyperthyroid; ↓ by androgens/obesity → low SHBG = more free T (PCOS)</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="page-divider">
+
+<!-- ═══════════════════════════════════════════ UNIT 4 ═══════════════════════════════════════════ -->
+<h1 class="unit">UNIT 4: Posterior Pituitary Hormones — ADH &amp; Oxytocin</h1>
+<span class="lecturer-tag">Lecturer: Dr. Sherman | GUSOM Class: Posterior Pituitary Hormones</span>
+
+<h2 class="section">4.1 Overview</h2>
+<div class="two-col">
+  <div style="background:#EBF4FF;border-radius:6px;padding:12px;">
+    <p style="font-weight:bold;color:#1F3864;">ADH (Vasopressin / AVP)</p>
+    <ul class="styled">
+      <li>Made in: Supraoptic nuclei of hypothalamus</li>
+      <li>Released from: Posterior pituitary</li>
+      <li>Primary trigger: ↑plasma osmolality (osmoreceptors)</li>
+      <li>Secondary trigger: ↓blood volume (baroreceptors)</li>
+      <li>Osmotic threshold for ADH secretion: ~280 mOsm/kg</li>
+      <li>Osmotic threshold for THIRST: ~290 mOsm/kg (5-10 mOsm HIGHER)</li>
+    </ul>
+  </div>
+  <div style="background:#EBF5E6;border-radius:6px;padding:12px;">
+    <p style="font-weight:bold;color:#375623;">OXYTOCIN</p>
+    <ul class="styled">
+      <li>Made in: Paraventricular nuclei of hypothalamus</li>
+      <li>Triggers: suckling reflex, uterine distension</li>
+      <li>Acts on: Uterine myometrium + mammary myoepithelial cells</li>
+      <li>Receptor: Gq → IP3/DAG → Ca²⁺ (both uterus and mammary)</li>
+      <li>Receptor ↑ near term → oxytocin augments labor</li>
+    </ul>
+  </div>
+</div>
+
+<h2 class="section">4.2 ADH Receptor Subtypes</h2>
+<table>
+  <tr><th>Receptor</th><th>Location</th><th>G-Protein</th><th>Effect</th><th>Clinical</th></tr>
+  <tr><td class="hdr-cell">V1a</td><td>Vascular smooth muscle, liver, platelets</td><td>Gq → ↑Ca²⁺</td><td>Vasoconstriction (pressor effect)</td><td>Vasopressin used as vasopressor in septic shock</td></tr>
+  <tr><td class="hdr-cell">V1b (V3)</td><td>Anterior pituitary</td><td>Gq → ↑Ca²⁺</td><td>↑ACTH release (synergizes with CRH)</td><td>Stress response</td></tr>
+  <tr><td class="highlight-yellow"><strong>V2</strong></td><td>Renal collecting duct principal cells</td><td>Gs → ↑cAMP → PKA</td><td>↑AQP2 insertion → water reabsorption</td><td><strong>Target of desmopressin (DDAVP). Loss = nephrogenic DI</strong></td></tr>
+</table>
+
+<h2 class="section">4.3 Diabetes Insipidus — The Three Types</h2>
+<table>
+  <tr><th>Feature</th><th>CENTRAL DI</th><th>NEPHROGENIC DI</th><th>GESTATIONAL DI</th><th>SIADH (contrast)</th></tr>
+  <tr><td class="hdr-cell">Defect</td><td>↓ADH production (hypothalamic/posterior pit damage)</td><td>Kidney doesn't respond to ADH (V2 or AQP2 defect)</td><td>Placental vasopressinase degrades ADH</td><td>Excess ADH activity</td></tr>
+  <tr><td class="hdr-cell">ADH Level</td><td class="highlight-red">LOW</td><td>HIGH (compensation)</td><td>LOW (degraded)</td><td>HIGH</td></tr>
+  <tr><td class="hdr-cell">Urine</td><td>Dilute (low osmolality)</td><td>Dilute (despite high ADH)</td><td>Dilute</td><td>Concentrated</td></tr>
+  <tr><td class="hdr-cell">Serum Na⁺</td><td class="highlight-red">↑ Hypernatremia</td><td class="highlight-red">↑ Hypernatremia</td><td class="highlight-red">↑ Hypernatremia</td><td>↓ Hyponatremia</td></tr>
+  <tr><td class="hdr-cell">DDAVP Test</td><td style="background:#E2EFDA;font-weight:bold;color:#375623;">RESPONDS (urine concentrates)</td><td style="background:#FCE4D6;font-weight:bold;color:#843C0C;">Does NOT respond</td><td style="background:#E2EFDA;">RESPONDS (DDAVP resistant to vasopressinase)</td><td>N/A</td></tr>
+  <tr><td class="hdr-cell">Treatment</td><td>Desmopressin (DDAVP)</td><td>Low-Na diet + thiazides; amiloride (for lithium-induced)</td><td>DDAVP</td><td>Fluid restriction; vaptans (V2 antagonists)</td></tr>
+</table>
+
+<div class="box how-tested">
+  <div class="box-header">🎯 HOW THIS IS TESTED — Unit 4</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>DI vignettes: polyuria + polydipsia + dilute urine + hypernatremia → DDAVP test distinguishes central from nephrogenic</li>
+      <li>Central DI causes: head trauma, pituitary surgery, craniopharyngioma, hypoxic brain injury</li>
+      <li>Nephrogenic DI causes: lithium (most common drug), hypercalcemia, hypokalemia, demeclocycline</li>
+      <li>DDAVP: V2-selective, resistant to vasopressinase → treats central AND gestational DI</li>
+      <li>Oxytocin receptor antagonists can't stop premature labor — receptor expression LOW pre-term, HIGH at term</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box traps">
+  <div class="box-header">⚠️ TEST TRAPS — Unit 4</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Osmotic threshold for THIRST is HIGHER than for ADH — body conserves water before making you thirsty</li>
+      <li>Vasopressin = ADH = AVP = arginine vasopressin — all the same molecule</li>
+      <li>Lithium-induced nephrogenic DI: amiloride preferred (blocks Li⁺ entry via ENaC)</li>
+      <li>V1a: vasoconstriction. V2: antidiuresis. V1b: ACTH. Know which does what!</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 7</div>
+  <div class="mini-q-stem">3 days post-transsphenoidal pituitary surgery, a patient develops polyuria (5-6 L/day), polydipsia, and serum Na⁺ 152 mEq/L. Urine osmolality 80 mOsm/kg. After intranasal DDAVP, urine osmolality rises to 600 mOsm/kg. Diagnosis?</div>
+  <div class="mini-q-choice">A) Nephrogenic DI</div>
+  <div class="mini-q-choice">B) SIADH</div>
+  <div class="mini-q-choice correct">C) Central DI ✓</div>
+  <div class="mini-q-choice">D) Primary polydipsia</div>
+  <div class="mini-q-choice">E) Gestational DI</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ C — Central DI</span><br>
+    Post-surgical damage to posterior pituitary → ↓ADH production → dilute urine despite hypernatremia. Response to DDAVP (urine concentrates) = CENTRAL DI. Nephrogenic DI would NOT respond to DDAVP.<br>
+    <span class="trap-label">⚠️ Trap:</span> Primary polydipsia = ↓serum osmolality (drinking too much water). SIADH = concentrated urine + hyponatremia.
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 8</div>
+  <div class="mini-q-stem">A woman at 28 weeks gestation presents with polyuria, polydipsia, and Na⁺ 149 mEq/L. Urine osmolality 120 mOsm/kg. Serum ADH is undetectable. She responds well to intranasal desmopressin. Underlying cause?</div>
+  <div class="mini-q-choice">A) Posterior pituitary destruction by placenta</div>
+  <div class="mini-q-choice correct">B) Placental vasopressinase degrades ADH ✓</div>
+  <div class="mini-q-choice">C) V2 receptor downregulation in pregnancy</div>
+  <div class="mini-q-choice">D) Plasma volume diluting ADH</div>
+  <div class="mini-q-choice">E) AQP2 channel dysfunction</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ B — Gestational DI</span><br>
+    Placenta produces vasopressinase → degrades endogenous ADH. DDAVP works because it is structurally resistant to vasopressinase. Resolves after delivery.<br>
+    <span class="trap-label">⚠️ Trap:</span> ADH is LOW (degraded) in gestational DI — helps distinguish from central DI, where ADH is absent due to production failure. Both respond to DDAVP.
+  </div>
+</div>
+
+<div class="box hy">
+  <div class="box-header">⚡ HIGH-YIELD SUMMARY — Unit 4</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>ADH: supraoptic nuclei → posterior pituitary. Released by ↑osmolality (primary) or ↓volume</li>
+      <li>V1a = vasoconstriction (Gq). V1b = ↑ACTH (Gq). V2 = antidiuresis via AQP2 (Gs/cAMP)</li>
+      <li>DDAVP: V2-selective agonist, resistant to vasopressinase → treats central and gestational DI</li>
+      <li class="bold">Central DI: ↓ADH → dilute urine + hypernatremia → RESPONDS to DDAVP</li>
+      <li class="bold">Nephrogenic DI: kidney unresponsive → dilute urine + hypernatremia → does NOT respond to DDAVP</li>
+      <li>Gestational DI: placental vasopressinase → responds to DDAVP (resistant to vasopressinase)</li>
+      <li>Oxytocin: suckling → milk ejection. Uterine distension → parturition. Receptor ↑ at term</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="page-divider">
+
+<!-- ═══════════════════════════════════════════ UNIT 5 ═══════════════════════════════════════════ -->
+<h1 class="unit">UNIT 5: Thyroid Hormone Synthesis &amp; Action</h1>
+<span class="lecturer-tag">Lecturer: Dr. Danielsen | GUSOM Class: Thyroid Hormone Synthesis and Action</span>
+
+<h2 class="section">5.1 Step-by-Step Synthesis</h2>
+<table>
+  <tr><th style="width:4%">#</th><th style="width:22%">Step</th><th style="width:28%">Key Enzyme/Protein</th><th style="width:46%">Inhibited By / Notes</th></tr>
+  <tr><td class="hdr-cell">1</td><td>Iodide uptake (basolateral)</td><td>Na⁺/I⁻ symporter (NIS) — powered by Na⁺/K⁺-ATPase</td><td>Inhibited by: ouabain, perchlorate, thiocyanate, pertechnetate (competitive). Stimulated by TSH</td></tr>
+  <tr><td class="hdr-cell">2</td><td>Iodide into colloid (apical)</td><td>PENDRIN (Cl⁻/I⁻ antiporter)</td><td>Pendred syndrome: pendrin mutation → deafness + goiter</td></tr>
+  <tr><td class="hdr-cell">3</td><td>Iodide OXIDATION (I⁻ → I⁺)</td><td>Thyroid Peroxidase (TPO) + H₂O₂ (dual oxidase)</td><td>Inhibited by: <strong>PTU, methimazole</strong>. ONLY thyroid can oxidize iodide</td></tr>
+  <tr><td class="hdr-cell">4</td><td>ORGANIFICATION: iodination of Tyr on thyroglobulin</td><td>TPO: Tyr → MIT (1 I) → DIT (2 I)</td><td><strong>Wolff-Chaikoff effect:</strong> excess iodide blocks organification</td></tr>
+  <tr><td class="hdr-cell">5</td><td>COUPLING of iodotyrosines</td><td>TPO: MIT+DIT → T3. DIT+DIT → T4</td><td>T4:T3 secreted ~10:1. T3 is 10x MORE potent</td></tr>
+  <tr><td class="hdr-cell">6</td><td>Thyroglobulin endocytosis + lysosomal hydrolysis</td><td>TSH-stimulated. Lysosomes cleave T3/T4. MIT/DIT recycled by iodotyrosine deiodinase</td><td>Thyroid stores 60-90 day supply</td></tr>
+  <tr><td class="hdr-cell">7</td><td>T4 → T3 in periphery</td><td>DEIODINASE (type 1, 2) in liver, kidney, target cells</td><td><strong>PTU also inhibits this step (methimazole does NOT)</strong>. rT3 = inactive; ↑ in illness</td></tr>
+</table>
+
+<h2 class="section">5.2 T3 vs T4</h2>
+<table>
+  <tr><th>Feature</th><th class="blue">T3 (Triiodothyronine)</th><th class="orange">T4 (Thyroxine)</th></tr>
+  <tr><td class="hdr-cell">Iodines</td><td>3</td><td>4</td></tr>
+  <tr><td class="hdr-cell">Potency</td><td><strong>10x MORE potent</strong> (10x higher affinity for TR)</td><td>Less potent — "prohormone"</td></tr>
+  <tr><td class="hdr-cell">Secreted more?</td><td>Less secreted directly</td><td><strong>10x MORE secreted</strong> — main thyroid output</td></tr>
+  <tr><td class="hdr-cell">Half-life</td><td>1.5 days</td><td>6.5 days (tighter TBG binding)</td></tr>
+  <tr><td class="hdr-cell">% free</td><td>0.3%</td><td>0.03%</td></tr>
+  <tr><td class="hdr-cell">Clinical use</td><td>Liothyronine (Cytomel) — short t½, rarely used</td><td><strong>Levothyroxine (Synthroid) — standard hypothyroid Rx</strong></td></tr>
+</table>
+
+<h2 class="section">5.3 Thyroid Hormone Inhibitors</h2>
+<table>
+  <tr><th>Drug/Agent</th><th>Mechanism</th><th>Also Inhibits</th><th>Clinical Use</th></tr>
+  <tr><td class="highlight-yellow"><strong>PTU</strong></td><td>Inhibits TPO (blocks organification + coupling)</td><td><strong>ALSO inhibits peripheral T4→T3 conversion (unique!)</strong></td><td>Preferred: 1st trimester pregnancy + thyroid storm</td></tr>
+  <tr><td><strong>Methimazole (MMI)</strong></td><td>Inhibits TPO only</td><td>Does NOT inhibit T4→T3 conversion</td><td>Preferred: 2nd/3rd trimester + long-term. AVOID in 1st trimester (aplasia cutis)</td></tr>
+  <tr><td><strong>Radioactive Iodine (I-131)</strong></td><td>NIS concentrates it → β-radiation → destroys follicular cells</td><td>—</td><td>Graves' disease (definitive). Contraindicated in pregnancy</td></tr>
+  <tr><td><strong>Perchlorate/Thiocyanate</strong></td><td>Competitive inhibitors of NIS → block iodide uptake</td><td>—</td><td>Pertechnetate used for thyroid IMAGING</td></tr>
+  <tr><td><strong>Iodide (high dose / Lugol's)</strong></td><td>Wolff-Chaikoff: blocks organification. Also ↓thyroid vascularity</td><td>—</td><td>Pre-op thyroidectomy + thyroid storm</td></tr>
+</table>
+
+<h2 class="section">5.4 Thyroid Diseases</h2>
+<table>
+  <tr><th>Disease</th><th>Mechanism</th><th>TSH</th><th>T3/T4</th><th>Antibodies</th><th>Classic Finding</th></tr>
+  <tr>
+    <td class="highlight-yellow"><strong>Graves' Disease</strong></td>
+    <td>Anti-TSH receptor Ab (TSI) → chronically activate receptor</td>
+    <td class="highlight-red">↓↓ suppressed</td><td class="highlight-red">↑↑</td>
+    <td>TSI (thyroid-stimulating immunoglobulins)</td>
+    <td>Diffuse goiter, EXOPHTHALMOS, pretibial myxedema, heat intolerance, weight loss, tachycardia</td>
+  </tr>
+  <tr>
+    <td><strong>Hashimoto's Thyroiditis</strong></td>
+    <td>Anti-Tg + anti-TPO Ab → destroy follicular cells → hypothyroid</td>
+    <td>↑↑</td><td>↓ (eventually)</td>
+    <td>Anti-Tg, anti-TPO (anti-microsomal)</td>
+    <td>Most common hypothyroidism in USA. Painless goiter. Cold intolerance, weight gain, fatigue, myxedema</td>
+  </tr>
+  <tr>
+    <td><strong>Congenital Hypothyroidism</strong></td>
+    <td>Iodide deficiency or thyroid agenesis</td>
+    <td>↑↑</td><td>↓↓</td><td>None</td>
+    <td>Cretinism: intellectual disability, short stature, coarse facies. SCREENED AT BIRTH</td>
+  </tr>
+  <tr>
+    <td><strong>Endemic Goiter</strong></td>
+    <td>Chronic iodide deficiency → ↑TSH → thyroid hyperplasia</td>
+    <td>↑↑</td><td>↓</td><td>None</td><td>Neck mass, hypothyroid symptoms</td>
+  </tr>
+  <tr>
+    <td><strong>Thyroid Storm</strong></td>
+    <td>Massive TH release (surgery/infection in uncontrolled hyperthyroid)</td>
+    <td>↓↓</td><td class="highlight-red">↑↑↑</td><td>—</td>
+    <td style="color:#C00000;font-weight:bold;">Life-threatening: fever, tachycardia, AF, confusion. Rx: PTU + iodide + beta-blockers + steroids</td>
+  </tr>
+</table>
+
+<h2 class="section">5.5 Thyroid Hormone Receptor Mechanism</h2>
+<table>
+  <tr><th class="orange">WITHOUT T3 (TR on TRE)</th><th class="green">WITH T3 (TR on TRE)</th></tr>
+  <tr>
+    <td>TR bound to TRE as heterodimer with RXR. Recruits co-REPRESSORS → actively REPRESSES transcription</td>
+    <td>T3 binds TR → co-repressors leave → co-ACTIVATORS recruited → ACTIVATES transcription of: Na⁺/K⁺-ATPase (↑metabolism), β1-AR (↑HR sensitivity), SERCA2 (↑Ca²⁺ cycling), myosin isoforms</td>
+  </tr>
+</table>
+
+<div class="box how-tested">
+  <div class="box-header">🎯 HOW THIS IS TESTED — Unit 5</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>TSH interpretation is MOST TESTED:</strong> ↑TSH = primary hypothyroid | ↓TSH = hyperthyroid or central hypothyroid</li>
+      <li>Lab pattern: ↑TSH + ↓T4 = primary hypothyroid. ↓TSH + ↑T4 = primary hyperthyroid. ↓TSH + ↓T4 = secondary/central hypothyroid</li>
+      <li>Graves' vs Hashimoto's: BOTH autoimmune, BOTH can have anti-TPO. KEY DIFFERENCE: Graves = hyperthyroid + TSI; Hashimoto = hypothyroid + anti-TPO/-Tg</li>
+      <li>PTU unique: blocks TPO + blocks peripheral T4→T3 → preferred in thyroid storm and 1st trimester</li>
+      <li>Wolff-Chaikoff: used pre-op (Lugol's) or for storm; effect escapes after ~48 hours</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box traps">
+  <div class="box-header">⚠️ TEST TRAPS — Unit 5</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Exophthalmos in Graves': NOT from T3/T4 — TSI activates TSH-R on ORBITAL FIBROBLASTS → GAG deposition → swelling. Persists after thyroidectomy!</li>
+      <li>PTU vs Methimazole pregnancy: PTU in 1st trimester (MMI = aplasia cutis). Switch to MMI in 2nd/3rd trimester</li>
+      <li>Sick euthyroid syndrome: ↑rT3, ↓T3, ↓T4, normal/↓TSH — DO NOT treat with T4</li>
+      <li>Hashitoxicosis: early Hashimoto's → follicular destruction → transient hyperthyroid phase before hypothyroid</li>
+      <li>Lithium inhibits T3/T4 RELEASE → can cause hypothyroidism/goiter</li>
+      <li>Pendred syndrome: deafness + goiter — pendrin mutation (iodide can't enter colloid despite normal NIS uptake)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 9</div>
+  <div class="mini-q-stem">A 32-year-old pregnant woman (8 weeks) has Graves' disease and requires antithyroid drug therapy. Most appropriate choice?</div>
+  <div class="mini-q-choice">A) Methimazole — once daily dosing preferred</div>
+  <div class="mini-q-choice">B) Radioactive iodine — safest in young women</div>
+  <div class="mini-q-choice correct">C) PTU — also inhibits peripheral T4→T3 conversion ✓</div>
+  <div class="mini-q-choice">D) Perchlorate — blocks iodide uptake without crossing placenta</div>
+  <div class="mini-q-choice">E) Lugol's iodine — Wolff-Chaikoff provides long-term control</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ C — PTU in 1st trimester</span><br>
+    Methimazole causes aplasia cutis and choanal atresia in 1st trimester. PTU preferred + blocks T4→T3 conversion. After 1st trimester, switch to methimazole (PTU hepatotoxicity risk).<br>
+    <span class="trap-label">⚠️ Trap:</span> I-131 ABSOLUTELY contraindicated in pregnancy. Lugol's effect only transient (Wolff-Chaikoff escapes after 48h).
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">📝 MINI Q 10</div>
+  <div class="mini-q-stem">A 55-year-old woman has fatigue, cold intolerance, weight gain, constipation. TSH 12 mIU/L, T4 3.2 μg/dL, anti-TPO antibodies positive. Most specific finding confirming the diagnosis?</div>
+  <div class="mini-q-choice">A) Elevated TSH alone</div>
+  <div class="mini-q-choice">B) Low T4 and T3</div>
+  <div class="mini-q-choice">C) Positive anti-TPO antibodies</div>
+  <div class="mini-q-choice correct">D) Combination of ↑TSH + ↓T4 with positive anti-TPO ✓</div>
+  <div class="mini-q-choice">E) Low radioactive iodine uptake on scan</div>
+  <div class="mini-q-answer">
+    <span class="answer-label">✅ D — ↑TSH + ↓T4 + anti-TPO</span><br>
+    Hashimoto's = autoimmune primary hypothyroidism. ↑TSH + ↓T4/T3 confirms primary hypothyroid. Anti-TPO antibodies + hypothyroid labs = Hashimoto's specifically.<br>
+    <span class="trap-label">⚠️ Trap:</span> Graves' ALSO has anti-TPO antibodies in ~70% of cases — antibody positivity alone doesn't distinguish. Graves' = hyperthyroid labs + TSI. Hashimoto's = hypothyroid labs + anti-TPO/-Tg.
+  </div>
+</div>
+
+<div class="box hy">
+  <div class="box-header">⚡ HIGH-YIELD SUMMARY — Unit 5</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Synthesis: NIS → Pendrin → TPO (oxidation + organification + coupling) → Tg storage → TSH-stimulated release → deiodinase (T4→T3)</li>
+      <li>T4 = prohormone (more secreted, longer t½). T3 = active form (10x more potent, shorter t½)</li>
+      <li class="bold">PTU: blocks TPO + T4→T3. Methimazole: blocks TPO only. PTU preferred in 1st trimester + thyroid storm</li>
+      <li>Graves' = ↓TSH + ↑T4/T3 + TSI + exophthalmos (orbital fibroblast activation)</li>
+      <li>Hashimoto's = ↑TSH + ↓T4/T3 + anti-TPO/anti-Tg. Most common US hypothyroidism</li>
+      <li>Wolff-Chaikoff: excess iodide blocks TPO → used pre-op/storm. Escapes after 48h</li>
+      <li class="bold">TR: bound to DNA without hormone = REPRESSES. T3 binding = ACTIVATES. RXR heterodimer</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="page-divider">
+
+<!-- ═══════════════════════════════════════════ RAPID REVIEW ═══════════════════════════════════════════ -->
+<h1 class="unit">⚡ BIOCHEMISTRY RAPID REVIEW — ALL UNITS</h1>
+<p style="font-weight:bold;color:#1F3864;margin-bottom:12px;">Cover the right column and test yourself.</p>
+<table class="rr-table">
+  <tr><th>QUESTION</th><th>ANSWER</th></tr>
+  <tr><td>Receptor for cortisol, aldosterone, testosterone?</td><td>Nuclear/cytoplasmic (hydrophobic → nuclear receptor)</td></tr>
+  <tr><td>Receptor for insulin, TSH, ADH(V2)?</td><td>Cell surface (hydrophilic → GPCR or RTK)</td></tr>
+  <tr><td>Zone that makes aldosterone? Regulated by?</td><td>Zona GLOMERULOSA. Angiotensin II + K⁺</td></tr>
+  <tr><td>Zone that makes cortisol? Regulated by?</td><td>Zona FASCICULATA. ACTH (CRH→ACTH→cortisol)</td></tr>
+  <tr><td>Most common CAH: enzyme? Labs?</td><td>21β-Hydroxylase. ↑17-OH-prog, ↓cortisol, ↓aldosterone, ↑androgens</td></tr>
+  <tr><td>CAH with hypertension?</td><td>11β-Hydroxylase def (11-DOC = mineralocorticoid)</td></tr>
+  <tr><td>Why doesn't cortisol cause hyperaldosteronism?</td><td>11β-HSD2 in kidney converts cortisol → cortisone. Licorice inhibits 11β-HSD2 → apparent mineralocorticoid excess</td></tr>
+  <tr><td>46XY female phenotype, ↑T, never virilizes?</td><td>Complete Androgen Insensitivity Syndrome (CAIS) — nonfunctional AR</td></tr>
+  <tr><td>46XY female phenotype, virilizes at puberty?</td><td>5α-Reductase deficiency</td></tr>
+  <tr><td>Primary estrogen source after menopause?</td><td>Adipose aromatase: adrenal androstenedione → estrone (E1)</td></tr>
+  <tr><td>Dominant estrogen in pregnancy?</td><td>Estriol (E3) — from placenta using fetal precursors</td></tr>
+  <tr><td>ADH V2 receptor 2nd messenger?</td><td>Gs → ↑cAMP → PKA → AQP2 insertion into collecting duct</td></tr>
+  <tr><td>Central DI vs Nephrogenic DI: how to distinguish?</td><td>DDAVP test: Central = responds (concentrates). Nephrogenic = does NOT respond</td></tr>
+  <tr><td>Gestational DI: cause and treatment?</td><td>Placental vasopressinase degrades ADH. Treat with DDAVP (resistant to vasopressinase)</td></tr>
+  <tr><td>Which drug inhibits both TPO AND T4→T3 conversion?</td><td>PTU (propylthiouracil). Methimazole: only inhibits TPO</td></tr>
+  <tr><td>Which thionamide in 1st trimester? Why?</td><td>PTU — methimazole causes aplasia cutis + choanal atresia in 1st trimester</td></tr>
+  <tr><td>Wolff-Chaikoff effect?</td><td>High iodide transiently inhibits TPO → blocks organification → ↓TH synthesis. Escapes after 48h</td></tr>
+  <tr><td>Graves' vs Hashimoto's: antibody difference?</td><td>Graves': TSI (stimulate TSH-R → hyperthyroid). Hashimoto's: anti-TPO, anti-Tg → hypothyroid</td></tr>
+  <tr><td>Thyroid hormone receptor without hormone: does what?</td><td>TR bound to TRE on DNA + REPRESSES transcription</td></tr>
+  <tr><td>Exophthalmos in Graves': mechanism?</td><td>TSI activates TSH-R on ORBITAL FIBROBLASTS → GAG deposition → water retention → proptosis</td></tr>
+</table>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GUSOM Endocrine | Physiology Study Guide</title>
+<style>
+  :root {
+    --forest: #1B4332; --teal: #2D6A4F; --ltteal: #B7E4C7;
+    --yellow: #FFE699; --green: #E2EFDA; --orange: #FCE4D6;
+    --gray: #F2F2F2; --red: #C00000;
+    --forest-text: #FFFFFF; --teal-text: #FFFFFF;
+    --yellow-text: #7F6000; --green-text: #375623; --orange-text: #843C0C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; font-size: 14px; color: #000; background: #fff; line-height: 1.5; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+  .title-block { text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%); color: white; border-radius: 8px; margin-bottom: 24px; }
+  .title-block h1 { font-size: 2.4em; margin-bottom: 8px; }
+  .title-block h2 { font-size: 1.4em; font-weight: normal; opacity: 0.9; }
+  .title-units { margin-top: 16px; }
+  .title-units p { font-size: 1.05em; margin: 4px 0; color: #B7E4C7; }
+
+  h1.unit { font-size: 1.8em; color: var(--forest); border-bottom: 3px solid var(--teal); padding-bottom: 8px; margin: 32px 0 16px; }
+  h2.section { font-size: 1.3em; color: var(--teal); margin: 24px 0 10px; border-left: 4px solid var(--teal); padding-left: 10px; }
+  h3.subsection { font-size: 1.1em; color: var(--forest); margin: 16px 0 8px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th { background: var(--forest); color: white; padding: 8px 10px; text-align: left; }
+  th.teal { background: var(--teal); }
+  th.orange { background: var(--orange); color: var(--orange-text); }
+  th.green { background: var(--green); color: var(--green-text); }
+  th.yellow { background: var(--yellow); color: var(--yellow-text); }
+  td { padding: 7px 10px; border: 1px solid #CCCCCC; vertical-align: top; }
+  tr:nth-child(even) td { background: #F4FAF7; }
+  td.hdr-cell { background: var(--ltteal); font-weight: bold; }
+  td.highlight-yellow { background: var(--yellow); }
+  td.highlight-red { color: var(--red); font-weight: bold; }
+
+  .box { border-radius: 6px; margin: 14px 0; overflow: hidden; }
+  .box-header { padding: 8px 14px; font-weight: bold; font-size: 1em; }
+  .box-body { padding: 12px 14px; }
+  .box.how-tested .box-header { background: var(--orange); color: var(--orange-text); }
+  .box.how-tested .box-body { background: #FEF9F6; }
+  .box.traps .box-header { background: var(--yellow); color: var(--yellow-text); }
+  .box.traps .box-body { background: #FFFDF0; }
+  .box.hy .box-header { background: var(--green); color: var(--green-text); }
+  .box.hy .box-body { background: #F4FAF0; }
+  .box.tips .box-header { background: var(--ltteal); color: var(--forest); }
+  .box.tips .box-body { background: #F0FAF4; }
+
+  ul.styled { list-style: none; padding: 0; margin: 6px 0; }
+  ul.styled li { padding: 3px 0 3px 18px; position: relative; font-size: 13px; }
+  ul.styled li::before { content: "•"; position: absolute; left: 4px; color: var(--teal); font-weight: bold; }
+  ul.styled li.bold { font-weight: bold; }
+
+  .mini-q { border: 2px solid var(--forest); border-radius: 6px; margin: 16px 0; overflow: hidden; }
+  .mini-q-header { background: var(--forest); color: white; padding: 7px 12px; font-weight: bold; font-size: 0.95em; }
+  .mini-q-stem { padding: 10px 12px; background: var(--gray); font-size: 13px; }
+  .mini-q-choice { padding: 5px 12px; border-top: 1px solid #ddd; font-size: 13px; }
+  .mini-q-choice.correct { background: var(--green); font-weight: bold; color: var(--green-text); }
+  .mini-q-answer { padding: 10px 12px; background: #EBF5E6; border-top: 2px solid #52BE80; font-size: 13px; }
+  .mini-q-answer .answer-label { font-weight: bold; color: var(--green-text); }
+  .mini-q-answer .trap-label { font-weight: bold; color: var(--red); }
+
+  .toc { background: #F4FAF7; border: 1px solid var(--ltteal); border-radius: 6px; padding: 16px 20px; margin-bottom: 24px; }
+  .toc h3 { color: var(--forest); margin-bottom: 10px; }
+  .toc ol { margin-left: 18px; }
+  .toc li { padding: 3px 0; font-size: 13px; }
+  .toc a { color: var(--teal); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .divider { border: none; border-top: 2px solid var(--ltteal); margin: 32px 0; }
+  p { margin: 6px 0; font-size: 13px; }
+  strong { color: #1B4332; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- TITLE -->
+<div class="title-block">
+  <h1>GUSOM Endocrine Block</h1>
+  <h2>Physiology Study Guide</h2>
+  <div class="title-units">
+    <p>L1 · Hypothalamic-Pituitary Relationships I &nbsp;|&nbsp; L2 · Hypothalamic-Pituitary Relationships II</p>
+    <p>L3 · Posterior Pituitary Hormones &nbsp;|&nbsp; L4 · GH Axis &nbsp;|&nbsp; L4b · HP-Thyroid Axis &nbsp;|&nbsp; L5 · HPA Axis &nbsp;|&nbsp; L6 · Stress Integration</p>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>📋 Table of Contents</h3>
+  <ol>
+    <li><a href="#L1">L1 — Hypothalamic-Pituitary Hormone Relationships I</a></li>
+    <li><a href="#L2">L2 — Hypothalamic-Pituitary Hormone Relationships II</a></li>
+    <li><a href="#L3">L3 — Posterior Pituitary Hormones (Vasopressin &amp; Oxytocin)</a></li>
+    <li><a href="#L4">L4 — Hypothalamic-Pituitary-Growth Hormone Axis</a></li>
+    <li><a href="#L4b">L4b — Hypothalamic-Pituitary-Thyroid Axis</a></li>
+    <li><a href="#L5">L5 — Hypothalamic-Pituitary-Adrenal Axis</a></li>
+    <li><a href="#L6">L6 — Stress, Stress Hormones &amp; Pathophysiology Integration</a></li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- LECTURE 1 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<h1 class="unit" id="L1">L1 — Hypothalamic-Pituitary Hormone Relationships I</h1>
+
+<h2 class="section">Endocrine Gland Classification</h2>
+<table>
+  <tr><th>Category</th><th>Definition</th><th>Examples</th></tr>
+  <tr><td class="hdr-cell">Primary endocrine organs</td><td>Main purpose = secreting hormones</td><td>Adrenal gland, thyroid gland, gonads (also produce gametes)</td></tr>
+  <tr><td class="hdr-cell">Secondary endocrine organs</td><td>Hormone secretion is a secondary function</td><td>Heart (ANP), kidney (EPO), pancreas (insulin)</td></tr>
+  <tr><td class="hdr-cell">Hypothalamic-independent organs</td><td>Self-regulate based on metabolic substrates; NOT under H-P control</td><td>Pancreas (insulin via blood glucose); parathyroid (blood Ca²⁺)</td></tr>
+</table>
+
+<h2 class="section">Hypothalamus &amp; Pituitary Anatomy</h2>
+<ul class="styled">
+  <li>Hypothalamus = part of the diencephalon; sits superior to the pituitary in the sella turcica of the sphenoid bone</li>
+  <li>Connected by the <strong>infundibulum</strong> (pituitary stalk)</li>
+  <li>Anterior pituitary = <strong>adenohypophysis</strong> (glandular tissue; "pars distalis")</li>
+  <li>Posterior pituitary = <strong>neurohypophysis</strong> (neural tissue; axon terminals from hypothalamic neurons)</li>
+  <li><strong>Pars intermedia</strong>: involutes in adults (degenerates; present in fetal/early childhood)</li>
+</ul>
+
+<h3 class="subsection">Key Hypothalamic Nuclei</h3>
+<table>
+  <tr><th>Nucleus</th><th>Abbreviation</th><th>Primary Output</th></tr>
+  <tr><td>Supraoptic nucleus</td><td>SON</td><td>ADH (vasopressin), oxytocin</td></tr>
+  <tr><td>Paraventricular nucleus</td><td>PVN</td><td>CRH, ADH, oxytocin; stress integration</td></tr>
+  <tr><td>Suprachiasmatic nucleus</td><td>SCN</td><td>Circadian rhythm regulation</td></tr>
+  <tr><td>Medial preoptic nucleus</td><td>—</td><td>GnRH</td></tr>
+  <tr><td>Dorsomedial nucleus</td><td>—</td><td>GnIH</td></tr>
+  <tr><td>Anterior hypothalamic area</td><td>—</td><td>TRH</td></tr>
+  <tr><td>Ventromedial nucleus</td><td>—</td><td>GHRH</td></tr>
+  <tr><td>Periventricular nucleus</td><td>—</td><td>Somatostatin (GHIH)</td></tr>
+  <tr><td>Arcuate nucleus</td><td>—</td><td>Near median eminence; neuroendocrine integration</td></tr>
+</table>
+
+<h2 class="section">Hypophyseal Portal System</h2>
+<p>Hypothalamic releasing/inhibiting hormones enter the <strong>first capillary network in the median eminence</strong>, travel via portal vessels down the infundibulum, and reach the <strong>second capillary bed in the anterior pituitary</strong>. This is the <strong>superior hypophyseal artery</strong> system.</p>
+<ul class="styled">
+  <li>Median eminence: area where blood-brain barrier is weakened → hormones can enter portal bloodstream</li>
+  <li>Neurohypophysis has a <em>separate</em> blood supply (inferior hypophyseal artery)</li>
+  <li>Circumventricular organs (OVLT, median eminence, neurohypophysis) = "windows through the BBB" for sensing blood composition</li>
+</ul>
+
+<h2 class="section">The Three Ways the Hypothalamus Controls the Body</h2>
+<table>
+  <tr><th>#</th><th>Mechanism</th><th>Key Details</th></tr>
+  <tr><td>1</td><td>Production of ADH &amp; oxytocin</td><td>Made in hypothalamic neurons; transported via fast axonal transport to posterior pituitary for storage &amp; release</td></tr>
+  <tr><td>2</td><td>Releasing/inhibiting hormones → anterior pituitary</td><td>Enter median eminence → portal system → adenohypophysis → control anterior pituitary secretory cells</td></tr>
+  <tr><td>3</td><td>Sympathetic output to adrenal medulla</td><td>Via splanchnic nerve → chromaffin cells → adrenaline secretion (least important in this course)</td></tr>
+</table>
+
+<h2 class="section">Hypothalamic Hormones Summary</h2>
+<table>
+  <tr><th>Hormone</th><th>Target</th><th>Effect on Anterior Pituitary</th><th>Notes</th></tr>
+  <tr><td>GnRH (gonadotropin-RH)</td><td>Gonadotropes</td><td>↑ LH, FSH release</td><td>Pulsatile release required; continuous → desensitization</td></tr>
+  <tr><td>GnIH (gonadotropin-IH)</td><td>Gonadotropes</td><td>↓ LH, FSH release</td><td>Mediates stress-induced amenorrhea</td></tr>
+  <tr><td>CRH (corticotropin-RH)</td><td>Corticotropes</td><td>↑ ACTH release</td><td>41-aa peptide; co-released with vasopressin</td></tr>
+  <tr><td>TRH (thyrotropin-RH)</td><td>Thyrotropes</td><td>↑ TSH release</td><td>Also stimulates prolactin</td></tr>
+  <tr><td>GHRH (GH-RH)</td><td>Somatotropes</td><td>↑ GH release</td><td>Converges on PKA with somatostatin</td></tr>
+  <tr><td>Somatostatin (GHIH)</td><td>Somatotropes</td><td>↓ GH release</td><td>Also inhibits TSH; GI effects</td></tr>
+  <tr><td class="highlight-yellow"><strong>PIH (dopamine)</strong></td><td class="highlight-yellow">Lactotropes</td><td class="highlight-yellow"><strong>↓ Prolactin ONLY</strong></td><td class="highlight-yellow"><strong>Small molecule (NOT a peptide); ONLY inhibitory control for prolactin</strong></td></tr>
+</table>
+
+<div class="box hy">
+  <div class="box-header">⭐ High-Yield</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>Prolactin is the ONLY anterior pituitary hormone under exclusively inhibitory hypothalamic control.</strong> All others have at least one releasing hormone. PIH = dopamine (a small molecule, unlike all other hypothalamic hormones which are peptides).</li>
+      <li>Cut the infundibulum (ligate the stalk) → <strong>prolactin rises</strong> (dopamine inhibition removed), all others fall (lose their releasing hormones).</li>
+      <li>Pars intermedia produces MSH in fetal life; in adults, MSH is produced mainly by ACTH cleavage from POMC.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box traps">
+  <div class="box-header">⚠️ Common Traps</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Anterior pituitary ≠ directly neural. It is <em>glandular</em> (adenohypophysis). The posterior pituitary is neural (axon terminals).</li>
+      <li>The pancreas is <em>NOT</em> under hypothalamic-pituitary control — it self-regulates via blood glucose.</li>
+      <li>TRH stimulates <em>both</em> TSH and prolactin secretion from the anterior pituitary.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">🧪 Practice Question</div>
+  <div class="mini-q-stem">A researcher ligates the infundibular stalk in a rat, cutting portal blood flow to the anterior pituitary. Twenty-four hours later, which hormone is most likely to be <em>elevated</em> in serum?</div>
+  <div class="mini-q-choice">A. TSH</div>
+  <div class="mini-q-choice">B. FSH</div>
+  <div class="mini-q-choice correct">C. Prolactin ✓</div>
+  <div class="mini-q-choice">D. GH</div>
+  <div class="mini-q-choice">E. ACTH</div>
+  <div class="mini-q-answer"><span class="answer-label">Answer: C.</span> Prolactin is the only anterior pituitary hormone under exclusively <em>inhibitory</em> hypothalamic control (via dopamine/PIH). Cutting the stalk removes dopaminergic inhibition → prolactin rises. All other anterior pituitary hormones lose their releasing-hormone signals and fall.</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- LECTURE 2 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<h1 class="unit" id="L2">L2 — Hypothalamic-Pituitary Hormone Relationships II</h1>
+
+<h2 class="section">Histology of the Adenohypophysis</h2>
+<table>
+  <tr><th>Cell Type</th><th>Staining</th><th>Hormone(s) Produced</th><th>Cell Name</th></tr>
+  <tr><td class="hdr-cell">Acidophils</td><td>Pink (eosinophilic)</td><td>GH</td><td>Somatotropes</td></tr>
+  <tr><td class="hdr-cell">Acidophils</td><td>Pink (eosinophilic)</td><td>Prolactin</td><td>Lactotropes</td></tr>
+  <tr><td class="hdr-cell">Basophils</td><td>Purple (hematoxylin)</td><td>FSH, LH</td><td>Gonadotropes</td></tr>
+  <tr><td class="hdr-cell">Basophils</td><td>Purple (hematoxylin)</td><td>ACTH (from POMC)</td><td>Corticotropes</td></tr>
+  <tr><td class="hdr-cell">Basophils</td><td>Purple (hematoxylin)</td><td>TSH</td><td>Thyrotropes</td></tr>
+  <tr><td class="hdr-cell">Chromophobes</td><td>Clear (non-staining)</td><td>None (supporting cells)</td><td>—</td></tr>
+</table>
+<p>All anterior pituitary hormones are <strong>peptides or glycoproteins</strong>. H&amp;E staining can distinguish acidophil vs basophil categories but not specific subtypes. Dense fenestrated capillaries throughout the adenohypophysis enable hormone secretion into blood.</p>
+
+<h2 class="section">Feedback Loop Types</h2>
+<table>
+  <tr><th>Loop</th><th>Source of Signal</th><th>Target</th><th>Example</th></tr>
+  <tr><td class="hdr-cell">Long-loop negative feedback</td><td>Terminal (effector) hormone from distal gland</td><td>Hypothalamus &amp; anterior pituitary</td><td>Cortisol inhibits CRH &amp; ACTH; IGF-1 inhibits GHRH &amp; GH</td></tr>
+  <tr><td class="hdr-cell">Short-loop negative feedback</td><td>Anterior pituitary hormone</td><td>Hypothalamus</td><td>GH inhibits GHRH release</td></tr>
+  <tr><td class="hdr-cell">Ultrashort-loop negative feedback</td><td>Hypothalamic hormone itself</td><td>Same releasing neuron (via axon collaterals)</td><td>GHRH inhibits its own releasing neuron</td></tr>
+</table>
+
+<h2 class="section">Pulsatile Secretion</h2>
+<ul class="styled">
+  <li>Ultrashort-loop autoinhibition creates <strong>pulsatile secretion patterns</strong></li>
+  <li>Prevents target cell desensitization/habituation (constant hormone = no new signal = receptor downregulation)</li>
+  <li><strong>GnRH must be pulsatile</strong> — continuous GnRH → pituitary desensitization → ↓LH/FSH (used therapeutically as Leuprolide for prostate cancer, endometriosis)</li>
+  <li>Pulsatile patterns are superimposed on ultradian and circadian rhythms</li>
+</ul>
+
+<h2 class="section">Positive Feedback (Exception to the Rule)</h2>
+<ul class="styled">
+  <li>Most hormonal axes use <em>negative</em> feedback. Key exceptions:</li>
+  <li><strong>Estradiol surge → LH surge (ovulation):</strong> Gradually rising [estradiol] over the follicular phase switches GnRH regulation from negative to positive feedback → LH surge → ovulation</li>
+  <li><strong>Oxytocin in labor:</strong> Uterine contractions stimulate more oxytocin release (Ferguson reflex) → contractions intensify until delivery</li>
+  <li>Similar positive feedback drives ejaculation in males</li>
+</ul>
+
+<h2 class="section">Hormones That Influence Growth (Overview)</h2>
+<table>
+  <tr><th>Hormone</th><th>Primary Role in Growth</th><th>Key Detail</th></tr>
+  <tr><td>GH</td><td>Drives cell division, linear growth in children</td><td>Via IGF-1 (liver); GH alone insufficient in adults</td></tr>
+  <tr><td>Thyroid hormones (T3/T4)</td><td>CNS development in infancy; pubertal skeletal growth</td><td>Congenital deficiency → cretinism (irreversible intellectual disability)</td></tr>
+  <tr><td>Insulin</td><td>Drives glucose uptake for cell metabolism</td><td>Required for liver to respond to GH and secrete IGF-1</td></tr>
+  <tr><td>Androgens &amp; estrogens</td><td>Secondary sex characteristics; skeletal muscle anabolism; bone maintenance</td><td>Estrogen closes epiphyseal plates (growth plates)</td></tr>
+  <tr><td>PTH, calcitonin, calcitriol</td><td>Bone growth via Ca²⁺ retention</td><td>Especially important in children</td></tr>
+</table>
+
+<div class="box hy">
+  <div class="box-header">⭐ High-Yield</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>"GH acts fast, anabolic; when fasting, GH spares glucose."</strong> Dual roles of GH are a core exam concept (see L4).</li>
+      <li>Prolactin: causes milk <em>production</em>. Oxytocin: causes milk <em>ejection</em> (let-down reflex). Don't confuse these.</li>
+      <li>Sudden unexplained hyperpigmentation → think excess ACTH → cleaved to produce excess MSH → skin darkening.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box how-tested">
+  <div class="box-header">📝 How This Is Tested</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Histology question: identify anterior vs posterior pituitary on H&amp;E; anterior = densely cellular (purple dots), posterior = sparse glial cells + Herring bodies</li>
+      <li>Feedback loop questions: know which hormone feeds back to which level (long, short, ultrashort)</li>
+      <li>Positive feedback: ovulation LH surge mechanism; why GnRH agonists cause initial flare then suppression</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- LECTURE 3 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<h1 class="unit" id="L3">L3 — Posterior Pituitary Hormones: Vasopressin &amp; Oxytocin</h1>
+
+<h2 class="section">Structure of AVP &amp; OXT</h2>
+<ul class="styled">
+  <li>Both are <strong>nonapeptides</strong> (9 amino acids)</li>
+  <li>Both have a <strong>cyclic disulfide bond</strong> at the N-terminus (protects from aminopeptidases) and an <strong>amide group at C-terminus</strong> (protects from carboxypeptidases)</li>
+  <li>Differ by only 2 amino acids (positions 3 and 8)</li>
+  <li>Synthesized in <strong>magnocellular neurons</strong> of the SON and PVN of the hypothalamus</li>
+  <li>Transported down axons → stored as Herring bodies in posterior pituitary → released into fenestrated capillaries</li>
+</ul>
+
+<h2 class="section">Vasopressin (ADH/AVP) Receptors &amp; Actions</h2>
+<table>
+  <tr><th>Receptor</th><th>Location</th><th>Second Messenger</th><th>Effect</th></tr>
+  <tr><td class="hdr-cell">V2R (V2 receptor)</td><td>Distal tubule &amp; collecting duct of kidney</td><td>Gs → cAMP → PKA</td><td>↑ Aquaporin-2 insertion → water reabsorption (antidiuresis)</td></tr>
+  <tr><td class="hdr-cell">V1a receptor</td><td>Vascular smooth muscle, myoepithelial cells (breast, uterus), CNS</td><td>Gq → PLC → IP3/DAG</td><td>Vasoconstriction; milk ejection; uterine contraction</td></tr>
+</table>
+
+<h2 class="section">Regulation of AVP Secretion</h2>
+<table>
+  <tr><th colspan="2" class="teal">Stimulate AVP Release</th><th colspan="2" class="orange">Inhibit AVP Release</th></tr>
+  <tr><th>Stimulus</th><th>Mechanism</th><th>Stimulus</th><th>Mechanism</th></tr>
+  <tr><td>↑ Plasma osmolality (above ~280 mOsm/kg)</td><td>Osmoreceptors in OVLT/SFO (circumventricular organs)</td><td>↓ Plasma osmolality</td><td>Below osmotic threshold</td></tr>
+  <tr><td>↓ Blood pressure / ↓ blood volume</td><td>Baroreceptors (aortic arch, carotid sinus, L atrium)</td><td>↑ Blood pressure</td><td>Baroreceptor activation inhibits AVP</td></tr>
+  <tr><td>Pain, stress, nausea/vomiting</td><td>CNS integration</td><td>Oropharyngeal cold receptors</td><td>Drinking cold water inhibits AVP before osmolality corrects (anticipatory reflex)</td></tr>
+  <tr><td>Angiotensin II signaling</td><td>Downstream of RAAS</td><td>Ethanol</td><td>Suppresses ADH → diuresis (hangover dehydration)</td></tr>
+</table>
+
+<h3 class="subsection">Key Thresholds</h3>
+<ul class="styled">
+  <li><strong>Osmotic threshold for AVP secretion:</strong> ~280 mOsm/kg (linear relationship above this)</li>
+  <li><strong>Osmotic threshold for thirst:</strong> ~5–10 mOsm/kg <em>above</em> the AVP threshold</li>
+  <li>Maximal antidiuresis at AVP ≈ 5 pg/mL; additional AVP above this does not further concentrate urine</li>
+  <li>As MAP ↑, the osmotic threshold for AVP rises → harder to stimulate AVP when BP is elevated</li>
+</ul>
+
+<h2 class="section">Diabetes Insipidus (DI)</h2>
+<p><strong>Definition:</strong> Large volumes of dilute urine that cannot be reduced by water restriction. Serum = hypernatremia. Urine = hypotonic.</p>
+<table>
+  <tr><th>Type</th><th>Cause</th><th>ADH Level</th><th>Response to DDAVP</th><th>Treatment</th></tr>
+  <tr><td class="hdr-cell">Central (neurogenic) DI</td><td>Can't make/secrete AVP (head trauma, pituitary tumors, stalk section, familial mutations)</td><td class="highlight-red">↓ or absent</td><td>✅ YES — responds (kidney OK)</td><td>DDAVP (desmopressin) intranasally or orally</td></tr>
+  <tr><td class="hdr-cell">Nephrogenic DI</td><td>Kidney doesn't respond to AVP (V2R mutations, lithium toxicity, hypercalcemia)</td><td class="highlight-red">↑ (can't use it)</td><td>❌ NO — kidney is the problem</td><td>Thiazides; indomethacin (AQP2 mutations)</td></tr>
+  <tr><td class="hdr-cell">Gestational DI</td><td>Placenta ↑ vasopressinase → degrades AVP faster</td><td>↓ (destroyed)</td><td>✅ YES — DDAVP (resistant to vasopressinase)</td><td>DDAVP (resolves postpartum)</td></tr>
+  <tr><td class="hdr-cell">Primary polydipsia (psychogenic)</td><td>Excessive drinking (psychiatric, OCD, iatrogenic); no real AVP deficit</td><td>↓ (suppressed by dilution)</td><td>Already hydrated; withhold water</td><td>Restrict water intake</td></tr>
+</table>
+
+<h3 class="subsection">DDAVP (Desmopressin) — Key Properties</h3>
+<ul class="styled">
+  <li><strong>1-desamino-8-D-arginine vasopressin</strong>: structural modifications = deaminated at position 1, D-arginine at position 8</li>
+  <li>Selectively binds <strong>V2R only</strong> (no V1a binding → no vasoconstriction, no BP effects)</li>
+  <li><strong>Longer half-life</strong> than AVP (deaminated residue protects from degradation)</li>
+  <li>Administered intranasally (bypasses first-pass metabolism, highly vascularized nasal mucosa, peptide-safe)</li>
+  <li>Resistant to vasopressinase → effective in gestational DI</li>
+</ul>
+
+<h2 class="section">Oxytocin</h2>
+<ul class="styled">
+  <li>Receptor couples to <strong>Gq → PLC → IP3 → Ca²⁺</strong> in uterus and breast</li>
+  <li>Also activates <strong>PLA2</strong> in uterus → prostaglandins → cervical ripening and pliability</li>
+  <li><strong>Milk ejection (let-down):</strong> suckling → sensory input → hypothalamus → OT release → myoepithelial cells contract → milk ejected into ducts</li>
+  <li><strong>Labor contractions:</strong> Uterine OT receptors only expressed near term (prevent premature contractions). OT drives contractions → positive feedback (Ferguson reflex) → more OT</li>
+  <li>Tocolysis with atosiban (OT antagonist) is not effective — OT plays only a minor role in initiating labor</li>
+  <li>Behavioral roles: pair bonding, social recognition, memory, metabolism</li>
+</ul>
+
+<div class="box hy">
+  <div class="box-header">⭐ High-Yield</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>DI = hypernatremia + dilute urine + polydipsia/polyuria.</strong> Distinguishing central from nephrogenic: water deprivation test + response to DDAVP.</li>
+      <li><strong>Lithium → nephrogenic DI</strong> (blocks V2R signaling). Up to 20% of lithium users affected.</li>
+      <li><strong>Alcohol → ↓ ADH → diuresis</strong> — classic trap: ethanol suppresses AVP.</li>
+      <li>Oxytocin = milk <em>ejection</em> (let-down). Prolactin = milk <em>production</em>. These are different mechanisms and different cells.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box traps">
+  <div class="box-header">⚠️ Common Traps</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>DI → hypernatremia</strong>, not hyponatremia. You are losing free water → serum sodium concentrates. SIADH = hyponatremia (too much water retained).</li>
+      <li>Nephrogenic DI has <em>high</em> ADH (kidney can't respond); central DI has <em>low</em> ADH.</li>
+      <li>DDAVP is selective for V2R (not V1a) → no vasoconstriction; safe for long-term use in DI without BP changes.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">🧪 Practice Question</div>
+  <div class="mini-q-stem">A 35-year-old man presents with polyuria and polydipsia. Labs show serum Na⁺ 152 mEq/L, serum osmolality 305 mOsm/kg, urine osmolality 90 mOsm/kg. After water deprivation, urine osmolality increases to 580 mOsm/kg. After DDAVP administration, urine osmolality increases to 700 mOsm/kg. Which diagnosis best fits?</div>
+  <div class="mini-q-choice correct">A. Central diabetes insipidus ✓</div>
+  <div class="mini-q-choice">B. Nephrogenic diabetes insipidus</div>
+  <div class="mini-q-choice">C. SIADH</div>
+  <div class="mini-q-choice">D. Primary polydipsia</div>
+  <div class="mini-q-answer"><span class="answer-label">Answer: A.</span> Hypernatremia + dilute urine = DI. Response to DDAVP (urine concentrates further) = kidneys are intact → central DI (can't make ADH). Nephrogenic DI: kidneys would NOT respond to DDAVP. Primary polydipsia: serum osmolality would be LOW (too much water), not elevated.</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- LECTURE 4 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<h1 class="unit" id="L4">L4 — Hypothalamic-Pituitary-Growth Hormone Axis</h1>
+
+<h2 class="section">GH Axis Overview</h2>
+<table>
+  <tr><th>Level</th><th>Signal</th><th>Feedback to Hypothalamus</th></tr>
+  <tr><td class="hdr-cell">Hypothalamus</td><td>GHRH (stimulates) / Somatostatin (inhibits)</td><td>Ultrashort loop (GHRH auto-inhibition)</td></tr>
+  <tr><td class="hdr-cell">Anterior pituitary</td><td>GH released from somatotropes</td><td>Short-loop: GH → inhibits GHRH, stimulates SS</td></tr>
+  <tr><td class="hdr-cell">Liver (primary target)</td><td>GH → IGF-1 (somatomedin C) release</td><td>Long-loop: IGF-1 → inhibits GHRH, stimulates SS; also inhibits GH from pituitary</td></tr>
+</table>
+<ul class="styled">
+  <li>GH = 191-aa protein; secreted from <strong>somatotropes</strong> in the anterior pituitary</li>
+  <li>50% of GH circulates bound to <strong>GHBP</strong> (growth hormone-binding protein) → ↑ half-life (~20 min)</li>
+  <li>IGF-1 = 70-aa peptide; almost entirely bound to <strong>IGFBP</strong> (IGF-binding protein) → half-life ~12 hours</li>
+  <li>IGFBP proteases cleave IGFBP to release and activate IGF-1</li>
+  <li>GH high homology to prolactin → can bind PRL receptor at high concentrations</li>
+</ul>
+
+<h2 class="section">Dual Roles of GH</h2>
+<table>
+  <tr><th>State</th><th>GH Action</th><th>Target Tissues</th><th>Metabolic Effect</th></tr>
+  <tr><td class="hdr-cell">Fed state (↑ AA)</td><td>Protein anabolism</td><td>Muscle, liver, adipose</td><td>↑ Protein synthesis; ↑ glucose uptake (insulin-like)</td></tr>
+  <tr><td class="hdr-cell">Fasting state (↓ glucose)</td><td>Glucose-sparing effect</td><td>Muscle, adipose</td><td>↓ Glucose uptake (insulin antagonism); ↑ lipolysis; ↑ gluconeogenesis (liver)</td></tr>
+</table>
+<ul class="styled">
+  <li>GH release <em>stimulated</em> by high serum [AA]; GH release <em>inhibited</em> by high serum [glucose]</li>
+  <li><strong>Insulin is required for GH → IGF-1 axis:</strong> Insulin drives GH receptor expression in liver → without insulin, liver cannot respond to GH to secrete IGF-1. <em>Balanced meal = growth.</em></li>
+  <li>A carb-heavy, protein-light meal → energy storage (insulin driven) but NOT growth</li>
+</ul>
+
+<h2 class="section">The Diabetogenic Effect of GH</h2>
+<p>When GH is chronically elevated, its glucose-sparing effects in muscle and adipose induce <strong>insulin resistance</strong>. Serum [glucose] and [FFAs] rise → ↑ incidence of <strong>diabetes mellitus</strong>. Disorders of excess GH secretion (gigantism, acromegaly) are associated with DM.</p>
+
+<h2 class="section">Regulators of GH Secretion</h2>
+<table>
+  <tr><th class="teal">Stimulate GH</th><th class="orange">Inhibit GH</th></tr>
+  <tr><td>↓ Serum glucose (fasting, hypoglycemia)</td><td>↑ Serum glucose</td></tr>
+  <tr><td>↓ Serum free fatty acids</td><td>↑ Serum free fatty acids</td></tr>
+  <tr><td>↑ Serum amino acids</td><td>Hypercortisolemia (chronic/intense stress, Cushing's)</td></tr>
+  <tr><td>Deep sleep (slow-wave, stage 4) / melatonin</td><td>Obesity / hyperinsulinemia</td></tr>
+  <tr><td>Exercise (powerful stimulus)</td><td>Pregnancy (human placental lactogen replaces GH)</td></tr>
+  <tr><td>Physiological [cortisol] (permissive)</td><td>Somatostatin (GHIH)</td></tr>
+  <tr><td>Sex steroids (estradiol, testosterone)</td><td>IGF-1 (long-loop feedback)</td></tr>
+</table>
+
+<h3 class="subsection">GH Secretion Pattern Over a Lifetime</h3>
+<table>
+  <tr><th>Life Stage</th><th>GH Level</th><th>Why</th></tr>
+  <tr><td>Fetus/neonate</td><td>Low (GH)</td><td>Fetal growth driven by hPL (human placental lactogen) and insulin, NOT GH</td></tr>
+  <tr><td>Childhood</td><td>High</td><td>Drives linear growth; essential period</td></tr>
+  <tr><td>Puberty</td><td>Highest</td><td>Sex steroids amplify GH → final linear growth spurt</td></tr>
+  <tr><td>Adulthood</td><td>Moderate plateau</td><td>Tissue maintenance; can tolerate low GH</td></tr>
+  <tr><td>Old age</td><td>Declining</td><td>↓ Sex steroids → ↓ GH → slower tissue repair</td></tr>
+</table>
+
+<h2 class="section">Disorders of GH</h2>
+<table>
+  <tr><th>Disorder</th><th>Cause</th><th>Features</th><th>Treatment</th></tr>
+  <tr><td class="hdr-cell">GH Deficiency (pituitary dwarfism)</td><td>↓ GH production (pituitary defect)</td><td>Short stature, proportionate body; most detrimental in childhood</td><td>Recombinant GH injections</td></tr>
+  <tr><td class="hdr-cell">Laron Syndrome (GH insensitivity)</td><td>GH receptor mutation (can't respond to GH)</td><td>Phenotype similar to pituitary dwarfism but ↑ GH, ↓ IGF-1</td><td>Recombinant IGF-1; gene therapy (difficult)</td></tr>
+  <tr><td class="hdr-cell">Gigantism</td><td>Excess GH <em>before</em> epiphyseal plate closure</td><td>Proportionate tall stature; heart failure (#1 cause of death — heart must supply massive body)</td><td>Resect pituitary adenoma; somatostatin analogues (octreotide)</td></tr>
+  <tr><td class="hdr-cell">Acromegaly</td><td>Excess GH <em>after</em> epiphyseal plate closure</td><td>↑ Hands/feet/jaw (acral growth); macroglossia; skin thickening; ptosis; insulin resistance → DM; bitemporal hemianopsia (if pituitary adenoma compresses optic chiasm)</td><td>Resect pituitary adenoma; octreotide; pegvisomant (GH receptor antagonist)</td></tr>
+</table>
+
+<div class="box hy">
+  <div class="box-header">⭐ High-Yield</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>GH is anabolic when fed, glucose-sparing when fasting.</strong> This dual role and its interaction with insulin are extremely high-yield.</li>
+      <li><strong>Laron syndrome = ↑ GH but ↓ IGF-1</strong> (receptor problem). Classic trap: mistaken for GH deficiency because phenotype is similar.</li>
+      <li><strong>Acromegaly</strong>: think pituitary adenoma in an adult. Bitemporal hemianopsia = optic chiasm compression. Almost always a prolactinoma or GH-secreting adenoma (check visual fields in any pituitary mass).</li>
+      <li><strong>Fetal growth is NOT GH-dependent</strong> — hPL (human placental lactogen / hCS) from the placenta drives intrauterine growth.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box traps">
+  <div class="box-header">⚠️ Common Traps</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Insulin is required for GH to signal through the liver. In insulin-deficient states (T1DM), GH can't drive IGF-1 → poor growth despite normal GH secretion.</li>
+      <li>GH deficiency in adults: surprisingly well-tolerated (sex steroids/other hormones compensate). Most detrimental during childhood.</li>
+      <li>Chronic hypercortisolemia (Cushing's) <em>inhibits</em> GH — opposite of what physiological cortisol does.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">🧪 Practice Question</div>
+  <div class="mini-q-stem">A 12-year-old boy is evaluated for short stature. Serum GH level is markedly elevated. IGF-1 level is markedly decreased. He does not respond to recombinant GH therapy. Which of the following is the most likely diagnosis?</div>
+  <div class="mini-q-choice">A. GH-secreting pituitary adenoma</div>
+  <div class="mini-q-choice">B. Pituitary dwarfism</div>
+  <div class="mini-q-choice correct">C. Laron syndrome ✓</div>
+  <div class="mini-q-choice">D. Constitutional growth delay</div>
+  <div class="mini-q-choice">E. Hypothyroidism</div>
+  <div class="mini-q-answer"><span class="answer-label">Answer: C.</span> Laron syndrome = GH receptor (or post-receptor signaling) mutation. GH is made in excess (trying to compensate) but cannot signal → no IGF-1 production. Phenotypically similar to GH deficiency (dwarfism) but with HIGH GH. Recombinant GH won't help — needs recombinant IGF-1.</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- LECTURE 4b — HP-THYROID AXIS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<h1 class="unit" id="L4b">L4b — Hypothalamic-Pituitary-Thyroid Axis</h1>
+<p style="color:#555;font-size:13px;margin-bottom:10px"><em>Integration lecture — builds on Biochem L5 (Thyroid Hormone Synthesis &amp; Action). Focus here: axis regulation, feedback, carrier proteins, axis interpretation in disease.</em></p>
+
+<h2 class="section">The HP-Thyroid Axis Cascade</h2>
+<table>
+  <tr><th>Level</th><th>Structure</th><th>Hormone</th><th>Notes</th></tr>
+  <tr><td class="hdr-cell">1 — Hypothalamus</td><td>PVN (parvocellular neurons)</td><td>TRH (thyrotropin-releasing hormone)</td><td>Tripeptide (pGlu-His-Pro); released in pulsatile fashion into portal blood; also stimulates prolactin (minor)</td></tr>
+  <tr><td class="hdr-cell">2 — Anterior Pituitary</td><td>Thyrotrope cells (basophils)</td><td>TSH (thyroid-stimulating hormone)</td><td>Glycoprotein (α + β subunits); α shared with FSH, LH, hCG; β subunit is unique/specific</td></tr>
+  <tr><td class="hdr-cell">3 — Thyroid Gland</td><td>Follicular cells</td><td>T4 (80% of secretion), T3 (20% direct)</td><td>TSH → TSHR → Gs→cAMP→PKA → activates NIS (iodine uptake), TPO, and thyroglobulin processing; also Gq at high [TSH] → follicular cell growth/hypertrophy</td></tr>
+  <tr><td class="hdr-cell">4 — Peripheral Tissues</td><td>Liver, kidney, muscle, brain</td><td>T3 (active form)</td><td>Deiodinase converts T4→T3; T3 feeds back on hypothalamus + pituitary to suppress TRH and TSH</td></tr>
+</table>
+
+<h2 class="section">T4 vs. T3 — Prohormone vs. Active Hormone</h2>
+<table>
+  <tr><th>Property</th><th>T4 (Thyroxine)</th><th>T3 (Triiodothyronine)</th></tr>
+  <tr><td class="hdr-cell">Iodines</td><td>4 iodine atoms</td><td>3 iodine atoms</td></tr>
+  <tr><td class="hdr-cell">Source</td><td>~80% of thyroid secretion</td><td>~20% direct secretion + 80% from T4 conversion</td></tr>
+  <tr><td class="hdr-cell">Potency</td><td>Prohormone (lower receptor affinity)</td><td>Active form — 3–5× more potent than T4</td></tr>
+  <tr><td class="hdr-cell">Half-life</td><td>~7 days (long; stable reservoir)</td><td>~1 day (shorter)</td></tr>
+  <tr><td class="hdr-cell">Protein binding</td><td>99.97% bound (TBG, TTR, albumin)</td><td>99.7% bound (slightly less than T4)</td></tr>
+  <tr><td class="hdr-cell">Receptor</td><td>Converted to T3 before acting (TR)</td><td>Directly binds thyroid hormone receptor (TR) in nucleus → gene regulation</td></tr>
+</table>
+
+<h2 class="section">Peripheral Deiodination — Deiodinase Enzymes</h2>
+<table>
+  <tr><th>Type</th><th>Location</th><th>Reaction</th><th>Significance</th></tr>
+  <tr><td class="hdr-cell">Type I</td><td>Liver, kidney, thyroid gland</td><td>T4 → T3 (removes 5' iodine from outer ring)</td><td>Primary source of circulating T3; reduced in illness/starvation (↑ rT3)</td></tr>
+  <tr><td class="hdr-cell">Type II</td><td>Brain, pituitary, brown adipose tissue</td><td>T4 → T3 (local conversion)</td><td>Provides T3 for local CNS and pituitary feedback; pituitary senses T3 locally</td></tr>
+  <tr><td class="hdr-cell">Type III</td><td>Placenta, developing brain, skin</td><td>T4 → rT3 (reverse T3, inactive); T3 → T2 (inactive)</td><td>Inactivates thyroid hormones; predominates in fetal life and during critical illness</td></tr>
+</table>
+
+<div class="box traps">
+  <div class="box-header">⚠️ Trap — Euthyroid Sick Syndrome (Non-Thyroidal Illness)</div>
+  <div class="box-body">
+    <p>In severe illness (sepsis, surgery, fasting), Type I deiodinase is <strong>downregulated</strong> and Type III is <strong>upregulated</strong> → ↓ T3, ↑ reverse T3 (rT3), normal or low TSH. The patient is NOT hypothyroid — this is an <strong>adaptive response</strong> to reduce metabolic rate during critical illness. <strong>Do NOT treat with T3/T4</strong> — TSH is the key discriminator. If TSH is normal/low, this is not primary hypothyroidism.</p>
+  </div>
+</div>
+
+<h2 class="section">Thyroid Hormone Carrier Proteins &amp; Free Hormone</h2>
+<table>
+  <tr><th>Carrier</th><th>% of T4 Carried</th><th>Note</th></tr>
+  <tr><td class="hdr-cell">TBG (thyroxine-binding globulin)</td><td>~70%</td><td>Primary carrier; most clinically relevant; estrogen increases TBG synthesis in liver</td></tr>
+  <tr><td class="hdr-cell">Transthyretin (TTR/prealbumin)</td><td>~15%</td><td>Also a CSF carrier; decreased in inflammation (negative acute-phase reactant)</td></tr>
+  <tr><td class="hdr-cell">Albumin</td><td>~15%</td><td>Low affinity, high capacity</td></tr>
+  <tr><td class="hdr-cell"><strong>Free T4 / Free T3</strong></td><td>&lt;0.05% free</td><td><strong>Biologically active fraction</strong> — drives receptor activation and feedback</td></tr>
+</table>
+
+<div class="box hy">
+  <div class="box-header">⭐ TBG Changes — The Total vs. Free Trap</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>↑ TBG</strong> (pregnancy, oral contraceptives, estrogen therapy) → ↑ total T4, but <strong>free T4 is NORMAL</strong> → patient is euthyroid. TSH is normal.</li>
+      <li><strong>↓ TBG</strong> (androgens, nephrotic syndrome, liver failure, high-dose glucocorticoids) → ↓ total T4, but <strong>free T4 is NORMAL</strong> → patient is euthyroid. TSH is normal.</li>
+      <li>Test of choice to assess thyroid function: <strong>TSH first</strong>. Then free T4 if TSH is abnormal. Total T4 is misleading.</li>
+    </ul>
+  </div>
+</div>
+
+<h2 class="section">Negative Feedback &amp; Axis Regulation</h2>
+<ul class="styled">
+  <li><strong>T3 is the primary feedback signal</strong> — T3 (not T4) binds thyroid hormone receptors (TR) in both hypothalamus and anterior pituitary to suppress TRH and TSH.</li>
+  <li>The pituitary is MORE sensitive to T3 feedback than the hypothalamus because thyrotropes have high local Type II deiodinase activity → convert intracellular T4→T3 efficiently.</li>
+  <li><strong>TSH is the most sensitive indicator of axis function</strong>: small changes in free T4 cause large, inverse changes in TSH (log-linear relationship).</li>
+  <li>Somatostatin and dopamine also inhibit TSH secretion (clinically relevant during critical illness).</li>
+</ul>
+
+<h2 class="section">Actions of T3 on Target Organs</h2>
+<table>
+  <tr><th>System</th><th>T3 Action</th><th>Clinical Correlate</th></tr>
+  <tr><td class="hdr-cell">Metabolism / Thermogenesis</td><td>↑ Na/K-ATPase expression → ↑ O₂ consumption → ↑ BMR; ↑ uncoupling proteins (UCP1) in BAT</td><td>Hyperthyroid = heat intolerance, weight loss; hypothyroid = cold intolerance, weight gain</td></tr>
+  <tr><td class="hdr-cell">Cardiovascular</td><td>↑ β1-adrenergic receptor expression (sensitizes to catecholamines); direct ↑ cardiac contractility + HR; ↑ CO</td><td>Hyperthyroid = palpitations, tachycardia, afib; hypothyroid = bradycardia, ↓ CO</td></tr>
+  <tr><td class="hdr-cell">CNS / Development</td><td>Critical for myelination, neuronal migration, synaptogenesis in fetal brain</td><td>Maternal hypothyroidism in 1st trimester → <strong>cretinism</strong> (irreversible intellectual disability); neonatal hypothyroidism → newborn screening (PKU card)</td></tr>
+  <tr><td class="hdr-cell">Growth</td><td>Permissive for GH action; required for normal bone maturation and linear growth</td><td>Hypothyroid children: short stature + delayed bone age</td></tr>
+  <tr><td class="hdr-cell">Lipid Metabolism</td><td>↑ LDL receptor expression → ↑ cholesterol clearance → ↓ serum LDL/cholesterol</td><td>Hypothyroid = hypercholesterolemia (↑ LDL); hyperthyroid = low LDL</td></tr>
+  <tr><td class="hdr-cell">GI</td><td>↑ GI motility</td><td>Hyperthyroid = diarrhea; hypothyroid = constipation</td></tr>
+</table>
+
+<h2 class="section">Interpreting the HP-Thyroid Axis — Lab Patterns</h2>
+<table>
+  <tr><th>Condition</th><th>TSH</th><th>Free T4</th><th>Free T3</th><th>Mechanism</th></tr>
+  <tr><td class="hdr-cell">Normal (euthyroid)</td><td>Normal (0.5–4.5 mIU/L)</td><td>Normal</td><td>Normal</td><td>—</td></tr>
+  <tr><td class="hdr-cell">Primary hypothyroidism</td><td class="highlight-red">↑↑ HIGH</td><td>↓ Low</td><td>↓ Low</td><td>Thyroid gland failure → loss of T3/T4 negative feedback → TSH rises</td></tr>
+  <tr><td class="hdr-cell">Secondary hypothyroidism</td><td class="highlight-red">↓ LOW</td><td>↓ Low</td><td>↓ Low</td><td>Pituitary failure → ↓ TSH → ↓ thyroid stimulation</td></tr>
+  <tr><td class="hdr-cell">Primary hyperthyroidism (Graves)</td><td class="highlight-red">↓ SUPPRESSED</td><td>↑ High</td><td>↑ High</td><td>TSIs stimulate TSHR autonomously → ↑ T3/T4 → suppresses TSH via negative feedback</td></tr>
+  <tr><td class="hdr-cell">Euthyroid sick syndrome</td><td>Normal or ↓ low</td><td>Normal or ↓</td><td>↓↓ Low (↑ rT3)</td><td>↑ Type III deiodinase during illness → T4→rT3 instead of T3; adaptation to reduce catabolism</td></tr>
+  <tr><td class="hdr-cell">↑ TBG (e.g., pregnancy)</td><td>Normal</td><td>Normal (free)</td><td>Normal (free)</td><td>Total T4 ↑ but free fraction unchanged; patient is euthyroid</td></tr>
+</table>
+
+<div class="box how-tested">
+  <div class="box-header">📝 How This Is Tested</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Given a TSH + T4 → identify primary vs. secondary vs. subclinical. <strong>TSH is always the first-line test.</strong></li>
+      <li>Pregnant patient with elevated total T4 but normal TSH → euthyroid (↑ TBG from estrogen). Do NOT treat.</li>
+      <li>Sick ICU patient with low T3, low-normal TSH, elevated rT3 → euthyroid sick syndrome. Do NOT give levothyroxine.</li>
+      <li>Mechanism of Graves disease: TSI (thyroid-stimulating immunoglobulins) bind and activate TSHR like TSH → autonomous stimulation → hyperthyroidism + low TSH.</li>
+      <li>Cretinism prevention: iodine supplementation in pregnancy + universal newborn thyroid screening.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">🧪 Practice Question</div>
+  <div class="mini-q-stem">A 32-year-old woman who is 14 weeks pregnant has a routine TSH of 1.8 mIU/L (normal) but a total T4 of 18 µg/dL (elevated; normal 5–12). She has no symptoms of thyroid disease. What is the most likely explanation?</div>
+  <div class="mini-q-choice">A. Graves disease — TSIs stimulating the thyroid</div>
+  <div class="mini-q-choice">B. Subclinical hyperthyroidism — treat with propylthiouracil</div>
+  <div class="mini-q-choice correct">C. Elevated TBG from estrogen → increased total T4, normal free T4 ✓</div>
+  <div class="mini-q-choice">D. hCG cross-reacting with TSHR → driving thyroid hormone production</div>
+  <div class="mini-q-answer"><span class="answer-label">Answer: C.</span> Pregnancy → high estrogen → ↑ hepatic TBG synthesis → more T4 is protein-bound → total T4 rises, but free T4 is UNCHANGED → patient is euthyroid. TSH is normal, confirming this. The key rule: total T4 can be misleading; always interpret with TSH and free T4. Note: hCG does have weak TSHR activity and can transiently lower TSH in early pregnancy — but that would cause low TSH, not the picture here.</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- LECTURE 5 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<h1 class="unit" id="L5">L5 — Hypothalamic-Pituitary-Adrenal Axis</h1>
+
+<h2 class="section">Adrenal Gland Anatomy — "GFR = Salt, Sugar, Sex"</h2>
+<table>
+  <tr><th>Zone</th><th>Mnemonic Layer</th><th>Product</th><th>Primary Regulator</th></tr>
+  <tr><td class="hdr-cell">Zona Glomerulosa (outer)</td><td>"Salt"</td><td>Mineralocorticoids (aldosterone)</td><td>Angiotensin II; extracellular K⁺; ACTH (permissive only)</td></tr>
+  <tr><td class="hdr-cell">Zona Fasciculata (middle)</td><td>"Sugar"</td><td>Glucocorticoids (cortisol)</td><td>ACTH from anterior pituitary</td></tr>
+  <tr><td class="hdr-cell">Zona Reticularis (inner)</td><td>"Sex"</td><td>Androgens (DHEA, androstenedione)</td><td>ACTH (primarily)</td></tr>
+  <tr><td class="hdr-cell">Adrenal Medulla</td><td>—</td><td>Epinephrine (75%), NE (25%)</td><td>Sympathetic preganglionic neurons (via splanchnic nerve)</td></tr>
+</table>
+
+<h2 class="section">The SAM Axis (Sympathetic-Adrenal-Medullary)</h2>
+<ul class="styled">
+  <li>Pre-autonomic neurons from PVN → preganglionic neurons → splanchnic nerve → adrenal <strong>chromaffin cells</strong> (modified postganglionic neurons)</li>
+  <li>Chromaffin cells release <strong>epinephrine (75%) + norepinephrine (25%)</strong> into blood</li>
+  <li>Time to peak effect: ~30 seconds; returns to baseline within minutes if stimulus stops</li>
+</ul>
+<table>
+  <tr><th>Adrenergic Effect</th><th>Receptor</th><th>Physiological Purpose</th></tr>
+  <tr><td>↑ Heart rate &amp; contractility</td><td>β1</td><td>↑ Cardiac output</td></tr>
+  <tr><td>Bronchodilation</td><td>β2</td><td>↑ O₂ delivery to muscles</td></tr>
+  <tr><td>Vasoconstriction (skin, viscera)</td><td>α1</td><td>Shunt blood to muscles/brain</td></tr>
+  <tr><td>Vasodilation (skeletal muscle, liver)</td><td>β2</td><td>Deliver O₂/glucose to working muscles</td></tr>
+  <tr><td>↑ Glycogenolysis &amp; lipolysis</td><td>β2</td><td>Free up energy substrates</td></tr>
+  <tr><td>↑ Blood [glucagon]</td><td>β2</td><td>Additional glucose mobilization</td></tr>
+</table>
+
+<h2 class="section">The HPA Axis</h2>
+<ul class="styled">
+  <li><strong>CRH</strong> (41 aa, from PVN of hypothalamus) → <strong>ACTH</strong> (39 aa, from corticotropes of anterior pituitary) → <strong>Cortisol</strong> (from zona fasciculata)</li>
+  <li>ACTH is cleaved from <strong>POMC</strong> (proopiomelanocortin); co-products: <strong>MSH, β-endorphin, β-lipotropin</strong></li>
+  <li>ACTH also drives androgen production (zona reticularis) and is permissive for mineralocorticoid synthesis, but does NOT directly trigger aldosterone release</li>
+  <li>Vasopressin (co-released with CRH) enhances ACTH secretion</li>
+  <li>ACTH stimulates LDL uptake and cholesterol → pregnenolone conversion in zona fasciculata</li>
+</ul>
+
+<h2 class="section">Cortisol Actions</h2>
+<table>
+  <tr><th>System</th><th>Cortisol Effect</th><th>Clinical Correlation</th></tr>
+  <tr><td class="hdr-cell">Metabolism</td><td>↑ Glycogenolysis; ↑ gluconeogenesis (liver); ↑ protein catabolism (muscle); ↑ lipolysis; induces insulin resistance in muscle/adipose</td><td>Hyperglycemia; "steroid diabetes"; muscle wasting in Cushing's</td></tr>
+  <tr><td class="hdr-cell">Immune</td><td>Anti-inflammatory; ↓ arachidonic acid pathway; ↓ T-cell cytokines; initially ↑ then ↓ antibody production</td><td>Chronic cortisol → immunosuppression → opportunistic infections</td></tr>
+  <tr><td class="hdr-cell">Bone</td><td>↓ Bone formation (↓ osteoblasts); ↑ bone resorption (↑ osteoclast signaling); ↑ renal Ca²⁺ excretion</td><td>Osteoporosis in Cushing's; fractures</td></tr>
+  <tr><td class="hdr-cell">Reproductive</td><td>Inhibits HPG axis at every level (hypothalamus, pituitary, gonads)</td><td>Chronic stress → amenorrhea; ↓ libido</td></tr>
+  <tr><td class="hdr-cell">Connective tissue</td><td>↓ Fibroblast activity; ↓ collagen/ECM production</td><td>Striae, thin skin, easy bruising in Cushing's</td></tr>
+  <tr><td class="hdr-cell">CNS</td><td>Physiological levels: ↑ cognitive function, memory consolidation, synaptic plasticity; crosses BBB</td><td>Chronic excess: depression, anxiety, hippocampal atrophy</td></tr>
+  <tr><td class="hdr-cell">Hematopoiesis</td><td>↑ EPO → ↑ RBC production</td><td>Polycythemia in Cushing's</td></tr>
+  <tr><td class="hdr-cell">Adrenergic sensitivity</td><td>Upregulates adrenergic receptors (permissive effect)</td><td>Required for vasopressors to work; adrenal crisis → refractory hypotension</td></tr>
+</table>
+
+<h3 class="subsection">Cortisol Circadian Rhythm</h3>
+<ul class="styled">
+  <li>Cortisol peaks at <strong>waking (~6–8 AM)</strong>, then declines throughout the day (with pulsatile superimposition)</li>
+  <li>Pre-waking rise: ↑ CRH → ↑ ACTH → ↑ cortisol → prepares body for the "metabolic demands of the day" (gluconeogenesis after overnight fast)</li>
+  <li>Cortisol can bind both <strong>GR (glucocorticoid receptor)</strong> and <strong>MR (mineralocorticoid receptor)</strong></li>
+  <li>11β-HSD2 in aldosterone-sensitive tissues converts cortisol → cortisone (inactive) to prevent cortisol from flooding MRs → MR specificity for aldosterone</li>
+</ul>
+
+<h2 class="section">Cushing's Disease vs Cushing's Syndrome</h2>
+<table>
+  <tr><th>Feature</th><th>Cushing's Disease</th><th>Cushing's Syndrome</th></tr>
+  <tr><td class="hdr-cell">Cause</td><td>ACTH-secreting pituitary adenoma (↑ ACTH → ↑ cortisol)</td><td>Any cause of excess cortisol (adrenal tumor, ectopic ACTH, exogenous steroids)</td></tr>
+  <tr><td class="hdr-cell">ACTH level</td><td class="highlight-red"><strong>↑ ACTH</strong></td><td>↓ ACTH (if adrenal tumor); ↑ ACTH (if ectopic)</td></tr>
+  <tr><td class="hdr-cell">Hyperpigmentation</td><td>YES (excess ACTH → MSH)</td><td>Only if ACTH is elevated (adrenal tumor: no)</td></tr>
+  <tr><td class="hdr-cell">Key signs (both)</td><td colspan="2">Moon face, buffalo hump, central obesity, striae, thin skin, easy bruising, osteoporosis, hyperglycemia, HTN, muscle weakness, amenorrhea</td></tr>
+  <tr><td class="hdr-cell">Dexamethasone suppression</td><td>High-dose dex suppresses (pituitary responds); low-dose does NOT suppress</td><td>Ectopic ACTH: neither dose suppresses; adrenal: ACTH already suppressed</td></tr>
+</table>
+
+<h2 class="section">Addison's Disease (Primary Adrenal Insufficiency)</h2>
+<table>
+  <tr><th>Feature</th><th>Details</th></tr>
+  <tr><td class="hdr-cell">Cause</td><td>Destruction of adrenal cortex (autoimmune #1; TB; infection); all three zones affected → ↓ cortisol, ↓ aldosterone, ↓ androgens</td></tr>
+  <tr><td class="hdr-cell">ACTH level</td><td class="highlight-red"><strong>↑↑ ACTH</strong> (loss of long-loop negative feedback from cortisol)</td></tr>
+  <tr><td class="hdr-cell">Hyperpigmentation</td><td><strong>YES</strong> — excess ACTH → MSH (check mucous membranes); bronze tan in sun-exposed AND non-exposed areas</td></tr>
+  <tr><td class="hdr-cell">Electrolytes</td><td>↓ Na⁺ (↓ aldosterone → Na⁺ wasting), ↑ K⁺, ↓ BP, ↑ eosinophils (↓ cortisol = ↑ eosinophils)</td></tr>
+  <tr><td class="hdr-cell">Other features</td><td>Weight loss, weakness, GI symptoms (N/V/abdominal pain), ↓ pubic/axillary hair (↓ androgens), orthostatic hypotension</td></tr>
+  <tr><td class="hdr-cell">Treatment</td><td>Hydrocortisone (GC replacement) + fludrocortisone (MC replacement)</td></tr>
+</table>
+
+<h2 class="section">Congenital Adrenal Hyperplasia (CAH)</h2>
+<p>Autosomal recessive enzymatic defects in adrenal steroidogenesis. Most common (90%): <strong>21-hydroxylase deficiency</strong>.</p>
+<table>
+  <tr><th>Feature</th><th>Details</th></tr>
+  <tr><td class="hdr-cell">Enzyme blocked</td><td>21-hydroxylase (CYP21A2) — cannot convert 17-OHP → 11-deoxycortisol (cortisol pathway) OR progesterone → 11-deoxycorticosterone (aldosterone pathway)</td></tr>
+  <tr><td class="hdr-cell">Consequence</td><td>↓ Cortisol + ↓ aldosterone → ↑↑ ACTH (loss of negative feedback) → precursors (17-OHP, DHEA) shunted to androgen synthesis → <strong>androgen excess</strong></td></tr>
+  <tr><td class="hdr-cell">Diagnostic marker</td><td class="highlight-red"><strong>↑↑ 17-hydroxyprogesterone (17-OHP)</strong> — the substrate that accumulates proximal to the block</td></tr>
+  <tr><td class="hdr-cell">Classic salt-wasting (severe)</td><td>Neonatal crisis: hyponatremia, hyperkalemia, hypotension, hypoglycemia (↓ aldosterone + ↓ cortisol) in first 1–2 weeks of life</td></tr>
+  <tr><td class="hdr-cell">In females (46,XX)</td><td>Ambiguous genitalia at birth (virilization from androgen excess in utero — clitoromegaly, labial fusion). Classic presentation that triggers investigation.</td></tr>
+  <tr><td class="hdr-cell">In males (46,XY)</td><td>Normal genitalia at birth → presents as salt-wasting crisis (no external virilization to signal diagnosis early)</td></tr>
+  <tr><td class="hdr-cell">Treatment</td><td>Hydrocortisone (replaces cortisol AND suppresses ACTH → reduces androgen excess) + fludrocortisone (for salt-wasting form)</td></tr>
+</table>
+
+<div class="box traps">
+  <div class="box-header">⚠️ CAH vs. Addison's — Key Distinction</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Both: ↑↑ ACTH + ↓ cortisol</li>
+      <li>CAH has: <strong>↑ 17-OHP + androgen excess</strong> (virilization, ambiguous genitalia) — the distinguishing biochemical marker</li>
+      <li>Addison's has: normal or low androgens; no 17-OHP accumulation; often autoimmune etiology in adults</li>
+      <li>CAH presenting finding in a neonate: ambiguous genitalia (46,XX female) or unexplained salt-wasting crisis (46,XY male)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box hy">
+  <div class="box-header">⭐ High-Yield</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>Addison's = ↑ ACTH → hyperpigmentation + ↓ Na⁺ + ↑ K⁺ + ↓ cortisol + ↓ aldosterone</strong></li>
+      <li><strong>Cushing's disease = ↑ ACTH from pituitary adenoma → hyperpigmentation + ↑ cortisol</strong></li>
+      <li><strong>Adrenal tumor causing Cushing's = ↓ ACTH (direct cortisol → suppresses pituitary) → NO hyperpigmentation</strong></li>
+      <li>Cortisol has a permissive effect on vasopressors (upregulates adrenergic receptors). Adrenal crisis = refractory hypotension → give hydrocortisone emergently.</li>
+      <li>11β-HSD2 deficiency → cortisol acts as a mineralocorticoid → hypertension + hypokalemia (a "secondary" form of hyperaldosteronism-like presentation with LOW aldosterone).</li>
+      <li><strong>CAH (21-hydroxylase deficiency) = ↑ ACTH + ↓ cortisol + ↓ aldosterone + ↑↑ 17-OHP + androgen excess → ambiguous genitalia (46,XX) or salt-wasting crisis (neonate).</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">🧪 Practice Question</div>
+  <div class="mini-q-stem">A 28-year-old woman presents with fatigue, weight loss, nausea, and hyperpigmentation of her gums and skin creases. Labs: Na⁺ 128 mEq/L, K⁺ 5.9 mEq/L, morning cortisol 2 µg/dL (low), ACTH 850 pg/mL (markedly elevated). Which of the following is the most likely diagnosis?</div>
+  <div class="mini-q-choice">A. Cushing's disease</div>
+  <div class="mini-q-choice">B. Secondary adrenal insufficiency</div>
+  <div class="mini-q-choice correct">C. Addison's disease ✓</div>
+  <div class="mini-q-choice">D. Conn's syndrome</div>
+  <div class="mini-q-answer"><span class="answer-label">Answer: C.</span> Classic Addison's: ↓ cortisol + ↑↑ ACTH (loss of negative feedback) + ↑ ACTH → MSH → hyperpigmentation + hyponatremia + hyperkalemia (↓ aldosterone). Secondary adrenal insufficiency = pituitary failure → ↓ ACTH (no hyperpigmentation, no hyperkalemia). Cushing's = excess cortisol, opposite labs.</div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- LECTURE 6 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<h1 class="unit" id="L6">L6 — Stress, Stress Hormones &amp; Pathophysiology Integration</h1>
+
+<h2 class="section">Defining Stress &amp; Stressors</h2>
+<ul class="styled">
+  <li><strong>Stressor</strong>: anything that disrupts homeostasis or is perceived as a threat</li>
+  <li><strong>Stress response</strong>: nonspecific — body responds the same way regardless of stressor quality</li>
+  <li>Can be detected sensorially (conscious/cognitive) OR bypass cortical awareness and go directly to the hypothalamus/ANS</li>
+</ul>
+
+<h2 class="section">General Adaptation Syndrome (GAS) — Selye's Model</h2>
+<table>
+  <tr><th>Stage</th><th>Name</th><th>Physiology</th><th>Clinical Analogy</th></tr>
+  <tr><td>1</td><td class="hdr-cell">Alarm</td><td>Immediate strong response; initial ↓ resistance; fight-or-flight activated (SAM axis); begins HPA axis activation</td><td>Acute injury, sudden illness</td></tr>
+  <tr><td>2</td><td class="hdr-cell">Resistance</td><td>Body adapts; ↑ resistance; hormonal tolerance; cortisol maintains metabolic needs; begins habituation</td><td>Subacute illness, sustained work stress</td></tr>
+  <tr><td>3</td><td class="hdr-cell">Exhaustion</td><td>Cannot maintain stress response; allostatic overload; tissue damage; organ dysfunction</td><td>Burnout, septic shock, prolonged starvation</td></tr>
+</table>
+
+<h2 class="section">Allostasis vs Homeostasis</h2>
+<ul class="styled">
+  <li><strong>Homeostasis</strong>: maintaining a fixed set point (classic thermostat model)</li>
+  <li><strong>Allostasis</strong>: "stability through change" — adjusting set points and mobilizing resources to survive stressors. The body defends <em>survival</em>, not a fixed value.</li>
+  <li><strong>Allostatic load</strong>: cumulative burden of all stressors over time; quantifies wear on the system</li>
+</ul>
+
+<h2 class="section">Reactive Scope Model (4 Zones)</h2>
+<table>
+  <tr><th>Zone</th><th>Description</th><th>Outcome</th></tr>
+  <tr><td class="hdr-cell">1. Predictive homeostasis</td><td>Normal, cyclical hormone range; body anticipates and prepares for known stressors (circadian, seasonal)</td><td>Healthy baseline; energy efficient</td></tr>
+  <tr><td class="hdr-cell">2. Reactive homeostasis</td><td>Hormones rise outside normal range to handle unpredicted stressors</td><td>Adaptive; maps to alarm + resistance stages of GAS</td></tr>
+  <tr><td class="hdr-cell">3. Homeostatic overload</td><td>Hormone levels exceed the reactive maximum; system is overwhelmed</td><td>Pathological; maps to late exhaustion (e.g., Takotsubo/broken heart syndrome from massive catecholamine surge)</td></tr>
+  <tr><td class="hdr-cell">4. Homeostatic failure</td><td>Hormone levels fall below predictive minimum; glands depleted/failed</td><td>Adrenal crisis; septic shock; multiorgan failure</td></tr>
+</table>
+
+<h2 class="section">SAM vs HPA Axes — Comparative Table</h2>
+<table>
+  <tr><th>Feature</th><th>SAM Axis</th><th>HPA Axis</th></tr>
+  <tr><td class="hdr-cell">Speed</td><td>Seconds (fast)</td><td>Minutes–hours (slow)</td></tr>
+  <tr><td class="hdr-cell">Duration</td><td>Short-lived (resolves in minutes)</td><td>Prolonged (hours–days)</td></tr>
+  <tr><td class="hdr-cell">Primary hormone</td><td>Epinephrine (+ NE)</td><td>Cortisol</td></tr>
+  <tr><td class="hdr-cell">Route</td><td>Nerve → chromaffin cells → blood</td><td>CRH → ACTH → cortisol</td></tr>
+  <tr><td class="hdr-cell">Metabolic effect</td><td>↑ Glycogenolysis, lipolysis; immediate glucose mobilization</td><td>↑ Gluconeogenesis, proteolysis; sustained glucose supply</td></tr>
+  <tr><td class="hdr-cell">Immune effect</td><td>Initial activation</td><td>Immunosuppression (anti-inflammatory)</td></tr>
+  <tr><td class="hdr-cell">Can cross BBB?</td><td>No (catecholamines are hydrophilic)</td><td>Yes (cortisol is lipophilic)</td></tr>
+  <tr><td class="hdr-cell">Receptor type</td><td>Adrenergic (GPCRs; α, β subtypes)</td><td>GR and MR (intracellular nuclear receptors)</td></tr>
+</table>
+
+<h2 class="section">CRH as the Central Stress Integrator</h2>
+<p>CRH from the PVN does more than drive the HPA axis — it is the master coordinator of the integrated stress response:</p>
+<ul class="styled">
+  <li><strong>HPA axis:</strong> CRH → anterior pituitary corticotropes → ACTH → cortisol (the classic pathway)</li>
+  <li><strong>LC-NE system:</strong> CRH directly activates the locus coeruleus (LC) → ↑ norepinephrine release throughout the brain → arousal, vigilance, anxiety</li>
+  <li><strong>HPG axis suppression:</strong> CRH increases GnIH (gonadotropin-inhibitory hormone) and directly suppresses GnRH pulsatility → inhibits reproduction</li>
+  <li><strong>HPT axis suppression:</strong> CRH → cortisol → ↓ TSH secretion + ↓ peripheral T4→T3 conversion; reduces metabolic rate during stress</li>
+  <li><strong>Appetite suppression:</strong> CRH in hypothalamus reduces food intake (anorexigenic effect) — one reason stress causes appetite loss</li>
+</ul>
+
+<h2 class="section">Pro-Inflammatory Cytokines &amp; the Stress Response</h2>
+<ul class="styled">
+  <li>During infection or tissue injury, macrophages/monocytes release <strong>IL-1β, IL-6, and TNF-α</strong></li>
+  <li>These cytokines cross the blood-brain barrier (or signal via vagal afferents) and <strong>directly stimulate CRH release</strong> from the PVN → activates the HPA axis</li>
+  <li>This is the mechanism of <strong>"sickness behavior"</strong>: fever, fatigue, anorexia, ↓ libido, ↓ activity — all mediated through CRH/cortisol/NE responses to cytokines</li>
+  <li>Cortisol then <strong>feeds back to suppress cytokine production</strong> (inhibits NF-κB → ↓ IL-1β, IL-6, TNF-α) — this is the anti-inflammatory mechanism and explains why glucocorticoids treat inflammatory diseases</li>
+  <li>Chronic inflammatory disease (RA, IBD, lupus) → persistent cytokine elevation → chronic HPA activation → HPA dysregulation and fatigue</li>
+</ul>
+
+<h2 class="section">Pathological Consequences of Chronic Stress</h2>
+<ul class="styled">
+  <li><strong>↓ Reproductive function:</strong> Chronic cortisol + CRH → HPG axis suppression at every level → amenorrhea, ↓ libido, ↓ fertility</li>
+  <li><strong>Osteoporosis:</strong> ↑ Cortisol → ↓ bone formation + ↑ resorption + ↑ renal Ca²⁺ loss</li>
+  <li><strong>Metabolic syndrome:</strong> Insulin resistance, central adiposity (visceral fat = GC-sensitive), HTN, dyslipidemia</li>
+  <li><strong>Immunosuppression:</strong> ↓ T-cell activity, ↓ antibody production → ↑ infection risk; ↓ NK cell surveillance</li>
+  <li><strong>Hippocampal atrophy:</strong> Prolonged GC exposure → dendritic retraction, ↓ neurogenesis → cognitive impairment, depression, impaired fear extinction (PTSD)</li>
+  <li><strong>Takotsubo syndrome (broken heart syndrome):</strong> Massive catecholamine surge → apical LV ballooning → transient cardiomyopathy; ECG changes mimic STEMI; normal coronaries</li>
+  <li><strong>GI dysfunction:</strong> Chronic sympathetic activation + cortisol → ↓ GI motility, ↑ gut permeability, ↑ acid secretion → stress ulcers, worsening IBS/IBD. (Selye's original rats developed gastric ulcers — this was part of his original GAS discovery.)</li>
+  <li><strong>Cancer and metastasis:</strong> Chronic immunosuppression (↓ NK cell activity) → impaired tumor surveillance; β-adrenergic signaling on tumor cells → ↑ VEGF, ↑ angiogenesis, ↑ metastatic potential. Epidemiological studies link chronic stress/depression with ↑ cancer incidence and worse outcomes.</li>
+</ul>
+
+<h2 class="section">Stress Reduction — Physiological Impact</h2>
+<p>Interventions that reduce allostatic load have measurable neuroendocrine effects:</p>
+<table>
+  <tr><th>Intervention</th><th>Physiological Mechanism</th><th>Measurable Outcome</th></tr>
+  <tr><td class="hdr-cell">Exercise (regular)</td><td>Acute physical stressor trains the HPA axis; ↑ BDNF (hippocampal neurogenesis); improves cortisol circadian rhythm</td><td>↓ Cortisol AUC; improved HPA reactivity; ↑ hippocampal volume; ↓ depression</td></tr>
+  <tr><td class="hdr-cell">Mindfulness / meditation</td><td>Prefrontal cortex activation → top-down inhibition of amygdala and PVN CRH neurons; shifts to predictive homeostasis</td><td>↓ Cortisol awakening response; ↓ IL-6; ↓ perceived stress</td></tr>
+  <tr><td class="hdr-cell">Social support</td><td>Oxytocin release → inhibits HPA axis (OT suppresses CRH/ACTH); reduces fear via amygdala modulation</td><td>Lower allostatic load; ↓ cortisol reactivity to stressors; ↓ cardiovascular disease risk</td></tr>
+  <tr><td class="hdr-cell">Sleep (adequate)</td><td>SWS normalizes cortisol circadian trough; GH pulse in SWS → tissue repair; ↓ sympathetic tone</td><td>Restored cortisol nadir at midnight; ↓ inflammatory markers; improved immune function</td></tr>
+  <tr><td class="hdr-cell">Cognitive reappraisal / CBT</td><td>Shifts stressor appraisal from reactive to predictive zone (Reactive Scope model); reduces amygdala hyperreactivity</td><td>↓ Cortisol to social stressors; effective in PTSD, depression, anxiety disorders</td></tr>
+</table>
+
+<div class="box hy">
+  <div class="box-header">⭐ High-Yield — Integration Summary</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li><strong>Acute stress → SAM (fast, EPI/NE) then HPA (slower, cortisol).</strong> Together: ↑ glucose, ↑ HR, ↑ BP, ↑ alertness. Classic fight-or-flight.</li>
+      <li><strong>Chronic stress → pathology</strong>: Cushing's-like metabolic picture, immunosuppression, reproductive suppression, osteoporosis, hippocampal damage.</li>
+      <li>Cortisol feedback timing: cortisol levels rise → feed back to hypothalamus (CRH ↓) and pituitary (ACTH ↓) via long-loop feedback. This is a key test of the HPA axis integrity (cosyntropin stimulation test).</li>
+      <li><strong>Predictability matters:</strong> Predictable stressors activate predictive homeostasis (lower allostatic load). Unpredictable stressors require reactive homeostasis (higher physiologic cost).</li>
+    </ul>
+  </div>
+</div>
+
+<div class="box how-tested">
+  <div class="box-header">📝 How This Is Tested</div>
+  <div class="box-body">
+    <ul class="styled">
+      <li>Integration vignettes: student before exam (SAM first, then HPA) — which hormones rise, in what order?</li>
+      <li>Mechanism of stress-induced amenorrhea: chronic cortisol → ↑ GnIH + direct HPG inhibition → ↓ LH/FSH → anovulation</li>
+      <li>Chronic stress and immune suppression: decreased T-cell cytokines, initial antibody ↑ then sustained ↓</li>
+      <li>Distinguish SAM from HPA by onset, duration, and hormone identity</li>
+      <li>Allostasis: explains why the same hormone concentration can be "normal" in one context and pathological in another</li>
+    </ul>
+  </div>
+</div>
+
+<div class="mini-q">
+  <div class="mini-q-header">🧪 Practice Question</div>
+  <div class="mini-q-stem">A 24-year-old female medical student is about to give a presentation she has been dreading. Within 30 seconds of starting, her heart is pounding and her palms are sweating. Two hours later, she still feels anxious and notices her appetite is suppressed. Which of the following best explains her presentation-day symptoms at the 2-hour mark?</div>
+  <div class="mini-q-choice">A. Epinephrine secretion from the adrenal medulla</div>
+  <div class="mini-q-choice">B. Direct sympathetic activation of sweat glands</div>
+  <div class="mini-q-choice correct">C. Cortisol-mediated gluconeogenesis and appetite suppression ✓</div>
+  <div class="mini-q-choice">D. Vasopressin-mediated water retention</div>
+  <div class="mini-q-choice">E. Oxytocin-mediated social bonding</div>
+  <div class="mini-q-answer"><span class="answer-label">Answer: C.</span> The 30-second symptoms (racing heart, sweating) reflect the fast SAM axis (EPI/NE). By 2 hours, catecholamine effects have resolved; what persists is HPA axis activation → elevated cortisol → ↑ gluconeogenesis, ↓ appetite (cortisol inhibits digestive/reproductive functions). This illustrates the temporal sequence: SAM (seconds) → HPA (minutes to hours).</div>
+</div>
+
+</div><!-- end .page -->
+</body>
+</html>
