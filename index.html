@@ -6,16 +6,15 @@
   <title>GUSOM Block 4 | Endocrine Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./revised_style.css" />
 </head>
 <body>
-  <div class="page-pattern" aria-hidden="true"></div>
-
   <main class="container">
     <section class="hero">
       <div class="eyebrow">GUSOM Block 4 • Endocrine Unit</div>
       <h1>Endocrine Study Hub</h1>
+      <p class="subtitle">Your central starting point for endocrine study guides, active recall, question practice, and progress tracking. Start with core learning sections, then move into reference tools and review workflow.</p>
 
       <div class="hero-actions">
         <a class="button button-primary" href="https://www.uworld.com/" target="_blank" rel="noopener noreferrer">Open UWorld</a>
@@ -23,115 +22,94 @@
       </div>
     </section>
 
-    <div class="section-header">
-      <div>
-        <h2>Core Sections</h2>
-        <p>Use quick tools first, then move into the main learning sections.</p>
-      </div>
-    </div>
+    <section class="section-header">
+      <h2>Primary Learning Sections</h2>
+      <p>These are the main places to study, review, and apply material.</p>
+    </section>
 
-    <section class="quick-actions">
-      <a class="dashboard-button dashboard-button-tracker" href="./progress-tracker/">
-        <span class="dashboard-button-icon">📈</span>
-        <span class="dashboard-button-content">
-          <span class="dashboard-button-title">Progress Tracker</span>
-          <span class="dashboard-button-text">Monitor lecture coverage, completion status, and weak areas.</span>
-        </span>
-        <span class="dashboard-button-arrow">→</span>
+    <section class="nav-grid">
+      <a class="nav-card" href="./study-guides/">
+        <div class="nav-icon">📘</div>
+        <h3>Study Guides</h3>
+        <p>Navigate summary notes, curated review pages, and structured endocrine content.</p>
+        <span class="nav-link">Open section →</span>
       </a>
 
-      <a class="dashboard-button dashboard-button-database" href="./databases/">
-        <span class="dashboard-button-icon">🧬</span>
-        <span class="dashboard-button-content">
-          <span class="dashboard-button-title">Databases</span>
-          <span class="dashboard-button-text">Open high-yield tables, fact banks, and reference repositories.</span>
-        </span>
-        <span class="dashboard-button-arrow">→</span>
+      <a class="nav-card" href="./study-drills/">
+        <div class="nav-icon">🎯</div>
+        <h3>Active Recall Drills</h3>
+        <p>Practice mechanisms, clinical patterns, and trap questions through recall-based review.</p>
+        <span class="nav-link">Open section →</span>
+      </a>
+
+      <a class="nav-card" href="./question-banks/">
+        <div class="nav-icon">🩺</div>
+        <h3>Board-Style Practice</h3>
+        <p>Keep exam-oriented practice sets and external QBank links organized in one place.</p>
+        <span class="nav-link">Open section →</span>
       </a>
     </section>
 
-    <section class="grid">
-      <a class="card card-guides" href="./study-guides/">
-        <div class="card-topline">
-          <div class="card-heading">
-            <div class="card-icon">📘</div>
-            <div class="card-heading-text"><h3>Study Guides</h3></div>
-          </div>
-          <div class="card-number">1</div>
-        </div>
-        <p>Navigate summary notes, curated review pages, concept breakdowns, and structured endocrine study documents.</p>
-        <span class="card-tag">Core content review</span>
-        <span class="card-link">Open Section →</span>
+    <section class="section-header">
+      <h2>Supporting Tools</h2>
+      <p>Use these to monitor progress and quickly reference key information.</p>
+    </section>
+
+    <section class="tools-grid">
+      <a class="tool-card" href="./progress-tracker/">
+        <h3>📈 Progress Tracker</h3>
+        <p>Monitor lecture coverage, completion status, and weak areas for targeted review.</p>
       </a>
 
-      <a class="card card-drills" href="./study-drills/">
-        <div class="card-topline">
-          <div class="card-heading">
-            <div class="card-icon">🎯</div>
-            <div class="card-heading-text"><h3>Active Recall Drills</h3></div>
-          </div>
-          <div class="card-number">2</div>
-        </div>
-        <p>Build a strong foundation for lecture learning and USMLE Step 1 review through active, gamified practice that trains recognition of clinical vignettes, trap questions, mechanisms, pathophysiology, drug facts, and process-based details.</p>
-        <span class="card-tag">Foundational learning</span>
-        <span class="card-link">Open Section →</span>
-      </a>
-
-      <a class="card card-qbanks" href="./question-banks/">
-        <div class="card-topline">
-          <div class="card-heading">
-            <div class="card-icon">🩺</div>
-            <div class="card-heading-text"><h3>Board-Style Practice</h3></div>
-          </div>
-          <div class="card-number">3</div>
-        </div>
-        <p>Keep exam-oriented question sources, categorized practice sets, and external QBank links organized in one place.</p>
-        <span class="card-tag">Application & testing</span>
-        <span class="card-link">Open Section →</span>
+      <a class="tool-card" href="./databases/">
+        <h3>🧬 Databases</h3>
+        <p>Open high-yield tables, fact banks, and quick-reference repositories.</p>
       </a>
     </section>
 
-    <section class="workflow-panel">
-      <div class="panel-header">
-        <h2>Recommended Study Workflow</h2>
-        <p>A simple path from first-pass learning to board-style application.</p>
+    <section class="workflow">
+      <div class="section-header workflow-header">
+        <div>
+          <h2>Suggested Study Flow</h2>
+          <p>A simple path from first-pass learning to question-based application.</p>
+        </div>
       </div>
 
       <div class="workflow-grid">
         <article class="workflow-step">
           <div class="step-number">1</div>
-          <h3>Start with Study Guides</h3>
-          <p>Build a structured overview of the lecture material and identify the highest-yield concepts first.</p>
+          <h3>Start with Guides</h3>
+          <p>Get a structured first pass through the material and identify the highest-yield concepts.</p>
         </article>
 
         <article class="workflow-step">
           <div class="step-number">2</div>
-          <h3>Use Active Recall Drills</h3>
-          <p>Practice identifying vignettes, trap patterns, mechanisms, and key facts through active learning and repetition.</p>
+          <h3>Practice Recall</h3>
+          <p>Strengthen pattern recognition, mechanisms, and retention through active review.</p>
         </article>
 
         <article class="workflow-step">
           <div class="step-number">3</div>
-          <h3>Reinforce with Databases</h3>
-          <p>Return to organized references, tables, and quick-hit repositories when you need clarification or comparison.</p>
+          <h3>Use References</h3>
+          <p>Return to tables and fact banks when you need quick clarification or comparison.</p>
         </article>
 
         <article class="workflow-step">
           <div class="step-number">4</div>
-          <h3>Apply with Board-Style Practice</h3>
-          <p>Shift into question-based reasoning and exam-style thinking using practice sets and external QBanks.</p>
+          <h3>Do Questions</h3>
+          <p>Shift into board-style reasoning with practice sets and external QBanks.</p>
         </article>
 
         <article class="workflow-step">
           <div class="step-number">5</div>
-          <h3>Track Progress</h3>
-          <p>Log what is complete, what still feels weak, and where to focus your next review block.</p>
+          <h3>Track Gaps</h3>
+          <p>Log what is complete, what still feels weak, and what to review next.</p>
         </article>
       </div>
     </section>
 
     <footer class="footer">
-      <div>Built as a shared entry point for GUSOM Block 4 Endocrine resources.</div>
+      <div>Built as a shared entry point for GUSOM Block 4 endocrine resources.</div>
       <div class="footer-meta">Last updated: March 31, 2026</div>
     </footer>
   </main>
