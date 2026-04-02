@@ -278,18 +278,27 @@
     [data-theme="dark"] .badge-challenge { background: rgba(245,158,11,0.15);  color: #fbbf24; }
     [data-theme="dark"] .badge-qbank     { background: rgba(93,191,135,0.15);  color: #5dbf87; }
 
-    .drill-topics { display: flex; flex-wrap: wrap; gap: 4px; }
+    /* Structured drill info block */
+    .drill-info { display: flex; flex-direction: column; gap: 5px; flex: 1; }
 
-    .drill-topic {
-      display: inline-flex; padding: 2px 7px; border-radius: 999px;
-      font-size: 0.67rem; font-weight: 600;
-      background: rgba(15,23,42,0.06); color: var(--ink-3);
-      transition: background 0.2s;
+    .di-row {
+      display: flex; flex-direction: column; gap: 1px;
     }
-    .dc-phys   .drill-topic { background: var(--phys-tag);   color: var(--phys-tx); }
-    .dc-biochem .drill-topic { background: var(--biochem-tag); color: var(--biochem-tx); }
-    .dc-path   .drill-topic { background: var(--path-tag);   color: var(--path-tx); }
-    .dc-pharm  .drill-topic { background: var(--pharm-tag);  color: var(--pharm-tx); }
+
+    .di-label {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; opacity: 0.55; color: var(--ink-3);
+    }
+    .dc-phys   .di-label { color: var(--phys-tx); }
+    .dc-biochem .di-label { color: var(--biochem-tx); }
+    .dc-path   .di-label { color: var(--path-tx); }
+    .dc-pharm  .di-label { color: var(--pharm-tx); }
+
+    .di-val {
+      font-size: 0.78rem; font-weight: 500; color: var(--ink-2);
+      line-height: 1.4;
+      transition: color 0.2s;
+    }
 
     .drill-cta {
       display: inline-flex; align-items: center; gap: 5px;
@@ -303,10 +312,25 @@
     .dc-path   .drill-cta { color: var(--path-tx); }
     .dc-pharm  .drill-cta { color: var(--pharm-tx); }
 
-    /* ── Wide drill card (spans full row for single items) ── */
-    .drill-card-wide { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 20px; }
-    .drill-card-wide .drill-topics { flex: 1; }
-    .drill-card-wide .drill-cta { padding-top: 0; }
+    /* ── Cumulative card style ── */
+    .drill-card-cumul {
+      background: var(--surface) !important;
+      border-style: dashed !important;
+    }
+    .drill-card-cumul .drill-card-title { color: var(--ink-2); }
+
+    /* Cumulative scope indicator */
+    .cumul-scope {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; opacity: 0.60;
+      margin-bottom: 2px;
+    }
+    .dc-phys   .cumul-scope { color: var(--phys-tx); }
+    .dc-biochem .cumul-scope { color: var(--biochem-tx); }
+    .dc-path   .cumul-scope { color: var(--path-tx); }
+    .dc-pharm  .cumul-scope { color: var(--pharm-tx); }
+
 
     /* ══════════════════════════════════════
        MOBILE BOTTOM NAV
@@ -471,14 +495,10 @@
               <span class="drill-card-title">Hub 1 Active Drills</span>
               <span class="drill-badge badge-inhouse">In-House</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">H-P Relationships I</span>
-              <span class="drill-topic">H-P Relationships II</span>
-              <span class="drill-topic">Posterior Pituitary</span>
-              <span class="drill-topic">GH Axis</span>
-              <span class="drill-topic">HP Adrenal Axis</span>
-              <span class="drill-topic">Stress Integration</span>
-              <span class="drill-topic">HP Thyroid Axis</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–7 Drill Modules</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Test Traps · Fill-in-Blank</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
             </div>
             <span class="drill-cta">Start Drills →</span>
           </a>
@@ -488,14 +508,10 @@
               <span class="drill-card-title">Hub 2 Active Drills</span>
               <span class="drill-badge badge-inhouse">In-House</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">H-P Relationships I</span>
-              <span class="drill-topic">H-P Relationships II</span>
-              <span class="drill-topic">Posterior Pituitary</span>
-              <span class="drill-topic">GH Axis</span>
-              <span class="drill-topic">HP Adrenal Axis</span>
-              <span class="drill-topic">Stress Integration</span>
-              <span class="drill-topic">HP Thyroid Axis</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–7 Drill Modules</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Test Traps · Fill-in-Blank</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
             </div>
             <span class="drill-cta">Start Drills →</span>
           </a>
@@ -503,16 +519,12 @@
           <a class="drill-card dc-phys" href="../GUSOM-Phys-Hub3-ActiveDrills.html">
             <div class="drill-card-header">
               <span class="drill-card-title">Hub 3 Active Drills</span>
-              <span class="drill-badge badge-inhouse">In-House</span>
+              <span class="drill-badge badge-step1">Step 1</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">H-P Relationships I</span>
-              <span class="drill-topic">H-P Relationships II</span>
-              <span class="drill-topic">Posterior Pituitary</span>
-              <span class="drill-topic">GH Axis</span>
-              <span class="drill-topic">HP Adrenal Axis</span>
-              <span class="drill-topic">Stress Integration</span>
-              <span class="drill-topic">HP Thyroid Axis</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–7 Drill Modules</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes · Challenge Drills · USMLE Maps</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">USMLE Step 1 / BRS Physiology</span></div>
             </div>
             <span class="drill-cta">Start Drills →</span>
           </a>
@@ -522,33 +534,38 @@
               <span class="drill-card-title">All Physiology Drills</span>
               <span class="drill-badge badge-inhouse">In-House</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Full Coverage</span>
-              <span class="drill-topic">All 7 Lectures</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–6 Drill Modules</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Test Traps · Fill-in-Blank</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
             </div>
             <span class="drill-cta">Start Drills →</span>
           </a>
 
-          <a class="drill-card dc-phys" href="../GUSOM-Phys-QuestionBank.html">
+          <a class="drill-card dc-phys drill-card-cumul" href="../GUSOM-Phys-QuestionBank.html">
+            <span class="cumul-scope">⬡ Cumulative</span>
             <div class="drill-card-header">
               <span class="drill-card-title">Physiology Question Bank</span>
               <span class="drill-badge badge-qbank">Q Bank</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Practice Questions</span>
-              <span class="drill-topic">All Topics</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Lectures</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
             </div>
             <span class="drill-cta">Open Bank →</span>
           </a>
 
-          <a class="drill-card dc-phys" href="../GUSOM-Phys-BlockChallenge.html">
+          <a class="drill-card dc-phys drill-card-cumul" href="../GUSOM-Phys-BlockChallenge.html">
+            <span class="cumul-scope">⬡ Cumulative</span>
             <div class="drill-card-header">
               <span class="drill-card-title">Physiology Block Challenge</span>
               <span class="drill-badge badge-challenge">Challenge</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Comprehensive</span>
-              <span class="drill-topic">All Hubs</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All 6 Lectures · 40 Questions</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Timed Block (50 min)</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
             </div>
             <span class="drill-cta">Take Challenge →</span>
           </a>
@@ -570,12 +587,10 @@
               <span class="drill-card-title">Hub 3 Active Drills</span>
               <span class="drill-badge badge-inhouse">In-House</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Intro to Hormones</span>
-              <span class="drill-topic">Adrenal Synthesis</span>
-              <span class="drill-topic">Sex Steroids</span>
-              <span class="drill-topic">Posterior Pituitary</span>
-              <span class="drill-topic">Thyroid Synthesis</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Drill Modules</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House + BRS Biochem Ch. 9</span></div>
             </div>
             <span class="drill-cta">Start Drills →</span>
           </a>
@@ -585,9 +600,10 @@
               <span class="drill-card-title">All Biochemistry Drills</span>
               <span class="drill-badge badge-inhouse">In-House</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Full Coverage</span>
-              <span class="drill-topic">All 5 Lectures</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Drill Modules</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Trap Detector · Fill-in-Blank · Anki Map</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
             </div>
             <span class="drill-cta">Start Drills →</span>
           </a>
@@ -597,72 +613,80 @@
               <span class="drill-card-title">Step 1 Active Drills</span>
               <span class="drill-badge badge-step1">Step 1</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Intro to Hormones</span>
-              <span class="drill-topic">Adrenal Synthesis</span>
-              <span class="drill-topic">Sex Steroids</span>
-              <span class="drill-topic">Posterior Pituitary</span>
-              <span class="drill-topic">Thyroid Synthesis</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Drill Modules</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Trap Detector · Fill-in-Blank · USMLE Maps</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">USMLE Step 1</span></div>
             </div>
             <span class="drill-cta">Start Drills →</span>
           </a>
 
-          <a class="drill-card dc-biochem" href="../GUSOM-Biochem-QuestionBank.html">
+          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-QuestionBank.html">
+            <span class="cumul-scope">⬡ Cumulative</span>
             <div class="drill-card-header">
               <span class="drill-card-title">Biochemistry Question Bank</span>
               <span class="drill-badge badge-qbank">Q Bank</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Practice Questions</span>
-              <span class="drill-topic">All Topics</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 + BRS Questions</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes · Test Traps</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Original + BRS Biochem</span></div>
             </div>
             <span class="drill-cta">Open Bank →</span>
           </a>
 
-          <a class="drill-card dc-biochem" href="../GUSOM-Biochem-QuestionBank-Traps.html">
+          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-QuestionBank-Traps.html">
+            <span class="cumul-scope">⬡ Cumulative</span>
             <div class="drill-card-header">
-              <span class="drill-card-title">Trap Questions</span>
+              <span class="drill-card-title">Trap Question Bank</span>
               <span class="drill-badge badge-qbank">Q Bank</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">High-Yield Traps</span>
-              <span class="drill-topic">Commonly Missed</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Lectures</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Test Traps · Step 1 MCQ</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM + USMLE Step 1</span></div>
             </div>
             <span class="drill-cta">Open Bank →</span>
           </a>
 
-          <a class="drill-card dc-biochem" href="../GUSOM-Biochem-BlockChallenge.html">
+          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-BlockChallenge.html">
+            <span class="cumul-scope">⬡ Cumulative</span>
             <div class="drill-card-header">
               <span class="drill-card-title">Block Challenge</span>
               <span class="drill-badge badge-challenge">Challenge</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">In-House</span>
-              <span class="drill-topic">Comprehensive</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All 5 Lectures</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Integration Vignettes · MCQ Gauntlet</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
             </div>
             <span class="drill-cta">Take Challenge →</span>
           </a>
 
-          <a class="drill-card dc-biochem" href="../GUSOM-Biochem-Step1-BlockChallenge.html">
+          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-Step1-BlockChallenge.html">
+            <span class="cumul-scope">⬡ Cumulative</span>
             <div class="drill-card-header">
               <span class="drill-card-title">Step 1 Block Challenge</span>
               <span class="drill-badge badge-step1">Step 1</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Step 1</span>
-              <span class="drill-topic">Comprehensive</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All 5 Lectures</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Integration Vignettes · MCQ Gauntlet</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">USMLE Step 1</span></div>
             </div>
             <span class="drill-cta">Take Challenge →</span>
           </a>
 
-          <a class="drill-card dc-biochem" href="../GUSOM-Biochem-AnkiMapping.html">
+          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-AnkiMapping.html">
+            <span class="cumul-scope">⬡ Cumulative</span>
             <div class="drill-card-header">
               <span class="drill-card-title">Anki Mapping</span>
-              <span class="drill-badge badge-step1">Step 1</span>
+              <span class="drill-badge badge-inhouse">In-House</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Card Mapping</span>
-              <span class="drill-topic">Spaced Repetition</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Anki Maps</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Card Mapping · Spaced Repetition</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
             </div>
             <span class="drill-cta">View Mapping →</span>
           </a>
@@ -679,16 +703,16 @@
         <p class="section-meta">Furlong · Santi · Wieneke · Endocrine pathology, diabetes, adrenal, thyroid, pituitary</p>
         <div class="drill-grid">
 
-          <a class="drill-card dc-path" href="../GUSOM-Path-ReviewQuestions.html">
+          <a class="drill-card dc-path drill-card-cumul" href="../GUSOM-Path-ReviewQuestions.html">
+            <span class="cumul-scope">⬡ Cumulative</span>
             <div class="drill-card-header">
               <span class="drill-card-title">Pathology Review Questions</span>
               <span class="drill-badge badge-qbank">Q Bank</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Diabetes Mellitus</span>
-              <span class="drill-topic">Adrenal Pathology</span>
-              <span class="drill-topic">Thyroid &amp; Parathyroid</span>
-              <span class="drill-topic">Pituitary Pathology</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Path Lectures (Furlong · Santi · Wieneke)</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House + Robbins</span></div>
             </div>
             <span class="drill-cta">Start Questions →</span>
           </a>
@@ -705,15 +729,16 @@
         <p class="section-meta">Janicic · Jonklaas · Sharma · Diabetes pharmacology, thyroid agents, adrenal drugs</p>
         <div class="drill-grid">
 
-          <a class="drill-card dc-pharm" href="../GUSOM-Pharmacology-ENDOPracticeQuestions_2024.html">
+          <a class="drill-card dc-pharm drill-card-cumul" href="../GUSOM-Pharmacology-ENDOPracticeQuestions_2024.html">
+            <span class="cumul-scope">⬡ Cumulative</span>
             <div class="drill-card-header">
               <span class="drill-card-title">Pharmacology Practice Questions</span>
               <span class="drill-badge badge-inhouse">In-House</span>
             </div>
-            <div class="drill-topics">
-              <span class="drill-topic">Diabetes Drugs</span>
-              <span class="drill-topic">Thyroid Agents</span>
-              <span class="drill-topic">Adrenal &amp; Pituitary</span>
+            <div class="drill-info">
+              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Pharm Lectures (Janicic · Jonklaas · Sharma)</span></div>
+              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Clinical Cases</span></div>
+              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
             </div>
             <span class="drill-cta">Start Questions →</span>
           </a>
