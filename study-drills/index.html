@@ -332,6 +332,95 @@
     .dc-pharm  .cumul-scope { color: var(--pharm-tx); }
 
 
+    /* ── Progression sub-groups ── */
+    .drill-subgroup { margin-bottom: 10px; }
+
+    .drill-subgroup-label {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 18px; margin-bottom: 0;
+      background: var(--surface);
+      border-left: 4px solid var(--rule);
+      border-radius: 0 10px 10px 0;
+      cursor: pointer; user-select: none;
+      transition: filter 0.15s;
+    }
+    .drill-subgroup-label:hover { filter: brightness(0.96); }
+    [data-theme="dark"] .drill-subgroup-label:hover { filter: brightness(1.08); }
+
+    .drill-subgroup .drill-grid {
+      padding-top: 10px;
+      transition: opacity 0.18s;
+    }
+    .drill-subgroup.collapsed .drill-grid { display: none; }
+
+    /* Chevron toggle indicator */
+    .dsg-chevron {
+      margin-left: auto; flex-shrink: 0;
+      font-size: 1rem; color: var(--ink-3);
+      transition: transform 0.2s;
+    }
+    .drill-subgroup.collapsed .dsg-chevron { transform: rotate(-90deg); }
+
+    /* Label text hierarchy */
+    .dsg-num {
+      font-size: 1.15rem; font-weight: 800;
+      letter-spacing: -0.02em; flex-shrink: 0;
+      opacity: 0.85;
+    }
+    .dsg-text { display: flex; flex-direction: column; gap: 2px; }
+    .dsg-name {
+      font-size: 0.95rem; font-weight: 700;
+      color: var(--ink); letter-spacing: -0.01em;
+    }
+    .dsg-desc {
+      font-size: 0.78rem; font-weight: 400;
+      color: var(--ink-3); line-height: 1.4;
+    }
+
+    /* Subject color variables */
+    .subject-phys   { --sub-r: 31;  --sub-g: 75;  --sub-b: 153; }
+    .subject-biochem { --sub-r: 22;  --sub-g: 101; --sub-b: 52;  }
+    .subject-path   { --sub-r: 159; --sub-g: 18;  --sub-b: 57;  }
+    .subject-pharm  { --sub-r: 109; --sub-g: 40;  --sub-b: 217; }
+
+    /* Tier shading — clearly distinct light → medium → dark, per subject */
+    .subject-phys .tier-1 .drill-subgroup-label   { background: rgba(31,75,153,0.05);  border-left-color: rgba(31,75,153,0.28); }
+    .subject-phys .tier-2 .drill-subgroup-label   { background: rgba(31,75,153,0.13);  border-left-color: rgba(31,75,153,0.62); }
+    .subject-phys .tier-3 .drill-subgroup-label   { background: rgba(31,75,153,0.24);  border-left-color: rgba(31,75,153,0.92); }
+    .subject-phys .dsg-num                         { color: var(--phys-tx); }
+
+    .subject-biochem .tier-1 .drill-subgroup-label { background: rgba(22,101,52,0.05); border-left-color: rgba(22,101,52,0.28); }
+    .subject-biochem .tier-2 .drill-subgroup-label { background: rgba(22,101,52,0.13); border-left-color: rgba(22,101,52,0.62); }
+    .subject-biochem .tier-3 .drill-subgroup-label { background: rgba(22,101,52,0.24); border-left-color: rgba(22,101,52,0.92); }
+    .subject-biochem .dsg-num                      { color: var(--biochem-tx); }
+
+    .subject-path .tier-1 .drill-subgroup-label   { background: rgba(159,18,57,0.05); border-left-color: rgba(159,18,57,0.28); }
+    .subject-path .tier-2 .drill-subgroup-label   { background: rgba(159,18,57,0.13); border-left-color: rgba(159,18,57,0.62); }
+    .subject-path .tier-3 .drill-subgroup-label   { background: rgba(159,18,57,0.24); border-left-color: rgba(159,18,57,0.92); }
+    .subject-path .dsg-num                         { color: var(--path-tx); }
+
+    .subject-pharm .tier-1 .drill-subgroup-label  { background: rgba(109,40,217,0.05); border-left-color: rgba(109,40,217,0.28); }
+    .subject-pharm .tier-2 .drill-subgroup-label  { background: rgba(109,40,217,0.13); border-left-color: rgba(109,40,217,0.62); }
+    .subject-pharm .tier-3 .drill-subgroup-label  { background: rgba(109,40,217,0.24); border-left-color: rgba(109,40,217,0.92); }
+    .subject-pharm .dsg-num                        { color: var(--pharm-tx); }
+
+    /* Card background/border — distinct shade per tier within each subject */
+    .subject-phys   .tier-1 .drill-card { background: rgba(31,75,153,0.05);  border-color: rgba(31,75,153,0.18); }
+    .subject-phys   .tier-2 .drill-card { background: rgba(31,75,153,0.13);  border-color: rgba(31,75,153,0.40); }
+    .subject-phys   .tier-3 .drill-card { background: rgba(31,75,153,0.22);  border-color: rgba(31,75,153,0.62); }
+
+    .subject-biochem .tier-1 .drill-card { background: rgba(22,101,52,0.05); border-color: rgba(22,101,52,0.18); }
+    .subject-biochem .tier-2 .drill-card { background: rgba(22,101,52,0.13); border-color: rgba(22,101,52,0.40); }
+    .subject-biochem .tier-3 .drill-card { background: rgba(22,101,52,0.22); border-color: rgba(22,101,52,0.62); }
+
+    .subject-path   .tier-1 .drill-card { background: rgba(159,18,57,0.05); border-color: rgba(159,18,57,0.18); }
+    .subject-path   .tier-2 .drill-card { background: rgba(159,18,57,0.13); border-color: rgba(159,18,57,0.40); }
+    .subject-path   .tier-3 .drill-card { background: rgba(159,18,57,0.22); border-color: rgba(159,18,57,0.62); }
+
+    .subject-pharm  .tier-1 .drill-card { background: rgba(109,40,217,0.05); border-color: rgba(109,40,217,0.18); }
+    .subject-pharm  .tier-2 .drill-card { background: rgba(109,40,217,0.13); border-color: rgba(109,40,217,0.40); }
+    .subject-pharm  .tier-3 .drill-card { background: rgba(109,40,217,0.22); border-color: rgba(109,40,217,0.62); }
+
     /* ══════════════════════════════════════
        MOBILE BOTTOM NAV
     ══════════════════════════════════════ */
@@ -482,267 +571,344 @@
       </section>
 
       <!-- ── PHYSIOLOGY ── -->
-      <div class="section-block" id="physiology">
+      <div class="section-block subject-phys" id="physiology">
         <div class="section-divider">
           <span class="section-divider-text">Physiology</span>
           <div class="section-divider-line"></div>
         </div>
         <p class="section-meta">3 in-house hubs · Watson · H-P axes, feedback loops, integration</p>
-        <div class="drill-grid">
 
-          <a class="drill-card dc-phys" href="../GUSOM-Phys-Hub1-ActiveDrills.html">
-            <div class="drill-card-header">
-              <span class="drill-card-title">Hub 1 Active Drills</span>
-              <span class="drill-badge badge-inhouse">In-House</span>
+        <!-- Tier 1 -->
+        <div class="drill-subgroup tier-1">
+          <div class="drill-subgroup-label">
+            <span class="dsg-num">01</span>
+            <div class="dsg-text">
+              <span class="dsg-name">Lecture Module Drill Sets</span>
+              <span class="dsg-desc">Per-lecture drill sets — work through each lecture before moving on</span>
             </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–7 Drill Modules</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Test Traps · Fill-in-Blank</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
-            </div>
-            <span class="drill-cta">Start Drills →</span>
-          </a>
-
-          <a class="drill-card dc-phys" href="../GUSOM-Phys-Hub2-ActiveDrills.html">
-            <div class="drill-card-header">
-              <span class="drill-card-title">Hub 2 Active Drills</span>
-              <span class="drill-badge badge-inhouse">In-House</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–7 Drill Modules</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Test Traps · Fill-in-Blank</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
-            </div>
-            <span class="drill-cta">Start Drills →</span>
-          </a>
-
-          <a class="drill-card dc-phys" href="../GUSOM-Phys-Hub3-ActiveDrills.html">
-            <div class="drill-card-header">
-              <span class="drill-card-title">Hub 3 Active Drills</span>
-              <span class="drill-badge badge-step1">Step 1</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–7 Drill Modules</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes · Challenge Drills · USMLE Maps</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">USMLE Step 1 / BRS Physiology</span></div>
-            </div>
-            <span class="drill-cta">Start Drills →</span>
-          </a>
-
-          <a class="drill-card dc-phys" href="../GUSOM-Phys-ActiveDrills.html">
-            <div class="drill-card-header">
-              <span class="drill-card-title">All Physiology Drills</span>
-              <span class="drill-badge badge-inhouse">In-House</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–6 Drill Modules</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Test Traps · Fill-in-Blank</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
-            </div>
-            <span class="drill-cta">Start Drills →</span>
-          </a>
-
-          <a class="drill-card dc-phys drill-card-cumul" href="../GUSOM-Phys-QuestionBank.html">
-            <span class="cumul-scope">⬡ Cumulative</span>
-            <div class="drill-card-header">
-              <span class="drill-card-title">Physiology Question Bank</span>
-              <span class="drill-badge badge-qbank">Q Bank</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Lectures</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
-            </div>
-            <span class="drill-cta">Open Bank →</span>
-          </a>
-
-          <a class="drill-card dc-phys drill-card-cumul" href="../GUSOM-Phys-BlockChallenge.html">
-            <span class="cumul-scope">⬡ Cumulative</span>
-            <div class="drill-card-header">
-              <span class="drill-card-title">Physiology Block Challenge</span>
-              <span class="drill-badge badge-challenge">Challenge</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All 6 Lectures · 40 Questions</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Timed Block (50 min)</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
-            </div>
-            <span class="drill-cta">Take Challenge →</span>
-          </a>
-
+            <span class="dsg-chevron">▾</span>
+          </div>
+          <div class="drill-grid">
+            <a class="drill-card dc-phys" href="../GUSOM-Phys-Hub1-ActiveDrills.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Hub 1 Active Drills</span>
+                <span class="drill-badge badge-inhouse">In-House</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–7 Drill Modules</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Test Traps · Fill-in-Blank</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
+              </div>
+              <span class="drill-cta">Start Drills →</span>
+            </a>
+            <a class="drill-card dc-phys" href="../GUSOM-Phys-Hub2-ActiveDrills.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Hub 2 Active Drills</span>
+                <span class="drill-badge badge-inhouse">In-House</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–7 Drill Modules</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Test Traps · Fill-in-Blank</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
+              </div>
+              <span class="drill-cta">Start Drills →</span>
+            </a>
+            <a class="drill-card dc-phys" href="../GUSOM-Phys-Hub3-ActiveDrills.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Hub 3 Active Drills</span>
+                <span class="drill-badge badge-step1">Step 1</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–7 Drill Modules</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes · Challenge Drills · USMLE Maps</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">USMLE Step 1 / BRS Physiology</span></div>
+              </div>
+              <span class="drill-cta">Start Drills →</span>
+            </a>
+            <a class="drill-card dc-phys" href="../GUSOM-Phys-ActiveDrills.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">All Physiology Drills</span>
+                <span class="drill-badge badge-inhouse">In-House</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–6 Drill Modules</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Test Traps · Fill-in-Blank</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
+              </div>
+              <span class="drill-cta">Start Drills →</span>
+            </a>
+          </div>
         </div>
+
+
+        <!-- Tier 2 -->
+        <div class="drill-subgroup tier-2">
+          <div class="drill-subgroup-label">
+            <span class="dsg-num">02</span>
+            <div class="dsg-text">
+              <span class="dsg-name">Lecture Practice Questions</span>
+              <span class="dsg-desc">Filterable by lecture — target specific areas as you work through the block</span>
+            </div>
+            <span class="dsg-chevron">▾</span>
+          </div>
+          <div class="drill-grid">
+            <a class="drill-card dc-phys" href="../GUSOM-Phys-QuestionBank.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Physiology Question Bank</span>
+                <span class="drill-badge badge-qbank">Q Bank</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Lectures · Lecture-Filterable</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
+              </div>
+              <span class="drill-cta">Open Bank →</span>
+            </a>
+          </div>
+        </div>
+
+
+        <!-- Tier 3 -->
+        <div class="drill-subgroup tier-3">
+          <div class="drill-subgroup-label">
+            <span class="dsg-num">03</span>
+            <div class="dsg-text">
+              <span class="dsg-name">Cumulative Exam-Style Questions</span>
+              <span class="dsg-desc">Full-coverage, no lecture filter — tackle after completing all lecture work</span>
+            </div>
+            <span class="dsg-chevron">▾</span>
+          </div>
+          <div class="drill-grid">
+            <a class="drill-card dc-phys drill-card-cumul" href="../GUSOM-Phys-BlockChallenge.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Physiology Block Challenge</span>
+                <span class="drill-badge badge-challenge">Challenge</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All 6 Lectures · 40 Questions</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Timed Block (50 min)</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
+              </div>
+              <span class="drill-cta">Take Challenge →</span>
+            </a>
+          </div>
+        </div>
+
       </div>
 
       <!-- ── BIOCHEMISTRY ── -->
-      <div class="section-block" id="biochemistry">
+      <div class="section-block subject-biochem" id="biochemistry">
         <div class="section-divider">
           <span class="section-divider-text">Biochemistry</span>
           <div class="section-divider-line"></div>
         </div>
         <p class="section-meta">Danielsen · Sherman · Hormone synthesis, steroid pathways, thyroid biochemistry</p>
-        <div class="drill-grid">
 
-          <a class="drill-card dc-biochem" href="../GUSOM-Biochem-Hub3-ActiveDrills.html">
-            <div class="drill-card-header">
-              <span class="drill-card-title">Hub 3 Active Drills</span>
-              <span class="drill-badge badge-inhouse">In-House</span>
+        <!-- Tier 1 -->
+        <div class="drill-subgroup tier-1">
+          <div class="drill-subgroup-label">
+            <span class="dsg-num">01</span>
+            <div class="dsg-text">
+              <span class="dsg-name">Lecture Module Drill Sets</span>
+              <span class="dsg-desc">Per-lecture drill sets — work through each lecture before moving on</span>
             </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Drill Modules</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House + BRS Biochem Ch. 9</span></div>
-            </div>
-            <span class="drill-cta">Start Drills →</span>
-          </a>
-
-          <a class="drill-card dc-biochem" href="../GUSOM-Biochem-ActiveDrills.html">
-            <div class="drill-card-header">
-              <span class="drill-card-title">All Biochemistry Drills</span>
-              <span class="drill-badge badge-inhouse">In-House</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Drill Modules</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Trap Detector · Fill-in-Blank · Anki Map</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
-            </div>
-            <span class="drill-cta">Start Drills →</span>
-          </a>
-
-          <a class="drill-card dc-biochem" href="../GUSOM-Biochem-Step1-ActiveDrills.html">
-            <div class="drill-card-header">
-              <span class="drill-card-title">Step 1 Active Drills</span>
-              <span class="drill-badge badge-step1">Step 1</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Drill Modules</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Trap Detector · Fill-in-Blank · USMLE Maps</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">USMLE Step 1</span></div>
-            </div>
-            <span class="drill-cta">Start Drills →</span>
-          </a>
-
-          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-QuestionBank.html">
-            <span class="cumul-scope">⬡ Cumulative</span>
-            <div class="drill-card-header">
-              <span class="drill-card-title">Biochemistry Question Bank</span>
-              <span class="drill-badge badge-qbank">Q Bank</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 + BRS Questions</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes · Test Traps</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Original + BRS Biochem</span></div>
-            </div>
-            <span class="drill-cta">Open Bank →</span>
-          </a>
-
-          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-QuestionBank-Traps.html">
-            <span class="cumul-scope">⬡ Cumulative</span>
-            <div class="drill-card-header">
-              <span class="drill-card-title">Trap Question Bank</span>
-              <span class="drill-badge badge-qbank">Q Bank</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Lectures</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Test Traps · Step 1 MCQ</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM + USMLE Step 1</span></div>
-            </div>
-            <span class="drill-cta">Open Bank →</span>
-          </a>
-
-          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-BlockChallenge.html">
-            <span class="cumul-scope">⬡ Cumulative</span>
-            <div class="drill-card-header">
-              <span class="drill-card-title">Block Challenge</span>
-              <span class="drill-badge badge-challenge">Challenge</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All 5 Lectures</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Integration Vignettes · MCQ Gauntlet</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
-            </div>
-            <span class="drill-cta">Take Challenge →</span>
-          </a>
-
-          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-Step1-BlockChallenge.html">
-            <span class="cumul-scope">⬡ Cumulative</span>
-            <div class="drill-card-header">
-              <span class="drill-card-title">Step 1 Block Challenge</span>
-              <span class="drill-badge badge-step1">Step 1</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All 5 Lectures</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Integration Vignettes · MCQ Gauntlet</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">USMLE Step 1</span></div>
-            </div>
-            <span class="drill-cta">Take Challenge →</span>
-          </a>
-
-          <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-AnkiMapping.html">
-            <span class="cumul-scope">⬡ Cumulative</span>
-            <div class="drill-card-header">
-              <span class="drill-card-title">Anki Mapping</span>
-              <span class="drill-badge badge-inhouse">In-House</span>
-            </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Anki Maps</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Card Mapping · Spaced Repetition</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
-            </div>
-            <span class="drill-cta">View Mapping →</span>
-          </a>
-
+            <span class="dsg-chevron">▾</span>
+          </div>
+          <div class="drill-grid">
+            <a class="drill-card dc-biochem" href="../GUSOM-Biochem-Hub3-ActiveDrills.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Hub 3 Active Drills</span>
+                <span class="drill-badge badge-inhouse">In-House</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Drill Modules</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House + BRS Biochem Ch. 9</span></div>
+              </div>
+              <span class="drill-cta">Start Drills →</span>
+            </a>
+            <a class="drill-card dc-biochem" href="../GUSOM-Biochem-ActiveDrills.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">All Biochemistry Drills</span>
+                <span class="drill-badge badge-inhouse">In-House</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Drill Modules</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Trap Detector · Fill-in-Blank · Anki Map</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
+              </div>
+              <span class="drill-cta">Start Drills →</span>
+            </a>
+            <a class="drill-card dc-biochem" href="../GUSOM-Biochem-Step1-ActiveDrills.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Step 1 Active Drills</span>
+                <span class="drill-badge badge-step1">Step 1</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Drill Modules</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Flashcard · MCQ · Vignettes · Trap Detector · Fill-in-Blank · USMLE Maps</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">USMLE Step 1</span></div>
+              </div>
+              <span class="drill-cta">Start Drills →</span>
+            </a>
+            <a class="drill-card dc-biochem" href="../GUSOM-Biochem-AnkiMapping.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Anki Mapping</span>
+                <span class="drill-badge badge-inhouse">In-House</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 Anki Maps</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Card Mapping · Spaced Repetition</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Anki Flash Decks</span></div>
+              </div>
+              <span class="drill-cta">View Mapping →</span>
+            </a>
+          </div>
         </div>
+
+
+        <!-- Tier 2 -->
+        <div class="drill-subgroup tier-2">
+          <div class="drill-subgroup-label">
+            <span class="dsg-num">02</span>
+            <div class="dsg-text">
+              <span class="dsg-name">Lecture Practice Questions</span>
+              <span class="dsg-desc">Filterable by lecture — target specific areas as you work through the block</span>
+            </div>
+            <span class="dsg-chevron">▾</span>
+          </div>
+          <div class="drill-grid">
+            <a class="drill-card dc-biochem" href="../GUSOM-Biochem-QuestionBank.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Biochemistry Question Bank</span>
+                <span class="drill-badge badge-qbank">Q Bank</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">Lecture #1–5 + BRS · Lecture-Filterable</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes · Test Traps</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM Original + BRS Biochem</span></div>
+              </div>
+              <span class="drill-cta">Open Bank →</span>
+            </a>
+            <a class="drill-card dc-biochem" href="../GUSOM-Biochem-QuestionBank-Traps.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Trap Question Bank</span>
+                <span class="drill-badge badge-qbank">Q Bank</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Lectures · Lecture-Filterable</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Test Traps · Step 1 MCQ</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM + USMLE Step 1</span></div>
+              </div>
+              <span class="drill-cta">Open Bank →</span>
+            </a>
+          </div>
+        </div>
+
+
+        <!-- Tier 3 -->
+        <div class="drill-subgroup tier-3">
+          <div class="drill-subgroup-label">
+            <span class="dsg-num">03</span>
+            <div class="dsg-text">
+              <span class="dsg-name">Cumulative Exam-Style Questions</span>
+              <span class="dsg-desc">Full-coverage, no lecture filter — tackle after completing all lecture work</span>
+            </div>
+            <span class="dsg-chevron">▾</span>
+          </div>
+          <div class="drill-grid">
+            <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-BlockChallenge.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Block Challenge</span>
+                <span class="drill-badge badge-challenge">Challenge</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All 5 Lectures</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Integration Vignettes · MCQ Gauntlet</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
+              </div>
+              <span class="drill-cta">Take Challenge →</span>
+            </a>
+            <a class="drill-card dc-biochem drill-card-cumul" href="../GUSOM-Biochem-Step1-BlockChallenge.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Step 1 Block Challenge</span>
+                <span class="drill-badge badge-step1">Step 1</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All 5 Lectures</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">Integration Vignettes · MCQ Gauntlet</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">USMLE Step 1</span></div>
+              </div>
+              <span class="drill-cta">Take Challenge →</span>
+            </a>
+          </div>
+        </div>
+
       </div>
 
       <!-- ── PATHOLOGY ── -->
-      <div class="section-block" id="pathology">
+      <div class="section-block subject-path" id="pathology">
         <div class="section-divider">
           <span class="section-divider-text">Pathology</span>
           <div class="section-divider-line"></div>
         </div>
         <p class="section-meta">Furlong · Santi · Wieneke · Endocrine pathology, diabetes, adrenal, thyroid, pituitary</p>
-        <div class="drill-grid">
-
-          <a class="drill-card dc-path drill-card-cumul" href="../GUSOM-Path-ReviewQuestions.html">
-            <span class="cumul-scope">⬡ Cumulative</span>
-            <div class="drill-card-header">
-              <span class="drill-card-title">Pathology Review Questions</span>
-              <span class="drill-badge badge-qbank">Q Bank</span>
+        <div class="drill-subgroup tier-3">
+          <div class="drill-subgroup-label">
+            <span class="dsg-num">03</span>
+            <div class="dsg-text">
+              <span class="dsg-name">Cumulative Exam-Style Questions</span>
+              <span class="dsg-desc">Full-coverage — tackle after completing all lecture work</span>
             </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Path Lectures (Furlong · Santi · Wieneke)</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House + Robbins</span></div>
-            </div>
-            <span class="drill-cta">Start Questions →</span>
-          </a>
-
+            <span class="dsg-chevron">▾</span>
+          </div>
+          <div class="drill-grid">
+            <a class="drill-card dc-path drill-card-cumul" href="../GUSOM-Path-ReviewQuestions.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Pathology Review Questions</span>
+                <span class="drill-badge badge-qbank">Q Bank</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Path Lectures (Furlong · Santi · Wieneke)</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Vignettes</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House + Robbins</span></div>
+              </div>
+              <span class="drill-cta">Start Questions →</span>
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- ── PHARMACOLOGY ── -->
-      <div class="section-block" id="pharmacology">
+      <div class="section-block subject-pharm" id="pharmacology">
         <div class="section-divider">
           <span class="section-divider-text">Pharmacology</span>
           <div class="section-divider-line"></div>
         </div>
         <p class="section-meta">Janicic · Jonklaas · Sharma · Diabetes pharmacology, thyroid agents, adrenal drugs</p>
-        <div class="drill-grid">
-
-          <a class="drill-card dc-pharm drill-card-cumul" href="../GUSOM-Pharmacology-ENDOPracticeQuestions_2024.html">
-            <span class="cumul-scope">⬡ Cumulative</span>
-            <div class="drill-card-header">
-              <span class="drill-card-title">Pharmacology Practice Questions</span>
-              <span class="drill-badge badge-inhouse">In-House</span>
+        <div class="drill-subgroup tier-3">
+          <div class="drill-subgroup-label">
+            <span class="dsg-num">03</span>
+            <div class="dsg-text">
+              <span class="dsg-name">Cumulative Exam-Style Questions</span>
+              <span class="dsg-desc">Full-coverage — tackle after completing all lecture work</span>
             </div>
-            <div class="drill-info">
-              <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Pharm Lectures (Janicic · Jonklaas · Sharma)</span></div>
-              <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Clinical Cases</span></div>
-              <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
-            </div>
-            <span class="drill-cta">Start Questions →</span>
-          </a>
-
+            <span class="dsg-chevron">▾</span>
+          </div>
+          <div class="drill-grid">
+            <a class="drill-card dc-pharm drill-card-cumul" href="../GUSOM-Pharmacology-ENDOPracticeQuestions_2024.html">
+              <div class="drill-card-header">
+                <span class="drill-card-title">Pharmacology Practice Questions</span>
+                <span class="drill-badge badge-inhouse">In-House</span>
+              </div>
+              <div class="drill-info">
+                <div class="di-row"><span class="di-label">Modules</span><span class="di-val">All Pharm Lectures (Janicic · Jonklaas · Sharma)</span></div>
+                <div class="di-row"><span class="di-label">Drill Types</span><span class="di-val">MCQ · Clinical Cases</span></div>
+                <div class="di-row"><span class="di-label">Source</span><span class="di-val">GUSOM In-House</span></div>
+              </div>
+              <span class="drill-cta">Start Questions →</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -791,6 +957,13 @@
   document.addEventListener('DOMContentLoaded', function () {
     const t = document.documentElement.getAttribute('data-theme');
     document.getElementById('darkToggle').textContent = t === 'dark' ? '☀️' : '🌙';
+
+    // ── Accordion toggle for drill subgroups ──
+    document.querySelectorAll('.drill-subgroup-label').forEach(function(label) {
+      label.addEventListener('click', function() {
+        label.closest('.drill-subgroup').classList.toggle('collapsed');
+      });
+    });
   });
 </script>
 
