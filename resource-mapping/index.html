@@ -566,7 +566,7 @@ function buildResGroup(res, chips) {
   const chipsHtml = chips.map(ch => {
     const hasLink = !!ch.html;
     const cls2 = hasLink ? 'res-chip' : 'res-chip no-link';
-    const oc   = hasLink ? `onclick="openAnki('./anki-files/${ch.html}','${esc(ch.section)}')"` : '';
+    const oc   = hasLink ? `onclick="openAnki('./resource-mapping/anki-files/${ch.html}','${esc(ch.section)}')"` : '';
     return `<div class="${cls2}" style="background:${st.bg};color:${st.c};border-color:${st.c}44" ${oc}>
       <span class="chip-txt">${esc(ch.section)}</span>
       <span class="chip-cnt">${ch.count}</span>
@@ -645,7 +645,7 @@ function buildAnkiList(cls) {
       <div class="anki-count-cell">${r.count} cards</div>
       <div>
         ${r.html
-          ? `<button class="anki-open-btn" onclick="openAnki('./anki-files/${r.html}','${esc(r.resName)} &mdash; ${esc(r.section)}')">Open ${r.count} cards &rarr;</button>`
+          ? `<button class="anki-open-btn" onclick="openAnki('./resource-mapping/anki-files/${r.html}','${esc(r.resName)} &mdash; ${esc(r.section)}')">Open ${r.count} cards &rarr;</button>`
           : `<span class="anki-no-link">No file</span>`}
       </div>
     </div>`).join('');
@@ -718,12 +718,12 @@ function buildHome() {
   const COV_FULL  = {bb:'Boards &amp; Beyond',bootcamp:'Bootcamp',pathoma:'Pathoma',sketchy_pharm:'Sketchy Pharm',sketchy_path:'Sketchy Path',_physeo:'Physeo (Pharm + Path)'};
   const COV_DOTS  = {bb:'#2E7D32',bootcamp:'#1565C0',pathoma:'#BF360C',sketchy_pharm:'#6A1B9A',sketchy_path:'#AD1457',_physeo:'#00695C'};
   const COV_FILES = {
-    bb:           'resources/3rdParty-BoardsBeyond-LectureMapping.docx',
-    bootcamp:     'resources/3rdParty-Bootcamp-LectureMapping.docx',
-    pathoma:      'resources/3rdParty-Pathoma-LectureMapping.docx',
-    sketchy_pharm:'resources/3rdParty-SketchyPharm-LectureMapping.docx',
-    sketchy_path: 'resources/3rdParty-SketchyPath-LectureMapping.docx',
-    _physeo:      'resources/3rdParty-Physeo-LectureMapping.docx',
+    bb:           './resource-mapping/3rdParty-BoardsBeyond-LectureMapping.docx',
+    bootcamp:     './resource-mapping/3rdParty-Bootcamp-LectureMapping.docx',
+    pathoma:      './resource-mapping/3rdParty-Pathoma-LectureMapping.docx',
+    sketchy_pharm:'./resource-mapping/3rdParty-SketchyPharm-LectureMapping.docx',
+    sketchy_path: './resource-mapping/3rdParty-SketchyPath-LectureMapping.docx',
+    _physeo:      './resource-mapping/3rdParty-Physeo-LectureMapping.docx',
   };
 
   const totalUW = new Set();
@@ -745,7 +745,7 @@ function buildHome() {
       + '<span class="cov-legend-ext">&#8599;</span>'
       + '</a>';
   });
-  legend += '<a class="cov-legend-item" href="./resources/GUSOM-UWorld-LectureMapping.xlsx" target="_blank" title="Open UWorld lecture mapping">'
+  legend += '<a class="cov-legend-item" href="./resource-mapping/GUSOM-UWorld-LectureMapping.xlsx" target="_blank" title="Open UWorld lecture mapping">'
     + '<div class="cov-legend-dot" style="background:#1a4a7a"></div>'
     + 'UWorld QIDs (count)'
     + '<span class="cov-legend-ext">&#8599;</span>'
@@ -806,8 +806,8 @@ function buildHome() {
     + '<div class="home-title">GUSOM Endocrine Block</div>'
     + '<div class="home-sub">Study Resource Hub &mdash; Select a lecture from the left panel, or explore the overview below.</div>'
     + '<div class="home-stat-row">'
-    +   '<a class="home-stat-card home-stat-card-blue" href="./resources/Endocrine_Mapping.xlsx" target="_blank"><div class="home-stat-n">'+DATA.length+'</div><div class="home-stat-title">Lectures</div><div class="home-stat-lbl">&#8599; Click for full lecture to 3rd party mapping</div></a>'
-    +   '<a class="home-stat-card home-stat-card-green" href="./resources/GUSOM-UWorld-LectureMapping.xlsx" target="_blank"><div class="home-stat-n">'+totalUW.size+'</div><div class="home-stat-title">Unique UWorld QIDs</div><div class="home-stat-lbl">&#8599; Click for full lecture to UWorld ID mapping</div></a>'
+    +   '<a class="home-stat-card home-stat-card-blue" href="./resource-mapping/Endocrine_Mapping.xlsx" target="_blank"><div class="home-stat-n">'+DATA.length+'</div><div class="home-stat-title">Lectures</div><div class="home-stat-lbl">&#8599; Click for full lecture to 3rd party mapping</div></a>'
+    +   '<a class="home-stat-card home-stat-card-green" href="./resource-mapping/GUSOM-UWorld-LectureMapping.xlsx" target="_blank"><div class="home-stat-n">'+totalUW.size+'</div><div class="home-stat-title">Unique UWorld QIDs</div><div class="home-stat-lbl">&#8599; Click for full lecture to UWorld ID mapping</div></a>'
     +   '<a class="home-stat-card home-stat-card-amber" href="https://forms.gle/spz5TRQfjjc7kbQh6" target="_blank"><div class="home-stat-icon">&#128203;</div><div class="home-stat-title">Suggest a Change</div><div class="home-stat-lbl">&#8599; QID additions, corrections &amp; updates</div></a>'
     + '</div>'
 
