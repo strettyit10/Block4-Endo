@@ -541,6 +541,42 @@ const SPC = {
   'Genetics (Gene)':        ['#EDE7F6','#512DA8'],
 };
 
+const GDRIVE_IDS = {
+  '9Pharm-7Endocrine-13_ADH.pdf': '1dX6POh2TJSHAut934lGQQuTWZ-CJ1Dbs',
+  '9Pharm-7Endocrine-14_Fludrocortisone.pdf': '1YHA7io23pbcEKfWht7jcZpSUau5V4IqD',
+  '11Path-2Endocrine-1_Pituitary.pdf': '1m3G-qU0d-qb_8vNRDomVnlaViMQ93pMM',
+  '11Path-2Endocrine-2_Hyperthyroidism.pdf': '1eDNx32_lE4wAsNa7ihAPUPONIRl59VW4',
+  '11Path-2Endocrine-3_Hypothyroidism.pdf': '1IWJqlJATPTBL9hFEASHpzWaK8k1NhtSe',
+  '11Path-2Endocrine-4_Thyroid_Neo.pdf': '1IAtDOcIvEWae_fhkM82DriOBqIflkklB',
+  '11Path-2Endocrine-5_Thyroiditis.pdf': '1f0om3-g6LRlxgMZeVz9pheqGCGVUc-6H',
+  '11Path-2Endocrine-6_EndocrinePath.pdf': '1SKA1h7R4eC7ZKpeyMw7Feif6sYfkZAoj',
+  '11Path-2Endocrine-7_Hyperaldosteronism.pdf': '1YpODLTw6qryV3EvjwKUVjJTv7TXpYRdT',
+  '11Path-2Endocrine-8_Hypercortisolism.pdf': '1MAj9rTd0Sutlq7e0nVTUr-bSeUtWaadJ',
+  '11Path-2Endocrine-9_Adrenal_Insufficiency.pdf': '1DSk2TvswOlou3kyBvroSEPmwEE2Hcypa',
+  '11Path-2Endocrine-10_Adrenal_Medulla.pdf': '1bYjgR4NVekVYSCv_ydKprk_tTVcADa8B',
+  '11Path-2Endocrine-11_Endocrine_neo.pdf': '1r1Q51WOMYnyqNdDjvaZb3fpChjhZpETW',
+  'Endocrine-BB-1_Thyroid.pdf': '1DMzUE1GEGZHVGXV7s2PkDEptFtCyL3PM',
+  'Endocrine-BB-2_Adrenal.pdf': '1YPmv_pz99rXg2nNznaHm82qJR8BQYbia',
+  'Endocrine-BB-3_Pancreas.pdf': '1lrAm2giFzaJ-JRK4Em5XtPXLoZSCC_1f',
+  'Endocrine-BB-5_Other.pdf': '16l6FNrH1i8qb9i17xrra5TDhKSkDODWj',
+  'Endocrine-Bootcamp-1_Fundamentals.pdf': '1lQno5kS-bhX9ejTnRb5bU1bj_0DDYYYC',
+  'Endocrine-Bootcamp-2_Hypothalamus.pdf': '1ycM9U30CvRj996Jw-H_ifPoymMae4ib7',
+  'Endocrine-Bootcamp-3_Pituitary.pdf': '1PkyXGcfJiz1z2Yr82ueqcRFqqh-2RjqF',
+  'Endocrine-Bootcamp-4_Thyroid.pdf': '1H6NZsclgNK1MQ3EwCYVa1czvz-dE6ztW',
+  'Endocrine-Bootcamp-5_Parathyroid.pdf': '1A87fcbMFzWGmybKSRl8JpfcnXZnRbSul',
+  'Endocrine-Bootcamp-6_Adrenal.pdf': '1rcbK0uk7y0JcC0IbIUXhQtOAHz701xck',
+  'Endocrine-Bootcamp-7_Pancreas.pdf': '1Ex-uYrnJk3uV5r5QY-LqF92bTDfC-2jX',
+  'Endocrine-Pathoma.pdf': '1LObhcX1xiLNt1AjiN-1rpZqcs-Gn4TGP',
+  'Endocrine-Sketchy-Path-1Hypothalamic.pdf': '1en2Fgstvi9eGFFqYN4h9Y7XiMsQk6PQA',
+  'Endocrine-Sketchy-Path-2Adrenal.pdf': '1yXapyl5AL4qRLWN9e56Twau6VMtUP71v',
+  'Endocrine-Sketchy-Path-3Diabetes.pdf': '1HsBHRv9cR25JHcXbA5uQPX9iJWGmCBX_',
+  'Endocrine-Sketchy-Path-4Thyroid.pdf': '1nyAZmW5UFhUuBJtFZc5ZfFXpn3SeTQjg',
+  'Endocrine-Sketchy-Pharm-2_Diabetes.pdf': '1hXxLZDGgyRbD7V2KblM6zhNFDPTUiutw',
+  'Endocrine-Sketchy-Pharm-3_Thyroid.pdf': '1UcyzfG-9wLA85W8dCYL4MDhSmlTAuSdc',
+  'Endocrine-Sketchy-Pharm-4_Hypothalamic.pdf': '1uZv6wtTymSEtHfYyyBeiSaQbPGoGZJJY',
+  'Endocrine-Sketchy-Pharm-5_SexHormones.pdf': '1LxrA0tdkdxsqWYl3MKYfk0bv1KFKepio',
+};
+
 let currentIdx = -1, sTerm = '', aSubj = 'all';
 
 /* ── UTILS ───────────────────────────────────────── */
@@ -567,7 +603,9 @@ function buildResGroup(res, chips) {
     const hasLink = !!ch.html;
     const cls2 = hasLink ? 'res-chip' : 'res-chip no-link';
     const pdfName = ch.html ? ch.html.replace(/\.html$/, '.pdf') : '';
-    const oc   = hasLink ? `onclick="openAnki('./anki-files/PDF/${pdfName}','${esc(ch.section)}')"` : '';
+    const gdriveId = pdfName ? GDRIVE_IDS[pdfName] : null;
+    const ankiUrl  = gdriveId ? 'https://drive.google.com/file/d/'+gdriveId+'/preview' : (pdfName ? './anki-files/PDF/'+pdfName : '');
+    const oc   = hasLink ? `onclick="openAnki('${ankiUrl}','${esc(ch.section)}')"` : '';
     return `<div class="${cls2}" style="background:${st.bg};color:${st.c};border-color:${st.c}44" ${oc}>
       <span class="chip-txt">${esc(ch.section)}</span>
       <span class="chip-cnt">${ch.count}</span>
@@ -636,7 +674,11 @@ function buildAnkiList(cls) {
     });
   });
   if (!rows.length) return `<div class="anki-none">No Anki resources mapped for this lecture.</div>`;
-  const rowsHtml = rows.map(r => `
+  const rowsHtml = rows.map(r => {
+    const _pdf = r.html ? r.html.replace(/\.html$/, '.pdf') : '';
+    const _id  = _pdf ? GDRIVE_IDS[_pdf] : null;
+    const _url = _id ? 'https://drive.google.com/file/d/'+_id+'/preview' : (_pdf ? './anki-files/PDF/'+_pdf : '');
+    return `
     <div class="anki-row">
       <div class="anki-res-cell">
         <div class="anki-res-dot" style="background:${r.dot}"></div>
@@ -646,10 +688,11 @@ function buildAnkiList(cls) {
       <div class="anki-count-cell">${r.count} cards</div>
       <div>
         ${r.html
-          ? `<button class="anki-open-btn" onclick="openAnki('./anki-files/PDF/${r.html.replace(/\.html$/,'.pdf')}','${esc(r.resName)} &mdash; ${esc(r.section)}')">Open ${r.count} cards &rarr;</button>`
+          ? `<button class="anki-open-btn" onclick="openAnki('${_url}','${esc(r.resName)} &mdash; ${esc(r.section)}')">Open ${r.count} cards &rarr;</button>`
           : `<span class="anki-no-link">No file</span>`}
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
   return `
     <div class="anki-list">
       <div class="anki-list-hdr">
@@ -912,9 +955,19 @@ function openAnki(url, title) {
   document.getElementById('ankiFrame').src = url;
   const dlBtn = document.getElementById('ankiDl');
   if (dlBtn) {
-    dlBtn.href = url;
-    dlBtn.download = url.split('/').pop();
-    dlBtn.style.display = url.endsWith('.pdf') ? 'inline-block' : 'none';
+    const gdMatch = url.match(/\/file\/d\/([^\/]+)\//);
+    if (gdMatch) {
+      dlBtn.href = 'https://drive.google.com/uc?export=download&id=' + gdMatch[1];
+      dlBtn.removeAttribute('download');
+      dlBtn.target = '_blank';
+      dlBtn.style.display = 'inline-block';
+    } else if (url.endsWith('.pdf')) {
+      dlBtn.href = url;
+      dlBtn.download = url.split('/').pop();
+      dlBtn.style.display = 'inline-block';
+    } else {
+      dlBtn.style.display = 'none';
+    }
   }
   document.getElementById('ankiOv').classList.add('open');
   document.body.style.overflow = 'hidden';
