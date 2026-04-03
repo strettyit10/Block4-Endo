@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (27 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div>What <b>psychiatric medication</b> is a common cause of drug-induced <b>nephrogenic diabetes insipidus</b>?<br/></div><br/><div><span class="cloze" data-cloze="Lithium" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <b>psychiatric medication</b> is a common cause of drug-induced <b>nephrogenic diabetes insipidus</b>?<br/></div><br/><div><span class="cloze" data-ordinal="1">Lithium</span> </div><br/>Treat with amiloride<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="61b7c56f47f1661e63789a4138a43306.webp"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><div><img src="4f85156091cb442d216b97facfc39bfa.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><img src="3c3766c749a60aea2853660175b5d8db.webp"><br><div><img src="26d4b698ca4e74d438218c910ea8d4d2.webp"><img src="b8458b8010404dfe2afcebdb2160e5a2.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-lithium?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Lithium</a><br><br> --><!-- <img src="54d01ba9391fa6859e9dce81403c50c7.webp"><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="e12e94b2da927dceb0ec449769ee45e0.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="tmpo3lyoqky.png"><br><img class="resizer" src="tmpjc7crreo.png"><br><img class="resizer" src="tmp22afm7r3.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><div><b>NSAIDs</b>, such as <span class="cloze" data-cloze="&lt;b&gt;indomethacin&lt;/b&gt;" data-ordinal="1">[...]</span>, may be used to treat <span class="cloze-inactive" data-ordinal="2"><b>nephrogenic</b></span><b> diabetes</b> <b>insipidus</b><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>NSAIDs</b>, such as <span class="cloze" data-ordinal="1"><b>indomethacin</b></span>, may be used to treat <span class="cloze-inactive" data-ordinal="2"><b>nephrogenic</b></span><b> diabetes</b> <b>insipidus</b><br/></div><br/><div>Via decreased production of prostaglandins, which antagonize the effects of ADH<br/></div><br/><div><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="683548dcfe861c1eaa75850384d28fc3.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="1a80f073d55dcce6eddfa3858a0e40a4.JPG"><br><img src="d0fbb521c7e007a8b3aaa36c5945c549.jpg"><br /><br /> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div>What <u>type</u> of <b>diabetes</b> is associated with <b>lithium use</b>?<br/></div><br/><div><span class="cloze" data-cloze="Nephrogenic diabetes insipidus" data-ordinal="1">[...]</span> <br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <u>type</u> of <b>diabetes</b> is associated with <b>lithium use</b>?<br/></div><br/><div><span class="cloze" data-ordinal="1">Nephrogenic diabetes insipidus</span> <br/></div><br/>Lithium antagonizes the action of ADH in the collecting tubules<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="61b7c56f47f1661e63789a4138a43306.webp"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><div><img src="1954bbdfd0e7a548142e4e61bc9dd2a4.webp"><br></div><img src="26d4b698ca4e74d438218c910ea8d4d2.webp"><img src="b8458b8010404dfe2afcebdb2160e5a2.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-lithium?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Lithium</a><br><br> --><!-- <img src="e12e94b2da927dceb0ec449769ee45e0.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="tmpo3lyoqky.png"><br><img class="resizer" src="tmpjc7crreo.png"><br><img class="resizer" src="tmp22afm7r3.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div><span class="cloze" data-cloze="&lt;b&gt;Amiloride&lt;/b&gt;" data-ordinal="1">[...]</span> is a K<sup>+</sup> sparing <b>diuretic</b> that may be used to treat <span class="cloze-inactive" data-ordinal="3"><u>lithium</u></span>-induced <span class="cloze-inactive" data-ordinal="2"><b>nephrogenic</b></span> <b>diabetes insipidus</b><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze" data-ordinal="1"><b>Amiloride</b></span> is a K<sup>+</sup> sparing <b>diuretic</b> that may be used to treat <span class="cloze-inactive" data-ordinal="3"><u>lithium</u></span>-induced <span class="cloze-inactive" data-ordinal="2"><b>nephrogenic</b></span> <b>diabetes insipidus</b><br/></div><br/>Amiloride blocks lithium entry through the ENaC channel<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="8d0d0e202e743b19b9c132555e17e72d.webp" width="800"><img src="869aee967c68cac784c3598bc7a5c463.webp"><br></div><img src="3ab1b98a881fdcd0d138bff6628fade4.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-cardiovascular-renal/videos/medical-pharmacology-cardiovascular-and-renal-diuretics-k-sparing-diuretics?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch K+ Sparing Diuretics</a><br><br><img src="daf8610040efbbc228509f58b27e62f7.webp" width="800"><br><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists<br><br><img src="12b2193ff7391d962dc5ab4c4f99bc68.webp"><img src="4b4f5fa44e8734057d21eda3aa803269.webp"><img src="b74d376eb29f5f626dfb2040c30fe64f.webp" style="color: white;"><br></a><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br> --><!-- <img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="tmpo3lyoqky.png"><br><img class="resizer" src="tmpjc7crreo.png"><br><img class="resizer" src="tmp22afm7r3.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><div>One <i>class</i> of drugs that may treat <b>nephrogenic diabetes insipidus</b> is <span class="cloze" data-cloze="&lt;b&gt;thiazide diuretics&lt;/b&gt;" data-ordinal="1">[...]</span>, which enhances the uptake of NaCl and H<sub>2</sub>O in the <b><span class="cloze-inactive" data-ordinal="2">proximal tubule</span></b> <br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One <i>class</i> of drugs that may treat <b>nephrogenic diabetes insipidus</b> is <span class="cloze" data-ordinal="1"><b>thiazide diuretics</b></span>, which enhances the uptake of NaCl and H<sub>2</sub>O in the <b><span class="cloze-inactive" data-ordinal="2">proximal tubule</span></b> <br/></div><br/><div><u>Confusing mechanism</u>: thiazide diuretics decrease reabsorption of NaCl in the early DCT → increased urinary excretion of Na<sup>+ </sup>→ decreased ECF volume → increased RAAS activation → increased proximal Na<sup>+</sup> and H<sub>2</sub>O reabsorption → decreased urine output</div><br/><div><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="c44870716068d955fea99370f96a1be5.webp" width="800"><img src="4e4906b22bd881e56aa7722365f6d329.webp"><br></div><img src="5fa1b88fb5126ead5ec278857605fe44.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-cardiovascular-renal/videos/medical-pharmacology-cardiovascular-and-renal-diuretics-thiazides?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thiazides</a><br><br><div><img src="5d7616474f071b889201c249c343e31c.webp" width="800"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><img src="ecc283f99e89b7a6a5123e811e6f7130.webp" width="800"><img src="2fc79b0805c7c042592d4da72a376f99.webp" width="800"><br><div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br> --><!-- <img src="8530188dce496bf5807f49ffd7d0ad15.webp"><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><div>In addition to <b>central diabetes insipidus</b>, <u>desmopressin</u> (DDAVP) may be used to treat <b>nocturnal enuresis</b>, <span class="cloze" data-cloze="&lt;b&gt;hemophilia A&lt;/b&gt;" data-ordinal="1">[...]</span>, and <b>von Willebrand disease</b><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In addition to <b>central diabetes insipidus</b>, <u>desmopressin</u> (DDAVP) may be used to treat <b>nocturnal enuresis</b>, <span class="cloze" data-ordinal="1"><b>hemophilia A</b></span>, and <b>von Willebrand disease</b><br/></div><br/><div>Hemophilia A is an X-linked deficiency of <b>factor VIII</b></div><br/><img src="c966ca2b9f054467feef9115f329044a.webp" width="501"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.cureus.com/articles/23672-spontaneous-knee-hemarthrosis-due-to-hypofibrinogenemia-following-tigecycline-treatment-for-periprosthetic-joint-infection#!/">Balfousias et al.</a>, <a href="https://creativecommons.org/licenses/by/3.0/deed.en">CC BY 3.0</a>, via Cureus<br/></span></i><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="1e3659d49d4139e4451ae62b8919f725.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <img src="8e6e32c9c3e969d5124efae5b5e34cbd.webp"><img src="5bb480f54d6fbebe49e1048005538b8c.webp"><img src="b827cf50495a3a9b62e581ca01012303.webp"><img src="29d5af4ef60c30451c013f0e308377ef.webp"><img src="47b8d9927cf037c575f57cb06344ad93.webp"><br><b><span style="font-weight: 400;"><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-hematology-oncology/videos/medical-internal-medicine-hematology-and-oncology-bleeding-and-clotting-disorders-bleeding-disorders-2-coagulation-factor-disorders-ddx" title="Watch Bleeding Disorders: Coagulation Factor Disorders DDx">Watch Bleeding Disorders: Coagulation Factor Disorders DDx</a></span></b><br><br><img src="4d8183bc6ee14de2af5dddafc7fe1fa1.webp"><img src="87bb511d88e41ead52481bac814fb78f.webp"><br><img src="dc465c8ca877156cde92edf6e50b537c.webp"><img src="985bc2517ad3ceebd2f6b74b0fac61f9.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/head-neck-trauma/lesson/moderate-severe-traumatic-brain-injury-management">Watch Moderate &amp; Severe Traumatic Brain Injury: Management</a><br><br><img src="5ab73d36f3752ead132692c295c1c7ed.webp"><img src="c14ee91a47d71d2dc9c8e6145fea7631.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img src="tmppscheho4.png"><br><img src="tmp5fxr4l4s.png"><br><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><div>Which treatment for <b>SIADH</b> may end up causing <b>nephrogenic diabetes insipidus</b>?<br/></div><br/><div><span class="cloze" data-cloze="Demeclocycline" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which treatment for <b>SIADH</b> may end up causing <b>nephrogenic diabetes insipidus</b>?<br/></div><br/><div><span class="cloze" data-ordinal="1">Demeclocycline</span></div><br/>Demeclocycline is an ADH antagonist<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="208a1c2d062e488c1465cbcb92acae6e.webp"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="04533f3c9d036453d535ed94df859d23.webp"><br><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <img src="cb468796978e7b4a276b193fbb8bb965.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="7996d6df5858aba0f1a83695258fabb8.webp"><img src="75c47f7d2252636f6f06e7a3ac7fca26.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img draggable="false" src="tmp0f67wic7.png" class="resizer"><br><img draggable="false" src="tmpdje6a463.png" class="resizer"><br><img draggable="false" src="tmpk8b3vp6g.png" class="resizer"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question"><div>The <b>V<sub>2</sub></b> receptor for <b>ADH</b> is located on the <span class="cloze" data-cloze="basolateral" data-ordinal="1">[...]</span> membrane of the <b>collecting duct</b><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The <b>V<sub>2</sub></b> receptor for <b>ADH</b> is located on the <span class="cloze" data-ordinal="1">basolateral</span> membrane of the <b>collecting duct</b><br/></div><br/><div>This causes aquaporin 2 channels to translocate to the <u>apical</u> membrane</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="fe0aee1f2a85e6c83190e77846383d1e.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpdyp8ayhf.png"><br><img src="tmp53xihcc9.png"><br><img src="tmpa0qg2m8n.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><div><b>Desmopressin (DDAVP)</b> has high specificity for the ADH-activated <span class="cloze" data-cloze="V&lt;sub&gt;2&lt;/sub&gt;" data-ordinal="1">[...]</span> receptor<br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Desmopressin (DDAVP)</b> has high specificity for the ADH-activated <span class="cloze" data-ordinal="1">V<sub>2</sub></span> receptor<br/></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="5e7a5d9043602e674f27c67d2b74dabc.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmppscheho4.png"><br><img src="tmp5fxr4l4s.png"><br><img src="tmpdyp8ayhf.png"><br><img src="tmp53xihcc9.png"><br><img src="tmpa0qg2m8n.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><div>ADH-activated <b>V<sub>2</sub></b> receptors cause translocation of <span class="cloze" data-cloze="aquaporin-2" data-ordinal="1">[...]</span> channels to the renal <b>apical</b> <b>membrane   </b> via <u>increased</u> <span class="cloze" data-cloze="cAMP" data-ordinal="1">[...]</span>, causing <u>increased reabsorption</u> of free water</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>ADH-activated <b>V<sub>2</sub></b> receptors cause translocation of <span class="cloze" data-ordinal="1">aquaporin-2</span> channels to the renal <b>apical</b> <b>membrane   </b> via <u>increased</u> <span class="cloze" data-ordinal="1">cAMP</span>, causing <u>increased reabsorption</u> of free water</div><br/>2-2-2<br/>V<sub><b>2</b>, </sub> aquaporin <b>2</b> , H<sub><b>2</b></sub>O<br/><br/><div><img src="2fe01147663b1f97286787c4af5e576b.jpg" width="504"/></div><i><span style="font-size: 10pt;"><div><em>Photo Credit: Image licensed by <a href="https://physeo.com/">Physeo</a> and used with permission. Purchase full access <a href="https://physeo.com/#sign-up">here</a>.</em></div></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="fe0aee1f2a85e6c83190e77846383d1e.webp"><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><img src="46079b39d8d407b38e31e1acd07c5328.webp"><br><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="Screen Shot 2022-07-13 at 4.41.31 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.41.59 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-posterior-lobe-of-the-pituitary">Watch Posterior Lobe of the Pituitary</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpdyp8ayhf.png"><br><img src="tmp53xihcc9.png"><br><img src="tmpa0qg2m8n.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><div>What <u>adverse effects</u> are associated with <b>demeclocycline</b>?<br/></div><br/><div><span class="cloze" data-cloze="Photosensitivity and abnormalities of bone/teeth (e.g., discolored teeth)" data-ordinal="1">[2]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <u>adverse effects</u> are associated with <b>demeclocycline</b>?<br/></div><br/><div><span class="cloze" data-ordinal="1">Photosensitivity and abnormalities of bone/teeth (e.g., discolored teeth)</span></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="8e10388cca1f2fa5d29284083fff98b6.webp" width="800"><br><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><img src="191a66e03b5562f559dd250457c30f04.webp" width="800"><img src="8720f1c7028dfa5269db321d9b47de47.webp" width="800"><br><img src="173cfbdf0c94f3b0b98dc9f7130382ef.webp"><img src="2843f917d26f71abc4717d857d05af26.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-antimicrobials/videos/medical-pharmacology-antimicrobials-inhibitors-of-bacterial-protein-synthesis-tetracyclines?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Tetracyclines</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img draggable="false" src="tmp0f67wic7.png" class="resizer"><br><img draggable="false" src="tmpdje6a463.png" class="resizer"><br><img draggable="false" src="tmpk8b3vp6g.png" class="resizer"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><div>What <b>G-protein receptor</b> is the ADH-activated <b>V<sub>1</sub></b> receptor coupled to?<br/></div><br/><div><span class="cloze" data-cloze="G&lt;sub&gt;q&lt;/sub&gt;" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <b>G-protein receptor</b> is the ADH-activated <b>V<sub>1</sub></b> receptor coupled to?<br/></div><br/><div><span class="cloze" data-ordinal="1">G<sub>q</sub></span></div><br/><div>Activates phospholipase C, which causes increased Ca<sup>2+</sup>/IP<sub>3</sub></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="5a996da198154d5560bc1dce6f7e575d.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><img src="de3a10eaafc2c00af6a9efb56326a240.webp"><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmp39uv7ajz.png"><br><img src="tmptwt4un9z.png"><br><img src="tmpzgxfia3t.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><div><b>ADH</b> activation of the <span class="cloze" data-cloze="V&lt;sub&gt;1&lt;/sub&gt;" data-ordinal="1">[...]</span> receptor on vascular smooth muscle causes <b>vasoconstriction</b> and <u>increased</u> <b>blood pressure</b><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>ADH</b> activation of the <span class="cloze" data-ordinal="1">V<sub>1</sub></span> receptor on vascular smooth muscle causes <b>vasoconstriction</b> and <u>increased</u> <b>blood pressure</b><br/></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="c2be5becdbe91ce26a880ab8159958fc.webp"><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><img src="e1e005523b468d0776a5fe7c75b3a0fe.webp"><img src="Screen Shot 2022-07-13 at 4.41.31 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.41.59 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-posterior-lobe-of-the-pituitary">Watch Posterior Lobe of the Pituitary</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmp39uv7ajz.png"><br><img src="tmptwt4un9z.png"><br><img src="tmpzgxfia3t.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><div><b>ADH</b> activation of the <span class="cloze-inactive" data-ordinal="2"><b>V<sub>2</sub></b></span> receptor on <b>vascular endothelium</b> causes release of <span class="cloze" data-cloze="von Willebrand factor (vWF)" data-ordinal="1">[...]</span> and <span class="cloze" data-cloze="factor VIII" data-ordinal="1">[...]</span><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>ADH</b> activation of the <span class="cloze-inactive" data-ordinal="2"><b>V<sub>2</sub></b></span> receptor on <b>vascular endothelium</b> causes release of <span class="cloze" data-ordinal="1">von Willebrand factor (vWF)</span> and <span class="cloze" data-ordinal="1">factor VIII</span><br/></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="5c3a92521320b7deeb835b901baac1b4.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpdyp8ayhf.png"><br><img src="tmp53xihcc9.png"><br><img src="tmpa0qg2m8n.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question"><div>What <b>G-protein receptor</b> is the ADH-activated <b>V<sub>2</sub></b> receptor coupled to?<br/></div><div><br/><div><span class="cloze" data-cloze="G&lt;sub&gt;s&lt;/sub&gt;" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <b>G-protein receptor</b> is the ADH-activated <b>V<sub>2</sub></b> receptor coupled to?<br/></div><div><br/><div><span class="cloze" data-ordinal="1">G<sub>s</sub></span></div></div><br/><div>- "FLAT Ch<u>A</u>MP's CHuGG"</div><br/><div>- Activates adenylyl cyclase, which causes increased cAMP</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="47a452b534f6206ed406665284f56938.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><img src="de3a10eaafc2c00af6a9efb56326a240.webp"><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpdyp8ayhf.png"><br><img src="tmp53xihcc9.png"><br><img src="tmpa0qg2m8n.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question"><div><i>Extra-renal</i> ADH-activated <b><span class="cloze-inactive" data-ordinal="2">V<sub>2</sub></span></b> receptors are located on the <span class="cloze" data-cloze="&lt;b&gt;vascular&lt;/b&gt; &lt;b&gt;endothelium&lt;/b&gt;" data-ordinal="1">[...]</span><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><i>Extra-renal</i> ADH-activated <b><span class="cloze-inactive" data-ordinal="2">V<sub>2</sub></span></b> receptors are located on the <span class="cloze" data-ordinal="1"><b>vascular</b> <b>endothelium</b></span><br/></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="817411b32009ca5547699004fbe91ce2.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpdyp8ayhf.png"><br><img src="tmp53xihcc9.png"><br><img src="tmpa0qg2m8n.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question">What adverse effect may <b>-vaptans</b> (tolvaptan, conivaptan) have on <b>serum sodium concentration</b>?<br/><br/><div><span class="cloze" data-cloze="Hypernatremia" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What adverse effect may <b>-vaptans</b> (tolvaptan, conivaptan) have on <b>serum sodium concentration</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Hypernatremia</span></div><br/>Loss of ADH causes volume loss (of water), resulting in hypernatremia<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e81caf6fc3101dc954809600b1c0b5a3.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="paste-07b3b62645f946248382f52b3aee8de594074c83.jpg"><br><img class="resizer" src="tmp6awxvfic.png"><br><img class="resizer" src="tmpq1gd7qqc.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question"><div>What adverse effect may <b>desmopressin</b> (DDAVP) have on <b>sodium levels</b>?<br/></div><br/><div><span class="cloze" data-cloze="Hyponatremia" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What adverse effect may <b>desmopressin</b> (DDAVP) have on <b>sodium levels</b>?<br/></div><br/><div><span class="cloze" data-ordinal="1">Hyponatremia</span></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="15d5312984cd42ea0113c83aad28a4c5.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <img src="dfeb6dafbfc82c6a10aea67522e50157.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img src="tmppscheho4.png"><br><img src="tmp5fxr4l4s.png"><br><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question"><div><b>Exogenous</b> <b>ADH</b> (vasopressin) is useful in the management of <span class="cloze" data-cloze="&lt;b&gt;esophageal&lt;/b&gt; &lt;b&gt;variceal&lt;/b&gt;" data-ordinal="1">[...]</span> <b>bleeding</b> by <u>reducing portal hypertension</u> (via action on V<sub>1</sub> receptors)<br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Exogenous</b> <b>ADH</b> (vasopressin) is useful in the management of <span class="cloze" data-ordinal="1"><b>esophageal</b> <b>variceal</b></span> <b>bleeding</b> by <u>reducing portal hypertension</u> (via action on V<sub>1</sub> receptors)<br/></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="3caad1021badcb49974619c2f6514c9c.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <img src="5281ec4f8e486ec21dd8ec3505d0ff67.webp"><br><img src="3a010457df51bcfbb956e7aa8eb883c8.webp"><img src="89a9ce85bfc22b97afb2fffb00d57130.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-gastroenterology/videos/medical-internal-medicine-gastroenterology-esophageal-and-gastric-disorders-acute-upper-gi-bleed-esophageal-varices">Watch&nbsp;<span style="text-decoration-line: none;">Acute Upper GI Bleed: Esophageal Varices</span></a><br> --><!-- <br> --><!-- <br> --><!-- <img src="tmp39uv7ajz.png"><br><img src="tmptwt4un9z.png"><br><img src="tmpzgxfia3t.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question"><div>In <b>SIADH</b>, serum Na<sup>+</sup> levels must be corrected <b>slowly</b> to prevent <span class="cloze" data-cloze="&lt;b&gt;osmotic demyelination&lt;/b&gt;" data-ordinal="1">[...]</span> <b>syndrome</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In <b>SIADH</b>, serum Na<sup>+</sup> levels must be corrected <b>slowly</b> to prevent <span class="cloze" data-ordinal="1"><b>osmotic demyelination</b></span> <b>syndrome</b></div><br/>- Formerly known as <b>central pontine myelinolysis</b><br/><br/>- "From low to high, your pons will die"<br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a984e74e3ccb89e70f93d6e757cce256.webp"><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hyperthyroidism-overview-and-graves-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="e81caf6fc3101dc954809600b1c0b5a3.webp"><br><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><div><img src="d41650fda1aa331dd1234e582f5be98d.webp"><br><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"></div><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br><br> --><!-- <img src="055cd19915445c0f89ee98ebbe30fa69.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="84e22671541daace6f445254ea5447af.webp"><img src="4cb876b0ba14b4cc61c8bc499ed5d740.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="paste-07b3b62645f946248382f52b3aee8de594074c83.jpg"><br><img class="resizer" src="tmp6awxvfic.png"><br><img class="resizer" src="tmpq1gd7qqc.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">21.1</td>
+                    <td class="question">In <b>central</b> <b>diabetes</b> <b>insipidus</b>, administration of <b>desmopressin</b> will <span class="cloze" data-cloze="&lt;u&gt;increase&lt;/u&gt;" data-ordinal="1">[...]</span> urine osmolality<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">In <b>central</b> <b>diabetes</b> <b>insipidus</b>, administration of <b>desmopressin</b> will <span class="cloze" data-ordinal="1"><u>increase</u></span> urine osmolality<br/>Due to ADH analog, which acts on normal kidneys to reabsorb free water<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c3dcc7a7275cb94404d8377c571cd09f.webp" width="800"><img src="9914cdbe934755094c5de3b7b9e39ec5.webp" width="800"><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="cfdbd80016e40e52dee37d28322c5762.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="5ab73d36f3752ead132692c295c1c7ed.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img src="tmppscheho4.png"><br><img src="tmp5fxr4l4s.png"><br><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">22.1</td>
+                    <td class="question">One common cause of <b>nephrogenic diabetes insipidus</b> is <span class="cloze" data-cloze="&lt;b&gt;lithium&lt;/b&gt;" data-ordinal="1">[...]</span>, which <u>prevents proper aquaporin formation</u> in principal cells<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">One common cause of <b>nephrogenic diabetes insipidus</b> is <span class="cloze" data-ordinal="1"><b>lithium</b></span>, which <u>prevents proper aquaporin formation</u> in principal cells<br/>- In the <b>collecting duct<br/></b><br/>- <b>Lithium-induced nephrogenic DI</b> is treated with <u>salt restriction</u> and <u>discontinuation of lithium</u> if lithium can be discontinued<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e36101b9d3845069e01855ee624ba8f5.webp"><br></div><div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="3c3766c749a60aea2853660175b5d8db.webp"><br><div><img src="26d4b698ca4e74d438218c910ea8d4d2.webp"><img src="b8458b8010404dfe2afcebdb2160e5a2.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-lithium?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Lithium</a><br><br> --><!-- <img src="54d01ba9391fa6859e9dce81403c50c7.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="e12e94b2da927dceb0ec449769ee45e0.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="tmpo3lyoqky.png"><br><img class="resizer" src="tmpjc7crreo.png"><br><img class="resizer" src="tmp22afm7r3.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">23.1</td>
+                    <td class="question"><div><b>Syndrome of inappropriate ADH secretion </b>(SIADH) may be treated with <span class="cloze" data-cloze="&lt;b&gt;fluid restriction&lt;/b&gt;" data-ordinal="1">[first-line treatment]</span>, <span class="cloze-inactive" data-ordinal="3"><b>conivaptan/tolvaptan</b></span>, or <span class="cloze-inactive" data-ordinal="2"><b>demeclocycline</b></span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Syndrome of inappropriate ADH secretion </b>(SIADH) may be treated with <span class="cloze" data-ordinal="1"><b>fluid restriction</b></span>, <span class="cloze-inactive" data-ordinal="3"><b>conivaptan/tolvaptan</b></span>, or <span class="cloze-inactive" data-ordinal="2"><b>demeclocycline</b></span></div><br/><div>These drugs are all ADH <b>antagonists</b></div><br/><img src="5f0ff7036f9deabb16357c8ec35bcfa6.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="55812e5412a6fa001100327c93639e23.webp" width="800"><img src="1aaa5c79a33e6b6a449289f450d6aabc.webp" width="800"><img src="208a1c2d062e488c1465cbcb92acae6e.webp" width="799"><br></div><div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="cb468796978e7b4a276b193fbb8bb965.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="3373b373253eafba4dfc6b83d8e0e056.webp"><img src="19e4dff4dda7b609d0ed796ecd63143d.webp"><img src="e0c3b2fca021636221c6eeee12d83fbc.webp"><br><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <div><img class="resizer" src="paste-07b3b62645f946248382f52b3aee8de594074c83.jpg"><br><img class="resizer" src="tmp6awxvfic.png"><br><img class="resizer" src="tmpq1gd7qqc.png"><br></div><img class="resizer" src="tmp0f67wic7.png"><br><img class="resizer" src="tmpdje6a463.png"><br><img class="resizer" src="tmpk8b3vp6g.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">24.1</td>
+                    <td class="question"><div>What endocrine pathology is <u>treated</u> with <b>demeclocycline</b>?</div><br/><div><span class="cloze" data-cloze="SIADH" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What endocrine pathology is <u>treated</u> with <b>demeclocycline</b>?</div><br/><div><span class="cloze" data-ordinal="1">SIADH</span></div><br/>Demeclocycline acts as an ADH antagonist<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="208a1c2d062e488c1465cbcb92acae6e.webp"><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="cb468796978e7b4a276b193fbb8bb965.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img draggable="false" src="tmp0f67wic7.png" class="resizer"><br><img draggable="false" src="tmpdje6a463.png" class="resizer"><br><img draggable="false" src="tmpk8b3vp6g.png" class="resizer"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">25.1</td>
+                    <td class="question"><div>What is the <u>treatment</u> for <b>von Willebrand disease</b>?</div><br/><div><span class="cloze" data-cloze="Desmopressin" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the <u>treatment</u> for <b>von Willebrand disease</b>?</div><br/><div><span class="cloze" data-ordinal="1">Desmopressin</span></div><br/>Desmopressin stimulates von Willebrand factor (vWF) release from endothelial cells<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="85b6e58cfa95bd722fc89d8f5c366efc.webp"><img src="db36d1c575498957934c9903b203b404.webp"><img src="18577dbb9396e5c824ffa1a44d068606.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-blood-coagulation/videos/medical-pathophysiology-blood-and-coagulation-coagulopathies-and-platelet-disorders-inherited-coagulation-defects?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Inherited Coagulation Defects</a><br><br><img src="paste-394277997773254.jpg"><img src="paste-394844933456343.jpg"><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br> --><!-- <img src="fbadc78da849371aaef19e4d5fd1652f.webp"><img src="03d021b2cc18e350ad8aa5a7a5930241.webp"><br><img src="4442ed9c85e95a8daeba66498c84e7e7.webp"><img src="8407e9aba7d9cbb638d36af894524b7f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-hematology-oncology/videos/medical-internal-medicine-hematology-and-oncology-bleeding-and-clotting-disorders-bleeding-disorders-1-platelet-disorders-ddx">Watch Bleeding Disorders: Platelet Disorders DDx</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="tmppscheho4.png"><br><img src="tmp5fxr4l4s.png"><br><img src="b66db4fbc2032eed9ca5efcf2ed9c918.webp"><br><img src="6921148f6d2e705b424e1b2dbfd610f8.webp"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7225?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Platelet_Disorders&amp;utm_content=Von_Willebrand_Disease_(In_Progress)">Review Von Willebrand Disease</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">26.1</td>
+                    <td class="question">The first-line treatment for <u>primary</u> <b>nocturnal enuresis</b> (bed wetting) may involve what <u>specific</u> <u>lifestyle modification</u> and <u>behavioral training</u> techniques? <br/><br/>- <span class="cloze" data-cloze="Fluid restriction" data-ordinal="1">[...]</span> at night<br/>- <span class="cloze" data-cloze="Timed" data-ordinal="1">[...]</span> voiding<br/>- <span class="cloze" data-cloze="Psychoeducation" data-ordinal="1">[...]</span> / behavioral training<br/>- <span class="cloze" data-cloze="Positive reinforcement" data-ordinal="1">[...]</span> of proper voiding<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">The first-line treatment for <u>primary</u> <b>nocturnal enuresis</b> (bed wetting) may involve what <u>specific</u> <u>lifestyle modification</u> and <u>behavioral training</u> techniques? <br/><br/>- <span class="cloze" data-ordinal="1">Fluid restriction</span> at night<br/>- <span class="cloze" data-ordinal="1">Timed</span> voiding<br/>- <span class="cloze" data-ordinal="1">Psychoeducation</span> / behavioral training<br/>- <span class="cloze" data-ordinal="1">Positive reinforcement</span> of proper voiding<br/><b>≥ 5 yo</b> → rule out <b>organic causes</b> → <b>lifestyle modification</b> and <b>behavioral training</b> → <b>enuresis alarm</b> ± <b>pharmacotherapy</b> (desmopressin &gt; imipramine)<br/><br/><img src="89325b150d93041102693a8023b2b816.webp" width="1000"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">27.1</td>
+                    <td class="question">What is the next step in treatment for <u>primary</u> <b>nocturnal enuresis</b> (bed wetting) <u>after</u> <u>unsuccessful</u> <b>lifestyle modification</b> and <b>behavioral training</b>?<br/><br/><span class="cloze" data-cloze="Enuresis alarm" data-ordinal="1">[...]</span> ± <span class="cloze" data-cloze="oral desmopressin" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the next step in treatment for <u>primary</u> <b>nocturnal enuresis</b> (bed wetting) <u>after</u> <u>unsuccessful</u> <b>lifestyle modification</b> and <b>behavioral training</b>?<br/><br/><span class="cloze" data-ordinal="1">Enuresis alarm</span> ± <span class="cloze" data-ordinal="1">oral desmopressin</span><br/>*Pharmacotherapy is <u>typically</u> reserved for children ≥ 7 yo if nonpharmacological options are unsuccessful <u>or if more rapid improvement is desired</u><br/><br/>- Desmopressin is an ADH anologue, thus increasing water reabsorption and decreasing the volume of urine production<br/><br/>- <b>Imipramine</b> is second-line due to significantly worse side effect profile<br/><br/><b>≥ 5 yo</b> → rule out <b>organic causes</b> → <b>lifestyle modification</b> and <b>behavioral training</b> → <b>enuresis alarm</b> ± <b>pharmacotherapy</b> (desmopressin &gt; imipramine)<br/><br/><img src="89325b150d93041102693a8023b2b816.webp" width="1000"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="15d5312984cd42ea0113c83aad28a4c5.webp"><br></div><div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmppscheho4.png"><br><img src="tmp5fxr4l4s.png"><br><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

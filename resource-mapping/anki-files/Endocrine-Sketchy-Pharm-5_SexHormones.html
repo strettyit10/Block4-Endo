@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (39 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question">What <u>cancer</u> may be treated with <i>continuous</i> <b>leuprolide</b>?<br/><br/><span class="cloze" data-cloze="Prostate carcinoma" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What <u>cancer</u> may be treated with <i>continuous</i> <b>leuprolide</b>?<br/><br/><span class="cloze" data-ordinal="1">Prostate carcinoma</span><br/>Other clinical uses include:<br/>-<b> Uterine fibroids</b><br/>- <b>Endometriosis</b><br/>- <b>Precocious puberty</b><br/>- <b>Infertility<br/></b><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><br/><img src="00afc760909880ed361afba65d4baa36.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="23. Prostate Cancer Treatment GnRH.jpg"><img src="24. Prostate Cancer Treatment GnRH.jpg"><br><img src="cebf2f974832dae5b6d0321dfcedde0a.webp"><img src="b2261bf8c627cc18849ee127b66fb1ac.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-male-gu-benign-prostatic-hyperplasia-bph-and-prostate-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Benign Prostatic Hyperplasia (BPH) &amp; Prostate Cancer</a><br><br><img src="857e41679514c758a54f2a79ef998549.jpg"><img src="2f043eca912ef418d7688e127c9a0676.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-33ff89962d7623d548880d5005dd7998bb387bf3.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><b>Clomiphene</b> results in <span class="cloze" data-cloze="&lt;u&gt;increased&lt;/u&gt;" data-ordinal="1">[increased/decreased]</span> release of <b>FSH</b> and <b>LH</b> from the pituitary<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Clomiphene</b> results in <span class="cloze" data-ordinal="1"><u>increased</u></span> release of <b>FSH</b> and <b>LH</b> from the pituitary<br/>Clomiphene is an <b>estrogen receptor antagonist</b> at the level of the <b>hypothalamus</b> which prevents normal feedback inhibition from estrogen.<br/><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e37b8441555396b300301dfe4a6629da.webp" width="685"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-a8a2ea8a42b99b15d81ef48f8550ce20e26834eb.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question">While <b>letrozole </b>is first-line,<b> </b><span class="cloze-inactive" data-ordinal="2"><b>clomiphene</b></span> is an alternative option that can be used to treat <span class="cloze" data-cloze="&lt;u&gt;infertility&lt;/u&gt;" data-ordinal="1">[...]</span> due to <b>anovulation</b> (e.g., <b>PCOS</b>)<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">While <b>letrozole </b>is first-line,<b> </b><span class="cloze-inactive" data-ordinal="2"><b>clomiphene</b></span> is an alternative option that can be used to treat <span class="cloze" data-ordinal="1"><u>infertility</u></span> due to <b>anovulation</b> (e.g., <b>PCOS</b>)<br/>- Clomiphene helps kickstart ovulation by antagonizing negative feedback ER receptors at the hypothalamus that regulate GnRH secretion → increased GnRH secretion → permissiveness of LH surge (and thus estrogen surge) to induce ovulation<br/><br/>- However, with regard to PCOS: Letrozole is an aromatase inhibitor that blocks conversion of androgen to estrogen, regulating LH and FSH levels and promoting the LH surge for ovulation<br/><br/>- Letrozole is <b>preferred over clomiphene</b> due to higher live birth rates (per UWorld)<br/><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e37b8441555396b300301dfe4a6629da.webp" width="685"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-a8a2ea8a42b99b15d81ef48f8550ce20e26834eb.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><b>Leuprolide</b>,<b> goserelin</b>, <b>triptorelin</b>, and <b>buserelin</b> are <u>GnRH analogues</u> with <span class="cloze" data-cloze="&lt;i&gt;agonist&lt;/i&gt;" data-ordinal="1">[...]</span> properties when used in a <b><u>pulsatile</u> fashion</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Leuprolide</b>,<b> goserelin</b>, <b>triptorelin</b>, and <b>buserelin</b> are <u>GnRH analogues</u> with <span class="cloze" data-ordinal="1"><i>agonist</i></span> properties when used in a <b><u>pulsatile</u> fashion</b><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div><img src="23. Prostate Cancer Treatment GnRH.jpg"><img src="24. Prostate Cancer Treatment GnRH.jpg"><img src="cebf2f974832dae5b6d0321dfcedde0a.webp"><img src="b2261bf8c627cc18849ee127b66fb1ac.webp"><br></div></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-male-gu-benign-prostatic-hyperplasia-bph-and-prostate-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Benign Prostatic Hyperplasia (BPH) &amp; Prostate Cancer</a><br><br><img src="b57a5f51988bfed30f67da0c8ba90773.jpg"><img src="8139cc504618248683c1f39faea85097.jpg"><img src="34fafaa9e34d972854d42ee77c4e68b5.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-33ff89962d7623d548880d5005dd7998bb387bf3.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><b>Leuprolide</b>, <b>goserelin</b>, <b>triptorelin</b>, and <b>buserelin</b> are <u>GnRH analogues</u> with <span class="cloze" data-cloze="&lt;i&gt;antagonist&lt;/i&gt;" data-ordinal="1">[...]</span> properties when used in a <b><u>continuous</u> fashion</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Leuprolide</b>, <b>goserelin</b>, <b>triptorelin</b>, and <b>buserelin</b> are <u>GnRH analogues</u> with <span class="cloze" data-ordinal="1"><i>antagonist</i></span> properties when used in a <b><u>continuous</u> fashion</b><br/>However, this may cause an initial surge in hormones during the first few weeks of therapy, but would then lead to GnRH receptor downregulation leading to a decrease in GnRH, FSH, and estrogen levels<br/><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="23. Prostate Cancer Treatment GnRH.jpg"><img src="24. Prostate Cancer Treatment GnRH.jpg"><br></div><img src="cebf2f974832dae5b6d0321dfcedde0a.webp"><img src="b2261bf8c627cc18849ee127b66fb1ac.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-male-gu-benign-prostatic-hyperplasia-bph-and-prostate-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Benign Prostatic Hyperplasia (BPH) &amp; Prostate Cancer</a><br><br><img src="b57a5f51988bfed30f67da0c8ba90773.jpg"><img src="8139cc504618248683c1f39faea85097.jpg"><img src="34fafaa9e34d972854d42ee77c4e68b5.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-33ff89962d7623d548880d5005dd7998bb387bf3.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><b><span class="cloze" data-cloze="Degarelix" data-ordinal="1">[...]</span> </b>is a(n) <b><span class="cloze-inactive" data-ordinal="2">GnRH antagonist</span></b> used to treat <u>prostate cancer</u><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b><span class="cloze" data-ordinal="1">Degarelix</span> </b>is a(n) <b><span class="cloze-inactive" data-ordinal="2">GnRH antagonist</span></b> used to treat <u>prostate cancer</u><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question">What is the <u>mechanism of action</u> of <b>flutamide</b>? <br/><br/><div><span class="cloze" data-cloze="Androgen receptor antagonist (competitive inhibitor)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the <u>mechanism of action</u> of <b>flutamide</b>? <br/><br/><div><span class="cloze" data-ordinal="1">Androgen receptor antagonist (competitive inhibitor)</span></div><br/>Useful for prostate cancer<br/><br/><img src="3b115adeb3944499c35ae5af4fe6b31d.webp" width="1089"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="fa5034814eed77b98c58f5cad2ef4dff.jpg"><img src="041f82f4ac7cec7fde6141eddea8f825.jpg"><img src="7e1e30097e25a52b7011eb47f7edcd6f.webp"><img src="39db42291235e23c4edf2dbba8e555a9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-non-steroidal-antiandrogens-nsaa">Watch Non-Steroidal Antiandrogens (NSAAs)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-5082c51767509a354619b11e223bf685d9e9ea44.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question"><b>Flutamide</b> is used for <span class="cloze" data-cloze="prostate" data-ordinal="1">[...]</span> carcinoma<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Flutamide</b> is used for <span class="cloze" data-ordinal="1">prostate</span> carcinoma<br/><img src="3b115adeb3944499c35ae5af4fe6b31d.webp" width="1089"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="8ed74bc04abb62dba95fb65d53c57a32.jpg"><img src="041f82f4ac7cec7fde6141eddea8f825.jpg"><img src="7e1e30097e25a52b7011eb47f7edcd6f.webp"><img src="39db42291235e23c4edf2dbba8e555a9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-non-steroidal-antiandrogens-nsaa">Watch Non-Steroidal Antiandrogens (NSAAs)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-5082c51767509a354619b11e223bf685d9e9ea44.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><b>Estrogen analogs</b> increase the risk of <span class="cloze" data-cloze="&lt;u&gt;endometrial&lt;/u&gt;" data-ordinal="1">[...]</span><u> cancer</u> when given <b><i>without</i> progesterone</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Estrogen analogs</b> increase the risk of <span class="cloze" data-ordinal="1"><u>endometrial</u></span><u> cancer</u> when given <b><i>without</i> progesterone</b><br/><img src="518a199c16560e5f04336c96da082189.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><b><u>* Extra-grow near cancer crab sign</u></b></div><img src="6034f3823025c8d90f604058f0ef80d9.webp" width="800"><img src="f81c85449a4c899ec4b89faa5723504d.webp" width="800"><br><img src="9ccb25560d391853ee678ebc9380ed27.webp"><br><img src="97d164301aef8ca505eb73511b8b22e1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-uterine-and-vulvovaginal-disorders-abnormal-uterine-bleeding-aub-and-endometriosis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Abnormal Uterine Bleeding (AUB) &amp; Endometriosis</a><br><br><img src="f35ffc4eaed0af6df078c1093df62acc.jpg"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br><br> --><!-- <img src="640606ed913fd5e31a857a8761e8f8b6.webp"><img src="2ab215789e2089ee4fb2be03b8790362.webp"><img src="efc096017fec7b9b660882150071affd.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/uterine-neoplasia/lesson/endometrial-hyperplasia-cancer">Watch Endometrial Hyperplasia &amp; Cancer</a><br><br><img src="ebbfff775cdca497d7c9c18b489fd6a7.webp"><br><img src="6f95d2ac0d7571e7f9788a480aa6317d.webp"><img src="e7ecaf87b1fc5250e026c1bca8be6ca2.webp"><br><a href="https://www.sketchy.com/medical-lessons/menopause-hormone-replacement-therapy">Watch Menopause &amp; Hormone Replacement Therapy</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question">Does <u>raloxifene</u> <i>increase</i> risk for <b>endometrial cancer</b>?<br/><br/><div><span class="cloze" data-cloze="No (estrogen antagonist at uterus)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Does <u>raloxifene</u> <i>increase</i> risk for <b>endometrial cancer</b>?<br/><br/><div><span class="cloze" data-ordinal="1">No (estrogen antagonist at uterus)</span></div><br/>However, tamoxifen does<br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f35ffc4eaed0af6df078c1093df62acc.jpg" width="537"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="98552d60ca4eda55b864713d6ced90f2.jpg"><br><img src="0e1192118ec7e9242b2b8ace733d6963.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><b>Raloxifene</b> is primarily used to treat <span class="cloze" data-cloze="post-menopausal osteoporosis" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Raloxifene</b> is primarily used to treat <span class="cloze" data-ordinal="1">post-menopausal osteoporosis</span><br/>- Acts as an estrogen <b>agonist</b> on receptors in <u><b>bone</b></u> (inhibits bone resorption) and as an <b>antagonist</b> on receptors in <b>breast</b> and <b>endometrium</b> (prevents growth stimulation of estrogen-receptor positive cells)<br/><br/>- <u>Note</u>: <b>Raloxifene </b>is typically only recommended <u>after</u> other anti-resorptive therapy (e.g., bisphosphonates, denosumab) has failed<br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="82eb53eaa076dcbaecfe5411944d7cc4.jpg" width="805"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br><br><img src="c3bf8345c6a33b7cb90ecf0ac9cf5bf9.webp" width="800"><br><div><img src="2adac70672426da1eecb5ed618608422.webp"><img src="024068ab0319c3b9089d88458e36faf1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-bisphosphonates-raloxifene-denosumab-calcitonin?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Bisphosphonates, Raloxifene, Denosumab, Calcitonin</a><br></div><br> --><!-- <img src="4705c39456a5d37b906be328906bd205.webp"><img src="6f95d2ac0d7571e7f9788a480aa6317d.webp"><img src="e7ecaf87b1fc5250e026c1bca8be6ca2.webp"><br><a href="https://www.sketchy.com/medical-lessons/menopause-hormone-replacement-therapy">Watch Menopause &amp; Hormone Replacement Therapy</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="98552d60ca4eda55b864713d6ced90f2.jpg"><br><img src="0e1192118ec7e9242b2b8ace733d6963.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><b><span class="cloze" data-cloze="Tamoxifen" data-ordinal="1">[...]</span></b> is an estrogen receptor <span class="cloze-inactive" data-ordinal="2"><u>antagonist</u></span> at <b>breast </b>and a(n) <span class="cloze-inactive" data-ordinal="2"><u>agonist</u></span> at <b>bone and uterus</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b><span class="cloze" data-ordinal="1">Tamoxifen</span></b> is an estrogen receptor <span class="cloze-inactive" data-ordinal="2"><u>antagonist</u></span> at <b>breast </b>and a(n) <span class="cloze-inactive" data-ordinal="2"><u>agonist</u></span> at <b>bone and uterus</b><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f12294c79b32b91736f92a6fec2f005c.jpg" width="537"><img src="82eb53eaa076dcbaecfe5411944d7cc4.jpg" width="537"><img src="4732e68a510e1d0ea25389de34bf24a5.jpg" width="537"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br><br><div><img src="67e92363c9e3145bec99611180ae96ab.webp" width="800"></div><div><img src="9ccb25560d391853ee678ebc9380ed27.webp"><br><img src="97d164301aef8ca505eb73511b8b22e1.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-uterine-and-vulvovaginal-disorders-abnormal-uterine-bleeding-aub-and-endometriosis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Abnormal Uterine Bleeding (AUB) &amp; Endometriosis</a></div><br> --><!-- <img src="640606ed913fd5e31a857a8761e8f8b6.webp"><br><img src="2ab215789e2089ee4fb2be03b8790362.webp"><img src="efc096017fec7b9b660882150071affd.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/uterine-neoplasia/lesson/endometrial-hyperplasia-cancer">Watch Endometrial Hyperplasia &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="98552d60ca4eda55b864713d6ced90f2.jpg"><br><img src="0e1192118ec7e9242b2b8ace733d6963.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><b>Tamoxifen</b> <u>increases</u> the risk of <b>thromboembolic</b> <b>events</b> and <span class="cloze" data-cloze="&lt;b&gt;endometrial&lt;/b&gt;" data-ordinal="1">[...]</span> <b>cancer</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Tamoxifen</b> <u>increases</u> the risk of <b>thromboembolic</b> <b>events</b> and <span class="cloze" data-ordinal="1"><b>endometrial</b></span> <b>cancer</b><br/>- Also increases the risk of <b>uterine sarcoma</b><br/><br/>- Does not require screening if asymptomatic<br/><br/>- Due to agonist effect at estrogen receptors in the uterus<br/><br/>- Raloxifene is also associated with increased risk of DVT / PEs, but not endometrial cancer<br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="67e92363c9e3145bec99611180ae96ab.webp" width="800"><img src="e3b853fe2d2ed216856c6d6bb4b38486.webp" width="800"></div><div><img src="9ccb25560d391853ee678ebc9380ed27.webp"><br><img src="97d164301aef8ca505eb73511b8b22e1.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-uterine-and-vulvovaginal-disorders-abnormal-uterine-bleeding-aub-and-endometriosis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Abnormal Uterine Bleeding (AUB) &amp; Endometriosis</a><br></div><br><div><img src="f35ffc4eaed0af6df078c1093df62acc.jpg" width="805"><img src="29cedf9bc04ca0ea1ce606dfc999a756.jpg" width="805"><br></div><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br><br> --><!-- <img src="640606ed913fd5e31a857a8761e8f8b6.webp"><img src="2ab215789e2089ee4fb2be03b8790362.webp"><img src="efc096017fec7b9b660882150071affd.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/uterine-neoplasia/lesson/endometrial-hyperplasia-cancer">Watch Endometrial Hyperplasia &amp; Cancer</a><br><br><img src="b7119a9ce39c59c5929ec8e7262ac3bd.webp"><img src="78249ef6c32843ef53b79d9deded3b46.webp"><img src="4c9c11ecd0d99dd0b0db975185cdcf99.webp"><img src="024d6b1cdca557d72380139bb3f54511.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/blood-vessel-disease/lesson/dvt-soap">Watch DVT SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="98552d60ca4eda55b864713d6ced90f2.jpg"><br><img src="0e1192118ec7e9242b2b8ace733d6963.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><b><span class="cloze" data-cloze="Raloxifene" data-ordinal="1">[...]</span></b> is an estrogen <u>antagonist</u> at <b>breast and uterus</b> and an <u>agonist</u> at <b>bone </b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b><span class="cloze" data-ordinal="1">Raloxifene</span></b> is an estrogen <u>antagonist</u> at <b>breast and uterus</b> and an <u>agonist</u> at <b>bone </b><br/>Compared to<b> tamoxifen</b> which is an estrogen receptor <u>antagonist</u> at <b>breast </b>and an <u>agonist</u> at <b>bone and uterus<br/><br/><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f12294c79b32b91736f92a6fec2f005c.jpg" width="536"><img src="82eb53eaa076dcbaecfe5411944d7cc4.jpg" width="537"><img src="4732e68a510e1d0ea25389de34bf24a5.jpg" width="537"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="98552d60ca4eda55b864713d6ced90f2.jpg"><br><img src="0e1192118ec7e9242b2b8ace733d6963.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question"><span class="cloze" data-cloze="&lt;b&gt;Selective estrogen receptor modulators &lt;/b&gt;(SERMs)" data-ordinal="1">[...]</span> are a class of drugs that are useful in the treatment <i>and</i> prevention of <span class="cloze-inactive" data-ordinal="2"><b>postmenopausal</b></span> <b>osteoporosis</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze" data-ordinal="1"><b>Selective estrogen receptor modulators </b>(SERMs)</span> are a class of drugs that are useful in the treatment <i>and</i> prevention of <span class="cloze-inactive" data-ordinal="2"><b>postmenopausal</b></span> <b>osteoporosis</b><br/>e.g., clomiphene, tamoxifen, raloxifene<br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4951adb95f8e6630cafb087c37c77114.webp"><br></div><img src="2adac70672426da1eecb5ed618608422.webp"><img src="024068ab0319c3b9089d88458e36faf1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-bisphosphonates-raloxifene-denosumab-calcitonin?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Bisphosphonates, Raloxifene, Denosumab, Calcitonin</a><br><br><div><img src="0fdb72986444e18676698fc4f9e064ed.webp"><br></div><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br><br> --><!-- <img src="4705c39456a5d37b906be328906bd205.webp"><img src="6f95d2ac0d7571e7f9788a480aa6317d.webp"><img src="e7ecaf87b1fc5250e026c1bca8be6ca2.webp"><br><a href="https://www.sketchy.com/medical-lessons/menopause-hormone-replacement-therapy">Watch Menopause &amp; Hormone Replacement Therapy</a><br> --><!-- <img src="d2f185ef64217e35ed95f9fa6f51a486.webp"><img src="47fdce4b8b0b3c4b0dfaf79204e9fd59.webp"><img src="4874b4ab956219e1b92e895a8400ff62.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-musculoskeletal-derm/videos/medical-pathophysiology-musculoskeletal-and-derm-bone-osteoporosis-and-paget-disease-of-bone?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osteoporosis &amp; Paget Disease of Bone</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question">What <u>drug class</u> do <b>anastrozole </b>and<b> </b><b>letrozole</b> belong to?<br/><br/><div><span class="cloze" data-cloze="Aromatase inhibitors" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What <u>drug class</u> do <b>anastrozole </b>and<b> </b><b>letrozole</b> belong to?<br/><br/><div><span class="cloze" data-ordinal="1">Aromatase inhibitors</span></div><br/>Inhibit peripheral conversion of androgens to estrogens<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="d61b2de5a67650e72f07ac3ca858dbb0.jpg" width="703"><img src="ba90d62e10d763f68097f4d08b2aebc2.jpg" width="701"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-067682a3106bd9c94c17515760c2ee45ac082a5b.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question">What <u>drug class</u> does <b>exemestane</b> belong to?<br/><br/><div><span class="cloze" data-cloze="Aromatase inhibitor" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What <u>drug class</u> does <b>exemestane</b> belong to?<br/><br/><div><span class="cloze" data-ordinal="1">Aromatase inhibitor</span></div><br/>Inhibits peripheral conversion of androgens to estrogens<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="d61b2de5a67650e72f07ac3ca858dbb0.jpg" width="537"><img src="ba90d62e10d763f68097f4d08b2aebc2.jpg" width="536"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question"><b>Estrogen analogs</b> induce a(n) <span class="cloze" data-cloze="&lt;u&gt;hyper&lt;/u&gt;" data-ordinal="1">[...]</span><u>coagulable</u> state<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Estrogen analogs</b> induce a(n) <span class="cloze" data-ordinal="1"><u>hyper</u></span><u>coagulable</u> state<br/>Thus contraindicated in patients with a history of DVT<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="29cedf9bc04ca0ea1ce606dfc999a756.jpg"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <img src="86bc50a3ab22496f2628f73aeee1736f.webp"><img src="a666e93f6ea17688f9aad9e5ad0e62b7.webp"><img src="ff2fb99152548ad1fe51327624e81465.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/contraception/lesson/intro-to-contraception">Watch OBGYN Contraception</a><br><a href="https://app.sketchy.com/study/medical/chapter/obstetrics--gynecology/lesson/intro-to-contraception">Watch FM Contraception</a><br><br><img src="19d8b97136a1743e82aaf1ca1d234bb3.webp"><br><img src="6f95d2ac0d7571e7f9788a480aa6317d.webp"><img src="e7ecaf87b1fc5250e026c1bca8be6ca2.webp"><br><a href="https://www.sketchy.com/medical-lessons/menopause-hormone-replacement-therapy">Watch Menopause &amp; Hormone Replacement Therapy</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question">Because <u>continuous</u> <b>leuprolide</b> downregulates GnRH receptors, patients can present with <span class="cloze" data-cloze="decreased" data-ordinal="1">[...]</span> libido, <span class="cloze" data-cloze="erectile" data-ordinal="1">[male]</span> dysfunction, and <span class="cloze" data-cloze="hypo" data-ordinal="1">[...]</span>gonadism<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Because <u>continuous</u> <b>leuprolide</b> downregulates GnRH receptors, patients can present with <span class="cloze" data-ordinal="1">decreased</span> libido, <span class="cloze" data-ordinal="1">erectile</span> dysfunction, and <span class="cloze" data-ordinal="1">hypo</span>gonadism<br/><b>Goserelin</b> is in the same class<br/><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="23. Prostate Cancer Treatment GnRH.png"><img src="24. Prostate Cancer Treatment GnRH.png"><br><img src="cebf2f974832dae5b6d0321dfcedde0a.webp"><img src="b2261bf8c627cc18849ee127b66fb1ac.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-male-gu-benign-prostatic-hyperplasia-bph-and-prostate-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Benign Prostatic Hyperplasia (BPH) &amp; Prostate Cancer</a><br><br><img src="2f1612b8fdb078ad8d7e2f81a086d17e.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-33ff89962d7623d548880d5005dd7998bb387bf3.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question">Patients taking <b>leuprolide </b>can experience nausea and <span class="cloze" data-cloze="vomiting" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Patients taking <b>leuprolide </b>can experience nausea and <span class="cloze" data-ordinal="1">vomiting</span><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="23. Prostate Cancer Treatment GnRH.png"><br><img src="cebf2f974832dae5b6d0321dfcedde0a.webp"><img src="b2261bf8c627cc18849ee127b66fb1ac.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-male-gu-benign-prostatic-hyperplasia-bph-and-prostate-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Benign Prostatic Hyperplasia (BPH) &amp; Prostate Cancer</a><br><br><img src="c4da865add08de144b9a94aa92375699.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-33ff89962d7623d548880d5005dd7998bb387bf3.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">21.1</td>
+                    <td class="question"><div><div>Continuous (not pulsatile) <span class="cloze" data-cloze="GnRH" data-ordinal="1">[...]</span> <i>agonists</i> may be used to treat <b>adenomyosis</b> (endometriosis in the myometrium) </div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>Continuous (not pulsatile) <span class="cloze" data-ordinal="1">GnRH</span> <i>agonists</i> may be used to treat <b>adenomyosis</b> (endometriosis in the myometrium) </div></div><br/>Also may be treated with hysterectomy<br/><br/><img src="04a51fa0a75e65d16633fc4b7b05ff57.webp" width="886"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ed765fdff4c8f047bad2bdd5643e696a.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <img src="a1fc405f40ae1ecd325b4628e94b96d8.webp"><img src="0dc9bc3b917e34a3a3b4b8326db50dee.webp"><img src="ba505db6cf5b3998c2b977c13666bd95.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/abnormal-uterine-bleeding-pelvic-pain/lesson/endometriosis">Watch Endometriosis</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">22.1</td>
+                    <td class="question"><div><b>Prostatic adenocarcinoma</b> may be treated with <span class="cloze" data-cloze="GnRH" data-ordinal="1">[...]</span> <i>analogs</i> and/or <span class="cloze" data-cloze="androgen" data-ordinal="1">[...]</span> <i>receptor</i> <i>inhibitors</i></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Prostatic adenocarcinoma</b> may be treated with <span class="cloze" data-ordinal="1">GnRH</span> <i>analogs</i> and/or <span class="cloze" data-ordinal="1">androgen</span> <i>receptor</i> <i>inhibitors</i></div><br/>- e.g., <b>leuprolide</b> (GnRH analog) and/or <b>flutamide</b> (androgen receptor inhibitor)<br/><br/>- The prostate is dependent on androgens to grow and function<br/><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><br/><img src="00afc760909880ed361afba65d4baa36.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="23. Prostate Cancer Treatment GnRH.png"><img src="24. Prostate Cancer Treatment GnRH.jpg"><br><img src="cebf2f974832dae5b6d0321dfcedde0a.webp"><img src="b2261bf8c627cc18849ee127b66fb1ac.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-male-gu-benign-prostatic-hyperplasia-bph-and-prostate-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Benign Prostatic Hyperplasia (BPH) &amp; Prostate Cancer</a><br><br><img src="2f043eca912ef418d7688e127c9a0676.jpg"><img src="8139cc504618248683c1f39faea85097.jpg"><img src="ed2c223ed3ba129b70d3d5ae5f4be221.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br><br><img src="8ed74bc04abb62dba95fb65d53c57a32.jpg"><img src="041f82f4ac7cec7fde6141eddea8f825.jpg"><img src="7e1e30097e25a52b7011eb47f7edcd6f.webp"><img src="39db42291235e23c4edf2dbba8e555a9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-non-steroidal-antiandrogens-nsaa">Watch Non-Steroidal Antiandrogens (NSAAs)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-33ff89962d7623d548880d5005dd7998bb387bf3.jpg"><div><img src="paste-5082c51767509a354619b11e223bf685d9e9ea44.jpg"><br></div><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">23.1</td>
+                    <td class="question"><div><b>Breast cancer</b> that is <b>ER+</b> and <b>PR+</b> is most likely to respond to <b>anti-</b><span class="cloze" data-cloze="estrogenic" data-ordinal="1">[...]</span> agents such as <b><span class="cloze" data-cloze="tamoxifen" data-ordinal="1">[...]</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Breast cancer</b> that is <b>ER+</b> and <b>PR+</b> is most likely to respond to <b>anti-</b><span class="cloze" data-ordinal="1">estrogenic</span> agents such as <b><span class="cloze" data-ordinal="1">tamoxifen</span></b> </div><br/>Can also prescribe <b>palbociclib </b>(CDK4/CDK6 inhibitor)<br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div>* also Raloxifene </div><img src="56. SERMS Treat Breast Cancers Overexpressing Estrogen Receptor .png" width="537"><br><img src="55. SERMS.jpg" width="536"><br><img src="eec8dc3d51556501e2db642d8f1167c6.webp"><img src="6155eea9cf7e3f54301f3c2f781fd98d.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-breast-breast-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Breast Cancer</a><br><br><img src="a717491699764b24eafb9f83216859ed.jpg" width="537"><br><img src="1c9866fc5582f033ddadfc9dcb34eb7d.jpg" width="537"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="98552d60ca4eda55b864713d6ced90f2.jpg"><br><img src="0e1192118ec7e9242b2b8ace733d6963.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">24.1</td>
+                    <td class="question"><div><div><b>Endometrial polyps</b> and <b>endometrial hyperplasia</b> can arise as a side effect of the chemotherapeutic drug <span class="cloze" data-cloze="&lt;b&gt;tamoxifen&lt;/b&gt;" data-ordinal="1">[...]</span> </div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div><b>Endometrial polyps</b> and <b>endometrial hyperplasia</b> can arise as a side effect of the chemotherapeutic drug <span class="cloze" data-ordinal="1"><b>tamoxifen</b></span> </div></div><br/>- Tamoxifen has anti-estrogenic effects on the breast but <b>weak pro-estrogenic effects on the endometrium</b> and bone<br/><br/>- Thus risk of <b>endometrial cancer</b><br/><br/><table style="width: 65.3351%;"><tbody><tr><th style="width: 43.4783%;"><b>Selective Estrogen Receptor Modulators</b> (SERMs)</th><th style="width: 18.9723%;">Breast</th><th style="width: 19.9562%;">Uterus</th><th style="width: 17.5932%;">Bone</th></tr><tr><th style="width: 43.4783%;">Tamoxifen</th><td style="width: 18.9723%;">-</td><td style="width: 19.9562%;">+</td><td style="width: 17.5932%;">+</td></tr><tr><th style="width: 43.4783%;">Raloxifene</th><td style="width: 18.9723%;">-</td><td style="width: 19.9562%;">-</td><td style="width: 17.5932%;">+</td></tr><tr><th style="width: 43.4783%;">Clomiphene</th><td colspan="3" style="width: 56.5217%;">- (in <b>hypothalamus</b><b>)</b></td></tr><tr><td colspan="4" style="width: 100%;">ER agonist = +; ER antagonist = -</td></tr></tbody></table><br/><div><img src="28e3d4df3ae87deadebe4323d1ad9d31.webp" width="977"/><br/></div><br/><div><div><img src="d0466e12462f4d2ff35f3e76d30cb796.webp" width="652"/></div><i><span style="font-size: 10pt;"><i><div><div><em>Photo credit: </em><a href="https://www.flickr.com/photos/jian-hua_qiao_md/27272318163/in/album-72157651210212545/"><em>© Dr. Jian-Hua Qiao</em></a><em>, all rights reserved, via Flickr (used with permission)</em></div></div></i></span></i></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="67e92363c9e3145bec99611180ae96ab.webp" width="800"><img src="e3b853fe2d2ed216856c6d6bb4b38486.webp" width="800"></div><div><img src="9ccb25560d391853ee678ebc9380ed27.webp"><br><img src="97d164301aef8ca505eb73511b8b22e1.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-uterine-and-vulvovaginal-disorders-abnormal-uterine-bleeding-aub-and-endometriosis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Abnormal Uterine Bleeding (AUB) &amp; Endometriosis</a><br></div><br><div><img src="f35ffc4eaed0af6df078c1093df62acc.jpg" width="805"><br></div><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br><br> --><!-- <img src="640606ed913fd5e31a857a8761e8f8b6.webp"><img src="2ab215789e2089ee4fb2be03b8790362.webp"><img src="efc096017fec7b9b660882150071affd.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/uterine-neoplasia/lesson/endometrial-hyperplasia-cancer">Watch Endometrial Hyperplasia &amp; Cancer</a><br><br><img src="81030a2a9c34dbc5645a6f937cc77c7b.webp"><img src="d4b2c91a160ca357a2d708f6f4c0ab2c.webp"><img src="82cb65db615ad45e957960b579feba2b.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/abnormal-uterine-bleeding-pelvic-pain/lesson/abnormal-uterine-bleeding-ddx">Watch Abnormal Uterine Bleeding DDx</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="98552d60ca4eda55b864713d6ced90f2.jpg"><br><img src="0e1192118ec7e9242b2b8ace733d6963.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">25.1</td>
+                    <td class="question"><div><u>Pulsatile</u> secretion of <b>GnRH</b> stimulates the <b>anterior pituitary</b> to secrete <b><span class="cloze" data-cloze="FSH" data-ordinal="1">[...]</span></b> and <b><span class="cloze" data-cloze="LH" data-ordinal="1">[...]</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><u>Pulsatile</u> secretion of <b>GnRH</b> stimulates the <b>anterior pituitary</b> to secrete <b><span class="cloze" data-ordinal="1">FSH</span></b> and <b><span class="cloze" data-ordinal="1">LH</span></b> </div><br/>In contrast, <u>continuous</u> GnRH <b>inhibits</b> FSH and LH secretion<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div><img src="1. GnRH.jpg"><img src="3. LH + FSH.jpg"><img src="07f90da2138a2b8e9d0b6b0dea7656d5.webp"><img src="30ede5b6c9d2fb1975bd78f003dfb3a4.webp"></div></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-reproductive-hormones-and-ovarian-disorders-reproductive-hormones-overview-and-polycystic-ovary-syndrome-pcos?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Repro Hormones Overview &amp; Polycystic Ovary Syndrome (PCOS)</a><br><br><img src="5a56f71616344e1bdbe06bd7c9c8d514.jpg"><img src="b57a5f51988bfed30f67da0c8ba90773.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br><br><img src="aec7fd6cad797cc35e8818cfa42ac5bb.webp"><img src="213375997d729db7cf8c7ae0dd52f8c4.webp"><img src="ca2ad9ec1a86886b4c426dae26307122.webp"><br><img src="Screen Shot 2022-07-13 at 4.30.00 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.35 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.42 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-anterior-lobe-of-the-pituitary">Watch Anterior Lobe of the Pituitary</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">26.1</td>
+                    <td class="question"><div><b><span class="cloze" data-cloze="Aromatase" data-ordinal="1">[...]</span></b> is the key <u>enzyme</u> in the conversion of <b>androgens</b> to <b>estrogen</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><span class="cloze" data-ordinal="1">Aromatase</span></b> is the key <u>enzyme</u> in the conversion of <b>androgens</b> to <b>estrogen</b></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="1037ff3a8346bdd742927a19bdfb755f.jpg" width="537"><img src="d61b2de5a67650e72f07ac3ca858dbb0.jpg" width="536"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">27.1</td>
+                    <td class="question"><div><div>The primary event that initiates <b>puberty</b> is the onset of <span class="cloze-inactive" data-ordinal="2"><b><u>pulsatile</u></b></span> <b>secretion</b> of <span class="cloze" data-cloze="&lt;b&gt;GnRH&lt;/b&gt;" data-ordinal="1">[...]</span> from the hypothalamus</div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>The primary event that initiates <b>puberty</b> is the onset of <span class="cloze-inactive" data-ordinal="2"><b><u>pulsatile</u></b></span> <b>secretion</b> of <span class="cloze" data-ordinal="1"><b>GnRH</b></span> from the hypothalamus</div></div><br/><div>- Pulsatile pattern is <u>necessary</u> for the onset of puberty</div><br/><div>- Delayed onset of pulsatile nighttime GnRH release leads to constitutional delay of growth and puberty (CDGP)</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="1. GnRH.jpg"><img src="3. LH + FSH.jpg"><img src="07f90da2138a2b8e9d0b6b0dea7656d5.webp"><img src="30ede5b6c9d2fb1975bd78f003dfb3a4.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-reproductive-hormones-and-ovarian-disorders-reproductive-hormones-overview-and-polycystic-ovary-syndrome-pcos?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Repro Hormones Overview &amp; Polycystic Ovary Syndrome (PCOS)</a><br><br><img src="5a56f71616344e1bdbe06bd7c9c8d514.jpg"><img src="b57a5f51988bfed30f67da0c8ba90773.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">28.1</td>
+                    <td class="question">What is the pharmacologic treatment of <b>central precocious puberty</b>?<br/><br/><div><span class="cloze" data-cloze="Continuous GnRH agonist therapy (e.g., leuprolide)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the pharmacologic treatment of <b>central precocious puberty</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Continuous GnRH agonist therapy (e.g., leuprolide)</span></div><br/>Initial stimulation of pituitary gonadotropin release → eventual suppression of HPGA → less LH and FSH release<br/><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><img src="77b46a44584300019d20f794ae05ca9f.webp" width="1000"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="8245b6ad26bee18e058aa28fa32d877c.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">29.1</td>
+                    <td class="question">If a patient with <b>prostate cancer </b>has a rise in PSA <u>without</u> symptoms or metastases, what is the <i>treatment</i>?<br/><br/><div><span class="cloze" data-cloze="Anti-androgens" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">If a patient with <b>prostate cancer </b>has a rise in PSA <u>without</u> symptoms or metastases, what is the <i>treatment</i>?<br/><br/><div><span class="cloze" data-ordinal="1">Anti-androgens</span></div><br/>- e.g., flutamide<br/><br/>- Symptoms or metastases warrants treatment with radiation<br/><br/><img src="3b115adeb3944499c35ae5af4fe6b31d.webp" width="1089"/><br/><br/><img src="00afc760909880ed361afba65d4baa36.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="8ed74bc04abb62dba95fb65d53c57a32.jpg"><img src="041f82f4ac7cec7fde6141eddea8f825.jpg"><img src="7e1e30097e25a52b7011eb47f7edcd6f.webp"><img src="39db42291235e23c4edf2dbba8e555a9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-non-steroidal-antiandrogens-nsaa">Watch Non-Steroidal Antiandrogens (NSAAs)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">30.1</td>
+                    <td class="question"><b>Tamoxifen</b> increases the risk of endometrial <span class="cloze" data-cloze="polyps" data-ordinal="1">[...]</span> in<b> pre</b>menopausal women<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Tamoxifen</b> increases the risk of endometrial <span class="cloze" data-ordinal="1">polyps</span> in<b> pre</b>menopausal women<br/>Endometrial hyperplasia / cancer in postmenopausal<br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/><br/></b><br/><div><img src="28e3d4df3ae87deadebe4323d1ad9d31.webp" width="977"/><br/></div><br/><div><div>Two benign endometrial polyps (yellow arrows) in an opened endometrial cavity:<br/></div><div><img src="d0466e12462f4d2ff35f3e76d30cb796.webp" width="652"/></div><i><span style="font-size: 10pt;"><i><i><div><div><em>Photo credit: </em><a href="https://www.flickr.com/photos/jian-hua_qiao_md/27272318163/in/album-72157651210212545/"><em>© Dr. Jian-Hua Qiao</em></a><em>, all rights reserved, via Flickr (used with permission)</em></div></div></i></i></span></i></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div><img src="67e92363c9e3145bec99611180ae96ab.webp" width="800"><img src="e3b853fe2d2ed216856c6d6bb4b38486.webp" width="800"></div><div><div><img src="9ccb25560d391853ee678ebc9380ed27.webp"><br><img src="97d164301aef8ca505eb73511b8b22e1.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-uterine-and-vulvovaginal-disorders-abnormal-uterine-bleeding-aub-and-endometriosis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Abnormal Uterine Bleeding (AUB) &amp; Endometriosis</a></div></div><br><div><img src="f35ffc4eaed0af6df078c1093df62acc.jpg" width="805"></div></div><div><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br></div><br> --><!-- <img src="81030a2a9c34dbc5645a6f937cc77c7b.webp"><img src="d4b2c91a160ca357a2d708f6f4c0ab2c.webp"><img src="82cb65db615ad45e957960b579feba2b.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/abnormal-uterine-bleeding-pelvic-pain/lesson/abnormal-uterine-bleeding-ddx">Watch Abnormal Uterine Bleeding DDx</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">31.1</td>
+                    <td class="question">Patients with <u><b>ER+</b></u> and/or <u><b>PR+</b></u> breast cancers are treated based on menopause status:<br/><br/>- <span class="cloze-inactive" data-ordinal="2">Pre</span>-menopause: <span class="cloze" data-cloze="tamoxifen (&lt;u&gt;SERMs&lt;/u&gt;)" data-ordinal="1">[...]</span><br/>- <span class="cloze-inactive" data-ordinal="2">Post</span>-menopause: <span class="cloze" data-cloze="aromatase inhibitors" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Patients with <u><b>ER+</b></u> and/or <u><b>PR+</b></u> breast cancers are treated based on menopause status:<br/><br/>- <span class="cloze-inactive" data-ordinal="2">Pre</span>-menopause: <span class="cloze" data-ordinal="1">tamoxifen (<u>SERMs</u>)</span><br/>- <span class="cloze-inactive" data-ordinal="2">Post</span>-menopause: <span class="cloze" data-ordinal="1">aromatase inhibitors</span><br/>- Aromatase inhibitors (e.g., <b>anastrozole</b>, <b>letrozole</b>, <b>exemestane</b>) block <b>peripheral</b> conversion of testosterone → estrogen (only works if the ovaries are not producing estrogen)<br/><br/>- Aromatase inhibitors are less effective than SERMs as monotherapy in premenopausal women, as ovarian aromatase is upregulated substantially in response to gonadotropins<br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f404f728fe3d67a35304d3da37905439.jpg" width="537"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="paste-067682a3106bd9c94c17515760c2ee45ac082a5b.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">32.1</td>
+                    <td class="question">Women who are at <u>increased risk</u> for<b> breast cancer</b> and <u>low risk</u> for<i> adverse medication effects</i> should receive:<br/><br/><span class="cloze" data-cloze="Tamoxifen,&lt;i&gt; &lt;/i&gt;raloxifene, or aromatase inhibitors" data-ordinal="1">[3 options]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Women who are at <u>increased risk</u> for<b> breast cancer</b> and <u>low risk</u> for<i> adverse medication effects</i> should receive:<br/><br/><span class="cloze" data-ordinal="1">Tamoxifen,<i> </i>raloxifene, or aromatase inhibitors</span><br/>Reduce effects of estrogen at the breast<br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">33.1</td>
+                    <td class="question">What is the <i>most common</i> <u>side effect</u> of <b>tamoxifen</b>?<br/><br/><span class="cloze" data-cloze="Hot flashes (80%)" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the <i>most common</i> <u>side effect</u> of <b>tamoxifen</b>?<br/><br/><span class="cloze" data-ordinal="1">Hot flashes (80%)</span><br/>Due to <u>anti-estrogenic activity</u> in the CNS which causes <b>thermoregulatory dysfunction</b> in the anterior hypothalamus; analogous to hot flashes<br/><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="3918a537b00213fb41379d54982ab9a2.jpg" width="537"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">34.1</td>
+                    <td class="question">Raloxifene can increase <b>DVT</b> risk<div><br/><div><span class="cloze" data-cloze="T" data-ordinal="1">[T/F]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Raloxifene can increase <b>DVT</b> risk<div><br/><div><span class="cloze" data-ordinal="1">T</span></div></div><br/>Anything that has <b>estrogen</b> <b>agonist</b> activity (even just at bone) can increase DVT risk by <b>increasing protein C resistance (</b>like<b> factor V leiden)<br/></b><br/><b><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="29cedf9bc04ca0ea1ce606dfc999a756.jpg" width="537"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <img src="61ffa18090d17e1c6a09cf5d1950bc0a.webp"><img src="3a5fbd65ed1ea347e7ae2d05afe2fba4.webp"><br><img src="f81edbaaccbd57fafc47761733f71fa5.webp"><img src="63cffad2db716bf780443427231a679a.webp"><br><b><span style="font-weight: 400;"><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-hematology-oncology/videos/medical-internal-medicine-hematology-and-oncology-bleeding-and-clotting-disorders-hypercoagulable-disorders-ddx" title="Watch Hypercoagulable Disorders DDx">Watch Hypercoagulable Disorders DDx</a></span></b><br> --><!-- <br> --><!-- <br> --><!-- <img src="98552d60ca4eda55b864713d6ced90f2.jpg"><br><img src="0e1192118ec7e9242b2b8ace733d6963.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">35.1</td>
+                    <td class="question">What is the first-line <i>pharmacologic treatment</i> for <u>infertility</u> (to induce ovulation) due to <b>polycystic ovary syndrome</b> (PCOS)?<br/><br/><div><span class="cloze" data-cloze="Letrozole" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the first-line <i>pharmacologic treatment</i> for <u>infertility</u> (to induce ovulation) due to <b>polycystic ovary syndrome</b> (PCOS)?<br/><br/><div><span class="cloze" data-ordinal="1">Letrozole</span></div><br/><div>Letrozole is an <b>aromatase inhibitor</b> that blocks conversion of androgen to estrogen, regulating LH and FSH levels and promoting the LH surge for ovulation (<b>preferred over clomiphene</b> to increase live birth rates, <u>per UWorld</u>)</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ba90d62e10d763f68097f4d08b2aebc2.jpg" width="536"><br><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br> --><!-- <br> --><!-- <img src="paste-a8a2ea8a42b99b15d81ef48f8550ce20e26834eb.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">36.1</td>
+                    <td class="question">2-3 months prior to <u>hysterectomy for <b>leiomyoma</b> removal</u>, <b><span class="cloze" data-cloze="leuprolide" data-ordinal="1">[...]</span></b> can be prescribed to shrink <i>large</i> or <i>multiple uterine leiomyomas</i><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">2-3 months prior to <u>hysterectomy for <b>leiomyoma</b> removal</u>, <b><span class="cloze" data-ordinal="1">leuprolide</span></b> can be prescribed to shrink <i>large</i> or <i>multiple uterine leiomyomas</i><br/>- <b>GnRH agonists</b> can reduce the size of leiomyomas by inducing hypoestrogenism and hypoprogesteronism<br/><br/><div>- A reduction in the size of leiomyomatous uterus decreases surgical time, speeds up postoperative recovery, and may even enable a vaginal hysterectomy (which causes less blood loss than an abdominal hysterectomy)<br/></div><br/><div><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ed765fdff4c8f047bad2bdd5643e696a.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <img src="e2aa6d0e798a7652f6844bc8c3ce8d09.webp"><img src="928d08179e1a3615d031b4b623ee7460.webp"><img src="9304a0f2ed72920dbe23730c9715050d.webp"><img src="2017398d84afc9993f924050bf28abee.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/abnormal-uterine-bleeding-pelvic-pain/lesson/uterine-leiomyomas">Watch Uterine Leiomyomas</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">37.1</td>
+                    <td class="question"><b>Uterine sarcoma</b> is a <i>gynecological malignancy</i> that has increased frequency following <span class="cloze-inactive" data-ordinal="2"><b>tamoxifen</b></span> <b>use</b> and <span class="cloze" data-cloze="&lt;b&gt;pelvic radiation&lt;/b&gt;" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Uterine sarcoma</b> is a <i>gynecological malignancy</i> that has increased frequency following <span class="cloze-inactive" data-ordinal="2"><b>tamoxifen</b></span> <b>use</b> and <span class="cloze" data-ordinal="1"><b>pelvic radiation</b></span><br/><img src="819894e96d191a9c4c5517cfdf372c64.webp" width="1100px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="f35ffc4eaed0af6df078c1093df62acc.jpg" width="537"><img src="29cedf9bc04ca0ea1ce606dfc999a756.jpg" width="536"><br></div><img src="3965f3cb11b4c3fb50a367ce3b04f3bb.webp"><img src="cc8a4d7f2ce58c2b6bc8e05764f78b49.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-serms-and-aromatase-inhibitors">Watch SERMs &amp; Aromatase Inhibitors</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">38.1</td>
+                    <td class="question">What is the recommended<i> treatment</i> for <b>idiopathic precocious puberty</b>?<br/><br/><div><span class="cloze" data-cloze="Continuous GnRH agonist therapy (e.g., leuprolide)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the recommended<i> treatment</i> for <b>idiopathic precocious puberty</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Continuous GnRH agonist therapy (e.g., leuprolide)</span></div><br/>Prevents premature epiphyseal plate fusion and maximizes adult height potential<br/><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><br/><img src="77b46a44584300019d20f794ae05ca9f.webp" width="669"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="8245b6ad26bee18e058aa28fa32d877c.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">39.1</td>
+                    <td class="question">What <u>medical therapy</u> may be used for <i>short-term</i> treatment of symptomatic <b>fibroids</b> <u>refractory to OCPs, progestin-IUDs, and NSAIDs</u>?<br/><br/><span class="cloze" data-cloze="GnRH agonists (e.g., leuprolide)&lt;br&gt;
+GnRH antagonists (e.g., elagolix)" data-ordinal="1">[2]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What <u>medical therapy</u> may be used for <i>short-term</i> treatment of symptomatic <b>fibroids</b> <u>refractory to OCPs, progestin-IUDs, and NSAIDs</u>?<br/><br/><span class="cloze" data-ordinal="1">GnRH agonists (e.g., leuprolide)<br/>GnRH antagonists (e.g., elagolix)</span><br/>- GnRH <u>agonists</u> desensitize the pituitary via <u>overstimulation</u> → diminished release of LH and FSH → <i>reduced</i> <u>estrogen</u> synthesis → volume reduction (deprives fibroid of its growth stimulus), amenorrhea, improved anemia<br/><br/>- They are an optimal treatment <b>prior to surgery</b>,<b> </b>but are not suited for long-term monotherapy (&gt; 6 months) because they cause rebound growth and bone demineralization (osteoporosis). <b>Fibroids continue to grow once therapy is discontinued</b>!<br/><br/>- UpToDate authors prefer antagonists due to their milder side effects<br/><br/><img src="1ded9be74ff34997198c46e3aefcb3db.webp" width="1089"/><br/><img src="df82d552e7376206205de3a8c089c0bb.webp" width="823"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ed765fdff4c8f047bad2bdd5643e696a.jpg"><img src="e48388b530f7b991ea41b0f7e6253052.webp"><img src="def53e725ff6fd6fd51a445ef18acb63.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-sex-hormones-lhrh-agonistsgnrh-analogs">Watch LHRH Agonists/GnRH Analogs</a><br> --><!-- <img src="603f12e89d8ed34c5c30e3958abc098f.webp"><img src="e2aa6d0e798a7652f6844bc8c3ce8d09.webp"><img src="9304a0f2ed72920dbe23730c9715050d.webp"><img src="2017398d84afc9993f924050bf28abee.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/abnormal-uterine-bleeding-pelvic-pain/lesson/uterine-leiomyomas">Watch Uterine Leiomyomas</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (4 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div>What drug may be used to <b>replace mineralocorticoids</b> in primary adrenal insufficiency?<br/></div><br/><div><span class="cloze" data-cloze="Fludrocortisone (aldosterone analog)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What drug may be used to <b>replace mineralocorticoids</b> in primary adrenal insufficiency?<br/></div><br/><div><span class="cloze" data-ordinal="1">Fludrocortisone (aldosterone analog)</span></div><br/>Fludrocortisone has minimal to no glucocorticoid side effects, so it can be combined with corticosteroids in replacement therapy without worrying about Cushing syndrome<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="92c9d6e2806289245cf448009d19a441.webp"><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br> --><!-- <img src="c860c0d09df50c7c1ae2dffb628da977.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><div><span class="cloze" data-cloze="&lt;b&gt;Fludrocortisone&lt;/b&gt;" data-ordinal="1">[...]</span> is a <u>synthetic analog</u> of <span class="cloze-inactive" data-ordinal="2"><b>aldosterone</b></span> with <b><u>little</u> glucocorticoid effects</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze" data-ordinal="1"><b>Fludrocortisone</b></span> is a <u>synthetic analog</u> of <span class="cloze-inactive" data-ordinal="2"><b>aldosterone</b></span> with <b><u>little</u> glucocorticoid effects</b></div><br/>Therefore can increase vascular adrenergic sensitivity<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div>Possible <u>adverse effects</u> of <b>fludrocortisone</b>, an aldosterone analog, include <b>edema</b> and <b>exacerbation</b> of <span class="cloze" data-cloze="heart failure" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Possible <u>adverse effects</u> of <b>fludrocortisone</b>, an aldosterone analog, include <b>edema</b> and <b>exacerbation</b> of <span class="cloze" data-ordinal="1">heart failure</span></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><u>Treatment of adrenal insufficiency</u>:<br/><br/><div>- <b><span class="cloze" data-cloze="Glucocorticoids" data-ordinal="1">[...]</span></b> for <u>both</u> primary and secondary</div><div>- Add <b>fludrocortisone</b> for <span class="cloze" data-cloze="primary (Addison disease)" data-ordinal="1">[primary/secondary]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><u>Treatment of adrenal insufficiency</u>:<br/><br/><div>- <b><span class="cloze" data-ordinal="1">Glucocorticoids</span></b> for <u>both</u> primary and secondary</div><div>- Add <b>fludrocortisone</b> for <span class="cloze" data-ordinal="1">primary (Addison disease)</span></div><br/>- <b>Fludrocortisone</b> replaces the aldosterone that the adrenal gland can no longer make<br/><br/>- <b>Fludrocortisone </b>is not necessary in <u>secondary</u> adrenal insufficiency since mineralocorticoids are still made (via the intact RAAS)<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="hypocortisolism_1566160514431.jpg"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><img src="92c9d6e2806289245cf448009d19a441.webp"><br><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br> --><!-- <img src="108dc4f52bad3e2c3b5b6c7a48557b87.webp"><img src="9eb8dd7c020af63945205d92b8817767.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

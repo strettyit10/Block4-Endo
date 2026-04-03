@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (64 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div>What <b>psychiatric medication</b> is a common cause of drug-induced <b>nephrogenic diabetes insipidus</b>?<br/></div><br/><div><span class="cloze" data-cloze="Lithium" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <b>psychiatric medication</b> is a common cause of drug-induced <b>nephrogenic diabetes insipidus</b>?<br/></div><br/><div><span class="cloze" data-ordinal="1">Lithium</span> </div><br/>Treat with amiloride<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="61b7c56f47f1661e63789a4138a43306.webp"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><div><img src="4f85156091cb442d216b97facfc39bfa.webp"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><img src="3c3766c749a60aea2853660175b5d8db.webp"><br><div><img src="26d4b698ca4e74d438218c910ea8d4d2.webp"><img src="b8458b8010404dfe2afcebdb2160e5a2.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-lithium?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Lithium</a><br><br> --><!-- <img src="54d01ba9391fa6859e9dce81403c50c7.webp"><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="e12e94b2da927dceb0ec449769ee45e0.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="tmpo3lyoqky.png"><br><img class="resizer" src="tmpjc7crreo.png"><br><img class="resizer" src="tmp22afm7r3.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><div>What <u>type</u> of <b>diabetes</b> is associated with <b>lithium use</b>?<br/></div><br/><div><span class="cloze" data-cloze="Nephrogenic diabetes insipidus" data-ordinal="1">[...]</span> <br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <u>type</u> of <b>diabetes</b> is associated with <b>lithium use</b>?<br/></div><br/><div><span class="cloze" data-ordinal="1">Nephrogenic diabetes insipidus</span> <br/></div><br/>Lithium antagonizes the action of ADH in the collecting tubules<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="61b7c56f47f1661e63789a4138a43306.webp"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><div><img src="1954bbdfd0e7a548142e4e61bc9dd2a4.webp"><br></div><img src="26d4b698ca4e74d438218c910ea8d4d2.webp"><img src="b8458b8010404dfe2afcebdb2160e5a2.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-lithium?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Lithium</a><br><br> --><!-- <img src="e12e94b2da927dceb0ec449769ee45e0.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="tmpo3lyoqky.png"><br><img class="resizer" src="tmpjc7crreo.png"><br><img class="resizer" src="tmp22afm7r3.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div>One <i>class</i> of drugs that may treat <b>nephrogenic diabetes insipidus</b> is <span class="cloze" data-cloze="&lt;b&gt;thiazide diuretics&lt;/b&gt;" data-ordinal="1">[...]</span>, which enhances the uptake of NaCl and H<sub>2</sub>O in the <b><span class="cloze-inactive" data-ordinal="2">proximal tubule</span></b> <br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One <i>class</i> of drugs that may treat <b>nephrogenic diabetes insipidus</b> is <span class="cloze" data-ordinal="1"><b>thiazide diuretics</b></span>, which enhances the uptake of NaCl and H<sub>2</sub>O in the <b><span class="cloze-inactive" data-ordinal="2">proximal tubule</span></b> <br/></div><br/><div><u>Confusing mechanism</u>: thiazide diuretics decrease reabsorption of NaCl in the early DCT → increased urinary excretion of Na<sup>+ </sup>→ decreased ECF volume → increased RAAS activation → increased proximal Na<sup>+</sup> and H<sub>2</sub>O reabsorption → decreased urine output</div><br/><div><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="c44870716068d955fea99370f96a1be5.webp" width="800"><img src="4e4906b22bd881e56aa7722365f6d329.webp"><br></div><img src="5fa1b88fb5126ead5ec278857605fe44.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-cardiovascular-renal/videos/medical-pharmacology-cardiovascular-and-renal-diuretics-thiazides?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thiazides</a><br><br><div><img src="5d7616474f071b889201c249c343e31c.webp" width="800"><br></div><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><img src="ecc283f99e89b7a6a5123e811e6f7130.webp" width="800"><img src="2fc79b0805c7c042592d4da72a376f99.webp" width="800"><br><div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br> --><!-- <img src="8530188dce496bf5807f49ffd7d0ad15.webp"><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div>Which treatment for <b>SIADH</b> may end up causing <b>nephrogenic diabetes insipidus</b>?<br/></div><br/><div><span class="cloze" data-cloze="Demeclocycline" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which treatment for <b>SIADH</b> may end up causing <b>nephrogenic diabetes insipidus</b>?<br/></div><br/><div><span class="cloze" data-ordinal="1">Demeclocycline</span></div><br/>Demeclocycline is an ADH antagonist<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="208a1c2d062e488c1465cbcb92acae6e.webp"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="04533f3c9d036453d535ed94df859d23.webp"><br><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <img src="cb468796978e7b4a276b193fbb8bb965.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="7996d6df5858aba0f1a83695258fabb8.webp"><img src="75c47f7d2252636f6f06e7a3ac7fca26.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img draggable="false" src="tmp0f67wic7.png" class="resizer"><br><img draggable="false" src="tmpdje6a463.png" class="resizer"><br><img draggable="false" src="tmpk8b3vp6g.png" class="resizer"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><div>In <u>females</u>, <b>prolactinoma</b> presents as <span class="cloze" data-cloze="&lt;b&gt;galactorrhea&lt;/b&gt;" data-ordinal="1">[...]</span>, <span class="cloze-inactive" data-ordinal="2"><b>amenorrhea</b></span>, and <span class="cloze-inactive" data-ordinal="3"><b>infertility</b></span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In <u>females</u>, <b>prolactinoma</b> presents as <span class="cloze" data-ordinal="1"><b>galactorrhea</b></span>, <span class="cloze-inactive" data-ordinal="2"><b>amenorrhea</b></span>, and <span class="cloze-inactive" data-ordinal="3"><b>infertility</b></span></div><br/>- ↑ Prolactin → ↑ lactogenesis → galactorrhea<br/><br/>- ↑ Prolactin → GnRH inhibition → amenorrhea, infertility<br/><br/><img src="8f59277944718e3785b245c5a6383dbb.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="24. Hyperprolactinemia.jpg" width="802"><img src="25. Hyperprolactinemia Caused By Prolactinomas.png" width="804"><img src="26. Hyperprolactinemia Prolactinomas Galactorrhea.png" width="803"><br></div><div><div><img src="11111bf4aca1414c0bb06997227b2e86.webp"><img src="ddcca0fbe030c35a150b708d46448532.webp"><br></div></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Amenorrhea</a><br></div><br><div><img src="8c673bd04b68810c43e057d48539c296.webp"><br></div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br><br><div><img src="56. Galactorrhea Caused By Prolactinomas.jpg"></div><div><img src="85a0382fb18f4b96fe9cdff44155a98f.webp"><br></div><div><img src="1747727efab3b85da07996e01881ea50.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Benign Breast Disorders</a><br><br><img src="Screen Shot 2022-07-13 at 4.30.00 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.35 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.42 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-anterior-lobe-of-the-pituitary">Watch Anterior Lobe of the Pituitary</a><br><br> --><!-- <img src="29fcaafde0ebc356722c7b4fc625007c.webp"><img src="7de7b7d9feea912ed48605c2bd6ca246.webp"><img src="d3b742917da5ff959f33ab7e2b402006.webp"><img src="0cae62c560f8af145c5e54d016ff5bbb.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/reproductive-endocrinology/lesson/secondary-amenorrhea-ddx-2">Watch OBGYN Secondary Amenorrhea DDx</a><br><a href="https://app.sketchy.com/study/medical/chapter/conditions-affecting-females/lesson/secondary-amenorrhea-ddx">Watch PEDS Secondary Amenorrhea DDx</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><div>What is the <u>most common</u> type of <b>pituitary adenoma</b>? </div><br/><div><span class="cloze" data-cloze="Prolactinoma" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the <u>most common</u> type of <b>pituitary adenoma</b>? </div><br/><div><span class="cloze" data-ordinal="1">Prolactinoma</span></div><br/>Adenoma of lactotrophs cause hyperprolactinemia<br/><br/><img src="2c397fb0ba64e0764a3ec6623dbb27e3.webp" width="900"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c05b219fd8fc794fbce97c7686d20e28.webp" width="534"><br><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="d56c8ba4c794a96bc801c784e44c7808.jpg"><br><img src="8286e57e4414f5b9f7f06a858f8ca047.jpg"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7012?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Pituitary_Adenoma">Review Pituitary Adenoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><div><b>Acromegaly</b> is associated with increased <b><span class="cloze" data-cloze="insulin" data-ordinal="1">[...]</span> resistance</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Acromegaly</b> is associated with increased <b><span class="cloze" data-ordinal="1">insulin</span> resistance</b> </div><br/>Thus contributing to secondary diabetes mellitus<br/><br/><img src="4fa4fca5f44c28ac1371124b9d91686a.webp" width="750px"/><br/><br/><img src="ba3723947c69b3c3b3f48a48256020de.webp" width="937"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="b82aa52f375b6b412a69f97620269f47.webp"><br><div><img src="c837d5b30799acf36a778252b4a7db77.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question"><b>Acromegaly</b> causes impaired <span class="cloze" data-cloze="&lt;b&gt;glucose&lt;/b&gt;" data-ordinal="1">[...]</span> tolerance (i.e., insulin resistance), which may present as secondary <span class="cloze" data-cloze="&lt;b&gt;diabetes mellitus&lt;/b&gt;" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Acromegaly</b> causes impaired <span class="cloze" data-ordinal="1"><b>glucose</b></span> tolerance (i.e., insulin resistance), which may present as secondary <span class="cloze" data-ordinal="1"><b>diabetes mellitus</b></span><br/><img src="4fa4fca5f44c28ac1371124b9d91686a.webp" width="750px"/><br/><br/><img src="ba3723947c69b3c3b3f48a48256020de.webp" width="937"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="b82aa52f375b6b412a69f97620269f47.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><div><b>Growth hormone-secreting adenoma</b> presents as <b><span class="cloze" data-cloze="acromegaly" data-ordinal="1">[...]</span></b> in <b><span class="cloze-inactive" data-ordinal="2">adults</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Growth hormone-secreting adenoma</b> presents as <b><span class="cloze" data-ordinal="1">acromegaly</span></b> in <b><span class="cloze-inactive" data-ordinal="2">adults</span></b> </div><br/>- <u>A</u>cromegaly = <u>A</u>dults<br/><br/>- As opposed to <u>gigantism</u> in <b>children</b><br/><br/><img src="ba3723947c69b3c3b3f48a48256020de.webp" width="937"/><br/><img src="48089560affe50003c859c56eb6aeadf.webp" width="500"/><img src="51a6e60ea1d40492b1e23296ac59d5b7.webp" width="428"/><br/><i><span style="font-size: 10pt;">Photo credits: <a href="https://ojrd.biomedcentral.com/articles/10.1186/1750-1172-3-17">Chanson et al.</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, via Orphanet Journal of Rare Diseases</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="4c01eecce33608d81fe7e3628f37352c.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><div><b>Acromegaly</b> causes enlarged bones in the <b><span class="cloze" data-cloze="hands" data-ordinal="1">[...]</span></b>, <b><span class="cloze" data-cloze="feet" data-ordinal="1">[...]</span></b>, and <b><span class="cloze" data-cloze="jaw" data-ordinal="1">[...]</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Acromegaly</b> causes enlarged bones in the <b><span class="cloze" data-ordinal="1">hands</span></b>, <b><span class="cloze" data-ordinal="1">feet</span></b>, and <b><span class="cloze" data-ordinal="1">jaw</span></b> </div><br/><img src="ba3723947c69b3c3b3f48a48256020de.webp" width="937"/><img src="48089560affe50003c859c56eb6aeadf.webp" width="500"/><img src="51a6e60ea1d40492b1e23296ac59d5b7.webp" width="428"/><br/><i><span style="font-size: 10pt;">Photo credits: <a href="https://ojrd.biomedcentral.com/articles/10.1186/1750-1172-3-17">Chanson et al.</a>, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, via Orphanet Journal of Rare Diseases</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="4c01eecce33608d81fe7e3628f37352c.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br><br><img src="f0fa4c197adc8dc393a71bfe38f36aae.webp"><br><img src="Screen Shot 2022-07-13 at 4.30.00 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.35 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.42 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-anterior-lobe-of-the-pituitary">Watch Anterior Lobe of the Pituitary</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><div><b>Acromegaly</b> may cause growth of <b>visceral <span class="cloze" data-cloze="organs" data-ordinal="1">[...]</span></b>, leading to dysfunction </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Acromegaly</b> may cause growth of <b>visceral <span class="cloze" data-ordinal="1">organs</span></b>, leading to dysfunction </div><br/><img src="ba3723947c69b3c3b3f48a48256020de.webp" width="937"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9206fee572c472b8efd14020f4572cb0.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><b>Acromegaly</b> is characterized by a <b>large</b> <span class="cloze" data-cloze="&lt;b&gt;tongue&lt;/b&gt;" data-ordinal="1">[...]</span> with <b>deep furrows</b> and a deep voice<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Acromegaly</b> is characterized by a <b>large</b> <span class="cloze" data-ordinal="1"><b>tongue</b></span> with <b>deep furrows</b> and a deep voice<br/><img src="ba3723947c69b3c3b3f48a48256020de.webp" width="937"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="cbd3b5955d0c4dc3c4d43b40af60113e.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><div>What is the <u>most common</u> cause of death in patients with <b>acromegaly</b>? </div><br/><div><span class="cloze" data-cloze="Heart failure" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the <u>most common</u> cause of death in patients with <b>acromegaly</b>? </div><br/><div><span class="cloze" data-ordinal="1">Heart failure</span></div><br/>Causes left ventricular hypertrophy<br/><br/><img src="ba3723947c69b3c3b3f48a48256020de.webp" width="937"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c837d5b30799acf36a778252b4a7db77.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><b>SIADH</b> is characterized by <span class="cloze" data-cloze="&lt;b&gt;euvolemic&lt;/b&gt;" data-ordinal="1">[volume]</span> <span class="cloze" data-cloze="&lt;b&gt;hyponatremia&lt;/b&gt;" data-ordinal="1">[Na<sup>+</sup> level]</span> with continued urinary Na<sup>+</sup> excretion<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>SIADH</b> is characterized by <span class="cloze" data-ordinal="1"><b>euvolemic</b></span> <span class="cloze" data-ordinal="1"><b>hyponatremia</b></span> with continued urinary Na<sup>+</sup> excretion<br/>Body responds to water retention with <b>decreased aldosterone</b>, causing normal volumes (euvolemic) but decreased sodium (hyponatremia)<br/><br/><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/><br/><img src="5f0ff7036f9deabb16357c8ec35bcfa6.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="8da7d1f62799599548030ab7b4dc93b6.webp" width="800"><img src="5b58300587a6c32fc746583b1584a3ea.webp" width="800"></div><div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br></div><br><div><img src="24fb47ae4b2cd4b8ef715db70d18ae07.webp" width="800"><img src="2798ca92e9b365f2652059e0c8ae7ad0.webp" width="800"><br></div><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="598919f9927d84eea6721f8f9ebaadb8.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="4a5156777f773e776a209dddb99b34e1.webp"><img src="cc56b3a637439180defb6d003b0a5301.webp"><img src="7242a0b3547228e59201f7a27bf925da.webp"><img src="bdfb0349c4081c5d5c17a3329252ea7c.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question"><div>In <b>diabetes insipidus</b>, the <b>water deprivation test</b> <i>fails</i> to <span class="cloze" data-cloze="&lt;b&gt;increase&lt;/b&gt;" data-ordinal="1">[...]</span> urine osmolality</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In <b>diabetes insipidus</b>, the <b>water deprivation test</b> <i>fails</i> to <span class="cloze" data-ordinal="1"><b>increase</b></span> urine osmolality</div><br/>Osmolality will increase in <b>central</b> diabetes insipidus with administration of an <b>ADH analog</b><br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><br/><b style="font-weight: bold;"><img src="efd7d2758188ef18fbf2b4d681bdcdd2.webp" width="960"/></b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="f8ac81d14576d52c66552c6776b860c2.webp" width="800"><img src="d4dd8112b355cde3148bbfb22016f754.webp" width="800"></div><div></div><div></div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="d8ac5847779c2444f5ba82f16856f756.webp"><br><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="11e27818cee1cdd718aee92dc4b237ee.webp"><img src="5ab73d36f3752ead132692c295c1c7ed.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question"><span class="cloze" data-cloze="&lt;b&gt;&lt;i&gt;Nephrogenic&lt;/i&gt;&lt;/b&gt;" data-ordinal="1">[...]</span><b> diabetes insipidus</b> is characterized by <b>polyuria</b> and <b>polydipsia</b> with an <u>inability</u> to <span class="cloze-inactive" data-ordinal="3"><b>concentrate</b></span> urine due to<b> </b><span class="cloze-inactive" data-ordinal="2"><b>lack of <u>response</u> to ADH</b></span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze" data-ordinal="1"><b><i>Nephrogenic</i></b></span><b> diabetes insipidus</b> is characterized by <b>polyuria</b> and <b>polydipsia</b> with an <u>inability</u> to <span class="cloze-inactive" data-ordinal="3"><b>concentrate</b></span> urine due to<b> </b><span class="cloze-inactive" data-ordinal="2"><b>lack of <u>response</u> to ADH</b></span><br/>Two subtypes:<br/>- <b>Complete nephrogenic diabetes</b>: complete unresponsiveness of the kidneys to ADH<br/>-<b> Partial nephrogenic diabetes</b>: slow but steady rise in urine osmolality with increasing serum osmolality after water deprivation. DDAVP still fails to increase urine osmolality. The urine osmolality remains low (&lt; 500 mOsm/L)<br/><br/>- Whereas <b>central</b> diabetes insipidus is due to <u>lack of ADH<br/></u><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><br/><u><img src="efd7d2758188ef18fbf2b4d681bdcdd2.webp" width="960"/></u><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="617692ee1ea3dfd9924ce3c0f86bacda.webp"><br><div><img src="e4fc569553e10103217ed6122bf75ccc.webp" width="800"><img src="843bd5d5d6a96feab652e6e382776176.webp" width="800"><img src="ae563ecf8973f58ecfa3dfe4dcfa31d0.webp" width="800"><br><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="42440a09511e1303b44043af0a08a3fa.webp"><img src="f69ac1587b2c84c6ab2a10fd52d9defe.webp"><img src="7808204fa7e1c91508f44bc07ffbcf1e.webp"><img src="b3aee301e34c335fd0acf0b00e7ed084.webp"><br><img src="2.4 - Production of Hypo-osmotic Urine.png"><br><img src="2.4 - Production of Hypo-osmotic Urine Captions.png"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-renal-physiology/lesson-quiz/medical-physiology-renal-physiology-production-of-hyposmotic-urine">Watch Production of Hypoosmotic Urine</a><br><br> --><!-- <img src="7657c12df614170b699896c2cc6abd8e.webp"><img src="8caf8275e4f3bb57b84705b02f84de96.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="19166f63648122d9c23094f6c11b9e9b.webp"><img src="87a283253ba2619db6e01260c7ece6f8.webp"><img src="e12e94b2da927dceb0ec449769ee45e0.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question"><div>Diagnosis of <b>diabetes insipidus</b> is aided by the <span class="cloze" data-cloze="&lt;b&gt;water deprivation&lt;/b&gt;" data-ordinal="1">[...]</span><b> test</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Diagnosis of <b>diabetes insipidus</b> is aided by the <span class="cloze" data-ordinal="1"><b>water deprivation</b></span><b> test</b> </div><br/>Alternatively, plasma <b>copeptin</b> levels (reflects circulating ADH levels)<br/><br/><u><img src="efd7d2758188ef18fbf2b4d681bdcdd2.webp" width="960"/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/></u><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="7442f50498b5bed087f5b04f83c59836.webp"><br><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="d8ac5847779c2444f5ba82f16856f756.webp"><br><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="11e27818cee1cdd718aee92dc4b237ee.webp"><br><img src="5ab73d36f3752ead132692c295c1c7ed.webp"><img src="c14ee91a47d71d2dc9c8e6145fea7631.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question">Treatment for <i>central</i> <b>diabetes insipidus</b> includes <b>hydration</b> and <span class="cloze" data-cloze="&lt;b&gt;desmopressin &lt;/b&gt;(DDAVP)" data-ordinal="1">[...]</span>, which is an <b>ADH</b> <i>analog</i><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Treatment for <i>central</i> <b>diabetes insipidus</b> includes <b>hydration</b> and <span class="cloze" data-ordinal="1"><b>desmopressin </b>(DDAVP)</span>, which is an <b>ADH</b> <i>analog</i><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c3dcc7a7275cb94404d8377c571cd09f.webp" width="800"><img src="b02940fd2b6ed0ac6a86b135b26381fc.webp" width="800"><br><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="3a8d2f43544734d36d271a5ac9795a9e.webp"><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br> --><!-- <img src="a7e1adbc52fccf014f2431de017730d7.webp"><img src="b287e92579bda9ad2cea8db3c04496c5.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="4d8183bc6ee14de2af5dddafc7fe1fa1.webp"><img src="87bb511d88e41ead52481bac814fb78f.webp"><br><img src="dc465c8ca877156cde92edf6e50b537c.webp"><img src="985bc2517ad3ceebd2f6b74b0fac61f9.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/head-neck-trauma/lesson/moderate-severe-traumatic-brain-injury-management">Watch Moderate &amp; Severe Traumatic Brain Injury: Management</a><br><br><img src="5ab73d36f3752ead132692c295c1c7ed.webp"><img src="c14ee91a47d71d2dc9c8e6145fea7631.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img src="tmppscheho4.png"><br><img src="tmp5fxr4l4s.png"><br><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question"><div><span class="cloze-inactive" data-ordinal="2"><b><i>Nephrogenic</i></b></span> <b>diabetes insipidus</b> is often caused by <span class="cloze" data-cloze="&lt;b&gt;ADH receptor&lt;/b&gt;" data-ordinal="1">[...]</span> <b>mutations</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze-inactive" data-ordinal="2"><b><i>Nephrogenic</i></b></span> <b>diabetes insipidus</b> is often caused by <span class="cloze" data-ordinal="1"><b>ADH receptor</b></span> <b>mutations</b> </div><br/>Or mutations in genes encoding aquaporins<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="ba00aee3fc8f86c11797564d0fc21d31.webp" width="800"><img src="ae563ecf8973f58ecfa3dfe4dcfa31d0.webp" width="800"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="7657c12df614170b699896c2cc6abd8e.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="87a283253ba2619db6e01260c7ece6f8.webp"><br><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question"><div>Both <i><b>central </b></i>and <b><i>nephrogenic</i> diabetes insipidus</b> are characterized by <span class="cloze" data-cloze="low" data-ordinal="1">[...]</span> <b>urine osmolality</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Both <i><b>central </b></i>and <b><i>nephrogenic</i> diabetes insipidus</b> are characterized by <span class="cloze" data-ordinal="1">low</span> <b>urine osmolality</b></div><br/>- Usually &lt; 300 mOsm/Kg<br/><br/>- Due to lack of water reabsorption from absent ADH or ADH resistance in kidneys<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="843bd5d5d6a96feab652e6e382776176.webp" width="800"><img src="ae563ecf8973f58ecfa3dfe4dcfa31d0.webp" width="800"><img src="57fe270a54312e9b940c7b11cad366b2.webp" width="800"><br></div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="42440a09511e1303b44043af0a08a3fa.webp"><img src="f69ac1587b2c84c6ab2a10fd52d9defe.webp"><img src="b3aee301e34c335fd0acf0b00e7ed084.webp"><br><img src="2.4 - Production of Hypo-osmotic Urine.png"><br><img src="2.4 - Production of Hypo-osmotic Urine Captions.png"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-renal-physiology/lesson-quiz/medical-physiology-renal-physiology-production-of-hyposmotic-urine">Watch Production of Hypoosmotic Urine</a><br><br> --><!-- <img src="174c88c7bd4f11753cbd047c15f025b4.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="19166f63648122d9c23094f6c11b9e9b.webp"><img src="18c80bfd5e534be488408e94370bedac.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">21.1</td>
+                    <td class="question"><div><b><i>Nephrogenic </i>diabetes insipidus</b> is characterized by <span class="cloze" data-cloze="normal" data-ordinal="1">[...]</span> or <span class="cloze" data-cloze="elevated" data-ordinal="1">[...]</span> levels of <b>ADH</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><i>Nephrogenic </i>diabetes insipidus</b> is characterized by <span class="cloze" data-ordinal="1">normal</span> or <span class="cloze" data-ordinal="1">elevated</span> levels of <b>ADH</b></div><br/>- Due to fully functional CNS<br/><br/>- Whereas <b>central</b> diabetes insipidus is characterized by <u>low</u> levels of ADH<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="6c2e0a9015b0890d60aa7c981e9fc4a3.webp"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="2.4 - Production of Hypo-osmotic Urine.png"><br><img src="2.4 - Production of Hypo-osmotic Urine Captions.png"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-renal-physiology/lesson-quiz/medical-physiology-renal-physiology-production-of-hyposmotic-urine">Watch Production of Hypoosmotic Urine</a><br><br> --><!-- <img src="7657c12df614170b699896c2cc6abd8e.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="87a283253ba2619db6e01260c7ece6f8.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">22.1</td>
+                    <td class="question"><span class="cloze" data-cloze="&lt;b&gt;&lt;i&gt;Central&lt;/i&gt;&lt;/b&gt;" data-ordinal="1">[...]</span><b> diabetes insipidus</b> is characterized by <b>polyuria</b> and <b>polydipsia</b> with an <u>inability</u> to <span class="cloze-inactive" data-ordinal="3"><b>concentrate</b></span> urine due to<b> </b><span class="cloze-inactive" data-ordinal="2"><b><u>lack of ADH</u></b></span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze" data-ordinal="1"><b><i>Central</i></b></span><b> diabetes insipidus</b> is characterized by <b>polyuria</b> and <b>polydipsia</b> with an <u>inability</u> to <span class="cloze-inactive" data-ordinal="3"><b>concentrate</b></span> urine due to<b> </b><span class="cloze-inactive" data-ordinal="2"><b><u>lack of ADH</u></b></span><br/>Whereas <b>nephrogenic</b> diabetes insipidus is due to lack of <u>response</u> to ADH<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <b><u>*Generous pee stream = polyuria<br></u></b><div><img src="e4fc569553e10103217ed6122bf75ccc.webp" width="800"><img src="843bd5d5d6a96feab652e6e382776176.webp" width="800"><img src="57fe270a54312e9b940c7b11cad366b2.webp" width="800"></div><div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="46b3c794b3c33bb92fea9db159614caf.webp"><img src="8caf8275e4f3bb57b84705b02f84de96.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="4d8183bc6ee14de2af5dddafc7fe1fa1.webp"><img src="87bb511d88e41ead52481bac814fb78f.webp"><br><img src="dc465c8ca877156cde92edf6e50b537c.webp"><img src="985bc2517ad3ceebd2f6b74b0fac61f9.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/head-neck-trauma/lesson/moderate-severe-traumatic-brain-injury-management">Watch Moderate &amp; Severe Traumatic Brain Injury: Management</a><br><br><img src="19166f63648122d9c23094f6c11b9e9b.webp"><br><img src="d47fa6e37789ca46d1928781fd7e5fe5.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br><br><img src="b44c724e7e25e82d183a2c3cf1137729.webp"><img src="728a9481574be58eedd67ffb58ed790d.webp"><img src="e663143d66ce7010f02a9a9082b3786e.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/bone-tumors/lesson/pediatric-bone-tumors-ddx">Watch Pediatric Bone Tumors DDx</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">23.1</td>
+                    <td class="question"><div><b><i>Central</i> diabetes insipidus</b> is characterized by <span class="cloze" data-cloze="low" data-ordinal="1">[...]</span> levels of <b>ADH</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><i>Central</i> diabetes insipidus</b> is characterized by <span class="cloze" data-ordinal="1">low</span> levels of <b>ADH</b></div><br/>- Whereas <b>nephrogenic</b> diabetes insipidus is characterized by <u>normal</u> or <u>elevated</u> levels of ADH<br/><br/>- Due to decreased ADH production by the CNS (hypothalamus) → diabetes insipidus (inappropriately dilute urine, polyuria, hypernatremia)<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="defaea59eac482c3eaea82b96e221290.webp" width="800"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br></div><br><div><img src="57fe270a54312e9b940c7b11cad366b2.webp" width="800"><br></div><img src="0c0996440ef7dacb81adf85c1b63e1bc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br> --><!-- <img src="46b3c794b3c33bb92fea9db159614caf.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="d47fa6e37789ca46d1928781fd7e5fe5.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">24.1</td>
+                    <td class="question"><div>Both <b><i>central </i></b>and <b><i>nephrogenic</i> diabetes insipidus</b> are characterized by <b>urine specific gravity </b>&lt; <span class="cloze" data-cloze="1.006" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Both <b><i>central </i></b>and <b><i>nephrogenic</i> diabetes insipidus</b> are characterized by <b>urine specific gravity </b>&lt; <span class="cloze" data-ordinal="1">1.006</span></div><br/>- Unable to concentrate urine<br/><br/>- Normal urine specific gravity = 1.005 - 1.030<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="843bd5d5d6a96feab652e6e382776176.webp"><br></div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="d5f100421f0157259d6bcfd23acf0d5e.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="19166f63648122d9c23094f6c11b9e9b.webp"><img src="18c80bfd5e534be488408e94370bedac.webp"><br><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">25.1</td>
+                    <td class="question"><div>Both <b><i>central</i></b> and <b><i>nephrogenic</i> diabetes insipidus</b> are characterized by <b>serum osmolality</b> <span class="cloze" data-cloze="&amp;gt;" data-ordinal="1">[...]</span> 290 mOsm/kg</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Both <b><i>central</i></b> and <b><i>nephrogenic</i> diabetes insipidus</b> are characterized by <b>serum osmolality</b> <span class="cloze" data-ordinal="1">&gt;</span> 290 mOsm/kg</div><br/>Due to decreased ability to retain H<sub>2</sub>O<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="b5bb7ea8469e5afbe8fe0bede81ddbf3.webp" width="800"><img src="a794af30783b6b50ec67aead8de3642a.webp" width="800"><br></div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="f1315d974c57686111f2c691bf389e93.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="19166f63648122d9c23094f6c11b9e9b.webp"><img src="a65e31b2680ab180752c538cb87b2b89.webp"><img src="18c80bfd5e534be488408e94370bedac.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">26.1</td>
+                    <td class="question"><b>Pituitary </b><span class="cloze" data-cloze="&lt;b&gt;adenoma&lt;/b&gt;" data-ordinal="1">[...]</span> is a <i>benign</i> tumor of the <b>anterior pituitary cells</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Pituitary </b><span class="cloze" data-ordinal="1"><b>adenoma</b></span> is a <i>benign</i> tumor of the <b>anterior pituitary cells</b><br/><img src="2c397fb0ba64e0764a3ec6623dbb27e3.webp" width="900"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="be956f9da529b5230a4e2241b8e3bf2d.webp"><img src="473d4214137977077e98748709d8c382.webp"><img src="6f652726184ddb2e04d4287d0cc1bf8a.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-neuro/videos/medical-pathophysiology-neuro-intracranial-hypertension-and-tumors-adult-cns-tumors?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adult CNS Tumors</a><br><br><img src="e6269e7c038d62c2c1090f77c458ad68.webp"><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br><br><img src="d7c3f3338d55c7714b99b6231579aa9f.webp"><br><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="7ff1ab621cb0727868bbd4692c979a6c.webp"><br><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="d56c8ba4c794a96bc801c784e44c7808.jpg"><br><img src="8286e57e4414f5b9f7f06a858f8ca047.jpg"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7012?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Pituitary_Adenoma">Review Pituitary Adenoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">27.1</td>
+                    <td class="question"><div>One possible cause of <b>hypopituitarism</b> in <b>children</b> is <span class="cloze" data-cloze="craniopharyngioma" data-ordinal="1">[...]</span> (due to <b>mass effect</b>) </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One possible cause of <b>hypopituitarism</b> in <b>children</b> is <span class="cloze" data-ordinal="1">craniopharyngioma</span> (due to <b>mass effect</b>) </div><br/><img src="9cf10c0d3fbbde94f795652381ef4184.webp" width="438"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Craniopharyngioma-t1sagkm-010.jpg">Hellerhoff</a>, <a href="https://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>, via Wikimedia Commons<br/></span></i><br/><img src="2c397fb0ba64e0764a3ec6623dbb27e3.webp" width="900"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="b4341a096bc9bce3edf4ca98394d66de.webp" width="800"><img src="8aa28308a06afcc11453414b9433aa6d.webp" width="800"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="84a93bf7bb36f1f5d71c8b5831aaaa2a.webp"><img src="5ef8b6d69757156a6df0b28f3bf2409c.webp"><img src="b890eb4a320b5d338438673ab7d4d098.webp"><img src="c02f0fd42731461caa5f2b6f53c9b71e.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-hypertension-tumors/lesson/pediatric-cns-tumors">Watch Pediatric CNS Tumors</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="craniopharyngioma.jpeg" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/4935?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Craniopharyngioma">Review Craniopharyngioma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">28.1</td>
+                    <td class="question"><div>One possible cause of <b>hypopituitarism</b> is <b><span class="cloze" data-cloze="pituitary apoplexy" data-ordinal="1">[...]</span></b>, which is a <b>sudden</b> <b><span class="cloze-inactive" data-ordinal="2">hemorrhage</span></b> of the pituitary gland, often in the presence of an existing adenoma</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One possible cause of <b>hypopituitarism</b> is <b><span class="cloze" data-ordinal="1">pituitary apoplexy</span></b>, which is a <b>sudden</b> <b><span class="cloze-inactive" data-ordinal="2">hemorrhage</span></b> of the pituitary gland, often in the presence of an existing adenoma</div><br/><b>Sheehan syndrome</b> is postpartum <u>necrosis</u> of the pituitary gland often following <u>postpartum hemorrhage</u><br/><br/><img src="2c397fb0ba64e0764a3ec6623dbb27e3.webp" width="900"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="804775251d7eb0f34305a28d3f124657.webp" width="800"><img src="2ac78fa82a599e4f1192ea9f4bad5a41.webp" width="800"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="d7c3f3338d55c7714b99b6231579aa9f.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">29.1</td>
+                    <td class="question"><div>The <u>most common cause</u> of <b>hypopituitarism</b> in adults is <span class="cloze" data-cloze="pituitary adenoma" data-ordinal="1">[...]</span> (due to <b>mass effect</b>)</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The <u>most common cause</u> of <b>hypopituitarism</b> in adults is <span class="cloze" data-ordinal="1">pituitary adenoma</span> (due to <b>mass effect</b>)</div><br/><img src="2c397fb0ba64e0764a3ec6623dbb27e3.webp" width="900"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e6269e7c038d62c2c1090f77c458ad68.webp"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br><br><img src="68ebfd3a37f5b1290bf9bdc8d73f9099.webp"><img src="d7c3f3338d55c7714b99b6231579aa9f.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="2ae307f0f046d11024ff08eac9bd2731.webp"><br><img src="e900d242092dec6e68aebfa36a3d0e14.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">30.1</td>
+                    <td class="question"><div><b>Pituitary adenoma</b> may present with <b><span class="cloze" data-cloze="hypopituitarism" data-ordinal="1">[...]</span></b> due to compression of normal pituitary tissue</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Pituitary adenoma</b> may present with <b><span class="cloze" data-ordinal="1">hypopituitarism</span></b> due to compression of normal pituitary tissue</div><br/><img src="2c397fb0ba64e0764a3ec6623dbb27e3.webp" width="900"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e6269e7c038d62c2c1090f77c458ad68.webp" width="800"><img src="321ffa8cd42e2c76cbd20b21dae669ff.webp" width="800"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br><br><img src="68ebfd3a37f5b1290bf9bdc8d73f9099.webp"><img src="d7c3f3338d55c7714b99b6231579aa9f.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="d56c8ba4c794a96bc801c784e44c7808.jpg"><br><img src="8286e57e4414f5b9f7f06a858f8ca047.jpg"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7012?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Pituitary_Adenoma">Review Pituitary Adenoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">31.1</td>
+                    <td class="question"><div><b>Nonfunctional pituitary adenomas</b> present with symptoms due to <b><span class="cloze" data-cloze="mass effect" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Nonfunctional pituitary adenomas</b> present with symptoms due to <b><span class="cloze" data-ordinal="1">mass effect</span></b></div><br/><img src="e6cac9f5a72b1d351d9248c327fd451a.jpg" width="758"/><br/><span style="font-size: 10pt;"><i>Photo credit: <a href="https://openstax.org/k12/anatomy-and-physiology">OpenStax</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br/></i></span><img src="2c397fb0ba64e0764a3ec6623dbb27e3.webp" width="900"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e6269e7c038d62c2c1090f77c458ad68.webp"><img src="e72aa74b057551f1fb996c7d9fc8c7a8.webp"><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br><br><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="d56c8ba4c794a96bc801c784e44c7808.jpg"><br><img src="8286e57e4414f5b9f7f06a858f8ca047.jpg"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7012?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Pituitary_Adenoma">Review Pituitary Adenoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">32.1</td>
+                    <td class="question"><div>A <i>non-specific</i> symptom of <b>pituitary adenoma</b> is <span class="cloze" data-cloze="headache" data-ordinal="1">[...]</span> (due to mass effect)</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>A <i>non-specific</i> symptom of <b>pituitary adenoma</b> is <span class="cloze" data-ordinal="1">headache</span> (due to mass effect)</div><br/><img src="2c397fb0ba64e0764a3ec6623dbb27e3.webp" width="900"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e72aa74b057551f1fb996c7d9fc8c7a8.webp"><br></div><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br><br><img src="21422cd9347b299e65eb04b7e4d8895f.webp"><img src="94e33bef37dfaf0aa9071a17aa26f91a.webp"><img src="90776b835183bb9309755a6c7af69721.webp"><img src="d9f0c6578814bc170f854f408c1c5e9e.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/neurological-symptoms/lesson/approach-to-headache">Watch Approach to Headache</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="d56c8ba4c794a96bc801c784e44c7808.jpg"><br><img src="8286e57e4414f5b9f7f06a858f8ca047.jpg"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7012?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Pituitary_Adenoma">Review Pituitary Adenoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">33.1</td>
+                    <td class="question"><div>One possible treatment for a <b>growth hormone adenoma</b> is a(n) <b><span class="cloze" data-cloze="GH receptor &lt;i&gt;antagonist&lt;/i&gt;" data-ordinal="1">[...]</span></b>, such as <b><span class="cloze-inactive" data-ordinal="2">pegvisomant</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One possible treatment for a <b>growth hormone adenoma</b> is a(n) <b><span class="cloze" data-ordinal="1">GH receptor <i>antagonist</i></span></b>, such as <b><span class="cloze-inactive" data-ordinal="2">pegvisomant</span></b></div><br/>May also surgically remove the adenoma<i> </i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div style=""><img src="3fff5fd4dc96f3ab4a815f0eb042b50d.webp" width="800"></div></div><div><div><div><div><img src="69304728475d6ff1f572d22c19bb1c62.webp"><br><img src="be58d3447db4eee9881e1cf6d4e32e7b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-growth-hormone-mecasermin-octreotide-pegvisomant?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Growth hormone, mecasermin, octreotide, pegvisomant</a><br></div></div></div></div><br><div><img src="23bfe95a6f94024b39dddab40bbeb74a.webp" width="800"><br></div><div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">34.1</td>
+                    <td class="question"><div>One possible treatment for a <b>growth hormone adenoma</b> is a(n) <b><span class="cloze" data-cloze="somatostatin" data-ordinal="1">[...]</span> <i>analog</i></b>, such as <b><span class="cloze" data-cloze="octreotide" data-ordinal="1">[...]</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One possible treatment for a <b>growth hormone adenoma</b> is a(n) <b><span class="cloze" data-ordinal="1">somatostatin</span> <i>analog</i></b>, such as <b><span class="cloze" data-ordinal="1">octreotide</span></b> </div><br/>Somatostatin suppresses GH release; may also surgically remove the adenoma<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="23bfe95a6f94024b39dddab40bbeb74a.webp"></div><div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br><br><img src="88f18f747936409369a344870279ba66.webp"><br><div><div><img src="69304728475d6ff1f572d22c19bb1c62.webp"><br><img src="be58d3447db4eee9881e1cf6d4e32e7b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-growth-hormone-mecasermin-octreotide-pegvisomant?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Growth hormone, mecasermin, octreotide, pegvisomant</a><br></div></div><div><div></div></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmp9sh9z40s.png"><br><img src="tmp9ok8jc51.png"><br><img src="tmp0qm5p4ii.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">35.1</td>
+                    <td class="question"><div>In <b>SIADH</b>, serum Na<sup>+</sup> levels must be corrected <b>slowly</b> to prevent <span class="cloze" data-cloze="&lt;b&gt;osmotic demyelination&lt;/b&gt;" data-ordinal="1">[...]</span> <b>syndrome</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In <b>SIADH</b>, serum Na<sup>+</sup> levels must be corrected <b>slowly</b> to prevent <span class="cloze" data-ordinal="1"><b>osmotic demyelination</b></span> <b>syndrome</b></div><br/>- Formerly known as <b>central pontine myelinolysis</b><br/><br/>- "From low to high, your pons will die"<br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a984e74e3ccb89e70f93d6e757cce256.webp"><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hyperthyroidism-overview-and-graves-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="e81caf6fc3101dc954809600b1c0b5a3.webp"><br><div><img src="b5fc2093e34642c8d9ed2815399b8d97.webp"><img src="ee611ad0f20429d8cef211cd6cc79ac8.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-adh-ddavp-adh-receptor-antagonists?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch ADH, DDAVP, ADH receptor antagonists</a><br><br><div><img src="d41650fda1aa331dd1234e582f5be98d.webp"><br><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"></div><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br><br> --><!-- <img src="055cd19915445c0f89ee98ebbe30fa69.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="84e22671541daace6f445254ea5447af.webp"><img src="4cb876b0ba14b4cc61c8bc499ed5d740.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="paste-07b3b62645f946248382f52b3aee8de594074c83.jpg"><br><img class="resizer" src="tmp6awxvfic.png"><br><img class="resizer" src="tmpq1gd7qqc.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">36.1</td>
+                    <td class="question"><div><b>Growth hormone-secreting adenoma</b> may be diagnosed by elevated serum levels of <b><span class="cloze" data-cloze="growth hormone" data-ordinal="1">[...]</span></b> and/or <b><span class="cloze" data-cloze="IGF-1" data-ordinal="1">[...]</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Growth hormone-secreting adenoma</b> may be diagnosed by elevated serum levels of <b><span class="cloze" data-ordinal="1">growth hormone</span></b> and/or <b><span class="cloze" data-ordinal="1">IGF-1</span></b> </div><br/><img src="4fa4fca5f44c28ac1371124b9d91686a.webp" width="750px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="721d0129b0e31a40d881a9c4f293cd0c.webp" width="800"><img src="8b6618f50cc23d4f62d7c58ca75fc470.webp" width="800"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="d56c8ba4c794a96bc801c784e44c7808.jpg"><br><img src="8286e57e4414f5b9f7f06a858f8ca047.jpg"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7012?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Pituitary_Adenoma">Review Pituitary Adenoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">37.1</td>
+                    <td class="question"><div><b>SIADH</b> is characterized by <i>increased</i> <span class="cloze" data-cloze="&lt;b&gt;retention&lt;/b&gt;" data-ordinal="1">[...]</span> of free <b>water</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>SIADH</b> is characterized by <i>increased</i> <span class="cloze" data-ordinal="1"><b>retention</b></span> of free <b>water</b></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><b><u>* Large wet kid with green shirt:</u></b> in SIADH, initially volume increases due to increased ADH and excessive free water retention)</div><div><img src="5b58300587a6c32fc746583b1584a3ea.webp"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="8ab0b2a9233b8a95aad65a6382962873.webp"><img src="2.3 - Production of Hyperosmotic Urine.png"><br><img src="2.3 - Production of Hyperosmotic Urine Caption.png"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-renal-physiology/videos/medical-physiology-renal-physiology-production-of-hyperosmotic-urine">Watch Production of Hyperosmotic Urine</a><br><br> --><!-- <img src="c3a65697cbd6ee408f0dbc53b10ef66f.webp"><img src="af0e24e03d0784fdc8a18005b02118d6.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="7242a0b3547228e59201f7a27bf925da.webp"><br><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">38.1</td>
+                    <td class="question"><div><b>Hypopituitarism</b> may be caused by <b><span class="cloze" data-cloze="empty sella" data-ordinal="1">[...]</span> syndrome</b>, which may occur due to trauma or congenital defect of the sella</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Hypopituitarism</b> may be caused by <b><span class="cloze" data-ordinal="1">empty sella</span> syndrome</b>, which may occur due to trauma or congenital defect of the sella</div><br/>Image shows empty sella filled with CSF with thin rim of pituitary gland along wall of the cavity<br/><br/><img src="c939331fcf225256b39b422772f96111.webp" width="542"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.cureus.com/articles/106281-the-emptiness-within-a-case-of-empty-sella-syndrome#!/">Ahamed et al.</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, via Cureus</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="5934bd16c31ec2c949f2102b6d7253b5.webp" width="800"><img src="0165f968d8ff5f47810d689bcb2c780f.webp" width="800"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">39.1</td>
+                    <td class="question"><div>What demographic is more commonly affected by <b>empty sella syndrome</b>? </div><br/><div><span class="cloze" data-cloze="Obese females" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What demographic is more commonly affected by <b>empty sella syndrome</b>? </div><br/><div><span class="cloze" data-ordinal="1">Obese females</span></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="5934bd16c31ec2c949f2102b6d7253b5.webp"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">40.1</td>
+                    <td class="question"><div>During <b>pregnancy</b>, the size of the <b>pituitary</b> <b>gland</b> <b><span class="cloze" data-cloze="doubles" data-ordinal="1">[#]</span></b>, but blood supply does not increase significantly </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>During <b>pregnancy</b>, the size of the <b>pituitary</b> <b>gland</b> <b><span class="cloze" data-ordinal="1">doubles</span></b>, but blood supply does not increase significantly </div><br/>Thus, increased risk of infarction (<b>Sheehan syndrome</b>)<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="49638d14fc5ec0fd3f742bd0ed33980b.webp" width="800"><img src="2e39808ac3db94d9917e729bd5e7fea6.webp" width="800"><br></div><div><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="fa0f1d7f888ef60fd0d82a071d284e71.jpg">&nbsp;<img src="862cac6d2a3a6308573070bfc23077eb.webp"><img src="8f8b7445e124ada572b451ac9f10277d.webp"><img src="41d2eb281a35d130ca0feaa66ad1236c.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/postpartum-care/lesson/postpartum-hemorrhage">Watch Postpartum Hemorrhage</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">41.1</td>
+                    <td class="question"><div>Pregnancy-related infarction of the pituitary gland (<b>Sheehan syndrome</b>) often occurs following <b><span class="cloze" data-cloze="postpartum hemorrhage &lt;/b&gt;(PPH)&lt;b&gt;" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Pregnancy-related infarction of the pituitary gland (<b>Sheehan syndrome</b>) often occurs following <b><span class="cloze" data-ordinal="1">postpartum hemorrhage </span></b>(PPH)</div><br/>Blood loss increases the risk of infarction<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="2e39808ac3db94d9917e729bd5e7fea6.webp"><br></div><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br><br><img src="Screen Shot 2022-07-13 at 4.30.00 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.35 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.42 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-anterior-lobe-of-the-pituitary">Watch Anterior Lobe of the Pituitary</a><br> --><!-- <img src="fa0f1d7f888ef60fd0d82a071d284e71.jpg">&nbsp;<img src="862cac6d2a3a6308573070bfc23077eb.webp"><img src="8f8b7445e124ada572b451ac9f10277d.webp"><img src="41d2eb281a35d130ca0feaa66ad1236c.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/postpartum-care/lesson/postpartum-hemorrhage">Watch Postpartum Hemorrhage</a><br><br><img src="769c7b7bc14c7387f26727d6c4fbc6e1.webp"><img src="2ee133f4b061e4a8bb1d0595b2491dfd.webp"><br><img src="d3b742917da5ff959f33ab7e2b402006.webp"><img src="0cae62c560f8af145c5e54d016ff5bbb.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/reproductive-endocrinology/lesson/secondary-amenorrhea-ddx-2">Watch OBGYN Secondary Amenorrhea DDx</a><br><a href="https://app.sketchy.com/study/medical/chapter/conditions-affecting-females/lesson/secondary-amenorrhea-ddx">Watch PEDS Secondary Amenorrhea DDx</a><br><br><img src="d7c3f3338d55c7714b99b6231579aa9f.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">42.1</td>
+                    <td class="question"><b>Pituitary apoplexy</b> presents with <u>sudden onset</u> severe <span class="cloze" data-cloze="headache" data-ordinal="1">[...]</span>, <span class="cloze" data-cloze="visual" data-ordinal="1">[...]</span> impairment, and features of <i>hypopituitarism</i><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Pituitary apoplexy</b> presents with <u>sudden onset</u> severe <span class="cloze" data-ordinal="1">headache</span>, <span class="cloze" data-ordinal="1">visual</span> impairment, and features of <i>hypopituitarism</i><br/>- e.g., bitemporal hemianopsia, diplopia<br/><br/>- This is an <b><u>emergency</u></b> and needs to be visualized STAT with a <u><b>CT</b></u><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f41214c72e037cc30beb4bc8fe303eef.webp" width="800"><img src="8551e84a9e8129f4352a27c9a3f8ea76.webp" width="800"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="68ebfd3a37f5b1290bf9bdc8d73f9099.webp"><img src="d7c3f3338d55c7714b99b6231579aa9f.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="21422cd9347b299e65eb04b7e4d8895f.webp"><img src="94e33bef37dfaf0aa9071a17aa26f91a.webp"><span style="font-weight: var(--f-weight-3);"><br></span><img src="90776b835183bb9309755a6c7af69721.webp"><img src="d9f0c6578814bc170f854f408c1c5e9e.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/neurological-symptoms/lesson/approach-to-headache">Watch Approach to Headache</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">43.1</td>
+                    <td class="question"><div><b>Prolactinoma</b> may be treated with a(n) <span class="cloze" data-cloze="&lt;b&gt;dopamine&lt;/b&gt;" data-ordinal="1">[...]</span> <b><i>agonist</i></b>, such as <span class="cloze-inactive" data-ordinal="2"><b>cabergoline</b></span> (preferred) or <span class="cloze-inactive" data-ordinal="2"><b>bromocriptine</b></span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Prolactinoma</b> may be treated with a(n) <span class="cloze" data-ordinal="1"><b>dopamine</b></span> <b><i>agonist</i></b>, such as <span class="cloze-inactive" data-ordinal="2"><b>cabergoline</b></span> (preferred) or <span class="cloze-inactive" data-ordinal="2"><b>bromocriptine</b></span></div><br/>- Also may be treated with surgical removal of the tumor<br/><br/>- Cabergoline preferred over bromocriptine due to efficacy and side-effect profile per AMBOSS (Jun 2023)<br/><br/><img src="https://ankihub.s3.us-east-1.amazonaws.com/deck_assets/e77aedfe-a636-40e2-8169-2fce2673187e/d99d28e40c3bb79385d0a3419b04e43f.png" width="355"/><br/><i><span style="font-size: 10pt;">Photo credit: Ahmed Afifi license CC</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="f2909a4ed199ce4b8b15b2eac3da64cb.webp"><br></div><div><div><div><div><img src="69304728475d6ff1f572d22c19bb1c62.webp"><br><img src="be58d3447db4eee9881e1cf6d4e32e7b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-hypothalamic-and-pituitary-growth-hormone-mecasermin-octreotide-pegvisomant?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Growth hormone, mecasermin, octreotide, pegvisomant</a><br></div></div></div></div><br><img src="94ac7eed0da2a98430ad19eacf55abb3.webp" width="800"><img src="c29cf3061cbe91dfa80bc76264ba3672.webp" width="800"><br><div><div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ca66ac9a6d67ebc501cf82b6f2900196.jpg"><br><img src="e279e0d8c87664643d1e739271f3ba5d.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">44.1</td>
+                    <td class="question"><div><b>Growth hormone-secreting adenoma</b> presents as <b><span class="cloze" data-cloze="gigantism" data-ordinal="1">[...]</span></b> in <b><span class="cloze-inactive" data-ordinal="2">children</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Growth hormone-secreting adenoma</b> presents as <b><span class="cloze" data-ordinal="1">gigantism</span></b> in <b><span class="cloze-inactive" data-ordinal="2">children</span></b></div><br/>- Due to increased linear bone growth<br/><br/>- As opposed to <u>acromegaly</u> in <b>adults</b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="2747a2443db25b0f2c480055879f9a03.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">45.1</td>
+                    <td class="question"><div><b>Growth hormone-secreting adenoma </b>may be diagnosed by lack of <b>GH</b> <b><span class="cloze" data-cloze="suppression" data-ordinal="1">[...]</span></b> by <b>oral glucose</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Growth hormone-secreting adenoma </b>may be diagnosed by lack of <b>GH</b> <b><span class="cloze" data-ordinal="1">suppression</span></b> by <b>oral glucose</b> </div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="85e6c2f8b03159cc68f051ee29c67670.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">46.1</td>
+                    <td class="question"><div>The <i>very low</i> serum <b>Na<sup>+</sup></b> concentration in <b>SIADH</b> can lead to <span class="cloze-inactive" data-ordinal="2"><b>cerebral</b></span> <span class="cloze" data-cloze="&lt;b&gt;edema&lt;/b&gt;" data-ordinal="1">[...]</span> and <b>seizures</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The <i>very low</i> serum <b>Na<sup>+</sup></b> concentration in <b>SIADH</b> can lead to <span class="cloze-inactive" data-ordinal="2"><b>cerebral</b></span> <span class="cloze" data-ordinal="1"><b>edema</b></span> and <b>seizures</b> </div><br/>- Seizures due to shift of water into neurons<br/><br/>- Hyponatremia due to excess reabsorption of free water<br/><br/>- Can be seen in any other condition that causes hyponatremia<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="357f1e43f53c1d918988bf1defa7a085.webp"><img src="3999c0c60cf2bfcb18ae93c79e235c6f.webp"><img src="aba8780ec683ab03b09461faae32ac75.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-neuro/videos/medical-pathophysiology-neuro-intracranial-hypertension-and-tumors-intracranial-hypertension-ich?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Intracranial Hypertension (ICH)</a><br></div><br><div><img src="5b58300587a6c32fc746583b1584a3ea.webp"><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="ecba9de8a7147456e047a8d8ba99c636.webp"><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br><br> --><!-- <img src="42135760026e2f7927d3a4eb80c9fbc7.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="e54edb80aebbcdedec70e6f01a81183c.webp"><img src="7242a0b3547228e59201f7a27bf925da.webp"><br><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br><br><img src="8a3ae10555e613f618f29e91226739e0.webp"><img src="87bb511d88e41ead52481bac814fb78f.webp"><br><img src="dc465c8ca877156cde92edf6e50b537c.webp"><img src="985bc2517ad3ceebd2f6b74b0fac61f9.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/head-neck-trauma/lesson/moderate-severe-traumatic-brain-injury-management">Watch Moderate &amp; Severe Traumatic Brain Injury: Management</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">47.1</td>
+                    <td class="question"><b>SIADH</b> is characterized by <span class="cloze" data-cloze="&lt;b&gt;urine&lt;/b&gt;" data-ordinal="1">[serum or urine]</span> osmolality &gt; <span class="cloze" data-cloze="&lt;b&gt;serum&lt;/b&gt;" data-ordinal="1">[serum or urine]</span> osmolality<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>SIADH</b> is characterized by <span class="cloze" data-ordinal="1"><b>urine</b></span> osmolality &gt; <span class="cloze" data-ordinal="1"><b>serum</b></span> osmolality<br/>Inappropriately concentrated urine &gt; 100mOsm/kg due to RAAS, BNP, and reabsorption of water via ADH<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="944818f8cb8ae113bc57263109e02a69.webp" width="800"><img src="d3eaf0d920949e378d49b011ebecf2ab.webp" width="800"><br></div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="98d2036df23550bb37d49f156a6da0ca.webp"><img src="cdfe5aec623d52a935a77110895aead8.webp"><img src="2.3 - Production of Hyperosmotic Urine.png"><br><img src="2.3 - Production of Hyperosmotic Urine Caption.png"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-renal-physiology/videos/medical-physiology-renal-physiology-production-of-hyperosmotic-urine">Watch Production of Hyperosmotic Urine</a><br><br> --><!-- <img src="a1f787afe62d969e9728d93f4d67f7e8.webp"><img src="598919f9927d84eea6721f8f9ebaadb8.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="dbca4b8a6e37c32fa3b1e2891ae1462d.webp"><br><img src="bdfb0349c4081c5d5c17a3329252ea7c.webp"><br><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">48.1</td>
+                    <td class="question"><b><span class="cloze" data-cloze="Hypopituitarism" data-ordinal="1">[...]</span></b> is the insufficient production of hormones by the <b>anterior pituitary gland</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b><span class="cloze" data-ordinal="1">Hypopituitarism</span></b> is the insufficient production of hormones by the <b>anterior pituitary gland</b><br/><img src="95d6ad52e3348bfea99d749734adb864.webp" width="777"/><br/><div class="centeredbox"><div class="leftalign"><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Gray1180.png">Henry Vandyke Carter</a>, Public domain, via Wikimedia Commons</span></i><br/></div></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="4b5fa5c4466c32b1733b6cc5f44e7d72.webp"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="01903e39bd68202d0678af8285bf2b66.webp"><img src="862cac6d2a3a6308573070bfc23077eb.webp"><img src="8f8b7445e124ada572b451ac9f10277d.webp"><img src="41d2eb281a35d130ca0feaa66ad1236c.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/postpartum-care/lesson/postpartum-hemorrhage">Watch Postpartum Hemorrhage</a><br><br><img src="68ebfd3a37f5b1290bf9bdc8d73f9099.webp"><img src="d7c3f3338d55c7714b99b6231579aa9f.webp"><img src="1c30858a7203ccd1b4a8e80ffcebb9ce.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="e900d242092dec6e68aebfa36a3d0e14.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">49.1</td>
+                    <td class="question">What is the treatment for <b>hypopituitarism</b>?<br/><br/><div><span class="cloze" data-cloze="Hormone replacement therapy (HRT)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the treatment for <b>hypopituitarism</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Hormone replacement therapy (HRT)</span></div><br/>e.g., corticosteroids, thyroxine, sex steroids, human growth hormone<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="anterior pituitary FLAT PiG_1566160514431.jpg" width="538"><img src="lymphocytic hypophysitis corticosteroids_1566160514431.jpg" width="538"><br><div><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"></div><div><span style="color: rgb(158, 158, 255); text-decoration-line: underline;">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</span></div><br> --><!-- <img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">50.1</td>
+                    <td class="question"><div><b>Empty sella syndrome</b> is characterized by <span class="cloze" data-cloze="absence" data-ordinal="1">[...]</span> of the <b>pituitary gland</b> on imaging</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Empty sella syndrome</b> is characterized by <span class="cloze" data-ordinal="1">absence</span> of the <b>pituitary gland</b> on imaging</div><br/>- Often asymptomatic<br/><br/>- Image shows empty sella filled with CSF with thin rim of pituitary gland along wall of the cavity<br/><br/><img src="a263a19adad35f43ac4d7e10fdea0591.webp" width="292"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.cureus.com/articles/106281-the-emptiness-within-a-case-of-empty-sella-syndrome#!/">Ahamed et al.</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, via Cureus, modified by cropping</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="5934bd16c31ec2c949f2102b6d7253b5.webp" width="800"><img src="0165f968d8ff5f47810d689bcb2c780f.webp" width="800"><br></div><div><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">51.1</td>
+                    <td class="question"><div>Symptoms of <b>Sheehan syndrome</b> include poor <b><span class="cloze" data-cloze="lactation" data-ordinal="1">[...]</span></b>, loss of <b><span class="cloze" data-cloze="pubic hair" data-ordinal="1">[...]</span></b>, <b><span class="cloze" data-cloze="hypo" data-ordinal="1">[...]</span>tension</b>, and <b>fatigue</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Symptoms of <b>Sheehan syndrome</b> include poor <b><span class="cloze" data-ordinal="1">lactation</span></b>, loss of <b><span class="cloze" data-ordinal="1">pubic hair</span></b>, <b><span class="cloze" data-ordinal="1">hypo</span>tension</b>, and <b>fatigue</b></div><br/>- Decreased anterior pituitary function → decreased LH secretion → decreased pubic hair growth<br/><br/>- May also have <b>absent menstruation</b> and <b>cold intolerance</b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="13493de1ff7b944540663bb2ef17cd2b.webp"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="769c7b7bc14c7387f26727d6c4fbc6e1.webp"><img src="2ee133f4b061e4a8bb1d0595b2491dfd.webp"><br><img src="d3b742917da5ff959f33ab7e2b402006.webp"><img src="0cae62c560f8af145c5e54d016ff5bbb.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/reproductive-endocrinology/lesson/secondary-amenorrhea-ddx-2">Watch OBGYN Secondary Amenorrhea DDx</a><br><a href="https://app.sketchy.com/study/medical/chapter/conditions-affecting-females/lesson/secondary-amenorrhea-ddx">Watch PEDS Secondary Amenorrhea DDx</a><br><br><img src="01903e39bd68202d0678af8285bf2b66.webp"><br><img src="862cac6d2a3a6308573070bfc23077eb.webp"><img src="8f8b7445e124ada572b451ac9f10277d.webp"><img src="41d2eb281a35d130ca0feaa66ad1236c.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/postpartum-care/lesson/postpartum-hemorrhage">Watch Postpartum Hemorrhage</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">52.1</td>
+                    <td class="question"><div><i>External</i> causes of <b>hypopituitarism</b> include<b> <span class="cloze" data-cloze="brain injury" data-ordinal="1">[...]</span></b> and <b><span class="cloze-inactive" data-ordinal="2">radiation</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><i>External</i> causes of <b>hypopituitarism</b> include<b> <span class="cloze" data-ordinal="1">brain injury</span></b> and <b><span class="cloze-inactive" data-ordinal="2">radiation</span></b> </div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c4112640ca5eb75099c593db8d9e9dce.webp"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="d7c3f3338d55c7714b99b6231579aa9f.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">53.1</td>
+                    <td class="question"><div><b>Empty sella syndrome</b> occurs due to atrophy or compression, and ultimately destruction of the <b><span class="cloze" data-cloze="pituitary" data-ordinal="1">[...]</span> gland</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Empty sella syndrome</b> occurs due to atrophy or compression, and ultimately destruction of the <b><span class="cloze" data-ordinal="1">pituitary</span> gland</b></div><br/>- For example, herniation of the arachnoid and CSF into the sella<br/><br/>- Below MRI shows empty sella filled with CSF with thin rim of pituitary gland along wall of the cavity<br/><br/><img src="c939331fcf225256b39b422772f96111.webp" width="542"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.cureus.com/articles/106281-the-emptiness-within-a-case-of-empty-sella-syndrome#!/">Ahamed et al.</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, via Cureus</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="5934bd16c31ec2c949f2102b6d7253b5.webp" width="800"><img src="0165f968d8ff5f47810d689bcb2c780f.webp" width="800"><br></div><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">54.1</td>
+                    <td class="question"><b>TSH</b>-producing, <b>LH</b>-producing, and <b>FSH</b>-producing <b>pituitary adenomas</b> occur <b><span class="cloze" data-cloze="rarely" data-ordinal="1">[frequency]</span></b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>TSH</b>-producing, <b>LH</b>-producing, and <b>FSH</b>-producing <b>pituitary adenomas</b> occur <b><span class="cloze" data-ordinal="1">rarely</span></b><br/><b>Lactotroph adenomas</b> (prolactinomas) are most common<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e3f7e84317d7fabb82b2578d2d712a1d.webp" width="800"><img src="260878e9e41203c36b5105c77d8ae6a1.webp" width="800"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br><br><img src="7636cb82238c6e586945d5fc90bf0208.webp"><br><img src="4117e4aa5a7090cdd93e974ba70b34ad.webp"><br><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="553046f5e489c2a1d8af0098b3a2016f.webp"><img src="5867ba9631b6a91aba7277fad57415ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">55.1</td>
+                    <td class="question"><div>Symptoms of <b>hypopituitarism</b> arise when &gt; <b><span class="cloze" data-cloze="75" data-ordinal="1">[...]</span></b>% of the pituitary parenchyma is lost</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Symptoms of <b>hypopituitarism</b> arise when &gt; <b><span class="cloze" data-ordinal="1">75</span></b>% of the pituitary parenchyma is lost</div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c4112640ca5eb75099c593db8d9e9dce.webp" width="800"><img src="321ffa8cd42e2c76cbd20b21dae669ff.webp" width="800"><br><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="68ebfd3a37f5b1290bf9bdc8d73f9099.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">56.1</td>
+                    <td class="question"><div><span class="cloze" data-cloze="&lt;b&gt;SIADH&lt;/b&gt;" data-ordinal="1">[...]</span> may be caused by drugs, which may be remembered with the mnemonic "<b>Ca</b>n't <b>C</b>oncentrate <b>S</b>erum <b>N</b>a<sup>+</sup>"</div><br/><div><div class="mnemonics"><div><span class="cloze" data-cloze="&lt;u&gt;Ca&lt;/u&gt;rbamazepine" data-ordinal="1">[<b>Ca</b>]</span></div><div><span class="cloze" data-cloze="&lt;u&gt;C&lt;/u&gt;yclophosphamide" data-ordinal="1">[<b>C</b>]</span></div><div><span class="cloze" data-cloze="&lt;u&gt;S&lt;/u&gt;SRIs" data-ordinal="1">[<b>S</b>]</span></div><div><span class="cloze" data-cloze="&lt;u&gt;N&lt;/u&gt;SAIDs" data-ordinal="1">[<b>N</b>]</span></div></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze" data-ordinal="1"><b>SIADH</b></span> may be caused by drugs, which may be remembered with the mnemonic "<b>Ca</b>n't <b>C</b>oncentrate <b>S</b>erum <b>N</b>a<sup>+</sup>"</div><br/><div><div class="mnemonics"><div><span class="cloze" data-ordinal="1"><u>Ca</u>rbamazepine</span></div><div><span class="cloze" data-ordinal="1"><u>C</u>yclophosphamide</span></div><div><span class="cloze" data-ordinal="1"><u>S</u>SRIs</span></div><div><span class="cloze" data-ordinal="1"><u>N</u>SAIDs</span></div></div></div><br/>Also commonly seen with <b>valproic acid</b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9a8e41f8e051848d5c3fc25c356519e5.webp"><br><img src="8c3fe56e28b2a6927c7b0ca15c6a3450.webp"><br><img src="90cd461080a072aa9fa73f23bf170fed.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-antidepressants-and-anxiolytics-ssris-snris-cyproheptadine?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch SSRIs, SNRIs, Cyproheptadine</a><br><br><img src="74056c016bdd7a4e12da4f40ce73d1fd.jpg"><img src="8aebbf00557b48a70f4f1fc3444800c2.webp"><img src="ad3ef699ac991d0a5617bf5b28333178.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-carbamazepine-oxcarbazepine-phenytoin-tiagabine-vigabatrin">Watch Carbamazepine, Oxcarbazepine, Phenytoin, Tiagabine, Vigabatrin</a><br><br><img src="be539432a10cfaa79b78a00e30d0370d.webp"><img src="327dc8c3d93e399fa3a76347b7ec4ba1.webp"><img src="17ca65694b87576bbdfc5d895c3c1cfc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-antineoplastics/videos/medical-pharmacology-antineoplastics-dna-and-cellular-division-cyclophosphamide-ifosfamide-busulifan-nitrosoureas-carmustine-lomustine-streptozocin">Watch Alkylating Agents</a><br><br><img src="93e9251fd5495e65a29e4ac7d84a1ca7.webp" width="800"><img src="a9b4fd6efadae5b1dc36bb8902886ed2.webp" width="800"><br><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br> --><!-- <img src="9a6f14a5ac440c31f73454c475509f42.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="85bf6767dd37ab3710a2a052e8814b75.webp"><br><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <img src="8a302abe07e82e02c44c23ebb7613df0.webp"><br><img src="dc7d4f7eb17cbb507d02b7cba30fe734.webp"><img src="085979a83f99b4dfc9b2ef7e3c8bbe41.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-carbamazepine-oxcarbazepine-phenytoin-tiagabine-vigabatrin">Watch Carbamazepine, Oxcarbazepine, Phenytoin, Tiagabine, Vigabatrin</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">57.1</td>
+                    <td class="question"><div><b>SIADH </b>may be caused by drugs, which may be remembered with the mnemonic "<span class="cloze" data-cloze="&lt;b&gt;Ca&lt;/b&gt;n't &lt;b&gt;C&lt;/b&gt;oncentrate &lt;b&gt;S&lt;/b&gt;erum &lt;b&gt;N&lt;/b&gt;a&lt;sup&gt;+&lt;/sup&gt;" data-ordinal="1">[...]</span>"</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>SIADH </b>may be caused by drugs, which may be remembered with the mnemonic "<span class="cloze" data-ordinal="1"><b>Ca</b>n't <b>C</b>oncentrate <b>S</b>erum <b>N</b>a<sup>+</sup></span>"</div><br/><div><u>Ca</u>rbamazepine</div><div><u>C</u>yclophosphamide</div><div><u>S</u>SRI</div><div><u>N</u>SAIDs</div><br/><div>Also commonly seen with <b>valproic acid</b><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9a8e41f8e051848d5c3fc25c356519e5.webp"><br><img src="8c3fe56e28b2a6927c7b0ca15c6a3450.webp"><br><img src="90cd461080a072aa9fa73f23bf170fed.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-antidepressants-and-anxiolytics-ssris-snris-cyproheptadine?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch SSRIs, SNRIs, Cyproheptadine</a><br><br><img src="74056c016bdd7a4e12da4f40ce73d1fd.jpg"><img src="8aebbf00557b48a70f4f1fc3444800c2.webp"><img src="ad3ef699ac991d0a5617bf5b28333178.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-carbamazepine-oxcarbazepine-phenytoin-tiagabine-vigabatrin">Watch Carbamazepine, Oxcarbazepine, Phenytoin, Tiagabine, Vigabatrin</a><br><br><img src="be539432a10cfaa79b78a00e30d0370d.webp"><img src="327dc8c3d93e399fa3a76347b7ec4ba1.webp"><img src="17ca65694b87576bbdfc5d895c3c1cfc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-antineoplastics/videos/medical-pharmacology-antineoplastics-dna-and-cellular-division-cyclophosphamide-ifosfamide-busulifan-nitrosoureas-carmustine-lomustine-streptozocin">Watch Alkylating Agents</a><br><br><img src="93e9251fd5495e65a29e4ac7d84a1ca7.webp" width="800"><img src="a9b4fd6efadae5b1dc36bb8902886ed2.webp" width="800"><br><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br> --><!-- <img src="9a6f14a5ac440c31f73454c475509f42.webp"><br><img src="3f997aa157d182100718328ab2810228.webp"><img src="79b8829d2cd8b0d62bf4cbe609a04bf4.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pituitaryhypothalamic-disorders/lesson/siadh">Watch SIADH</a><br><br><img src="85bf6767dd37ab3710a2a052e8814b75.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <img src="8a302abe07e82e02c44c23ebb7613df0.webp"><br><img src="dc7d4f7eb17cbb507d02b7cba30fe734.webp"><img src="085979a83f99b4dfc9b2ef7e3c8bbe41.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-carbamazepine-oxcarbazepine-phenytoin-tiagabine-vigabatrin">Watch Carbamazepine, Oxcarbazepine, Phenytoin, Tiagabine, Vigabatrin</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">58.1</td>
+                    <td class="question"><div>In <u>males</u>, <b>prolactinoma</b> presents as <b>headache</b>, <b>decreased <span class="cloze" data-cloze="libido" data-ordinal="1">[...]</span></b>, and <b>infertility</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In <u>males</u>, <b>prolactinoma</b> presents as <b>headache</b>, <b>decreased <span class="cloze" data-ordinal="1">libido</span></b>, and <b>infertility</b></div><br/>- Due to inhibition of GnRH release and mass effect; no galactorrhea<br/><br/>- HOWEVER, men with prolactinomas are more likely to present at an advanced stage with mass-effect symptoms<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4625c3b367f8a654adaa17f4b2cd9c77.webp"><br></div><div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br></div><br><div><img src="56. Galactorrhea Caused By Prolactinomas.jpg"><img src="85a0382fb18f4b96fe9cdff44155a98f.webp"></div><div><img src="1747727efab3b85da07996e01881ea50.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Benign Breast Disorders</a><br><br> --><!-- <img src="21422cd9347b299e65eb04b7e4d8895f.webp"><img src="94e33bef37dfaf0aa9071a17aa26f91a.webp"><span style="font-weight: var(--f-weight-3);"><br></span><img src="90776b835183bb9309755a6c7af69721.webp"><img src="d9f0c6578814bc170f854f408c1c5e9e.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/neurological-symptoms/lesson/approach-to-headache">Watch Approach to Headache</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">59.1</td>
+                    <td class="question"><div><b>Pituitary adenomas</b> may be <b><span class="cloze" data-cloze="functional" data-ordinal="1">[...]</span></b> (hormone producing) or <b><span class="cloze" data-cloze="nonfunctional" data-ordinal="1">[...]</span></b> (silent)</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Pituitary adenomas</b> may be <b><span class="cloze" data-ordinal="1">functional</span></b> (hormone producing) or <b><span class="cloze" data-ordinal="1">nonfunctional</span></b> (silent)</div><br/>If functioning, results in hyper___emia of whatever the hormone cell tumor produces (e.g., lactotroph → hyperprolactinemia)<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">60.1</td>
+                    <td class="question"><div><b>Pituitary adenoma</b> may present with <b><span class="cloze" data-cloze="bitemporal hemianopsia" data-ordinal="1">[...]</span></b> due to compression of the <b><span class="cloze-inactive" data-ordinal="2">optic chiasm</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Pituitary adenoma</b> may present with <b><span class="cloze" data-ordinal="1">bitemporal hemianopsia</span></b> due to compression of the <b><span class="cloze-inactive" data-ordinal="2">optic chiasm</span></b> </div><br/><div>- Tumor sits in sella turcica, which is adjacent to optic chiasm</div><div>- These patients will present with a history of <b>clumsiness</b> and <b>visual changes</b></div><br/><div><img src="e6cac9f5a72b1d351d9248c327fd451a.jpg" width="758"/><br/></div><div><i><span style="font-size: 10pt;">Photo credit: <a href="https://openstax.org/k12/anatomy-and-physiology">OpenStax</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></span></i><br/></div><br/><div> </div><div><img src="35e7dcf465724480a9050dd5fafe724c.jpg"/><br/></div><div><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Human_visual_pathway.svg">Miquel Perello Nieto</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons</span></i></div><img src="2c397fb0ba64e0764a3ec6623dbb27e3.webp" width="900"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="95951f5cf3e16dded980b4de76ada74f.webp" width="800"><img src="ab395ba0083a494897a85ee735728aa6.webp" width="800"><br></div><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="d56c8ba4c794a96bc801c784e44c7808.jpg"><br><img src="8286e57e4414f5b9f7f06a858f8ca047.jpg"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7012?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Pituitary_Adenoma">Review Pituitary Adenoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">61.1</td>
+                    <td class="question"><b>Hypopituitarism</b> may be caused by <span class="cloze" data-cloze="&lt;b&gt;Sheehan&lt;/b&gt;" data-ordinal="1">[...]</span> <b>syndrome</b>, which is a(n) <span class="cloze-inactive" data-ordinal="2"><b>pregnancy</b></span><b>-related</b> <span class="cloze-inactive" data-ordinal="3"><b>infarction</b></span> of the pituitary gland<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Hypopituitarism</b> may be caused by <span class="cloze" data-ordinal="1"><b>Sheehan</b></span> <b>syndrome</b>, which is a(n) <span class="cloze-inactive" data-ordinal="2"><b>pregnancy</b></span><b>-related</b> <span class="cloze-inactive" data-ordinal="3"><b>infarction</b></span> of the pituitary gland<br/>- Pregnancy-induced growth of pituitary (estrogen stimulates hyperplasia of lactotrophs), as well as the minimal vascularity of the pituitary gland, make the pituitary susceptible to hypoperfusion<br/><br/><div>- Therefore, heavy postpartum bleeding will manifest with hypoperfusion of the pituitary</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="49638d14fc5ec0fd3f742bd0ed33980b.webp" width="800"><img src="2e39808ac3db94d9917e729bd5e7fea6.webp" width="800"><br></div><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br><br><img src="Screen Shot 2022-07-13 at 4.30.00 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.35 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.38.42 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-anterior-lobe-of-the-pituitary">Watch Anterior Lobe of the Pituitary</a><br> --><!-- <img src="01903e39bd68202d0678af8285bf2b66.webp"><img src="862cac6d2a3a6308573070bfc23077eb.webp"><img src="8f8b7445e124ada572b451ac9f10277d.webp"><img src="41d2eb281a35d130ca0feaa66ad1236c.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/postpartum-care/lesson/postpartum-hemorrhage">Watch Postpartum Hemorrhage</a><br><br><img src="769c7b7bc14c7387f26727d6c4fbc6e1.webp"><img src="2ee133f4b061e4a8bb1d0595b2491dfd.webp"><br><img src="d3b742917da5ff959f33ab7e2b402006.webp"><img src="0cae62c560f8af145c5e54d016ff5bbb.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/reproductive-endocrinology/lesson/secondary-amenorrhea-ddx-2">Watch OBGYN Secondary Amenorrhea DDx</a><br><a href="https://app.sketchy.com/study/medical/chapter/conditions-affecting-females/lesson/secondary-amenorrhea-ddx">Watch PEDS Secondary Amenorrhea DDx</a><br><br><img src="68ebfd3a37f5b1290bf9bdc8d73f9099.webp"><img src="d7c3f3338d55c7714b99b6231579aa9f.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">62.1</td>
+                    <td class="question">One common cause of <b>nephrogenic diabetes insipidus</b> is <span class="cloze" data-cloze="&lt;b&gt;lithium&lt;/b&gt;" data-ordinal="1">[...]</span>, which <u>prevents proper aquaporin formation</u> in principal cells<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">One common cause of <b>nephrogenic diabetes insipidus</b> is <span class="cloze" data-ordinal="1"><b>lithium</b></span>, which <u>prevents proper aquaporin formation</u> in principal cells<br/>- In the <b>collecting duct<br/></b><br/>- <b>Lithium-induced nephrogenic DI</b> is treated with <u>salt restriction</u> and <u>discontinuation of lithium</u> if lithium can be discontinued<br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e36101b9d3845069e01855ee624ba8f5.webp"><br></div><div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="3c3766c749a60aea2853660175b5d8db.webp"><br><div><img src="26d4b698ca4e74d438218c910ea8d4d2.webp"><img src="b8458b8010404dfe2afcebdb2160e5a2.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-neuro-psych/videos/medical-pharmacology-neuropsych-mood-stabilizers-and-antiepileptic-drugs-lithium?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Lithium</a><br><br> --><!-- <img src="54d01ba9391fa6859e9dce81403c50c7.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="e12e94b2da927dceb0ec449769ee45e0.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="tmpo3lyoqky.png"><br><img class="resizer" src="tmpjc7crreo.png"><br><img class="resizer" src="tmp22afm7r3.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">63.1</td>
+                    <td class="question"><div>Etiologies of <span class="cloze" data-cloze="&lt;b&gt;&lt;i&gt;central&lt;/i&gt;&lt;/b&gt;" data-ordinal="1">[...]</span> <b>diabetes insipidus</b> include pituitary tumor, autoimmune, trauma, surgery, and ischemic encephalopathy </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Etiologies of <span class="cloze" data-ordinal="1"><b><i>central</i></b></span> <b>diabetes insipidus</b> include pituitary tumor, autoimmune, trauma, surgery, and ischemic encephalopathy </div><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="af292f9369b5f183123391c43a4f3eb8.webp" width="800"><img src="ceafedaddfd64189a7e972ce5f440aa6.webp" width="800"><img src="d692c69b873ae382e516e3b999e17082.webp" width="802"><br><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <img src="46b3c794b3c33bb92fea9db159614caf.webp"><img src="64316c40b74376ed51eaad9a6dee79ac.webp"><br><img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br><br><img src="4d8183bc6ee14de2af5dddafc7fe1fa1.webp"><img src="87bb511d88e41ead52481bac814fb78f.webp"><br><img src="dc465c8ca877156cde92edf6e50b537c.webp"><img src="985bc2517ad3ceebd2f6b74b0fac61f9.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/head-neck-trauma/lesson/moderate-severe-traumatic-brain-injury-management">Watch Moderate &amp; Severe Traumatic Brain Injury: Management</a><br><br><img src="d47fa6e37789ca46d1928781fd7e5fe5.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br><br><img src="b44c724e7e25e82d183a2c3cf1137729.webp"><img src="728a9481574be58eedd67ffb58ed790d.webp"><img src="e663143d66ce7010f02a9a9082b3786e.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/bone-tumors/lesson/pediatric-bone-tumors-ddx">Watch Pediatric Bone Tumors DDx</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">64.1</td>
+                    <td class="question"><b>Diabetes insipidus</b> will cause a(n) <span class="cloze" data-cloze="hyper" data-ordinal="1">[...]</span>osmotic change with <span class="cloze" data-cloze="euvolemia" data-ordinal="1">[contraction/expansion]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Diabetes insipidus</b> will cause a(n) <span class="cloze" data-ordinal="1">hyper</span>osmotic change with <span class="cloze" data-ordinal="1">euvolemia</span><br/>Free water loss →  increased serum osmolality → water moves from ICF to ECF → contraction of both ECF &amp; ICF; however, <b><u>thirst maintains volume status (euvolemia)<br/></u></b><br/><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/><br/><img src="9f57feaef0c097cf9bfba47d99cfde1e.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4235d74b43ecb820f42abcb8d273d806.webp"><br></div><div><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br></div><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br> --><!-- <img src="2f612936b61fca7f7f28487fd0244149.webp"><img src="ddaad142e0eb18061e6a405b8ac7386c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-insipidus">Watch Diabetes Insipidus</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

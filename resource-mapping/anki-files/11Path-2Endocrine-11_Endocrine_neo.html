@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (17 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><b>MEN</b> <span class="cloze-inactive" data-ordinal="3"><b>2B</b></span> is associated with <span class="cloze" data-cloze="&lt;b&gt;marfanoid&lt;/b&gt;" data-ordinal="1">[...]</span> <b>habitus</b> and mutations in the <span class="cloze-inactive" data-ordinal="2"><i>RET</i></span> gene<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>MEN</b> <span class="cloze-inactive" data-ordinal="3"><b>2B</b></span> is associated with <span class="cloze" data-ordinal="1"><b>marfanoid</b></span> <b>habitus</b> and mutations in the <span class="cloze-inactive" data-ordinal="2"><i>RET</i></span> gene<br/><img class="blur" src="6f15da71f8ae2345d513dfa105aa631e.webp" width="309"/><br/><i><span style="font-size: 10pt;">Marfan patient. Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Marfan_Patient.jpeg">Mileny ES Colovati1, Luciana RJ da Silva1, Sylvia S Takeno1, Tatiane I Mancini1, Ana R N Dutra1,Roberta S Guilherme1, Cláudia B de Mello2, Maria I Melaragno1and Ana B A Perez1</a>, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>, via Wikimedia Commons<br/></span></i><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><br/><img src="cfc83d12b6df0e0b024d8710b5a9bf4e.webp" width="1081"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="2612d556fa75ff3ff69ef5bab72f87a1.webp" width="800"><img src="316beb62d1d77d2e9c36fd4c87c6b14d.webp" width="800"><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><div><b>MEN 2B</b> is associated with <b>mucosal <span class="cloze" data-cloze="neuromas &lt;/b&gt;(oral / intestinal ganglioneuromatosis)&lt;b&gt;" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>MEN 2B</b> is associated with <b>mucosal <span class="cloze" data-ordinal="1">neuromas </span></b>(oral / intestinal ganglioneuromatosis)</div><br/>Small collections of nervous tissue on tongue, lips, and buccal mucosa<br/><br/><img src="f7186bd0aa0390b16d43c1e46bfe8991.webp" width="572"/><br/><i><span style="font-size: 10pt;">Photo credit: </span><a href="https://commons.wikimedia.org/wiki/File:Mucosal_Neuromas.png" style="font-size: 10pt;">Mikeybomb44</a><span style="font-size: 10pt;">, </span><a href="https://creativecommons.org/licenses/by-sa/4.0" style="font-size: 10pt;">CC BY-SA 4.0</a><span style="font-size: 10pt;">, via Wikimedia Commons</span>, </i><i><span style="font-size: 10pt;">the supplementary image with overlays of the relevant areas was adapted from the image mentioned previously, licensed under </span></i><i><span style="font-size: 10pt;"><a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a><br/></span></i><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="55e6790102b0db517e97084041488bb2.webp" width="800"><img src="bb18b52e678cb34efe820ace489b3e54.webp" width="800"><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div>About 10% of cases of <b>insulinoma</b> are associated with <b><span class="cloze" data-cloze="MEN 1" data-ordinal="1">[...]</span> syndrome</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>About 10% of cases of <b>insulinoma</b> are associated with <b><span class="cloze" data-ordinal="1">MEN 1</span> syndrome</b> </div><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><br/><img src="89a1323b64372d97dbae9afcc5e44e95.webp" width="782"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e335d2e19fc7ede8414cf42ad1a9bef6.webp"><img src="7eda4e0d4acf8100fb9519c4f98402df.webp"><br><img src="fba5739d7cde18fd2a1e5801f0f8cf1d.webp"><img src="2702f53a4ea67b5fb453248c803cc516.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-hepatobiliary/videos/medical-pathophysiology-hepatobiliary-pancreatic-disease-pancreatic-cancer-and-islet-cell-tumors">Watch Pancreatic Cancer &amp; Islet Cell Tumors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpqr3sa_wd_1606536512074.png" class="resizer"><br><img src="tmpc5nk_svo_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3209?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_1">Review MEN 1</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div><b>MEN </b><span class="cloze-inactive" data-ordinal="2"><b>1</b></span> is associated with <b>pancreatic endocrine tumors</b>, such as <span class="cloze" data-cloze="Zollinger-Ellison syndrome (gastrinoma)" data-ordinal="1">[...]</span>, <span class="cloze-inactive" data-ordinal="3">insulinomas</span>, VIPomas, and glucagonomas (rare)</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>MEN </b><span class="cloze-inactive" data-ordinal="2"><b>1</b></span> is associated with <b>pancreatic endocrine tumors</b>, such as <span class="cloze" data-ordinal="1">Zollinger-Ellison syndrome (gastrinoma)</span>, <span class="cloze-inactive" data-ordinal="3">insulinomas</span>, VIPomas, and glucagonomas (rare)</div><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><br/><img src="89a1323b64372d97dbae9afcc5e44e95.webp" width="782"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="bc52a1908d0e6670a3ca468fe7c50368.webp" width="800"><img src="47bd3e8836f8d567f45f7c7153792e15.webp" width="800"><img src="5ed5f6814ff4e4fa3fde3d66930edbcb.webp" width="800"><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br><br><img src="e335d2e19fc7ede8414cf42ad1a9bef6.webp"><br><img src="fba5739d7cde18fd2a1e5801f0f8cf1d.webp"><img src="2702f53a4ea67b5fb453248c803cc516.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-hepatobiliary/videos/medical-pathophysiology-hepatobiliary-pancreatic-disease-pancreatic-cancer-and-islet-cell-tumors">Watch Pancreatic Cancer &amp; Islet Cell Tumors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpqr3sa_wd_1606536512074.png" class="resizer"><br><img src="tmpc5nk_svo_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3209?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_1">Review MEN 1</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><div><b>MEN <span class="cloze-inactive" data-ordinal="2">1</span></b> is associated with <b>pituitary</b> <b>tumors</b> that secrete <span class="cloze" data-cloze="prolactin" data-ordinal="1">[...]</span> or <span class="cloze" data-cloze="GH" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>MEN <span class="cloze-inactive" data-ordinal="2">1</span></b> is associated with <b>pituitary</b> <b>tumors</b> that secrete <span class="cloze" data-ordinal="1">prolactin</span> or <span class="cloze" data-ordinal="1">GH</span></div><br/>Can be associated with <b>any anterior pituitary cell line</b><br/><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="07fc039b58dc65178e106cb9e71ff3fe.webp" width="800"><img src="0790857a09ae0ea1bb53d16a971da609.webp" width="800"><br></div><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br><br><img src="1a32c44d00ecb773c47e93304669d034.webp"><br><div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpqr3sa_wd_1606536512074.png" class="resizer"><br><img src="tmpc5nk_svo_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3209?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_1">Review MEN 1</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><div><b>MEN <span class="cloze" data-cloze="1" data-ordinal="1">[...]</span> </b>is associated with <b>parathyroid <u>adenomas</u></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>MEN <span class="cloze" data-ordinal="1">1</span> </b>is associated with <b>parathyroid <u>adenomas</u></b> </div><br/>While MEN 2A is associated with parathyroid <u>hyperplasia<br/></u><br/>Parathyroid chief cell adenoma: <br/><img src="84cf0eb206bdbc3eeb4d7e9e6e4b233e.webp" width="683"/><br/><i><span style="font-size: 10pt;"><i>Photo credit: </i><a href="https://www.flickr.com/photos/jian-hua_qiao_md/27946006895/"><i>©️ Dr. Jian-Hua Qiao</i></a><i>, all rights reserved, via Flickr (used with permission)<br/></i></span></i><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="1eb3e2cbd512e427cea8bb71a02daec1.webp"><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br><br><img src="51a3dfea813e96aea906f4c4c2d1cdb5.webp"><img src="8dd8d46a9fbc5c04d796c9c1faf228be.webp"><img src="8d1ef30b2a70bd2698283664c4e3b951.webp"><img src="7a9294130c4bfc8b7097b2ad5df82ca1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-parathyroid-gland-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Parathyroid Gland Disorders</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpqr3sa_wd_1606536512074.png" class="resizer"><br><img src="tmpc5nk_svo_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3209?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_1">Review MEN 1</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question">What is the inheritance of all <b>multiple endocrine neoplasia </b>(MEN) syndromes?<br/><br/><div><span class="cloze" data-cloze="Autosomal dominant" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the inheritance of all <b>multiple endocrine neoplasia </b>(MEN) syndromes?<br/><br/><div><span class="cloze" data-ordinal="1">Autosomal dominant</span></div><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ad5bbf224b5bc4bfca73d3ef174fa0a1.webp"><br><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question">Which three <u>organs</u> / <u>diseases</u> are involved in <b>MEN</b> <b>1</b>?<br/><br/>- <span class="cloze" data-cloze="Pituitary" data-ordinal="1">[...]</span><br/>- <span class="cloze" data-cloze="Parathyroid" data-ordinal="1">[...]</span><br/>- <span class="cloze" data-cloze="Pancreas" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which three <u>organs</u> / <u>diseases</u> are involved in <b>MEN</b> <b>1</b>?<br/><br/>- <span class="cloze" data-ordinal="1">Pituitary</span><br/>- <span class="cloze" data-ordinal="1">Parathyroid</span><br/>- <span class="cloze" data-ordinal="1">Pancreas</span><br/>The "3 P's" - all located midline<br/><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="fc6cf35a60e066ce733cad72030dd500.webp"><img src="e2f0919a19f376565c48b93fe350bff0.webp"><img src="febd44b0968b24bf55ccdd489d578074.webp"><img src="a36194c79af4ba883992138c340d06dd.webp"><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br><br><img src="e7f81bb7f20589e24970c73f61392cb6.webp"><br><div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br><br><img src="4d04374124e0a4a95310ad9d57a0c5e5.webp"><br><img src="fe948dbb7700437a1f9896ea427e0629.webp"><br><img src="8dd8d46a9fbc5c04d796c9c1faf228be.webp"><img src="8d1ef30b2a70bd2698283664c4e3b951.webp"><img src="7a9294130c4bfc8b7097b2ad5df82ca1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-parathyroid-gland-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Parathyroid Gland Disorders</a><br><br><img src="e335d2e19fc7ede8414cf42ad1a9bef6.webp"><br><img src="fba5739d7cde18fd2a1e5801f0f8cf1d.webp"><img src="2702f53a4ea67b5fb453248c803cc516.webp"><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpqr3sa_wd_1606536512074.png" class="resizer"><br><img src="tmpc5nk_svo_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3209?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_1">Review MEN 1</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><b>MEN 1</b> is associated with mutation of the <span class="cloze" data-cloze="&lt;i&gt;MEN1&lt;/i&gt; (menin)" data-ordinal="1">[...]</span> gene, which is a <b>tumor suppressor gene</b> found on chromosome <span class="cloze-inactive" data-ordinal="2">11</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>MEN 1</b> is associated with mutation of the <span class="cloze" data-ordinal="1"><i>MEN1</i> (menin)</span> gene, which is a <b>tumor suppressor gene</b> found on chromosome <span class="cloze-inactive" data-ordinal="2">11</span><br/>MEN<u style="font-weight: bold;">1</u> = men<u style="font-weight: bold;">1</u>n = chromosome <b><u>11<br/></u></b><u><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/></u><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="1d03c9faef5f72be04eafff3a162c125.webp" width="800"><img src="188ff25fb1eb8bd1e707ffe52b7a0ff4.webp" width="800"><img src="d613ac5fb7f45d2bb06670f239773515.webp" width="800"><br><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpqr3sa_wd_1606536512074.png" class="resizer"><br><img src="tmpc5nk_svo_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3209?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_1">Review MEN 1</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><div><b>MEN</b> <span class="cloze-inactive" data-ordinal="2"><b>2A</b></span> and <span class="cloze-inactive" data-ordinal="2"><b>2B</b></span> are associated with <span class="cloze" data-cloze="&lt;b&gt;pheochromocytoma&lt;/b&gt;" data-ordinal="1">[adrenal medulla]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>MEN</b> <span class="cloze-inactive" data-ordinal="2"><b>2A</b></span> and <span class="cloze-inactive" data-ordinal="2"><b>2B</b></span> are associated with <span class="cloze" data-ordinal="1"><b>pheochromocytoma</b></span> </div><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="bb5e7104eb5f8f9c1b7dd20c523b79bc.webp" width="800"><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br><br><img src="5b219271dbf0fc11654be3d06bcf31ec.webp"><br><img src="9c64774ae2f659915fbb1707093b2644.webp"><img src="a49f56b59d6b5600f39594b037548fc5.webp" width="798"><br><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question">Which three <u>organs</u> / <u>diseases</u> are involved in <b>MEN 2A</b>?<br/><br/>- <span class="cloze" data-cloze="Parathyroid" data-ordinal="1">[...]</span><br/>- <span class="cloze" data-cloze="Medullary thyroid carcinoma" data-ordinal="1">[...]</span><br/>- <span class="cloze" data-cloze="Pheochromocytoma" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which three <u>organs</u> / <u>diseases</u> are involved in <b>MEN 2A</b>?<br/><br/>- <span class="cloze" data-ordinal="1">Parathyroid</span><br/>- <span class="cloze" data-ordinal="1">Medullary thyroid carcinoma</span><br/>- <span class="cloze" data-ordinal="1">Pheochromocytoma</span><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9c64774ae2f659915fbb1707093b2644.webp"><img src="5b219271dbf0fc11654be3d06bcf31ec.webp"><img src="fbbef7ecb5f60043435d4617c5d2ec9e.webp" width="800"><img src="79bf3eaa13e2594f896f07e068818a22.webp" width="800"><br><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br><br><img src="4d04374124e0a4a95310ad9d57a0c5e5.webp"><img src="27494651d7920e62ddba50afe1fe0d64.webp"><br><img src="8dd8d46a9fbc5c04d796c9c1faf228be.webp"><img src="8d1ef30b2a70bd2698283664c4e3b951.webp"><img src="7a9294130c4bfc8b7097b2ad5df82ca1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-parathyroid-gland-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Parathyroid Gland Disorders</a><br><br><img src="0490c1adc8a4150830d8b95704843fcf.webp"><br><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br><br><img src="905e6c880880f96dfde105a28231b335.webp"><br><div><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><div><b>MEN</b> <span class="cloze-inactive" data-ordinal="2"><b>2A</b></span> and <span class="cloze-inactive" data-ordinal="2"><b>2B</b></span> are associated with <span class="cloze" data-cloze="&lt;b&gt;medullary thyroid carcinoma&lt;/b&gt;" data-ordinal="1">[thyroid]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>MEN</b> <span class="cloze-inactive" data-ordinal="2"><b>2A</b></span> and <span class="cloze-inactive" data-ordinal="2"><b>2B</b></span> are associated with <span class="cloze" data-ordinal="1"><b>medullary thyroid carcinoma</b></span> </div><br/>- Neoplasm of parafollicular cells, which secrete calcitonin<br/><br/>- Requires prophylactic thyroidectomy<br/><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f0f70f002901e422fcdb7aa6e7fa7d7d.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br><br><img class="resizer" src="MEN2A, MEN2B - medullary thyroid cancer_1566160514431.jpg"><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question">Which three <u>organs</u> / <u>diseases</u> are involved in <b>MEN 2B</b>?<br/><br/>- <span class="cloze" data-cloze="Medullary thyroid carcinoma" data-ordinal="1">[...]</span><br/>- <span class="cloze" data-cloze="Pheochromocytoma" data-ordinal="1">[...]</span><br/>- <span class="cloze" data-cloze="Mucosal neuroma" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which three <u>organs</u> / <u>diseases</u> are involved in <b>MEN 2B</b>?<br/><br/>- <span class="cloze" data-ordinal="1">Medullary thyroid carcinoma</span><br/>- <span class="cloze" data-ordinal="1">Pheochromocytoma</span><br/>- <span class="cloze" data-ordinal="1">Mucosal neuroma</span><br/>Also associated with a marfanoid habitus and the RET gene mutation<br/><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="79bf3eaa13e2594f896f07e068818a22.webp" width="800"><img src="ce21190a8f0a059d8b313ef3656dc0f0.webp" width="800"><img src="55e6790102b0db517e97084041488bb2.webp" width="800"></div><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br><br><img src="0490c1adc8a4150830d8b95704843fcf.webp"><br><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br><br><img src="905e6c880880f96dfde105a28231b335.webp"><br><div><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><div>Detection of a <i>RET</i> oncogene<b> mutation</b> warrants <b>prophylactic </b><b><span class="cloze" data-cloze="thyroidectomy" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Detection of a <i>RET</i> oncogene<b> mutation</b> warrants <b>prophylactic </b><b><span class="cloze" data-ordinal="1">thyroidectomy</span></b></div><br/>- Due to its increased risk of various thyroid carcinomas<br/><br/><div>- Also associated with MEN 2A and 2B, so <b>check metanephrines first</b> (pheochromocytoma)</div><br/><div><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="7f93a90d78a7cf6cd728b3f4b60b2df9.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <img src="728d39d57391e2cd4afdcd8cb63d0186.webp"><img src="a86ee8fec3fb8a496a7bd96118cbb79f.webp"><br><img src="79c340c31d8b1fd4c87d8bdb9782b2ea.webp"><img src="8a66e7a2528e515a1c10e56d2965e50b.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/lessons-from-the-or/lesson/thyroidectomy-overview">Watch Thyroidectomy Overview</a><br> --><!-- <br> --><!-- <br> --><!-- <br><img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question">Which <b>MEN syndrome</b> can have <u>multiple</u> <b>angiofibromas</b>, <b>collagenomas</b>, <b>meningiomas</b>, and <b>lipomas</b>?<br/><br/><div><span class="cloze" data-cloze="MEN 1" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which <b>MEN syndrome</b> can have <u>multiple</u> <b>angiofibromas</b>, <b>collagenomas</b>, <b>meningiomas</b>, and <b>lipomas</b>?<br/><br/><div><span class="cloze" data-ordinal="1">MEN 1</span></div><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br> --><!-- <img src="8f9df67432165a739726e472e0943d39.webp"><img src="48ad93fab60dcdf945d56ea97527e421.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpqr3sa_wd_1606536512074.png" class="resizer"><br><img src="tmpc5nk_svo_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3209?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_1">Review MEN 1</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question"><div>What <u>endocrine disorder</u> may be associated with <b>Zollinger-Ellison syndrome</b>? </div><br/><div><span class="cloze" data-cloze="MEN 1" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <u>endocrine disorder</u> may be associated with <b>Zollinger-Ellison syndrome</b>? </div><br/><div><span class="cloze" data-ordinal="1">MEN 1</span></div><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><br/><img src="89a1323b64372d97dbae9afcc5e44e95.webp" width="782"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e335d2e19fc7ede8414cf42ad1a9bef6.webp"><br><img src="fba5739d7cde18fd2a1e5801f0f8cf1d.webp"><img src="2702f53a4ea67b5fb453248c803cc516.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-hepatobiliary/videos/medical-pathophysiology-hepatobiliary-pancreatic-disease-pancreatic-cancer-and-islet-cell-tumors">Watch Pancreatic Cancer &amp; Islet Cell Tumors</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpqr3sa_wd_1606536512074.png" class="resizer"><br><img src="tmpc5nk_svo_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3209?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_1">Review MEN 1</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question">The <b>RET</b> <span class="cloze" data-cloze="proto-oncogene" data-ordinal="1">[type of gene]</span> encodes for the RET receptor tyrosine kinase, which is a(n) <span class="cloze" data-cloze="growth factor" data-ordinal="1">[class]</span> receptor<br/><br/><u>Mutations</u> are associated with:<br/><span class="cloze-inactive" data-ordinal="2">MEN 2A &amp; 2B</span><br/><span class="cloze-inactive" data-ordinal="3">Pheochromocytoma</span><br/><span class="cloze-inactive" data-ordinal="4">Medullary &amp; papillary thyroid carcinoma</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">The <b>RET</b> <span class="cloze" data-ordinal="1">proto-oncogene</span> encodes for the RET receptor tyrosine kinase, which is a(n) <span class="cloze" data-ordinal="1">growth factor</span> receptor<br/><br/><u>Mutations</u> are associated with:<br/><span class="cloze-inactive" data-ordinal="2">MEN 2A &amp; 2B</span><br/><span class="cloze-inactive" data-ordinal="3">Pheochromocytoma</span><br/><span class="cloze-inactive" data-ordinal="4">Medullary &amp; papillary thyroid carcinoma</span><br/>The RET RTK binds <b>GDNF</b>, a <u>neurotrophic growth factor</u> involved in embryological development<br/><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="7f93a90d78a7cf6cd728b3f4b60b2df9.webp" width="800"><img src="f0f70f002901e422fcdb7aa6e7fa7d7d.webp" width="800"><br><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br><br><img src="9c64774ae2f659915fbb1707093b2644.webp"><img src="316beb62d1d77d2e9c36fd4c87c6b14d.webp" width="800"><br><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-multiple-endocrine-neoplasia-men?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

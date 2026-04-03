@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (20 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div>What is the <u>precursor</u> molecule of <b>thromboxane A<sub>2</sub></b>?</div><br/><div><span class="cloze" data-cloze="Arachidonic acid" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the <u>precursor</u> molecule of <b>thromboxane A<sub>2</sub></b>?</div><br/><div><span class="cloze" data-ordinal="1">Arachidonic acid</span></div><br/><img src="6c4b329864adb2b4c6aca3e931fde848.webp" width="811"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c851e122e246c88e149d604a50d095e3.webp"><img src="161df5b5e5607a68b08f4d8023f5aea7.webp"><img src="dfbe7443500ca90fe6a50801019442f6.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-blood-inflammation/videos/medical-pharmacology-blood-and-inflammation-anticoagulants-and-thrombolytics-antiplatelet-agents?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Antiplatelet Agents</a><br> --><!-- <br> --><!-- <img src="91426be7dea242b6a3b9037b02017b97.webp"><img src="Screen Shot 2019-09-23 at 9.07.36 AM.png"><img src="Screen Shot 2019-09-23 at 9.08.10 AM.png"><br> --><!-- <br> --><!-- <img src="666f0ed7a0a536dca19f7e986ead5018.webp"><br><img src="a229c38af4203a8875589e5f659dfb87.webp"><br><img src="c238ff51060ed4bf7e01ea0c37231765.webp"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7237?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Platelet_Disorders&amp;utm_content=Platelet_Plug_Formation">Review Platelet Plug Formation</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><b>Oxytocin</b> and <b>ADH </b><u>deficiency</u> are more common with <span class="cloze" data-cloze="&lt;u&gt;hypothalamic&lt;/u&gt;" data-ordinal="1">[hypothalamic/posterior pituitary]</span> injury<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Oxytocin</b> and <b>ADH </b><u>deficiency</u> are more common with <span class="cloze" data-ordinal="1"><u>hypothalamic</u></span> injury<br/>Because these hormones are made in the hypothalamus<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="53c1baf0eaaad1d2c4fb5476f3390a03.webp"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question">Dysfunction of the <span class="cloze" data-cloze="&lt;b&gt;hypothalamus&lt;/b&gt;" data-ordinal="1">[...]</span> and <span class="cloze" data-cloze="&lt;b&gt;posterior pituitary&lt;/b&gt;" data-ordinal="1">[...]</span> may lead to <u>decreased</u> <b>uterine contractions</b> during childbirth and <b>milk letdown</b> in breastfeeding<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Dysfunction of the <span class="cloze" data-ordinal="1"><b>hypothalamus</b></span> and <span class="cloze" data-ordinal="1"><b>posterior pituitary</b></span> may lead to <u>decreased</u> <b>uterine contractions</b> during childbirth and <b>milk letdown</b> in breastfeeding<br/><div>Due to <u>decreased</u> <b>oxytocin</b> release from the posterior pituitary</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="88d57bbd64a4ae88eb2f0d7d4c755791.webp"><br></div><div><div><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br></div></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br><img src="Screen Shot 2022-07-13 at 4.41.31 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.41.59 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-posterior-lobe-of-the-pituitary">Watch Posterior Lobe of the Pituitary</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div>Chronic <i>excess</i> levels of <u>cortisol</u> (glucocorticoid) result in decreased levels of <span class="cloze" data-cloze="&lt;b&gt;CRH&lt;/b&gt;" data-ordinal="1">[...]</span> and <span class="cloze" data-cloze="&lt;b&gt;ACTH&lt;/b&gt;" data-ordinal="1">[...]</span> via <b>negative feedback</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Chronic <i>excess</i> levels of <u>cortisol</u> (glucocorticoid) result in decreased levels of <span class="cloze" data-ordinal="1"><b>CRH</b></span> and <span class="cloze" data-ordinal="1"><b>ACTH</b></span> via <b>negative feedback</b></div><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="bd2ae00ba4e14b11686e255d06a96e2f.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="58f3ddd6c1dc00a2df5f5886efa8ed77.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><div>All <b>steroid</b> hormones are derivatives of <span class="cloze" data-cloze="&lt;b&gt;cholesterol&lt;/b&gt;" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>All <b>steroid</b> hormones are derivatives of <span class="cloze" data-ordinal="1"><b>cholesterol</b></span></div><br/><img src="96e95e83221f8f6f2b658cc853704499.webp" width="1114"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><div>The <span class="cloze" data-cloze="&lt;b&gt;anterior&lt;/b&gt;" data-ordinal="1">[...]</span> <b>lobe</b> of the pituitary gland is primarily composed of <span class="cloze-inactive" data-ordinal="2"><b>endocrine</b></span> <b>cells</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The <span class="cloze" data-ordinal="1"><b>anterior</b></span> <b>lobe</b> of the pituitary gland is primarily composed of <span class="cloze-inactive" data-ordinal="2"><b>endocrine</b></span> <b>cells</b></div><br/>The anterior pituitary is sometimes referred to as the <b>adenohypophysis</b><br/><br/><img src="48c1c2dcd8539a8be8a95d26c2fe406d.jpg" width="593"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://openstax.org/k12/anatomy-and-physiology">OpenStax</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br/></span></i><br/><img src="c7011e5081d0275503073f2b57975f76.webp"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><div><b>Oxytocin</b> causes powerful rhythmic contractions of <b><span class="cloze" data-cloze="uterine smooth" data-ordinal="1">[...]</span> muscle</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Oxytocin</b> causes powerful rhythmic contractions of <b><span class="cloze" data-ordinal="1">uterine smooth</span> muscle</b></div><br/>During pregnancy, oxytocin receptors in the uterus are up-regulated as parturition approaches<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br><img src="Screen Shot 2022-07-13 at 4.41.31 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.41.59 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-posterior-lobe-of-the-pituitary">Watch Posterior Lobe of the Pituitary</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question"><div>How does <b>cortisol</b> affect secretion of <b>CRH</b> from the hypothalamus?</div><br/><div><span class="cloze" data-cloze="Inhibits secretion, &lt;i&gt;both &lt;/i&gt;directly and indirectly" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>How does <b>cortisol</b> affect secretion of <b>CRH</b> from the hypothalamus?</div><br/><div><span class="cloze" data-ordinal="1">Inhibits secretion, <i>both </i>directly and indirectly</span></div><br/><div>Indirectly via affecting the hippocampal neurons which synapse on the hypothalamus</div><br/><img src="ae4f796a32079f4297f847c3f6149317.png"/> <br/><span style="font-size: 10pt;"><em>Photo cr<span style="font-size: 10pt;">edit: </span>avensonline [<a href="https://www.avensonline.org/fulltextarticles/jpcc-2380-0534-02-0014.html"><span style="font-size: 10pt;">Avens Publishing Grou</span></a><a href="https://www.avensonline.org/fulltextarticles/jpcc-2380-0534-02-0014.html">p - Neonatal Hypotension, the Role of Hydrocortisone and Other Pharmacological Agents in its Management (avensonline.org)</a>]</em></span><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><div>Both <b>ADH</b> and <b>oxytocin</b> are <b>neuropeptides</b>, <i>synthesized</i> in hypothalamic neurons and <i>secreted</i> from nerve terminals in the <span class="cloze" data-cloze="posterior pituitary" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Both <b>ADH</b> and <b>oxytocin</b> are <b>neuropeptides</b>, <i>synthesized</i> in hypothalamic neurons and <i>secreted</i> from nerve terminals in the <span class="cloze" data-ordinal="1">posterior pituitary</span></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a6319d9f7a6afe6e639ce62941580081.webp" width="800"><img src="b2fdc14f880ae9de341828a72e173516.webp"><img src="71707a5bf4cd1431047f9c34b0d49429.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-etiologies?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Etiologies</a><br><br><div><img src="Screen Shot 2020-03-19 at 2.42.27 PM.JPG"><br></div><div><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-pulmonary/videos/medical-pathophysiology-pulmonary-lung-cancer-lung-carcinoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="Screen Shot 2022-07-13 at 4.41.31 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.41.59 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-posterior-lobe-of-the-pituitary">Watch Posterior Lobe of the Pituitary</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><div><b>Oxytocin</b> is <i>secreted</i> in response to <b>orgasm</b> or <b><span class="cloze" data-cloze="cervical dilation" data-ordinal="1">[...]</span></b> during <b>labor</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Oxytocin</b> is <i>secreted</i> in response to <b>orgasm</b> or <b><span class="cloze" data-ordinal="1">cervical dilation</span></b> during <b>labor</b></div><br/><table border="1" class="one" style="border-collapse: collapse; width: 70%; border-color: #000000; border-style: solid; margin-left: auto; margin-right: auto;"><tbody><tr><td colspan="2" style="width: 99.9654%; text-align: center;"><span style="font-size: 18pt;"><strong>Factors Affecting Oxytocin </strong><strong>Secretion</strong></span></td></tr><tr><td style="width: 50.9049%; text-align: center;">Stimulatory Factors</td><td style="width: 49.0605%; text-align: center;">Inhibitory Factors</td></tr><tr><td style="width: 50.9049%;">Seeing baby</td><td style="width: 49.0605%;">Opiates</td></tr><tr><td style="width: 50.9049%;">Sound of a baby</td><td style="width: 49.0605%;"> </td></tr><tr><td style="width: 50.9049%;">Suckling</td><td style="width: 49.0605%;"> </td></tr><tr><td style="width: 50.9049%;">Cervical dilation</td><td style="width: 49.0605%;"> </td></tr><tr><td style="width: 50.9049%;">Orgasm</td><td style="width: 49.0605%;"> </td></tr></tbody></table><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br><img src="Screen Shot 2022-07-13 at 4.41.31 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.41.59 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-posterior-lobe-of-the-pituitary">Watch Posterior Lobe of the Pituitary</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><div>Which <u>pituitary hormone</u> is useful for <b>stimulating labor</b> via the induction of <b>uterine contractions</b>? </div><br/><div><span class="cloze" data-cloze="Oxytocin" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <u>pituitary hormone</u> is useful for <b>stimulating labor</b> via the induction of <b>uterine contractions</b>? </div><br/><div><span class="cloze" data-ordinal="1">Oxytocin</span></div><br/>- Acts via <b>G<sub>q</sub>-Coupled</b> receptors <br/><br/>- Uterine contraction may also be used to help <b>control uterine hemorrhage</b> (e.g., postpartum bleeding)<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br><img src="Screen Shot 2022-07-13 at 4.41.31 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.41.59 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-posterior-lobe-of-the-pituitary">Watch Posterior Lobe of the Pituitary</a><br> --><!-- <div><img src="f6d20500601dd97527256a78563532c6.webp"><img src="6db436e075af6b80fd5714a97b27bb33.webp"><img src="2d04eec233afdc1b7d384c8464d41023.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-obstetrics-gynecology/units/medical-obstetrics-gynecology-ob-labor-delivery/videos/medical-obstetrics-gynecology-ob-labor-and-delivery-intro-to-landd-normal-and-abnormal-labor">Watch Normal &amp; Abnormal Labor</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><div>How does <b>GHRH</b> affect its own secretion from the hypothalamus?</div><br/><div><span class="cloze" data-cloze="Decreases (ultrashort-loop &lt;b&gt;negative&lt;/b&gt; feedback)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>How does <b>GHRH</b> affect its own secretion from the hypothalamus?</div><br/><div><span class="cloze" data-ordinal="1">Decreases (ultrashort-loop <b>negative</b> feedback)</span></div><br/><span style="font-size: 10pt;"><img src="abb35897a568653e0dd6019178528528.jpg" style="width: 637.969px;" width="529"/></span><br/><span style="font-size: 10pt;"><em>Photo credit: Frontiersin [<a href="https://www.frontiersin.org/articles/10.3389/fendo.2020.597573/full">Frontiers | Growth Hormone Receptor Regulation in Cancer and Chronic Diseases (frontiersin.org)</a>]</em></span><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><div>What receptors sense an increase in <b>plasma osmolarity</b>, providing stimuli to increase <b>ADH</b> secretion?</div><br/><div><span class="cloze" data-cloze="Osmoreceptors in the anterior hypothalamus" data-ordinal="1">[What and where?]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What receptors sense an increase in <b>plasma osmolarity</b>, providing stimuli to increase <b>ADH</b> secretion?</div><br/><div><span class="cloze" data-ordinal="1">Osmoreceptors in the anterior hypothalamus</span></div><br/><img src="4745b73b1308000debe6add54d42aa02.jpg"/><br/><span style="font-size: 10pt;"><i>Photo credit: lumenlearning [<a href="https://courses.lumenlearning.com/suny-dutchess-ap1/chapter/the-urinary-system-and-homeostasis/">The Urinary System and Homeostasis – Water and Electrolyte balance. | BIO103: Human Biology (lumenlearning.com)</a>]</i></span><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e1477e7f31d5017c6151e90c076c78a7.webp"><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><div><b><span class="cloze" data-cloze="Oxytocin" data-ordinal="1">[...]</span></b> is a hormone that may be used to <i>induce</i> <b><span class="cloze-inactive" data-ordinal="2">labor</span></b> and <i>reduce</i> <b><span class="cloze-inactive" data-ordinal="3">postpartum bleeding</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><span class="cloze" data-ordinal="1">Oxytocin</span></b> is a hormone that may be used to <i>induce</i> <b><span class="cloze-inactive" data-ordinal="2">labor</span></b> and <i>reduce</i> <b><span class="cloze-inactive" data-ordinal="3">postpartum bleeding</span></b></div><br/>- Synthetic analog is known as <b>pitocin</b><br/><br/>- Both effects are a result of increased <b>uterine contraction</b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br><img src="Screen Shot 2022-07-13 at 4.41.31 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.41.59 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-posterior-lobe-of-the-pituitary">Watch Posterior Lobe of the Pituitary</a><br> --><!-- <img src="1cb6a8bc20d3b7da3e146a267f7b11b1.webp"><img src="966702a4810017d6a50731e3ceb0b71b.webp"><img src="9f9e708de47472943c0fe78df58004e0.webp"><img src="7d5d674c63d177edb129e5ec7b1cdb3b.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intro-to-ob/lesson/fetal-heart-tracings">Watch Fetal Heart Tracings</a><br><br><img src="f6d20500601dd97527256a78563532c6.webp"><br><div><img src="6db436e075af6b80fd5714a97b27bb33.webp"><img src="2d04eec233afdc1b7d384c8464d41023.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-obstetrics-gynecology/units/medical-obstetrics-gynecology-ob-labor-delivery/videos/medical-obstetrics-gynecology-ob-labor-and-delivery-intro-to-landd-normal-and-abnormal-labor">Watch Normal &amp; Abnormal Labor</a><br><br><img src="f589611539c65b1543ae5b3f720f44f6.webp"><br><img src="862cac6d2a3a6308573070bfc23077eb.webp"><img src="8f8b7445e124ada572b451ac9f10277d.webp"><img src="41d2eb281a35d130ca0feaa66ad1236c.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/postpartum-care/lesson/postpartum-hemorrhage">Watch Postpartum Hemorrhage</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question"><div><u>Circadian rhythm</u>: The <b>suprachiasmatic nucleus</b> releases <b><span class="cloze" data-cloze="norepinephrine" data-ordinal="1">[...]</span></b>, which stimulates the <u><span class="cloze-inactive" data-ordinal="2">pineal</span> gland</u> to secrete <b><span class="cloze-inactive" data-ordinal="3">melatonin</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><u>Circadian rhythm</u>: The <b>suprachiasmatic nucleus</b> releases <b><span class="cloze" data-ordinal="1">norepinephrine</span></b>, which stimulates the <u><span class="cloze-inactive" data-ordinal="2">pineal</span> gland</u> to secrete <b><span class="cloze-inactive" data-ordinal="3">melatonin</span></b></div><br/>Darkness causes norepinephrine release onto pinealocytes, resulting in melatonin secretion and increased sleep drive<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="01_Suprachiasmatic_Nucleus1.png"><br><img src="01_Suprachiasmatic_Nucleus2.png"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question">The <span class="cloze-inactive" data-ordinal="2"><u>pineal</u></span><u> gland</u> is responsible for <span class="cloze" data-cloze="&lt;b&gt;melatonin&lt;/b&gt;" data-ordinal="1">[...]</span> <b>secretion</b> and <b>circadian rhythms</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">The <span class="cloze-inactive" data-ordinal="2"><u>pineal</u></span><u> gland</u> is responsible for <span class="cloze" data-ordinal="1"><b>melatonin</b></span> <b>secretion</b> and <b>circadian rhythms</b><br/>- The pineal gland does not have a BBB<br/>- Darkness causes NE release onto pinealocytes, resulting in melatonin secretion and increased sleep drive<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question"><div><u>ID the structure</u>: <span class="cloze" data-cloze="Pineal gland" data-ordinal="1">[...]</span></div><br/><div><img src="1e23b9a5bd9d279a4282606c552cef47.jpg"/><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><u>ID the structure</u>: <span class="cloze" data-ordinal="1">Pineal gland</span></div><br/><div><img src="1e23b9a5bd9d279a4282606c552cef47.jpg"/><br/></div><br/><span style="font-size: 10pt;">Photo credit: Modified, Image licensed by <a href="https://physeo.com/">Physeo</a> and used with permission. Purchase full access <a href="https://physeo.com/#sign-up">here</a>.</span><br/><br/>The pineal gland helps to regulate circadian rhythms and secretes melatonin<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question"><div>Stimulation of <u>hypothalamic osmoreceptors</u> stimulates <span class="cloze" data-cloze="&lt;b&gt;thirst&lt;/b&gt;" data-ordinal="1">[...]</span> and <i>secretion</i> of <span class="cloze-inactive" data-ordinal="2"><b>ADH</b></span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Stimulation of <u>hypothalamic osmoreceptors</u> stimulates <span class="cloze" data-ordinal="1"><b>thirst</b></span> and <i>secretion</i> of <span class="cloze-inactive" data-ordinal="2"><b>ADH</b></span></div><br/>Inhibition of hypothalamic osmoreceptors produces the opposite effect<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e1477e7f31d5017c6151e90c076c78a7.webp"><br><div><img src="b74d376eb29f5f626dfb2040c30fe64f.webp"><br></div><img src="474deaccb4d84afc1be352862af17710.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-diabetes-insipidus-and-siadh?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Diabetes Insipidus &amp; SIADH</a><br><br><img src="855aab42c06d23fdbb32a0ad40fed126.webp"><img src="b7a21d87a7b7980f65f093d3ec3b1134.webp"><img src="29ada64b9586a7b3be1210916dc970fb.webp"><img src="5a33f7e7f5c0c0611583d5b3b3495a52.webp"><br><img src="2.1 - Regulation of Body Fluid Osmolarity.png"><br><img src="2.1 – Regulation of Body Fluid Osmolarity Captions.png"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-renal-physiology/lesson-quiz/medical-physiology-renal-physiology-regulation-of-body-fluid-osmolarity">Watch Regulation of Body Fluid Osmolarity</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question"><div>In males, <b>androgens</b> are converted to <b>estrogen</b> primarily in <span class="cloze" data-cloze="adipose" data-ordinal="1">[...]</span> tissue and the <span class="cloze" data-cloze="testes" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In males, <b>androgens</b> are converted to <b>estrogen</b> primarily in <span class="cloze" data-ordinal="1">adipose</span> tissue and the <span class="cloze" data-ordinal="1">testes</span></div><br/>By cytochrome P-450 aromatase<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question"><div>What form of <b>estrogen </b>is produced in the <b>adipose tissue</b>?</div><br/><div><span class="cloze" data-cloze="Estrone" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What form of <b>estrogen </b>is produced in the <b>adipose tissue</b>?</div><br/><div><span class="cloze" data-ordinal="1">Estrone</span></div><br/>This becomes the source of estrogen after menopause<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

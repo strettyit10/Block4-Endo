@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (30 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div>If a <b>thyroid nodule</b> has <b><u>increased</u></b> <b>uptake</b> of <b><sup>123</sup>I</b>, it is considered a(n) <b><span class="cloze" data-cloze="hot" data-ordinal="1">[...]</span> nodule</b>; seen in nodular goiter</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>If a <b>thyroid nodule</b> has <b><u>increased</u></b> <b>uptake</b> of <b><sup>123</sup>I</b>, it is considered a(n) <b><span class="cloze" data-ordinal="1">hot</span> nodule</b>; seen in nodular goiter</div><br/>Graves disease will instead display diffuse uptake<br/><br/><img src="b63923145e281b74c5583108a4094479.webp" width="850px"/><br/><br/><img src="dcedda352724145fd2cb1af902605da8.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="58aa16c467647b9dddfcf0c9d0fa80ec.webp" width="800"><img src="30aa90042a1a3cd4bb5763e597f65499.webp" width="800"><img src="db6662c9151b04ded1a4c3633f6a8884.webp"><img src="a20c8a3846b1d33c175f60ee189e4951.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hyperthyroidism-overview-and-graves-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperthyroidism Overview &amp; Graves Disease</a><br> --><!-- <img src="4839a5812e77a0a860bd7d91d6425bfd.webp"><img src="c6195ab57e8faaf5c9a546906ccf22e0.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><div><b>MEN</b> <span class="cloze-inactive" data-ordinal="2"><b>2A</b></span> and <span class="cloze-inactive" data-ordinal="2"><b>2B</b></span> are associated with <span class="cloze" data-cloze="&lt;b&gt;medullary thyroid carcinoma&lt;/b&gt;" data-ordinal="1">[thyroid]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>MEN</b> <span class="cloze-inactive" data-ordinal="2"><b>2A</b></span> and <span class="cloze-inactive" data-ordinal="2"><b>2B</b></span> are associated with <span class="cloze" data-ordinal="1"><b>medullary thyroid carcinoma</b></span> </div><br/>- Neoplasm of parafollicular cells, which secrete calcitonin<br/><br/>- Requires prophylactic thyroidectomy<br/><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f0f70f002901e422fcdb7aa6e7fa7d7d.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br><br><img class="resizer" src="MEN2A, MEN2B - medullary thyroid cancer_1566160514431.jpg"><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div><b><span class="cloze" data-cloze="Papillary" data-ordinal="1">[...]</span> thyroid carcinoma</b> may be lined by cells with clear, "<b><span class="cloze-inactive" data-ordinal="2">Orphan Annie eye</span></b>" nuclei</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><span class="cloze" data-ordinal="1">Papillary</span> thyroid carcinoma</b> may be lined by cells with clear, "<b><span class="cloze-inactive" data-ordinal="2">Orphan Annie eye</span></b>" nuclei</div><br/><div>Nuclei with <u>central clearing</u>, sometimes described as "<b>ground glass</b>" nuclei or having <b>finely dispersed chromatin</b></div><br/><div><img src="be960f2dd63d6a04df9e4a21889fdd6a.webp" width="568"/><br/></div><div><i><span style="font-size: 10pt;"><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.hindawi.com/journals/criot/2016/6469073/">Mohan et al.</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, via Case Reports in Otolaryngology; </span></i>the supplementary image with overlays of the relevant areas was adapted from the image mentioned previously (© AnkiHub, LLC)</span></i></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div><img src="f4f53d22fe5aacb70705f3ccbcc58663.webp" width="800"><img src="5af13642923e6d6fddd30725e37e06c1.webp" width="800"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"></div></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div>If a <b>thyroid nodule</b> has <b><u>decreased</u></b> <b>uptake</b> of <b><sup>123</sup>I</b>, it is considered a(n) <b><span class="cloze" data-cloze="cold" data-ordinal="1">[...]</span> nodule</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>If a <b>thyroid nodule</b> has <b><u>decreased</u></b> <b>uptake</b> of <b><sup>123</sup>I</b>, it is considered a(n) <b><span class="cloze" data-ordinal="1">cold</span> nodule</b></div><br/>- Suggestive of adenoma or carcinoma (biopsy to rule out malignancy via FNA)<br/><br/>- <b>C</b>ancer is <b>c</b>old<br/><br/><img src="8211f26d2aa57b30cbe57fa0b4929830.jpg" width="479"/><br/><br/><img src="b63923145e281b74c5583108a4094479.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="6371f422382dfbde5c91b846d491dc32.webp" width="800"><img src="0dbbe34e5e2066da51e6fbc54006f320.webp" width="800"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><div>What does a <b>cold nodule</b> on <b><sup>123</sup>I</b> <b>radioactive uptake studies</b> suggest?</div><br/><div><span class="cloze" data-cloze="Adenoma or carcinoma" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What does a <b>cold nodule</b> on <b><sup>123</sup>I</b> <b>radioactive uptake studies</b> suggest?</div><br/><div><span class="cloze" data-ordinal="1">Adenoma or carcinoma</span></div><br/>- May warrant FNA biopsy<br/><br/>- "Cold" nodules = nodules that do not take up radioactive iodine<br/><br/><img src="8211f26d2aa57b30cbe57fa0b4929830.jpg" width="479"/><br/><br/><img src="b63923145e281b74c5583108a4094479.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="0dbbe34e5e2066da51e6fbc54006f320.webp" width="800"><img src="6371f422382dfbde5c91b846d491dc32.webp" width="800"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <img src="09bdf15a20a18da880100d5eb922ac4d.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><div><b>Thyroid nodules</b> may be studied using <b><span class="cloze" data-cloze="&lt;sup&gt;123&lt;/sup&gt;I" data-ordinal="1">[...]</span> radioactive uptake studies</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Thyroid nodules</b> may be studied using <b><span class="cloze" data-ordinal="1"><sup>123</sup>I</span> radioactive uptake studies</b></div><br/><img src="8211f26d2aa57b30cbe57fa0b4929830.jpg" width="479"/><br/><br/><img src="b63923145e281b74c5583108a4094479.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="6371f422382dfbde5c91b846d491dc32.webp" width="800"><img src="0dbbe34e5e2066da51e6fbc54006f320.webp" width="800"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <img src="0cf63307a823f5a6570ebf219ffc8dad.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><div>How is a <b>biopsy</b> performed for a <b>thyroid nodule</b>? </div><br/><div><span class="cloze" data-cloze="Fine needle aspiration (FNA)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>How is a <b>biopsy</b> performed for a <b>thyroid nodule</b>? </div><br/><div><span class="cloze" data-ordinal="1">Fine needle aspiration (FNA)</span></div><br/>Must do FNA because the thyroid is highly vascularized<br/><br/><img src="b63923145e281b74c5583108a4094479.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question"><div>In <b>Riedel thyroiditis</b>, fibrosis may extend to <span class="cloze" data-cloze="&lt;b&gt;local structures&lt;/b&gt; (e.g., airway)" data-ordinal="1">[...]</span>, thus mimicking <span class="cloze-inactive" data-ordinal="2"><b>anaplastic thyroid carcinoma</b></span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In <b>Riedel thyroiditis</b>, fibrosis may extend to <span class="cloze" data-ordinal="1"><b>local structures</b> (e.g., airway)</span>, thus mimicking <span class="cloze-inactive" data-ordinal="2"><b>anaplastic thyroid carcinoma</b></span></div><br/>Distinguishing feature is age (anaplastic carcinoma occurs in older patients)<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="1bcd43b1fcba883cfdf2b4ed6797a2af.webp" width="800"><img src="ab0faf56fda8810792c48a7fa8621465.webp" width="800"><br><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="50075611eceef95df6ac6aea4d063590.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><div><div>What type of <b>thyroid carcinoma</b> is illustrated in this histology slide? </div><br/><div><span class="cloze" data-cloze="Anaplastic thyroid carcinoma" data-ordinal="1">[...]</span> </div></div><br/><div><img src="e542fc32e976e20257686836675b8098.webp" width="418"/><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>What type of <b>thyroid carcinoma</b> is illustrated in this histology slide? </div><br/><div><span class="cloze" data-ordinal="1">Anaplastic thyroid carcinoma</span> </div></div><br/><div><img src="e542fc32e976e20257686836675b8098.webp" width="418"/><br/></div><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.hindawi.com/journals/crionm/2014/468159/">Ghosh et al.</a>, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>, via Hindawi Case Reports in Oncological Medicine</span></i><br/><br/>Histology shows malignant cells that do not resemble normal thyroid tissue<br/><br/>  <img alt="(b) " src="d22f6f83332fb587494020f5e603253f.jpg"/><div><i><span style="font-size: 10pt;">Photo credit: Hindawi [<a href="https://www.hindawi.com/journals/crionm/2013/783862/">Aggressive Multimodal Approach for Anaplastic Thyroid Cancer and Long-Term Survival (hindawi.com)</a>]</span></i></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="b7078a532d63c3fcc562d9749e8d1277.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><div>What is the <u>most common</u> type of <b>thyroid </b><u>adenoma</u>?<br/></div><div><br/><div><span class="cloze" data-cloze="Follicular adenoma" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the <u>most common</u> type of <b>thyroid </b><u>adenoma</u>?<br/></div><div><br/><div><span class="cloze" data-ordinal="1">Follicular adenoma</span></div></div><br/>Whereas the <i>most common</i> type of thyroid <u>carcinoma</u> is <b>papillary carcinoma</b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e73a78d80ef36ab578f89949b671ce21.webp"><br><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <img src="29230b9ca3cf20df3968b75882082e91.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="553046f5e489c2a1d8af0098b3a2016f.webp"><img src="5867ba9631b6a91aba7277fad57415ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><div><span class="cloze-inactive" data-ordinal="2"><b>Papillary</b></span> <b>thyroid carcinoma</b> may have <span class="cloze" data-cloze="&lt;b&gt;psammoma&lt;/b&gt;" data-ordinal="1">[...]</span> <b>bodies</b> on biopsy, which are characterized by <b>concentric</b> layers of <b>calcification</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze-inactive" data-ordinal="2"><b>Papillary</b></span> <b>thyroid carcinoma</b> may have <span class="cloze" data-ordinal="1"><b>psammoma</b></span> <b>bodies</b> on biopsy, which are characterized by <b>concentric</b> layers of <b>calcification</b> </div><br/>- <b><u>P</u></b>apillary = <b><u>P</u></b>sammoma<br/>- <u>P</u>SaMMOMa<span style="font-size: 12pt;"><br/><br/><img alt="File:Psammoma body Papillary thyroid carcinoma magnx400.jpg" src="00143b569fb25d36bbf571229f1dd164.jpg" width="612"/></span><br/><em><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Psammoma_body_Papillary_thyroid_carcinoma_magnx400.jpg">Eriugen</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons</span></em><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="20a2eaac11867d18e6c428cfcc55467d.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><div>What is the main <u>distinguishing feature</u> between <b>follicular adenoma</b> and <b>follicular carcinoma</b> of the thyroid?</div><br/><div><span class="cloze" data-cloze="Follicular &lt;u&gt;adenoma&lt;/u&gt; lacks capsular and vascular invasion" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the main <u>distinguishing feature</u> between <b>follicular adenoma</b> and <b>follicular carcinoma</b> of the thyroid?</div><br/><div><span class="cloze" data-ordinal="1">Follicular <u>adenoma</u> lacks capsular and vascular invasion</span></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9f7dde29e765d312e65f34cbf4f3e7b5.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><div><b>Thyroid</b> <b>follicular adenoma</b> is a <u>benign tumor</u> of follicles surrounded by a(n) <b><span class="cloze" data-cloze="fibrous capsule" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Thyroid</b> <b>follicular adenoma</b> is a <u>benign tumor</u> of follicles surrounded by a(n) <b><span class="cloze" data-ordinal="1">fibrous capsule</span></b></div><br/><div>- Usually nonfunctional; rarely may secrete thyroid hormone</div><br/><div>- Note: tumor is separated by a dense, fibrous capsule<br/></div><br/><div><img src="cecf4e10933e3ca7cd7b1d074780d08e.jpg"/></div><div><span style="font-size: 10pt;"><i>Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Follicular_adenoma_--_extremely_low_mag.jpg">Nephron</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons</i></span></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="408fcbd3c16e1634fba1405c614cbbc1.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><div><b>Follicular thyroid carcinoma</b> is characterized by a malignant proliferation of follicles surrounded by a(n) <b><span class="cloze" data-cloze="fibrous capsule" data-ordinal="1">[...]</span></b> with <b><span class="cloze" data-cloze="invasion through the capsule" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Follicular thyroid carcinoma</b> is characterized by a malignant proliferation of follicles surrounded by a(n) <b><span class="cloze" data-ordinal="1">fibrous capsule</span></b> with <b><span class="cloze" data-ordinal="1">invasion through the capsule</span></b></div><br/>Invasion through the capsule depicted in yellow<br/><br/><img src="0e1987b0db840c49ac364516a7d18c2b.webp" width="507"/><img src="ada52f02d433a85939b304dbc9fea1bb.webp" width="507"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Follicular_thyroid_carcinoma_2_--_low_mag.jpg">Nephron</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons (left); AMBOSS, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> (right)<br/></span></i><br/>Follicular thyroid carcinoma<br/><img src="058e83895d25318aa5d3d6fbcbf473b6.webp" width="666"/><br/><i><span style="font-size: 10pt;"><i><i>Photo credit: </i><a href="https://www.flickr.com/photos/bc_the_path/2651597801/in/dateposted/"><i>Dr. Bulent Celasun</i></a><i>. Ankara, Turkey. Used with permission</i></i></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9f7dde29e765d312e65f34cbf4f3e7b5.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question"><div>In <b>medullary thyroid carcinoma</b>, <u>calcitonin</u> often deposits within the tumor as <span class="cloze" data-cloze="&lt;b&gt;amyloid&lt;/b&gt;" data-ordinal="1">[...]</span>, which may be visualized with a(n) <span class="cloze-inactive" data-ordinal="2"><b>Congo red</b></span> <b>stain</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In <b>medullary thyroid carcinoma</b>, <u>calcitonin</u> often deposits within the tumor as <span class="cloze" data-ordinal="1"><b>amyloid</b></span>, which may be visualized with a(n) <span class="cloze-inactive" data-ordinal="2"><b>Congo red</b></span> <b>stain</b></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="0e2f8893d9faf765e68e5ea6100a357e.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question"><div><b>Thyroid <span class="cloze" data-cloze="adenoma" data-ordinal="1">[...]</span></b> is a <b>benign</b> solitary growth of the thyroid</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Thyroid <span class="cloze" data-ordinal="1">adenoma</span></b> is a <b>benign</b> solitary growth of the thyroid</div><br/>Secretes thyroid hormone<br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="79f0028926f947a4b0a446cb5dea0b1f.webp" width="800"><img src="e73a78d80ef36ab578f89949b671ce21.webp" width="800"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <img src="29230b9ca3cf20df3968b75882082e91.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question"><div>What is the prognosis of <b>papillary thyroid carcinoma</b>? </div><br/><div><span class="cloze" data-cloze="Excellent" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the prognosis of <b>papillary thyroid carcinoma</b>? </div><br/><div><span class="cloze" data-ordinal="1">Excellent</span></div><br/>Because many gene mutations can be targeted (e.g. BRAF, RET, NTRK1)<br/><br/>Papillary thyroid carcinoma: <br/><img src="820bba77fc60584ce1018d93b4cfd7c2.webp" width="565"/><img src="0a122a1b910cf7d5c0eff786686ed419.webp" width="565"/><br/><i><span style="font-size: 10pt;"><i><em>Photo credit: </em><a href="https://www.flickr.com/photos/jian-hua_qiao_md/8030899890/in/album-72157633448720343/"><em>© Dr. Jian-Hua Qiao</em></a><em>, all rights reserved, via Flickr (used with permission)</em></i></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question"><div><span class="cloze" data-cloze="&lt;b&gt;Medullary&lt;/b&gt;" data-ordinal="1">[...]</span> <b>thyroid carcinoma</b> is a malignant proliferation of <span class="cloze-inactive" data-ordinal="2"><b>parafollicular "C"</b></span> <b>cells</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze" data-ordinal="1"><b>Medullary</b></span> <b>thyroid carcinoma</b> is a malignant proliferation of <span class="cloze-inactive" data-ordinal="2"><b>parafollicular "C"</b></span> <b>cells</b></div><br/>Calcitonin-secreting<br/><br/>Calcitonin stain in medullary thyroid carcinoma on the right:<br/><img src="8edd6f3bbfe8c49a0eca5026ffba3924.webp"/><br/><i><span style="font-size: 10pt;"><i>Photo credit: <a href="https://www.flickr.com/photos/lunarcaustic/51254780804/in/dateposted/">© Lunar Caustic</a>, all rights reserved, via Flickr. Used with permission<br/></i></span></i><br/><img src="42a989d207e2f0f9b732408348caddf9.webp" width="635"/> <br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.flickr.com/photos/lunarcaustic/3441640567/in/dateposted/">© Lunar Caustic</a>, all rights reserved, via Flickr. Used with permission</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="c4a228f9e5a5d7a2dd3a5668bd4133a6.webp" width="800"><img src="52b90e47f3f7bb8596422a0327e74737.webp" width="800"><br></div><div><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question"><div>What is the <u>most common</u> type of <b>thyroid</b> <u>cancer</u>? </div><br/><div><span class="cloze" data-cloze="Papillary thyroid carcinoma (80%)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the <u>most common</u> type of <b>thyroid</b> <u>cancer</u>? </div><br/><div><span class="cloze" data-ordinal="1">Papillary thyroid carcinoma (80%)</span></div><br/>Whereas the <i>most common</i> type of thyroid <u>adenoma</u> is <b>follicular adenoma<br/></b><br/>Papillary thyroid carcinoma: <br/><img src="820bba77fc60584ce1018d93b4cfd7c2.webp" width="565"/><img src="0a122a1b910cf7d5c0eff786686ed419.webp" width="565"/><br/><i><span style="font-size: 10pt;"><em>Photo credit: </em><a href="https://www.flickr.com/photos/jian-hua_qiao_md/8030899890/in/album-72157633448720343/"><em>© Dr. Jian-Hua Qiao</em></a><em>, all rights reserved, via Flickr (used with permission)</em></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="49552a7a1f8629f2c1d9c09b72f921c4.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question"><div><b>Medullary thyroid carcinomas</b> secrete <span class="cloze" data-cloze="&lt;b&gt;calcitonin&lt;/b&gt;" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Medullary thyroid carcinomas</b> secrete <span class="cloze" data-ordinal="1"><b>calcitonin</b></span> </div><br/>Calcitonin stain in medullary thyroid carcinoma on the right:<br/><img src="8edd6f3bbfe8c49a0eca5026ffba3924.webp"/> <br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.flickr.com/photos/lunarcaustic/51254780804/in/dateposted/">© Lunar Caustic</a>, all rights reserved, via Flickr. Used with permission<br/></span></i><br/><img src="42a989d207e2f0f9b732408348caddf9.webp" width="635"/><br/><i><span style="font-size: 10pt;"><i>Photo credit: <a href="https://www.flickr.com/photos/lunarcaustic/3441640567/in/dateposted/">© Lunar Caustic</a>, all rights reserved, via Flickr. Used with permission</i></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c4a228f9e5a5d7a2dd3a5668bd4133a6.webp" width="800"><img src="52b90e47f3f7bb8596422a0327e74737.webp" width="800"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">21.1</td>
+                    <td class="question"><div>Exposure to <span class="cloze" data-cloze="&lt;b&gt;ionizing&lt;/b&gt; &lt;b&gt;radiation&lt;/b&gt;" data-ordinal="1">[...]</span> in <b>childhood</b> is a major risk factor for <b><span class="cloze-inactive" data-ordinal="2">papillary</span> thyroid carcinoma</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Exposure to <span class="cloze" data-ordinal="1"><b>ionizing</b> <b>radiation</b></span> in <b>childhood</b> is a major risk factor for <b><span class="cloze-inactive" data-ordinal="2">papillary</span> thyroid carcinoma</b></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="8987e53ffd3882c8dc00843db724c4bc.webp" width="800"><img src="3b9628368b010279b3232c9443c95b4a.webp" width="800"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <img src="a157500b1d796d6ca6224d290bf6abca.webp"><img src="057171dca012f537a0e246ecbdeff374.webp"><img src="c2a71bad13b992d6f6bf542d09a9e1b5.webp"><br><img src="9041622ad11cac0f26759695f83db7f4.webp"><img src="0f9753076f7b4c631990f5cc2638e130.webp"><br><b><span style="font-weight: 400;"><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-hematology-oncology/videos/medical-internal-medicine-hematology-and-oncology-oncology-hodgkin-lymphoma-soap" title="Watch Hodgkin Lymphoma SOAP">Watch Hodgkin Lymphoma SOAP</a><br></span></b><br><img src="78243bdd64a5d4b69d13de32e05fe62d.webp"><br><img src="2927fd45af8c601a7efd45d22e99975f.webp"><br><img src="f2efff4777d47884392f8a9f4d49f0f9.webp"><br><img src="ffce64257795e9cb36b5da5d4b08c6a0.webp"><br><img src="bde02e34ec6df3617f965bcd719da088.webp"><br><b><span style="font-weight: 400;"><a title="Watch Non-Hodgkin Lymphoma SOAP" href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-hematology-oncology/videos/medical-internal-medicine-hematology-and-oncology-oncology-non-hodgkin-lymphoma-soap">Watch Non-Hodgkin Lymphoma SOAP</a></span></b><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">22.1</td>
+                    <td class="question"><div>High levels of <b>calcitonin</b> produced by a <b>medullary thyroid carcinoma</b> may lead to <span class="cloze" data-cloze="&lt;b&gt;hypocalcemia&lt;/b&gt;" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>High levels of <b>calcitonin</b> produced by a <b>medullary thyroid carcinoma</b> may lead to <span class="cloze" data-ordinal="1"><b>hypocalcemia</b></span></div><br/>- Calcitonin "tones" down the calcium levels (hypocalcemia)<br/><br/>- Calcitonin inhibits osteoclast activity and renal reabsorption of calcium and phosphate to reduce serum calcium<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="52b90e47f3f7bb8596422a0327e74737.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">23.1</td>
+                    <td class="question"><div>Most <b>thyroid adenomas</b> are <b>nonfunctional</b> ("cold"), but may rarely cause <span class="cloze" data-cloze="&lt;b&gt;hyperthyroidism&lt;/b&gt;" data-ordinal="1">[...]</span> via autonomous thyroid hormone production ("hot" or "toxic") </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Most <b>thyroid adenomas</b> are <b>nonfunctional</b> ("cold"), but may rarely cause <span class="cloze" data-ordinal="1"><b>hyperthyroidism</b></span> via autonomous thyroid hormone production ("hot" or "toxic") </div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ba8d6a3ac2e07964545244bf53a055a0.webp" width="800"><img src="0d1139f4e0a83a984e34a5441084f6b2.webp" width="800"><img src="db6662c9151b04ded1a4c3633f6a8884.webp"><img src="a20c8a3846b1d33c175f60ee189e4951.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hyperthyroidism-overview-and-graves-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperthyroidism Overview &amp; Graves Disease</a><br> --><!-- <img src="c6195ab57e8faaf5c9a546906ccf22e0.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">24.1</td>
+                    <td class="question"><b>Thyroid nodules</b> are more likely to be <b><span class="cloze" data-cloze="benign" data-ordinal="1">[benign or malignant]</span></b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Thyroid nodules</b> are more likely to be <b><span class="cloze" data-ordinal="1">benign</span></b><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">25.1</td>
+                    <td class="question"><div>What is the most common route of <b>metastasis</b> for <b>follicular thyroid carcinoma</b>?</div><br/><div><span class="cloze" data-cloze="Hematogenous" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the most common route of <b>metastasis</b> for <b>follicular thyroid carcinoma</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hematogenous</span> </div><br/>- This is one of the exceptions (carcinomas typically spread through lymphatics)<br/><br/>- Mnemonic: <i><b>E</b>very</i> <i><b>H</b>ematogenous <b>S</b>preading <b>C</b>ancer <b>R</b>eigns <u><b>F</b></u>oolishly</i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9f7dde29e765d312e65f34cbf4f3e7b5.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">26.1</td>
+                    <td class="question"><div>Can <b>fine needle aspiration</b> (FNA) distinguish thyroid <b>follicular adenoma </b>from <b>follicular</b> <b>carcinoma</b>?</div><br/><div><span class="cloze" data-cloze="No" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Can <b>fine needle aspiration</b> (FNA) distinguish thyroid <b>follicular adenoma </b>from <b>follicular</b> <b>carcinoma</b>?</div><br/><div><span class="cloze" data-ordinal="1">No</span></div><br/>Because the fibrous capsule cannot be visualized with FNA<br/><br/><img src="892335a272146471a2589d728283c159.jpg"/><br/><span style="font-size: 10pt;"><em>Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Follicular_adenoma_of_the_thyroid.jpg">See page for author</a>, Public domain, via Wikimedia Commons<br/></em></span><br/>Follicular thyroid carcinoma<br/><img src="058e83895d25318aa5d3d6fbcbf473b6.webp" width="666"/><br/><i><span style="font-size: 10pt;"><i>Photo credit: </i><a href="https://www.flickr.com/photos/bc_the_path/2651597801/in/dateposted/"><i>Dr. Bulent Celasun</i></a><i>. Ankara, Turkey. Used with permission</i></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">27.1</td>
+                    <td class="question"><div>What is the prognosis of <b>anaplastic thyroid carcinoma</b>?</div><br/><div><span class="cloze" data-cloze="Poor" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the prognosis of <b>anaplastic thyroid carcinoma</b>?</div><br/><div><span class="cloze" data-ordinal="1">Poor</span></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="63e6c49e34f16498e97a69cc8640b6df.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">28.1</td>
+                    <td class="question"><div><b><span class="cloze" data-cloze="Anaplastic" data-ordinal="1">[...]</span> thyroid carcinoma</b> often invades <b>local</b> <b>structures</b> leading to dysphagia or respiratory compromise</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><span class="cloze" data-ordinal="1">Anaplastic</span> thyroid carcinoma</b> often invades <b>local</b> <b>structures</b> leading to dysphagia or respiratory compromise</div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="4b5bb0c8242abbc344532011fa35278a.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <img src="7736fc180182658a66c3a4d8a83155ba.webp"><img src="4c9494fe4986b4ca57dc4dae43583d73.webp"><img src="cf90b145ca4d3830f155696d584fa300.webp"><img src="eaab86c8ba00602ac6761eae37ea0ce7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/esophageal-gastric-disorders-2/lesson/approach-to-dysphagia">Watch Approach to Dysphagia</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">29.1</td>
+                    <td class="question"><div>In addition to "Orphan Annie eye" nuclei, <b>papillary thyroid carcinoma</b> may have cells with <b>intranuclear</b> <span class="cloze" data-cloze="&lt;b&gt;grooves&lt;/b&gt;" data-ordinal="1">[...]</span> and <b>inclusions</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In addition to "Orphan Annie eye" nuclei, <b>papillary thyroid carcinoma</b> may have cells with <b>intranuclear</b> <span class="cloze" data-ordinal="1"><b>grooves</b></span> and <b>inclusions</b></div><br/><div><img src="be960f2dd63d6a04df9e4a21889fdd6a.webp" width="568"/><br/></div><div><i><span style="font-size: 10pt;"><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.hindawi.com/journals/criot/2016/6469073/">Mohan et al.</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, via Case Reports in Otolaryngology; </span></i>the supplementary image with overlays of the relevant areas was adapted from the image mentioned previously (© AnkiHub, LLC)<i><span style="font-size: 10pt;"> </span></i></span></i></div><img alt="File:Thyroid papillary carcinoma histopathology (4).jpg" src="a4fd7462f64f9a49c0bef398615f36eb.jpg"/><br/><span style="font-size: 10pt;"><em>Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Thyroid_papillary_carcinoma_histopathology_(4).jpg">No machine-readable author provided. KGH assumed (based on copyright claims).</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>, via Wikimedia Commons</em></span><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="f4f53d22fe5aacb70705f3ccbcc58663.webp" width="800"><img src="5af13642923e6d6fddd30725e37e06c1.webp" width="800"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">30.1</td>
+                    <td class="question"><div><b><span class="cloze" data-cloze="Anaplastic" data-ordinal="1">[...]</span> thyroid carcinoma</b> is an <i>undifferentiated</i> malignant tumor of thyroid</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><span class="cloze" data-ordinal="1">Anaplastic</span> thyroid carcinoma</b> is an <i>undifferentiated</i> malignant tumor of thyroid</div><br/>Characterized by large pleomorphic, osteoclast-like multinucleate<b> giant cells</b>, and <b>biphasic spindle cells</b><br/><br/><div><div><b> </b></div></div><div><img alt="(b) " src="d22f6f83332fb587494020f5e603253f.jpg" style="width: 600px;"/></div><div><i><span style="font-size: 10pt;">Photo credit: Hindawi [<a href="https://www.hindawi.com/journals/crionm/2013/783862/">Aggressive Multimodal Approach for Anaplastic Thyroid Cancer and Long-Term Survival (hindawi.com)</a>]</span></i><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="b7078a532d63c3fcc562d9749e8d1277.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (21 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div><u>Histologically</u>, <b>Hashimoto thyroiditis</b> may have <b><span class="cloze" data-cloze="Hurthle" data-ordinal="1">[...]</span> cells</b>, which are <b>eosinophilic</b> metaplastic cells that line the follicles</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><u>Histologically</u>, <b>Hashimoto thyroiditis</b> may have <b><span class="cloze" data-ordinal="1">Hurthle</span> cells</b>, which are <b>eosinophilic</b> metaplastic cells that line the follicles</div><br/>Often described as epithelial cells with eosinophilic granular cytoplasm and abundant mitochondria<br/><br/><img src="6f9423af0a7126e44989199dee66d409.webp" width="692"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Hurthle_cell_carcinoma_--_high_mag.jpg">Librepath</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons</span></i><br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="21923e70f5e447c77f4755eff161bcfe.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><div><b>Riedel thyroiditis</b> presents as a(n) <b>"</b><span class="cloze" data-cloze="&lt;b&gt;hard as wood&lt;/b&gt;" data-ordinal="1">[...]</span><b>"</b>, <span class="cloze-inactive" data-ordinal="2"><b>non-tender</b></span> goiter</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Riedel thyroiditis</b> presents as a(n) <b>"</b><span class="cloze" data-ordinal="1"><b>hard as wood</b></span><b>"</b>, <span class="cloze-inactive" data-ordinal="2"><b>non-tender</b></span> goiter</div><br/>Also described as "stone-like" or "hard-as-rock" in other sources<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="016dffd3affc212acd89546b4c36536c.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="b3cbae7829cf80ff96663cd75c0ea615.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div><b>Riedel thyroiditis</b> is characterized by replacement of thyroid by <span class="cloze" data-cloze="&lt;b&gt;fibrous&lt;/b&gt;" data-ordinal="1">[...]</span> <b>tissue</b> with <b>inflammatory infiltrate</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Riedel thyroiditis</b> is characterized by replacement of thyroid by <span class="cloze" data-ordinal="1"><b>fibrous</b></span> <b>tissue</b> with <b>inflammatory infiltrate</b></div><br/>Intense inflammatory infiltrate including neutrophils, eosinophils, lymphocytes, and plasma cells<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e4f236d0048d719893937bb31118b12e.webp" width="800"><img src="d9affe23b9879d937b487c61327a5047.webp" width="800"><br></div><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="2e182823470d5ed01de6f92f73b26bb6.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div>In <b>Riedel thyroiditis</b>, fibrosis may extend to <span class="cloze" data-cloze="&lt;b&gt;local structures&lt;/b&gt; (e.g., airway)" data-ordinal="1">[...]</span>, thus mimicking <span class="cloze-inactive" data-ordinal="2"><b>anaplastic thyroid carcinoma</b></span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In <b>Riedel thyroiditis</b>, fibrosis may extend to <span class="cloze" data-ordinal="1"><b>local structures</b> (e.g., airway)</span>, thus mimicking <span class="cloze-inactive" data-ordinal="2"><b>anaplastic thyroid carcinoma</b></span></div><br/>Distinguishing feature is age (anaplastic carcinoma occurs in older patients)<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="1bcd43b1fcba883cfdf2b4ed6797a2af.webp" width="800"><img src="ab0faf56fda8810792c48a7fa8621465.webp" width="800"><br><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="50075611eceef95df6ac6aea4d063590.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><b>Riedel thyroiditis</b> is considered a manifestation of <span class="cloze" data-cloze="&lt;b&gt;IgG&lt;sub&gt;4&lt;/sub&gt;&lt;/b&gt;" data-ordinal="1">[...]</span>-<b>related systemic disease</b>, which includes autoimmune pancreatitis, retroperitoneal fibrosis, and noninfectious aortitis<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Riedel thyroiditis</b> is considered a manifestation of <span class="cloze" data-ordinal="1"><b>IgG<sub>4</sub></b></span>-<b>related systemic disease</b>, which includes autoimmune pancreatitis, retroperitoneal fibrosis, and noninfectious aortitis<br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="0fcc16bec9102f59c7d1fcaa9d5306ce.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br><br><img src="6a476963761ce4e72c91c8470277b0a9.webp"><img src="96225b18d4017e2c4878fd14d315b08f.webp"><br><img src="c481d9341038421145c20b6543db0f59.webp"><br><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-urinary-tract-obstruction-hydronephrosis-and-urinary-tract-obstruction?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hydronephrosis &amp; Urinary Tract Obstruction</a><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><div><b>Hashimoto thyroiditis</b> is associated with <b>HLA-<span class="cloze" data-cloze="DR3" data-ordinal="1">[...]</span></b> and <b>HLA-<span class="cloze" data-cloze="DR5" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Hashimoto thyroiditis</b> is associated with <b>HLA-<span class="cloze" data-ordinal="1">DR3</span></b> and <b>HLA-<span class="cloze" data-ordinal="1">DR5</span></b></div><br/>-<b> DR.</b> Hashimoto is <b>odd</b> (odd numbers: <b>3,</b> <b>5</b>)<br/><br/>- Whereas <b>Graves disease</b> is associated with <b>HLA-B8</b> and <b>HLA-DR3</b><br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="a86d1a0ddb60f1afc7a7e437297973c5.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="cf22e346b8ae2159866740190ae7e8ff.webp"><img src="06d810f57dd7dd2b4dded13b5262f96f.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><div>What demographic is most commonly affected by <b>Riedel thyroiditis</b>?</div><br/><div><span class="cloze" data-cloze="Middle-aged females (30-50 years old)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What demographic is most commonly affected by <b>Riedel thyroiditis</b>?</div><br/><div><span class="cloze" data-ordinal="1">Middle-aged females (30-50 years old)</span></div><br/>Important distinguishing feature vs. anaplastic thyroid carcinoma<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg" title=""/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4aa3433339b3141ef92eaee2ee2b9333.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question"><div><b>Subacute granulomatous thyroiditis (de Quervain)</b> is a self-limited disease often following <span class="cloze" data-cloze="&lt;b&gt;viral infection&lt;/b&gt;" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Subacute granulomatous thyroiditis (de Quervain)</b> is a self-limited disease often following <span class="cloze" data-ordinal="1"><b>viral infection</b></span></div><br/>- Most common in <b><u>middle-aged women<br/></u></b><br/>- Thought to involve <b>HLA-B35</b> polymorphisms<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="1216fc719ee622fa6f452db4389c23f9.webp" width="538"><img src="191824c28591b63041a5fc4fa0747f13.webp" width="534"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="73706871719986c8a75c19a812bc3343.webp"><img src="3eeec03be85e8fada442eb42f8aea656.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><div>Patients with <b>Hashimoto thyroiditis</b> have an increased risk for <b><span class="cloze" data-cloze="primary thyroid lymphoma" data-ordinal="1">[...]</span></b>; presents as an enlarging thyroid late in disease course</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Patients with <b>Hashimoto thyroiditis</b> have an increased risk for <b><span class="cloze" data-ordinal="1">primary thyroid lymphoma</span></b>; presents as an enlarging thyroid late in disease course</div><br/>Most commonly marginal zone lymphoma (non-Hodgkin lymphoma)<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div>* due to chronic inflammation with germinal centers</div><img src="a272b7ec7cc82470def918efdc89baf4.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="19bb5e99e76da899994e392a26d0106a.webp"><img src="2927fd45af8c601a7efd45d22e99975f.webp"><img src="7f00c2be20e1db5a03015831f3c1d781.webp"><img src="ec388d987637c9459e780a208a598361.webp"><br><b><span style="font-weight: 400;"><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-hematology-oncology/videos/medical-internal-medicine-hematology-and-oncology-oncology-non-hodgkin-lymphoma-soap" title="Watch Non-Hodgkin Lymphoma SOAP">Watch Non-Hodgkin Lymphoma SOAP</a></span></b><b><span style="font-weight: 400;"><br></span></b><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><div>Does <b>Hashimoto thyroiditis</b> present with a <b>tender</b> or <b>nontender</b> thyroid?</div><br/><div><span class="cloze" data-cloze="Nontender" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Does <b>Hashimoto thyroiditis</b> present with a <b>tender</b> or <b>nontender</b> thyroid?</div><br/><div><span class="cloze" data-ordinal="1">Nontender</span></div><br/>And mildly enlarged<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg" title=""/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="911abbf1cf113fc93a9e4089d79e7dee.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="2c93da8cdb36ec6750d6aee77d4c2b46.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><div><b>Hashimoto thyroiditis</b> <u>initially</u> presents as <b><span class="cloze" data-cloze="hyperthyroidism" data-ordinal="1">[...]</span> </b>due to <i>thyrotoxicosis</i> during follicular rupture </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Hashimoto thyroiditis</b> <u>initially</u> presents as <b><span class="cloze" data-ordinal="1">hyperthyroidism</span> </b>due to <i>thyrotoxicosis</i> during follicular rupture </div><br/>Ultimately progresses to <b>hypothyroidism</b> (decreased T<sub>4</sub>, increased TSH)<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="80530ff362900ac6108f2e396db000f6.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="9bc7e2743ef1569230c0d7061eebf428.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><div>What demographic is most commonly associated with <b>anaplastic thyroid carcinoma</b>?</div><br/><div><span class="cloze" data-cloze="Elderly females" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What demographic is most commonly associated with <b>anaplastic thyroid carcinoma</b>?</div><br/><div><span class="cloze" data-ordinal="1">Elderly females</span></div><br/>This is an important distinguishing feature from <b>Riedel</b> <b>thyroiditis</b>, which is seen in middle-aged females<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e855d69745248f12e37a6ecae6a7000f.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><b><span class="cloze" data-cloze="Subacute lymphocytic thyroiditis" data-ordinal="1">[...]</span></b> is a variant of Hashimoto thyroiditis that presents with <u>transient hyperthyroidism</u> followed sometimes by <u>hypothyroidism</u><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b><span class="cloze" data-ordinal="1">Subacute lymphocytic thyroiditis</span></b> is a variant of Hashimoto thyroiditis that presents with <u>transient hyperthyroidism</u> followed sometimes by <u>hypothyroidism</u><br/>- AKA painless thyroiditis<br/><br/>- Can look like Graves without eye / skin findings + serum TSI not present<br/><br/><div>- Usually self-limited (weeks)</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="Subacute lymphocytic thyroiditis (SLT)_1566160514431.jpg"><img src="SLT - transient hypothyroidism_1566160514431.jpg"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-gestational-disorders-gestational-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br></div><br><div><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br> --><!-- <img src="530dbb0e325a93208ff2f06b705cd4f7.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="08a16c095b7c58cda71e06318d5c0ec3.webp"><br><img alt="Lesson Review" src="5063534fee8032559ff556fa22953de1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hyperthyroidism-soap">Watch Hyperthyroidism SOAP</a><br><br><img src="626c3a1a63b9fa10c1f4ddc583aad446.webp"><img src="857c0dbec070bcdcee57ad9cf656b369.webp"><img src="f0510d7ddd4e15ba116a84732061d3a5.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><div><b>Subacute granulomatous thyroiditis (de Quervain)</b> may <i>initially</i> present with <span class="cloze" data-cloze="&lt;b&gt;hyperthyroidism&lt;/b&gt;" data-ordinal="1">[...]</span>, which typically is followed by a brief <span class="cloze" data-cloze="&lt;b&gt;hypothyroid&lt;/b&gt;" data-ordinal="1">[...]</span> state</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Subacute granulomatous thyroiditis (de Quervain)</b> may <i>initially</i> present with <span class="cloze" data-ordinal="1"><b>hyperthyroidism</b></span>, which typically is followed by a brief <span class="cloze" data-ordinal="1"><b>hypothyroid</b></span> state</div><br/>- Thyroid symptoms usually mild; this is permanent in ~15% of cases<br/><br/><div>- During the transient hyperthyroid phase, radioiodine uptake is decreased due to low TSH levels</div><div><div><br/><div>- Typical pattern of <b>thyroiditis</b> (initially hyper spilling<div style="display: inline !important;"> out T<sub>3</sub>/T<sub>4</sub>, then transitioning to burnout hypo)</div></div></div></div><div><img src="53b4869667ab7d60531d8d4b5dd514de.jpg" style="width: 894px;"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9cf65c280565017ede01e8356a9d84fb.webp" width="800"><img src="7e26aa4382fb8405ecd575295f307a1c.webp" width="800"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="08a16c095b7c58cda71e06318d5c0ec3.webp"><br><img src="5063534fee8032559ff556fa22953de1.webp" alt="Lesson Review"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hyperthyroidism-soap">Watch Hyperthyroidism SOAP</a><br><br><img src="857c0dbec070bcdcee57ad9cf656b369.webp"><img src="f0510d7ddd4e15ba116a84732061d3a5.webp"><img src="86cfa4ee992421e9f6a2068a99d02f69.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br><br><img src="f769018cebcd91199c89e5b005761616.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question"><div>Does <b>subacute granulomatous thyroiditis (de Quervain)</b> present with a <b>tender</b> or <b>nontender</b> thyroid?</div><br/><div><span class="cloze" data-cloze="**Very tender**" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Does <b>subacute granulomatous thyroiditis (de Quervain)</b> present with a <b>tender</b> or <b>nontender</b> thyroid?</div><br/><div><span class="cloze" data-ordinal="1">**Very tender**</span></div><br/>- May also have <b>jaw pain, </b>pain that radiates to <u>ears</u>, and elevated ESR / CRP<br/><div>- de Quer<b>VAIN</b> is associated with <b>PAIN</b></div><br/>- Most common in <b><u>middle-aged women</u></b><br/>- Thought to involve <b>HLA-B35</b> polymorphisms<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="1216fc719ee622fa6f452db4389c23f9.webp" width="538"><img src="191824c28591b63041a5fc4fa0747f13.webp" width="534"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br><br> --><!-- <img src="9a16db549a3cdb5eb9ea6f471719165d.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question"><div>What is the most common cause of <b>hypothyroidism</b> in regions where iodine levels are adequate?</div><br/><div><span class="cloze" data-cloze="Hashimoto thyroiditis" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the most common cause of <b>hypothyroidism</b> in regions where iodine levels are adequate?</div><br/><div><span class="cloze" data-ordinal="1">Hashimoto thyroiditis</span></div><br/>Other causes include:<div>- <b>Iodine</b> <b>deficiency </b>(<b>endemic goiter</b> especially in Southeast Asia and Africa)</div><div>- <b>Wolff-Chaikoff effect</b> (iodine excess)</div><div>- Goitrogens (e.g., lithium, amiodarone)</div><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4e53e7312c04c6e954317840700b0e07.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br><br> --><!-- <img src="6ed798dde77880ee86279fcb74f06d45.webp"><img src="093db06fe28bd08bd115dae0b6df6bf4.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question"><div>Which <u>two</u> antibodies are associated with <b>Hashimoto thyroiditis</b>? </div><br/><div>- <span class="cloze" data-cloze="Antithyroglobulin antibodies (TgAbs)" data-ordinal="1">[...]</span></div><div>- <span class="cloze" data-cloze="Antithyroid peroxidase antibodies (TPOAbs, anti-microsomal)" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <u>two</u> antibodies are associated with <b>Hashimoto thyroiditis</b>? </div><br/><div>- <span class="cloze" data-ordinal="1">Antithyroglobulin antibodies (TgAbs)</span></div><div>- <span class="cloze" data-ordinal="1">Antithyroid peroxidase antibodies (TPOAbs, anti-microsomal)</span> </div><br/>- These are a <b>sign</b> of thyroid damage, <u><b>not</b></u> the <b>cause</b> of damage<br/><br/><div>- Note: anti-mito<b>chondrial</b> (primary biliary cholangitis) vs. anti-micro<b>somal</b> (Hashimoto)</div><br/><div><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e8ad3316d4da59894269763b3d833cf3.webp" width="800"><img src="89e292e5e60db469e22f90db3834aa03.webp" width="800"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br> --><!-- <img src="5df991b4deb2f07d79d22851275b62d3.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question"><div>What <u>histological</u> findings are associated with <b>subacute thyroiditis (de Quervain)</b>?</div><br/><div><span class="cloze" data-cloze="Granulomatous inflammation" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <u>histological</u> findings are associated with <b>subacute thyroiditis (de Quervain)</b>?</div><br/><div><span class="cloze" data-ordinal="1">Granulomatous inflammation</span></div><br/><div>SGT is initially characterized by a more neutrophilic infiltrate with microabscess formation; then replaced by a more generalized inflammatory infiltrate with macrophages and multinucleated giant cells</div><br/><div><img src="b500087ebe17b07fc661dc7b8f9c4019.jpg"/></div><span style="font-size: 10pt;"><i>Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Subacute_thyroiditis_-_high_mag.jpg">Nephron</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons</i></span><br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="bdf34bab6381f30f6f4a0dea7ffbdd63.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question"><div><u>Histologically</u>, <b>Hashimoto thyroiditis</b> is associated with <b>chronic inflammation</b> with well-developed <b><span class="cloze" data-cloze="germinal centers" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><u>Histologically</u>, <b>Hashimoto thyroiditis</b> is associated with <b>chronic inflammation</b> with well-developed <b><span class="cloze" data-ordinal="1">germinal centers</span></b></div><br/>This is an <b>autoimmune disorder</b> as<b> </b>T-cells attack thyroid and B-cells get activated<br/><br/><img src="8824be66573007353e97baf7ebca88ae.webp" width="581"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Hashimoto%27s_thyroiditis,_HE_4.jpg">Patho</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons </span></i><br/><br/><div> </div><img alt="Hashimoto thyroiditis - alt -- intermed mag" src="5aeceeee81fbfd551cb6e4f35f8ab83f.webp" width="512"/><br/><em><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Hashimoto_thyroiditis_-_alt_--_intermed_mag.jpg">Librepath</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons<br/><br/> </span></em><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="26f198de49312c9846238537ac1fbf8b.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question">What is the likely outcome in most cases of <b>subacute thyroiditis</b>?<br/><br/><div><span class="cloze" data-cloze="Complete recovery (return to euthyroid state)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the likely outcome in most cases of <b>subacute thyroiditis</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Complete recovery (return to euthyroid state)</span></div><br/><div><b><u>Subacute thyroiditis consist of two main subtypes</u></b>:</div><div>1) Subacute granulomatous thyroiditis AKA de Quervain thyroiditis</div><div>2) Subacute lymphocytic thyroiditis AKA silent or painless thyroiditis</div><br/><div>- Most cases self-resolve within 1 year; permanent hypothyroidism occurs in ∼15% of cases</div><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="7e26aa4382fb8405ecd575295f307a1c.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="a8d58864ff54d07b824bc3146f685ae6.webp"><img src="5c3cf3297f27745b04699be1312ceaaf.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">21.1</td>
+                    <td class="question"><div>When performing <b>immunohistochemistry</b>, <u>thyroglobulin</u> can be used to identify malignancies of the <span class="cloze" data-cloze="thyroid" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>When performing <b>immunohistochemistry</b>, <u>thyroglobulin</u> can be used to identify malignancies of the <span class="cloze" data-ordinal="1">thyroid</span></div><br/>Autoantibodies against thyroglobulin are seen in Hashimoto thyroiditis<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="553046f5e489c2a1d8af0098b3a2016f.webp"><img src="5867ba9631b6a91aba7277fad57415ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

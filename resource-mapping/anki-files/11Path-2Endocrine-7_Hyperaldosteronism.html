@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (22 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div>The most common cause of <b>primary hyperaldosteronism</b> is <span class="cloze" data-cloze="bilateral adrenal hyperplasia" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The most common cause of <b>primary hyperaldosteronism</b> is <span class="cloze" data-ordinal="1">bilateral adrenal hyperplasia</span></div><br/>Aldosterone-secreting adenoma and carcinoma are less common causes <br/><br/><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" width="986"/><br/><br/><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="42e27d2420b72cd52620d3cbc836ea13.webp" width="800"><img src="3b48ee1754dd16f3458d47911cdb1811.webp" width="800"></div><div><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <div><img src="02355d33af8a51210470c78032d6e52f.webp"><br></div><div><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><span class="cloze" data-cloze="&lt;b&gt;Secondary&lt;/b&gt;" data-ordinal="1">[...]</span><b> hyperaldosteronism</b> is seen in patients with <b>renovascular</b> <b>hypertension</b> due to <u>independent</u> activation of the RAAS<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze" data-ordinal="1"><b>Secondary</b></span><b> hyperaldosteronism</b> is seen in patients with <b>renovascular</b> <b>hypertension</b> due to <u>independent</u> activation of the RAAS<br/><div>*usually due to atherosclerosis or fibromuscular dysplasia → narrowing of renal arteries → decreased renal perfusion → increased RENIN secretion by the kidney → RAAS activation → elevated serum aldosterone</div><br/><div><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="27471e68daa8f99eced9decf71fcdde0.webp" width="800"><br></div><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div><b>Hyperaldosteronism</b> presents with the following findings:<br/><br/>- <span class="cloze" data-cloze="&lt;b&gt;Hyper&lt;/b&gt;" data-ordinal="1">[...]</span><b>tension</b><br/>- <span class="cloze" data-cloze="&lt;b&gt;Hyper&lt;/b&gt;" data-ordinal="1">[...]</span><b>natremia</b><br/>- <span class="cloze" data-cloze="&lt;b&gt;Hypo&lt;/b&gt;" data-ordinal="1">[...]</span><b>kalemia</b><br/>- <span class="cloze" data-cloze="&lt;b&gt;Metabolic alkalosis&lt;/b&gt;" data-ordinal="1">[Acid-base disturbance]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Hyperaldosteronism</b> presents with the following findings:<br/><br/>- <span class="cloze" data-ordinal="1"><b>Hyper</b></span><b>tension</b><br/>- <span class="cloze" data-ordinal="1"><b>Hyper</b></span><b>natremia</b><br/>- <span class="cloze" data-ordinal="1"><b>Hypo</b></span><b>kalemia</b><br/>- <span class="cloze" data-ordinal="1"><b>Metabolic alkalosis</b></span></div><br/>- Due to aldosterone escape mechanism, there is usually no clinically significant edema or hypernatremia in primary hyperaldosteronism (more common in secondary hyperaldosteronism)<br/><br/>- Goljan: May present with hypocalcemia due to alkalosis (albumin becomes more negative and binds Ca<sup>2+</sup>) which leads to <b>tetany<br/></b><br/><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" width="986"/><br/><br/><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e08dda89752fab181a20dba07d35fdbf.webp" width="800"><img src="e0765b9e1b03b649cbf255cb1b113149.webp" width="800"><img src="732da66ec4293385e1f8d9eddb7f5c83.webp" width="800"><img src="452db610bbd49503c72679806619b16d.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <img src="33490108b9f52d349deb8fd7dda27902.webp"><img src="9c0287a192e6516ee490cb226b61b4ec.webp"><img src="ceb52318d9e314e6164bc6b3ba818d38.webp"><br><img src="eabcf1c6d8ad466100533c48e98dcc87.webp"><img src="1b8f3e88561b246f4d04346e1891b8cf.webp"><img src="284b6b5991f11c77e97e9c833673fc5f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-cardiology/videos/medical-internal-medicine-cardiology-blood-pressure-htn-soa">Watch Hypertension SOA</a><br><br><img src="4e7d76f6d0ac6baf70e3f4a69ad819b0.webp"><img src="664591b90d54ed5e5583cadcfdaee68a.webp"><img src="262da3290c6df94a8f4e0a219207e910.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br><br><img src="7767c16d016b57924340f32b82639ba7.webp"><img src="02355d33af8a51210470c78032d6e52f.webp"><img src="4ae2748d48ce6a36073c8c32fe44f33c.webp"><img src="c7aef22144f5689059ce1634efe2244e.webp"><br><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to <b>primary adrenal adenoma</b>, <b>hyperplasia</b>, or <b>carcinoma</b>?</div><br/><div><span class="cloze" data-cloze="&lt;u&gt;Atrophy&lt;/u&gt; of the &lt;u&gt;uninvolved&lt;/u&gt; gland; &lt;u&gt;hyperplasia&lt;/u&gt; of the &lt;u&gt;involved&lt;/u&gt; gland" data-ordinal="1">[hyperplasia, atrophy; one, both]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to <b>primary adrenal adenoma</b>, <b>hyperplasia</b>, or <b>carcinoma</b>?</div><br/><div><span class="cloze" data-ordinal="1"><u>Atrophy</u> of the <u>uninvolved</u> gland; <u>hyperplasia</u> of the <u>involved</u> gland</span></div><br/>Thus can also present with pseudohyperaldosteronism<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a694c9975b41cd410d4f6bec1fbd9a0e.webp"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br><br><img src="5508ce30e1ae3804f06f13a38cf60dba.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="b9994025cab83a7d92ae5f4163ff3b00.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><div><span class="cloze" data-cloze="&lt;b&gt;Primary&lt;/b&gt;" data-ordinal="1">[...]</span> <b>hyperaldosteronism </b>is characterized by <b>high aldosterone</b> and <span class="cloze-inactive" data-ordinal="2"><b>low</b></span> <b>renin</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze" data-ordinal="1"><b>Primary</b></span> <b>hyperaldosteronism </b>is characterized by <b>high aldosterone</b> and <span class="cloze-inactive" data-ordinal="2"><b>low</b></span> <b>renin</b></div><br/>- This results in <b>resistant hypertension</b>; renin is downregulated via high blood pressure<br/><br/>- <u>NO direct edema</u> due to <b>aldosterone escape mechanism</b> (aldosterone upregulates ENaC, increased BV causes atria to release ANP to downregulate ENaC)<br/><br/><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/><br/><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" width="986"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="d10f23ce8ba5832c555ba35a5f2edead.webp" width="800"><img src="cbbe03b8031d112654e9530680847e5a.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <img src="a51a09355e1c31d8bd04b793f1854db7.webp"><img src="b8d4a2a63c5622b1160fdfc7b3f9ed68.webp"><img src="d3fd806cf69cbc7eb0d5940d4c417880.webp"><br><img src="eabcf1c6d8ad466100533c48e98dcc87.webp"><img src="1b8f3e88561b246f4d04346e1891b8cf.webp"><img src="284b6b5991f11c77e97e9c833673fc5f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-cardiology/videos/medical-internal-medicine-cardiology-blood-pressure-htn-soa">Watch Hypertension SOA</a><br><br><img src="262da3290c6df94a8f4e0a219207e910.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br><br><div><img src="c82bf0995f85afd9b3300156d58bc311.webp"><img src="aaf2c604edb59a25bfce931e72b33b9b.webp"><img src="7767c16d016b57924340f32b82639ba7.webp"><br></div><div><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><span class="cloze" data-cloze="&lt;b&gt;Secondary&lt;/b&gt;" data-ordinal="1">[...]</span><b> hyperaldosteronism</b> is seen in patients with <b>juxtaglomerular</b> <b>cell</b> <b>tumor</b> due to <u>independent</u> activation of the RAAS<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze" data-ordinal="1"><b>Secondary</b></span><b> hyperaldosteronism</b> is seen in patients with <b>juxtaglomerular</b> <b>cell</b> <b>tumor</b> due to <u>independent</u> activation of the RAAS<br/><div>- Results in severe hypertension that is <u>difficult to control</u></div><br/><div><div>- These secrete renin (hence AKA <b>reninoma</b>), thus you also have ATII upregulation as well as aldosterone (failure of aldosterone escape)</div></div><br/><div><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="7dbd37480a3782baf17591e21599c5d2.webp"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><b>Secondary hyperaldosteronism</b> is due to activation of <span class="cloze" data-cloze="&lt;b&gt;renin-angiotensin&lt;/b&gt;" data-ordinal="1">[...]</span> <b>system</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Secondary hyperaldosteronism</b> is due to activation of <span class="cloze" data-ordinal="1"><b>renin-angiotensin</b></span> <b>system</b><br/>- Seen in patients with <b>renovascular hypertension</b> (renal artery stenosis), <b>juxtaglomerular cell tumors</b>, and <b>edema</b> (cirrhosis, heart failure, nephrotic syndrome)<br/><br/>- <u>EDEMA present</u> due to <b>NO aldosterone escape mechanism</b> (even if ANP rises, ATII is still present increasing Na<sup>+</sup> reabsorption through Na<sup>+</sup> / H<sup>+</sup> exchanger)<br/><br/><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="7223b5e5fb04d787eff1c18a30506656.webp" width="800"><img src="823a463e1ba1ad03ce46f9ac81f57487.webp" width="800"><img src="6244cad015f6044a6ceceed7a7412780.webp" width="800"><img src="27471e68daa8f99eced9decf71fcdde0.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <img src="b3aac21a4a8698e2c937fbf45bd49d3f.webp"><br><img src="eabcf1c6d8ad466100533c48e98dcc87.webp"><img src="1b8f3e88561b246f4d04346e1891b8cf.webp"><img src="284b6b5991f11c77e97e9c833673fc5f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-cardiology/videos/medical-internal-medicine-cardiology-blood-pressure-htn-soa">Watch Hypertension SOA</a><br><br><div><img src="4ae2748d48ce6a36073c8c32fe44f33c.webp"><br></div><div><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question"><div><b><span class="cloze" data-cloze="Secondary" data-ordinal="1">[...]</span></b> <b>hyperaldosteronism </b>is characterized by <b>high aldosterone</b> and <b><span class="cloze-inactive" data-ordinal="2">high</span> renin</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><span class="cloze" data-ordinal="1">Secondary</span></b> <b>hyperaldosteronism </b>is characterized by <b>high aldosterone</b> and <b><span class="cloze-inactive" data-ordinal="2">high</span> renin</b></div><br/>- Seen in patients with <b>renovascular</b> <b>hypertension</b> and <b>juxtaglomerular cell tumor</b> (due to independent activation of renin-angiotensin-aldosterone system), as well as causes of <b>edema </b>(cirrhosis, heart failure, nephrotic syndrome)<br/><br/>- <u>EDEMA present</u> due to <b>NO</b> <b>aldosterone escape mechanism</b> (even if ANP is elevated, ATII is still increasing Na<sup>+</sup> reabsorption via Na<sup>+ </sup>/ H<sup>+</sup> exchanger)<br/><br/>- vs. <u>primary</u> hyperaldosteronism, which would be characterized by high aldosterone and low renin<br/><br/><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="7223b5e5fb04d787eff1c18a30506656.webp"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <img src="b3aac21a4a8698e2c937fbf45bd49d3f.webp"><br><img src="eabcf1c6d8ad466100533c48e98dcc87.webp"><img src="1b8f3e88561b246f4d04346e1891b8cf.webp"><img src="284b6b5991f11c77e97e9c833673fc5f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-cardiology/videos/medical-internal-medicine-cardiology-blood-pressure-htn-soa">Watch Hypertension SOA</a><br><br><div><img src="4ae2748d48ce6a36073c8c32fe44f33c.webp"><br></div><div><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question">Do <b>aldosterone-secreting adenomas</b> cause atrophy of the contralateral adrenal gland? <br/><br/><div><span class="cloze" data-cloze="No" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Do <b>aldosterone-secreting adenomas</b> cause atrophy of the contralateral adrenal gland? <br/><br/><div><span class="cloze" data-ordinal="1">No</span> </div><br/>Because ACTH secretion is not affected [ACTH is responsible for adrenal gland size]<br/><br/><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="361ae97dd6b621a22e26cab956f13565.webp" width="800"><img src="cbbe03b8031d112654e9530680847e5a.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><b>Primary hyperaldosteronism</b> activates "aldosterone escape", which leads to a steady state of <span class="cloze" data-cloze="normonatremia" data-ordinal="1">[sodium levels]</span>, <span class="cloze" data-cloze="hypokalemia" data-ordinal="1">[potassium levels]</span> and <span class="cloze" data-cloze="hypervolemia" data-ordinal="1">[volume levels]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Primary hyperaldosteronism</b> activates "aldosterone escape", which leads to a steady state of <span class="cloze" data-ordinal="1">normonatremia</span>, <span class="cloze" data-ordinal="1">hypokalemia</span> and <span class="cloze" data-ordinal="1">hypervolemia</span><br/><div>- Excess aldosterone → increased Na<sup>+</sup> reabsorption → negative luminal charge, which pulls K<sup>+</sup> and H<sup>+</sup> into urine → hypokalemia + metabolic alkalosis</div><br/><div>- Despite the increase in Na<sup>+</sup> reabsorption, hypernatremia and pedal edema are rarely observed due to increased intravascular volume, which increases renal blood flow (resulting in pressure natriuresis and normal sodium levels)</div><br/><div><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" width="986"/><br/></div><br/><div><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="c8c9fe66051cf3e7a2b26d75e5400490.webp" width="800"><img src="71a2c3b61a9d93467f063aa0d2b4510c.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br><br> --><!-- <img src="664591b90d54ed5e5583cadcfdaee68a.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br><br><img src="02355d33af8a51210470c78032d6e52f.webp"><br><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question">The diagnosis of <b>primary hyperaldosteronism</b> may be <u>confirmed</u> by a(n) <span class="cloze-inactive" data-ordinal="2"><b>oral sodium loading</b></span> <b>test</b> showing elevated <span class="cloze" data-cloze="&lt;b&gt;urine aldosterone&lt;/b&gt;" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">The diagnosis of <b>primary hyperaldosteronism</b> may be <u>confirmed</u> by a(n) <span class="cloze-inactive" data-ordinal="2"><b>oral sodium loading</b></span> <b>test</b> showing elevated <span class="cloze" data-ordinal="1"><b>urine aldosterone</b></span><br/><div>- Patients adhere to a high-sodium diet for 3 days. 24-hour urine measurements of aldosterone are elevated (&gt; 12 mcg/day) in patients with primary hyperaldosteronism because of a failure to suppress aldosterone secretion</div><br/><div>- A positive test requires further adrenal imaging</div><br/><div>- This card was recently updated to reflect more accurate terminology and test findings (July 2025)</div><br/><img src="ae7b170a997925adfc4782657936e71e.webp" width="800"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="af7a4b7aad1c5cfdb001a954cfb91fe2.webp" width="800"><img src="7470b7e862aedc5aa00c5dc1f17577b7.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><b>Primary hyperaldosteronism</b> may present with <span class="cloze" data-cloze="&lt;u&gt;increased&lt;/u&gt;" data-ordinal="1">[...]</span> <b>renal blood flow</b> and <span class="cloze" data-cloze="&lt;u&gt;increased&lt;/u&gt;" data-ordinal="1">[...]</span> <b>glomerular filtration rate </b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Primary hyperaldosteronism</b> may present with <span class="cloze" data-ordinal="1"><u>increased</u></span> <b>renal blood flow</b> and <span class="cloze" data-ordinal="1"><u>increased</u></span> <b>glomerular filtration rate </b><br/>Due to arterial hypertension and hypersecretion of aldosterone<br/><br/><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" width="986"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="c5bdec1b94b34ab46e553ec9506b39e2.webp" width="800"><img src="cbbe03b8031d112654e9530680847e5a.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><b>Primary hyperaldosteronism</b> <i>initially</i> causes severe <b>volume</b> <span class="cloze" data-cloze="&lt;b&gt;overload&lt;/b&gt;" data-ordinal="1">[...]</span> and <span class="cloze" data-cloze="&lt;b&gt;hyper&lt;/b&gt;" data-ordinal="1">[...]</span><b>tension</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Primary hyperaldosteronism</b> <i>initially</i> causes severe <b>volume</b> <span class="cloze" data-ordinal="1"><b>overload</b></span> and <span class="cloze" data-ordinal="1"><b>hyper</b></span><b>tension</b><br/>- Due to sodium and water retention<br/><br/>- Primary hyperaldosteronism eventually activates aldosterone escape via pressure natriuresis and increased ANP, leading to a steady state of normonatremia, hypokalemia and hypervolemia<br/><br/><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" width="986"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="d7cdc75d00acb9b8e153e24a76b0e137.webp" width="800"><img src="cbbe03b8031d112654e9530680847e5a.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <div><img src="aaf2c604edb59a25bfce931e72b33b9b.webp"><img src="7767c16d016b57924340f32b82639ba7.webp"><br></div><div><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br></div><br><div><img src="96dba5616933a146c4106aec557ce56f.webp"><br></div><div><img src="48664334076f714d499024f7dfb35800.webp"><img src="65174e568ba926e80edfc2b8f3f33f7d.webp"><img src="9eda9778fcbdef2db708face545aa1ae.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/blood-pressure/lesson/hypertension-management">Watch Hypertension Management</a><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><b>Congestive heart failure</b>, <b>cirrhosis</b>, <b>nephrotic syndrome</b>, and <b>excessive peripheral edema</b> may cause <span class="cloze" data-cloze="&lt;u&gt;secondary&lt;/u&gt;" data-ordinal="1">[...]</span> <u>hyperaldosteronism</u><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Congestive heart failure</b>, <b>cirrhosis</b>, <b>nephrotic syndrome</b>, and <b>excessive peripheral edema</b> may cause <span class="cloze" data-ordinal="1"><u>secondary</u></span> <u>hyperaldosteronism</u><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="823a463e1ba1ad03ce46f9ac81f57487.webp" width="800"><img src="6244cad015f6044a6ceceed7a7412780.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <div><img src="4ae2748d48ce6a36073c8c32fe44f33c.webp"><br></div><div><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question">Which steroid hormone enzyme deficiency presents with <u>decreased</u> <b>renin</b> activity?<br/><br/><div><span class="cloze" data-cloze="11β-hydroxylase" data-ordinal="1">[21- or 11β-hydroxylase]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which steroid hormone enzyme deficiency presents with <u>decreased</u> <b>renin</b> activity?<br/><br/><div><span class="cloze" data-ordinal="1">11β-hydroxylase</span></div><br/>Due to increased 11-DOC, which is a mineralocorticoid<br/><br/><img src="3fa34185a173225cbb91cdd952781128.webp" width="1200px"/><br/><br/><img src="96e95e83221f8f6f2b658cc853704499.webp" width="1114"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="2df8585135940fa8a58bacae4e3ecd6b.webp" width="800"><img src="1d9f6073b7284faead833866d45c4936.webp" width="800"><img src="bcc3b92122e427557a0d3d5327eebce1.webp"><img src="7a565f9131d59a6a16ca4a5c4755b583.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-congenital-adrenal-hyperplasia-cah?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Congenital Adrenal Hyperplasia (CAH)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question"><div><span class="cloze" data-cloze="&lt;b&gt;Primary hyperaldosteronism&lt;/b&gt; (Conn syndrome)" data-ordinal="1">[...]</span> is most commonly caused by <span class="cloze-inactive" data-ordinal="2"><b>bilateral adrenal hyperplasia</b> (60%)</span> or <span class="cloze-inactive" data-ordinal="2"><b>aldosteronoma</b> (30%)</span><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze" data-ordinal="1"><b>Primary hyperaldosteronism</b> (Conn syndrome)</span> is most commonly caused by <span class="cloze-inactive" data-ordinal="2"><b>bilateral adrenal hyperplasia</b> (60%)</span> or <span class="cloze-inactive" data-ordinal="2"><b>aldosteronoma</b> (30%)</span><br/></div><br/><u>Note</u>: some sources define Conn syndrome as primary hyperaldosteronism regardless of cause while others specify this denotes an aldosteronoma<br/><br/><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" width="986"/><br/><br/><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="3b48ee1754dd16f3458d47911cdb1811.webp" width="800"><img src="42e27d2420b72cd52620d3cbc836ea13.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <div><img src="02355d33af8a51210470c78032d6e52f.webp"><br></div><div><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question">Treatment of <b>Conn syndrome</b> consists of administration of a(n) <span class="cloze" data-cloze="&lt;u&gt;aldosterone&lt;/u&gt;" data-ordinal="1">[...]</span><u> antagonist</u>, such as <span class="cloze-inactive" data-ordinal="2"><b>spironolactone</b></span>, followed by removal of the <span class="cloze" data-cloze="aldosterone" data-ordinal="1">[...]</span>-secreting tumor<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Treatment of <b>Conn syndrome</b> consists of administration of a(n) <span class="cloze" data-ordinal="1"><u>aldosterone</u></span><u> antagonist</u>, such as <span class="cloze-inactive" data-ordinal="2"><b>spironolactone</b></span>, followed by removal of the <span class="cloze" data-ordinal="1">aldosterone</span>-secreting tumor<br/><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/><br/><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" width="986"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="1d806f6eb06db9bb1a1695107e1c740e.webp" width="800"><img src="a0f872170b47939270f807634c0a8428.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br><br><img src="869aee967c68cac784c3598bc7a5c463.webp"><br><img src="3ab1b98a881fdcd0d138bff6628fade4.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-cardiovascular-renal/videos/medical-pharmacology-cardiovascular-and-renal-diuretics-k-sparing-diuretics?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch K+ Sparing Diuretics</a><br><br><div><img src="text-65d0554c3778e87e12ffe6aaa67918c50e44375e_1566160514431.JPG"><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question"><div><b>Conn syndrome </b>presents with <b>hypertension</b>, <b>hypokalemia</b>, and <b>metabolic alkalosis</b> due to <span class="cloze" data-cloze="increased" data-ordinal="1">[...]</span> <u>aldosterone</u> levels</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Conn syndrome </b>presents with <b>hypertension</b>, <b>hypokalemia</b>, and <b>metabolic alkalosis</b> due to <span class="cloze" data-ordinal="1">increased</span> <u>aldosterone</u> levels</div><br/>- Also have <b>decreased</b> <b>renin</b> levels; increased ECF volume causes increased renal perfusion pressure, which inhibits renin secretion<br/><br/>- These electrolyte imbalances may cause <b>paresthesias </b>and <b>muscle weakness </b>in some patients <br/><br/><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" width="986"/><br/><br/><img src="d62b754aabb30fc4b034916f97799b1d.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e08dda89752fab181a20dba07d35fdbf.webp" width="800"><img src="e0765b9e1b03b649cbf255cb1b113149.webp" width="800"><img src="732da66ec4293385e1f8d9eddb7f5c83.webp" width="800"><img src="452db610bbd49503c72679806619b16d.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <img src="262da3290c6df94a8f4e0a219207e910.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br><br><img src="7767c16d016b57924340f32b82639ba7.webp"><img src="02355d33af8a51210470c78032d6e52f.webp"><br><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br><br><img src="96dba5616933a146c4106aec557ce56f.webp"><br><img src="48664334076f714d499024f7dfb35800.webp"><img src="65174e568ba926e80edfc2b8f3f33f7d.webp"><img src="9eda9778fcbdef2db708face545aa1ae.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/blood-pressure/lesson/hypertension-management">Watch Hypertension Management</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question"><div><b>Nephrotic syndrome</b> results in <span class="cloze" data-cloze="&lt;u&gt;hypoalbuminemia&lt;/u&gt;" data-ordinal="1">[lab finding]</span>, which manifests as <b><span class="cloze-inactive" data-ordinal="2">pitting edema</span></b> on physical exam and <span class="cloze-inactive" data-ordinal="3"><b>secondary</b></span> <u>hyperaldosteronism</u></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Nephrotic syndrome</b> results in <span class="cloze" data-ordinal="1"><u>hypoalbuminemia</u></span>, which manifests as <b><span class="cloze-inactive" data-ordinal="2">pitting edema</span></b> on physical exam and <span class="cloze-inactive" data-ordinal="3"><b>secondary</b></span> <u>hyperaldosteronism</u></div><br/><div>- Edema leads to a decreased <u>effective circulating volume</u>, causing a <u>secondary hyperaldosteronism</u> which leads to salt retention and exacerbating the edema (generated by decreased oncotic pressure)</div><br/>- Also manifests as <u>periorbital edema</u> (thus can present clinically as a patient who thinks they are having an allergic reaction)<br/><br/><img src="1e4df6e154984bd0cbf02df3dd75387a.webp" width="969"/><br/><br/><img src="bd8b2d59515a17a289866930cc2b2722.webp" width="1100px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="118087393b9185b1c83afdc670d4ea10.webp" width="800"><img src="66f6234ce2ca25a9e9e8edc7f67437ba.webp" width="800"><br><img src="1f01461706abf679a190fc0b01cd4e77.webp"><img src="66c0e00017caf56854602d2695b2861f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-glomerulopathy-nephrotic-syndrome?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Nephrotic Syndrome</a><br><br><img src="823a463e1ba1ad03ce46f9ac81f57487.webp" width="800"><img src="6244cad015f6044a6ceceed7a7412780.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-glomerulopathy-nephrotic-syndrome?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <img src="2ebc73441e756f66a446444c1014dc50.webp"><img src="5fe2f5790619af6d2ef779c4781f00ff.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intrapulmonary-shunt-processes/lesson/transudative-pleural-effusions-ddx">Watch Transudative Pleural Effusions DDx</a><br><br><img src="11688c0e5058b1694d9618bda802fa9b.webp"><img src="b1e3edc5f6d9093643ce04590ff61d8e.webp"><br><img src="b1f0f419dd655b27988669e7121e33b5.webp"><img src="798f770f0254c4cbad862e6041f42e96.webp"><br><br><img src="8d6b6d2d1c167c6e32ef9ccb2ef8cf02.webp"><br><img src="6a799dfdbbaaa1e5c7597fea1598d91c.webp"><br><img src="4547c67c2157e6fdcb37f084a41fbb74.webp"><br><img src="d6b806226bbf9611a2c405f450857c8b.webp"><br><img src="caad2536700a4748c5d0ec1ab92c38fd.webp"><br><img src="a59292c921d19a5dfd0a37a9ae448500.webp"><br><img src="8b7192b2954a510d0d9d60f7979bb7fe.webp"><img src="0550b6b464ad100a0a183635fa0e35b1.webp"><img src="ae77c2c054fb833bab4b2e4dd9619230.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-nephrology-urology/videos/medical-internal-medicine-nephrology-and-urology-nephrology-nephrotic-syndrome-soap">Watch Nephrotic Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question"><br/><div>No cloze ⁨1⁩ found on card.Please either add a cloze deletion, or use the Empty Cards tool.<br/><a href="https://anki.tenderapp.com/kb/problems/no-cloze-found-on-card">More information</a></div></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>No cloze ⁨1⁩ found on card.Please either add a cloze deletion, or use the Empty Cards tool.<br/><a href="https://anki.tenderapp.com/kb/problems/no-cloze-found-on-card">More information</a></div></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">21.1</td>
+                    <td class="question">Which <u>renal tubular disorders</u> present similarly to <b>hyperaldosteronism</b>?<br/><br/><span class="cloze" data-cloze="Liddle syndrome, syndrome of apparent mineralocorticoid excess (SAME)" data-ordinal="1">[2]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which <u>renal tubular disorders</u> present similarly to <b>hyperaldosteronism</b>?<br/><br/><span class="cloze" data-ordinal="1">Liddle syndrome, syndrome of apparent mineralocorticoid excess (SAME)</span><br/>However in these syndromes, aldosterone levels are decreased<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="paste-356374911386086.jpg" width="540"><br></div><div><img src="869aee967c68cac784c3598bc7a5c463.webp"><br></div><img src="3ab1b98a881fdcd0d138bff6628fade4.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-cardiovascular-renal/videos/medical-pharmacology-cardiovascular-and-renal-diuretics-k-sparing-diuretics?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch K+ Sparing Diuretics</a><br><br> --><!-- <div><img src="c7aef22144f5689059ce1634efe2244e.webp"><br></div><div><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">22.1</td>
+                    <td class="question"><b>Primary hyperaldosteronism</b> does <u>not</u> directly cause <b>edema or hypernatremia</b> due to <span class="cloze" data-cloze="&lt;u&gt;aldosterone escape&lt;/u&gt;" data-ordinal="1">[...]</span>, which occurs through <span class="cloze-inactive" data-ordinal="2"><b>pressure natriuresis</b></span> and increased <span class="cloze-inactive" data-ordinal="2"><i>ANP</i></span> <i>secretion</i><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Primary hyperaldosteronism</b> does <u>not</u> directly cause <b>edema or hypernatremia</b> due to <span class="cloze" data-ordinal="1"><u>aldosterone escape</u></span>, which occurs through <span class="cloze-inactive" data-ordinal="2"><b>pressure natriuresis</b></span> and increased <span class="cloze-inactive" data-ordinal="2"><i>ANP</i></span> <i>secretion</i><br/>- <b style="">Aldosterone escape mechanism/no edema </b>and<b style=""> ↔ Na<sup>+</sup></b>: aldosterone causes retention of Na<sup style="">+</sup>/water, which induces ANP secretion, causing increased excretion of Na<sup style="">+</sup>/water<br/><br/><div style="">- <b style="">Pressure natriuresis</b>:<b style=""> </b>↑ volume = ↑ RBF = ↑ Na<sup style="">+</sup>/H<sub style="">2</sub>O secretion</div><br/><div style="font-style: italic;"><img src="03fb997bf136fc785d275a3d6b2d1fa4.webp" style="font-style: normal;" width="986"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="0bf303d3788ece13405662c5b4ceea4b.webp" width="800"><img src="04d86d43d9a876dfec2d9dfa4d3685c6.webp" width="800"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br> --><!-- <img src="f331938731eec052eb00d60694e4e461.jpg"><br><img src="f7348df09cf082534c0761ed1ed2ef90.webp"><img src="afc5a0889c57fb2422ffc14fd9883ff4.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-fluids-electrolytes-acid-base/videos/medical-internal-medicine-electrolytes--acid-base-hypernatremia">Watch Hypernatremia</a><br><br><img src="664591b90d54ed5e5583cadcfdaee68a.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (40 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div><span class="cloze-inactive" data-ordinal="2"><b>Tertiary</b></span><b> adrenal insufficiency</b> is seen in patients with <u>chronic exogenous</u> <span class="cloze" data-cloze="&lt;b&gt;glucocorticoid&lt;/b&gt;" data-ordinal="1">[...]</span><b> </b>use, precipitated by <span class="cloze" data-cloze="&lt;u&gt;abrupt&lt;/u&gt;&lt;b&gt; withdrawal&lt;/b&gt;" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze-inactive" data-ordinal="2"><b>Tertiary</b></span><b> adrenal insufficiency</b> is seen in patients with <u>chronic exogenous</u> <span class="cloze" data-ordinal="1"><b>glucocorticoid</b></span><b> </b>use, precipitated by <span class="cloze" data-ordinal="1"><u>abrupt</u><b> withdrawal</b></span></div><br/>- Chronic exogenous steroids leads to a chronic suppression of ACTH release, leading to adrenal atrophy over time; thus discontinuing steroids abruptly leads to hypoadrenalism → <b><u>t</u></b>ertiary from <u><b>t</b></u>reatment<div><br/><div>- Therefore chronic adrenal insufficiency patients who go for surgery are given a single dose of high dose steroids (<u>stress dose steroids</u>) to prevent insufficiency; also the basis for weaning patients off of steroids (<u>slow discontinuation</u>)</div></div><br/><div>- Aldosterone synthesis is unaffected<br/></div><br/><div><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a404af37620a02f5e4c62ade79eb3c0b.webp" width="800"><img src="07e8f63f8126a53f76f5c0d1fdeeb708.webp" width="800"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><img src="1b3ee2b7c0c5cf5f4f6ac6cab1046993.webp"><br><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="09e3ec51ba8a9dc7131a127b38fab860.webp"><img src="6724eadd2da889d51cab9df24a4a887d.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="37367808b42ddc0028d2a0009d184bcb.webp"><br><img src="c69d3b059cbd28dec67c872764dab360.webp"><br><img src="c657a117972e9046c7b4df6dab48079d.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/genetic-disorders/lesson/muscular-dystrophies-soap">Watch Muscular Dystrophies</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><div><b>Glucocorticoids</b> are useful in treating <span class="cloze" data-cloze="&lt;b&gt;adrenal&lt;/b&gt;" data-ordinal="1">[...]</span> <b>insufficiency</b>, which may progress to circulatory shock, hypoglycemia, and death<br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Glucocorticoids</b> are useful in treating <span class="cloze" data-ordinal="1"><b>adrenal</b></span> <b>insufficiency</b>, which may progress to circulatory shock, hypoglycemia, and death<br/></div><br/><div>e.g., Addison disease</div><br/><div><img src="d07caa211c01b83c5f6ba5df44e4330b.webp" width="886"/><br/></div><br/><div><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="71dab35dea9a5a66203a772ead6d209b.webp" width="800"><img src="91bd311d21bda3eac634e60ca1dc170a.webp" width="800"><br><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br></div><br><div><img src="92c9d6e2806289245cf448009d19a441.webp"><br></div><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="5a26d5b9e28280f2de15e2029d0a79cc.webp"><img src="79fb050f4e37486ab942b823f383254e.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div><div><div><div><b>Vitamin </b><span class="cloze-inactive" data-ordinal="2"><b>B<sub>5</sub></b></span><b> deficiency</b> presents with dermatitis, enteritis, alopecia, and <span class="cloze" data-cloze="adrenal" data-ordinal="1">[...]</span> insufficiency</div></div></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div><div><div><b>Vitamin </b><span class="cloze-inactive" data-ordinal="2"><b>B<sub>5</sub></b></span><b> deficiency</b> presents with dermatitis, enteritis, alopecia, and <span class="cloze" data-ordinal="1">adrenal</span> insufficiency</div></div></div></div><br/>True vitamin B<sub>5</sub> deficiencies are rare<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e53eccd9611f0a43c5db00bc9cea1207.webp"><img src="56b7074c5e4b8d9d727d3eba357e770a.webp"><img src="3b5f4ff5963a5d39e029253cf7445c23.webp"><img src="21108528232777b46d647a92c79bedfc.webp"><img src="4028eea9136e435478dcc58ae1367ada.webp"><br><img src="Screen Shot 2021-02-01 at 09.20.02.jpg"><br><a href="https://app.sketchy.com/study/medical/chapter/water-soluble-vitamins/lesson/vitamin-b5-pantothenic-acid">Watch Vitamin B5 (Pantothenic Acid)</a><br> --><!-- <img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="Vitamin B5 (Pantothenic Acid) copy.jpg" class="resizer"><img src="Vitamin B5 (Pantothenic Acid).jpg" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3682?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry">Review Vitamin B5 (Pantothenic Acid)</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div><u>Chronic</u> primary adrenal insufficiency, also known as <b><span class="cloze" data-cloze="Addison" data-ordinal="1">[...]</span></b><b> disease</b>, is due to adrenal atrophy or destruction by disease</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><u>Chronic</u> primary adrenal insufficiency, also known as <b><span class="cloze" data-ordinal="1">Addison</span></b><b> disease</b>, is due to adrenal atrophy or destruction by disease</div><br/><img src="d07caa211c01b83c5f6ba5df44e4330b.webp" width="886"/><br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ba3704d145c3077e8c4329d623f951d4.webp" width="800"><img src="36aab99f6b6b1e8103c5e345d231eb56.webp" width="800"><br><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="59439aebe34393749ad98bb466e0f517.webp"><img src="7467dd3c6a3d81feadc2aa754a29d42e.webp"><img src="8eb01730664bc3e6cc3c1c6d0c797e95.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><span class="cloze-inactive" data-ordinal="2"><b>Primary</b></span> <b>adrenal insufficiency</b> presents with <span class="cloze" data-cloze="&lt;b&gt;low&lt;/b&gt;" data-ordinal="1">[...]</span> <b>cortisol</b> and <span class="cloze" data-cloze="&lt;b&gt;high&lt;/b&gt;" data-ordinal="1">[...]</span> <b>ACTH</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze-inactive" data-ordinal="2"><b>Primary</b></span> <b>adrenal insufficiency</b> presents with <span class="cloze" data-ordinal="1"><b>low</b></span> <b>cortisol</b> and <span class="cloze" data-ordinal="1"><b>high</b></span> <b>ACTH</b><br/>- AKA Addison disease<br/><br/>- Adrenal glands are knocked out and do not produce cortisol, and lack thereof stimulates the anterior pituitary to release ACTH<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><br/><img src="d07caa211c01b83c5f6ba5df44e4330b.webp" width="886"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="bd7b1746618b2e02e1d8f9e5d648548d.webp" width="800"><img src="71dab35dea9a5a66203a772ead6d209b.webp" width="800"><br></div><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="59439aebe34393749ad98bb466e0f517.webp"><img src="7467dd3c6a3d81feadc2aa754a29d42e.webp"><img src="3b8c7c169b25580c7db742d3bda5fced.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="af2555a1381c5b5e5c0f97bc53aeffc5.webp"><img src="8ff7d84749764ad3aa5cbf29832abd82.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br><br><img src="2f190bca6aa51696090875038a2ee308.webp"><img src="1ef67d8094dfa8a33368f1c2f855c0b8.webp"><img src="cb8fb75a734ff0d380af3a140e29f419.webp"><br><img src="7c1f28f97f6de7bc18a4d434d63efa02.webp"><br><img src="58e8e287da098b9a1897e0682a0a6335.webp"><img src="1d4fdd073f8bd25c479e8700404dcfdc.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><div>In <u>primary adrenal insufficiency</u>, the <b>metyrapone stimulation test</b> results in <span class="cloze" data-cloze="&lt;b&gt;increased&lt;/b&gt;" data-ordinal="1">[...]</span><b> ACTH</b> and <span class="cloze" data-cloze="&lt;b&gt;unchanged&lt;/b&gt;" data-ordinal="1">[...]</span><b> 11-deoxycortisol</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>In <u>primary adrenal insufficiency</u>, the <b>metyrapone stimulation test</b> results in <span class="cloze" data-ordinal="1"><b>increased</b></span><b> ACTH</b> and <span class="cloze" data-ordinal="1"><b>unchanged</b></span><b> 11-deoxycortisol</b></div><br/>- Administration → ↓ cortisol → loss of negative feedback on anterior pituitary → ↑ ACTH secretion<br/><br/>- Normal is increased ACTH and 11-deoxycortisol<br/><br/>- Metyrapone blocks conversion of 11-deoxycortisol → cortisol<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><img src="96e95e83221f8f6f2b658cc853704499.webp"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e8e7899fbca357f49ed22a981a05235a.webp"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br> --><!-- <img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><div><div>In <u>secondary/tertiary adrenal insufficiency</u>, the <b>metyrapone stimulation test</b> results in <span class="cloze" data-cloze="&lt;b&gt;unchanged&lt;/b&gt;" data-ordinal="1">[...]</span><b> ACTH</b> and <span class="cloze" data-cloze="&lt;b&gt;unchanged&lt;/b&gt;" data-ordinal="1">[...]</span><b> 11-deoxycortisol</b></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>In <u>secondary/tertiary adrenal insufficiency</u>, the <b>metyrapone stimulation test</b> results in <span class="cloze" data-ordinal="1"><b>unchanged</b></span><b> ACTH</b> and <span class="cloze" data-ordinal="1"><b>unchanged</b></span><b> 11-deoxycortisol</b></div></div><br/>- Normal is increased ACTH and 11-deoxycortisol<br/><br/>- Metyrapone <u>blocks</u> conversion of 11-deoxycortisol to cortisol<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div>* administration → decreased cortisol → loss of negative feedback on anterior pituitary → increased ACTH secretion</div><img src="e8e7899fbca357f49ed22a981a05235a.webp"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br></div><br> --><!-- <img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question"><div>Does <b>secondary adrenal insufficiency</b> present with hyperkalemia?</div><br/><div><span class="cloze" data-cloze="No, because aldosterone synthesis is preserved" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Does <b>secondary adrenal insufficiency</b> present with hyperkalemia?</div><br/><div><span class="cloze" data-ordinal="1">No, because aldosterone synthesis is preserved</span></div><br/>- Due to intact renin-angiotensin-aldosterone system (RAAS)<br/><br/>- Mineralocorticoid production is controlled by RAAS and angiotensin II, not by ACTH<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="17d4a96d015ba145ab22f9efb2928733.webp" width="800"><img src="318515cb5bf5253d2f3cb103ab403f72.webp" width="791"><br></div><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><img src="d515def4c7fdcdf6d100cd9d6f1e14c6.webp"><br><div><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a></div><br> --><!-- <img src="b322fdadedb0a1b9ac5c6d54caae97b1.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question">One cause of <u>acute</u> <b>primary adrenal insufficiency</b> is <span class="cloze" data-cloze="Waterhouse-Friderichsen" data-ordinal="1">[...]</span> syndrome<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">One cause of <u>acute</u> <b>primary adrenal insufficiency</b> is <span class="cloze" data-ordinal="1">Waterhouse-Friderichsen</span> syndrome<br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="33628e416f49832739d198dd9f08fccf.webp" width="800"><img src="00d4ead7349ccd2d0bb2d126739901b8.webp" width="800"><img src="2922911e47c9ce173fa8b999c9d22422.webp" width="800"></div><div><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><img src="81c02393e8a8c9569753301a7d33f1f4.webp"><br><img src="67f8540ac466df4937e7253d2a250b1e.webp"><img src="09b02f5d4a350513cffe9f04f7bca767.webp"><br><br> --><!-- <img src="297dc0b9369ad2155af351ac1ef4abcd.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <img src="366ca011800d73f9168124c0a07c6c82.webp"><br><img src="15747298dc32fc5722072bc985d4074e.webp"><br><img src="99e73bb2c2c490d8cd3538bb2f945e55.webp"><img src="3e748973dd9fd7c6172ea2d1b8434d82.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-microbiology/units/medical-microbiology-bacteria/videos/medical-microbiology-bacteria-gram-negative-cocci-neisseria-meningitidis">Watch Neisseria meningitidis</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><div><b><span class="cloze" data-cloze="Adrenal insufficiency" data-ordinal="1">[...]</span></b> is the inability of the <b>adrenal</b> <b>glands</b> to generate enough <u>glucocorticoids</u> ± <u>mineralocorticoids</u></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><span class="cloze" data-ordinal="1">Adrenal insufficiency</span></b> is the inability of the <b>adrenal</b> <b>glands</b> to generate enough <u>glucocorticoids</u> ± <u>mineralocorticoids</u></div><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="91bd311d21bda3eac634e60ca1dc170a.webp" width="800"><img src="71dab35dea9a5a66203a772ead6d209b.webp" width="800"><br></div><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="7467dd3c6a3d81feadc2aa754a29d42e.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="2f190bca6aa51696090875038a2ee308.webp"><img src="cb8fb75a734ff0d380af3a140e29f419.webp"><img src="7c1f28f97f6de7bc18a4d434d63efa02.webp"><br><img src="58e8e287da098b9a1897e0682a0a6335.webp"><img src="1d4fdd073f8bd25c479e8700404dcfdc.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><b>Primary adrenal insufficiency</b> may present with <span class="cloze" data-cloze="sugar" data-ordinal="1">[...]</span> and/or <span class="cloze" data-cloze="salt" data-ordinal="1">[...]</span> cravings due to decreased levels of glucocorticoids ± mineralocorticoids<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Primary adrenal insufficiency</b> may present with <span class="cloze" data-ordinal="1">sugar</span> and/or <span class="cloze" data-ordinal="1">salt</span> cravings due to decreased levels of glucocorticoids ± mineralocorticoids<br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a2331c1b21c00452552a0e0c234f200c.webp" width="800"><img src="eada3e71113cf6f4ef382604808d6885.webp" width="800"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br><img src="727c9ad3b8b8d3e2967f1f987eff9e58.webp"><br><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="c84cbb043bcfe15c8151ed2e35aeec34.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><b>Mineralocorticoid</b> production by the adrenal gland is preserved in <span class="cloze" data-cloze="&lt;u&gt;secondary&lt;/u&gt; and &lt;u&gt;tertiary&lt;/u&gt;" data-ordinal="1">[...]</span> <b>adrenal</b> <b>insufficiency</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Mineralocorticoid</b> production by the adrenal gland is preserved in <span class="cloze" data-ordinal="1"><u>secondary</u> and <u>tertiary</u></span> <b>adrenal</b> <b>insufficiency</b><br/>No hyperkalemia!<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="ec28e9e3dae1835adb892afd49316e25.webp" width="800"><br></div><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br><img src="17d4a96d015ba145ab22f9efb2928733.webp" width="800"><img src="318515cb5bf5253d2f3cb103ab403f72.webp" width="791"><br><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="b322fdadedb0a1b9ac5c6d54caae97b1.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><span class="cloze" data-cloze="&lt;b&gt;Adrenal&lt;/b&gt;" data-ordinal="1">[...]</span><b> insufficiency</b> may cause<b> fatigue</b>, <b>muscle pain</b>, and <b>weakness</b> due to decreased cortisol<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze" data-ordinal="1"><b>Adrenal</b></span><b> insufficiency</b> may cause<b> fatigue</b>, <b>muscle pain</b>, and <b>weakness</b> due to decreased cortisol<br/>- Especially when under physiological stress<br/><br/>- Muscle symptoms arise from high<b> potassium </b>(due to aldosterone deficiency)<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4463e3834cf1aa193c34fd8ffa5298d0.webp"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br> --><!-- <img src="4dd2f442d540fe47aa01e2d1f4a324a3.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question">What are the <u>serum ACTH levels</u> in <u>tertiary</u> <b>adrenal insufficiency</b>?<br/><br/><div><span class="cloze" data-cloze="Decreased ACTH" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What are the <u>serum ACTH levels</u> in <u>tertiary</u> <b>adrenal insufficiency</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Decreased ACTH</span></div><br/>Due to decreased CRH → decreased ACTH → decreased endogenous cortisol<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="664ae99002a13a27cc46dee15cc2acfc.webp"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="3b8c7c169b25580c7db742d3bda5fced.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question">What are the effects of<b> adrenal insufficiency</b> on <u>serum</u> glucose levels?<br/><br/><div><span class="cloze" data-cloze="Decreased (hypoglycemia)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What are the effects of<b> adrenal insufficiency</b> on <u>serum</u> glucose levels?<br/><br/><div><span class="cloze" data-ordinal="1">Decreased (hypoglycemia)</span></div><br/>↓ cortisol → ↓ gluconeogenesis → ↓ blood glucose levels<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="eada3e71113cf6f4ef382604808d6885.webp" width="800"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br></div><br><img src="149dd0c3ddc9a44326ebc57c98154f5b.webp" width="800"><br><div><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><img src="727c9ad3b8b8d3e2967f1f987eff9e58.webp"><br><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="fbce8131fff57271de1f2fe16cfaaba0.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question">The <b>adrenal glands</b> in <u>tertiary</u><b> adrenal insufficiency </b>are characterized by <span class="cloze" data-cloze="&lt;u&gt;atrophy&lt;/u&gt; of &lt;u&gt;both&lt;/u&gt; adrenal glands" data-ordinal="1">[hyperplasia, atrophy; one, both]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">The <b>adrenal glands</b> in <u>tertiary</u><b> adrenal insufficiency </b>are characterized by <span class="cloze" data-ordinal="1"><u>atrophy</u> of <u>both</u> adrenal glands</span><br/>Due to lack of ACTH stimulation on adrenal glands<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div>* due to lack of ACTH stimulation on adrenal glands (in sketch broken ACTHion clipper → low ACTH)</div><img src="965f32e56c9db0ef9aab344457eb6659.webp"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="56cf5a118bf2fe3192bedb425cf603c8.webp"><img src="83945f432432bfe90e26a675ba3b671e.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question">What are the <u>serum CRH<b> </b>levels</u> in <u>tertiary</u> <b>adrenal insufficiency</b>?<br/><br/><div><span class="cloze" data-cloze="Decreased CRH" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What are the <u>serum CRH<b> </b>levels</u> in <u>tertiary</u> <b>adrenal insufficiency</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Decreased CRH</span> </div><br/>Decreased due to hypothalamic inhibition (e.g., tumor, radiation, exogenous steroids, etc)<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e938563f61851bdbcd3878311773854e.webp" width="800"><img src="664ae99002a13a27cc46dee15cc2acfc.webp" width="800"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="0bfffc3224d7f0cb243dc2ff02953f88.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question"><b>Hypo</b><b>thyroidism</b> may be associated with <span class="cloze" data-cloze="&lt;b&gt;adrenal &lt;/b&gt;&lt;b&gt;insufficiency&lt;/b&gt;" data-ordinal="1">[endocrine complication]</span> due to <b>autoimmune disease</b> or dysfunctional <b>pituitary/hypothalamus</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Hypo</b><b>thyroidism</b> may be associated with <span class="cloze" data-ordinal="1"><b>adrenal </b><b>insufficiency</b></span> due to <b>autoimmune disease</b> or dysfunctional <b>pituitary/hypothalamus</b><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="4aed4d9d9d26d6b19ecbf621ba18902c.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="e900d242092dec6e68aebfa36a3d0e14.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="35918a68991f2718d7f1e66fd52a9d44.webp"><br><img src="68ebfd3a37f5b1290bf9bdc8d73f9099.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question"><div>What effect does <b>secondary adrenal insufficiency </b>have on <u>serum sodium levels</u>?</div><br/><span class="cloze" data-cloze="Decreased (&lt;u&gt;hyponatremia)&lt;/u&gt;" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What effect does <b>secondary adrenal insufficiency </b>have on <u>serum sodium levels</u>?</div><br/><span class="cloze" data-ordinal="1">Decreased (<u>hyponatremia)</u></span><br/>Low cortisol → ↑ hypothalamic release of CRH → triggers ADH secretion → ↑ water reabsorption → dilutional hyponatremia<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a2331c1b21c00452552a0e0c234f200c.webp"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br> --><!-- <img src="3fb22e4fb22e567a84af6d25cccecac4.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="06b388fff0840c09826ca0238b860ead.webp"><img src="8c98084d759470a1c1e3ad4fabccd535.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question"><b>Adrenal insufficiency</b> may cause <span class="cloze" data-cloze="&lt;b&gt;adrenal crisis&lt;/b&gt;" data-ordinal="1">[complication]</span> following a <i>stressful event</i> (e.g., surgery, infection), characterized by hypotensive shock, confusion, fever, and abdominal pain <br/><br/><i>*bonus: what is the next step in management?</i><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Adrenal insufficiency</b> may cause <span class="cloze" data-ordinal="1"><b>adrenal crisis</b></span> following a <i>stressful event</i> (e.g., surgery, infection), characterized by hypotensive shock, confusion, fever, and abdominal pain <br/><br/><i>*bonus: what is the next step in management?</i><br/>- *<b><u>Immediate</u></b> <b>glucocorticoids </b>(e.g.,<b> </b>hydrocortisone or <b>dexamethasone</b>); dexamethasone is often preferred because it does not interfere with plasma cortisol level that may be needed to confirm the diagnosis<br/><br/>- Mineralocorticoid replacement (e.g., fludrocortisone) requires several days to exert its sodium-retaining effects and is typically started after initial resuscitation<br/><br/>- Because low cortisol is unable to maintain blood pressure<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="f236004fe8e91bc34403ec2adfff5f7f.webp" width="800"><br></div><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br><img src="cae62e3366a94f620feaebbf702fae41.webp" width="800"><br><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><img src="584b57362e53a407b79c15beec74eaed.webp"><br><img src="5b46a62e04e61b74230dc44c29713f8f.webp"><br><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="9406e96f8ae91a3f96d61c7a209b60b9.webp"><img src="4a5dd2ad92296f093e688be90d830917.webp"><img src="467fcd2f99a346e921288bf1827091c3.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">21.1</td>
+                    <td class="question"><u>Tertiary</u><b> adrenal insufficiency</b> is caused by <u>lack</u> of <span class="cloze" data-cloze="CRH" data-ordinal="1">[hormone]</span> due to <i>tumor</i>, <i>radiation</i>, <i>exogenous steroids, etc.</i><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><u>Tertiary</u><b> adrenal insufficiency</b> is caused by <u>lack</u> of <span class="cloze" data-ordinal="1">CRH</span> due to <i>tumor</i>, <i>radiation</i>, <i>exogenous steroids, etc.</i><br/>Decreased CRH due to hypothalamic inhibition (e.g., tumor, radiation, exogenous steroids, etc)<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e938563f61851bdbcd3878311773854e.webp" width="800"><img src="a404af37620a02f5e4c62ade79eb3c0b.webp" width="800"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="56cf5a118bf2fe3192bedb425cf603c8.webp"><img src="bab18caf455610ab94188d5d27289274.webp"><img src="425553a0dcf7b590745cd0d163ba93cf.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="37367808b42ddc0028d2a0009d184bcb.webp"><br><img src="c69d3b059cbd28dec67c872764dab360.webp"><br><img src="c657a117972e9046c7b4df6dab48079d.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/genetic-disorders/lesson/muscular-dystrophies-soap">Watch Muscular Dystrophies</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">22.1</td>
+                    <td class="question">What is the effect of <b>primary adrenal insufficiency</b> on the release of ADH from the posterior pituitary?<br/><br/><div><span class="cloze" data-cloze="Increased" data-ordinal="1">[...]</span></div><br/><div><i>*bonus: why?</i></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the effect of <b>primary adrenal insufficiency</b> on the release of ADH from the posterior pituitary?<br/><br/><div><span class="cloze" data-ordinal="1">Increased</span></div><br/><div><i>*bonus: why?</i></div><br/>*Due to hypovolemia from lack of aldosterone<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="945614fa13aca37a51f924a8b8405046.webp"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><img src="Screen Shot 2022-07-13 at 4.41.31 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.41.59 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-hypothalmic-pituitary-axis-posterior-lobe-of-the-pituitary">Watch Posterior Lobe of the Pituitary</a><br> --><!-- <img src="fb952a4619107224130c5c028920e281.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="8b265d52a9a692d687118b377fd3fe58.webp"><img src="af2555a1381c5b5e5c0f97bc53aeffc5.webp"><img src="8ff7d84749764ad3aa5cbf29832abd82.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">23.1</td>
+                    <td class="question"><b>Autoimmune polyendocrine syndrome</b><b> type 1</b> (APS-1) is characterized by a triad of:<br/><br/>- <span class="cloze" data-cloze="Hypoparathyroidism" data-ordinal="1">[...]</span><br/>- <span class="cloze-inactive" data-ordinal="2">Adrenal insufficiency</span><br/>- <span class="cloze-inactive" data-ordinal="3">Chronic mucocutaneous candidiasis</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Autoimmune polyendocrine syndrome</b><b> type 1</b> (APS-1) is characterized by a triad of:<br/><br/>- <span class="cloze" data-ordinal="1">Hypoparathyroidism</span><br/>- <span class="cloze-inactive" data-ordinal="2">Adrenal insufficiency</span><br/>- <span class="cloze-inactive" data-ordinal="3">Chronic mucocutaneous candidiasis</span><br/>APS-1 is due to mutations in the autoimmune regulatory gene (AIRE) which lead to impaired negative selection of T-cells<br/><br/><u><b>Mnemonic:<br/></b></u>"without <b>AIRE</b>, your body will <b>CHAR</b>"<br/><br/><b>C</b>hronic mucocutaneous candidiasis<br/><b>H</b>ypoparathyroidism<br/><b>A</b>drenal insufficiency<br/><b>R</b>ecurrent candida infections<br/><br/><div><table border="1" class="one"><tbody><tr><td colspan="3">Autoimmune Polyendocrine Syndromes</td></tr><tr><th> </th><th>APS-1</th><th>APS-2</th></tr><tr><th>Clinical Features</th><td>Adrenal insufficiency, hypoparathyroidism, chronic mucocutaneous candidiasis, ectodermal dystrophy<br/></td><td>Adrenal insufficiency, autoimmune thyroid disease (e.g., Hashimoto or Graves), T1DM</td></tr><tr><th>Age of Onset</th><td>Childhood</td><td>Adulthood</td></tr><tr><th>Genetic Association</th><td>AIRE gene mutation</td><td>HLA-DR3/DR-4</td></tr></tbody></table></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="47d1d45009b5a529327ab51e697cb130.webp" width="800"><img src="6b9168eddbb5c53782247c7936cb2405.webp" width="800"><img src="8dd8d46a9fbc5c04d796c9c1faf228be.webp"><img src="8d1ef30b2a70bd2698283664c4e3b951.webp"><img src="7a9294130c4bfc8b7097b2ad5df82ca1.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-parathyroid-gland-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Parathyroid Gland Disorders</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">24.1</td>
+                    <td class="question">What is the<b> treatment</b> of <b>primary adrenal insufficiency</b> (Addison disease)?<br/><br/><span class="cloze" data-cloze="Replacement of glucocorticoids and mineralocorticoids" data-ordinal="1">[Specific]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the<b> treatment</b> of <b>primary adrenal insufficiency</b> (Addison disease)?<br/><br/><span class="cloze" data-ordinal="1">Replacement of glucocorticoids and mineralocorticoids</span><br/>In addition to rapid IV volume repletion<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><br/><img src="d07caa211c01b83c5f6ba5df44e4330b.webp" width="886"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="71dab35dea9a5a66203a772ead6d209b.webp" width="800"><img src="91bd311d21bda3eac634e60ca1dc170a.webp" width="800"><br><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><div><img src="92c9d6e2806289245cf448009d19a441.webp"><br></div><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="108dc4f52bad3e2c3b5b6c7a48557b87.webp"><img src="9eb8dd7c020af63945205d92b8817767.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">25.1</td>
+                    <td class="question"><span class="cloze-inactive" data-ordinal="2"><b>Primary</b></span> <b>adrenal insufficiency</b> (<span class="cloze-inactive" data-ordinal="2">Addison</span> disease) is most commonly caused by <span class="cloze" data-cloze="&lt;b&gt;autoimmune destruction&lt;/b&gt;" data-ordinal="1">[...]</span> of <u>all three zones</u> of the adrenal cortex, which can precipitate an <b>adrenal crisis</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze-inactive" data-ordinal="2"><b>Primary</b></span> <b>adrenal insufficiency</b> (<span class="cloze-inactive" data-ordinal="2">Addison</span> disease) is most commonly caused by <span class="cloze" data-ordinal="1"><b>autoimmune destruction</b></span> of <u>all three zones</u> of the adrenal cortex, which can precipitate an <b>adrenal crisis</b><br/>- i.e., autoimmune adrenalitis<br/><br/>- Primary defect of the adrenal cortex, not of the hypothalamus-hypophysial axis<br/><br/>- Can precipitate acute adrenal crisis in response to stress (e.g., gastrointestinal illness (most common), infections, perioperative period)<br/><br/><img src="d07caa211c01b83c5f6ba5df44e4330b.webp" width="886"/><br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="ba3704d145c3077e8c4329d623f951d4.webp" width="800"><img src="36aab99f6b6b1e8103c5e345d231eb56.webp" width="800"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="59439aebe34393749ad98bb466e0f517.webp"><img src="8eb01730664bc3e6cc3c1c6d0c797e95.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">26.1</td>
+                    <td class="question"><div><b><span class="cloze" data-cloze="Secondary" data-ordinal="1">[Primary or Secondary]</span> </b><b>adrenal</b> <b>insufficiency</b> occurs when there is insufficient <b><span class="cloze-inactive" data-ordinal="2">ACTH</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><span class="cloze" data-ordinal="1">Secondary</span> </b><b>adrenal</b> <b>insufficiency</b> occurs when there is insufficient <b><span class="cloze-inactive" data-ordinal="2">ACTH</span></b></div><br/>- Therefore it is a primary defect of the hypothalamus or anterior pituitary, not the adrenal cortex<br/><br/>- Whereas tertiary adrenal insufficiency is due to insufficient CRH<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a7e3fdbc083822e38a934a2e61b1652e.webp" width="800"><img src="ca4d7bcb71052f9d34b3a9b360306df0.webp" width="800"><br></div><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="1a5971a76eb3cbb5b6b647be3545a783.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">27.1</td>
+                    <td class="question"><div>Does <b>secondary adrenal insufficiency</b> present with hyperpigmentation? Why?</div><br/><div><span class="cloze" data-cloze="No; ACTH levels are low therefore there is no increased melanocyte-stimulating hormone (MSH)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Does <b>secondary adrenal insufficiency</b> present with hyperpigmentation? Why?</div><br/><div><span class="cloze" data-ordinal="1">No; ACTH levels are low therefore there is no increased melanocyte-stimulating hormone (MSH)</span></div><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="1d156452a349f6181e724e7eb7dbb387.webp" width="800"><br><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br><img src="31f06eaffd1a961e8a7d92d7c70db608.webp" width="800"><br><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="5d1f775df7708225c23a1795cff6b35b.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">28.1</td>
+                    <td class="question"><div>What is the level of <b>ACTH</b> in <b>secondary adrenal insufficiency</b>? Why?</div><br/><div><span class="cloze" data-cloze="Decreased; the disease is a result of decreased ACTH secretion" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the level of <b>ACTH</b> in <b>secondary adrenal insufficiency</b>? Why?</div><br/><div><span class="cloze" data-ordinal="1">Decreased; the disease is a result of decreased ACTH secretion</span></div><br/>This is an important distinguishing feature from Addison disease and explains why secondary adrenal insufficiency does <u>not</u> present with hyperpigmentation<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a7e3fdbc083822e38a934a2e61b1652e.webp" width="800"><br></div><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><img src="ef05fbc10f83743f3451bb0dd3b8a490.webp" width="800"><br><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br> --><!-- <img src="3b8c7c169b25580c7db742d3bda5fced.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">29.1</td>
+                    <td class="question"><div>Does <b>secondary adrenal insufficiency</b> present with any of the following symptoms: hyperkalemia, metabolic acidosis, or hypotension*?</div><br/><div><span class="cloze" data-cloze="No, aldosterone levels are normal" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Does <b>secondary adrenal insufficiency</b> present with any of the following symptoms: hyperkalemia, metabolic acidosis, or hypotension*?</div><br/><div><span class="cloze" data-ordinal="1">No, aldosterone levels are normal</span></div><br/>*May have <u>orthostatic</u> hypotension due to hypocortisolism<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="17d4a96d015ba145ab22f9efb2928733.webp"><br><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenal-insufficiency?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="b322fdadedb0a1b9ac5c6d54caae97b1.webp"><img src="fb952a4619107224130c5c028920e281.webp"><img src="1c3cc91c7a8b3d3588e848af0410d566.webp"><img src="2b92128ddd602dfcfff2a69bcf6fbb74.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">30.1</td>
+                    <td class="question"><span class="cloze" data-cloze="&lt;b&gt;Metyrapone&lt;/b&gt;" data-ordinal="1">[Drug]</span> inhibits <b>glucocorticoid biosynthesis</b> via inhibition of the enzyme <span class="cloze-inactive" data-ordinal="2"><i><b>11β-hydroxylase</b></i></span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze" data-ordinal="1"><b>Metyrapone</b></span> inhibits <b>glucocorticoid biosynthesis</b> via inhibition of the enzyme <span class="cloze-inactive" data-ordinal="2"><i><b>11β-hydroxylase</b></i></span><br/>Metyrapone stimulation test is useful for diagnosis of which order of <u>adrenal insufficiency</u> a patient with symptoms is experiencing<div>- if 1° = decreased 11-deoxycortisol, increased ACTH</div><div>- if 2°/3° = decreased 11-deoxycortisol, decreased ACTH</div><br/><img src="96e95e83221f8f6f2b658cc853704499.webp" width="1114"/><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div>* administration → decreased cortisol → loss of negative feedback on anterior pituitary → increased ACTH secretion</div><img src="e8e7899fbca357f49ed22a981a05235a.webp"><br><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br><img src="9cf2d051ec59d52e8d96466f1baadff0.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br> --><!-- <img src="c9b5b4aa012be90cc93c9ad12d770d0d.webp"><br><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">31.1</td>
+                    <td class="question">In <span class="cloze-inactive" data-ordinal="3"><b>adrenoleukodystrophy</b></span>, the <u>peroxisomal</u> <i>metabolism</i> of <span class="cloze" data-cloze="&lt;u&gt;very long-chain fatty acids&lt;/u&gt; (VLCFA)" data-ordinal="1">[...]</span> is disrupted, resulting in excessive buildup in the <b>nervous system</b>, <b>adrenal gland</b>, and <span class="cloze-inactive" data-ordinal="2"><b>testes</b></span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">In <span class="cloze-inactive" data-ordinal="3"><b>adrenoleukodystrophy</b></span>, the <u>peroxisomal</u> <i>metabolism</i> of <span class="cloze" data-ordinal="1"><u>very long-chain fatty acids</u> (VLCFA)</span> is disrupted, resulting in excessive buildup in the <b>nervous system</b>, <b>adrenal gland</b>, and <span class="cloze-inactive" data-ordinal="2"><b>testes</b></span><br/><b>Initial symptoms in childhood</b>:<br/>- <u>Adrenal insufficiency</u> (<u>often first sx</u>)<br/>- Hyperactivity<br/>- Hyperpigmentation of skin<br/><br/><b>Progression</b>:<br/>- <u>Progressive demyelination</u> → <u>muscle stiffness</u><br/>- <u>Sexual dysfunction</u><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="Screen Shot 2019-12-05 at 10.31.08 PM.jpeg" class="resizer"><img src="Screen Shot 2019-12-05 at 10.32.21 PM.jpeg" class="resizer"><img src="adrenoleu (1).jpeg" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/4815?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Peroxisome&amp;utm_content=Adrenoleukodystrophy">Review Adrenoleukodystrophy</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">32.1</td>
+                    <td class="question"><div>What <u>acid-base disturbance</u> is associated with <b>primary adrenal insufficiency</b> (<b>Addison disease</b>)?</div><div><br/><div><span class="cloze" data-cloze="&lt;u&gt;Normal&lt;/u&gt; anion gap metabolic acidosis (&lt;b&gt;type &lt;/b&gt;&lt;b&gt;4&lt;/b&gt;&lt;b&gt; RTA)&lt;/b&gt;" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <u>acid-base disturbance</u> is associated with <b>primary adrenal insufficiency</b> (<b>Addison disease</b>)?</div><div><br/><div><span class="cloze" data-ordinal="1"><u>Normal</u> anion gap metabolic acidosis (<b>type </b><b>4</b><b> RTA)</b></span></div></div><br/>- Due to decreased aldosterone synthesis<br/><br/>- H<u>A</u>RDASS<br/><br/><img src="d07caa211c01b83c5f6ba5df44e4330b.webp" width="886"/><br/><br/><img src="806a7a9e6b6cbaeac748a27c67cafa8c.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c745901781eae51cb9e92836fe339a51.webp"><br><img src="793177808e13939b166c1512ddbdf96a.webp"><img src="1ebb5b44b40ede3a4e7b41b397d0c6d8.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-renal-tubular-acidosis-rta?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Renal Tubular Acidosis (RTA)</a><br><br><img src="bbcef025e90c77e801caa645607471e8.webp"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-renal-tubular-acidosis-rta?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="1c3cc91c7a8b3d3588e848af0410d566.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="3c45383c11b3f5ca60bba9ff9118cdb1.webp"><img src="2f190bca6aa51696090875038a2ee308.webp"><img src="1ef67d8094dfa8a33368f1c2f855c0b8.webp"><img src="cb8fb75a734ff0d380af3a140e29f419.webp"><img src="7c1f28f97f6de7bc18a4d434d63efa02.webp"><br><img src="58e8e287da098b9a1897e0682a0a6335.webp"><img src="1d4fdd073f8bd25c479e8700404dcfdc.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">33.1</td>
+                    <td class="question"><div><div>How does <b>ECF volume</b> change with <b>adrenal insufficiency</b>? </div><br/><div><span class="cloze" data-cloze="Decreased" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>How does <b>ECF volume</b> change with <b>adrenal insufficiency</b>? </div><br/><div><span class="cloze" data-ordinal="1">Decreased</span></div></div><br/>Due to <u>loss</u> of <b>aldosterone mediated Na<sup>+</sup></b> in ECF<br/><br/><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/><br/><table border="1" class="one"><tbody><tr><th> </th><th>Causes</th><th>Intracellular Fluid Volume</th><th>Extracellular Fluid Volume</th><th>Osmolarity</th><th>Hematocrit</th><th>Protein in Plasma</th></tr><tr><th>Isosmotic Volume Expansion</th><td>Isotonic NaCl, bolus or fluids</td><td>-</td><td>↑</td><td>-</td><td>↓</td><td>↓</td></tr><tr><th>Hyperosmotic Volume Expansion</th><td>High Salt Intake</td><td>↓</td><td>↑</td><td>↑</td><td>↓</td><td>↓</td></tr><tr><th>Hyposmotic Volume Expansion</th><td>SIADH</td><td>↑</td><td>↑</td><td>↓</td><td>-</td><td>↓</td></tr><tr><th>Isosmotic Volume Contraction</th><td>Burns, Diarrhea</td><td>-</td><td>↓</td><td>-</td><td>↑</td><td>↑</td></tr><tr><th>Hyperosmotic Volume Contraction</th><td>Diabetes insipidus, Excessive sweating</td><td>↓</td><td>↓</td><td>↑</td><td>-</td><td>↑</td></tr><tr><th>Hyposmotic Volume Contraction</th><td>Adrenal insufficiency</td><td>↑</td><td>↓</td><td>↓</td><td>↑</td><td>↑</td></tr></tbody></table><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="3e3e191dcdfce0bfd85501e4125aedbd.webp" width="800"><img src="3811768a33096aabf70278a243a5ffeb.webp" width="800"><br></div><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br><br><img src="1d0789a4041819e498e5faf0d9f6eb53.webp" width="800"><img src="945614fa13aca37a51f924a8b8405046.webp" width="800"><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="53b34267b09d0473c457bccffa623292.webp"><img src="abe15907454f7c3648abe19ef8477ec5.webp"><img src="af2555a1381c5b5e5c0f97bc53aeffc5.webp"><img src="8ff7d84749764ad3aa5cbf29832abd82.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br><br><img src="98e76483c82335c7bd95de8331efacb5.webp"><img src="47242063d6fb69d66269593d16ae3d1b.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">34.1</td>
+                    <td class="question"><div><div><div>How does <b>ICF volume</b> change with <b>hyposmotic volume contraction</b> (e.g., adrenal insufficiency)? </div><br/><div><span class="cloze" data-cloze="Increased" data-ordinal="1">[...]</span></div></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div><div>How does <b>ICF volume</b> change with <b>hyposmotic volume contraction</b> (e.g., adrenal insufficiency)? </div><br/><div><span class="cloze" data-ordinal="1">Increased</span></div></div></div><br/><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/><br/><table border="1" class="one"><tbody><tr><th> </th><th>Causes</th><th>Intracellular Fluid Volume</th><th>Extracellular Fluid Volume</th><th>Osmolarity</th><th>Hematocrit</th><th>Protein in Plasma</th></tr><tr><th>Isosmotic Volume Expansion</th><td>Isotonic NaCl, bolus or fluids</td><td>-</td><td>↑</td><td>-</td><td>↓</td><td>↓</td></tr><tr><th>Hyperosmotic Volume Expansion</th><td>High Salt Intake</td><td>↓</td><td>↑</td><td>↑</td><td>↓</td><td>↓</td></tr><tr><th>Hyposmotic Volume Expansion</th><td>SIADH</td><td>↑</td><td>↑</td><td>↓</td><td>-</td><td>↓</td></tr><tr><th>Isosmotic Volume Contraction</th><td>Burns, Diarrhea</td><td>-</td><td>↓</td><td>-</td><td>↑</td><td>↑</td></tr><tr><th>Hyperosmotic Volume Contraction</th><td>Diabetes insipidus, Excessive sweating</td><td>↓</td><td>↓</td><td>↑</td><td>-</td><td>↑</td></tr><tr><th>Hyposmotic Volume Contraction</th><td>Adrenal insufficiency</td><td>↑</td><td>↓</td><td>↓</td><td>↑</td><td>↑</td></tr></tbody></table><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="3e3e191dcdfce0bfd85501e4125aedbd.webp" width="800"><img src="3811768a33096aabf70278a243a5ffeb.webp" width="800"><br><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br> --><!-- <img src="53b34267b09d0473c457bccffa623292.webp"><img src="abe15907454f7c3648abe19ef8477ec5.webp"><img src="af2555a1381c5b5e5c0f97bc53aeffc5.webp"><img src="8ff7d84749764ad3aa5cbf29832abd82.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br><br><img src="98e76483c82335c7bd95de8331efacb5.webp"><img src="47242063d6fb69d66269593d16ae3d1b.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">35.1</td>
+                    <td class="question"><div><div>How does <b>plasma protein </b><u>concentration</u> change with <b>hyposmotic volume contraction</b> (e.g., adrenal insufficiency)? </div><br/><div><span class="cloze" data-cloze="Increased" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>How does <b>plasma protein </b><u>concentration</u> change with <b>hyposmotic volume contraction</b> (e.g., adrenal insufficiency)? </div><br/><div><span class="cloze" data-ordinal="1">Increased</span></div></div><br/><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/><br/><table border="1" class="one"><tbody><tr><th> </th><th>Causes</th><th>Intracellular Fluid Volume</th><th>Extracellular Fluid Volume</th><th>Osmolarity</th><th>Hematocrit</th><th>Protein in Plasma</th></tr><tr><th>Isosmotic Volume Expansion</th><td>Isotonic NaCl, bolus or fluids</td><td>-</td><td>↑</td><td>-</td><td>↓</td><td>↓</td></tr><tr><th>Hyperosmotic Volume Expansion</th><td>High Salt Intake</td><td>↓</td><td>↑</td><td>↑</td><td>↓</td><td>↓</td></tr><tr><th>Hyposmotic Volume Expansion</th><td>SIADH</td><td>↑</td><td>↑</td><td>↓</td><td>-</td><td>↓</td></tr><tr><th>Isosmotic Volume Contraction</th><td>Burns, Diarrhea</td><td>-</td><td>↓</td><td>-</td><td>↑</td><td>↑</td></tr><tr><th>Hyperosmotic Volume Contraction</th><td>Diabetes insipidus, Excessive sweating</td><td>↓</td><td>↓</td><td>↑</td><td>-</td><td>↑</td></tr><tr><th>Hyposmotic Volume Contraction</th><td>Adrenal insufficiency</td><td>↑</td><td>↓</td><td>↓</td><td>↑</td><td>↑</td></tr></tbody></table><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="3e3e191dcdfce0bfd85501e4125aedbd.webp" width="800"><img src="3811768a33096aabf70278a243a5ffeb.webp" width="800"><br><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br> --><!-- <img src="53b34267b09d0473c457bccffa623292.webp"><img src="abe15907454f7c3648abe19ef8477ec5.webp"><img src="af2555a1381c5b5e5c0f97bc53aeffc5.webp"><img src="8ff7d84749764ad3aa5cbf29832abd82.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br><br><img src="98e76483c82335c7bd95de8331efacb5.webp"><img src="47242063d6fb69d66269593d16ae3d1b.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">36.1</td>
+                    <td class="question"><div><div><b>Adrenal insufficiency</b> is a cause of <span class="cloze" data-cloze="&lt;u&gt;hypo&lt;/u&gt;" data-ordinal="1">[...]</span><u>-osmotic volume</u><b> contraction</b></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div><b>Adrenal insufficiency</b> is a cause of <span class="cloze" data-ordinal="1"><u>hypo</u></span><u>-osmotic volume</u><b> contraction</b></div></div><br/>Decreased aldosterone → decreased sodium reabsorption<br/><br/><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/><br/><table border="1" class="one"><tbody><tr><th> </th><th>Causes</th><th>Intracellular Fluid Volume</th><th>Extracellular Fluid Volume</th><th>Osmolarity</th><th>Hematocrit</th><th>Protein in Plasma</th></tr><tr><th>Isosmotic Volume Expansion</th><td>Isotonic NaCl, bolus or fluids</td><td>-</td><td>↑</td><td>-</td><td>↓</td><td>↓</td></tr><tr><th>Hyperosmotic Volume Expansion</th><td>High Salt Intake</td><td>↓</td><td>↑</td><td>↑</td><td>↓</td><td>↓</td></tr><tr><th>Hyposmotic Volume Expansion</th><td>SIADH</td><td>↑</td><td>↑</td><td>↓</td><td>-</td><td>↓</td></tr><tr><th>Isosmotic Volume Contraction</th><td>Burns, Diarrhea</td><td>-</td><td>↓</td><td>-</td><td>↑</td><td>↑</td></tr><tr><th>Hyperosmotic Volume Contraction</th><td>Diabetes insipidus, Excessive sweating</td><td>↓</td><td>↓</td><td>↑</td><td>-</td><td>↑</td></tr><tr><th>Hyposmotic Volume Contraction</th><td>Adrenal insufficiency</td><td>↑</td><td>↓</td><td>↓</td><td>↑</td><td>↑</td></tr></tbody></table><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="3e3e191dcdfce0bfd85501e4125aedbd.webp" width="800"><img src="3811768a33096aabf70278a243a5ffeb.webp" width="800"><br></div><div><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br></div><div><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br></div><br><div><img src="1d0789a4041819e498e5faf0d9f6eb53.webp" width="800"><img src="945614fa13aca37a51f924a8b8405046.webp" width="800"><br></div><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="53b34267b09d0473c457bccffa623292.webp"><img src="abe15907454f7c3648abe19ef8477ec5.webp"><img src="af2555a1381c5b5e5c0f97bc53aeffc5.webp"><img src="8ff7d84749764ad3aa5cbf29832abd82.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br><br><img src="98e76483c82335c7bd95de8331efacb5.webp"><img src="47242063d6fb69d66269593d16ae3d1b.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">37.1</td>
+                    <td class="question"><div><div>How does <b>osmolarity</b> change with <b>adrenal insufficiency</b>? </div><br/><div><span class="cloze" data-cloze="Decreased (loss of Na&lt;sup&gt;+&lt;/sup&gt; due to lack of aldosterone)" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>How does <b>osmolarity</b> change with <b>adrenal insufficiency</b>? </div><br/><div><span class="cloze" data-ordinal="1">Decreased (loss of Na<sup>+</sup> due to lack of aldosterone)</span></div></div><br/><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/><br/><table border="1" class="one"><tbody><tr><th> </th><th>Causes</th><th>Intracellular Fluid Volume</th><th>Extracellular Fluid Volume</th><th>Osmolarity</th><th>Hematocrit</th><th>Protein in Plasma</th></tr><tr><th>Isosmotic Volume Expansion</th><td>Isotonic NaCl, bolus or fluids</td><td>-</td><td>↑</td><td>-</td><td>↓</td><td>↓</td></tr><tr><th>Hyperosmotic Volume Expansion</th><td>High Salt Intake</td><td>↓</td><td>↑</td><td>↑</td><td>↓</td><td>↓</td></tr><tr><th>Hyposmotic Volume Expansion</th><td>SIADH</td><td>↑</td><td>↑</td><td>↓</td><td>-</td><td>↓</td></tr><tr><th>Isosmotic Volume Contraction</th><td>Burns, Diarrhea</td><td>-</td><td>↓</td><td>-</td><td>↑</td><td>↑</td></tr><tr><th>Hyperosmotic Volume Contraction</th><td>Diabetes insipidus, Excessive sweating</td><td>↓</td><td>↓</td><td>↑</td><td>-</td><td>↑</td></tr><tr><th>Hyposmotic Volume Contraction</th><td>Adrenal insufficiency</td><td>↑</td><td>↓</td><td>↓</td><td>↑</td><td>↑</td></tr></tbody></table><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="3e3e191dcdfce0bfd85501e4125aedbd.webp" width="800"><img src="3811768a33096aabf70278a243a5ffeb.webp" width="800"><br><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br> --><!-- <img src="53b34267b09d0473c457bccffa623292.webp"><img src="abe15907454f7c3648abe19ef8477ec5.webp"><img src="af2555a1381c5b5e5c0f97bc53aeffc5.webp"><img src="8ff7d84749764ad3aa5cbf29832abd82.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br><br><img src="98e76483c82335c7bd95de8331efacb5.webp"><img src="47242063d6fb69d66269593d16ae3d1b.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">38.1</td>
+                    <td class="question"><div>Which <u>renal tubular acidosis</u> may be caused by <i>decreased</i> <b>aldosterone production</b>? </div><br/><div><span class="cloze" data-cloze="Type 4 (hyperkalemic) RTA" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <u>renal tubular acidosis</u> may be caused by <i>decreased</i> <b>aldosterone production</b>? </div><br/><div><span class="cloze" data-ordinal="1">Type 4 (hyperkalemic) RTA</span></div><br/>- e.g., diabetic hyporeninism, ACE inhibitors, ARBs, NSAIDs, heparin, cyclosporine, adrenal insufficiency<br/><br/>- Lack of K<sup>+</sup> secretion → type 4 RTA<br/><br/><img src="806a7a9e6b6cbaeac748a27c67cafa8c.webp" width="900px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="c745901781eae51cb9e92836fe339a51.webp"><br></div><div><img src="793177808e13939b166c1512ddbdf96a.webp"><img src="1ebb5b44b40ede3a4e7b41b397d0c6d8.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-renal-tubular-acidosis-rta?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Renal Tubular Acidosis (RTA)</a><br></div><br><div><img src="bbcef025e90c77e801caa645607471e8.webp"><br></div><div><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-renal-tubular-acidosis-rta?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br><br><i><img src="Screen Shot 2017-03-05 at 9.05.21 PM.png"><br></i><img src="55c289283080864794b151ee2984631d.webp"><img src="fe5b1c882a0a13d903a279191aded246.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-blood-inflammation/videos/medical-pharmacology-blood-and-inflammation-anticoagulants-and-thrombolytics-heparin-lmwh-fondaparinux-direct-thrombin-inhibitors-xa-inhibitors?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Heparin, LMWH, Fondaparinux, Direct Thrombin Inhibitors, Xa Inhibitors</a><br><br> --><!-- <img src="1c3cc91c7a8b3d3588e848af0410d566.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br><img src="3c45383c11b3f5ca60bba9ff9118cdb1.webp"><img src="2f190bca6aa51696090875038a2ee308.webp"><img src="1ef67d8094dfa8a33368f1c2f855c0b8.webp"><img src="cb8fb75a734ff0d380af3a140e29f419.webp"><img src="7c1f28f97f6de7bc18a4d434d63efa02.webp"><br><img src="58e8e287da098b9a1897e0682a0a6335.webp"><img src="1d4fdd073f8bd25c479e8700404dcfdc.webp"><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="tmp92aur717.png"><br><img class="resizer" src="tmpeuka9ur6.png"><br><img class="resizer" src="tmpjqewdw42.png"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/5572?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Immunology&amp;utm_term=Immunosuppressants&amp;utm_content=Cyclosporine">Review Cyclosporine</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">39.1</td>
+                    <td class="question"><div><div><div>How does <b>hematocrit</b> change with <b>hyposmotic volume contraction</b> (e.g., adrenal insufficiency)? </div><br/><div><span class="cloze" data-cloze="Increased" data-ordinal="1">[...]</span></div></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div><div>How does <b>hematocrit</b> change with <b>hyposmotic volume contraction</b> (e.g., adrenal insufficiency)? </div><br/><div><span class="cloze" data-ordinal="1">Increased</span></div></div></div><br/><table border="1" class="one"><tbody><tr><th> </th><th>Causes</th><th>Intracellular Fluid Volume</th><th>Extracellular Fluid Volume</th><th>Osmolarity</th><th>Hematocrit</th><th>Protein in Plasma</th></tr><tr><th>Isosmotic Volume Expansion</th><td>Isotonic NaCl, bolus or fluids</td><td>-</td><td>↑</td><td>-</td><td>↓</td><td>↓</td></tr><tr><th>Hyperosmotic Volume Expansion</th><td>High Salt Intake</td><td>↓</td><td>↑</td><td>↑</td><td>↓</td><td>↓</td></tr><tr><th>Hyposmotic Volume Expansion</th><td>SIADH</td><td>↑</td><td>↑</td><td>↓</td><td>-</td><td>↓</td></tr><tr><th>Isosmotic Volume Contraction</th><td>Burns, Diarrhea</td><td>-</td><td>↓</td><td>-</td><td>↑</td><td>↑</td></tr><tr><th>Hyperosmotic Volume Contraction</th><td>Diabetes insipidus, Excessive sweating</td><td>↓</td><td>↓</td><td>↑</td><td>-</td><td>↑</td></tr><tr><th>Hyposmotic Volume Contraction</th><td>Adrenal insufficiency</td><td>↑</td><td>↓</td><td>↓</td><td>↑</td><td>↑</td></tr></tbody></table><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="Screen Shot 2019-11-17 at 7.29.37 PM.png"><img src="Screen Shot 2019-11-17 at 7.29.47 PM.png"><br><img src="b2fddc65f76735e87873373f0db844c8.webp"><img src="0cb3f8b621d876b4e03dd2b4ed112a71.webp"><img src="eaa8a90d3c5b364b22258d3e3a9bebd7.webp"><br><img src="cc3cbbbbd14fdc61d33ff39947836d27.webp" width="400"><img src="6f66db17b9579b0160fecc0e67999a2c.webp" width="400"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-volume-electrolyte-and-acidbase-disorders-osmolality-and-sodium-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osmolality &amp; Sodium Disorders</a><br> --><!-- <img src="53b34267b09d0473c457bccffa623292.webp"><img src="abe15907454f7c3648abe19ef8477ec5.webp"><img src="af2555a1381c5b5e5c0f97bc53aeffc5.webp"><img src="8ff7d84749764ad3aa5cbf29832abd82.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br><br><img src="98e76483c82335c7bd95de8331efacb5.webp"><img src="47242063d6fb69d66269593d16ae3d1b.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">40.1</td>
+                    <td class="question">What <i>initial tests</i> should be performed in a patient with suspected<b> adrenal insufficiency</b>?<br/><br/><div>1. <span class="cloze" data-cloze="&lt;u&gt;Morning&lt;/u&gt; serum cortisol" data-ordinal="1">[...]</span></div><div>2. <span class="cloze" data-cloze="&lt;u&gt;Morning&lt;/u&gt;&amp;nbsp;plasma ACTH" data-ordinal="1">[...]</span></div><div>3. <span class="cloze" data-cloze="Cosyntropin (ACTH) stimulation test" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What <i>initial tests</i> should be performed in a patient with suspected<b> adrenal insufficiency</b>?<br/><br/><div>1. <span class="cloze" data-ordinal="1"><u>Morning</u> serum cortisol</span></div><div>2. <span class="cloze" data-ordinal="1"><u>Morning</u> plasma ACTH</span></div><div>3. <span class="cloze" data-ordinal="1">Cosyntropin (ACTH) stimulation test</span></div><br/><div>- <b>Low cortisol </b>with <b>high ACTH</b> confirms <u>primary adrenal insufficiency</u></div><br/><div>- Cosyntropin (~ ACTH) stimulation test should normally increase cortisol, but this does not happen</div><br/><div><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ade2275026d998fedddcb9f74580648d.webp" width="800"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br><img src="ca4d7bcb71052f9d34b3a9b360306df0.webp" width="800"><br><img src="1ceecbff3f1ee840653f832e017b4adc.webp"><img src="c1fc83e0c9ab8001d0194be2651cd43b.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenal Insufficiency</a><br> --><!-- <img src="69c2fe65d4d9ac9de079c0ccd5983271.webp"><img src="9ed279f061c2dc72a5cf63eb67a48baa.webp"><img src="078d1ed528e6c855edee897eca9015e1.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br><br class="Apple-interchange-newline"><img src="af2555a1381c5b5e5c0f97bc53aeffc5.webp"><img src="8ff7d84749764ad3aa5cbf29832abd82.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

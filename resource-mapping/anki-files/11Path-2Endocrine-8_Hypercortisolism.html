@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (54 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question">Which <u>antifungal</u> is used in the treatment of <b>Cushing syndrome</b>?<br/><br/><div><span class="cloze" data-cloze="Ketoconazole" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which <u>antifungal</u> is used in the treatment of <b>Cushing syndrome</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Ketoconazole</span></div><br/><div>Via inhibition of cholesterol desmolase in the adrenal gland (inhibits cortisol production)</div><br/><div><img src="3b115adeb3944499c35ae5af4fe6b31d.webp" width="1089"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="a5405c9e04c11230a050989c8c4e8c1e.webp" width="800"><img src="60a166c53fb790c15568efd0a3155b5b.webp" width="800"><br><div><img src="606eef59e9557770df31237e995f56ac.webp"><br><img src="80e2ad7a91a07a84180cdac2b2c737cd.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-antimicrobials/videos/medical-pharmacology-antimicrobials-antifungals-azoles?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Azoles</a><br></div><br><img src="1a3be6b7712588ebe58a5e6aee1c0bf0.webp"><br><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br> --><!-- <img src="313ecc49a6f436e0721c1166dac2050f.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><div>What is the effect of <b>glucocorticoids</b> on<b> blood peripheral <u>eosinophil</u> levels?</b><br/></div><br/><div><span class="cloze" data-cloze="Decreased" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the effect of <b>glucocorticoids</b> on<b> blood peripheral <u>eosinophil</u> levels?</b><br/></div><br/><div><span class="cloze" data-ordinal="1">Decreased</span></div><br/><div>- Useful in allergic conditions, such as <b>asthma</b></div><br/><div>- Excess cortisol increases eosinophil apoptosis<br/></div><br/><div><img src="657997e940e39e3d64c82bc812a55037.webp" width="942"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="1e861093c0849f7f3e49c1528dadc3ff.webp"><br></div><div><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="tmp0ssecd9k_1606536512074.png" class="resizer"><br><img src="tmpulezrzfg_1606536512074.png" class="resizer"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/5585?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Immunology&amp;utm_term=Other_Cell_Types&amp;utm_content=Eosinophils">Review Eosinophils</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div>What drug may be used to <b>replace mineralocorticoids</b> in primary adrenal insufficiency?<br/></div><br/><div><span class="cloze" data-cloze="Fludrocortisone (aldosterone analog)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What drug may be used to <b>replace mineralocorticoids</b> in primary adrenal insufficiency?<br/></div><br/><div><span class="cloze" data-ordinal="1">Fludrocortisone (aldosterone analog)</span></div><br/>Fludrocortisone has minimal to no glucocorticoid side effects, so it can be combined with corticosteroids in replacement therapy without worrying about Cushing syndrome<br/><br/><img src="b9b7c9d3c4ecf17bd5a813c1b55aa090.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="92c9d6e2806289245cf448009d19a441.webp"><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br> --><!-- <img src="c860c0d09df50c7c1ae2dffb628da977.webp"><img src="be89eb0b99ba485a043ece9e55126e41.webp"><img src="0174c093e9722e3aa06461e5e7231857.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/adrenal-insufficiency-soap?cardType=symbols">Watch Adrenal Insufficiency SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div><b>Chronic</b> <b>glucocorticoid</b> use may cause <b>iatrogenic</b> <span class="cloze" data-cloze="Cushing" data-ordinal="1">[...]</span> <b>syndrome</b><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Chronic</b> <b>glucocorticoid</b> use may cause <b>iatrogenic</b> <span class="cloze" data-ordinal="1">Cushing</span> <b>syndrome</b><br/></div><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="657997e940e39e3d64c82bc812a55037.webp"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="6a041eb55fb79aa5ad6c4a652c8dc7e0.webp"><br></div><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br><img src="CS.jpg"><img src="CS exogenous corticosteroids.jpg"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br> --><!-- <img src="2b736e990bd9480953a213fe5c2c4867.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="7faf3ed30d7acb955bbe00449f3ad43b.webp"><br><img src="84eca05d781817f6d7bc034fd30cef1a.webp"><br><img src="09d8d2bc89e9cb704e67b608b25e2bcd.webp"><img src="6aae186c475de5af17ee55af23d0d61c.webp"><img src="8cfcc2390756b5df27c0107b667eded3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-diabetes-soap">Watch Diabetes SOAP</a><br><br><img src="5c46b2a891ea37f36a5013cecdf055ba.webp"><br><img src="c69d3b059cbd28dec67c872764dab360.webp"><br><img src="c657a117972e9046c7b4df6dab48079d.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/genetic-disorders/lesson/muscular-dystrophies-soap">Watch Muscular Dystrophies</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><div>When the <b>brain</b> is ischemic, the Pco<sub>2</sub> <span class="cloze" data-cloze="increases" data-ordinal="1">[...]</span> and pH <span class="cloze" data-cloze="decreases" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>When the <b>brain</b> is ischemic, the Pco<sub>2</sub> <span class="cloze" data-ordinal="1">increases</span> and pH <span class="cloze" data-ordinal="1">decreases</span></div><br/>e.g., the Cushing reflex where increases in intracranial pressure cause compression of cerebral blood vessels<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="0a404b60f2b5359b7fba6c0572f5accd.webp"><img src="ae61a5ff2b05a8bb4838f9ae0d488260.webp"><br><img src="Screen Shot 2022-06-13 at 2.21.33 PM.jpg"><br><img src="Screen Shot 2022-06-13 at 2.33.08 PM.jpg"><br><img src="Screen Shot 2022-06-13 at 2.33.15 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-cardiovascular-physiology/videos/medical-physiology-cardiovascular-physiology-cardiovascular-response-to-hemorrhage">Watch Cardiovascular Response to Hemorrhage</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><div>One clinical feature of <b>Cushing syndrome</b> is <b><span class="cloze" data-cloze="immune suppression" data-ordinal="1">[...]</span></b>, which is a result of inhibition of phospholipase A<sub>2</sub>, IL-2, and histamine</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One clinical feature of <b>Cushing syndrome</b> is <b><span class="cloze" data-ordinal="1">immune suppression</span></b>, which is a result of inhibition of phospholipase A<sub>2</sub>, IL-2, and histamine</div><br/><img src="6c4b329864adb2b4c6aca3e931fde848.webp" width="1024"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="a126b5e3d6035977a481c06a091a3812.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><div>What is the <u>most common</u> cause of <b>Cushing syndrome</b>?</div><br/><div><span class="cloze" data-cloze="Exogenous glucocorticoids" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the <u>most common</u> cause of <b>Cushing syndrome</b>?</div><br/><div><span class="cloze" data-ordinal="1">Exogenous glucocorticoids</span></div><br/>vs. most common <u>endogenous</u> cause of Cushing syndrome: Cushing disease (i.e., an ACTH-secreting pituitary adenoma)<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><br/><img src="657997e940e39e3d64c82bc812a55037.webp" width="942"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="CS.jpg"><img src="CS exogenous corticosteroids.jpg"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="d51aa0b91adbc769dd99fae8dd62218c.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="a9cb3a90ebeebed25823ec8f15d53191.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><br><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question">What is the differential diagnosis in a patient with <u>Cushing syndrome</u> with <b>suppressed ACTH</b>?<br/><br/>- <span class="cloze" data-cloze="Exogenous glucocorticoids" data-ordinal="1">[...]</span><br/>- <span class="cloze" data-cloze="Adrenal adenoma (or carcinoma, hyperplasia)" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the differential diagnosis in a patient with <u>Cushing syndrome</u> with <b>suppressed ACTH</b>?<br/><br/>- <span class="cloze" data-ordinal="1">Exogenous glucocorticoids</span><br/>- <span class="cloze" data-ordinal="1">Adrenal adenoma (or carcinoma, hyperplasia)</span><br/>- i.e., ACTH-independent Cushing syndrome<br/><br/>- MRI to confirm tumor<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><br/><img src="657997e940e39e3d64c82bc812a55037.webp" width="942"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="bd2ae00ba4e14b11686e255d06a96e2f.webp" width="800"><img src="bd2ae00ba4e14b11686e255d06a96e2f.webp" width="800"><br></div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="29af49b56abe9fea55f597e1f66ac5da.webp"><br><img src="aa4bb954009b25f580be05a1c039ffdf.webp"><br><img src="25565374523237073cdc148955da8e88.webp"><br><img src="a23034b5133e7b8b8111a169799a1cc1.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><b>Cushing </b><i><b>disease</b> </i>refers <i>specifically</i> to a(n) <span class="cloze" data-cloze="ACTH-secreting pituitary adenoma" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Cushing </b><i><b>disease</b> </i>refers <i>specifically</i> to a(n) <span class="cloze" data-ordinal="1">ACTH-secreting pituitary adenoma</span><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div>Thus, CT scan of chest would be FIRST step in patient with cushing syndrome features (moon face, buffalo hump, truncal obesity)</div><div><img src="02956babcb06f8d9112532c43b0e2ab3.webp"><br></div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br><br><img src="97e0c83570cc466544e28161853f00d4.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="fac566eb0d06d1bab8691a470a0277fe.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><div>If a patient with <b>ACTH-dependent Cushing syndrome</b> has <u>adequate cortisol suppression</u> following a <b>high-dose dexamethasone suppression test</b> (8mg), the most likely cause of their syndrome is <b><span class="cloze" data-cloze="Cushing disease" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>If a patient with <b>ACTH-dependent Cushing syndrome</b> has <u>adequate cortisol suppression</u> following a <b>high-dose dexamethasone suppression test</b> (8mg), the most likely cause of their syndrome is <b><span class="cloze" data-ordinal="1">Cushing disease</span></b></div><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><br/><img alt="File:CushingsFace.jpg" src="b11f1b792fd146e0ebbc297323b3e029.jpg"/><br/><span style="font-size: 10pt;"><em>Photo credit: <a href="https://commons.wikimedia.org/wiki/File:CushingsFace.jpg">Ozlem Celik, Mutlu Niyazoglu, Hikmet Soylu and Pinar Kadioglu</a>, <a href="https://creativecommons.org/licenses/by/2.5">CC BY 2.5</a>, via Wikimedia Commons</em></span><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4673f75f709df2c549fd31f1f1d2057a.webp" width="800"><img src="755f0d633a09b5632b4e3b8b629859cd.webp" width="800"><br></div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="815442f1b4d4ec40899aebee23ffe525.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><div><div>If a patient with <b>ACTH-dependent Cushing syndrome</b> has <u>increased ACTH secretion</u> following a <b>CRH stimulation test</b>, the most likely cause of their syndrome is <b><span class="cloze" data-cloze="Cushing disease" data-ordinal="1">[...]</span></b></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>If a patient with <b>ACTH-dependent Cushing syndrome</b> has <u>increased ACTH secretion</u> following a <b>CRH stimulation test</b>, the most likely cause of their syndrome is <b><span class="cloze" data-ordinal="1">Cushing disease</span></b></div></div><br/>Corticotropin-releasing hormone stimulation test → ACTH secreting pituitary adenoma increases production of ACTH<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><br/><img alt="File:CushingsFace.jpg" src="b11f1b792fd146e0ebbc297323b3e029.jpg"/><br/><span style="font-size: 10pt;"><em>Photo credit: <a href="https://commons.wikimedia.org/wiki/File:CushingsFace.jpg">Ozlem Celik, Mutlu Niyazoglu, Hikmet Soylu and Pinar Kadioglu</a>, <a href="https://creativecommons.org/licenses/by/2.5">CC BY 2.5</a>, via Wikimedia Commons</em></span><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="a385d911d7622699856f5d110ca38923.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><b>Cushing <i>syndrome</i></b> simply refers to an increase in serum <b><span class="cloze" data-cloze="cortisol" data-ordinal="1">[...]</span></b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Cushing <i>syndrome</i></b> simply refers to an increase in serum <b><span class="cloze" data-ordinal="1">cortisol</span></b><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><span style="font-size: 10pt;"><br/><img alt="File:CushingsFace.jpg" src="b11f1b792fd146e0ebbc297323b3e029.jpg"/></span><br/><em><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:CushingsFace.jpg">Ozlem Celik, Mutlu Niyazoglu, Hikmet Soylu and Pinar Kadioglu</a>, <a href="https://creativecommons.org/licenses/by/2.5">CC BY 2.5</a>, via Wikimedia Commons<br/></span></em><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="47dab63a61e1cf3b139bd7fc54a06860.webp" width="800"><img src="988c7725caaf2162fc7350ca01945ab9.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br><img src="02f8b91a1638e09f175aa4db00770551.webp"><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br> --><!-- <img src="e97e25321e383342678bceb44d28da5a.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><div><img src="7faf3ed30d7acb955bbe00449f3ad43b.webp"><img src="09d8d2bc89e9cb704e67b608b25e2bcd.webp"><img src="6aae186c475de5af17ee55af23d0d61c.webp"><img src="8cfcc2390756b5df27c0107b667eded3.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-diabetes-soap">Watch Diabetes SOAP</a></div><br><img src="a9cb3a90ebeebed25823ec8f15d53191.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question">What is the differential diagnosis in a patient with <u>Cushing syndrome</u> with <b>elevated ACTH</b>?<br/><br/>- <span class="cloze" data-cloze="Cushing disease (ACTH-secreting pituitary adenoma)" data-ordinal="1">[...]</span><br/>- <span class="cloze" data-cloze="Ectopic ACTH secretion (e.g., small cell carcinoma)" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the differential diagnosis in a patient with <u>Cushing syndrome</u> with <b>elevated ACTH</b>?<br/><br/>- <span class="cloze" data-ordinal="1">Cushing disease (ACTH-secreting pituitary adenoma)</span><br/>- <span class="cloze" data-ordinal="1">Ectopic ACTH secretion (e.g., small cell carcinoma)</span><br/>- i.e., ACTH-dependent Cushing syndrome<br/><br/>- MRI of pituitary to confirm (high-dose dexamethasone suppression test was previously first-line for diagnosis, but current guidelines recommend MRI)<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="755f0d633a09b5632b4e3b8b629859cd.webp" width="800"><img src="f8e8a3fb07a692ef264e942277a8adc9.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="3e772d13b722f6db276c99c6a479b534.webp"><br><img src="a23034b5133e7b8b8111a169799a1cc1.webp"><br><img src="0d73289ba570d5353d526a682fdd36c3.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="8e66cfab974584d8155ac307102742a4.webp"><br><img src="c7af7849ba0aed7a8a06f64a1dcd8072.webp"><img src="92053b5e9a283359be552a33ef3e74e6.webp"><img src="cb97d84156a423405462fb1aec52fbd1.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/oncology-im/lesson/lung-cancer">Watch Lung Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><div><div>If a patient with <b>ACTH-dependent Cushing syndrome</b> has <u>no cortisol suppression</u> following a <b>high-dose dexamethasone suppression test</b> (8mg), the most likely cause of their syndrome is <b><span class="cloze" data-cloze="ectopic ACTH secretion" data-ordinal="1">[...]</span></b></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>If a patient with <b>ACTH-dependent Cushing syndrome</b> has <u>no cortisol suppression</u> following a <b>high-dose dexamethasone suppression test</b> (8mg), the most likely cause of their syndrome is <b><span class="cloze" data-ordinal="1">ectopic ACTH secretion</span></b></div></div><br/><span>Ectopic ACTH secretion has no response to negative feedback</span><br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><br/><img alt="File:CushingsFace.jpg" src="b11f1b792fd146e0ebbc297323b3e029.jpg"/><br/><span style="font-size: 10pt;"><em>Photo credit: <a href="https://commons.wikimedia.org/wiki/File:CushingsFace.jpg">Ozlem Celik, Mutlu Niyazoglu, Hikmet Soylu and Pinar Kadioglu</a>, <a href="https://creativecommons.org/licenses/by/2.5">CC BY 2.5</a>, via Wikimedia Commons</em></span><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div><img src="4673f75f709df2c549fd31f1f1d2057a.webp" width="800"><img src="f8e8a3fb07a692ef264e942277a8adc9.webp" width="800"><br></div></div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="e38ea45cab6e81b1f172a8a8b65b8eb9.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question"><div>What is the most common <u>endogenous</u> cause of <b>Cushing syndrome</b>?</div><br/><div><span class="cloze" data-cloze="Cushing disease (i.e., an ACTH-secreting pituitary adenoma)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the most common <u>endogenous</u> cause of <b>Cushing syndrome</b>?</div><br/><div><span class="cloze" data-ordinal="1">Cushing disease (i.e., an ACTH-secreting pituitary adenoma)</span></div><br/>vs. most common <u>overall</u> cause of Cushing syndrome: exogenous glucocorticoids<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="755f0d633a09b5632b4e3b8b629859cd.webp"><br><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br><img src="15e26934b93a3d7a0641cd0aba47b8ef.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <img src="fac566eb0d06d1bab8691a470a0277fe.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="d56c8ba4c794a96bc801c784e44c7808.jpg"><br><img src="8286e57e4414f5b9f7f06a858f8ca047.jpg"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7012?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Pituitary_Adenoma">Review Pituitary Adenoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question"><div>Clinical features of <span class="cloze-inactive" data-ordinal="2"><b>Cushing syndrome</b></span> include moon facies, buffalo hump, and truncal obesity due to <b>increased </b><span class="cloze" data-cloze="&lt;b&gt;fat storage&lt;/b&gt;" data-ordinal="1">[...]</span>, secondary to excess <span class="cloze" data-cloze="&lt;b&gt;insulin&lt;/b&gt;" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Clinical features of <span class="cloze-inactive" data-ordinal="2"><b>Cushing syndrome</b></span> include moon facies, buffalo hump, and truncal obesity due to <b>increased </b><span class="cloze" data-ordinal="1"><b>fat storage</b></span>, secondary to excess <span class="cloze" data-ordinal="1"><b>insulin</b></span> </div><br/>Increased gluconeogenesis causes hyperglycemia, leading to insulin release and thus fat storage<br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><br/><img src="47bb55b4d1f0726be07eadd576e4bb5c.jpg" width="360"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:CushingsFace.jpg">Celik et al.</a>, <a href="https://creativecommons.org/licenses/by/2.5">CC BY 2.5</a>, via Wikimedia Commons</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="de11be7765cabe98b1c5859c1ad157e7.webp" width="800"><img src="d6543fe6707895d5f5e14057f2081d42.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br><img src="3bfa7a61486c53edfa7686e788da4af4.webp"><img src="27c34e49214177300e38420cc4ab3d68.webp"><img src="89d58c58ee839d54ed99e372289c3bdc.webp"><img src="645c0e5babdc67ff4f36d57975495aca.webp"><br><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="e663f759a2e5f38c404f5ea99ea1a589.webp"><br><img src="6ef42868ef94da459ab987d433c1d348.webp"><br><img src="0ee082c3a3777c0832fd5dbd6daa0158.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><div><img src="7faf3ed30d7acb955bbe00449f3ad43b.webp"><img src="09d8d2bc89e9cb704e67b608b25e2bcd.webp"><img src="6aae186c475de5af17ee55af23d0d61c.webp"><img src="8cfcc2390756b5df27c0107b667eded3.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-diabetes-soap">Watch Diabetes SOAP</a></div><br><img src="5c46b2a891ea37f36a5013cecdf055ba.webp"><br><img src="c69d3b059cbd28dec67c872764dab360.webp"><br><img src="c657a117972e9046c7b4df6dab48079d.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/genetic-disorders/lesson/muscular-dystrophies-soap">Watch Muscular Dystrophies</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question"><div>One clinical feature of <b>Cushing syndrome</b> is <span class="cloze" data-cloze="&lt;b&gt;osteoporosis&lt;/b&gt;" data-ordinal="1">[...]</span>, which is a result of <u>decreased</u> <span class="cloze-inactive" data-ordinal="2"><b>osteoblast</b></span><b> activity</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One clinical feature of <b>Cushing syndrome</b> is <span class="cloze" data-ordinal="1"><b>osteoporosis</b></span>, which is a result of <u>decreased</u> <span class="cloze-inactive" data-ordinal="2"><b>osteoblast</b></span><b> activity</b> </div><br/>Excessive glucocorticoids increase bone resorption, decrease intestinal calcium absorption, and decrease renal calcium reabsorption<br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="03daeb77f92bcfc9e802b0fbeb8dbdb0.webp"><img src="d48600da011d14cf9cc1f002c155531a.webp"><img src="96564ec88d13e9f36a14c6aa60e53de6.webp"></div><br><img src="a40f7e0b28bb4f637128dc06dd0b70ba.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br><img src="b5e22126889b47f541f919d4d14b707b.webp"><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br><img src="Screen Shot 2022-07-12 at 11.25.56 PM.jpg"><img src="Screen Shot 2022-07-12 at 11.26.14 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-cellular-physiology/videos/medical-physiology-cellular-physiology-bone-formation--repair">Watch Bone Formation and Repair</a><br><br> --><!-- <img src="1dd6cc7c0fb362fefcb3a71940c702d3.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="800d77737469623e1524f5a5b8702d75.webp"><br><img src="c69d3b059cbd28dec67c872764dab360.webp"><br><img src="c657a117972e9046c7b4df6dab48079d.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/genetic-disorders/lesson/muscular-dystrophies-soap">Watch Muscular Dystrophies</a><br> --><!-- <img src="b340afa8088b3c0082d7413018bb12ef.webp"><img src="ad7e67a56bfb34fd5c74d598665a6b0b.webp"><img src="ec69f059bf8ec7c5bf62ef86d94cbdcb.webp"><img src="47fdce4b8b0b3c4b0dfaf79204e9fd59.webp"><img src="4874b4ab956219e1b92e895a8400ff62.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-musculoskeletal-derm/videos/medical-pathophysiology-musculoskeletal-and-derm-bone-osteoporosis-and-paget-disease-of-bone?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Osteoporosis &amp; Paget Disease of Bone</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question"><div>One clinical feature of <b>Cushing syndrome</b> is <b>muscle weakness</b> with <b><span class="cloze" data-cloze="thin" data-ordinal="1">[appearance]</span> extremities </b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One clinical feature of <b>Cushing syndrome</b> is <b>muscle weakness</b> with <b><span class="cloze" data-ordinal="1">thin</span> extremities </b></div><br/><span style="background-color: rgba(255, 255, 255, 0);">Due to increased lipolysis/proteolysis<br/></span><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="cd951409f551bd60d90a3e8f4ddda377.webp" width="800"><br></div><div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br><img src="567d5cb58a5afd2f208716a6e94b3b06.webp"><br><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="c65db55c5d901e9e92424f1983771e8a.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="a9cb3a90ebeebed25823ec8f15d53191.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question"><div>One clinical feature of <b>Cushing syndrome</b> is <span class="cloze" data-cloze="&lt;b&gt;hypertension&lt;/b&gt;" data-ordinal="1">[...]</span>, which is a result of an <u>upregulation</u> of <span class="cloze-inactive" data-ordinal="2"><b>α<sub>1</sub>-adrenergic</b></span> <b>receptors</b>, causing increased sensitivity of blood vessels to catecholamines </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One clinical feature of <b>Cushing syndrome</b> is <span class="cloze" data-ordinal="1"><b>hypertension</b></span>, which is a result of an <u>upregulation</u> of <span class="cloze-inactive" data-ordinal="2"><b>α<sub>1</sub>-adrenergic</b></span> <b>receptors</b>, causing increased sensitivity of blood vessels to catecholamines </div><br/>Cortisol mediates the upregulation of α<sub>1</sub> receptors on arterioles<br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c375c915d522f18cb081d027f8b8a890.webp" width="800"><img src="0e71414ba9b4fe3a982c8a671972e485.webp" width="800"><br><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="78bfee0b368a40f1d3b21941ef6a0a86.webp"><br><img src="eabcf1c6d8ad466100533c48e98dcc87.webp"><img src="1b8f3e88561b246f4d04346e1891b8cf.webp"><img src="284b6b5991f11c77e97e9c833673fc5f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-cardiology/videos/medical-internal-medicine-cardiology-blood-pressure-htn-soa">Watch Hypertension SOA</a><br><br><img src="6f6d364571f2ea769095fb20b8c90359.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="a9cb3a90ebeebed25823ec8f15d53191.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question"><div>One clinical feature of <b>Cushing syndrome</b> is <b><span class="cloze-inactive" data-ordinal="2">abdominal striae</span></b> which is a result of <u>impaired</u> <b><span class="cloze" data-cloze="collagen" data-ordinal="1">[...]</span> synthesis</b>, allowing blood vessels to rupture easily</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One clinical feature of <b>Cushing syndrome</b> is <b><span class="cloze-inactive" data-ordinal="2">abdominal striae</span></b> which is a result of <u>impaired</u> <b><span class="cloze" data-ordinal="1">collagen</span> synthesis</b>, allowing blood vessels to rupture easily</div><br/>Due to decreased fibroblast activity<br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><br/><img src="7e72f253e0cfca81b4de116f256382a8.webp" width="505"/><img src="edfc80921cd0450f6be0bbfed3df2e97.webp" width="350"/><br/><i><span style="font-size: 10pt;">Image(s) licensed by <a href="https://dermnetnz.org/">DermNet</a> and used with permission, <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/nz/">CC-BY-NC-ND 3.0 NZ</a></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="116f6d3f9bc8226f55f30dd2b0b59691.webp" width="800"></div><div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br><img src="c84974d115363183605cadda4cdae1ba.webp"><br><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="a57fd079e4c4c18f7dfd92f9d3f22b67.webp"><br><img src="250a8fcb6f14b85a1adbd2ff5d34fd7a.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">21.1</td>
+                    <td class="question"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to <b>ACTH secreting pituitary adenoma</b>?</div><br/><div><span class="cloze" data-cloze="&lt;u&gt;Hyperplasia&lt;/u&gt; of &lt;u&gt;both&lt;/u&gt; adrenal glands" data-ordinal="1">[hyperplasia, atrophy; one, both]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to <b>ACTH secreting pituitary adenoma</b>?</div><br/><div><span class="cloze" data-ordinal="1"><u>Hyperplasia</u> of <u>both</u> adrenal glands</span></div><br/>An ACTH secreting pituitary adenoma is also known as <b>Cushing disease<br/></b> <br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="10cb27a31c3a51085bf70a348c64393a.webp" width="800"><img src="755f0d633a09b5632b4e3b8b629859cd.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">22.1</td>
+                    <td class="question"><div>If a patient with <b>ACTH-dependent Cushing syndrome</b> has <u>no increase in ACTH secretion</u> following a <b>CRH stimulation test</b>, the most likely cause of their syndrome is <b><span class="cloze" data-cloze="ectopic ACTH secretion" data-ordinal="1">[...]</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>If a patient with <b>ACTH-dependent Cushing syndrome</b> has <u>no increase in ACTH secretion</u> following a <b>CRH stimulation test</b>, the most likely cause of their syndrome is <b><span class="cloze" data-ordinal="1">ectopic ACTH secretion</span></b> </div><br/><div>Ectopic tumors cannot respond to stimulation from CRH </div><br/><div><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="47dab63a61e1cf3b139bd7fc54a06860.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="e440a985437ada1a46df2e0c9a7058e9.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">23.1</td>
+                    <td class="question">What <u>two</u> tests may be used to differentiate between <b>Cushing disease</b> and <b>ectopic</b> (<b>paraneoplastic</b>) <b>ACTH secretion</b>? <br/><br/>- <span class="cloze" data-cloze="&lt;u&gt;High-dose&lt;/u&gt; dexamethasone suppression test" data-ordinal="1">[...]</span><br/>- <span class="cloze" data-cloze="CRH stimulation test" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What <u>two</u> tests may be used to differentiate between <b>Cushing disease</b> and <b>ectopic</b> (<b>paraneoplastic</b>) <b>ACTH secretion</b>? <br/><br/>- <span class="cloze" data-ordinal="1"><u>High-dose</u> dexamethasone suppression test</span><br/>- <span class="cloze" data-ordinal="1">CRH stimulation test</span><br/>- <b>High-dose dexamethasone test</b> inhibits ACTH-secreting pituitary adenomas, but NOT ectopic ACTH-secreting tumors<br/><br/>- <b>CRH stimulation test</b> increases ACTH production in pituitary adenomas, but fails to increase ACTH production with ectopic tumors<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div><img src="4673f75f709df2c549fd31f1f1d2057a.webp" width="800"><img src="5e7df382fe71604fd515c5a910c9ca7e.webp" width="800"><img src="33c1c534d4101dda699191ebc122aa21.webp" width="800"></div><div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="815442f1b4d4ec40899aebee23ffe525.webp"><br><img src="e38ea45cab6e81b1f172a8a8b65b8eb9.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">24.1</td>
+                    <td class="question"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to <b>exogenous corticosteroids</b>? </div><br/><div><span class="cloze" data-cloze="&lt;u&gt;Atrophy&lt;/u&gt; of &lt;u&gt;both&lt;/u&gt; adrenal glands" data-ordinal="1">[hyperplasia, atrophy; one, both]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to <b>exogenous corticosteroids</b>? </div><br/><div><span class="cloze" data-ordinal="1"><u>Atrophy</u> of <u>both</u> adrenal glands</span></div><br/>Due to inhibition of ACTH<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="76d3b81a1f2510b2fd9bcf2d4c4f37a7.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">25.1</td>
+                    <td class="question"><div>One <i>positive</i> <b>screening test</b> for <b>Cushing syndrome</b> is an <u>increased</u> <b>midnight <span class="cloze" data-cloze="salivary" data-ordinal="1">[...]</span> cortisol</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One <i>positive</i> <b>screening test</b> for <b>Cushing syndrome</b> is an <u>increased</u> <b>midnight <span class="cloze" data-ordinal="1">salivary</span> cortisol</b></div><br/>Cortisol levels are not normally elevated in the evening<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="ede244f7a62dde2b94c03024b09104a7.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="a349091be2b18576252e2a198015971e.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">26.1</td>
+                    <td class="question"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to a <b>paraneoplastic (ectopic) ACTH secretion</b>?</div><br/><div><span class="cloze" data-cloze="&lt;u&gt;Hyperplasia&lt;/u&gt; of &lt;u&gt;both&lt;/u&gt; adrenal glands" data-ordinal="1">[hyperplasia, atrophy; one, both]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to a <b>paraneoplastic (ectopic) ACTH secretion</b>?</div><br/><div><span class="cloze" data-ordinal="1"><u>Hyperplasia</u> of <u>both</u> adrenal glands</span></div><br/>- Examples include <b>small cell lung carcinoma</b> and <b>bronchial carcinoids</b><br/>- Hyperplasia due to <u>constant</u> stimulation from ACTH<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" style="width: 1000px;" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="10cb27a31c3a51085bf70a348c64393a.webp" width="800"><img src="755f0d633a09b5632b4e3b8b629859cd.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">27.1</td>
+                    <td class="question">What is the most common tumor that produces <b>ectopic ACTH</b>?<br/><br/><span class="cloze" data-cloze="Small cell lung carcinoma (SCLC)" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the most common tumor that produces <b>ectopic ACTH</b>?<br/><br/><span class="cloze" data-ordinal="1">Small cell lung carcinoma (SCLC)</span><br/>Also may produce ADH causing SIADH<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div>*cushion is in front of the table → <u>anterior</u> pituitary</div><div><img src="b1e22fcd29684e29fe56d0fdfb11dbec.webp"><img src="3577626ac2d23eb349a69595078ae388.webp"><img src="ea03274517d64005bc392beb20888e8c.webp"><br></div></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-pulmonary/videos/medical-pathophysiology-pulmonary-lung-cancer-lung-carcinoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Lung Carcinoma</a><br><br><img src="001c0a81a38a9bfb9139b906d8ab5ecc.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="04d46d3b654fb1bbffa404b60f1afc1d.webp"><img src="8e66cfab974584d8155ac307102742a4.webp"><img src="c7af7849ba0aed7a8a06f64a1dcd8072.webp"><img src="92053b5e9a283359be552a33ef3e74e6.webp"><img src="cb97d84156a423405462fb1aec52fbd1.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/oncology-im/lesson/lung-cancer">Watch Lung Cancer</a><br><br><img src="a6594d21b90448cd5b07b7beb98bc52d.webp"><br><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">28.1</td>
+                    <td class="question"><div>One <i>positive</i> <b>screening test</b> for <b>Cushing syndrome</b> is an <u>increased</u> free <span class="cloze" data-cloze="cortisol" data-ordinal="1">[...]</span> on 24-hour urinalysis </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One <i>positive</i> <b>screening test</b> for <b>Cushing syndrome</b> is an <u>increased</u> free <span class="cloze" data-ordinal="1">cortisol</span> on 24-hour urinalysis </div><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="ede244f7a62dde2b94c03024b09104a7.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="601c3414f389b52768bd148cd5f3d367.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="a9cb3a90ebeebed25823ec8f15d53191.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">29.1</td>
+                    <td class="question"><div>One <i>positive</i> <b>screening test</b> for <b>Cushing syndrome</b> is <b>no <span class="cloze" data-cloze="cortisol suppression" data-ordinal="1">[...]</span></b> with overnight <u>low-dose</u> dexamethasone test (1mg) </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One <i>positive</i> <b>screening test</b> for <b>Cushing syndrome</b> is <b>no <span class="cloze" data-ordinal="1">cortisol suppression</span></b> with overnight <u>low-dose</u> dexamethasone test (1mg) </div><br/>e.g., cortisol levels remain elevated due to ectopic or exogenous glucocorticoid production uninhibited<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="43219abb6cce2686cff9ccab5dd7b9a2.webp" width="800"><img src="33c1c534d4101dda699191ebc122aa21.webp" width="800"><br></div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="8082365ff821b2a5a566915b2cbf96a7.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="a9cb3a90ebeebed25823ec8f15d53191.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">30.1</td>
+                    <td class="question"><span class="cloze" data-cloze="&lt;b&gt;Nelson&lt;/b&gt;" data-ordinal="1">[...]</span><b> syndrome</b> is an enlargement of <i>existing</i> ACTH-secreting pituitary adenoma after <b>bilateral</b> <span class="cloze-inactive" data-ordinal="2"><b>adrenalectomy</b></span> for refractory Cushing syndrome<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze" data-ordinal="1"><b>Nelson</b></span><b> syndrome</b> is an enlargement of <i>existing</i> ACTH-secreting pituitary adenoma after <b>bilateral</b> <span class="cloze-inactive" data-ordinal="2"><b>adrenalectomy</b></span> for refractory Cushing syndrome<br/>- AKA postadrenalectomy syndrome<br/><br/>- Sudden decrease in cortisol increases ACTH secretion via loss of negative feedback; leads to enlargement of <b>preexisting</b> but <b>undetected</b> pituitary adenoma<br/><br/>- Patient must take glucocorticoid &amp; mineralocorticoids for the rest of their life<br/><br/><img src="42291e7d13770d8b48f5d5a214eb36aa.webp" width="750"/><br/>1) Indications include primary Cushing syndrome due to bilateral adrenal disease or severe secondary Cushing syndrome refractory to treatment<br/>2) <b>Bilateral adrenalectomy</b> causes sudden drop in cortisol<br/>3) Loss of negative feedback from cortisol<br/>4) Increased corticotropin-releasing hormone (CRH) production<br/>5) Enlargement of <u>preexisting</u> but <u>undetected</u> pituitary adenoma <br/>6) Symptoms manifest (e.g., hyperpigmentation, headaches, &amp; bitemporal hemianopsia)<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="48f129df377ddc2461ecaaa8ea69033f.webp" width="800"><img src="f7e6f22bd5f1e88a7ca0cb1a24ca9a35.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">31.1</td>
+                    <td class="question"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to <b>primary adrenal adenoma</b>, <b>hyperplasia</b>, or <b>carcinoma</b>?</div><br/><div><span class="cloze" data-cloze="&lt;u&gt;Atrophy&lt;/u&gt; of the &lt;u&gt;uninvolved&lt;/u&gt; gland; &lt;u&gt;hyperplasia&lt;/u&gt; of the &lt;u&gt;involved&lt;/u&gt; gland" data-ordinal="1">[hyperplasia, atrophy; one, both]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the state of the <b>adrenal glands</b> in <u>Cushing syndrome</u> due to <b>primary adrenal adenoma</b>, <b>hyperplasia</b>, or <b>carcinoma</b>?</div><br/><div><span class="cloze" data-ordinal="1"><u>Atrophy</u> of the <u>uninvolved</u> gland; <u>hyperplasia</u> of the <u>involved</u> gland</span></div><br/>Thus can also present with pseudohyperaldosteronism<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a694c9975b41cd410d4f6bec1fbd9a0e.webp"><img src="d240028f37988e6da89e165270112d9c.webp"><img src="bdda7cf743d382854786877a9f35ab13.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-adrenocortical-hyperfunction-hyperaldosteronism-and-hypercortisolism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adrenocortical Hyperfunction Hyperaldosteronism &amp; Hypercortisolism</a><br><br><img src="5508ce30e1ae3804f06f13a38cf60dba.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="b9994025cab83a7d92ae5f4163ff3b00.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">32.1</td>
+                    <td class="question">One clinical feature of <b><u>secondary</u></b> <b>Cushing syndrome</b> (e.g., Cushing <u>disease</u>) is <b><span class="cloze" data-cloze="hyperpigmentation" data-ordinal="1">[...]</span></b>, due to increased levels of <b>MSH</b> cleaved from <b>proopiomelanocortin </b>(POMC)<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">One clinical feature of <b><u>secondary</u></b> <b>Cushing syndrome</b> (e.g., Cushing <u>disease</u>) is <b><span class="cloze" data-ordinal="1">hyperpigmentation</span></b>, due to increased levels of <b>MSH</b> cleaved from <b>proopiomelanocortin </b>(POMC)<br/>- M<span style="">elanocyte-stimulating hormone</span> (MSH)<span style=""> </span>is produced along with ACTH, causing hyperpigmentation in <span style=""><u>secondary</u></span> <span style="">Cushing syndrome</span> which is ACTH-dependent (e.g., Cushing <u>disease</u>, small cell lung cancer)<br/><br/>- Compare with <b><u>primary</u></b> <b>Cushing syndrome</b> (ACTH-independent; cortisol release from adrenal) which would <u>not</u> have hyperpigmentation<br/><br/><img src="aaddb81d4cf4fd64514f768a2be65d33.webp" width="374"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:WomenWithAddison.jpg">James Heilman, MD</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons, modified by censoring<br/></span></i><br/><img src="d07caa211c01b83c5f6ba5df44e4330b.webp" width="886"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="2a6d11685c8e520ae45689fc40c2756d.webp" width="800"><img src="86195076b2fd58aaed9ac43c2ba9aac2.webp" width="800"><div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="c94ef0e02b438d11b53fc9c60c87ad26.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">33.1</td>
+                    <td class="question"><b>Mifepristone, mitotane, metyrapone, </b>and <b>ketoconazole</b> can be used to treat <span class="cloze" data-cloze="&lt;b&gt;hyper&lt;/b&gt;" data-ordinal="1">[...]</span><b>cortisolism</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Mifepristone, mitotane, metyrapone, </b>and <b>ketoconazole</b> can be used to treat <span class="cloze" data-ordinal="1"><b>hyper</b></span><b>cortisolism</b><br/>- <b>Mifepristone</b> antagonizes cortisol and progesterone receptors<br/><br/>- <b>Mitotane</b> directly suppresses adrenal glands<br/><br/>- <b>Metyrapone</b> inhibits 11β-hydroxylase<br/><br/>- <b>Ketoconazole</b> inhibits adrenal hormone production<br/><br/><img src="96e95e83221f8f6f2b658cc853704499.webp" width="1114"/><br/><br/><img src="3b115adeb3944499c35ae5af4fe6b31d.webp" width="1089"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="79ca51e540041aa08879496a88e99baa.webp" width="800"><img src="7aad7af5a44e011b7d9e41428e40bffd.webp" width="800"><img src="9cf2d051ec59d52e8d96466f1baadff0.webp" width="800"><img src="1a3be6b7712588ebe58a5e6aee1c0bf0.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="313ecc49a6f436e0721c1166dac2050f.webp"><br><img src="c9b5b4aa012be90cc93c9ad12d770d0d.webp"><br><img src="3a46a52affe4c26946ff4942cb7958b5.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">34.1</td>
+                    <td class="question">What is the <u>first-line treatment</u> for a patient with endogenous <b>Cushing syndrome</b> with <i>hypercortisolism</i> and <i>low ACTH</i>?<br/><br/><span class="cloze" data-cloze="Adrenalectomy" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the <u>first-line treatment</u> for a patient with endogenous <b>Cushing syndrome</b> with <i>hypercortisolism</i> and <i>low ACTH</i>?<br/><br/><span class="cloze" data-ordinal="1">Adrenalectomy</span><br/>- Get <b>CT/MRI to confirm first</b>; likely diagnosis is primary hypercortisolism (most commonly due to adrenal adenoma)<br/><br/>- After surgical therapy, patients who develop adrenal insufficiency <b>require lifelong glucocorticoid and mineralocorticoid replacement<br/></b><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="f7e6f22bd5f1e88a7ca0cb1a24ca9a35.webp" width="800"><img src="48f129df377ddc2461ecaaa8ea69033f.webp" width="800"><br></div><div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br> --><!-- <img src="f03dcfe667db4d238c5eeaff745ad596.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">35.1</td>
+                    <td class="question"><div>Which <u>thyroid neoplasm</u> may produce <b>VIP</b>, <b>serotonin</b>, or <b>ACTH</b>?</div><br/><div><span class="cloze" data-cloze="Medullary thyroid carcinoma" data-ordinal="1">[...]</span><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <u>thyroid neoplasm</u> may produce <b>VIP</b>, <b>serotonin</b>, or <b>ACTH</b>?</div><br/><div><span class="cloze" data-ordinal="1">Medullary thyroid carcinoma</span><br/></div><br/>- VIP → diarrhea<br/>- Serotonin → flushing<br/>- ACTH → Cushing syndrome<br/><br/><img src="42a989d207e2f0f9b732408348caddf9.webp" width="635"/><br/><i><span style="font-size: 10pt;"><i>Photo credit: <a href="https://www.flickr.com/photos/lunarcaustic/3441640567/in/dateposted/">© Lunar Caustic</a>, all rights reserved, via Flickr. Used with permission</i></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="baf6cdd457652a5f691883f7a6c6a0fc.webp"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">36.1</td>
+                    <td class="question"><div><b>Cushing </b><span class="cloze" data-cloze="&lt;b&gt;disease&lt;/b&gt;" data-ordinal="1">[...]</span> is the result of chronic <b>excess</b> <b>glucocorticoids</b> caused by <span class="cloze-inactive" data-ordinal="2"><i>hypersecretion of ACTH</i> from a <b>pituitary adenoma</b></span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Cushing </b><span class="cloze" data-ordinal="1"><b>disease</b></span> is the result of chronic <b>excess</b> <b>glucocorticoids</b> caused by <span class="cloze-inactive" data-ordinal="2"><i>hypersecretion of ACTH</i> from a <b>pituitary adenoma</b></span></div><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="15e26934b93a3d7a0641cd0aba47b8ef.webp"><br><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br><br><img src="755f0d633a09b5632b4e3b8b629859cd.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="fac566eb0d06d1bab8691a470a0277fe.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">37.1</td>
+                    <td class="question"><div><span class="cloze" data-cloze="&lt;b&gt;Cushing&lt;/b&gt;" data-ordinal="1">[...]</span> <b>syndrome</b> is the result of chronic <b>excess glucocorticoids</b> by: </div><div><br/><div> 1. Adrenal gland hyperplasia</div><div> 2. <span class="cloze-inactive" data-ordinal="2">Pharmacologic doses of glucocorticoids</span> (most common)</div><div> 3. ACTH secreting pituitary adenoma (Cushing <i>disease</i>)</div><div> 4. Ectopic ACTH production (e.g., small cell lung carcinoma)</div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze" data-ordinal="1"><b>Cushing</b></span> <b>syndrome</b> is the result of chronic <b>excess glucocorticoids</b> by: </div><div><br/><div> 1. Adrenal gland hyperplasia</div><div> 2. <span class="cloze-inactive" data-ordinal="2">Pharmacologic doses of glucocorticoids</span> (most common)</div><div> 3. ACTH secreting pituitary adenoma (Cushing <i>disease</i>)</div><div> 4. Ectopic ACTH production (e.g., small cell lung carcinoma)</div></div><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="d1eb087e3b2a9377f38a03c4067dd247.webp" width="800"><img src="001c0a81a38a9bfb9139b906d8ab5ecc.webp" width="800"><img src="09685389a80f3c6665903439a0b71c6e.webp" width="800"><img src="755f0d633a09b5632b4e3b8b629859cd.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="ad9caf0a1f41712dff36d609165d5518.webp"><img src="a6594d21b90448cd5b07b7beb98bc52d.webp"><br><img src="aa4bb954009b25f580be05a1c039ffdf.webp"><br><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><div><img src="7faf3ed30d7acb955bbe00449f3ad43b.webp"><img src="84eca05d781817f6d7bc034fd30cef1a.webp"><br></div><div><img src="09d8d2bc89e9cb704e67b608b25e2bcd.webp"><img src="6aae186c475de5af17ee55af23d0d61c.webp"><img src="8cfcc2390756b5df27c0107b667eded3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-diabetes-diabetes-soap">Watch Diabetes SOAP</a></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">38.1</td>
+                    <td class="question"><div>What <u>clinical feature</u> is seen in <b>Cushing syndrome/disease</b> that is a result of <u>increased</u><b> androgen </b>levels in <b>females</b>?</div><br/><div><span class="cloze" data-cloze="Virilization" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <u>clinical feature</u> is seen in <b>Cushing syndrome/disease</b> that is a result of <u>increased</u><b> androgen </b>levels in <b>females</b>?</div><br/><div><span class="cloze" data-ordinal="1">Virilization</span></div><br/><b>Virilization</b> is the appearance of male secondary sexual characteristics (e.g., voice deepening, hirsutism, male-pattern hair loss, increased muscle mass, clitoromegaly) in a female individual<br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="6495d89f258286da552af39a23a8451b.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="14dc2cf51412e5be936ac081ce21cc4a.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="1d41d5f3f9b475e5df0d72640e8b7b7f.webp"><img src="d7f1e4bd4b77db83fbed996b1e5964e1.webp"><br><img src="c48fe52dfedeaa9d5a6b102f3041cc1b.webp"><img src="fc6247503208b89b70f1b1f62dbc8bcc.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/reproductive-endocrinology/lesson/hirsutism-virilization-ddx">Watch Hirsutism &amp; Virilization DDx</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">39.1</td>
+                    <td class="question"><div>Chronically <i>elevated</i> levels of <b>ACTH</b> cause <span class="cloze" data-cloze="hypertrophy/hyperplasia" data-ordinal="1">[...]</span> of the <b>adrenal cortex</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Chronically <i>elevated</i> levels of <b>ACTH</b> cause <span class="cloze" data-ordinal="1">hypertrophy/hyperplasia</span> of the <b>adrenal cortex</b></div><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="10cb27a31c3a51085bf70a348c64393a.webp" width="800"><img src="09685389a80f3c6665903439a0b71c6e.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">40.1</td>
+                    <td class="question">What is the treatment for <b>Cushing <i>disease</i></b>?<br/><br/><span class="cloze" data-cloze="Removal of the ACTH-secreting pituitary adenoma" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the treatment for <b>Cushing <i>disease</i></b>?<br/><br/><span class="cloze" data-ordinal="1">Removal of the ACTH-secreting pituitary adenoma</span><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="db8c36ca821ae55ce7b2533a1fc4e3aa.webp"><br><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="1882f7765cbdb50fad3d1ad4b0df9845.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">41.1</td>
+                    <td class="question"><div>What is the result of a <b>dexamethasone suppression test</b> if the cause of <b>hypercortisolism </b>is an <b>ACTH-secreting tumor</b> of the <u>anterior pituitary</u>?</div><br/><div><span class="cloze" data-cloze="&lt;i&gt;LOW&lt;/i&gt; dose of dexamethasone does not suppress cortisol secretion, but &lt;i&gt;HIGH&lt;/i&gt; dose does" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the result of a <b>dexamethasone suppression test</b> if the cause of <b>hypercortisolism </b>is an <b>ACTH-secreting tumor</b> of the <u>anterior pituitary</u>?</div><br/><div><span class="cloze" data-ordinal="1"><i>LOW</i> dose of dexamethasone does not suppress cortisol secretion, but <i>HIGH</i> dose does</span></div><br/>- The tumor's ACTH secretion is less sensitive to negative feedback<br/><br/>- ACTH-secreting pituitary adenoma is called <b>Cushing</b> <b><i>disease<br/></i></b><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="755f0d633a09b5632b4e3b8b629859cd.webp" width="800"><img src="33c1c534d4101dda699191ebc122aa21.webp" width="800"><img src="4673f75f709df2c549fd31f1f1d2057a.webp" width="800"></div><div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="815442f1b4d4ec40899aebee23ffe525.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">42.1</td>
+                    <td class="question"><div><div>What is the level of <b>ACTH</b> in <b>Cushing <i>disease</i></b>? Why?</div></div><br/><div><span class="cloze" data-cloze="Increased because the disease is caused by an ACTH-secreting pituitary tumor" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>What is the level of <b>ACTH</b> in <b>Cushing <i>disease</i></b>? Why?</div></div><br/><div><span class="cloze" data-ordinal="1">Increased because the disease is caused by an ACTH-secreting pituitary tumor</span></div><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="02956babcb06f8d9112532c43b0e2ab3.webp"><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br><br><img src="755f0d633a09b5632b4e3b8b629859cd.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="7ff1ab621cb0727868bbd4692c979a6c.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">43.1</td>
+                    <td class="question"><div>The <span class="cloze" data-cloze="&lt;b&gt;dexamethasone&lt;/b&gt;" data-ordinal="1">[...]</span> <b>suppression</b> <b>test</b> is useful in patients with <span class="cloze-inactive" data-ordinal="2"><b>hypercortisolism</b> (Cushing syndrome)</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The <span class="cloze" data-ordinal="1"><b>dexamethasone</b></span> <b>suppression</b> <b>test</b> is useful in patients with <span class="cloze-inactive" data-ordinal="2"><b>hypercortisolism</b> (Cushing syndrome)</span></div><br/>Helps distinguish possible etiologies (i.e., ACTH-secreting tumor vs. adrenal cortical tumor; Cushing syndrome vs. disease)<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="43219abb6cce2686cff9ccab5dd7b9a2.webp"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="4a521a62f19f59e31adb44a14f26b6eb.webp"><img src="9d61d990877a9d4785fe9a02c91ec3bb.webp"><img src="59b7eb1276757e9a0e6611fa383d2cb8.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="a9cb3a90ebeebed25823ec8f15d53191.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">44.1</td>
+                    <td class="question"><div>What is the result of a <b>dexamethasone suppression test</b> if the cause of <b>hypercortisolism </b>is an <b>adrenal cortical tumor</b>?</div><br/><div><span class="cloze" data-cloze="&lt;u&gt;Neither&lt;/u&gt; low &lt;i&gt;nor&lt;/i&gt; high dose dexamethasone suppresses cortisol secretion" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the result of a <b>dexamethasone suppression test</b> if the cause of <b>hypercortisolism </b>is an <b>adrenal cortical tumor</b>?</div><br/><div><span class="cloze" data-ordinal="1"><u>Neither</u> low <i>nor</i> high dose dexamethasone suppresses cortisol secretion</span> </div><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="33c1c534d4101dda699191ebc122aa21.webp" width="800"><img src="5e7df382fe71604fd515c5a910c9ca7e.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">45.1</td>
+                    <td class="question"><div>Which treatments for <b>Cushing syndrome</b> work by <u>blocking</u> <b>steroid hormone</b> biosynthesis? </div><br/><div><b><span class="cloze" data-cloze="Ketoconazole" data-ordinal="1">[...]</span></b> or <b><span class="cloze" data-cloze="metyrapone" data-ordinal="1">[...]</span></b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which treatments for <b>Cushing syndrome</b> work by <u>blocking</u> <b>steroid hormone</b> biosynthesis? </div><br/><div><b><span class="cloze" data-ordinal="1">Ketoconazole</span></b> or <b><span class="cloze" data-ordinal="1">metyrapone</span></b></div><br/>First-line treatment is surgery, but can use these enzyme inhibitors to reduce symptoms temporarily<br/><br/><img src="3b115adeb3944499c35ae5af4fe6b31d.webp" width="1089"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9cf2d051ec59d52e8d96466f1baadff0.webp" width="800"><img src="1a3be6b7712588ebe58a5e6aee1c0bf0.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br><br><img src="83ca938ffe582dc134038c26c98d786e.webp"><br><img src="606eef59e9557770df31237e995f56ac.webp"><br><img src="80e2ad7a91a07a84180cdac2b2c737cd.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-antimicrobials/videos/medical-pharmacology-antimicrobials-antifungals-azoles?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Azoles</a><br> --><!-- <img src="313ecc49a6f436e0721c1166dac2050f.webp"><br><img src="c9b5b4aa012be90cc93c9ad12d770d0d.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">46.1</td>
+                    <td class="question"><div><div>What classes of steroid hormones are <u>increased</u> in <b>Cushing syndrome/disease</b>?</div><br/><div><span class="cloze" data-cloze="Glucocorticoids (cortisol) ± androgens" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>What classes of steroid hormones are <u>increased</u> in <b>Cushing syndrome/disease</b>?</div><br/><div><span class="cloze" data-ordinal="1">Glucocorticoids (cortisol) ± androgens</span></div></div><br/>ACTH stimulates zona reticularis to induce androgen production AND stimulates cortisol secretion from adrenal cortex<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="6495d89f258286da552af39a23a8451b.webp" width="800"><img src="755f0d633a09b5632b4e3b8b629859cd.webp" width="800"></div><div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br></div><div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a></div><br><div><img src="6d932d2c2eda945c96565b1b5f480923.webp"></div><img src="aff38637d96f1e19a1d492d5d0aecc87.webp"><img src="4632ca6f58046f011bd592d0919955cc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-glucocorticoids?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Glucocorticoids</a><br><br> --><!-- <img src="58f3ddd6c1dc00a2df5f5886efa8ed77.webp"><img src="7ee3a17d7410ee715ab9499137cbcc44.webp"><img src="a4b379524b38b696eb852ccc8437394e.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">47.1</td>
+                    <td class="question"><div>At high concentrations, <b>cortisol</b> can bind to <span class="cloze" data-cloze="mineralocorticoid (aldosterone)" data-ordinal="1">[...]</span> <b>receptors</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>At high concentrations, <b>cortisol</b> can bind to <span class="cloze" data-ordinal="1">mineralocorticoid (aldosterone)</span> <b>receptors</b></div><br/>Cortisol has a high affinity for mineralocorticoid receptors, but is deactivated by the renal <b>enzyme 11β-hydroxysteroid dehydrogenase</b>, thus producing only <b>weak</b> mineralocorticosteroid activity<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="8f46e7ba4c407c0e51ebd1906cbc6fc8.webp"><br></div><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-internal-medicine-endocrinology-adrenal-disease-cushing-syndrome-soap?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="a9cb3a90ebeebed25823ec8f15d53191.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br><br><div><img src="c7aef22144f5689059ce1634efe2244e.webp"><br></div><div><img src="7b34164740edf8f1d9ad92d6a81649c9.webp"><img src="71877d236ad971386849fc2155c4e2de.webp"><img src="079c78e9a544a7822a42822d446c7259.webp"><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">48.1</td>
+                    <td class="question"><div><div>What type of <u>gastric ulcer</u> is caused by <b>increased intracranial pressure</b>? </div><br/><div><span class="cloze" data-cloze="Cushing ulcer" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>What type of <u>gastric ulcer</u> is caused by <b>increased intracranial pressure</b>? </div><br/><div><span class="cloze" data-ordinal="1">Cushing ulcer</span></div></div><br/>- "Always <b>Cush</b>ion the <b>brain</b>"<br/><br/>- Increased ICP → massive vagal output → increased gastric acid production → Cushing ulcers<br/><br/><img src="b9a7f0771521c69a6ee7f4985578118e.webp" width="1000px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div></div><img src="15883e9b41bcf1247cc360a4c4eb4d6f.webp"><img src="3999c0c60cf2bfcb18ae93c79e235c6f.webp"><img src="aba8780ec683ab03b09461faae32ac75.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-gi/videos/medical-pathophysiology-gi-esophageal-and-gastric-disorders-acute-and-chronic-gastritis-and-peptic-ulcer-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Intracranial Hypertension (ICH)</a><br><br><img src="f2a6f0641e52670a051d4eccfd731df7.webp"><img src="d97c2a00fdc4d5b1d11f1b1b39affe23.webp"><br><img src="4fab584304db7bc7a2dcdc5a71109d1d.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-gi/videos/medical-pathophysiology-gi-esophageal-and-gastric-disorders-acute-and-chronic-gastritis-and-peptic-ulcer-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Acute &amp; Chronic Gastritis &amp; Peptic Ulcer Disease</a><br><br> --><!-- <img src="940e49bef6656a5d85371788f17687e6.webp"><img src="2dddb9fd3e0ff356bafe7e62ef3e9c81.webp"><img src="8ba9ade26bf097609bd964605572a9a6.webp"><img src="a63b61227da28c4968210fd018fa16cb.webp"><img src="fcaccfe06643aa654a587529fd5400c6.webp"><img src="ecd12710dc4c4245749885adf95d4337.webp"><br><br><img src="99ecda47ce033fdb3b5c33d27ed24b21.webp"><br><img src="4fc96b1cc6e3d2786cc9aca23310ec94.webp"><img src="a580c57f00c2f6b9bc249b3a44f21a5e.webp"><img src="3ed1de8158eb52942470c3421bc5dea3.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/head-neck-trauma/lesson/cervical-spine-injuries-workup-management">Watch Cervical Spine Injuries: Workup &amp; Management</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">49.1</td>
+                    <td class="question"><b>Pancreatic </b><b>adenocarcinoma</b> may cause <span class="cloze" data-cloze="&lt;b&gt;Cushing syndrome&lt;/b&gt;" data-ordinal="1">[endocrine paraneoplastic syndrome]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Pancreatic </b><b>adenocarcinoma</b> may cause <span class="cloze" data-ordinal="1"><b>Cushing syndrome</b></span><br/>Due to ectopic secretion of <b>ACTH<br/></b><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="7bd5f5758b480feac43a23b47ebb3834.webp"><br></div><div><img src="fba5739d7cde18fd2a1e5801f0f8cf1d.webp"><img src="2702f53a4ea67b5fb453248c803cc516.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-hepatobiliary/videos/medical-pathophysiology-hepatobiliary-pancreatic-disease-pancreatic-cancer-and-islet-cell-tumors">Watch Pancreatic Cancer &amp; Islet Cell Tumors</a><br> --><!-- <img src="f71f7480fd9d23d6dc31f45a26189b6b.webp"><img src="24ee5c59d7a7722a825148cd2e4a3ad8.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-hepatobiliary/review-cards/medical-internal-medicine-hepatobiliary-pancreatic-disease-pancreatic-cancer">Watch Pancreatic Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">50.1</td>
+                    <td class="question"><u>Increased</u><i> ICP</i> may cause a(n) <span class="cloze" data-cloze="&lt;b&gt;Cushing&lt;/b&gt;" data-ordinal="1">[...]</span><b> ulcer</b> due to massive <u>vagal output</u>, which causes increased gastric acid production<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><u>Increased</u><i> ICP</i> may cause a(n) <span class="cloze" data-ordinal="1"><b>Cushing</b></span><b> ulcer</b> due to massive <u>vagal output</u>, which causes increased gastric acid production<br/>- "Always <b style="">Cush</b>ion the <b style="">brain</b>" <br/><div>- Thus, Cushing ulcers most likely occur in the body/corpus of the stomach</div><br/><div><img src="b9a7f0771521c69a6ee7f4985578118e.webp" width="1000px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="Screen Shot 2020-03-07 at 12.56.41 PM.JPG"><br><img src="3999c0c60cf2bfcb18ae93c79e235c6f.webp"><img src="aba8780ec683ab03b09461faae32ac75.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-neuro/videos/medical-pathophysiology-neuro-intracranial-hypertension-and-tumors-intracranial-hypertension-ich?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Intracranial Hypertension (ICH)</a><br><br><img src="f2a6f0641e52670a051d4eccfd731df7.webp"><br><img src="d97c2a00fdc4d5b1d11f1b1b39affe23.webp"><br><img src="4fab584304db7bc7a2dcdc5a71109d1d.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-gi/videos/medical-pathophysiology-gi-esophageal-and-gastric-disorders-acute-and-chronic-gastritis-and-peptic-ulcer-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Acute &amp; Chronic Gastritis &amp; Peptic Ulcer Disease</a><br> --><!-- <img src="940e49bef6656a5d85371788f17687e6.webp"><img src="2dddb9fd3e0ff356bafe7e62ef3e9c81.webp"><img src="8ba9ade26bf097609bd964605572a9a6.webp"><img src="a63b61227da28c4968210fd018fa16cb.webp"><img src="fcaccfe06643aa654a587529fd5400c6.webp"><img src="ecd12710dc4c4245749885adf95d4337.webp"><br><br><img src="69e55cabf2d8cb2a93b10484b2dc3e3a.webp"><br><img src="9a81f3de7a787cf4f04df4358ad6d534.webp"><br><img src="d34cded264a1134966758d633272635a.webp"><img src="b8c0bbbd10f24e98cc3cab92b34470b7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/gi-disease-in-infants--toddlers/lesson/vomiting-in-older-children-adolescents-ddx-2">Watch Vomiting in Older Children &amp; Adolescents DDx</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">51.1</td>
+                    <td class="question"><div><u>Functional</u> <b>pituitary adenoma</b> is <i>less</i> <i>commonly</i> from adenoma of <span class="cloze" data-cloze="&lt;b&gt;somatotrophs&lt;/b&gt; (GH)" data-ordinal="1">[...]</span> and <span class="cloze-inactive" data-ordinal="2"><b>corticotrophs</b> (ACTH)</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><u>Functional</u> <b>pituitary adenoma</b> is <i>less</i> <i>commonly</i> from adenoma of <span class="cloze" data-ordinal="1"><b>somatotrophs</b> (GH)</span> and <span class="cloze-inactive" data-ordinal="2"><b>corticotrophs</b> (ACTH)</span> </div><br/>Causing acromegaly / gigantism and Cushing disease, respectively<br/><br/><img src="6121bc932ad81139270a0e4dd4375bb4.webp" width="402"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Acromegaly_pituitary_macroadenoma.JPEG">Philippe Chanson and Sylvie Salenave</a>, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>, via Wikimedia Commons</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a8b9e4651c656d143b50739bd690ab60.webp"><img src="21ef54d634851676cd84e33e804bcb0e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hyperpituitarism?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperpituitarism</a><br> --><!-- <img src="58ccbd2b71c13507e2e8000885ae2dbc.webp"><img src="57471e1b1bcac31e5110d2e2b317bd81.webp"><img src="7b7618485caa960e13a1cb733e965a64.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/intracranial-neoplasms/lesson/primary-brain-tumors-in-adults">Watch Primary Brain Tumors in Adults</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="d56c8ba4c794a96bc801c784e44c7808.jpg"><br><img src="8286e57e4414f5b9f7f06a858f8ca047.jpg"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/7012?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Neuroanatomy&amp;utm_term=Brain_Tumors&amp;utm_content=Pituitary_Adenoma">Review Pituitary Adenoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">52.1</td>
+                    <td class="question"><div>Which <u>renal neoplasia</u> is associated with <b>paraneoplastic syndromes</b>? </div><br/><div><span class="cloze" data-cloze="Renal cell carcinoma" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <u>renal neoplasia</u> is associated with <b>paraneoplastic syndromes</b>? </div><br/><div><span class="cloze" data-ordinal="1">Renal cell carcinoma</span></div><br/>"<b>PEAR</b>"-aneoplastic syndromes<br/><br/><img src="4d2cf3e91f05af5a9711a81398f8e95f.webp" width="645"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Unclassified_renal_cell_carcinoma_-_thyroid-like_--_intermed_mag.jpg">Nephron</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="Screen Shot 2019-11-05 at 10.56.10 PM_1566160514431.png" width="800"><img src="Screen Shot 2019-11-05 at 10.55.56 PM_1566160514431.png" width="800"><img src="Screen Shot 2019-11-05 at 10.56.03 PM_1566160514431.png" width="800"><img src="Screen Shot 2019-11-05 at 10.55.48 PM_1566160514431.png" width="800"><br></div><img src="8baf814ba2f42bef111481f15d6701b3.webp"><img src="24f8b839b59ec96cc26cad7bc6993067.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-renal/videos/medical-pathophysiology-renal-renal-cancer-renal-cell-carcinoma-and-nephroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Renal Cell Carcinoma &amp; Nephroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">53.1</td>
+                    <td class="question"><span class="cloze-inactive" data-ordinal="2"><b>Small cell</b></span> <b>lung carcinoma</b> may produce the <u><b>anterior</b> pituitary</u> hormone <span class="cloze" data-cloze="&lt;b&gt;ACTH&lt;/b&gt;" data-ordinal="1">[...]</span> leading to <span class="cloze" data-cloze="&lt;b&gt;Cushing syndrome&lt;/b&gt;" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze-inactive" data-ordinal="2"><b>Small cell</b></span> <b>lung carcinoma</b> may produce the <u><b>anterior</b> pituitary</u> hormone <span class="cloze" data-ordinal="1"><b>ACTH</b></span> leading to <span class="cloze" data-ordinal="1"><b>Cushing syndrome</b></span><br/>"Small cell, Smokers, Central, paraneoplastic Syndromes"<br/><br/>- <u>Small cell lung cancer</u> may also produce the posterior pituitary hormone <b>ADH,</b> leading to <b>SIADH</b><br/><br/>- ACTH leads to activation of the adrenal cortex which leads to increased cortisol which decreases activation of the anterior pituitary and hypothalamus<br/><br/><table border="1" class="one"><tbody><tr><th>Type of tumor</th><th>Incidence</th><th>Location</th><th>Associations</th><th>Histology</th></tr><tr><th>Adenocarcinoma</th><td>Most common primary lung cancer &gt; Women &gt; Nonsmokers</td><td>Peripheral</td><td>Better prognosis<br/>EGFR gene &amp; ALK gene<br/>Clubbing</td><td>Glandular<br/>Mucin positive<br/>Lepidic → alveolar thickening</td></tr><tr><th>Small cell carcinoma</th><td>&gt; Smokers</td><td>Central</td><td>Aggressive<br/>Early metastases<br/>L-myc oncogene<br/>Paraneoplastic syndromes (Cushing syndrome, SIADH, Lambert-Eaton)</td><td>Neuroendocrine<br/>Kulchitsky Cells<br/>Chromogranin A<br/>Synaptophysin<br/>Neuron-specific enolase</td></tr><tr><th>Squamous cell carcinoma</th><td>&gt; Smokers (91% of SCC occurs in smokers)</td><td>Central (hilar)</td><td>PTHrP: Hypercalcemia</td><td>Epithelial<br/>Desmosomes<br/>Keratin pearls</td></tr><tr><th>Large cell carcinoma</th><td>&gt; Smokers</td><td>Peripheral</td><td>Early metastasis<br/>Poor prognosis</td><td>Undifferentiated<br/>Large cell</td></tr><tr><th>Bronchial carcinoid tumor</th><td>Most common primary lung cancer in children and adolescents</td><td>Variable</td><td>Good prognosis<br/>Rare metastases<br/>Carcinoid syndrome<br/>Mass effect</td><td>Same as small cell<br/>(Neuroendocrine<br/>Kulchitsky Cells<br/>Chromogranin A<br/>Synaptophysin<br/>Neuron-specific enolase)</td></tr></tbody></table><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div>*cushion is in front of the table → <u>anterior</u> pituitary</div><div><img src="b1e22fcd29684e29fe56d0fdfb11dbec.webp"><img src="3577626ac2d23eb349a69595078ae388.webp"><img src="ea03274517d64005bc392beb20888e8c.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-pulmonary/videos/medical-pathophysiology-pulmonary-lung-cancer-lung-carcinoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Lung Carcinoma</a><br><br><img src="Ectopic ACTH lung cancer.jpg"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-pulmonary/videos/medical-pathophysiology-pulmonary-lung-cancer-lung-carcinoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="a6594d21b90448cd5b07b7beb98bc52d.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="04d46d3b654fb1bbffa404b60f1afc1d.webp"><img src="8e66cfab974584d8155ac307102742a4.webp"><br><img src="c7af7849ba0aed7a8a06f64a1dcd8072.webp"><img src="92053b5e9a283359be552a33ef3e74e6.webp"><img src="cb97d84156a423405462fb1aec52fbd1.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/oncology-im/lesson/lung-cancer">Watch Lung Cancer</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">54.1</td>
+                    <td class="question">What is the likely <i>secondary</i> <i>diagnosis</i> in a <u>chronic smoker</u> that develops <b>hypertension</b>, <b>hyperglycemia</b>, and <b>weight gain</b>?<br/><br/><div><span class="cloze" data-cloze="Cushing syndrome" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the likely <i>secondary</i> <i>diagnosis</i> in a <u>chronic smoker</u> that develops <b>hypertension</b>, <b>hyperglycemia</b>, and <b>weight gain</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Cushing syndrome</span></div><br/>Likely ectopic production of <b>ACTH</b> from small cell lung cancer<br/><br/><img src="2d3b2869ea75b5daf341d3d3531c6197.webp" width="1000px"/><br/><br/><img src="1e8afed2ba4fc42efb681f2d967f80f1.webp" width="987"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="b1e22fcd29684e29fe56d0fdfb11dbec.webp"><img src="3577626ac2d23eb349a69595078ae388.webp"><img src="ea03274517d64005bc392beb20888e8c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-pulmonary/videos/medical-pathophysiology-pulmonary-lung-cancer-lung-carcinoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Lung Carcinoma</a><br><br><img src="001c0a81a38a9bfb9139b906d8ab5ecc.webp" width="800"><img src="47754a2ab25a07269865f3ca040e9522.webp"><img src="ad4792ac555351af2177173368dd40f9.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-neuro/videos/medical-pathophysiology-neuro-cerebrovascular-ischemic-and-hemorrhagic-stroke?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Cushings Syndrome</a><br> --><!-- <img src="e663f759a2e5f38c404f5ea99ea1a589.webp"><br><img src="6f6d364571f2ea769095fb20b8c90359.webp"><br><img src="0ee082c3a3777c0832fd5dbd6daa0158.webp"><img src="191b0fdfaec95b2994e19553f2234cba.webp"><img src="e2ffe769916927ed469c7e3e80a6e1f7.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/adrenal-disease/lesson/cushing-syndrome-soap">Watch Cushing Syndrome SOAP</a><br><br><img src="bb1330a91554cc3b628cf3390e1798c4.webp"><img src="8e66cfab974584d8155ac307102742a4.webp"><br><img src="c7af7849ba0aed7a8a06f64a1dcd8072.webp"><img src="92053b5e9a283359be552a33ef3e74e6.webp"><img src="cb97d84156a423405462fb1aec52fbd1.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/oncology-im/lesson/lung-cancer">Watch Lung Cancer</a><br><br><img src="a9cb3a90ebeebed25823ec8f15d53191.webp"><img src="5c882040e42281fb55eeb22546e497c8.webp"><img src="c2f4046b4de13d04215b94f5f67065e0.webp"><img src="f655c3b124b6e0ec58b98233b2568c0f.webp"><br><br><img src="96dba5616933a146c4106aec557ce56f.webp"><br><img src="48664334076f714d499024f7dfb35800.webp"><img src="65174e568ba926e80edfc2b8f3f33f7d.webp"><img src="9eda9778fcbdef2db708face545aa1ae.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/blood-pressure/lesson/hypertension-management">Watch Hypertension Management</a><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="SmallCellCarcinoma_tagged.JPG"><div><img class="resizer" src="SmallCellCarcinoma_Clean-5240c01d5218108002184fc5ae094f615d76a2d3.JPG"></div><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

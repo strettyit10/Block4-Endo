@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (64 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div><b>Propranolol</b> is a <u>β-blocker</u> that is useful for the treatment of <span class="cloze" data-cloze="&lt;b&gt;thyroid&lt;/b&gt;" data-ordinal="1">[...]</span> <b>storm</b><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Propranolol</b> is a <u>β-blocker</u> that is useful for the treatment of <span class="cloze" data-ordinal="1"><b>thyroid</b></span> <b>storm</b><br/></div><br/><div> - Blocks increased sympathetic activity as well as inhibiting 5'-deiodinase</div><br/><div> - Also may be useful for <u>symptomatic</u> relief of hyperthyroidism (e.g., hypertension, tachycardia, heat intolerance); <b>does not help with exophthalmos or myxedema</b></div><br/><div>One of the "<b>4 P's</b>" to treat thyroid storm: </div><div>- <b><u>P</u></b>ropranolol</div><div>- <b><u>P</u></b>ropylthiouracil (antithyroid agent)</div><div>- <b><u>P</u></b>rednisolone (corticosteroid)</div><div>- <u><b>P</b></u>otassium iodide (lugol iodine)</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><div><img src="paste-28759101014603.jpg"><br></div><div><img src="85b716a97caff24804749693188846e0.webp"><img src="8c5bb6384b37dc7ccaa7bcf5d0262b40.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-autonomic-drugs/videos/medical-pharmacology-autonomic-drugs-sympathetic-beta-blockers?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Beta Blockers</a><br><br><img src="26c5933145d08649e244143007dfc1d1.webp"><img src="d50c7fd6a8f5b688399e6ab48c3e57ce.webp"><img src="ec2168b730f5344d796b7952f5a6918f.webp"><br><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br></div><br> --><!-- <img src="a9b2d7d20145b40eededb17d37c60ce8.webp"><br><img src="5063534fee8032559ff556fa22953de1.webp" alt="Lesson Review"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hyperthyroidism-soap">Watch Hyperthyroidism SOAP</a><br><br><img src="1c2b0e4e7b352b0a60cd2130c197c999.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><div><span class="cloze-inactive" data-ordinal="2"><b>Amiodarone</b></span>, a class III antiarrhythmic, can cause <i>both</i> <b>hyper-</b> or <b>hypo</b><span class="cloze" data-cloze="&lt;b&gt;thyroidism&lt;/b&gt;" data-ordinal="1">[...]</span><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze-inactive" data-ordinal="2"><b>Amiodarone</b></span>, a class III antiarrhythmic, can cause <i>both</i> <b>hyper-</b> or <b>hypo</b><span class="cloze" data-ordinal="1"><b>thyroidism</b></span><br/></div><br/><div>- Am<b>iod</b>arone is 40% <b>iod</b>ine by weight; must check TFTs</div><div><br/><div>- Hyperthyroidism will occur in patients with pre-existing thyroid disease who will then receive excess iodine to the thyroid</div><div>- Hypothyroidism occurs due to a direct toxic effect of the drug</div></div><div>- Amiodarone can prevent conversion of T<sub>4</sub> to T<sub>3</sub></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="b9f6c1fa16ca1b3126a77869ccfd34ef.webp"><img src="bfd587146e8d91468df649dbcfc35510.webp"><img src="6c765b3c422ecd809071f596dd210357.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-cardiovascular-renal/videos/medical-pharmacology-cardiovascular-and-renal-antiarrhythmics-class-iii?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Class III Antiarrhythmics</a><br><br><img src="85482b17291b20b0235d1d759b8afc42.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br><br> --><!-- <img src="20d0d9996ecd98057f1e0707627f5ea3.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="bb2d83ed9b4ec0db945de2a1cf7847b4.webp"><br><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br><br><img src="65bec32c3c40cc5e44d9e4728cd72171.webp"><br><img src="5063534fee8032559ff556fa22953de1.webp" alt="Lesson Review"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hyperthyroidism-soap">Watch Hyperthyroidism SOAP</a><br> --><!-- <img src="85a916e9703d1a948b2b5c5508c7d450.webp"><img src="Screen Shot 2019-09-25 at 9.07.07 AM.png"><br> --><!-- <br> --><!-- <img src="eb5b2ce351c204fa8bc490108df870e9.webp"><br><img src="470ac0fe5e55d3a9290c7a3d530a6174.webp"><br><b><a href="https://pixorize.com/view/100594?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=antiarrhythmic"><span style="font-weight: 400;">Review Amiodarone</span></a></b><br><img src="11_Class_III_Antiarrhythmics-Amiodarone_1.jpeg"><br><img src="11_Class_III_Antiarrhythmics-Amiodarone_2.jpeg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question">What kind of <u>hair texture</u> is associated with <b>hypothyroidism</b>?<br/><br/><div><span class="cloze" data-cloze="Dry, brittle hair" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What kind of <u>hair texture</u> is associated with <b>hypothyroidism</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Dry, brittle hair</span></div><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><br><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br><img src="c790e3767e1a773445516370db6b22ef.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="1b4ccf2c24235f82e5b061d943904b95.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><span class="cloze" data-cloze="Reverse T&lt;sub&gt;3&lt;/sub&gt; (rT&lt;sub&gt;3&lt;/sub&gt;)" data-ordinal="1">[...]</span> is an isomer of T<sub>3</sub> that mirrors T<sub>4</sub> levels<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze" data-ordinal="1">Reverse T<sub>3</sub> (rT<sub>3</sub>)</span> is an isomer of T<sub>3</sub> that mirrors T<sub>4</sub> levels<br/>- Hence in hypothyroidism, there will be <b>low rT<sub>3<br/></sub></b><br/><div>- In euthyroid sick syndrome, there will be increased rT<sub>3</sub>, low T<sub>3</sub>, and normal TSH</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><b>Levothyroxine</b> and <b>liothyronine</b> are <span class="cloze" data-cloze="thyroid replacement" data-ordinal="1">[main function]</span> medications that are used to treat <u>hypo</u>thyroidism<i> and </i><b>myxedema coma</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Levothyroxine</b> and <b>liothyronine</b> are <span class="cloze" data-ordinal="1">thyroid replacement</span> medications that are used to treat <u>hypo</u>thyroidism<i> and </i><b>myxedema coma</b><br/>- Levothyroxine is the synthetic form of T<sub>4</sub><br/>- Liothyronine is the synthetic form of T<sub>3</sub><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><img src="329a9181c2f33d7dabea2bbd0955c7a5.webp"><img src="4880774e32c26da33394595dfbb54602.webp"><img src="4880774e32c26da33394595dfbb54602.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br><img src="cafe3c4a1adb40f43ac7f14cff8ac654.webp"><br><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="7d32d86637fd8bb0a6a1d89d9fd4a876.webp"><img src="50050569308a2ae7684f51bd67460333.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <img src="c3b46f947b8a70a7f4102a645e8ea519.webp" width="800"><img src="31c72d88d15599230ec793766e4ec0cc.webp" width="800"><img src="06814abbfcc33bf78fb9b6dffe843d4a.webp" width="800"><img src="b329dc48f2a4a6022464e708d876d0d8.webp" width="800"><br><img src="3f5e15b8cd56d285b7221f4c03100720.webp"><img src="f4c4249c8f249b7fce12a962f93b60b2.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-propylthiouracil-methimazole-levothyroxine">Watch Propylthiouracil, Methimazole, Levothyroxine</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question">What is a common <i><u>long-term</u> complication</i> of <b>radioactive iodine</b> when treating <u>Graves disease</u>?<br/><br/><div><span class="cloze" data-cloze="Permanent hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is a common <i><u>long-term</u> complication</i> of <b>radioactive iodine</b> when treating <u>Graves disease</u>?<br/><br/><div><span class="cloze" data-ordinal="1">Permanent hypothyroidism</span></div><br/><div>- Radioactive iodine is rapidly taken up by thyroid follicular cells → destroys the cells → results in <b>permanent hypothyroidism</b> in &gt; 90% of patients</div><br/><div>- This is why patients with Graves disease who undergo thyroid ablation need to take thyroid medications for the rest of their life; hypothyroidism is easier to manage</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f739633a82e5838bd6549c611d771442.webp"><img src="9ee30b426926fad752362443ccbfba62.webp"><br><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br> --><!-- <img src="d7c09cbc5060fe20d4e9a65842f9b1c5.webp"><img src="9ae1253393309842fb3aee8bf4cddde3.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br><br><img src="3913c41757c4a6b387fe9296ddf6e570.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <img src="6bc423b96df474c4b8ce1fb9f55f7303.webp"><br><img src="3f5e15b8cd56d285b7221f4c03100720.webp"><img src="f4c4249c8f249b7fce12a962f93b60b2.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-propylthiouracil-methimazole-levothyroxine">Watch Propylthiouracil, Methimazole, Levothyroxine</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><div><div>Does <b>hypothyroidism</b> present with <b>hypo-</b> or <b>hyper-cholesterolemia</b>? Why?</div><br/><div><span class="cloze" data-cloze="Hypercholesterolemia; due to &lt;u&gt;decreased&lt;/u&gt; LDL receptor expression" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>Does <b>hypothyroidism</b> present with <b>hypo-</b> or <b>hyper-cholesterolemia</b>? Why?</div><br/><div><span class="cloze" data-ordinal="1">Hypercholesterolemia; due to <u>decreased</u> LDL receptor expression</span></div></div><br/>Decreased thyroid hormone → down regulation of LDL receptors in peripheral tissues → accumulation of LDL in blood<br/><br/><img src="8c183660c5d16e24258d7391c5663f6c.webp" width="820"/><br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4c72302d11cff6bb4701716a175f1ae9.webp" width="800"><img src="7d797b90f633cfa02c89f847ed87090b.webp" width="800"><br></div><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="ce7425b6a7096596a5c2beadc2348910.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question">In <b>hypothyroidism</b>, <b>myxedema</b> commonly affects the <span class="cloze" data-cloze="&lt;b&gt;larynx&lt;/b&gt;" data-ordinal="1">[...]</span> (causing deep voice) and <span class="cloze" data-cloze="&lt;b&gt;tongue&lt;/b&gt;" data-ordinal="1">[...]</span> (causing enlargement)<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">In <b>hypothyroidism</b>, <b>myxedema</b> commonly affects the <span class="cloze" data-ordinal="1"><b>larynx</b></span> (causing deep voice) and <span class="cloze" data-ordinal="1"><b>tongue</b></span> (causing enlargement)<br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="bba009e3df415af8ad32a6273009367f.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br> --><!-- <img src="9b091df8fa40c250eec8a0767399f173.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><div><b>Hashimoto thyroiditis</b> <u>initially</u> presents as <b><span class="cloze" data-cloze="hyperthyroidism" data-ordinal="1">[...]</span> </b>due to <i>thyrotoxicosis</i> during follicular rupture </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Hashimoto thyroiditis</b> <u>initially</u> presents as <b><span class="cloze" data-ordinal="1">hyperthyroidism</span> </b>due to <i>thyrotoxicosis</i> during follicular rupture </div><br/>Ultimately progresses to <b>hypothyroidism</b> (decreased T<sub>4</sub>, increased TSH)<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="80530ff362900ac6108f2e396db000f6.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="9bc7e2743ef1569230c0d7061eebf428.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question"><div><b><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></b> in neonates and infants was historically known as <b>cretinism</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b><span class="cloze" data-ordinal="1">Hypothyroidism</span></b> in neonates and infants was historically known as <b>cretinism</b> </div><br/>- Now known as congenital hypothyroidism<br/><br/>- Can be caused by maternal intake of propylthiouracil (PTU)<br/><br/>- Other causes include maternal hypothyroidism, thyroid agenesis, and dyshormonogenetic goiter<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="af3c1f93a282be447cf6066df69d8996.webp"><br></div><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><b><span class="cloze" data-cloze="Subacute lymphocytic thyroiditis" data-ordinal="1">[...]</span></b> is a variant of Hashimoto thyroiditis that presents with <u>transient hyperthyroidism</u> followed sometimes by <u>hypothyroidism</u><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b><span class="cloze" data-ordinal="1">Subacute lymphocytic thyroiditis</span></b> is a variant of Hashimoto thyroiditis that presents with <u>transient hyperthyroidism</u> followed sometimes by <u>hypothyroidism</u><br/>- AKA painless thyroiditis<br/><br/>- Can look like Graves without eye / skin findings + serum TSI not present<br/><br/><div>- Usually self-limited (weeks)</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="Subacute lymphocytic thyroiditis (SLT)_1566160514431.jpg"><img src="SLT - transient hypothyroidism_1566160514431.jpg"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-reproductive-gu/videos/medical-pathophysiology-reproductive-and-gu-gestational-disorders-gestational-disorders?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br></div><br><div><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br> --><!-- <img src="530dbb0e325a93208ff2f06b705cd4f7.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="08a16c095b7c58cda71e06318d5c0ec3.webp"><br><img alt="Lesson Review" src="5063534fee8032559ff556fa22953de1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hyperthyroidism-soap">Watch Hyperthyroidism SOAP</a><br><br><img src="626c3a1a63b9fa10c1f4ddc583aad446.webp"><img src="857c0dbec070bcdcee57ad9cf656b369.webp"><img src="f0510d7ddd4e15ba116a84732061d3a5.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question">Patients with <span class="cloze-inactive" data-ordinal="2"><b>hypothyroidism</b></span> may develop <span class="cloze" data-cloze="hypoventilation" data-ordinal="1">[...]</span> from <u>respiratory muscle weakness</u><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Patients with <span class="cloze-inactive" data-ordinal="2"><b>hypothyroidism</b></span> may develop <span class="cloze" data-ordinal="1">hypoventilation</span> from <u>respiratory muscle weakness</u><br/>Patients with hypothyroidism may also develop macroglossia, which can precipitate obstructive sleep apnea<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="0b6a863c08b6f26158c1d95956f846b4.webp"><br><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br> --><!-- <img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> presents with <b>hyponatremia</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> presents with <b>hyponatremia</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/>- Hypothyroidism → decreased cardiac output → baroreceptor and osmoreceptor response → SIADH → decreased free water excretion → hyponatremia... nausea and malaise, stupor (can lead to coma and seizures due to osmotic-induced fluid extravasation into cerebral tissue)<br/><br/>- This is rare and only occurs in cases of severe hypothyroidism and myxedema<br/><br/><img src="2ae72a995cc6a24a59d2cddb14d2504f.webp" width="950px"/><br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="36b7150fede3943da5775542213bd9c2.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="329a9181c2f33d7dabea2bbd0955c7a5.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br> --><!-- <img src="d2ca2381a44e886e4e8384252073a441.webp"><img src="e17eeab445158a618873728176144a15.webp"><img src="708695bd021673661af3c1d2f9e88f59.webp"><img src="ff058385b98d0bf17536a237a3ba4ec5.webp"><img src="ffd2e30ab09f993ac33bc0810c8947c8.webp"><br><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> presents with <b>abnormal uterine bleeding </b>and <b>infertility</b>?</div><br/><div><span class="cloze" data-cloze="Both hyper and hypothyroidism :)" data-ordinal="1">[...]</span><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> presents with <b>abnormal uterine bleeding </b>and <b>infertility</b>?</div><br/><div><span class="cloze" data-ordinal="1">Both hyper and hypothyroidism :)</span><br/></div><br/>Both can present with oligomenorrhea, but:<div>- Hypothyroidism is more associated with menorrhagia</div><div>- Hyperthyroidism is more associated with amenorrhea</div><br/><div><img src="8f59277944718e3785b245c5a6383dbb.webp" width="1000px"/><br/></div><br/><div><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e8c2e9dcb26f7954f01e6f720995436c.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="a76d7b91c0d7d993f4192adcf8b8fea4.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="ba01efd832d3dade49885abd5f5ed998.webp"><br><img src="d3b742917da5ff959f33ab7e2b402006.webp"><img src="0cae62c560f8af145c5e54d016ff5bbb.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/reproductive-endocrinology/lesson/secondary-amenorrhea-ddx-2">Watch OBGYN Secondary Amenorrhea DDx</a><br><a href="https://app.sketchy.com/study/medical/chapter/conditions-affecting-females/lesson/secondary-amenorrhea-ddx">Watch PEDS Secondary Amenorrhea DDx</a><br><br><img src="f338bb5378065f6f4cc76131d36e08d5.webp"><br><img src="d4b2c91a160ca357a2d708f6f4c0ab2c.webp"><img src="82cb65db615ad45e957960b579feba2b.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/abnormal-uterine-bleeding-pelvic-pain/lesson/abnormal-uterine-bleeding-ddx">Watch Abnormal Uterine Bleeding DDx</a><br><br><img src="6e392e7bbd1a12d98c2d4c74eed53972.webp"><br><img src="f707dd6ac9117cdae4f394fd2efa4922.webp"><img src="cf204c1e698eea170c1d37d2e3f734ef.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-obstetrics-gynecology/units/medical-obstetrics-gynecology-reproductive-endocrinology-infertility/videos/medical-obstetrics-gynecology-reproductive-endocrinology-and-infertility-reproductive-endocrinology-primary-amenorrhea-ddx">Watch OBGYN Primary Amenorrhea DDx</a><br><a href="https://app.sketchy.com/study/medical/chapter/pubertal-disorders/lesson/primary-amenorrhea-ddx">Watch Pediatric Primary Amenorrhea DDx</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">15.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> <u>characteristically</u> presents with <b>myoedema</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> <u>characteristically</u> presents with <b>myoedema</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/>- This is a small lump that rises on the surface of a muscle when struck with a hammer; helps affirm the diagnosis of <u>hypothyroid myopathy</u><br/><br/><div>- This is caused by impaired reuptake of calcium by the sarcoplasmic reticulum (<b>decreased lusitropy</b>)</div><br/><div><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="b738a00db9f245278fe434f01bce63f3.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br><br> --><!-- <img src="cd60ef0500cd1599f1d59e62e5663755.webp"><img src="57c0185f427971447f0f9725d5dc165b.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">16.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> may present with <b>decreased libido</b>?</div><br/><div><span class="cloze" data-cloze="Both hyper and hypothyroidism :)" data-ordinal="1">[...]</span><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> may present with <b>decreased libido</b>?</div><br/><div><span class="cloze" data-ordinal="1">Both hyper and hypothyroidism :)</span><br/></div><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">17.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> presents with <b>puffy facies </b>and <b>generalized nonpitting edema</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> presents with <b>puffy facies </b>and <b>generalized nonpitting edema</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/>- This is known as <b>myxedema<br/></b><br/>- TSH stimulates dermal fibroblasts to deposit GAGs in interstitial spaces<br/><br/>- Hyaluronic acid provides an osmotic stimulus to draw water into deposits and cause this presentation<br/><br/><img src="cb13d1a80a5162e23c0a197daa37974b.webp" width="477"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.cureus.com/articles/102096-clinical-manifestations-of-severe-untreated-hypothyroidism#!/media">Bhutada et al.</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, via Cureus<br/></span></i><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="6708e11984df9b05d20eb4e98bb5686d.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br><br> --><!-- <img src="e84b8854df5e571921bd175a4fc755c2.webp"><img src="6758f041de4a6973da1bf40548942e32.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">18.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> presents with <b>increased TSH</b> (if 1°) and <b>decreased free T<sub>3</sub>* / T<sub>4</sub></b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> presents with <b>increased TSH</b> (if 1°) and <b>decreased free T<sub>3</sub>* / T<sub>4</sub></b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/>* <b>T<sub>3</sub> may be normal</b> in patients with hypothyroidism (due to increased peripheral conversion of T<sub>4</sub> to T<sub>3</sub>)<br/><br/>- TSH elevated due to lack of negative feedback on anterior pituitary<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="f055046d19bf47ad68d0c646f8500396.webp" width="800"><img src="bf148c7a05e8eeda34c90855c79dfd3b.webp" width="800"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br><br> --><!-- <img src="7131075a57155266e3a15b8fc417735b.webp"><img src="f6ae097232f941c437181cf0a5b4a020.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="583e241dabafce11cc5d0a3192130e8a.webp"><img src="fb8e285c097f6f83d946880b1a1af773.webp"><br><img src="1181865e0db1e50a985597a9f53eca8b.webp"><br><img src="a431598bc292bcd1850b7ae0603c9b0a.webp"><img src="8784684b53ebe31a2f28690956d5ae54.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/aneuploidies/lesson/chromosomal-syndromes-turner-syndrome-soap-2">Watch Turner Syndrome</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">19.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> presents with <b>depression</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> presents with <b>depression</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/>Thus in dementia patients make sure to both screen for depression AND get TSH levels<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="73524bfd38788b738ad5fbfa1429caf5.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="a4afbbe3e5b3e037e013f2cc131b7b6f.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">20.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> presents with <b>hypoactivity, lethargy, and fatigue</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> presents with <b>hypoactivity, lethargy, and fatigue</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="87f47ae47141f3d34a6aa76606651953.webp"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br><img src="28d0824f2f3fe47369353e9332cab343.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hyperthyroidism-overview-and-graves-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><br><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br> --><!-- <img src="35ffb50fd68b5c6923f5653150e364fd.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">21.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> presents with <b>carpal tunnel syndrome</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> presents with <b>carpal tunnel syndrome</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/><div>- Increased circulating levels of TSH stimulate fibroblasts in the connective tissue of the carpal tunnel to deposit glycosaminoglycans (GAGs)</div><br/><div>- GAGs attract water which cause the carpal tunnel to swell impinging the median nerve</div><br/><div>- Pressing Down <u><b>H</b></u>ARD</div><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="df32b9a47d6f61598154d8a53357c902.webp" width="800"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="223addda2cd11077be58c06444f2eecc.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">22.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> presents with <b>brittle nails</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> presents with <b>brittle nails</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/>In contrast, hyperthyroidism is associated with <b>onycholysis </b>(painless separation of the nail from the nailbed)<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c790e3767e1a773445516370db6b22ef.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><br><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br> --><!-- <img src="337f819a4e922fe4eb930f275790d34d.webp"><img src="baee96b6d238dbe3c67a338530c8ad54.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">23.1</td>
+                    <td class="question">One cause of <b>congenital hypothyroidism </b>is <span class="cloze" data-cloze="antibody" data-ordinal="1">[...]</span>-mediated <u>maternal</u> hypothyroidism<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">One cause of <b>congenital hypothyroidism </b>is <span class="cloze" data-ordinal="1">antibody</span>-mediated <u>maternal</u> hypothyroidism<br/>Congenital hypothyroidism was historically known as cretinism<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="af3c1f93a282be447cf6066df69d8996.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">24.1</td>
+                    <td class="question">Which <b>thyroid imbalance</b> presents with <b>weight <u>gain</u></b> and <b>decreased appetite</b>?<br/><br/><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which <b>thyroid imbalance</b> presents with <b>weight <u>gain</u></b> and <b>decreased appetite</b>?<br/><br/><span class="cloze" data-ordinal="1">Hypothyroidism</span><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><b><u>* Fat belly:</u></b> hypothyroidism can present with weight gain due to decreased BMR and non-pitting edema</div><img src="87f47ae47141f3d34a6aa76606651953.webp"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br><br><img src="e3ce8f0c97594407d621a7eaaaf535d9.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br><br> --><!-- <img src="929ef321fd31e29a84f7e014a884f09e.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">25.1</td>
+                    <td class="question"><div><div>Which <b>thyroid imbalance</b> is associated with <b>dry, cool skin</b> and <b>coarse, brittle hair</b>?</div></div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>Which <b>thyroid imbalance</b> is associated with <b>dry, cool skin</b> and <b>coarse, brittle hair</b>?</div></div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/>Dry and cool skin is due to decreased blood flow to dermal blood vessels<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="c790e3767e1a773445516370db6b22ef.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="337f819a4e922fe4eb930f275790d34d.webp"><img src="baee96b6d238dbe3c67a338530c8ad54.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">26.1</td>
+                    <td class="question">Which <b>thyroid imbalance</b> presents with <b>proximal muscle weakness</b> and <u>increased</u> <b>creatine</b> <b>kinase</b>?<br/><br/><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which <b>thyroid imbalance</b> presents with <b>proximal muscle weakness</b> and <u>increased</u> <b>creatine</b> <b>kinase</b>?<br/><br/><span class="cloze" data-ordinal="1">Hypothyroidism</span><br/>- i.e., hypothyroid myopathy<br/><br/>- Presents with proximal muscle weakness, cramps, myalgias, and ↑ serum creatine kinase (common in up to 90%)<br/><br/>- As opposed to <b>normal creatine kinase</b> in <u>thyrotoxic myopathy<br/></u><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img width="800" src="b738a00db9f245278fe434f01bce63f3.webp"><img width="800" src="5d69c5ffe56c66df2087add9fddd8f0d.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br> --><!-- <img src="cd60ef0500cd1599f1d59e62e5663755.webp"><img src="57c0185f427971447f0f9725d5dc165b.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">27.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> presents with <u>decreased</u> <b>heat production</b> (<b>cold</b> <b>intolerance</b>) and <u>decreased</u> <b>sweating</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> presents with <u>decreased</u> <b>heat production</b> (<b>cold</b> <b>intolerance</b>) and <u>decreased</u> <b>sweating</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span> </div><br/>Decreased BMR (due to decreased Na<sup>+</sup>-K<sup>+ </sup>ATPase activity) leads to decreased calorigenesis<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="ee570a7cba9a65901e9b23e82b940537.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="5a5bfee6844d77d8d1436ec585cdc8b6.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br><br> --><!-- <img src="d389054b10f0d982bce00bf712e1e80f.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">28.1</td>
+                    <td class="question"><div><div>Which <b>thyroid imbalance</b> presents with <b>constipation</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>Which <b>thyroid imbalance</b> presents with <b>constipation</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div></div><br/>Decreased GI motility<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="8a18c63efb8b759ff79d42d34abfde60.webp"><br></div><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="1894d464c0ccbe686b46e56e5a62649b.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">29.1</td>
+                    <td class="question"><div><div>Which <b>thyroid imbalance</b> presents with <b>bradycardia </b>and <b>dyspnea</b> <b>on exertion</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>Which <b>thyroid imbalance</b> presents with <b>bradycardia </b>and <b>dyspnea</b> <b>on exertion</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div></div><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="0b6a863c08b6f26158c1d95956f846b4.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hyperthyroidism-overview-and-graves-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="87f47ae47141f3d34a6aa76606651953.webp"><img src="a867bc65ef7cd84cbf36de69e1d7a1f6.webp"><img src="84049e534f1ac9fc77f2266537aafaea.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-hypothalamic-and-pituitary-disorders-hypothalamic-and-pituitary-dysfunction-clinical-manifestations?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothalamic &amp; Pituitary Dysfunction Clinical Manifestations</a><br> --><!-- <img src="cbf7c1a1a11da7d7af9e86604d17c3f0.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="49de4c143ef4098388cd84e0a350cfd4.webp"><img src="64cb5f7491a3bc62c25e85fad7cbc427.webp"><br><div><img src="2da98effe82d4f3c851b42e2d0c57192.webp"></div><a href="https://app.sketchy.com/study/medical/chapter/bradycardia/lesson/bradycardia-ddx-soap">Watch Bradycardia DDx</a><br><br><img src="b83ea0c0cec6283b4c335f24e689d146.webp"><img src="bf7c783751ab7992141f04a13ab1e8f4.webp"><br><img src="c398347638fe044653206d7a37a7b1bc.webp"><img src="1229ca5e1f1fdba6984fffc6ceeb7fa5.webp"><img src="6b2fcb4493dd4c54677cb4e6778f6d7a.webp"><img src="1290512ebac75ccc608e33b300284ddc.webp"><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">30.1</td>
+                    <td class="question"><div><b>Subacute granulomatous thyroiditis (de Quervain)</b> may <i>initially</i> present with <span class="cloze" data-cloze="&lt;b&gt;hyperthyroidism&lt;/b&gt;" data-ordinal="1">[...]</span>, which typically is followed by a brief <span class="cloze" data-cloze="&lt;b&gt;hypothyroid&lt;/b&gt;" data-ordinal="1">[...]</span> state</div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Subacute granulomatous thyroiditis (de Quervain)</b> may <i>initially</i> present with <span class="cloze" data-ordinal="1"><b>hyperthyroidism</b></span>, which typically is followed by a brief <span class="cloze" data-ordinal="1"><b>hypothyroid</b></span> state</div><br/>- Thyroid symptoms usually mild; this is permanent in ~15% of cases<br/><br/><div>- During the transient hyperthyroid phase, radioiodine uptake is decreased due to low TSH levels</div><div><div><br/><div>- Typical pattern of <b>thyroiditis</b> (initially hyper spilling<div style="display: inline !important;"> out T<sub>3</sub>/T<sub>4</sub>, then transitioning to burnout hypo)</div></div></div></div><div><img src="53b4869667ab7d60531d8d4b5dd514de.jpg" style="width: 894px;"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="9cf65c280565017ede01e8356a9d84fb.webp" width="800"><img src="7e26aa4382fb8405ecd575295f307a1c.webp" width="800"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="08a16c095b7c58cda71e06318d5c0ec3.webp"><br><img src="5063534fee8032559ff556fa22953de1.webp" alt="Lesson Review"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hyperthyroidism-soap">Watch Hyperthyroidism SOAP</a><br><br><img src="857c0dbec070bcdcee57ad9cf656b369.webp"><img src="f0510d7ddd4e15ba116a84732061d3a5.webp"><img src="86cfa4ee992421e9f6a2068a99d02f69.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br><br><img src="f769018cebcd91199c89e5b005761616.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">31.1</td>
+                    <td class="question"><div>The most common cause of <b>congenital hypothyroidism </b>in the <u>U.S.</u> is <span class="cloze" data-cloze="&lt;b&gt;thyroid dysgenesis&lt;/b&gt;" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The most common cause of <b>congenital hypothyroidism </b>in the <u>U.S.</u> is <span class="cloze" data-ordinal="1"><b>thyroid dysgenesis</b></span></div><br/>- Thyroid dysgenesis refers to an underdeveloped (i.e., hypoplasia, aplasia) or ectopic thyroid<br/><br/>- Congenital hypothyroidism was historically known as cretinism<br/><br/>Other causes include:<div><div>- Antibody mediated maternal hypothyroidism</div><div>- Thyroid agenesis (NOT the same as thyroid dysgenesis)</div></div><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="af3c1f93a282be447cf6066df69d8996.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">32.1</td>
+                    <td class="question"><div>What is the most common cause of <b>hypothyroidism</b> in regions where iodine levels are adequate?</div><br/><div><span class="cloze" data-cloze="Hashimoto thyroiditis" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What is the most common cause of <b>hypothyroidism</b> in regions where iodine levels are adequate?</div><br/><div><span class="cloze" data-ordinal="1">Hashimoto thyroiditis</span></div><br/>Other causes include:<div>- <b>Iodine</b> <b>deficiency </b>(<b>endemic goiter</b> especially in Southeast Asia and Africa)</div><div>- <b>Wolff-Chaikoff effect</b> (iodine excess)</div><div>- Goitrogens (e.g., lithium, amiodarone)</div><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4e53e7312c04c6e954317840700b0e07.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br><br> --><!-- <img src="6ed798dde77880ee86279fcb74f06d45.webp"><img src="093db06fe28bd08bd115dae0b6df6bf4.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">33.1</td>
+                    <td class="question"><div><div><span class="cloze-inactive" data-ordinal="2"><b>Myxedema</b></span> is the accumulation of <span class="cloze" data-cloze="&lt;b&gt;glycosaminoglycans&lt;/b&gt;" data-ordinal="1">[...]</span> in the skin and soft tissue; it is most often associated with <span class="cloze-inactive" data-ordinal="3"><b>hypothyroidism</b></span> </div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div><span class="cloze-inactive" data-ordinal="2"><b>Myxedema</b></span> is the accumulation of <span class="cloze" data-ordinal="1"><b>glycosaminoglycans</b></span> in the skin and soft tissue; it is most often associated with <span class="cloze-inactive" data-ordinal="3"><b>hypothyroidism</b></span> </div></div><br/>- The major GAG is hyaluronic acid, which then draws water out into the deposit (in interstitial spaces of the dermis; due to osmotic pressure) and causes swelling (water retention; usually facial / periorbital swelling but can be <u>generalized nonpitting edema</u>)<br/><br/><div>- A myxedema coma = coma from hypothyroidism</div><br/><div><img src="c42f045620c655e786953811ef75c75a.webp" width="342"/><br/></div><div><span style="font-size: 10pt;"><em>Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Myxedema_face.png">Herbert L. Fred, MD and Hendrik A. van Dijk</a>, <a href="https://creativecommons.org/licenses/by/2.5">CC BY 2.5</a>, via Wikimedia Commons</em></span></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="38b7e9ffb5b452895c9f6512550b2aa9.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="329a9181c2f33d7dabea2bbd0955c7a5.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br><br> --><!-- <img src="e84b8854df5e571921bd175a4fc755c2.webp"><img src="6758f041de4a6973da1bf40548942e32.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">34.1</td>
+                    <td class="question"><div><div>Which <b>thyroid imbalance</b> presents with <b><u>decreased</u> reflexes</b>?</div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><div>Which <b>thyroid imbalance</b> presents with <b><u>decreased</u> reflexes</b>?</div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div></div><br/>Reflexes are delayed / slow relaxing ("hung up reflexes")<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="dd803bd718dfc889e4125625dd1af913.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="92c72e7ef7ce8661cbbcda71493fc025.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">35.1</td>
+                    <td class="question"><b>Hypothyroidism</b> may contribute to development of <span class="cloze" data-cloze="atherosclerosis" data-ordinal="1">[...]</span> due to <i>dyslipidemia</i> and <i>endothelial dysfunction</i><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Hypothyroidism</b> may contribute to development of <span class="cloze" data-ordinal="1">atherosclerosis</span> due to <i>dyslipidemia</i> and <i>endothelial dysfunction</i><br/><div>- <b>Hypothyroidism</b> causes decreased LDL turnover due to decreased expression and activity of LDL receptors → increased <b>total cholesterol and LDL</b></div><br/><div>- It also causes decreased activity of lipoprotein lipase → <b>hypertriglyceridemia</b></div><br/><div><img src="88cd09b8bbb9ed9f1f28b737f9bb028c.webp" width="899"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="727798f7135c6d8dd58397b6f20ba723.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="ce7425b6a7096596a5c2beadc2348910.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">36.1</td>
+                    <td class="question">What is the most common <b>thyroid nodularity</b>?<br/><br/><div><span class="cloze" data-cloze="Multinodular goiter" data-ordinal="1">[...]</span></div><br/><div><i>*bonus: why?</i></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the most common <b>thyroid nodularity</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Multinodular goiter</span></div><br/><div><i>*bonus: why?</i></div><br/>- *Secondary to iodine deficiency hypothyroidism<br/><br/>- Fluctuating iodine levels → irregularly enlarged multinodular goiter and hypothyroidism<br/><br/><img src="dcedda352724145fd2cb1af902605da8.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="122d1ea63972f516121f1b79f96a2c15.webp" width="800"><img src="88436a93081afa7a3f019d8877732336.webp"><img src="6a273cfa494cc3c57b03c7460c9941e3.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-thyroid-nodules-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Thyroid Nodules &amp; Cancer</a><br><br><img src="Iodine def - multinodular goiter_1566160514431.jpg"><br><div><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br></div><br> --><!-- <img src="0720b2f6d87cfdf30d69a58e2d6d0a08.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">37.1</td>
+                    <td class="question">What is the most common cause of <b>hypothyroidism</b> (endemic goiter) <i>worldwide</i>?<br/><br/><div><span class="cloze" data-cloze="&lt;u&gt;Iodine deficiency&lt;/u&gt;" data-ordinal="1">[...]</span><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the most common cause of <b>hypothyroidism</b> (endemic goiter) <i>worldwide</i>?<br/><br/><div><span class="cloze" data-ordinal="1"><u>Iodine deficiency</u></span><br/></div><br/><img src="dcedda352724145fd2cb1af902605da8.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="29cc89ba21739149dd8b5beb8b583d6d.webp" width="800"><img src="fad424e43d836286dc451b51867cc110.webp" width="800"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br> --><!-- <img src="52dea5a775b462b551455135b13ed60a.webp"><img src="dd5bf9ecbe998526c65597ed3b8a6a4b.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">38.1</td>
+                    <td class="question">Tissue in a <b>multinodular</b> <b>goiter</b> may <i>autonomously </i>produce <span class="cloze" data-cloze="&lt;b&gt;thyroid hormone (T&lt;sub&gt;4&lt;/sub&gt;)&lt;/b&gt;" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Tissue in a <b>multinodular</b> <b>goiter</b> may <i>autonomously </i>produce <span class="cloze" data-ordinal="1"><b>thyroid hormone (T<sub>4</sub>)</b></span><br/>- Leading to <b>hyper</b><b>thyroidism</b><div><br/><div>- <b>Multinodular goiter </b>is also a common cause of <i>hypothyroidism</i></div></div><br/><div><img src="dcedda352724145fd2cb1af902605da8.webp" width="850px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="6ef4d993396c12de25b03e85fc2465c3.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br><br><img src="39adbe96e174ccabf02f9b162da6b78f.webp"><img src="db6662c9151b04ded1a4c3633f6a8884.webp"><img src="a20c8a3846b1d33c175f60ee189e4951.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hyperthyroidism-overview-and-graves-disease?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperthyroidism Overview &amp; Graves Disease</a><br> --><!-- <img src="0cec7729b1e41073117b4348f02c2322.webp"><br><img alt="Lesson Review" src="5063534fee8032559ff556fa22953de1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hyperthyroidism-soap">Watch Hyperthyroidism SOAP</a><br><br><img src="b02402450f9c833525d44e85165bab38.webp"><img src="f72da7ab168e62d6db051db89a2a47cd.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">39.1</td>
+                    <td class="question"><b>Hypothyroidism</b> may present with distal <span class="cloze" data-cloze="&lt;u&gt;symmetric&lt;/u&gt; &lt;b&gt;neuropathy&lt;/b&gt;" data-ordinal="1">[specific]</span> in a "stocking glove" distribution<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Hypothyroidism</b> may present with distal <span class="cloze" data-ordinal="1"><u>symmetric</u> <b>neuropathy</b></span> in a "stocking glove" distribution<br/>Presents as sensory loss, tingling, and pain in distal extremities bilaterally<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="30bc7b87d63853fcd2c641ac1befd29a.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">40.1</td>
+                    <td class="question"><b>Hypothyroidism</b> may cause <span class="cloze" data-cloze="&lt;b&gt;hyper&lt;/b&gt;" data-ordinal="1">[...]</span><b>tension</b> due to <u>increased</u> <span class="cloze" data-cloze="&lt;b&gt;systemic vascular resistance&lt;/b&gt;" data-ordinal="1">[...]</span><br/><br/><div><i>*bonus: what causes the latter cloze?</i></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Hypothyroidism</b> may cause <span class="cloze" data-ordinal="1"><b>hyper</b></span><b>tension</b> due to <u>increased</u> <span class="cloze" data-ordinal="1"><b>systemic vascular resistance</b></span><br/><br/><div><i>*bonus: what causes the latter cloze?</i></div><br/>*decreased thyroid hormone → impaired relaxation of vascular smooth muscle → ↑ SVR<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="e98da9054b8a2b23092eac43e6d9d43e.webp" width="800"><img src="c8927248981b9721bc4610b1d650abb6.webp" width="800"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="32f3cb13edde0089c52e4b7800dae2af.webp"><img src="fb758eb8e4a696fe2e645eb616a6e02b.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="96dba5616933a146c4106aec557ce56f.webp"><br><img src="48664334076f714d499024f7dfb35800.webp"><img src="65174e568ba926e80edfc2b8f3f33f7d.webp"><img src="9eda9778fcbdef2db708face545aa1ae.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/blood-pressure/lesson/hypertension-management">Watch Hypertension Management</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">41.1</td>
+                    <td class="question">What is the likely outcome in most cases of <b>subacute thyroiditis</b>?<br/><br/><div><span class="cloze" data-cloze="Complete recovery (return to euthyroid state)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the likely outcome in most cases of <b>subacute thyroiditis</b>?<br/><br/><div><span class="cloze" data-ordinal="1">Complete recovery (return to euthyroid state)</span></div><br/><div><b><u>Subacute thyroiditis consist of two main subtypes</u></b>:</div><div>1) Subacute granulomatous thyroiditis AKA de Quervain thyroiditis</div><div>2) Subacute lymphocytic thyroiditis AKA silent or painless thyroiditis</div><br/><div>- Most cases self-resolve within 1 year; permanent hypothyroidism occurs in ∼15% of cases</div><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="7e26aa4382fb8405ecd575295f307a1c.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="a8d58864ff54d07b824bc3146f685ae6.webp"><img src="5c3cf3297f27745b04699be1312ceaaf.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">42.1</td>
+                    <td class="question">Many cases of <b>Riedel thyroiditis</b> progress to <u>subclinical</u> and <u>overt</u> <span class="cloze" data-cloze="hypothyroidism" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Many cases of <b>Riedel thyroiditis</b> progress to <u>subclinical</u> and <u>overt</u> <span class="cloze" data-ordinal="1">hypothyroidism</span><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="0b86e8b2404c17753eecf44dffd444bc.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="2e182823470d5ed01de6f92f73b26bb6.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">43.1</td>
+                    <td class="question"><b>Central hypothyroidism </b>presents with <span class="cloze" data-cloze="&lt;u&gt;decreased&lt;/u&gt;" data-ordinal="1">[...]</span> <b>free</b> <b>T4</b> levels and <span class="cloze" data-cloze="&lt;u&gt;decreased&lt;/u&gt;" data-ordinal="1">[...]</span> <b>serum</b> <b>TSH</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Central hypothyroidism </b>presents with <span class="cloze" data-ordinal="1"><u>decreased</u></span> <b>free</b> <b>T4</b> levels and <span class="cloze" data-ordinal="1"><u>decreased</u></span> <b>serum</b> <b>TSH</b><br/>- <b>Central</b> <b>hypothyroidism</b> includes <u>secondary</u> and <u>tertiary</u> causes (due knocked out <b>anterior pituitary</b> or <b>hypothalamus</b>, respectively)<br/><br/>- UWorld claims that TSH can sometimes be inappropriately normal<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="13ad8a967c5c29581b905a601e169349.webp" width="800"><img src="c4a5fd93ea7a3c854ffb8ec9d25ad2e1.webp" width="800"><img src="3f484e074b6943247a0bfd8b3a999633.webp" width="800"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br> --><!-- <img src="f374bf65b0ffd159c4876bcf90c92a64.webp"><img src="47dd19c5f07cfd8b6c7253a094a2e798.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">44.1</td>
+                    <td class="question"><b>Hashimoto thyroiditis</b> is an <u>irreversible</u> <b>hypothyroidism</b> most commonly seen in <span class="cloze" data-cloze="&lt;u&gt;females&lt;/u&gt;&amp;nbsp;age 30-50" data-ordinal="1">[sex, age]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Hashimoto thyroiditis</b> is an <u>irreversible</u> <b>hypothyroidism</b> most commonly seen in <span class="cloze" data-ordinal="1"><u>females</u> age 30-50</span><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="e1b87adc21f6a7ba6a912eeed42dc032.webp" width="800"><img src="edc8bcba86c0b10348d2a61173f56261.webp" width="800"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="2e4d8cf5704121d6bf39a1d18c347faf.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">45.1</td>
+                    <td class="question">What drug blocks production of <u>T<sub>3</sub></u> and <u>T<sub>3</sub> receptors</u> (and is directly toxic to the thyroid gland)?<br/><br/><div><span class="cloze" data-cloze="&lt;b&gt;Amiodarone&lt;/b&gt;" data-ordinal="1">[...]</span><br/></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What drug blocks production of <u>T<sub>3</sub></u> and <u>T<sub>3</sub> receptors</u> (and is directly toxic to the thyroid gland)?<br/><br/><div><span class="cloze" data-ordinal="1"><b>Amiodarone</b></span><br/></div><br/>Also blocks conversion of T<sub>4</sub> to T<sub>3</sub><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="85482b17291b20b0235d1d759b8afc42.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br><br><div><img src="b9f6c1fa16ca1b3126a77869ccfd34ef.webp"><img src="bfd587146e8d91468df649dbcfc35510.webp"><img src="6c765b3c422ecd809071f596dd210357.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-cardiovascular-renal/videos/medical-pharmacology-cardiovascular-and-renal-antiarrhythmics-class-iii?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Class III Antiarrhythmics</a><br><br> --><!-- <img src="20d0d9996ecd98057f1e0707627f5ea3.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <img src="eb5b2ce351c204fa8bc490108df870e9.webp"><br><img src="470ac0fe5e55d3a9290c7a3d530a6174.webp"><b><br><a href="https://pixorize.com/view/100594?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=antiarrhythmic"><span style="font-weight: 400;">Review Amiodarone</span></a></b><br><img src="11_Class_III_Antiarrhythmics-Amiodarone_1.jpeg"><br><img src="11_Class_III_Antiarrhythmics-Amiodarone_2.jpeg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">46.1</td>
+                    <td class="question">What may precipitate after <i>longstanding</i>, <u>severe</u> <b>hypothyroidism</b> OR an <u>acute stressor</u>?<br/><br/><div><span class="cloze" data-cloze="Myxedema coma" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What may precipitate after <i>longstanding</i>, <u>severe</u> <b>hypothyroidism</b> OR an <u>acute stressor</u>?<br/><br/><div><span class="cloze" data-ordinal="1">Myxedema coma</span></div><br/>Exaggerated form of hypothyroidism<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="1200bffd96b3e5b614417c7c6dbea321.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="329a9181c2f33d7dabea2bbd0955c7a5.webp"><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br> --><!-- <img src="842c81efee2198e93c9170a9fc1a9aa2.webp"><img src="f268f1ca6a28d7a98fba5cda0820ecc7.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="49de4c143ef4098388cd84e0a350cfd4.webp"><br><img src="2da98effe82d4f3c851b42e2d0c57192.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/bradycardia/lesson/bradycardia-ddx-soap">Watch Bradycardia DDx</a><br><br><img src="b83ea0c0cec6283b4c335f24e689d146.webp"><br><img src="c398347638fe044653206d7a37a7b1bc.webp"><img src="45e967c3410222f56a117ce9e1c6b10f.webp"><img src="c5325770c6ebb6aa0452bd16217f8844.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">47.1</td>
+                    <td class="question"><div>Which <b>thyroid imbalance</b> may present as a <b>goiter</b>? </div><br/><div><span class="cloze" data-cloze="Both hyper and hypothyroidism :)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Which <b>thyroid imbalance</b> may present as a <b>goiter</b>? </div><br/><div><span class="cloze" data-ordinal="1">Both hyper and hypothyroidism :)</span></div><br/><div><img src="dcedda352724145fd2cb1af902605da8.webp" width="850px"/></div><br/><div><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/></div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="44ca8ca29d51f3cd8479343d31074a8c.webp"><img src="db6662c9151b04ded1a4c3633f6a8884.webp"><img src="a20c8a3846b1d33c175f60ee189e4951.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hyperthyroidism Overview &amp; Graves Disease</a><br><br><img src="a7852051bfeabbeadb657d0ca2172cfe.webp"><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="15007f37c6c19ccf2443705fa4dbaf6c.webp"><br><img alt="Lesson Review" src="5063534fee8032559ff556fa22953de1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hyperthyroidism-soap">Watch Hyperthyroidism SOAP</a><br><br><img src="bca3942a1e40220ad3ef8416eb1df3b9.webp"><img src="1988cbca9a1c5cb877388b6877ceb5bf.webp"><img src="7cc98f365856ddbc3892d30875cdcaa2.webp"><img src="309bad72e5f1a0a69c5fa0728c8df558.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br><br><img src="57a49d501e8dbb43622059ac28339152.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">48.1</td>
+                    <td class="question">Cases in which <b>hypothyroidism</b> could present with <u>decreased</u> <b>TSH</b> levels include when the disorder <i>originates</i> in the <span class="cloze" data-cloze="hypothalamus" data-ordinal="1">[...]</span> or <span class="cloze" data-cloze="anterior pituitary" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Cases in which <b>hypothyroidism</b> could present with <u>decreased</u> <b>TSH</b> levels include when the disorder <i>originates</i> in the <span class="cloze" data-ordinal="1">hypothalamus</span> or <span class="cloze" data-ordinal="1">anterior pituitary</span><br/>i.e., insufficient TRH or TSH secretion<br/><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br><img src="Screen Shot 2022-07-13 at 4.44.57 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.45.27 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-thyroid-hormones-regulation-and-actions-of-thyroid-hormones">Watch Regulation &amp; Actions of Thyroid Hormones</a><br> --><!-- <img src="ffe31cf9c36133fbd29ec2ebd225914a.webp"><img src="74dc250fa5cde830ed0cc7c37154ee7c.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">49.1</td>
+                    <td class="question">What are the levels of <b>TSH</b> in <b>hypothyroidism</b> due to <b>thyroiditis</b> or <b>I<sup>-</sup> deficiency</b>?<br/>Why?<br/><br/><span class="cloze" data-cloze="Increased" data-ordinal="1">[Increased/Decreased]</span> due to <span class="cloze" data-cloze="&lt;u&gt;loss&lt;/u&gt; of negative feedback (decreased levels of free T&lt;sub&gt;3&lt;/sub&gt;)" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What are the levels of <b>TSH</b> in <b>hypothyroidism</b> due to <b>thyroiditis</b> or <b>I<sup>-</sup> deficiency</b>?<br/>Why?<br/><br/><span class="cloze" data-ordinal="1">Increased</span> due to <span class="cloze" data-ordinal="1"><u>loss</u> of negative feedback (decreased levels of free T<sub>3</sub>)</span><br/><img src="df443d0bf0a538b77310921beeb15bd5.jpg"/><br/><em><span style="font-size: 10pt;">Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Figure_37_04_01.png">CNX OpenStax</a>, <a href="https://creativecommons.org/licenses/by/4.0">CC BY 4.0</a>, via Wikimedia Commons<br/></span></em><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="7131075a57155266e3a15b8fc417735b.webp"><img src="f6ae097232f941c437181cf0a5b4a020.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="64cb5f7491a3bc62c25e85fad7cbc427.webp"><br><img src="2da98effe82d4f3c851b42e2d0c57192.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/bradycardia/lesson/bradycardia-ddx-soap">Watch Bradycardia DDx</a><br><br><img src="bf7c783751ab7992141f04a13ab1e8f4.webp"><br><img src="c398347638fe044653206d7a37a7b1bc.webp"><img src="45e967c3410222f56a117ce9e1c6b10f.webp"><img src="c5325770c6ebb6aa0452bd16217f8844.webp"><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">50.1</td>
+                    <td class="question">In <b>adulthood</b>, which <u>thyroid disorder</u> is associated with <b>lethargy</b>, <i>slowed</i> <b>speech</b>, <b>somnolence</b>, <i>impaired</i> <b>memory</b>, and <i>decreased</i> <b>mental capacity</b>?<br/><br/><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">In <b>adulthood</b>, which <u>thyroid disorder</u> is associated with <b>lethargy</b>, <i>slowed</i> <b>speech</b>, <b>somnolence</b>, <i>impaired</i> <b>memory</b>, and <i>decreased</i> <b>mental capacity</b>?<br/><br/><span class="cloze" data-ordinal="1">Hypothyroidism</span><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="28d0824f2f3fe47369353e9332cab343.webp" width="800"><img src="73524bfd38788b738ad5fbfa1429caf5.webp" width="800"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="cef100d6842715b755430b8fa7c20166.webp"><img src="Screen Shot 2022-07-13 at 4.44.57 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.45.27 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-endocrine-physiology/review-cards/medical-physiology-endocrine-physiology-thyroid-hormones-regulation-and-actions-of-thyroid-hormones">Watch Regulation &amp; Actions of Thyroid Hormones</a><br> --><!-- <img src="bb5c5460d4c3d3ce439e92e3d1687a58.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="6dd73e1dde2ba6af5c537e55b1e81567.webp"><img src="e73f2662bab9100756be3c0b99fa1acb.webp"><img src="605961af62c605e6b623470dfe5e04dd.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/neurological-symptoms/lesson/approach-to-altered-mental-status-">Watch Approach to Altered Mental Status</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">51.1</td>
+                    <td class="question"><b>Hypothyroidism</b> may be treated with <span class="cloze" data-cloze="thyroid hormone replacement therapy (e.g., levothyroxine, liothyronine)" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Hypothyroidism</b> may be treated with <span class="cloze" data-ordinal="1">thyroid hormone replacement therapy (e.g., levothyroxine, liothyronine)</span><br/>- Levothyroxine is the synthetic form of T<sub>4</sub><br/>- Liothyronine is the synthetic form of T<sub>3<br/></sub><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="437528fd728cadd3b0339f68714842ba.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="4880774e32c26da33394595dfbb54602.webp"><br><img src="95db20e5fc1503ec25d31dc84623fa0f.webp"><img src="ca29fae43a9893879a0e12c87359c806.webp"><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br> --><!-- <img src="7d32d86637fd8bb0a6a1d89d9fd4a876.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="eb62c95a692ee5451ea0630e72753998.webp"><br><img src="311a03706aa5c2894d83ba6501a216b6.webp"><br><img src="dcf62e80e3e58ad8204b3c77d6d1daa4.webp"><br><img src="6b8bcbdd5e0de2712cfdd17329e30323.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-hematology-oncology/videos/medical-internal-medicine-hematology-and-oncology-anemia-normocytic-anemia-ddx">Watch Normocytic Anemia DDx</a><br> --><!-- <img src="c3b46f947b8a70a7f4102a645e8ea519.webp" width="800"><img src="06814abbfcc33bf78fb9b6dffe843d4a.webp" width="800"><img src="b329dc48f2a4a6022464e708d876d0d8.webp" width="800"><br><img src="3f5e15b8cd56d285b7221f4c03100720.webp"><img src="f4c4249c8f249b7fce12a962f93b60b2.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-gi-endocrine/videos/medical-pharmacology-gi-and-endocrine-thyroid-parathyroid-and-adrenal-propylthiouracil-methimazole-levothyroxine">Watch Propylthiouracil, Methimazole, Levothyroxine</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">52.1</td>
+                    <td class="question"><div><b>Hypothyroidism</b> in the <b>perinatal period</b> causes <i>irreversible</i><b><i> </i></b><span class="cloze" data-cloze="&lt;b&gt;intellectual disability&lt;/b&gt; (congenital hypothyroidism)" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Hypothyroidism</b> in the <b>perinatal period</b> causes <i>irreversible</i><b><i> </i></b><span class="cloze" data-ordinal="1"><b>intellectual disability</b> (congenital hypothyroidism)</span></div><br/>- Thyroid hormone replacement therapy during the perinatal period may prevent intellectual disability, therefore screening for neonatal hypothyroidism is <b>mandatory<br/></b><br/>- Congenital hypothyroidism was historically known as cretinism<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><br/><img src="c8fd37d64febe6724576e9aa224e6b08.webp" width="1300px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="af3c1f93a282be447cf6066df69d8996.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">53.1</td>
+                    <td class="question"><b><span class="cloze" data-cloze="Congenital hypothyroidism" data-ordinal="1">[...]</span></b> is a condition of <b>severely stunted physical and mental growth</b> due to untreated congenital deficiency of <b>thyroid hormones</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b><span class="cloze" data-ordinal="1">Congenital hypothyroidism</span></b> is a condition of <b>severely stunted physical and mental growth</b> due to untreated congenital deficiency of <b>thyroid hormones</b><br/>Congenital hypothyroidism was historically known as cretinism<br/><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="af3c1f93a282be447cf6066df69d8996.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br><br><img src="Screen Shot 2022-07-13 at 4.50.16 PM.jpg"><img src="Screen Shot 2022-07-13 at 4.50.30 PM.jpg"><br><a href="https://www.sketchy.com/medical-lessons/pathophysiology-of-thyroid-hormones">Watch Pathophysiology of Thyroid Hormones</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">54.1</td>
+                    <td class="question">Removal of a <b>lingual thyroid</b> may result in <span class="cloze" data-cloze="hypothyroidism" data-ordinal="1">[...]</span> if it is the only thyroid tissue present<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Removal of a <b>lingual thyroid</b> may result in <span class="cloze" data-ordinal="1">hypothyroidism</span> if it is the only thyroid tissue present<br/><img src="3cd2d3b2d806f301e9c5489ac8563871.webp"/><br/><i><span style="font-size: 10pt;">Photo credit: <a href="https://www.hindawi.com/journals/jtr/2011/159703/">Choudhury et al.</a>, <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>, via Journal of Thyroid Research, modified by cropping</span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">55.1</td>
+                    <td class="question">What is the most sensitive screening test for <b>primary hypothyroidism</b>?<br/><br/><div><span class="cloze" data-cloze="TSH" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the most sensitive screening test for <b>primary hypothyroidism</b>?<br/><br/><div><span class="cloze" data-ordinal="1">TSH</span></div><br/>TSH will be high due to lack of negative feedback on the anterior pituitary<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="f055046d19bf47ad68d0c646f8500396.webp" width="800"><img src="bf148c7a05e8eeda34c90855c79dfd3b.webp" width="800"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="7131075a57155266e3a15b8fc417735b.webp"><img src="f6ae097232f941c437181cf0a5b4a020.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br><br><img src="64cb5f7491a3bc62c25e85fad7cbc427.webp"><br><img src="2da98effe82d4f3c851b42e2d0c57192.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/bradycardia/lesson/bradycardia-ddx-soap">Watch Bradycardia DDx</a><br><br><img src="bf7c783751ab7992141f04a13ab1e8f4.webp"><br><img src="c398347638fe044653206d7a37a7b1bc.webp"><img src="45e967c3410222f56a117ce9e1c6b10f.webp"><img src="c5325770c6ebb6aa0452bd16217f8844.webp"><br><br><img src="583e241dabafce11cc5d0a3192130e8a.webp"><img src="fb8e285c097f6f83d946880b1a1af773.webp"><br><img src="1181865e0db1e50a985597a9f53eca8b.webp"><br><img src="a431598bc292bcd1850b7ae0603c9b0a.webp"><img src="8784684b53ebe31a2f28690956d5ae54.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/aneuploidies/lesson/chromosomal-syndromes-turner-syndrome-soap-2">Watch Turner Syndrome</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">56.1</td>
+                    <td class="question"><div><span class="cloze" data-cloze="Chemotherapy ± radiation" data-ordinal="1">[...]</span> is the mainstay of <u>treatment</u> for <b>Hodgkin lymphoma</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><span class="cloze" data-ordinal="1">Chemotherapy ± radiation</span> is the mainstay of <u>treatment</u> for <b>Hodgkin lymphoma</b> </div><br/>- While radiation was traditionally first-line, guidelines now recommend chemotherapy followed by radiation for early-stage disease vs. chemotherapy alone* for late-stage disease (radiation appropriate for bulky disease or incomplete response to chemotherapy) (June 2023)<br/><br/>- Common chemotherapeutic regimen is ABVD (doxorubicin (Adriamycin), bleomycin, vinblastine, dacarbazine)<br/><br/>- Radiation to <b>the neck</b> may cause an <b>iatrogenic hypothyroidism </b><br/>- Radiation <b>near head</b> can cause an<b> iatrogenic hypopituitarism<br/></b><br/><img src="3635e361704e74fe66cbc27b4d5e7068.webp" width="700px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="39452c00d59d0fa9a82f94618e2e30a1.webp"><img src="e07ad432798081276de53019ce537fe3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-myeloid-lymphoid/videos/medical-pathophysiology-myeloid-and-lymphoid-lymphoid-and-plasma-cell-disorders-hodgkin-lymphoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hodgkin Lymphoma</a><br> --><!-- <img src="ba5283cba589a43c18939ce62bc1af78.webp"><img src="5bf8a6dd794981fcfa6bc2dc626171bc.webp"><b><span style="font-weight: 400;"><br></span></b><img src="c2a71bad13b992d6f6bf542d09a9e1b5.webp"><br><img src="9041622ad11cac0f26759695f83db7f4.webp"><img src="0f9753076f7b4c631990f5cc2638e130.webp"><br><b><span style="font-weight: 400;"><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-hematology-oncology/videos/medical-internal-medicine-hematology-and-oncology-oncology-hodgkin-lymphoma-soap" title="Watch Hodgkin Lymphoma SOAP">Watch Hodgkin Lymphoma SOAP</a></span></b><br> --><!-- <br> --><!-- <br> --><!-- <img src="tmp982t0jbn.png"><br><img src="tmp5olzo41i.png"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/5280?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Pharmacology&amp;utm_term=Oncology_Pharm&amp;utm_content=Doxorubicin,_Daunorubicin">Review Doxorubicin, Daunorubicin</a></span><br><img src="tmp6xqpp7md.png"><br><img src="tmpjdyxnsga.png"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/5643?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Immunology&amp;utm_term=Leukemias_and_Lymphomas&amp;utm_content=Hodgkin_Lymphoma">Review Hodgkin Lymphoma</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">57.1</td>
+                    <td class="question">The <b>carcinoembryonic antigen</b> (CEA) is a <u>serum tumor marker</u> that has <b>minor</b> associations with <span class="cloze" data-cloze="gastric" data-ordinal="1">[...]</span>, <span class="cloze" data-cloze="breast" data-ordinal="1">[...]</span>, and medullary thyroid carcinomas<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">The <b>carcinoembryonic antigen</b> (CEA) is a <u>serum tumor marker</u> that has <b>minor</b> associations with <span class="cloze" data-ordinal="1">gastric</span>, <span class="cloze" data-ordinal="1">breast</span>, and medullary thyroid carcinomas<br/>- CEA <u>major</u> associations: <b>colorectal</b>, <b>pancreatic</b><br/>- CEA <u>minor</u> associations: <b>gastric</b>, <b>breast</b><br/><br/>- <u>Non-malignant</u> conditions where CEA may also be elevated: <b>IBD</b>, <b>pancreatitis</b>, <b>cirrhosis</b>, <b>hypothyroidism</b><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="9b339996ed2076c39910a9d0cb353cc9.webp"><br></div><img src="12c8ad598e3f0b800de56dc3b3c73082.webp"><img src="a409df11116f9d08ae547ad0ee8dbcad.webp"><img src="5e7a7ebe23b1f0419f6462e385c9426d.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-gi/videos/medical-pathophysiology-gi-colorectal-and-anal-disorders-colorectal-polyps-and-cancer?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Colorectal Polyps &amp; Cancer</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">58.1</td>
+                    <td class="question"><b>Carcinoembryonic antigen</b> (CEA) is elevated in <span class="cloze" data-cloze="gastrointestinal" data-ordinal="1">[...]</span> diseases (e.g., Crohn, pancreatitis)<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Carcinoembryonic antigen</b> (CEA) is elevated in <span class="cloze" data-ordinal="1">gastrointestinal</span> diseases (e.g., Crohn, pancreatitis)<br/>Also elevated in hypothyroidism, liver disease (liver metabolizes CEA), and COPD<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f3c3ddf4e9b5adbdea223a8e6c3355b8.webp"><img src="acc2300f1200eef5154196e8625264ec.webp"><img src="183974dd44ace63e9356aba4095b2202.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/pancreas/lesson/acute-pancreatitis">Watch Surgery Acute Pancreatitis</a><br><a href="https://app.sketchy.com/study/medical/chapter/pancreatic-disease-2/lesson/acute-pancreatitis">Watch Internal Medicine Acute Pancreatitis</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">59.1</td>
+                    <td class="question">The pathologies associated with <b>carpal tunnel syndrome </b>may be remembered with the mnemonic <span class="cloze" data-cloze="&lt;u&gt;&lt;b&gt;P&lt;/b&gt;&lt;/u&gt;ressing &lt;u&gt;&lt;b&gt;D&lt;/b&gt;&lt;/u&gt;own &lt;u&gt;&lt;b&gt;HARD&lt;/b&gt;&lt;/u&gt;" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">The pathologies associated with <b>carpal tunnel syndrome </b>may be remembered with the mnemonic <span class="cloze" data-ordinal="1"><u><b>P</b></u>ressing <u><b>D</b></u>own <u><b>HARD</b></u></span><br/><div><div><div><b>P</b>ressing<b>: </b><u>P</u>regnancy (due to edema)</div><div><b>D</b>own<b>: </b><u>D</u>ialysis-related amyloidosis</div><div><br/><u>H</u>ypothyroidism</div><div><u>A</u>cromegaly</div><div><div><u>R</u>heumatoid arthritis</div><u>D</u>iabetes mellitus</div></div></div><br/><div>It <b>may</b> also be associated with repetitive use</div><br/><div><b>Dialysis-related amyloidosis</b>: β2-microglobulin is not effectively removed by dialysis→forms amyloid which deposits in bones, joints, tendons (commonly shoulder and wrist)<br/><div><br/><div><b>Hypothyroidism</b>: increased circulating levels of TSH stimulate fibroblasts in the CT of the Carpal Tunnel to deposit GAGs, these attract water which cause the carpal tunnel to swell impinging the median nerve</div></div><br/><div><b>Acromegaly</b>: enlarged hands and feet can lead to compression of the median nerve and carpal tunnel syndrome (up to 1/3 of those with acromegaly get carpal tunnel syndrome)<br/></div><b><br/>Rheumatoid arthritis</b>: deposits of Antibodies (rheumatoid factor / anti-CCP antibodies) in joints of the wrist results in inflammation of median nerve</div><div><br/><b>DM</b>: circulating AGE deposit in carpal tunnel vessels deposit and cause inflammation, growth of basement membrane, and fibrosis, leading to impingement of median nerve</div><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="8b36e02033f1de0d241fac06179f6d29.webp" width="800"><img src="56cefec10240dddd649293635f0d90ac.webp" width="800"><br><div><img src="fc724f9a88f75c90d8379d2ff1bc7518.webp"><img src="d9b2f1596ad016128f77e9cf57919cfc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-autonomic-drugs/videos/medical-pharmacology-autonomic-drugs-parasympathetic-acetylcholinesterase-inhibitors?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Amyloidosis</a><br><br><img src="df32b9a47d6f61598154d8a53357c902.webp" width="800"><br><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br></div><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">60.1</td>
+                    <td class="question">The pathologies associated with <span class="cloze" data-cloze="&lt;b&gt;carpal tunnel syndrome&lt;/b&gt;" data-ordinal="1">[...]</span> may be remembered with the mnemonic "<b>P</b>ressing <b>D</b>own <b>HARD</b>":<div><br/><div class="mnemonics"><div><b>P</b>ressing<b>: </b><span class="cloze" data-cloze="Pregnancy" data-ordinal="1">[reproductive circumstance]</span> (due to edema)</div><div><b>D</b>own<b>: </b><span class="cloze" data-cloze="Dialysis-related amyloidosis" data-ordinal="1">[inflammatory disorder]</span></div><div><br/><b>H: </b><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[thyroid disorder]</span></div><div><b>A: </b><span class="cloze" data-cloze="Acromegaly" data-ordinal="1">[pituitary disorder]</span></div><div><div><b>R: </b><span class="cloze" data-cloze="Rheumatoid arthritis" data-ordinal="1">[inflammatory disorder]</span></div><b>D: </b><span class="cloze" data-cloze="Diabetes mellitus" data-ordinal="1">[endocrine disorder]</span></div></div></div><br/><div>It <b>may</b> also be associated with <span class="cloze" data-cloze="repetitive use" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">The pathologies associated with <span class="cloze" data-ordinal="1"><b>carpal tunnel syndrome</b></span> may be remembered with the mnemonic "<b>P</b>ressing <b>D</b>own <b>HARD</b>":<div><br/><div class="mnemonics"><div><b>P</b>ressing<b>: </b><span class="cloze" data-ordinal="1">Pregnancy</span> (due to edema)</div><div><b>D</b>own<b>: </b><span class="cloze" data-ordinal="1">Dialysis-related amyloidosis</span></div><div><br/><b>H: </b><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><div><b>A: </b><span class="cloze" data-ordinal="1">Acromegaly</span></div><div><div><b>R: </b><span class="cloze" data-ordinal="1">Rheumatoid arthritis</span></div><b>D: </b><span class="cloze" data-ordinal="1">Diabetes mellitus</span></div></div></div><br/><div>It <b>may</b> also be associated with <span class="cloze" data-ordinal="1">repetitive use</span></div><br/><b>Dialysis-related amyloidosis</b>: β<sub>2</sub>-microglobulin is not effectively removed by dialysis → forms amyloid which deposits in bones, joints, tendons (commonly shoulder and wrist)<br/><br/><b>Hypothyroidism</b>: increased circulating levels of TSH stimulate fibroblasts in the connective tissue of the carpal tunnel to deposit GAGs; these attract water which cause the carpal tunnel to swell impinging the median nerve<br/><br/><b>Acromegaly</b>: enlarged hands and feet can lead to compression of the median nerve and carpal tunnel syndrome (up to 1/3 of those with acromegaly get carpal tunnel syndrome)<br/><br/><b>Rheumatoid arthritis</b>: deposits of antibodies (rheumatoid factor / anti-CCP antibodies) in joints of the wrist results in inflammation of median nerve<br/><br/><b>DM</b>: circulating advanced glycation end-products (AGEs) deposit in carpal tunnel vessels deposit and cause inflammation, growth of basement membrane, and fibrosis, leading to impingement of median nerve<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="8b36e02033f1de0d241fac06179f6d29.webp" width="800"><img src="56cefec10240dddd649293635f0d90ac.webp" width="800"><br><img src="fc724f9a88f75c90d8379d2ff1bc7518.webp"><img src="d9b2f1596ad016128f77e9cf57919cfc.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-autonomic-drugs/videos/medical-pharmacology-autonomic-drugs-parasympathetic-acetylcholinesterase-inhibitors?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Amyloidosis</a><br><br><img src="df32b9a47d6f61598154d8a53357c902.webp" width="800"><br><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="13e50902a1cd7524671aa55f97a7d3e5.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">61.1</td>
+                    <td class="question">Which of the following is associated with <u>hypothyroidism</u> as a predisposing condition?<br/><br/><span class="cloze" data-cloze="Slipped capital femoral epiphysis (SCFE)" data-ordinal="1">[Legg-Calvé-Perthes disease vs Slipped capital femoral epiphysis (SCFE)]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">Which of the following is associated with <u>hypothyroidism</u> as a predisposing condition?<br/><br/><span class="cloze" data-ordinal="1">Slipped capital femoral epiphysis (SCFE)</span><br/>Because thyroid hormone stimulates growth plate ossification, hypothyroidism increases the risk of SCFE<br/><br/><img src="71301d61fe3fc14426c3b09efe2f1bf3.webp" width="1200px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="952e0fcb9b1ee16266749a1db7dccc29.png"><br><img src="e15945bf9362f2000d4d7f80817c6f1d.webp"><img src="3f0b9798d45a35c67a1cd25068620ff8.webp"><img src="62a12f3b49cb5c55afa699040513c94c.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/hip-disorders/lesson/hip-disorders-soap-2">Watch Pediatric Hip Disorders</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">62.1</td>
+                    <td class="question"><div>What <u>endocrine pathology</u> is a <i>reversible</i> cause of <b>dementia</b>? </div><br/><div><span class="cloze" data-cloze="Hypothyroidism" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>What <u>endocrine pathology</u> is a <i>reversible</i> cause of <b>dementia</b>? </div><br/><div><span class="cloze" data-ordinal="1">Hypothyroidism</span></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="4a8cb414d5a2094531c31974981a960b.webp"><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">63.1</td>
+                    <td class="question">What is the likely <i>diagnosis</i> in an <u>asymptomatic</u> patient with a <b>slightly</b> <b>elevated</b> <b>TSH </b>despite <b>normal free</b> <b>T<sub>3 </sub></b>/ <b>T<sub>4</sub></b> <b>levels</b>?<br/><br/><span class="cloze" data-cloze="Subclinical hypothyroidism" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">What is the likely <i>diagnosis</i> in an <u>asymptomatic</u> patient with a <b>slightly</b> <b>elevated</b> <b>TSH </b>despite <b>normal free</b> <b>T<sub>3 </sub></b>/ <b>T<sub>4</sub></b> <b>levels</b>?<br/><br/><span class="cloze" data-ordinal="1">Subclinical hypothyroidism</span><br/>- Characterized by normal T<sub>3 </sub>/<sub> </sub>T<sub>4</sub> levels with a mildly elevated TSH and <u>no</u> symptoms of hypothyroidism <br/><br/>- If TSH &gt; 10 mU/L, symptomatic, antithyroid antibodies (+), menstrual / ovulatory dysfunction, or abnormal lipids then begin treating by replacing T<sub>4<br/></sub><br/><img src="aad604be34240a1dd449c04c48af0f09.webp" width="800px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="56d2769fe0d9212d4065f4846c11ccf7.webp"><img src="765ca7f2eab71e33785db8f5105d8933.webp"><img src="d414cb8f06f6459f094e5bda13a38e6e.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-overview-and-hashimotos-thyroiditis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Overview &amp; Hashimotos Thyroiditis</a><br> --><!-- <img src="8128d5c096f1f5f4ac4cb00d32b9db57.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">64.1</td>
+                    <td class="question"><b>Postpartum thyroiditis</b> is often characterized by an <i>initial</i> brief <span class="cloze" data-cloze="&lt;b&gt;hyper&lt;/b&gt;" data-ordinal="1">[...]</span><b>thyroid</b> phase followed by a(n) <span class="cloze" data-cloze="&lt;b&gt;hypo&lt;/b&gt;" data-ordinal="1">[...]</span><b>thyroid</b> phase<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><b>Postpartum thyroiditis</b> is often characterized by an <i>initial</i> brief <span class="cloze" data-ordinal="1"><b>hyper</b></span><b>thyroid</b> phase followed by a(n) <span class="cloze" data-ordinal="1"><b>hypo</b></span><b>thyroid</b> phase<br/>e.g., anxiety, palpitations followed by fatigue, weight gain, constipation, <b>hypercholesterolemia</b>, <b>hyponatremia<br/></b><br/><img src="53b4869667ab7d60531d8d4b5dd514de.jpg"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="888bb531e29791559bf6d6df31d815fe.webp" width="800"><img src="d41e738c61489a4c60e25cea1b7c4979.webp" width="800"><br><img src="33a2a4d6ea91c2174519abfebb9d9d61.webp"><img src="29f230a60c2f274bda2a599d8c31227c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-thyroid-and-parathyroid-hypothyroidism-other-causes?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Hypothyroidism Other Causes</a><br> --><!-- <img src="b549b1d9091326a190f797910aae6ab7.webp"><br><img alt="Lesson Review" src="5063534fee8032559ff556fa22953de1.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hyperthyroidism-soap">Watch Hyperthyroidism SOAP</a><br><br><img src="4f4e4382004b05803a8fe9047fad8a25.webp"><img src="e21390ce0d34b21297782454e5ef99df.webp"><img src="5cebd94464883265671581428506302b.webp"><img src="0c06650ed2948254436ebee52fa011ea.webp"><br><br><img src="f769018cebcd91199c89e5b005761616.webp"><img src="79dd4eab2c2d5e7c6b79cb5467d727c2.webp"><br><img src="bfd375a80940526e8785a475d1ec21c0.webp"><img src="e49046f51e38d6fbc743a7ac8f8bc7b0.webp"><img src="7d2223719c56dd9b71ecac1327b250c3.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-endocrinology/videos/medical-internal-medicine-endocrinology-thyroid-disease-hypothyroidism-soap">Watch Hypothyroidism SOAP</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>

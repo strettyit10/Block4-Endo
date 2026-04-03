@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Anki PDF Exporter:  (14 cards)</title>
+    <style>
+        body {
+            font-size: 9pt;
+            font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+        }
+        .cards-container {
+            column-count: 1;
+        }
+        .card > table {
+            width: 100%;
+        }
+        .card > table > tr > td {
+            vertical-align: top
+        }
+        td.question, td.answer {
+            word-break: break-all;
+            word-break: break-word;
+            hyphens: auto;
+        }
+        td.index {
+            font-size: 9pt;
+            width: 5%;
+            color: #888888;
+        }
+        td.question {
+            width: 18%;
+            font-weight: normal;
+        }
+        td.spacer {
+            width: 3%;
+        }
+        td.answer {
+            width: 100%;
+        }
+        .card {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        img {
+            max-width: 35%;
+            max-height: 35vh;
+        }
+        hr {
+            color: #DADADA;
+            border-width: 1px;
+            height: 0px;
+            border-style: solid;
+        }
+        
+/* Cloze deletions */
+.cloze {
+  font-weight: bold;
+  color: blue;
+}
+
+/* Image occlusions */
+#io-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#io-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 3
+}
+
+#io-original {
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+#io-revl-btn {
+  display: none;
+}
+    </style>
+    <base href="file:///Users/ashleyjohnston/Library/Application%20Support/Anki2/Ashley/collection.media/">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    function unfixAll() {
+      for (const el of document.getElementsByTagName("*")){
+          var style = window.getComputedStyle(el);
+          if (style.position === "fixed") {
+            if (style.display === "none" || style.visibility === "hidden") return;
+            el.remove();
+          }
+      }
+    }
+    function removeInlineImgStyles(){
+        for(let elm of document.getElementsByTagName("img")){
+            elm.style.width = null;
+            elm.style.height = null;
+      }
+    }
+
+    window.addEventListener("load", unfixAll);
+    window.addEventListener("load", removeInlineImgStyles);
+    </script>
+</head>
+    
+<body>
+<div class="cards-container">
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">1.1</td>
+                    <td class="question"><div>Up to 25% of cases of <b>pheochromocytoma</b> are associated with germline mutations, including <span class="cloze" data-cloze="&lt;i&gt;NF1&lt;/i&gt;" data-ordinal="1">[...]</span>, <span class="cloze-inactive" data-ordinal="2"><i>VHL</i></span>, and <span class="cloze-inactive" data-ordinal="3"><i>RET</i> (MEN 2A / MEN 2B)</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Up to 25% of cases of <b>pheochromocytoma</b> are associated with germline mutations, including <span class="cloze" data-ordinal="1"><i>NF1</i></span>, <span class="cloze-inactive" data-ordinal="2"><i>VHL</i></span>, and <span class="cloze-inactive" data-ordinal="3"><i>RET</i> (MEN 2A / MEN 2B)</span></div><br/><img src="80b07e075d2526db908e250d2c99ed63.webp" width="850px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="bb5e7104eb5f8f9c1b7dd20c523b79bc.webp" width="800"><img src="277ed2b17eb888226117d30858819fe2.webp" width="800"><img src="f46442ece05ad57cda72e6afeaff4b07.webp" width="800"></div><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br /><br /><img src="5b219271dbf0fc11654be3d06bcf31ec.webp"><br><img src="9c64774ae2f659915fbb1707093b2644.webp"><img src="a49f56b59d6b5600f39594b037548fc5.webp" width="798"><br><img src="316beb62d1d77d2e9c36fd4c87c6b14d.webp"><img src="db2b95de1050d4aa459323b1bce36d1e.webp"><img src="384a7c959c0d0359af0e83407e09e27c.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Multiple Endocrine Neoplasia (MEN)</a><br><br><div><img class="resizer" src="VHL pheochromocytoma_1566160514431.jpg"><img src="473d4214137977077e98748709d8c382.webp"><img src="6f652726184ddb2e04d4287d0cc1bf8a.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-neuro/videos/medical-pathophysiology-neuro-intracranial-hypertension-and-tumors-adult-cns-tumors?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Adult CNS Tumors</a><br><br><img src="a782731e52e61f2d38f9cddf18d39cde.webp"><img src="e3799df1088d4ea94a30cf9312e34b0f.webp"><img src="8922b91f1d77659dab1161f5b145eb40.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-neuro/videos/medical-pathophysiology-neuro-congenital-and-neurocutaneous-neurofibromatosis?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Neurofibromatosis</a><br><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="NF1.jpg" class="resizer"></div><div><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3037?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=Von_Recklinghausen_Disease_(NF_I)">Review Von Recklinghausen Disease (NF I)</a></span><br></div><div><img src="vhl.jpeg" class="resizer"></div><div><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3026?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=von_Hippel-Lindau_(VHL)">Review von Hippel-Lindau (VHL)</a></span><br><img src="tmpunlxztge_1606536512074.png" class="resizer"><br><img src="tmp0e0mkg5k_1606536512074.png" class="resizer"></div><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/3120?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry&amp;utm_term=Autosomal_Dominant_Diseases&amp;utm_content=MEN_2">Review MEN 2</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">2.1</td>
+                    <td class="question"><span class="cloze-inactive" data-ordinal="2"><b>Pheochromocytoma</b> and <b>neuroblastoma</b></span> are diagnosed by increased <b>serum</b> and <b>urine</b> levels of <b>catecholamines</b>, or their breakdown products <span class="cloze" data-cloze="&lt;b&gt;metanephrines&lt;/b&gt;, &lt;b&gt;VMA&lt;/b&gt;, and &lt;b&gt;HVA&lt;/b&gt;" data-ordinal="1">[3]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze-inactive" data-ordinal="2"><b>Pheochromocytoma</b> and <b>neuroblastoma</b></span> are diagnosed by increased <b>serum</b> and <b>urine</b> levels of <b>catecholamines</b>, or their breakdown products <span class="cloze" data-ordinal="1"><b>metanephrines</b>, <b>VMA</b>, and <b>HVA</b></span><br/>- Metanephrines = metanephrine (epinephrine metabolite) and normetanephrine (norepinephrine metabolite)<br/>- VMA = vanillylmandelic acid (breakdown product of metanephrines)<br/>- HVA = homovanillic acid (breakdown product of dopamine)<br/><br/>- This card used to only say "pheochromocytoma" but neuroblastoma was added for completeness, additional clarification was added that HVA is <b>NOT</b> a metanephrine metabolite. The duplicate card (nid:1462818499640) has been marked for deletion (Oct 2025)<br/><br/><img src="f3a8a7ee9329eba02f10ba4490dd4f8e.webp" width="700px"/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="f3227c1b69055488f2ea1b80ddd95a5b.webp" width="800"><img src="1cfd156e31c669e80492d1ed5d89dc02.webp" width="800"></div><div><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br><br><div><img src="4082f20598cdf54fa6f36fda61d6e85c.webp"><img src="b7799228884f615767f584ca9247e7d3.webp"><img src="1d5bc03e365e6deafe7f8ce6eb2d06fe.webp"></div><img src="Screen Shot 2021-01-07 at 15.12.39.jpg"><img src="Screen Shot 2021-01-07 at 15.12.52.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-biochemistry/units/medical-biochemistry-metabolism/videos/medical-biochemistry-metabolism-amino-acids-and-proteins-catecholamine-synthesis-and-degradation">Watch Catecholamine Synthesis &amp; Degradation</a><br><br> --><!-- <img src="4afdfef9872fa42b0f7bb847a0b8a223.webp"><br><img src="eabcf1c6d8ad466100533c48e98dcc87.webp"><img src="1b8f3e88561b246f4d04346e1891b8cf.webp"><img src="284b6b5991f11c77e97e9c833673fc5f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-cardiology/videos/medical-internal-medicine-cardiology-blood-pressure-htn-soa">Watch Hypertension SOA</a><br><br><img src="f074f28ff7bae8f023fe26408a98ab29.webp"><img src="e5cb8a1e4f808b11540fabc95b74fa97.webp"><img src="fa4f780d1cbed82a8e61ca26417fb769.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/extracranial-embryonal-cancers/lesson/neuroblastoma">Watch Neuroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <img class="resizer" src="Catecholamine Synthesis _ Breakdown - OG copy.png"><img src="Catecholamine Synthesis _ Breakdown - OG.png"><br><span style="text-decoration-line: underline;"><a href="https://pixorize.com/view/4681?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=Biochemistry">Review Catecholamine Synthesis &amp; Breakdown</a></span><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">3.1</td>
+                    <td class="question"><div>The <b>adrenal medulla</b> is composed of <span class="cloze" data-cloze="&lt;b&gt;chromaffin&lt;/b&gt;" data-ordinal="1">[...]</span><b> cells</b>, which are derived from the <span class="cloze-inactive" data-ordinal="2"><b>neural crest</b></span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The <b>adrenal medulla</b> is composed of <span class="cloze" data-ordinal="1"><b>chromaffin</b></span><b> cells</b>, which are derived from the <span class="cloze-inactive" data-ordinal="2"><b>neural crest</b></span></div><br/>AKA pheochromocytes<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="285764efc7a9cf0bfc6234afe44d878e.webp"><img src="6449f0e69cf09b739b000d6436673371.webp"><img src="8fe278d24f6f72c1431ef15686c1bb56.webp"><img src="1.1 – Sympathetic Nervous System.png"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-autonomic-nervous-system/review-cards/medical-physiology-autonomic-nervous-system-organization-and-features-of-ans-sympathetic-nervous-system">Watch Sympathetic Nervous System</a><br><br><img src="4f47967e428c1bc85f6388ba48777a95.webp"><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br> --><!-- <img src="7e62331a7daaf174d180fb06f3b204cb.webp"><img src="e5cb8a1e4f808b11540fabc95b74fa97.webp"><img src="fa4f780d1cbed82a8e61ca26417fb769.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/extracranial-embryonal-cancers/lesson/neuroblastoma">Watch Neuroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">4.1</td>
+                    <td class="question"><div>A <b>pheochromocytoma</b> is a tumor of <span class="cloze" data-cloze="&lt;b&gt;chromaffin&lt;/b&gt;" data-ordinal="1">[...]</span><b> cells</b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>A <b>pheochromocytoma</b> is a tumor of <span class="cloze" data-ordinal="1"><b>chromaffin</b></span><b> cells</b> </div><br/>Pheochromocytoma (Largely encapsulated adrenal mass with light brown to mahogany cut surface and patchy fibrosis. No residual normal adrenal tissue is seen grossly):<br/><img src="59f69301cf3fcdbafc47a6235f666639.webp" width="693"/><br/><i><span style="font-size: 10pt;"><i><em>Photo credit: </em><a href="https://www.flickr.com/photos/jian-hua_qiao_md/8074338270/in/album-72157631738958071/"><em>© Dr. Jian-Hua Qiao</em></a><em>, all rights reserved, via Flickr (used with permission)</em></i></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="d91d4834921cf9841d7d56e4c21d50d0.webp"><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">5.1</td>
+                    <td class="question"><div>Treatment for a <b>pheochromocytoma</b> is <span class="cloze" data-cloze="surgical excision*" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Treatment for a <b>pheochromocytoma</b> is <span class="cloze" data-ordinal="1">surgical excision*</span></div><br/>*Before surgery, <b>phenoxybenzamine</b> (α-blocker) must be given first <u>before</u> β-blockers to prevent unopposed α<sub>1 </sub>stimulation and thereby hypertensive crisis<br/><br/>Pheochromocytoma (Largely encapsulated adrenal mass with light brown to mahogany cut surface and patchy fibrosis. No residual normal adrenal tissue is seen grossly):<br/><img src="59f69301cf3fcdbafc47a6235f666639.webp" width="693"/><br/><i><span style="font-size: 10pt;"><i><em>Photo credit: </em><a href="https://www.flickr.com/photos/jian-hua_qiao_md/8074338270/in/album-72157631738958071/"><em>© Dr. Jian-Hua Qiao</em></a><em>, all rights reserved, via Flickr (used with permission)</em></i></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="b5f78cd2c4fe6a703217af3217e6c440.webp"><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="f6d8593ebf7d17d3fa4dae3f3fd70ac2.webp"><br><img src="d38d653d852ce935c0547acd3a57a104.webp"><br><b><a href="https://pixorize.com/view/101222/video?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=pharm"><span style="font-weight: 400;">Review Phenoxybenzamine</span></a></b><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">6.1</td>
+                    <td class="question"><div>One classic location for a <b>pheochromocytoma</b> <u>outside of the adrenal medulla</u> is in the <b><span class="cloze" data-cloze="bladder" data-ordinal="1">[...]</span> wall</b>, which presents with episodic symptoms of a pheochromocytoma following <b><span class="cloze" data-cloze="urination" data-ordinal="1">[...]</span></b> </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>One classic location for a <b>pheochromocytoma</b> <u>outside of the adrenal medulla</u> is in the <b><span class="cloze" data-ordinal="1">bladder</span> wall</b>, which presents with episodic symptoms of a pheochromocytoma following <b><span class="cloze" data-ordinal="1">urination</span></b> </div><br/>Pheochromocytoma outside of the adrenal medulla = paraganglioma<br/><br/><img alt="Cancers 14 00917 g001" src="6d71491f68a20a148dbba6db56113e72.webp" width="700"/><br/><span style="font-size: 10pt;"><i>Photo credit: <a href="https://www.mdpi.com/2072-6694/14/4/917">Calissendorff et al.</a>, <a href="creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, via MDPI Cancers</i></span><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">7.1</td>
+                    <td class="question"><div>The classic finding on <u>gross exam</u> for a <b>pheochromocytoma</b> is a(n) <span class="cloze" data-cloze="&lt;b&gt;brown&lt;/b&gt;" data-ordinal="1">[color]</span><b> tumor</b></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The classic finding on <u>gross exam</u> for a <b>pheochromocytoma</b> is a(n) <span class="cloze" data-ordinal="1"><b>brown</b></span><b> tumor</b></div><br/>Small yellow line represents the adrenal cortex (yellow due to cholesterol)<br/><br/>Pheochromocytoma (Largely encapsulated adrenal mass with light brown to mahogany cut surface and patchy fibrosis. No residual normal adrenal tissue is seen grossly):<br/><img src="59f69301cf3fcdbafc47a6235f666639.webp" width="693"/><br/><i><span style="font-size: 10pt;"><i><em>Photo credit: </em><a href="https://www.flickr.com/photos/jian-hua_qiao_md/8074338270/in/album-72157631738958071/"><em>© Dr. Jian-Hua Qiao</em></a><em>, all rights reserved, via Flickr (used with permission)</em></i></span></i><br/><br/><img alt="File:Adrenal paraganglioma clinical Pheochromocytoma.jpg" src="6795799a91655d56fe5df581456fc2c5.jpg"/><br/><span style="font-size: 10pt;"><em>Photo credit: <a href="https://commons.wikimedia.org/wiki/File:Adrenal_paraganglioma_clinical_Pheochromocytoma.jpg">Michael Feldman, MD, PhDUniversity of Pennsylvania School of Medicine</a>, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>, via Wikimedia Commons</em></span><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="4b75e7458d42260b3ad3effe5a29d5b4.webp"><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">8.1</td>
+                    <td class="question"><div><b>Pheochromocytoma</b> is associated with the rule of <span class="cloze" data-cloze="10s" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div><b>Pheochromocytoma</b> is associated with the rule of <span class="cloze" data-ordinal="1">10s</span></div><br/>Rule of 10s:<br/>10% malignant<br/>10% bilateral<br/>10% extra-adrenal (e.g., bladder wall, organ of Zuckerkandl)<br/>10% calcify<br/>10% children<br/><br/>Pheochromocytoma (Largely encapsulated adrenal mass with light brown to mahogany cut surface and patchy fibrosis. No residual normal adrenal tissue is seen grossly):<br/><img src="59f69301cf3fcdbafc47a6235f666639.webp" width="693"/><br/><i><span style="font-size: 10pt;"><i><em>Photo credit: </em><a href="https://www.flickr.com/photos/jian-hua_qiao_md/8074338270/in/album-72157631738958071/"><em>© Dr. Jian-Hua Qiao</em></a><em>, all rights reserved, via Flickr (used with permission)</em></i></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="095159288616c053711cfe4871c47095.webp"><br></div><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">9.1</td>
+                    <td class="question"><div>Prior to removal of a <b>pheochromocytoma</b>, irreversible <span class="cloze" data-cloze="&lt;b&gt;α-blockers&lt;/b&gt;" data-ordinal="1">[...]</span>, such as <span class="cloze-inactive" data-ordinal="2"><b>phenoxybenzamine</b></span> are administered, followed by <span class="cloze" data-cloze="&lt;b&gt;β&lt;/b&gt;&lt;b&gt;-blockers&lt;/b&gt;" data-ordinal="1">[...]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Prior to removal of a <b>pheochromocytoma</b>, irreversible <span class="cloze" data-ordinal="1"><b>α-blockers</b></span>, such as <span class="cloze-inactive" data-ordinal="2"><b>phenoxybenzamine</b></span> are administered, followed by <span class="cloze" data-ordinal="1"><b>β</b><b>-blockers</b></span></div><br/>- α-blockade must be achieved before giving β-blockers to avoid hypertensive crisis<br/><br/>- May use phentolamine (a shorter acting α-blocker) intraoperatively if needed<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="pheochromocytoma - phenoxybenzamine_1566160514431.jpg"><img src="pheochromocytoma - beta blocker_1566160514431.jpg"><img src="pheochromocytoma - beta blocker.2_1566160514431.jpg"><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"></div><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br><br><img src="c184cd2f73e54c25f306321a513a6826.webp"><img src="9fbea1421bc722d512af9ee3f63ca342.webp"><br><img src="165e9cda4c712fe470033f56187fabac.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-autonomic-drugs/videos/medical-pharmacology-autonomic-drugs-sympathetic-alpha-drugs?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Alpha Drugs</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="0ed171452c802ec012959b0c20413b9e.webp"><br><img src="1751d1af47ba1c71541fc805d4cd7544.webp"><b><br><a href="https://pixorize.com/view/101056/video?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=pharm"><span style="font-weight: 400;">Review Phentolamine</span></a><br></b><img src="f6d8593ebf7d17d3fa4dae3f3fd70ac2.webp"><br><img src="d38d653d852ce935c0547acd3a57a104.webp"><br><b><a href="https://pixorize.com/view/101222/video?utm_source=anki&amp;utm_medium=anking&amp;utm_campaign=pharm"><span style="font-weight: 400;">Review Phenoxybenzamine</span></a></b><br><img src="Phenoxybenzamine.jpg"><br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">10.1</td>
+                    <td class="question">One classic location for a(n) <span class="cloze-inactive" data-ordinal="3"><b>pheochromocytoma</b></span> <u>outside of the adrenal medulla</u> is the <b>organ of</b> <span class="cloze-inactive" data-ordinal="2"><b>Zuckerkandl</b></span> at the <span class="cloze" data-cloze="&lt;b&gt;inferior mesenteric&lt;/b&gt;" data-ordinal="1">[...]</span> <b>artery</b> root<br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">One classic location for a(n) <span class="cloze-inactive" data-ordinal="3"><b>pheochromocytoma</b></span> <u>outside of the adrenal medulla</u> is the <b>organ of</b> <span class="cloze-inactive" data-ordinal="2"><b>Zuckerkandl</b></span> at the <span class="cloze" data-ordinal="1"><b>inferior mesenteric</b></span> <b>artery</b> root<br/>- Extra-adrenal chromaffin tissue, found via <b>MIBG scan</b> (meta-iodobenzylguanidine scan)<br/><br/>- Pheochromocytoma outside of the adrenal medulla = paraganglioma<br/><br/><img alt="Cancers 14 00917 g001" src="6d71491f68a20a148dbba6db56113e72.webp" width="700"/><br/><span style="font-size: 10pt;"><i>Photo credit: <a href="https://www.mdpi.com/2072-6694/14/4/917">Calissendorff et al.</a>, <a href="creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, via MDPI Cancers</i></span><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="a95845ee848c1ad795355cfc312078e3.webp"><br><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">11.1</td>
+                    <td class="question"><span class="cloze-inactive" data-ordinal="2"><b>Pheochromocytoma</b></span> is the <u>most common</u> tumor of the <span class="cloze" data-cloze="&lt;b&gt;adrenal medulla&lt;/b&gt;" data-ordinal="1">[...]</span> in <b>adults</b><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><span class="cloze-inactive" data-ordinal="2"><b>Pheochromocytoma</b></span> is the <u>most common</u> tumor of the <span class="cloze" data-ordinal="1"><b>adrenal medulla</b></span> in <b>adults</b><br/>- Neuroblastoma in children<br/><br/>- Composed of neoplastic chromaffin cells<br/><br/>Pheochromocytoma (Largely encapsulated adrenal mass with light brown to mahogany cut surface and patchy fibrosis. No residual normal adrenal tissue is seen grossly):<br/><img src="59f69301cf3fcdbafc47a6235f666639.webp" width="693"/><br/><i><span style="font-size: 10pt;"><em>Photo credit: </em><a href="https://www.flickr.com/photos/jian-hua_qiao_md/8074338270/in/album-72157631738958071/"><em>© Dr. Jian-Hua Qiao</em></a><em>, all rights reserved, via Flickr (used with permission)</em></span></i><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="d91d4834921cf9841d7d56e4c21d50d0.webp" width="800"><img src="bef608a1265d632869af99f21a75e6d0.webp" width="800"><br></div><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br> --><!-- <img src="fa32e9e975d66845650f5bdcd2eac9fe.webp"><br><img src="eabcf1c6d8ad466100533c48e98dcc87.webp"><img src="1b8f3e88561b246f4d04346e1891b8cf.webp"><img src="284b6b5991f11c77e97e9c833673fc5f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-cardiology/videos/medical-internal-medicine-cardiology-blood-pressure-htn-soa">Watch Hypertension SOA</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">12.1</td>
+                    <td class="question"><div>The <u>five</u> <b>episodic hyperadrenergic symptoms</b> of a(n) <span class="cloze-inactive" data-ordinal="3"><b>pheochromocytoma</b></span> are:</div><div><br/>1. <span class="cloze" data-cloze="Pressure (increased BP)" data-ordinal="1">[...]</span></div><div> 2. <span class="cloze" data-cloze="Pain (headache)" data-ordinal="1">[...]</span></div><div> 3. <span class="cloze-inactive" data-ordinal="2">Perspiration</span></div><div> 4. <span class="cloze-inactive" data-ordinal="2">Palpitations (tachycardia)</span></div><div> 5. Pallor </div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>The <u>five</u> <b>episodic hyperadrenergic symptoms</b> of a(n) <span class="cloze-inactive" data-ordinal="3"><b>pheochromocytoma</b></span> are:</div><div><br/>1. <span class="cloze" data-ordinal="1">Pressure (increased BP)</span></div><div> 2. <span class="cloze" data-ordinal="1">Pain (headache)</span></div><div> 3. <span class="cloze-inactive" data-ordinal="2">Perspiration</span></div><div> 4. <span class="cloze-inactive" data-ordinal="2">Palpitations (tachycardia)</span></div><div> 5. Pallor </div><br/>In contrast with aldosteronoma → hypertension, hypokalemia (leading to fatigue, muscles weakness, headaches, and palpitations), metabolic alkalosis, and mild hypernatremia<br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <div><img src="a36e4cd24fb052458c2970dd1a6ac141.webp" width="800"><img src="bf7d02cd89eccbd99815b4c28f5f5c4d.webp" width="800"><br></div><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br><br><div><img src="b3ee571c4fdaf13d112c73e2da667a24.webp"><br></div><img src="9fbea1421bc722d512af9ee3f63ca342.webp"><br><img src="165e9cda4c712fe470033f56187fabac.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pharmacology/units/medical-pharmacology-autonomic-drugs/videos/medical-pharmacology-autonomic-drugs-sympathetic-alpha-drugs?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Alpha Drugs</a><br><br> --><!-- <img src="33e858e097c39100c40b839164f3cb01.webp"><br><img src="eabcf1c6d8ad466100533c48e98dcc87.webp"><img src="1b8f3e88561b246f4d04346e1891b8cf.webp"><img src="284b6b5991f11c77e97e9c833673fc5f.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-internal-medicine/units/medical-internal-medicine-cardiology/videos/medical-internal-medicine-cardiology-blood-pressure-htn-soa">Watch Hypertension SOA</a><br><br><img src="96dba5616933a146c4106aec557ce56f.webp"><br><img src="48664334076f714d499024f7dfb35800.webp"><img src="65174e568ba926e80edfc2b8f3f33f7d.webp"><img src="9eda9778fcbdef2db708face545aa1ae.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/blood-pressure/lesson/hypertension-management">Watch Hypertension Management</a><br><br><img src="d6672991fd24fa6e80de2f84f40660e4.webp"><br><img src="e02fced855c0014e764067d0782c04e0.webp"><img src="ade27d1e0c144a113aa7574acf0bc1e0.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/cardiac-symptoms/lesson/approach-to-palpitations--arrythmias">Watch Approach to Palpitations &amp; Arrythmias</a><br><br><img src="21422cd9347b299e65eb04b7e4d8895f.webp"><span style="font-weight: var(--f-weight-3);"><br></span><img src="90776b835183bb9309755a6c7af69721.webp"><img src="d9f0c6578814bc170f854f408c1c5e9e.webp"><br><a href="https://app.sketchy.com/study/medical/chapter/neurological-symptoms/lesson/approach-to-headache">Watch Approach to Headache</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">13.1</td>
+                    <td class="question"><div>Patients with <b>pheochromocytoma</b> experience their symptoms <span class="cloze" data-cloze="&lt;b&gt;episodically&lt;/b&gt;" data-ordinal="1">[episodically/continuously]</span></div><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer"><div>Patients with <b>pheochromocytoma</b> experience their symptoms <span class="cloze" data-ordinal="1"><b>episodically</b></span></div><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="af6f1cad48274730313bd7fd9a1b59c9.webp"><br><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+        <div class="card">
+            <table>
+                <tr>
+                    <td class="index" style="">14.1</td>
+                    <td class="question">The <b>adrenal medulla </b>is responsible for the secretion of the <b>catecholamines</b> <span class="cloze" data-cloze="norepinephrine" data-ordinal="1">[...]</span> and <span class="cloze" data-cloze="epinephrine" data-ordinal="1">[...]</span><br/></td>
+                    <td class="spacer">&nbsp;</td>
+                    <td class="answer">The <b>adrenal medulla </b>is responsible for the secretion of the <b>catecholamines</b> <span class="cloze" data-ordinal="1">norepinephrine</span> and <span class="cloze" data-ordinal="1">epinephrine</span><br/><br/><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <img src="1cfd156e31c669e80492d1ed5d89dc02.webp"><br><img src="d491ff78f15ab8173d37e778964b3959.webp"><img src="b778321b21c00f8ef40a1e42d1f64ffb.webp"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-pathophysiology/units/medical-pathophysiology-endocrine/videos/medical-pathophysiology-endocrine-adrenal-disorders-pheochromocytoma-and-neuroblastoma?utm_source=anki&amp;utm_medium=partnership&amp;utm_campaign=february_update&amp;utm_content=medical">Watch Pheochromocytoma &amp; Neuroblastoma</a><br><br><img src="285764efc7a9cf0bfc6234afe44d878e.webp"><img src="8fe278d24f6f72c1431ef15686c1bb56.webp"><img src="1.1 – Sympathetic Nervous System.png"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-autonomic-nervous-system/review-cards/medical-physiology-autonomic-nervous-system-organization-and-features-of-ans-sympathetic-nervous-system">Watch Sympathetic Nervous System</a><br><br><img src="Screen Shot 2022-07-13 at 4.11.50 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.12.35 PM.jpg"><br><img src="Screen Shot 2022-07-13 at 4.12.55 PM.jpg"><br><a href="https://dashboard.sketchy.com/study/medical/courses/medical-physiology/units/medical-physiology-autonomic-nervous-system/videos/medical-physiology-autonomic-nervous-system-adrenergic-receptors-adrenoreceptors">Watch Adrenergic Receptors (Adrenoreceptors)</a><br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --><!-- <br> --></td>
+                </tr>
+            </table>
+        </div>
+        <hr>
+    
+    <hr>
+</div>
+</body>
+</html>
