@@ -475,7 +475,7 @@ a.cov-legend-item:hover .cov-legend-ext{background:#1F3864;color:#fff;border-col
     <div class="modal-hdr">
       <h3 id="ankiTitle">Anki Cards</h3>
       <div style="display:flex;align-items:center;gap:8px">
-        <button class="modal-print-btn" onclick="printAnki()" title="Print or save as PDF">&#128438;&nbsp; Print / Save PDF</button>
+        <a id="ankiDl" href="" download style="padding:5px 13px;background:#6A1B9A;color:#fff;border-radius:5px;font-size:11.5px;font-weight:700;text-decoration:none;line-height:1;display:none">&#11015;&nbsp; Download PDF</a>
         <button class="modal-cls" onclick="closeM('ankiOv')">&#x2715;</button>
       </div>
     </div>
@@ -566,7 +566,8 @@ function buildResGroup(res, chips) {
   const chipsHtml = chips.map(ch => {
     const hasLink = !!ch.html;
     const cls2 = hasLink ? 'res-chip' : 'res-chip no-link';
-    const oc   = hasLink ? `onclick="openAnki('./anki-files/${ch.html}','${esc(ch.section)}')"` : '';
+    const pdfName = ch.html ? ch.html.replace(/\.html$/, '.pdf') : '';
+    const oc   = hasLink ? `onclick="openAnki('./anki-files/PDF/${pdfName}','${esc(ch.section)}')"` : '';
     return `<div class="${cls2}" style="background:${st.bg};color:${st.c};border-color:${st.c}44" ${oc}>
       <span class="chip-txt">${esc(ch.section)}</span>
       <span class="chip-cnt">${ch.count}</span>
@@ -645,7 +646,7 @@ function buildAnkiList(cls) {
       <div class="anki-count-cell">${r.count} cards</div>
       <div>
         ${r.html
-          ? `<button class="anki-open-btn" onclick="openAnki('./anki-files/${r.html}','${esc(r.resName)} &mdash; ${esc(r.section)}')">Open ${r.count} cards &rarr;</button>`
+          ? `<button class="anki-open-btn" onclick="openAnki('./anki-files/PDF/${r.html.replace(/\.html$/,'.pdf')}','${esc(r.resName)} &mdash; ${esc(r.section)}')">Open ${r.count} cards &rarr;</button>`
           : `<span class="anki-no-link">No file</span>`}
       </div>
     </div>`).join('');
@@ -909,6 +910,12 @@ function applyFilter() {
 function openAnki(url, title) {
   document.getElementById('ankiTitle').textContent = title;
   document.getElementById('ankiFrame').src = url;
+  const dlBtn = document.getElementById('ankiDl');
+  if (dlBtn) {
+    dlBtn.href = url;
+    dlBtn.download = url.split('/').pop();
+    dlBtn.style.display = url.endsWith('.pdf') ? 'inline-block' : 'none';
+  }
   document.getElementById('ankiOv').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
