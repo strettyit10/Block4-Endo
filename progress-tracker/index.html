@@ -89,10 +89,19 @@ body{
 .sb-disc-bar{width:36px;height:3px;background:var(--surface2);border-radius:99px;overflow:hidden;flex-shrink:0}
 .sb-disc-bar-fill{height:100%;border-radius:99px;transition:width 0.4s ease}
 
-.sb-footer{margin-top:auto;padding:12px 18px;border-top:1px solid var(--border)}
+.sb-footer{margin-top:auto;padding:12px 18px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:7px}
 .sb-reset-btn{width:100%;background:transparent;border:1px solid var(--border2);
   color:var(--muted);padding:6px;border-radius:6px;font-size:0.7rem;cursor:pointer;transition:all var(--transition)}
 .sb-reset-btn:hover{border-color:var(--path);color:var(--path)}
+.sb-export-btn{width:100%;background:var(--complete);border:none;color:#fff;
+  padding:7px;border-radius:6px;font-size:0.72rem;font-weight:600;cursor:pointer;transition:opacity var(--transition)}
+.sb-export-btn:hover{opacity:0.85}
+/* Panel export button */
+.panel-export-row{display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px}
+.panel-export-btn{background:transparent;border:1px solid var(--border2);color:var(--muted);
+  padding:5px 12px;border-radius:6px;font-size:0.7rem;cursor:pointer;transition:all var(--transition);
+  display:flex;align-items:center;gap:5px}
+.panel-export-btn:hover{border-color:var(--complete);color:var(--complete)}
 
 /* ═══════════════════════════ MAIN ══════════════════════════════════ */
 #main{flex:1;min-width:0;display:flex;flex-direction:column}
@@ -171,21 +180,40 @@ body{
   white-space:nowrap;margin-top:2px;flex-shrink:0;font-weight:600}
 
 /* ═══════════════════════════ OVERVIEW ══════════════════════════════ */
-.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:11px;margin-bottom:22px}
-.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:15px 13px;text-align:center;position:relative;overflow:hidden;
-  cursor:pointer;transition:all var(--transition);box-shadow:0 1px 3px rgba(0,0,0,0.06)}
-.ov-card:hover{border-color:var(--border2);box-shadow:0 3px 8px rgba(0,0,0,0.1)}
-.ov-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.ov-physio::before{background:var(--physio)}.ov-biochem::before{background:var(--biochem)}
-.ov-path::before{background:var(--path)}.ov-pharm::before{background:var(--pharm)}
-.ov-histo::before{background:var(--histo)}.ov-resources::before{background:var(--resources)}
-.ov-uworld::before{background:var(--uworld)}.ov-planner::before{background:var(--planner)}
-.ov-name{font-size:0.68rem;color:var(--muted);margin-bottom:5px}
-.ov-pct{font-size:1.85rem;font-weight:800;color:var(--text);margin-bottom:5px;line-height:1}
-.ov-bar{height:3px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-bottom:4px}
-.ov-bar-fill{height:100%;border-radius:99px;transition:width 0.4s ease}
-.ov-count{font-size:0.63rem;color:var(--dim)}
+/* Stat cards */
+.ov-stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-bottom:20px}
+.ov-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px 17px}
+.ov-stat-label{font-size:0.63rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:6px}
+.ov-stat-val{font-size:1.55rem;font-weight:800;line-height:1;color:var(--text);margin-bottom:4px}
+.ov-stat-sub{font-size:0.69rem;color:var(--dim);margin-bottom:8px}
+.ov-stat-bar{height:4px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.ov-stat-bar-fill{height:100%;border-radius:99px;transition:width 0.4s ease}
+/* Focus section */
+.ov-focus{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 17px;margin-bottom:18px}
+.ov-focus-hdr{font-size:0.63rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:10px}
+.ov-focus-lec{display:flex;align-items:center;gap:9px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.05)}
+.ov-focus-lec:last-child{border-bottom:none}
+.ov-focus-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ov-focus-name{font-size:0.79rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ov-focus-tag{font-size:0.63rem;font-weight:700;padding:2px 8px;border-radius:99px;flex-shrink:0}
+.ov-focus-prog{font-size:0.68rem;color:var(--dim);flex-shrink:0;white-space:nowrap}
+/* Section header */
+.ov-section-hdr{font-size:0.63rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:8px}
+/* Lecture table */
+.ov-lec-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:18px;overflow:hidden}
+.ov-lec-thead{display:grid;grid-template-columns:10px 58px 1fr 90px 90px;gap:10px;align-items:center;
+  padding:7px 14px;background:var(--surface2);border-bottom:1px solid var(--border);
+  font-size:0.6rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted)}
+.ov-lec-row{display:grid;grid-template-columns:10px 58px 1fr 90px 90px;gap:10px;align-items:center;
+  padding:6px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:0.76rem}
+.ov-lec-row:last-child{border-bottom:none}
+.ov-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.ov-lec-date{font-size:0.67rem;color:var(--dim);white-space:nowrap}
+.ov-lec-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.76rem}
+.ov-mini-wrap{display:flex;flex-direction:column;gap:3px}
+.ov-mini-bar{height:5px;background:var(--surface2);border-radius:99px;overflow:hidden}
+.ov-mini-bar-fill{height:100%;border-radius:99px;transition:width 0.3s}
+.ov-mini-pct{font-size:0.62rem;color:var(--dim);text-align:right}
 
 .act-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:17px 19px}
 .act-hdr{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:12px}
@@ -300,6 +328,43 @@ textarea.uw-notes::placeholder{color:var(--dim)}
 .pr-note-inp:focus{border-color:var(--planner);color:var(--text)}
 .pr-note-inp::placeholder{color:var(--dim)}
 
+/* ═══════════════════════════ STUDY ORDER ════════════════════════════ */
+.week-block{margin-bottom:28px}
+.week-hdr{display:flex;align-items:center;justify-content:space-between;
+  padding:8px 14px;background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;margin-bottom:10px}
+.week-hdr-label{font-size:0.8rem;font-weight:700;color:var(--text)}
+.week-hdr-time{font-size:0.71rem;color:var(--muted);background:var(--surface);
+  border:1px solid var(--border2);border-radius:10px;padding:2px 10px}
+.week-hdr-prog{font-size:0.68rem;color:var(--dim)}
+
+.sch-lec{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  margin-bottom:9px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.sch-lec-hdr{display:flex;align-items:center;gap:10px;padding:10px 15px;
+  border-bottom:1px solid rgba(0,0,0,0.06)}
+.sch-lec-stripe{width:3px;height:26px;border-radius:2px;flex-shrink:0}
+.sch-lec-name{font-size:0.83rem;font-weight:600;color:var(--text);flex:1}
+.sch-lec-meta{font-size:0.67rem;color:var(--muted)}
+.sch-lec-time{font-size:0.67rem;color:var(--dim);background:var(--surface2);
+  border:1px solid var(--border);border-radius:8px;padding:1px 8px;flex-shrink:0}
+
+.sch-items{padding:6px 15px 10px 28px}
+.sch-row{display:flex;align-items:flex-start;gap:8px;padding:5px 0;
+  border-bottom:1px solid rgba(0,0,0,0.05)}
+.sch-row:last-child{border-bottom:none}
+.sch-row-icon{font-size:0.72rem;width:16px;flex-shrink:0;margin-top:1px;text-align:center}
+.sch-row-body{flex:1;min-width:0}
+.sch-row-label{font-size:0.79rem;color:var(--text);line-height:1.4}
+.sch-row-covers{font-size:0.64rem;color:var(--dim);margin-top:2px;font-style:italic}
+.sch-row-time{font-size:0.63rem;color:var(--dim);white-space:nowrap;margin-top:2px;flex-shrink:0}
+
+.sch-row.covered .sch-row-label{color:var(--dim);text-decoration:line-through;opacity:0.6}
+.sch-row.covered .sch-row-icon{opacity:0.4}
+.sch-row.mnts-row .sch-row-label{color:var(--muted)}
+
+.sch-empty{text-align:center;padding:40px 20px;color:var(--dim);font-size:0.82rem;
+  background:var(--surface);border:1px dashed var(--border2);border-radius:var(--radius)}
+
 @media(max-width:680px){
   body{flex-direction:column}
   #sidebar{width:100%;min-width:unset;height:auto;position:static;border-right:none;
@@ -309,6 +374,7 @@ textarea.uw-notes::placeholder{color:var(--dim)}
   .planner-table{overflow-x:auto}
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -352,7 +418,9 @@ textarea.uw-notes::placeholder{color:var(--dim)}
     </button>
     <button class="nav-btn" data-panel="planner" onclick="switchPanel('planner',this)">
       <span class="nav-icon">📅</span> Planner
-      <span class="nav-badge" id="nb-plan">—</span>
+    </button>
+    <button class="nav-btn" data-panel="schedule" onclick="switchPanel('schedule',this)">
+      <span class="nav-icon">🗓️</span> Study Order
     </button>
     <button class="nav-btn" data-panel="checklist" onclick="switchPanel('checklist',this)">
       <span class="nav-icon">📚</span> Checklist
@@ -360,19 +428,14 @@ textarea.uw-notes::placeholder{color:var(--dim)}
     </button>
     <button class="nav-btn" data-panel="resources" onclick="switchPanel('resources',this)">
       <span class="nav-icon">🗂️</span> Resources
-      <span class="nav-badge" id="nb-res">—</span>
     </button>
     <button class="nav-btn" data-panel="uworld" onclick="switchPanel('uworld',this)">
       <span class="nav-icon">💊</span> UWorld
     </button>
   </div>
 
-  <div class="sb-disc-section">
-    <div class="sb-disc-lbl">Core Resources</div>
-    <div id="sbDiscList"></div>
-  </div>
-
   <div class="sb-footer">
+    <button class="sb-export-btn" onclick="downloadExcel()">⬇ Export to Excel</button>
     <button class="sb-reset-btn" onclick="confirmReset()">↺ Reset All Progress</button>
   </div>
 </nav>
@@ -391,7 +454,10 @@ textarea.uw-notes::placeholder{color:var(--dim)}
 
     <!-- OVERVIEW -->
     <div class="panel active" id="panel-overview">
-      <div class="ov-grid" id="ovGrid"></div>
+      <div class="ov-stats-row" id="ovStatsRow"></div>
+      <div id="ovFocus"></div>
+      <div class="ov-section-hdr">All 25 Lectures</div>
+      <div id="ovLecTable"></div>
       <div class="act-card">
         <div class="act-hdr">📝 Recent Activity</div>
         <div id="actLog"><p style="color:var(--muted);font-size:0.81rem">No activity yet — start checking off items!</p></div>
@@ -430,9 +496,21 @@ textarea.uw-notes::placeholder{color:var(--dim)}
       </div>
     </div>
 
+    <!-- STUDY ORDER -->
+    <div class="panel" id="panel-schedule">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div class="panel-title" style="margin-bottom:0">Study Order — ideal sequence based on your Planner selections</div>
+        <button class="panel-export-btn" onclick="downloadExcel()">⬇ Export Excel</button>
+      </div>
+      <div id="scheduleContainer"></div>
+    </div>
+
     <!-- CHECKLIST -->
     <div class="panel" id="panel-checklist">
-      <div class="panel-title">Lecture Checklist — MNTS review, lecture notes &amp; selected 3rd-party resources per class</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div class="panel-title" style="margin-bottom:0">Lecture Checklist — MNTS review, lecture notes &amp; selected 3rd-party resources per class</div>
+        <button class="panel-export-btn" onclick="downloadExcel()">⬇ Export Excel</button>
+      </div>
       <div id="topicsContainer"></div>
     </div>
 
@@ -461,6 +539,9 @@ textarea.uw-notes::placeholder{color:var(--dim)}
 
     <!-- UWORLD -->
     <div class="panel" id="panel-uworld">
+      <div class="panel-export-row">
+        <button class="panel-export-btn" onclick="downloadExcel()">⬇ Export Excel</button>
+      </div>
       <div class="uw-grid">
         <div class="uw-card">
           <label>Questions Done</label>
@@ -480,12 +561,32 @@ textarea.uw-notes::placeholder{color:var(--dim)}
         </div>
       </div>
       <div class="uw-perf">
-        <h3>📈 Performance by Topic</h3>
+        <h3>📈 Performance by Lecture</h3>
         <div id="uwTopicRows"></div>
       </div>
       <div class="uw-notes-card">
         <h3>📝 Notes &amp; Weak Areas</h3>
         <textarea class="uw-notes" id="uwNotes" placeholder="Weak areas, flagged topics, patterns to review..." oninput="saveUW()"></textarea>
+      </div>
+
+      <div class="uw-notes-card" style="margin-top:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;cursor:pointer"
+          onclick="this.parentElement.querySelector('#uwQidRef').style.display=this.parentElement.querySelector('#uwQidRef').style.display==='none'?'block':'none';this.querySelector('.qid-chev').style.transform=this.parentElement.querySelector('#uwQidRef').style.display==='none'?'':'rotate(180deg)'">
+          <h3 style="margin:0">🔢 QID Reference — 186 Assigned Questions</h3>
+          <span class="qid-chev" style="color:var(--dim);font-size:0.62rem;transition:transform 0.18s">&#9660;</span>
+        </div>
+        <div id="uwQidRef" style="display:none"></div>
+        <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+          <a href="../3rdParty-UWorld-EndocrineQID.html" target="_blank"
+            style="font-size:0.72rem;color:var(--uworld);text-decoration:none;font-weight:600">
+            Open full QID list ↗
+          </a>
+          &nbsp;&middot;&nbsp;
+          <a href="../3rdParty-UWorld-LO_QID.html" target="_blank"
+            style="font-size:0.72rem;color:var(--uworld);text-decoration:none;font-weight:600">
+            Open LO → QID mapping ↗
+          </a>
+        </div>
       </div>
     </div>
 
@@ -611,13 +712,45 @@ const CLASSES = [
   {id:'pl25', subj:'Pharm',  date:'May 29', cls:'TBL — Pituitary & Thyroid Disorders'},
 ];
 
-const UW_TOPICS = [
-  {id:'uwt_pit',  label:'Pituitary'},
-  {id:'uwt_thy',  label:'Thyroid & Parathyroid'},
-  {id:'uwt_adr',  label:'Adrenal'},
-  {id:'uwt_diab', label:'Diabetes & Glucose'},
-  {id:'uwt_sex',  label:'Sex Hormones / Gonads'},
-  {id:'uwt_misc', label:'Misc. Endocrine'},
+// QIDs per lecture from GUSOM-UWorld-LectureMapping.xlsx (By Lecture sheet)
+const UW_LEC_DEFAULTS = {
+  pl1:42, pl2:4,  pl3:11, pl4:14, pl5:4,  pl6:5,  pl7:17, pl8:17, pl9:2,
+  pl10:1, pl11:14,pl12:0, pl13:47,pl14:20,pl15:16,pl16:49,pl17:41,pl18:41,
+  pl19:29,pl20:16,pl21:0, pl22:1, pl23:0, pl24:1, pl25:0
+};
+
+// QID reference by subtopic (sourced from 3rdParty-UWorld-EndocrineQID)
+const UW_QIDS = [
+  {section:'Pituitary', tid:'uwt_pit', color:'#9333ea', subtopics:[
+    {name:'Pituitary Gland', count:17, qids:'8702, 15303, 1152, 18948, 224, 15209, 1561, 18553, 214, 213, 1379, 225, 210, 206, 20588, 7670, 7671'},
+  ]},
+  {section:'Thyroid & Parathyroid', tid:'uwt_thy', color:'#2563eb', subtopics:[
+    {name:'Thyroid Gland', count:15, qids:'1213, 19754, 15028, 1407, 19752, 772, 1615, 770, 14985, 20168, 763, 19746, 767, 19753, 626'},
+    {name:'Thyroid Disorders', count:14, qids:'768, 14953, 20375, 983, 764, 769, 19747, 19946, 20146, 622, 14951, 1945, 19745, 12512'},
+    {name:'Thyroid Cancer', count:2, qids:'17236, 1747'},
+    {name:'Parathyroid Glands', count:18, qids:'641, 15270, 15289, 18863, 631, 11977, 795, 19947, 992, 15291, 640, 1686, 11660, 22188, 543, 979, 978, 15280'},
+  ]},
+  {section:'Adrenal', tid:'uwt_adr', color:'#dc2626', subtopics:[
+    {name:'Adrenal Glands', count:13, qids:'21524, 549, 8424, 18801, 687, 18803, 1773, 17247, 19975, 14899, 989, 608, 609'},
+    {name:'Congenital Adrenal Hyperplasia', count:6, qids:'2080, 2081, 924, 19030, 610, 930'},
+    {name:'Adrenal Disorders', count:10, qids:'1263, 17246, 454, 928, 295, 1921, 931, 927, 152, 932'},
+  ]},
+  {section:'Diabetes & Glucose', tid:'uwt_diab', color:'#ea6c0a', subtopics:[
+    {name:'Endocrine Pancreas', count:4, qids:'1768, 15881, 585, 1121'},
+    {name:'Diabetes', count:17, qids:'846, 1913, 848, 11040, 1012, 107, 985, 1011, 1996, 15675, 106, 15668, 18951, 1059, 921, 19407, 15652'},
+    {name:'Insulin', count:4, qids:'600, 15876, 850, 1324'},
+    {name:'Treatment of Diabetes', count:17, qids:'920, 6772, 11565, 18952, 18956, 18457, 16324, 15770, 15308, 18958, 1984, 14136, 8531, 607, 606, 1655, 604'},
+  ]},
+  {section:'Sex Hormones / Gonads', tid:'uwt_sex', color:'#059669', subtopics:[
+    {name:'Reproductive Hormones', count:15, qids:'14952, 879, 954, 656, 19007, 208, 7606, 209, 216, 19189, 1560, 100, 207, 217, 579'},
+    {name:'Male Reproductive', count:10, qids:'1725, 658, 107781, 19000, 16236, 1726, 8930, 13776, 11920, 1449'},
+    {name:'Female Reproductive', count:5, qids:'18747, 1899, 577, 18654, 12512'},
+    {name:'Menstrual Cycle', count:8, qids:'1917, 1839, 1809, 925, 218, 215, 21791, 1986'},
+  ]},
+  {section:'Misc. Endocrine', tid:'uwt_misc', color:'#d97706', subtopics:[
+    {name:'MEN Syndromes', count:7, qids:'15105, 988, 1658, 1844, 1660, 1845, 1659'},
+    {name:'Signaling Pathways', count:4, qids:'1720, 143, 995, 1122'},
+  ]},
 ];
 
 const SUBJ_COLOR = {Biochem:'var(--biochem)',Phys:'var(--physio)',Path:'var(--path)',Pharm:'var(--pharm)',Hist:'var(--histo)'};
@@ -749,7 +882,7 @@ function isOptedOut(itemId){
 }
 
 // ═══════════════════════════════ NAV ══════════════════════════════════
-const PANEL_NAMES={overview:'Overview',checklist:'Checklist',resources:'Resources',uworld:'UWorld',planner:'Strategy 2026 Planner'};
+const PANEL_NAMES={overview:'Overview',planner:'Strategy 2026 Planner',schedule:'Study Order',checklist:'Checklist',resources:'Resources',uworld:'UWorld'};
 function switchPanel(id,btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -1114,18 +1247,19 @@ function refreshResourceOptedOut(){
 
 // ═══════════════════════════ GLOBAL REFRESH ═══════════════════════════
 function refreshAll(){
-  // MNTS: always 25 items (one per lecture)
+  // Global progress = sum of per-lecture progress (only what's visible in Checklist)
+  let total=0,done=0;
+  CLASSES.forEach(cls=>{
+    const p=getLecProgress(cls);
+    total+=p.total;done+=p.done;
+  });
+  const pct=total?Math.round(done/total*100):0;
+
+  // For nav badge: MNTS + lec_ only
   const mntsIds=CLASSES.map(c=>'mnts_'+c.id);
   const mntsDone=mntsIds.filter(id=>S.checks[id]).length;
-  // Lecture notes: only when 'lecture' chip is selected
   const lecIds=CLASSES.filter(c=>(S.planner[c.id+'_res']||[]).includes('lecture')).map(c=>'lec_'+c.id);
   const lecDone=lecIds.filter(id=>S.checks[id]).length;
-  // Active resource items (excluding opted-out)
-  const resActive=RESOURCES.flatMap(r=>r.items).filter(i=>!isOptedOut(i.id));
-  const resDone=resActive.filter(i=>S.checks[i.id]).length;
-  const total=mntsIds.length+lecIds.length+resActive.length;
-  const done=mntsDone+lecDone+resDone;
-  const pct=total?Math.round(done/total*100):0;
 
   // Donut
   const circ=157;
@@ -1136,60 +1270,121 @@ function refreshAll(){
   document.getElementById('sbBar').style.width=pct+'%';
 
   // Nav badges
-  const checklistDone=mntsDone+lecDone;
-  const checklistTotal=mntsIds.length+lecIds.length;
+  const checklistDone=done;
+  const checklistTotal=total;
   document.getElementById('nb-checklist').textContent=checklistDone+'/'+checklistTotal;
-  document.getElementById('nb-res').textContent=resDone+'/'+resActive.length;
-  document.getElementById('nb-plan').textContent=CLASSES.filter(c=>S.planner[c.id+'_status']==='done').length+'/'+CLASSES.length;
 
-  // Topbar pills (per-subject lecture completion)
+  // Topbar pills (per-subject checklist completion)
   const subjects=[{l:'Physio',ck:'physio',s:'Phys'},{l:'Biochem',ck:'biochem',s:'Biochem'},{l:'Path',ck:'path',s:'Path'},{l:'Pharm',ck:'pharm',s:'Pharm'}];
   document.getElementById('topbarPills').innerHTML=subjects.map(g=>{
-    const ids=CLASSES.filter(c=>c.subj===g.s).map(c=>'mnts_'+c.id);
-    const c=ids.filter(id=>S.checks[id]).length;
-    return `<div class="top-pill"><div class="top-pill-dot" style="background:var(--${g.ck})"></div><strong>${c}/${ids.length}</strong> ${g.l}</div>`;
+    const grp=CLASSES.filter(c=>c.subj===g.s);
+    const t=grp.reduce((sum,cls)=>sum+getLecProgress(cls).total,0);
+    const c=grp.reduce((sum,cls)=>sum+getLecProgress(cls).done,0);
+    return `<div class="top-pill"><div class="top-pill-dot" style="background:var(--${g.ck})"></div><strong>${c}/${t}</strong> ${g.l}</div>`;
   }).join('');
 
-  // Sidebar disc list
-  document.getElementById('sbDiscList').innerHTML=SB_DISC.map(d=>{
-    const ids=d.ids();
-    const c=ids.filter(id=>S.checks[id]).length;
-    const t=ids.length;
-    const p=t?Math.round(c/t*100):0;
-    return `<div class="sb-disc-row" onclick="switchPanel('${d.panel}',document.querySelector('[data-panel=\\'${d.panel}\\']'))">
-      <div class="sb-dot" style="background:var(--${d.ck})"></div>
-      <div class="sb-disc-name">${d.name}</div>
-      <div class="sb-disc-pct">${p}%</div>
-      <div class="sb-disc-bar"><div class="sb-disc-bar-fill" style="width:${p}%;background:var(--${d.ck})"></div></div>
+  // ── Overview: Stat Cards ──────────────────────────────────────────────
+  const uwDoneTotal=CLASSES.reduce((s,cls)=>s+parseInt(S.uworld['d_'+cls.id]||0),0);
+  const uwTotalQs=CLASSES.reduce((s,cls)=>{
+    const def=UW_LEC_DEFAULTS[cls.id]||0;
+    const t=S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?parseInt(S.uworld['t_'+cls.id]):def;
+    return s+t;
+  },0);
+  const uwPct=uwTotalQs?Math.round(uwDoneTotal/uwTotalQs*100):0;
+  const plannerDone=CLASSES.filter(c=>S.planner[c.id+'_status']==='done').length;
+  const plannerToday=CLASSES.filter(c=>S.planner[c.id+'_status']==='today').length;
+  const plannerInProg=CLASSES.filter(c=>S.planner[c.id+'_status']==='in-progress').length;
+  // Remaining study time (unfinished selected items across all lectures)
+  let remMins=0;
+  CLASSES.forEach(cls=>{
+    if(!S.checks['mnts_'+cls.id]) remMins+=15;
+    if((S.planner[cls.id+'_res']||[]).includes('lecture')&&!S.checks['lec_'+cls.id]) remMins+=60;
+    getLecItemsForLecture(cls.id).forEach(item=>{if(!S.checks[item.id]) remMins+=ITEM_MINS[item.id]||0;});
+  });
+  document.getElementById('ovStatsRow').innerHTML=`
+    <div class="ov-stat">
+      <div class="ov-stat-label">Checklist Progress</div>
+      <div class="ov-stat-val">${pct}<span style="font-size:1rem;font-weight:500;color:var(--dim)">%</span></div>
+      <div class="ov-stat-sub">${done} of ${total} items complete</div>
+      <div class="ov-stat-bar"><div class="ov-stat-bar-fill" style="width:${pct}%;background:var(--complete)"></div></div>
+    </div>
+    <div class="ov-stat">
+      <div class="ov-stat-label">UWorld Questions</div>
+      <div class="ov-stat-val">${uwPct}<span style="font-size:1rem;font-weight:500;color:var(--dim)">%</span></div>
+      <div class="ov-stat-sub">${uwDoneTotal} of ${uwTotalQs} Qs done</div>
+      <div class="ov-stat-bar"><div class="ov-stat-bar-fill" style="width:${uwPct}%;background:var(--uworld)"></div></div>
+    </div>
+    <div class="ov-stat">
+      <div class="ov-stat-label">Lectures (Planner)</div>
+      <div class="ov-stat-val">${plannerDone}<span style="font-size:1rem;font-weight:500;color:var(--dim)">/25</span></div>
+      <div class="ov-stat-sub">${plannerToday} today &middot; ${plannerInProg} in progress</div>
+      <div class="ov-stat-bar"><div class="ov-stat-bar-fill" style="width:${Math.round(plannerDone/25*100)}%;background:var(--complete)"></div></div>
+    </div>
+    <div class="ov-stat">
+      <div class="ov-stat-label">Est. Time Remaining</div>
+      <div class="ov-stat-val" style="font-size:1.15rem">${fmtTime(remMins)}</div>
+      <div class="ov-stat-sub">across selected resources</div>
+      <div class="ov-stat-bar"><div class="ov-stat-bar-fill" style="width:${pct}%;background:var(--planner)"></div></div>
     </div>`;
-  }).join('');
 
-  // Overview grid
-  const ovS=[
-    {label:'Physiology',  ck:'physio',  ids:CLASSES.filter(c=>c.subj==='Phys').map(c=>'mnts_'+c.id)},
-    {label:'Biochemistry',ck:'biochem', ids:CLASSES.filter(c=>c.subj==='Biochem').map(c=>'mnts_'+c.id)},
-    {label:'Pathology',   ck:'path',    ids:CLASSES.filter(c=>c.subj==='Path').map(c=>'mnts_'+c.id)},
-    {label:'Pharmacology',ck:'pharm',   ids:CLASSES.filter(c=>c.subj==='Pharm').map(c=>'mnts_'+c.id)},
-    {label:'Histology',   ck:'histo',   ids:CLASSES.filter(c=>c.subj==='Hist').map(c=>'mnts_'+c.id)},
-    {label:'NK Guides',   ck:'resources',ids:RESOURCES.find(r=>r.id==='nk').items.map(i=>i.id)},
-    {label:'Bootcamp',    ck:'uworld',  ids:RESOURCES.find(r=>r.id==='bootcamp').items.filter(i=>!isOptedOut(i.id)).map(i=>i.id)},
-    {label:'Sketchy Pharm',ck:'pharm',  ids:RESOURCES.find(r=>r.id==='skpharm').items.filter(i=>!isOptedOut(i.id)).map(i=>i.id)},
-    {label:'Sketchy Path', ck:'biochem', ids:RESOURCES.find(r=>r.id==='skpath').items.filter(i=>!isOptedOut(i.id)).map(i=>i.id)},
-    {label:'Pathoma',      ck:'path',   ids:RESOURCES.find(r=>r.id==='pathoma').items.filter(i=>!isOptedOut(i.id)).map(i=>i.id)},
-  ];
-  document.getElementById('ovGrid').innerHTML=ovS.map(s=>{
-    const c=s.ids.filter(id=>S.checks[id]).length;
-    const t=s.ids.length;
-    const p=t?Math.round(c/t*100):0;
-    return `<div class="ov-card ov-${s.ck}">
-      <div class="ov-name">${s.label}</div>
-      <div class="ov-pct">${p}%</div>
-      <div class="ov-bar"><div class="ov-bar-fill" style="width:${p}%;background:var(--${s.ck})"></div></div>
-      <div class="ov-count">${c} of ${t}</div>
+  // ── Overview: Active Lectures (Today / In Progress) ──────────────────
+  const focusLecs=CLASSES.filter(c=>['today','in-progress'].includes(S.planner[c.id+'_status']));
+  const focusEl=document.getElementById('ovFocus');
+  if(focusLecs.length){
+    const ST_LABEL={'today':'Today','in-progress':'In Progress'};
+    const ST_COLOR={'today':'var(--planner)','in-progress':'var(--uworld)'};
+    focusEl.innerHTML=`<div class="ov-focus">
+      <div class="ov-focus-hdr">🎯 Active Lectures</div>
+      ${focusLecs.map(cls=>{
+        const st=S.planner[cls.id+'_status'];
+        const p=getLecProgress(cls);
+        const uwD=parseInt(S.uworld['d_'+cls.id]||0);
+        const uwDef=UW_LEC_DEFAULTS[cls.id]||0;
+        const uwT=S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?parseInt(S.uworld['t_'+cls.id]):uwDef;
+        return `<div class="ov-focus-lec">
+          <div class="ov-focus-dot" style="background:${ST_COLOR[st]}"></div>
+          <div class="ov-focus-name" title="${cls.cls}">${cls.cls}</div>
+          <div class="ov-focus-tag" style="background:${ST_COLOR[st]}22;color:${ST_COLOR[st]}">${ST_LABEL[st]}</div>
+          <div class="ov-focus-prog">${p.done}/${p.total} items &middot; ${uwD}/${uwT} UW</div>
+        </div>`;
+      }).join('')}
     </div>`;
-  }).join('');
+  } else {
+    focusEl.innerHTML='';
+  }
 
-  // Activity log
+  // ── Overview: All Lectures Table ─────────────────────────────────────
+  const STATUS_DOT_COLOR={'not-started':'var(--border2)','in-progress':'var(--uworld)','today':'var(--planner)','done':'var(--complete)'};
+  document.getElementById('ovLecTable').innerHTML=`
+    <div class="ov-lec-wrap">
+      <div class="ov-lec-thead">
+        <div></div><div>Date</div><div>Lecture</div><div>Checklist</div><div>UWorld</div>
+      </div>
+      ${CLASSES.map(cls=>{
+        const st=S.planner[cls.id+'_status']||'not-started';
+        const p=getLecProgress(cls);
+        const uwD=parseInt(S.uworld['d_'+cls.id]||0);
+        const uwDef=UW_LEC_DEFAULTS[cls.id]||0;
+        const uwT=S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?parseInt(S.uworld['t_'+cls.id]):uwDef;
+        const uwP=uwT?Math.min(100,Math.round(uwD/uwT*100)):0;
+        const color=SUBJ_COLOR[cls.subj]||'var(--muted)';
+        return `<div class="ov-lec-row">
+          <div class="ov-status-dot" style="background:${STATUS_DOT_COLOR[st]}" title="${st.replace('-',' ')}"></div>
+          <div class="ov-lec-date">${cls.date}</div>
+          <div class="ov-lec-name" title="${cls.cls}">${cls.cls}</div>
+          <div class="ov-mini-wrap">
+            <div class="ov-mini-bar"><div class="ov-mini-bar-fill" style="width:${p.pct}%;background:${color}"></div></div>
+            <div class="ov-mini-pct">${p.pct}%</div>
+          </div>
+          <div class="ov-mini-wrap">
+            ${uwT?`<div class="ov-mini-bar"><div class="ov-mini-bar-fill" style="width:${uwP}%;background:var(--uworld)"></div></div>
+            <div class="ov-mini-pct">${uwD}/${uwT}</div>`:`<div class="ov-mini-pct" style="text-align:left;padding-top:3px">—</div>`}
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+
+  // ── Overview: Activity Log ────────────────────────────────────────────
   const al=document.getElementById('actLog');
   if(!S.activity.length){
     al.innerHTML='<p style="color:var(--muted);font-size:0.81rem">No activity yet — start checking off items!</p>';
@@ -1206,22 +1401,46 @@ function refreshAll(){
 
 // ═══════════════════════════════ UWORLD ═══════════════════════════════
 function renderUWTopics(){
-  document.getElementById('uwTopicRows').innerHTML=UW_TOPICS.map(t=>{
-    const d=parseInt(S.uworld['d_'+t.id]||0);
-    const tot=parseInt(S.uworld['t_'+t.id]||0);
+  document.getElementById('uwTopicRows').innerHTML=CLASSES.map(cls=>{
+    const d=parseInt(S.uworld['d_'+cls.id]||0);
+    const defaultTot=UW_LEC_DEFAULTS[cls.id]||0;
+    const tot=parseInt(S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?S.uworld['t_'+cls.id]:defaultTot);
     const pct=tot>0?Math.min(100,Math.round(d/tot*100)):0;
-    return `<div class="uw-topic-row">
-      <div class="uw-topic-name">${t.label}</div>
-      <div class="uw-bar-track"><div class="uw-bar-fill" id="uwbar_${t.id}" style="width:${pct}%"></div></div>
+    const savedTot=S.uworld['t_'+cls.id]!==undefined?S.uworld['t_'+cls.id]:String(defaultTot||'');
+    const color=SUBJ_COLOR[cls.subj]||'var(--muted)';
+    return `<div class="uw-topic-row" style="margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:7px;width:260px;flex-shrink:0;overflow:hidden">
+        <span class="subj-badge s-${cls.subj}" style="font-size:0.54rem;padding:1px 5px;flex-shrink:0">${cls.subj}</span>
+        <span style="font-size:0.76rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${cls.cls}">${cls.cls}</span>
+      </div>
+      <div class="uw-bar-track"><div class="uw-bar-fill" id="uwbar_${cls.id}" style="width:${pct}%;background:${color}"></div></div>
       <div class="uw-score-inps">
-        <input class="mini-inp" type="number" min="0" max="9999" placeholder="done"
-          id="uwd_${t.id}" value="${S.uworld['d_'+t.id]||''}" oninput="saveUWTopic('${t.id}')">
+        <input class="mini-inp" type="number" min="0" max="9999" placeholder="—"
+          id="uwd_${cls.id}" value="${S.uworld['d_'+cls.id]||''}" oninput="saveUWTopic('${cls.id}')">
         <span class="mini-lbl">/</span>
-        <input class="mini-inp" type="number" min="0" max="9999" placeholder="tot"
-          id="uwt_${t.id}" value="${S.uworld['t_'+t.id]||''}" oninput="saveUWTopic('${t.id}')">
+        <input class="mini-inp" type="number" min="0" max="9999" placeholder="—"
+          id="uwt_${cls.id}" value="${savedTot}" oninput="saveUWTopic('${cls.id}')">
       </div>
     </div>`;
   }).join('');
+}
+
+function renderUWQids(){
+  const el=document.getElementById('uwQidRef');
+  if(!el) return;
+  el.innerHTML=UW_QIDS.map(section=>`
+    <div style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px">
+        <div style="width:8px;height:8px;border-radius:50%;background:${section.color};flex-shrink:0"></div>
+        <span style="font-size:0.75rem;font-weight:700;color:var(--text)">${section.section}</span>
+        <span style="font-size:0.68rem;color:var(--muted)">(${section.subtopics.reduce((s,st)=>s+st.count,0)} Qs)</span>
+      </div>
+      ${section.subtopics.map(st=>`
+        <div style="margin-left:15px;margin-bottom:5px">
+          <div style="font-size:0.69rem;font-weight:600;color:var(--muted);margin-bottom:2px">${st.name} <span style="color:var(--dim);font-weight:400">(${st.count})</span></div>
+          <div style="font-size:0.64rem;color:var(--dim);font-family:monospace;line-height:1.6;word-break:break-all">${st.qids}</div>
+        </div>`).join('')}
+    </div>`).join('');
 }
 function saveUW(){
   ['uw_done','uw_total','uw_score','uw_inhouse'].forEach(id=>{const el=document.getElementById(id);if(el)S.uworld[id]=el.value;});
@@ -1234,8 +1453,175 @@ function saveUWTopic(tid){
   const bar=document.getElementById('uwbar_'+tid);if(bar)bar.style.width=pct+'%';saveState();
 }
 function loadUW(){
+  // Seed defaults on first-ever load (no uw_total set yet)
+  if(!S.uworld['uw_total']){
+    S.uworld['uw_total']='186';
+    Object.entries(UW_LEC_DEFAULTS).forEach(([lid,tot])=>{
+      if(S.uworld['t_'+lid]===undefined) S.uworld['t_'+lid]=tot>0?String(tot):'';
+    });
+    saveState();
+  }
   ['uw_done','uw_total','uw_score','uw_inhouse'].forEach(id=>{const el=document.getElementById(id);if(el&&S.uworld[id])el.value=S.uworld[id];});
   const n=document.getElementById('uwNotes');if(n&&S.uworld.notes)n.value=S.uworld.notes;
+}
+
+// ═══════════════════════════ STUDY ORDER ══════════════════════════════
+const MONTH_NUM={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+function clsDate(cls){const[m,d]=cls.date.split(' ');return new Date(2026,MONTH_NUM[m],+d);}
+function weekMonday(d){const dt=new Date(d);dt.setDate(dt.getDate()-((dt.getDay()+6)%7));return dt;}
+function weekLabel(d){return'Week of '+d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+
+function renderSchedule(){
+  const el=document.getElementById('scheduleContainer');
+  if(!el) return;
+
+  const anySelected=CLASSES.some(c=>(S.planner[c.id+'_res']||[]).length>0);
+  if(!anySelected){
+    el.innerHTML='<div class="sch-empty">Select LEC or resource chips in the Planner to generate your personalised study order.</div>';
+    return;
+  }
+
+  // Sort classes by date
+  const sorted=[...CLASSES].sort((a,b)=>clsDate(a)-clsDate(b));
+
+  // First pass: assign each resource item to the earliest lecture that selected it
+  const owner={};  // itemId → cls.id
+  sorted.forEach(cls=>{
+    getLecItemsForLecture(cls.id).forEach(item=>{
+      if(!owner[item.id]) owner[item.id]=cls.id;
+    });
+  });
+
+  // Helper: short lecture name for cross-reference notes
+  function shortName(cid){
+    const c=CLASSES.find(x=>x.id===cid);
+    if(!c) return cid;
+    const words=c.cls.split(' ');
+    return words.length<=4?c.cls:words.slice(0,4).join(' ')+'…';
+  }
+
+  // Group sorted classes by Monday-anchored week
+  const weekMap={};const weekOrder=[];
+  sorted.forEach(cls=>{
+    const mon=weekMonday(clsDate(cls));
+    const key=mon.toISOString().slice(0,10);
+    if(!weekMap[key]){weekMap[key]={label:weekLabel(mon),classes:[]};weekOrder.push(key);}
+    weekMap[key].classes.push(cls);
+  });
+
+  let html='';
+  weekOrder.forEach(key=>{
+    const week=weekMap[key];
+    // Tally week time: MNTS for all lecs + owned items only (avoid double-counting)
+    let weekMins=0;
+    week.classes.forEach(cls=>{
+      weekMins+=15; // MNTS
+      if((S.planner[cls.id+'_res']||[]).includes('lecture')) weekMins+=60;
+      getLecItemsForLecture(cls.id).forEach(item=>{
+        if(owner[item.id]===cls.id) weekMins+=ITEM_MINS[item.id]||0;
+      });
+    });
+
+    html+=`<div class="week-block">
+      <div class="week-hdr">
+        <span class="week-hdr-label">📅 ${week.label}</span>
+        <span class="week-hdr-time">~${fmtTime(weekMins)}</span>
+      </div>`;
+
+    week.classes.forEach(cls=>{
+      const color=SUBJ_COLOR[cls.subj]||'var(--muted)';
+      const lecSel=(S.planner[cls.id+'_res']||[]).includes('lecture');
+      const resItems=getLecItemsForLecture(cls.id);
+      const selectedRTs=(S.planner[cls.id+'_res']||[]).filter(r=>r!=='lecture');
+
+      // Lecture-level time (MNTS + LEC + owned items)
+      let lecMins=15;
+      if(lecSel) lecMins+=60;
+      resItems.forEach(item=>{if(owner[item.id]===cls.id) lecMins+=ITEM_MINS[item.id]||0;});
+
+      html+=`<div class="sch-lec">
+        <div class="sch-lec-hdr">
+          <div class="sch-lec-stripe" style="background:${color}"></div>
+          <div style="flex:1;min-width:0">
+            <div class="sch-lec-name">${cls.cls}</div>
+            <div class="sch-lec-meta">${cls.date} &middot; ${cls.subj}</div>
+          </div>
+          <div class="sch-lec-time">~${fmtTime(lecMins)}</div>
+        </div>
+        <div class="sch-items">`;
+
+      // MNTS (always first)
+      html+=`<div class="sch-row mnts-row">
+        <div class="sch-row-icon">⭐</div>
+        <div class="sch-row-body"><div class="sch-row-label">Reviewed MNTS</div></div>
+        <div class="sch-row-time">15 min</div>
+      </div>`;
+
+      // Lecture notes (if LEC selected)
+      if(lecSel){
+        html+=`<div class="sch-row">
+          <div class="sch-row-icon">📖</div>
+          <div class="sch-row-body"><div class="sch-row-label">Lecture</div></div>
+          <div class="sch-row-time">60 min</div>
+        </div>`;
+      }
+
+      // No 3rd-party resources selected and no LEC
+      if(selectedRTs.length===0 && !lecSel){
+        html+=`<div class="sch-row mnts-row">
+          <div class="sch-row-icon">—</div>
+          <div class="sch-row-body"><div class="sch-row-label" style="font-style:italic;color:var(--dim)">No resources selected for this lecture</div></div>
+          <div class="sch-row-time"></div>
+        </div>`;
+      }
+
+      // Group resource rows by RT, in selection order
+      const byRT={};
+      resItems.forEach(item=>{if(!byRT[item.rt])byRT[item.rt]=[];byRT[item.rt].push(item);});
+
+      selectedRTs.forEach(rt=>{
+        const items=byRT[rt]||[];
+        items.forEach(item=>{
+          const isOwner=owner[item.id]===cls.id;
+          const mins=ITEM_MINS[item.id]||0;
+          if(isOwner){
+            // Find other lectures (later in schedule) that also use this item
+            const others=sorted.filter(c=>
+              c.id!==cls.id &&
+              (S.planner[c.id+'_res']||[]).filter(r=>r!=='lecture').includes(rt) &&
+              getLecItemsForLecture(c.id).some(i=>i.id===item.id)
+            );
+            const coversNote=others.length
+              ? `Also covers: ${others.map(c=>shortName(c.id)).join(', ')}`:'';
+            html+=`<div class="sch-row">
+              <div class="sch-row-icon" style="color:${RT_COLOR[rt]||'var(--dim)'}">▶</div>
+              <div class="sch-row-body">
+                <div class="sch-row-label">${item.label}</div>
+                ${coversNote?`<div class="sch-row-covers">${coversNote}</div>`:''}
+              </div>
+              <div class="sch-row-time">${mins?mins+' min':item.tag}</div>
+            </div>`;
+          } else {
+            const ownerCls=CLASSES.find(c=>c.id===owner[item.id]);
+            html+=`<div class="sch-row covered">
+              <div class="sch-row-icon">✓</div>
+              <div class="sch-row-body">
+                <div class="sch-row-label">${item.label}</div>
+                <div class="sch-row-covers">Covered in: ${ownerCls?ownerCls.date+' — '+shortName(ownerCls.id):owner[item.id]}</div>
+              </div>
+              <div class="sch-row-time"></div>
+            </div>`;
+          }
+        });
+      });
+
+      html+='</div></div>';
+    });
+
+    html+='</div>';
+  });
+
+  el.innerHTML=html;
 }
 
 // ═══════════════════════════════ PLANNER ══════════════════════════════
@@ -1328,6 +1714,8 @@ function toggleRes(cid,rt,e){
   }
   // Rebuild Checklist tab (preserves open state)
   renderTopics();
+  // Rebuild Study Order tab
+  renderSchedule();
   // Update opted-out states in Resources tab
   refreshResourceOptedOut();
   refreshAll();
@@ -1363,6 +1751,93 @@ function refreshPlannerSummary(){
     <div class="ps-card"><div class="ps-val">${total}</div><div class="ps-lbl">Total Classes</div></div>`;
 }
 
+// ═══════════════════════════════ EXCEL EXPORT ═════════════════════════
+function downloadExcel(){
+  if(!window.XLSX){alert('Excel library not loaded — please refresh the page and try again.');return;}
+  const XL=window.XLSX;
+  const wb=XL.utils.book_new();
+  const RT_LABEL_MAP={lecture:'Lecture',bootcamp:'Bootcamp',bnb:'Boards & Beyond',pathoma:'Pathoma',skpharm:'Sketchy Pharm',skpath:'Sketchy Path'};
+
+  // ── Sheet 1: Study Order ────────────────────────────────────────────
+  const soRows=[['Week','Date','Subject','Lecture','Resource','Resource Type','Est. Time (min)','Notes']];
+  const anySelected=CLASSES.some(c=>(S.planner[c.id+'_res']||[]).length>0);
+  if(anySelected){
+    const sorted=[...CLASSES].sort((a,b)=>clsDate(a)-clsDate(b));
+    const owner={};
+    sorted.forEach(cls=>getLecItemsForLecture(cls.id).forEach(item=>{if(!owner[item.id])owner[item.id]=cls.id;}));
+    const weekMap={},weekOrder=[];
+    sorted.forEach(cls=>{
+      const mon=weekMonday(clsDate(cls));
+      const key=mon.toISOString().slice(0,10);
+      if(!weekMap[key]){weekMap[key]={label:weekLabel(mon),classes:[]};weekOrder.push(key);}
+      weekMap[key].classes.push(cls);
+    });
+    weekOrder.forEach(key=>{
+      weekMap[key].classes.forEach(cls=>{
+        const lecSel=(S.planner[cls.id+'_res']||[]).includes('lecture');
+        const selectedRTs=(S.planner[cls.id+'_res']||[]).filter(r=>r!=='lecture');
+        const resItems=getLecItemsForLecture(cls.id);
+        soRows.push([weekMap[key].label,cls.date,cls.subj,cls.cls,'Reviewed MNTS','MNTS',15,'']);
+        if(lecSel) soRows.push([weekMap[key].label,cls.date,cls.subj,cls.cls,'Lecture Notes','LEC',60,'']);
+        const byRT={};
+        resItems.forEach(item=>{if(!byRT[item.rt])byRT[item.rt]=[];byRT[item.rt].push(item);});
+        selectedRTs.forEach(rt=>{
+          (byRT[rt]||[]).forEach(item=>{
+            const isOwner=owner[item.id]===cls.id;
+            let notes='';
+            if(isOwner){
+              const others=sorted.filter(c=>c.id!==cls.id&&(S.planner[c.id+'_res']||[]).filter(r=>r!=='lecture').includes(rt)&&getLecItemsForLecture(c.id).some(i=>i.id===item.id));
+              if(others.length) notes='Also covers: '+others.map(c=>c.cls).join('; ');
+            } else {
+              const ownerCls=CLASSES.find(c=>c.id===owner[item.id]);
+              notes='Covered in: '+(ownerCls?ownerCls.date+' — '+ownerCls.cls:owner[item.id]);
+            }
+            soRows.push([weekMap[key].label,cls.date,cls.subj,cls.cls,item.label,RT_LABEL_MAP[rt]||rt,ITEM_MINS[item.id]||'',notes]);
+          });
+        });
+      });
+    });
+  } else {
+    soRows.push(['No Planner selections found. Set up your study strategy in the Planner tab first.','','','','','','','']);
+  }
+  const wsSO=XL.utils.aoa_to_sheet(soRows);
+  wsSO['!cols']=[{wch:14},{wch:8},{wch:8},{wch:42},{wch:38},{wch:16},{wch:18},{wch:52}];
+  XL.utils.book_append_sheet(wb,wsSO,'Study Order');
+
+  // ── Sheet 2: Checklist ──────────────────────────────────────────────
+  const ckRows=[['Subject','Date','Lecture','Resource','Resource Type','Done','Est. Time (min)']];
+  CLASSES.forEach(cls=>{
+    const lecSel=(S.planner[cls.id+'_res']||[]).includes('lecture');
+    const resItems=getLecItemsForLecture(cls.id);
+    ckRows.push([cls.subj,cls.date,cls.cls,'Reviewed MNTS','MNTS',S.checks['mnts_'+cls.id]?'✓':'',15]);
+    if(lecSel) ckRows.push([cls.subj,cls.date,cls.cls,'Lecture Notes','LEC',S.checks['lec_'+cls.id]?'✓':'',60]);
+    resItems.forEach(item=>{
+      ckRows.push([cls.subj,cls.date,cls.cls,item.label,RT_LABEL_MAP[item.rt]||item.rt,S.checks[item.id]?'✓':'',ITEM_MINS[item.id]||'']);
+    });
+  });
+  const wsCK=XL.utils.aoa_to_sheet(ckRows);
+  wsCK['!cols']=[{wch:8},{wch:8},{wch:42},{wch:38},{wch:16},{wch:6},{wch:18}];
+  XL.utils.book_append_sheet(wb,wsCK,'Checklist');
+
+  // ── Sheet 3: UWorld ─────────────────────────────────────────────────
+  const uwRows=[['Subject','Date','Lecture','Total Qs Assigned','Qs Done','% Complete']];
+  let uwTotSum=0,uwDonSum=0;
+  CLASSES.forEach(cls=>{
+    const d=parseInt(S.uworld['d_'+cls.id]||0);
+    const def=UW_LEC_DEFAULTS[cls.id]||0;
+    const t=S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?parseInt(S.uworld['t_'+cls.id]):def;
+    const pct=t>0?Math.round(d/t*100):0;
+    uwRows.push([cls.subj,cls.date,cls.cls,t,d,pct+'%']);
+    uwTotSum+=t;uwDonSum+=d;
+  });
+  uwRows.push(['','','TOTAL',uwTotSum,uwDonSum,uwTotSum>0?Math.round(uwDonSum/uwTotSum*100)+'%':'0%']);
+  const wsUW=XL.utils.aoa_to_sheet(uwRows);
+  wsUW['!cols']=[{wch:8},{wch:8},{wch:42},{wch:18},{wch:10},{wch:12}];
+  XL.utils.book_append_sheet(wb,wsUW,'UWorld');
+
+  XL.writeFile(wb,'Endocrine-Block-Tracker.xlsx');
+}
+
 // ═══════════════════════════════ RESET ════════════════════════════════
 function confirmReset(){
   if(confirm('Reset all progress and planner data? This cannot be undone.')){
@@ -1375,8 +1850,10 @@ function init(){
   loadState();
   renderTopics();
   renderUWTopics();
+  renderUWQids();
   loadUW();
   renderPlanner();
+  renderSchedule();
   refreshAll();
 }
 init();
