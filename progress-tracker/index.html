@@ -439,7 +439,24 @@ textarea.uw-notes::placeholder{color:var(--dim)}
     <!-- RESOURCES -->
     <div class="panel" id="panel-resources">
       <div class="panel-title">Review Resources</div>
-      <div id="resourcesContainer"></div>
+      <div style="max-width:520px;margin:0 auto;padding-top:12px">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+          padding:32px 28px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06)">
+          <div style="font-size:2rem;margin-bottom:12px">🗂️</div>
+          <div style="font-weight:700;font-size:1rem;color:var(--text);margin-bottom:6px">Study Resources Hub</div>
+          <div style="font-size:0.8rem;color:var(--muted);margin-bottom:22px;line-height:1.5">
+            All 3rd-party resources, lecture mappings, Anki decks, and reference materials are organized in the full Resource Hub.
+          </div>
+          <a href="../resource-mapping/index.html" target="_blank"
+            style="display:inline-flex;align-items:center;gap:8px;
+              background:var(--resources);color:#fff;
+              padding:10px 22px;border-radius:8px;font-size:0.82rem;font-weight:600;
+              text-decoration:none;transition:opacity 0.15s"
+            onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            Open Study Resources Hub ↗
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- UWORLD -->
@@ -1357,7 +1374,6 @@ function confirmReset(){
 function init(){
   loadState();
   renderTopics();
-  renderResources();
   renderUWTopics();
   loadUW();
   renderPlanner();
