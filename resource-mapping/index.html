@@ -119,6 +119,15 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#F0F4F9;color:#1A2332;fo
 }
 .detail-stat-anki{background:#F5EEF8;border:1.5px solid #D9B8EA}
 .detail-stat-uw  {background:#EEF5FC;border:1.5px solid #BAD0E8}
+.detail-stat-sg  {background:#E8F5E9;border:1.5px solid #A5D6A7;cursor:pointer;text-decoration:none;color:inherit}
+.detail-stat-sg:hover{background:#C8E6C9;border-color:#388E3C}
+.detail-stat-sg .stat-n{color:#2E7D32}
+.stat-click{font-size:9px;color:#388E3C;margin-top:2px;letter-spacing:.3px}
+.detail-stat-drill{background:#FFF8E1;border:1.5px solid #FFE082;cursor:pointer;text-decoration:none;color:inherit}
+.detail-stat-drill:hover{background:#FFF0C2;border-color:#F9A825}
+.detail-stat-drill .stat-n{color:#F57F17}
+.detail-stat-drill .stat-click{color:#E65100}
+.detail-stat-ph{cursor:default}
 .stat-n{font-size:26px;font-weight:800;line-height:1}
 .detail-stat-anki .stat-n{color:#7B1FA2}
 .detail-stat-uw   .stat-n{color:#1a4a7a}
@@ -589,6 +598,33 @@ const GDRIVE_IDS = {
   'Pharm-11_Cinacalcet.pdf':                      '1E0JaLm5ZnsyvVOge8TmEirb9z_vzLjiL',
 };
 
+const STUDY_GUIDES = {
+  1:  {url: '../lecture-guides/lec01-introduction-to-hormones.html',      drillUrl: null},
+  2:  {url: '../lecture-guides/lec02-hypothalamic-pituitary-I.html',      drillUrl: null},
+  3:  {url: '../lecture-guides/lec03-adrenal-cortex.html',                drillUrl: null},
+  4:  {url: '../lecture-guides/lec04-sex-steroid-synthesis.html',         drillUrl: null},
+  5:  {url: '../lecture-guides/lec05-hypothalamic-pituitary-II.html',     drillUrl: null},
+  6:  {url: '../lecture-guides/lec06-posterior-pituitary.html',           drillUrl: null},
+  7:  {url: '../lecture-guides/lec07-pituitary-pathology.html',           drillUrl: null},
+  8:  {url: '../lecture-guides/lec08-pituitary-treatment.html',           drillUrl: null},
+  9:  {url: '../lecture-guides/lec09-gh-axis.html',                       drillUrl: null},
+  10: {url: '../lecture-guides/lec10-thyroid-synthesis.html',             drillUrl: null},
+  11: {url: '../lecture-guides/lec11-endocrine-histology.html',           drillUrl: null},
+  12: {url: '../lecture-guides/lec12-hpt-axis.html',                      drillUrl: null},
+  13: {url: '../lecture-guides/lec13-thyroid-parathyroid-pathology.html', drillUrl: null},
+  14: {url: '../lecture-guides/lec14-thyroid-treatment.html',             drillUrl: null},
+  15: {url: '../lecture-guides/lec15-hpa-axis.html',                      drillUrl: null},
+  16: {url: '../lecture-guides/lec16-diabetes-pathophysiology.html',      drillUrl: null},
+  17: {url: '../lecture-guides/lec17-t1dm-treatment.html',                drillUrl: null},
+  18: {url: '../lecture-guides/lec18-t2dm-treatment.html',                drillUrl: null},
+  19: {url: '../lecture-guides/lec19-adrenal-pathology.html',             drillUrl: null},
+  20: {url: '../lecture-guides/lec20-adrenal-treatment.html',             drillUrl: null},
+  21: {url: '../lecture-guides/lec21-pituitary-thyroid-cases.html',       drillUrl: null},
+  22: {url: '../lecture-guides/lec22-stress-hormones.html',               drillUrl: null},
+  23: {url: '../lecture-guides/lec23-endocrine-lab.html',                 drillUrl: null},
+  24: {url: '../lecture-guides/lec24-diabetes-clinical-cases.html',       drillUrl: null},
+};
+
 let currentIdx = -1, sTerm = '', aSubj = 'all';
 
 /* ── UTILS ───────────────────────────────────────── */
@@ -741,6 +777,7 @@ function buildDetail(cls) {
     </button>
     <div class="detail-sec-panel" id="d-secuw">${uwContent}</div>` : '';
 
+
   return `
   <div class="detail-hdr" style="border-left:5px solid ${sb}">
     <div class="detail-hdr-top">
@@ -751,6 +788,17 @@ function buildDetail(cls) {
     <div class="detail-stats">
       ${ankiTotal ? `<div class="detail-stat detail-stat-anki"><span class="stat-n">${ankiTotal}</span><span class="stat-lbl">Anki Cards</span></div>` : ''}
       ${uwCnt ? `<div class="detail-stat detail-stat-uw"><span class="stat-n">${uwCnt}</span><span class="stat-lbl">UWorld QIDs</span></div>` : ''}
+      ${(()=>{
+        const _sg = STUDY_GUIDES[cls.class]||{};
+        const sgTag  = _sg.url   ? `<a class="detail-stat detail-stat-sg" href="${_sg.url}" target="_blank">`
+                                 : `<div class="detail-stat detail-stat-sg detail-stat-ph">`;
+        const sgEnd  = _sg.url   ? `</a>` : `</div>`;
+        const drTag  = _sg.drillUrl ? `<a class="detail-stat detail-stat-drill" href="${_sg.drillUrl}" target="_blank">`
+                                    : `<div class="detail-stat detail-stat-drill detail-stat-ph">`;
+        const drEnd  = _sg.drillUrl ? `</a>` : `</div>`;
+        return sgTag+`<span class="stat-n">&#128214;</span><span class="stat-lbl">Study Guide</span><span class="stat-click">click here ↗</span>`+sgEnd
+             + drTag+`<span class="stat-n">&#9998;</span><span class="stat-lbl">Lecture Drills</span><span class="stat-click">click here ↗</span>`+drEnd;
+      })()}
     </div>
   </div>
   <div class="detail-sections">
