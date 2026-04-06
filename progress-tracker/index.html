@@ -34,28 +34,48 @@
   --transition:0.18s ease;
 }
 body{
-  background:var(--bg);color:var(--text);
+  background:var(--bg);
+  color:var(--text);
   font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-  min-height:100vh;display:flex;overflow-x:hidden;
+  min-height:100vh;
+  display:flex;
+  overflow-x:hidden;
 }
 
 /* ═══════════════════════════ SIDEBAR ═══════════════════════════════ */
 #sidebar{
-  width:var(--sidebar-w);min-width:var(--sidebar-w);
-  background:var(--sidebar-bg);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;height:100vh;
-  position:sticky;top:0;overflow-y:auto;overflow-x:hidden;
-  scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+  width:var(--sidebar-w);
+  min-width:var(--sidebar-w);
+  background:var(--sidebar-bg);
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  height:100vh;
+  position:sticky;
+  top:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  scrollbar-width:thin;
+  scrollbar-color:var(--border) transparent;
 }
-.sb-header{padding:20px 18px 16px;border-bottom:1px solid var(--border)}
+.sb-header{
+  padding:20px 18px 16px;
+  border-bottom:1px solid var(--border);
+}
 .sb-title{font-size:0.82rem;font-weight:700;color:var(--text);letter-spacing:0.02em;line-height:1.3}
 .sb-sub{font-size:0.68rem;color:var(--muted);margin-top:3px}
 
-.sb-donut-wrap{padding:18px 18px 12px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border)}
+/* Donut */
+.sb-donut-wrap{
+  padding:18px 18px 12px;
+  display:flex;align-items:center;gap:14px;
+  border-bottom:1px solid var(--border);
+}
 .donut-svg{position:relative;flex-shrink:0}
 .donut-track{fill:none;stroke:var(--surface2);stroke-width:5}
 .donut-fill{fill:none;stroke-width:5;stroke-linecap:round;stroke:url(#donutGrad);
-  transition:stroke-dashoffset 0.6s ease;transform:rotate(-90deg);transform-origin:50% 50%}
+  transition:stroke-dashoffset 0.6s ease;
+  transform:rotate(-90deg);transform-origin:50% 50%}
 .donut-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .donut-pct{font-size:1.05rem;font-weight:800;color:var(--text);line-height:1}
 .donut-lbl{font-size:0.5rem;color:var(--muted);margin-top:1px;letter-spacing:0.05em}
@@ -65,23 +85,34 @@ body{
 .sb-overall-bar{height:4px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:4px}
 .sb-overall-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#2563eb,#7c3aed,#059669);transition:width 0.5s ease}
 
+/* Nav */
 .sb-nav{padding:10px 10px 6px}
 .sb-nav-lbl{font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dim);padding:6px 8px 4px}
-.nav-btn{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;
+.nav-btn{
+  display:flex;align-items:center;gap:8px;
+  width:100%;padding:8px 10px;
   background:transparent;border:none;border-radius:7px;
   color:var(--muted);font-size:0.81rem;font-weight:500;
-  cursor:pointer;transition:all var(--transition);text-align:left}
+  cursor:pointer;transition:all var(--transition);text-align:left;
+}
 .nav-btn:hover{background:var(--surface2);color:var(--text)}
 .nav-btn.active{background:var(--surface2);color:var(--text)}
 .nav-icon{font-size:0.88rem;width:18px;text-align:center;flex-shrink:0}
-.nav-badge{margin-left:auto;font-size:0.6rem;background:var(--surface);border:1px solid var(--border2);
-  color:var(--muted);padding:1px 6px;border-radius:10px}
+.nav-badge{
+  margin-left:auto;font-size:0.6rem;
+  background:var(--surface);border:1px solid var(--border2);
+  color:var(--muted);padding:1px 6px;border-radius:10px;
+}
 .nav-btn.active .nav-badge{color:var(--text)}
 
+/* Discipline list */
 .sb-disc-section{padding:0 10px 10px;border-top:1px solid var(--border);margin-top:4px}
 .sb-disc-lbl{font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dim);padding:10px 8px 5px}
-.sb-disc-row{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:6px;
-  cursor:pointer;transition:background var(--transition)}
+.sb-disc-row{
+  display:flex;align-items:center;gap:7px;
+  padding:5px 8px;border-radius:6px;cursor:pointer;
+  transition:background var(--transition);
+}
 .sb-disc-row:hover{background:var(--surface2)}
 .sb-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .sb-disc-name{font-size:0.73rem;color:var(--muted);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -90,21 +121,24 @@ body{
 .sb-disc-bar-fill{height:100%;border-radius:99px;transition:width 0.4s ease}
 
 .sb-footer{margin-top:auto;padding:12px 18px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:7px}
-.sb-reset-btn{width:100%;background:transparent;border:1px solid var(--border2);
-  color:var(--muted);padding:6px;border-radius:6px;font-size:0.7rem;cursor:pointer;transition:all var(--transition)}
+.sb-reset-btn{
+  width:100%;background:transparent;border:1px solid var(--border2);
+  color:var(--muted);padding:6px;border-radius:6px;
+  font-size:0.7rem;cursor:pointer;transition:all var(--transition);
+}
 .sb-reset-btn:hover{border-color:var(--path);color:var(--path)}
-.sb-export-btn{width:100%;background:var(--complete);border:none;color:#fff;
-  padding:7px;border-radius:6px;font-size:0.72rem;font-weight:600;cursor:pointer;transition:opacity var(--transition)}
-.sb-export-btn:hover{opacity:0.85}
-/* Panel export button */
-.panel-export-row{display:flex;align-items:center;justify-content:flex-end;margin-bottom:12px}
-.panel-export-btn{background:transparent;border:1px solid var(--border2);color:var(--muted);
-  padding:5px 12px;border-radius:6px;font-size:0.7rem;cursor:pointer;transition:all var(--transition);
-  display:flex;align-items:center;gap:5px}
-.panel-export-btn:hover{border-color:var(--complete);color:var(--complete)}
+.sb-export-btn{
+  width:100%;background:var(--complete);border:none;
+  color:#fff;padding:7px;border-radius:6px;
+  font-size:0.72rem;font-weight:600;cursor:pointer;transition:opacity var(--transition);
+  display:flex;align-items:center;justify-content:center;gap:5px;
+}
+.sb-export-btn:hover{opacity:0.88}
+.sb-export-btn:disabled{background:var(--muted);cursor:not-allowed}
 
 /* ═══════════════════════════ MAIN ══════════════════════════════════ */
 #main{flex:1;min-width:0;display:flex;flex-direction:column}
+
 #topbar{
   background:var(--sidebar-bg);border-bottom:1px solid var(--border);
   padding:13px 26px;display:flex;align-items:center;
@@ -114,22 +148,23 @@ body{
 .topbar-title{font-size:1rem;font-weight:700;color:var(--text)}
 .topbar-sub{font-size:0.71rem;color:var(--muted);margin-top:1px}
 .topbar-pills{display:flex;gap:8px;flex-wrap:wrap}
-.top-pill{display:flex;align-items:center;gap:5px;background:var(--surface2);
-  border:1px solid var(--border2);border-radius:20px;padding:4px 11px;font-size:0.7rem;color:var(--muted)}
+.top-pill{
+  display:flex;align-items:center;gap:5px;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:20px;padding:4px 11px;
+  font-size:0.7rem;color:var(--muted);
+}
 .top-pill-dot{width:7px;height:7px;border-radius:50%}
 .top-pill strong{color:var(--text);font-size:0.75rem}
 
 #content{flex:1;padding:22px 26px 60px}
 .panel{display:none}
 .panel.active{display:block}
-.panel-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);
-  margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.panel-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 
 /* ═══════════════════════ SECTION CARDS ════════════════════════════ */
-.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  margin-bottom:11px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
-.sc-head{display:flex;align-items:center;gap:11px;padding:13px 17px;cursor:pointer;
-  user-select:none;transition:background var(--transition)}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:11px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.sc-head{display:flex;align-items:center;gap:11px;padding:13px 17px;cursor:pointer;user-select:none;transition:background var(--transition)}
 .sc-head:hover{background:var(--surface2)}
 .sc-stripe{width:3px;height:30px;border-radius:2px;flex-shrink:0}
 .sc-meta{flex:1}
@@ -144,76 +179,36 @@ body{
 .sc-items{display:none;padding:0 17px 13px 30px}
 .sc.open .sc-items{display:block}
 
-.item-row{display:flex;align-items:flex-start;gap:9px;padding:7px 0;
-  border-bottom:1px solid rgba(0,0,0,0.06);cursor:pointer}
+.item-row{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid rgba(0,0,0,0.06);cursor:pointer}
 .item-row:last-child{border-bottom:none}
 .item-row:hover .item-label{color:var(--text)}
-.item-check{width:15px;height:15px;border:1.5px solid var(--border2);border-radius:3px;
-  flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;
-  transition:all var(--transition);font-size:8px;color:transparent}
+.item-check{width:15px;height:15px;border:1.5px solid var(--border2);border-radius:3px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all var(--transition);font-size:8px;color:transparent}
 .item-row.checked .item-check{background:var(--complete);border-color:var(--complete);color:#fff}
 .item-label{font-size:0.82rem;color:var(--muted);line-height:1.4;flex:1;transition:color var(--transition)}
 .item-row.checked .item-label{text-decoration:line-through;opacity:0.5}
-.item-tag{font-size:0.63rem;padding:2px 7px;border-radius:8px;background:var(--surface2);
-  color:var(--muted);white-space:nowrap;margin-top:2px;flex-shrink:0}
+.item-tag{font-size:0.63rem;padding:2px 7px;border-radius:8px;background:var(--surface2);color:var(--muted);white-space:nowrap;margin-top:2px;flex-shrink:0}
 
-/* Opted-out resource items */
+/* Opted-out items */
 .item-row.opted-out{cursor:default;pointer-events:none}
 .item-row.opted-out .item-check{opacity:0.2;background:transparent!important;border-color:var(--dim)!important}
 .item-row.opted-out .item-label{text-decoration:line-through;opacity:0.28;color:var(--dim)!important}
 .item-row.opted-out .item-tag{opacity:0.2}
-.opted-badge{font-size:0.6rem;padding:1px 6px;border-radius:8px;background:#fde8ec;
-  color:var(--opted);border:1px solid #fca5b5;white-space:nowrap;flex-shrink:0;margin-top:2px}
-
-/* ═══════════ LECTURE CARDS (Checklist tab) ════════════════════════════ */
-.lec-res-hdr{
-  font-size:0.6rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);
-  padding:6px 0 2px;margin-top:4px;border-top:1px dashed rgba(0,0,0,0.09);
-  display:flex;align-items:center;gap:6px;
-}
-.lec-res-hdr-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.lec-no-res{
-  font-size:0.73rem;color:var(--dim);padding:7px 0 2px;
-  font-style:italic;
-}
-.lec-tag{display:inline-block;font-size:0.63rem;padding:2px 8px;border-radius:8px;
-  white-space:nowrap;margin-top:2px;flex-shrink:0;font-weight:600}
+.opted-badge{font-size:0.6rem;padding:1px 6px;border-radius:8px;background:#fde8ec;color:var(--opted);border:1px solid #fca5b5;white-space:nowrap;flex-shrink:0;margin-top:2px}
 
 /* ═══════════════════════════ OVERVIEW ══════════════════════════════ */
-/* Stat cards */
-.ov-stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-bottom:20px}
-.ov-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px 17px}
-.ov-stat-label{font-size:0.63rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:6px}
-.ov-stat-val{font-size:1.55rem;font-weight:800;line-height:1;color:var(--text);margin-bottom:4px}
-.ov-stat-sub{font-size:0.69rem;color:var(--dim);margin-bottom:8px}
-.ov-stat-bar{height:4px;background:var(--surface2);border-radius:99px;overflow:hidden}
-.ov-stat-bar-fill{height:100%;border-radius:99px;transition:width 0.4s ease}
-/* Focus section */
-.ov-focus{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 17px;margin-bottom:18px}
-.ov-focus-hdr{font-size:0.63rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:10px}
-.ov-focus-lec{display:flex;align-items:center;gap:9px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.05)}
-.ov-focus-lec:last-child{border-bottom:none}
-.ov-focus-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.ov-focus-name{font-size:0.79rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ov-focus-tag{font-size:0.63rem;font-weight:700;padding:2px 8px;border-radius:99px;flex-shrink:0}
-.ov-focus-prog{font-size:0.68rem;color:var(--dim);flex-shrink:0;white-space:nowrap}
-/* Section header */
-.ov-section-hdr{font-size:0.63rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:8px}
-/* Lecture table */
-.ov-lec-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:18px;overflow:hidden}
-.ov-lec-thead{display:grid;grid-template-columns:10px 58px 1fr 90px 90px;gap:10px;align-items:center;
-  padding:7px 14px;background:var(--surface2);border-bottom:1px solid var(--border);
-  font-size:0.6rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--muted)}
-.ov-lec-row{display:grid;grid-template-columns:10px 58px 1fr 90px 90px;gap:10px;align-items:center;
-  padding:6px 14px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:0.76rem}
-.ov-lec-row:last-child{border-bottom:none}
-.ov-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.ov-lec-date{font-size:0.67rem;color:var(--dim);white-space:nowrap}
-.ov-lec-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:0.76rem}
-.ov-mini-wrap{display:flex;flex-direction:column;gap:3px}
-.ov-mini-bar{height:5px;background:var(--surface2);border-radius:99px;overflow:hidden}
-.ov-mini-bar-fill{height:100%;border-radius:99px;transition:width 0.3s}
-.ov-mini-pct{font-size:0.62rem;color:var(--dim);text-align:right}
+.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:11px;margin-bottom:22px}
+.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px 13px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:all var(--transition);box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.ov-card:hover{border-color:var(--border2);box-shadow:0 3px 8px rgba(0,0,0,0.1)}
+.ov-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.ov-physio::before{background:var(--physio)} .ov-biochem::before{background:var(--biochem)}
+.ov-path::before{background:var(--path)} .ov-pharm::before{background:var(--pharm)}
+.ov-histo::before{background:var(--histo)} .ov-resources::before{background:var(--resources)}
+.ov-uworld::before{background:var(--uworld)} .ov-planner::before{background:var(--planner)}
+.ov-name{font-size:0.68rem;color:var(--muted);margin-bottom:5px}
+.ov-pct{font-size:1.85rem;font-weight:800;color:var(--text);margin-bottom:5px;line-height:1}
+.ov-bar{height:3px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-bottom:4px}
+.ov-bar-fill{height:100%;border-radius:99px;transition:width 0.4s ease}
+.ov-count{font-size:0.63rem;color:var(--dim)}
 
 .act-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:17px 19px}
 .act-hdr{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:12px}
@@ -228,8 +223,7 @@ body{
 .uw-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:15px}
 .uw-card label{display:block;font-size:0.66rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:7px}
 .uw-wrap{display:flex;align-items:center;gap:6px}
-.uw-input{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);
-  font-size:1.25rem;font-weight:700;width:68px;padding:5px 8px;text-align:center;outline:none;transition:border-color var(--transition)}
+.uw-input{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:1.25rem;font-weight:700;width:68px;padding:5px 8px;text-align:center;outline:none;transition:border-color var(--transition)}
 .uw-input:focus{border-color:var(--uworld)}
 .uw-input::placeholder{color:var(--dim);font-size:0.88rem;font-weight:400}
 .uw-unit{font-size:0.78rem;color:var(--muted)}
@@ -240,15 +234,13 @@ body{
 .uw-bar-track{flex:1;height:8px;background:var(--surface2);border-radius:99px;overflow:hidden}
 .uw-bar-fill{height:100%;background:var(--uworld);border-radius:99px;transition:width 0.4s ease}
 .uw-score-inps{display:flex;align-items:center;gap:5px;flex-shrink:0}
-.mini-inp{background:var(--surface2);border:1px solid var(--border);border-radius:5px;color:var(--text);
-  font-size:0.74rem;width:40px;padding:3px 5px;text-align:center;outline:none}
+.mini-inp{background:var(--surface2);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:0.74rem;width:40px;padding:3px 5px;text-align:center;outline:none}
 .mini-inp:focus{border-color:var(--uworld)}
 .mini-inp::placeholder{color:var(--dim)}
+.mini-lbl{font-size:0.63rem;color:var(--muted)}
 .uw-notes-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:17px 19px}
 .uw-notes-card h3{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin-bottom:9px}
-textarea.uw-notes{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;
-  color:var(--text);font-size:0.82rem;padding:10px 12px;outline:none;min-height:88px;resize:vertical;
-  font-family:inherit;transition:border-color var(--transition)}
+textarea.uw-notes{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:0.82rem;padding:10px 12px;outline:none;min-height:88px;resize:vertical;font-family:inherit;transition:border-color var(--transition)}
 textarea.uw-notes:focus{border-color:var(--uworld)}
 textarea.uw-notes::placeholder{color:var(--dim)}
 
@@ -261,21 +253,26 @@ textarea.uw-notes::placeholder{color:var(--dim)}
 .leg-divider{width:1px;height:14px;background:var(--border);margin:0 2px}
 
 .ps-strip{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:16px}
-.ps-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;
-  padding:12px 15px;flex:1;min-width:100px;text-align:center}
+.ps-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 15px;flex:1;min-width:100px;text-align:center}
 .ps-val{font-size:1.5rem;font-weight:800;color:var(--text);line-height:1}
 .ps-lbl{font-size:0.65rem;color:var(--muted);margin-top:3px}
 
-.planner-hint{font-size:0.7rem;color:var(--muted);background:var(--surface2);
-  border:1px solid var(--border);border-radius:7px;padding:8px 13px;margin-bottom:14px}
+.planner-hint{font-size:0.7rem;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:8px 13px;margin-bottom:14px}
 
 .planner-table{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.pt-head{display:grid;grid-template-columns:34px 90px 62px 1fr 122px 88px;
-  background:var(--surface2);border-bottom:1px solid var(--border)}
+.pt-head{
+  display:grid;
+  grid-template-columns:34px 90px 62px 1fr 122px 88px;
+  background:var(--surface2);border-bottom:1px solid var(--border);
+}
 .pt-th{padding:9px 11px;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);font-weight:600}
 
-.pr{display:grid;grid-template-columns:34px 90px 62px 1fr 122px 88px;
-  border-bottom:1px solid rgba(0,0,0,0.06);align-items:start;transition:background var(--transition)}
+.pr{
+  display:grid;
+  grid-template-columns:34px 90px 62px 1fr 122px 88px;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  align-items:start;transition:background var(--transition);
+}
 .pr:last-child{border-bottom:none}
 .pr:hover{background:rgba(0,0,0,0.025)}
 .pr.s-done{opacity:0.52}
@@ -283,9 +280,7 @@ textarea.uw-notes::placeholder{color:var(--dim)}
 .pr.s-in-progress{background:rgba(234,108,10,0.05)}
 
 .pr-chk{display:flex;align-items:center;justify-content:center;padding:13px 0 0 10px;cursor:pointer}
-.pr-cb{width:14px;height:14px;border:1.5px solid var(--border2);border-radius:3px;
-  display:flex;align-items:center;justify-content:center;transition:all var(--transition);
-  font-size:8px;color:transparent;flex-shrink:0}
+.pr-cb{width:14px;height:14px;border:1.5px solid var(--border2);border-radius:3px;display:flex;align-items:center;justify-content:center;transition:all var(--transition);font-size:8px;color:transparent;flex-shrink:0}
 .pr.s-done .pr-cb{background:var(--complete);border-color:var(--complete);color:#fff}
 
 .pr-date-cell{padding:10px 7px 9px 9px}
@@ -293,8 +288,7 @@ textarea.uw-notes::placeholder{color:var(--dim)}
 .pr-date-sub{font-size:0.62rem;color:var(--dim);margin-top:1px}
 
 .pr-subj{padding:10px 7px 9px}
-.subj-badge{display:inline-block;font-size:0.6rem;font-weight:700;padding:2px 7px;border-radius:9px;
-  text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap}
+.subj-badge{display:inline-block;font-size:0.6rem;font-weight:700;padding:2px 7px;border-radius:9px;text-transform:uppercase;letter-spacing:0.04em;white-space:nowrap}
 .s-Biochem{background:rgba(124,58,237,0.1);color:var(--biochem)}
 .s-Phys{background:rgba(37,99,235,0.1);color:var(--physio)}
 .s-Path{background:rgba(220,38,38,0.1);color:var(--path)}
@@ -305,81 +299,46 @@ textarea.uw-notes::placeholder{color:var(--dim)}
 .pr-cls-name{font-size:0.8rem;color:var(--text)}
 .pr.s-done .pr-cls-name{text-decoration:line-through;color:var(--muted)}
 
+/* Resource chips */
 .rc-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
-.rc{display:inline-flex;align-items:center;font-size:0.58rem;font-weight:700;padding:2px 7px;
-  border-radius:9px;cursor:pointer;border:1.5px solid;transition:all 0.15s;user-select:none;line-height:1.4}
+.rc{display:inline-flex;align-items:center;font-size:0.58rem;font-weight:700;padding:2px 7px;border-radius:9px;cursor:pointer;border:1.5px solid;transition:all 0.15s;user-select:none;line-height:1.4}
 .rc:not(.sel){opacity:0.32}
 .rc.sel{opacity:1}
-.rc-bootcamp{border-color:#ea6c0a;color:#ea6c0a}.rc-bootcamp.sel{background:#ea6c0a;color:#fff}
-.rc-bnb{border-color:#2563eb;color:#2563eb}.rc-bnb.sel{background:#2563eb;color:#fff}
-.rc-pathoma{border-color:#dc2626;color:#dc2626}.rc-pathoma.sel{background:#dc2626;color:#fff}
-.rc-skpharm{border-color:#059669;color:#059669}.rc-skpharm.sel{background:#059669;color:#fff}
-.rc-skpath{border-color:#7c3aed;color:#7c3aed}.rc-skpath.sel{background:#7c3aed;color:#fff}
-.rc-lecture{border-color:#475569;color:#475569}.rc-lecture.sel{background:#475569;color:#fff}
+.rc-bootcamp{border-color:#ea6c0a;color:#ea6c0a}
+.rc-bootcamp.sel{background:#ea6c0a;color:#fff}
+.rc-bnb{border-color:#2563eb;color:#2563eb}
+.rc-bnb.sel{background:#2563eb;color:#fff}
+.rc-pathoma{border-color:#dc2626;color:#dc2626}
+.rc-pathoma.sel{background:#dc2626;color:#fff}
+.rc-skpharm{border-color:#059669;color:#059669}
+.rc-skpharm.sel{background:#059669;color:#fff}
+.rc-skpath{border-color:#7c3aed;color:#7c3aed}
+.rc-skpath.sel{background:#7c3aed;color:#fff}
 .rc.maxed:not(.sel){opacity:0.12;cursor:not-allowed;pointer-events:none}
 
 .pr-status-cell{padding:9px 7px}
-.pr-sel{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);
-  font-size:0.7rem;padding:4px 7px;outline:none;cursor:pointer;width:108px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+.pr-sel{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:0.7rem;padding:4px 7px;outline:none;cursor:pointer;width:108px;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
 .pr-sel:focus{border-color:var(--planner)}
+
 .pr-note-cell{padding:9px 9px 9px 5px}
-.pr-note-inp{background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--muted);
-  font-size:0.71rem;width:74px;outline:none;padding:2px 3px;font-family:inherit;transition:border-color var(--transition)}
+.pr-note-inp{background:transparent;border:none;border-bottom:1px solid var(--border);color:var(--muted);font-size:0.71rem;width:74px;outline:none;padding:2px 3px;font-family:inherit;transition:border-color var(--transition)}
 .pr-note-inp:focus{border-color:var(--planner);color:var(--text)}
 .pr-note-inp::placeholder{color:var(--dim)}
 
-/* ═══════════════════════════ STUDY ORDER ════════════════════════════ */
-.week-block{margin-bottom:28px}
-.week-hdr{display:flex;align-items:center;justify-content:space-between;
-  padding:8px 14px;background:var(--surface2);border:1px solid var(--border);
-  border-radius:8px;margin-bottom:10px}
-.week-hdr-label{font-size:0.8rem;font-weight:700;color:var(--text)}
-.week-hdr-time{font-size:0.71rem;color:var(--muted);background:var(--surface);
-  border:1px solid var(--border2);border-radius:10px;padding:2px 10px}
-.week-hdr-prog{font-size:0.68rem;color:var(--dim)}
-
-.sch-lec{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  margin-bottom:9px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.05)}
-.sch-lec-hdr{display:flex;align-items:center;gap:10px;padding:10px 15px;
-  border-bottom:1px solid rgba(0,0,0,0.06)}
-.sch-lec-stripe{width:3px;height:26px;border-radius:2px;flex-shrink:0}
-.sch-lec-name{font-size:0.83rem;font-weight:600;color:var(--text);flex:1}
-.sch-lec-meta{font-size:0.67rem;color:var(--muted)}
-.sch-lec-time{font-size:0.67rem;color:var(--dim);background:var(--surface2);
-  border:1px solid var(--border);border-radius:8px;padding:1px 8px;flex-shrink:0}
-
-.sch-items{padding:6px 15px 10px 28px}
-.sch-row{display:flex;align-items:flex-start;gap:8px;padding:5px 0;
-  border-bottom:1px solid rgba(0,0,0,0.05)}
-.sch-row:last-child{border-bottom:none}
-.sch-row-icon{font-size:0.72rem;width:16px;flex-shrink:0;margin-top:1px;text-align:center}
-.sch-row-body{flex:1;min-width:0}
-.sch-row-label{font-size:0.79rem;color:var(--text);line-height:1.4}
-.sch-row-covers{font-size:0.64rem;color:var(--dim);margin-top:2px;font-style:italic}
-.sch-row-time{font-size:0.63rem;color:var(--dim);white-space:nowrap;margin-top:2px;flex-shrink:0}
-
-.sch-row.covered .sch-row-label{color:var(--dim);text-decoration:line-through;opacity:0.6}
-.sch-row.covered .sch-row-icon{opacity:0.4}
-.sch-row.mnts-row .sch-row-label{color:var(--muted)}
-
-.sch-empty{text-align:center;padding:40px 20px;color:var(--dim);font-size:0.82rem;
-  background:var(--surface);border:1px dashed var(--border2);border-radius:var(--radius)}
-
 @media(max-width:680px){
   body{flex-direction:column}
-  #sidebar{width:100%;min-width:unset;height:auto;position:static;border-right:none;
-    border-bottom:1px solid var(--border);flex-direction:row;flex-wrap:wrap;overflow:visible}
+  #sidebar{width:100%;min-width:unset;height:auto;position:static;border-right:none;border-bottom:1px solid var(--border);flex-direction:row;flex-wrap:wrap;overflow:visible}
   .sb-donut-wrap,.sb-disc-section{display:none}
   #content{padding:14px}
   .planner-table{overflow-x:auto}
 }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
 <!-- ══════════════════════════ SIDEBAR ══════════════════════════════ -->
 <nav id="sidebar">
+
   <div class="sb-header">
     <div class="sb-title">🧬 Endocrine Block</div>
     <div class="sb-sub">Georgetown SOM · Progress Tracker</div>
@@ -416,32 +375,37 @@ textarea.uw-notes::placeholder{color:var(--dim)}
     <button class="nav-btn active" data-panel="overview" onclick="switchPanel('overview',this)">
       <span class="nav-icon">📊</span> Overview
     </button>
-    <button class="nav-btn" data-panel="planner" onclick="switchPanel('planner',this)">
-      <span class="nav-icon">📅</span> Planner
-    </button>
-    <button class="nav-btn" data-panel="schedule" onclick="switchPanel('schedule',this)">
-      <span class="nav-icon">🗓️</span> Study Order
-    </button>
-    <button class="nav-btn" data-panel="checklist" onclick="switchPanel('checklist',this)">
-      <span class="nav-icon">📚</span> Checklist
-      <span class="nav-badge" id="nb-checklist">—</span>
+    <button class="nav-btn" data-panel="topics" onclick="switchPanel('topics',this)">
+      <span class="nav-icon">📚</span> Topics
+      <span class="nav-badge" id="nb-topics">—</span>
     </button>
     <button class="nav-btn" data-panel="resources" onclick="switchPanel('resources',this)">
       <span class="nav-icon">🗂️</span> Resources
+      <span class="nav-badge" id="nb-res">—</span>
     </button>
     <button class="nav-btn" data-panel="uworld" onclick="switchPanel('uworld',this)">
       <span class="nav-icon">💊</span> UWorld
     </button>
+    <button class="nav-btn" data-panel="planner" onclick="switchPanel('planner',this)">
+      <span class="nav-icon">📅</span> Planner
+      <span class="nav-badge" id="nb-plan">—</span>
+    </button>
+  </div>
+
+  <div class="sb-disc-section">
+    <div class="sb-disc-lbl">Core Resources</div>
+    <div id="sbDiscList"></div>
   </div>
 
   <div class="sb-footer">
-    <button class="sb-export-btn" onclick="downloadExcel()">⬇ Export to Excel</button>
+    <button class="sb-export-btn" id="exportBtn" onclick="exportToExcel()">⬇ Export to Excel</button>
     <button class="sb-reset-btn" onclick="confirmReset()">↺ Reset All Progress</button>
   </div>
 </nav>
 
 <!-- ══════════════════════════ MAIN ══════════════════════════════════ -->
 <div id="main">
+
   <div id="topbar">
     <div>
       <div class="topbar-title" id="topbarTitle">Overview</div>
@@ -454,94 +418,27 @@ textarea.uw-notes::placeholder{color:var(--dim)}
 
     <!-- OVERVIEW -->
     <div class="panel active" id="panel-overview">
-      <div class="ov-stats-row" id="ovStatsRow"></div>
-      <div id="ovFocus"></div>
-      <div class="ov-section-hdr">All 25 Lectures</div>
-      <div id="ovLecTable"></div>
+      <div class="ov-grid" id="ovGrid"></div>
       <div class="act-card">
         <div class="act-hdr">📝 Recent Activity</div>
         <div id="actLog"><p style="color:var(--muted);font-size:0.81rem">No activity yet — start checking off items!</p></div>
       </div>
     </div>
 
-    <!-- PLANNER -->
-    <div class="panel" id="panel-planner">
-      <div class="planner-hdr">
-        <h2>📅 Strategy 2026 — Class Planner</h2>
-        <div class="planner-legend">
-          <div class="leg-item"><div class="leg-dot" style="background:var(--complete)"></div>Done</div>
-          <div class="leg-item"><div class="leg-dot" style="background:var(--planner)"></div>Today</div>
-          <div class="leg-item"><div class="leg-dot" style="background:var(--uworld)"></div>In Progress</div>
-          <div class="leg-divider"></div>
-          <div class="leg-item"><span style="font-size:0.63rem;background:#475569;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">LEC</span>&nbsp;Lecture</div>
-          <div class="leg-item"><span style="font-size:0.63rem;background:#ea6c0a;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">BC</span>&nbsp;Bootcamp</div>
-          <div class="leg-item"><span style="font-size:0.63rem;background:#2563eb;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">BnB</span>&nbsp;Boards &amp; Beyond</div>
-          <div class="leg-item"><span style="font-size:0.63rem;background:#dc2626;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">PT</span>&nbsp;Pathoma</div>
-          <div class="leg-item"><span style="font-size:0.63rem;background:#059669;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">SKP</span>&nbsp;Sketchy Pharm</div>
-          <div class="leg-item"><span style="font-size:0.63rem;background:#7c3aed;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">SKPa</span>&nbsp;Sketchy Path</div>
-        </div>
-      </div>
-      <div class="planner-hint">💡 Select <strong>LEC</strong> to include the in-house lecture, plus up to <strong>2 third-party resources</strong> per lecture. Your selections automatically populate the Checklist tab.</div>
-      <div class="ps-strip" id="psSummary"></div>
-      <div class="planner-table">
-        <div class="pt-head">
-          <div class="pt-th"></div>
-          <div class="pt-th">Date</div>
-          <div class="pt-th">Subject</div>
-          <div class="pt-th">Class &amp; Resources</div>
-          <div class="pt-th">Status</div>
-          <div class="pt-th">Notes</div>
-        </div>
-        <div id="plannerRows"></div>
-      </div>
-    </div>
-
-    <!-- STUDY ORDER -->
-    <div class="panel" id="panel-schedule">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-        <div class="panel-title" style="margin-bottom:0">Study Order — ideal sequence based on your Planner selections</div>
-        <button class="panel-export-btn" onclick="downloadExcel()">⬇ Export Excel</button>
-      </div>
-      <div id="scheduleContainer"></div>
-    </div>
-
-    <!-- CHECKLIST -->
-    <div class="panel" id="panel-checklist">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-        <div class="panel-title" style="margin-bottom:0">Lecture Checklist — MNTS review, lecture notes &amp; selected 3rd-party resources per class</div>
-        <button class="panel-export-btn" onclick="downloadExcel()">⬇ Export Excel</button>
-      </div>
+    <!-- TOPICS -->
+    <div class="panel" id="panel-topics">
+      <div class="panel-title">Core Lecture Topics</div>
       <div id="topicsContainer"></div>
     </div>
 
     <!-- RESOURCES -->
     <div class="panel" id="panel-resources">
       <div class="panel-title">Review Resources</div>
-      <div style="max-width:520px;margin:0 auto;padding-top:12px">
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-          padding:32px 28px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.06)">
-          <div style="font-size:2rem;margin-bottom:12px">🗂️</div>
-          <div style="font-weight:700;font-size:1rem;color:var(--text);margin-bottom:6px">Study Resources Hub</div>
-          <div style="font-size:0.8rem;color:var(--muted);margin-bottom:22px;line-height:1.5">
-            All 3rd-party resources, lecture mappings, Anki decks, and reference materials are organized in the full Resource Hub.
-          </div>
-          <a href="../resource-mapping/index.html" target="_blank"
-            style="display:inline-flex;align-items:center;gap:8px;
-              background:var(--resources);color:#fff;
-              padding:10px 22px;border-radius:8px;font-size:0.82rem;font-weight:600;
-              text-decoration:none;transition:opacity 0.15s"
-            onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-            Open Study Resources Hub ↗
-          </a>
-        </div>
-      </div>
+      <div id="resourcesContainer"></div>
     </div>
 
     <!-- UWORLD -->
     <div class="panel" id="panel-uworld">
-      <div class="panel-export-row">
-        <button class="panel-export-btn" onclick="downloadExcel()">⬇ Export Excel</button>
-      </div>
       <div class="uw-grid">
         <div class="uw-card">
           <label>Questions Done</label>
@@ -561,32 +458,43 @@ textarea.uw-notes::placeholder{color:var(--dim)}
         </div>
       </div>
       <div class="uw-perf">
-        <h3>📈 Performance by Lecture</h3>
+        <h3>📈 Performance by Topic</h3>
         <div id="uwTopicRows"></div>
       </div>
       <div class="uw-notes-card">
-        <h3>📝 Notes &amp; Weak Areas</h3>
+        <h3>📝 Notes & Weak Areas</h3>
         <textarea class="uw-notes" id="uwNotes" placeholder="Weak areas, flagged topics, patterns to review..." oninput="saveUW()"></textarea>
       </div>
+    </div>
 
-      <div class="uw-notes-card" style="margin-top:14px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;cursor:pointer"
-          onclick="this.parentElement.querySelector('#uwQidRef').style.display=this.parentElement.querySelector('#uwQidRef').style.display==='none'?'block':'none';this.querySelector('.qid-chev').style.transform=this.parentElement.querySelector('#uwQidRef').style.display==='none'?'':'rotate(180deg)'">
-          <h3 style="margin:0">🔢 QID Reference — 186 Assigned Questions</h3>
-          <span class="qid-chev" style="color:var(--dim);font-size:0.62rem;transition:transform 0.18s">&#9660;</span>
+    <!-- PLANNER -->
+    <div class="panel" id="panel-planner">
+      <div class="planner-hdr">
+        <h2>📅 Strategy 2026 — Class Planner</h2>
+        <div class="planner-legend">
+          <div class="leg-item"><div class="leg-dot" style="background:var(--complete)"></div>Done</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--planner)"></div>Today</div>
+          <div class="leg-item"><div class="leg-dot" style="background:var(--uworld)"></div>In Progress</div>
+          <div class="leg-divider"></div>
+          <div class="leg-item"><span style="font-size:0.63rem;background:#ea6c0a;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">BC</span>&nbsp;Bootcamp</div>
+          <div class="leg-item"><span style="font-size:0.63rem;background:#2563eb;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">BnB</span>&nbsp;Boards &amp; Beyond</div>
+          <div class="leg-item"><span style="font-size:0.63rem;background:#dc2626;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">PT</span>&nbsp;Pathoma</div>
+          <div class="leg-item"><span style="font-size:0.63rem;background:#059669;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">SKP</span>&nbsp;Sketchy Pharm</div>
+          <div class="leg-item"><span style="font-size:0.63rem;background:#7c3aed;color:#fff;padding:1px 5px;border-radius:6px;font-weight:700">SKPa</span>&nbsp;Sketchy Path</div>
         </div>
-        <div id="uwQidRef" style="display:none"></div>
-        <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-          <a href="../3rdParty-UWorld-EndocrineQID.html" target="_blank"
-            style="font-size:0.72rem;color:var(--uworld);text-decoration:none;font-weight:600">
-            Open full QID list ↗
-          </a>
-          &nbsp;&middot;&nbsp;
-          <a href="../3rdParty-UWorld-LO_QID.html" target="_blank"
-            style="font-size:0.72rem;color:var(--uworld);text-decoration:none;font-weight:600">
-            Open LO → QID mapping ↗
-          </a>
+      </div>
+      <div class="planner-hint">💡 Select up to <strong>2 resources</strong> per lecture. Resources never selected will be automatically crossed out in the Resources tab and excluded from your progress totals.</div>
+      <div class="ps-strip" id="psSummary"></div>
+      <div class="planner-table">
+        <div class="pt-head">
+          <div class="pt-th"></div>
+          <div class="pt-th">Date</div>
+          <div class="pt-th">Subject</div>
+          <div class="pt-th">Class &amp; Resources</div>
+          <div class="pt-th">Status</div>
+          <div class="pt-th">Notes</div>
         </div>
+        <div id="plannerRows"></div>
       </div>
     </div>
 
@@ -595,6 +503,53 @@ textarea.uw-notes::placeholder{color:var(--dim)}
 
 <script>
 // ═══════════════════════════════ DATA ══════════════════════════════════
+
+const DISCIPLINES = [
+  { id:'physio', name:'Physiology', color:'var(--physio)', ck:'physio', sub:'Dr. Watson · 7 Lectures',
+    items:[
+      {id:'ph1',label:'Hypothalamic-Pituitary Relationships I',tag:'L1'},
+      {id:'ph2',label:'Hypothalamic-Pituitary Relationships II',tag:'L2'},
+      {id:'ph3',label:'Posterior Pituitary Hormones',tag:'L3'},
+      {id:'ph4',label:'Growth Hormone (GH) Axis',tag:'L4'},
+      {id:'ph5',label:'Hypothalamic-Pituitary-Adrenal Axis',tag:'L5'},
+      {id:'ph6',label:'Stress, Stress Hormones & Pathophysiology Integration',tag:'L6'},
+      {id:'ph7',label:'Hypothalamic-Pituitary-Thyroid Axis',tag:'L7'},
+    ]
+  },
+  { id:'biochem', name:'Biochemistry', color:'var(--biochem)', ck:'biochem', sub:'Danielsen, Sherman · 5 Lectures',
+    items:[
+      {id:'bch1',label:'Introduction to Hormone Action',tag:'L1 · Danielsen'},
+      {id:'bch2',label:'Adrenal Hormone Synthesis & Action',tag:'L2 · Danielsen'},
+      {id:'bch3',label:'Sex Steroid Synthesis & Action',tag:'L3 · Danielsen'},
+      {id:'bch4',label:'Posterior Pituitary Hormones',tag:'L4 · Sherman'},
+      {id:'bch5',label:'Thyroid Hormone Synthesis & Action',tag:'L5 · Danielsen'},
+    ]
+  },
+  { id:'path', name:'Pathology', color:'var(--path)', ck:'path', sub:'Santi, Wieneke, Furlong · 5 Topics',
+    items:[
+      {id:'pa1',label:'Pituitary Pathology',tag:'Santi'},
+      {id:'pa2',label:'Thyroid & Parathyroid Pathology',tag:'Wieneke'},
+      {id:'pa3',label:'Adrenal Pathology',tag:'Wieneke'},
+      {id:'pa4',label:'Pathophysiology of Diabetes Mellitus',tag:'Furlong'},
+      {id:'pa5',label:'Endocrine Pathology Lab',tag:'Furlong'},
+    ]
+  },
+  { id:'pharm', name:'Pharmacology', color:'var(--pharm)', ck:'pharm', sub:'Janicic, Jonklaas, Sharma · 6 Topics',
+    items:[
+      {id:'pk1',label:'Type I & II Diabetes — Pharmacotherapy',tag:'Janicic'},
+      {id:'pk2',label:'Diabetes Clinical Cases (TBL)',tag:'Janicic'},
+      {id:'pk3',label:'Diagnosis & Treatment of Pituitary Disorders',tag:'Jonklaas'},
+      {id:'pk4',label:'Diagnosis & Treatment of Thyroid Disorders',tag:'Jonklaas'},
+      {id:'pk5',label:'TBL: Pituitary & Thyroid Disorders',tag:'Jonklaas'},
+      {id:'pk6',label:'Diagnosis & Treatment of Adrenal Disorders',tag:'Sharma'},
+    ]
+  },
+  { id:'histo', name:'Histology', color:'var(--histo)', ck:'histo', sub:'Dr. Notario · 1 Topic',
+    items:[
+      {id:'hi1',label:'Thyroid, Parathyroid & Adrenal Histology',tag:'Notario'},
+    ]
+  }
+];
 
 const RESOURCES = [
   { id:'nk', name:'NK Review Guides', color:'var(--resources)', ck:'resources', sub:'GUSOM Custom Review Guides',
@@ -684,6 +639,7 @@ const RESOURCES = [
   }
 ];
 
+// Classes with actual dates from Endocrine_Mapping.xlsx (Apr–May 2026)
 const CLASSES = [
   {id:'pl1',  subj:'Biochem', date:'Apr 20', cls:'Introduction to Hormones'},
   {id:'pl2',  subj:'Phys',   date:'Apr 20', cls:'Hypothalamic Pituitary Relationships I'},
@@ -712,68 +668,30 @@ const CLASSES = [
   {id:'pl25', subj:'Pharm',  date:'May 29', cls:'TBL — Pituitary & Thyroid Disorders'},
 ];
 
-// QIDs per lecture from GUSOM-UWorld-LectureMapping.xlsx (By Lecture sheet)
-const UW_LEC_DEFAULTS = {
-  pl1:42, pl2:4,  pl3:11, pl4:14, pl5:4,  pl6:5,  pl7:17, pl8:17, pl9:2,
-  pl10:1, pl11:14,pl12:0, pl13:47,pl14:20,pl15:16,pl16:49,pl17:41,pl18:41,
-  pl19:29,pl20:16,pl21:0, pl22:1, pl23:0, pl24:1, pl25:0
-};
-
-// QID reference by subtopic (sourced from 3rdParty-UWorld-EndocrineQID)
-const UW_QIDS = [
-  {section:'Pituitary', tid:'uwt_pit', color:'#9333ea', subtopics:[
-    {name:'Pituitary Gland', count:17, qids:'8702, 15303, 1152, 18948, 224, 15209, 1561, 18553, 214, 213, 1379, 225, 210, 206, 20588, 7670, 7671'},
-  ]},
-  {section:'Thyroid & Parathyroid', tid:'uwt_thy', color:'#2563eb', subtopics:[
-    {name:'Thyroid Gland', count:15, qids:'1213, 19754, 15028, 1407, 19752, 772, 1615, 770, 14985, 20168, 763, 19746, 767, 19753, 626'},
-    {name:'Thyroid Disorders', count:14, qids:'768, 14953, 20375, 983, 764, 769, 19747, 19946, 20146, 622, 14951, 1945, 19745, 12512'},
-    {name:'Thyroid Cancer', count:2, qids:'17236, 1747'},
-    {name:'Parathyroid Glands', count:18, qids:'641, 15270, 15289, 18863, 631, 11977, 795, 19947, 992, 15291, 640, 1686, 11660, 22188, 543, 979, 978, 15280'},
-  ]},
-  {section:'Adrenal', tid:'uwt_adr', color:'#dc2626', subtopics:[
-    {name:'Adrenal Glands', count:13, qids:'21524, 549, 8424, 18801, 687, 18803, 1773, 17247, 19975, 14899, 989, 608, 609'},
-    {name:'Congenital Adrenal Hyperplasia', count:6, qids:'2080, 2081, 924, 19030, 610, 930'},
-    {name:'Adrenal Disorders', count:10, qids:'1263, 17246, 454, 928, 295, 1921, 931, 927, 152, 932'},
-  ]},
-  {section:'Diabetes & Glucose', tid:'uwt_diab', color:'#ea6c0a', subtopics:[
-    {name:'Endocrine Pancreas', count:4, qids:'1768, 15881, 585, 1121'},
-    {name:'Diabetes', count:17, qids:'846, 1913, 848, 11040, 1012, 107, 985, 1011, 1996, 15675, 106, 15668, 18951, 1059, 921, 19407, 15652'},
-    {name:'Insulin', count:4, qids:'600, 15876, 850, 1324'},
-    {name:'Treatment of Diabetes', count:17, qids:'920, 6772, 11565, 18952, 18956, 18457, 16324, 15770, 15308, 18958, 1984, 14136, 8531, 607, 606, 1655, 604'},
-  ]},
-  {section:'Sex Hormones / Gonads', tid:'uwt_sex', color:'#059669', subtopics:[
-    {name:'Reproductive Hormones', count:15, qids:'14952, 879, 954, 656, 19007, 208, 7606, 209, 216, 19189, 1560, 100, 207, 217, 579'},
-    {name:'Male Reproductive', count:10, qids:'1725, 658, 107781, 19000, 16236, 1726, 8930, 13776, 11920, 1449'},
-    {name:'Female Reproductive', count:5, qids:'18747, 1899, 577, 18654, 12512'},
-    {name:'Menstrual Cycle', count:8, qids:'1917, 1839, 1809, 925, 218, 215, 21791, 1986'},
-  ]},
-  {section:'Misc. Endocrine', tid:'uwt_misc', color:'#d97706', subtopics:[
-    {name:'MEN Syndromes', count:7, qids:'15105, 988, 1658, 1844, 1660, 1845, 1659'},
-    {name:'Signaling Pathways', count:4, qids:'1720, 143, 995, 1122'},
-  ]},
+const UW_TOPICS = [
+  {id:'uwt_pit',  label:'Pituitary'},
+  {id:'uwt_thy',  label:'Thyroid & Parathyroid'},
+  {id:'uwt_adr',  label:'Adrenal'},
+  {id:'uwt_diab', label:'Diabetes & Glucose'},
+  {id:'uwt_sex',  label:'Sex Hormones / Gonads'},
+  {id:'uwt_misc', label:'Misc. Endocrine'},
 ];
 
-const SUBJ_COLOR = {Biochem:'var(--biochem)',Phys:'var(--physio)',Path:'var(--path)',Pharm:'var(--pharm)',Hist:'var(--histo)'};
-const SUBJ_CK    = {Biochem:'biochem',Phys:'physio',Path:'path',Pharm:'pharm',Hist:'histo'};
-const RT_NAMES   = {bootcamp:'Bootcamp',bnb:'Boards & Beyond',pathoma:'Pathoma',skpharm:'Sketchy Pharm',skpath:'Sketchy Path'};
-const RT_COLOR   = {bootcamp:'#ea6c0a',bnb:'#2563eb',pathoma:'#dc2626',skpharm:'#059669',skpath:'#7c3aed'};
-const RC_LABELS  = {bootcamp:'BC',bnb:'BnB',pathoma:'PT',skpharm:'SKP',skpath:'SKPa'};
-
-// Sidebar quick-view
 const SB_DISC = [
-  {name:'Physiology',   ck:'physio',   lec:true, ids:()=>CLASSES.filter(c=>c.subj==='Phys').map(c=>'lec_'+c.id),   panel:'checklist'},
-  {name:'Biochemistry', ck:'biochem',  lec:true, ids:()=>CLASSES.filter(c=>c.subj==='Biochem').map(c=>'lec_'+c.id), panel:'checklist'},
-  {name:'Pathology',    ck:'path',     lec:true, ids:()=>CLASSES.filter(c=>c.subj==='Path').map(c=>'lec_'+c.id),    panel:'checklist'},
-  {name:'Pharmacology', ck:'pharm',    lec:true, ids:()=>CLASSES.filter(c=>c.subj==='Pharm').map(c=>'lec_'+c.id),   panel:'checklist'},
-  {name:'Histology',    ck:'histo',    lec:true, ids:()=>CLASSES.filter(c=>c.subj==='Hist').map(c=>'lec_'+c.id),    panel:'checklist'},
-  {name:'NK Guides',    ck:'resources',lec:false,ids:()=>RESOURCES.find(r=>r.id==='nk').items.map(i=>i.id),         panel:'resources'},
-  {name:'Bootcamp',     ck:'uworld',   lec:false,ids:()=>RESOURCES.find(r=>r.id==='bootcamp').items.filter(i=>!isOptedOut(i.id)).map(i=>i.id), panel:'resources'},
-  {name:'Sketchy Pharm',ck:'pharm',    lec:false,ids:()=>RESOURCES.find(r=>r.id==='skpharm').items.filter(i=>!isOptedOut(i.id)).map(i=>i.id), panel:'resources'},
-  {name:'Sketchy Path', ck:'biochem',  lec:false,ids:()=>RESOURCES.find(r=>r.id==='skpath').items.filter(i=>!isOptedOut(i.id)).map(i=>i.id),  panel:'resources'},
-  {name:'Pathoma',      ck:'path',     lec:false,ids:()=>RESOURCES.find(r=>r.id==='pathoma').items.filter(i=>!isOptedOut(i.id)).map(i=>i.id), panel:'resources'},
+  {name:'Physiology',    ck:'physio',    items:()=>DISCIPLINES.find(d=>d.id==='physio').items,   panel:'topics'},
+  {name:'Biochemistry',  ck:'biochem',   items:()=>DISCIPLINES.find(d=>d.id==='biochem').items,  panel:'topics'},
+  {name:'Pathology',     ck:'path',      items:()=>DISCIPLINES.find(d=>d.id==='path').items,     panel:'topics'},
+  {name:'Pharmacology',  ck:'pharm',     items:()=>DISCIPLINES.find(d=>d.id==='pharm').items,    panel:'topics'},
+  {name:'Histology',     ck:'histo',     items:()=>DISCIPLINES.find(d=>d.id==='histo').items,    panel:'topics'},
+  {name:'NK Guides',     ck:'resources', items:()=>RESOURCES.find(r=>r.id==='nk').items,         panel:'resources'},
+  {name:'Bootcamp',      ck:'uworld',    items:()=>RESOURCES.find(r=>r.id==='bootcamp').items,   panel:'resources'},
+  {name:'Sketchy Pharm', ck:'pharm',     items:()=>RESOURCES.find(r=>r.id==='skpharm').items,    panel:'resources'},
+  {name:'Sketchy Path',  ck:'biochem',   items:()=>RESOURCES.find(r=>r.id==='skpath').items,     panel:'resources'},
+  {name:'Pathoma',       ck:'path',      items:()=>RESOURCES.find(r=>r.id==='pathoma').items,    panel:'resources'},
 ];
 
 // ═══════════════ HEATMAP: lecture → available resource types ════════════
+// Derived from Endocrine_Mapping.xlsx "Resource Matrix" sheet
 const HEATMAP = {
   pl1:  ['bootcamp','bnb'],
   pl2:  ['bootcamp','bnb','skpharm','skpath'],
@@ -802,359 +720,129 @@ const HEATMAP = {
   pl25: ['bootcamp','bnb'],
 };
 
+// ═══════════ ITEM_LECS: resource item → lectures that reference it ═══════
 const ITEM_LECS = {
-  bc1:['pl1','pl2'], bc2:['pl5','pl6','pl7','pl8','pl9','pl21'],
-  bc3:['pl10','pl11','pl12','pl13','pl14','pl21','pl25'], bc4:['pl11','pl13'],
-  bc5:['pl3','pl4','pl11','pl15','pl19','pl20','pl22'], bc6:['pl16','pl17','pl18','pl23','pl24'],
-  bnb1:['pl1','pl2','pl5','pl6','pl7','pl8','pl9'], bnb2:['pl10','pl11','pl12','pl13','pl14','pl21','pl25'],
-  bnb3:['pl11','pl13'], bnb4:['pl3','pl4','pl11','pl15','pl19','pl20','pl22'],
-  bnb5:['pl16','pl17','pl18','pl24'], bnb6:['pl4','pl5'],
-  pto1:['pl7'], pto2:['pl11','pl13'], pto3:['pl11','pl13'], pto4:['pl11','pl13'],
-  pto5:['pl16'], pto6:['pl19'], pto7:['pl23'],
-  skp1:['pl17','pl18','pl24'], skp2:['pl17','pl18','pl24'], skp3:['pl11','pl13','pl14'],
-  skp4:['pl11','pl13'], skp5:['pl11','pl13'], skp6:['pl19','pl20'],
-  skp7:['pl6','pl8','pl9'], skp8:['pl6','pl8','pl9'],
-  skpa1:['pl2','pl5','pl6','pl7','pl8','pl9'], skpa2:['pl2','pl5','pl6','pl7','pl8','pl9'],
-  skpa3:['pl6','pl7','pl8'], skpa4:['pl3','pl11','pl15','pl19','pl20'],
-  skpa5:['pl3','pl11','pl15','pl19','pl20'], skpa6:['pl16','pl17','pl23'],
-  skpa7:['pl16','pl17','pl23'], skpa8:['pl10','pl11','pl12','pl13','pl14','pl23'],
-  skpa9:['pl10','pl11','pl12','pl13','pl14','pl23'], skpa10:['pl11','pl13','pl23'],
-  skpa11:['pl11','pl13'],
+  // Bootcamp chapters
+  bc1:  ['pl1','pl2'],
+  bc2:  ['pl5','pl6','pl7','pl8','pl9','pl21'],
+  bc3:  ['pl10','pl11','pl12','pl13','pl14','pl21','pl25'],
+  bc4:  ['pl11','pl13'],
+  bc5:  ['pl3','pl4','pl11','pl15','pl19','pl20','pl22'],
+  bc6:  ['pl16','pl17','pl18','pl23','pl24'],
+  // Boards & Beyond chapters
+  bnb1: ['pl1','pl2','pl5','pl6','pl7','pl8','pl9'],
+  bnb2: ['pl10','pl11','pl12','pl13','pl14','pl21','pl25'],
+  bnb3: ['pl11','pl13'],
+  bnb4: ['pl3','pl4','pl11','pl15','pl19','pl20','pl22'],
+  bnb5: ['pl16','pl17','pl18','pl24'],
+  bnb6: ['pl4','pl5'],
+  // Pathoma Ch. 15
+  pto1: ['pl7'],
+  pto2: ['pl11','pl13'],
+  pto3: ['pl11','pl13'],
+  pto4: ['pl11','pl13'],
+  pto5: ['pl16'],
+  pto6: ['pl19'],
+  pto7: ['pl23'],
+  // Sketchy Pharm
+  skp1: ['pl17','pl18','pl24'],
+  skp2: ['pl17','pl18','pl24'],
+  skp3: ['pl11','pl13','pl14'],
+  skp4: ['pl11','pl13'],
+  skp5: ['pl11','pl13'],
+  skp6: ['pl19','pl20'],
+  skp7: ['pl6','pl8','pl9'],
+  skp8: ['pl6','pl8','pl9'],
+  // Sketchy Path
+  skpa1:  ['pl2','pl5','pl6','pl7','pl8','pl9'],
+  skpa2:  ['pl2','pl5','pl6','pl7','pl8','pl9'],
+  skpa3:  ['pl6','pl7','pl8'],
+  skpa4:  ['pl3','pl11','pl15','pl19','pl20'],
+  skpa5:  ['pl3','pl11','pl15','pl19','pl20'],
+  skpa6:  ['pl16','pl17','pl23'],
+  skpa7:  ['pl16','pl17','pl23'],
+  skpa8:  ['pl10','pl11','pl12','pl13','pl14','pl23'],
+  skpa9:  ['pl10','pl11','pl12','pl13','pl14','pl23'],
+  skpa10: ['pl11','pl13','pl23'],
+  skpa11: ['pl11','pl13'],
+  // NK guides, practice Qs, Anki: no ITEM_LECS entry → never opted out
 };
 
+// ═══════════════ ITEM_RT: item → resource type key ════════════════
 const ITEM_RT = {
-  bc1:'bootcamp',bc2:'bootcamp',bc3:'bootcamp',bc4:'bootcamp',bc5:'bootcamp',bc6:'bootcamp',
-  bnb1:'bnb',bnb2:'bnb',bnb3:'bnb',bnb4:'bnb',bnb5:'bnb',bnb6:'bnb',
-  pto1:'pathoma',pto2:'pathoma',pto3:'pathoma',pto4:'pathoma',pto5:'pathoma',pto6:'pathoma',pto7:'pathoma',
-  skp1:'skpharm',skp2:'skpharm',skp3:'skpharm',skp4:'skpharm',skp5:'skpharm',skp6:'skpharm',skp7:'skpharm',skp8:'skpharm',
-  skpa1:'skpath',skpa2:'skpath',skpa3:'skpath',skpa4:'skpath',skpa5:'skpath',skpa6:'skpath',
-  skpa7:'skpath',skpa8:'skpath',skpa9:'skpath',skpa10:'skpath',skpa11:'skpath',
+  bc1:'bootcamp', bc2:'bootcamp', bc3:'bootcamp', bc4:'bootcamp', bc5:'bootcamp', bc6:'bootcamp',
+  bnb1:'bnb', bnb2:'bnb', bnb3:'bnb', bnb4:'bnb', bnb5:'bnb', bnb6:'bnb',
+  pto1:'pathoma', pto2:'pathoma', pto3:'pathoma', pto4:'pathoma', pto5:'pathoma', pto6:'pathoma', pto7:'pathoma',
+  skp1:'skpharm', skp2:'skpharm', skp3:'skpharm', skp4:'skpharm',
+  skp5:'skpharm', skp6:'skpharm', skp7:'skpharm', skp8:'skpharm',
+  skpa1:'skpath', skpa2:'skpath', skpa3:'skpath', skpa4:'skpath', skpa5:'skpath', skpa6:'skpath',
+  skpa7:'skpath', skpa8:'skpath', skpa9:'skpath', skpa10:'skpath', skpa11:'skpath',
 };
 
-// Duration in minutes per resource item
-const ITEM_MINS = {
-  bc1:29, bc2:77, bc3:113, bc4:57, bc5:153, bc6:90,
-  bnb1:28, bnb2:78, bnb3:28, bnb4:72, bnb5:89, bnb6:57,
-  pto1:14, pto2:11, pto3:5,  pto4:11, pto5:15, pto6:13, pto7:12,
-  skp1:30, skp2:24, skp3:22, skp4:18, skp5:19, skp6:21, skp7:19, skp8:18,
-  skpa1:12, skpa2:25, skpa3:27, skpa4:22, skpa5:25, skpa6:29,
-  skpa7:23, skpa8:21, skpa9:19, skpa10:29, skpa11:12,
-};
-
-function fmtTime(mins){
-  if(mins<60) return mins+' min';
-  const h=Math.floor(mins/60);const m=mins%60;
-  return m===0?h+' hr':h+' hr '+m+' min';
-}
-function calcLecTime(cls){
-  const cid=cls.id;
-  const lecSelected=(S.planner[cid+'_res']||[]).includes('lecture');
-  const resItems=getLecItemsForLecture(cid);
-  let mins=15; // MNTS always
-  if(lecSelected) mins+=60;
-  resItems.forEach(item=>{mins+=ITEM_MINS[item.id]||0;});
-  return fmtTime(mins);
-}
+const RC_LABELS = {bootcamp:'BC', bnb:'BnB', pathoma:'PT', skpharm:'SKP', skpath:'SKPa'};
 
 // ═══════════════════════════════ STATE ════════════════════════════════
-let S = {checks:{},uworld:{},planner:{},activity:[]};
+
+let S = {checks:{}, uworld:{}, planner:{}, activity:[]};
 
 function loadState(){
   try{
-    const r=localStorage.getItem('endo_v4');
-    if(r) S=JSON.parse(r);
-    ['checks','uworld','planner'].forEach(k=>{if(!S[k])S[k]={};});
+    const r = localStorage.getItem('endo_v4');
+    if(r) S = JSON.parse(r);
+    ['checks','uworld','planner'].forEach(k=>{ if(!S[k]) S[k]={}; });
     if(!S.activity) S.activity=[];
   }catch(e){}
 }
-function saveState(){try{localStorage.setItem('endo_v4',JSON.stringify(S));}catch(e){}}
+function saveState(){ try{ localStorage.setItem('endo_v4', JSON.stringify(S)); }catch(e){} }
 
 // ═══════════════════════════════ OPTED-OUT ════════════════════════════
+
 function isOptedOut(itemId){
-  const lecs=ITEM_LECS[itemId];
-  if(!lecs||lecs.length===0) return false;
-  const rt=ITEM_RT[itemId];
+  const lecs = ITEM_LECS[itemId];
+  if(!lecs || lecs.length===0) return false;
+  const rt = ITEM_RT[itemId];
   if(!rt) return false;
-  // Only count lectures where user has made a 3rd-party decision (exclude 'lecture' from count)
-  const decided=lecs.filter(lid=>(S.planner[lid+'_res']||[]).filter(r=>r!=='lecture').length>0);
+  // Only lectures that have had any resource selections made count as "decided"
+  const decided = lecs.filter(lid=>(S.planner[lid+'_res']||[]).length>0);
   if(decided.length===0) return false;
+  // Opted out if NONE of the decided lectures selected this resource type
   return !decided.some(lid=>(S.planner[lid+'_res']||[]).includes(rt));
 }
 
 // ═══════════════════════════════ NAV ══════════════════════════════════
-const PANEL_NAMES={overview:'Overview',planner:'Strategy 2026 Planner',schedule:'Study Order',checklist:'Checklist',resources:'Resources',uworld:'UWorld'};
-function switchPanel(id,btn){
+
+const PANEL_NAMES = {overview:'Overview',topics:'Topics',resources:'Resources',uworld:'UWorld',planner:'Strategy 2026 Planner'};
+
+function switchPanel(id, btn){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
   if(btn) btn.classList.add('active');
-  document.getElementById('topbarTitle').textContent=PANEL_NAMES[id]||id;
+  document.getElementById('topbarTitle').textContent = PANEL_NAMES[id]||id;
 }
 
-// ═══════════════ CHECKLIST: per-lecture cards ════════════════════════════
+// ═══════════════════════════ SECTION CARDS ════════════════════════════
 
-function getLecItemsForLecture(cid){
-  // Filter out 'lecture' — only return actual 3rd-party resource types
-  const selectedRTs=(S.planner[cid+'_res']||[]).filter(r=>r!=='lecture');
-  if(!selectedRTs.length) return [];
-  const result=[];
-  const seen=new Set();
-  for(const section of RESOURCES){
-    for(const item of section.items){
-      if(seen.has(item.id)) continue;
-      const rt=ITEM_RT[item.id];
-      if(!rt||!selectedRTs.includes(rt)) continue;
-      if(!(ITEM_LECS[item.id]||[]).includes(cid)) continue;
-      seen.add(item.id);
-      result.push({id:item.id,label:item.label,tag:item.tag,rt,sectionCk:section.ck});
-    }
-  }
-  return result;
-}
-
-function getLecProgress(cls){
-  const mntsId='mnts_'+cls.id;
-  const lecId='lec_'+cls.id;
-  const lecSelected=(S.planner[cls.id+'_res']||[]).includes('lecture');
-  const resItems=getLecItemsForLecture(cls.id);
-  // MNTS is always counted
-  let total=1+resItems.length;
-  let done=(S.checks[mntsId]?1:0)+resItems.filter(i=>S.checks[i.id]).length;
-  // Lecture notes only counted if 'lecture' chip selected
-  if(lecSelected){total+=1;if(S.checks[lecId])done+=1;}
-  return{done,total,pct:total?Math.round(done/total*100):0};
-}
-
-function buildLectureCard(cls){
-  const card=document.createElement('div');
-  card.className='sc';
-  card.id='card_'+cls.id;
-  const color=SUBJ_COLOR[cls.subj]||'var(--muted)';
-  const lecId='lec_'+cls.id;
-  const mntsId='mnts_'+cls.id;
-  const {done,total,pct}=getLecProgress(cls);
-  const resItems=getLecItemsForLecture(cls.id);
-  const selectedRTs=(S.planner[cls.id+'_res']||[]).filter(r=>r!=='lecture');
-  const lecSelected=(S.planner[cls.id+'_res']||[]).includes('lecture');
-
-  // Group resource items by RT, in selection order
-  const byRT={};
-  resItems.forEach(item=>{
-    if(!byRT[item.rt]) byRT[item.rt]=[];
-    byRT[item.rt].push(item);
-  });
-
-  // ── Lecture section (always shown) ─────────────────────────────────
-  const mntsRowCls=['item-row',S.checks[mntsId]?'checked':''].filter(Boolean).join(' ');
-  const mntsRow=`<div class="${mntsRowCls}" data-item-id="${mntsId}" onclick="toggleMntsCheck('${cls.id}')">
-    <div class="item-check">${S.checks[mntsId]?'&#10003;':''}</div>
-    <div class="item-label">&#9733; Reviewed MNTS</div>
-    <div class="item-tag" style="background:#47556922;color:#475569">15 min</div>
-  </div>`;
-
-  let lecRow='';
-  if(lecSelected){
-    const lecRowCls=['item-row',S.checks[lecId]?'checked':''].filter(Boolean).join(' ');
-    lecRow=`<div class="${lecRowCls}" data-item-id="${lecId}" onclick="toggleLecCheck('${cls.id}')">
-      <div class="item-check">${S.checks[lecId]?'&#10003;':''}</div>
-      <div class="item-label">&#128218; Lecture</div>
-      <div class="item-tag" style="background:${color}22;color:${color}">60 min</div>
-    </div>`;
-  }
-
-  const lecSectionHeader=`<div class="lec-res-hdr" style="border-top:none;margin-top:0">
-    <span class="lec-res-hdr-dot" style="background:#475569"></span>Lecture
-  </div>`;
-
-  // ── 3rd-party resource rows ──────────────────────────────────────────
-  let resHTML='';
-  if(selectedRTs.length>0){
-    selectedRTs.forEach(rt=>{
-      const items=byRT[rt]||[];
-      if(!items.length) return;
-      const dot=`<span class="lec-res-hdr-dot" style="background:${RT_COLOR[rt]||'var(--dim)'}"></span>`;
-      resHTML+=`<div class="lec-res-hdr">${dot}${RT_NAMES[rt]||rt}</div>`;
-      resHTML+=items.map(item=>{
-        const rowCls=['item-row',S.checks[item.id]?'checked':''].filter(Boolean).join(' ');
-        const itemMins=ITEM_MINS[item.id]||0;
-        return `<div class="${rowCls}" data-item-id="${item.id}" onclick="toggleLecItem('${item.id}','${cls.id}')">
-          <div class="item-check">${S.checks[item.id]?'&#10003;':''}</div>
-          <div class="item-label">${item.label}</div>
-          <div class="item-tag">${itemMins?itemMins+' min':item.tag}</div>
-        </div>`;
-      }).join('');
-    });
-  }
-
-  if(!lecSelected && selectedRTs.length===0){
-    resHTML='<div class="lec-no-res">No resources selected — use LEC and resource chips in Planner to customize this checklist.</div>';
-  }
-
-  // ── Total time ────────────────────────────────────────────────────────
-  const totalTime=calcLecTime(cls);
-
-  card.innerHTML=`
-    <div class="sc-head" onclick="toggleCard('${cls.id}')">
-      <div class="sc-stripe" style="background:${color}"></div>
-      <div class="sc-meta">
-        <div class="sc-name">${cls.cls}</div>
-        <div class="sc-sub">${cls.date} &middot; ${cls.subj} &middot; <span id="time_${cls.id}" style="color:var(--dim)">~${totalTime}</span></div>
-      </div>
-      <div class="sc-right">
-        <div class="sc-pct" id="pct_${cls.id}">${pct}%</div>
-        <div class="mini-bar"><div class="mini-bar-fill" id="bar_${cls.id}" style="width:${pct}%;background:${color}"></div></div>
-        <span class="sc-chev">&#9660;</span>
-      </div>
-    </div>
-    <div class="sc-items" id="items_${cls.id}">
-      ${lecSectionHeader}
-      ${mntsRow}
-      ${lecRow}
-      ${resHTML}
-    </div>`;
-  return card;
-}
-
-function renderTopics(){
-  // Preserve open cards so re-render doesn't collapse them
-  const openIds=new Set();
-  document.querySelectorAll('#topicsContainer .sc.open').forEach(el=>{
-    const m=el.id.match(/^card_(.+)$/);
-    if(m) openIds.add(m[1]);
-  });
-  const c=document.getElementById('topicsContainer');
-  c.innerHTML='';
-  CLASSES.forEach(cls=>{
-    const card=buildLectureCard(cls);
-    if(openIds.has(cls.id)) card.classList.add('open');
-    c.appendChild(card);
-  });
-}
-
-function refreshLectureBar(cid){
-  const cls=CLASSES.find(c=>c.id===cid);
-  if(!cls) return;
-  const {pct}=getLecProgress(cls);
-  const color=SUBJ_COLOR[cls.subj]||'var(--muted)';
-  const pe=document.getElementById('pct_'+cid);
-  const be=document.getElementById('bar_'+cid);
-  if(pe) pe.textContent=pct+'%';
-  if(be) be.style.width=pct+'%';
-}
-
-// Toggle the "Reviewed MNTS" checkbox
-function toggleMntsCheck(cid){
-  const mntsId='mnts_'+cid;
-  const was=!!S.checks[mntsId];
-  S.checks[mntsId]=!was;
-  if(!was){
-    const cls=CLASSES.find(c=>c.id===cid);
-    const now=new Date();
-    S.activity.unshift({
-      text:`Reviewed MNTS: ${cls?cls.cls:'lecture'}`,
-      ck:SUBJ_CK[cls?.subj]||'physio',
-      time:now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
-    });
-    if(S.activity.length>30) S.activity=S.activity.slice(0,30);
-  }
-  saveState();
-  document.querySelectorAll(`[data-item-id="${mntsId}"]`).forEach(r=>{
-    r.classList.toggle('checked',S.checks[mntsId]);
-    const chk=r.querySelector('.item-check');
-    if(chk) chk.innerHTML=S.checks[mntsId]?'&#10003;':'';
-  });
-  refreshLectureBar(cid);
-  refreshAll();
-}
-
-// Toggle the "reviewed lecture notes" checkbox
-function toggleLecCheck(cid){
-  const lecId='lec_'+cid;
-  const was=!!S.checks[lecId];
-  S.checks[lecId]=!was;
-  if(!was){
-    const cls=CLASSES.find(c=>c.id===cid);
-    const now=new Date();
-    S.activity.unshift({
-      text:`Reviewed lecture: ${cls?cls.cls:'lecture'}`,
-      ck:SUBJ_CK[cls?.subj]||'physio',
-      time:now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
-    });
-    if(S.activity.length>30) S.activity=S.activity.slice(0,30);
-  }
-  saveState();
-  document.querySelectorAll(`[data-item-id="${lecId}"]`).forEach(r=>{
-    r.classList.toggle('checked',S.checks[lecId]);
-    const chk=r.querySelector('.item-check');
-    if(chk) chk.innerHTML=S.checks[lecId]?'&#10003;':'';
-  });
-  refreshLectureBar(cid);
-  refreshAll();
-}
-
-// Toggle a 3rd-party resource item clicked from inside a lecture card
-function toggleLecItem(itemId,cid){
-  if(isOptedOut(itemId)) return;
-  const was=!!S.checks[itemId];
-  S.checks[itemId]=!was;
-  if(!was){
-    let label=itemId;
-    for(const s of RESOURCES){const i=s.items.find(x=>x.id===itemId);if(i){label=i.label;break;}}
-    const now=new Date();
-    S.activity.unshift({
-      text:`Completed: ${label}`,
-      ck:ITEM_RT[itemId]||'resources',
-      time:now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
-    });
-    if(S.activity.length>30) S.activity=S.activity.slice(0,30);
-  }
-  saveState();
-  // Update all lecture card rows showing this item (data-item-id)
-  document.querySelectorAll(`[data-item-id="${itemId}"]`).forEach(r=>{
-    r.classList.toggle('checked',S.checks[itemId]);
-    const chk=r.querySelector('.item-check');
-    if(chk) chk.innerHTML=S.checks[itemId]?'&#10003;':'';
-  });
-  // Update Resources tab row (id-based)
-  const resRow=document.getElementById('row_'+itemId);
-  if(resRow){
-    resRow.classList.toggle('checked',S.checks[itemId]);
-    const chk=resRow.querySelector('.item-check');
-    if(chk) chk.innerHTML=S.checks[itemId]?'&#10003;':'';
-  }
-  // Refresh lecture bars for every lecture that displays this item
-  (ITEM_LECS[itemId]||[]).forEach(lid=>{
-    if((S.planner[lid+'_res']||[]).filter(r=>r!=='lecture').includes(ITEM_RT[itemId])) refreshLectureBar(lid);
-  });
-  // Refresh Resources section bar
-  for(const sec of RESOURCES){
-    if(sec.items.some(i=>i.id===itemId)){refreshSectionBar(sec.id,sec,true);break;}
-  }
-  refreshAll();
-}
-
-// ═══════════════════════ RESOURCES SECTION CARDS ══════════════════════
-
-function buildCard(section){
-  const card=document.createElement('div');
-  card.className='sc';
-  card.id='card_'+section.id;
-  const activeItems=section.items.filter(i=>!isOptedOut(i.id));
-  const c=activeItems.filter(i=>S.checks[i.id]).length;
-  const t=activeItems.length;
-  const pct=t?Math.round(c/t*100):0;
-  const itemsHTML=section.items.map(item=>{
-    const optedOut=isOptedOut(item.id);
-    const rowCls=['item-row',S.checks[item.id]?'checked':'',optedOut?'opted-out':''].filter(Boolean).join(' ');
-    const onclk=optedOut?'':` onclick="toggleItem('${item.id}','${section.id}','${section.name}','${section.ck}')"`;
-    return `<div class="${rowCls}" id="row_${item.id}"${onclk}>
+function buildCard(section, isResource){
+  const card = document.createElement('div');
+  card.className = 'sc';
+  card.id = 'card_'+section.id;
+  const activeItems = isResource ? section.items.filter(i=>!isOptedOut(i.id)) : section.items;
+  const c = activeItems.filter(i=>S.checks[i.id]).length;
+  const t = activeItems.length;
+  const pct = t ? Math.round(c/t*100) : 0;
+  const itemsHTML = section.items.map(item=>{
+    const optedOut = isResource && isOptedOut(item.id);
+    const rowCls = ['item-row', S.checks[item.id]?'checked':'', optedOut?'opted-out':''].filter(Boolean).join(' ');
+    const onclk = optedOut ? '' : `onclick="toggleItem('${item.id}','${section.id}','${section.name}','${section.ck}')"`;
+    return `<div class="${rowCls}" id="row_${item.id}" ${onclk}>
       <div class="item-check">${S.checks[item.id]?'&#10003;':''}</div>
       <div class="item-label">${item.label}</div>
       <div class="item-tag">${item.tag}</div>
       ${optedOut?'<span class="opted-badge">excluded</span>':''}
     </div>`;
   }).join('');
-  card.innerHTML=`
+  card.innerHTML = `
     <div class="sc-head" onclick="toggleCard('${section.id}')">
       <div class="sc-stripe" style="background:${section.color}"></div>
       <div class="sc-meta">
@@ -1171,220 +859,169 @@ function buildCard(section){
   return card;
 }
 
-function toggleCard(id){document.getElementById('card_'+id).classList.toggle('open');}
-
-function renderResources(){
-  const c=document.getElementById('resourcesContainer');
-  c.innerHTML='';
-  RESOURCES.forEach(r=>c.appendChild(buildCard(r)));
+function toggleCard(id){
+  document.getElementById('card_'+id).classList.toggle('open');
 }
 
-// Toggle item clicked from Resources tab
-function toggleItem(itemId,secId,secName,ck){
+function renderTopics(){
+  const c = document.getElementById('topicsContainer');
+  c.innerHTML = '';
+  DISCIPLINES.forEach(d=>c.appendChild(buildCard(d, false)));
+}
+
+function renderResources(){
+  const c = document.getElementById('resourcesContainer');
+  c.innerHTML = '';
+  RESOURCES.forEach(r=>c.appendChild(buildCard(r, true)));
+}
+
+// ═══════════════════════ OPTED-OUT LIVE UPDATE ════════════════════════
+
+function refreshResourceOptedOut(){
+  RESOURCES.forEach(section=>{
+    let activeCount=0, doneCount=0;
+    section.items.forEach(item=>{
+      const optedOut = isOptedOut(item.id);
+      const row = document.getElementById('row_'+item.id);
+      if(!row) return;
+      row.classList.toggle('opted-out', optedOut);
+      if(optedOut) row.removeAttribute('onclick');
+      else row.setAttribute('onclick',`toggleItem('${item.id}','${section.id}','${section.name}','${section.ck}')`);
+      let badge = row.querySelector('.opted-badge');
+      if(optedOut && !badge){
+        badge = document.createElement('span');
+        badge.className = 'opted-badge';
+        badge.textContent = 'excluded';
+        row.appendChild(badge);
+      } else if(!optedOut && badge){
+        badge.remove();
+      }
+      if(!optedOut){ activeCount++; if(S.checks[item.id]) doneCount++; }
+    });
+    const pct = activeCount ? Math.round(doneCount/activeCount*100) : 0;
+    const pe = document.getElementById('pct_'+section.id);
+    const be = document.getElementById('bar_'+section.id);
+    if(pe) pe.textContent = pct+'%';
+    if(be) be.style.width = pct+'%';
+  });
+}
+
+// ═══════════════════════════ TOGGLE ITEM ══════════════════════════════
+
+function toggleItem(itemId, secId, secName, ck){
   if(isOptedOut(itemId)) return;
-  const was=!!S.checks[itemId];
-  S.checks[itemId]=!was;
-  let label=itemId;
-  for(const s of RESOURCES){const i=s.items.find(x=>x.id===itemId);if(i){label=i.label;break;}}
-  if(!was){
-    const now=new Date();
-    S.activity.unshift({text:`Completed: ${label} (${secName})`,ck,time:now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
+  const was = !!S.checks[itemId];
+  S.checks[itemId] = !was;
+  const allS = [...DISCIPLINES,...RESOURCES];
+  const sec = allS.find(s=>s.id===secId);
+  const item = sec?.items.find(i=>i.id===itemId);
+  if(!was && item){
+    const now = new Date();
+    S.activity.unshift({text:`Completed: ${item.label} (${secName})`,ck,time:now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
     if(S.activity.length>30) S.activity=S.activity.slice(0,30);
   }
   saveState();
-  const row=document.getElementById('row_'+itemId);
-  if(row){row.classList.toggle('checked',S.checks[itemId]);row.querySelector('.item-check').innerHTML=S.checks[itemId]?'&#10003;':'';}
-  // Sync lecture card rows
-  document.querySelectorAll(`[data-item-id="${itemId}"]`).forEach(r=>{
-    r.classList.toggle('checked',S.checks[itemId]);
-    const chk=r.querySelector('.item-check');
-    if(chk) chk.innerHTML=S.checks[itemId]?'&#10003;':'';
-  });
-  // Refresh lecture bars
-  (ITEM_LECS[itemId]||[]).forEach(lid=>{
-    if((S.planner[lid+'_res']||[]).filter(r=>r!=='lecture').includes(ITEM_RT[itemId])) refreshLectureBar(lid);
-  });
-  const sec=RESOURCES.find(s=>s.id===secId);
-  if(sec) refreshSectionBar(secId,sec,true);
+  const row = document.getElementById('row_'+itemId);
+  if(row){
+    row.classList.toggle('checked', S.checks[itemId]);
+    row.querySelector('.item-check').innerHTML = S.checks[itemId]?'&#10003;':'';
+  }
+  refreshSectionBar(secId, sec, true);
   refreshAll();
 }
 
-function refreshSectionBar(secId,sec,isRes){
+function refreshSectionBar(secId, sec, isRes){
   if(!sec) return;
-  const activeItems=isRes?sec.items.filter(i=>!isOptedOut(i.id)):sec.items;
-  const c=activeItems.filter(i=>S.checks[i.id]).length;
-  const t=activeItems.length;
-  const pct=t?Math.round(c/t*100):0;
-  const pe=document.getElementById('pct_'+secId);
-  const be=document.getElementById('bar_'+secId);
-  if(pe) pe.textContent=pct+'%';
-  if(be) be.style.width=pct+'%';
-}
-
-// Live update opted-out states in Resources tab without full re-render
-function refreshResourceOptedOut(){
-  RESOURCES.forEach(section=>{
-    let ac=0,dc=0;
-    section.items.forEach(item=>{
-      const optedOut=isOptedOut(item.id);
-      const row=document.getElementById('row_'+item.id);
-      if(!row) return;
-      row.classList.toggle('opted-out',optedOut);
-      if(optedOut) row.removeAttribute('onclick');
-      else row.setAttribute('onclick',`toggleItem('${item.id}','${section.id}','${section.name}','${section.ck}')`);
-      let badge=row.querySelector('.opted-badge');
-      if(optedOut&&!badge){badge=document.createElement('span');badge.className='opted-badge';badge.textContent='excluded';row.appendChild(badge);}
-      else if(!optedOut&&badge) badge.remove();
-      if(!optedOut){ac++;if(S.checks[item.id])dc++;}
-    });
-    const pct=ac?Math.round(dc/ac*100):0;
-    const pe=document.getElementById('pct_'+section.id);
-    const be=document.getElementById('bar_'+section.id);
-    if(pe) pe.textContent=pct+'%';
-    if(be) be.style.width=pct+'%';
-  });
+  const activeItems = isRes ? sec.items.filter(i=>!isOptedOut(i.id)) : sec.items;
+  const c = activeItems.filter(i=>S.checks[i.id]).length;
+  const t = activeItems.length;
+  const pct = t?Math.round(c/t*100):0;
+  const pe = document.getElementById('pct_'+secId);
+  const be = document.getElementById('bar_'+secId);
+  if(pe) pe.textContent = pct+'%';
+  if(be) be.style.width = pct+'%';
 }
 
 // ═══════════════════════════ GLOBAL REFRESH ═══════════════════════════
-function refreshAll(){
-  // Global progress = sum of per-lecture progress (only what's visible in Checklist)
-  let total=0,done=0;
-  CLASSES.forEach(cls=>{
-    const p=getLecProgress(cls);
-    total+=p.total;done+=p.done;
-  });
-  const pct=total?Math.round(done/total*100):0;
 
-  // For nav badge: MNTS + lec_ only
-  const mntsIds=CLASSES.map(c=>'mnts_'+c.id);
-  const mntsDone=mntsIds.filter(id=>S.checks[id]).length;
-  const lecIds=CLASSES.filter(c=>(S.planner[c.id+'_res']||[]).includes('lecture')).map(c=>'lec_'+c.id);
-  const lecDone=lecIds.filter(id=>S.checks[id]).length;
+function refreshAll(){
+  // Exclude opted-out resource items from global count
+  const discItems = DISCIPLINES.flatMap(d=>d.items);
+  const resItems  = RESOURCES.flatMap(r=>r.items).filter(i=>!isOptedOut(i.id));
+  const all = [...discItems,...resItems];
+  const total = all.length;
+  const done  = all.filter(i=>S.checks[i.id]).length;
+  const pct   = total ? Math.round(done/total*100) : 0;
 
   // Donut
-  const circ=157;
-  document.getElementById('donutFill').style.strokeDashoffset=circ-(circ*(pct/100));
-  document.getElementById('donutPct').textContent=pct+'%';
-  document.getElementById('sbDone').textContent=done;
-  document.getElementById('sbLeft').textContent=total-done;
-  document.getElementById('sbBar').style.width=pct+'%';
+  const circ = 157;
+  document.getElementById('donutFill').style.strokeDashoffset = circ-(circ*(pct/100));
+  document.getElementById('donutPct').textContent = pct+'%';
+  document.getElementById('sbDone').textContent = done;
+  document.getElementById('sbLeft').textContent = total-done;
+  document.getElementById('sbBar').style.width = pct+'%';
 
   // Nav badges
-  const checklistDone=done;
-  const checklistTotal=total;
-  document.getElementById('nb-checklist').textContent=checklistDone+'/'+checklistTotal;
+  const td = DISCIPLINES.flatMap(d=>d.items);
+  document.getElementById('nb-topics').textContent = td.filter(i=>S.checks[i.id]).length+'/'+td.length;
+  const rdActive = RESOURCES.flatMap(r=>r.items).filter(i=>!isOptedOut(i.id));
+  const rdDone   = rdActive.filter(i=>S.checks[i.id]).length;
+  document.getElementById('nb-res').textContent = rdDone+'/'+rdActive.length;
+  const pdone = CLASSES.filter(c=>S.planner[c.id+'_status']==='done').length;
+  document.getElementById('nb-plan').textContent = pdone+'/'+CLASSES.length;
 
-  // Topbar pills (per-subject checklist completion)
-  const subjects=[{l:'Physio',ck:'physio',s:'Phys'},{l:'Biochem',ck:'biochem',s:'Biochem'},{l:'Path',ck:'path',s:'Path'},{l:'Pharm',ck:'pharm',s:'Pharm'}];
-  document.getElementById('topbarPills').innerHTML=subjects.map(g=>{
-    const grp=CLASSES.filter(c=>c.subj===g.s);
-    const t=grp.reduce((sum,cls)=>sum+getLecProgress(cls).total,0);
-    const c=grp.reduce((sum,cls)=>sum+getLecProgress(cls).done,0);
-    return `<div class="top-pill"><div class="top-pill-dot" style="background:var(--${g.ck})"></div><strong>${c}/${t}</strong> ${g.l}</div>`;
+  // Topbar pills
+  const g4=[{label:'Physio',ck:'physio',items:DISCIPLINES.find(d=>d.id==='physio').items},
+    {label:'Biochem',ck:'biochem',items:DISCIPLINES.find(d=>d.id==='biochem').items},
+    {label:'Path',ck:'path',items:DISCIPLINES.find(d=>d.id==='path').items},
+    {label:'Pharm',ck:'pharm',items:DISCIPLINES.find(d=>d.id==='pharm').items}];
+  document.getElementById('topbarPills').innerHTML = g4.map(g=>{
+    const c=g.items.filter(i=>S.checks[i.id]).length;
+    return `<div class="top-pill"><div class="top-pill-dot" style="background:var(--${g.ck})"></div><strong>${c}/${g.items.length}</strong> ${g.label}</div>`;
   }).join('');
 
-  // ── Overview: Stat Cards ──────────────────────────────────────────────
-  const uwDoneTotal=CLASSES.reduce((s,cls)=>s+parseInt(S.uworld['d_'+cls.id]||0),0);
-  const uwTotalQs=CLASSES.reduce((s,cls)=>{
-    const def=UW_LEC_DEFAULTS[cls.id]||0;
-    const t=S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?parseInt(S.uworld['t_'+cls.id]):def;
-    return s+t;
-  },0);
-  const uwPct=uwTotalQs?Math.round(uwDoneTotal/uwTotalQs*100):0;
-  const plannerDone=CLASSES.filter(c=>S.planner[c.id+'_status']==='done').length;
-  const plannerToday=CLASSES.filter(c=>S.planner[c.id+'_status']==='today').length;
-  const plannerInProg=CLASSES.filter(c=>S.planner[c.id+'_status']==='in-progress').length;
-  // Remaining study time (unfinished selected items across all lectures)
-  let remMins=0;
-  CLASSES.forEach(cls=>{
-    if(!S.checks['mnts_'+cls.id]) remMins+=15;
-    if((S.planner[cls.id+'_res']||[]).includes('lecture')&&!S.checks['lec_'+cls.id]) remMins+=60;
-    getLecItemsForLecture(cls.id).forEach(item=>{if(!S.checks[item.id]) remMins+=ITEM_MINS[item.id]||0;});
-  });
-  document.getElementById('ovStatsRow').innerHTML=`
-    <div class="ov-stat">
-      <div class="ov-stat-label">Checklist Progress</div>
-      <div class="ov-stat-val">${pct}<span style="font-size:1rem;font-weight:500;color:var(--dim)">%</span></div>
-      <div class="ov-stat-sub">${done} of ${total} items complete</div>
-      <div class="ov-stat-bar"><div class="ov-stat-bar-fill" style="width:${pct}%;background:var(--complete)"></div></div>
-    </div>
-    <div class="ov-stat">
-      <div class="ov-stat-label">UWorld Questions</div>
-      <div class="ov-stat-val">${uwPct}<span style="font-size:1rem;font-weight:500;color:var(--dim)">%</span></div>
-      <div class="ov-stat-sub">${uwDoneTotal} of ${uwTotalQs} Qs done</div>
-      <div class="ov-stat-bar"><div class="ov-stat-bar-fill" style="width:${uwPct}%;background:var(--uworld)"></div></div>
-    </div>
-    <div class="ov-stat">
-      <div class="ov-stat-label">Lectures (Planner)</div>
-      <div class="ov-stat-val">${plannerDone}<span style="font-size:1rem;font-weight:500;color:var(--dim)">/25</span></div>
-      <div class="ov-stat-sub">${plannerToday} today &middot; ${plannerInProg} in progress</div>
-      <div class="ov-stat-bar"><div class="ov-stat-bar-fill" style="width:${Math.round(plannerDone/25*100)}%;background:var(--complete)"></div></div>
-    </div>
-    <div class="ov-stat">
-      <div class="ov-stat-label">Est. Time Remaining</div>
-      <div class="ov-stat-val" style="font-size:1.15rem">${fmtTime(remMins)}</div>
-      <div class="ov-stat-sub">across selected resources</div>
-      <div class="ov-stat-bar"><div class="ov-stat-bar-fill" style="width:${pct}%;background:var(--planner)"></div></div>
+  // Sidebar disc list
+  document.getElementById('sbDiscList').innerHTML = SB_DISC.map(d=>{
+    const allIt = d.items();
+    const activeIt = allIt.filter(i=>!isOptedOut(i.id));
+    const c2=activeIt.filter(i=>S.checks[i.id]).length;
+    const t2=activeIt.length;
+    const pct2=t2?Math.round(c2/t2*100):0;
+    return `<div class="sb-disc-row" onclick="switchPanel('${d.panel}',document.querySelector('[data-panel=\\'${d.panel}\\']'))">
+      <div class="sb-dot" style="background:var(--${d.ck})"></div>
+      <div class="sb-disc-name">${d.name}</div>
+      <div class="sb-disc-pct">${pct2}%</div>
+      <div class="sb-disc-bar"><div class="sb-disc-bar-fill" style="width:${pct2}%;background:var(--${d.ck})"></div></div>
     </div>`;
+  }).join('');
 
-  // ── Overview: Active Lectures (Today / In Progress) ──────────────────
-  const focusLecs=CLASSES.filter(c=>['today','in-progress'].includes(S.planner[c.id+'_status']));
-  const focusEl=document.getElementById('ovFocus');
-  if(focusLecs.length){
-    const ST_LABEL={'today':'Today','in-progress':'In Progress'};
-    const ST_COLOR={'today':'var(--planner)','in-progress':'var(--uworld)'};
-    focusEl.innerHTML=`<div class="ov-focus">
-      <div class="ov-focus-hdr">🎯 Active Lectures</div>
-      ${focusLecs.map(cls=>{
-        const st=S.planner[cls.id+'_status'];
-        const p=getLecProgress(cls);
-        const uwD=parseInt(S.uworld['d_'+cls.id]||0);
-        const uwDef=UW_LEC_DEFAULTS[cls.id]||0;
-        const uwT=S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?parseInt(S.uworld['t_'+cls.id]):uwDef;
-        return `<div class="ov-focus-lec">
-          <div class="ov-focus-dot" style="background:${ST_COLOR[st]}"></div>
-          <div class="ov-focus-name" title="${cls.cls}">${cls.cls}</div>
-          <div class="ov-focus-tag" style="background:${ST_COLOR[st]}22;color:${ST_COLOR[st]}">${ST_LABEL[st]}</div>
-          <div class="ov-focus-prog">${p.done}/${p.total} items &middot; ${uwD}/${uwT} UW</div>
-        </div>`;
-      }).join('')}
+  // Overview grid
+  const ovSections=[
+    {label:'Physiology',ck:'physio',items:DISCIPLINES.find(d=>d.id==='physio').items,res:false},
+    {label:'Biochemistry',ck:'biochem',items:DISCIPLINES.find(d=>d.id==='biochem').items,res:false},
+    {label:'Pathology',ck:'path',items:DISCIPLINES.find(d=>d.id==='path').items,res:false},
+    {label:'Pharmacology',ck:'pharm',items:DISCIPLINES.find(d=>d.id==='pharm').items,res:false},
+    {label:'Histology',ck:'histo',items:DISCIPLINES.find(d=>d.id==='histo').items,res:false},
+    {label:'NK Guides',ck:'resources',items:RESOURCES.find(r=>r.id==='nk').items,res:true},
+    {label:'Bootcamp',ck:'uworld',items:RESOURCES.find(r=>r.id==='bootcamp').items,res:true},
+    {label:'Sketchy Pharm',ck:'pharm',items:RESOURCES.find(r=>r.id==='skpharm').items,res:true},
+    {label:'Sketchy Path',ck:'biochem',items:RESOURCES.find(r=>r.id==='skpath').items,res:true},
+    {label:'Pathoma',ck:'path',items:RESOURCES.find(r=>r.id==='pathoma').items,res:true},
+  ];
+  document.getElementById('ovGrid').innerHTML = ovSections.map(s=>{
+    const ai = s.res ? s.items.filter(i=>!isOptedOut(i.id)) : s.items;
+    const c=ai.filter(i=>S.checks[i.id]).length;
+    const t=ai.length;
+    const p=t?Math.round(c/t*100):0;
+    return `<div class="ov-card ov-${s.ck}">
+      <div class="ov-name">${s.label}</div>
+      <div class="ov-pct">${p}%</div>
+      <div class="ov-bar"><div class="ov-bar-fill" style="width:${p}%;background:var(--${s.ck})"></div></div>
+      <div class="ov-count">${c} of ${t}</div>
     </div>`;
-  } else {
-    focusEl.innerHTML='';
-  }
+  }).join('');
 
-  // ── Overview: All Lectures Table ─────────────────────────────────────
-  const STATUS_DOT_COLOR={'not-started':'var(--border2)','in-progress':'var(--uworld)','today':'var(--planner)','done':'var(--complete)'};
-  document.getElementById('ovLecTable').innerHTML=`
-    <div class="ov-lec-wrap">
-      <div class="ov-lec-thead">
-        <div></div><div>Date</div><div>Lecture</div><div>Checklist</div><div>UWorld</div>
-      </div>
-      ${CLASSES.map(cls=>{
-        const st=S.planner[cls.id+'_status']||'not-started';
-        const p=getLecProgress(cls);
-        const uwD=parseInt(S.uworld['d_'+cls.id]||0);
-        const uwDef=UW_LEC_DEFAULTS[cls.id]||0;
-        const uwT=S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?parseInt(S.uworld['t_'+cls.id]):uwDef;
-        const uwP=uwT?Math.min(100,Math.round(uwD/uwT*100)):0;
-        const color=SUBJ_COLOR[cls.subj]||'var(--muted)';
-        return `<div class="ov-lec-row">
-          <div class="ov-status-dot" style="background:${STATUS_DOT_COLOR[st]}" title="${st.replace('-',' ')}"></div>
-          <div class="ov-lec-date">${cls.date}</div>
-          <div class="ov-lec-name" title="${cls.cls}">${cls.cls}</div>
-          <div class="ov-mini-wrap">
-            <div class="ov-mini-bar"><div class="ov-mini-bar-fill" style="width:${p.pct}%;background:${color}"></div></div>
-            <div class="ov-mini-pct">${p.pct}%</div>
-          </div>
-          <div class="ov-mini-wrap">
-            ${uwT?`<div class="ov-mini-bar"><div class="ov-mini-bar-fill" style="width:${uwP}%;background:var(--uworld)"></div></div>
-            <div class="ov-mini-pct">${uwD}/${uwT}</div>`:`<div class="ov-mini-pct" style="text-align:left;padding-top:3px">—</div>`}
-          </div>
-        </div>`;
-      }).join('')}
-    </div>`;
-
-  // ── Overview: Activity Log ────────────────────────────────────────────
+  // Activity
   const al=document.getElementById('actLog');
   if(!S.activity.length){
     al.innerHTML='<p style="color:var(--muted);font-size:0.81rem">No activity yet — start checking off items!</p>';
@@ -1396,235 +1033,62 @@ function refreshAll(){
         <div class="act-time">${a.time}</div>
       </div>`).join('');
   }
+
   refreshPlannerSummary();
 }
 
 // ═══════════════════════════════ UWORLD ═══════════════════════════════
+
 function renderUWTopics(){
-  document.getElementById('uwTopicRows').innerHTML=CLASSES.map(cls=>{
-    const d=parseInt(S.uworld['d_'+cls.id]||0);
-    const defaultTot=UW_LEC_DEFAULTS[cls.id]||0;
-    const tot=parseInt(S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?S.uworld['t_'+cls.id]:defaultTot);
+  document.getElementById('uwTopicRows').innerHTML = UW_TOPICS.map(t=>{
+    const d=parseInt(S.uworld['d_'+t.id]||0);
+    const tot=parseInt(S.uworld['t_'+t.id]||0);
     const pct=tot>0?Math.min(100,Math.round(d/tot*100)):0;
-    const savedTot=S.uworld['t_'+cls.id]!==undefined?S.uworld['t_'+cls.id]:String(defaultTot||'');
-    const color=SUBJ_COLOR[cls.subj]||'var(--muted)';
-    return `<div class="uw-topic-row" style="margin-bottom:10px">
-      <div style="display:flex;align-items:center;gap:7px;width:260px;flex-shrink:0;overflow:hidden">
-        <span class="subj-badge s-${cls.subj}" style="font-size:0.54rem;padding:1px 5px;flex-shrink:0">${cls.subj}</span>
-        <span style="font-size:0.76rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${cls.cls}">${cls.cls}</span>
-      </div>
-      <div class="uw-bar-track"><div class="uw-bar-fill" id="uwbar_${cls.id}" style="width:${pct}%;background:${color}"></div></div>
+    return `<div class="uw-topic-row">
+      <div class="uw-topic-name">${t.label}</div>
+      <div class="uw-bar-track"><div class="uw-bar-fill" id="uwbar_${t.id}" style="width:${pct}%"></div></div>
       <div class="uw-score-inps">
-        <input class="mini-inp" type="number" min="0" max="9999" placeholder="—"
-          id="uwd_${cls.id}" value="${S.uworld['d_'+cls.id]||''}" oninput="saveUWTopic('${cls.id}')">
+        <input class="mini-inp" type="number" min="0" max="9999" placeholder="done"
+          id="uwd_${t.id}" value="${S.uworld['d_'+t.id]||''}" oninput="saveUWTopic('${t.id}')">
         <span class="mini-lbl">/</span>
-        <input class="mini-inp" type="number" min="0" max="9999" placeholder="—"
-          id="uwt_${cls.id}" value="${savedTot}" oninput="saveUWTopic('${cls.id}')">
+        <input class="mini-inp" type="number" min="0" max="9999" placeholder="tot"
+          id="uwt_${t.id}" value="${S.uworld['t_'+t.id]||''}" oninput="saveUWTopic('${t.id}')">
       </div>
     </div>`;
   }).join('');
 }
 
-function renderUWQids(){
-  const el=document.getElementById('uwQidRef');
-  if(!el) return;
-  el.innerHTML=UW_QIDS.map(section=>`
-    <div style="margin-bottom:14px">
-      <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px">
-        <div style="width:8px;height:8px;border-radius:50%;background:${section.color};flex-shrink:0"></div>
-        <span style="font-size:0.75rem;font-weight:700;color:var(--text)">${section.section}</span>
-        <span style="font-size:0.68rem;color:var(--muted)">(${section.subtopics.reduce((s,st)=>s+st.count,0)} Qs)</span>
-      </div>
-      ${section.subtopics.map(st=>`
-        <div style="margin-left:15px;margin-bottom:5px">
-          <div style="font-size:0.69rem;font-weight:600;color:var(--muted);margin-bottom:2px">${st.name} <span style="color:var(--dim);font-weight:400">(${st.count})</span></div>
-          <div style="font-size:0.64rem;color:var(--dim);font-family:monospace;line-height:1.6;word-break:break-all">${st.qids}</div>
-        </div>`).join('')}
-    </div>`).join('');
-}
 function saveUW(){
-  ['uw_done','uw_total','uw_score','uw_inhouse'].forEach(id=>{const el=document.getElementById(id);if(el)S.uworld[id]=el.value;});
-  S.uworld.notes=document.getElementById('uwNotes').value;saveState();
+  ['uw_done','uw_total','uw_score','uw_inhouse'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) S.uworld[id]=el.value;
+  });
+  S.uworld.notes=document.getElementById('uwNotes').value;
+  saveState();
 }
+
 function saveUWTopic(tid){
-  const d=document.getElementById('uwd_'+tid)?.value||'';const t=document.getElementById('uwt_'+tid)?.value||'';
-  S.uworld['d_'+tid]=d;S.uworld['t_'+tid]=t;
+  const d=document.getElementById('uwd_'+tid)?.value||'';
+  const t=document.getElementById('uwt_'+tid)?.value||'';
+  S.uworld['d_'+tid]=d;
+  S.uworld['t_'+tid]=t;
   const pct=parseInt(t)>0?Math.min(100,Math.round(parseInt(d)/parseInt(t)*100)):0;
-  const bar=document.getElementById('uwbar_'+tid);if(bar)bar.style.width=pct+'%';saveState();
+  const bar=document.getElementById('uwbar_'+tid);
+  if(bar) bar.style.width=pct+'%';
+  saveState();
 }
+
 function loadUW(){
-  // Seed defaults on first-ever load (no uw_total set yet)
-  if(!S.uworld['uw_total']){
-    S.uworld['uw_total']='186';
-    Object.entries(UW_LEC_DEFAULTS).forEach(([lid,tot])=>{
-      if(S.uworld['t_'+lid]===undefined) S.uworld['t_'+lid]=tot>0?String(tot):'';
-    });
-    saveState();
-  }
-  ['uw_done','uw_total','uw_score','uw_inhouse'].forEach(id=>{const el=document.getElementById(id);if(el&&S.uworld[id])el.value=S.uworld[id];});
-  const n=document.getElementById('uwNotes');if(n&&S.uworld.notes)n.value=S.uworld.notes;
-}
-
-// ═══════════════════════════ STUDY ORDER ══════════════════════════════
-const MONTH_NUM={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
-function clsDate(cls){const[m,d]=cls.date.split(' ');return new Date(2026,MONTH_NUM[m],+d);}
-function weekMonday(d){const dt=new Date(d);dt.setDate(dt.getDate()-((dt.getDay()+6)%7));return dt;}
-function weekLabel(d){return'Week of '+d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
-
-function renderSchedule(){
-  const el=document.getElementById('scheduleContainer');
-  if(!el) return;
-
-  const anySelected=CLASSES.some(c=>(S.planner[c.id+'_res']||[]).length>0);
-  if(!anySelected){
-    el.innerHTML='<div class="sch-empty">Select LEC or resource chips in the Planner to generate your personalised study order.</div>';
-    return;
-  }
-
-  // Sort classes by date
-  const sorted=[...CLASSES].sort((a,b)=>clsDate(a)-clsDate(b));
-
-  // First pass: assign each resource item to the earliest lecture that selected it
-  const owner={};  // itemId → cls.id
-  sorted.forEach(cls=>{
-    getLecItemsForLecture(cls.id).forEach(item=>{
-      if(!owner[item.id]) owner[item.id]=cls.id;
-    });
+  ['uw_done','uw_total','uw_score','uw_inhouse'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&S.uworld[id]) el.value=S.uworld[id];
   });
-
-  // Helper: short lecture name for cross-reference notes
-  function shortName(cid){
-    const c=CLASSES.find(x=>x.id===cid);
-    if(!c) return cid;
-    const words=c.cls.split(' ');
-    return words.length<=4?c.cls:words.slice(0,4).join(' ')+'…';
-  }
-
-  // Group sorted classes by Monday-anchored week
-  const weekMap={};const weekOrder=[];
-  sorted.forEach(cls=>{
-    const mon=weekMonday(clsDate(cls));
-    const key=mon.toISOString().slice(0,10);
-    if(!weekMap[key]){weekMap[key]={label:weekLabel(mon),classes:[]};weekOrder.push(key);}
-    weekMap[key].classes.push(cls);
-  });
-
-  let html='';
-  weekOrder.forEach(key=>{
-    const week=weekMap[key];
-    // Tally week time: MNTS for all lecs + owned items only (avoid double-counting)
-    let weekMins=0;
-    week.classes.forEach(cls=>{
-      weekMins+=15; // MNTS
-      if((S.planner[cls.id+'_res']||[]).includes('lecture')) weekMins+=60;
-      getLecItemsForLecture(cls.id).forEach(item=>{
-        if(owner[item.id]===cls.id) weekMins+=ITEM_MINS[item.id]||0;
-      });
-    });
-
-    html+=`<div class="week-block">
-      <div class="week-hdr">
-        <span class="week-hdr-label">📅 ${week.label}</span>
-        <span class="week-hdr-time">~${fmtTime(weekMins)}</span>
-      </div>`;
-
-    week.classes.forEach(cls=>{
-      const color=SUBJ_COLOR[cls.subj]||'var(--muted)';
-      const lecSel=(S.planner[cls.id+'_res']||[]).includes('lecture');
-      const resItems=getLecItemsForLecture(cls.id);
-      const selectedRTs=(S.planner[cls.id+'_res']||[]).filter(r=>r!=='lecture');
-
-      // Lecture-level time (MNTS + LEC + owned items)
-      let lecMins=15;
-      if(lecSel) lecMins+=60;
-      resItems.forEach(item=>{if(owner[item.id]===cls.id) lecMins+=ITEM_MINS[item.id]||0;});
-
-      html+=`<div class="sch-lec">
-        <div class="sch-lec-hdr">
-          <div class="sch-lec-stripe" style="background:${color}"></div>
-          <div style="flex:1;min-width:0">
-            <div class="sch-lec-name">${cls.cls}</div>
-            <div class="sch-lec-meta">${cls.date} &middot; ${cls.subj}</div>
-          </div>
-          <div class="sch-lec-time">~${fmtTime(lecMins)}</div>
-        </div>
-        <div class="sch-items">`;
-
-      // MNTS (always first)
-      html+=`<div class="sch-row mnts-row">
-        <div class="sch-row-icon">⭐</div>
-        <div class="sch-row-body"><div class="sch-row-label">Reviewed MNTS</div></div>
-        <div class="sch-row-time">15 min</div>
-      </div>`;
-
-      // Lecture notes (if LEC selected)
-      if(lecSel){
-        html+=`<div class="sch-row">
-          <div class="sch-row-icon">📖</div>
-          <div class="sch-row-body"><div class="sch-row-label">Lecture</div></div>
-          <div class="sch-row-time">60 min</div>
-        </div>`;
-      }
-
-      // No 3rd-party resources selected and no LEC
-      if(selectedRTs.length===0 && !lecSel){
-        html+=`<div class="sch-row mnts-row">
-          <div class="sch-row-icon">—</div>
-          <div class="sch-row-body"><div class="sch-row-label" style="font-style:italic;color:var(--dim)">No resources selected for this lecture</div></div>
-          <div class="sch-row-time"></div>
-        </div>`;
-      }
-
-      // Group resource rows by RT, in selection order
-      const byRT={};
-      resItems.forEach(item=>{if(!byRT[item.rt])byRT[item.rt]=[];byRT[item.rt].push(item);});
-
-      selectedRTs.forEach(rt=>{
-        const items=byRT[rt]||[];
-        items.forEach(item=>{
-          const isOwner=owner[item.id]===cls.id;
-          const mins=ITEM_MINS[item.id]||0;
-          if(isOwner){
-            // Find other lectures (later in schedule) that also use this item
-            const others=sorted.filter(c=>
-              c.id!==cls.id &&
-              (S.planner[c.id+'_res']||[]).filter(r=>r!=='lecture').includes(rt) &&
-              getLecItemsForLecture(c.id).some(i=>i.id===item.id)
-            );
-            const coversNote=others.length
-              ? `Also covers: ${others.map(c=>shortName(c.id)).join(', ')}`:'';
-            html+=`<div class="sch-row">
-              <div class="sch-row-icon" style="color:${RT_COLOR[rt]||'var(--dim)'}">▶</div>
-              <div class="sch-row-body">
-                <div class="sch-row-label">${item.label}</div>
-                ${coversNote?`<div class="sch-row-covers">${coversNote}</div>`:''}
-              </div>
-              <div class="sch-row-time">${mins?mins+' min':item.tag}</div>
-            </div>`;
-          } else {
-            const ownerCls=CLASSES.find(c=>c.id===owner[item.id]);
-            html+=`<div class="sch-row covered">
-              <div class="sch-row-icon">✓</div>
-              <div class="sch-row-body">
-                <div class="sch-row-label">${item.label}</div>
-                <div class="sch-row-covers">Covered in: ${ownerCls?ownerCls.date+' — '+shortName(ownerCls.id):owner[item.id]}</div>
-              </div>
-              <div class="sch-row-time"></div>
-            </div>`;
-          }
-        });
-      });
-
-      html+='</div></div>';
-    });
-
-    html+='</div>';
-  });
-
-  el.innerHTML=html;
+  const n=document.getElementById('uwNotes');
+  if(n&&S.uworld.notes) n.value=S.uworld.notes;
 }
 
 // ═══════════════════════════════ PLANNER ══════════════════════════════
+
 function renderPlanner(){
   const container=document.getElementById('plannerRows');
   container.innerHTML='';
@@ -1632,7 +1096,8 @@ function renderPlanner(){
     const status=S.planner[cls.id+'_status']||'not-started';
     const note=S.planner[cls.id+'_note']||'';
     const row=document.createElement('div');
-    row.className=`pr s-${status}`;row.id='pr_'+cls.id;
+    row.className=`pr s-${status}`;
+    row.id='pr_'+cls.id;
     row.innerHTML=`
       <div class="pr-chk" onclick="togglePDone('${cls.id}')">
         <div class="pr-cb">${status==='done'?'&#10003;':''}</div>
@@ -1641,7 +1106,9 @@ function renderPlanner(){
         <div class="pr-date-val">${cls.date}</div>
         <div class="pr-date-sub">${cls.subj}</div>
       </div>
-      <div class="pr-subj"><span class="subj-badge s-${cls.subj}">${cls.subj}</span></div>
+      <div class="pr-subj">
+        <span class="subj-badge s-${cls.subj}">${cls.subj}</span>
+      </div>
       <div class="pr-cls">
         <div class="pr-cls-name">${cls.cls}</div>
         ${buildChipsHTML(cls.id)}
@@ -1663,60 +1130,40 @@ function renderPlanner(){
 }
 
 function buildChipsHTML(cid){
-  const thirdPartyTypes=HEATMAP[cid]||[];
+  const resTypes=HEATMAP[cid]||[];
+  if(!resTypes.length) return '';
   const sel=S.planner[cid+'_res']||[];
-  const thirdPartySel=sel.filter(r=>r!=='lecture');
-  const lecSel=sel.includes('lecture');
-  const maxed=thirdPartySel.length>=2;
-
-  // LEC chip always appears first, independent of max-2 limit
-  const lecCls=['rc','rc-lecture',lecSel?'sel':''].filter(Boolean).join(' ');
-  const lecChip=`<span class="${lecCls}" onclick="toggleRes('${cid}','lecture',event)">LEC</span>`;
-
-  const tpChips=thirdPartyTypes.map(rt=>{
+  const maxed=sel.length>=2;
+  const chips=resTypes.map(rt=>{
     const selected=sel.includes(rt);
-    const cls=['rc',`rc-${rt}`,selected?'sel':'',(!selected&&maxed)?'maxed':''].filter(Boolean).join(' ');
+    const cls=['rc',`rc-${rt}`,selected?'sel':'',((!selected)&&maxed)?'maxed':''].filter(Boolean).join(' ');
     return `<span class="${cls}" onclick="toggleRes('${cid}','${rt}',event)">${RC_LABELS[rt]||rt}</span>`;
   }).join('');
-
-  return `<div class="rc-row" id="rcrow_${cid}">${lecChip}${tpChips}</div>`;
+  return `<div class="rc-row" id="rcrow_${cid}">${chips}</div>`;
 }
 
-function toggleRes(cid,rt,e){
+function toggleRes(cid, rt, e){
   e.stopPropagation();
   let sel=[...(S.planner[cid+'_res']||[])];
   if(sel.includes(rt)){
     sel=sel.filter(r=>r!==rt);
   } else {
-    // 'lecture' chip bypasses the max-2 limit; 3rd-party types are capped at 2
-    if(rt!=='lecture'){
-      const tpCount=sel.filter(r=>r!=='lecture').length;
-      if(tpCount>=2) return;
-    }
+    if(sel.length>=2) return;
     sel.push(rt);
   }
   S.planner[cid+'_res']=sel;
   saveState();
-  // Refresh chips in planner row
+  // Refresh chips for this row
   const rcrow=document.getElementById('rcrow_'+cid);
   if(rcrow){
-    const thirdPartySel=sel.filter(r=>r!=='lecture');
-    const lecSel=sel.includes('lecture');
-    const maxed=thirdPartySel.length>=2;
-    const lecCls=['rc','rc-lecture',lecSel?'sel':''].filter(Boolean).join(' ');
-    const lecChip=`<span class="${lecCls}" onclick="toggleRes('${cid}','lecture',event)">LEC</span>`;
-    const tpChips=(HEATMAP[cid]||[]).map(rt2=>{
+    const maxed=sel.length>=2;
+    rcrow.innerHTML=(HEATMAP[cid]||[]).map(rt2=>{
       const selected=sel.includes(rt2);
-      const cls=['rc',`rc-${rt2}`,selected?'sel':'',(!selected&&maxed)?'maxed':''].filter(Boolean).join(' ');
+      const cls=['rc',`rc-${rt2}`,selected?'sel':'',((!selected)&&maxed)?'maxed':''].filter(Boolean).join(' ');
       return `<span class="${cls}" onclick="toggleRes('${cid}','${rt2}',event)">${RC_LABELS[rt2]||rt2}</span>`;
     }).join('');
-    rcrow.innerHTML=lecChip+tpChips;
   }
-  // Rebuild Checklist tab (preserves open state)
-  renderTopics();
-  // Rebuild Study Order tab
-  renderSchedule();
-  // Update opted-out states in Resources tab
+  // Update opted-out states across resource items
   refreshResourceOptedOut();
   refreshAll();
 }
@@ -1725,19 +1172,32 @@ function togglePDone(cid){
   const cur=S.planner[cid+'_status']||'not-started';
   const next=cur==='done'?'not-started':'done';
   S.planner[cid+'_status']=next;
-  const sel=document.getElementById('ps_'+cid);if(sel)sel.value=next;
+  const sel=document.getElementById('ps_'+cid);
+  if(sel) sel.value=next;
   const row=document.getElementById('pr_'+cid);
-  if(row){row.className=`pr s-${next}`;row.querySelector('.pr-cb').innerHTML=next==='done'?'&#10003;':'';}
-  saveState();refreshPlannerSummary();refreshAll();
+  if(row){
+    row.className=`pr s-${next}`;
+    row.querySelector('.pr-cb').innerHTML=next==='done'?'&#10003;':'';
+  }
+  saveState(); refreshPlannerSummary(); refreshAll();
 }
+
 function updatePStatus(cid){
   const next=document.getElementById('ps_'+cid)?.value||'not-started';
   S.planner[cid+'_status']=next;
   const row=document.getElementById('pr_'+cid);
-  if(row){row.className=`pr s-${next}`;row.querySelector('.pr-cb').innerHTML=next==='done'?'&#10003;':'';}
-  saveState();refreshPlannerSummary();refreshAll();
+  if(row){
+    row.className=`pr s-${next}`;
+    row.querySelector('.pr-cb').innerHTML=next==='done'?'&#10003;':'';
+  }
+  saveState(); refreshPlannerSummary(); refreshAll();
 }
-function savePl(cid){S.planner[cid+'_note']=document.getElementById('pn_'+cid)?.value||'';saveState();}
+
+function savePl(cid){
+  S.planner[cid+'_note']=document.getElementById('pn_'+cid)?.value||'';
+  saveState();
+}
+
 function refreshPlannerSummary(){
   const total=CLASSES.length;
   const done=CLASSES.filter(c=>S.planner[c.id+'_status']==='done').length;
@@ -1751,112 +1211,536 @@ function refreshPlannerSummary(){
     <div class="ps-card"><div class="ps-val">${total}</div><div class="ps-lbl">Total Classes</div></div>`;
 }
 
-// ═══════════════════════════════ EXCEL EXPORT ═════════════════════════
-function downloadExcel(){
-  if(!window.XLSX){alert('Excel library not loaded — please refresh the page and try again.');return;}
-  const XL=window.XLSX;
-  const wb=XL.utils.book_new();
-  const RT_LABEL_MAP={lecture:'Lecture',bootcamp:'Bootcamp',bnb:'Boards & Beyond',pathoma:'Pathoma',skpharm:'Sketchy Pharm',skpath:'Sketchy Path'};
-
-  // ── Sheet 1: Study Order ────────────────────────────────────────────
-  const soRows=[['Week','Date','Subject','Lecture','Resource','Resource Type','Est. Time (min)','Notes']];
-  const anySelected=CLASSES.some(c=>(S.planner[c.id+'_res']||[]).length>0);
-  if(anySelected){
-    const sorted=[...CLASSES].sort((a,b)=>clsDate(a)-clsDate(b));
-    const owner={};
-    sorted.forEach(cls=>getLecItemsForLecture(cls.id).forEach(item=>{if(!owner[item.id])owner[item.id]=cls.id;}));
-    const weekMap={},weekOrder=[];
-    sorted.forEach(cls=>{
-      const mon=weekMonday(clsDate(cls));
-      const key=mon.toISOString().slice(0,10);
-      if(!weekMap[key]){weekMap[key]={label:weekLabel(mon),classes:[]};weekOrder.push(key);}
-      weekMap[key].classes.push(cls);
-    });
-    weekOrder.forEach(key=>{
-      weekMap[key].classes.forEach(cls=>{
-        const lecSel=(S.planner[cls.id+'_res']||[]).includes('lecture');
-        const selectedRTs=(S.planner[cls.id+'_res']||[]).filter(r=>r!=='lecture');
-        const resItems=getLecItemsForLecture(cls.id);
-        soRows.push([weekMap[key].label,cls.date,cls.subj,cls.cls,'Reviewed MNTS','MNTS',15,'']);
-        if(lecSel) soRows.push([weekMap[key].label,cls.date,cls.subj,cls.cls,'Lecture Notes','LEC',60,'']);
-        const byRT={};
-        resItems.forEach(item=>{if(!byRT[item.rt])byRT[item.rt]=[];byRT[item.rt].push(item);});
-        selectedRTs.forEach(rt=>{
-          (byRT[rt]||[]).forEach(item=>{
-            const isOwner=owner[item.id]===cls.id;
-            let notes='';
-            if(isOwner){
-              const others=sorted.filter(c=>c.id!==cls.id&&(S.planner[c.id+'_res']||[]).filter(r=>r!=='lecture').includes(rt)&&getLecItemsForLecture(c.id).some(i=>i.id===item.id));
-              if(others.length) notes='Also covers: '+others.map(c=>c.cls).join('; ');
-            } else {
-              const ownerCls=CLASSES.find(c=>c.id===owner[item.id]);
-              notes='Covered in: '+(ownerCls?ownerCls.date+' — '+ownerCls.cls:owner[item.id]);
-            }
-            soRows.push([weekMap[key].label,cls.date,cls.subj,cls.cls,item.label,RT_LABEL_MAP[rt]||rt,ITEM_MINS[item.id]||'',notes]);
-          });
-        });
-      });
-    });
-  } else {
-    soRows.push(['No Planner selections found. Set up your study strategy in the Planner tab first.','','','','','','','']);
-  }
-  const wsSO=XL.utils.aoa_to_sheet(soRows);
-  wsSO['!cols']=[{wch:14},{wch:8},{wch:8},{wch:42},{wch:38},{wch:16},{wch:18},{wch:52}];
-  XL.utils.book_append_sheet(wb,wsSO,'Study Order');
-
-  // ── Sheet 2: Checklist ──────────────────────────────────────────────
-  const ckRows=[['Subject','Date','Lecture','Resource','Resource Type','Done','Est. Time (min)']];
-  CLASSES.forEach(cls=>{
-    const lecSel=(S.planner[cls.id+'_res']||[]).includes('lecture');
-    const resItems=getLecItemsForLecture(cls.id);
-    ckRows.push([cls.subj,cls.date,cls.cls,'Reviewed MNTS','MNTS',S.checks['mnts_'+cls.id]?'✓':'',15]);
-    if(lecSel) ckRows.push([cls.subj,cls.date,cls.cls,'Lecture Notes','LEC',S.checks['lec_'+cls.id]?'✓':'',60]);
-    resItems.forEach(item=>{
-      ckRows.push([cls.subj,cls.date,cls.cls,item.label,RT_LABEL_MAP[item.rt]||item.rt,S.checks[item.id]?'✓':'',ITEM_MINS[item.id]||'']);
-    });
-  });
-  const wsCK=XL.utils.aoa_to_sheet(ckRows);
-  wsCK['!cols']=[{wch:8},{wch:8},{wch:42},{wch:38},{wch:16},{wch:6},{wch:18}];
-  XL.utils.book_append_sheet(wb,wsCK,'Checklist');
-
-  // ── Sheet 3: UWorld ─────────────────────────────────────────────────
-  const uwRows=[['Subject','Date','Lecture','Total Qs Assigned','Qs Done','% Complete']];
-  let uwTotSum=0,uwDonSum=0;
-  CLASSES.forEach(cls=>{
-    const d=parseInt(S.uworld['d_'+cls.id]||0);
-    const def=UW_LEC_DEFAULTS[cls.id]||0;
-    const t=S.uworld['t_'+cls.id]!==undefined&&S.uworld['t_'+cls.id]!==''?parseInt(S.uworld['t_'+cls.id]):def;
-    const pct=t>0?Math.round(d/t*100):0;
-    uwRows.push([cls.subj,cls.date,cls.cls,t,d,pct+'%']);
-    uwTotSum+=t;uwDonSum+=d;
-  });
-  uwRows.push(['','','TOTAL',uwTotSum,uwDonSum,uwTotSum>0?Math.round(uwDonSum/uwTotSum*100)+'%':'0%']);
-  const wsUW=XL.utils.aoa_to_sheet(uwRows);
-  wsUW['!cols']=[{wch:8},{wch:8},{wch:42},{wch:18},{wch:10},{wch:12}];
-  XL.utils.book_append_sheet(wb,wsUW,'UWorld');
-
-  XL.writeFile(wb,'Endocrine-Block-Tracker.xlsx');
-}
-
 // ═══════════════════════════════ RESET ════════════════════════════════
+
 function confirmReset(){
   if(confirm('Reset all progress and planner data? This cannot be undone.')){
-    S={checks:{},uworld:{},planner:{},activity:[]};saveState();location.reload();
+    S={checks:{},uworld:{},planner:{},activity:[]};
+    saveState();
+    location.reload();
   }
 }
 
 // ═══════════════════════════════ INIT ═════════════════════════════════
+
 function init(){
   loadState();
   renderTopics();
+  renderResources();
   renderUWTopics();
-  renderUWQids();
   loadUW();
   renderPlanner();
-  renderSchedule();
   refreshAll();
 }
 init();
+</script>
+
+<!-- SheetJS for Excel export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+// ═══════════════════════════ EXCEL EXPORT ════════════════════════════
+
+// ── style helpers ──────────────────────────────────────────────────
+const XL = {
+  NAVY:    'FF0F2747',
+  PURPLE:  'FF163A63',
+  LT_BLUE: 'FFEAF1FB',
+  LT_PURP: 'FFEFE3FF',
+  D_BLUE:  'FFD9EAF7',
+  STRIPE:  'FFF5F7FC',
+  WHITE:   'FFFFFFFF',
+  GREY6:   'FF666666',
+  GREY4:   'FF44546A',
+  SUBJ: {Biochem:'FF7C3AED',Phys:'FF2563EB',Path:'FFDC2626',Pharm:'FF059669',Hist:'FFD97706'},
+};
+
+function xlFill(rgb){ return {patternType:'solid', fgColor:{rgb}}; }
+function xlFont(bold,sz,rgb){ return {bold:!!bold, sz:sz||11, color:{rgb: rgb||'FF000000'}, name:'Calibri'}; }
+function xlAlign(h,wrap){ return {horizontal:h||'left', vertical:'center', wrapText:!!wrap}; }
+function xlBorder(){
+  const s={style:'thin',color:{rgb:'FFD0D7E3'}};
+  return {left:s,right:s,top:s,bottom:s};
+}
+
+function xlCell(v, bold, sz, fg, fill, align, border, numFmt){
+  const c = {v, t: typeof v==='number'?'n': v instanceof Date?'d':'s'};
+  const style = {};
+  if(bold||sz||fg)  style.font  = xlFont(bold, sz, fg);
+  if(fill)          style.fill  = xlFill(fill);
+  if(align)         style.alignment = xlAlign(align, true);
+  if(border)        style.border = xlBorder();
+  if(numFmt)        style.numFmt = numFmt;
+  c.s = style;
+  return c;
+}
+
+// Header cell (navy bg, white bold text)
+function hdrCell(v){ return xlCell(v, true, 11, XL.WHITE, XL.NAVY, 'center', true); }
+// Title cell (row 1)
+function titleCell(v){ return xlCell(v, true, 16, XL.WHITE, XL.NAVY, 'left'); }
+// Subtitle cell (row 2)
+function subCell(v){ return xlCell(v, false, 11, XL.GREY4, XL.LT_BLUE, 'left'); }
+// Subject badge
+function subjCell(s){ return xlCell(s, true, 11, XL.WHITE, XL.SUBJ[s]||XL.NAVY, 'center', true); }
+// Data cell with optional stripe
+function dCell(v, stripe, align, numFmt){
+  return xlCell(v, false, 11, null, stripe?XL.STRIPE:null, align||'left', true, numFmt||null);
+}
+
+// Build a worksheet from a 2D array of cell objects
+function buildSheet(rows, merges, colWidths){
+  const ws = {};
+  let maxC = 0;
+  rows.forEach((row, ri)=>{
+    row.forEach((cell, ci)=>{
+      if(!cell) return;
+      const addr = XLSX.utils.encode_cell({r:ri,c:ci});
+      ws[addr] = cell;
+      if(ci>maxC) maxC=ci;
+    });
+  });
+  ws['!ref'] = XLSX.utils.encode_range({s:{r:0,c:0},e:{r:rows.length-1,c:maxC}});
+  if(merges)    ws['!merges'] = merges;
+  if(colWidths) ws['!cols']   = colWidths;
+  return ws;
+}
+
+// ── Data ─────────────────────────────────────────────────────────────
+
+// ITEM_LECS / ITEMS / HEATMAP already defined above as ITEM_LECS, ITEMS, HEATMAP
+// (references globals from the tracker)
+
+const ITEM_ORDER_XL = [
+  'bc1','bc2','bc3','bc4','bc5','bc6',
+  'bnb1','bnb2','bnb3','bnb4','bnb5','bnb6',
+  'pto1','pto2','pto3','pto4','pto5','pto6','pto7',
+  'skp1','skp2','skp3','skp4','skp5','skp6','skp7','skp8',
+  'skpa1','skpa2','skpa3','skpa4','skpa5','skpa6','skpa7',
+  'skpa8','skpa9','skpa10','skpa11'
+];
+
+const ITEMS_XL = {
+  bc1:{label:'Fundamental Principles of Endocrinology (Ch. 1)',min:29,type:'Bootcamp'},
+  bc2:{label:'Hypothalamus & Pituitary (Ch. 2\u20133)',min:77,type:'Bootcamp'},
+  bc3:{label:'Thyroid Gland (Ch. 4)',min:113,type:'Bootcamp'},
+  bc4:{label:'Parathyroid Glands (Ch. 5)',min:57,type:'Bootcamp'},
+  bc5:{label:'Adrenal Glands (Ch. 6)',min:153,type:'Bootcamp'},
+  bc6:{label:'Endocrine Pancreas (Ch. 7)',min:90,type:'Bootcamp'},
+  bnb1:{label:'Pituitary Gland (Ch. 5)',min:28,type:'Boards & Beyond'},
+  bnb2:{label:'Thyroid (Ch. 1)',min:78,type:'Boards & Beyond'},
+  bnb3:{label:'Parathyroid Gland (Ch. 1)',min:28,type:'Boards & Beyond'},
+  bnb4:{label:'Adrenals (Ch. 2)',min:72,type:'Boards & Beyond'},
+  bnb5:{label:'Endocrine Pancreas & Diabetes (Ch. 3)',min:89,type:'Boards & Beyond'},
+  bnb6:{label:'Reproductive Hormones (Ch. 4)',min:57,type:'Boards & Beyond'},
+  pto1:{label:'Anterior & Posterior Pituitary (15.1\u201315.2)',min:14,type:'Pathoma'},
+  pto2:{label:'Thyroid Gland & Thyroiditis (15.3, 15.6)',min:11,type:'Pathoma'},
+  pto3:{label:'Thyroid Neoplasia (15.7)',min:5,type:'Pathoma'},
+  pto4:{label:'Parathyroid Gland (15.8)',min:11,type:'Pathoma'},
+  pto5:{label:'Endocrine Pancreas (15.9)',min:15,type:'Pathoma'},
+  pto6:{label:'Adrenal Cortex (15.10)',min:13,type:'Pathoma'},
+  pto7:{label:'Adrenal Medulla (15.11)',min:12,type:'Pathoma'},
+  skp1:{label:'Insulin, Sulfonylureas, GLP-1, DPP-4 \u2014 \u201cLangerhansel and Gretel\u201d',min:30,type:'Sketchy Pharm'},
+  skp2:{label:'Metformin, TZDs, Pramlintide, SGLT2 \u2014 \u201cRosiglitazones are Red\u2026\u201d',min:24,type:'Sketchy Pharm'},
+  skp3:{label:'PTU, Methimazole, Levothyroxine \u2014 \u201cIodine is Forever\u201d',min:22,type:'Sketchy Pharm'},
+  skp4:{label:'Bisphosphonates, Raloxifene, Denosumab \u2014 \u201cNatural History of Osteoporosis\u201d',min:18,type:'Sketchy Pharm'},
+  skp5:{label:'Teriparatide, Vitamin D, Cinacalcet \u2014 \u201cPthD in Paleontology\u201d',min:19,type:'Sketchy Pharm'},
+  skp6:{label:'Glucocorticoids \u2014 \u201cThe Court of Sone Henge\u201d',min:21,type:'Sketchy Pharm'},
+  skp7:{label:'ADH, DDAVP, ADH Antagonists \u2014 \u201cWater Hazard\u201d',min:19,type:'Sketchy Pharm'},
+  skp8:{label:'GH, Octreotide, Pegvisomant \u2014 \u201cJak Stat and the Beanstalk\u201d',min:18,type:'Sketchy Pharm'},
+  skpa1:{label:'Pituitary Dysfunction: Etiologies \u2014 \u201cMillion Dollar Pituitary\u201d',min:12,type:'Sketchy Path'},
+  skpa2:{label:'Pituitary Dysfunction: Clinical \u2014 \u201cRocky Pituitary\u201d',min:25,type:'Sketchy Path'},
+  skpa3:{label:'Diabetes Insipidus & SIADH \u2014 \u201cAcqua Gialla Della Vita\u201d',min:27,type:'Sketchy Path'},
+  skpa4:{label:'Adrenal Insufficiency \u2014 \u201cHollywood Hypofunction\u201d',min:22,type:'Sketchy Path'},
+  skpa5:{label:'CAH \u2014 \u201cThank you Desmond, but our cortisol is in another adrenal!\u201d',min:25,type:'Sketchy Path'},
+  skpa6:{label:'Diabetes Mellitus: Pathogenesis \u2014 \u201cCandy Rush\u201d',min:29,type:'Sketchy Path'},
+  skpa7:{label:'Diabetes Mellitus: Complications \u2014 \u201cBlood, Sweets, and Tears\u201d',min:23,type:'Sketchy Path'},
+  skpa8:{label:'Hypothyroidism & Hashimoto\u2019s \u2014 \u201cDr. No Thyroid\u201d',min:21,type:'Sketchy Path'},
+  skpa9:{label:'Thyroid Nodules & Cancer \u2014 \u201cThe Man with the Golden Nodule\u201d',min:19,type:'Sketchy Path'},
+  skpa10:{label:'Parathyroid Disorders \u2014 \u201cCalci-YUM Stone Creamery\u201d',min:29,type:'Sketchy Path'},
+  skpa11:{label:'MEN \u2014 \u201cMen in Slacks\u201d',min:12,type:'Sketchy Path'},
+};
+
+const UW_COUNTS_XL = {
+  pl1:42,pl2:4,pl3:11,pl4:14,pl5:4,pl6:5,pl7:17,pl8:17,
+  pl9:2,pl10:1,pl11:14,pl12:0,pl13:47,pl14:20,pl15:16,
+  pl16:49,pl17:41,pl18:41,pl19:29,pl20:16,pl21:0,
+  pl22:1,pl23:0,pl24:1,pl25:0,
+};
+
+const QID_DATA_XL = [
+  ['Pituitary','Pituitary Gland',17,'8702, 15303, 1152, 18948, 224, 15209, 1561, 18553, 214, 213, 1379, 225, 210, 206, 20588, 7670, 7671','#9333ea'],
+  ['Thyroid & Parathyroid','Thyroid Gland',15,'1213, 19754, 15028, 1407, 19752, 772, 1615, 770, 14985, 20168, 763, 19746, 767, 19753, 626','#2563eb'],
+  ['Thyroid & Parathyroid','Thyroid Disorders',14,'768, 14953, 20375, 983, 764, 769, 19747, 19946, 20146, 622, 14951, 1945, 19745, 12512','#2563eb'],
+  ['Thyroid & Parathyroid','Thyroid Cancer',2,'17236, 1747','#2563eb'],
+  ['Thyroid & Parathyroid','Parathyroid Glands',18,'641, 15270, 15289, 18863, 631, 11977, 795, 19947, 992, 15291, 640, 1686, 11660, 22188, 543, 979, 978, 15280','#2563eb'],
+  ['Adrenal','Adrenal Glands',13,'21524, 549, 8424, 18801, 687, 18803, 1773, 17247, 19975, 14899, 989, 608, 609','#dc2626'],
+  ['Adrenal','Congenital Adrenal Hyperplasia',6,'2080, 2081, 924, 19030, 610, 930','#dc2626'],
+  ['Adrenal','Adrenal Disorders',10,'1263, 17246, 454, 928, 295, 1921, 931, 927, 152, 932','#dc2626'],
+  ['Diabetes & Glucose','Endocrine Pancreas',4,'1768, 15881, 585, 1121','#ea6c0a'],
+  ['Diabetes & Glucose','Diabetes',17,'846, 1913, 848, 11040, 1012, 107, 985, 1011, 1996, 15675, 106, 15668, 18951, 1059, 921, 19407, 15652','#ea6c0a'],
+  ['Diabetes & Glucose','Insulin',4,'600, 15876, 850, 1324','#ea6c0a'],
+  ['Diabetes & Glucose','Treatment of Diabetes',17,'920, 6772, 11565, 18952, 18956, 18457, 16324, 15770, 15308, 18958, 1984, 14136, 8531, 607, 606, 1655, 604','#ea6c0a'],
+  ['Sex Hormones / Gonads','Reproductive Hormones',15,'14952, 879, 954, 656, 19007, 208, 7606, 209, 216, 19189, 1560, 100, 207, 217, 579','#059669'],
+  ['Sex Hormones / Gonads','Male Reproductive',10,'1725, 658, 107781, 19000, 16236, 1726, 8930, 13776, 11920, 1449','#059669'],
+  ['Sex Hormones / Gonads','Female Reproductive',5,'18747, 1899, 577, 18654, 12512','#059669'],
+  ['Sex Hormones / Gonads','Menstrual Cycle',8,'1917, 1839, 1809, 925, 218, 215, 21791, 1986','#059669'],
+  ['Misc. Endocrine','MEN Syndromes',7,'15105, 988, 1658, 1844, 1660, 1845, 1659','#d97706'],
+  ['Misc. Endocrine','Signaling Pathways',4,'1720, 143, 995, 1122','#d97706'],
+];
+
+function getLecItems(lid){
+  return ITEM_ORDER_XL.filter(iid=> (ITEM_LECS[iid]||[]).includes(lid));
+}
+
+function getAvailRes(lid){
+  const map={bootcamp:'Bootcamp',bnb:'Boards & Beyond',pathoma:'Pathoma',skpharm:'Sketchy Pharm',skpath:'Sketchy Path'};
+  return (HEATMAP[lid]||[]).map(k=>map[k]).filter(Boolean).join(', ');
+}
+
+// Pre-compute checklist row ranges
+function buildClRanges(){
+  const ranges={};
+  let r=5; // data starts row 5 (1-indexed), which is index 4 (0-indexed)
+  CLASSES.forEach(cls=>{
+    const n = 2 + getLecItems(cls.id).length;
+    ranges[cls.id]={r1:r, r2:r+n-1};
+    r+=n;
+  });
+  return ranges;
+}
+
+// ── Sheet builders ───────────────────────────────────────────────────
+
+function buildDashboard(clRanges){
+  const rows=[];
+  const N=11;
+
+  // Row 0 (Excel row 1): title
+  const trow=Array(N).fill(null);
+  trow[0]=titleCell('Endocrine Block \u2014 Progress Tracker');
+  rows.push(trow);
+
+  // Row 1 (Excel row 2): subtitle
+  const srow=Array(N).fill(null);
+  srow[0]=subCell('Built from GUSOM-Endocrine-ProgressTracker.html \u2014 Upload to Google Sheets to keep live formulas.');
+  rows.push(srow);
+
+  // Row 2: blank spacer
+  rows.push(Array(N).fill(null));
+
+  // Row 3: stat block labels
+  const lrow=Array(N).fill(null);
+  lrow[0]=xlCell('How to use',true,11,XL.PURPLE,null,'left');
+  lrow[1]=xlCell('Checklist Progress',true,11,XL.PURPLE,XL.LT_PURP,'center');
+  lrow[4]=xlCell('Lectures Planned',true,11,XL.PURPLE,XL.LT_PURP,'center');
+  lrow[7]=xlCell('3rd-Party Selections',true,11,XL.PURPLE,XL.LT_PURP,'center');
+  lrow[10]=xlCell('UWorld Progress',true,11,XL.PURPLE,XL.LT_PURP,'center');
+  rows.push(lrow);
+
+  // Rows 4-7: instructions + stat values
+  const instrs=[
+    '1) Use the Planner tab to choose LEC plus up to 2 third-party resources per lecture.',
+    '2) Mark Done? on the Checklist tab for tasks you complete.',
+    '3) Enter UWorld progress on the UWorld tab.',
+    '4) Upload to Google Sheets to use live cross-sheet formulas.',
+  ];
+  const totalCl = Object.values(clRanges).reduce((a,v)=>a+(v.r2-v.r1+1),0) + 4; // last CL row
+  const lastCl = 4 + totalCl; // approximate
+  // Use snapshot values (formulas don't work cross-sheet in SheetJS client export)
+  const allItems = CLASSES.flatMap(cls=>{
+    const items=getLecItems(cls.id);
+    return [
+      {lid:cls.id,type:'MNTS',included:true,done:!!S.checks['mnts_'+cls.id]},
+      {lid:cls.id,type:'LEC',included:!!(S.planner[cls.id+'_lec']==='Yes'),done:!!S.checks['lec_'+cls.id]},
+      ...items.map(iid=>({
+        lid:cls.id,type:ITEMS_XL[iid].type,iid,
+        included:!!(S.planner[cls.id+'_res']||[]).includes(ITEMS_XL[iid].type)||false,
+        done:!!S.checks[iid]
+      }))
+    ];
+  });
+
+  const stats = {
+    clIncluded: allItems.filter(i=>i.included).length,
+    clDone:     allItems.filter(i=>i.included&&i.done).length,
+    lecPlanned: CLASSES.filter(c=>S.planner[c.id+'_lec']==='Yes').length,
+    res3p:      CLASSES.reduce((a,c)=>{
+      const rs=S.planner[c.id+'_res']||[];
+      return a+rs.filter(r=>r!=='LEC'&&r!=='MNTS').length;
+    },0),
+    uwDone:     CLASSES.reduce((a,c)=>a+(parseInt(S.uworld['uw_done_'+c.id])||0),0),
+    uwTotal:    CLASSES.reduce((a,c)=>a+(UW_COUNTS_XL[c.id]||0),0),
+  };
+  const clPct = stats.clIncluded ? Math.round(stats.clDone/stats.clIncluded*100) : 0;
+  const uwPct = stats.uwTotal    ? Math.round(stats.uwDone/stats.uwTotal*100)     : 0;
+
+  instrs.forEach((txt,i)=>{
+    const row=Array(N).fill(null);
+    row[0]=xlCell(txt,false,10,XL.GREY6,null,'left',false);
+    if(i===0){
+      row[1]=xlCell(clPct+'%',true,14,null,XL.D_BLUE,'center');
+      row[4]=xlCell(stats.lecPlanned,true,14,null,XL.D_BLUE,'center');
+      row[7]=xlCell(stats.res3p,true,14,null,XL.D_BLUE,'center');
+      row[10]=xlCell(uwPct+'%',true,14,null,XL.D_BLUE,'center');
+    }
+    if(i===1){
+      row[1]=xlCell(`${stats.clDone} done / ${stats.clIncluded} included`,false,10,XL.GREY4,XL.D_BLUE,'center');
+      row[4]=xlCell(`${stats.lecPlanned} of 25 lectures`,false,10,XL.GREY4,XL.D_BLUE,'center');
+      row[7]=xlCell(`${stats.res3p} resource slots filled`,false,10,XL.GREY4,XL.D_BLUE,'center');
+      row[10]=xlCell(`${stats.uwDone} done / ${stats.uwTotal} assigned`,false,10,XL.GREY4,XL.D_BLUE,'center');
+    }
+    rows.push(row);
+  });
+
+  // Row 8: spacer
+  rows.push(Array(N).fill(null));
+
+  // Row 9: summary table header (Excel row 10)
+  rows.push(['Date','Subject','Lecture','Planner Status','Est. Time (min)','Checklist %','UWorld Assigned','UWorld Done',null,null,null].map((v,i)=>v?hdrCell(v):null));
+
+  // Data rows
+  CLASSES.forEach((cls,i)=>{
+    const stripe = i%2===1;
+    const plStatus = S.planner[cls.id+'_status']||'Not Started';
+    const r1r2 = clRanges[cls.id];
+    // Checklist items for this lecture
+    const lecItems = allItems.filter(it=>it.lid===cls.id);
+    const incl = lecItems.filter(it=>it.included).length;
+    const done = lecItems.filter(it=>it.included&&it.done).length;
+    const pct  = incl ? Math.round(done/incl*100) : 0;
+    const uw   = parseInt(S.uworld['uw_done_'+cls.id])||0;
+
+    const row=Array(N).fill(null);
+    row[0]=dCell(cls.date,stripe,'center');
+    row[0].t='s'; // store date as string for display
+    row[1]=subjCell(cls.subj);
+    row[2]=dCell(cls.cls,stripe,'left');
+    row[3]=dCell(plStatus,stripe,'center');
+    row[4]=dCell(lecItems.filter(it=>it.included).reduce((a,it)=>{
+      if(it.type==='MNTS') return a+15;
+      if(it.type==='LEC')  return a+60;
+      const iid = it.iid;
+      return a+(iid&&ITEMS_XL[iid]?ITEMS_XL[iid].min:0);
+    },0),stripe,'center');
+    row[5]=dCell(pct+'%',stripe,'center');
+    row[6]=dCell(UW_COUNTS_XL[cls.id]||0,stripe,'center');
+    row[7]=dCell(uw,stripe,'center');
+    rows.push(row);
+  });
+
+  const merges=[
+    {s:{r:0,c:0},e:{r:0,c:N-1}},
+    {s:{r:1,c:0},e:{r:1,c:N-1}},
+  ];
+  const cols=[{wch:11},{wch:10},{wch:38},{wch:14},{wch:15},{wch:14},{wch:15},{wch:13},{wch:3},{wch:3},{wch:16}];
+  return buildSheet(rows, merges, cols);
+}
+
+function buildPlanner(clRanges){
+  const rows=[];
+  const N=13;
+
+  const trow=Array(N).fill(null); trow[0]=titleCell('Planner'); rows.push(trow);
+  const srow=Array(N).fill(null); srow[0]=subCell('Choose LEC plus up to 2 third-party resources per lecture. Progress updates everywhere else automatically.'); rows.push(srow);
+  rows.push(Array(N).fill(null));
+
+  const hdrs=['Date','Subject','Lecture','Include LEC?','Resource 1','Resource 2','Status','Notes','Est. Total Min','Checklist Done','Checklist Total','Progress %','Available 3rd-Party Resources'];
+  rows.push(hdrs.map(hdrCell));
+
+  CLASSES.forEach((cls,i)=>{
+    const stripe=i%2===1;
+    const lid=cls.id;
+    const lec    = S.planner[lid+'_lec']||'No';
+    const res    = S.planner[lid+'_res']||[];
+    const res1   = res[0]||'';
+    const res2   = res[1]||'';
+    const status = S.planner[lid+'_status']||'Not Started';
+    const note   = S.planner[lid+'_note']||'';
+
+    // Compute summary stats
+    const clItems=[
+      {type:'MNTS',min:15,included:true,done:!!S.checks['mnts_'+lid]},
+      {type:'LEC',min:60,included:lec==='Yes',done:!!S.checks['lec_'+lid]},
+      ...getLecItems(lid).map(iid=>({
+        type:ITEMS_XL[iid].type,iid,min:ITEMS_XL[iid].min,
+        included:res.includes(ITEMS_XL[iid].type),
+        done:!!S.checks[iid]
+      }))
+    ];
+    const totalMin = clItems.filter(it=>it.included).reduce((a,it)=>a+it.min,0);
+    const clDone   = clItems.filter(it=>it.included&&it.done).length;
+    const clTotal  = clItems.filter(it=>it.included).length;
+    const pct      = clTotal ? Math.round(clDone/clTotal*100) : 0;
+
+    const row=Array(N).fill(null);
+    row[0]=dCell(cls.date,stripe,'center');
+    row[0].t='s';
+    row[1]=subjCell(cls.subj);
+    row[2]=dCell(cls.cls,stripe,'left');
+    row[3]=dCell(lec,stripe,'center');
+    row[4]=dCell(res1,stripe,'center');
+    row[5]=dCell(res2,stripe,'center');
+    row[6]=dCell(status,stripe,'center');
+    row[7]=dCell(note,stripe,'left');
+    row[8]=dCell(totalMin,stripe,'center');
+    row[9]=dCell(clDone,stripe,'center');
+    row[10]=dCell(clTotal,stripe,'center');
+    row[11]=dCell(pct+'%',stripe,'center');
+    row[12]=dCell(getAvailRes(lid),stripe,'left');
+    rows.push(row);
+  });
+
+  const merges=[{s:{r:0,c:0},e:{r:0,c:N-1}},{s:{r:1,c:0},e:{r:1,c:N-1}}];
+  const cols=[{wch:11},{wch:9},{wch:38},{wch:13},{wch:18},{wch:18},{wch:13},{wch:18},{wch:14},{wch:14},{wch:14},{wch:11},{wch:44}];
+  return buildSheet(rows, merges, cols);
+}
+
+function buildChecklist(){
+  const rows=[];
+  const N=10;
+
+  const trow=Array(N).fill(null); trow[0]=titleCell('Checklist'); rows.push(trow);
+  const srow=Array(N).fill(null); srow[0]=subCell('Mark Done? = TRUE as you complete tasks. Included? reflects your Planner selections.'); rows.push(srow);
+  rows.push(Array(N).fill(null));
+
+  rows.push(['Date','Subject','Lecture','Sort','Item Type','Task / Resource','Est. Min','Included?','Done?','Notes'].map(hdrCell));
+
+  CLASSES.forEach((cls,i)=>{
+    const stripe=i%2===1;
+    const lid=cls.id;
+    const res = S.planner[lid+'_res']||[];
+    const lec = S.planner[lid+'_lec']||'No';
+
+    const writeRow=(sort,type,task,min,included,done)=>{
+      const row=Array(N).fill(null);
+      row[0]=dCell(cls.date,stripe,'center'); row[0].t='s';
+      row[1]=subjCell(cls.subj);
+      row[2]=dCell(cls.cls,stripe,'left');
+      row[3]=dCell(sort,stripe,'center');
+      row[4]=dCell(type,stripe,'center');
+      row[5]=dCell(task,stripe,'left');
+      row[6]=dCell(min,stripe,'center');
+      row[7]=dCell(included?'TRUE':'FALSE',stripe,'center');
+      row[8]=dCell(done?'TRUE':'FALSE',stripe,'center');
+      row[9]=dCell('',stripe,'left');
+      rows.push(row);
+    };
+
+    writeRow(1,'MNTS','Reviewed MNTS',15,true,!!S.checks['mnts_'+lid]);
+    writeRow(2,'LEC','Lecture Notes',60,lec==='Yes',!!S.checks['lec_'+lid]);
+    getLecItems(lid).forEach(iid=>{
+      const it=ITEMS_XL[iid];
+      const included=res.includes(it.type);
+      writeRow(3,it.type,it.label,it.min,included,!!S.checks[iid]);
+    });
+  });
+
+  const merges=[{s:{r:0,c:0},e:{r:0,c:N-1}},{s:{r:1,c:0},e:{r:1,c:N-1}}];
+  const cols=[{wch:11},{wch:9},{wch:36},{wch:6},{wch:16},{wch:56},{wch:9},{wch:10},{wch:8},{wch:18}];
+  return buildSheet(rows, merges, cols);
+}
+
+function buildUWorld(){
+  const rows=[];
+  const N=9;
+
+  const trow=Array(N).fill(null); trow[0]=titleCell('UWorld'); rows.push(trow);
+  const srow=Array(N).fill(null); srow[0]=subCell('Enter question progress by lecture. Assigned counts are pre-filled from the HTML tracker.'); rows.push(srow);
+  rows.push(Array(N).fill(null));
+
+  rows.push(['Lecture ID','Date','Subject','Lecture','Assigned Qs','Done Qs','% Complete','% Correct','Notes'].map(hdrCell));
+
+  let totalAssigned=0, totalDone=0;
+  CLASSES.forEach((cls,i)=>{
+    const stripe=i%2===1;
+    const lid=cls.id;
+    const assigned=UW_COUNTS_XL[lid]||0;
+    const done=parseInt(S.uworld['uw_done_'+lid])||0;
+    const pct=assigned?Math.round(done/assigned*100):0;
+    totalAssigned+=assigned; totalDone+=done;
+
+    const row=Array(N).fill(null);
+    row[0]=dCell(lid,stripe,'center');
+    row[1]=dCell(cls.date,stripe,'center'); row[1].t='s';
+    row[2]=subjCell(cls.subj);
+    row[3]=dCell(cls.cls,stripe,'left');
+    row[4]=dCell(assigned,stripe,'center');
+    row[5]=dCell(done,stripe,'center');
+    row[6]=dCell(pct+'%',stripe,'center');
+    row[7]=dCell('',stripe,'center');
+    row[8]=dCell('',stripe,'left');
+    rows.push(row);
+  });
+
+  // Total row
+  const totPct=totalAssigned?Math.round(totalDone/totalAssigned*100):0;
+  const totRow=Array(N).fill(null);
+  totRow[3]=xlCell('TOTAL',true,11,null,XL.LT_BLUE,'left',true);
+  totRow[4]=xlCell(totalAssigned,true,11,null,XL.LT_BLUE,'center',true);
+  totRow[5]=xlCell(totalDone,true,11,null,XL.LT_BLUE,'center',true);
+  totRow[6]=xlCell(totPct+'%',true,11,null,XL.LT_BLUE,'center',true);
+  for(let c=0;c<N;c++) if(!totRow[c]) totRow[c]=xlCell('',false,11,null,XL.LT_BLUE,null,true);
+  rows.push(totRow);
+
+  const merges=[{s:{r:0,c:0},e:{r:0,c:N-1}},{s:{r:1,c:0},e:{r:1,c:N-1}}];
+  const cols=[{wch:12},{wch:11},{wch:9},{wch:42},{wch:13},{wch:11},{wch:12},{wch:12},{wch:22}];
+  return buildSheet(rows, merges, cols);
+}
+
+function buildQIDRef(){
+  const rows=[];
+  const N=5;
+
+  const trow=Array(N).fill(null); trow[0]=titleCell('QID Reference'); rows.push(trow);
+  const srow=Array(N).fill(null); srow[0]=subCell('Subtopic-level UWorld question IDs from the HTML tracker.'); rows.push(srow);
+  rows.push(Array(N).fill(null));
+
+  rows.push(['Section','Subtopic','Question Count','QIDs','Color Tag'].map(hdrCell));
+
+  QID_DATA_XL.forEach(([section,subtopic,count,qids,color],i)=>{
+    const stripe=i%2===1;
+    const row=Array(N).fill(null);
+    row[0]=dCell(section,stripe,'left');
+    row[1]=dCell(subtopic,stripe,'left');
+    row[2]=dCell(count,stripe,'center');
+    row[3]=dCell(qids,stripe,'left');
+    // Color tag cell with colored background
+    const rgb='FF'+color.replace('#','').toUpperCase();
+    row[4]=xlCell(color,false,10,XL.WHITE,rgb,'center',true);
+    rows.push(row);
+  });
+
+  const merges=[{s:{r:0,c:0},e:{r:0,c:N-1}},{s:{r:1,c:0},e:{r:1,c:N-1}}];
+  const cols=[{wch:24},{wch:34},{wch:14},{wch:90},{wch:14}];
+  return buildSheet(rows, merges, cols);
+}
+
+// ── Main export function ─────────────────────────────────────────────
+
+function exportToExcel(){
+  const btn=document.getElementById('exportBtn');
+  btn.disabled=true; btn.textContent='⏳ Generating…';
+
+  setTimeout(()=>{
+    try{
+      const clRanges=buildClRanges();
+      const wb=XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, buildDashboard(clRanges), 'Dashboard');
+      XLSX.utils.book_append_sheet(wb, buildPlanner(clRanges),   'Planner');
+      XLSX.utils.book_append_sheet(wb, buildChecklist(),          'Checklist');
+      XLSX.utils.book_append_sheet(wb, buildUWorld(),             'UWorld');
+      XLSX.utils.book_append_sheet(wb, buildQIDRef(),             'QID Reference');
+
+      XLSX.writeFile(wb, 'Endocrine-Block-Progress-Tracker.xlsx', {bookType:'xlsx', cellStyles:true});
+      btn.textContent='✓ Downloaded!';
+      setTimeout(()=>{ btn.disabled=false; btn.textContent='⬇ Export to Excel'; }, 2500);
+    } catch(e){
+      console.error(e);
+      btn.textContent='✗ Error — check console';
+      btn.disabled=false;
+    }
+  }, 50);
+}
 </script>
 </body>
 </html>
